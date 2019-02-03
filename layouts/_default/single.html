@@ -56,12 +56,11 @@
                 </p>
             {{ end }}
            
-            {{ with .Permalink }} 
             <p class="copyright-item">
-                    <span>Link:</span>
-                   <span><a href={{ . }}>{{ . }}</span>
+                    <span>{{ i18n "Words" }}:</span>
+                   <span>{{ .WordCount }}</span>
             </p>
-            {{ end }}
+
             {{ with .Site.Params.license }} 
             <p class="copyright-item lincese">
                 {{ . | safeHTML}}
