@@ -3,7 +3,7 @@ KeepIt Hugo Theme
 
 KeepIt is a clean, elegant, simple but not simpler blog theme for Hugo based on the original [LeaveIt Theme](https://raw.githubusercontent.com/liuzc/LeaveIt/) developed by [LiuZhichao](https://raw.githubusercontent.com/liuzc/).
 
-![hugo-theme-KeepIt](https://raw.githubusercontent.com/liuzc/LeaveIt/master/images/screenshot.png)
+![hugo-theme-KeepIt](https://raw.githubusercontent.com/fastbyte01/KeepIt/master/images/screenshot.png)
 
 # Demo
 To see this theme in action,  Here is a live [demo site](https://www.fsb01.com) which is rendered with this theme.
@@ -96,19 +96,6 @@ If you want to show posts on index instead of a personal profile, just open conf
 [params]
  home_mode = "post" # post or other
 ```
-
-### Displaying Featured Image
-
-```toml
----
-date: 2018-08-29
-title: "This One Goes to 11!"
-description: "With Go 1.11, Hugo finally gets support for variable overwrites in templates!"
-categories: ["Releases"]
-featured_image: https://raw.githubusercontent.com/gohugoio/hugoDocs/master/content/en/news/0.48-relnotes/featured-hugo-48-poster.png
----
-```
-![hugo-theme-LeaveIt-Host_post](https://raw.githubusercontent.com/liuzc/LeaveIt/master/images/home_post_mode.jpg)
 
 # Questions, ideas, bugs, pull requests?
 All feedback is welcome! Head over to the [issue tracker](https://github.com/fastbyte01/KeepIt/issues).
