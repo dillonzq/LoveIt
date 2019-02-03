@@ -3,7 +3,7 @@ KeepIt Hugo Theme
 
 KeepIt is a clean, elegant, simple but not simpler blog theme for Hugo based on the original [LeaveIt Theme](https://raw.githubusercontent.com/liuzc/LeaveIt/) developed by [LiuZhichao](https://raw.githubusercontent.com/liuzc/).
 
-![hugo-theme-KeepIt](https://raw.githubusercontent.com/fastbyte01/KeepIt/master/images/screenshot.png)
+![hugo-theme-KeepIt](https://github.com/Fastbyte01/KeepIt/blob/master/images/screenshot.png)
 
 # Demo
 To see this theme in action,  Here is a live [demo site](https://www.fsb01.com) which is rendered with this theme.
@@ -88,7 +88,7 @@ This theme write style with scss, So you must download and install the “extend
 
 #### How to toggle dark-light mode
 * You can click the love heart ❤️ in front of your blog title to toggle dark-light mode. I don't think it's a good interaction design. But I don't have a good idea.
-* If you want to make your own theme toggle-able element, you can create an element with a class `.theme-switch`. See [here](https://github.com/liuzc/LeaveIt/blob/4e8672ebbc636ba1d0e96573d25739a5295d879b/assets/js/main.js#L32)
+* If you want to make your own theme toggle-able element, you can create an element with a class `.theme-switch`. See [here](https://github.com/Fastbyte01/KeepIt/blob/master/assets/js/main.js#L32)
 
 # Home Post model
 If you want to show posts on index instead of a personal profile, just open config.toml in the base of the Hugo site, add the following line to config.toml
@@ -96,9 +96,12 @@ If you want to show posts on index instead of a personal profile, just open conf
 [params]
  home_mode = "post" # post or other
 ```
+# Add logo and cover for SEO
+
+Add a logo image (127x40) and a cover image (800x600). This images are used for SEO.
 
 # Questions, ideas, bugs, pull requests?
-All feedback is welcome! Head over to the [issue tracker](https://github.com/fastbyte01/KeepIt/issues).
+All feedback is welcome! Head over to the [issue tracker](https://github.com/Fastbyte01/KeepIt/issues).
 
 # License
 LeaveIt is licensed under the MIT license. Check the LICENSE file for details.
@@ -109,7 +112,7 @@ The following resources are included in the theme:
 * code-prettify - https://github.com/google/code-prettify
 
 # Author
-[Fastbyte01](https://github.com/fastbyte01)
+[Fastbyte01](https://github.com/Fastbyte01)
 
 # See Also
 
