@@ -1,0 +1,105 @@
+{{ define "content" -}}
+{{ $cdn_url := .Scratch.Get "cdn_url" }}
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">{{ .Title }}</h1>
+        <div class="post-meta">
+            {{ i18n "Written" }} {{ i18n "by" }} <a href="{{.Site.BaseURL }}" rel="author">{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}</a> {{ i18n "with" }} ♥ 
+                <span class="post-time">
+                    {{ i18n "on" }} <time datetime={{.Date.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }} >{{ .Date.Format (.Site.Params.dateFormatToUse | default "2 January 2006") }}</time>
+                </span>
+                {{ i18n "in" }}
+                {{ with .Params.categories -}}
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        {{ range . }}
+                        {{- $name := . -}}
+                        {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
+                          <a href="{{ .Permalink }}"> {{ $name }} </a>
+                        {{ end -}}
+                        {{ end }}
+                </span>
+                {{- end }}
+        </div>
+    </header>
+    <div class="post-content">
+        <!--featured_image-->
+
+        {{ $images := findRE "<img src=\"[^\"|\\\"]*\"" .Content -}}
+        {{ if ge (len $images) 1}}
+            {{ $.Scratch.Set "postHasImages" true }}
+        {{ end }}
+
+        {{ with .Params.featured_image }}
+          {{- $img := . -}}
+          <img src="{{ printf "%s%s" $cdn_url $img }}" class="featured_image">
+        {{ end }}
+        <!-- end featured_image-->
+     
+          {{ $reAltIn := "<img src=\"([^\"]+)\" alt=\"([^\"]+)?\" />" }}
+          {{ $reAltOut :=  ( printf "<figure><img src=\"/images/ring.svg\" data-sizes=\"auto\" data-src=\"%s$1\" alt=\"$2\" class=\"lazyload\"><figcaption class=\"image-caption\">$2</figcaption></figure>" $cdn_url ) }}
+          {{ $altContent := .Content | replaceRE $reAltIn $reAltOut | safeHTML }}
+
+          {{ $reAltTitleIn := "<img src=\"([^\"]+)\" alt=\"([^\"]+)?\" title=\"([^\"]+)?\" />" }}
+          {{ $reAltTitleOut := ( printf "<figure><img src=\"/images/ring.svg\" data-src=\"%s$1\" data-sizes=\"auto\" alt=\"$2\" title=\"$3\" class=\"lazyload\"><figcaption class=\"image-caption\">$2</figcaption></figure>" $cdn_url ) }}
+          {{ $finalContent := $altContent | replaceRE $reAltTitleIn $reAltTitleOut | safeHTML }}
+
+          {{ $finalContent }}
+    </div>
+
+    <div class="post-copyright">
+            {{ with .Site.Params.author }} 
+            <p class="copyright-item">
+                <span>{{ i18n "Author" }}:</span>
+                <span>{{ . }} </span>
+                </p>
+            {{ end }}
+           
+            {{ with .Permalink }} 
+            <p class="copyright-item">
+                    <span>Link:</span>
+                   <span><a href={{ . }}>{{ . }}</span>
+            </p>
+            {{ end }}
+            {{ with .Site.Params.license }} 
+            <p class="copyright-item lincese">
+                {{ . | safeHTML}}
+            </p>
+            {{ end }}
+    </div>
+
+  
+    <div class="post-tags">
+        {{ with .Params.tags }}
+            <section>
+            <i class="iconfont icon-tag"></i>{{ i18n "Tag" }}: 
+            {{ range . }}
+            <span class="tag"><a href="{{ "tags/" | absURL }}{{ . | urlize }}/">
+                    #{{.}}</a></span>
+            {{ end }}
+            </section>
+        {{ end }}
+        <section>
+                <a href="javascript:window.history.back();">{{ i18n "back" }}</a></span> · 
+                <span><a href="{{ .Site.BaseURL }}">{{ i18n "Home" }}</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        {{ if .PrevInSection }}
+        <a href="{{.PrevInSection.Permalink}}" class="prev" rel="prev" title="{{ .PrevInSection.Title}}"><i class="iconfont icon-left"></i>&nbsp;{{ .PrevInSection.Title}}</a>
+        {{ end }} 
+        {{ if .NextInSection }}
+        <a href="{{.NextInSection.Permalink}}" class="next" rel="next" title="{{.NextInSection.Title}}">{{.NextInSection.Title}}&nbsp;<i class="iconfont icon-right"></i></a>
+        {{ end }}
+    </div>
+
+    <div class="post-comment">
+          {{ if ( .Params.showComments | default true ) }}
+                 {{ if ne .Site.DisqusShortname "" }}
+                     {{ template "_internal/disqus.html" . }}
+                 {{ end }}
+          {{ end }}
+    </div>
+</article>
+{{- end }}

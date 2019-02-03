@@ -1,0 +1,47 @@
+{{ define "content" }}
+
+{{ $termName := .Data.Plural }}
+{{ $terms := .Data.Terms.ByCount }}
+{{ $length := len $terms }}
+{{ $type := .Type }}
+<!-- Categories Page -->
+<div class="post-warp {{.Data.Plural}}">
+    <h2 class="post-title" style="text-align:right;padding-bottom:2em">-&nbsp;{{ .Data.Plural | humanize }}&nbsp;-</h2>
+{{ if and $.Site.Taxonomies.categories (eq $termName "categories") }}
+
+<div class="categories-card">
+{{ range $terms }}
+    {{ $term := .Term }}
+    {{ $pages := .Pages }}
+    {{ with $.Site.GetPage "taxonomy" (printf "%s/%s" $type $term) }}
+         <div class="card-item">
+           <div class="categories" >
+             <a href="{{ .URL }}"><h3> <i class="iconfont icon-folder" style="padding-right: 3px"></i> {{ $term | humanize}}  </h3> </a>
+               {{ range first 5 $pages }}   
+                <article class="archive-item">
+                <a href="{{ .URL }}" class="archive-item-link">{{ .Title }}</a>
+                </article>
+              {{ end }}
+               {{ if gt (len $pages) 5 }}
+                  <span class="more-post">
+                    <a href="{{ .Permalink }}" class="more-post-link">More  >></a>
+               </span> 
+               {{ end }}
+           </div>
+        </div>
+    {{ end }}
+{{ end }}
+</div> <!-- //categories-card -->
+ <!-- Tag cloud Page -->
+{{ else if and $.Site.Taxonomies.tags (eq $termName "tags") }}
+     <div class="tag-cloud-tags">
+          {{ range $.Site.Taxonomies.tags.ByCount }}
+            {{ if .Name }}
+            <a href="/tags/{{ .Name | urlize}}/"> {{ .Name }} <small>({{ .Count }})</small></a>
+            {{ end }}
+          {{end}}
+     </div>
+
+{{ end }}
+</div>
+{{end }}

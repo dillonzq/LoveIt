@@ -1,0 +1,28 @@
+{{ $cdn_url := .Scratch.Get "cdn_url" }}
+{{ $postHasImages :=  .Scratch.Get "postHasImages"}}
+{{ $jquery := resources.Get "/js/jquery.min.js" }}
+{{ $lazysizes := resources.Get "/js/lazysizes.min.js"}}
+{{ $prettify := resources.Get "/js/prettify.min.js" }}
+{{ $dynamic := resources.Get "/js/dynamic.to.top.min.js" }}
+{{ $main := resources.Get "/js/main.js" }}
+{{ $lihtGallery := resources.Get "/js/lightGallery-all.min.js" }}
+{{ $lihtGallery_init := resources.Get "/js/lightGallery-init.js" }}
+{{ if .IsPage }}
+
+    {{ if $postHasImages }}
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+     {{ $vendorscript := slice $jquery $lazysizes $prettify $dynamic $main $lihtGallery $lihtGallery_init | resources.Concat "/js/vendor_gallery.js" | resources.Minify }} 
+     <script src="{{ printf "%s%s" $cdn_url $vendorscript.RelPermalink }}" async="" ></script>
+    {{ else }}
+    {{ $vendorscript := slice $jquery $prettify $dynamic $main | resources.Concat "/js/vendor_no_gallery.js" | resources.Minify }}
+    <script src="{{ printf "%s%s" $cdn_url $vendorscript.RelPermalink }}" async=""></script>
+    {{ end }}
+  
+{{ else }}
+    {{ $main := slice  $jquery $main | resources.Concat "/js/vendor_main.js" | resources.Minify}}
+    <script src="{{ printf "%s%s" $cdn_url $main.RelPermalink }}" async=""></script>
+{{ end }}
+
+{{ if eq ( getenv "HUGO_ENV" ) "production" }}
+  {{ template "_internal/google_analytics_async.html" . }}
+{{ end }}

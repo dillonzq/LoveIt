@@ -1,0 +1,36 @@
+# theme.toml template for a Hugo theme
+# See https://github.com/gohugoio/hugoThemes#themetoml for an example
+
+name = "KeepIt"
+license = "MIT"
+licenselink = "https://github.com/liuzc/LeaveIt/blob/master/LICENSE"
+description = "A simple, clean blog theme for hugo."
+homepage = "https://liuzhichao.com/"
+tags = [
+  "blog",
+  "minimal",
+  "clean",
+  "responsive",
+  "gallery",
+  "dark",
+  "theme"
+]
+features = [
+  "cover-image",
+  "favicon",
+  "multilingual",
+  "pagination",
+  "social-menu",
+  "syntax-highlighting",
+]
+min_version = "0.53"
+
+[author]
+  name = "Fastbyte01"
+  homepage = "https://www.fsb01.com/"
+
+# If porting an existing theme
+[original]
+  name = "LiuZhichao"
+  homepage = "https://liuzhichao.com/"
+  repo = "https://github.com/liuzc/LeaveIt/"

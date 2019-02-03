@@ -1,0 +1,158 @@
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .navbar {
+        display: none;
+    }
+
+    .navbar-mobile {
+        display: block !important;
+        position: fixed;
+        width: 100%;
+        z-index: 100;
+        transition: all 0.6s ease 0s;
+        .container {
+            padding: 0;
+            margin: 0;
+            height: 5em;
+            line-height: 5.5em;
+            background: $light-background-color;
+
+            .navbar-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                padding-right: 1em;
+                padding-left: 1em;
+                box-sizing: border-box;
+
+        
+                .menu-toggle {
+                    cursor: pointer;
+                    line-height: 5.5em;
+
+                    span {
+                        display: block;
+                        background: #000;
+                        width: 36px;
+                        height: 2px;
+                        -webkit-border-radius: 3px;
+                        -moz-border-radius: 3px;
+                        border-radius: 3px;
+                        -webkit-transition: .25s margin .25s, .25s transform;
+                        -moz-transition: .25s margin .25s, .25s transform;
+                        transition: .25s margin .25s, .25s transform;
+
+                        .dark-theme & {
+                            background: $dark-font-color;
+                        }
+                    }
+
+                    span:nth-child(1) {
+                        margin-bottom: 8px;
+                    }
+                    span:nth-child(3) {
+                        margin-top: 8px;
+                    }
+
+                    &.active {
+                        span {
+                            -webkit-transition: .25s margin, .25s transform .25s;
+                            -moz-transition: .25s margin, .25s transform .25s;
+                            transition: .25s margin, .25s transform .25s;
+                        }
+                        span:nth-child(1) {
+                            -moz-transform: rotate(45deg) translate(4px, 6px);
+                            -ms-transform: rotate(45deg) translate(4px, 6px);
+                            -webkit-transform: rotate(45deg) translate(4px, 6px);
+                            transform: rotate(45deg) translate(4px, 6px);
+                        }
+
+                        span:nth-child(2) {
+                            opacity: 0
+                        }
+
+                        span:nth-child(3) {
+                            -moz-transform: rotate(-45deg) translate(8px, -10px);
+                            -ms-transform: rotate(-45deg) translate(8px, -10px);
+                            -webkit-transform: rotate(-45deg) translate(8px, -10px);
+                            transform: rotate(-45deg) translate(8px, -10px);
+                        }
+                    }
+                }
+            }
+
+            .menu {
+                text-align: center;
+                background: #ffffff;
+                border-top: 2px solid #000000;
+                padding-top: 1em;
+                padding-bottom: 1em;
+                display: none;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1);
+                a {
+                    display: block;
+                    line-height: 2.5em;
+                }
+
+                &.active {
+                    display: block;
+                }
+
+                .dark-theme & {
+                    background: $dark-background-color;
+                    border-top: 2px solid $dark-font-secondary-color;
+                }
+            }
+            .dark-theme & {
+                background: $dark-background-color !important;
+            }
+        }
+    }
+
+    #dynamic-to-top {
+        display: none !important;
+    }
+    .footer {
+        height: 3rem;
+        width: 100%;
+        text-align: center;
+        line-height: 1.5rem;
+        padding-top: 2em;
+    }
+
+    .post-warp {
+        padding-top: 6em;
+        .archive-item-date {
+            display: none;
+        }
+        .categories-card {
+            .card-item {
+                width: 95%;
+            }
+        }
+    }
+}
+
+
+
+/* iPads (portrait and landscape) ----------- */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {}
+
+
+
+/* Desktops and laptops ----------- */
+
+@media only screen and (min-width: 1224px) {
+    .navbar-mobile {
+        display: none;
+    }
+}
+
+
+
+/* Large screens ----------- */
+
+@media only screen and (min-width: 1824px) {
+    /* Styles */
+}

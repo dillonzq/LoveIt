@@ -1,0 +1,44 @@
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  {{ with .Site.Params.google_verification }}<meta name="google-site-verification" content="{{ . }}" />{{ end }}
+  {{ if .PrevInSection }}<link rel="prev" href="{{.PrevInSection.Permalink}}" />{{end}}
+  {{ if .NextInSection}}<link rel="next" href="{{ .NextInSection.Permalink }}" />{{end}}
+  <link rel="canonical" href="{{ .Permalink }}" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       {{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
+       {{ if .IsHome }}
+           {{ .Site.Title }}
+       {{ else if .Params.heading }}
+           {{ .Params.heading }}
+       {{ else }}
+           {{ .Title }} | {{ .Site.Title }}
+       {{ end }}
+  </title>
+  <meta name="title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else if .Params.heading }}{{ .Params.heading }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end}}">
+  {{ partial "css" . }}
+  {{ if .RSSLink }}
+    <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+    <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+  {{ end }}
+  {{- template "_internal/opengraph.html" . }}
+  {{- template "_internal/twitter_cards.html" . }}
+  {{ partial "seo_schema" . }}
+</head>
+{{ $cdn_url := ""}}
+  {{ if eq ( getenv "HUGO_ENV" ) "production" }}
+          {{ with .Site.Params.cdn_url }}
+              {{ $cdn_url = .}}
+           {{ end }}   
+  {{ end  }}
+{{ .Scratch.Set "cdn_url" $cdn_url }}

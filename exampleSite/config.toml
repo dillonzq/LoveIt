@@ -1,0 +1,89 @@
+baseURL = "https://example.com"
+languageCode = "en"
+defaultContentLanguage = "en"
+title = "KeepIt"
+theme = "KeepIt"
+
+paginate = 12
+enableEmoji = true
+enableRobotsTXT = true
+googleAnalytics = ""
+
+[sitemap]
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[blackfriday]
+  hrefTargetBlank = true
+  nofollowLinks = true
+  noreferrerLinks = true
+
+[Permalinks]
+ posts = "/:year/:filename/"
+
+[menu]
+  [[menu.main]]
+    name = "Blog"
+    url = "/posts/"
+    weight = 1
+  
+  [[menu.main]]
+    name = "Projects"
+    url = "/projects/"
+    weight = 2
+
+  [[menu.main]]
+    name = "Categories"
+    url = "/categories/"
+    weight = 3
+
+[params]
+    since = 2012
+    author = "Fastbyte01"               # Author's name
+    avatar = "/images/me/avatar.jpeg"           # Author's avatar
+    subtitle = "A Hugo theme"       # Subtitle
+    cdn_url = ""           # Base CDN URL
+    home_mode = "" # post or other
+
+    google_verification = ""
+
+    description = "" # site description
+    keywords = "" # site keywords
+
+    license= 'Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+
+[params.social]
+    GitHub = "xxxx"
+    Twitter = "xxxx"
+    Email   = "xxxx"
+    Facebook = "xxxx"
+    Telegram = "xxxx"
+    Dribbble = "xxxx"
+    Medium = "xxxx"
+    Linkedin = "xxxx"
+
+# Used only for Seo schema 
+copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+
+[author]
+  name = "Fastbyte01"
+
+  [params.publisher]
+    name = "Fastbyte01"
+
+    [params.publisher.logo]
+      url = "logo.png"
+      width = 127
+      height = 40
+
+  [params.logo]
+    url = "logo.png"
+    width = 127
+    height = 40
+
+  [params.image]
+    url = "cover.png"
+    width = 800
+    height = 600
+    

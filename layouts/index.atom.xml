@@ -1,0 +1,27 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+  {{ if .IsHome }}
+    <title>{{ .Title }}</title>
+  {{ else }}
+    <title>{{ .Title }} - {{ .Site.Title }}</title>
+  {{ end }}
+  <link href="{{ .Permalink }}index.xml" rel="self"/>
+  <link href="{{ .Permalink }}"/>{{ if not .Date.IsZero }}
+  <updated>{{ .Date.Format "02-01-2006T15:04:05-07:00" | safeHTML }}</updated>{{ end }}
+  <id>{{ .Permalink }}</id>{{ with .Site.Author.name }}
+  <author>
+    <name>{{.}}</name>{{ with $.Site.Author.email }}
+    <email>{{.}}</email>{{end}}
+  </author>{{end}}
+  <generator>Hugo -- gohugo.io</generator>{{ range first 15 (where .Data.Pages "Type" "in" .Site.Params.mainSections) }}
+  <entry>
+    {{ `<title type="html"><![CDATA[` | safeHTML }}{{ .Title }}]]></title>
+    <link href="{{ .Permalink }}"/>
+    <id>{{ .Permalink }}</id>{{ with .Site.Params.Author }}
+    <author>
+      <name>{{.}}</name>
+    </author>{{end}}
+    <published>{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</published>
+    <updated>{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</updated>
+    {{ `<content type="html"><![CDATA[` | safeHTML }}{{ .Content }}]]></content>
+  </entry>{{ end }}
+</feed>
