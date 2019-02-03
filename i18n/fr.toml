@@ -1,0 +1,34 @@
+# Translations for French
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# Single.html
+
+[Written]
+other = "Écrit"
+
+[by]
+other = "par"
+
+[with]
+other = "avec"
+
+[on]
+other = "sur"
+
+[in]
+other = "dans"
+
+[Author]
+other = "Auteur"
+
+[Link]
+other = "Lien"
+
+[Tag]
+other = "Étiquette"
+
+[Home]
+other = "Accueil"
+
+[back]
+other = "Retour"
