@@ -21,8 +21,8 @@ other = "in"
 [Author]
 other = "Autore"
 
-[Link]
-other = "Link"
+[Words]
+other = "Parole"
 
 [Tag]
 other = "Tag"
@@ -32,3 +32,6 @@ other = "Home"
 
 [back]
 other = "Indietro"
+
+[minute]
+other = "minuto"
