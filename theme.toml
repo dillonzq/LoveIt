@@ -3,9 +3,9 @@
 
 name = "KeepIt"
 license = "MIT"
-licenselink = "https://github.com/liuzc/LeaveIt/blob/master/LICENSE"
-description = "A simple, clean blog theme for hugo."
-homepage = "https://liuzhichao.com/"
+licenselink = "https://github.com/Fastbyte01/KeepIt/blob/master/LICENSE"
+description = "A minimal and responsive theme for Hugo."
+homepage = "https://www.fsb01.com/"
 tags = [
   "blog",
   "minimal",
@@ -22,6 +22,7 @@ features = [
   "pagination",
   "social-menu",
   "syntax-highlighting",
+  "SEO Optimized"
 ]
 min_version = "0.53"
 
@@ -29,7 +30,6 @@ min_version = "0.53"
   name = "Fastbyte01"
   homepage = "https://www.fsb01.com/"
 
-# If porting an existing theme
 [original]
   name = "LiuZhichao"
   homepage = "https://liuzhichao.com/"
