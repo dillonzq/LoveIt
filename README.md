@@ -15,6 +15,7 @@ To see this theme in action,  Here is a live [demo site](https://www.fsb01.com) 
 * A More coerent style beetwen page and sections
 * Multilanguage support.
 * Added configuration file for use on [Netlify](https://www.netlify.com)
+* Reading Time
 * Dark/Light mode 
 * Wrap Image with Figure Tag without Shortcode. Thanks [Junian.Net](https://www.junian.net/hugo-image-figure-wrap/)
 * Load images with Lazy Load By [lazysizes](https://github.com/aFarkas/lazysizes)
