@@ -1,0 +1,34 @@
+# Translations for Deutsch
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# Single.html
+
+[Written]
+other = "Geschrieben"
+
+[by]
+other = "durch"
+
+[with]
+other = "mit"
+
+[on]
+other = "auf"
+
+[in]
+other = "im"
+
+[Author]
+other = "Autor"
+
+[Link]
+other = "Verknüpfung"
+
+[Tag]
+other = "Etikett"
+
+[Home]
+other = "Zuhause"
+
+[back]
+other = "Zurück"
