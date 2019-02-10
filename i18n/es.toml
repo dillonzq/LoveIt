@@ -1,0 +1,37 @@
+# Translations for Spanish
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# Single.html
+
+[Written]
+other = "Escrito"
+
+[by]
+other = "por"
+
+[with]
+other = "con"
+
+[on]
+other = "en"
+
+[in]
+other = "en"
+
+[Author]
+other = "Autor"
+
+[Words]
+other = "Palabras"
+
+[Tag]
+other = "Etiqueta"
+
+[Home]
+other = "Home"
+
+[back]
+other = "Atrás"
+
+[minute]
+other = "minuto"
