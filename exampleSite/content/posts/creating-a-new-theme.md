@@ -1,10 +1,17 @@
 ---
-title: Creating a New Theme
-author: "Michael Henderson"
-tags: ["Theme", "Hugo"]
-categories: ["Uncategorized"]
+author:
+  name: "Michael Henderson"
 date: 2014-09-28
+linktitle: Creating a New Theme
+type:
+- post 
+- posts
+title: Creating a New Theme
+weight: 10
+series:
+- Hugo 101
 ---
+
 
 ## Introduction
 
@@ -22,7 +29,7 @@ $ echo this is a command
 this is a command
 
 ## edit the file
-$vi foo.md
+$ vi foo.md
 +++
 date = "2014-09-28"
 title = "creating a new theme"
