@@ -1,0 +1,37 @@
+# Translations for Esperanto
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# Single.html
+
+[Written]
+other = "Skribita"
+
+[by]
+other = "de"
+
+[with]
+other = "kun"
+
+[on]
+other = "il"
+
+[in]
+other = "sur"
+
+[Author]
+other = "Aŭtoro"
+
+[Words]
+other = "Vortoj"
+
+[Tag]
+other = "Tag"
+
+[Home]
+other = "Home"
+
+[back]
+other = "Reen"
+
+[minute]
+other = "minuto"
