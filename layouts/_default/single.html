@@ -72,7 +72,7 @@
     <div class="post-tags">
         {{ with .Params.tags }}
             <section>
-            <i class="iconfont icon-tag"></i>{{ i18n "Tag" }}: 
+            <i class="iconfont icon-icon-tag"></i>{{ i18n "Tag" }}: 
             {{ range . }}
             <span class="tag"><a href="{{ "tags/" | absURL }}{{ . | urlize }}/">
                     #{{.}}</a></span>
@@ -87,10 +87,10 @@
 
     <div class="post-nav">
         {{ if .PrevInSection }}
-        <a href="{{.PrevInSection.Permalink}}" class="prev" rel="prev" title="{{ .PrevInSection.Title}}"><i class="iconfont icon-left"></i>&nbsp;{{ .PrevInSection.Title}}</a>
+        <a href="{{.PrevInSection.Permalink}}" class="prev" rel="prev" title="{{ .PrevInSection.Title}}"><i class="iconfont icon-dajiantou"></i>&nbsp;{{ .PrevInSection.Title}}</a>
         {{ end }} 
         {{ if .NextInSection }}
-        <a href="{{.NextInSection.Permalink}}" class="next" rel="next" title="{{.NextInSection.Title}}">{{.NextInSection.Title}}&nbsp;<i class="iconfont icon-right"></i></a>
+        <a href="{{.NextInSection.Permalink}}" class="next" rel="next" title="{{.NextInSection.Title}}">{{.NextInSection.Title}}&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         {{ end }}
     </div>
 
