@@ -57,3 +57,11 @@ other = "në"
 
 [More]
 other = "më shumë"
+
+# Related post
+
+[Related]
+other = "Artikuj"
+
+[Articles]
+other = "Të lidhura"

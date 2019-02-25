@@ -57,3 +57,11 @@ other = "a"
 
 [More]
 other = "Más"
+
+# Related post
+
+[Related]
+other = "Artículos"
+
+[Articles]
+other = "Similares"

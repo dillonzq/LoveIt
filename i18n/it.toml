@@ -57,3 +57,11 @@ other = "alla"
 
 [More]
 other = "Altro"
+
+# Related post
+
+[Related]
+other = "Articoli"
+
+[Articles]
+other = "Correlati"
