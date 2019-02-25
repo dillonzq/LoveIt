@@ -1,105 +1,151 @@
-*{margin: 0;padding: 0;list-style: none;}
-/*
-KISSY CSS Reset
-理念：1. reset 的目的不是清除浏览器的默认样式，这仅是部分工作。清除和重置是紧密不可分的。
-2. reset 的目的不是让默认样式在所有浏览器下一致，而是减少默认样式有可能带来的问题。
-3. reset 期望提供一套普适通用的基础样式。但没有银弹，推荐根据具体需求，裁剪和修改后再使用。
-特色：1. 适应中文；2. 基于最新主流浏览器。
-维护：玉伯<lifesinger@gmail.com>, 正淳<ragecarrier@gmail.com>
- */
-
-/** 清除内外边距 **/
-body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
-dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
-pre, /* text formatting elements 文本格式元素 */
-form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
-th, td /* table elements 表格元素 */ {
-  margin: 0;
-  padding: 0;
+/* Logo 字体 */
+@font-face {
+  font-family: "iconfont logo";
+  src: url('https://at.alicdn.com/t/font_985780_km7mi63cihi.eot?t=1545807318834');
+  src: url('https://at.alicdn.com/t/font_985780_km7mi63cihi.eot?t=1545807318834#iefix') format('embedded-opentype'),
+    url('https://at.alicdn.com/t/font_985780_km7mi63cihi.woff?t=1545807318834') format('woff'),
+    url('https://at.alicdn.com/t/font_985780_km7mi63cihi.ttf?t=1545807318834') format('truetype'),
+    url('https://at.alicdn.com/t/font_985780_km7mi63cihi.svg?t=1545807318834#iconfont') format('svg');
 }
 
-/** 设置默认字体 **/
-body,
-button, input, select, textarea /* for ie */ {
-  font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
+.logo {
+  font-family: "iconfont logo";
+  font-size: 160px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-h1, h2, h3, h4, h5, h6 { font-size: 100%; }
-address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
-code, kbd, pre, samp { font-family: courier new, courier, monospace; } /* 统一等宽字体 */
-small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
 
-/** 重置列表元素 **/
-ul, ol { list-style: none; }
-
-/** 重置文本格式元素 **/
-a { text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-
-/** 重置表单元素 **/
-legend { color: #000; } /* for ie6 */
-fieldset, img { border: 0; } /* img 搭车：让链接里的 img 无边框 */
-button, input, select, textarea { font-size: 100%; } /* 使得表单元素在 ie 下能继承字体大小 */
-/* 注：optgroup 无法扶正 */
-
-/** 重置表格元素 **/
-table { border-collapse: collapse; border-spacing: 0; }
-
-/* 清除浮动 */
-.ks-clear:after, .clear:after {
-  content: '\20';
-  display: block;
-  height: 0;
-  clear: both;
+/* tabs */
+.nav-tabs {
+  position: relative;
 }
-.ks-clear, .clear {
+
+.nav-tabs .nav-more {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 42px;
+  line-height: 42px;
+  color: #666;
+}
+
+#tabs {
+  border-bottom: 1px solid #eee;
+}
+
+#tabs li {
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 16px;
+  border-bottom: 2px solid transparent;
+  position: relative;
+  z-index: 1;
+  margin-bottom: -1px;
+  color: #666;
+}
+
+
+#tabs .active {
+  border-bottom-color: #f00;
+  color: #222;
+}
+
+.tab-container .content {
+  display: none;
+}
+
+/* 页面布局 */
+.main {
+  padding: 30px 100px;
+  width: 960px;
+  margin: 0 auto;
+}
+
+.main .logo {
+  color: #333;
+  text-align: left;
+  margin-bottom: 30px;
+  line-height: 1;
+  height: 110px;
+  margin-top: -50px;
+  overflow: hidden;
   *zoom: 1;
 }
 
-.main {
-  padding: 30px 100px;
-width: 960px;
-margin: 0 auto;
+.main .logo a {
+  font-size: 160px;
+  color: #333;
 }
-.main h1{font-size:36px; color:#333; text-align:left;margin-bottom:30px; border-bottom: 1px solid #eee;}
 
-.helps{margin-top:40px;}
-.helps pre{
-  padding:20px;
-  margin:10px 0;
-  border:solid 1px #e7e1cd;
+.helps {
+  margin-top: 40px;
+}
+
+.helps pre {
+  padding: 20px;
+  margin: 10px 0;
+  border: solid 1px #e7e1cd;
   background-color: #fffdef;
   overflow: auto;
 }
 
-.icon_lists{
+.icon_lists {
   width: 100% !important;
-
+  overflow: hidden;
+  *zoom: 1;
 }
 
-.icon_lists li{
-  float:left;
+.icon_lists li {
   width: 100px;
-  height:180px;
+  margin-bottom: 10px;
+  margin-right: 20px;
   text-align: center;
   list-style: none !important;
+  cursor: default;
 }
-.icon_lists .icon{
-  font-size: 42px;
-  line-height: 100px;
-  margin: 10px 0;
-  color:#333;
-  -webkit-transition: font-size 0.25s ease-out 0s;
-  -moz-transition: font-size 0.25s ease-out 0s;
-  transition: font-size 0.25s ease-out 0s;
 
+.icon_lists li .code-name {
+  line-height: 1.2;
 }
-.icon_lists .icon:hover{
+
+.icon_lists .icon {
+  display: block;
+  height: 100px;
+  line-height: 100px;
+  font-size: 42px;
+  margin: 10px auto;
+  color: #333;
+  -webkit-transition: font-size 0.25s linear, width 0.25s linear;
+  -moz-transition: font-size 0.25s linear, width 0.25s linear;
+  transition: font-size 0.25s linear, width 0.25s linear;
+}
+
+.icon_lists .icon:hover {
   font-size: 100px;
 }
 
+.icon_lists .svg-icon {
+  /* 通过设置 font-size 来改变图标大小 */
+  width: 1em;
+  /* 图标和文字相邻时，垂直对齐 */
+  vertical-align: -0.15em;
+  /* 通过设置 color 来改变 SVG 的颜色/fill */
+  fill: currentColor;
+  /* path 和 stroke 溢出 viewBox 部分在 IE 下会显示
+      normalize.css 中也包含这行 */
+  overflow: hidden;
+}
 
+.icon_lists li .name,
+.icon_lists li .code-name {
+  color: #666;
+}
 
+/* markdown 样式 */
 .markdown {
   color: #666;
   font-size: 14px;
@@ -165,40 +211,39 @@ margin: 0 auto;
   clear: both;
 }
 
-.markdown p,
-.markdown pre {
+.markdown p {
   margin: 1em 0;
 }
 
-.markdown > p,
-.markdown > blockquote,
-.markdown > .highlight,
-.markdown > ol,
-.markdown > ul {
+.markdown>p,
+.markdown>blockquote,
+.markdown>.highlight,
+.markdown>ol,
+.markdown>ul {
   width: 80%;
 }
 
-.markdown ul > li {
+.markdown ul>li {
   list-style: circle;
 }
 
-.markdown > ul li,
-.markdown blockquote ul > li {
+.markdown>ul li,
+.markdown blockquote ul>li {
   margin-left: 20px;
   padding-left: 4px;
 }
 
-.markdown > ul li p,
-.markdown > ol li p {
+.markdown>ul li p,
+.markdown>ol li p {
   margin: 0.6em 0;
 }
 
-.markdown ol > li {
+.markdown ol>li {
   list-style: decimal;
 }
 
-.markdown > ol li,
-.markdown blockquote ol > li {
+.markdown>ol li,
+.markdown blockquote ol>li {
   margin-left: 20px;
   padding-left: 4px;
 }
@@ -210,24 +255,12 @@ margin: 0 auto;
   border-radius: 3px;
 }
 
-.markdown pre {
-  border-radius: 6px;
-  background: #f7f7f7;
-  padding: 20px;
-}
-
-.markdown pre code {
-  border: none;
-  background: #f7f7f7;
-  margin: 0;
-}
-
 .markdown strong,
 .markdown b {
   font-weight: 600;
 }
 
-.markdown > table {
+.markdown>table {
   border-collapse: collapse;
   border-spacing: 0px;
   empty-cells: show;
@@ -236,21 +269,20 @@ margin: 0 auto;
   margin-bottom: 24px;
 }
 
-.markdown > table th {
+.markdown>table th {
   white-space: nowrap;
   color: #333;
   font-weight: 600;
-
 }
 
-.markdown > table th,
-.markdown > table td {
+.markdown>table th,
+.markdown>table td {
   border: 1px solid #e9e9e9;
   padding: 8px 16px;
   text-align: left;
 }
 
-.markdown > table th {
+.markdown>table th {
   background: #F7F7F7;
 }
 
@@ -260,7 +292,6 @@ margin: 0 auto;
   border-left: 4px solid #e9e9e9;
   padding-left: 0.8em;
   margin: 1em 0;
-  font-style: italic;
 }
 
 .markdown blockquote p {
@@ -287,8 +318,8 @@ margin: 0 auto;
   display: inline-block;
 }
 
-.markdown > br,
-.markdown > p > br {
+.markdown>br,
+.markdown>p>br {
   clear: both;
 }
 
@@ -360,11 +391,149 @@ margin: 0 auto;
   text-decoration: underline;
 }
 
-pre{
-  background: #fff;
+/* 代码高亮 */
+/* PrismJS 1.15.0
+https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: black;
+  background: none;
+  text-shadow: 0 1px white;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
 }
 
+pre[class*="language-"]::-moz-selection,
+pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection,
+code[class*="language-"] ::-moz-selection {
+  text-shadow: none;
+  background: #b3d4fc;
+}
 
+pre[class*="language-"]::selection,
+pre[class*="language-"] ::selection,
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection {
+  text-shadow: none;
+  background: #b3d4fc;
+}
 
+@media print {
 
+  code[class*="language-"],
+  pre[class*="language-"] {
+    text-shadow: none;
+  }
+}
 
+/* Code blocks */
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+}
+
+:not(pre)>code[class*="language-"],
+pre[class*="language-"] {
+  background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre)>code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: slategray;
+}
+
+.token.punctuation {
+  color: #999;
+}
+
+.namespace {
+  opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #9a6e3a;
+  background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #07a;
+}
+
+.token.function,
+.token.class-name {
+  color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #e90;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
