@@ -13,9 +13,10 @@ To see this theme in action,  Here is a live [demo site](https://suspicious-arch
 * Optimized for performance: 99/100 on mobile and 100/100 on desktop in Google PageSpeed Insights
 * Optimized SEO performance with a correct SEO SCHEMA based on JSON-LD
 * A More coerent style beetwen page and sections
-* Multilanguage support.
+* Multilanguage support
+* Pagination support
 * Added configuration file for use on [Netlify](https://www.netlify.com)
-* Dark/Light mode 
+* Dark/Light mode
 * Wrap Image with Figure Tag without Shortcode. Thanks [Junian.Net](https://www.junian.net/hugo-image-figure-wrap/)
 * Load images with Lazy Load By [lazysizes](https://github.com/aFarkas/lazysizes)
 * Automatically highlighting code By [Google code-prettify](https://github.com/google/code-prettify), Customizable styles via CSS. See the [themes gallery](https://rawgit.com/google/code-prettify/master/styles/index.html).
