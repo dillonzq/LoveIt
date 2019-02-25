@@ -35,3 +35,20 @@ other = "Retour"
 
 [minute]
 other = "minute"
+
+# 404.html
+
+[page]
+other = "Page"
+
+[not]
+other = "non"
+
+[found]
+other = "trouvée"
+
+[return]
+other = "Retourner"
+
+[to]
+other = "à"

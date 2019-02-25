@@ -35,3 +35,20 @@ other = "Indietro"
 
 [minute]
 other = "minuto"
+
+# 404.html
+
+[page]
+other = "pagina"
+
+[not]
+other = "non"
+
+[found]
+other = "trovata"
+
+[return]
+other = "torna"
+
+[to]
+other = "alla"

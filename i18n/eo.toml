@@ -35,3 +35,20 @@ other = "Reen"
 
 [minute]
 other = "minuto"
+
+# 404.html
+
+[page]
+other = "paĝo"
+
+[not]
+other = "ne"
+
+[found]
+other = "trovita"
+
+[return]
+other = "Revenu"
+
+[to]
+other = "al"

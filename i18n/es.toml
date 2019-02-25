@@ -35,3 +35,20 @@ other = "Atrás"
 
 [minute]
 other = "minuto"
+
+# 404.html
+
+[page]
+other = "página"
+
+[not]
+other = "no"
+
+[found]
+other = "encontrada"
+
+[return]
+other = "Volver"
+
+[to]
+other = "a"

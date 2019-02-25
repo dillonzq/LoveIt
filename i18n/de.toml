@@ -35,3 +35,20 @@ other = "Zurück"
 
 [minute]
 other = "minute"
+
+# 404.html
+
+[page]
+other = "Seite"
+
+[not]
+other = "nicht"
+
+[found]
+other = "gefunden"
+
+[return]
+other = "Zurückkommen"
+
+[to]
+other = "zu"

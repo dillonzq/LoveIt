@@ -35,3 +35,20 @@ other = "Prapa"
 
 [minute]
 other = "minutë"
+
+# 404.html
+
+[page]
+other = "Faqja"
+
+[not]
+other = "nuk u"
+
+[found]
+other = "gjet"
+
+[return]
+other = "Kthehu"
+
+[to]
+other = "në"
