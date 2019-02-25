@@ -6,7 +6,7 @@ KeepIt is a clean, elegant, simple but not simpler blog theme for Hugo based on 
 ![hugo-theme-KeepIt](https://github.com/Fastbyte01/KeepIt/blob/master/images/screenshot.png)
 
 # Demo
-To see this theme in action,  Here is a live [demo site](https://www.fsb01.com) which is rendered with this theme.
+To see this theme in action,  Here is a live [demo site](https://suspicious-archimedes-ab369d.netlify.com) which is rendered with this theme.
 
 # Features
 
