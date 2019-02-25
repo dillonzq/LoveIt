@@ -32,3 +32,6 @@ other = "Accueil"
 
 [back]
 other = "Retour"
+
+[minute]
+other = "minute"

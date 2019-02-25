@@ -28,7 +28,10 @@ other = "Wörter"
 other = "Etikett"
 
 [Home]
-other = "Zuhause"
+other = "Hause"
 
 [back]
 other = "Zurück"
+
+[minute]
+other = "minute"
