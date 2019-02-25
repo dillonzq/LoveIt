@@ -55,13 +55,21 @@ googleAnalytics = ""
 
 [params.social]
     GitHub = "xxxx"
+    Linkedin = "xxxx"
     Twitter = "xxxx"
+    Instagram = "xxxx"
     Email   = "xxxx"
     Facebook = "xxxx"
     Telegram = "xxxx"
-    Dribbble = "xxxx"
     Medium = "xxxx"
-    Linkedin = "xxxx"
+    Gitlab = "xxxx"
+    Youtube = "xxxx"
+    Tumblr ="xxxx"
+    Quora = "xxxx"
+    Keybase = "xxxx"
+    Pinterest = "xxxx"
+    Reddit = "xxxx"
+    Codepen = "xxxx"
 
 # Used only for Seo schema 
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
