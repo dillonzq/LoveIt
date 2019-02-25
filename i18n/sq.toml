@@ -1,0 +1,37 @@
+# Translations for Albanian
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# Single.html
+
+[Written]
+other = "shkruar"
+
+[by]
+other = "nga"
+
+[with]
+other = "me"
+
+[on]
+other = "në"
+
+[in]
+other = "në"
+
+[Author]
+other = "Autor"
+
+[Words]
+other = "Fjalë"
+
+[Tag]
+other = "Etiketë"
+
+[Home]
+other = "Shtëpi"
+
+[back]
+other = "Prapa"
+
+[minute]
+other = "minutë"
