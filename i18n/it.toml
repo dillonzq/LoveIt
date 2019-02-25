@@ -48,7 +48,12 @@ other = "non"
 other = "trovata"
 
 [return]
-other = "torna"
+other = "Torna"
 
 [to]
 other = "alla"
+
+# Pagination
+
+[More]
+other = "Altro"

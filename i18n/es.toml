@@ -52,3 +52,8 @@ other = "Volver"
 
 [to]
 other = "a"
+
+# Pagination
+
+[More]
+other = "Más"
