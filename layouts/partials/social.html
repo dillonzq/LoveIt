@@ -46,6 +46,12 @@
 {{ with .Site.Params.Social.Codepen}}
 <a href="https://codepen.io/{{.}}" rel="me noopener"><i class="iconfont icon-codepen"></i></a>
 {{ end }}
+{{ with .Site.Params.Social.Bitbucket}}
+<a href="https://bitbucket.org/{{.}}" rel="me noopener"><i class="iconfont icon-bitbucket"></i></a>
+{{ end }}
+{{ with .Site.Params.Social.Stackoverflow}}
+<a href="https://stackoverflow.com/users/{{.}}" rel="me noopener"><i class="iconfont icon-stack-overflow"></i></a>
+{{ end }}
 
 
 
