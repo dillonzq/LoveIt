@@ -8,6 +8,10 @@ KeepIt is a clean, elegant, simple but not simpler blog theme for Hugo based on 
 # Demo
 To see this theme in action,  Here is a live [demo site](https://suspicious-archimedes-ab369d.netlify.com) which is rendered with this theme.
 
+People that are using **KeepIt**:
+
+* [PapEr](https://page.codespaper.com)
+
 # Features
 
 * Optimized for performance: 99/100 on mobile and 100/100 on desktop in Google PageSpeed Insights
@@ -17,7 +21,7 @@ To see this theme in action,  Here is a live [demo site](https://suspicious-arch
 * Pagination support
 * Added configuration file for use on [Netlify](https://www.netlify.com)
 * Dark/Light mode
-* Over 15 social sites supported out-of-the-box
+* Over 20 social sites supported out-of-the-box
 * Wrap Image with Figure Tag without Shortcode. Thanks [Junian.Net](https://www.junian.net/hugo-image-figure-wrap/)
 * Load images with Lazy Load By [lazysizes](https://github.com/aFarkas/lazysizes)
 * Automatically highlighting code By [Google code-prettify](https://github.com/google/code-prettify), Customizable styles via CSS. See the [themes gallery](https://rawgit.com/google/code-prettify/master/styles/index.html).
@@ -104,6 +108,8 @@ Add a logo image (127x40) and a cover image (800x600). This images are used for 
 
 # Questions, ideas, bugs, pull requests?
 All feedback is welcome! Head over to the [issue tracker](https://github.com/Fastbyte01/KeepIt/issues).
+
+For more configuration info or other tips you can see the [wiki](https://github.com/Fastbyte01/KeepIt/wiki).
 
 # License
 LeaveIt is licensed under the MIT license. Check the LICENSE file for details.
