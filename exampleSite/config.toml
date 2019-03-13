@@ -47,7 +47,10 @@ googleAnalytics = ""
     home_mode = "" # post or other
 
     google_verification = ""
-    googleAnalytics = ""
+    
+
+
+    disqusShortname = "yourdiscussshortname"
 
     description = "" # site description
     keywords = "" # site keywords
