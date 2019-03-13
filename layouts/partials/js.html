@@ -25,3 +25,5 @@
 
 {{ if eq ( getenv "HUGO_ENV" ) "production" }}
 {{ end }}
+
+{{ template "_internal/google_analytics_async.html" . }}

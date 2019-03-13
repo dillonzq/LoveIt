@@ -47,6 +47,7 @@ googleAnalytics = ""
     home_mode = "" # post or other
 
     google_verification = ""
+    googleAnalytics = ""
 
     description = "" # site description
     keywords = "" # site keywords
