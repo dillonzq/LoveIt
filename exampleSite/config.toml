@@ -82,6 +82,14 @@ googleAnalytics = ""
     #Odnoklassniki = "xxxx"
     #VKontakte = "xxxx"
     #Flickr = "xxxx"
+    #Xing = "xxxx"
+    #Snapchat = "xxxx"
+    #Soundcloud = "xxxx"
+    #Spotify = "xxxx"
+    #Bandcamp = "xxxx"
+    #Paypal = "xxxx"
+    #Fivehundredpx = "xxxx"
+
 
 # Used only for Seo schema 
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
