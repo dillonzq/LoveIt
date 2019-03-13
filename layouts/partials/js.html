@@ -10,7 +10,7 @@
 {{ if .IsPage }}
 
     {{ if $postHasImages }}
-     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">  
      {{ $vendorscript := slice $jquery $lazysizes $prettify $dynamic $main $lihtGallery $lihtGallery_init | resources.Concat "/js/vendor_gallery.js" | resources.Minify }} 
      <script src="{{ printf "%s%s" $cdn_url $vendorscript.RelPermalink }}" async="" ></script>
     {{ else }}
@@ -24,5 +24,4 @@
 {{ end }}
 
 {{ if eq ( getenv "HUGO_ENV" ) "production" }}
-  {{ template "_internal/google_analytics_async.html" . }}
 {{ end }}
