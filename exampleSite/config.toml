@@ -47,6 +47,9 @@ googleAnalytics = ""
     home_mode = "" # post or other
 
     google_verification = ""
+
+    socialShare = true
+    
     
 
 
@@ -89,6 +92,7 @@ googleAnalytics = ""
     #Bandcamp = "xxxx"
     #Paypal = "xxxx"
     #Fivehundredpx = "xxxx"
+    #Mix = "xxxx"
 
 
 # Used only for Seo schema 
