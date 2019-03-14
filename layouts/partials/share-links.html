@@ -1,0 +1,30 @@
+{{ if or .Params.socialShare (and .Site.Params.socialShare (ne .Params.socialShare false)) }}
+
+<!-- Social Share Button HTML -->
+      <!-- Twitter -->
+        <a href="//twitter.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Params.Social.Twitter }}" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+      <!-- Facebook -->
+        <a href="//www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+      <!-- Reddit -->
+        <a href="//reddit.com/submit?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on Reddit">
+          <i class="iconfont icon-reddit"></i>
+        </a>
+      <!-- LinkedIn -->
+        <a href="//www.linkedin.com/shareArticle?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on LinkedIn">
+          <i class="iconfont icon-linkedin"></i>
+        </a>
+      <!-- Pinterest -->
+        <a href="//www.pinterest.com/pin/create/button/?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="Share on Pinterest">
+          <i class="iconfont icon-pinterest"></i>
+        </a>
+        <!-- Mix -->
+        <a href="//mix.com/add?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="Share on Mix">
+            <i class="iconfont icon-mix"></i>
+          </a>
+  {{ end }}
+
+ <URL></URL>

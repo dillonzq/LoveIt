@@ -60,6 +60,13 @@
                     <span>{{ i18n "Words" }}:</span>
                    <span>{{ .WordCount }}</span>
             </p>
+            
+            <div class = "post-share">
+                {{ if $.Param "socialShare" }}
+                <span>{{ i18n "Share" }}:</span>
+                <span>{{ partial "share-links" . }}</span>
+                  </div>
+                       {{ end }}
 
             {{ with .Site.Params.license }} 
             <p class="copyright-item lincese">
