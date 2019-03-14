@@ -8,6 +8,7 @@ paginate = 12
 enableEmoji = true
 enableRobotsTXT = true
 googleAnalytics = ""
+disqusShortname = "yourdiscussshortname"
 
 [sitemap]
   changefreq = "monthly"
@@ -53,7 +54,7 @@ googleAnalytics = ""
     
 
 
-    disqusShortname = "yourdiscussshortname"
+    
 
     description = "" # site description
     keywords = "" # site keywords
