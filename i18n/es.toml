@@ -36,6 +36,9 @@ other = "Atrás"
 [minute]
 other = "minuto"
 
+[Share]
+other = "Compartir"
+
 # 404.html
 
 [page]

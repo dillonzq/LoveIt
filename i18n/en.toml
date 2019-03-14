@@ -36,6 +36,9 @@ other = "Back"
 [minute]
 other = "minute"
 
+[Share]
+other = "Share"
+
 # 404.html
 
 [page]

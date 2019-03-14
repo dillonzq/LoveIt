@@ -36,6 +36,10 @@ other = "Indietro"
 [minute]
 other = "minuto"
 
+[Share]
+other = "Condividi"
+
+
 # 404.html
 
 [page]
