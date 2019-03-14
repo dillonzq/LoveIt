@@ -94,3 +94,37 @@
 {{ with .Site.Params.Social.Mix}}
 <a href="https://mix.com/{{.}}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-mix"></i></a>
 {{ end }}
+
+{{ with .Site.Params.Social.Goodreads}}
+<a href="https://www.goodreads.com/user/show/{{.}}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-goodreads"></i></a>
+{{ end }}
+{{ with .Site.Params.Social.Lastfm}}
+<a href="https://www.last.fm/user/{{.}}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-POP_lastfm"></i></a>
+{{ end }}
+{{ with .Site.Params.Social.Foursquare}}
+<a href="https://foursquare.com/{{.}}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-foursquare"></i></a>
+{{ end }}
+{{ with .Site.Params.Social.Hackernews}}
+<a href="https://news.ycombinator.com/user?id={{.}}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-ycombinator"></i></a>
+{{ end }}
+{{ with .Site.Params.Social.Kickstarter}}
+<a href="https://kickstarter.com/profile/{{.}}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-kickstarter"></i></a>
+{{ end }}
+{{ with .Site.Params.Social.Patreon}}
+<a href="https://patreon.com/{{.}}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-patreon"></i></a>
+{{ end }}
+{{ with .Site.Params.Social.Steam}}
+<a href="https://steamcommunity.com/id/{{.}}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-steam"></i></a>
+{{ end }}
+{{ with .Site.Params.Social.Twitch}}
+<a href="https://www.twitch.tv/{{.}}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-twitch"></i></a>
+{{ end }}
+{{ with .Site.Params.Social.Strava}}
+<a href="https://www.strava.com/athletes/{{.}}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-strava"></i></a>
+{{ end }}
+{{ with .Site.Params.Social.Skype}}
+<a href="skype:{{.}}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-skype"></i></a>
+{{ end }}
+{{ with .Site.Params.Social.Whatsapp}}
+<a href="https://wa.me/{{.}}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-whatsapp"></i></a>
+{{ end }}
