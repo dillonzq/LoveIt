@@ -19,9 +19,13 @@ People that are using **KeepIt**:
 * A More coerent style beetwen page and sections
 * Multilanguage support
 * Pagination support
+* Google Analytics support
+* Disqus Support
+* Share post support
 * Added configuration file for use on [Netlify](https://www.netlify.com)
 * Dark/Light mode
 * Over 20 social sites supported out-of-the-box
+* Translation ready
 * Wrap Image with Figure Tag without Shortcode. Thanks [Junian.Net](https://www.junian.net/hugo-image-figure-wrap/)
 * Load images with Lazy Load By [lazysizes](https://github.com/aFarkas/lazysizes)
 * Automatically highlighting code By [Google code-prettify](https://github.com/google/code-prettify), Customizable styles via CSS. See the [themes gallery](https://rawgit.com/google/code-prettify/master/styles/index.html).
