@@ -1,11 +1,9 @@
 <div class="intro">
     {{ $cdn_url := .Scratch.Get "cdn_url" }}
-    {{ with .Site.Params.avatar}}
-    {{ $avatar := .}}
+    
     <div class="avatar">
-        <a href="/posts/"> <img src="{{ (printf "%s%s" $cdn_url $avatar)}}"> </a>
+        <img src="https://www.gravatar.com/avatar/{{ md5 .Site.Params.gravatar.email }}?s=240&d=mp" alt="gravatar">
     </div>
-    {{ end }}
     {{ with .Site.Params.subtitle}}
     <h2 class="description">
        {{ . }}

@@ -42,7 +42,6 @@ disqusShortname = "yourdiscussshortname"
 [params]
     since = 2012
     author = "Fastbyte01"               # Author's name
-    avatar = "/images/me/avatar.jpeg"           # Author's avatar
     subtitle = "A Hugo theme"       # Subtitle
     cdn_url = ""           # Base CDN URL
     home_mode = "" # post or other
@@ -51,10 +50,8 @@ disqusShortname = "yourdiscussshortname"
 
     socialShare = true
     
-    
-
-
-    
+[params.gravatar]
+    email = ""
 
     description = "" # site description
     keywords = "" # site keywords
