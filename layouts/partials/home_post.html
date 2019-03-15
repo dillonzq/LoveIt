@@ -4,7 +4,7 @@
 		{{ $cdn_url := .Scratch.Get "cdn_url" }}
 		
     <div class="avatar">
-			<img src="https://www.gravatar.com/avatar/{{ md5 .Site.Params.gravatar.email }}?s=240&d=mp" alt="gravatar">
+			<a href="/posts/">	<img src="https://www.gravatar.com/avatar/{{ md5 .Site.Params.gravatar.email }}?s=240&d=mp" alt="gravatar"> </a>
     </div>
     {{ with .Site.Params.subtitle}}
     <h2 class="description">
@@ -61,4 +61,5 @@
 
 	{{ partial "paginator.html" . }}
 </div>
+
 
