@@ -20,7 +20,8 @@ People that are using **KeepIt**:
 * Multilanguage support
 * Pagination support
 * Google Analytics support
-* Disqus Support
+* Disqus Comment System
+* Gitalk Comment System
 * Share post support
 * Added configuration file for use on [Netlify](https://www.netlify.com)
 * Dark/Light mode
