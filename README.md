@@ -22,6 +22,7 @@ People that are using **KeepIt**:
 * Google Analytics support
 * Disqus Comment System
 * Gitalk Comment System
+* Gravatar Support
 * Share post support
 * Added configuration file for use on [Netlify](https://www.netlify.com)
 * Dark/Light mode
