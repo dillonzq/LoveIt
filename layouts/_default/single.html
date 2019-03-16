@@ -61,15 +61,15 @@
                    <span>{{ .WordCount }}</span>
             </p>
             
-            <div class = "post-share">
+            <p class="copyright-item">
                 {{ if $.Param "socialShare" }}
                 <span>{{ i18n "Share" }}:</span>
                 <span>{{ partial "share-links" . }}</span>
-                  </div>
+            </p>
                        {{ end }}
 
             {{ with .Site.Params.license }} 
-            <p class="copyright-item lincese">
+            <p class="copyright-item">
                 {{ . | safeHTML}}
             </p>
             {{ end }}
@@ -108,3 +108,4 @@
     </div>
 </article>
 {{- end }}
+
