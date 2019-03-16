@@ -11,6 +11,7 @@ To see this theme in action,  Here is a live [demo site](https://suspicious-arch
 People that are using **KeepIt**:
 
 * [PapEr](https://page.codespaper.com)
+* [SilkeHenderickx](https://www.silkehenderickx.be)
 
 # Features
 
