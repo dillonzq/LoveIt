@@ -1,32 +1,46 @@
 {{ if or .Params.socialShare (and .Site.Params.socialShare (ne .Params.socialShare false)) }}
 
-<!-- Social Share Button HTML -->
-      <!-- Twitter -->
+      {{ if or .Params.Share.Twitter (and .Site.Params.Share.Twitter (ne .Params.Share.Twitter false)) }}
         <a href="//twitter.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Params.Social.Twitter }}" target="_blank" title="Share on Twitter">
           <i class="iconfont icon-twitter"></i>
         </a>
-      <!-- Facebook -->
+        {{ end }}
+      
+      {{ if or .Params.Share.Facebook (and .Site.Params.Share.Facebook (ne .Params.Share.Facebook false)) }}
         <a href="//www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" title="Share on Facebook">
           <i class="iconfont icon-facebook"></i>
         </a>
-      <!-- Reddit -->
+        {{ end }}
+      
+      {{ if or .Params.Share.Reddit (and .Site.Params.Share.Reddit (ne .Params.Share.Reddit false)) }}
         <a href="//reddit.com/submit?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on Reddit">
           <i class="iconfont icon-reddit"></i>
         </a>
-      <!-- LinkedIn -->
+        {{ end }}
+      
+      {{ if or .Params.Share.Linkedin (and .Site.Params.Share.Linkedin (ne .Params.Share.Linkedin false)) }}
         <a href="//www.linkedin.com/shareArticle?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on LinkedIn">
           <i class="iconfont icon-linkedin"></i>
         </a>
-      <!-- Pinterest -->
+        {{ end }}
+      
+      {{ if or .Params.Share.Pinterest (and .Site.Params.Share.Pinterest (ne .Params.Share.Pinterest false)) }}
         <a href="//www.pinterest.com/pin/create/button/?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="Share on Pinterest">
           <i class="iconfont icon-pinterest"></i>
         </a>
-        <!-- Hacker News -->
+        {{ end }}
+        
+      {{ if or .Params.Share.HackerNews (and .Site.Params.Share.HackerNews (ne .Params.Share.HackerNews false)) }}
         <a href="//news.ycombinator.com/submitlink?u={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="Share on Hacker News">
           <i class="iconfont icon-ycombinator"></i>
         </a>
-        <!-- Mix -->
+        {{ end }}
+        
+      {{ if or .Params.Share.Mix (and .Site.Params.Share.Mix (ne .Params.Share.Mix false)) }}
         <a href="//mix.com/add?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="Share on Mix">
             <i class="iconfont icon-mix"></i>
           </a>
-  {{ end }}
+          {{ end }}
+{{ end }}
+
+
