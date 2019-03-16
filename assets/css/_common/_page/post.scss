@@ -177,12 +177,7 @@
         .copyright-item {
             margin: 5px 0;
         }
-
-        .lincese {
-            font-weight: bold;
-            & a {}
-        }
-
+        
         .dark-theme & {
             border-top: 1px solid $dark-border-color;
             border-bottom: 1px solid $dark-border-color;
