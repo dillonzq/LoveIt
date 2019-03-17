@@ -113,6 +113,10 @@ Linkedin = true
 #Pinterest = true
 #HackerNews = true
 #Mix = true
+#Tumblr = true
+#VKontakte = true
+#Douban = true
+#Weibo = true
 
 # Used only for Seo schema 
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."

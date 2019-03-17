@@ -41,6 +41,30 @@
             <i class="iconfont icon-mix"></i>
           </a>
           {{ end }}
+
+          {{ if or .Params.Share.Tumblr (and .Site.Params.Share.Tumblr (ne .Params.Share.Tumblr false)) }}
+        <a href="//www.tumblr.com/widgets/share/tool?canonicalUrl={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on Tumblr">
+            <i class="iconfont icon-tumblr"></i>
+          </a>
+          {{ end }}
+
+          {{ if or .Params.Share.VKontakte (and .Site.Params.Share.VKontakte (ne .Params.Share.VKontakte false)) }}
+        <a href="//vk.com/share.php?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on VKontakte ">
+            <i class="iconfont icon-vk"></i>
+          </a>
+          {{ end }}
+
+          {{ if or .Params.Share.Douban (and .Site.Params.Share.Douban (ne .Params.Share.Douban false)) }}
+        <a href="//www.douban.com/recommend/?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-douban"></i>
+          </a>
+          {{ end }}
+
+          {{ if or .Params.Share.Weibo (and .Site.Params.Share.Weibo (ne .Params.Share.Weibo false)) }}
+        <a href="//service.weibo.com/share/share.php?url={{ .Permalink }}&amp;appkey=&amp;title={{ .Title }}" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          {{ end }}
 {{ end }}
 
 
