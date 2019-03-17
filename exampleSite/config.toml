@@ -102,6 +102,8 @@ disqusShortname = "yourdiscussshortname"
     #Strava = "xxxx"
     #Skype = "xxxx"
     #Whatsapp = "xxxx"
+    #Zhihu = "xxxx"
+    #Douban = "xxxx"
 
 [params.share]
 Twitter = true
