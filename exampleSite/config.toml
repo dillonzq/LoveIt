@@ -104,6 +104,14 @@ disqusShortname = "yourdiscussshortname"
     #Whatsapp = "xxxx"
     #Zhihu = "xxxx"
     #Douban = "xxxx"
+    Angellist = "xxxx"
+    Slidershare = "xxxx"
+    Jsfiddle = "xxxx"
+    Deviantart = "xxxx"
+    Behance = "xxxx"
+    Dribble = "xxxx"
+    Wordpress = "xxxx"
+    Vine = "xxxx"
 
 [params.share]
 Twitter = true
