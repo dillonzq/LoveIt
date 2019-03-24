@@ -49,6 +49,7 @@ disqusShortname = "yourdiscussshortname"
     google_verification = ""
     bing_verification = ""
     yandex_verification = ""
+    pinterest_verification = ""
 
     socialShare = true
     
