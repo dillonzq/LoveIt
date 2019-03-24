@@ -25,9 +25,10 @@ People that are using **KeepIt**:
 * Gitalk Comment System
 * Gravatar Support
 * Share post support
+* Search engine verification support (Google, Bind, Yandex and Baidu)
 * Added configuration file for use on [Netlify](https://www.netlify.com)
 * Dark/Light mode
-* Up to 53 social sites supported out-of-the-box [see the list here](https://github.com/Fastbyte01/KeepIt/wiki/List-of-social-platforms-supported-out-of-box)
+* Up to 54 social sites supported out-of-the-box [see the list here](https://github.com/Fastbyte01/KeepIt/wiki/List-of-social-platforms-supported-out-of-box)
 * Translation ready
 * Wrap Image with Figure Tag without Shortcode. Thanks [Junian.Net](https://www.junian.net/hugo-image-figure-wrap/)
 * Load images with Lazy Load By [lazysizes](https://github.com/aFarkas/lazysizes)
