@@ -47,6 +47,8 @@ disqusShortname = "yourdiscussshortname"
     home_mode = "" # post or other
 
     google_verification = ""
+    bing_verification = ""
+    yandex_verification = ""
 
     socialShare = true
     

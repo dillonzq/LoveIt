@@ -4,6 +4,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noodp"/>
   {{ with .Site.Params.google_verification }}<meta name="google-site-verification" content="{{ . }}" />{{ end }}
+  {{ with .Site.Params.bing_verification }}<meta name="msvalidate.01" content="{{ . }}" />{{end}}
+  {{ with .Site.Params.yandex_verification }}<meta name="yandex-verification" content="{{ . }}" />{{ end }}
   {{ if .PrevInSection }}<link rel="prev" href="{{.PrevInSection.Permalink}}" />{{end}}
   {{ if .NextInSection}}<link rel="next" href="{{ .NextInSection.Permalink }}" />{{end}}
   <link rel="canonical" href="{{ .Permalink }}" />
