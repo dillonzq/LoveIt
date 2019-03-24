@@ -112,6 +112,8 @@ disqusShortname = "yourdiscussshortname"
     #Dribble = "xxxx"
     #Wordpress = "xxxx"
     #Vine = "xxxx"
+    #Googlescholar = "xxxx"
+    #Researchgate = "xxxx"
 
 [params.share]
 Twitter = true

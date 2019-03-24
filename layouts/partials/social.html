@@ -155,13 +155,11 @@
 <a href="https://{{ . }}.wordpress.com" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-wordpress"></i></a>
 {{ end }}
 {{ with .Site.Params.Social.Vine}}
-<a href="https://vine.co/{{ . }}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-vine"></i></a>
+<a href="https://vine.co/" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-vine"></i></a>
 {{ end }}
-
-
-
-
-
-
-
-
+{{ with .Site.Params.Social.Googlescholar}}
+<a href="https://scholar.google.com/citations?{{ . }}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-Googlescholar"></i></a>
+{{ end }}
+{{ with .Site.Params.Social.Researchgate}}
+<a href="https://www.researchgate.net/profile/{{ . }}" rel="me noopener noreffer" target="_blank"><i class="iconfont icon-researchgate"></i></a>
+{{ end }}
