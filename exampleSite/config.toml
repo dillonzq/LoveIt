@@ -50,6 +50,7 @@ disqusShortname = "yourdiscussshortname"
     bing_verification = ""
     yandex_verification = ""
     pinterest_verification = ""
+    baidu_verification = ""
 
     socialShare = true
     
