@@ -24,6 +24,7 @@ People that are using **KeepIt**:
 * Disqus Comment System
 * Gitalk Comment System
 * Gravatar Support
+* Local Avatar Support
 * Share post support
 * Search engine verification support (Google, Bind, Yandex and Baidu)
 * Added configuration file for use on [Netlify](https://www.netlify.com)
@@ -44,7 +45,7 @@ cd themes
 git clone https://github.com/Fastbyte01/KeepIt.git
 ```
 
-Next, open config.toml in the base of the Hugo site and ensure the theme option is set to mainroad:
+Next, open config.toml in the base of the Hugo site and ensure the theme option is set to KeepIt:
 ```bash
 theme = "KeepIt"
 ```
