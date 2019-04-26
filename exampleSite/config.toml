@@ -165,3 +165,13 @@ owner = ""
 repo = ""               
 clientId = ""           
 clientSecret = ""   
+
+[params.valine]
+  enable = false
+  appId = 'your appId'
+  appKey = 'your appKey'
+  notify = false  # mail notifier , https://github.com/xCss/Valine/wiki
+  verify = false # Verification code
+  avatar = 'mm'
+  placeholder = 'your comments ...'
+  visitor = true
