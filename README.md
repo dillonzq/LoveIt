@@ -23,6 +23,7 @@ People that are using **KeepIt**:
 * Google Analytics support
 * Disqus Comment System
 * Gitalk Comment System
+* Valine Comment System
 * Gravatar Support
 * Local Avatar Support
 * Share post support
