@@ -40,7 +40,7 @@
   <!-- valine -->
   {{- if .Site.Params.valine.enable -}}
   <span
-    id="{{ .URL | relURL }}"
+    id="{{ .RelPermalink | relURL }}"
     class="leancloud_visitors"
     data-flag-title="{{ .Title }}"
   >
@@ -65,3 +65,4 @@
   </script>
   {{- end -}}
 {{- end }}
+
