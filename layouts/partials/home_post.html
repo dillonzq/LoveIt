@@ -3,7 +3,6 @@
 	<div class="intro">
 			{{ $cdn_url := .Scratch.Get "cdn_url" }}
 			{{ with .Site.Params.avatar}}
-		{{ $cdn_url := .Scratch.Get "cdn_url" }}
 		{{ $avatar := .}}
     <div class="avatar">
         <a href="/posts/"> <img src="{{ (printf "%s%s" $cdn_url $avatar)}}"> </a>
