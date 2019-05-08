@@ -63,11 +63,11 @@
             </p>
             
             <p class="copyright-item">
-                {{ if $.Param "socialShare" }}
+                {{ if and ( $.Param "socialShare" ) (gt (len ($.Param "share")) 0) }}
                 <span>{{ i18n "Share" }}:</span>
                 <span>{{ partial "share-links" . }}</span>
+                {{ end }}
             </p>
-                       {{ end }}
 
             {{ with .Site.Params.license }} 
             <p class="copyright-item">
