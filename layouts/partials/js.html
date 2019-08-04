@@ -11,18 +11,15 @@
 
     {{ if $postHasImages }}
     <link crossorigin="anonymous" integrity="sha384-yziQACfvCVwLqVFLqkWBYRO3XeA4EqzfXKGwaWnenYn5XzqfJFlFdKEmvutIQdKb" href="https://lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">
-     {{ $vendorscript := slice $dynamic $main $lihtGallery $lihtGallery_init | resources.Concat "/js/vendor_gallery.js" | resources.Minify }}
+     {{ $vendorscript := slice $jquery $lazysizes $prettify $dynamic $main $lihtGallery $lihtGallery_init | resources.Concat "/js/vendor_gallery.js" | resources.Minify }}
      <script src="{{ printf "%s%s" $cdn_url $vendorscript.RelPermalink }}" async="" ></script>
-     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-     <script src="https://cdn.bootcss.com/prettify/r298/prettify.min.js"></script>
-     <script src="https://cdn.bootcss.com/lazysizes/5.1.0/lazysizes.min.js"></script>
     {{ else }}
-    {{ $vendorscript := slice $dynamic $main | resources.Concat "/js/vendor_no_gallery.js" | resources.Minify }}
+    {{ $vendorscript := slice $jquery $prettify $dynamic $main | resources.Concat "/js/vendor_no_gallery.js" | resources.Minify }}
     <script src="{{ printf "%s%s" $cdn_url $vendorscript.RelPermalink }}" async=""></script>
     {{ end }}
 
 {{ else }}
-    {{ $main := slice $main | resources.Concat "/js/vendor_main.js" | resources.Minify}}
+    {{ $main := slice  $jquery $main | resources.Concat "/js/vendor_main.js" | resources.Minify}}
     <script src="{{ printf "%s%s" $cdn_url $main.RelPermalink }}" async=""></script>
 {{ end }}
 
