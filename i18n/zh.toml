@@ -1,71 +1,71 @@
-# Translations for English
+# Translations for Simplified Chinese
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === Post ===
 [posts]
-other = "Posts"
+other = "文章"
 # === Post ===
 
 # === Taxonomy ===
 [tag]
-other = "Tag"
+other = "标签"
 
 [tags]
-other = "Tags"
+other = "标签"
 
 [category]
-other = "Category"
+other = "分类"
 
 [categories]
-other = "Categories"
+other = "分类"
 # === Taxonomy ===
 
 # === Pagination ===
 [More]
-other = "More"
+other = "更多"
 # === Pagination ===
 
 # === partials/footer.html ===
 [powered]
-other = "Powered by %s"
+other = "由 %s 强力驱动"
 
 [theme]
-other = "Theme - "
+other = "主题 - "
 # === partials/footer.html ===
 
 # === posts/single.html ===
 [wrote]
-other = "wrote on"
+other = "创作于"
 
 [wordCount]
-other = "about {{ .Count }} words"
+other = "约 {{ .Count }} 字"
 
 [readingTime]
-other = "{{ .Count }} min"
+other = "预计阅读  {{ .Count }} 分钟"
 
 [author]
-other = "Author"
+other = "作者"
 
 [lastMod]
-other = "Last Modified"
+other = "上次更新"
 
 [share]
-other = "Share"
+other = "内容分享"
 
 [license]
-other = "License"
+other = "许可协议"
 
 [back]
-other = "Back"
+other = "返回"
 
 [home]
-other = "Home"
+other = "主页"
 # === posts/single.html ===
 
 # === 404.html ===
 [pageNotFound]
-other = "Page not found"
+other = "页面没找到"
 
 [backToHome]
-other = "Back to Home"
+other = "回到主页"
 # === 404.html ===

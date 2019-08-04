@@ -1,0 +1,61 @@
+{{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
+
+{{ define "content" }}
+    {{ $taxonomy := .Data.Singular }}
+    {{ $taxonomysName := $taxonomy }}
+    {{ if eq $taxonomy "tag"}}
+        {{ $taxonomysName = (T "tags") }}
+    {{ else if eq $taxonomy "category"}}
+        {{ $taxonomysName = (T "categories") }}
+    {{ end }}
+
+    {{ $terms := .Data.Terms.ByCount }}
+    {{ $length := len $terms }}
+    {{ $type := .Type }}
+
+    <div class="post-warp {{.Data.Plural}}">
+        <h2 class="post-title" style="text-align:right;padding-bottom:2em">
+            {{- printf "- %s -" $taxonomysName -}}
+        </h2>
+
+        <!-- Categories Page -->
+        {{ if eq $taxonomy "category" }}
+            <div class="categories-card">
+                {{ range $terms }}
+                    {{ $term := .Term }}
+                    {{ $pages := .Pages }}
+                    {{ with $.Site.GetPage "taxonomy" (printf "%s/%s" $type $term) }}
+                    <div class="card-item">
+                        <div class="categories">
+                            <a href="{{ .Permalink }}">
+                                <h3> <i class="iconfont icon-folder" style="padding-right: 3px"></i> {{ $term | humanize}} </h3>
+                            </a>
+                            {{ range first 5 $pages }}
+                                <article class="archive-item">
+                                    <a href="{{ .Permalink }}" class="archive-item-link">{{ .Title }}</a>
+                                </article>
+                            {{ end }}
+                            {{ if gt (len $pages) 5 }}
+                                <span class="more-post">
+                                    <a href="{{ .Permalink }}" class="more-post-link">{{ T "More" }} >></a>
+                                </span>
+                            {{ end }}
+                        </div>
+                    </div>
+                    {{ end }}
+                {{ end }}
+            </div>
+
+        <!-- Tag Cloud Page -->
+        {{ else if eq $taxonomy "tag" }}
+            <div class="tag-cloud-tags">
+                {{ range $.Site.Taxonomies.tags.ByCount }}
+                    {{ if .Name }}
+                        <a href="/tags/{{ .Name | urlize}}/"> {{ .Name }} <small>({{ .Count }})</small></a>
+                    {{ end }}
+                {{end}}
+            </div>
+
+        {{ end }}
+    </div>
+{{end }}

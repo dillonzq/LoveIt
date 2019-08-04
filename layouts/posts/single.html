@@ -1,0 +1,117 @@
+{{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
+
+{{ define "content" }}
+    {{ $cdn_url := .Scratch.Get "cdn_url" }}
+    {{ $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
+    {{ $modify_date := .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
+    {{ $author := .Site.Params.author }}
+    {{ if isset .Params "author" }}
+       {{ $author = .Params.author }}
+    {{ end }}
+
+    <article class="post-warp">
+        <header class="post-header">
+            <h1 class="post-title">{{ .Title }}</h1>
+            <div class="post-meta">
+                <a href="{{.Site.BaseURL }}" rel="author">{{ $author }}</a>
+                {{ T "wrote" }}
+                <span class="post-time"><time datetime={{ $publish_date }}>{{ $publish_date }}</time></span>
+                &nbsp;✎
+                {{ T "wordCount" .WordCount }}
+                <i class="iconfont icon-timer"></i>
+                {{ T "readingTime" .ReadingTime }}
+                &nbsp;
+                {{ with .Params.categories -}}
+                    <span class="post-category">
+                        {{ range . }}
+                            {{- $name := . -}}
+                            {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
+                                <i class="iconfont icon-folder"></i>
+                                <a href="{{ .Permalink }}">{{ $name }}</a>
+                            {{ end -}}
+                        {{ end }}
+                    </span>
+                {{- end }}
+            </div>
+        </header>
+        <div class="post-content">
+            <!--featured_image-->
+            {{ $images := findRE "<img src=\"[^\"|\\\"]*\"" .Content -}}
+            {{ if ge (len $images) 1}}
+                {{ $.Scratch.Set "postHasImages" true }}
+            {{ end }}
+            {{ with .Params.featured_image }}
+                {{ $img := . }}<img src="{{ printf "%s%s" $cdn_url $img }}" class="featured_image">
+            {{ end }}
+            <!-- end featured_image-->
+
+            {{ $reAltIn := "<img src=\"([^\"]+)\" alt=\"([^\"]+)?\" />" }}
+            {{ $reAltOut :=  ( printf "<figure><img src=\"/images/ring.svg\" data-sizes=\"auto\" data-src=\"%s$1\" alt=\"$2\" class=\"lazyload\"><figcaption class=\"image-caption\">$2</figcaption></figure>" $cdn_url ) }}
+            {{ $altContent := .Content | replaceRE $reAltIn $reAltOut | safeHTML }}
+            {{ $reAltTitleIn := "<img src=\"([^\"]+)\" alt=\"([^\"]+)?\" title=\"([^\"]+)?\" />" }}
+            {{ $reAltTitleOut := ( printf "<figure><img src=\"/images/ring.svg\" data-src=\"%s$1\" data-sizes=\"auto\" alt=\"$2\" title=\"$3\" class=\"lazyload\"><figcaption class=\"image-caption\">$2</figcaption></figure>" $cdn_url ) }}
+            {{ $finalContent := $altContent | replaceRE $reAltTitleIn $reAltTitleOut | safeHTML }}
+            {{ $finalContent }}
+        </div>
+
+        <div class="post-copyright">
+            <p class="copyright-item">
+                <span>{{ T "author" }}:</span>
+                <span><a href="{{.Site.BaseURL }}" rel="author">{{ $author }}</a></span>
+            </p>
+
+            <p class="copyright-item">
+                <span>{{ T "lastMod" }}:</span>
+                <span>{{ $modify_date }}</span>
+            </p>
+
+            <p class="copyright-item">
+                {{ if and ( $.Param "socialShare" ) (gt (len ($.Param "share")) 0) }}
+                <span>{{ T "share" }}:</span>
+                <span>{{ partial "share-links" . }}</span>
+                {{ end }}
+            </p>
+
+            {{ with .Site.Params.license }}
+            <p class="copyright-item">
+                <span>{{ T "license" }}:</span>
+                <span>{{ . | safeHTML }}</span>
+            </p>
+            {{ end }}
+        </div>
+
+        <div class="post-tags">
+            {{ with .Params.tags }}
+            <section>
+                <i class="iconfont icon-icon-tag"></i>{{ T "tag" }}:
+                {{ range . }}
+                <span class="tag">
+                    <a href="{{ "tags/" | absURL }}{{ . | urlize }}/">#{{.}}</a>
+                </span>
+                {{ end }}
+            </section>
+            {{ end }}
+            <section>
+                <a href="javascript:window.history.back();">{{ T "back" }}</a></span> ·
+                <span><a href="{{ .Site.BaseURL }}">{{ T "home" }}</a></span>
+            </section>
+        </div>
+
+        <div class="post-nav">
+            {{ if .PrevInSection }}
+            <a href="{{.PrevInSection.Permalink}}" class="prev" rel="prev" title="{{ .PrevInSection.Title}}"><i
+                    class="iconfont icon-dajiantou"></i>&nbsp;{{ .PrevInSection.Title}}</a>
+            {{ end }}
+            {{ if .NextInSection }}
+            <a href="{{.NextInSection.Permalink}}" class="next" rel="next"
+                title="{{.NextInSection.Title}}">{{.NextInSection.Title}}&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+            {{ end }}
+        </div>
+
+        <div class="post-comment">
+            {{ if ( .Params.showComments | default true ) }}
+            {{ partial "comments" . }}
+            {{ end }}
+        </div>
+    </article>
+{{- end }}

@@ -10,14 +10,14 @@
 {{ if .IsPage }}
 
     {{ if $postHasImages }}
-     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">  
-     {{ $vendorscript := slice $jquery $lazysizes $prettify $dynamic $main $lihtGallery $lihtGallery_init | resources.Concat "/js/vendor_gallery.js" | resources.Minify }} 
+    <link crossorigin="anonymous" integrity="sha384-yziQACfvCVwLqVFLqkWBYRO3XeA4EqzfXKGwaWnenYn5XzqfJFlFdKEmvutIQdKb" href="https://lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">
+     {{ $vendorscript := slice $jquery $lazysizes $prettify $dynamic $main $lihtGallery $lihtGallery_init | resources.Concat "/js/vendor_gallery.js" | resources.Minify }}
      <script src="{{ printf "%s%s" $cdn_url $vendorscript.RelPermalink }}" async="" ></script>
     {{ else }}
     {{ $vendorscript := slice $jquery $prettify $dynamic $main | resources.Concat "/js/vendor_no_gallery.js" | resources.Minify }}
     <script src="{{ printf "%s%s" $cdn_url $vendorscript.RelPermalink }}" async=""></script>
     {{ end }}
-  
+
 {{ else }}
     {{ $main := slice  $jquery $main | resources.Concat "/js/vendor_main.js" | resources.Minify}}
     <script src="{{ printf "%s%s" $cdn_url $main.RelPermalink }}" async=""></script>

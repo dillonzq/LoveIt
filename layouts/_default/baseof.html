@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
-  {{ partial "head.html" . }}
-  <body class="">
-    <div class="wrapper">
-        {{ partial "header" . }}
-    	 <main class="main">
-          <div class="container">
-      		{{ block "content" . }}{{ end }}
-          </div>
-		   </main>
-      {{ partial "footer.html" . }}
-     </div>
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{{ block "title" . -}}{{ .Site.Title }}{{- end }}</title>
+        {{ partial "head.html" . }}
+    </head>
+    {{ $cdn_url := ""}}
+    {{ if eq ( getenv "HUGO_ENV" ) "production" }}
+        {{ with .Site.Params.cdn_url }}
+            {{ $cdn_url = .}}
+        {{ end }}
+    {{ end }}
+    {{ .Scratch.Set "cdn_url" $cdn_url }}
+    <body class="">
+        <div class="wrapper">
+            {{ partial "header" . }}
+            <main class="main">
+                <div class="container">
+                    {{ block "content" . }}{{ end }}
+                </div>
+            </main>
+            {{ partial "footer.html" . }}
+        </div>
+    </body>
 </html>
