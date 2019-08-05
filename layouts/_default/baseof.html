@@ -1,3 +1,11 @@
+{{ $cdn_url := ""}}
+{{ if eq ( getenv "HUGO_ENV" ) "production" }}
+    {{ with .Site.Params.cdn_url }}
+        {{ $cdn_url = .}}
+    {{ end }}
+{{ end }}
+{{ .Scratch.Set "cdn_url" $cdn_url }}
+
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
     <head>
@@ -6,16 +14,9 @@
         <title>{{ block "title" . -}}{{ .Site.Title }}{{- end }}</title>
         {{ partial "head.html" . }}
     </head>
-    {{ $cdn_url := ""}}
-    {{ if eq ( getenv "HUGO_ENV" ) "production" }}
-        {{ with .Site.Params.cdn_url }}
-            {{ $cdn_url = .}}
-        {{ end }}
-    {{ end }}
-    {{ .Scratch.Set "cdn_url" $cdn_url }}
     <body class="">
         <div class="wrapper">
-            {{ partial "header" . }}
+            {{ partial "header.html" . }}
             <main class="main">
                 <div class="container">
                     {{ block "content" . }}{{ end }}

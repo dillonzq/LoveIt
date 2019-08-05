@@ -1,7 +1,22 @@
 {{ if and .IsPage (ne .Params.comment false) -}}
     <!-- Disqus Comment System-->
     {{- if .Site.DisqusShortname -}}
-        {{ template "_internal/disqus.html" . }}
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            (function() {
+                // Don't ever inject Disqus on localhost--it creates unwanted
+                // discussions from 'localhost:1313' on your Disqus account...
+                if (window.location.hostname == "localhost")
+                    return;
+
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                var disqus_shortname = '{{ .Site.DisqusShortname }}';
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     {{- end -}}
 
     <!-- gitalk Comment System-->
@@ -23,7 +38,7 @@
             gitalk.render('gitalk-container');
         </script>
         <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
-    {{- end }}
+    {{- end -}}
 
     <!-- valine -->
     {{- if .Site.Params.valine.enable -}}

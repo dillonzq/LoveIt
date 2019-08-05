@@ -5,25 +5,25 @@
 {{ $prettify := resources.Get "/js/prettify.min.js" }}
 {{ $dynamic := resources.Get "/js/dynamic.to.top.min.js" }}
 {{ $main := resources.Get "/js/main.js" }}
-{{ $lihtGallery := resources.Get "/js/lightGallery-all.min.js" }}
-{{ $lihtGallery_init := resources.Get "/js/lightGallery-init.js" }}
-{{ if .IsPage }}
+{{ $lightGallery := resources.Get "/js/lightGallery-all.min.js" }}
+{{ $lightGallery_init := resources.Get "/js/lightGallery-init.js" }}
 
+{{ if .IsPage }}
     {{ if $postHasImages }}
-    <link crossorigin="anonymous" integrity="sha384-yziQACfvCVwLqVFLqkWBYRO3XeA4EqzfXKGwaWnenYn5XzqfJFlFdKEmvutIQdKb" href="https://lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">
-     {{ $vendorscript := slice $jquery $lazysizes $prettify $dynamic $main $lihtGallery $lihtGallery_init | resources.Concat "/js/vendor_gallery.js" | resources.Minify }}
-     <script src="{{ printf "%s%s" $cdn_url $vendorscript.RelPermalink }}" async="" ></script>
+        <link href="https://cdn.bootcss.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">
+        {{ $vendorScript := slice $jquery $lazysizes $prettify $dynamic $main $lightGallery $lightGallery_init | resources.Concat "/js/vendor_gallery.js" | resources.Minify }}
+        <script src="{{ printf "%s%s" $cdn_url $vendorScript.RelPermalink }}" async=""></script>
     {{ else }}
-    {{ $vendorscript := slice $jquery $prettify $dynamic $main | resources.Concat "/js/vendor_no_gallery.js" | resources.Minify }}
-    <script src="{{ printf "%s%s" $cdn_url $vendorscript.RelPermalink }}" async=""></script>
+        {{ $vendorScript := slice $jquery $prettify $dynamic $main | resources.Concat "/js/vendor_no_gallery.js" | resources.Minify }}
+        <script src="{{ printf "%s%s" $cdn_url $vendorScript.RelPermalink }}" async=""></script>
     {{ end }}
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 {{ else }}
-    {{ $main := slice  $jquery $main | resources.Concat "/js/vendor_main.js" | resources.Minify}}
-    <script src="{{ printf "%s%s" $cdn_url $main.RelPermalink }}" async=""></script>
-{{ end }}
-
-{{ if eq ( getenv "HUGO_ENV" ) "production" }}
+    {{ $vendorScript := slice  $jquery $main | resources.Concat "/js/vendor_main.js" | resources.Minify}}
+    <script src="{{ printf "%s%s" $cdn_url $vendorScript.RelPermalink }}" async=""></script>
 {{ end }}
 
 {{ template "_internal/google_analytics_async.html" . }}

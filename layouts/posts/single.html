@@ -68,7 +68,7 @@
             <p class="copyright-item">
                 {{ if and ( $.Param "socialShare" ) (gt (len ($.Param "share")) 0) }}
                 <span>{{ T "share" }}:</span>
-                <span>{{ partial "share-links" . }}</span>
+                <span>{{ partial "share-links.html" . }}</span>
                 {{ end }}
             </p>
 
@@ -110,7 +110,7 @@
 
         <div class="post-comment">
             {{ if ( .Params.showComments | default true ) }}
-            {{ partial "comments" . }}
+            {{ partial "comments.html" . }}
             {{ end }}
         </div>
     </article>

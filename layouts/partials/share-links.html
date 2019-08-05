@@ -1,68 +1,75 @@
 {{ if or .Params.socialShare (and .Site.Params.socialShare (ne .Params.socialShare false)) }}
 
-      {{ if or .Params.Share.Twitter (and .Site.Params.Share.Twitter (ne .Params.Share.Twitter false)) }}
-        <a href="//twitter.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Params.Social.Twitter }}" target="_blank" title="Share on Twitter">
-          <i class="iconfont icon-twitter"></i>
+    {{ if or .Params.Share.Twitter (and .Site.Params.Share.Twitter (ne .Params.Share.Twitter false)) }}
+        <a href="//twitter.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Params.Social.Twitter }}"
+            target="_blank" title="Share on Twitter">
+            <i class="iconfont icon-twitter"></i>
         </a>
-        {{ end }}
-      
-      {{ if or .Params.Share.Facebook (and .Site.Params.Share.Facebook (ne .Params.Share.Facebook false)) }}
+    {{ end }}
+
+    {{ if or .Params.Share.Facebook (and .Site.Params.Share.Facebook (ne .Params.Share.Facebook false)) }}
         <a href="//www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" title="Share on Facebook">
-          <i class="iconfont icon-facebook"></i>
+            <i class="iconfont icon-facebook"></i>
         </a>
-        {{ end }}
-      
-      {{ if or .Params.Share.Reddit (and .Site.Params.Share.Reddit (ne .Params.Share.Reddit false)) }}
+    {{ end }}
+
+    {{ if or .Params.Share.Reddit (and .Site.Params.Share.Reddit (ne .Params.Share.Reddit false)) }}
         <a href="//reddit.com/submit?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on Reddit">
-          <i class="iconfont icon-reddit"></i>
+            <i class="iconfont icon-reddit"></i>
         </a>
-        {{ end }}
-      
-      {{ if or .Params.Share.Linkedin (and .Site.Params.Share.Linkedin (ne .Params.Share.Linkedin false)) }}
-        <a href="//www.linkedin.com/shareArticle?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on LinkedIn">
-          <i class="iconfont icon-linkedin"></i>
+    {{ end }}
+
+    {{ if or .Params.Share.Linkedin (and .Site.Params.Share.Linkedin (ne .Params.Share.Linkedin false)) }}
+        <a href="//www.linkedin.com/shareArticle?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank"
+            title="Share on LinkedIn">
+            <i class="iconfont icon-linkedin"></i>
         </a>
-        {{ end }}
-      
-      {{ if or .Params.Share.Pinterest (and .Site.Params.Share.Pinterest (ne .Params.Share.Pinterest false)) }}
-        <a href="//www.pinterest.com/pin/create/button/?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="Share on Pinterest">
-          <i class="iconfont icon-pinterest"></i>
+    {{ end }}
+
+    {{ if or .Params.Share.Pinterest (and .Site.Params.Share.Pinterest (ne .Params.Share.Pinterest false)) }}
+        <a href="//www.pinterest.com/pin/create/button/?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank"
+            title="Share on Pinterest">
+            <i class="iconfont icon-pinterest"></i>
         </a>
-        {{ end }}
-        
-      {{ if or .Params.Share.HackerNews (and .Site.Params.Share.HackerNews (ne .Params.Share.HackerNews false)) }}
-        <a href="//news.ycombinator.com/submitlink?u={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="Share on Hacker News">
-          <i class="iconfont icon-ycombinator"></i>
+    {{ end }}
+
+    {{ if or .Params.Share.HackerNews (and .Site.Params.Share.HackerNews (ne .Params.Share.HackerNews false)) }}
+        <a href="//news.ycombinator.com/submitlink?u={{ .Permalink }}&amp;description={{ .Title }}" target="_blank"
+            title="Share on Hacker News">
+            <i class="iconfont icon-ycombinator"></i>
         </a>
-        {{ end }}
-        
-      {{ if or .Params.Share.Mix (and .Site.Params.Share.Mix (ne .Params.Share.Mix false)) }}
+    {{ end }}
+
+    {{ if or .Params.Share.Mix (and .Site.Params.Share.Mix (ne .Params.Share.Mix false)) }}
         <a href="//mix.com/add?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="Share on Mix">
             <i class="iconfont icon-mix"></i>
-          </a>
-          {{ end }}
+        </a>
+    {{ end }}
 
-          {{ if or .Params.Share.Tumblr (and .Site.Params.Share.Tumblr (ne .Params.Share.Tumblr false)) }}
-        <a href="//www.tumblr.com/widgets/share/tool?canonicalUrl={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on Tumblr">
+    {{ if or .Params.Share.Tumblr (and .Site.Params.Share.Tumblr (ne .Params.Share.Tumblr false)) }}
+        <a href="//www.tumblr.com/widgets/share/tool?canonicalUrl={{ .Permalink }}&amp;title={{ .Title }}" target="_blank"
+            title="Share on Tumblr">
             <i class="iconfont icon-tumblr"></i>
-          </a>
-          {{ end }}
+        </a>
+    {{ end }}
 
-          {{ if or .Params.Share.VKontakte (and .Site.Params.Share.VKontakte (ne .Params.Share.VKontakte false)) }}
+    {{ if or .Params.Share.VKontakte (and .Site.Params.Share.VKontakte (ne .Params.Share.VKontakte false)) }}
         <a href="//vk.com/share.php?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on VKontakte ">
             <i class="iconfont icon-vk"></i>
-          </a>
-          {{ end }}
+        </a>
+    {{ end }}
 
-          {{ if or .Params.Share.Douban (and .Site.Params.Share.Douban (ne .Params.Share.Douban false)) }}
-        <a href="//www.douban.com/recommend/?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on Douban ">
+    {{ if or .Params.Share.Douban (and .Site.Params.Share.Douban (ne .Params.Share.Douban false)) }}
+        <a href="//www.douban.com/recommend/?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank"
+            title="Share on Douban ">
             <i class="iconfont icon-douban"></i>
-          </a>
-          {{ end }}
+        </a>
+    {{ end }}
 
-          {{ if or .Params.Share.Weibo (and .Site.Params.Share.Weibo (ne .Params.Share.Weibo false)) }}
-        <a href="//service.weibo.com/share/share.php?url={{ .Permalink }}&amp;appkey=&amp;title={{ .Title }}" target="_blank" title="Share on Douban ">
+    {{ if or .Params.Share.Weibo (and .Site.Params.Share.Weibo (ne .Params.Share.Weibo false)) }}
+        <a href="//service.weibo.com/share/share.php?url={{ .Permalink }}&amp;appkey=&amp;title={{ .Title }}" target="_blank"
+            title="Share on Douban ">
             <i class="iconfont icon-weibo"></i>
-          </a>
-          {{ end }}
+        </a>
+    {{ end }}
 {{ end }}

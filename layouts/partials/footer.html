@@ -2,13 +2,12 @@
     <div class="copyright">
         &copy;
         {{ with .Site.Params.since }}
-        <span itemprop="copyrightYear">{{ if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year }}</span>
+            <span itemprop="copyrightYear">{{ if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year }}</span>
         {{ end }}
         {{ if .Site.Params.author }}
-        <span class="author" itemprop="copyrightHolder"><a href="{{ .Site.BaseURL }}">{{ .Site.Params.author }}</a> |
-        </span>
+            <span class="author" itemprop="copyrightHolder"><a href="{{ .Site.BaseURL }}">{{ .Site.Params.author }}</a> |
+            </span>
         {{ end }}
-
         <span>{{ (printf (T "powered") `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>`) | safeHTML }} | {{ T "theme" }}<a href="https://github.com/dillonzq/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a></span>
     </div>
 </footer>
