@@ -1,19 +1,18 @@
-KeepIt Hugo Theme
-========================
+# LoveIt Hugo Theme
 
-KeepIt is a clean, elegant, simple but not simpler blog theme for Hugo based on the original [LeaveIt Theme](https://raw.githubusercontent.com/liuzc/LeaveIt/) developed by [LiuZhichao](https://raw.githubusercontent.com/liuzc/).
+LoveIt is a clean, elegant, simple but not simpler blog theme for Hugo based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) and [KeepIt Theme](https://github.com/liuzc/LeaveIt/) developed by [Dillon](https://dillonzq.com).
 
-![hugo-theme-KeepIt](https://github.com/Fastbyte01/KeepIt/blob/master/images/screenshot.png)
+![hugo-theme-LoveIt](https://github.com/dillonzq/LoveIt/blob/master/images/screenshot.png)
 
-# Demo
+## Demo
+
 To see this theme in action,  Here is a live [demo site](https://suspicious-archimedes-ab369d.netlify.com) which is rendered with this theme.
 
-People that are using **KeepIt**:
+People that are using **LoveIt**:
 
-* [PapEr](https://page.codespaper.com)
-* [SilkeHenderickx](http://www.silkehenderickx.be)
+* [Dillon](https://dillonzq.com)
 
-# Features
+## Features
 
 * Optimized for performance: 99/100 on mobile and 100/100 on desktop in Google PageSpeed Insights
 * Optimized SEO performance with a correct SEO SCHEMA based on JSON-LD
@@ -38,28 +37,32 @@ People that are using **KeepIt**:
 * Automagical image gallery with [lightGallery](https://github.com/sachinchoolur/lightGallery)
 * ...
 
-# Getting Started
+## Getting Started
+
 Clone this repository to your hugo theme directory.
 
 ```bash
-cd themes
-git clone https://github.com/Fastbyte01/KeepIt.git
+  cd themes
+  git clone https://github.com/dillonzq/LoveIt.git
 ```
 
 Next, open config.toml in the base of the Hugo site and ensure the theme option is set to KeepIt:
+
 ```bash
-theme = "KeepIt"
+  theme = "LoveIt"
 ```
+
 For more information read the [official setup guide](https://gohugo.io/documentation/) of Hugo.
 
-# Site Configuration
+## Site Configuration
+
 Take a look in the `exampleSite` folder.
 
 This directory contains an example config file and the content for the demo. It serves as an example setup for your documentation.
 
 Copy the `config.toml` in the root directory of your website. Overwrite the existing config file if necessary.
 
-# Content Suggestions
+## Content Suggestions
 
 A few suggestions to help you get a good looking site quickly:
 
@@ -67,14 +70,14 @@ A few suggestions to help you get a good looking site quickly:
 * Keep static pages in the content directory, for example: content/about.md
 * Keep media like images in the static directory, for example: static/images/2019/10/screenshot.png
 
-# Customizing styles for your website
+## Customizing styles for your website
 
 If you want to change some styling to fit your own website needs, you can edit them:
 
 * `assets/css/_varibales/default.scss`:  You can override the variables in `_variables.scss` to customize the style
 * `assets/css/_custom.scss` :  You can put your custom css in this file
 
-# Favicons, Browserconfig, Manifest
+## Favicons, Browserconfig, Manifest
 
 It is recommended to put your own favicons
 
@@ -85,54 +88,62 @@ It is recommended to put your own favicons
 * android-chrome-192x192.png (192x192)
 * android-chrome-512x512.png (512x512)
 
-into `/static`. They’re easily created via https://realfavicongenerator.net/.
+into `/static`. They’re easily created via [https://realfavicongenerator.net/](https://realfavicongenerator.net/).
 
 Customize browserconfig.xml and site.webmanifest to set theme-color and background-color for example.
 
-# Tips
+## Tips
 
-#### Set production environment when generating site
+### Set production environment when generating site
 
 Because some functions are only in production mode, So you **need to add a production** environment variables when generating your site.
+
 ```bash
-HUGO_ENV=production hugo --gc --minify
+  HUGO_ENV=production hugo --gc --minify
 ```
 
-#### Hugo “extended” Sass/SCSS version required
+### Hugo “extended” Sass/SCSS version required
 
 This theme write style with scss, So you must download and install the “extended” Sass/SCSS version
 
-#### How to toggle dark-light mode
+### How to toggle dark-light mode
+
 * You can click the sun logo to toggle dark-light mode. In the desktop version the sun logo is to the right and in the mobile version is positioned to the left, close to the site title.
 * If you want to make your own theme toggle-able element, you can create an element with a class `.theme-switch`. See [here](https://github.com/Fastbyte01/KeepIt/blob/master/assets/js/main.js#L32)
 
-# Home Post model
+## Home Post model
+
 If you want to show posts on index instead of a personal profile, just open config.toml in the base of the Hugo site, add the following line to config.toml
+
 ```toml
-[params]
- home_mode = "post" # post or other
+  [params]
+  home_mode = "post" # post or other
 ```
-# Add logo and cover for SEO
+
+## Add logo and cover for SEO
 
 Add a logo image (127x40) and a cover image (800x600). This images are used for SEO.
 
-# Questions, ideas, bugs, pull requests?
-All feedback is welcome! Head over to the [issue tracker](https://github.com/Fastbyte01/KeepIt/issues).
+## Questions, ideas, bugs, pull requests
 
-For more configuration info or other tips you can see the [wiki](https://github.com/Fastbyte01/KeepIt/wiki).
+All feedback is welcome! Head over to the [issue tracker](https://github.com/dillonzq/LoveIt/issues).
 
-# License
+For more configuration info or other tips you can see the [wiki](https://github.com/dillonzq/LoveIt/wiki).
+
+## License
+
 LeaveIt is licensed under the MIT license. Check the LICENSE file for details.
 The following resources are included in the theme:
 
-* lazysizes - https://github.com/aFarkas/lazysizes
-* lightGallery - https://github.com/sachinchoolur/lightGallery
-* code-prettify - https://github.com/google/code-prettify
+* [lazysizes](https://github.com/aFarkas/lazysizes)
+* [lightGallery](https://github.com/sachinchoolur/lightGallery)
+* [code-prettify](https://github.com/google/code-prettify)
 
-# Author
-[Fastbyte01](https://github.com/Fastbyte01)
+## Author
 
-# See Also
+[Dillon](https://dillonzq.com)
+
+## See Also
 
 * [Hermitt](https://github.com/Track3/hermit)
 * [Goa](https://github.com/shenoybr/hugo-goa)
