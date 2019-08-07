@@ -12,8 +12,10 @@
         <div class="avatar"><a href="/posts/"> <img src={{ $avatar }} alt="avatar"></a></div>
     {{ end }}
 
-    {{ with .Site.Params.subtitle}}
-        <h2 class="description">{{ . }}</h2>
+    {{ with .Site.Params.subtitle }}
+        <h2 class="description">
+            <div id="subtitle"></div>
+        </h2>
     {{ end }}
 
     <div class="social-links">

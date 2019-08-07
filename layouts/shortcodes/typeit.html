@@ -7,7 +7,7 @@
     {{ end }}
     {{ $id = printf "#%s" $id }}
         <script>
-            if (!typeitMap) {
+            if (!window.typeitMap) {
                 var typeitMap = {}
             }
             typeitMap["{{ $id }}"] = {{ .Inner | safeHTML }};

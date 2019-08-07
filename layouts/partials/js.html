@@ -36,11 +36,20 @@
 {{ $countdown := `
   <script src="https://cdn.jsdelivr.net/npm/jquery-countdown@2.2.0/dist/jquery.countdown.min.js" integrity="sha256-Ikk5myJowmDQaYVCUD0Wr+vIDkN8hGI58SGWdE671A8=" crossorigin="anonymous"></script>
 ` }}
+
 {{ $jquery | safeHTML }}
+{{ $typeit | safeHTML }}
+{{ with .Site.Params.subtitle }}
+    <script>
+        if (!window.typeitMap) {
+            var typeitMap = {}
+        }
+        typeitMap["#subtitle"] = "{{ . }}";
+    </script>
+{{ end }}
 
 {{ if .IsPage }}
     {{ $prettify | safeHTML }}
-    {{ $typeit | safeHTML }}
     {{ $countdown | safeHTML }}
     {{ $scripts = $scripts | append $dynamicToTop }}
 
