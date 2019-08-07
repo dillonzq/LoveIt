@@ -7,7 +7,7 @@
 
 <!-- jQuery https://github.com/jquery/jquery -->
 {{ $jquery := `
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 ` }}
 <!-- JavaScript code prettifier https://github.com/google/code-prettify -->
 {{ $prettify := `
@@ -28,16 +28,20 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 ` }}
-<!-- Typed.js https://github.com/mattboldt/typed.js -->
-{{ $typed := `
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.10/lib/typed.min.js" integrity="sha256-F6VRM94CIE3Kv2zkAtbzlViDfZ3HMaIgusIcFBPIjiU=" crossorigin="anonymous"></script>
+<!-- TypeIt https://github.com/alexmacarthur/typeit -->
+{{ $typeit := `
+  <script src="https://cdn.jsdelivr.net/npm/typeit@6.0.3/dist/typeit.min.js" integrity="sha256-jl1b2Wp4cXCUyX8FxPZ8Z0PPIPV3QYNb/jPSLGDej2c=" crossorigin="anonymous"></script>
 ` }}
-
+<!-- jQuery.countdown https://github.com/hilios/jQuery.countdown/ -->
+{{ $countdown := `
+  <script src="https://cdn.jsdelivr.net/npm/jquery-countdown@2.2.0/dist/jquery.countdown.min.js" integrity="sha256-Ikk5myJowmDQaYVCUD0Wr+vIDkN8hGI58SGWdE671A8=" crossorigin="anonymous"></script>
+` }}
 {{ $jquery | safeHTML }}
 
 {{ if .IsPage }}
     {{ $prettify | safeHTML }}
-    {{ $typed | safeHTML }}
+    {{ $typeit | safeHTML }}
+    {{ $countdown | safeHTML }}
     {{ $scripts = $scripts | append $dynamicToTop }}
 
     {{ if $postHasImages }}

@@ -1,0 +1,15 @@
+{{ if .Get "id" }}
+    {{ $id := .Get "id" }}
+    {{ with .Get "class" }}
+        <div id={{ $id }} class="{{ . }}"></div>
+    {{ else }}
+        <div id={{ $id }}></div>
+    {{ end }}
+    {{ $id = printf "#%s" $id }}
+        <script>
+            if (!typeitMap) {
+                var typeitMap = {}
+            }
+            typeitMap["{{ $id }}"] = {{ .Inner | safeHTML }};
+        </script>
+{{ end }}

@@ -9,6 +9,31 @@ jQuery(function($) {
         window.prettyPrint && prettyPrint();
     };
 
+    _Blog.typeit = function() {
+        if (window.typeitMap) {
+            for (let id in typeitMap) {
+                new TypeIt(id, {
+                    strings: typeitMap[id],
+                }).go();
+            }
+        }
+    };
+
+    _Blog.countdown = function() {
+        if (window.countdownMap) {
+            for (let id in countdownMap) {
+              $(id).countdown(countdownMap[id], {elapse: true})
+                .on('update.countdown', function(event) {
+                  var $this = $(this).html(event.strftime(''
+                    + '<span>%D</span> 天 <br />'
+                    + '<span>%H</span> 时 '
+                    + '<span>%M</span> 分 '
+                    + '<span>%S</span> 秒'));
+              });
+          }
+        }
+    };
+
     _Blog.externalUrl = function() {
         $.expr[':'].external = function(obj) {
             return !obj.href.match(/^mailto\:/) &&
@@ -48,9 +73,11 @@ jQuery(function($) {
     }
 
     $(document).ready(function() {
-        _Blog.prettify()
-        _Blog.changeTitle()
         _Blog.toggleTheme()
+        _Blog.prettify()
+        _Blog.countdown()
+        _Blog.changeTitle()
         _Blog.toggleMobileMenu()
+        _Blog.typeit()
     });
 });
