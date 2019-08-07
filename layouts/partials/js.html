@@ -5,30 +5,39 @@
 {{ $dynamicToTop := resources.Get "/js/dynamicToTop.min.js" }}
 {{ $lightGallery_init := resources.Get "/js/lightGallery-init.js" }}
 
+<!-- jQuery https://github.com/jquery/jquery -->
 {{ $jquery := `
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
 ` }}
+<!-- JavaScript code prettifier https://github.com/google/code-prettify -->
 {{ $prettify := `
     <script src="https://cdn.jsdelivr.net/npm/code-prettify@0.1.0/src/prettify.js" integrity="sha256-w3n8zE0N1lx/nrrWA16Dk7KnySbJF7cPs5E2CByeB7A=" crossorigin="anonymous"></script>
 ` }}
+<!-- lightGallery https://github.com/sachinchoolur/lightGallery -->
 {{ $lightGallery := `
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.12/dist/css/lightgallery.min.css" integrity="sha256-8rfHbJr+ju3Oc099jFJMR1xAPu8CTPHU8uP5J3X/VAY=" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.12/dist/js/lightgallery-all.min.js" integrity="sha256-w14QFJrxOYkUnF0hb8pVFCSgYcsF0hMIKrqGb8A7J8A=" crossorigin="anonymous"></script>
 ` }}
+<!-- lazysizes https://github.com/aFarkas/lazysizes -->
 {{ $lazysizes := `
     <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.1/lazysizes.min.js" integrity="sha256-6zKmNZVeImc0d1Y55vm4So/0W5mbwWiPS4zJt3F4t2A=" crossorigin="anonymous"></script>
 ` }}
+<!-- KaTeX https://github.com/KaTeX/KaTeX -->
 {{ $katex := `
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 ` }}
+<!-- Typed.js https://github.com/mattboldt/typed.js -->
+{{ $typed := `
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.10/lib/typed.min.js" integrity="sha256-F6VRM94CIE3Kv2zkAtbzlViDfZ3HMaIgusIcFBPIjiU=" crossorigin="anonymous"></script>
+` }}
 
-<!-- jQuery -->
 {{ $jquery | safeHTML }}
 
 {{ if .IsPage }}
     {{ $prettify | safeHTML }}
+    {{ $typed | safeHTML }}
     {{ $scripts = $scripts | append $dynamicToTop }}
 
     {{ if $postHasImages }}
@@ -40,7 +49,6 @@
         {{ $scripts = $scripts | resources.Concat "/js/vendor_no_gallery.js" | resources.Minify }}
     {{ end }}
 
-    <!-- KaTeX -->
     {{ if or .Params.Math .Site.Params.Math }}
         {{ $katex | safeHTML }}
     {{ end }}
