@@ -36,6 +36,14 @@
 {{ $countdown := `
   <script src="https://cdn.jsdelivr.net/npm/jquery-countdown@2.2.0/dist/jquery.countdown.min.js" integrity="sha256-Ikk5myJowmDQaYVCUD0Wr+vIDkN8hGI58SGWdE671A8=" crossorigin="anonymous"></script>
 ` }}
+<!-- jQuery.countdown https://github.com/hilios/jQuery.countdown/ -->
+{{ $metingjs := `
+  <!-- require APlayer -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+  <!-- require MetingJS -->
+  <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+` }}
 
 {{ $jquery | safeHTML }}
 {{ $typeit | safeHTML }}
@@ -49,8 +57,14 @@
 {{ end }}
 
 {{ if .IsPage }}
-    {{ $prettify | safeHTML }}
+    {{ if .Params.Code }}
+        {{ $prettify | safeHTML }}
+    {{ end }}
+    {{ if .Params.Music }}
+        {{ $metingjs | safeHTML }}
+    {{ end }}
     {{ $countdown | safeHTML }}
+
     {{ $scripts = $scripts | append $dynamicToTop }}
 
     {{ if $postHasImages }}
