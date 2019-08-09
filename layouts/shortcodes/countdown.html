@@ -8,9 +8,7 @@
     {{ $id = printf "#%s" $id }}
     {{ with .Get "date" }}
         <script>
-            if (!window.countdownMap) {
-                var countdownMap = {}
-            }
+            var countdownMap = window.countdownMap || {};
             countdownMap["{{ $id }}"] = {{ . }};
         </script>
     {{ end }}

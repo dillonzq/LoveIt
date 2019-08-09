@@ -55,29 +55,29 @@ jQuery(function($) {
     };
 
     _Blog.toggleTheme = function() {
-        const currentTheme = window.localStorage && window.localStorage.getItem('theme')
-        const isDark = currentTheme === 'dark'
-        $('body').toggleClass('dark-theme', isDark)
+        const currentTheme = window.localStorage && window.localStorage.getItem('theme');
+        const isDark = currentTheme === 'dark';
+        $('body').toggleClass('dark-theme', isDark);
         $('.theme-switch').on('click', () => {
-            $('body').toggleClass('dark-theme')
+            $('body').toggleClass('dark-theme');
             window.localStorage &&
-                window.localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light', )
-        })
+                window.localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light', );
+        });
     }
 
     _Blog.toggleMobileMenu = function() {
         $('.menu-toggle').on('click', () => {
-            $('.menu-toggle').toggleClass('active')
-            $('#mobile-menu').toggleClass('active')
-        })
+            $('.menu-toggle').toggleClass('active');
+            $('#mobile-menu').toggleClass('active');
+        });
     }
 
     $(document).ready(function() {
-        _Blog.toggleTheme()
-        _Blog.prettify()
-        _Blog.countdown()
-        _Blog.changeTitle()
-        _Blog.toggleMobileMenu()
-        _Blog.typeit()
+        _Blog.toggleTheme();
+        _Blog.prettify();
+        _Blog.countdown();
+        _Blog.changeTitle();
+        _Blog.toggleMobileMenu();
+        _Blog.typeit();
     });
 });

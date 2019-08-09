@@ -47,14 +47,6 @@
 
 {{ $jquery | safeHTML }}
 {{ $typeit | safeHTML }}
-{{ with .Site.Params.subtitle }}
-    <script>
-        if (!window.typeitMap) {
-            var typeitMap = {}
-        }
-        typeitMap["#subtitle"] = "{{ . }}";
-    </script>
-{{ end }}
 
 {{ if .IsPage }}
     {{ if .Params.Code }}
