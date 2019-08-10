@@ -11,8 +11,7 @@
     {{ $content = trim $content "\n" }}
     {{ $content = replaceRE `\n</span>` "</span>\n" $content }}
     {{ $content = replaceRE `(?m)^(<span.*?>)(.*?)\[(.*?)\]\((.*?)\)(.*?)(</span>)` "$1$2$6<a href=$4>$3</a>$1$5$6" $content }}
-    {{ $content = replaceRE `(?m)^( +)<span` "<span class=space>$1</span><span" $content }}
-    {{ $content = replaceRE `</span>( +)<span` "</span><span class=space>$1</span><span" $content | replaceRE `\n` "<br />" }}
+    {{ $content = replaceRE ` ` "&nbsp;" $content | replaceRE `(<\w+)&nbsp;` "$1 " | replaceRE `\n` "<br />" }}
     <div id={{ printf "r%s" $id }} hidden=true>{{ $content | safeHTML }}</div>
     <div class={{ .Get "class" | default "typeit-code" }} id={{ $id }}></div>
 {{ else }}
