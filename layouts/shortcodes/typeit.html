@@ -1,13 +1,34 @@
-{{ if .Get "id" }}
-    {{ $id := .Get "id" }}
-    {{ with .Get "class" }}
-        <div id={{ $id }} class="{{ . }}"></div>
-    {{ else }}
-        <div id={{ $id }}></div>
-    {{ end }}
-    {{ $id = printf "#%s" $id }}
-        <script>
-            var typeitMap = window.typeitMap || {};
-            typeitMap["{{ $id }}"] = {{ .Inner | safeHTML }};
-        </script>
+{{ $content := .Inner }}
+{{ $id := delimit (split (md5 $content) "" | shuffle) "" | printf "tp-%s" }}
+
+{{ if .Get "raw" }}
+{{ $content = trim $content "\n" }}
+    <div id={{ printf "r%s" $id }} hidden=true>{{ $content | safeHTML }}</div>
+    <div class={{ .Get "class" }} id={{ $id }}></div>
+{{ else if .Get "code" }}
+    {{ $content = highlight $content (.Get "code") "encoding=utf-8" }}
+    {{ $content = replaceRE `<div class="highlight">\s*?<pre class="chroma">\s*?<code.*?>(?s)(.*?)</code>\s*?</pre>\s*?</div>` "$1" $content }}
+    {{ $content = trim $content "\n" }}
+    {{ $content = replaceRE `\n</span>` "</span><br />" $content | replaceRE `\n` "<br />" }}
+    {{ $content = replaceRE `>( +)<span` "><span class=space>$1</span><span" $content }}
+    <div id={{ printf "r%s" $id }} hidden=true>{{ $content | safeHTML }}</div>
+    <div class={{ .Get "class" | default "typeit-code" }} id={{ $id }}></div>
+{{ else }}
+    {{ $tag := .Get "tag" | default "p" }}
+    {{ $content = $content | markdownify | chomp }}
+    {{ $content = trim $content "\n" }}
+    <div id={{ printf "r%s" $id }} hidden=true>{{ $content | safeHTML }}</div>
+    {{ printf "<%s class=%s id=%s></%s>" $tag (.Get "class" | default "typeit") $id $tag | safeHTML }}
 {{ end }}
+
+<script>
+    var typeitMap = window.typeitMap || {};
+    {{ with .Get "group" }}
+        if (!typeitMap[{{ . }}]) {
+            typeitMap[{{ . }}] = [];
+        }
+        typeitMap[{{ . }}].push({{ $id }});
+    {{ else }}
+    typeitMap[{{ $id }}] = true;
+    {{ end }}
+</script>

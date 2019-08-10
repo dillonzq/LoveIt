@@ -4,17 +4,31 @@ jQuery(function($) {
 
     var _Blog = window._Blog || {};
 
-    _Blog.prettify = function() {
-        $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
-        window.prettyPrint && prettyPrint();
-    };
-
     _Blog.typeit = function() {
         if (window.typeitMap) {
             for (let id in typeitMap) {
-                new TypeIt(id, {
-                    strings: typeitMap[id],
-                }).go();
+                if (Array.isArray(typeitMap[id])) {
+                    const group = typeitMap[id];
+                    (function typeone (i) {
+                        if (i === group.length - 1) {
+                            new TypeIt(`#${group[i]}`, {
+                                strings: document.getElementById(`r${group[i]}`).innerHTML,
+                            }).go();
+                            return;
+                        }
+                        let instance = new TypeIt(`#${group[i]}`, {
+                            strings: document.getElementById(`r${group[i]}`).innerHTML,
+                            afterComplete: () => {
+                                instance.destroy();
+                                typeone(i + 1);
+                            },
+                        }).go();
+                    })(0);
+                } else {
+                    new TypeIt(`#${id}`, {
+                        strings: document.getElementById(`r${id}`).innerHTML,
+                    }).go();
+                }
             }
         }
     };
@@ -74,7 +88,6 @@ jQuery(function($) {
 
     $(document).ready(function() {
         _Blog.toggleTheme();
-        _Blog.prettify();
         _Blog.countdown();
         _Blog.changeTitle();
         _Blog.toggleMobileMenu();

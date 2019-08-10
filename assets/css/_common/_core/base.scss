@@ -1,18 +1,14 @@
 /** Font **/
+/* Lato */
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900);
 
-	/* Lato */
-	@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900);
-	
-	/* Montserrat */
-	@import url(https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800);
-	
-	/* Roboto */
-	@import url(https://fonts.googleapis.com/css?family=Roboto:400,900);
+/* Montserrat */
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800);
 
-  
- 
-  
-  html {
+/* Roboto */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900);
+
+html {
     &::-webkit-scrollbar {
       width: 8px;
       height: 8px;
@@ -25,8 +21,8 @@
         background-color: #ddd;
       }
     }
-  }
-  
+}
+
   ::selection {
     background: rgba(0, 149, 255, 0.1);
   }

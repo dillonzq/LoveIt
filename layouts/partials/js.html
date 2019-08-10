@@ -1,5 +1,5 @@
 {{ $cdn_url := .Scratch.Get "cdn_url" }}
-{{ $postHasImages :=  .Scratch.Get "postHasImages"}}
+{{ $postHasImages := .Scratch.Get "postHasImages" }}
 
 {{ $scripts := resources.Get "/js/main.js" | slice }}
 {{ $dynamicToTop := resources.Get "/js/dynamicToTop.min.js" }}
@@ -8,10 +8,6 @@
 <!-- jQuery https://github.com/jquery/jquery -->
 {{ $jquery := `
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-` }}
-<!-- JavaScript code prettifier https://github.com/google/code-prettify -->
-{{ $prettify := `
-    <script src="https://cdn.jsdelivr.net/npm/code-prettify@0.1.0/src/prettify.js" integrity="sha256-w3n8zE0N1lx/nrrWA16Dk7KnySbJF7cPs5E2CByeB7A=" crossorigin="anonymous"></script>
 ` }}
 <!-- lightGallery https://github.com/sachinchoolur/lightGallery -->
 {{ $lightGallery := `
@@ -49,9 +45,6 @@
 {{ $typeit | safeHTML }}
 
 {{ if .IsPage }}
-    {{ if .Params.Code }}
-        {{ $prettify | safeHTML }}
-    {{ end }}
     {{ if .Params.Music }}
         {{ $metingjs | safeHTML }}
     {{ end }}
@@ -76,5 +69,4 @@
 {{ end }}
 
 <script src="{{ printf "%s%s" $cdn_url $scripts.RelPermalink }}" async=""></script>
-
 {{ template "_internal/google_analytics_async.html" . }}

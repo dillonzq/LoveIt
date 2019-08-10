@@ -1,75 +1,58 @@
 {{ $cdn_url := .Scratch.Get "cdn_url" }}
 
 <div class="post-warp">
-    <div class="intro">
-        {{ $avatar := "" }}
-        {{ if or .Params.gravatar.Email (and .Site.Params.gravatar.Email (ne .Params.gravatar.Email false)) }}
-            {{ $avatar = (printf "https://www.gravatar.com/avatar/%s?s=240&d=mp" (md5 .Site.Params.gravatar.email)) }}
-        {{ else if .Site.Params.avatar }}
-            {{ $avatar = (printf "%s%s" $cdn_url .) }}
-        {{ end }}
-        {{ if $avatar }}
-            <div class="avatar">
-                <a href="/posts/"> <img src={{ $avatar }} alt="avatar"></a>
+    {{ partial "intro.html" . }}
+    {{ range (.Paginate (where .Pages "Type" "posts")).Pages }}
+        <article class="post" itemscope itemtype="http://schema.org/Article">
+            <header class="post-header">
+                <h1 class="post-title" itemprop="name headline">
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                </h1>
+            </header>
+            <div class="post-content">
+                <!--featured_image-->
+                {{ with .Params.featured_image }}
+                    {{ $img := . }}
+                    <p>
+                        <img itemprop="image" src="{{ printf "%s%s" $cdn_url $img }}" class="featured_image">
+                    </p>
+                {{ end }}
+                <!-- end featured_image-->
+
+                {{ .Summary }}
             </div>
-        {{ end }}
-
-        {{ with .Site.Params.subtitle }}
-            <h2 class="description">
-                <div id="subtitle"></div>
-            </h2>
-            <script>
-                var typeitMap = window.typeitMap || {};
-                typeitMap["#subtitle"] = "{{ . }}";
-            </script>
-        {{ end }}
-    </div>
-
-    {{ range (.Paginate .Pages).Pages }}
-    <article class="post" itemscope itemscope="" itemtype="http://schema.org/Article">
-
-        <header class="post-header">
-            <h1 class="post-title" itemprop="name headline"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
-        </header>
-        <div class="post-content">
-            <!--featured_image-->
-            {{ with .Params.featured_image }}
-            {{- $img := . -}}
-            <p><img src="{{ printf "%s%s" $cdn_url $img }}" class="featured_image"></p>
-            {{ end }}
-            <!-- end featured_image-->
-
-            {{ .Summary }}
-        </div>
-        <div class="post-footer">
-            <div class="post-meta">
-                <span class="post-time">
-                    <time datetime={{.Date.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
-                        itemprop="datePublished">{{ .Date.Format (.Site.Params.dateFormatToUse | default "2 January 2006") }}</time>
-                </span>
-                in
-                {{ with .Params.categories -}}
-                <i class="iconfont icon-folder"></i>
-                <span class="post-category">
-                    {{ range . }}
-                    {{- $name := . -}}
-                    {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
-                    <a href="{{ .Permalink }}"> {{ $name }} </a>
-                    {{ end -}}
+            <div class="post-footer">
+                <div class="post-meta">
+                    <span class="post-time">
+                        <time datetime={{.Date.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }} itemprop="datePublished">
+                            {{ .Date.Format (.Site.Params.dateFormatToUse | default "2 January 2006") }}
+                        </time>
+                    </span>
+                    in
+                    {{ with .Params.categories }}
+                        <i class="iconfont icon-folder"></i>
+                        <span class="post-category">
+                            {{ range . }}
+                                {{ $name := . }}
+                                {{ with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) }}
+                                    <a href="{{ .Permalink }}">{{ $name }}</a>
+                                {{ end }}
+                            {{ end }}
+                        </span>
                     {{ end }}
-                </span>
-                {{- end }}
-            </div>
-            {{ with .Params.tags }}
-            <div class="post-tags">
-                {{ range . }}
-                <span class="tag"><a href="{{ "tags/" | absURL }}{{ . | urlize }}/">
-                        #{{.}}</a></span>
+                </div>
+
+                {{ with .Params.tags }}
+                    <div class="post-tags">
+                        {{ range . }}
+                            <span class="tag">
+                                <a href="{{ "tags/" | absURL }}{{ . | urlize }}/">#{{ . }}</a>
+                            </span>
+                        {{ end }}
+                    </div>
                 {{ end }}
             </div>
-            {{ end }}
-        </div>
-    </article>
+        </article>
     {{ end }}
 
     {{ partial "paginator.html" . }}
