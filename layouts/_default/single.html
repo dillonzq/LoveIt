@@ -1,0 +1,10 @@
+{{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
+
+{{ define "content" }}
+    <div class="post-warp">
+        <h2 class="post-title" style="text-align:right;padding-bottom:2em">{{ .Title }}</h2>
+        <div class="post-content">
+            {{ .Content }}
+        </div>
+    </div>
+{{end }}

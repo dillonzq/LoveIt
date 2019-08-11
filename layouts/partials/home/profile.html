@@ -1,0 +1,31 @@
+<div class="intro">
+    {{ $avatar := "" }}
+    {{ if or .Params.gravatar.Email (and .Site.Params.gravatar.Email (ne .Params.gravatar.Email false)) }}
+        {{ $avatar = (printf "https://www.gravatar.com/avatar/%s?s=240&d=mp" (md5 .Site.Params.gravatar.email)) }}
+    {{ else if .Site.Params.avatar }}
+        {{ $avatar = .Site.Params.avatar }}
+    {{ end }}
+    {{ if $avatar }}
+        <div class="avatar">
+            <a href="/posts/">
+                <img src={{ $avatar }} alt="avatar">
+            </a>
+        </div>
+    {{ end }}
+
+    {{ with .Site.Params.subtitle }}
+        <h2 class="description">
+            {{ $id := md5 . | printf "tp-%s" }}
+            <div id={{ printf "r%s" $id }} hidden=true>{{ . | safeHTML }}</div>
+            <div id={{ $id }} class="typeit"></div>
+            <script>
+                var typeitMap = window.typeitMap || {};
+                typeitMap["{{ $id }}"] = true;
+            </script>
+        </h2>
+    {{ end }}
+
+    <div class="social-links">
+        {{ partial "home/social.html" . }}
+    </div>
+</div>

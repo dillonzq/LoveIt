@@ -1,20 +1,10 @@
-{{ $cdn_url := .Scratch.Get "cdn_url" }}
-{{ $postHasImages := .Scratch.Get "postHasImages" }}
-
 {{ $scripts := resources.Get "/js/main.js" | slice }}
-{{ $dynamicToTop := resources.Get "/js/dynamicToTop.min.js" }}
-{{ $lightGallery_init := resources.Get "/js/lightGallery-init.js" }}
+{{ $dynamicToTop := resources.Get "/js/dynamicToTop.js" }}
 
 <!-- jQuery https://github.com/jquery/jquery -->
 {{ $jquery := `
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 ` }}
-<!-- lightGallery https://github.com/sachinchoolur/lightGallery -->
-{{ $lightGallery := `
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.12/dist/css/lightgallery.min.css" integrity="sha256-8rfHbJr+ju3Oc099jFJMR1xAPu8CTPHU8uP5J3X/VAY=" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.12/dist/js/lightgallery-all.min.js" integrity="sha256-w14QFJrxOYkUnF0hb8pVFCSgYcsF0hMIKrqGb8A7J8A=" crossorigin="anonymous"></script>
-` }}
-<!-- lazysizes https://github.com/aFarkas/lazysizes -->
 {{ $lazysizes := `
     <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.1/lazysizes.min.js" integrity="sha256-6zKmNZVeImc0d1Y55vm4So/0W5mbwWiPS4zJt3F4t2A=" crossorigin="anonymous"></script>
 ` }}
@@ -26,19 +16,19 @@
 ` }}
 <!-- TypeIt https://github.com/alexmacarthur/typeit -->
 {{ $typeit := `
-  <script src="https://cdn.jsdelivr.net/npm/typeit@6.0.3/dist/typeit.min.js" integrity="sha256-jl1b2Wp4cXCUyX8FxPZ8Z0PPIPV3QYNb/jPSLGDej2c=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typeit@6.0.3/dist/typeit.min.js" integrity="sha256-jl1b2Wp4cXCUyX8FxPZ8Z0PPIPV3QYNb/jPSLGDej2c=" crossorigin="anonymous"></script>
 ` }}
-<!-- jQuery.countdown https://github.com/hilios/jQuery.countdown/ -->
+<!-- jQuery.countdown https://github.com/hilios/jQuery.countdown -->
 {{ $countdown := `
-  <script src="https://cdn.jsdelivr.net/npm/jquery-countdown@2.2.0/dist/jquery.countdown.min.js" integrity="sha256-Ikk5myJowmDQaYVCUD0Wr+vIDkN8hGI58SGWdE671A8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-countdown@2.2.0/dist/jquery.countdown.min.js" integrity="sha256-Ikk5myJowmDQaYVCUD0Wr+vIDkN8hGI58SGWdE671A8=" crossorigin="anonymous"></script>
 ` }}
-<!-- jQuery.countdown https://github.com/hilios/jQuery.countdown/ -->
+<!-- MetingJS https://github.com/metowolf/MetingJS -->
 {{ $metingjs := `
-  <!-- require APlayer -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-  <!-- require MetingJS -->
-  <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    <!-- require MetingJS -->
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
 ` }}
 
 {{ $jquery | safeHTML }}
@@ -49,24 +39,18 @@
         {{ $metingjs | safeHTML }}
     {{ end }}
     {{ $countdown | safeHTML }}
-
-    {{ $scripts = $scripts | append $dynamicToTop }}
-
-    {{ if $postHasImages }}
-        {{ $lightGallery | safeHTML }}
-        {{ $lazysizes | safeHTML }}
-        {{ $scripts = $scripts | append $lightGallery_init }}
-        {{ $scripts = $scripts | resources.Concat "/js/vendor_gallery.js" | resources.Minify }}
-    {{ else }}
-        {{ $scripts = $scripts | resources.Concat "/js/vendor_no_gallery.js" | resources.Minify }}
-    {{ end }}
-
     {{ if or .Params.Math .Site.Params.Math }}
         {{ $katex | safeHTML }}
     {{ end }}
+
+    {{ $lazysizes | safeHTML }}
+
+    {{ $scripts = $scripts | append $dynamicToTop }}
+    {{ $scripts = $scripts | resources.Concat "/js/vendor_post.js" | resources.Minify }}
 {{ else }}
     {{ $scripts = $scripts | resources.Concat "/js/vendor_main.js" | resources.Minify}}
 {{ end }}
 
-<script src="{{ printf "%s%s" $cdn_url $scripts.RelPermalink }}" async=""></script>
+<script src="{{ $scripts.RelPermalink }}" async=""></script>
+
 {{ template "_internal/google_analytics_async.html" . }}

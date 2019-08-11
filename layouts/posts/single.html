@@ -1,12 +1,11 @@
 {{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
 
 {{ define "content" }}
-    {{ $cdn_url := .Scratch.Get "cdn_url" }}
     {{ $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
     {{ $modify_date := .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
-    {{ $author := .Site.Params.author }}
+    {{ $author := .Site.Author.Name }}
     {{ if isset .Params "author" }}
-       {{ $author = .Params.author }}
+       {{ $author = .Site.Author.Name }}
     {{ end }}
 
     <article class="post-warp">
@@ -36,20 +35,16 @@
         </header>
         <div class="post-content">
             <!--featured_image-->
-            {{ $images := findRE "<img src=\"[^\"|\\\"]*\"" .Content -}}
-            {{ if ge (len $images) 1}}
-                {{ $.Scratch.Set "postHasImages" true }}
-            {{ end }}
             {{ with .Params.featured_image }}
-                {{ $img := . }}<img src="{{ printf "%s%s" $cdn_url $img }}" class="featured_image">
+                <img src="{{ . }}" class="featured_image">
             {{ end }}
             <!-- end featured_image-->
 
-            {{ $reAltIn := "<img src=\"([^\"]+)\" alt=\"([^\"]+)?\" />" }}
-            {{ $reAltOut :=  ( printf "<figure><img src=\"/images/ring.svg\" data-sizes=\"auto\" data-src=\"%s$1\" alt=\"$2\" class=\"lazyload\"><figcaption class=\"image-caption\">$2</figcaption></figure>" $cdn_url ) }}
+            {{ $reAltIn := `<img src="([^"]+)" alt="([^"]+)?" />` }}
+            {{ $reAltOut := "<figure><img src=/images/loading.svg data-sizes=auto data-src=$1 alt=$2 class=lazyload><figcaption class=image-caption>$2</figcaption></figure>" }}
             {{ $altContent := .Content | replaceRE $reAltIn $reAltOut | safeHTML }}
-            {{ $reAltTitleIn := "<img src=\"([^\"]+)\" alt=\"([^\"]+)?\" title=\"([^\"]+)?\" />" }}
-            {{ $reAltTitleOut := ( printf "<figure><img src=\"/images/ring.svg\" data-src=\"%s$1\" data-sizes=\"auto\" alt=\"$2\" title=\"$3\" class=\"lazyload\"><figcaption class=\"image-caption\">$2</figcaption></figure>" $cdn_url ) }}
+            {{ $reAltTitleIn := `<img src="([^"]+)" alt="([^"]+)?" title="([^"]+)?" />` }}
+            {{ $reAltTitleOut := "<figure><img src=/images/loading.svg data-src=$1 data-sizes=auto alt=$2 title=$3 class=lazyload><figcaption class=image-caption>$2</figcaption></figure>" }}
             {{ $finalContent := $altContent | replaceRE $reAltTitleIn $reAltTitleOut | safeHTML }}
             {{ $finalContent }}
         </div>
@@ -68,7 +63,7 @@
             <p class="copyright-item">
                 {{ if and ( $.Param "socialShare" ) (gt (len ($.Param "share")) 0) }}
                 <span>{{ T "share" }}:</span>
-                <span>{{ partial "share-links.html" . }}</span>
+                <span>{{ partial "post/share-links.html" . }}</span>
                 {{ end }}
             </p>
 

@@ -3,13 +3,12 @@
         &copy;
         {{ with .Site.Params.since }}
             <span itemprop="copyrightYear">{{ if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year }}</span>
+        {{ else }}
+            <span itemprop="copyrightYear">{{ now.Year }}</span>
         {{ end }}
-        {{ if .Site.Params.author }}
-            <span class="author" itemprop="copyrightHolder"><a href="{{ .Site.BaseURL }}">{{ .Site.Params.author }}</a> |
-            </span>
+        {{ with .Site.Author.Name }}
+            <span class="author" itemprop="copyrightHolder"><a href="{{ .Site.BaseURL }}">{{ . }}</a> | </span>
         {{ end }}
         <span>{{ (printf (T "powered") `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>`) | safeHTML }} | {{ T "theme" }}<a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt</a></span>
     </div>
 </footer>
-
-{{ partial "js.html" . }}

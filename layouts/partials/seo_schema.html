@@ -80,15 +80,10 @@
             }
         },
     {{ end }}
-    {{ if .Params.author }}
+    {{ if .Site.Author.Name }}
         "author": {
             "@type": "Person",
-            "name": "{{ .Params.author }}"
-        },
-    {{ else if .Site.Author.name }}
-        "author": {
-            "@type": "Person",
-            "name": "{{ .Site.Author.name }}"
+            "name": "{{ .Site.Author.Name }}"
         },
     {{ end }}
     "description": "{{ .Description }}"
