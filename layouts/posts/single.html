@@ -22,7 +22,7 @@
                         {{ range . }}
                             {{- $name := . -}}
                             {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
-                                <i class="far fa-folder"></i>
+                                <i class="far fa-folder"></i>&nbsp;
                                 <a href="{{ .Permalink }}">{{ $name }}</a>
                             {{ end -}}
                         {{ end }}
@@ -30,15 +30,15 @@
                 {{- end }}
             </div>
             <div class="post-meta-other">
-                <i class="far fa-calendar-alt"></i>
+                <i class="far fa-calendar-alt"></i>&nbsp;
                 <span class="post-time"><time datetime={{ $publish_date }}>{{ $publish_date }}</time></span>
-                <i class="fas fa-pencil-alt"></i>
+                &nbsp;<i class="fas fa-pencil-alt"></i>&nbsp;
                 {{ T "wordCount" .WordCount }}
-                <i class="far fa-clock"></i>
+                &nbsp;<i class="far fa-clock"></i>&nbsp;
                 {{ T "readingTime" .ReadingTime }}
                 {{ if and .Site.Params.valine.enable .Site.Params.valine.visitor }}
                 <span id="{{ .RelPermalink | relURL }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
-                    <i class="far fa-eye"></i>
+                    &nbsp;<i class="far fa-eye"></i>
                     {{ T "pageviews" | safeHTML }}
                 </span>
                 {{ end }}
