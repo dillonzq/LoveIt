@@ -34,14 +34,17 @@ other = "主题 - "
 # === partials/footer.html ===
 
 # === posts/single.html ===
-[wrote]
-other = "创作于"
+[included]
+other = "收录于"
 
 [wordCount]
 other = "约 {{ .Count }} 字"
 
 [readingTime]
-other = "预计阅读  {{ .Count }} 分钟"
+other = "预计阅读 {{ .Count }} 分钟"
+
+[pageviews]
+other = "<span class=leancloud-visitors-count></span> 次阅读"
 
 [author]
 other = "作者"

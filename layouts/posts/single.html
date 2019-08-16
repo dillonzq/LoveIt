@@ -3,36 +3,48 @@
 {{ define "content" }}
     {{ $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
     {{ $modify_date := .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
-    {{ $author := .Site.Author.Name }}
+    {{ $author := .Site.Author.name }}
     {{ if isset .Params "author" }}
-       {{ $author = .Site.Author.Name }}
+       {{ $author = .Site.Author.name }}
     {{ end }}
 
     <article class="post-warp">
         <header class="post-header">
             <h1 class="post-title">{{ .Title }}</h1>
-            <div class="post-meta">
+        </header>
+
+        <div class="post-meta">
+            <div class="post-meta-main">
                 <a href="{{.Site.BaseURL }}" rel="author">{{ $author }}</a>
-                {{ T "wrote" }}
-                <span class="post-time"><time datetime={{ $publish_date }}>{{ $publish_date }}</time></span>
-                &nbsp;✎
-                {{ T "wordCount" .WordCount }}
-                <i class="iconfont icon-timer"></i>
-                {{ T "readingTime" .ReadingTime }}
-                &nbsp;
+                {{ T "included" }}
                 {{ with .Params.categories -}}
                     <span class="post-category">
                         {{ range . }}
                             {{- $name := . -}}
                             {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
-                                <i class="iconfont icon-folder"></i>
+                                <i class="far fa-folder"></i>
                                 <a href="{{ .Permalink }}">{{ $name }}</a>
                             {{ end -}}
                         {{ end }}
                     </span>
                 {{- end }}
             </div>
-        </header>
+            <div class="post-meta-other">
+                <i class="far fa-calendar-alt"></i>
+                <span class="post-time"><time datetime={{ $publish_date }}>{{ $publish_date }}</time></span>
+                <i class="fas fa-pencil-alt"></i>
+                {{ T "wordCount" .WordCount }}
+                <i class="far fa-clock"></i>
+                {{ T "readingTime" .ReadingTime }}
+                {{ if and .Site.Params.valine.enable .Site.Params.valine.visitor }}
+                <span id="{{ .RelPermalink | relURL }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
+                    <i class="far fa-eye"></i>
+                    {{ T "pageviews" | safeHTML }}
+                </span>
+                {{ end }}
+            </div>
+        </div>
+
         <div class="post-content">
             <!--featured_image-->
             {{ with .Params.featured_image }}
@@ -49,43 +61,30 @@
             {{ $finalContent }}
         </div>
 
-        <div class="post-copyright">
-            <p class="copyright-item">
-                <span>{{ T "author" }}:</span>
-                <span><a href="{{.Site.BaseURL }}" rel="author">{{ $author }}</a></span>
-            </p>
-
-            <p class="copyright-item">
+        <div class="post-info">
+            <p class="post-info-item">
                 <span>{{ T "lastMod" }}:</span>
                 <span>{{ $modify_date }}</span>
             </p>
 
-            <p class="copyright-item">
+            <p class="post-info-item">
                 {{ if and ( $.Param "socialShare" ) (gt (len ($.Param "share")) 0) }}
-                <span>{{ T "share" }}:</span>
-                <span>{{ partial "post/share-links.html" . }}</span>
+                    <span>{{ T "share" }}:</span>
+                    <span>{{ partial "post/share-links.html" . }}</span>
                 {{ end }}
             </p>
-
-            {{ with .Site.Params.license }}
-            <p class="copyright-item">
-                <span>{{ T "license" }}:</span>
-                <span>{{ . | safeHTML }}</span>
-            </p>
-            {{ end }}
         </div>
 
         <div class="post-tags">
-            {{ with .Params.tags }}
             <section>
-                <i class="iconfont icon-icon-tag"></i>{{ T "tag" }}:
-                {{ range . }}
-                <span class="tag">
-                    <a href="{{ "tags/" | absURL }}{{ . | urlize }}/">#{{.}}</a>
-                </span>
+                {{ with .Params.tags }}
+                    {{ range . }}
+                        <span class="tag">
+                            <i class="fas fa-tag"></i><a href="{{ "tags/" | absURL }}{{ . | urlize }}/">&nbsp;{{.}}&nbsp;</a>
+                        </span>
+                    {{ end }}
                 {{ end }}
             </section>
-            {{ end }}
             <section>
                 <span><a href="javascript:window.history.back();">{{ T "back" }}</a></span>
                 |
@@ -95,12 +94,10 @@
 
         <div class="post-nav">
             {{ if .PrevInSection }}
-            <a href="{{.PrevInSection.Permalink}}" class="prev" rel="prev" title="{{ .PrevInSection.Title}}"><i
-                    class="iconfont icon-dajiantou"></i>&nbsp;{{ .PrevInSection.Title}}</a>
+            <a href="{{.PrevInSection.Permalink}}" class="prev" rel="prev" title="{{ .PrevInSection.Title}}"><i class="fas fa-angle-left"></i>&nbsp;{{ .PrevInSection.Title}}</a>
             {{ end }}
             {{ if .NextInSection }}
-            <a href="{{.NextInSection.Permalink}}" class="next" rel="next"
-                title="{{.NextInSection.Title}}">{{.NextInSection.Title}}&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+            <a href="{{.NextInSection.Permalink}}" class="next" rel="next" title="{{.NextInSection.Title}}">{{.NextInSection.Title}}&nbsp;<i class="fas fa-angle-right"></i></a>
             {{ end }}
         </div>
 

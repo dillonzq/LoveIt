@@ -41,17 +41,17 @@
     max-width: 95%;
 
     &:hover {
-      color: $light-global-link-hover-color;
+      color: $global-link-hover-color;
       background-color: transparent;
     }
 
     .dark-theme & {
-      color: $dark-global-link-color;
+      color: $global-link-color-dark;
       text-decoration: none;
       transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
 
       &:hover {
-        color: $dark-global-link-hover-color;
+        color: $global-link-hover-color-dark;
         text-decoration: none;
         transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
       }
@@ -61,10 +61,10 @@
   .archive-item-date {
     float: right;
     text-align: right;
-    color: $light-font-secondary-color;
+    color: $global-font-secondary-color;
 
     .dark-theme & {
-      color: $dark-font-secondary-color;
+      color: $global-font-secondary-color-dark;
     }
   }
 

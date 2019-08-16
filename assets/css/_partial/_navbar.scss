@@ -6,7 +6,6 @@
   }
 }
 
-
 .navbar .menu a {
 
   padding: 0 8px;
@@ -14,10 +13,10 @@
 
 .navbar .menu .active {
   font-weight: 900;
-  color: $light-navbar-active-color;
+  color: $navbar-active-color;
 
   .dark-theme & {
-    color: $dark-navbar-active-color;
+    color: $navbar-active-color-dark;
   }
 }
 
@@ -26,3 +25,5 @@
 
   background-color: transparent;
 }
+
+

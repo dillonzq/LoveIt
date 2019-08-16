@@ -32,23 +32,33 @@
 ` }}
 
 {{ $jquery | safeHTML }}
-{{ $typeit | safeHTML }}
 
 {{ if .IsPage }}
-    {{ if .Params.Music }}
+    {{ $lazysizes | safeHTML }}
+    {{ if .Scratch.Get "music" }}
         {{ $metingjs | safeHTML }}
     {{ end }}
-    {{ $countdown | safeHTML }}
-    {{ if or .Params.Math .Site.Params.Math }}
+    {{ if or .Params.math .Site.Params.math }}
         {{ $katex | safeHTML }}
     {{ end }}
-
-    {{ $lazysizes | safeHTML }}
-
     {{ $scripts = $scripts | append $dynamicToTop }}
     {{ $scripts = $scripts | resources.Concat "/js/vendor_post.js" | resources.Minify }}
 {{ else }}
     {{ $scripts = $scripts | resources.Concat "/js/vendor_main.js" | resources.Minify}}
+{{ end }}
+
+{{ $typeitMap := .Scratch.Get "typeitMap" }}
+{{ if $typeitMap }}
+    {{ $typeit | safeHTML }}
+    {{ $typeitArr := slice }}
+    {{ range $key, $val := $typeitMap }}
+        {{ $typeitArr = $typeitArr | append (slice $val) }}
+    {{ end }}
+    <script>var typeitArr = {{ $typeitArr | jsonify | safeJS }};</script>
+{{ end }}
+{{ with .Scratch.Get "countdownMap" }}
+    {{ $countdown | safeHTML }}
+    <script>var countdownMap = {{ . | jsonify | safeJS }};</script>
 {{ end }}
 
 <script src="{{ $scripts.RelPermalink }}" async=""></script>

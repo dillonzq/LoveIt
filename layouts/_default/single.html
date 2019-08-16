@@ -2,7 +2,9 @@
 
 {{ define "content" }}
     <div class="post-warp">
-        <h2 class="post-title" style="text-align:right;padding-bottom:2em">{{ .Title }}</h2>
+        <header class="post-header">
+            <div class="align-right"><h1 class="post-title">{{ .Title }}</h1></div>
+        </header>
         <div class="post-content">
             {{ .Content }}
         </div>

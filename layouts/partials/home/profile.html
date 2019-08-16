@@ -1,6 +1,6 @@
 <div class="intro">
     {{ $avatar := "" }}
-    {{ if or .Params.gravatar.Email (and .Site.Params.gravatar.Email (ne .Params.gravatar.Email false)) }}
+    {{ if .Site.Params.gravatar.email }}
         {{ $avatar = (printf "https://www.gravatar.com/avatar/%s?s=240&d=mp" (md5 .Site.Params.gravatar.email)) }}
     {{ else if .Site.Params.avatar }}
         {{ $avatar = .Site.Params.avatar }}
@@ -18,10 +18,11 @@
             {{ $id := md5 . | printf "tp-%s" }}
             <div id={{ printf "r%s" $id }} hidden=true>{{ . | safeHTML }}</div>
             <div id={{ $id }} class="typeit"></div>
-            <script>
-                var typeitMap = window.typeitMap || {};
-                typeitMap["{{ $id }}"] = true;
-            </script>
+            {{ with $.Scratch.Get "typeitMap" }}
+                {{ $.Scratch.Set "typeitMap" (dict $id (slice $id) | merge .) }}
+            {{ else }}
+                {{ $.Scratch.Set "typeitMap" (dict $id (slice $id)) }}
+            {{ end }}
         </h2>
     {{ end }}
 

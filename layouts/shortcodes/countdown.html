@@ -7,9 +7,11 @@
     {{ end }}
     {{ $id = printf "#%s" $id }}
     {{ with .Get "date" }}
-        <script>
-            var countdownMap = window.countdownMap || {};
-            countdownMap["{{ $id }}"] = {{ . }};
-        </script>
+        {{ $date := . }}
+        {{ with $.Page.Scratch.Get "countdownMap" }}
+            {{ $.Page.Scratch.Set "countdownMap" (dict $id $date | merge .) }}
+        {{ else }}
+            {{ $.Page.Scratch.Set "countdownMap" (dict $id $date) }}
+        {{ end }}
     {{ end }}
 {{ end }}

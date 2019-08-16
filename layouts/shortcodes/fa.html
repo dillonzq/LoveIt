@@ -1,0 +1,5 @@
+{{ if .IsNamedParams -}}
+    <i class="inline-icon {{ .Get "class" }}"></i>
+{{- else -}}
+    <i class="inline-icon {{ .Get 0 }}"></i>
+{{- end }}

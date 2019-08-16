@@ -8,27 +8,28 @@
     position: fixed;
     width: 100%;
     z-index: 100;
-    transition: all 0.6s ease 0s;
+    transition: all 0.3s ease 0s;
 
     .container {
       padding: 0;
       margin: 0;
-      height: 5em;
-      line-height: 5.5em;
-      background: $light-background-color;
+      height: 4.5em;
+      line-height: 4.5em;
+      background: $global-background-color;
 
       .navbar-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
+        font-size: 18px;
         padding-right: 1em;
         padding-left: 1em;
         box-sizing: border-box;
 
         .menu-toggle {
           cursor: pointer;
-          line-height: 5.5em;
+          line-height: 4.5em;
 
           span {
             display: block;
@@ -38,12 +39,12 @@
             -webkit-border-radius: 3px;
             -moz-border-radius: 3px;
             border-radius: 3px;
-            -webkit-transition: .25s margin .25s, .25s transform;
-            -moz-transition: .25s margin .25s, .25s transform;
-            transition: .25s margin .25s, .25s transform;
+            -webkit-transition: .2s margin .2s, .2s transform;
+            -moz-transition: .2s margin .2s, .2s transform;
+            transition: .2s margin .2s, .2s transform;
 
             .dark-theme & {
-              background: $dark-font-color;
+              background: $global-font-color-dark;
             }
           }
 
@@ -57,9 +58,9 @@
 
           &.active {
             span {
-              -webkit-transition: .25s margin, .25s transform .25s;
-              -moz-transition: .25s margin, .25s transform .25s;
-              transition: .25s margin, .25s transform .25s;
+              -webkit-transition: .2s margin, .2s transform .2s;
+              -moz-transition: .2s margin, .2s transform .2s;
+              transition: .2s margin, .2s transform .2s;
             }
 
             span:nth-child(1) {
@@ -85,10 +86,8 @@
 
       .menu {
         text-align: center;
-        background: #ffffff;
-        border-top: 2px solid #000000;
-        padding-top: 1em;
-        padding-bottom: 1em;
+        background: $global-background-color;
+        border-top: 2px solid $global-font-color;
         display: none;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -102,13 +101,13 @@
         }
 
         .dark-theme & {
-          background: $dark-background-color;
-          border-top: 2px solid $dark-font-secondary-color;
+          background: $global-background-color-dark;
+          border-top: 2px solid $global-font-color-dark;
         }
       }
 
       .dark-theme & {
-        background: $dark-background-color !important;
+        background: $global-background-color-dark !important;
       }
     }
   }

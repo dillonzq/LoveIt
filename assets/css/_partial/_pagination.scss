@@ -32,11 +32,11 @@
     }
 
     &:hover a {
-      color: $light-pagination-link-active-color;
+      color: $pagination-link-active-color;
     }
 
     .dark-theme &:hover a {
-      color: $dark-pagination-link-active-color;
+      color: $pagination-link-active-color-dark;
     }
 
     &:before,
@@ -45,14 +45,14 @@
       content: "";
       width: 0;
       height: 3px;
-      background: $light-pagination-link-active-color;
+      background: $pagination-link-active-color;
       transition: 0.3s;
       bottom: 0px;
     }
 
     .dark-theme &:before,
     .dark-theme &:after {
-      background: $dark-pagination-link-active-color;
+      background: $pagination-link-active-color-dark;
     }
 
     &:before .active,
@@ -78,11 +78,11 @@
 
     &.active {
       a {
-        color: $light-pagination-link-active-color;
+        color: $pagination-link-active-color;
       }
 
       .dark-theme & a {
-        color: $dark-pagination-link-active-color;
+        color: $pagination-link-active-color-dark;
       }
 
       &:before,

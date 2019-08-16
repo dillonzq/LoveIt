@@ -1,0 +1,200 @@
+.admonition {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),
+      0 1px 5px 0 rgba(0,0,0,.12),
+      0 3px 1px -2px rgba(0,0,0,.2);
+  position: relative;
+  margin: .9765em 0;
+  padding: 0 .75rem;
+  border-left: .25rem solid #448aff;
+  border-radius: .125rem;
+  overflow: auto;
+
+  .admonition-title {
+    margin: 0 -0.75rem;
+    padding: .5rem .75rem .5rem 2.5rem;
+    border-bottom: .1rem solid rgba(68,138,255,.1);
+    background-color: rgba(68,138,255,.1);
+    font-weight: 700;
+  }
+
+  i.icon {
+    font-size: 16px;
+    cursor: auto;
+    position: absolute;
+    left: .75rem;
+    top: .75rem;
+  }
+
+  &.note {
+    border-left-color: #448aff;
+
+    i.icon {
+      color: #448aff;
+    }
+  }
+
+  &.abstract {
+    border-left-color: #00b0ff;
+
+    .admonition-title {
+      background-color: rgba(0,176,255,.1);
+    }
+
+    i.icon {
+      color: #00b0ff;
+    }
+  }
+
+  &.info {
+    border-left-color: #00b8d4;
+
+    .admonition-title {
+      background-color: rgba(0,184,212,.1);
+    }
+
+    i.icon {
+      color: #00b8d4;
+    }
+  }
+
+  &.tip {
+    border-left-color: #00bfa5;
+
+    .admonition-title {
+      background-color: rgba(0,191,165,.1);
+    }
+
+    i.icon {
+      color: #00bfa5;
+    }
+  }
+
+  &.success {
+    border-left-color: #00c853;
+
+    .admonition-title {
+      background-color: rgba(0,200,83,.1);
+    }
+
+    i.icon {
+      color: #00c853;
+    }
+  }
+
+  &.question {
+    border-left-color: #64dd17;
+
+    .admonition-title {
+      background-color: rgba(100,221,23,.1);
+    }
+
+    i.icon {
+      color: #64dd17;
+    }
+  }
+
+  &.warning {
+    border-left-color: #ff9100;
+
+    .admonition-title {
+      background-color: rgba(255,145,0,.1);
+    }
+
+    i.icon {
+      color: #ff9100;
+    }
+  }
+
+  &.failure {
+    border-left-color: #ff5252;
+
+    .admonition-title {
+      background-color: rgba(255,82,82,.1);
+    }
+
+    i.icon {
+      color: #ff5252;
+    }
+  }
+
+  &.danger {
+    border-left-color: #ff1744;
+
+    .admonition-title {
+      background-color: rgba(255,23,68,.1);
+    }
+
+    i.icon {
+      color: #ff1744;
+    }
+  }
+
+  &.bug {
+    border-left-color: #f50057;
+
+    .admonition-title {
+      background-color: rgba(245,0,87,.1);
+    }
+
+    i.icon {
+      color: #f50057;
+    }
+  }
+
+  &.example {
+    border-left-color: #651fff;
+
+    .admonition-title {
+      background-color: rgba(101,31,255,.1);
+    }
+
+    i.icon {
+      color: #651fff;
+    }
+  }
+
+  &.quote {
+    border-left-color: #9e9e9e;
+
+    .admonition-title {
+      background-color: hsla(0,0%,62%,.1);
+    }
+
+    i.icon {
+      color: #9e9e9e;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: .75rem;
+  }
+}
+
+details.admonition {
+  summary {
+    display: block;
+    outline: none;
+    cursor: pointer;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    i.details {
+      position: absolute;
+      top: .75rem;
+      right: .75rem;
+      color: $global-font-color;
+
+      .dark-theme & {
+        color: $global-font-color-dark;
+      }
+    }
+  }
+}
+
+details.admonition[open] {
+  i.details {
+    transform: rotate(180deg);
+  }
+}

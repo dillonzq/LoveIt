@@ -7,6 +7,7 @@
         {{ partial "head.html" . }}
         {{ $style := resources.Get "css/style.scss" | resources.ToCSS | resources.Minify}}
         <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">
     </head>
     <body class="">
         <div class="wrapper">

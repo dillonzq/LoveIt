@@ -13,19 +13,19 @@
     &:active,
     &:focus,
     &:hover {
-      color: $light-global-link-hover-color;
+      color: $global-link-hover-color;
       transform: scale(1.1);
 
       .dark-theme & {
-        color: $dark-global-link-hover-color;
+        color: $global-link-hover-color-dark;
       }
     }
 
     small {
-      color: $light-font-secondary-color;
+      color: $global-font-secondary-color;
 
       .dark-theme & {
-        color: $dark-global-link-hover-color;
+        color: $global-link-hover-color-dark;
       }
     }
   }

@@ -28,14 +28,14 @@
           color: rgba(85, 85, 85, 0.52941) !important;
 
           .dark-theme & {
-            color: $dark-font-secondary-color !important;
+            color: $global-font-secondary-color-dark !important;
           }
 
           &:hover {
-            color: $light-font-secondary-color !important;
+            color: $global-font-secondary-color !important;
 
             .dark-theme & {
-              color: $dark-font-secondary-color !important;
+              color: $global-font-secondary-color-dark !important;
             }
           }
         }
@@ -47,14 +47,14 @@
             color: rgba(85, 85, 85, 0.52941) !important;
 
             .dark-theme & {
-              color: $dark-font-secondary-color !important;
+              color: $global-font-secondary-color-dark !important;
             }
 
             &:hover {
-              color: $light-font-secondary-color !important;
+              color: $global-font-secondary-color !important;
 
               .dark-theme & {
-                color: $dark-font-secondary-color !important;
+                color: $global-font-secondary-color-dark !important;
               }
             }
           }

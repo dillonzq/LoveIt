@@ -44,7 +44,7 @@ jQuery(function($) {
 
     _Blog.countdown = function() {
         if (window.countdownMap) {
-            for (let id in countdownMap) {
+            Object.keys(countdownMap).forEach(function(id) {
               $(id).countdown(countdownMap[id], {elapse: true})
                 .on('update.countdown', function(event) {
                   var $this = $(this).html(event.strftime(''
@@ -53,35 +53,29 @@ jQuery(function($) {
                     + '<span>%M</span> 分 '
                     + '<span>%S</span> 秒'));
               });
-          }
+          });
         }
     };
 
     _Blog.typeit = function() {
-        if (window.typeitMap) {
-            for (let id in typeitMap) {
-                if (Array.isArray(typeitMap[id])) {
-                    const group = typeitMap[id];
-                    (function typeone (i) {
-                        if (i === group.length - 1) {
-                            new TypeIt(`#${group[i]}`, {
-                                strings: document.getElementById(`r${group[i]}`).innerHTML,
-                            }).go();
-                            return;
-                        }
-                        let instance = new TypeIt(`#${group[i]}`, {
+        if (window.typeitArr) {
+            for (let i = 0; i < typeitArr.length; i++) {
+                const group = typeitArr[i];
+                (function typeone (i) {
+                    if (i === group.length - 1) {
+                        new TypeIt(`#${group[i]}`, {
                             strings: document.getElementById(`r${group[i]}`).innerHTML,
-                            afterComplete: () => {
-                                instance.destroy();
-                                typeone(i + 1);
-                            },
                         }).go();
-                    })(0);
-                } else {
-                    new TypeIt(`#${id}`, {
-                        strings: document.getElementById(`r${id}`).innerHTML,
+                        return;
+                    }
+                    let instance = new TypeIt(`#${group[i]}`, {
+                        strings: document.getElementById(`r${group[i]}`).innerHTML,
+                        afterComplete: () => {
+                            instance.destroy();
+                            typeone(i + 1);
+                        },
                     }).go();
-                }
+                })(0);
             }
         }
     };

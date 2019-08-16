@@ -1,73 +1,52 @@
-/** light theme **/
+// ==============================
+// Variables
+// ==============================
 
-$light-background-color: #fff;
+// ========== Global ========== //
+// Background color of the body
+$global-background-color: #fff !default;
+$global-background-color-dark: #292a2d !default;
 
-$light-font-color: #161209;
-$light-font-secondary-color: #a9a9b3;
+// Text color of the body.
+$global-font-color: #161209 !default;
+$global-font-color-dark: #a9a9b3 !default;
 
-$light-navbar-active-color: #161209;
+$global-font-secondary-color: #a9a9b3 !default;
+$global-font-secondary-color-dark: #87878d !default;
 
-$light-global-link-color: #161209;
-$light-global-link-hover-color:#2d96bd;
+$global-link-color: #161209 !default;
+$global-link-color-dark: #a9a9b3 !default;
+$global-link-hover-color:#2d96bd !default;
+$global-link-hover-color-dark:#fff !default;
 
-$light-post-link-color: #2d96bd;
-$light-post-link-hover-color:#ef3982;
+$global-border-color: #dcdcdc !default;
+$global-border-color-dark: #4a4b50 !default;
 
-$light-pagination-link-color : #2d96bd;
-$light-pagination-link-active-color: #000;
+$navbar-active-color: #161209 !default;
+$navbar-active-color-dark: #fff !default;
 
-$light-border-color: #dcdcdc;
+$post-link-color: #2d96bd !default;
+$post-link-color-dark: #eee !default;
+$post-link-hover-color: #ef3982 !default;
+$post-link-hover-color-dark: #fff !default;
 
-/** dark theme **/
-
-$dark-background-color: #292a2d;
-
-$dark-font-color: #a9a9b3;
-$dark-font-secondary-color: #87878d;
-
-$dark-navbar-active-color: #fff;
-
-$dark-global-link-color: #a9a9b3;
-$dark-global-link-hover-color:#fff;
-
-$dark-post-link-color: #eee;
-$dark-post-link-hover-color:#fff;
-
-$dark-pagination-link-color : #a9a9b3;
-$dark-pagination-link-active-color: #fff;
-
-$dark-border-color: #4a4b50;
-
-// ========== Color ========== //
-$black: #0a0a0a !default;
-$white: #fefefe !default;
-$light-gray: #e6e6e6 !default;
-$gray: #cacaca !default;
-$dark-gray: #8a8a8a !default;
+$pagination-link-color: #2d96bd !default;
+$pagination-link-color-dark: #a9a9b3 !default;
+$pagination-link-active-color: #000 !default;
+$pagination-link-active-color-dark: #fff !default;
 
 // ========== Code ========== //
 // Color of the code.
-$l-code-color: #E74C3C !default;
-$d-code-color: #E5BF78 !default;
+$code-color: #E74C3C !default;
+$code-color-dark: #E5BF78 !default;
+
+$code-info-color: #cacaca !default;
 
 // Font size of code.
-$code-font-size: 13px !default;
+$code-font-size: 14px !default;
 
 // Font family of the code.
-$code-font-family: Consolas, Monaco, Menlo, "DejaVu Sans Mono",
- "Bitstream Vera Sans Mono", "Courier New", monospace !default;
-
-// Color of code highlight, solarized.
-$code-highlight-color: (
-  comment: #93a1a1,
-  keyword: #859900,
-  number: #2aa198,
-  title: #268bd2,
-  attribute: #b58900,
-  symbol: #cb4b16,
-  built_in: #dc322f,
-  formula: #eee8d5
-) !default;
+$code-font-family: Consolas, Monaco, Menlo, "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace !default;
 
 // Code type list.
 $code-type-list: (
@@ -94,7 +73,6 @@ $code-type-list: (
   language-ruby: "Ruby",
   language-sql: "SQL",
   language-shell: "Shell",
-
   language-erlang: "Erlang",
   language-go: "Go",
   language-go-html-template: "Go HTML Template",

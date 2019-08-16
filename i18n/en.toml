@@ -34,14 +34,17 @@ other = "Theme - "
 # === partials/footer.html ===
 
 # === posts/single.html ===
-[wrote]
-other = "wrote on"
+[included]
+other = "included in"
 
 [wordCount]
 other = "about {{ .Count }} words"
 
 [readingTime]
 other = "{{ .Count }} min"
+
+[pageviews]
+other = "<span class=leancloud-visitors-count></span> pageviews"
 
 [author]
 other = "Author"

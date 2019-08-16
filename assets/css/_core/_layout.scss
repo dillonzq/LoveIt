@@ -3,7 +3,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 98vh;
   width: 100%;
 }
 
@@ -24,17 +24,18 @@
 .main {
   flex: 1 0 auto;
 }
-.container{
+
+.container {
   padding-left: 1em;
   padding-right: 1em;
 }
 
 .footer {
-  height: 4rem;
+  height: 2rem;
   width: 100%;
   text-align: center;
-  line-height: 4rem;
-  padding-top: 2em;
+  line-height: 1.2rem;
+  padding-top: 1.6em;
 }
 
 .notfound {
