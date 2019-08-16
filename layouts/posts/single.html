@@ -31,14 +31,14 @@
             </div>
             <div class="post-meta-other">
                 <i class="far fa-calendar-alt"></i>&nbsp;
-                <span class="post-time"><time datetime={{ $publish_date }}>{{ $publish_date }}</time></span>
-                &nbsp;<i class="fas fa-pencil-alt"></i>&nbsp;
-                {{ T "wordCount" .WordCount }}
-                &nbsp;<i class="far fa-clock"></i>&nbsp;
-                {{ T "readingTime" .ReadingTime }}
+                <span class="post-time"><time datetime={{ $publish_date }}>{{ $publish_date }}</time></span>&nbsp;
+                <i class="fas fa-pencil-alt"></i>&nbsp;
+                {{ T "wordCount" .WordCount }}&nbsp;
+                <i class="far fa-clock"></i>&nbsp;
+                {{ T "readingTime" .ReadingTime }}&nbsp;
                 {{ if and .Site.Params.valine.enable .Site.Params.valine.visitor }}
                 <span id="{{ .RelPermalink | relURL }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
-                    &nbsp;<i class="far fa-eye"></i>
+                    <i class="far fa-eye"></i>
                     {{ T "pageviews" | safeHTML }}
                 </span>
                 {{ end }}
