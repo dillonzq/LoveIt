@@ -3,10 +3,10 @@ pre {
   padding: 7px;
   font-size: $code-font-size;
   font-family: $code-font-family;
-  background: $l-code-background;
+  background: $code-background;
 
   .dark-theme & {
-    background: $d-code-background;
+    background: $code-background-dark;
   }
 }
 
@@ -14,20 +14,20 @@ code {
   padding: 3px 5px;
   border-radius: 4px;
   color: $code-color;
-  background: $l-code-background;
+  background: $code-background;
 
   .dark-theme & {
     color: $code-color-dark;
-    background: $d-code-background;
+    background: $code-background-dark;
   }
 }
 
 p > code {
-  background: darken($l-code-background, 3%);
+  background: darken($code-background, 3%);
 
   .dark-theme & {
     color: $code-color-dark;
-    background: darken($d-code-background, 3%);
+    background: darken($code-background-dark, 3%);
   }
 }
 
@@ -38,7 +38,7 @@ p > code {
   overflow-x: auto;
   box-shadow: 1px 1px 2px rgba(0,0,0,0.125);
   position: relative;
-  background: $l-code-background;
+  background: $code-background;
 
   code {
     padding: 0;
@@ -56,11 +56,11 @@ p > code {
       font-size: $code-font-size;
       font-weight: bold;
       color: darken($code-info-color, 10%);
-      background: darken($l-code-background, 3%);
+      background: darken($code-background, 3%);
       content: 'Code';
 
       .dark-theme & {
-        background: darken($d-code-background, 3%);
+        background: darken($code-background-dark, 3%);
       }
     }
   }
@@ -81,7 +81,7 @@ p > code {
 
       pre {
         margin: 0;
-        padding: 40px 7px 10px;
+        padding: 38px 7px 8px;
       }
     }
 
@@ -90,7 +90,7 @@ p > code {
 
       pre {
         margin: 0;
-        padding: 40px 10px 10px;
+        padding: 38px 10px 8px;
       }
     }
   }
@@ -100,10 +100,10 @@ p > code {
     padding: 0;
     width: 100%;
     border-collapse: collapse;
-    border-color: $l-code-background;
+    border-color: $code-background;
 
     .dark-theme & {
-      border-color: $d-code-background;
+      border-color: $code-background-dark;
     }
   }
 
@@ -183,7 +183,7 @@ p > code {
   /* GenericTraceback */  .gt { color: #d33682 }
 
   .dark-theme & {
-    background: $d-code-background;
+    background: $code-background-dark;
 
     /* Keyword */ .chroma .k { color: #D371E3 }
     /* KeywordConstant */ .chroma .kc { color: #D371E3 }

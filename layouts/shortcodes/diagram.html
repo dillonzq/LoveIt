@@ -1,0 +1,5 @@
+{{ $_hugo_config := `{ "version": 1 }` -}}
+{{ .Page.Scratch.Set "diagram" "true" }}
+<div class="mermaid">
+    {{- .Inner -}}
+</div>

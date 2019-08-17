@@ -1,4 +1,4 @@
-{{ if and .IsPage (ne .Params.comment false) -}}
+{{ if eq (getenv "HUGO_ENV") "production" | and .IsPage | and (ne .Params.comment false) -}}
     <!-- Disqus Comment System-->
     {{- if .Site.DisqusShortname -}}
         <div id="disqus_thread"></div>

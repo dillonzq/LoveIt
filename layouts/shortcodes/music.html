@@ -1,4 +1,4 @@
-{{ .Page.Scratch.Set "music" "true" }}
+{{ .Page.Scratch.Set "music" "true" -}}
 {{ if .IsNamedParams }}
     <meting-js server={{ .Get "server" }} type={{ .Get "type" }} id={{ .Get "id" }}
     {{ with .Get "autoplay" }}

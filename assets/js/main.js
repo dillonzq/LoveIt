@@ -11,14 +11,14 @@ jQuery(function($) {
         });
     };
 
-    _Blog.toggleTheme = function() {
-        const currentTheme = window.localStorage && window.localStorage.getItem('theme');
-        const isDark = currentTheme === 'dark';
+    _Blog.toggleTheme = function(isDark) {
         $('body').toggleClass('dark-theme', isDark);
         $('.theme-switch').on('click', () => {
             $('body').toggleClass('dark-theme');
-            window.localStorage &&
-                window.localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light', );
+            window.localStorage && window.localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light', );
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme');
+            const isDark = currentTheme === 'dark';
+            this.echarts(isDark);
         });
     };
 
@@ -41,6 +41,143 @@ jQuery(function($) {
             block.className += ' ' + lang;
         }
     };
+
+    _Blog.responsiveTable = function() {
+        const tables = document.querySelectorAll('.post-content > table');
+        for (let i = 0; i < tables.length; i++) {
+            const table = tables[i];
+            const wrapper = document.createElement('div');
+            wrapper.className = 'table-wrapper';
+            table.parentElement.replaceChild(wrapper, table);
+            wrapper.appendChild(table);
+        }
+    };
+
+    _Blog._initToc = function() {
+        const SPACING = 20;
+        const $toc = $('.post-toc');
+
+        if ($toc.length) {
+            const startTop = $toc.css("top");
+            const minScrollTop = $toc.offset().top - SPACING;
+
+            const tocState = {
+                start: {
+                    'position': 'absolute',
+                    'top': startTop,
+                },
+                process: {
+                    'position': 'fixed',
+                    'top': SPACING,
+                },
+            };
+
+            $(window).scroll(function() {
+            const scrollTop = $(window).scrollTop();
+
+            if (scrollTop < minScrollTop) {
+                $toc.css(tocState.start);
+            } else {
+                $toc.css(tocState.process);
+            }
+            });
+        }
+
+        const HEADERFIX = 30;
+        const $toclink = $('.toc-link');
+        const $headerlink = $('.headerlink');
+        const $tocLinkLis = $('.post-toc-content li');
+
+        const headerlinkTop = $.map($headerlink, function(link) {
+            return $(link).offset().top;
+        });
+
+        const headerLinksOffsetForSearch = $.map(headerlinkTop, function(offset) {
+            return offset - HEADERFIX;
+        });
+
+        const searchActiveTocIndex = function(array, target) {
+            for (let i = 0; i < array.length - 1; i++) {
+                if (target > array[i] && target <= array[i + 1]) return i;
+            }
+            if (target > array[array.length - 1]) return array.length - 1;
+            return 0;
+        };
+
+        const activeIndex = function() {
+            const scrollTop = $(window).scrollTop();
+            const activeTocIndex = searchActiveTocIndex(headerLinksOffsetForSearch, scrollTop);
+
+            $($toclink).removeClass('active');
+            $($tocLinkLis).removeClass('has-active');
+
+            if (activeTocIndex !== -1) {
+                $($toclink[activeTocIndex]).addClass('active');
+                let ancestor = $toclink[activeTocIndex].parentNode;
+                while (ancestor.tagName !== 'NAV') {
+                    $(ancestor).addClass('has-active');
+                    ancestor = ancestor.parentNode.parentNode;
+                }
+            }
+        };
+        activeIndex();
+        $(window).scroll(activeIndex);
+    };
+
+    _Blog.toc = function() {
+        const tocContainer = document.getElementById('post-toc');
+        if (tocContainer !== null) {
+            const toc = document.getElementById('TableOfContents');
+            if (toc === null) {
+            // toc = true, but there are no headings
+            tocContainer.parentNode.removeChild(tocContainer);
+            } else {
+            this._refactorToc(toc);
+            this._linkToc();
+            this._initToc();
+            }
+        }
+    };
+
+    _Blog._refactorToc = function(toc) {
+        // when headings do not start with `h1`
+        const oldTocList = toc.children[0];
+        let newTocList = oldTocList;
+        let temp;
+        while (newTocList.children.length === 1
+            && (temp = newTocList.children[0].children[0]).tagName === 'UL') {
+            newTocList = temp;
+        }
+
+        if (newTocList !== oldTocList) toc.replaceChild(newTocList, oldTocList);
+    };
+
+    _Blog._linkToc = function() {
+        const links = document.querySelectorAll('#TableOfContents a:first-child');
+        for (let i = 0; i < links.length; i++) links[i].className += ' toc-link';
+
+        for (let num = 1; num <= 6; num++) {
+            const headers = document.querySelectorAll('.post-content>h' + num);
+            for (let i = 0; i < headers.length; i++) {
+                const header = headers[i];
+                header.innerHTML = `<a href="#${header.id}" class="headerlink anchor"><i class="iconfont icon-link"></i></a>${header.innerHTML}`;
+            }
+        }
+    };
+
+    _Blog.echarts = function(isDark) {
+        if (window.echartsMap) {
+            for (let i = 0; i < echartsArr.length; i++) {
+                echartsArr[i].dispose();
+            }
+            echartsArr = [];
+            Object.keys(echartsMap).forEach(function(id) {
+                let myChart = echarts.init(document.getElementById(id), isDark ? 'dark' : 'light');
+                myChart.setOption(echartsMap[id]);
+                echartsArr.push(myChart);
+            });
+        }
+    }
 
     _Blog.countdown = function() {
         if (window.countdownMap) {
@@ -81,10 +218,16 @@ jQuery(function($) {
     };
 
     $(document).ready(function() {
+        const currentTheme = window.localStorage && window.localStorage.getItem('theme');
+        const isDark = currentTheme === 'dark';
+
         _Blog.toggleMobileMenu();
-        _Blog.toggleTheme();
+        _Blog.toggleTheme(isDark);
         _Blog.changeTitle();
         _Blog.chroma();
+        _Blog.responsiveTable();
+        _Blog.toc();
+        _Blog.echarts(isDark);
         _Blog.countdown();
         _Blog.typeit();
     });

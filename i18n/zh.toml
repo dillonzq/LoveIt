@@ -34,6 +34,9 @@ other = "主题 - "
 # === partials/footer.html ===
 
 # === posts/single.html ===
+[toc]
+other = "目录"
+
 [included]
 other = "收录于"
 
@@ -50,10 +53,7 @@ other = "<span class=leancloud-visitors-count></span> 次阅读"
 other = "作者"
 
 [lastMod]
-other = "上次更新"
-
-[share]
-other = "内容分享"
+other = "本文于 %s 更新"
 
 [license]
 other = "许可协议"

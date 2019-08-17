@@ -34,6 +34,9 @@ other = "Theme - "
 # === partials/footer.html ===
 
 # === posts/single.html ===
+[toc]
+other = "Table of Contents"
+
 [included]
 other = "included in"
 
@@ -50,10 +53,7 @@ other = "<span class=leancloud-visitors-count></span> pageviews"
 other = "Author"
 
 [lastMod]
-other = "Last Modified"
-
-[share]
-other = "Share"
+other = "This article is updated with %s"
 
 [license]
 other = "License"

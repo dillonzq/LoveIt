@@ -1,0 +1,14 @@
+<!-- shuffle md5 as id -->
+{{ $id := delimit (split (md5 .Inner) "" | shuffle) "" | printf "ec-%s" -}}
+{{ $echartsMap := .Page.Scratch.Get "echartsMap" -}}
+{{ if $echartsMap -}}
+    {{ $echartsMap = dict $id .Inner | merge $echartsMap -}}
+{{ else -}}
+    {{ $echartsMap = dict $id .Inner -}}
+{{ end -}}
+{{ .Page.Scratch.Set "echartsMap" $echartsMap -}}
+{{ if .IsNamedParams }}
+    <div class="echarts" id="{{ $id }}" style="width: {{ .Get "width" }}; height: {{ .Get "height" }};"></div>
+{{ else }}
+    <div class="echarts" id="{{ $id }}" style="width: {{ .Get 0 }}; height: {{ .Get 1 }};"></div>
+{{ end }}

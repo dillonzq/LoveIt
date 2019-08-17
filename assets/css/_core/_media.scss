@@ -3,6 +3,10 @@
     display: none;
   }
 
+  .post-toc {
+    display: none;
+  }
+
   .navbar-mobile {
     display: block !important;
     position: fixed;
@@ -141,7 +145,15 @@
 
 /* iPads (portrait and landscape) ----------- */
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .post-warp {
+    max-width: 560px !important;
+  }
+
+  .post-toc {
+    margin-left: 580px !important;
+  }
+}
 
 /* Desktops and laptops ----------- */
 

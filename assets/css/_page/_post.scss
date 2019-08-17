@@ -44,6 +44,51 @@
     }
   }
 
+  .post-toc {
+    position: absolute;
+    width: 200px;
+    max-width: 240px;
+    margin-left: 800px;
+    padding: 10px;
+    border-left: 1px solid $global-border-color;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    top: 120px;
+
+    .post-toc-title {
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+
+    .post-toc-content {
+      &.always-active ul {
+        display: block;
+      }
+
+      >nav>ul {
+        margin: 10px 0;
+      }
+
+      ul {
+        padding-left: 10px;
+        list-style: none;
+
+        ul {
+          padding-left: 20px;
+          display: none;
+        }
+
+        .has-active > ul {
+          display: block;
+        }
+      }
+
+      .toc-link.active {
+        color: $global-link-hover-color;
+      }
+    }
+  }
+
   .post-content {
     h2,
     h3,
@@ -95,25 +140,42 @@
       padding-left: 2em;
     }
 
-    table {
-      max-width: 100%;
-      margin: 10px 0;
-      border-spacing: 0;
-      box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.125);
+    .table-wrapper {
+      overflow-x: auto;
 
-      th,
-      td {
-        padding: 5px 15px;
-        border: 1px double #ebe9f5;
+      > table {
+        width: 100%;
+        max-width: 100%;
+        margin: 10px 0;
+        border-spacing: 0;
+        box-shadow: 2px 2px 3px rgba(0,0,0,.125);
+        background: $table-background-color;
+
+        .dark-theme & {
+          background: $table-background-color-dark;
+        }
+
+        thead {
+          background: $table-thead-color;
+
+          .dark-theme & {
+            background-color: $table-thead-color-dark;
+          }
+        }
+
+        th, td {
+          padding: 5px 15px;
+          border: 1px double $global-border-color;
+
+          .dark-theme & {
+            border: 1px double $global-border-color-dark;
+          }
+        }
       }
     }
 
     figure {
       text-align: center;
-
-      img:hover {
-        cursor: zoom-in;
-      }
     }
 
     .image-caption:not(:empty) {
@@ -134,10 +196,6 @@
       height: auto;
       margin: 0 auto;
       overflow: hidden;
-    }
-
-    img[data-action="zoom"] {
-      cursor: zoom-in;
     }
 
     .featured_image {
@@ -193,6 +251,70 @@
     @import "../_partial/_post/code";
     @import "../_partial/_post/admonition";
 
+    .mermaid {
+      @import "../_mermaid/neutral/index";
+
+      .dark-theme & {
+        @import "../_mermaid/dark/index";
+      }
+    }
+
+    .echarts {
+      margin: 3% auto;
+      text-align: center;
+    }
+
+    .bilibili {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%;
+      margin: 3% auto;
+
+      iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+      }
+    }
+
+    hr {
+      margin: 1rem 0;
+      position: relative;
+      border-top: 1px dashed $global-border-color;
+      border-bottom: none;
+
+      .dark-theme & {
+        border-top: 1px dashed $global-border-color-dark;
+      }
+    }
+
+    kbd {
+      display: inline-block;
+      padding: .25em;
+      background-color: $global-background-color;
+      border: 1px solid $global-border-color;
+      border-bottom-color: $global-border-color;
+      border-radius: 3px;
+      -webkit-box-shadow: inset 0 -1px 0 $global-border-color;
+      box-shadow: inset 0 -1px 0 $global-border-color;
+      font-size: .8em;
+      line-height: 1.25;
+      font-family: $code-font-family;
+      color: $code-color;
+
+      .dark-theme & {
+        background-color: $global-background-color-dark;
+        border: 1px solid $global-border-color-dark;
+        border-bottom-color: $global-border-color-dark;
+        -webkit-box-shadow: inset 0 -1px 0 $global-border-color-dark;
+        box-shadow: inset 0 -1px 0 $global-border-color-dark;
+        color: $code-color-dark;
+      }
+    }
+
     .typeit {
       .code {
         padding: 6px;
@@ -246,13 +368,11 @@
   }
 
   .post-info {
-    margin-top: 5rem;
-    border-top: 1px solid $global-border-color;
+    margin-top: 3rem;
     border-bottom: 1px solid $global-border-color;
-
-    .post-info-item {
-      margin: 5px 0;
-    }
+    padding: 1rem 0 0.3rem;
+    display: flex;
+    justify-content: space-between;
 
     .dark-theme & {
       border-top: 1px solid $global-border-color-dark;
@@ -261,7 +381,7 @@
   }
 
   .post-tags {
-    padding: 1rem 0 1rem;
+    padding: 0.3rem 0 1rem;
     display: flex;
     justify-content: space-between;
   }

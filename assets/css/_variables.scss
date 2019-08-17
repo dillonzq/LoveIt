@@ -35,15 +35,27 @@ $pagination-link-color-dark: #a9a9b3 !default;
 $pagination-link-active-color: #000 !default;
 $pagination-link-active-color-dark: #fff !default;
 
+// Color of the table background.
+$table-background-color: white !default;
+$table-background-color-dark: #272C34 !default;
+
+// Color of the table thead.
+$table-thead-color: #EDEDED !default;
+$table-thead-color-dark: #20252B !default;
+
 // ========== Code ========== //
 // Color of the code.
 $code-color: #E74C3C !default;
 $code-color-dark: #E5BF78 !default;
 
+// Color of the code background.
+$code-background: whitesmoke !default;
+$code-background-dark: #272C34 !default;
+
 $code-info-color: #cacaca !default;
 
 // Font size of code.
-$code-font-size: 14px !default;
+$code-font-size: 13px !default;
 
 // Font family of the code.
 $code-font-family: Consolas, Monaco, Menlo, "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace !default;
@@ -94,7 +106,3 @@ $code-type-list: (
   language-toml: "TOML",
   language-diff: "Diff"
 ) !default;
-
-// Color of the code background.
-$l-code-background: #F8F5EC !default;
-$d-code-background: #272C34 !default;

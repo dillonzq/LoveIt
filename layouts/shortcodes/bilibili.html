@@ -1,0 +1,7 @@
+<div class="bilibili">
+    {{- if .IsNamedParams -}}
+        <iframe src="//player.bilibili.com/player.html?aid={{ .Get "aid" }}&cid={{ .Get "cid" }}&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+    {{- else -}}
+        <iframe src="//player.bilibili.com/player.html?aid={{ .Get 0 }}&cid={{ .Get 1 }}&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+    {{- end -}}
+</div>

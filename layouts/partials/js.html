@@ -14,6 +14,15 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 ` }}
+<!-- mermaid https://github.com/knsv/mermaid -->
+{{ $diagram := `
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.2.3/dist/mermaid.min.js" integrity="sha256-4s3fF5e1iWRLtiV7mRev7n17oALqqDHbWrNqF3/r7jU=" crossorigin="anonymous"></script>
+    <script>mermaid.initialize({startOnLoad: true, theme: null,});</script>
+` }}
+<!-- ECharts https://github.com/apache/incubator-echarts -->
+{{ $echarts := `
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.2.1/dist/echarts.min.js" integrity="sha256-XNiBJGZuErA+MsbKwxuTqNMimobZMsVS79SkTUroRz4=" crossorigin="anonymous"></script>
+` }}
 <!-- TypeIt https://github.com/alexmacarthur/typeit -->
 {{ $typeit := `
     <script src="https://cdn.jsdelivr.net/npm/typeit@6.0.3/dist/typeit.min.js" integrity="sha256-jl1b2Wp4cXCUyX8FxPZ8Z0PPIPV3QYNb/jPSLGDej2c=" crossorigin="anonymous"></script>
@@ -35,12 +44,34 @@
 
 {{ if .IsPage }}
     {{ $lazysizes | safeHTML }}
-    {{ if .Scratch.Get "music" }}
-        {{ $metingjs | safeHTML }}
+
+    {{ if .Scratch.Get "diagram" }}
+        {{ $diagram | safeHTML }}
     {{ end }}
+
+    {{ with .Scratch.Get "echartsMap" }}
+        {{ $echarts | safeHTML }}
+        {{ $echartsMap := . }}
+        <script>var echartsMap = {
+            {{ range $key, $var := $echartsMap }}
+                {{ $key }}: {{ $var | safeJS }},
+            {{ end }}
+        };var echartsArr=[];</script>
+    {{ end }}
+
     {{ if or .Params.math .Site.Params.math }}
         {{ $katex | safeHTML }}
     {{ end }}
+
+    {{ if .Scratch.Get "music" }}
+        {{ $metingjs | safeHTML }}
+    {{ end }}
+
+    {{ with .Scratch.Get "countdownMap" }}
+        {{ $countdown | safeHTML }}
+        <script>var countdownMap = {{ . | jsonify | safeJS }};</script>
+    {{ end }}
+
     {{ $scripts = $scripts | append $dynamicToTop }}
     {{ $scripts = $scripts | resources.Concat "/js/vendor_post.js" | resources.Minify }}
 {{ else }}
@@ -55,10 +86,6 @@
         {{ $typeitArr = $typeitArr | append (slice $val) }}
     {{ end }}
     <script>var typeitArr = {{ $typeitArr | jsonify | safeJS }};</script>
-{{ end }}
-{{ with .Scratch.Get "countdownMap" }}
-    {{ $countdown | safeHTML }}
-    <script>var countdownMap = {{ . | jsonify | safeJS }};</script>
 {{ end }}
 
 <script src="{{ $scripts.RelPermalink }}" async=""></script>
