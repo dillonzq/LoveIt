@@ -2,7 +2,6 @@
 
 {{ define "content" }}
     {{ $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
-    {{ $modify_date := .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
     {{ $author := .Site.Author.name }}
     {{ if isset .Params "author" }}
        {{ $author = .Site.Author.name }}
@@ -15,20 +14,19 @@
 
         <div class="post-meta">
             <div class="post-meta-main">
-                <a href="{{.Site.BaseURL }}" rel="author">{{ $author }}</a>
-                {{ T "included" }}
+                <a class="author" href="{{.Site.BaseURL }}" rel="author"><i class="fas fa-user-circle"></i>&nbsp;{{ $author }}&nbsp;</a>
                 {{ with .Params.categories -}}
                     <span class="post-category">
+                        {{ T "included" }}
                         {{ range . }}
                             {{- $name := . -}}
                             {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
-                                <i class="far fa-folder"></i>&nbsp;<a href="{{ .Permalink }}">{{ $name }}</a>
+                                <i class="far fa-folder"></i>&nbsp;<a href="{{ .Permalink }}">{{ $name }}</a>&nbsp;
                             {{ end -}}
                         {{ end }}
                     </span>
                 {{- end }}
             </div>
-
             <div class="post-meta-other">
                 <span class="post-time"><i class="far fa-calendar-alt"></i>&nbsp;<time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;</span>
                 <i class="fas fa-pencil-alt"></i>&nbsp;{{ T "wordCount" .WordCount }}&nbsp;
@@ -45,64 +43,34 @@
             <div class="post-toc" id="post-toc">
                 <h2 class="post-toc-title">{{ T "toc" }}</h2>
                 {{- $globalAutoCollapseToc := .Site.Params.autoCollapseToc | default true }}
-                <div class="post-toc-content{{ if not (or .Params.autoCollapseToc (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false))) }} always-active{{ end }}">
-                    {{.TableOfContents}}
+                <div class="post-toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false)) }} always-active{{ end }}">
+                    {{ .TableOfContents }}
                 </div>
             </div>
         {{- end }}
 
+        {{ with .Params.featured_image }}
+            <img src=/images/loading.svg data-sizes=auto data-src={{ . }} alt="featured image" class="featured_image lazyload">
+        {{ end }}
+
         <div class="post-content">
-            <!--featured_image-->
-            {{ with .Params.featured_image }}
-                <img src=/images/loading.svg data-sizes=auto data-src={{ . }} alt="featured image" class="featured_image lazyload">
-            {{ end }}
-            <!-- end featured_image-->
-
-            {{ $reAltIn := `<img src="([^"]+)" alt="([^"]+)?" />` }}
-            {{ $reAltOut := "<figure><img src=/images/loading.svg data-sizes=auto data-src=$1 alt=$2 class=lazyload><figcaption class=image-caption>$2</figcaption></figure>" }}
-            {{ $altContent := .Content | replaceRE $reAltIn $reAltOut | safeHTML }}
-            {{ $reAltTitleIn := `<img src="([^"]+)" alt="([^"]+)?" title="([^"]+)?" />` }}
-            {{ $reAltTitleOut := "<figure><img src=/images/loading.svg data-src=$1 data-sizes=auto alt=$2 title=$3 class=lazyload><figcaption class=image-caption>$2</figcaption></figure>" }}
-            {{ $finalContent := $altContent | replaceRE $reAltTitleIn $reAltTitleOut | safeHTML }}
-            {{ $finalContent }}
+            {{ $content := .Content }}
+            {{ $REin := `<img src="([^"]+)" alt="([^"]+)?" />` }}
+            {{ $REout := "<figure><img src=/images/loading.svg data-sizes=auto data-src=$1 alt=$2 class=lazyload><figcaption class=image-caption>$2</figcaption></figure>" }}
+            {{ $content = replaceRE $REin $REout $content }}
+            {{ $REin = `<img src="([^"]+)" alt="([^"]+)?" title="([^"]+)?" />` }}
+            {{ $REout = "<figure><img src=/images/loading.svg data-src=$1 data-sizes=auto alt=$2 title=$3 class=lazyload><figcaption class=image-caption>$2</figcaption></figure>" }}
+            {{ $content = replaceRE $REin $REout $content }}
+            {{ $REin = `:\(([\w- ]+?)\):` }}
+            {{ $REout = `<i class="inline-icon $1"></i>` }}
+            {{ $content = replaceRE $REin $REout $content }}
+            {{ $content | safeHTML }}
         </div>
-        <div class="post-footer">
-            <div class="post-info">
-                <div class="post-info-mod"><span>{{ printf (T "lastMod") $modify_date }}</span></div>
-                <div class="post-info-share">
-                    {{ if and ( $.Param "socialShare" ) (gt (len ($.Param "share")) 0) }}
-                        <span>{{ partial "post/share-links.html" . }}</span>
-                    {{ end }}
-                </div>
-            </div>
 
-            <div class="post-tags">
-                <section>
-                    {{ with .Params.tags }}
-                        {{ range . }}
-                            <span class="tag">
-                                <i class="fas fa-tag"></i><a href="{{ "tags/" | absURL }}{{ . | urlize }}/">&nbsp;{{.}}&nbsp;</a>
-                            </span>
-                        {{ end }}
-                    {{ end }}
-                </section>
-                <section>
-                    <span><a href="javascript:window.history.back();">{{ T "back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{ .Site.BaseURL }}">{{ T "home" }}</a></span>
-                </section>
-            </div>
-
-            <div class="post-nav">
-                {{ if .PrevInSection }}
-                <a href="{{.PrevInSection.Permalink}}" class="prev" rel="prev" title="{{ .PrevInSection.Title}}"><i class="fas fa-angle-left"></i>&nbsp;{{ .PrevInSection.Title}}</a>
-                {{ end }}
-                {{ if .NextInSection }}
-                <a href="{{.NextInSection.Permalink}}" class="next" rel="next" title="{{.NextInSection.Title}}">{{.NextInSection.Title}}&nbsp;<i class="fas fa-angle-right"></i></a>
-                {{ end }}
-            </div>
-        </div>
+        {{ partial "post/footer.html" . }}
 
         <div class="post-comment">
-            {{ if ( .Params.showComments | default true ) }}
+            {{ if ( .Params.comment | default true ) }}
             {{ partial "comments.html" . }}
             {{ end }}
         </div>

@@ -56,56 +56,64 @@ jQuery(function($) {
     _Blog._initToc = function() {
         const SPACING = 20;
         const $toc = $('.post-toc');
+        const $footer = $('.post-footer');
 
         if ($toc.length) {
-            const startTop = $toc.css("top");
-            const minScrollTop = $toc.offset().top - SPACING;
-
-            const tocState = {
-                start: {
-                    'position': 'absolute',
-                    'top': startTop,
-                },
-                process: {
-                    'position': 'fixed',
-                    'top': SPACING,
-                },
-            };
+            const minTop = $toc.position().top;
+            const mainTop = $('main').position().top;
+            const minScrollTop = minTop + mainTop - SPACING;
 
             $(window).scroll(function() {
-            const scrollTop = $(window).scrollTop();
+                const scrollTop = $(window).scrollTop();
+                const maxTop = $footer.position().top - $toc.height();
+                const maxScrollTop = maxTop + mainTop - SPACING;
 
-            if (scrollTop < minScrollTop) {
-                $toc.css(tocState.start);
-            } else {
-                $toc.css(tocState.process);
-            }
+                const tocState = {
+                    start: {
+                        'position': 'absolute',
+                        'top': minTop,
+                    },
+                    process: {
+                        'position': 'fixed',
+                        'top': SPACING,
+                    },
+                    end: {
+                        'position': 'absolute',
+                        'top': maxTop,
+                    }
+                };
+
+                if (scrollTop < minScrollTop) {
+                    $toc.css(tocState.start);
+                } else if (scrollTop > maxScrollTop) {
+                    $toc.css(tocState.end);
+                } else {
+                    $toc.css(tocState.process);
+                }
             });
         }
 
-        const HEADERFIX = 30;
+        const HEADERFIX = 60;
         const $toclink = $('.toc-link');
         const $headerlink = $('.headerlink');
         const $tocLinkLis = $('.post-toc-content li');
 
-        const headerlinkTop = $.map($headerlink, function(link) {
-            return $(link).offset().top;
-        });
-
-        const headerLinksOffsetForSearch = $.map(headerlinkTop, function(offset) {
-            return offset - HEADERFIX;
-        });
-
-        const searchActiveTocIndex = function(array, target) {
-            for (let i = 0; i < array.length - 1; i++) {
-                if (target > array[i] && target <= array[i + 1]) return i;
-            }
-            if (target > array[array.length - 1]) return array.length - 1;
-            return 0;
-        };
-
         const activeIndex = function() {
             const scrollTop = $(window).scrollTop();
+            const headerlinkTop = $.map($headerlink, function(link) {
+                return $(link).offset().top;
+            });
+            const headerLinksOffsetForSearch = $.map(headerlinkTop, function(offset) {
+                return offset - HEADERFIX;
+            });
+            const searchActiveTocIndex = function(array, target) {
+                for (let i = 0; i < array.length - 1; i++) {
+                    if (target > array[i] && target <= array[i + 1]) return i;
+                }
+                if (target > array[array.length - 1]) return array.length - 1;
+                return 0;
+            };
+
             const activeTocIndex = searchActiveTocIndex(headerLinksOffsetForSearch, scrollTop);
 
             $($toclink).removeClass('active');
@@ -182,7 +190,7 @@ jQuery(function($) {
     _Blog.countdown = function() {
         if (window.countdownMap) {
             Object.keys(countdownMap).forEach(function(id) {
-              $(id).countdown(countdownMap[id], {elapse: true})
+              $(`#${id}`).countdown(countdownMap[id], {elapse: true})
                 .on('update.countdown', function(event) {
                   var $this = $(this).html(event.strftime(''
                     + '<span>%D</span> 天 <br />'
@@ -226,9 +234,9 @@ jQuery(function($) {
         _Blog.changeTitle();
         _Blog.chroma();
         _Blog.responsiveTable();
-        _Blog.toc();
         _Blog.echarts(isDark);
         _Blog.countdown();
         _Blog.typeit();
+        _Blog.toc();
     });
 });

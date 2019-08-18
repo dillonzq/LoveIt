@@ -9,7 +9,7 @@
         {{ $taxonomyName = (T "category") }}
     {{ end }}
     <div class="post-warp archive">
-        <h2 class="post-title" style="text-align:right;padding-bottom:2em">
+        <h2 class="post-title">
             {{- printf "%s - %s" $taxonomyName .Title -}}
         </h2>
         {{ range (.Paginate (.Pages.GroupByDate "2006")).PageGroups }}

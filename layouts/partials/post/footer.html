@@ -1,0 +1,35 @@
+{{ $modify_date := .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
+<div class="post-footer">
+    <div class="post-info">
+        <div class="post-info-mod"><span>{{ printf (T "lastMod") $modify_date }}</span></div>
+        <div class="post-info-share">
+            {{ if and ( .Param "socialShare" ) (gt (len (.Param "share")) 0) }}
+                <span>{{ partial "post/share.html" . }}</span>
+            {{ end }}
+        </div>
+    </div>
+
+    <div class="post-tags">
+        <section>
+            {{ with .Params.tags }}
+                {{ range . }}
+                    <span class="tag">
+                        <a href="{{ "tags/" | absURL }}{{ . | urlize }}/"><i class="fas fa-tag"></i>&nbsp;{{.}}&nbsp;</a>
+                    </span>
+                {{ end }}
+            {{ end }}
+        </section>
+        <section>
+            <span><a href="javascript:window.history.back();">{{ T "back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{ .Site.BaseURL }}">{{ T "home" }}</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        {{ if .PrevInSection }}
+        <a href="{{.PrevInSection.Permalink}}" class="prev" rel="prev" title="{{ .PrevInSection.Title}}"><i class="fas fa-angle-left"></i>&nbsp;{{ .PrevInSection.Title}}</a>
+        {{ end }}
+        {{ if .NextInSection }}
+        <a href="{{.NextInSection.Permalink}}" class="next" rel="next" title="{{.NextInSection.Title}}">{{.NextInSection.Title}}&nbsp;<i class="fas fa-angle-right"></i></a>
+        {{ end }}
+    </div>
+</div>

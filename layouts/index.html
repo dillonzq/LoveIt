@@ -1,15 +1,16 @@
-{{ define "content" }}
-    {{ if eq .Site.Params.home_mode "post" }}
+{{ define "content" -}}
+    {{ if eq .Site.Params.home_mode "post" -}}
         <div class="post-warp">
-            {{ partial "home/profile.html" . }}
+            {{- partial "home/profile.html" . -}}
 
-            {{ range (.Paginate (where .Pages "Type" "posts")).Pages }}
-                {{ .Render "summary" }}
-            {{ end }}
+            {{- $paginator := .Paginate (where (where .Data.Pages "Type" "posts") ".Params.show_in_homepage" "!=" false) }}
+            {{ range $paginator.Pages -}}
+                {{ .Render "summary" -}}
+            {{ end -}}
 
             {{ partial "paginator.html" . }}
         </div>
-    {{ else }}
-        {{ partial "home/profile.html" . }}
-    {{ end }}
+    {{- else -}}
+        {{ partial "home/profile.html" . -}}
+    {{ end -}}
 {{ end }}

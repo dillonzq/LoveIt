@@ -1,0 +1,128 @@
+.intro {
+  transform: translateY(0);
+  padding: 2em 0 2em 0;
+
+  .avatar {
+    img {
+      width: 96px;
+    }
+  }
+}
+
+.post {
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  color: $global-font-color;
+  border-top: 1px dashed $global-border-color;
+  border-bottom: 1px dashed $global-border-color;
+
+  .dark-theme & {
+    color: $global-font-color-dark;
+    border-bottom: 1px dashed $global-border-color-dark;
+  }
+
+  .featured_image_preview {
+    width: 100%;
+    padding: 30% 0 0;
+    position: relative;
+    margin-bottom: 1em;
+
+    img {
+      position: absolute;
+      width: 100%; height: 100%;
+      left: 0; top: 0;
+      object-fit: cover;
+    }
+  }
+
+  .post-list-title {
+    font-size: 1.6em;
+  }
+
+  .post-meta {
+    font-size: 14px !important;
+    a {
+      color: $global-font-secondary-color !important;
+
+      .dark-theme & {
+        color: $global-font-secondary-color-dark !important;
+      }
+
+      &:hover {
+        color: $global-link-hover-color !important;
+
+        .dark-theme & {
+          color: $global-link-hover-color-dark !important;
+        }
+      }
+    }
+  }
+
+  .post-content {
+    padding-top: .2em;
+    font-size: 0.9em;
+    width: 100%;
+    max-height: 100px;
+    overflow: hidden;
+
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: 1em;
+      line-height: 1em;
+      padding-top: .3em;
+      padding-bottom: .3em;
+    }
+
+    p {
+    margin: 0;
+    padding-top: .3em;
+    padding-bottom: .3em;
+    }
+  }
+
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px !important;
+
+    a {
+      color: $post-link-color !important;
+
+      .dark-theme & {
+        color: $post-link-color-dark !important;
+      }
+
+      &:hover {
+        color: $post-link-hover-color !important;
+
+        .dark-theme & {
+          color: $post-link-hover-color-dark !important;
+        }
+      }
+    }
+
+    .post-tags {
+      padding: 0;
+
+      a {
+        color: $global-link-color !important;
+
+        .dark-theme & {
+          color: $global-link-color-dark !important;
+        }
+
+        &:hover {
+          color: $global-link-hover-color !important;
+
+          .dark-theme & {
+            color: $global-link-hover-color-dark !important;
+          }
+        }
+      }
+    }
+  }
+}

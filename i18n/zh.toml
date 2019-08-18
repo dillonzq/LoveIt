@@ -37,6 +37,9 @@ other = "主题 - "
 [toc]
 other = "目录"
 
+[publish]
+other = "发布于"
+
 [included]
 other = "收录于"
 
@@ -63,6 +66,9 @@ other = "返回"
 
 [home]
 other = "主页"
+
+[readmore]
+other = "阅读全文......"
 # === posts/single.html ===
 
 # === 404.html ===

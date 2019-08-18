@@ -37,6 +37,9 @@ other = "Theme - "
 [toc]
 other = "Table of Contents"
 
+[publish]
+other = "published on"
+
 [included]
 other = "included in"
 
@@ -63,6 +66,9 @@ other = "Back"
 
 [home]
 other = "Home"
+
+[readmore]
+other = "Read More......"
 # === posts/single.html ===
 
 # === 404.html ===

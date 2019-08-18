@@ -30,12 +30,15 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#ffffff">
-
-{{ with .OutputFormats.Get "RSS" }}
+{{- with .OutputFormats.Get "RSS" -}}
     <link rel="alternate" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ site.Title }}">
     <link rel="feed" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ site.Title }}">
-{{ end }}
+{{- end -}}
 
-{{ template "_internal/twitter_cards.html" . }}
+{{- template "_internal/twitter_cards.html" . -}}
 
-{{ partial "seo_schema.html" . }}
+{{- partial "seo_schema.html" . -}}
+
+{{- $style := resources.Get "css/style.scss" | resources.ToCSS | resources.Minify -}}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">

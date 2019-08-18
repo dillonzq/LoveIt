@@ -1,0 +1,55 @@
+<article class="post" itemscope itemtype="http://schema.org/Article">
+    {{ $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
+    {{ $author := .Site.Author.name }}
+    {{ if isset .Params "author" }}
+       {{ $author = .Site.Author.name }}
+    {{ end }}
+
+    <!--featured_image-->
+    {{ with .Params.featured_image }}
+        {{ $image := $.Params.featured_image_preview | default . }}
+        <div class="featured_image_preview">
+            <img src=/images/loading.svg data-sizes=auto data-src={{ $image }} alt="featured image" class="lazyload">
+        </div>
+    {{ end }}
+    <!-- end featured_image-->
+    <header class="post-header">
+        <h1 class="post-title post-list-title" itemprop="name headline">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </h1>
+    </header>
+    <div class="post-meta">
+        <a class="author" href="{{.Site.BaseURL }}" rel="author"><i class="fas fa-user-circle"></i>&nbsp;{{ $author }}&nbsp;</a>
+        {{ T "publish" }}<span class="post-time">&nbsp;<time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;</span>
+        {{ with .Params.categories -}}
+            <span class="post-category">
+                {{ T "included" }}
+                {{ range . }}
+                    {{- $name := . -}}
+                    {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
+                        <i class="far fa-folder"></i>&nbsp;<a href="{{ .Permalink }}">{{ $name }}</a>&nbsp;
+                    {{ end -}}
+                {{ end }}
+            </span>
+        {{- end }}
+    </div>
+    <div class="post-content">
+        {{ if .Params.show_description }}
+            <p>{{ . }}</p>
+        {{ else }}
+            {{ .Summary }}
+        {{ end }}
+    </div>
+    <div class="post-footer">
+        <a href="{{ .Permalink }}">{{ T "readmore" }}</a>
+        {{ with .Params.tags }}
+            <div class="post-tags">
+                {{ range . }}
+                    <span class="tag">
+                        <a href="{{ "tags/" | absURL }}{{ . | urlize }}/">&nbsp;<i class="fas fa-tag"></i>&nbsp;{{ . }}</a>
+                    </span>
+                {{ end }}
+            </div>
+        {{ end }}
+    </div>
+</article>
