@@ -1,10 +1,10 @@
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .navbar {
-    display: none;
+    display: none !important;
   }
 
   .post-toc {
-    display: none;
+    display: none !important;
   }
 
   .navbar-mobile {
@@ -149,13 +149,25 @@
   .post-toc {
     margin-left: 580px !important;
   }
+
+  .navbar-mobile {
+    display: none !important;
+  }
+
+  .post-toc-mobile {
+    display: none !important;
+  }
 }
 
 /* Desktops and laptops ----------- */
 
 @media only screen and (min-width: 1224px) {
   .navbar-mobile {
-    display: none;
+    display: none !important;
+  }
+
+  .post-toc-mobile {
+    display: none !important;
   }
 }
 
@@ -163,4 +175,11 @@
 
 @media only screen and (min-width: 1824px) {
   /* Styles */
+  .navbar-mobile {
+    display: none !important;
+  }
+
+  .post-toc-mobile {
+    display: none !important;
+  }
 }

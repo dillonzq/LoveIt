@@ -39,6 +39,10 @@
             </div>
         </div>
 
+        {{ with .Params.featured_image }}
+            <img src=/images/loading.svg data-sizes=auto data-src={{ . }} alt="featured image" class="featured_image lazyload">
+        {{ end }}
+
         {{ if or .Params.toc (and .Site.Params.toc (ne .Params.toc false)) -}}
             <div class="post-toc" id="post-toc">
                 <h2 class="post-toc-title">{{ T "toc" }}</h2>
@@ -47,11 +51,15 @@
                     {{ .TableOfContents }}
                 </div>
             </div>
+            <div class="post-toc-mobile" id="post-toc-mobile">
+                <details>
+                    <summary class="post-toc-title">{{ T "toc" }}<i class="details icon fas fa-angle-down"></i></summary>
+                    <div class="post-toc-content">
+                        {{ .TableOfContents }}
+                    </div>
+                </details>
+            </div>
         {{- end }}
-
-        {{ with .Params.featured_image }}
-            <img src=/images/loading.svg data-sizes=auto data-src={{ . }} alt="featured image" class="featured_image lazyload">
-        {{ end }}
 
         <div class="post-content">
             {{ $content := .Content }}

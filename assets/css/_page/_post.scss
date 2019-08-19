@@ -85,6 +85,64 @@
   }
 }
 
+.post-toc-mobile {
+  padding: 10px;
+
+  details {
+    summary {
+      display: block;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2em;
+      font-weight: bold;
+      line-height: 2em;
+      padding: 0 10px;
+      background: $code-background-color;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      i.details {
+        line-height: 2em;
+      }
+
+      .dark-theme & {
+        background: $code-background-color-dark;
+      }
+    }
+  }
+
+  details[open] {
+    i.details {
+      transform: rotate(180deg);
+    }
+  }
+
+  .post-toc-content {
+    border: 2px solid $code-background-color;
+
+    >nav>ul {
+      margin: 10px 0;
+    }
+
+    ul {
+      padding-left: 10px;
+      list-style: none;
+
+      ul {
+        padding-left: 20px;
+      }
+    }
+
+    .dark-theme & {
+      border: 2px solid $code-background-color-dark;
+    }
+  }
+}
+
 .featured_image {
   display: block;
   max-width: 100%;
@@ -145,14 +203,14 @@
   }
 
   ruby {
-    background: $code-background;
+    background: $code-background-color;
 
     rt {
       color: $global-font-secondary-color;
     }
 
     .dark-theme & {
-      background: $code-background-dark;
+      background: $code-background-color-dark;
 
       rt {
         color: $global-font-secondary-color-dark;
