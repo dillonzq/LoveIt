@@ -64,6 +64,9 @@
             {{ $REin = `:\(([\w- ]+?)\):` }}
             {{ $REout = `<i class="inline-icon $1"></i>` }}
             {{ $content = replaceRE $REin $REout $content }}
+            {{ $REin = `\[(.+?)\]\^\((.+?)\)` }}
+            {{ $REout = `<strong><ruby>$1<rt>$2</rt></ruby></strong>` }}
+            {{ $content = replaceRE $REin $REout $content }}
             {{ $content | safeHTML }}
         </div>
 

@@ -144,6 +144,22 @@
     padding-left: 2em;
   }
 
+  ruby {
+    background: $code-background;
+
+    rt {
+      color: $global-font-secondary-color;
+    }
+
+    .dark-theme & {
+      background: $code-background-dark;
+
+      rt {
+        color: $global-font-secondary-color-dark;
+      }
+    }
+  }
+
   .table-wrapper {
     overflow-x: auto;
 
@@ -362,19 +378,59 @@
 p {
   font-size: 1em;
   margin: .5em 0 .5em 0;
+  text-align: justify;
 }
 
 .post-footer {
+  margin-top: 3rem;
+
   .post-info {
-    margin-top: 3rem;
     border-bottom: 1px solid $global-border-color;
     padding: 1rem 0 0.3rem;
-    display: flex;
-    justify-content: space-between;
 
     .dark-theme & {
-      border-top: 1px solid $global-border-color-dark;
       border-bottom: 1px solid $global-border-color-dark;
+    }
+
+    .post-info-line {
+      display: flex;
+      justify-content: space-between;
+
+      .post-info-mod {
+        font-size: 0.8em;
+        color: $global-font-secondary-color;
+
+        .dark-theme & {
+          color: $global-font-secondary-color-dark;
+        }
+      }
+
+      .post-info-license {
+        font-size: 0.8em;
+        color: $global-font-secondary-color;
+
+        .dark-theme & {
+          color: $global-font-secondary-color-dark;
+        }
+      }
+
+      .post-info-md
+      a {
+        font-size: 0.8em;
+        color: $post-link-color;
+
+        .dark-theme & {
+          color: $post-link-color-dark;
+        }
+
+        &:hover {
+          color: $post-link-hover-color;
+
+          .dark-theme & {
+            color: $post-link-hover-color-dark;
+          }
+        }
+      }
     }
   }
 

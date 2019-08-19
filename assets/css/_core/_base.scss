@@ -73,3 +73,11 @@ a {
     }
   }
 }
+
+.navbar {
+  background-color: $navbar-background-color;
+
+  .dark-theme & {
+    background-color: $navbar-background-color-dark;
+  }
+}

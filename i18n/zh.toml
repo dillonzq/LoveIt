@@ -59,7 +59,10 @@ other = "作者"
 other = "本文于 %s 更新"
 
 [license]
-other = "许可协议"
+other = "采用 %s 协议发布"
+
+[seeMarkDown]
+other = "阅读原始文档"
 
 [back]
 other = "返回"
@@ -68,7 +71,7 @@ other = "返回"
 other = "主页"
 
 [readmore]
-other = "阅读全文......"
+other = "阅读全文"
 # === posts/single.html ===
 
 # === 404.html ===
