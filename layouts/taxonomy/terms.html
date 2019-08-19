@@ -50,9 +50,7 @@
         {{ else if eq $taxonomy "tag" }}
             <div class="tag-cloud-tags">
                 {{ range $.Site.Taxonomies.tags.ByCount }}
-                    {{ if .Name }}
-                        <a href="/tags/{{ .Name | urlize}}/"> {{ .Name }} <small>({{ .Count }})</small></a>
-                    {{ end }}
+                    <a href="{{ .Page.Permalink }}"> {{ .Page.Title }} <small>({{ .Count }})</small></a>
                 {{end}}
             </div>
 
