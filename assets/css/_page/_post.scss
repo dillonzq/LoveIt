@@ -86,31 +86,31 @@
 }
 
 .post-toc-mobile {
-  padding: 10px;
+  padding: 10px 0;
 
   details {
     summary {
-      display: block;
-      outline: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      font-size: 1.2em;
-      font-weight: bold;
-      line-height: 2em;
-      padding: 0 10px;
-      background: $code-background-color;
+      .post-toc-title {
+        display: block;
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.2em;
+        font-weight: bold;
+        line-height: 2em;
+        padding: 0 10px;
+        background: $code-background-color;
+
+        i.details {
+          line-height: 2em;
+        }
+
+        .dark-theme & {
+          background: $code-background-color-dark;
+        }
+      }
 
       &::-webkit-details-marker {
         display: none;
-      }
-
-      i.details {
-        line-height: 2em;
-      }
-
-      .dark-theme & {
-        background: $code-background-color-dark;
       }
     }
   }

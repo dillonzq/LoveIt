@@ -53,7 +53,7 @@
             </div>
             <div class="post-toc-mobile" id="post-toc-mobile">
                 <details>
-                    <summary class="post-toc-title">{{ T "toc" }}<i class="details icon fas fa-angle-down"></i></summary>
+                    <summary><div class="post-toc-title">{{ T "toc" }}<i class="details icon fas fa-angle-down"></i></div></summary>
                     <div class="post-toc-content">
                         {{ $toc := .TableOfContents }}
                         {{ $toc = replaceRE `id="TableOfContents"` `id="TableOfContentsMobile"` $toc }}
