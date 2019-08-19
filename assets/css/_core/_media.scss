@@ -19,6 +19,7 @@
       margin: 0;
       height: 4.5em;
       line-height: 4.5em;
+      background: $global-background-color;
 
       .navbar-header {
         display: flex;
@@ -89,6 +90,7 @@
 
       .menu {
         text-align: center;
+        background: $global-background-color;
         border-top: 2px solid $global-font-color;
         display: none;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -103,8 +105,13 @@
         }
 
         .dark-theme & {
+          background: $global-background-color-dark;
           border-top: 2px solid $global-font-color-dark;
         }
+      }
+
+      .dark-theme & {
+        background: $global-background-color-dark !important;
       }
     }
   }

@@ -42,8 +42,8 @@
 
 .post-toc {
   position: absolute;
-  width: 200px;
-  max-width: 240px;
+  width: 240px;
+  max-width: 300px;
   margin-left: 800px;
   padding: 10px;
   border-left: 1px solid $global-border-color;
@@ -244,6 +244,7 @@
         color: $post-link-color-dark;
       }
     }
+
     &:after {
       content: "#blockquote" attr(cite);
       display: block;

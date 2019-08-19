@@ -43,7 +43,7 @@ jQuery(function($) {
     };
 
     _Blog.responsiveTable = function() {
-        const tables = document.querySelectorAll('.post-content > table');
+        const tables = document.querySelectorAll('.post-content table');
         for (let i = 0; i < tables.length; i++) {
             const table = tables[i];
             const wrapper = document.createElement('div');
@@ -54,16 +54,14 @@ jQuery(function($) {
     };
 
     _Blog._initToc = function() {
-        const SPACING = 20;
-        const $toc = $('.post-toc');
-        const $footer = $('.post-footer');
-
-        if ($toc.length) {
+        if ($('.post-toc').length) {
+            const SPACING = 20;
+            const $toc = $('.post-toc');
+            const $footer = $('.post-footer');
             const minTop = $toc.position().top;
             const mainTop = $('main').position().top;
             const minScrollTop = minTop + mainTop - SPACING;
-
-            $(window).scroll(function() {
+            const changeTocState = function() {
                 const scrollTop = $(window).scrollTop();
                 const maxTop = $footer.position().top - $toc.height();
                 const maxScrollTop = maxTop + mainTop - SPACING;
@@ -90,46 +88,47 @@ jQuery(function($) {
                 } else {
                     $toc.css(tocState.process);
                 }
-            });
-        }
-
-        const HEADERFIX = 60;
-        const $toclink = $('.toc-link');
-        const $headerlink = $('.headerlink');
-        const $tocLinkLis = $('.post-toc-content li');
-
-        const activeIndex = function() {
-            const scrollTop = $(window).scrollTop();
-            const headerlinkTop = $.map($headerlink, function(link) {
-                return $(link).offset().top;
-            });
-            const headerLinksOffsetForSearch = $.map(headerlinkTop, function(offset) {
-                return offset - HEADERFIX;
-            });
-            const searchActiveTocIndex = function(array, target) {
-                for (let i = 0; i < array.length - 1; i++) {
-                    if (target > array[i] && target <= array[i + 1]) return i;
-                }
-                if (target > array[array.length - 1]) return array.length - 1;
-                return 0;
             };
+            changeTocState();
+            $(window).scroll(changeTocState);
 
-            const activeTocIndex = searchActiveTocIndex(headerLinksOffsetForSearch, scrollTop);
+            const HEADERFIX = 100;
+            const $toclink = $('.toc-link');
+            const $headerlink = $('.headerlink');
+            const $tocLinkLis = $('.post-toc-content li');
+            const activeIndex = function() {
+                const scrollTop = $(window).scrollTop();
+                const headerlinkTop = $.map($headerlink, function(link) {
+                    return $(link).offset().top;
+                });
+                const headerLinksOffsetForSearch = $.map(headerlinkTop, function(offset) {
+                    return offset - HEADERFIX;
+                });
+                const searchActiveTocIndex = function(array, target) {
+                    for (let i = 0; i < array.length - 1; i++) {
+                        if (target > array[i] && target <= array[i + 1]) return i;
+                    }
+                    if (target > array[array.length - 1]) return array.length - 1;
+                    return 0;
+                };
 
-            $($toclink).removeClass('active');
-            $($tocLinkLis).removeClass('has-active');
+                const activeTocIndex = searchActiveTocIndex(headerLinksOffsetForSearch, scrollTop);
 
-            if (activeTocIndex !== -1) {
-                $($toclink[activeTocIndex]).addClass('active');
-                let ancestor = $toclink[activeTocIndex].parentNode;
-                while (ancestor.tagName !== 'NAV') {
-                    $(ancestor).addClass('has-active');
-                    ancestor = ancestor.parentNode.parentNode;
+                $($toclink).removeClass('active');
+                $($tocLinkLis).removeClass('has-active');
+
+                if (activeTocIndex !== -1) {
+                    $($toclink[activeTocIndex]).addClass('active');
+                    let ancestor = $toclink[activeTocIndex].parentNode;
+                    while (ancestor.tagName !== 'NAV') {
+                        $(ancestor).addClass('has-active');
+                        ancestor = ancestor.parentNode.parentNode;
+                    }
                 }
-            }
-        };
-        activeIndex();
-        $(window).scroll(activeIndex);
+            };
+            activeIndex();
+            $(window).scroll(activeIndex);
+        }
     };
 
     _Blog.toc = function() {

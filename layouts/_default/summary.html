@@ -37,7 +37,14 @@
         {{ if .Params.show_description }}
             <p>{{ . }}</p>
         {{ else }}
-            {{ .Summary }}
+            {{ $summary := .Summary }}
+            {{ $REin := `:\(([\w- ]+?)\):` }}
+            {{ $REout := `<i class="inline-icon $1"></i>` }}
+            {{ $summary  = replaceRE $REin $REout $summary  }}
+            {{ $REin = `\[(.+?)\]\^\((.+?)\)` }}
+            {{ $REout = `<strong><ruby>$1<rt>$2</rt></ruby></strong>` }}
+            {{ $summary  = replaceRE $REin $REout $summary  }}
+            {{ $summary  | safeHTML }}
         {{ end }}
     </div>
     <div class="post-footer">
