@@ -55,7 +55,9 @@
                 <details>
                     <summary class="post-toc-title">{{ T "toc" }}<i class="details icon fas fa-angle-down"></i></summary>
                     <div class="post-toc-content">
-                        {{ .TableOfContents }}
+                        {{ $toc := .TableOfContents }}
+                        {{ $toc = replaceRE `id="TableOfContents"` `id="TableOfContentsMobile"` $toc }}
+                        {{ $toc | safeHTML }}
                     </div>
                 </details>
             </div>
