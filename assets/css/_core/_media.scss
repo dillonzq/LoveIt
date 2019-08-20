@@ -131,6 +131,15 @@
   .post-warp {
     padding-top: 6em;
 
+    .post-content {
+      a.post-title-target:target {
+        display: block;
+        position: relative;
+        top: -60px;
+        visibility: hidden;
+      }
+    }
+
     .categories-card {
       .card-item {
         width: 95%;
