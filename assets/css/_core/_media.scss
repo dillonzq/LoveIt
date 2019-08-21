@@ -1,14 +1,14 @@
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .navbar {
-    display: none !important;
+    display: none;
   }
 
   .post-toc {
-    display: none !important;
+    display: none;
   }
 
   .navbar-mobile {
-    display: block !important;
+    display: block;
     position: fixed;
     width: 100%;
     z-index: 100;
@@ -111,13 +111,13 @@
       }
 
       .dark-theme & {
-        background: $global-background-color-dark !important;
+        background: $global-background-color-dark;
       }
     }
   }
 
   #dynamic-to-top {
-    display: none !important;
+    display: none;
   }
 
   .post-warp {
@@ -129,39 +129,44 @@
   }
 }
 
-/* iPads (portrait and landscape) ----------- */
+/* iPads (portrait) ----------- */
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation:portrait) {
   .post-warp {
-    max-width: 600px !important;
+    max-width: 600px;
   }
 
   .navbar-mobile {
-    display: none !important;
+    display: none;
   }
 
   .post-toc {
-    display: none !important;
-  }
-}
-
-/* iPads (portrait and landscape) ----------- */
-
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation:landscape) {
-  .post-warp {
-    max-width: 560px !important;
-  }
-
-  .post-toc {
-    margin-left: 580px !important;
-  }
-
-  .navbar-mobile {
-    display: none !important;
+    display: none;
   }
 
   .post-toc-mobile {
-    display: none !important;
+    display: block;
+  }
+}
+
+/* iPads (landscape) ----------- */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation:landscape) {
+  .post-warp {
+    max-width: 560px;
+  }
+
+  .post-toc {
+    display: block;
+    margin-left: 580px;
+  }
+
+  .navbar-mobile {
+    display: none;
+  }
+
+  .post-toc-mobile {
+    display: none;
   }
 }
 
@@ -169,11 +174,11 @@
 
 @media only screen and (min-width: 1224px) {
   .navbar-mobile {
-    display: none !important;
+    display: none;
   }
 
   .post-toc-mobile {
-    display: none !important;
+    display: none;
   }
 }
 
@@ -182,10 +187,10 @@
 @media only screen and (min-width: 1824px) {
   /* Styles */
   .navbar-mobile {
-    display: none !important;
+    display: none;
   }
 
   .post-toc-mobile {
-    display: none !important;
+    display: none;
   }
 }

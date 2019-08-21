@@ -6,7 +6,11 @@
         <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
         {{ partial "head.html" . }}
     </head>
-    <body class="">
+    <body>
+        <script>
+            var isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            if (isDark) document.body.classList.add('dark-theme');
+        </script>
         <div class="wrapper">
             {{ partial "header.html" . }}
             <main class="main">

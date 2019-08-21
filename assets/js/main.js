@@ -11,14 +11,12 @@ jQuery(function($) {
         });
     };
 
-    _Blog.toggleTheme = function(isDark) {
-        $('body').toggleClass('dark-theme', isDark);
+    _Blog.toggleTheme = function() {
         $('.theme-switch').on('click', () => {
             $('body').toggleClass('dark-theme');
-            window.localStorage && window.localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light', );
-            const currentTheme = window.localStorage && window.localStorage.getItem('theme');
-            const isDark = currentTheme === 'dark';
-            this.echarts(isDark);
+            isDark = !isDark;
+            window.localStorage && window.localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            this.echarts();
         });
     };
 
@@ -53,12 +51,38 @@ jQuery(function($) {
         }
     };
 
+    _Blog._refactorToc = function(toc) {
+        // when headings do not start with `h1`
+        const oldTocList = toc.children[0];
+        let newTocList = oldTocList;
+        let temp;
+        while (newTocList.children.length === 1
+            && (temp = newTocList.children[0].children[0]).tagName === 'UL') {
+            newTocList = temp;
+        }
+
+        if (newTocList !== oldTocList) toc.replaceChild(newTocList, oldTocList);
+    };
+
+    _Blog._linkToc = function() {
+        const links = document.querySelectorAll('#TableOfContents a:first-child');
+        for (let i = 0; i < links.length; i++) links[i].className += ' toc-link';
+
+        for (let num = 1; num <= 6; num++) {
+            const headers = document.querySelectorAll('.post-content>h' + num);
+            for (let i = 0; i < headers.length; i++) {
+                const header = headers[i];
+                header.innerHTML = `<a href="#${header.id}" class="headerlink anchor"><i class="iconfont icon-link"></i></a>${header.innerHTML}`;
+            }
+        }
+    };
+
     _Blog._initToc = function() {
-        if ($('.post-toc').length && $('.post-toc').css('display') !== 'none') {
+        const $toc = $('.post-toc');
+        if ($toc.length && $toc.css('display') !== 'none') {
             const SPACING = 100;
-            const $toc = $('.post-toc');
             const $footer = $('.post-footer');
-            const minTop = $toc.position().top;
+            const minTop = $toc.position().top;;
             const mainTop = $('main').position().top;
             const minScrollTop = minTop + mainTop - SPACING;
             const changeTocState = function() {
@@ -146,38 +170,14 @@ jQuery(function($) {
                 this._linkToc();
                 this._initToc();
                 // Listen for orientation changes
-                window.addEventListener("orientationchange", this._initToc, false);
+                window.addEventListener("orientationchange", function() {
+                    this.setTimeout(_Blog._initToc, 0);
+                }, false);
             }
         }
     };
 
-    _Blog._refactorToc = function(toc) {
-        // when headings do not start with `h1`
-        const oldTocList = toc.children[0];
-        let newTocList = oldTocList;
-        let temp;
-        while (newTocList.children.length === 1
-            && (temp = newTocList.children[0].children[0]).tagName === 'UL') {
-            newTocList = temp;
-        }
-
-        if (newTocList !== oldTocList) toc.replaceChild(newTocList, oldTocList);
-    };
-
-    _Blog._linkToc = function() {
-        const links = document.querySelectorAll('#TableOfContents a:first-child');
-        for (let i = 0; i < links.length; i++) links[i].className += ' toc-link';
-
-        for (let num = 1; num <= 6; num++) {
-            const headers = document.querySelectorAll('.post-content>h' + num);
-            for (let i = 0; i < headers.length; i++) {
-                const header = headers[i];
-                header.innerHTML = `<a href="#${header.id}" class="headerlink anchor"><i class="iconfont icon-link"></i></a>${header.innerHTML}`;
-            }
-        }
-    };
-
-    _Blog.echarts = function(isDark) {
+    _Blog.echarts = function() {
         if (window.echartsMap) {
             for (let i = 0; i < echartsArr.length; i++) {
                 echartsArr[i].dispose();
@@ -230,15 +230,12 @@ jQuery(function($) {
     };
 
     $(document).ready(function() {
-        const currentTheme = window.localStorage && window.localStorage.getItem('theme');
-        const isDark = currentTheme === 'dark';
-
         _Blog.toggleMobileMenu();
-        _Blog.toggleTheme(isDark);
+        _Blog.toggleTheme();
         _Blog.changeTitle();
         _Blog.chroma();
         _Blog.responsiveTable();
-        _Blog.echarts(isDark);
+        _Blog.echarts();
         _Blog.countdown();
         _Blog.typeit();
         _Blog.toc();
