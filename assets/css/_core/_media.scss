@@ -151,7 +151,7 @@
 
 /* iPads (landscape) ----------- */
 
-@media only screen and (min-width: 1366px) {
+@media only screen and (min-width: 1080px) {
   .post-warp {
     max-width: 560px !important;
   }
@@ -172,7 +172,16 @@
 
 /* Desktops and laptops ----------- */
 
-@media only screen and (min-width: 1600) {
+@media only screen and (min-width: 1300px) {
+  .post-warp {
+    max-width: 780px !important;
+  }
+
+  .post-toc {
+    display: block !important;
+    margin-left: 800px !important;
+  }
+
   .navbar-mobile {
     display: none !important;
   }
