@@ -1,77 +1,77 @@
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .navbar {
-    display: none;
+    display: none !important;
   }
 
   .post-toc {
-    display: none;
+    display: none !important;
   }
 
   .navbar-mobile {
-    display: block;
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    transition: all 0.3s ease 0s;
+    display: block !important;
+    position: fixed !important;
+    width: 100% !important;
+    z-index: 100 !important;
+    transition: all 0.3s ease 0s !important;
 
     .container {
-      padding: 0;
-      margin: 0;
-      height: 4.5em;
-      line-height: 4.5em;
-      background: $global-background-color;
+      padding: 0 !important;
+      margin: 0 !important;
+      height: 4.5em !important;
+      line-height: 4.5em !important;
+      background: $global-background-color !important;
 
       .navbar-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        font-size: 18px;
-        padding-right: 1em;
-        padding-left: 1em;
-        box-sizing: border-box;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        font-size: 18px !important;
+        padding-right: 1em !important;
+        padding-left: 1em !important;
+        box-sizing: border-box !important;
 
         .menu-toggle {
-          cursor: pointer;
-          line-height: 4.5em;
+          cursor: pointer !important;
+          line-height: 4.5em !important;
 
           span {
-            display: block;
-            background: #000;
-            width: 36px;
-            height: 2px;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-            -webkit-transition: .2s margin .2s, .2s transform;
-            -moz-transition: .2s margin .2s, .2s transform;
-            transition: .2s margin .2s, .2s transform;
+            display: block !important;
+            background: #000 !important;
+            width: 36px !important;
+            height: 2px !important;
+            -webkit-border-radius: 3px !important;
+            -moz-border-radius: 3px !important;
+            border-radius: 3px !important;
+            -webkit-transition: .2s margin .2s, .2s transform !important;
+            -moz-transition: .2s margin .2s, .2s transform !important;
+            transition: .2s margin .2s, .2s transform !important;
 
             .dark-theme & {
-              background: $global-font-color-dark;
+              background: $global-font-color-dark !important;
             }
           }
 
           span:nth-child(1) {
-            margin-bottom: 8px;
+            margin-bottom: 8px !important;
           }
 
           span:nth-child(3) {
-            margin-top: 8px;
+            margin-top: 8px !important;
           }
 
           &.active {
             span {
-              -webkit-transition: .2s margin, .2s transform .2s;
-              -moz-transition: .2s margin, .2s transform .2s;
-              transition: .2s margin, .2s transform .2s;
+              -webkit-transition: .2s margin, .2s transform .2s !important;
+              -moz-transition: .2s margin, .2s transform .2s !important;
+              transition: .2s margin, .2s transform .2s !important;
             }
 
             span:nth-child(1) {
-              -moz-transform: rotate(45deg) translate(4px, 6px);
-              -ms-transform: rotate(45deg) translate(4px, 6px);
-              -webkit-transform: rotate(45deg) translate(4px, 6px);
-              transform: rotate(45deg) translate(4px, 6px);
+              -moz-transform: rotate(45deg) translate(4px, 6px) !important;
+              -ms-transform: rotate(45deg) translate(4px, 6px) !important;
+              -webkit-transform: rotate(45deg) translate(4px, 6px) !important;
+              transform: rotate(45deg) translate(4px, 6px) !important;
             }
 
             span:nth-child(2) {
@@ -79,51 +79,51 @@
             }
 
             span:nth-child(3) {
-              -moz-transform: rotate(-45deg) translate(8px, -10px);
-              -ms-transform: rotate(-45deg) translate(8px, -10px);
-              -webkit-transform: rotate(-45deg) translate(8px, -10px);
-              transform: rotate(-45deg) translate(8px, -10px);
+              -moz-transform: rotate(-45deg) translate(8px, -10px) !important;
+              -ms-transform: rotate(-45deg) translate(8px, -10px) !important;
+              -webkit-transform: rotate(-45deg) translate(8px, -10px) !important;
+              transform: rotate(-45deg) translate(8px, -10px) !important;
             }
           }
         }
       }
 
       .menu {
-        text-align: center;
-        background: $global-background-color;
-        border-top: 2px solid $global-font-color;
-        display: none;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center !important;
+        background: $global-background-color !important;
+        border-top: 2px solid $global-font-color !important;
+        display: none !important;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1) !important;
 
         a {
-          display: block;
-          line-height: 2.5em;
+          display: block !important;
+          line-height: 2.5em !important;
         }
 
         &.active {
-          display: block;
+          display: block !important;
         }
 
         .dark-theme & {
-          background: $global-background-color-dark;
-          border-top: 2px solid $global-font-color-dark;
+          background: $global-background-color-dark !important;
+          border-top: 2px solid $global-font-color-dark !important;
         }
       }
 
       .dark-theme & {
-        background: $global-background-color-dark;
+        background: $global-background-color-dark !important;
       }
     }
   }
 
   #dynamic-to-top {
-    display: none;
+    display: none !important;
   }
 
   .post-warp {
     .categories-card {
       .card-item {
-        width: 95%;
+        width: 95% !important;
       }
     }
   }
@@ -131,66 +131,53 @@
 
 /* iPads (portrait) ----------- */
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation:portrait) {
+@media only screen and (min-width: 768px) {
   .post-warp {
-    max-width: 600px;
+    max-width: 600px !important;
   }
 
   .navbar-mobile {
-    display: none;
+    display: none !important;
   }
 
   .post-toc {
-    display: none;
+    display: none !important;
   }
 
   .post-toc-mobile {
-    display: block;
+    display: block !important;
   }
 }
 
 /* iPads (landscape) ----------- */
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation:landscape) {
+@media only screen and (min-width: 1366px) {
   .post-warp {
-    max-width: 560px;
+    max-width: 560px !important;
   }
 
   .post-toc {
-    display: block;
-    margin-left: 580px;
+    display: block !important;
+    margin-left: 580px !important;
   }
 
   .navbar-mobile {
-    display: none;
+    display: none !important;
   }
 
   .post-toc-mobile {
-    display: none;
+    display: none !important;
   }
 }
 
 /* Desktops and laptops ----------- */
 
-@media only screen and (min-width: 1224px) {
+@media only screen and (min-width: 1600) {
   .navbar-mobile {
-    display: none;
+    display: none !important;
   }
 
   .post-toc-mobile {
-    display: none;
-  }
-}
-
-/* Large screens ----------- */
-
-@media only screen and (min-width: 1824px) {
-  /* Styles */
-  .navbar-mobile {
-    display: none;
-  }
-
-  .post-toc-mobile {
-    display: none;
+    display: none !important;
   }
 }
