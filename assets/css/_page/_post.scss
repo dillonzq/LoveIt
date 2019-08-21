@@ -49,7 +49,7 @@
   border-left: 1px solid $global-border-color;
   word-wrap: break-word;
   box-sizing: border-box;
-  top: 120px;
+  top: 200px;
 
   .post-toc-title {
     font-weight: 400;
@@ -152,6 +152,13 @@
 }
 
 .post-content {
+  a.post-title-target:target {
+    display: block;
+    position: relative;
+    top: -60px;
+    visibility: hidden;
+  }
+
   h2,
   h3,
   h4,

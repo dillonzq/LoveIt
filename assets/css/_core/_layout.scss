@@ -8,9 +8,13 @@
 }
 
 .navbar {
+  display: block !important;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
   height: 4rem;
   line-height: 4rem;
-  width: 100%;
+
   .container {
     width: auto;
     max-width: 1200px;
@@ -26,20 +30,20 @@
 }
 
 .container {
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .footer {
   height: 2rem;
   width: 100%;
   text-align: center;
-  line-height: 1.4rem;
-  padding-top: 1em;
+  line-height: 1.5rem;
+  padding-top: 2rem;
 }
 
 .notfound {
-  font-size: 2em;
+  font-size: 2rem;
   transform: translateY(35vh);
   text-align: center;
 }

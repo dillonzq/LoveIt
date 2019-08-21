@@ -55,7 +55,7 @@ jQuery(function($) {
 
     _Blog._initToc = function() {
         if ($('.post-toc').length && $('.post-toc').css('display') !== 'none') {
-            const SPACING = 20;
+            const SPACING = 100;
             const $toc = $('.post-toc');
             const $footer = $('.post-footer');
             const minTop = $toc.position().top;
