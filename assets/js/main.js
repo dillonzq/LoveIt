@@ -54,7 +54,7 @@ jQuery(function($) {
     };
 
     _Blog._initToc = function() {
-        if ($('.post-toc').length) {
+        if ($('.post-toc').length && $('.post-toc').css('display') !== 'none') {
             const SPACING = 20;
             const $toc = $('.post-toc');
             const $footer = $('.post-footer');
@@ -90,7 +90,6 @@ jQuery(function($) {
                 }
             };
             changeTocState();
-            $(window).scroll(changeTocState);
 
             const HEADERFIX = 100;
             const $toclink = $('.toc-link');
@@ -127,7 +126,11 @@ jQuery(function($) {
                 }
             };
             activeIndex();
-            $(window).scroll(activeIndex);
+            if (!this._initTocOnce) {
+                $(window).scroll(changeTocState);
+                $(window).scroll(activeIndex);
+                this._initTocOnce = true;
+            }
         }
     };
 
@@ -136,12 +139,14 @@ jQuery(function($) {
         if (tocContainer !== null) {
             const toc = document.getElementById('TableOfContents');
             if (toc === null) {
-            // toc = true, but there are no headings
-            tocContainer.parentNode.removeChild(tocContainer);
+                // toc = true, but there are no headings
+                tocContainer.parentNode.removeChild(tocContainer);
             } else {
-            this._refactorToc(toc);
-            this._linkToc();
-            this._initToc();
+                this._refactorToc(toc);
+                this._linkToc();
+                this._initToc();
+                // Listen for orientation changes
+                window.addEventListener("orientationchange", this._initToc, false);
             }
         }
     };

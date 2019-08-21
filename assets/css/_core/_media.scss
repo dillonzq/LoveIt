@@ -150,7 +150,23 @@
 
 /* iPads (portrait and landscape) ----------- */
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation:portrait) {
+  .post-warp {
+    max-width: 600px !important;
+  }
+
+  .navbar-mobile {
+    display: none !important;
+  }
+
+  .post-toc {
+    display: none !important;
+  }
+}
+
+/* iPads (portrait and landscape) ----------- */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation:landscape) {
   .post-warp {
     max-width: 560px !important;
   }
