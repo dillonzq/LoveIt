@@ -1,43 +1,40 @@
-{{ $secureCSS := "<link rel=\"stylesheet\" href=\"%s\" integrity=\"%s\">" }}
-{{ $secureJS := "<script src=\"%s\" integrity=\"%s\"></script>" }}
-
 <!-- jQuery https://github.com/jquery/jquery -->
 {{ $jquery := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.jquery_js }}
     {{ $jquery = .Site.Params.cdn.jquery_js }}
 {{ else }}
-    {{ $secureRes := resources.Get "js/lib/jquery/jquery.min.js" | resources.Minify | resources.Fingerprint "sha512" }}
-    {{ $jquery = printf $secureJS $secureRes.RelPermalink $secureRes.Data.Integrity }}
+    {{ $res := resources.Get "js/lib/jquery/jquery.min.js" | resources.Minify }}
+    {{ $jquery = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
 <!-- lazysizes https://github.com/aFarkas/lazysizes -->
 {{ $lazysizes := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.lazysizes_js }}
     {{ $lazysizes = .Site.Params.cdn.lazysizes_js }}
 {{ else }}
-    {{ $secureRes := resources.Get "js/lib/lazysizes/lazysizes.min.js" | resources.Minify | resources.Fingerprint "sha512" }}
-    {{ $lazysizes = printf $secureJS $secureRes.RelPermalink $secureRes.Data.Integrity }}
+    {{ $res := resources.Get "js/lib/lazysizes/lazysizes.min.js" | resources.Minify }}
+    {{ $lazysizes = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
 <!-- KaTeX https://github.com/KaTeX/KaTeX -->
 {{ $katex_css := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.katex_css }}
     {{ $katex_css = .Site.Params.cdn.katex_css }}
 {{ else }}
-    {{ $secureRes := resources.Get "css/lib/katex/katex.min.css" | resources.Minify | resources.Fingerprint "sha512" }}
-    {{ $katex_css = printf $secureCSS $secureRes.RelPermalink $secureRes.Data.Integrity }}
+    {{ $res := resources.Get "css/lib/katex/katex.min.css" | resources.Minify }}
+    {{ $katex_css = printf "<link rel=\"stylesheet\" href=\"%s\">" $res.RelPermalink }}
 {{ end }}
 {{ $katex_js := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.katex_js }}
     {{ $katex_js = .Site.Params.cdn.katex_js }}
 {{ else }}
-    {{ $secureRes := resources.Get "js/lib/katex/katex.min.js" | resources.Minify | resources.Fingerprint "sha512" }}
-    {{ $katex_js = printf $secureJS $secureRes.RelPermalink $secureRes.Data.Integrity }}
+    {{ $res := resources.Get "js/lib/katex/katex.min.js" | resources.Minify }}
+    {{ $katex_js = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
 {{ $katex_auto_render_js := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.katex_auto_render_js }}
     {{ $katex_auto_render_js = .Site.Params.cdn.katex_auto_render_js }}
 {{ else }}
-    {{ $secureRes := resources.Get "js/lib/katex/auto-render.min.js" | resources.Minify | resources.Fingerprint "sha512" }}
-    {{ $katex_auto_render_js = printf $secureJS $secureRes.RelPermalink $secureRes.Data.Integrity }}
+    {{ $res := resources.Get "js/lib/katex/auto-render.min.js" | resources.Minify }}
+    {{ $katex_auto_render_js = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
 {{ $katex := delimit (slice $katex_css $katex_js $katex_auto_render_js) "" }}
 <!-- mermaid https://github.com/knsv/mermaid -->
@@ -45,8 +42,8 @@
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.mermaid_js }}
     {{ $diagram = .Site.Params.cdn.mermaid_js }}
 {{ else }}
-    {{ $secureRes := resources.Get "js/lib/mermaid/mermaid.min.js" | resources.Minify | resources.Fingerprint "sha512" }}
-    {{ $diagram = printf $secureJS $secureRes.RelPermalink $secureRes.Data.Integrity }}
+    {{ $res := resources.Get "js/lib/mermaid/mermaid.min.js" | resources.Minify }}
+    {{ $diagram = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
 {{ $diagram = delimit (slice $diagram "<script>mermaid.initialize({startOnLoad: true, theme: null,});</script>") "" }}
 <!-- ECharts https://github.com/apache/incubator-echarts -->
@@ -54,46 +51,46 @@
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.echarts_js }}
     {{ $echarts = .Site.Params.cdn.echarts_js }}
 {{ else }}
-    {{ $secureRes := resources.Get "js/lib/echarts/echarts.min.js" | resources.Minify | resources.Fingerprint "sha512" }}
-    {{ $echarts = printf $secureJS $secureRes.RelPermalink $secureRes.Data.Integrity }}
+    {{ $res := resources.Get "js/lib/echarts/echarts.min.js" | resources.Minify }}
+    {{ $echarts = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
 <!-- TypeIt https://github.com/alexmacarthur/typeit -->
 {{ $typeit := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.typeit_js }}
     {{ $typeit = .Site.Params.cdn.typeit_js }}
 {{ else }}
-    {{ $secureRes := resources.Get "js/lib/typeit/typeit.min.js" | resources.Minify | resources.Fingerprint "sha512" }}
-    {{ $typeit = printf $secureJS $secureRes.RelPermalink $secureRes.Data.Integrity }}
+    {{ $res := resources.Get "js/lib/typeit/typeit.min.js" | resources.Minify }}
+    {{ $typeit = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
 <!-- jQuery.countdown https://github.com/hilios/jQuery.countdown -->
 {{ $countdown := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.jquery_countdown_js }}
     {{ $countdown = .Site.Params.cdn.jquery_countdown_js }}
 {{ else }}
-    {{ $secureRes := resources.Get "js/lib/jquery-countdown/jquery.countdown.min.js" | resources.Minify | resources.Fingerprint "sha512" }}
-    {{ $countdown = printf $secureJS $secureRes.RelPermalink $secureRes.Data.Integrity }}
+    {{ $res := resources.Get "js/lib/jquery-countdown/jquery.countdown.min.js" | resources.Minify }}
+    {{ $countdown = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
 <!-- MetingJS https://github.com/metowolf/MetingJS -->
 {{ $aplayer_css := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.aplayer_css }}
     {{ $aplayer_css = .Site.Params.cdn.aplayer_css }}
 {{ else }}
-    {{ $secureRes := resources.Get "css/lib/aplayer/APlayer.min.css" | resources.Minify | resources.Fingerprint "sha512" }}
-    {{ $aplayer_css = printf $secureCSS $secureRes.RelPermalink $secureRes.Data.Integrity }}
+    {{ $res := resources.Get "css/lib/aplayer/APlayer.min.css" | resources.Minify }}
+    {{ $aplayer_css = printf "<link rel=\"stylesheet\" href=\"%s\">" $res.RelPermalink }}
 {{ end }}
 {{ $aplayer_js := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.aplayer_js }}
     {{ $aplayer_js = .Site.Params.cdn.aplayer_js }}
 {{ else }}
-    {{ $secureRes := resources.Get "js/lib/aplayer/APlayer.min.js" | resources.Minify | resources.Fingerprint "sha512" }}
-    {{ $aplayer_js = printf $secureJS $secureRes.RelPermalink $secureRes.Data.Integrity }}
+    {{ $res := resources.Get "js/lib/aplayer/APlayer.min.js" | resources.Minify }}
+    {{ $aplayer_js = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
 {{ $meting_js := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.meting_js }}
     {{ $meting_js = .Site.Params.cdn.meting_js }}
 {{ else }}
-    {{ $secureRes := resources.Get "js/lib/meting/Meting.min.js" | resources.Minify | resources.Fingerprint "sha512" }}
-    {{ $meting_js = printf $secureJS $secureRes.RelPermalink $secureRes.Data.Integrity }}
+    {{ $res := resources.Get "js/lib/meting/Meting.min.js" | resources.Minify }}
+    {{ $meting_js = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
 {{ $metingjs := delimit (slice $aplayer_css $aplayer_js $meting_js) "" }}
 
@@ -139,7 +136,7 @@
     <script>var typeitArr = {{ $typeitArr | jsonify | safeJS }};</script>
 {{ end }}
 
-{{ $scripts := resources.Get "/js/blog.js" | resources.Minify }}
-<script src="{{ $scripts.RelPermalink }}" async=""></script>
+{{ $res := resources.Get "/js/blog.js" | resources.Minify }}
+<script src="{{ $res.RelPermalink }}"></script>
 
 {{ template "_internal/google_analytics_async.html" . }}

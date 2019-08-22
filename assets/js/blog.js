@@ -198,7 +198,7 @@ jQuery(function($) {
                 this._linkToc();
                 this._initToc();
                 // Listen for orientation changes
-                window.addEventListener("orientationchange", function() {
+                window.addEventListener("resize", function() {
                     this.setTimeout(_Blog._initToc, 0);
                 }, false);
             }

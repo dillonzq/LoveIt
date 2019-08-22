@@ -39,11 +39,11 @@
 
 {{- partial "seo_schema.html" . -}}
 
-{{- $secureRes := resources.Get "css/style.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint "sha512" -}}
-<link rel="stylesheet" href="{{ $secureRes.RelPermalink }}" integrity="{{ $secureRes.Data.Integrity }}">
+{{- $res := resources.Get "css/style.scss" | resources.ToCSS | resources.Minify -}}
+<link rel="stylesheet" href="{{ $res.RelPermalink }}">
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.fontawesome_free_css }}
     {{ .Site.Params.cdn.fontawesome_free_css | safeHTML }}
 {{ else }}
-    {{- $secureRes := resources.Get "css/lib/fontawesome-free/all.min.css" | resources.Minify | resources.Fingerprint "sha512" -}}
-    <link rel="stylesheet" href="{{ $secureRes.RelPermalink }}" integrity="{{ $secureRes.Data.Integrity }}">
+    {{- $res := resources.Get "css/lib/fontawesome-free/all.min.css" | resources.Minify | resources.Fingerprint "sha512" -}}
+    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
 {{ end }}

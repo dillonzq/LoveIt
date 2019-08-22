@@ -25,14 +25,14 @@
         {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.gitalk_css }}
             {{ .Site.Params.cdn.gitalk_css | safeHTML }}
         {{ else }}
-            {{- $secureRes := resources.Get "css/lib/gitalk/gitalk.css" | resources.Minify | resources.Fingerprint "sha512" -}}
-            <link rel="stylesheet" href="{{ $secureRes.RelPermalink }}" integrity="{{ $secureRes.Data.Integrity }}">
+            {{- $res := resources.Get "css/lib/gitalk/gitalk.css" | resources.Minify -}}
+            <link rel="stylesheet" href="{{ $res.RelPermalink }}">
         {{ end }}
         {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.gitalk_js }}
             {{ .Site.Params.cdn.gitalk_js | safeHTML }}
         {{ else }}
-            {{- $secureRes := resources.Get "js/lib/gitalk/gitalk.min.js" | resources.Minify | resources.Fingerprint "sha512" -}}
-            <script src="{{ $secureRes.RelPermalink }}" integrity="{{ $secureRes.Data.Integrity }}"></script>
+            {{- $res := resources.Get "js/lib/gitalk/gitalk.min.js" | resources.Minify -}}
+            <script src="{{ $res.RelPermalink }}"></script>
         {{ end }}
         <script type="text/javascript">
             var gitalk = new Gitalk({
@@ -56,8 +56,10 @@
         {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.valine_js }}
             {{ .Site.Params.cdn.valine_js | safeHTML }}
         {{ else }}
-            {{- $secureRes := resources.Get "js/lib/valine/Valine.min.js" | resources.Minify | resources.Fingerprint "sha512" -}}
-            <script src="{{ $secureRes.RelPermalink }}" integrity="{{ $secureRes.Data.Integrity }}"></script>
+            {{- $res := resources.Get "js/lib/valine/Valine.min.js" | resources.Minify -}}
+    {{ .Site.Params.cdn.fontawesome_free_css | safeHTML }}
+    {{ .Site.Params.cdn.fontawesome_free_css | safeHTML }}
+    <script src="{{ $res.RelPermalink }}"></script>
         {{ end }}
         <script type="text/javascript">
             new Valine({
