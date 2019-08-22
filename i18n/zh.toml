@@ -81,3 +81,6 @@ other = "页面没找到"
 [backToHome]
 other = "回到主页"
 # === 404.html ===
+
+[all]
+other = "所有"

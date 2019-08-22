@@ -1,16 +1,16 @@
-{{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
+{{ define "title" }}{{ .Title }} | {{ T .Data.Singular | default (humanize .Data.Singular) }} | {{ .Site.Title }}{{ end }}
 
 {{ define "content" }}
-    {{ $taxonomy := .Data.Singular }}
-    {{ $taxonomyName := $taxonomy }}
-    {{ if eq $taxonomy "tag"}}
-        {{ $taxonomyName = (T "tag") }}
-    {{ else if eq $taxonomy "category"}}
-        {{ $taxonomyName = (T "category") }}
-    {{ end }}
     <div class="post-warp archive">
         <h2 class="post-title">
-            {{- printf "%s - %s" $taxonomyName .Title -}}
+            {{ $taxonomy := .Data.Singular }}
+            {{ if eq $taxonomy "category" }}
+                <i class="far fa-folder-open"></i>&nbsp;{{ .Title }}
+            {{ else if eq $taxonomy "tag" }}
+                <i class="fas fa-tag"></i>&nbsp;{{ .Title }}
+            {{ else }}
+                {{ printf "%s - %s" (T $taxonomy | default  (humanize $taxonomy)) .Title }}
+            {{ end }}
         </h2>
         {{ range (.Paginate (.Pages.GroupByDate "2006")).PageGroups }}
             <h3>{{ .Key }}</h3>

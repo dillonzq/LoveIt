@@ -39,6 +39,11 @@
 
 {{- partial "seo_schema.html" . -}}
 
-{{- $style := resources.Get "css/style.scss" | resources.ToCSS | resources.Minify -}}
-<link rel="stylesheet" href="{{ $style.RelPermalink }}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">
+{{- $secureRes := resources.Get "css/style.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint "sha512" -}}
+<link rel="stylesheet" href="{{ $secureRes.RelPermalink }}" integrity="{{ $secureRes.Data.Integrity }}">
+{{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.fontawesome_free_css }}
+    {{ .Site.Params.cdn.fontawesome_free_css | safeHTML }}
+{{ else }}
+    {{- $secureRes := resources.Get "css/lib/fontawesome-free/all.min.css" | resources.Minify | resources.Fingerprint "sha512" -}}
+    <link rel="stylesheet" href="{{ $secureRes.RelPermalink }}" integrity="{{ $secureRes.Data.Integrity }}">
+{{ end }}

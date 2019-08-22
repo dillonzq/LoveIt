@@ -45,7 +45,7 @@
         </a>
     {{ end }}
     {{ if or .Params.Share.Weibo (and .Site.Params.Share.Weibo (ne .Params.Share.Weibo false)) }}
-        <a href="//service.weibo.com/share/share.php?url={{ .Permalink }}&amp;appkey=&amp;title={{ .Title }}" target="_blank" title="Share on Weibo">
+        <a href="//service.weibo.com/share/share.php?url={{ .Permalink }}&amp;appkey=&amp;title={{ .Title }}{{ with $.Params.featured_image }}&amp;pic={{ . }}{{ end }}" target="_blank" title="Share on Weibo">
             <i class="fab fa-weibo"></i>
         </a>
     {{ end }}

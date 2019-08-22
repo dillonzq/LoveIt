@@ -30,6 +30,34 @@ jQuery(function($) {
         };
     };
 
+    _Blog.dynamicToTop = function() {
+        const min = 300;
+        const speed = 300;
+        const fade_in = 600;
+        const fade_out = 400;
+        var $toTop = $('#dynamic-to-top');
+        $toTop.click(function() {
+          $('html, body').stop().animate({
+            scrollTop: 0
+          }, speed, 'linear');
+          return false;
+        });
+        $(window).scroll(function() {
+          var scrollTop = $(window).scrollTop();
+          if (typeof document.body.style.maxHeight === 'undefined') {
+            $toTop.css({
+              'position': 'absolute',
+              'top': scrollTop + $(window).height() - 20,
+            });
+          }
+          if (scrollTop > min) {
+            $toTop.fadeIn(fade_in);
+          } else {
+            $toTop.fadeOut(fade_out);
+          }
+        });
+    };
+
     _Blog.chroma = function() {
         const blocks = document.querySelectorAll('.highlight > .chroma');
         for (let i = 0; i < blocks.length; i++) {
@@ -233,6 +261,7 @@ jQuery(function($) {
         _Blog.toggleMobileMenu();
         _Blog.toggleTheme();
         _Blog.changeTitle();
+        _Blog.dynamicToTop();
         _Blog.chroma();
         _Blog.responsiveTable();
         _Blog.echarts();

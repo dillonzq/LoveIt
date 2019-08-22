@@ -1,5 +1,5 @@
 {{ with .Site.Params.Social.Github }}
-    <a href="https://github.com/{{.}}" rel="me noopener noreffer" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://github.com/{{.}}" rel="me noopener noreffer" target="_blank"><i class="fab fa-github-alt"></i></a>
 {{ end }}
 {{ with .Site.Params.Social.LinkedIn }}
     <a href="https://linkedin.com/in/{{.}}" rel="me noopener noreffer" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -9,9 +9,6 @@
 {{ end }}
 {{ with .Site.Params.Social.Instagram }}
     <a href="https://www.instagram.com/{{.}}/" rel="me noopener noreffer" target="_blank"><i class="fab fa-instagram"></i></a>
-{{ end }}
-{{ with .Site.Params.Social.Email}}
-    <a href="mailto:{{.}}" rel="me noopener noreffer"><i class="fas fa-envelope" target="_blank"></i></a>
 {{ end }}
 {{ with .Site.Params.Social.Facebook}}
     <a href="https://facebook.com/{{.}}" rel="me noopener noreffer" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -162,4 +159,7 @@
 {{ end }}
 {{ with .Site.Params.Social.Mastodon}}
     <a href="https://mastodon.social/{{ . }}" rel="me noopener noreffer" target="_blank"><i class="fab fa-mastodon"></i></a>
+{{ end }}
+{{ with .Site.Params.Social.Email}}
+    <a href="mailto:{{.}}" rel="me noopener noreffer"><i class="far fa-envelope" target="_blank"></i></a>
 {{ end }}

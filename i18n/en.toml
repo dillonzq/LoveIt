@@ -78,3 +78,6 @@ other = "Page not found"
 [backToHome]
 other = "Back to Home"
 # === 404.html ===
+
+[all]
+other = "All "

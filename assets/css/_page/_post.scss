@@ -2,13 +2,13 @@
 .post-header {
   .post-title {
     margin: 0 !important;
-    font-size: 2em;
-    line-height: 1.5em;
+    font-size: 2rem;
+    line-height: 3rem;
   }
 }
 
 .post-meta {
-  font-size: 14px;
+  font-size: .88rem;
   color: rgba(85, 85, 85, 0.52941) !important;
 
   span {
@@ -36,8 +36,12 @@
   }
 
   .author {
-    font-size: 1.2em;
+    font-size: 1.05rem;
   }
+}
+
+.post-featured-image {
+  padding-top: .6rem;
 }
 
 .post-toc {
@@ -45,11 +49,11 @@
   width: 240px;
   max-width: 300px;
   margin-left: 800px;
-  padding: 10px;
+  padding: .8rem;
   border-left: 1px solid $global-border-color;
   word-wrap: break-word;
   box-sizing: border-box;
-  top: 200px;
+  top: 12rem;
 
   .post-toc-title {
     font-weight: 400;
@@ -86,7 +90,7 @@
 }
 
 .post-toc-mobile {
-  padding: 10px 0;
+  padding-top: .8rem;
 
   details {
     summary {
