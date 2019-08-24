@@ -11,6 +11,12 @@
 
 /* iPads (portrait) ----------- */
 @media only screen and (max-width: 1080px) {
+  .navbar {
+    .navbar-container {
+      margin: 0 2rem;
+    }
+  }
+
   .post-warp {
     max-width: 80%;
 
@@ -24,7 +30,7 @@
   }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 480px) {
   .navbar {
     display: none;
   }
