@@ -161,4 +161,6 @@
 {{ $res := resources.Get "/js/blog.js" | resources.Minify }}
 <script src="{{ $res.RelPermalink }}"></script>
 
-{{ template "_internal/google_analytics_async.html" . }}
+{{ if not .Site.IsServer }}
+    {{ template "_internal/google_analytics_async.html" . }}
+{{ end }}
