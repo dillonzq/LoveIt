@@ -84,7 +84,7 @@
             {{ $REout = `<a class="post-dummy-target" $2></a><$1>` }}
             {{ $content = replaceRE $REin $REout $content }}
             {{ $REin = `<(li) (id="fn:.+?")>` }}
-            {{ $REout = `<a class="post-dummy-target" $2></a><$1>` }}
+            {{ $REout = `<$1><a class="post-dummy-target" $2></a>` }}
             {{ $content = replaceRE $REin $REout $content }}
             {{ $content | safeHTML }}
         </div>
