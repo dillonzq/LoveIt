@@ -157,9 +157,9 @@
 
 .post-content {
   .post-dummy-target:target {
-    display: inline;
+    display: inline-block;
     position: relative;
-    top: -4rem;
+    top: -5.4rem;
     visibility: hidden;
   }
 
