@@ -1,5 +1,4 @@
   /** pagination **/
-
 .pagination {
   display: flex;
   flex-direction: row;
@@ -7,13 +6,13 @@
   list-style: none;
   white-space: nowrap;
   width: 100%;
-  padding-top: 1em;
+  padding-top: 1rem;
 
   a {
     -webkit-font-smoothing: antialiased;
-    font-size: 0.8em;
+    font-size: .8rem;
     color: #bfbfbf;
-    letter-spacing: 0.1em;
+    letter-spacing: .1rem;
     font-weight: 700;
     padding: 5px 5px;
     text-decoration: none;

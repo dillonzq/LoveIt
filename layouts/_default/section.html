@@ -1,11 +1,12 @@
-{{ define "title" }}{{ T .Section | default (humanize .Section) }} | {{ .Site.Title }}{{ end -}}
+{{ define "title" }}{{ T "all" }}{{ T .Section | default (humanize .Section) }} | {{ .Site.Title }}{{ end -}}
 
 {{ define "content" -}}
     {{ $data := .Data -}}
     <div class="post-warp archive">
-        <h2 class="post-title">
+        <h2 class="post-title animated pulse faster">
             {{ printf "%s%s" (T "all") (T .Section | default (humanize .Section)) }}
         </h2>
+
         {{- range (.Paginate (.Pages.GroupByDate "2006")).PageGroups -}}
             <h3>{{ .Key }}</h3>
             {{- range .Pages -}}

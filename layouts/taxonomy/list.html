@@ -2,7 +2,7 @@
 
 {{ define "content" }}
     <div class="post-warp archive">
-        <h2 class="post-title">
+        <h2 class="post-title animated pulse faster">
             {{ $taxonomy := .Data.Singular }}
             {{ if eq $taxonomy "category" }}
                 <i class="far fa-folder-open"></i>&nbsp;{{ .Title }}
@@ -12,6 +12,7 @@
                 {{ printf "%s - %s" (T $taxonomy | default  (humanize $taxonomy)) .Title }}
             {{ end }}
         </h2>
+
         {{ range (.Paginate (.Pages.GroupByDate "2006")).PageGroups }}
             <h3>{{ .Key }}</h3>
             {{ range .Pages }}

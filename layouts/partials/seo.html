@@ -1,17 +1,17 @@
-{{ if .IsHome }}
+{{ if .IsHome -}}
     <script type="application/ld+json">
     {
     "@context": "http://schema.org",
     "@type": "WebSite",
     "url": "{{ .Site.BaseURL }}",
-    {{ if .Site.Author.name }}
+    {{ with .Site.Author.name }}
         "author": {
             "@type": "Person",
-            "name": "{{ .Site.Author.name }}"
+            "name": "{{ . }}"
         },
     {{ end }}
-    {{ if .Site.Params.description }}
-        "description": "{{ .Site.Params.description }}",
+    {{ with .Site.Params.description }}
+        "description": "{{ . }}",
     {{ end }}
     {{ with .Site.Params.image }}
         "image": "{{ .url | absURL }}",
@@ -25,8 +25,7 @@
     "name": "{{ .Site.Title }}"
     }
     </script>
-
-{{ else if .IsPage }}
+{{ else if .IsPage -}}
     <script type="application/ld+json">
     {
     "@context": "http://schema.org",
@@ -80,10 +79,10 @@
             }
         },
     {{ end }}
-    {{ if .Site.Author.Name }}
+    {{ with .Site.Author.Name }}
         "author": {
             "@type": "Person",
-            "name": "{{ .Site.Author.Name }}"
+            "name": "{{ . }}"
         },
     {{ end }}
     "description": "{{ .Description }}"

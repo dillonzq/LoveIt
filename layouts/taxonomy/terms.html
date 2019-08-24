@@ -1,4 +1,4 @@
-{{ define "title" }}{{ T .Data.Plural | default (humanize .Data.Plural) }} | {{ .Site.Title }}{{ end }}
+{{ define "title" }}{{ T "all" }}{{ T .Data.Plural | default (humanize .Data.Plural) }} | {{ .Site.Title }}{{ end }}
 
 {{ define "content" }}
     {{ $taxonomies := .Data.Plural }}
@@ -6,7 +6,7 @@
     {{ $type := .Type }}
 
     <div class="post-warp archive">
-        <h2 class="post-title">
+        <h2 class="post-title animated pulse faster">
             {{- printf "%s%s" (T "all") (T $taxonomies | default (humanize $taxonomies)) -}}
         </h2>
 

@@ -11,11 +11,11 @@ html {
 
   &::-webkit-scrollbar-thumb {
     height: 40px;
-    background-color: #eee;
+    background-color: #87878D;
     border-radius: 16px;
 
     &:hover {
-      background-color: #C2C2C2;
+      background-color: #A9A9B3;
     }
   }
 }
@@ -71,13 +71,5 @@ a {
     &:hover {
       color: $global-link-hover-color-dark;
     }
-  }
-}
-
-.navbar {
-  background-color: $navbar-background-color;
-
-  .dark-theme & {
-    background-color: $navbar-background-color-dark;
   }
 }

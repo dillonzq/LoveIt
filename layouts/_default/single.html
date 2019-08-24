@@ -1,10 +1,8 @@
 {{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
 
 {{ define "content" }}
-    <div class="post-warp">
-        <header class="post-header">
-            <div class="align-right"><h1 class="post-title">{{ .Title }}</h1></div>
-        </header>
+    <div class="post-warp single">
+        <h1 class="post-title animated pulse faster">{{ .Title }}</h1>
         <div class="post-content">
             {{ .Content }}
         </div>

@@ -1,19 +1,18 @@
-.intro {
+.home-intro {
   transform: translateY(0);
-  padding: 2em 0 2em 0;
+  padding: 2rem 0 2rem 0;
 
-  .avatar {
+  .home-avatar {
     img {
-      width: 96px;
+      width: 6rem;
     }
   }
 }
 
 .post {
-  padding-top: 0.8em;
-  padding-bottom: 0.8em;
+  padding-top: 1rem;
+  padding-bottom: .8rem;
   color: $global-font-color;
-  border-top: 1px dashed $global-border-color;
   border-bottom: 1px dashed $global-border-color;
 
   .dark-theme & {
@@ -25,7 +24,7 @@
     width: 100%;
     padding: 30% 0 0;
     position: relative;
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
 
     img {
       position: absolute;
@@ -36,11 +35,11 @@
   }
 
   .post-list-title {
-    font-size: 1.6em;
+    font-size: 1.6rem;
   }
 
   .post-meta {
-    font-size: 14px !important;
+    font-size: .875rem !important;
     a {
       color: $global-font-secondary-color !important;
 
@@ -59,10 +58,10 @@
   }
 
   .post-content {
-    padding-top: .2em;
-    font-size: 0.9em;
+    padding-top: .2rem;
+    font-size: .9rem;
     width: 100%;
-    max-height: 108px;
+    max-height: 6.8rem;
     overflow: hidden;
 
     h2,
@@ -70,25 +69,25 @@
     h4,
     h5,
     h6 {
-      font-size: 1em;
-      line-height: 1em;
-      padding-top: .3em;
-      padding-bottom: .3em;
+      font-size: 1rem;
+      line-height: 1rem;
+      padding-top: .3rem;
+      padding-bottom: .3rem;
     }
 
     p {
     margin: 0;
-    padding-top: .3em;
-    padding-bottom: .3em;
+    padding-top: .3rem;
+    padding-bottom: .3rem;
     }
   }
 
   .post-footer {
-    margin-top: 0.5em;
+    margin-top: .5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 14px !important;
+    font-size: .875rem !important;
 
     a {
       color: $post-link-color !important;

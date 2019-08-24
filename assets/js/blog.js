@@ -5,8 +5,8 @@ jQuery(function($) {
     var _Blog = window._Blog || {};
 
     _Blog.toggleMobileMenu = function() {
-        $('.menu-toggle').on('click', () => {
-            $('.menu-toggle').toggleClass('active');
+        $('#menu-toggle').on('click', () => {
+            $('#menu-toggle').toggleClass('active');
             $('#mobile-menu').toggleClass('active');
         });
     };
@@ -32,29 +32,48 @@ jQuery(function($) {
 
     _Blog.dynamicToTop = function() {
         const min = 300;
-        const speed = 300;
-        const fade_in = 600;
-        const fade_out = 400;
         var $toTop = $('#dynamic-to-top');
-        $toTop.click(function() {
-          $('html, body').stop().animate({
-            scrollTop: 0
-          }, speed, 'linear');
-          return false;
-        });
         $(window).scroll(function() {
-          var scrollTop = $(window).scrollTop();
-          if (typeof document.body.style.maxHeight === 'undefined') {
-            $toTop.css({
-              'position': 'absolute',
-              'top': scrollTop + $(window).height() - 20,
-            });
-          }
-          if (scrollTop > min) {
-            $toTop.fadeIn(fade_in);
-          } else {
-            $toTop.fadeOut(fade_out);
-          }
+            var scrollTop = $(window).scrollTop();
+            if (typeof document.body.style.maxHeight === 'undefined') {
+                $toTop.css({
+                    'position': 'absolute',
+                    'top': scrollTop + $(window).height() - 20,
+                });
+            }
+            if (scrollTop > min) {
+                (function fadeIn(el, display){
+                    display = display || "block";
+                    if (el.style.display !== display) {
+                        el.style.opacity = 0;
+                        el.style.display = display;
+                        (function fade() {
+                            var val = parseFloat(el.style.opacity);
+                            if (!((val += .1) > 1)) {
+                                el.style.opacity = val;
+                                requestAnimationFrame(fade);
+                            }
+                        })();
+                    }
+                })(document.getElementById('dynamic-to-top'));
+            } else {
+                (function fadeOut(el){
+                    if (el.style.display !== "none") {
+                        el.style.opacity = 1;
+                        (function fade() {
+                            if ((el.style.opacity -= .1) < 0) {
+                                el.style.display = "none";
+                            } else {
+                                requestAnimationFrame(fade);
+                            }
+                        })();
+                    }
+                })(document.getElementById('dynamic-to-top'));
+            }
+        });
+        new SmoothScroll('#dynamic-to-top', {
+            speed: 300,
+            speedAsDuration: true,
         });
     };
 
@@ -106,10 +125,10 @@ jQuery(function($) {
     };
 
     _Blog._initToc = function() {
-        const $toc = $('.post-toc');
+        const $toc = $('#post-toc');
         if ($toc.length && $toc.css('display') !== 'none') {
             const SPACING = 100;
-            const $footer = $('.post-footer');
+            const $footer = $('#post-footer');
             const minTop = $toc.position().top;;
             const mainTop = $('main').position().top;
             const minScrollTop = minTop + mainTop - SPACING;
@@ -212,25 +231,28 @@ jQuery(function($) {
             }
             echartsArr = [];
             Object.keys(echartsMap).forEach(function(id) {
-                let myChart = echarts.init(document.getElementById(id), isDark ? 'dark' : 'light');
+                let myChart = echarts.init(document.getElementById(id), window.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
                 myChart.setOption(echartsMap[id]);
                 echartsArr.push(myChart);
             });
+            window.addEventListener("resize", function() {
+                this.setTimeout(function(){
+                    for (let i = 0; i < echartsArr.length; i++) {
+                        echartsArr[i].resize();
+                    }
+                }, 0);
+            }, false);
         }
     }
 
     _Blog.countdown = function() {
         if (window.countdownMap) {
             Object.keys(countdownMap).forEach(function(id) {
-              $(`#${id}`).countdown(countdownMap[id], {elapse: true})
-                .on('update.countdown', function(event) {
-                  var $this = $(this).html(event.strftime(''
-                    + '<span>%D</span> 天 <br />'
-                    + '<span>%H</span> 时 '
-                    + '<span>%M</span> 分 '
-                    + '<span>%S</span> 秒'));
-              });
-          });
+                $(`#${id}`).countdown(countdownMap[id]['date'], {elapse: true})
+                    .on('update.countdown', function(event) {
+                    $(this).html(event.strftime(countdownMap[id]['pattern']));
+                });
+            });
         }
     };
 

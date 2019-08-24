@@ -7,6 +7,9 @@ other = "文章"
 # === Post ===
 
 # === Taxonomy ===
+[all]
+other = "所有"
+
 [tag]
 other = "标签"
 
@@ -72,6 +75,18 @@ other = "主页"
 
 [readmore]
 other = "阅读全文"
+
+[day]
+other = "天"
+
+[hour]
+other = "时"
+
+[minute]
+other = "分"
+
+[second]
+other = "秒"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -81,6 +96,3 @@ other = "页面没找到"
 [backToHome]
 other = "回到主页"
 # === 404.html ===
-
-[all]
-other = "所有"

@@ -7,8 +7,4 @@
     {{ $echartsMap = dict $id .Inner -}}
 {{ end -}}
 {{ .Page.Scratch.Set "echartsMap" $echartsMap -}}
-{{ if .IsNamedParams }}
-    <div class="echarts" id="{{ $id }}" style="width: {{ .Get "width" }}; height: {{ .Get "height" }};"></div>
-{{ else }}
-    <div class="echarts" id="{{ $id }}" style="width: {{ .Get 0 }}; height: {{ .Get 1 }};"></div>
-{{ end }}
+<div class="echarts" id="{{ $id }}"></div>

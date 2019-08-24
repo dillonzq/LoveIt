@@ -14,9 +14,16 @@
 .archive {
   .post-title {
     text-align: right;
-    padding-bottom: 2em;
+    padding-bottom: 2rem;
   }
 
   @import "_terms";
   @import "_tags";
+}
+
+.single {
+  .post-title {
+    text-align: right;
+    padding-bottom: 2rem;
+  }
 }

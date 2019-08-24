@@ -1,13 +1,13 @@
 /** Home **/
-.intro {
+.home-intro {
   transform: translateY(25vh);
   text-align: center;
 
-  .avatar {
-    padding: 10px;
+  .home-avatar {
+    padding: 0.6rem;
 
     img {
-      width: 128px;
+      width: 8rem;
       height: auto;
       display: inline-block;
       -webkit-border-radius: 100%;
@@ -23,35 +23,35 @@
 
       &:hover {
         position: relative;
-        -webkit-transform: translateY(-0.75em);
-        -moz-transform: translateY(-0.75em);
-        -ms-transform: translateY(-0.75em);
-        -o-transform: translateY(-0.75em);
-        transform: translateY(-0.75em);
+        -webkit-transform: translateY(-0.75rem);
+        -moz-transform: translateY(-0.75rem);
+        -ms-transform: translateY(-0.75rem);
+        -o-transform: translateY(-0.75rem);
+        transform: translateY(-0.75rem);
         cursor: pointer;
       }
     }
   }
-}
 
-h2.description {
-  font-size: 1em;
-  font-weight: normal;
-  padding: 5px;
-}
-
-.social-links {
-  a {
-
-    padding: 0 5px;
-
-    &:hover {
-
-      background-color: transparent;
-    }
+  .home-description {
+    font-size: 1rem;
+    font-weight: normal;
+    padding: .4rem;
   }
 
-  i {
-    font-size: 1.4em;
+  .home-social-links {
+    padding-top: .6rem;
+
+    a {
+      padding: 0 .4rem;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    i {
+      font-size: 1.4rem;
+    }
   }
 }

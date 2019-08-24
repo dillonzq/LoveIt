@@ -7,6 +7,9 @@ other = "Posts"
 # === Post ===
 
 # === Taxonomy ===
+[all]
+other = "All "
+
 [tag]
 other = "Tag"
 
@@ -69,6 +72,18 @@ other = "Home"
 
 [readmore]
 other = "Read More"
+
+[day]
+other = "d"
+
+[hour]
+other = "hr"
+
+[minute]
+other = "min"
+
+[second]
+other = "sec"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -78,6 +93,3 @@ other = "Page not found"
 [backToHome]
 other = "Back to Home"
 # === 404.html ===
-
-[all]
-other = "All "

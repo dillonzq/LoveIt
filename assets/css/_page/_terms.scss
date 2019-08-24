@@ -4,23 +4,23 @@
 
 .categories-card {
   margin: 0 auto;
-  margin-top: 3em;
+  margin-top: 3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 0 2.5em;
-  line-height: 1.6em;
+  padding: 0 2.5rem;
+  line-height: 1.6rem;
 
   .card-item {
-    font-size: 14px;
+    font-size: .875rem;
     text-align: left;
     width: 45%;
     display: flex;
     align-items: flex-start;
-    margin-top: 2em;
-    min-height: 10em;
+    margin-top: 2rem;
+    min-height: 10rem;
     padding: 0 2%;
     position: relative;
 
@@ -78,6 +78,6 @@
 
   span {
     float: right;
-    padding-right: 1em;
+    padding-right: 1rem;
   }
 }

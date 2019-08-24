@@ -13,11 +13,10 @@
         </div>
     {{ end }}
     <!-- end featured_image-->
-    <header class="post-header">
-        <h1 class="post-title post-list-title" itemprop="name headline">
-            <a href="{{ .Permalink }}">{{ .Title }}</a>
-        </h1>
-    </header>
+    <h1 class="post-title post-list-title" itemprop="name headline">
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </h1>
+
     <div class="post-meta">
         <a class="author" href="{{.Site.BaseURL }}" rel="author"><i class="fas fa-user-circle"></i>&nbsp;{{ $author }}&nbsp;</a>
         {{ T "publish" }}<span class="post-time">&nbsp;<time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;</span>

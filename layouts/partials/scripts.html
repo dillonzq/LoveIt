@@ -3,7 +3,7 @@
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.jquery_js }}
     {{ $jquery = .Site.Params.cdn.jquery_js }}
 {{ else }}
-    {{ $res := resources.Get "js/lib/jquery/jquery.min.js" | resources.Minify }}
+    {{ $res := resources.Get "js/lib/jquery/jquery.slim.min.js" | resources.Minify }}
     {{ $jquery = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
 <!-- lazysizes https://github.com/aFarkas/lazysizes -->
@@ -34,26 +34,34 @@
     {{ $katex_auto_render_js = .Site.Params.cdn.katex_auto_render_js }}
 {{ else }}
     {{ $res := resources.Get "js/lib/katex/auto-render.min.js" | resources.Minify }}
-    {{ $katex_auto_render_js = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
+    {{ $katex_auto_render_js = printf "<script defer src=\"%s\" onload=\"renderMathInElement(document.body);\"></script>" $res.RelPermalink }}
 {{ end }}
 {{ $katex := delimit (slice $katex_css $katex_js $katex_auto_render_js) "" }}
 <!-- mermaid https://github.com/knsv/mermaid -->
-{{ $diagram := "" }}
+{{ $mermaid := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.mermaid_js }}
-    {{ $diagram = .Site.Params.cdn.mermaid_js }}
+    {{ $mermaid = .Site.Params.cdn.mermaid_js }}
 {{ else }}
     {{ $res := resources.Get "js/lib/mermaid/mermaid.min.js" | resources.Minify }}
-    {{ $diagram = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
+    {{ $mermaid = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
-{{ $diagram = delimit (slice $diagram "<script>mermaid.initialize({startOnLoad: true, theme: null,});</script>") "" }}
+{{ $mermaid = delimit (slice $mermaid "<script>mermaid.initialize({startOnLoad: true, theme: null,});</script>") "" }}
 <!-- ECharts https://github.com/apache/incubator-echarts -->
-{{ $echarts := "" }}
+{{ $echarts_js := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.echarts_js }}
-    {{ $echarts = .Site.Params.cdn.echarts_js }}
+    {{ $echarts_js = .Site.Params.cdn.echarts_js }}
 {{ else }}
     {{ $res := resources.Get "js/lib/echarts/echarts.min.js" | resources.Minify }}
-    {{ $echarts = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
+    {{ $echarts_js = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
+{{ $echarts_macarons_js := "" }}
+{{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.echarts_macarons_js }}
+    {{ $echarts_macarons_js = .Site.Params.cdn.echarts_macarons_js }}
+{{ else }}
+    {{ $res := resources.Get "js/lib/echarts/macarons.js" | resources.Minify }}
+    {{ $echarts_macarons_js = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
+{{ end }}
+{{ $echarts := delimit (slice $echarts_js $echarts_macarons_js) "" }}
 <!-- TypeIt https://github.com/alexmacarthur/typeit -->
 {{ $typeit := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.typeit_js }}
@@ -70,7 +78,7 @@
     {{ $res := resources.Get "js/lib/jquery-countdown/jquery.countdown.min.js" | resources.Minify }}
     {{ $countdown = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
-<!-- MetingJS https://github.com/metowolf/MetingJS -->
+<!-- APlayer https://github.com/MoePlayer/APlayer -->
 {{ $aplayer_css := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.aplayer_css }}
     {{ $aplayer_css = .Site.Params.cdn.aplayer_css }}
@@ -85,31 +93,44 @@
     {{ $res := resources.Get "js/lib/aplayer/APlayer.min.js" | resources.Minify }}
     {{ $aplayer_js = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
-{{ $meting_js := "" }}
+{{ $aplayer := delimit (slice $aplayer_css $aplayer_js) "" }}
+<!-- MetingJS https://github.com/metowolf/MetingJS -->
+{{ $meting := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.meting_js }}
-    {{ $meting_js = .Site.Params.cdn.meting_js }}
+    {{ $meting = .Site.Params.cdn.meting_js }}
 {{ else }}
     {{ $res := resources.Get "js/lib/meting/Meting.min.js" | resources.Minify }}
-    {{ $meting_js = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
+    {{ $meting = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
-{{ $metingjs := delimit (slice $aplayer_css $aplayer_js $meting_js) "" }}
+<!-- Smooth Scroll https://github.com/cferdinandi/smooth-scroll -->
+{{ $smooth_scroll := "" }}
+{{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.smooth_scroll_js }}
+    {{ $smooth_scroll = .Site.Params.cdn.smooth_scroll_js }}
+{{ else }}
+    {{ $res := resources.Get "js/lib/smooth-scroll/smooth-scroll.polyfills.min.js" | resources.Minify }}
+    {{ $smooth_scroll = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
+{{ end }}
 
 {{ $jquery | safeHTML }}
 {{ $lazysizes | safeHTML }}
+{{ $smooth_scroll | safeHTML }}
 
 {{ if .IsPage }}
-    {{ if .Scratch.Get "diagram" }}
-        {{ $diagram | safeHTML }}
+    {{/*  dev feature */}}
+    {{ if .Params.dev }}
+        {{ with .Scratch.Get "echartsMap" }}
+            {{ $echarts | safeHTML }}
+            {{ $echartsMap := . }}
+            <script>window.echartsMap = {
+                {{ range $key, $var := $echartsMap }}
+                    {{ $key }}: {{ $var | safeJS }},
+                {{ end }}
+            };window.echartsArr=[];</script>
+        {{ end }}
     {{ end }}
 
-    {{ with .Scratch.Get "echartsMap" }}
-        {{ $echarts | safeHTML }}
-        {{ $echartsMap := . }}
-        <script>var echartsMap = {
-            {{ range $key, $var := $echartsMap }}
-                {{ $key }}: {{ $var | safeJS }},
-            {{ end }}
-        };var echartsArr=[];</script>
+    {{ if .Scratch.Get "diagram" }}
+        {{ $mermaid | safeHTML }}
     {{ end }}
 
     {{ if or .Params.math .Site.Params.math }}
@@ -117,12 +138,13 @@
     {{ end }}
 
     {{ if .Scratch.Get "music" }}
-        {{ $metingjs | safeHTML }}
+        {{ $aplayer | safeHTML }}
+        {{ $meting | safeHTML }}
     {{ end }}
 
     {{ with .Scratch.Get "countdownMap" }}
         {{ $countdown | safeHTML }}
-        <script>var countdownMap = {{ . | jsonify | safeJS }};</script>
+        <script>window.countdownMap = {{ . | jsonify | safeJS }};</script>
     {{ end }}
 {{ end }}
 
@@ -133,7 +155,7 @@
     {{ range $key, $val := $typeitMap }}
         {{ $typeitArr = $typeitArr | append (slice $val) }}
     {{ end }}
-    <script>var typeitArr = {{ $typeitArr | jsonify | safeJS }};</script>
+    <script>window.typeitArr = {{ $typeitArr | jsonify | safeJS }};</script>
 {{ end }}
 
 {{ $res := resources.Get "/js/blog.js" | resources.Minify }}

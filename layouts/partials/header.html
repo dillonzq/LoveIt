@@ -1,10 +1,9 @@
 <nav class="navbar">
-    <div class="container">
-        <div class="navbar-header header-logo">
+    <div class="navbar-container">
+        <div class="navbar-header">
             <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
         </div>
-
-        <div class="menu navbar-right">
+        <div class="navbar-menu">
             {{ $currentPage := . }}
             {{ range .Site.Menus.main }}
                 <a class="menu-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) | or (eq $currentPage.RelPermalink .URL) }} active{{ end }}" href="{{ .URL | absLangURL }}" title="{{ .Title }}">{{ .Name }}</a>
@@ -13,19 +12,18 @@
         </div>
     </div>
 </nav>
-<nav class="navbar-mobile" id="nav-mobile" style="display: none">
-     <div class="container">
+<nav class="navbar-mobile">
+     <div class="navbar-container">
         <div class="navbar-header">
-            <div><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180"></i></a>&nbsp;<a href="{{.Site.BaseURL}}">{{ .Site.Title }}</a></div>
-            <div class="menu-toggle">
+            <div><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180"></i></a>&nbsp;&nbsp;<a href="{{.Site.BaseURL}}">{{ .Site.Title }}</a></div>
+            <div class="menu-toggle" id="menu-toggle">
                 <span></span><span></span><span></span>
             </div>
         </div>
-
-        <div class="menu" id="mobile-menu">
+        <div class="navbar-menu" id="mobile-menu">
             {{ $currentPage := . }}
             {{ range .Site.Menus.main }}
-                <a class="menu-item{{if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{ end }}" href="{{ .URL | absLangURL }}" title="{{ .Title }}">{{ .Name }}</a>
+                <a class="menu-item" href="{{ .URL | absLangURL }}" title="{{ .Title }}">{{ .Name }}</a>
             {{ end }}
         </div>
     </div>
