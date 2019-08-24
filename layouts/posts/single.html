@@ -78,7 +78,13 @@
             {{ $REout = `<strong><ruby>$1<rt>$2</rt></ruby></strong>` }}
             {{ $content = replaceRE $REin $REout $content }}
             {{ $REin = `<(h[23456]) (id=".+?")>` }}
-            {{ $REout = `<a class="post-title-target" $2></a><$1>` }}
+            {{ $REout = `<a class="post-dummy-target" $2></a><$1>` }}
+            {{ $content = replaceRE $REin $REout $content }}
+            {{ $REin = `<(sup class="footnote-ref") (id="fnref:.+?")>` }}
+            {{ $REout = `<a class="post-dummy-target" $2></a><$1>` }}
+            {{ $content = replaceRE $REin $REout $content }}
+            {{ $REin = `<(li) (id="fn:.+?")>` }}
+            {{ $REout = `<a class="post-dummy-target" $2></a><$1>` }}
             {{ $content = replaceRE $REin $REout $content }}
             {{ $content | safeHTML }}
         </div>

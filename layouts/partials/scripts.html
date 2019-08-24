@@ -110,6 +110,7 @@
     {{ $res := resources.Get "js/lib/smooth-scroll/smooth-scroll.polyfills.min.js" | resources.Minify }}
     {{ $smooth_scroll = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
+{{ $smooth_scroll = delimit (slice $smooth_scroll "<script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script>") "" }}
 
 {{ $jquery | safeHTML }}
 {{ $lazysizes | safeHTML }}

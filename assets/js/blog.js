@@ -71,10 +71,6 @@ jQuery(function($) {
                 })(document.getElementById('dynamic-to-top'));
             }
         });
-        new SmoothScroll('#dynamic-to-top', {
-            speed: 300,
-            speedAsDuration: true,
-        });
     };
 
     _Blog.chroma = function() {

@@ -73,15 +73,15 @@
     }
 
     >nav>ul {
-      margin: 10px 0;
+      margin: .625rem 0;
     }
 
     ul {
-      padding-left: 10px;
+      padding-left: .625rem;
       list-style: none;
 
       ul {
-        padding-left: 20px;
+        padding-left: 1.25rem;
         display: none;
       }
 
@@ -109,7 +109,7 @@
         font-size: 1.2em;
         font-weight: bold;
         line-height: 2em;
-        padding: 0 10px;
+        padding: 0 .625rem;
         background: $code-background-color;
 
         i.details {
@@ -137,15 +137,15 @@
     border: 2px solid $code-background-color;
 
     >nav>ul {
-      margin: 10px 0;
+      margin: .625rem 0;
     }
 
     ul {
-      padding-left: 10px;
+      padding-left: .625rem;
       list-style: none;
 
       ul {
-        padding-left: 20px;
+        padding-left: 1.25rem;
       }
     }
 
@@ -156,10 +156,10 @@
 }
 
 .post-content {
-  a.post-title-target:target {
-    display: block;
+  .post-dummy-target:target {
+    display: inline;
     position: relative;
-    top: -60px;
+    top: -4rem;
     visibility: hidden;
   }
 
@@ -168,13 +168,13 @@
   h4,
   h5,
   h6 {
-    padding-top: .8em;
-    padding-bottom: .3em;
+    padding-top: .8rem;
+    padding-bottom: .3rem;
   }
 
   h2::before {
     content: "#";
-    margin-right: 5px;
+    margin-right: .3125rem;
     color: $post-link-color;
 
     .dark-theme & {
@@ -184,7 +184,7 @@
 
   h3::before {
     content: "|";
-    margin-right: 5px;
+    margin-right: .3125rem;
     color: $post-link-color;
 
     .dark-theme & {
@@ -193,8 +193,8 @@
   }
 
   p {
-    font-size: 1em;
-    margin: .5em 0 .5em 0;
+    font-size: 1rem;
+    margin: .5rem 0 .5rem 0;
     text-align: justify;
   }
 
@@ -216,7 +216,7 @@
   }
 
   ul {
-    padding-left: 2em;
+    padding-left: 2rem;
   }
 
   ruby {
@@ -241,7 +241,7 @@
     > table {
       width: 100%;
       max-width: 100%;
-      margin: 10px 0;
+      margin: .625rem 0;
       border-spacing: 0;
       box-shadow: 2px 2px 3px rgba(0,0,0,.125);
       background: $table-background-color;
@@ -259,7 +259,7 @@
       }
 
       th, td {
-        padding: 5px 15px;
+        padding: .3rem 1rem;
         border: 1px double $global-border-color;
 
         .dark-theme & {
@@ -277,10 +277,10 @@
     min-width: 20%;
     max-width: 80%;
     display: inline-block;
-    padding: 10px;
+    padding: .625rem;
     margin: 0 auto;
     border-bottom: 1px solid #d9d9d9;
-    font-size: 14px;
+    font-size: .875rem;
     color: #969696;
     line-height: 1.7;
   }
@@ -392,7 +392,7 @@
     -webkit-box-shadow: inset 0 -1px 0 $global-border-color;
     box-shadow: inset 0 -1px 0 $global-border-color;
     font-size: .8em;
-    line-height: 1.25;
+    line-height: 1.25rem;
     font-family: $code-font-family;
     color: $code-color;
 
@@ -408,8 +408,8 @@
 
   .typeit {
     .code {
-      padding: 6px;
-      font-size: 14px;
+      padding: .375rem;
+      font-size: .875rem;
       font-family: Consolas, Monaco, Menlo, Consolas, monospace;
       font-weight: bold;
       word-break: break-all;
@@ -542,7 +542,7 @@
     & a.prev,
     & a.next {
       font-weight: 600;
-      font-size: 16px;
+      font-size: 1rem;
 
       transition-property: transform;
       transition-timing-function: ease-out;
@@ -568,5 +568,5 @@
 }
 
 .post-comment {
-  padding: 3em 0;
+  padding: 3rem 0;
 }
