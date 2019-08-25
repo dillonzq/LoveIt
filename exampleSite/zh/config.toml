@@ -19,7 +19,7 @@ pygmentsCodefences = true
 pygmentsUseClasses = true
 pygmentsCodefencesGuessSyntax = true
 
-staticDir = ["../static", "themes/LoveIt/assets/others"] # 静态文件目录
+staticDir = ["../static", "../../assets/others"]         # 静态文件目录
 
 [author]                                              #### 作者信息
   name = "XXXX"

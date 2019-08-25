@@ -19,7 +19,7 @@ pygmentsCodefences = true
 pygmentsUseClasses = true
 pygmentsCodefencesGuessSyntax = true
 
-staticDir = ["static", "themes/LoveIt/assets/others"]    # static directories
+staticDir = ["static", "../assets/others"]               # static directories
 
 [author]                                              #### Author Info
   name = "XXXX"
