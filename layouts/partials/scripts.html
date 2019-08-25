@@ -14,6 +14,15 @@
     {{ $res := resources.Get "js/lib/lazysizes/lazysizes.min.js" | resources.Minify }}
     {{ $lazysizes = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
+<!-- Smooth Scroll https://github.com/cferdinandi/smooth-scroll -->
+{{ $smooth_scroll := "" }}
+{{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.smooth_scroll_js }}
+    {{ $smooth_scroll = .Site.Params.cdn.smooth_scroll_js }}
+{{ else }}
+    {{ $res := resources.Get "js/lib/smooth-scroll/smooth-scroll.polyfills.min.js" | resources.Minify }}
+    {{ $smooth_scroll = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
+{{ end }}
+{{ $smooth_scroll = delimit (slice $smooth_scroll "<script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script>") "" }}
 <!-- KaTeX https://github.com/KaTeX/KaTeX -->
 {{ $katex_css := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.katex_css }}
@@ -102,15 +111,6 @@
     {{ $res := resources.Get "js/lib/meting/Meting.min.js" | resources.Minify }}
     {{ $meting = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
-<!-- Smooth Scroll https://github.com/cferdinandi/smooth-scroll -->
-{{ $smooth_scroll := "" }}
-{{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.smooth_scroll_js }}
-    {{ $smooth_scroll = .Site.Params.cdn.smooth_scroll_js }}
-{{ else }}
-    {{ $res := resources.Get "js/lib/smooth-scroll/smooth-scroll.polyfills.min.js" | resources.Minify }}
-    {{ $smooth_scroll = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
-{{ end }}
-{{ $smooth_scroll = delimit (slice $smooth_scroll "<script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script>") "" }}
 
 {{ $jquery | safeHTML }}
 {{ $lazysizes | safeHTML }}

@@ -6,7 +6,7 @@
         <div class="navbar-menu">
             {{ $currentPage := . }}
             {{ range .Site.Menus.main }}
-                <a class="menu-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) | or (eq $currentPage.RelPermalink .URL) }} active{{ end }}" href="{{ .URL | absLangURL }}" title="{{ .Title }}">{{ .Name }}</a>
+                <a class="menu-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) | or (eq $currentPage.RelPermalink .URL) }} active{{ end }}" href="{{ .URL | absLangURL }}" title="{{ .Title }}">{{ .Name | safeHTML }}</a>
             {{ end }}
             <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180"></i></a>&nbsp;
         </div>
@@ -23,7 +23,7 @@
         <div class="navbar-menu" id="mobile-menu">
             {{ $currentPage := . }}
             {{ range .Site.Menus.main }}
-                <a class="menu-item" href="{{ .URL | absLangURL }}" title="{{ .Title }}">{{ .Name }}</a>
+                <a class="menu-item" href="{{ .URL | absLangURL }}" title="{{ .Title }}">{{ .Name | safeHTML }}</a>
             {{ end }}
         </div>
     </div>

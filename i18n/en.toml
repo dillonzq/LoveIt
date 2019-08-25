@@ -8,7 +8,7 @@ other = "Posts"
 
 # === Taxonomy ===
 [all]
-other = "All "
+other = "all "
 
 [tag]
 other = "Tag"

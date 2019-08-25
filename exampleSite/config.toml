@@ -1,77 +1,128 @@
-baseURL = "https://example.com"
-languageCode = "en"
-defaultContentLanguage = "en"
-title = "KeepIt"
-theme = "KeepIt"
+baseURL = "/"
+languageCode = "en"                                      # website language
+defaultContentLanguage = "en"                            # [en, zh, ...] determines which i18n file to use
+title = "LoveIt Theme"                                   # website title
+theme = "LoveIt"                                         # theme
+enableGitInfo = false                                    # whether to use git commit log to generate lastmod record
+hasCJKLanguage = false                                   # whether to include chinese/japanese/korean
+paginate = 8                                             # amount of posts in each page only when home_mode is post
+enableEmoji = true                                       # whether to use emoji code
+enableRobotsTXT = true                                   # whether to use robots.txt
+googleAnalytics = ""                                     # [UA-XXXXXXXX-X] google analytics code
+disqusShortname = "dillonzq"                             # Disqus shortname to use Disqus in posts
+copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+                                                         # copyright description used only for seo schema
 
-paginate = 12
-enableEmoji = true
-enableRobotsTXT = true
-googleAnalytics = ""
-disqusShortname = "yourdiscussshortname"
+                                                      #### Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
+pygmentsOptions = "linenos=table"
+pygmentsCodefences = true
+pygmentsUseClasses = true
+pygmentsCodefencesGuessSyntax = true
 
-[sitemap]
-  changefreq = "monthly"
+staticDir = ["static", "themes/LoveIt/assets/others"]    # static directories
+
+[author]                                              #### Author Info
+  name = "XXXX"
+
+[sitemap]                                             #### Sitemap Info
+  changefreq = "weekly"
   filename = "sitemap.xml"
   priority = 0.5
 
-[blackfriday]
-  hrefTargetBlank = true
-  nofollowLinks = true
-  noreferrerLinks = true
+[Permalinks]                                          #### Permalinks Info (https://gohugo.io/content-management/urls/#permalinks)
+  posts = "/:year/:month/:filename/"
 
-[Permalinks]
- posts = "/:year/:filename/"
-
-[menu]
+[menu]                                                #### Menu Info
   [[menu.main]]
-    name = "Blog"
+    identifier = "posts"
+    name = "Posts"
     url = "/posts/"
     weight = 1
 
   [[menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    url = "/tags/"
+    weight = 2
+
+  [[menu.main]]
+    identifier = "categories"
     name = "Categories"
     url = "/categories/"
     weight = 3
 
   [[menu.main]]
+    identifier = "about"
     name = "About"
-    url = "/about"
+    url = "/about/"
     weight = 4
 
+  [[menu.main]]
+    identifier = "zh"
+    name = '<i class="fas fa-language"></i>'
+    url = "https://hugo-loveit-zh.netlify.com"
+    weight = 5
+
 [params]
-    since = 2012
-    author = "Fastbyte01"               # Author's name
-    subtitle = "A Hugo theme"       # Subtitle
-    cdn_url = ""           # Base CDN URL
-    home_mode = "" # post or other
+  version = "5.x"                                        # LoveIt theme version
+  description = "LoveIt Theme Demo"                      # site description
+  keywords = ["XXXX", "Theme", "Hugo"]                   # site keywords
 
-    google_verification = ""
-    bing_verification = ""
-    yandex_verification = ""
-    pinterest_verification = ""
-    baidu_verification = ""
-    
-    avatar = "/images/me/avatar.jpg" #comment it to use gravatar
-    socialShare = true
-    
-    description = "" # site description
-    keywords = "" # site keywords
+                                                      #### Home Page Info
+  home_mode = "post"                                     # [post, other] home mode
+  avatar = "/images/avatar.png"                          # URL of avatar shown in home page
+  subtitle = "A Clean, Elegant but Advanced Hugo Theme"  # subtitle shown in home page
 
-    license= 'Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+  socialShare = true                                     # whether to show social share links in post page
 
-[params.gravatar]
-    #email = "example@gmail.com"   #uncomment and insert your email address to use gravatar
+                                                      #### Footer CopyRight Info
+  since = 2018                                           # Site creation time
+  icp = ''                                               # ICP info only in China (HTML format is allowed)
+  license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+                                                         # license info (HTML format is allowed)
+  gitRepo = ""                                           # public git repo url to link lastmod git commit only then enableGitInfo is true
 
+  linkToMarkdown = true                                  # whether to show link to Raw Markdown content of the post
 
-[params.social]
+                                                      #### site verification code for Google/Bing/Yandex/Pinterest/Baidu
+  google_verification = ""
+  bing_verification = ""
+  yandex_verification = ""
+  pinterest_verification = ""
+  baidu_verification = ""
+
+  [params.cdn]                                       #### CSS and JS Files CDN
+    fontawesome_free_css = ''                           # for example '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
+    animate_css = ''
+    gitalk_css = ''
+    gitalk_js = ''
+    valine_js = ''
+    jquery_js = ''
+    lazysizes_js = ''
+    smooth_scroll_js = ''
+    katex_css = ''
+    katex_js = ''
+    katex_auto_render_js = ''
+    mermaid_js = ''
+    echarts_macarons_js = ''
+    echarts_js = ''
+    typeit_js = ''
+    jquery_countdown_js = ''
+    aplayer_css = ''
+    aplayer_js = ''
+    meting_js = ''
+
+  [params.gravatar]                                      # Gravatar Info for preferred avatar in home page
+    email = ""
+
+  [params.social]                                        # Social Info in home page
     GitHub = "xxxx"
     Linkedin = "xxxx"
     Twitter = "xxxx"
     #Instagram = "xxxx"
-    #Email   = "xxxx"
+    #Email = "xxxx"
     Facebook = "xxxx"
-    #Telegram = "xxxx"
+    Telegram = "xxxx"
     #Medium = "xxxx"
     #Gitlab = "xxxx"
     #Youtubelegacy = "xxxx"
@@ -84,7 +135,7 @@ disqusShortname = "yourdiscussshortname"
     #Reddit = "xxxx"
     #Codepen = "xxxx"
     #Bitbucket = "xxxx"
-    #Stackoverflow = "xxxxx"
+    #Stackoverflow = "xxxx"
     #Weibo = "xxxx"
     #Odnoklassniki = "xxxx"
     #VKontakte = "xxxx"
@@ -123,55 +174,72 @@ disqusShortname = "yourdiscussshortname"
     #Mastodon = "xxxx"
     #Thingiverse = "xxxx"
 
-[params.share]
-Twitter = true
-Facebook = true
-#Reddit = true
-Linkedin = true
-#Pinterest = true
-#HackerNews = true
-#Mix = true
-#Tumblr = true
-#VKontakte = true
-#Douban = true
-#Weibo = true
+  [params.share]                                         # Social Share Links in post page
+    enable = true
+    Twitter = true
+    Facebook = true
+    Reddit = true
+    #Linkedin = true
+    #Pinterest = true
+    #HackerNews = true
+    #Mix = true
+    #Tumblr = true
+    #VKontakte = true
+    #Weibo = true
 
-# Used only for Seo schema 
-copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
-
-[author]
-  name = "Fastbyte01"
-
-  [params.publisher]
-    name = "Fastbyte01"
-
+  [params.publisher]                                     # Publisher Info just for SEO
+    name = "XXXX"
     [params.publisher.logo]
-      url = "logo.png"
+      url = "/logo.png"
       width = 127
       height = 40
 
-  [params.logo]
-    url = "logo.png"
+  [params.logo]                                          # Website Log Info just for SEO
+    url = "/logo.png"
     width = 127
     height = 40
 
-  [params.image]
-    url = "cover.png"
+  [params.image]                                         # Website Image Info just for SEO
+    url = "/cover.png"
     width = 800
     height = 600
 
-[params.gitalk]           
-owner = ""              
-repo = ""               
-clientId = ""           
-clientSecret = ""   
+  [params.gitalk]                                        # Gittalk Comment Config (https://github.com/gitalk/gitalk)
+    owner = ""
+    repo = ""
+    clientId = ""
+    clientSecret = ""
 
-[params.valine]
-  enable = false
-  appId = 'your appId'
-  appKey = 'your appKey'
-  notify = false  # mail notifier , https://github.com/xCss/Valine/wiki
-  verify = false # Verification code
-  avatar = 'mm'
-  placeholder = 'your comments ...'
-  visitor = true
+  [params.valine]                                        # Valine Comment Config (https://github.com/xCss/Valine)
+    enable = false
+    appId = ""
+    appKey = ""
+    notify = false
+    verify = true
+    avatar = "mp"
+    placeholder = "Your comment ..."
+    visitor = true
+    recordIP = true
+
+[privacy]                                             #### Privacy Info (https://gohugo.io/about/hugo-and-gdpr/)
+  [privacy.googleAnalytics]
+    anonymizeIP = true
+
+  [privacy.youtube]
+    privacyEnhanced = true
+
+[mediaTypes]                                          #### Options to make hugo output .md files.
+  [mediaTypes."text/plain"]
+    suffixes = ["md"]
+
+[outputFormats.MarkDown]                              #### Options to make hugo output .md files.
+  mediaType = "text/plain"
+  isPlainText = true
+  isHTML = false
+
+[outputs]                                             #### Options to make hugo output .md files.
+  home = ["HTML", "RSS"]
+  page = ["HTML", "MarkDown"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  taxonomyTerm = ["HTML"]

@@ -1,0 +1,243 @@
+baseURL = "/"
+languageCode = "zh"                                      # 网站语言标识
+defaultContentLanguage = "zh"                            # [en, zh, ...] 设定主题的国际化
+title = "LoveIt 主题"                                     # 网站标题
+theme = "LoveIt"                                         # 主题
+enableGitInfo = false                                    # 是否使用 git 信息来生成文章的上次修改时间
+hasCJKLanguage = true                                    # 是否包括中日韩文字
+paginate = 8                                             # post 模式下，主页每页显示的文章数目
+enableEmoji = true                                       # 是否使用 emoji 代码
+enableRobotsTXT = true                                   # 是否使用 robots.txt
+googleAnalytics = ""                                     # [UA-XXXXXXXX-X] 谷歌分析代号
+disqusShortname = "dillonzq"                             # Disqus 的用户名，用来在文章中启用 Disqus 评论系统
+copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+                                                         # 版权描述，仅仅用于 SEO
+
+                                                      ####  代码高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
+pygmentsOptions = "linenos=table"
+pygmentsCodefences = true
+pygmentsUseClasses = true
+pygmentsCodefencesGuessSyntax = true
+
+staticDir = ["../static", "themes/LoveIt/assets/others"] # 静态文件目录
+
+[author]                                              #### 作者信息
+  name = "XXXX"
+
+[sitemap]                                             #### Sitemap 信息
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[Permalinks]                                          #### Permalinks 信息 (https://gohugo.io/content-management/urls/#permalinks)
+  posts = "/:year/:month/:filename/"
+
+[menu]                                                #### 菜单信息
+  [[menu.main]]
+    identifier = "posts"
+    name = "文章"
+    url = "/posts/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "tags"
+    name = "标签"
+    url = "/tags/"
+    weight = 2
+
+  [[menu.main]]
+    identifier = "categories"
+    name = "目录"
+    url = "/categories/"
+    weight = 3
+
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 4
+
+  [[menu.main]]
+    identifier = "en"
+    name = '<i class="fas fa-language"></i>'
+    url = "https://hugo-loveit-en.netlify.com"
+    weight = 5
+
+[params]
+  version = "5.x"                                        # LoveIt 主题版本
+  description = "LoveIt 主题演示"                         # 网站介绍
+  keywords = ["XXXX", "Theme", "Hugo"]                   # 网站关键词
+
+                                                      #### 主页配置
+  home_mode = "post"                                     # [post, other] 主页模式
+  avatar = "/images/avatar.png"                          # 主页显示的头像路径
+  subtitle = "一个简洁、优雅且高效的 Hugo 主题"              # 主页显示的网站副标题
+
+  socialShare = true                                     # 在文章页面是否使用分享功能
+
+                                                      #### 页面底部版权信息设置
+  since = 2018                                           # 网站创立年份
+  icp = ''                                               # ICP 备案信息，仅在中国使用 (允许使用 HTML 格式)
+  license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+                                                         # 许可协议信息 (允许使用 HTML 格式)
+  gitRepo = ""                                           # 用于生成文章上次修改时间的公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
+
+  linkToMarkdown = true                                  # 是否在文章页面显示原始 Markdown 文档链接
+
+                                                      #### 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
+  google_verification = ""
+  bing_verification = ""
+  yandex_verification = ""
+  pinterest_verification = ""
+  baidu_verification = ""
+
+  [params.cdn]                                       #### CSS 和 JS 文件的 CDN 设置
+    fontawesome_free_css = ''                           # 例如 '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
+    animate_css = ''
+    gitalk_css = ''
+    gitalk_js = ''
+    valine_js = ''
+    jquery_js = ''
+    lazysizes_js = ''
+    smooth_scroll_js = ''
+    katex_css = ''
+    katex_js = ''
+    katex_auto_render_js = ''
+    mermaid_js = ''
+    typeit_js = ''
+    jquery_countdown_js = ''
+    aplayer_css = ''
+    aplayer_js = ''
+    meting_js = ''
+
+  [params.gravatar]                                      # Gravatar 信息，用于优先在主页显示的头像
+    email = ""
+
+  [params.social]                                        # 主页的社交信息设置
+    GitHub = "xxxx"
+    Linkedin = "xxxx"
+    Twitter = "xxxx"
+    #Instagram = "xxxx"
+    #Email = "xxxx"
+    Facebook = "xxxx"
+    Telegram = "xxxx"
+    #Medium = "xxxx"
+    #Gitlab = "xxxx"
+    #Youtubelegacy = "xxxx"
+    #Youtubecustom = "xxxx"
+    #Youtubechannel = "xxxx"
+    #Tumblr ="xxxx"
+    #Quora = "xxxx"
+    #Keybase = "xxxx"
+    #Pinterest = "xxxx"
+    #Reddit = "xxxx"
+    #Codepen = "xxxx"
+    #Bitbucket = "xxxx"
+    #Stackoverflow = "xxxx"
+    #Weibo = "xxxx"
+    #Odnoklassniki = "xxxx"
+    #VKontakte = "xxxx"
+    #Flickr = "xxxx"
+    #Xing = "xxxx"
+    #Snapchat = "xxxx"
+    #Soundcloud = "xxxx"
+    #Spotify = "xxxx"
+    #Bandcamp = "xxxx"
+    #Paypal = "xxxx"
+    #Fivehundredpx = "xxxx"
+    #Mix = "xxxx"
+    #Goodreads = "xxxx"
+    #Lastfm = "xxxx"
+    #Foursquare = "xxxx"
+    #Hackernews = "xxxx"
+    #Kickstarter = "xxxx"
+    #Patreon = "xxxx"
+    #Steam = "xxxx"
+    #Twitch = "xxxx"
+    #Strava = "xxxx"
+    #Skype = "xxxx"
+    #Whatsapp = "xxxx"
+    #Zhihu = "xxxx"
+    #Douban = "xxxx"
+    #Angellist = "xxxx"
+    #Slidershare = "xxxx"
+    #Jsfiddle = "xxxx"
+    #Deviantart = "xxxx"
+    #Behance = "xxxx"
+    #Dribble = "xxxx"
+    #Wordpress = "xxxx"
+    #Vine = "xxxx"
+    #Googlescholar = "xxxx"
+    #Researchgate = "xxxx"
+    #Mastodon = "xxxx"
+    #Thingiverse = "xxxx"
+
+  [params.share]                                         # 文章页面的分享信息设置
+    enable = true
+    Twitter = true
+    Facebook = true
+    Reddit = true
+    #Linkedin = true
+    #Pinterest = true
+    #HackerNews = true
+    #Mix = true
+    #Tumblr = true
+    #VKontakte = true
+    #Weibo = true
+
+  [params.publisher]                                     # 出版者信息，仅用于 SEO
+    name = "XXXX"
+    [params.publisher.logo]
+      url = "/logo.png"
+      width = 127
+      height = 40
+
+  [params.logo]                                          # 网站图标信息，仅用于 SEO
+    url = "/logo.png"
+    width = 127
+    height = 40
+
+  [params.image]                                         # 网站图片信息，仅用于 SEO
+    url = "/cover.png"
+    width = 800
+    height = 600
+
+  [params.gitalk]                                        # Gittalk 评论系统设置 (https://github.com/gitalk/gitalk)
+    owner = ""
+    repo = ""
+    clientId = ""
+    clientSecret = ""
+
+  [params.valine]                                        # Valine 评论系统设置 (https://github.com/xCss/Valine)
+    enable = false
+    appId = ""
+    appKey = ""
+    notify = false
+    verify = true
+    avatar = "mp"
+    placeholder = "Your comment ..."
+    visitor = true
+    recordIP = true
+
+[privacy]                                             #### 隐私信息设置 (https://gohugo.io/about/hugo-and-gdpr/)
+  [privacy.googleAnalytics]
+    anonymizeIP = true
+
+  [privacy.youtube]
+    privacyEnhanced = true
+
+[mediaTypes]                                          #### 用于输出 Markdown 格式文档的设置
+  [mediaTypes."text/plain"]
+    suffixes = ["md"]
+
+[outputFormats.MarkDown]                              #### 用于输出 Markdown 格式文档的设置
+  mediaType = "text/plain"
+  isPlainText = true
+  isHTML = false
+
+[outputs]                                             #### 用于输出 Markdown 格式文档的设置
+  home = ["HTML", "RSS"]
+  page = ["HTML", "MarkDown"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  taxonomyTerm = ["HTML"]

@@ -34,7 +34,7 @@
     </div>
     <div class="post-content">
         {{ if .Params.show_description }}
-            <p>{{ . }}</p>
+            <p>{{ .Params.description }}</p>
         {{ else }}
             {{ $summary := .Summary }}
             {{ $REin := `:\(([\w- ]+?)\):` }}

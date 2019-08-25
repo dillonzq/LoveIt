@@ -1,40 +1,53 @@
-# LoveIt Hugo Theme
+# LoveIt Theme | Hugo
 
-LoveIt is a clean, elegant, simple but not simpler blog theme for Hugo based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) and [KeepIt Theme](https://github.com/liuzc/LeaveIt/) developed by [Dillon](https://dillonzq.com).
+[中文 README](README.zh.md)
 
-![hugo-theme-LoveIt](https://github.com/dillonzq/LoveIt/blob/master/images/screenshot.png)
+**LoveIt** is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
+
+It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) and [KeepIt Theme](https://github.com/liuzc/LeaveIt/).
+
+![Hugo Theme LoveIt](exampleSite/static/images/Apple-Devices-Preview.png)
 
 ## Demo
 
-To see this theme in action,  Here is a live [demo site](https://suspicious-archimedes-ab369d.netlify.com) which is rendered with this theme.
+To see this theme in action, here is a live [demo site](https://hugo-loveit-en.netlify.com) which is rendered with **LoveIt** theme.
 
-People that are using **LoveIt**:
+Websites using **LoveIt** theme:
 
 * [Dillon](https://dillonzq.com)
+* Yours
 
 ## Features
 
-* Optimized for performance: 99/100 on mobile and 100/100 on desktop in Google PageSpeed Insights
+* Optimized for performance: 99/100 on mobile and 100/100 on desktop in [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
+* Desktop / Mobile layouts support
+* Dark / Light mode
 * Optimized SEO performance with a correct SEO SCHEMA based on JSON-LD
 * A More coerent style beetwen page and sections
-* Multilanguage support
+* Multilanguage support and I18N ready
 * Pagination support
-* Google Analytics support
-* Disqus Comment System
-* Gitalk Comment System
-* Valine Comment System
-* Gravatar Support
-* Local Avatar Support
+* [Google Analytics](https://analytics.google.com/analytics) support
+* Disqus comment system support by [Disqus](https://disqus.com)
+* Gitalk comment system support by [Gitalk](https://github.com/gitalk/gitalk)
+* Valine comment system support by [Valine](https://valine.js.org/)
+* Gravatar support by [Gravatar](https://gravatar.com)
+* Local Avatar support
+* Up to 54 social sites supported
 * Share post support
 * Search engine verification support (Google, Bind, Yandex and Baidu)
-* Added configuration file for use on [Netlify](https://www.netlify.com)
-* Dark/Light mode
-* Up to 54 social sites supported out-of-the-box [see the list here](https://github.com/Fastbyte01/KeepIt/wiki/List-of-social-platforms-supported-out-of-box)
-* Translation ready
-* Wrap Image with Figure Tag without Shortcode. Thanks [Junian.Net](https://www.junian.net/hugo-image-figure-wrap/)
-* Load images with Lazy Load By [lazysizes](https://github.com/aFarkas/lazysizes)
-* Automatically highlighting code By [Google code-prettify](https://github.com/google/code-prettify), Customizable styles via CSS. See the [themes gallery](https://rawgit.com/google/code-prettify/master/styles/index.html).
-* Automagical image gallery with [lightGallery](https://github.com/sachinchoolur/lightGallery)
+* Automatically converted images with Lazy Load by [lazysizes](https://github.com/aFarkas/lazysizes)
+* Automatically highlighting code by chroma in Hugo
+* Extended markdown syntax for [Font Awesome](https://fontawesome.com/) icons
+* Math formula support by [Katex](https://katex.org/)
+* Diagram syntax shortcode support by [mermaid](https://github.com/knsv/mermaid)
+* Embedded music player support by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
+* Bilibili player support
+* Kinds of admonitions shortcode support
+* Custom align and float style shortcodes support
+* Animated typing support by [TypeIt](https://typeitjs.com/)
+* Animated coutdown support by [jQuery.countdown](https://github.com/hilios/jQuery.countdown)
+* Dynamic to top support by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
+* CDN support
 * ...
 
 ## Getting Started
@@ -46,7 +59,13 @@ Clone this repository to your hugo theme directory.
   git clone https://github.com/dillonzq/LoveIt.git
 ```
 
-Next, open config.toml in the base of the Hugo site and ensure the theme option is set to KeepIt:
+Or, make this repository a submodule of your site directory.
+
+```bash
+  git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
+```
+
+Next, open `config.toml` in the base of the Hugo site and ensure the theme option is set to KeepIt:
 
 ```bash
   theme = "LoveIt"
@@ -58,24 +77,25 @@ For more information read the [official setup guide](https://gohugo.io/documenta
 
 Take a look in the `exampleSite` folder.
 
-This directory contains an example config file and the content for the demo. It serves as an example setup for your documentation.
+This directory contains an example config file and the content for the demo for `en` and `zh` languages.
+It serves as an example setup for your website.
 
-Copy the `config.toml` in the root directory of your website. Overwrite the existing config file if necessary.
+Copy the `config.toml` to the root directory of your website. Overwrite the existing config file if necessary.
 
 ## Content Suggestions
 
 A few suggestions to help you get a good looking site quickly:
 
-* Keep blog posts in the content/posts directory, for example: content/posts/my-first-post.md
-* Keep static pages in the content directory, for example: content/about.md
-* Keep media like images in the static directory, for example: static/images/2019/10/screenshot.png
+* Keep blog posts in the `content/posts` directory, for example: `content/posts/my-first-post.md`
+* Keep static pages in the `content` directory, for example: `content/about.md`
+* Keep media like images in the `static` directory, for example: `static/images/2019/9/screenshot.png`
 
 ## Customizing styles for your website
 
 If you want to change some styling to fit your own website needs, you can edit them:
 
-* `assets/css/_varibales/default.scss`:  You can override the variables in `_variables.scss` to customize the style
-* `assets/css/_custom.scss` :  You can put your custom css in this file
+* `assets/css/_varibales.scss`: You can override the variables in `_variables.scss` to customize the style
+* `assets/css/_custom.scss`: You can put your custom css in this file
 
 ## Favicons, Browserconfig, Manifest
 
@@ -90,60 +110,60 @@ It is recommended to put your own favicons
 
 into `/static`. They’re easily created via [https://realfavicongenerator.net/](https://realfavicongenerator.net/).
 
-Customize browserconfig.xml and site.webmanifest to set theme-color and background-color for example.
+Customize `browserconfig.xml` and `site.webmanifest` to set theme-color and background-color.
 
 ## Tips
 
-### Set production environment when generating site
+### Set `production` environment when generating site
 
-Because some functions are only in production mode, So you **need to add a production** environment variables when generating your site.
+Because some features are only in production mode, so you need to add a `production` environment variables when generating your site.
 
 ```bash
   HUGO_ENV=production hugo --gc --minify
 ```
 
-### Hugo “extended” Sass/SCSS version required
-
-This theme write style with scss, So you must download and install the “extended” Sass/SCSS version
-
 ### How to toggle dark-light mode
 
-* You can click the sun logo to toggle dark-light mode. In the desktop version the sun logo is to the right and in the mobile version is positioned to the left, close to the site title.
-* If you want to make your own theme toggle-able element, you can create an element with a class `.theme-switch`. See [here](https://github.com/Fastbyte01/KeepIt/blob/master/assets/js/main.js#L32)
+* You can click the circle icon to toggle dark-light mode. In the desktop version the circle icon is to the right and in the mobile version is positioned to the left, close to the site title.
+* If you want to make your own theme toggle-able element, you can create an element with a class `.theme-switch`. See [here](https://github.com/dillonzq/LoveIt/blob/master/assets/js/blog.js#L14)
 
 ## Home Post model
 
-If you want to show posts on index instead of a personal profile, just open config.toml in the base of the Hugo site, add the following line to config.toml
+If you want to show posts on index instead of a personal profile, just open `config.toml`, add the following line:
 
 ```toml
   [params]
-  home_mode = "post" # post or other
+    home_mode = "post"
 ```
 
 ## Add logo and cover for SEO
 
-Add a logo image (127x40) and a cover image (800x600). This images are used for SEO.
+Add a logo image (127x40) and a cover image (800x600) in the `static` directory.
 
 ## Questions, ideas, bugs, pull requests
 
 All feedback is welcome! Head over to the [issue tracker](https://github.com/dillonzq/LoveIt/issues).
 
-For more configuration info or other tips you can see the [wiki](https://github.com/dillonzq/LoveIt/wiki).
-
 ## License
 
-LeaveIt is licensed under the MIT license. Check the LICENSE file for details.
-The following resources are included in the theme:
+LoveIt is licensed under the MIT license. Check the [LICENSE file](https://github.com/dillonzq/LoveIt/blob/master/LICENSE) for details.
 
+Thanks to the authors of following resources included in the theme:
+
+* [Font Awesome](https://fontawesome.com/)
+* [Animate.css](https://daneden.github.io/animate.css/)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
-* [lightGallery](https://github.com/sachinchoolur/lightGallery)
-* [code-prettify](https://github.com/google/code-prettify)
+* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
+* [TypeIt](https://typeitjs.com/)
+* [jQuery](https://github.com/jquery/jquery)
+* [jQuery.countdown](https://github.com/hilios/jQuery.countdown)
+* [Katex](https://katex.org/)
+* [mermaid](https://github.com/knsv/mermaid)
+* [APlayer](https://github.com/MoePlayer/APlayer)
+* [MetingJS](https://github.com/metowolf/MetingJS)
+* [Gitalk](https://github.com/gitalk/gitalk)
+* [Valine](https://valine.js.org/)
 
 ## Author
 
 [Dillon](https://dillonzq.com)
-
-## See Also
-
-* [Hermitt](https://github.com/Track3/hermit)
-* [Goa](https://github.com/shenoybr/hugo-goa)

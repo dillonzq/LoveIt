@@ -4,14 +4,12 @@
 name = "LoveIt"
 license = "MIT"
 licenselink = "https://github.com/dillonzq/LoveIt/blob/master/LICENSE"
-description = "A minimal and responsive theme for Hugo."
-homepage = "https://dillonzq.com/"
+description = "A Clean, Elegant but Advanced Hugo Theme for Hugo."
+homepage = "https://hugo-loveit-en.netlify.com"
 tags = [
   "blog",
-  "minimal",
   "clean",
   "responsive",
-  "gallery",
   "dark",
   "theme"
 ]
