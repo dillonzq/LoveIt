@@ -1,6 +1,8 @@
 # LoveIt 主题 | Hugo
 
-[English README](README.md)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c51d4765-deb8-43d2-954c-720527879667/deploy-status)](https://app.netlify.com/sites/hugo-loveit-zh/deploys)
+
+[English README](README.md) | [预览网站](https://hugo-loveit-zh.netlify.com)
 
 [LoveIt](https://github.com/dillonzq/LoveIt) 是一个**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 
@@ -17,25 +19,37 @@
 * [Dillon](https://dillonzq.com)
 * 你的网站
 
-## 特性
+### 特性
+
+#### 性能和 SEO
 
 * 性能优化：在 [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights) 中， 99/100 的移动设备得分和 100/100 的桌面设备得分
-* 桌面设备 / 移动设备 布局的支持
-* 暗黑 / 明亮 模式
 * 使用基于 JSON-LD 格式 的 SEO SCHEMA 文件进行 SEO 优化
-* 页面和列表保持一致的视觉样式
-* 支持多语言和国际化
-* 支持分页
 * 支持 [Google Analytics](https://analytics.google.com/analytics)
-* 支持 [Disqus](https://disqus.com) 评论系统
-* 支持 [Gitalk](https://github.com/gitalk/gitalk) 评论系统
-* 支持 [Valine](https://valine.js.org/) 评论系统
+* 支持搜索引擎的网站验证 (Google, Bind, Yandex and Baidu)
+* 支持 CDN
+* 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为懒加载
+
+#### 外观和布局
+
+* 桌面设备/移动设备 响应式布局
+* 暗黑/明亮 模式
+* 页面和列表保持一致的视觉样式
+* 支持分页
+* 支持多语言和国际化
+
+#### 社交和评论系统
+
 * 支持 [Gravatar](https://gravatar.com) 头像
 * 支持本地头像
 * 支持多达 54 种社交链接
 * 支持文章分享
-* 支持搜索引擎的网站验证 (Google, Bind, Yandex and Baidu)
-* 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为懒加载
+* 支持 [Disqus](https://disqus.com) 评论系统
+* 支持 [Gitalk](https://github.com/gitalk/gitalk) 评论系统
+* 支持 [Valine](https://valine.js.org/) 评论系统
+
+#### 扩展功能
+
 * 基于 Hugo 使用的 chroma 进行代码高亮
 * 使用 [Font Awesome](https://fontawesome.com/) 图标的扩展 Markdown 语法
 * 支持基于 [Katex](https://katex.org/) 的数学公式
@@ -47,7 +61,6 @@
 * 支持基于 [TypeIt](https://typeitjs.com/) 的打字动画
 * 支持基于 [jQuery.countdown](https://github.com/hilios/jQuery.countdown) 的倒计时动画
 * 支持基于 [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) 的回到顶部动画
-* 支持 CDN
 * ...
 
 ## 快速开始

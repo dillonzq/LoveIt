@@ -18,15 +18,15 @@
     </h1>
 
     <div class="post-meta">
-        <a class="author" href="{{.Site.BaseURL }}" rel="author"><i class="fas fa-user-circle"></i>{{ $author }}&nbsp;</a>
-        {{ T "publish" }}<span class="post-time">&nbsp;<time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;</span>
+        <a class="author" href="{{.Site.BaseURL }}" rel="author"><i class="fas fa-user-circle fa-fw"></i>{{ $author }}&nbsp;</a>
+        {{ T "publish" }}&nbsp;<time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;
         {{ with .Params.categories -}}
             <span class="post-category">
                 {{ T "included" }}
                 {{ range . }}
                     {{- $name := . -}}
                     {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
-                        <i class="far fa-folder"></i><a href="{{ .Permalink }}">{{ $name }}</a>
+                        <i class="far fa-folder fa-fw"></i><a href="{{ .Permalink }}">{{ $name }}</a>
                     {{ end -}}
                 {{ end }}
             </span>
@@ -38,7 +38,7 @@
         {{ else }}
             {{ $summary := .Summary }}
             {{ $REin := `:\(([\w- ]+?)\):` }}
-            {{ $REout := `<i class="inline-icon $1"></i>` }}
+            {{ $REout := `<i class="$1 fa-fw"></i>` }}
             {{ $summary  = replaceRE $REin $REout $summary  }}
             {{ $REin = `\[(.+?)\]\^\((.+?)\)` }}
             {{ $REout = `<strong><ruby>$1<rt>$2</rt></ruby></strong>` }}
@@ -51,7 +51,7 @@
         {{ with .Params.tags }}
             <div class="post-tags">
                 {{ range . }}
-                    &nbsp;&nbsp;<span class="tag"><a href="{{ "tags/" | absURL }}{{ . | urlize }}/"><i class="fas fa-tag"></i>{{ . }}</a></span>
+                    &nbsp;&nbsp;<span class="tag"><a href="{{ "tags/" | absURL }}{{ . | urlize }}/"><i class="fas fa-tag fa-fw"></i>{{ . }}</a></span>
                 {{ end }}
             </div>
         {{ end }}

@@ -12,7 +12,7 @@
             {{ $REout = "<figure><img src=/images/loading.svg data-src=$1 data-sizes=auto alt=$2 title=$3 class=lazyload><figcaption class=image-caption>$2</figcaption></figure>" }}
             {{ $content = replaceRE $REin $REout $content }}
             {{ $REin = `:\(([\w- ]+?)\):` }}
-            {{ $REout = `<i class="inline-icon $1"></i>` }}
+            {{ $REout = `<i class="$1 fa-fw"></i>` }}
             {{ $content = replaceRE $REin $REout $content }}
             {{ $REin = `\[(.+?)\]\^\((.+?)\)` }}
             {{ $REout = `<strong><ruby>$1<rt>$2</rt></ruby></strong>` }}

@@ -1,6 +1,8 @@
 # LoveIt Theme | Hugo
 
-[中文 README](README.zh.md)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit-en/deploys)
+
+[中文 README](README.zh.md) | [Demo Site](https://hugo-loveit-en.netlify.com)
 
 **LoveIt** is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
 
@@ -17,25 +19,37 @@ Websites using **LoveIt** theme:
 * [Dillon](https://dillonzq.com)
 * Yours
 
-## Features
+### Features
+
+#### Performance and SEO
 
 * Optimized for performance: 99/100 on mobile and 100/100 on desktop in [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
-* Desktop / Mobile layouts support
-* Dark / Light mode
 * Optimized SEO performance with a correct SEO SCHEMA based on JSON-LD
-* A More coerent style beetwen page and sections
-* Multilanguage support and I18N ready
-* Pagination support
 * [Google Analytics](https://analytics.google.com/analytics) support
-* Disqus comment system support by [Disqus](https://disqus.com)
-* Gitalk comment system support by [Gitalk](https://github.com/gitalk/gitalk)
-* Valine comment system support by [Valine](https://valine.js.org/)
+* Search engine verification support (Google, Bind, Yandex and Baidu)
+* CDN support
+* Automatically converted images with Lazy Load by [lazysizes](https://github.com/aFarkas/lazysizes)
+
+#### Appearance and Layout
+
+* Desktops/Mobiles Responsive layout
+* Dark/Light Mode
+* A More coerent style beetwen page and sections
+* Pagination support
+* Multilanguage support and I18N ready
+
+#### Social and Comment Systems
+
 * Gravatar support by [Gravatar](https://gravatar.com)
 * Local Avatar support
 * Up to 54 social sites supported
 * Share post support
-* Search engine verification support (Google, Bind, Yandex and Baidu)
-* Automatically converted images with Lazy Load by [lazysizes](https://github.com/aFarkas/lazysizes)
+* Disqus comment system support by [Disqus](https://disqus.com)
+* Gitalk comment system support by [Gitalk](https://github.com/gitalk/gitalk)
+* Valine comment system support by [Valine](https://valine.js.org/)
+
+#### Extended Features
+
 * Automatically highlighting code by chroma in Hugo
 * Extended markdown syntax for [Font Awesome](https://fontawesome.com/) icons
 * Math formula support by [Katex](https://katex.org/)
@@ -47,7 +61,6 @@ Websites using **LoveIt** theme:
 * Animated typing support by [TypeIt](https://typeitjs.com/)
 * Animated coutdown support by [jQuery.countdown](https://github.com/hilios/jQuery.countdown)
 * Dynamic to top support by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* CDN support
 * ...
 
 ## Getting Started

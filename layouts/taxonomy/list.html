@@ -5,9 +5,9 @@
         <h2 class="post-title animated pulse faster">
             {{ $taxonomy := .Data.Singular }}
             {{ if eq $taxonomy "category" }}
-                <i class="far fa-folder-open"></i>{{ .Title }}
+                <i class="far fa-folder-open fa-fw"></i>{{ .Title }}
             {{ else if eq $taxonomy "tag" }}
-                <i class="fas fa-tag"></i>{{ .Title }}
+                <i class="fas fa-tag fa-fw"></i>{{ .Title }}
             {{ else }}
                 {{ printf "%s - %s" (T $taxonomy | default  (humanize $taxonomy)) .Title }}
             {{ end }}

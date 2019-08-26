@@ -12,23 +12,35 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 
 ### Features
 
+#### Performance and SEO
+
 * :(fas fa-rocket): Optimized for performance: 99/100 on mobile and 100/100 on desktop in [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
-* :(fas fa-desktop): / :(fas fa-mobile): layouts support
-* :(fas fa-moon): / :(fas fa-sun): mode
 * :(fab fa-searchengin): Optimized SEO performance with a correct SEO SCHEMA based on JSON-LD
-* :(fas fa-layer-group): A More coerent style beetwen page and sections
-* :(fas fa-language): Multilanguage support and I18N ready
-* :(fas fa-ellipsis-h): Pagination support
 * :(fab fa-google): [Google Analytics](https://analytics.google.com/analytics) support
-* :(far fa-comment): Disqus comment system support by [Disqus](https://disqus.com)
-* :(far fa-comment-dots): Gitalk comment system support by [Gitalk](https://github.com/gitalk/gitalk)
-* :(far fa-comment-alt): Valine comment system support by [Valine](https://valine.js.org/)
+* :(fas fa-search): Search engine verification support (Google, Bind, Yandex and Baidu)
+* :(fas fa-tachometer-alt): CDN support
+* :(far fa-images): Automatically converted images with Lazy Load by [lazysizes](https://github.com/aFarkas/lazysizes)
+
+#### Appearance and Layout
+
+* :(fas fa-desktop): / :(fas fa-mobile): Responsive layout
+* :(fas fa-moon): / :(fas fa-sun): Mode
+* :(fas fa-layer-group): A More coerent style beetwen page and sections
+* :(fas fa-ellipsis-h): Pagination support
+* :(fas fa-language): Multilanguage support and I18N ready
+
+#### Social and Comment Systems
+
 * :(far fa-user): Gravatar support by [Gravatar](https://gravatar.com)
 * :(fas fa-user-circle): Local Avatar support
 * :(far fa-id-card): Up to 54 social sites supported
 * :(fas fa-share-square): Share post support
-* :(fas fa-search): Search engine verification support (Google, Bind, Yandex and Baidu)
-* :(far fa-images): Automatically converted images with Lazy Load by [lazysizes](https://github.com/aFarkas/lazysizes)
+* :(far fa-comment): Disqus comment system support by [Disqus](https://disqus.com)
+* :(far fa-comment-dots): Gitalk comment system support by [Gitalk](https://github.com/gitalk/gitalk)
+* :(far fa-comment-alt): Valine comment system support by [Valine](https://valine.js.org/)
+
+#### Extended Features
+
 * :(fas fa-code): Automatically highlighting code by chroma in Hugo
 * :(fab fa-font-awesome): Extended markdown syntax for [Font Awesome](https://fontawesome.com/) icons
 * :(fas fa-square-root-alt): Math formula support by [Katex](https://katex.org/)
@@ -40,12 +52,13 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 * :(fas fa-i-cursor): Animated typing support by [TypeIt](https://typeitjs.com/)
 * :(far fa-clock): Animated coutdown support by [jQuery.countdown](https://github.com/hilios/jQuery.countdown)
 * :(fas fa-arrow-up): Dynamic to top support by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* :(fas fa-tachometer-alt): CDN support
 * ...
 
 ### License
 
-LoveIt is licensed under the MIT license. Check the [LICENSE file](https://github.com/dillonzq/LoveIt/blob/master/LICENSE) for details.
+LoveIt is licensed under the MIT license.
+
+Check the [LICENSE file](https://github.com/dillonzq/LoveIt/blob/master/LICENSE) for details.
 
 Thanks to the authors of following resources included in the theme:
 

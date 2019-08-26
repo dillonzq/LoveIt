@@ -12,27 +12,27 @@
 
         <div class="post-meta">
             <div class="post-meta-main">
-                <a class="author" href="{{.Site.BaseURL }}" rel="author"><i class="fas fa-user-circle"></i>&nbsp;{{ $author }}&nbsp;</a>
+                <a class="author" href="{{.Site.BaseURL }}" rel="author"><i class="fas fa-user-circle fa-fw"></i>{{ $author }}&nbsp;</a>
                 {{ with .Params.categories -}}
                     <span class="post-category">
                         {{ T "included" }}
                         {{ range . }}
                             {{- $name := . -}}
                             {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
-                                <i class="far fa-folder"></i><a href="{{ .Permalink }}">{{ $name }}</a>&nbsp;
+                                <i class="far fa-folder fa-fw"></i><a href="{{ .Permalink }}">{{ $name }}</a>
                             {{ end -}}
                         {{ end }}
                     </span>
                 {{- end }}
             </div>
             <div class="post-meta-other">
-                <span class="post-time"><i class="far fa-calendar-alt"></i><time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;</span>
-                <i class="fas fa-pencil-alt"></i>{{ T "wordCount" .WordCount }}&nbsp;
-                <i class="far fa-clock"></i>{{ T "readingTime" .ReadingTime }}&nbsp;
+                <i class="far fa-calendar-alt fa-fw"></i><time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>{{ T "wordCount" .WordCount }}&nbsp;
+                <i class="far fa-clock fa-fw"></i>{{ T "readingTime" .ReadingTime }}&nbsp;
                 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.valine.enable | and .Site.Params.valine.visitor -}}
                     <span id="{{ .RelPermalink | relURL }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
-                        <i class="far fa-eye"></i>{{ T "pageviews" | safeHTML }}&nbsp;
-                    </span>
+                        <i class="far fa-eye fa-fw"></i>{{ T "pageviews" | safeHTML }}
+                    </span>&nbsp;
                 {{- end -}}
             </div>
         </div>
@@ -72,7 +72,7 @@
             {{ $REout = "<figure><img src=/images/loading.svg data-src=$1 data-sizes=auto alt=$2 title=$3 class=lazyload><figcaption class=image-caption>$2</figcaption></figure>" }}
             {{ $content = replaceRE $REin $REout $content }}
             {{ $REin = `:\(([\w- ]+?)\):` }}
-            {{ $REout = `<i class="inline-icon $1"></i>` }}
+            {{ $REout = `<i class="$1 fa-fw"></i>` }}
             {{ $content = replaceRE $REin $REout $content }}
             {{ $REin = `\[(.+?)\]\^\((.+?)\)` }}
             {{ $REout = `<strong><ruby>$1<rt>$2</rt></ruby></strong>` }}

@@ -59,7 +59,7 @@ staticDir = ["static", "../assets/others"]               # static directories
 
   [[menu.main]]
     identifier = "zh"
-    name = '<i class="fas fa-language"></i>'
+    name = '<i class="fas fa-language fa-fw"></i>'
     url = "https://hugo-loveit-zh.netlify.com"
     weight = 5
 
