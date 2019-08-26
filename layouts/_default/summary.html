@@ -18,7 +18,7 @@
     </h1>
 
     <div class="post-meta">
-        <a class="author" href="{{.Site.BaseURL }}" rel="author"><i class="fas fa-user-circle"></i>&nbsp;{{ $author }}&nbsp;</a>
+        <a class="author" href="{{.Site.BaseURL }}" rel="author"><i class="fas fa-user-circle"></i>{{ $author }}&nbsp;</a>
         {{ T "publish" }}<span class="post-time">&nbsp;<time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;</span>
         {{ with .Params.categories -}}
             <span class="post-category">
@@ -26,7 +26,7 @@
                 {{ range . }}
                     {{- $name := . -}}
                     {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
-                        <i class="far fa-folder"></i>&nbsp;<a href="{{ .Permalink }}">{{ $name }}</a>&nbsp;
+                        <i class="far fa-folder"></i><a href="{{ .Permalink }}">{{ $name }}</a>
                     {{ end -}}
                 {{ end }}
             </span>
@@ -51,7 +51,7 @@
         {{ with .Params.tags }}
             <div class="post-tags">
                 {{ range . }}
-                    &nbsp;&nbsp;<span class="tag"><a href="{{ "tags/" | absURL }}{{ . | urlize }}/"><i class="fas fa-tag"></i>&nbsp;{{ . }}</a></span>
+                    &nbsp;&nbsp;<span class="tag"><a href="{{ "tags/" | absURL }}{{ . | urlize }}/"><i class="fas fa-tag"></i>{{ . }}</a></span>
                 {{ end }}
             </div>
         {{ end }}

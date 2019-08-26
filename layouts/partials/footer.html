@@ -1,8 +1,8 @@
 <footer class="footer">
     <div class="copyright">
-        <span>{{ (printf (T "powered") `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>`) | safeHTML }}&nbsp;|&nbsp;{{ T "theme" }}<a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt&nbsp;<i class="far fa-heart"></i></a></span>
+        <span>{{ (printf (T "powered") `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>`) | safeHTML }}&nbsp;|&nbsp;{{ T "theme" }}<a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart"></i></a></span>
         <br />
-        <i class="far fa-copyright"></i>&nbsp;
+        <i class="far fa-copyright"></i>
         {{- with .Site.Params.since -}}
             <span itemprop="copyrightYear">{{ if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year }}</span>
         {{- else -}}

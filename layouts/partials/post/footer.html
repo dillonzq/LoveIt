@@ -32,7 +32,7 @@
             {{ with .Params.tags }}
                 {{ range . }}
                     <span class="tag">
-                        <a href="{{ "tags/" | absURL }}{{ . | urlize }}/"><i class="fas fa-tag"></i>&nbsp;{{.}}&nbsp;</a>
+                        <a href="{{ "tags/" | absURL }}{{ . | urlize }}/"><i class="fas fa-tag"></i>{{.}}</a>
                     </span>
                 {{ end }}
             {{ end }}
@@ -44,7 +44,7 @@
 
     <div class="post-nav">
         {{ if .PrevInSection }}
-        <a href="{{.PrevInSection.Permalink}}" class="prev" rel="prev" title="{{ .PrevInSection.Title}}"><i class="fas fa-angle-left"></i>&nbsp;{{ .PrevInSection.Title}}</a>
+        <a href="{{.PrevInSection.Permalink}}" class="prev" rel="prev" title="{{ .PrevInSection.Title}}"><i class="fas fa-angle-left"></i>{{ .PrevInSection.Title}}</a>
         {{ end }}
         {{ if .NextInSection }}
         <a href="{{.NextInSection.Permalink}}" class="next" rel="next" title="{{.NextInSection.Title}}">{{.NextInSection.Title}}&nbsp;<i class="fas fa-angle-right"></i></a>

@@ -115,7 +115,7 @@ jQuery(function($) {
             const headers = document.querySelectorAll('.post-content>h' + num);
             for (let i = 0; i < headers.length; i++) {
                 const header = headers[i];
-                header.innerHTML = `<a href="#${header.id}" class="headerlink anchor"><i class="iconfont icon-link"></i></a>${header.innerHTML}`;
+                header.innerHTML = `<a href="#${header.id}" class="headerlink"></a>${header.innerHTML}`;
             }
         }
     };

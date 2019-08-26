@@ -19,19 +19,19 @@
                         {{ range . }}
                             {{- $name := . -}}
                             {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
-                                <i class="far fa-folder"></i>&nbsp;<a href="{{ .Permalink }}">{{ $name }}</a>&nbsp;
+                                <i class="far fa-folder"></i><a href="{{ .Permalink }}">{{ $name }}</a>&nbsp;
                             {{ end -}}
                         {{ end }}
                     </span>
                 {{- end }}
             </div>
             <div class="post-meta-other">
-                <span class="post-time"><i class="far fa-calendar-alt"></i>&nbsp;<time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;</span>
-                <i class="fas fa-pencil-alt"></i>&nbsp;{{ T "wordCount" .WordCount }}&nbsp;
-                <i class="far fa-clock"></i>&nbsp;{{ T "readingTime" .ReadingTime }}&nbsp;
+                <span class="post-time"><i class="far fa-calendar-alt"></i><time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;</span>
+                <i class="fas fa-pencil-alt"></i>{{ T "wordCount" .WordCount }}&nbsp;
+                <i class="far fa-clock"></i>{{ T "readingTime" .ReadingTime }}&nbsp;
                 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.valine.enable | and .Site.Params.valine.visitor -}}
                     <span id="{{ .RelPermalink | relURL }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
-                        <i class="far fa-eye"></i>&nbsp;{{ T "pageviews" | safeHTML }}&nbsp;
+                        <i class="far fa-eye"></i>{{ T "pageviews" | safeHTML }}&nbsp;
                     </span>
                 {{- end -}}
             </div>
