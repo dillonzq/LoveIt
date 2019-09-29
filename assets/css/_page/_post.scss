@@ -182,7 +182,10 @@
     }
   }
 
-  h3::before {
+  h3::before,
+  h4::before,
+  h5::before,
+  h6::before {
     content: "|";
     margin-right: .3125rem;
     color: $post-link-color;

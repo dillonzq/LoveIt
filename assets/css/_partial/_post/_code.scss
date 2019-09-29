@@ -108,7 +108,15 @@ p > code {
   }
 
   /* LineNumbersTable */  .lnt { color: $code-info-color; }
-  /* LineHighlight */  .hl { display: block; width: 100%; background-color: #ffffcc }
+  /* LineHighlight */  .hl {
+    display: block;
+    width: 100%;
+    background-color: darken($code-background-color, 5%);
+
+    .dark-theme & {
+      background-color: darken($code-background-color-dark, 5%);
+    }
+  }
   /* P */ .chroma .p { color: #A9A9B3 }
 
     /* Keyword */  .k { color: #859900 }

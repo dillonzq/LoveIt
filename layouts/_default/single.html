@@ -20,7 +20,7 @@
             {{ $REin = `<sup>\[return\]</sup>` }}
             {{ $REout = printf "<sup>[%s]</sup>" (T "return") }}
             {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<(h[23456]) (id=".+?")>` }}
+            {{ $REin = `<(h[123456]) (id=".+?")>` }}
             {{ $REout = `<a class="post-dummy-target" $2></a><$1>` }}
             {{ $content = replaceRE $REin $REout $content }}
             {{ $REin = `<(sup class="footnote-ref") (id="fnref:.+?")>` }}
