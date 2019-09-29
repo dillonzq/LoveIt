@@ -1,6 +1,6 @@
 # Hugo default output directory
 public
-resources
+/exampleSite/zh/resources
 
 ## OS Files
 # Windows

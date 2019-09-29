@@ -18,7 +18,7 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 * :(fab fa-searchengin): Optimized SEO performance with a correct SEO SCHEMA based on JSON-LD
 * :(fab fa-google): [Google Analytics](https://analytics.google.com/analytics) support
 * :(fas fa-search): Search engine verification support (Google, Bind, Yandex and Baidu)
-* :(fas fa-tachometer-alt): CDN support
+* :(fas fa-tachometer-alt): CDN for all third-party libraries support
 * :(far fa-images): Automatically converted images with Lazy Load by [lazysizes](https://github.com/aFarkas/lazysizes)
 
 #### Appearance and Layout
@@ -27,7 +27,9 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 * :(fas fa-moon): / :(fas fa-sun): Mode
 * :(fas fa-layer-group): A More coerent style beetwen page and sections
 * :(fas fa-ellipsis-h): Pagination support
+* :(far fa-list-alt): Easy-to-use and self-expanding article catalog, while adapting to the mobile side
 * :(fas fa-language): Multilanguage support and I18N ready
+* :(fab fa-css3-alt): Beautiful CSS animation
 
 #### Social and Comment Systems
 

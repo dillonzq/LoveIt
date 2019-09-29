@@ -2,43 +2,70 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c51d4765-deb8-43d2-954c-720527879667/deploy-status)](https://app.netlify.com/sites/hugo-loveit-zh/deploys)
 
-[English README](README.md) | [预览网站](https://hugo-loveit-zh.netlify.com)
+[English README](README.md) | 中文说明
 
 [LoveIt](https://github.com/dillonzq/LoveIt) 是一个**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 
 它的原型基于 [LeaveIt 主题](https://github.com/liuzc/LeaveIt/) 和 [KeepIt 主题](https://github.com/liuzc/LeaveIt/)。
 
+由于三个主题外观的相似性，如果你对于它们的不同之处有疑问，请阅读 [为什么选择 LoveIt](#为什么选择-LoveIt)，以便你能选择最适合你的一个。
+
 ![Hugo 主题 LoveIt](exampleSite/static/images/Apple-Devices-Preview.png)
 
-## 主题预览
+## 主题[预览](https://hugo-loveit-zh.netlify.com)
 
 为了直观地浏览主题特性，这里有一个基于 **LoveIt** 主题渲染的 [预览网站](https://hugo-loveit-zh.netlify.com)。
 
-使用 **LoveIt** 主题的网站：
+## 为什么选择 LoveIt
 
-* [Dillon](https://dillonzq.com)
-* 你的网站
+相较于 LeaveIt 主题 和 KeepIt 主题，LoveIt 主题主要有以下修改
 
-### 特性
+* 固定的标题栏
+* 系统原生字体
+* 主页副标题的打字机效果
+* 焕然一新的主页文章列表，已经兼容最新版 Hugo
+* 所有主题图标替换为 [Font Awesome](https://fontawesome.com/)
+* 大量的样式细节调整，包括颜色、字体大小、边距、代码预览样式
+* 可读性更强的暗黑模式
+* 一些美观的 CSS 动画
+* 易用和自动展开的文章目录，同时适配移动端
+* 为了更适合作为博客主题，去除了画廊功能，但保留了图片懒加载以提高性能
+* 使用 [Font Awesome](https://fontawesome.com/) 图标的扩展 Markdown 语法
+* 支持基于 [Katex](https://katex.org/) 的数学公式
+* 支持基于 [mermaid](https://github.com/knsv/mermaid) 的图表和流程图生成功能
+* 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的内嵌音乐播放器
+* 支持内嵌 Bilibili 视频
+* 支持多种提醒样式的 shortcode
+* 支持自定义对齐和浮动方式的 shortcode
+* 支持所有第三方库的 CDN
+* 更加丰富的自定义设置
 
-#### 性能和 SEO
+所以，如果你更偏好 LoveIt 主题的设计语言和自由度，如果你想便捷地使用扩展的 Font Awesome 图标，如果你想在文章内嵌数学公式、流程图、音乐或是 Bilibili 视频，
+那么，LoveIt 主题可能是更适合你。
+希望你会 LoveIt ❤️!
+
+## 特性
+
+### 性能和 SEO
 
 * 性能优化：在 [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights) 中， 99/100 的移动设备得分和 100/100 的桌面设备得分
 * 使用基于 JSON-LD 格式 的 SEO SCHEMA 文件进行 SEO 优化
 * 支持 [Google Analytics](https://analytics.google.com/analytics)
 * 支持搜索引擎的网站验证 (Google, Bind, Yandex and Baidu)
-* 支持 CDN
+* 支持所有第三方库的 CDN
 * 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为懒加载
 
-#### 外观和布局
+### 外观和布局
 
 * 桌面设备/移动设备 响应式布局
 * 暗黑/明亮 模式
 * 页面和列表保持一致的视觉样式
 * 支持分页
+* 易用和自动展开的文章目录，同时适配移动端
 * 支持多语言和国际化
+* 美观的 CSS 动画
 
-#### 社交和评论系统
+### 社交和评论系统
 
 * 支持 [Gravatar](https://gravatar.com) 头像
 * 支持本地头像
@@ -48,7 +75,7 @@
 * 支持 [Gitalk](https://github.com/gitalk/gitalk) 评论系统
 * 支持 [Valine](https://valine.js.org/) 评论系统
 
-#### 扩展功能
+### 扩展功能
 
 * 基于 Hugo 使用的 chroma 进行代码高亮
 * 使用 [Font Awesome](https://fontawesome.com/) 图标的扩展 Markdown 语法
@@ -139,7 +166,7 @@
 * 你可以点击圆形图标来切换网站 暗黑-明亮 模式。桌面模式下圆形图标在网页右上角，移动设备模式下在网站左上角标题旁边
 * 如果你想自定义切换网站 暗黑-明亮 模式的元素，可以使用一个 class 包含 `.theme-switch` 的元素，详见[此处](https://github.com/dillonzq/LoveIt/blob/master/assets/js/blog.js#L14)
 
-## 主页预览文章模式
+### 主页预览文章模式
 
 如果你想在主页显示文章而不仅仅是个人信息，请打开配置文件 `config.toml`，并增加下面一行：
 
@@ -148,7 +175,7 @@
     home_mode = "post"
 ```
 
-## 增加网站 logo 和封面用于 SEO 优化
+### 增加网站 logo 和封面用于 SEO 优化
 
 增加一个 logo 图片 (127x40) 和一个封面图片 (800x600) 在 `static` 目录。
 

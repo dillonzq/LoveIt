@@ -2,43 +2,74 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit-en/deploys)
 
-[中文 README](README.zh.md) | [Demo Site](https://hugo-loveit-en.netlify.com)
+English README | [中文说明](README.zh.md)
 
 **LoveIt** is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
 
 It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) and [KeepIt Theme](https://github.com/liuzc/LeaveIt/).
 
+Since the three themes have a similar look, if you have questions about their differences,
+read [Why choose LoveIt](#why-choose-loveit) so that you can choose the one that works best for you.
+
 ![Hugo Theme LoveIt](exampleSite/static/images/Apple-Devices-Preview.png)
 
-## Demo
+## [Demo Site](https://hugo-loveit-en.netlify.com)
 
 To see this theme in action, here is a live [demo site](https://hugo-loveit-en.netlify.com) which is rendered with **LoveIt** theme.
 
-Websites using **LoveIt** theme:
+## Why choose LoveIt
 
-* [Dillon](https://dillonzq.com)
-* Yours
+Compared to the original LeaveIt theme and the KeepIt theme, the LoveIt theme has the following modifications.
 
-### Features
+* Fixed title bar
+* System native fonts
+* Home subtitles typewriter effect
+* A new list of home posts, compatible with the latest version of Hugo
+* Replace all theme icons with [Font Awesome](https://fontawesome.com/)
+* A lot of style detail adjustments, including color, font size, margins, code preview style
+* More readable dark mode
+* Some beautiful CSS animations
+* Easy-to-use and self-expanding article catalog, while adapting to the mobile side
+* More suitable as a blog theme, the gallery function has been removed, but the image is lazy loaded to improve performance
+* Extended markdown syntax for [Font Awesome](https://fontawesome.com/) icons
+* Math formula support by [Katex](https://katex.org/)
+* Diagram syntax shortcode support by [mermaid](https://github.com/knsv/mermaid)
+* Embedded music player support by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
+* Bilibili player support
+* Kinds of admonitions shortcode support
+* Custom align and float style shortcodes support
+* CDN for all third-party libraries support
 
-#### Performance and SEO
+In short,
+if you prefer the design language and freedom of the LoveIt theme,
+if you want to use the extended Font Awesome icons conveniently,
+if you want to embed math formulas, flowcharts, music or Bilibili videos in your posts,
+the LoveIt theme may be more suitable for you.
+
+I hope you will LoveIt ❤️!
+
+## Features
+
+### Performance and SEO
 
 * Optimized for performance: 99/100 on mobile and 100/100 on desktop in [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
 * Optimized SEO performance with a correct SEO SCHEMA based on JSON-LD
 * [Google Analytics](https://analytics.google.com/analytics) support
 * Search engine verification support (Google, Bind, Yandex and Baidu)
-* CDN support
+* CDN for all third-party libraries support
 * Automatically converted images with Lazy Load by [lazysizes](https://github.com/aFarkas/lazysizes)
 
-#### Appearance and Layout
+### Appearance and Layout
 
 * Desktops/Mobiles Responsive layout
 * Dark/Light Mode
 * A More coerent style beetwen page and sections
 * Pagination support
+* Easy-to-use and self-expanding article catalog, while adapting to the mobile side
 * Multilanguage support and I18N ready
+* Beautiful CSS animation
 
-#### Social and Comment Systems
+### Social and Comment Systems
 
 * Gravatar support by [Gravatar](https://gravatar.com)
 * Local Avatar support
@@ -48,7 +79,7 @@ Websites using **LoveIt** theme:
 * Gitalk comment system support by [Gitalk](https://github.com/gitalk/gitalk)
 * Valine comment system support by [Valine](https://valine.js.org/)
 
-#### Extended Features
+### Extended Features
 
 * Automatically highlighting code by chroma in Hugo
 * Extended markdown syntax for [Font Awesome](https://fontawesome.com/) icons
@@ -140,7 +171,7 @@ Because some features are only in production mode, so you need to add a `product
 * You can click the circle icon to toggle dark-light mode. In the desktop version the circle icon is to the right and in the mobile version is positioned to the left, close to the site title.
 * If you want to make your own theme toggle-able element, you can create an element with a class `.theme-switch`. See [here](https://github.com/dillonzq/LoveIt/blob/master/assets/js/blog.js#L14)
 
-## Home Post model
+### Home Post model
 
 If you want to show posts on index instead of a personal profile, just open `config.toml`, add the following line:
 
@@ -149,7 +180,7 @@ If you want to show posts on index instead of a personal profile, just open `con
     home_mode = "post"
 ```
 
-## Add logo and cover for SEO
+### Add logo and cover for SEO
 
 Add a logo image (127x40) and a cover image (800x600) in the `static` directory.
 

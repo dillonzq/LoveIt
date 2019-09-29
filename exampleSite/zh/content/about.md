@@ -18,7 +18,7 @@ draft: false
 * :(fab fa-searchengin): 使用基于 JSON-LD 格式 的 SEO SCHEMA 文件进行 SEO 优化
 * :(fab fa-google): 支持 [Google Analytics](https://analytics.google.com/analytics)
 * :(fas fa-search): 支持搜索引擎的网站验证 (Google, Bind, Yandex and Baidu)
-* :(fas fa-tachometer-alt): 支持 CDN
+* :(fas fa-tachometer-alt): 支持所有第三方库的 CDN
 * :(far fa-images): 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为懒加载
 
 #### 外观和布局
@@ -27,7 +27,9 @@ draft: false
 * :(fas fa-moon): / :(fas fa-sun): 模式
 * :(fas fa-layer-group): 页面和列表保持一致的视觉样式
 * :(fas fa-ellipsis-h): 支持分页
+* :(far fa-list-alt): 易用和自动展开的文章目录，同时适配移动端
 * :(fas fa-language): 支持多语言和国际化
+* :(fab fa-css3-alt): 美观的 CSS 动画
 
 #### 社交和评论系统
 
