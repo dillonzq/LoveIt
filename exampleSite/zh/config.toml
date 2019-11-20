@@ -5,7 +5,7 @@ title = "LoveIt 主题"                                     # 网站标题
 theme = "LoveIt"                                         # 主题
 enableGitInfo = false                                    # 是否使用 git 信息来生成文章的上次修改时间
 hasCJKLanguage = true                                    # 是否包括中日韩文字
-paginate = 8                                             # post 模式下，主页每页显示的文章数目
+paginate = 12                                            # 默认每页列表显示的文章数目
 enableEmoji = true                                       # 是否使用 emoji 代码
 enableRobotsTXT = true                                   # 是否使用 robots.txt
 googleAnalytics = ""                                     # [UA-XXXXXXXX-X] 谷歌分析代号
@@ -70,8 +70,9 @@ staticDir = ["../static", "../../assets/others"]         # 静态文件目录
 
                                                       #### 主页配置
   home_mode = "post"                                     # [post, other] 主页模式
-  avatar = "images/avatar.png"                          # 主页显示的头像路径
-  subtitle = "一个简洁、优雅且高效的 Hugo 主题"              # 主页显示的网站副标题
+  home_paginate = 6                                      # post 主页模式下，主页每页显示的文章数目，默认等于 paginate 值
+  avatar = "images/avatar.png"                           # 主页显示的头像路径
+  subtitle = "一个简洁、优雅且高效的 Hugo 主题"               # 主页显示的网站副标题
 
   socialShare = true                                     # 在文章页面是否使用分享功能
 

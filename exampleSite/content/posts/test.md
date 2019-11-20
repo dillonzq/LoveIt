@@ -4,7 +4,7 @@ date: 2019-08-04T22:49:56+08:00
 lastmod: 2019-08-17T22:41:56+08:00
 draft: true
 description: "This is a test page."
-show_in_homepage: false
+show_in_homepage: true
 show_description: false
 
 tags: []
@@ -24,7 +24,7 @@ dev: true
 
 Test all features in development[^link test].
 
-[^link test]: http://www.google.com/
+[^link test]: https://www.google.com/
 
 <!--more-->
 
@@ -286,7 +286,7 @@ int a = 1;
 
 ## Test Img
 
-![Gif](http://pvuonn2xy.bkt.clouddn.com/uploads/2019-08-08%2013:59:32-2019-08-08%2013.56.05.gif "Title")
+![Gif](https://static.dillonzq.com/images/20190817130904-U6cPUk.jpg "Title")
 
 ## Test Align
 

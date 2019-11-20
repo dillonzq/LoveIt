@@ -7,8 +7,8 @@
     {{ end }}
     {{ if $avatar }}
         <div class="home-avatar">
-            <a href="/posts/">
-                <img src={{ $avatar }} alt="avatar">
+            <a href="/posts">
+                <img src={{ $avatar | relURL }} alt="avatar">
             </a>
         </div>
     {{ end }}

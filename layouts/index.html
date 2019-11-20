@@ -3,8 +3,14 @@
         <div class="post-warp">
             {{- partial "home/profile.html" . -}}
 
-            {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") -}}
-            {{ range where $paginator.Pages "Params.show_in_homepage" "!=" false -}}
+            {{ $paginator := where .Site.RegularPages "Type" "posts" -}}
+            {{ $paginator = where $paginator "Params.show_in_homepage" "!=" false -}}
+            {{ with .Site.Params.home_paginate -}}
+                {{ $paginator = $.Paginate $paginator . -}}
+            {{ else -}}
+                {{ $paginator = $.Paginate $paginator -}}
+            {{ end -}}
+            {{ range $paginator.Pages -}}
                 {{ .Render "summary" -}}
             {{ end -}}
 

@@ -10,7 +10,7 @@
 
 由于三个主题外观的相似性，如果你对于它们的不同之处有疑问，请阅读 [为什么选择 LoveIt](#为什么选择-LoveIt)，以便你能选择最适合你的一个。
 
-![Hugo 主题 LoveIt](exampleSite/static/images/Apple-Devices-Preview.png)
+![Hugo 主题 LoveIt](images/Apple-Devices-Preview.png)
 
 ## 主题[预览](https://hugo-loveit-zh.netlify.com)
 

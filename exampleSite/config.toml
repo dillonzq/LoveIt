@@ -5,7 +5,7 @@ title = "LoveIt Theme"                                   # website title
 theme = "LoveIt"                                         # theme
 enableGitInfo = false                                    # whether to use git commit log to generate lastmod record
 hasCJKLanguage = false                                   # whether to include chinese/japanese/korean
-paginate = 8                                             # amount of posts in each page only when home_mode is post
+paginate = 12                                            # default amount of posts in each pages
 enableEmoji = true                                       # whether to use emoji code
 enableRobotsTXT = true                                   # whether to use robots.txt
 googleAnalytics = ""                                     # [UA-XXXXXXXX-X] google analytics code
@@ -70,7 +70,8 @@ staticDir = ["static", "../assets/others"]               # static directories
 
                                                       #### Home Page Info
   home_mode = "post"                                     # [post, other] home mode
-  avatar = "images/avatar.png"                          # URL of avatar shown in home page
+  home_paginate = 6                                      # special amount of posts in each home post page
+  avatar = "images/avatar.png"                           # URL of avatar shown in home page
   subtitle = "A Clean, Elegant but Advanced Hugo Theme"  # subtitle shown in home page
 
   socialShare = true                                     # whether to show social share links in post page
