@@ -30,31 +30,31 @@ staticDir = ["../static", "../../assets/others"]         # 静态文件目录
   priority = 0.5
 
 [Permalinks]                                          #### Permalinks 信息 (https://gohugo.io/content-management/urls/#permalinks)
-  posts = "/:year/:month/:filename/"
+  posts = ":year/:month/:filename"
 
 [menu]                                                #### 菜单信息
   [[menu.main]]
     identifier = "posts"
     name = "文章"
-    url = "/posts/"
+    url = "posts"
     weight = 1
 
   [[menu.main]]
     identifier = "tags"
     name = "标签"
-    url = "/tags/"
+    url = "tags"
     weight = 2
 
   [[menu.main]]
     identifier = "categories"
     name = "目录"
-    url = "/categories/"
+    url = "categories"
     weight = 3
 
   [[menu.main]]
     identifier = "about"
     name = "关于"
-    url = "/about/"
+    url = "about"
     weight = 4
 
   [[menu.main]]
@@ -70,7 +70,7 @@ staticDir = ["../static", "../../assets/others"]         # 静态文件目录
 
                                                       #### 主页配置
   home_mode = "post"                                     # [post, other] 主页模式
-  avatar = "/images/avatar.png"                          # 主页显示的头像路径
+  avatar = "images/avatar.png"                          # 主页显示的头像路径
   subtitle = "一个简洁、优雅且高效的 Hugo 主题"              # 主页显示的网站副标题
 
   socialShare = true                                     # 在文章页面是否使用分享功能
@@ -104,6 +104,8 @@ staticDir = ["../static", "../../assets/others"]         # 静态文件目录
     katex_js = ''
     katex_auto_render_js = ''
     mermaid_js = ''
+    echarts_js = ''
+    echarts_macarons_js = ''
     typeit_js = ''
     jquery_countdown_js = ''
     aplayer_css = ''
@@ -188,17 +190,17 @@ staticDir = ["../static", "../../assets/others"]         # 静态文件目录
   [params.publisher]                                     # 出版者信息，仅用于 SEO
     name = "XXXX"
     [params.publisher.logo]
-      url = "/logo.png"
+      url = "logo.png"
       width = 127
       height = 40
 
   [params.logo]                                          # 网站图标信息，仅用于 SEO
-    url = "/logo.png"
+    url = "logo.png"
     width = 127
     height = 40
 
   [params.image]                                         # 网站图片信息，仅用于 SEO
-    url = "/cover.png"
+    url = "cover.png"
     width = 800
     height = 600
 

@@ -1,4 +1,13 @@
-/* iPads (landscape) ----------- */
+@media only screen and (max-width: 1800px) {
+  .post-warp {
+    max-width: 780px;
+
+    .post-toc {
+      margin-left: 800px;
+    }
+  }
+}
+
 @media only screen and (max-width: 1300px) {
   .post-warp {
     max-width: 560px;
@@ -9,7 +18,6 @@
   }
 }
 
-/* iPads (portrait) ----------- */
 @media only screen and (max-width: 1080px) {
   .navbar {
     .navbar-container {

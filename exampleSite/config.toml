@@ -30,31 +30,31 @@ staticDir = ["static", "../assets/others"]               # static directories
   priority = 0.5
 
 [Permalinks]                                          #### Permalinks Info (https://gohugo.io/content-management/urls/#permalinks)
-  posts = "/:year/:month/:filename/"
+  posts = ":year/:month/:filename"
 
 [menu]                                                #### Menu Info
   [[menu.main]]
     identifier = "posts"
     name = "Posts"
-    url = "/posts/"
+    url = "posts"
     weight = 1
 
   [[menu.main]]
     identifier = "tags"
     name = "Tags"
-    url = "/tags/"
+    url = "tags"
     weight = 2
 
   [[menu.main]]
     identifier = "categories"
     name = "Categories"
-    url = "/categories/"
+    url = "categories"
     weight = 3
 
   [[menu.main]]
     identifier = "about"
     name = "About"
-    url = "/about/"
+    url = "about"
     weight = 4
 
   [[menu.main]]
@@ -70,7 +70,7 @@ staticDir = ["static", "../assets/others"]               # static directories
 
                                                       #### Home Page Info
   home_mode = "post"                                     # [post, other] home mode
-  avatar = "/images/avatar.png"                          # URL of avatar shown in home page
+  avatar = "images/avatar.png"                          # URL of avatar shown in home page
   subtitle = "A Clean, Elegant but Advanced Hugo Theme"  # subtitle shown in home page
 
   socialShare = true                                     # whether to show social share links in post page
@@ -104,8 +104,8 @@ staticDir = ["static", "../assets/others"]               # static directories
     katex_js = ''
     katex_auto_render_js = ''
     mermaid_js = ''
-    echarts_macarons_js = ''
     echarts_js = ''
+    echarts_macarons_js = ''
     typeit_js = ''
     jquery_countdown_js = ''
     aplayer_css = ''
@@ -190,17 +190,17 @@ staticDir = ["static", "../assets/others"]               # static directories
   [params.publisher]                                     # Publisher Info just for SEO
     name = "XXXX"
     [params.publisher.logo]
-      url = "/logo.png"
+      url = "logo.png"
       width = 127
       height = 40
 
   [params.logo]                                          # Website Log Info just for SEO
-    url = "/logo.png"
+    url = "logo.png"
     width = 127
     height = 40
 
   [params.image]                                         # Website Image Info just for SEO
-    url = "/cover.png"
+    url = "cover.png"
     width = 800
     height = 600
 
