@@ -20,6 +20,7 @@
 
     .navbar-header a {
       padding: 0 8px;
+      font-size: 20px;
 
       i {
         line-height: 2em;
@@ -65,6 +66,10 @@
       padding-left: 1em;
       box-sizing: border-box;
 
+      .navbar-header-title {
+        font-size: 20px;
+      }
+
       .menu-toggle {
         cursor: pointer;
         line-height: 4.5em;
@@ -72,7 +77,7 @@
         span {
           display: block;
           background: #000;
-          width: 36px;
+          width: 24px;
           height: 2px;
           -webkit-border-radius: 3px;
           -moz-border-radius: 3px;
