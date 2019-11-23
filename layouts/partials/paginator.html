@@ -1,10 +1,10 @@
-{{ if gt $.paginator.TotalPages 1 -}}
+{{ if gt $.Paginator.TotalPages 1 -}}
     <ul class="pagination">
         {{- $.Scratch.Set "paginator.ellipsed" false -}}
-        {{ range $.paginator.Pagers -}}
+        {{ range $.Paginator.Pagers -}}
             {{ $right := sub .TotalPages .PageNumber -}}
             {{ $showNumber := or (le .PageNumber 1) (eq $right 0) -}}
-            {{ $showNumber := or $showNumber (and (gt .PageNumber (sub $.paginator.PageNumber 3)) (lt .PageNumber (add $.paginator.PageNumber 3))) -}}
+            {{ $showNumber := or $showNumber (and (gt .PageNumber (sub $.Paginator.PageNumber 3)) (lt .PageNumber (add $.Paginator.PageNumber 3))) -}}
             {{ if $showNumber -}}
                 {{ $.Scratch.Set "paginator.ellipsed" false -}}
                 {{ $.Scratch.Set "paginator.shouldEllipse" false -}}
@@ -13,7 +13,7 @@
                 {{ $.Scratch.Set "paginator.ellipsed" true -}}
             {{ end -}}
             {{ if $showNumber -}}
-                <li class="page-item {{ if eq . $.paginator }}active{{ end }}">
+                <li class="page-item {{ if eq . $.Paginator }}active{{ end }}">
                     <span class="page-link">
                         <a href="{{ .URL }}">{{ .PageNumber }}</a>
                     </span>
