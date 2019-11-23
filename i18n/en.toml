@@ -28,6 +28,11 @@ other = "Categories"
 other = "More"
 # === Pagination ===
 
+# === partials/comments.html ===
+[valineLang]
+other = "en"
+# === partials/comments.html ===
+
 # === partials/footer.html ===
 [powered]
 other = "Powered by %s"

@@ -57,9 +57,7 @@
             {{ .Site.Params.cdn.valine_js | safeHTML }}
         {{ else }}
             {{- $res := resources.Get "js/lib/valine/Valine.min.js" | resources.Minify -}}
-    {{ .Site.Params.cdn.fontawesome_free_css | safeHTML }}
-    {{ .Site.Params.cdn.fontawesome_free_css | safeHTML }}
-    <script src="{{ $res.RelPermalink }}"></script>
+            <script src="{{ $res.RelPermalink }}"></script>
         {{ end }}
         <script type="text/javascript">
             new Valine({
@@ -73,6 +71,7 @@
                 placeholder: "{{ .Site.Params.valine.placeholder }}",
                 visitor: "{{ .Site.Params.valine.visitor }}",
                 recordIP: "{{ .Site.Params.valine.recordIP }}",
+                lang: "{{ T `valineLang` }}",
             });
         </script>
     {{- end -}}

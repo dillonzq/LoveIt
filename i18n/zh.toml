@@ -28,6 +28,11 @@ other = "分类"
 other = "更多"
 # === Pagination ===
 
+# === partials/comments.html ===
+[valineLang]
+other = "zh-cn"
+# === partials/comments.html ===
+
 # === partials/footer.html ===
 [powered]
 other = "由 %s 强力驱动"
