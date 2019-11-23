@@ -76,7 +76,7 @@
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.typeit_js }}
     {{ $typeit = .Site.Params.cdn.typeit_js }}
 {{ else }}
-    {{ $res := resources.Get "js/lib/typeit/typeit.min.js" | resources.Minify }}
+    {{ $res := resources.Get "js/lib/typeit/typeit.modern.min.js" | resources.Minify }}
     {{ $typeit = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
 <!-- jQuery.countdown https://github.com/hilios/jQuery.countdown -->
