@@ -1,4 +1,5 @@
 {{ $_hugo_config := `{ "version": 1 }` -}}
-<div class="align-right">
+<!-- [left, right] -->
+<div class={{ .Get 0 | printf "float-%s" }}>
     {{- .Inner -}}
 </div>

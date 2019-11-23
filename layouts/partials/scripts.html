@@ -54,7 +54,8 @@
     {{ $res := resources.Get "js/lib/mermaid/mermaid.min.js" | resources.Minify }}
     {{ $mermaid = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
-{{ $mermaid = delimit (slice $mermaid "<script>mermaid.initialize({startOnLoad: true, theme: null,});</script>") "" }}
+{{ $mermaidInit := "<script>mermaid.initialize({startOnLoad: false, theme: null});</script>" }}
+{{ $mermaid = delimit (slice $mermaid $mermaidInit) "" }}
 <!-- ECharts https://github.com/apache/incubator-echarts -->
 {{ $echarts_js := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.echarts_js }}
@@ -117,21 +118,22 @@
 {{ $smooth_scroll | safeHTML }}
 
 {{ if .IsPage }}
-    {{/*  dev feature */}}
+    {{/* dev feature */}}
     {{ if .Params.dev }}
         {{ with .Scratch.Get "echartsMap" }}
             {{ $echarts | safeHTML }}
-            {{ $echartsMap := . }}
             <script>window.echartsMap = {
-                {{ range $key, $var := $echartsMap }}
+                {{ range $key, $var := . }}
                     {{ $key }}: {{ $var | safeJS }},
                 {{ end }}
             };window.echartsArr=[];</script>
         {{ end }}
     {{ end }}
+    {{/* dev feature */}}
 
-    {{ if .Scratch.Get "diagram" }}
+    {{ with .Scratch.Get "mermaidMap" }}
         {{ $mermaid | safeHTML }}
+        <script>window.mermaidMap = {{ . | jsonify | safeJS }};</script>
     {{ end }}
 
     {{ if or .Params.math .Site.Params.math }}

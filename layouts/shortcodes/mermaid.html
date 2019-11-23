@@ -1,0 +1,10 @@
+<!-- shuffle md5 as id -->
+{{ $id := delimit (split (md5 .Inner) "" | shuffle) "" | printf "mermaid-%s" -}}
+{{ $mermaidMap := .Page.Scratch.Get "mermaidMap" -}}
+{{ if $mermaidMap -}}
+    {{ $mermaidMap = trim .Inner "\n" | dict $id | merge $mermaidMap -}}
+{{ else -}}
+    {{ $mermaidMap = trim .Inner "\n" | dict $id -}}
+{{ end -}}
+{{ .Page.Scratch.Set "mermaidMap" $mermaidMap -}}
+<div class="mermaid" id="{{ $id }}"></div>

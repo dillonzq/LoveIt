@@ -1,0 +1,5 @@
+{{ $_hugo_config := `{ "version": 1 }` -}}
+<!-- [left, center, right] -->
+<div class={{ .Get 0 | printf "align-%s" }}>
+    {{- .Inner -}}
+</div>

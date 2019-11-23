@@ -33,7 +33,7 @@ jQuery(function($) {
     _Blog.dynamicToTop = function() {
         const min = 300;
         var $toTop = $('#dynamic-to-top');
-        $(window).scroll(function() {
+        $(window).scroll(() => {
             var scrollTop = $(window).scrollTop();
             if (typeof document.body.style.maxHeight === 'undefined') {
                 $toTop.css({
@@ -103,7 +103,6 @@ jQuery(function($) {
             && (temp = newTocList.children[0].children[0]).tagName === 'UL') {
             newTocList = temp;
         }
-
         if (newTocList !== oldTocList) toc.replaceChild(newTocList, oldTocList);
     };
 
@@ -220,19 +219,33 @@ jQuery(function($) {
         }
     };
 
+    _Blog.mermaid = function() {
+        if (window.mermaidMap) {
+            const mermaidAPI = mermaid.mermaidAPI
+            Object.keys(mermaidMap).forEach((id) => {
+                const element = document.getElementById(id);
+                mermaidAPI.render("d" + id, mermaidMap[id], (svgCode) => {
+                    element.innerHTML = svgCode;
+                    const svg = element.firstChild;
+                    svg.style.width = "100%"
+                }, element);
+            });
+        }
+    }
+
     _Blog.echarts = function() {
         if (window.echartsMap) {
             for (let i = 0; i < echartsArr.length; i++) {
                 echartsArr[i].dispose();
             }
             echartsArr = [];
-            Object.keys(echartsMap).forEach(function(id) {
+            Object.keys(echartsMap).forEach((id) => {
                 let myChart = echarts.init(document.getElementById(id), window.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
                 myChart.setOption(echartsMap[id]);
                 echartsArr.push(myChart);
             });
             window.addEventListener("resize", function() {
-                this.setTimeout(function(){
+                this.setTimeout(() => {
                     for (let i = 0; i < echartsArr.length; i++) {
                         echartsArr[i].resize();
                     }
@@ -275,13 +288,14 @@ jQuery(function($) {
         }
     };
 
-    $(document).ready(function() {
+    $(document).ready(() => {
         _Blog.toggleMobileMenu();
         _Blog.toggleTheme();
         _Blog.changeTitle();
         _Blog.dynamicToTop();
         _Blog.chroma();
         _Blog.responsiveTable();
+        _Blog.mermaid();
         _Blog.echarts();
         _Blog.countdown();
         _Blog.typeit();

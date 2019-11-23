@@ -344,6 +344,10 @@
   @import "../_partial/_post/admonition";
 
   .mermaid {
+    width: 100%;
+    margin: 3% auto;
+    text-align: center;
+
     @import "../_mermaid/neutral/index";
 
     .dark-theme & {
@@ -364,6 +368,7 @@
     height: 0;
     padding-bottom: 75%;
     margin: 3% auto;
+    text-align: center;
 
     iframe {
       position: absolute;
