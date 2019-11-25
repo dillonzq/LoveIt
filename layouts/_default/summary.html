@@ -18,7 +18,7 @@
     </h1>
 
     <div class="post-meta">
-        <a class="author" href="{{.Site.BaseURL }}" rel="author"><i class="fas fa-user-circle fa-fw"></i>{{ $author }}&nbsp;</a>
+        <a class="author" href="/" rel="author"><i class="fas fa-user-circle fa-fw"></i>{{ $author }}&nbsp;</a>
         {{ T "publish" }}&nbsp;<time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;
         {{ with .Params.categories -}}
             <span class="post-category">

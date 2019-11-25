@@ -11,7 +11,7 @@
                 <span itemprop="copyrightYear">{{ now.Year }}</span>
             {{- end -}}
             {{- with .Site.Author.name -}}
-                <span class="author" itemprop="copyrightHolder">&nbsp;<a href="{{ $.Site.BaseURL }}">{{ . }}</a></span>
+                <span class="author" itemprop="copyrightHolder">&nbsp;<a href="/">{{ . }}</a></span>
             {{- end -}}
             {{- with .Site.Params.icp -}}
                 <span class="icp">&nbsp;|&nbsp;{{ . | safeHTML }}</span>
