@@ -52,7 +52,6 @@
 
     <!-- valine -->
     {{- if .Site.Params.valine.enable -}}
-	    <br/>
         <div id="vcomments"></div>
         {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.valine_js }}
             {{ .Site.Params.cdn.valine_js | safeHTML }}
