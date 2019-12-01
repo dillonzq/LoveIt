@@ -19,8 +19,6 @@ pygmentsCodefences = true
 pygmentsUseClasses = true
 pygmentsCodefencesGuessSyntax = true
 
-staticDir = ["static", "../assets/others"]               # static directories
-
 [author]                                              #### Author Info
   name = "XXXX"
 
