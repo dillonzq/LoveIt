@@ -135,6 +135,7 @@ staticDir = ["static", "../assets/others"]               # static directories
     #Pinterest = "xxxx"
     #Reddit = "xxxx"
     #Codepen = "xxxx"
+    #FreeCodeCamp = "xxxx"
     #Bitbucket = "xxxx"
     #Stackoverflow = "xxxx"
     #Weibo = "xxxx"
