@@ -4,7 +4,7 @@
             {{- partial "home/profile.html" . -}}
 
             {{ $paginator := where .Site.RegularPages "Type" "posts" -}}
-            {{ $paginator = where $paginator "Params.show_in_homepage" "!=" false -}}
+            {{ $paginator = where $paginator "Params.exclude_from_homepage" "!=" true -}}
             {{ with .Site.Params.home_paginate -}}
                 {{ $paginator = $.Paginate $paginator . -}}
             {{ else -}}
