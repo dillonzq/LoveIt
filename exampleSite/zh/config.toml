@@ -174,6 +174,7 @@ staticDir = ["../static", "../../assets/others"]         # 静态文件目录
     #Researchgate = "xxxx"
     #Mastodon = "xxxx"
     #Thingiverse = "xxxx"
+    #Devto = "xxxx"
 
   [params.share]                                         # 文章页面的分享信息设置
     enable = true

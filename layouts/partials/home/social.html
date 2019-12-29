@@ -157,6 +157,9 @@
 {{ with .Site.Params.Social.Researchgate}}
     <a href="https://www.researchgate.net/profile/{{ . }}" rel="me noopener noreffer" target="_blank"><i class="fab fa-researchgate fa-fw"></i></a>
 {{ end }}
+{{ with .Site.Params.Social.Devto}}
+    <a href="https://dev.to/{{ . }}" rel="me noopener noreffer" target="_blank"><i class="fab fa-dev fa-fw"></i></a>
+{{ end }}
 {{ with .Site.Params.Social.Mastodon}}
     <a href="https://mastodon.social/{{ . }}" rel="me noopener noreffer" target="_blank"><i class="fab fa-mastodon fa-fw"></i></a>
 {{ end }}
