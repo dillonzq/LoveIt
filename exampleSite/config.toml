@@ -179,6 +179,7 @@ unsafe = true
     #Researchgate = "xxxx"
     #Mastodon = "xxxx"
     #Thingiverse = "xxxx"
+    #Devto = "xxxx"
 
   [params.share]                                         # Social Share Links in post page
     enable = true
