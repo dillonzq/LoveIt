@@ -160,6 +160,9 @@
 {{ with .Site.Params.Social.Mastodon}}
     <a href="https://mastodon.social/{{ . }}" rel="me noopener noreffer" target="_blank"><i class="fab fa-mastodon fa-fw"></i></a>
 {{ end }}
+{{ with .Site.Params.Social.Devto}}
+    <a href="https://dev.to/{{ . }}" rel="me noopener noreffer" target="_blank"><i class="fab fa-dev fa-fw" title="Dev.To"></i></a>
+{{ end }}
 {{ with .Site.Params.Social.Email}}
     <a href="mailto:{{.}}" rel="me noopener noreffer"><i class="far fa-envelope" target="_blank fa-fw"></i></a>
 {{ end }}
