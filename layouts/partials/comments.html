@@ -75,4 +75,21 @@
             });
         </script>
     {{- end -}}
+
+    <!-- facebook comment -->
+    {{- if .Site.Params.facebook.enable -}}
+        <div id="fb-root"></div>
+        <script 
+            async 
+            defer 
+            crossorigin="anonymous" 
+            src="https://connect.facebook.net/{{ .Site.Params.facebook.languageCode }}/sdk.js#xfbml=1&version=v5.0&appId={{ .Site.Params.facebook.appId }}&autoLogAppEvents=1"
+        ></script>
+        <div 
+            class="fb-comments" 
+            data-href="{{ .Site.Params.baseURL }}{{ .Permalink | absURL }}"
+            data-width="{{ .Site.Params.facebook.width }}" 
+            data-numposts="{{ .Site.Params.facebook.numPosts }}"
+        ></div>
+    {{- end -}}
 {{- end }}

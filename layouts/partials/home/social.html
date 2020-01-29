@@ -49,6 +49,9 @@
 {{ with .Site.Params.Social.Codepen}}
     <a href="https://codepen.io/{{.}}" rel="me noopener noreffer" target="_blank"><i class="fab fa-codepen fa-fw" title="Codepen"></i></a>
 {{ end }}
+{{ with .Site.Params.Social.FreeCodeCamp}}
+    <a href="https://freecodecamp.org/{{.}}" rel="me noopener noreffer" target="_blank"><i class="fab fa-free-code-camp fa-fw"></i></a>
+{{ end }}
 {{ with .Site.Params.Social.Bitbucket}}
     <a href="https://bitbucket.org/{{.}}" rel="me noopener noreffer" target="_blank"><i class="fab fa-bitbucket fa-fw" title="Bitbucket"></i></a>
 {{ end }}
@@ -101,7 +104,7 @@
     <a href="https://foursquare.com/{{.}}" rel="me noopener noreffer" target="_blank"><i class="fab fa-foursquare fa-fw" title="Foursquare"></i></a>
 {{ end }}
 {{ with .Site.Params.Social.Hackernews}}
-    <a href="https://news.ycombinator.com/user?id={{.}}" rel="me noopener noreffer" target="_blank"><i class="fab fa-ycombinator fa-fw" title="Hackernews"></i></a>
+    <a href="https://news.ycombinator.com/user?id={{.}}" rel="me noopener noreffer" target="_blank"><i class="fab fa-hacker-news fa-fw" title="Hackernews"></i></a>
 {{ end }}
 {{ with .Site.Params.Social.Kickstarter}}
     <a href="https://kickstarter.com/profile/{{.}}" rel="me noopener noreffer" target="_blank"><i class="fab fa-kickstarter fa-fw" title="Kickstarter"></i></a>
@@ -160,6 +163,9 @@
 {{ with .Site.Params.Social.Mastodon}}
     <a href="https://mastodon.social/{{ . }}" rel="me noopener noreffer" target="_blank"><i class="fab fa-mastodon fa-fw" title="Mastodon"></i></a>
 {{ end }}
+{{ with .Site.Params.Social.Devto}}
+    <a href="https://dev.to/{{ . }}" rel="me noopener noreffer" target="_blank"><i class="fab fa-dev fa-fw" title="Dev.To"></i></a>
+{{ end }}
 {{ with .Site.Params.Social.Email}}
-    <a href="mailto:{{.}}" rel="me noopener noreffer"><i class="far fa-envelope" target="_blank fa-fw" title="Email"></i></a>
+    <a href="mailto:{{.}}" rel="me noopener noreffer"><i class="far fa-envelope fa-fw" target="_blank" title="Email"></i></a>
 {{ end }}
