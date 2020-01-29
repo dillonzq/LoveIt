@@ -225,6 +225,13 @@ unsafe = true
     placeholder = "Your comment ..."
     visitor = true
     recordIP = true
+  
+  [params.facebook]                                      # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
+    enable = false
+    width = "100%"
+    numPosts = 10
+    appId = ""
+    languageCode = "en_US"
 
 [privacy]                                             #### Privacy Info (https://gohugo.io/about/hugo-and-gdpr/)
   [privacy.googleAnalytics]

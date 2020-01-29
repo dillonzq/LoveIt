@@ -78,6 +78,7 @@ I hope you will LoveIt ❤️!
 * Disqus comment system support by [Disqus](https://disqus.com)
 * Gitalk comment system support by [Gitalk](https://github.com/gitalk/gitalk)
 * Valine comment system support by [Valine](https://valine.js.org/)
+* Facebook comment system support by [Facebook](https://developers.facebook.com/docs/plugins/comments/)
 
 ### Extended Features
 
@@ -207,6 +208,7 @@ Thanks to the authors of following resources included in the theme:
 * [MetingJS](https://github.com/metowolf/MetingJS)
 * [Gitalk](https://github.com/gitalk/gitalk)
 * [Valine](https://valine.js.org/)
+* [Facebook](https://developers.facebook.com/docs/plugins/comments/)
 
 ## Author
 
