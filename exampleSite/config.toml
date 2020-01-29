@@ -19,8 +19,6 @@ pygmentsCodefences = true
 pygmentsUseClasses = true
 pygmentsCodefencesGuessSyntax = true
 
-staticDir = ["static", "../assets/others"]               # static directories
-
 [markup]
 [markup.goldmark]
 [markup.goldmark.renderer]
