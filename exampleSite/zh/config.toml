@@ -1,3 +1,4 @@
+baseURL = "https://example.com/"
 languageCode = "zh"                                      # 网站语言标识
 defaultContentLanguage = "zh"                            # [en, zh, ...] 设定主题的国际化
 title = "LoveIt 主题"                                     # 网站标题
