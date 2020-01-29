@@ -21,6 +21,11 @@ pygmentsCodefencesGuessSyntax = true
 
 staticDir = ["static", "../assets/others"]               # static directories
 
+[markup]
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+
 [author]                                              #### Author Info
   name = "XXXX"
 
