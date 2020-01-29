@@ -135,6 +135,7 @@
 
 * `assets/css/_varibales.scss`： 你可以覆盖 `_variables.scss` 中的变量来自定义样式
 * `assets/css/_custom.scss`： 你可以把自定义的样式放在这个文件
+*  需要使用hugo extended版本编译sass，否则修改css无法生效
 
 ## 网站图标、浏览器配置、网站清单
 
