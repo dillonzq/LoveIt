@@ -1,3 +1,4 @@
+baseURL = "https://example.com/"
 languageCode = "en"                                      # website language
 defaultContentLanguage = "en"                            # [en, zh, ...] determines which i18n file to use
 title = "LoveIt Theme"                                   # website title
