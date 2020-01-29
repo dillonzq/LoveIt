@@ -19,7 +19,10 @@ pygmentsCodefences = true
 pygmentsUseClasses = true
 pygmentsCodefencesGuessSyntax = true
 
-staticDir = ["static", "../assets/others"]               # static directories
+[markup]
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
 
 [author]                                              #### Author Info
   name = "XXXX"
@@ -135,6 +138,7 @@ staticDir = ["static", "../assets/others"]               # static directories
     #Pinterest = "xxxx"
     #Reddit = "xxxx"
     #Codepen = "xxxx"
+    #FreeCodeCamp = "xxxx"
     #Bitbucket = "xxxx"
     #Stackoverflow = "xxxx"
     #Weibo = "xxxx"
@@ -174,6 +178,7 @@ staticDir = ["static", "../assets/others"]               # static directories
     #Researchgate = "xxxx"
     #Mastodon = "xxxx"
     #Thingiverse = "xxxx"
+    #Devto = "xxxx"
 
   [params.share]                                         # Social Share Links in post page
     enable = true
@@ -221,6 +226,13 @@ staticDir = ["static", "../assets/others"]               # static directories
     placeholder = "Your comment ..."
     visitor = true
     recordIP = true
+  
+  [params.facebook]                                      # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
+    enable = false
+    width = "100%"
+    numPosts = 10
+    appId = ""
+    languageCode = "en_US"
 
 [privacy]                                             #### Privacy Info (https://gohugo.io/about/hugo-and-gdpr/)
   [privacy.googleAnalytics]
