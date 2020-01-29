@@ -96,8 +96,6 @@
     {{ $res := resources.Get "css/lib/aplayer/APlayer.min.css" | resources.Minify }}
     {{ $aplayer_css = printf "<link rel=\"stylesheet\" href=\"%s\">" $res.RelPermalink }}
 {{ end }}
-{{ $res := resources.Get "css/lib/aplayer/APlayer.dark.scss" | resources.ToCSS | resources.Minify }}
-{{ $aplayer_dark_css := printf "<link rel=\"stylesheet\" href=\"%s\">" $res.RelPermalink }}
 {{ $aplayer_js := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.aplayer_js }}
     {{ $aplayer_js = .Site.Params.cdn.aplayer_js }}
@@ -105,7 +103,7 @@
     {{ $res := resources.Get "js/lib/aplayer/APlayer.min.js" | resources.Minify }}
     {{ $aplayer_js = printf "<script src=\"%s\"></script>" $res.RelPermalink }}
 {{ end }}
-{{ $aplayer := delimit (slice $aplayer_css $aplayer_dark_css $aplayer_js) "" }}
+{{ $aplayer := delimit (slice $aplayer_css $aplayer_js) "" }}
 <!-- MetingJS https://github.com/metowolf/MetingJS -->
 {{ $meting := "" }}
 {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.meting_js }}
