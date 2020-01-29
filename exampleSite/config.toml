@@ -226,7 +226,7 @@ unsafe = true
     placeholder = "Your comment ..."
     visitor = true
     recordIP = true
-  
+
   [params.facebook]                                      # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
     enable = false
     width = "100%"
