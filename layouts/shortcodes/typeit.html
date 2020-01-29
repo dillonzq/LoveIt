@@ -10,7 +10,7 @@
         <div id={{ $id }}></div>
     {{ else if .Get "code" }}
         <!-- highlight code content without line number -->
-        {{ $content = highlight $content (.Get "code") "linenos=" }}
+        {{ $content = highlight $content (.Get "code") "linenos=false" }}
         <!-- delete outer label -->
         {{ $content = replaceRE `<div class="highlight"><pre class="chroma"><code[^<>]*>(?s)(.*)</code></pre></div>` "$1" $content }}
         <!-- parsing markdown links -->

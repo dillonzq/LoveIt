@@ -269,15 +269,16 @@ jQuery(function($) {
         if (window.typeitArr) {
             for (let i = 0; i < typeitArr.length; i++) {
                 const group = typeitArr[i];
-                (function typeone (i) {
+                (function typeone(i) {
+                    const content = document.getElementById(`r${group[i]}`).innerHTML;
                     if (i === group.length - 1) {
                         new TypeIt(`#${group[i]}`, {
-                            strings: document.getElementById(`r${group[i]}`).innerHTML,
+                            strings: content,
                         }).go();
                         return;
                     }
                     let instance = new TypeIt(`#${group[i]}`, {
-                        strings: document.getElementById(`r${group[i]}`).innerHTML,
+                        strings: content,
                         afterComplete: () => {
                             instance.destroy();
                             typeone(i + 1);
