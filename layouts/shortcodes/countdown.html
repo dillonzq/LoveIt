@@ -8,5 +8,5 @@
     {{ else -}}
         {{ .Page.Scratch.Set "countdownMap" $new -}}
     {{ end -}}
-    <div id="{{ $id }}"></div>
+    <div id="{{ $id }}" style={{ .Get "style" | safeCSS }}></div>
 {{ end -}}
