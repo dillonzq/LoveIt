@@ -24,9 +24,14 @@ other = "分类"
 # === Taxonomy ===
 
 # === Pagination ===
-[More]
+[more]
 other = "更多"
 # === Pagination ===
+
+# === partials/header.html ===
+[switchTheme]
+other = "切换主题"
+# === partials/header.html ===
 
 # === partials/comments.html ===
 [valineLang]
@@ -78,7 +83,7 @@ other = "返回"
 [home]
 other = "主页"
 
-[readmore]
+[readMore]
 other = "阅读全文"
 
 [day]

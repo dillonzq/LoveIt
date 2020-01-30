@@ -22,13 +22,13 @@
     <!-- gitalk Comment System-->
     {{- if .Site.Params.gitalk.owner -}}
         <div id="gitalk-container"></div>
-        {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.gitalk_css }}
+        {{ if .Site.Params.cdn.gitalk_css }}
             {{ .Site.Params.cdn.gitalk_css | safeHTML }}
         {{ else }}
             {{- $res := resources.Get "css/lib/gitalk/gitalk.css" | resources.Minify -}}
             <link rel="stylesheet" href="{{ $res.RelPermalink }}">
         {{ end }}
-        {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.gitalk_js }}
+        {{ if .Site.Params.cdn.gitalk_js }}
             {{ .Site.Params.cdn.gitalk_js | safeHTML }}
         {{ else }}
             {{- $res := resources.Get "js/lib/gitalk/gitalk.min.js" | resources.Minify -}}
@@ -53,7 +53,7 @@
     <!-- valine -->
     {{- if .Site.Params.valine.enable -}}
         <div id="vcomments"></div>
-        {{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.valine_js }}
+        {{ if .Site.Params.cdn.valine_js }}
             {{ .Site.Params.cdn.valine_js | safeHTML }}
         {{ else }}
             {{- $res := resources.Get "js/lib/valine/Valine.min.js" | resources.Minify -}}
@@ -79,16 +79,16 @@
     <!-- facebook comment -->
     {{- if .Site.Params.facebook.enable -}}
         <div id="fb-root"></div>
-        <script 
-            async 
-            defer 
-            crossorigin="anonymous" 
+        <script
+            async
+            defer
+            crossorigin="anonymous"
             src="https://connect.facebook.net/{{ .Site.Params.facebook.languageCode }}/sdk.js#xfbml=1&version=v5.0&appId={{ .Site.Params.facebook.appId }}&autoLogAppEvents=1"
         ></script>
-        <div 
-            class="fb-comments" 
+        <div
+            class="fb-comments"
             data-href="{{ .Site.Params.baseURL }}{{ .Permalink | absURL }}"
-            data-width="{{ .Site.Params.facebook.width }}" 
+            data-width="{{ .Site.Params.facebook.width }}"
             data-numposts="{{ .Site.Params.facebook.numPosts }}"
         ></div>
     {{- end -}}

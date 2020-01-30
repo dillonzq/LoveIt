@@ -24,9 +24,14 @@ other = "Categories"
 # === Taxonomy ===
 
 # === Pagination ===
-[More]
+[more]
 other = "More"
 # === Pagination ===
+
+# === partials/header.html ===
+[switchTheme]
+other = "Switch Theme"
+# === partials/header.html ===
 
 # === partials/comments.html ===
 [valineLang]
@@ -75,7 +80,7 @@ other = "Back"
 [home]
 other = "Home"
 
-[readmore]
+[readMore]
 other = "Read More"
 
 [day]
