@@ -54,6 +54,3 @@
     {{ $res := resources.Get "css/lib/animate/animate.min.css" | resources.Minify -}}
     <link rel="stylesheet" href="{{ $res.RelPermalink }}">
 {{ end }}
-{{ if or .Params.math .Site.Params.math }}
-    {{ partial "math.html" . }}
-{{ end }}
