@@ -97,9 +97,6 @@ other = "分"
 
 [second]
 other = "秒"
-
-[return]
-other = "返回"
 # === posts/single.html ===
 
 # === 404.html ===

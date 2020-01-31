@@ -1,5 +1,6 @@
 ---
 author: "Hugo Authors"
+author_link: "https://gohugo.io/"
 title: "Markdown Syntax Guide"
 date: 2020-01-30T21:57:40+08:00
 lastmod: 2020-01-30T21:57:40+08:00
@@ -17,7 +18,6 @@ tags: [
 ]
 categories: [
     "themes",
-    "syntax",
 ]
 
 featured_image: /images/markdown.png
@@ -25,7 +25,7 @@ featured_image_preview: ""
 
 comment: true
 toc: true
-autoCollapseToc: true
+auto_collapse_toc: true
 math: false
 ---
 

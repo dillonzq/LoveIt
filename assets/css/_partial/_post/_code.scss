@@ -65,7 +65,7 @@ p > code {
   }
 
   @each $sign, $text in $code-type-list {
-    & .#{$sign} table::after {
+    &.#{$sign} table::after {
       content: $text;
     }
   }

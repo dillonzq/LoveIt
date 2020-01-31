@@ -73,12 +73,13 @@ jQuery(function($) {
         });
     };
 
-    _Blog.chroma = function() {
+    _Blog.chroma = function () {
         const blocks = document.querySelectorAll('.highlight > .chroma');
         for (let i = 0; i < blocks.length; i++) {
             const block = blocks[i];
-            const afterHighLight = block.querySelector('pre.chroma > code');
-            const lang = afterHighLight ? afterHighLight.className : '';
+            const codes = block.querySelectorAll('pre.chroma > code');
+            const code = codes[codes.length - 1];
+            const lang = code ? code.className.toLowerCase() : '';
             block.className += ' ' + lang;
         }
     };

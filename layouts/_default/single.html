@@ -17,7 +17,7 @@
             {{- $content = replaceRE $REin $REout $content -}}
 
             {{- $REin = `<sup>\[return\]</sup>` -}}
-            {{- $REout = printf "<sup>[%s]</sup>" (T "return") -}}
+            {{- $REout = `↩︎` -}}
             {{- $content = replaceRE $REin $REout $content -}}
 
             {{- $REin = `<(h[23456]) (id=".+?")>` -}}
@@ -26,6 +26,10 @@
 
             {{- $REin = `<(.+) (id="fnref:.+?")>` -}}
             {{- $REout = `<a class="post-dummy-target" $2></a><$1>` -}}
+            {{- $content = replaceRE $REin $REout $content -}}
+
+            {{- $REin = `<li (id="fn:.+?")(.*?)>\s?<p>` -}}
+            {{- $REout = `<li $2><p><a class="post-dummy-target" $1></a>` -}}
             {{- $content = replaceRE $REin $REout $content -}}
 
             {{- $content | safeHTML -}}

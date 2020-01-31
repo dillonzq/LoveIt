@@ -3,22 +3,35 @@
     max-width: 780px;
 
     .post-toc {
+      width: 300px;
       margin-left: 800px;
     }
   }
 }
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1440px) {
+  .warpper {
+    max-width: 680px;
+
+    .post-toc {
+      width: 240px;
+      margin-left: 700px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
   .warpper {
     max-width: 560px;
 
     .post-toc {
+      width: 180px;
       margin-left: 580px;
     }
   }
 }
 
-@media only screen and (max-width: 1080px) {
+@media only screen and (max-width: 960px) {
   .navbar {
     .navbar-container {
       margin: 0 2rem;
@@ -52,7 +65,7 @@
 
     .categories-card {
       .card-item {
-        width: 95%;
+        width: 100%;
       }
     }
   }

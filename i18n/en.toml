@@ -94,9 +94,6 @@ other = "min"
 
 [second]
 other = "sec"
-
-[return]
-other = "return"
 # === posts/single.html ===
 
 # === 404.html ===

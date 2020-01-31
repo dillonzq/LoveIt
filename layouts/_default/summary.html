@@ -1,9 +1,7 @@
 <article class="post" itemscope itemtype="http://schema.org/Article">
     {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
-    {{- $author := .Site.Author.name -}}
-    {{- if isset .Params "author" -}}
-       {{- $author = .Site.Author.name -}}
-    {{- end -}}
+    {{- $author := .Params.author | default .Site.Author.name -}}
+    {{- $author_link := .Params.author_link | default .Site.Author.link | default .Site.BaseURL -}}
 
     <!--featured_image-->
     {{- with .Params.featured_image -}}
@@ -19,11 +17,13 @@
     </h1>
 
     <div class="post-meta">
-        <a class="author" href="{{.Site.BaseURL }}" rel="author"><i class="fas fa-user-circle fa-fw"></i>{{ $author }}&nbsp;</a>
+        <a class="author" href="{{ $author_link }}" rel="author" target="_blank">
+            <i class="fas fa-user-circle fa-fw"></i>{{ $author }}&nbsp;
+        </a>
         {{ T "publish" }}&nbsp;<time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;
         {{- with .Params.categories -}}
             <span class="post-category">
-                {{- T "included" -}}
+                {{- T "included" -}}&nbsp;
                 {{- range . -}}
                     {{- $name := . -}}
                     {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
@@ -41,12 +41,15 @@
             </p>
         {{- else -}}
             {{- $summary := .Summary -}}
+
             {{- $REin := `:\(([\w- ]+?)\):` -}}
             {{- $REout := `<i class="$1 fa-fw"></i>` -}}
             {{- $summary  = replaceRE $REin $REout $summary  -}}
+
             {{- $REin = `\[(.+?)\]\^\((.+?)\)` -}}
             {{- $REout = `<strong><ruby>$1<rt>$2</rt></ruby></strong>` -}}
             {{- $summary  = replaceRE $REin $REout $summary -}}
+
             {{- $summary  | safeHTML -}}
         {{- end -}}
     </div>
@@ -55,7 +58,9 @@
         {{- with .Params.tags -}}
             <div class="post-tags">
                 {{- range . -}}
-                    &nbsp;&nbsp;<span class="tag"><a href="{{ "tags/" | absURL }}{{ . | urlize }}/"><i class="fas fa-tag fa-fw"></i>{{ . }}</a></span>
+                    <span class="tag">
+                        &nbsp;<a href="{{ "tags/" | absURL }}{{ . | urlize }}/"><i class="fas fa-tag fa-fw"></i>&nbsp;{{ . }}</a>
+                    </span>
                 {{- end -}}
             </div>
         {{- end -}}

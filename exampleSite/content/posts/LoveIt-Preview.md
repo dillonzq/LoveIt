@@ -16,7 +16,7 @@ featured_image_preview: ""
 
 comment: true
 toc: true
-autoCollapseToc: true
+auto_collapse_toc: true
 math: true
 ---
 

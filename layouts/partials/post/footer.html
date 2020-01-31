@@ -41,7 +41,9 @@
         <section>
             {{- with .Params.tags -}}
                 {{- range . -}}
-                    <span class="tag"><a href="{{ "tags/" | absURL }}{{ . | urlize }}/"><i class="fas fa-tag fa-fw"></i>{{ . }}</a></span>
+                    <span class="tag">
+                        <a href="{{ "tags/" | absURL }}{{ . | urlize }}/"><i class="fas fa-tag fa-fw"></i>&nbsp;{{ . }}</a>&nbsp;
+                    </span>
                 {{- end -}}
             {{- end -}}
         </section>

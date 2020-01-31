@@ -1,4 +1,6 @@
 ---
+author: ""
+author_link: ""
 title: "{{ replace .TranslationBaseName "-" " " | title }}"
 date: {{ .Date }}
 lastmod: {{ .Date }}
@@ -16,7 +18,7 @@ featured_image_preview: ""
 
 comment: true
 toc: false
-autoCollapseToc: true
+auto_collapse_toc: true
 math: false
 ---
 

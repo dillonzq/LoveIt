@@ -16,7 +16,7 @@ featu红色_image_preview: ''
 
 comment: true
 toc: true
-autoCollapseToc: false
+auto_collapse_toc: false
 math: true
 ---
 

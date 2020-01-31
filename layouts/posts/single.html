@@ -2,20 +2,20 @@
 
 {{- define "content" -}}
     {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
-    {{- $author := .Site.Author.name -}}
-    {{- if isset .Params "author" -}}
-       {{- $author = .Site.Author.name -}}
-    {{- end }}
+    {{- $author := .Params.author | default .Site.Author.name -}}
+    {{- $author_link := .Params.author_link | default .Site.Author.link | default .Site.BaseURL -}}
 
     <article class="warpper">
         <h1 class="post-title animated flipInX">{{ .Title }}</h1>
 
         <div class="post-meta">
             <div class="post-meta-main">
-                <a class="author" href="{{.Site.BaseURL }}" rel="author"><i class="fas fa-user-circle fa-fw"></i>{{ $author }}&nbsp;</a>
+                <a class="author" href="{{ $author_link }}" rel="author" target="_blank">
+                    <i class="fas fa-user-circle fa-fw"></i>{{ $author }}&nbsp;
+                </a>
                 {{- with .Params.categories -}}
                     <span class="post-category">
-                        {{- T "included" -}}
+                        {{- T "included" -}}&nbsp;
                         {{- range . -}}
                             {{- $name := . -}}
                             {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
@@ -47,8 +47,8 @@
         {{- if or .Params.toc (and .Site.Params.toc (ne .Params.toc false)) -}}
             <div class="post-toc" id="post-toc">
                 <h2 class="post-toc-title">{{ T "toc" }}</h2>
-                {{- $globalAutoCollapseToc := .Site.Params.autoCollapseToc | default true }}
-                <div class="post-toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false)) }} always-active{{ end }}">
+                {{- $globalAutoCollapseToc := .Site.Params.auto_collapse_toc | default true }}
+                <div class="post-toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.auto_collapse_toc false)) }} always-active{{ end }}">
                     {{- .TableOfContents -}}
                 </div>
             </div>
@@ -81,15 +81,19 @@
             {{- $content = replaceRE $REin $REout $content -}}
 
             {{- $REin = `<sup>\[return\]</sup>` -}}
-            {{- $REout = printf "<sup>[%s]</sup>" (T "return") -}}
+            {{- $REout = `↩︎` -}}
             {{- $content = replaceRE $REin $REout $content -}}
 
             {{- $REin = `<(h[23456]) (id=".+?")>` -}}
             {{- $REout = `<a class="post-dummy-target" $2></a><$1>` -}}
             {{- $content = replaceRE $REin $REout $content -}}
 
-            {{- $REin = `<(.+) (id="fnref:.+?")>` -}}
+            {{- $REin = `<(.+?) (id="fnref:.+?")>` -}}
             {{- $REout = `<a class="post-dummy-target" $2></a><$1>` -}}
+            {{- $content = replaceRE $REin $REout $content -}}
+
+            {{- $REin = `<li (id="fn:.+?")(.*?)>\s?<p>` -}}
+            {{- $REout = `<li $2><p><a class="post-dummy-target" $1></a>` -}}
             {{- $content = replaceRE $REin $REout $content -}}
 
             {{- $content | safeHTML -}}
