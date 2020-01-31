@@ -6,13 +6,13 @@ draft: false
 description: "This is a LoveIt theme preview and documentation page."
 show_in_homepage: true
 show_description: false
-license: ''
+license: ""
 
-tags: ['Hugo', 'Theme']
-categories: ['Documentation']
+tags: ["Hugo", "Theme"]
+categories: ["Documentation"]
 
-featured_image: ''
-featured_image_preview: ''
+featured_image: ""
+featured_image_preview: ""
 
 comment: true
 toc: true

@@ -1,6 +1,6 @@
 {{ if eq (getenv "HUGO_ENV") "production" | and .IsPage | and (ne .Params.comment false) -}}
     <!-- Disqus Comment System-->
-    {{- if .Site.DisqusShortname -}}
+    {{- if .Site.Params.disqus.shortname -}}
         <div id="disqus_thread"></div>
         <script type="text/javascript">
             (function() {
@@ -10,7 +10,7 @@
                     return;
 
                 var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
-                var disqus_shortname = "{{ .Site.DisqusShortname }}";
+                var disqus_shortname = "{{ .Site.Params.disqus.shortname }}";
                 dsq.src = "//" + disqus_shortname + ".disqus.com/embed.js";
                 (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
             })();

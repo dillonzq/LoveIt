@@ -20,7 +20,7 @@
         <!-- fix "<br />" location error which is a bug of Typeit HTML parser -->
         {{ $content = replaceRE `<br /></span>` "</span><br />" $content }}
         <div id={{ printf "r%s" $id }} hidden=true>{{ $content | safeHTML }}</div>
-        <div class="code" id={{ $id }}></div>
+        <div class="highlight" id={{ $id }}></div>
     {{ else }}
         {{ $tag := .Get "tag" | default "p" }}
         {{ $content = $content | markdownify | chomp }}

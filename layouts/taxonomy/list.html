@@ -1,7 +1,7 @@
 {{ define "title" }}{{ .Title }} | {{ T .Data.Singular | default (humanize .Data.Singular) }} | {{ .Site.Title }}{{ end }}
 
 {{ define "content" }}
-    <div class="post-warp archive">
+    <div class="warpper archive">
         <h2 class="post-title animated pulse faster">
             {{ $taxonomy := .Data.Singular }}
             {{ if eq $taxonomy "category" }}

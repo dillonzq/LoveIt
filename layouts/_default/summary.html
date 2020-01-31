@@ -9,7 +9,8 @@
     {{ with .Params.featured_image }}
         {{ $image := $.Params.featured_image_preview | default . }}
         <div class="post-featured-image-preview">
-            <img src=/images/loading.svg data-sizes=auto data-src={{ $image }} alt="featured image" class="lazyload">
+            {{ $res := resources.Get "svg/loading.svg" | minify }}
+            <img src="{{ $res.RelPermalink }}" data-sizes="auto" data-src="{{ $image }}" alt="featured image" class="lazyload">
         </div>
     {{ end }}
     <!-- end featured_image-->
@@ -42,7 +43,7 @@
             {{ $summary  = replaceRE $REin $REout $summary  }}
             {{ $REin = `\[(.+?)\]\^\((.+?)\)` }}
             {{ $REout = `<strong><ruby>$1<rt>$2</rt></ruby></strong>` }}
-            {{ $summary  = replaceRE $REin $REout $summary  }}
+            {{ $summary  = replaceRE $REin $REout $summary }}
             {{ $summary  | safeHTML }}
         {{ end }}
     </div>

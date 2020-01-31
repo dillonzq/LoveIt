@@ -157,27 +157,23 @@ jQuery(function($) {
             };
             changeTocState();
 
-            const HEADERFIX = 100;
+            const HEADERFIX = 150;
             const $toclink = $('.toc-link');
             const $headerlink = $('.headerlink');
             const $tocLinkLis = $('.post-toc-content li');
-            const activeIndex = function() {
+            const activeIndex = function () {
                 const scrollTop = $(window).scrollTop();
                 const headerlinkTop = $.map($headerlink, function(link) {
                     return $(link).offset().top;
                 });
-                const headerLinksOffsetForSearch = $.map(headerlinkTop, function(offset) {
-                    return offset - HEADERFIX;
-                });
                 const searchActiveTocIndex = function(array, target) {
                     for (let i = 0; i < array.length - 1; i++) {
-                        if (target > array[i] && target <= array[i + 1]) return i;
+                        if ( target < array[i + 1]) return i;
                     }
-                    if (target > array[array.length - 1]) return array.length - 1;
-                    return 0;
+                    return array.length - 1;
                 };
 
-                const activeTocIndex = searchActiveTocIndex(headerLinksOffsetForSearch, scrollTop);
+                const activeTocIndex = searchActiveTocIndex(headerlinkTop, scrollTop + HEADERFIX);
 
                 $($toclink).removeClass('active');
                 $($tocLinkLis).removeClass('has-active');

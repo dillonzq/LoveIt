@@ -1,5 +1,5 @@
 @media only screen and (max-width: 1800px) {
-  .post-warp {
+  .warpper {
     max-width: 780px;
 
     .post-toc {
@@ -9,7 +9,7 @@
 }
 
 @media only screen and (max-width: 1300px) {
-  .post-warp {
+  .warpper {
     max-width: 560px;
 
     .post-toc {
@@ -25,7 +25,7 @@
     }
   }
 
-  .post-warp {
+  .warpper {
     max-width: 80%;
 
     .post-toc {
@@ -38,7 +38,7 @@
   }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 560px) {
   .navbar {
     display: none;
   }
@@ -47,7 +47,7 @@
     display: block;
   }
 
-  .post-warp {
+  .warpper {
     max-width: 100%;
 
     .categories-card {

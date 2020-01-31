@@ -106,6 +106,9 @@ other = "返回"
 [pageNotFound]
 other = "页面没找到"
 
+[pageNotFoundText]
+other = "抱歉，您要查找的页面不存在。"
+
 [backToHome]
 other = "回到主页"
 # === 404.html ===

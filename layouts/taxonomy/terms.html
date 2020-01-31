@@ -5,7 +5,7 @@
     {{ $terms := .Data.Terms.ByCount }}
     {{ $type := .Type }}
 
-    <div class="post-warp archive">
+    <div class="warpper archive">
         <h2 class="post-title animated pulse faster">
                 {{ T "all" | humanize}}{{ T $taxonomies | default $taxonomies | humanize }}
         </h2>

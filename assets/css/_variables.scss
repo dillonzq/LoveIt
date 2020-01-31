@@ -3,6 +3,10 @@
 // ==============================
 
 // ========== Global ========== //
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900);
+
+$global-font-family: Lato, -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif !default;
+
 // Background color of the body
 $global-background-color: #fff !default;
 $global-background-color-dark: #292a2d !default;
@@ -31,7 +35,7 @@ $navbar-active-color-dark: #fff !default;
 $post-link-color: #2d96bd !default;
 $post-link-color-dark: #eee !default;
 $post-link-hover-color: #ef3982 !default;
-$post-link-hover-color-dark: #fff !default;
+$post-link-hover-color-dark: #2d96bd !default;
 
 $pagination-link-color: #2d96bd !default;
 $pagination-link-color-dark: #a9a9b3 !default;
@@ -52,7 +56,7 @@ $code-color: #E74C3C !default;
 $code-color-dark: #E5BF78 !default;
 
 // Color of the code background.
-$code-background-color: whitesmoke !default;
+$code-background-color: #f5f5f5 !default;
 $code-background-color-dark: #272C34 !default;
 
 $code-info-color: #cacaca !default;
@@ -61,7 +65,7 @@ $code-info-color: #cacaca !default;
 $code-font-size: 13px !default;
 
 // Font family of the code.
-$code-font-family: Consolas, Monaco, Menlo, "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace !default;
+$code-font-family: Source Code Pro, Consolas, Liberation Mono, Menlo, Courier, monospace !default;
 
 // Code type list.
 $code-type-list: (

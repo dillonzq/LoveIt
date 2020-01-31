@@ -7,14 +7,14 @@
 
 .post-meta {
   font-size: .88rem;
-  color: rgba(85, 85, 85, 0.52941) !important;
+  color: $global-font-secondary-color;
 
   span {
     display: inline-block;
   }
 
   .dark-theme & {
-    color: $global-font-secondary-color-dark !important;
+    color: $global-font-secondary-color-dark;
   }
 
   a {
@@ -246,7 +246,6 @@
       max-width: 100%;
       margin: .625rem 0;
       border-spacing: 0;
-      box-shadow: 2px 2px 3px rgba(0,0,0,.125);
       background: $table-background-color;
 
       .dark-theme & {
@@ -306,7 +305,7 @@
     margin: 0 0 2em 0;
     position: relative;
 
-    &:before {
+    &::before {
       content: '\201C';
       position: absolute;
       top: 0em;
@@ -323,8 +322,8 @@
       }
     }
 
-    &:after {
-      content: "#blockquote" attr(cite);
+    &::after {
+      content: '#blockquote' attr(cite);
       display: block;
       text-align: right;
       font-size: 0.875em;
@@ -337,6 +336,14 @@
 
     .dark-theme & {
       border-color: $global-border-color-dark;
+    }
+  }
+
+  .footnotes {
+    color: $global-font-secondary-color;
+
+    .dark-theme & {
+      color: $global-font-secondary-color-dark;
     }
   }
 
@@ -420,45 +427,9 @@
     .code {
       padding: .375rem;
       font-size: .875rem;
-      font-family: Consolas, Monaco, Menlo, Consolas, monospace;
+      font-family: $code-font-family;
       font-weight: bold;
       word-break: break-all;
-
-      .k {
-        color: #D371E3;
-      }
-
-      .kt {
-        color: #D371E3;
-      }
-
-      .kc {
-        color: #D371E3;
-      }
-
-      .o {
-        color: #D371E3;
-      }
-
-      .nf {
-        color: #F16473;
-      }
-
-      .na {
-        color: #41B1F5;
-      }
-
-      .s {
-        color: #8BC56F;
-      }
-
-      .n {
-        color: #DB975C;
-      }
-
-      .c1 {
-        color: #7E848F;
-      }
     }
   }
 
@@ -544,20 +515,20 @@
   }
 
   .post-nav {
-    &:before,
-    &:after {
-      content: " ";
+    &::before,
+    &::after {
+      content: ' ';
       display: table;
     }
 
     & a.prev,
     & a.next {
-      font-weight: 600;
       font-size: 1rem;
+      font-weight: 600;
 
+      transition-duration: .3s;
       transition-property: transform;
       transition-timing-function: ease-out;
-      transition-duration: 0.3s;
     }
 
     & a.prev {

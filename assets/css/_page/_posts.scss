@@ -24,7 +24,7 @@
     width: 100%;
     padding: 30% 0 0;
     position: relative;
-    margin-bottom: 1rem;
+    margin: 0.6rem auto;
 
     img {
       position: absolute;
@@ -32,7 +32,7 @@
       height: 100%;
       left: 0;
       top: 0;
-      object-fit: scale-down;
+      object-fit: cover;
     }
   }
 

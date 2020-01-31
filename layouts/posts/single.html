@@ -7,7 +7,7 @@
        {{ $author = .Site.Author.name }}
     {{ end }}
 
-    <article class="post-warp">
+    <article class="warpper">
         <h1 class="post-title animated flipInX">{{ .Title }}</h1>
 
         <div class="post-meta">
@@ -39,7 +39,8 @@
 
         {{ with .Params.featured_image }}
             <div class="post-featured-image">
-                <img src=/images/loading.svg data-sizes=auto data-src={{ . }} alt="featured image" class="lazyload">
+                {{ $res := resources.Get "svg/loading.svg" | minify }}
+                <img src="{{ $res.RelPermalink }}" data-sizes="auto" data-src="{{ . }}" alt="featured image" class="lazyload">
             </div>
         {{ end }}
 
@@ -65,14 +66,8 @@
 
         <div class="post-content">
             {{ $content := .Content }}
-            {{ $REin := `<img src="([^"]+)" alt="([^"]+)?" />` }}
-            {{ $REout := "<figure><img src=/images/loading.svg data-sizes=auto data-src=$1 alt=$2 class=lazyload><figcaption class=image-caption>$2</figcaption></figure>" }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<img src="([^"]+)" alt="([^"]+)?" title="([^"]+)?" />` }}
-            {{ $REout = "<figure><img src=/images/loading.svg data-src=$1 data-sizes=auto alt=$2 title=$3 class=lazyload><figcaption class=image-caption>$2</figcaption></figure>" }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `:\(([\w- ]+?)\):` }}
-            {{ $REout = `<i class="$1 fa-fw"></i>` }}
+            {{ $REin := `:\(([\w- ]+?)\):` }}
+            {{ $REout := `<i class="$1 fa-fw"></i>` }}
             {{ $content = replaceRE $REin $REout $content }}
             {{ $REin = `\[(.+?)\]\^\((.+?)\)` }}
             {{ $REout = `<strong><ruby>$1<rt>$2</rt></ruby></strong>` }}
@@ -80,14 +75,11 @@
             {{ $REin = `<sup>\[return\]</sup>` }}
             {{ $REout = printf "<sup>[%s]</sup>" (T "return") }}
             {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<(h[123456]) (id=".+?")>` }}
+            {{ $REin = `<(h[23456]) (id=".+?")>` }}
             {{ $REout = `<a class="post-dummy-target" $2></a><$1>` }}
             {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<(sup class="footnote-ref") (id="fnref:.+?")>` }}
+            {{ $REin = `<(.+) (id="fnref:.+?")>` }}
             {{ $REout = `<a class="post-dummy-target" $2></a><$1>` }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<(li) (id="fn:.+?")>` }}
-            {{ $REout = `<$1><a class="post-dummy-target" $2></a>` }}
             {{ $content = replaceRE $REin $REout $content }}
             {{ $content | safeHTML }}
         </div>

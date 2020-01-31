@@ -48,7 +48,7 @@ other = "Theme - "
 
 # === posts/single.html ===
 [toc]
-other = "Table of Contents"
+other = "Contents"
 
 [publish]
 other = "published on"
@@ -102,6 +102,9 @@ other = "return"
 # === 404.html ===
 [pageNotFound]
 other = "Page not found"
+
+[pageNotFoundText]
+other = "The page you're looking for doesn't exist. Sorry."
 
 [backToHome]
 other = "Back to Home"

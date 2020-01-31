@@ -6,13 +6,13 @@ draft: true
 description: ""
 show_in_homepage: true
 show_description: false
-license: ''
+license: ""
 
 tags: []
 categories: []
 
-featured_image: ''
-featured_image_preview: ''
+featured_image: ""
+featured_image_preview: ""
 
 comment: true
 toc: false
