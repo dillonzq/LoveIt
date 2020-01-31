@@ -21,6 +21,8 @@ enableRobotsTXT = true
 googleAnalytics = ""
 # copyright description used only for seo schema
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+# date format
+dateFormatToUse = "2006-01-02"
 
 # Markup related configuration in Hugo
 [markup]

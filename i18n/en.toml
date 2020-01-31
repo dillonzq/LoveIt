@@ -69,7 +69,7 @@ other = "<span class=leancloud-visitors-count></span> pageviews"
 other = "Author"
 
 [lastMod]
-other = "This article is updated with %s"
+other = "The article was updated on %s"
 
 [license]
 other = "Published under the %s license"

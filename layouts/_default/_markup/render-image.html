@@ -1,6 +1,6 @@
 <figure>
     <img
-        {{ $res := resources.Get "svg/loading.svg" | minify }}
+        {{- $res := resources.Get "svg/loading.svg" | minify -}}
         src="{{ $res.RelPermalink }}"
         data-sizes="auto"
         data-src="{{ .Destination | safeURL }}"

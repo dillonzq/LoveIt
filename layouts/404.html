@@ -1,4 +1,6 @@
-{{- define "title" }}{{ T "pageNotFound" | printf "404 %s" }} | {{ .Site.Title }}{{ end -}}
+{{- define "title" }}
+    {{- T "pageNotFound" | printf "404 %s" }} | {{ .Site.Title -}}
+{{- end -}}
 
 {{- define "content" -}}
     <div class="notfound">

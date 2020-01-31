@@ -1,4 +1,6 @@
-{{- define "title" }}{{ T "all" | humanize}}{{ T .Section | default .Section | humanize }} | {{ .Site.Title }}{{ end -}}
+{{- define "title" }}
+    {{- T "all" | humanize}}{{ T .Section | default .Section | humanize }} | {{ .Site.Title -}}
+{{- end -}}
 
 {{- define "content" -}}
     {{- $data := .Data -}}

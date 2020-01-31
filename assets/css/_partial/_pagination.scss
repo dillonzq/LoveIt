@@ -31,11 +31,11 @@
     }
 
     &:hover a {
-      color: $pagination-link-active-color;
+      color: $pagination-link-hover-color;
     }
 
     .dark-theme &:hover a {
-      color: $pagination-link-active-color-dark;
+      color: $pagination-link-hover-color-dark;
     }
 
     &:before,
@@ -44,14 +44,14 @@
       content: "";
       width: 0;
       height: 3px;
-      background: $pagination-link-active-color;
+      background: $pagination-link-hover-color;
       transition: 0.3s;
       bottom: 0px;
     }
 
     .dark-theme &:before,
     .dark-theme &:after {
-      background: $pagination-link-active-color-dark;
+      background: $pagination-link-hover-color-dark;
     }
 
     &:before .active,
@@ -77,11 +77,11 @@
 
     &.active {
       a {
-        color: $pagination-link-active-color;
+        color: $pagination-link-hover-color;
       }
 
       .dark-theme & a {
-        color: $pagination-link-active-color-dark;
+        color: $pagination-link-hover-color-dark;
       }
 
       &:before,

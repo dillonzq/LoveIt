@@ -1,27 +1,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noodp" />
 <meta name="Description" content="{{ .Params.description | default .Site.Params.description }}">
-{{ with .Site.Params.google_verification -}}
+{{- with .Site.Params.google_verification -}}
     <meta name="google-site-verification" content="{{ . }}" />
-{{ end -}}
-{{ with .Site.Params.bing_verification -}}
+{{- end -}}
+{{- with .Site.Params.bing_verification -}}
     <meta name="msvalidate.01" content="{{ . }}" />
-{{ end -}}
-{{ with .Site.Params.yandex_verification -}}
+{{- end -}}
+{{- with .Site.Params.yandex_verification -}}
     <meta name="yandex-verification" content="{{ . }}" />
-{{ end -}}
-{{ with .Site.Params.pinterest_verification -}}
+{{- end -}}
+{{- with .Site.Params.pinterest_verification -}}
     <meta name="p:domain_verify" content="{{ . }}" />
-{{ end -}}
-{{ with .Site.Params.baidu_verification -}}
+{{- end -}}
+{{- with .Site.Params.baidu_verification -}}
     <meta name="baidu-site-verification" content="{{ . }}" />
-{{ end -}}
-{{ if .PrevInSection -}}
+{{- end -}}
+{{- if .PrevInSection -}}
     <link rel="prev" href="{{ .PrevInSection.Permalink }}" />
-{{ end -}}
-{{ if .NextInSection -}}
+{{- end -}}
+{{- if .NextInSection -}}
     <link rel="next" href="{{ .NextInSection.Permalink }}" />
-{{ end -}}
+{{- end -}}
 <link rel="canonical" href="{{ .Permalink }}" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -31,26 +31,26 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#ffffff">
-{{ with .OutputFormats.Get "RSS" -}}
+{{- with .OutputFormats.Get "RSS" -}}
     <link rel="alternate" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ $.Site.Title }}">
     <link rel="feed" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ $.Site.Title }}">
-{{ end -}}
+{{- end -}}
 
-{{ template "_internal/twitter_cards.html" . -}}
+{{- template "_internal/twitter_cards.html" . -}}
 
-{{ partial "seo.html" . -}}
+{{- partial "seo.html" . -}}
 
-{{ $res := resources.Get "css/style.scss" | toCSS | minify -}}
+{{- $res := resources.Get "css/style.scss" | toCSS | minify -}}
 <link rel="stylesheet" href="{{ $res.RelPermalink }}">
-{{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.fontawesome_free_css -}}
-    {{ .Site.Params.cdn.fontawesome_free_css | safeHTML }}
-{{ else -}}
-    {{ $res = resources.Get "css/lib/fontawesome-free/all.min.css" | minify -}}
+{{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.fontawesome_free_css -}}
+    {{- .Site.Params.cdn.fontawesome_free_css | safeHTML -}}
+{{- else -}}
+    {{- $res = resources.Get "css/lib/fontawesome-free/all.min.css" | minify -}}
     <link rel="stylesheet" href="{{ $res.RelPermalink }}">
-{{ end }}
-{{ if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.animate_css -}}
-    {{ .Site.Params.cdn.animate_css | safeHTML }}
-{{ else -}}
+{{- end -}}
+{{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.animate_css -}}
+    {{- .Site.Params.cdn.animate_css | safeHTML -}}
+{{- else -}}
     {{ $res = resources.Get "css/lib/animate/animate.min.css" | minify -}}
     <link rel="stylesheet" href="{{ $res.RelPermalink }}">
-{{ end }}
+{{- end -}}
