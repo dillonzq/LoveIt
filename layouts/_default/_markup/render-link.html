@@ -6,5 +6,5 @@
         target="_blank"
     {{ end -}}
     >
-    {{- .Text -}}
+    {{- .Text | safeHTML -}}
 </a>

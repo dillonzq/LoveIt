@@ -1,19 +1,9 @@
 code,
 pre {
-  padding: 7px;
   font-size: $code-font-size;
   font-family: $code-font-family;
-  background: $code-background-color;
-
-  .dark-theme & {
-    background: $code-background-color-dark;
-  }
-}
-
-code {
-  padding: 3px 5px;
-  border-radius: 4px;
   color: $code-color;
+  padding: 5px;
   background: $code-background-color;
 
   .dark-theme & {
@@ -22,50 +12,46 @@ code {
   }
 }
 
-p > code {
-  background: darken($code-background-color, 3%);
-
-  .dark-theme & {
-    color: $code-color-dark;
-    background: darken($code-background-color-dark, 3%);
-  }
+.highlight > pre.chroma {
+  padding: 38px 7px 8px;
+  overflow-x: auto;
 }
 
-// chroma
 .highlight > .chroma {
   margin: 1em 0;
-  border-radius: 6px;
-  overflow-x: auto;
   position: relative;
-  background: $code-background-color;
+  font-family: $code-font-family;
 
   code {
     padding: 0;
   }
 
-  table {
-    position: relative;
+  pre {
+    margin: 0;
+    padding: 38px 7px 8px;
+    overflow-x: visible;
+  }
 
-    &::after {
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      padding: 2px 7px;
-      font-size: $code-font-size;
-      font-weight: bold;
-      color: darken($code-info-color, 10%);
-      background: darken($code-background-color, 3%);
-      content: 'Code';
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 2px 7px;
+    font-size: $code-font-size;
+    font-weight: bold;
+    color: $code-info-color;
+    background: darken($code-background-color, 3%);
+    content: 'Code';
 
-      .dark-theme & {
-        background: darken($code-background-color-dark, 3%);
-      }
+    .dark-theme & {
+      color: $code-info-color-dark;
+      background: darken($code-background-color-dark, 3%);
     }
   }
 
   @each $sign, $text in $code-type-list {
-    &.#{$sign} table::after {
+    &.#{$sign}::after {
       content: $text;
     }
   }
@@ -77,20 +63,10 @@ p > code {
 
     &:first-child {
       width: 10px;
-
-      pre {
-        margin: 0;
-        padding: 38px 7px 8px;
-      }
     }
 
     &:last-child {
       vertical-align: top;
-
-      pre {
-        margin: 0;
-        padding: 38px 10px 8px;
-      }
     }
   }
 
@@ -106,10 +82,14 @@ p > code {
     }
   }
 
-  /* LineNumbersTable */  .lnt { color: $code-info-color; }
-  /* LineHighlight */  .hl {
+  /* LineNumbersTable */
+  .lnt {
+    color: $code-info-color;
+  }
+
+  /* LineHighlight */
+  .hl {
     display: block;
-    width: 100%;
     background-color: darken($code-background-color, 5%);
 
     .dark-theme & {

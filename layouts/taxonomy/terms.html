@@ -1,5 +1,5 @@
 {{- define "title" -}}
-    {{- T "all" | humanize}}{{ T .Data.Plural | default .Data.Plural | humanize }} | {{ .Site.Title -}}
+    {{- T "all" | humanize }}{{ T .Data.Plural | default .Data.Plural | humanize }} | {{ .Site.Title -}}
 {{- end -}}
 
 {{- define "content" -}}
@@ -7,7 +7,7 @@
     {{- $terms := .Data.Terms.ByCount -}}
     {{- $type := .Type -}}
 
-    <div class="warpper archive">
+    <div class="page archive">
         <h2 class="post-title animated pulse faster">
             {{- T "all" | humanize}}{{ T $taxonomies | default $taxonomies | humanize -}}
         </h2>

@@ -5,7 +5,7 @@
     {{- $author := .Params.author | default .Site.Author.name -}}
     {{- $author_link := .Params.author_link | default .Site.Author.link | default .Site.BaseURL -}}
 
-    <article class="warpper">
+    <article class="page">
         <h1 class="post-title animated flipInX">{{ .Title }}</h1>
 
         <div class="post-meta">
@@ -19,7 +19,7 @@
                         {{- range . -}}
                             {{- $name := . -}}
                             {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
-                                <i class="far fa-folder fa-fw"></i><a href="{{ .Permalink }}">{{ $name }}</a>
+                                <i class="far fa-folder fa-fw"></i><a href="{{ .Permalink }}">{{ $name | humanize }}</a>
                             {{- end -}}
                         {{- end -}}
                     </span>

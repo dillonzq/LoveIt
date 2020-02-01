@@ -22,7 +22,7 @@ features = [
   "syntax-highlighting",
   "SEO Optimized"
 ]
-min_version = "0.53"
+min_version = "0.62.0"
 
 [author]
   name = "Dillon"

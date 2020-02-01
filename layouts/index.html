@@ -1,6 +1,6 @@
 {{- define "content" -}}
     {{- if eq .Site.Params.home_mode "post" -}}
-        <div class="warpper">
+        <div class="page">
             {{- partial "home/profile.html" . -}}
 
             {{- $paginator := where .Site.RegularPages "Type" "posts" -}}

@@ -3,13 +3,13 @@
 {{- end -}}
 
 {{- define "content" -}}
-    <div class="warpper archive">
+    <div class="page archive">
         <h2 class="post-title animated pulse faster">
             {{- $taxonomy := .Data.Singular -}}
             {{- if eq $taxonomy "category" -}}
-                <i class="far fa-folder-open fa-fw"></i>&nbsp;{{ .Title }}
+                <i class="far fa-folder-open fa-fw"></i>&nbsp;{{ humanize .Title }}
             {{- else if eq $taxonomy "tag" -}}
-                <i class="fas fa-tag fa-fw"></i>&nbsp;{{ .Title }}
+                <i class="fas fa-tag fa-fw"></i>&nbsp;{{ humanize .Title }}
             {{- else -}}
                 {{- printf "%s - %s" (T $taxonomy | default  (humanize $taxonomy)) .Title -}}
             {{- end -}}
