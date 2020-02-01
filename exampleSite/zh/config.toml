@@ -1,38 +1,68 @@
 baseURL = "https://example.com/"
-languageCode = "zh"                                      # 网站语言标识
-defaultContentLanguage = "zh"                            # [en, zh, ...] 设定主题的国际化
-title = "LoveIt 主题"                                     # 网站标题
-theme = "LoveIt"                                         # 主题
-enableGitInfo = false                                    # 是否使用 git 信息来生成文章的上次修改时间
-hasCJKLanguage = true                                    # 是否包括中日韩文字
-paginate = 12                                            # 默认每页列表显示的文章数目
-enableEmoji = true                                       # 是否使用 emoji 代码
-enableRobotsTXT = true                                   # 是否使用 robots.txt
-googleAnalytics = ""                                     # [UA-XXXXXXXX-X] 谷歌分析代号
-disqusShortname = "dillonzq"                             # Disqus 的用户名，用来在文章中启用 Disqus 评论系统
+# 网站语言
+languageCode = "zh"
+# [en, zh, ...] 设定主题的国际化
+defaultContentLanguage = "zh"
+# 网站标题
+title = "LoveIt 主题"
+# 主题
+theme = "LoveIt"
+# 是否使用 git 信息来生成文章的上次修改时间
+enableGitInfo = false
+# 是否包括中日韩文字
+hasCJKLanguage = true
+# 默认每页列表显示的文章数目
+paginate = 12
+# 是否使用 emoji 代码
+enableEmoji = true
+# 是否使用 robots.txt
+enableRobotsTXT = true
+# [UA-XXXXXXXX-X] 谷歌分析代号
+googleAnalytics = ""
+# 版权描述，仅仅用于 SEO
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
-                                                         # 版权描述，仅仅用于 SEO
+# 日期格式
+dateFormatToUse = "2006-01-02"
 
-                                                      ####  代码高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
-pygmentsOptions = "linenos=table"
-pygmentsCodefences = true
-pygmentsUseClasses = true
-pygmentsCodefencesGuessSyntax = true
+# Hugo 解析文档的配置
+[markup]
+  # 代码高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNoStart = 1
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = false
+    style = "monokai"
+    tabWidth = 4
+  # Goldmark 是 Hugo 0.60 以来的默认 Markdown 解析库
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      # 是否在文档中直接使用 HTML 标签
+      unsafe = true
+  # 目录设置
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
 
-staticDir = ["../static", "../../assets/others"]         # 静态文件目录
+# 作者信息
+[author]
+  name = "xxxx"
+  link = ""
 
-[author]                                              #### 作者信息
-  name = "XXXX"
-
-[sitemap]                                             #### Sitemap 信息
+# 网站地图信息
+[sitemap]
   changefreq = "weekly"
   filename = "sitemap.xml"
   priority = 0.5
 
-[Permalinks]                                          #### Permalinks 信息 (https://gohugo.io/content-management/urls/#permalinks)
+# Permalinks 信息 (https://gohugo.io/content-management/urls/#permalinks)
+[Permalinks]
   posts = ":year/:month/:filename"
 
-[menu]                                                #### 菜单信息
+# 菜单信息
+[menu]
   [[menu.main]]
     identifier = "posts"
     name = "文章"
@@ -59,41 +89,56 @@ staticDir = ["../static", "../../assets/others"]         # 静态文件目录
 
   [[menu.main]]
     identifier = "en"
-    name = '<i class="fas fa-language fa-fw"></i>'
+    name = '<i class="fas fa-language fa-fw" title="English"></i>'
     url = "https://hugo-loveit-en.netlify.com"
     weight = 5
 
 [params]
-  version = "5.x"                                        # LoveIt 主题版本
-  description = "LoveIt 主题演示"                         # 网站介绍
-  keywords = ["XXXX", "Theme", "Hugo"]                   # 网站关键词
+  # LoveIt 主题版本
+  version = "0.1.X"
+  # 网站描述
+  description = "关于 LoveIt 主题"
+  # 网站关键词
+  keywords = ["Theme", "Hugo"]
 
-                                                      #### 主页配置
-  home_mode = "post"                                     # [post, other] 主页模式
-  home_paginate = 6                                      # post 主页模式下，主页每页显示的文章数目，默认等于 paginate 值
-  avatar = "images/avatar.png"                           # 主页显示的头像路径
-  subtitle = "一个简洁、优雅且高效的 Hugo 主题"               # 主页显示的网站副标题
+  # 主页信息设置
+  ## [post, other] 主页模式
+  home_mode = "post"
+  ## 主页在 post 模式下每页 post 显示数量
+  home_paginate = 6
+  ## 主页显示头像的 URL
+  avatar = "images/avatar.png"
+  ## 主页显示的网站副标题
+  subtitle = "一个简洁、优雅且高效的 Hugo 主题"
 
-  socialShare = true                                     # 在文章页面是否使用分享功能
+  # 在文章页面是否使用分享功能
+  socialShare = true
 
-                                                      #### 页面底部版权信息设置
-  since = 2018                                           # 网站创立年份
-  icp = ''                                               # ICP 备案信息，仅在中国使用 (允许使用 HTML 格式)
+  # 页面底部版权信息设置
+  ## 网站创立年份
+  since = 2018
+  ## ICP 备案信息，仅在中国使用 (允许使用 HTML 格式)
+  icp = ""
+  ## 许可协议信息 (允许使用 HTML 格式)
   license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
-                                                         # 许可协议信息 (允许使用 HTML 格式)
-  gitRepo = ""                                           # 用于生成文章上次修改时间的公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
 
-  linkToMarkdown = true                                  # 是否在文章页面显示原始 Markdown 文档链接
+  # 用于生成文章上次修改时间的公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
+  gitRepo = ""
 
-                                                      #### 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
+  # 是否在文章页面显示原始 Markdown 文档链接
+  linkToMarkdown = true
+
+  # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
   google_verification = ""
   bing_verification = ""
   yandex_verification = ""
   pinterest_verification = ""
   baidu_verification = ""
 
-  [params.cdn]                                       #### CSS 和 JS 文件的 CDN 设置
-    fontawesome_free_css = ''                           # 例如 '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
+  # CSS 和 JS 文件的 CDN 设置
+  [params.cdn]
+    ## 例如 '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
+    fontawesome_free_css = ''
     animate_css = ''
     gitalk_css = ''
     gitalk_js = ''
@@ -113,15 +158,17 @@ staticDir = ["../static", "../../assets/others"]         # 静态文件目录
     aplayer_js = ''
     meting_js = ''
 
-  [params.gravatar]                                      # Gravatar 信息，用于优先在主页显示的头像
+  # Gravatar 信息，用于优先在主页显示的头像
+  [params.gravatar]
     email = ""
 
-  [params.social]                                        # 主页的社交信息设置
+  # 主页的社交信息设置
+  [params.social]
     GitHub = "xxxx"
     Linkedin = "xxxx"
     Twitter = "xxxx"
     #Instagram = "xxxx"
-    #Email = "xxxx"
+    Email = "xxxx@outlook.com"
     Facebook = "xxxx"
     Telegram = "xxxx"
     #Medium = "xxxx"
@@ -135,6 +182,7 @@ staticDir = ["../static", "../../assets/others"]         # 静态文件目录
     #Pinterest = "xxxx"
     #Reddit = "xxxx"
     #Codepen = "xxxx"
+    #FreeCodeCamp = "xxxx"
     #Bitbucket = "xxxx"
     #Stackoverflow = "xxxx"
     #Weibo = "xxxx"
@@ -176,7 +224,8 @@ staticDir = ["../static", "../../assets/others"]         # 静态文件目录
     #Thingiverse = "xxxx"
     #Devto = "xxxx"
 
-  [params.share]                                         # 文章页面的分享信息设置
+  # 文章页面的分享信息设置
+  [params.share]
     enable = true
     Twitter = true
     Facebook = true
@@ -189,57 +238,79 @@ staticDir = ["../static", "../../assets/others"]         # 静态文件目录
     #VKontakte = true
     #Weibo = true
 
-  [params.publisher]                                     # 出版者信息，仅用于 SEO
-    name = "XXXX"
+  # 出版者信息，仅用于 SEO
+  [params.publisher]
+    name = "xxxx"
     [params.publisher.logo]
       url = "logo.png"
       width = 127
       height = 40
 
-  [params.logo]                                          # 网站图标信息，仅用于 SEO
+  # 网站图标信息，仅用于 SEO
+  [params.logo]
     url = "logo.png"
     width = 127
     height = 40
 
-  [params.image]                                         # 网站图片信息，仅用于 SEO
+  #  网站图标信息，仅用于 SEO
+  [params.image]
     url = "cover.png"
     width = 800
     height = 600
 
-  [params.gitalk]                                        # Gittalk 评论系统设置 (https://github.com/gitalk/gitalk)
+  # Disqus 评论系统设置 (https://disqus.com/)
+  [params.disqus]
+    # Disqus 的用户名，用来在文章中启用 Disqus 评论系统
+    shortname = "dillonzq"
+
+  # Gittalk 评论系统设置 (https://github.com/gitalk/gitalk)
+  [params.gitalk]
     owner = ""
     repo = ""
     clientId = ""
     clientSecret = ""
 
-  [params.valine]                                        # Valine 评论系统设置 (https://github.com/xCss/Valine)
+  # Valine 评论系统设置 (https://github.com/xCss/Valine)
+  [params.valine]
     enable = false
     appId = ""
     appKey = ""
     notify = false
     verify = true
     avatar = "mp"
-    placeholder = "Your comment ..."
+    placeholder = "你的评论 ..."
     visitor = true
     recordIP = true
 
-[privacy]                                             #### 隐私信息设置 (https://gohugo.io/about/hugo-and-gdpr/)
+  # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
+  [params.facebook]
+    enable = false
+    width = "100%"
+    numPosts = 10
+    appId = ""
+    languageCode = "en_US"
+
+# 隐私信息设置 (https://gohugo.io/about/hugo-and-gdpr/)
+[privacy]
   [privacy.googleAnalytics]
     anonymizeIP = true
 
   [privacy.youtube]
     privacyEnhanced = true
 
-[mediaTypes]                                          #### 用于输出 Markdown 格式文档的设置
+# 用于输出 Markdown 格式文档的设置
+[mediaTypes]
   [mediaTypes."text/plain"]
     suffixes = ["md"]
 
-[outputFormats.MarkDown]                              #### 用于输出 Markdown 格式文档的设置
+# 用于输出 Markdown 格式文档的设置
+[outputFormats.MarkDown]
   mediaType = "text/plain"
   isPlainText = true
   isHTML = false
 
-[outputs]                                             #### 用于输出 Markdown 格式文档的设置
+# 用于 Hugo 输出文档的设置
+[outputs]
   home = ["HTML", "RSS"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]

@@ -39,6 +39,7 @@ dateFormatToUse = "2006-01-02"
   # Goldmark is from Hugo 0.60 the default library used for Markdown
   [markup.goldmark]
     [markup.goldmark.renderer]
+      # whether to use HTML tags directly in the document
       unsafe = true
   # Table Of Contents settings
   [markup.tableOfContents]
@@ -48,6 +49,7 @@ dateFormatToUse = "2006-01-02"
 # Author Info
 [author]
   name = "xxxx"
+  link = ""
 
 # Sitemap Info
 [sitemap]
@@ -95,7 +97,7 @@ dateFormatToUse = "2006-01-02"
   # LoveIt theme version
   version = "0.1.X"
   # site description
-  description = "LoveIt Theme Demo"
+  description = "About LoveIt Theme"
   # site keywords
   keywords = ["Theme", "Hugo"]
 
@@ -259,7 +261,7 @@ dateFormatToUse = "2006-01-02"
   # Disqus Comment Config (https://disqus.com/)
   [params.disqus]
     # Disqus shortname to use Disqus in posts
-    shortname = ""
+    shortname = "dillonzq"
 
   # Gittalk Comment Config (https://github.com/gitalk/gitalk)
   [params.gitalk]
@@ -296,18 +298,18 @@ dateFormatToUse = "2006-01-02"
   [privacy.youtube]
     privacyEnhanced = true
 
-# Options to make hugo output .md files.
+# Options to make output .md files
 [mediaTypes]
   [mediaTypes."text/plain"]
     suffixes = ["md"]
 
-# Options to make hugo output .md files.
+# Options to make output .md files
 [outputFormats.MarkDown]
   mediaType = "text/plain"
   isPlainText = true
   isHTML = false
 
-# Options to make hugo output files.
+# Options to make hugo output files
 [outputs]
   home = ["HTML", "RSS"]
   page = ["HTML", "MarkDown"]
