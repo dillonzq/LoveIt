@@ -1,0 +1,15 @@
+// ==============================
+// Custom style
+// 自定义样式
+// ==============================
+// You can override the variables in assets/css/_variables.scss to customize the style
+// 您可以覆盖 assets/css/_variables.scss 中的变量以自定义样式
+
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900);
+
+$global-font-family: Lato, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft Yahei, Segoe UI, Helvetica, Arial, sans-serif, Segoe UI Emoji;
+
+
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400,700&display=swap&subset=latin-ext');
+
+$code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospace;

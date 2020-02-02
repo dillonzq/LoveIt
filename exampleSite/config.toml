@@ -1,4 +1,4 @@
-baseURL = "https://example.com/"
+baseURL = "/"
 # website language
 languageCode = "en"
 # [en, zh, ...] determines which i18n file to use

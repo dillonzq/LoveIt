@@ -123,7 +123,7 @@ jQuery(function($) {
     _Blog._initToc = function() {
         const $toc = $('#post-toc');
         if ($toc.length && $toc.css('display') !== 'none') {
-            const SPACING = 100;
+            const SPACING = 80;
             const $footer = $('#post-footer');
             const minTop = $toc.position().top;;
             const mainTop = $('main').position().top;

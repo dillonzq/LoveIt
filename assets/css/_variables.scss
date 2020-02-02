@@ -3,80 +3,105 @@
 // ==============================
 
 // ========== Global ========== //
-@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900);
+// Font family
+$global-font-family: -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft Yahei, Segoe UI, Helvetica, Arial, sans-serif, Segoe UI Emoji !default;
 
-$global-font-family: Lato, -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif !default;
-
-// Background color of the body
+// Color of the background
 $global-background-color: #fff !default;
 $global-background-color-dark: #292a2d !default;
 
-$navbar-background-color: #fafafa !default;
-$navbar-background-color-dark: #252627 !default;
-
-// Text color of the body.
+// Color of the text
 $global-font-color: #161209 !default;
 $global-font-color-dark: #a9a9b3 !default;
 
+// Color of the secondary text
 $global-font-secondary-color: #a9a9b3 !default;
 $global-font-secondary-color-dark: #87878d !default;
 
+// Color of the link
 $global-link-color: #161209 !default;
 $global-link-color-dark: #a9a9b3 !default;
+
+// Color of the hover link
 $global-link-hover-color: #2d96bd !default;
 $global-link-hover-color-dark: #fff !default;
 
+// Color of the border
 $global-border-color: #dcdcdc !default;
 $global-border-color-dark: #4a4b50 !default;
+// ========== Global ========== //
 
+// ========== Scrollbar ========== //
+// Color of the scrollbar
 $scrollbar-color: #87878d !default;
-$scrollbar-hover-color: #a9a9b3 !default;
 
+// Color of the hover scrollbar
+$scrollbar-hover-color: #a9a9b3 !default;
+// ========== Scrollbar ========== //
+
+// ========== Selection ========== //
+// Color of the selected text
 $selection-color: rgba(38, 139, 211, 0.2) !default;
 $selection-color-dark: rgba(38, 139, 211, 0.3) !default;
+// ========== Selection ========== //
 
+// ========== Navbar ========== //
+// Color of the navbar background
+$navbar-background-color: #fafafa !default;
+$navbar-background-color-dark: #252627 !default;
+
+// Color of the hover navbar item
 $navbar-hover-color: #161209 !default;
 $navbar-hover-color-dark: #fff !default;
+// ========== Navbar ========== //
 
+// ========== Post Content ========== //
+// Color of the post link
 $post-link-color: #2d96bd !default;
 $post-link-color-dark: #eee !default;
+
+// Color of the hover post link
 $post-link-hover-color: #ef3982 !default;
 $post-link-hover-color-dark: #2d96bd !default;
 
-$pagination-link-color: #2d96bd !default;
-$pagination-link-color-dark: #a9a9b3 !default;
-$pagination-link-hover-color: #000 !default;
-$pagination-link-hover-color-dark: #fff !default;
-
-// Color of the table background.
+// Color of the table background
 $table-background-color: #fff !default;
 $table-background-color-dark: #272c34 !default;
 
-// Color of the table thead.
+// Color of the table thead
 $table-thead-color: #ededed !default;
 $table-thead-color-dark: #20252b !default;
+// ========== Post Content ========== //
+
+// ========== Pagination ========== //
+// Color of the link in pagination
+$pagination-link-color: #2d96bd !default;
+$pagination-link-color-dark: #a9a9b3 !default;
+
+// Color of the hover link in pagination
+$pagination-link-hover-color: #000 !default;
+$pagination-link-hover-color-dark: #fff !default;
+// ========== Pagination ========== //
 
 // ========== Code ========== //
-// Color of the code.
+// Color of the code
 $code-color: #E74C3C !default;
 $code-color-dark: #E5BF78 !default;
 
-// Color of the code background.
+// Color of the code background
 $code-background-color: #f5f5f5 !default;
 $code-background-color-dark: #272C34 !default;
 
 $code-info-color: #b1b0b0 !default;
 $code-info-color-dark: #b1b0b0 !default;
 
-// Font size of code.
+// Font size of the code
 $code-font-size: 13px !default;
 
-@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400,700&display=swap&subset=latin-ext');
+// Font family of the code
+$code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace !default;
 
-// Font family of the code.
-$code-font-family: Fira Mono, Source Code Pro, Menlo, monospace !default;
-
-// Code type list.
+// Code type list
 $code-type-list: (
   // Custom code type
   language-bash: 'Bash',
@@ -122,3 +147,4 @@ $code-type-list: (
   language-toml: 'TOML',
   language-diff: 'Diff'
 ) !default;
+// ========== Code ========== //

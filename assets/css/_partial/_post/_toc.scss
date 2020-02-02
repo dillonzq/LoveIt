@@ -3,7 +3,7 @@
   position: absolute;
   width: 360px;
   margin-left: 1000px;
-  padding: .8rem;
+  padding: 0 .8rem;
   border-left: 1px solid $global-border-color;
   word-wrap: break-word;
   box-sizing: border-box;
@@ -15,6 +15,7 @@
 
   .post-toc-title {
     font-weight: 400;
+    margin: .8rem 0;
     text-transform: uppercase;
   }
 

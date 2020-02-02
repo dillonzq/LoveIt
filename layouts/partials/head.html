@@ -40,17 +40,25 @@
 
 {{- partial "seo.html" . -}}
 
-{{- $res := resources.Get "css/style.scss" | toCSS | minify -}}
-<link rel="stylesheet" href="{{ $res.RelPermalink }}">
+{{- $options := dict "targetPath" "css/style.min.css" "outputStyle" "compressed" "enableSourceMap" true -}}
+{{- if fileExists "config/css/_custom.scss" -}}
+    {{- $options = dict "includePaths" (slice "config/css") | merge $options -}}
+    {{- $res := resources.Get "css/custom-style.scss" | toCSS $options -}}
+    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
+{{- else -}}
+    {{- $res := resources.Get "css/style.scss" | toCSS $options -}}
+    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
+{{- end -}}
+
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.fontawesome_free_css -}}
     {{- .Site.Params.cdn.fontawesome_free_css | safeHTML -}}
 {{- else -}}
-    {{- $res = resources.Get "css/lib/fontawesome-free/all.min.css" | minify -}}
+    {{- $res := resources.Get "css/lib/fontawesome-free/all.min.css" -}}
     <link rel="stylesheet" href="{{ $res.RelPermalink }}">
 {{- end -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.animate_css -}}
     {{- .Site.Params.cdn.animate_css | safeHTML -}}
 {{- else -}}
-    {{ $res = resources.Get "css/lib/animate/animate.min.css" | minify -}}
+    {{ $res := resources.Get "css/lib/animate/animate.min.css" -}}
     <link rel="stylesheet" href="{{ $res.RelPermalink }}">
 {{- end -}}
