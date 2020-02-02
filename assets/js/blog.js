@@ -158,7 +158,7 @@ jQuery(function($) {
             };
             changeTocState();
 
-            const HEADERFIX = 150;
+            const HEADERFIX = 120;
             const $toclink = $('.toc-link');
             const $headerlink = $('.headerlink');
             const $tocLinkLis = $('.post-toc-content li');

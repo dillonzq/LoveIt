@@ -11,15 +11,15 @@
 {{- $iconMap  = dict "bug" "fas fa-bug" | merge $iconMap -}}
 {{- $iconMap  = dict "example" "fas fa-list-ol" | merge $iconMap -}}
 {{- $iconMap  = dict "quote" "fas fa-quote-right" | merge $iconMap -}}
-{{- $iconMap  = dict "details" "fas fa-angle-down" | merge $iconMap -}}
+{{- $iconDetails := "fas fa-angle-down" -}}
 
 {{- if .IsNamedParams -}}
-    {{- $type := .Get "type" -}}
+    {{- $type := .Get "type" | default "note" -}}
     {{- if eq (.Get "details") "true" -}}
         <details class="admonition {{ $type }}">
             {{- with .Get "title" -}}
                 <summary class="admonition-title">
-                    <i class="icon {{ index $iconMap $type }}"></i>{{ . }}<i class="details {{ index $iconMap "details" }}"></i>
+                    <i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}"></i>{{ . }}<i class="details {{ $iconDetails }}"></i>
                 </summary>
             {{- end -}}
             {{- .Inner -}}
@@ -27,7 +27,7 @@
     {{- else -}}
         <div class="admonition {{ $type }}">
             {{- with .Get "title" -}}
-                <p class="admonition-title"><i class="icon {{ index $iconMap $type }}"></i>{{ . }}</p>
+                <p class="admonition-title"><i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}"></i>{{ . }}</p>
             {{- end -}}
             {{- .Inner -}}
         </div>
@@ -38,7 +38,7 @@
         <details class="admonition {{ $type }}">
             {{- with .Get 1 -}}
                 <summary class="admonition-title">
-                    <i class="icon {{ index $iconMap $type }}"></i>{{ . }}<i class="details {{ index $iconMap "details" }}"></i>
+                    <i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}"></i>{{ . }}<i class="details {{ $iconDetails }}"></i>
                 </summary>
             {{- end -}}
             {{- .Inner -}}
@@ -46,7 +46,7 @@
     {{- else -}}
         <div class="admonition {{ $type }}">
             {{- with .Get 1 -}}
-                <p class="admonition-title"><i class="icon {{ index $iconMap $type }}"></i>{{ . }}</p>
+                <p class="admonition-title"><i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}"></i>{{ . }}</p>
             {{- end -}}
             {{- .Inner -}}
         </div>

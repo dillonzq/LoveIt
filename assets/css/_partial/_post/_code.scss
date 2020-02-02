@@ -50,8 +50,8 @@ pre {
     }
   }
 
-  @each $sign, $text in $code-type-list {
-    &.#{$sign}::after {
+  @each $type, $text in $code-type-map {
+    &.#{$type}::after {
       content: $text;
     }
   }

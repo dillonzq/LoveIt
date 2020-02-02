@@ -887,3 +887,57 @@ __^^_insert 倾斜 加粗_^^__  _^^__insert 倾斜 加粗 2__^^_
 **^^_insert 倾斜 加粗_^^**  _^^**insert 倾斜 加粗 2**^^_
 
 __^^*insert 倾斜 加粗*^^__  *^^__insert 倾斜 加粗 2__^^*
+
+## Admonition
+
+{{% admonition "note" "Admonition note" %}}
+This is the content of the admonition.
+{{% /admonition %}}
+
+{{% admonition "abstract" "Admonition abstract" %}}
+This is the content of the admonition.
+{{% /admonition %}}
+
+{{% admonition "info" "Admonition info" %}}
+This is the content of the admonition.
+{{% /admonition %}}
+
+{{% admonition "tip" "Admonition tip" %}}
+This is the content of the admonition.
+{{% /admonition %}}
+
+{{% admonition "success" "Admonition success" %}}
+This is the content of the admonition.
+{{% /admonition %}}
+
+{{% admonition "question" "Admonition question" %}}
+This is the content of the admonition.
+{{% /admonition %}}
+
+{{% admonition "warning" "Admonition warning" %}}
+This is the content of the admonition.
+{{% /admonition %}}
+
+{{% admonition "failure" "Admonition failure" %}}
+This is the content of the admonition.
+{{% /admonition %}}
+
+{{% admonition "danger" "Admonition danger" %}}
+This is the content of the admonition.
+{{% /admonition %}}
+
+{{% admonition "bug" "Admonition bug" %}}
+This is the content of the admonition.
+{{% /admonition %}}
+
+{{% admonition "example" "Admonition example" %}}
+This is the content of the admonition.
+{{% /admonition %}}
+
+{{% admonition "quote" "Admonition quote" %}}
+This is the content of the admonition.
+{{% /admonition %}}
+
+{{% admonition title="Admonition" details="true" %}}
+This is the content of the admonition.
+{{% /admonition %}}
