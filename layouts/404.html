@@ -6,12 +6,8 @@
     <div class="notfound">
         <h1 class="error-emoji"></h1>
         <p class="error-text">
-            {{- T "pageNotFoundText" -}}
-        </p>
-        <p class="error-link">
-            <a href="{{ .Site.BaseURL }}">
-                {{- T "backToHome" | printf "← %s" -}}
-            </a>
+            {{- T "pageNotFoundText" -}}&nbsp;
+            <a href="{{ .Site.BaseURL }}" title="{{ T "backToHome" }}">↩︎</a>
         </p>
     </div>
     <script>
