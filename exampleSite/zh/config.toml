@@ -124,7 +124,7 @@ dateFormatToUse = "2006-01-02"
 
   # 页面底部版权信息设置
   ## 网站创立年份
-  since = 2018
+  since = 2019
   ## ICP 备案信息，仅在中国使用 (允许使用 HTML 格式)
   icp = ""
   ## 许可协议信息 (允许使用 HTML 格式)
@@ -133,6 +133,8 @@ dateFormatToUse = "2006-01-02"
   # 用于生成文章上次修改时间的公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = ""
 
+  # 是否渲染数学公式
+  math = true
   # 是否在文章页面显示原始 Markdown 文档链接
   linkToMarkdown = true
 

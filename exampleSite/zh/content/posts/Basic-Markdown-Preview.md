@@ -435,7 +435,7 @@ Web image
 ![Web Picture](https://static.dillonzq.com/images/20190817130904-U6cPUk.jpg "Web Picture")
 
 Local image
-![Local Picture](logo-revolunet-carre.jpg "Local Picture")
+![Local Picture](/images/Apple-Devices-Preview.png)
 
 contact@revolunet.com
 
@@ -456,7 +456,7 @@ Web image
 ![Web Picture](https://static.dillonzq.com/images/20190817130904-U6cPUk.jpg "Web Picture")
 
 Local image
-![Local Picture](/苹果-touch-icon.png "Local Picture")
+![Local Picture](/images/Apple-Devices-Preview.png)
 
 <https://www.google.com>
 

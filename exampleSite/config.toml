@@ -124,7 +124,7 @@ dateFormatToUse = "2006-01-02"
 
   # Footer CopyRight Info
   ## Site creation time
-  since = 2018
+  since = 2019
   ## ICP info only in China (HTML format is allowed)
   icp = ""
   ## license info (HTML format is allowed)
@@ -133,6 +133,8 @@ dateFormatToUse = "2006-01-02"
   # public git repo url to link lastmod git commit only then enableGitInfo is true
   gitRepo = ""
 
+  # whether to render mathematical formulas
+  math = true
   # whether to show link to Raw Markdown content of the post
   linkToMarkdown = true
 
