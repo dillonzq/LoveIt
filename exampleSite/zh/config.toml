@@ -97,7 +97,9 @@ dateFormatToUse = "2006-01-02"
 
   [[menu.main]]
     identifier = "en"
-    name = '<i class="fas fa-language fa-fw" title="English"></i>'
+    pre = '<i class="fas fa-language fa-fw"></i>'
+    name = ""
+    title = "English"
     url = "https://hugo-loveit-en.netlify.com"
     weight = 5
 

@@ -10,7 +10,7 @@
             {{- $currentPage := . }}
             {{- range .Site.Menus.main -}}
                 <a class="menu-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) | or (eq $currentPage.RelPermalink .URL) }} active{{ end }}" href="{{ .URL | absLangURL }}" title="{{ .Title }}">
-                    {{- .Name | safeHTML -}}
+                    {{- .Pre | safeHTML }}{{ .Name -}}
                 </a>
             {{- end -}}
             <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="{{ T "switchTheme" }}"></i></a>

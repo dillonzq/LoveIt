@@ -97,7 +97,9 @@ dateFormatToUse = "2006-01-02"
 
   [[menu.main]]
     identifier = "zh"
-    name = '<i class="fas fa-language fa-fw" title="简体中文"></i>'
+    pre = '<i class="fas fa-language fa-fw"></i>'
+    name = ""
+    title = "简体中文"
     url = "https://hugo-loveit-zh.netlify.com"
     weight = 5
 
