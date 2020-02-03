@@ -7,7 +7,7 @@ lastmod: 2019-08-25T16:22:42+08:00
 draft: false
 description: "这是一篇用于预览 Markdown 基本语法的文章。"
 show_in_homepage: true
-show_description: false
+description_as_summary: false
 license: ""
 
 tags: [

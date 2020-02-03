@@ -7,7 +7,7 @@ lastmod: 2020-01-01T16:45:40+08:00
 draft: false
 description: "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
 show_in_homepage: true
-show_description: false
+description_as_summary: false
 license: ""
 
 tags: [

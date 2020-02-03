@@ -7,7 +7,7 @@ lastmod: {{ .Date }}
 draft: true
 description: ""
 show_in_homepage: true
-show_description: false
+description_as_summary: false
 license: ""
 
 tags: []

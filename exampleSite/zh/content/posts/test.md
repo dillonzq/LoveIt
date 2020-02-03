@@ -7,7 +7,7 @@ lastmod: 2019-08-17T22:41:56+08:00
 draft: true
 description: "This is a test page."
 show_in_homepage: false
-show_description: false
+description_as_summary: false
 license: ""
 
 tags: [

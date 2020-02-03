@@ -7,7 +7,7 @@ lastmod: 2019-08-01T18:02:41+08:00
 draft: false
 description: "Lorem Ipsum Dolor Si Amet"
 show_in_homepage: true
-show_description: false
+description_as_summary: false
 license: ""
 
 tags: [

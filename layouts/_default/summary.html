@@ -37,9 +37,9 @@
         {{- end -}}
     </div>
 
-    {{- /* Content */ -}}
+    {{- /* Summary content */ -}}
     <div class="post-content">
-        {{- if .Params.show_description -}}
+        {{- if .Params.description_as_summary -}}
             <p>
                 {{- .Params.description -}}
             </p>

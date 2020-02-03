@@ -7,7 +7,7 @@ lastmod: 2019-09-01T18:06:32+08:00
 draft: false
 description: "A brief description of Hugo Shortcodes"
 show_in_homepage: true
-show_description: false
+description_as_summary: false
 license: ""
 
 tags: [
