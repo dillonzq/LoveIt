@@ -70,6 +70,17 @@
     }
   }
 
+  .copyright {
+    .copyright-line {
+      .icp-splitter {
+        display: none;
+      }
+      .icp-br {
+        display: block;
+      }
+    }
+  }
+
   .dynamic-to-top {
     display: none !important;
   }

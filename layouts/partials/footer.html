@@ -21,14 +21,15 @@
                 <span class="author" itemprop="copyrightHolder">&nbsp;<a href="{{ $.Site.Author.link | default $.Site.BaseURL }}" target="_blank">{{ . }}</a></span>
             {{- end -}}
 
-            {{- /* ICP */ -}}
-            {{- with .Site.Params.icp -}}
-                &nbsp;|&nbsp;<span class="icp">{{ . | safeHTML }}</span>
-            {{- end -}}
-
             {{- /* License */ -}}
             {{- with .Site.Params.license -}}
                 &nbsp;|&nbsp;<span class="license">{{ . | safeHTML }}</span>
+            {{- end -}}
+
+            {{- /* ICP */ -}}
+            {{- with .Site.Params.icp -}}
+                <span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                <span class="icp">{{ . | safeHTML }}</span>
             {{- end -}}
         </div>
     </div>
