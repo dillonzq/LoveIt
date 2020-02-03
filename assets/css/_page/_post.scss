@@ -7,14 +7,14 @@
 
 .post-meta {
   font-size: .88rem;
-  color: rgba(85, 85, 85, 0.52941) !important;
+  color: $global-font-secondary-color;
 
   span {
     display: inline-block;
   }
 
   .dark-theme & {
-    color: $global-font-secondary-color-dark !important;
+    color: $global-font-secondary-color-dark;
   }
 
   a {
@@ -50,110 +50,7 @@
   }
 }
 
-.post-toc {
-  display: block;
-  position: absolute;
-  width: 240px;
-  max-width: 300px;
-  margin-left: 980px;
-  padding: .8rem;
-  border-left: 1px solid $global-border-color;
-  word-wrap: break-word;
-  box-sizing: border-box;
-  top: 12rem;
-
-  .post-toc-title {
-    font-weight: 400;
-    text-transform: uppercase;
-  }
-
-  .post-toc-content {
-    &.always-active ul {
-      display: block;
-    }
-
-    >nav>ul {
-      margin: .625rem 0;
-    }
-
-    ul {
-      padding-left: .625rem;
-      list-style: none;
-
-      ul {
-        padding-left: 1.25rem;
-        display: none;
-      }
-
-      .has-active > ul {
-        display: block;
-      }
-    }
-
-    .toc-link.active {
-      color: $global-link-hover-color;
-    }
-  }
-}
-
-.post-toc-mobile {
-  display: none;
-  padding-top: .8rem;
-
-  details {
-    summary {
-      .post-toc-title {
-        display: block;
-        display: flex;
-        justify-content: space-between;
-        font-size: 1.2em;
-        font-weight: bold;
-        line-height: 2em;
-        padding: 0 .625rem;
-        background: $code-background-color;
-
-        i.details {
-          line-height: 2em;
-        }
-
-        .dark-theme & {
-          background: $code-background-color-dark;
-        }
-      }
-
-      &::-webkit-details-marker {
-        display: none;
-      }
-    }
-  }
-
-  details[open] {
-    i.details {
-      transform: rotate(180deg);
-    }
-  }
-
-  .post-toc-content {
-    border: 2px solid $code-background-color;
-
-    >nav>ul {
-      margin: .625rem 0;
-    }
-
-    ul {
-      padding-left: .625rem;
-      list-style: none;
-
-      ul {
-        padding-left: 1.25rem;
-      }
-    }
-
-    .dark-theme & {
-      border: 2px solid $code-background-color-dark;
-    }
-  }
-}
+@import "../_partial/_post/toc";
 
 .post-content {
   .post-dummy-target:target {
@@ -161,6 +58,19 @@
     position: relative;
     top: -5.6rem;
     visibility: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: bold;
+
+    .dark-theme & {
+      font-weight: bolder;
+    }
   }
 
   h2,
@@ -198,7 +108,6 @@
   p {
     font-size: 1rem;
     margin: .5rem 0 .5rem 0;
-    text-align: justify;
   }
 
   a {
@@ -220,6 +129,7 @@
 
   ul {
     padding-left: 2rem;
+    list-style-type: disc;
   }
 
   ruby {
@@ -241,12 +151,19 @@
   .table-wrapper {
     overflow-x: auto;
 
+    &::-webkit-scrollbar {
+      background-color: $table-background-color;
+
+      .dark-theme & {
+        background-color: $table-background-color-dark;
+      }
+    }
+
     > table {
       width: 100%;
       max-width: 100%;
       margin: .625rem 0;
       border-spacing: 0;
-      box-shadow: 2px 2px 3px rgba(0,0,0,.125);
       background: $table-background-color;
 
       .dark-theme & {
@@ -306,7 +223,7 @@
     margin: 0 0 2em 0;
     position: relative;
 
-    &:before {
+    &::before {
       content: '\201C';
       position: absolute;
       top: 0em;
@@ -323,8 +240,8 @@
       }
     }
 
-    &:after {
-      content: "#blockquote" attr(cite);
+    &::after {
+      content: '#blockquote' attr(cite);
       display: block;
       text-align: right;
       font-size: 0.875em;
@@ -337,6 +254,14 @@
 
     .dark-theme & {
       border-color: $global-border-color-dark;
+    }
+  }
+
+  .footnotes {
+    color: $global-font-secondary-color;
+
+    .dark-theme & {
+      color: $global-font-secondary-color-dark;
     }
   }
 
@@ -420,45 +345,9 @@
     .code {
       padding: .375rem;
       font-size: .875rem;
-      font-family: Consolas, Monaco, Menlo, Consolas, monospace;
+      font-family: $code-font-family;
       font-weight: bold;
       word-break: break-all;
-
-      .k {
-        color: #D371E3;
-      }
-
-      .kt {
-        color: #D371E3;
-      }
-
-      .kc {
-        color: #D371E3;
-      }
-
-      .o {
-        color: #D371E3;
-      }
-
-      .nf {
-        color: #F16473;
-      }
-
-      .na {
-        color: #41B1F5;
-      }
-
-      .s {
-        color: #8BC56F;
-      }
-
-      .n {
-        color: #DB975C;
-      }
-
-      .c1 {
-        color: #7E848F;
-      }
     }
   }
 
@@ -483,101 +372,6 @@
   }
 }
 
-.post-footer {
-  margin-top: 3rem;
+@import "../_partial/_post/footer";
 
-  .post-info {
-    border-bottom: 1px solid $global-border-color;
-    padding: 1rem 0 0.3rem;
-
-    .dark-theme & {
-      border-bottom: 1px solid $global-border-color-dark;
-    }
-
-    .post-info-line {
-      display: flex;
-      justify-content: space-between;
-
-      .post-info-mod {
-        font-size: 0.8em;
-        color: $global-font-secondary-color;
-
-        .dark-theme & {
-          color: $global-font-secondary-color-dark;
-        }
-      }
-
-      .post-info-license {
-        font-size: 0.8em;
-        color: $global-font-secondary-color;
-
-        .dark-theme & {
-          color: $global-font-secondary-color-dark;
-        }
-      }
-
-      .post-info-md
-      a {
-        font-size: 0.8em;
-        color: $post-link-color;
-
-        .dark-theme & {
-          color: $post-link-color-dark;
-        }
-
-        &:hover {
-          color: $post-link-hover-color;
-
-          .dark-theme & {
-            color: $post-link-hover-color-dark;
-          }
-        }
-      }
-    }
-  }
-
-  .post-info-more {
-    padding: 0.3rem 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-  }
-
-  .post-nav {
-    &:before,
-    &:after {
-      content: " ";
-      display: table;
-    }
-
-    & a.prev,
-    & a.next {
-      font-weight: 600;
-      font-size: 1rem;
-
-      transition-property: transform;
-      transition-timing-function: ease-out;
-      transition-duration: 0.3s;
-    }
-
-    & a.prev {
-      float: left;
-    }
-
-    & a.prev:hover {
-      transform: translateX(-4px);
-    }
-
-    & a.next {
-      float: right;
-    }
-
-    & a.next:hover {
-      transform: translateX(4px);
-    }
-  }
-}
-
-.post-comment {
-  padding: 4rem 0;
-}
+@import "../_partial/_post/comment";

@@ -1,51 +1,57 @@
-{{ define "title" }}{{ T "all" | humanize}}{{ T .Data.Plural | default .Data.Plural | humanize }} | {{ .Site.Title }}{{ end }}
+{{- define "title" -}}
+    {{- T "all" | humanize }}{{ T .Data.Plural | default .Data.Plural | humanize }} | {{ .Site.Title -}}
+{{- end -}}
 
-{{ define "content" }}
-    {{ $taxonomies := .Data.Plural }}
-    {{ $terms := .Data.Terms.ByCount }}
-    {{ $type := .Type }}
+{{- define "content" -}}
+    {{- $taxonomies := .Data.Plural -}}
+    {{- $terms := .Data.Terms.ByCount -}}
+    {{- $type := .Type -}}
 
-    <div class="post-warp archive">
+    <div class="page archive">
+        {{- /* Title */ -}}
         <h2 class="post-title animated pulse faster">
-                {{ T "all" | humanize}}{{ T $taxonomies | default $taxonomies | humanize }}
+            {{- T "all" | humanize}}{{ T $taxonomies | default $taxonomies | humanize -}}
         </h2>
 
-        <!-- Categories Page -->
-        {{ if eq $taxonomies "categories" }}
+        {{- /* Categories Page */ -}}
+        {{- if eq $taxonomies "categories" -}}
             <div class="categories-card">
-                {{ range $terms }}
-                    {{ $term := .Term }}
-                    {{ $pages := .Pages }}
-                    {{ with $.Site.GetPage "taxonomy" (printf "%s/%s" $type $term) }}
+                {{- range $terms -}}
+                    {{- $term := .Term -}}
+                    {{- $pages := .Pages -}}
+                    {{- with $.Site.GetPage "taxonomy" (printf "%s/%s" $type $term) -}}
                     <div class="card-item">
-                        <div class="categories">
-                            <a href="{{ .Permalink }}">
-                                <h3><i class="far fa-folder fa-fw"></i>{{ $term | humanize}}</h3>
-                            </a>
-                            {{ range first 5 $pages }}
+                        <div class="card-item-wrapper">
+                            <h3 class="card-item-title">
+                                <a href="{{ .Permalink }}">
+                                    <i class="far fa-folder fa-fw"></i>&nbsp;{{ $term | humanize}}
+                                </a>
+                            </h3>
+                            {{- range first 5 $pages -}}
                                 <article class="archive-item">
-                                    <a href="{{ .Permalink }}" class="archive-item-link">{{ .Title }}</a>
+                                    <a href="{{ .Permalink }}" class="archive-item-link">
+                                        {{- .Title -}}
+                                    </a>
                                 </article>
-                            {{ end }}
-                            {{ if gt (len $pages) 5 }}
+                            {{- end -}}
+                            {{- if gt (len $pages) 5 -}}
                                 <span class="more-post">
-                                    <a href="{{ .Permalink }}" class="more-post-link">{{ T "More" }} >></a>
+                                    <a href="{{ .Permalink }}" class="more-post-link">{{ T "more" }} >></a>
                                 </span>
-                            {{ end }}
+                            {{- end -}}
                         </div>
                     </div>
-                    {{ end }}
-                {{ end }}
+                    {{- end -}}
+                {{- end -}}
             </div>
 
-        <!-- Tag Cloud Page -->
-        {{ else if eq $taxonomies "tags" }}
+        {{- /* Tag Cloud Page */ -}}
+        {{- else if eq $taxonomies "tags" -}}
             <div class="tag-cloud-tags">
-                {{ range $.Site.Taxonomies.tags.ByCount }}
+                {{- range $.Site.Taxonomies.tags.ByCount -}}
                     <a href="{{ .Page.Permalink }}"> {{ .Page.Title }} <small>({{ .Count }})</small></a>
-                {{end}}
+                {{- end -}}
             </div>
-
-        {{ end }}
+        {{- end -}}
     </div>
-{{end }}
+{{- end -}}

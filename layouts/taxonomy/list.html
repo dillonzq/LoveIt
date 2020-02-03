@@ -1,29 +1,35 @@
-{{ define "title" }}{{ .Title }} | {{ T .Data.Singular | default (humanize .Data.Singular) }} | {{ .Site.Title }}{{ end }}
+{{- define "title" -}}
+    {{- .Title }} | {{ T .Data.Singular | default (humanize .Data.Singular) }} | {{ .Site.Title -}}
+{{- end -}}
 
-{{ define "content" }}
-    <div class="post-warp archive">
+{{- define "content" -}}
+    <div class="page archive">
+        {{- /* Title */ -}}
         <h2 class="post-title animated pulse faster">
-            {{ $taxonomy := .Data.Singular }}
-            {{ if eq $taxonomy "category" }}
-                <i class="far fa-folder-open fa-fw"></i>{{ .Title }}
-            {{ else if eq $taxonomy "tag" }}
-                <i class="fas fa-tag fa-fw"></i>{{ .Title }}
-            {{ else }}
-                {{ printf "%s - %s" (T $taxonomy | default  (humanize $taxonomy)) .Title }}
-            {{ end }}
+            {{- $taxonomy := .Data.Singular -}}
+            {{- if eq $taxonomy "category" -}}
+                <i class="far fa-folder-open fa-fw"></i>&nbsp;{{ humanize .Title }}
+            {{- else if eq $taxonomy "tag" -}}
+                <i class="fas fa-tag fa-fw"></i>&nbsp;{{ humanize .Title }}
+            {{- else -}}
+                {{- printf "%s - %s" (T $taxonomy | default  (humanize $taxonomy)) .Title -}}
+            {{- end -}}
         </h2>
 
-        {{ range (.Paginate (.Pages.GroupByDate "2006")).PageGroups }}
+        {{- /* Paginate */ -}}
+        {{- range (.Paginate (.Pages.GroupByDate "2006")).PageGroups -}}
             <h3>{{ .Key }}</h3>
-            {{ range .Pages }}
+            {{- range .Pages -}}
                 <article class="archive-item">
-                    <a href="{{ .RelPermalink }}" class="archive-item-link">{{ .Title }}</a>
+                    <a href="{{ .RelPermalink }}" class="archive-item-link">
+                        {{- .Title -}}
+                    </a>
                     <span class="archive-item-date">
-                        {{ .Date.Format (.Site.Params.dateFormatToUse | default "01-02") }}
+                        {{- .Date.Format (.Site.Params.dateFormatToUse | default "01-02") -}}
                     </span>
                 </article>
-            {{ end }}
-        {{ end }}
-        {{ partial "paginator.html" . }}
+            {{- end -}}
+        {{- end -}}
+        {{- partial "paginator.html" . -}}
     </div>
-{{end }}
+{{- end -}}

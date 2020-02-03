@@ -1,41 +1,76 @@
-baseURL = "https://example.com/"
-languageCode = "en"                                      # website language
-defaultContentLanguage = "en"                            # [en, zh, ...] determines which i18n file to use
-title = "LoveIt Theme"                                   # website title
-theme = "LoveIt"                                         # theme
-enableGitInfo = false                                    # whether to use git commit log to generate lastmod record
-hasCJKLanguage = false                                   # whether to include chinese/japanese/korean
-paginate = 12                                            # default amount of posts in each pages
-enableEmoji = true                                       # whether to use emoji code
-enableRobotsTXT = true                                   # whether to use robots.txt
-googleAnalytics = ""                                     # [UA-XXXXXXXX-X] google analytics code
-disqusShortname = "dillonzq"                             # Disqus shortname to use Disqus in posts
+baseURL = "/"
+# website language
+languageCode = "en"
+# [en, zh, ...] determines which i18n file to use
+defaultContentLanguage = "en"
+# website title
+title = "LoveIt Theme"
+# theme
+theme = "LoveIt"
+# whether to use git commit log to generate lastmod record
+enableGitInfo = false
+# whether to include chinese/japanese/korean
+hasCJKLanguage = false
+# default amount of posts in each pages
+paginate = 12
+# whether to use emoji code
+enableEmoji = true
+# whether to use robots.txt
+enableRobotsTXT = true
+# [UA-XXXXXXXX-X] google analytics code
+googleAnalytics = ""
+# copyright description used only for seo schema
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
-                                                         # copyright description used only for seo schema
+# date format
+dateFormatToUse = "2006-01-02"
 
-                                                      #### Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
-pygmentsOptions = "linenos=table"
-pygmentsCodefences = true
-pygmentsUseClasses = true
-pygmentsCodefencesGuessSyntax = true
-
+# Markup related configuration in Hugo
 [markup]
-[markup.goldmark]
-[markup.goldmark.renderer]
-unsafe = true
+  # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNoStart = 1
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = false
+    style = "monokai"
+    tabWidth = 4
+  # Goldmark is from Hugo 0.60 the default library used for Markdown
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      strikethrough = true
+      table = true
+      taskList = true
+      typographer = true
+    [markup.goldmark.renderer]
+      # whether to use HTML tags directly in the document
+      unsafe = true
+  # Table Of Contents settings
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
 
-[author]                                              #### Author Info
-  name = "XXXX"
+# Author Info
+[author]
+  name = "xxxx"
+  link = ""
 
-[sitemap]                                             #### Sitemap Info
+# Sitemap Info
+[sitemap]
   changefreq = "weekly"
   filename = "sitemap.xml"
   priority = 0.5
 
-[Permalinks]                                          #### Permalinks Info (https://gohugo.io/content-management/urls/#permalinks)
+# Permalinks Info (https://gohugo.io/content-management/urls/#permalinks)
+[Permalinks]
   posts = ":year/:month/:filename"
 
-[menu]                                                #### Menu Info
+# Menu Info
+[menu]
   [[menu.main]]
     identifier = "posts"
     name = "Posts"
@@ -62,41 +97,70 @@ unsafe = true
 
   [[menu.main]]
     identifier = "zh"
-    name = '<i class="fas fa-language fa-fw"></i>'
+    pre = '<i class="fas fa-language fa-fw"></i>'
+    name = ""
+    title = "简体中文"
     url = "https://hugo-loveit-zh.netlify.com"
     weight = 5
 
 [params]
-  version = "5.x"                                        # LoveIt theme version
-  description = "LoveIt Theme Demo"                      # site description
-  keywords = ["XXXX", "Theme", "Hugo"]                   # site keywords
+  # LoveIt theme version
+  version = "0.1.X"
+  # site description
+  description = "About LoveIt Theme"
+  # site keywords
+  keywords = ["Theme", "Hugo"]
 
-                                                      #### Home Page Info
-  home_mode = "post"                                     # [post, other] home mode
-  home_paginate = 6                                      # special amount of posts in each home post page
-  avatar = "images/avatar.png"                           # URL of avatar shown in home page
-  subtitle = "A Clean, Elegant but Advanced Hugo Theme"  # subtitle shown in home page
+  # Home Page Info
+  ## [post, other] home mode
+  home_mode = "post"
+  ## special amount of posts in each home post page
+  home_paginate = 6
+  ## URL of avatar shown in home page
+  avatar = "images/avatar.png"
+  ## subtitle shown in home page
+  subtitle = "A Clean, Elegant but Advanced Hugo Theme"
 
-  socialShare = true                                     # whether to show social share links in post page
+  # whether to show social share links in post page
+  socialShare = true
 
-                                                      #### Footer CopyRight Info
-  since = 2018                                           # Site creation time
-  icp = ''                                               # ICP info only in China (HTML format is allowed)
+  # Footer CopyRight Info
+  ## Site creation time
+  since = 2019
+  ## ICP info only in China (HTML format is allowed)
+  icp = ""
+  ## license info (HTML format is allowed)
   license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
-                                                         # license info (HTML format is allowed)
-  gitRepo = ""                                           # public git repo url to link lastmod git commit only then enableGitInfo is true
 
-  linkToMarkdown = true                                  # whether to show link to Raw Markdown content of the post
+  # public git repo url to link lastmod git commit only then enableGitInfo is true
+  gitRepo = ""
 
-                                                      #### site verification code for Google/Bing/Yandex/Pinterest/Baidu
+  # mathematical formulas (KaTeX)
+  [params.math]
+    enable = true
+    block_left_delimiter = ""
+    block_right_delimiter = ""
+    inline_left_delimiter = "$"
+    inline_right_delimiter = "$"
+    # KaTeX extension copy_tex
+    copy_tex = true
+    # KaTeX extension mhchem
+    mhchem = true
+
+  # whether to show link to Raw Markdown content of the post
+  linkToMarkdown = true
+
+  # site verification code for Google/Bing/Yandex/Pinterest/Baidu
   google_verification = ""
   bing_verification = ""
   yandex_verification = ""
   pinterest_verification = ""
   baidu_verification = ""
 
-  [params.cdn]                                       #### CSS and JS Files CDN
-    fontawesome_free_css = ''                           # for example '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
+  # CSS and JS Files CDN
+  [params.cdn]
+    ## for example '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
+    fontawesome_free_css = ''
     animate_css = ''
     gitalk_css = ''
     gitalk_js = ''
@@ -107,6 +171,9 @@ unsafe = true
     katex_css = ''
     katex_js = ''
     katex_auto_render_js = ''
+    katex_copy_tex_css = ''
+    katex_copy_tex_js = ''
+    katex_mhchem_js = ''
     mermaid_js = ''
     echarts_js = ''
     echarts_macarons_js = ''
@@ -116,15 +183,17 @@ unsafe = true
     aplayer_js = ''
     meting_js = ''
 
-  [params.gravatar]                                      # Gravatar Info for preferred avatar in home page
+  # Gravatar Info for preferred avatar in home page
+  [params.gravatar]
     email = ""
 
-  [params.social]                                        # Social Info in home page
+  # Social Info in home page
+  [params.social]
     GitHub = "xxxx"
     Linkedin = "xxxx"
     Twitter = "xxxx"
     #Instagram = "xxxx"
-    #Email = "xxxx"
+    Email = "xxxx@outlook.com"
     Facebook = "xxxx"
     Telegram = "xxxx"
     #Medium = "xxxx"
@@ -180,7 +249,8 @@ unsafe = true
     #Thingiverse = "xxxx"
     #Devto = "xxxx"
 
-  [params.share]                                         # Social Share Links in post page
+  # Social Share Links in post page
+  [params.share]
     enable = true
     Twitter = true
     Facebook = true
@@ -193,30 +263,40 @@ unsafe = true
     #VKontakte = true
     #Weibo = true
 
-  [params.publisher]                                     # Publisher Info just for SEO
-    name = "XXXX"
+  # Publisher Info just for SEO
+  [params.publisher]
+    name = "xxxx"
     [params.publisher.logo]
       url = "logo.png"
       width = 127
       height = 40
 
-  [params.logo]                                          # Website Log Info just for SEO
+  # Website Log Info just for SEO
+  [params.logo]
     url = "logo.png"
     width = 127
     height = 40
 
-  [params.image]                                         # Website Image Info just for SEO
+  # Website Image Info just for SEO
+  [params.image]
     url = "cover.png"
     width = 800
     height = 600
 
-  [params.gitalk]                                        # Gittalk Comment Config (https://github.com/gitalk/gitalk)
+  # Disqus Comment Config (https://disqus.com/)
+  [params.disqus]
+    # Disqus shortname to use Disqus in posts
+    shortname = "dillonzq"
+
+  # Gittalk Comment Config (https://github.com/gitalk/gitalk)
+  [params.gitalk]
     owner = ""
     repo = ""
     clientId = ""
     clientSecret = ""
 
-  [params.valine]                                        # Valine Comment Config (https://github.com/xCss/Valine)
+  # Valine Comment Config (https://github.com/xCss/Valine)
+  [params.valine]
     enable = false
     appId = ""
     appKey = ""
@@ -227,30 +307,35 @@ unsafe = true
     visitor = true
     recordIP = true
 
-  [params.facebook]                                      # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
+  # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
+  [params.facebook]
     enable = false
     width = "100%"
     numPosts = 10
     appId = ""
     languageCode = "en_US"
 
-[privacy]                                             #### Privacy Info (https://gohugo.io/about/hugo-and-gdpr/)
+# Privacy Info (https://gohugo.io/about/hugo-and-gdpr/)
+[privacy]
   [privacy.googleAnalytics]
     anonymizeIP = true
 
   [privacy.youtube]
     privacyEnhanced = true
 
-[mediaTypes]                                          #### Options to make hugo output .md files.
+# Options to make output .md files
+[mediaTypes]
   [mediaTypes."text/plain"]
     suffixes = ["md"]
 
-[outputFormats.MarkDown]                              #### Options to make hugo output .md files.
+# Options to make output .md files
+[outputFormats.MarkDown]
   mediaType = "text/plain"
   isPlainText = true
   isHTML = false
 
-[outputs]                                             #### Options to make hugo output .md files.
+# Options to make hugo output files
+[outputs]
   home = ["HTML", "RSS"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]

@@ -1,52 +1,71 @@
-{{ if or (eq .Params.share.enable false) (eq .Site.Params.share.enable false) | not }}
-    {{ if or .Params.Share.Twitter (and .Site.Params.Share.Twitter (ne .Params.Share.Twitter false)) }}
-        <a href="//twitter.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Params.Social.Twitter }}" target="_blank" title="Share on Twitter">
+{{- if .Params.share.enable | default .Site.Params.share.enable | eq true -}}
+    {{- /* Share on Twitter */ -}}
+    {{- if .Params.Share.Twitter | default .Site.Params.Share.Twitter | eq true -}}
+        <a href="//twitter.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Params.Social.Twitter }}" target="_blank" title="{{ T "share" }} Twitter">
             <i class="fab fa-twitter fa-fw"></i>
         </a>
-    {{ end }}
-    {{ if or .Params.Share.Facebook (and .Site.Params.Share.Facebook (ne .Params.Share.Facebook false)) }}
-        <a href="//www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" title="Share on Facebook">
+    {{- end -}}
+
+    {{- /* Share on Facebook */ -}}
+    {{- if .Params.Share.Facebook | default .Site.Params.Share.Facebook | eq true -}}
+        <a href="//www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" title="{{ T "share" }} Facebook">
             <i class="fab fa-facebook-square fa-fw"></i>
         </a>
-    {{ end }}
-    {{ if or .Params.Share.Reddit (and .Site.Params.Share.Reddit (ne .Params.Share.Reddit false)) }}
-        <a href="//reddit.com/submit?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on Reddit">
+    {{- end -}}
+
+    {{- /* Share on Reddit */ -}}
+    {{- if .Params.Share.Reddit | default .Site.Params.Share.Reddit | eq true -}}
+        <a href="//reddit.com/submit?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="{{ T "share" }} Reddit">
             <i class="fab fa-reddit fa-fw"></i>
         </a>
-    {{ end }}
-    {{ if or .Params.Share.Linkedin (and .Site.Params.Share.Linkedin (ne .Params.Share.Linkedin false)) }}
-        <a href="//www.linkedin.com/shareArticle?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on LinkedIn">
+    {{- end -}}
+
+    {{- /* Share on Linkedin */ -}}
+    {{- if .Params.Share.Linkedin | default .Site.Params.Share.Linkedin | eq true -}}
+        <a href="//www.linkedin.com/shareArticle?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="{{ T "share" }} LinkedIn">
             <i class="fab fa-linkedin fa-fw"></i>
         </a>
-    {{ end }}
-    {{ if or .Params.Share.Pinterest (and .Site.Params.Share.Pinterest (ne .Params.Share.Pinterest false)) }}
-        <a href="//www.pinterest.com/pin/create/button/?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="Share on Pinterest">
+    {{- end -}}
+
+    {{- /* Share on Pinterest */ -}}
+    {{- if .Params.Share.Pinterest | default .Site.Params.Share.Pinterest | eq true -}}
+        <a href="//www.pinterest.com/pin/create/button/?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="{{ T "share" }} Pinterest">
             <i class="fab fa-pinterest fa-fw"></i>
         </a>
-    {{ end }}
-    {{ if or .Params.Share.YCombinator (and .Site.Params.Share.YCombinator (ne .Params.Share.YCombinator false)) }}
-        <a href="//news.ycombinator.com/submitlink?u={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="Share on Hacker News">
+    {{- end -}}
+
+    {{- /* Share on Hacker News */ -}}
+    {{- if .Params.Share.Hackernews | default .Site.Params.Share.Hackernews | eq true -}}
+        <a href="//news.ycombinator.com/submitlink?u={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="{{ T "share" }} Hacker News">
             <i class="fab fa-y-combinator fa-fw"></i>
         </a>
-    {{ end }}
-    {{ if or .Params.Share.Mix (and .Site.Params.Share.Mix (ne .Params.Share.Mix false)) }}
-        <a href="//mix.com/add?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="Share on Mix">
+    {{- end -}}
+
+    {{- /* Share on Mix */ -}}
+    {{- if .Params.Share.Mix | default .Site.Params.Share.Mix | eq true -}}
+        <a href="//mix.com/add?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="{{ T "share" }} Mix">
             <i class="fab fa-mix fa-fw"></i>
         </a>
-    {{ end }}
-    {{ if or .Params.Share.Tumblr (and .Site.Params.Share.Tumblr (ne .Params.Share.Tumblr false)) }}
-        <a href="//www.tumblr.com/widgets/share/tool?canonicalUrl={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on Tumblr">
+    {{- end -}}
+
+    {{- /* Share on Tumblr */ -}}
+    {{- if .Params.Share.Tumblr | default .Site.Params.Share.Tumblr | eq true -}}
+        <a href="//www.tumblr.com/widgets/share/tool?canonicalUrl={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="{{ T "share" }} Tumblr">
             <i class="fab fa-tumblr fa-fw"></i>
         </a>
-    {{ end }}
-    {{ if or .Params.Share.VK (and .Site.Params.Share.VK (ne .Params.Share.VK false)) }}
-        <a href="//vk.com/share.php?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on VKontakte ">
+    {{- end -}}
+
+    {{- /* Share on VKontakte */ -}}
+    {{- if .Params.Share.VKontakte | default .Site.Params.Share.VKontakte | eq true -}}
+        <a href="//vk.com/share.php?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="{{ T "share" }} VKontakte ">
             <i class="fab fa-vk fa-fw"></i>
         </a>
-    {{ end }}
-    {{ if or .Params.Share.Weibo (and .Site.Params.Share.Weibo (ne .Params.Share.Weibo false)) }}
-        <a href="//service.weibo.com/share/share.php?url={{ .Permalink }}&amp;appkey=&amp;title={{ .Title }}{{ with $.Params.featured_image }}&amp;pic={{ . }}{{ end }}" target="_blank" title="Share on Weibo">
+    {{- end -}}
+
+    {{- /* Share on Weibo */ -}}
+    {{- if .Params.Share.Weibo | default .Site.Params.Share.Weibo | eq true -}}
+        <a href="//service.weibo.com/share/share.php?url={{ .Permalink }}&amp;appkey=&amp;title={{ .Title }}{{ with $.Params.featured_image }}&amp;pic={{ . }}{{- end -}}" target="_blank" title="{{ T "share" }} Weibo">
             <i class="fab fa-weibo fa-fw"></i>
         </a>
-    {{ end }}
-{{ end }}
+    {{- end -}}
+{{- end -}}

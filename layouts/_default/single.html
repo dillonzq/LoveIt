@@ -1,35 +1,15 @@
-{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+{{- define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end -}}
 
-{{ define "content" }}
-    <div class="post-warp single">
-        <h1 class="post-title animated pulse faster">{{ .Title }}</h1>
+{{- define "content" -}}
+    <div class="page single">
+        {{- /* Title */ -}}
+        <h1 class="post-title animated pulse faster">
+            {{- .Title -}}
+        </h1>
+
+        {{- /* Content */ -}}
         <div class="post-content">
-            {{ $content := .Content }}
-            {{ $REin := `<img src="([^"]+)" alt="([^"]+)?" />` }}
-            {{ $REout := "<figure><img src=/images/loading.svg data-sizes=auto data-src=$1 alt=$2 class=lazyload><figcaption class=image-caption>$2</figcaption></figure>" }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<img src="([^"]+)" alt="([^"]+)?" title="([^"]+)?" />` }}
-            {{ $REout = "<figure><img src=/images/loading.svg data-src=$1 data-sizes=auto alt=$2 title=$3 class=lazyload><figcaption class=image-caption>$2</figcaption></figure>" }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `:\(([\w- ]+?)\):` }}
-            {{ $REout = `<i class="$1 fa-fw"></i>` }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `\[(.+?)\]\^\((.+?)\)` }}
-            {{ $REout = `<strong><ruby>$1<rt>$2</rt></ruby></strong>` }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<sup>\[return\]</sup>` }}
-            {{ $REout = printf "<sup>[%s]</sup>" (T "return") }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<(h[123456]) (id=".+?")>` }}
-            {{ $REout = `<a class="post-dummy-target" $2></a><$1>` }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<(sup class="footnote-ref") (id="fnref:.+?")>` }}
-            {{ $REout = `<a class="post-dummy-target" $2></a><$1>` }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<(li) (id="fn:.+?")>` }}
-            {{ $REout = `<$1><a class="post-dummy-target" $2></a>` }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $content | safeHTML }}
+            {{- partial "hook/content.html" .Content | safeHTML -}}
         </div>
     </div>
-{{end }}
+{{- end -}}

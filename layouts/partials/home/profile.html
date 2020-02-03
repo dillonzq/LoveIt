@@ -1,32 +1,34 @@
 <div class="home-intro">
-    {{ $avatar := "" }}
-    {{ if .Site.Params.gravatar.email }}
-        {{ $avatar = (printf "https://www.gravatar.com/avatar/%s?s=240&d=mp" (md5 .Site.Params.gravatar.email)) }}
-    {{ else if .Site.Params.avatar }}
-        {{ $avatar = .Site.Params.avatar }}
-    {{ end }}
-    {{ if $avatar }}
+    {{- $avatar := "" -}}
+    {{- if .Site.Params.gravatar.email -}}
+        {{- $avatar = (printf "https://www.gravatar.com/avatar/%s?s=240&d=mp" (md5 .Site.Params.gravatar.email)) -}}
+    {{- else if .Site.Params.avatar -}}
+        {{- $avatar = .Site.Params.avatar -}}
+    {{- end -}}
+    {{- if $avatar -}}
         <div class="home-avatar">
             <a href="/posts">
-                <img src={{ $avatar | relURL }} alt="avatar">
+                <img src={{ $avatar | relURL }} alt="avatar" title="{{ T "home" }}">
             </a>
         </div>
-    {{ end }}
+    {{- end -}}
 
-    {{ with .Site.Params.subtitle }}
+    {{- with .Site.Params.subtitle -}}
         <h2 class="home-description">
-            {{ $id := md5 . | printf "tp-%s" }}
-            <div id={{ printf "r%s" $id }} hidden=true>{{ . | safeHTML }}</div>
+            {{- $id := md5 . | printf "tp-%s" -}}
+            <div id={{ printf "r%s" $id }} hidden=true>
+                {{- . | safeHTML -}}
+            </div>
             <div id={{ $id }} class="typeit"></div>
-            {{ with $.Scratch.Get "typeitMap" }}
-                {{ $.Scratch.Set "typeitMap" (dict $id (slice $id) | merge .) }}
-            {{ else }}
-                {{ $.Scratch.Set "typeitMap" (dict $id (slice $id)) }}
-            {{ end }}
+            {{- with $.Scratch.Get "typeitMap" -}}
+                {{- $.Scratch.Set "typeitMap" (dict $id (slice $id) | merge .) -}}
+            {{- else -}}
+                {{- $.Scratch.Set "typeitMap" (dict $id (slice $id)) -}}
+            {{- end -}}
         </h2>
-    {{ end }}
+    {{- end -}}
 
     <div class="home-social-links">
-        {{ partial "home/social.html" . }}
+        {{- partial "home/social.html" . -}}
     </div>
 </div>

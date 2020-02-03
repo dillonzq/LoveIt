@@ -1,91 +1,94 @@
-{{ if .IsHome -}}
+{{- /* Home SEO */ -}}
+{{- if .IsHome -}}
     <script type="application/ld+json">
     {
-    "@context": "http://schema.org",
-    "@type": "WebSite",
-    "url": "{{ .Site.BaseURL }}",
-    {{ with .Site.Author.name }}
-        "author": {
-            "@type": "Person",
-            "name": "{{ . }}"
-        },
-    {{ end }}
-    {{ with .Site.Params.description }}
-        "description": "{{ . }}",
-    {{ end }}
-    {{ with .Site.Params.image }}
-        "image": "{{ .url | absURL }}",
-    {{ end }}
-    {{ with .Site.Params.logo }}
-        "thumbnailUrl": "{{ .url | absURL }}",
-    {{ end }}
-    {{ with .Site.Copyright }}
-        "license": "{{ . }}",
-    {{ end }}
-    "name": "{{ .Site.Title }}"
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "{{ .Site.BaseURL }}",
+        {{- with .Site.Author.name -}}
+            "author": {
+                "@type": "Person",
+                "name": "{{ . }}"
+            },
+        {{- end -}}
+        {{- with .Site.Params.description -}}
+            "description": "{{ . }}",
+        {{- end -}}
+        {{- with .Site.Params.image -}}
+            "image": "{{ .url | absURL }}",
+        {{- end -}}
+        {{- with .Site.Params.logo -}}
+            "thumbnailUrl": "{{ .url | absURL }}",
+        {{- end -}}
+        {{- with .Site.Copyright -}}
+            "license": "{{ . }}",
+        {{- end -}}
+        "name": "{{ .Site.Title }}"
     }
     </script>
-{{ else if .IsPage -}}
+
+{{- /* Page SEO */ -}}
+{{- else if .IsPage -}}
     <script type="application/ld+json">
     {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "{{ .Title }}",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "{{ .Permalink }}"
-    },
-    {{ if ge (.Param "lua.image.width") 696 }}
-        "image": {
-            "@type": "ImageObject",
-            "url": "{{ .Param "lua.image.url" | absURL }}",
-            "width": {{ .Param "lua.image.width" }},
-            "height": {{ .Param "lua.image.height" }}
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "{{ .Title }}",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ .Permalink }}"
         },
-    {{ else if ge .Site.Params.image.width 696 }}
-        "image": {
-            "@type": "ImageObject",
-            "url": "{{ .Site.Params.image.url | absURL }}",
-            "width": {{ .Site.Params.image.width }},
-            "height": {{ .Site.Params.image.height }}
-        },
-    {{ end }}
-    "genre": "{{ .Type }}",
-    {{ with .Params.tags }}
-        "keywords": "{{ delimit . ", " }}",
-    {{ end }}
-    "wordcount": {{ .WordCount }},
-    "url": "{{ .Permalink }}",
-    {{ if not .PublishDate.IsZero }}
-        "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
-    {{ else if not .Date.IsZero }}
-        "datePublished": "{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
-    {{ end }}
-    {{ with .Lastmod }}
-        "dateModified": "{{ .Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
-    {{ end }}
-    {{ with .Site.Copyright }}
-        "license": "{{ . }}",
-    {{ end }}
-    {{ with .Site.Params.publisher }}
-        "publisher": {
-            "@type": "Organization",
-            "name": "{{ .name }}",
-            "logo": {
-            "@type": "ImageObject",
-            "url": "{{ .logo.url | absURL }}",
-            "width": {{ .logo.width }},
-            "height": {{ .logo.height }}
-            }
-        },
-    {{ end }}
-    {{ with .Site.Author.Name }}
-        "author": {
-            "@type": "Person",
-            "name": "{{ . }}"
-        },
-    {{ end }}
-    "description": "{{ .Description }}"
+        {{- if ge (.Param "lua.image.width") 696 -}}
+            "image": {
+                "@type": "ImageObject",
+                "url": "{{ .Param "lua.image.url" | absURL }}",
+                "width": {{ .Param "lua.image.width" }},
+                "height": {{ .Param "lua.image.height" }}
+            },
+        {{- else if ge .Site.Params.image.width 696 -}}
+            "image": {
+                "@type": "ImageObject",
+                "url": "{{ .Site.Params.image.url | absURL }}",
+                "width": {{ .Site.Params.image.width }},
+                "height": {{ .Site.Params.image.height }}
+            },
+        {{- end -}}
+        "genre": "{{ .Type }}",
+        {{- with .Params.tags -}}
+            "keywords": "{{ delimit . ", " }}",
+        {{- end -}}
+        "wordcount": {{ .WordCount }},
+        "url": "{{ .Permalink }}",
+        {{- if not .PublishDate.IsZero -}}
+            "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+        {{- else if not .Date.IsZero -}}
+            "datePublished": "{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+        {{- end -}}
+        {{- with .Lastmod -}}
+            "dateModified": "{{ .Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+        {{- end -}}
+        {{- with .Site.Copyright -}}
+            "license": "{{ . }}",
+        {{- end -}}
+        {{- with .Site.Params.publisher -}}
+            "publisher": {
+                "@type": "Organization",
+                "name": "{{ .name }}",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "{{ .logo.url | absURL }}",
+                "width": {{ .logo.width }},
+                "height": {{ .logo.height }}
+                }
+            },
+        {{- end -}}
+        {{- with .Site.Author.Name -}}
+            "author": {
+                "@type": "Person",
+                "name": "{{ . }}"
+            },
+        {{- end -}}
+        "description": "{{ .Description }}"
     }
     </script>
-{{ end }}
+{{- end -}}

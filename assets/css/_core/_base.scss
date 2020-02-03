@@ -1,37 +1,37 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900);
-
 html {
-  font-family: "Lato", -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft Yahei", "WenQuanYi Micro Hei", Arial, Verdana, sans-serif;
+  font-family: $global-font-family;
+}
 
-  /* scrollbar, only support webkit */
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
+/* scrollbar, only support webkit */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
 
-  &::-webkit-scrollbar-thumb {
-    height: 40px;
-    background-color: #87878D;
-    border-radius: 16px;
+::-webkit-scrollbar-thumb {
+  background-color: $scrollbar-color;
 
-    &:hover {
-      background-color: #A9A9B3;
-    }
+  &:hover {
+    background-color: $scrollbar-hover-color;
   }
 }
 
 ::selection {
-  background: rgba(0, 149, 255, 0.1);
+  background: $selection-color;
+
+  .dark-theme & {
+    background: $selection-color-dark;
+  }
 }
 
 body {
   font-size: 16px;
   font-weight: 400;
-  line-height: 26px;
+  line-height: 1.5rem;
   background-color: $global-background-color;
   color: $global-font-color;
 
-  &:before {
+  &::before {
     content: "";
     background-repeat: no-repeat;
     background-position: center;

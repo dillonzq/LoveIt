@@ -1,22 +1,27 @@
-{{ define "content" -}}
-    {{ if eq .Site.Params.home_mode "post" -}}
-        <div class="post-warp">
+{{- define "content" -}}
+    {{- /* Home mode [post] */ -}}
+    {{- if eq .Site.Params.home_mode "post" -}}
+        <div class="page">
+            {{- /* Profile */ -}}
             {{- partial "home/profile.html" . -}}
 
-            {{ $paginator := where .Site.RegularPages "Type" "posts" -}}
-            {{ $paginator = where $paginator "Params.show_in_homepage" "!=" false -}}
-            {{ with .Site.Params.home_paginate -}}
-                {{ $paginator = $.Paginate $paginator . -}}
-            {{ else -}}
-                {{ $paginator = $.Paginate $paginator -}}
-            {{ end -}}
-            {{ range $paginator.Pages -}}
-                {{ .Render "summary" -}}
-            {{ end -}}
-
-            {{ partial "paginator.html" . -}}
+            {{- /* Paginate */ -}}
+            {{- $paginator := where .Site.RegularPages "Type" "posts" -}}
+            {{- $paginator = where $paginator "Params.show_in_homepage" "!=" false -}}
+            {{- with .Site.Params.home_paginate -}}
+                {{- $paginator = $.Paginate $paginator . -}}
+            {{- else -}}
+                {{- $paginator = $.Paginate $paginator -}}
+            {{- end -}}
+            {{- range $paginator.Pages -}}
+                {{- .Render "summary" -}}
+            {{- end -}}
+            {{- partial "paginator.html" . -}}
         </div>
+
+    {{- /* Home mode [other] */ -}}
     {{- else -}}
-        {{ partial "home/profile.html" . -}}
-    {{ end -}}
-{{ end }}
+        {{- /* Profile */ -}}
+        {{- partial "home/profile.html" . -}}
+    {{- end -}}
+{{- end -}}

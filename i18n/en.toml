@@ -24,9 +24,14 @@ other = "Categories"
 # === Taxonomy ===
 
 # === Pagination ===
-[More]
+[more]
 other = "More"
 # === Pagination ===
+
+# === partials/header.html ===
+[switchTheme]
+other = "Switch Theme"
+# === partials/header.html ===
 
 # === partials/comments.html ===
 [valineLang]
@@ -41,9 +46,14 @@ other = "Powered by %s"
 other = "Theme - "
 # === partials/footer.html ===
 
+# === partials/post/share.html ===
+[share]
+other = "Share on"
+# === partials/post/share.html ===
+
 # === posts/single.html ===
 [toc]
-other = "Table of Contents"
+other = "Contents"
 
 [publish]
 other = "published on"
@@ -64,7 +74,7 @@ other = "<span class=leancloud-visitors-count></span> pageviews"
 other = "Author"
 
 [lastMod]
-other = "This article is updated with %s"
+other = "The article was updated on %s"
 
 [license]
 other = "Published under the %s license"
@@ -75,7 +85,7 @@ other = "Back"
 [home]
 other = "Home"
 
-[readmore]
+[readMore]
 other = "Read More"
 
 [day]
@@ -89,14 +99,14 @@ other = "min"
 
 [second]
 other = "sec"
-
-[return]
-other = "return"
 # === posts/single.html ===
 
 # === 404.html ===
 [pageNotFound]
 other = "Page not found"
+
+[pageNotFoundText]
+other = "The page you're looking for doesn't exist. Sorry."
 
 [backToHome]
 other = "Back to Home"

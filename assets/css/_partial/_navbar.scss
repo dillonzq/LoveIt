@@ -14,7 +14,7 @@
   .navbar-container {
     width: auto;
     text-align: center;
-    margin: 0 6rem;
+    margin: 0 4rem;
     display: flex;
     justify-content: space-between;
 
@@ -32,10 +32,10 @@
 
       &.active {
         font-weight: 900;
-        color: $navbar-active-color;
+        color: $navbar-hover-color;
 
         .dark-theme & {
-          color: $navbar-active-color-dark;
+          color: $navbar-hover-color-dark;
         }
       }
     }
