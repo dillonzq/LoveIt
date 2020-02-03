@@ -133,8 +133,18 @@ dateFormatToUse = "2006-01-02"
   # public git repo url to link lastmod git commit only then enableGitInfo is true
   gitRepo = ""
 
-  # whether to render mathematical formulas
-  math = true
+  # mathematical formulas (KaTeX)
+  [params.math]
+    enable = true
+    block_left_delimiter = ""
+    block_right_delimiter = ""
+    inline_left_delimiter = "$"
+    inline_right_delimiter = "$"
+    # KaTeX extension copy_tex
+    copy_tex = true
+    # KaTeX extension mhchem
+    mhchem = true
+
   # whether to show link to Raw Markdown content of the post
   linkToMarkdown = true
 
@@ -159,6 +169,9 @@ dateFormatToUse = "2006-01-02"
     katex_css = ''
     katex_js = ''
     katex_auto_render_js = ''
+    katex_copy_tex_css = ''
+    katex_copy_tex_js = ''
+    katex_mhchem_js = ''
     mermaid_js = ''
     echarts_js = ''
     echarts_macarons_js = ''

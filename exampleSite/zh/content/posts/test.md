@@ -314,3 +314,9 @@ int a = 1;
 $$ c = \pm\sqrt{a^2 + b^2} $$
 
 Left \\( c = \pm\sqrt{a^2 + b^2} \\) Right
+
+Left $ c = \pm\sqrt{a^2 + b^2} $ Right
+
+$ \ce{CO2 + C -> 2 CO} $
+
+$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $

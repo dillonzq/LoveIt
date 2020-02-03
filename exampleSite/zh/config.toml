@@ -133,8 +133,18 @@ dateFormatToUse = "2006-01-02"
   # 用于生成文章上次修改时间的公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = ""
 
-  # 是否渲染数学公式
-  math = true
+  # 数学公式 (KaTeX https://katex.org/)
+  [params.math]
+    enable = true
+    block_left_delimiter = ""
+    block_right_delimiter = ""
+    inline_left_delimiter = "$"
+    inline_right_delimiter = "$"
+    # KaTeX 插件 copy_tex
+    copy_tex = true
+    # KaTeX 插件 mhchem
+    mhchem = true
+
   # 是否在文章页面显示原始 Markdown 文档链接
   linkToMarkdown = true
 
@@ -159,6 +169,9 @@ dateFormatToUse = "2006-01-02"
     katex_css = ''
     katex_js = ''
     katex_auto_render_js = ''
+    katex_copy_tex_css = ''
+    katex_copy_tex_js = ''
+    katex_mhchem_js = ''
     mermaid_js = ''
     echarts_js = ''
     echarts_macarons_js = ''

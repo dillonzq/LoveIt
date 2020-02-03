@@ -54,7 +54,8 @@
 {{- end -}}
 
 {{- /* KaTeX https://github.com/KaTeX/KaTeX */ -}}
-{{- if .Site.Params.math | and (ne .Params.math false) -}}
+{{- if .Site.Params.math.enable | and (ne .Params.math false) -}}
+    {{- $math := .Site.Params.math -}}
     {{- $katex_css := "" -}}
     {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.katex_css -}}
         {{- $katex_css = .Site.Params.cdn.katex_css -}}
@@ -74,10 +75,54 @@
         {{- $katex_auto_render_js = .Site.Params.cdn.katex_auto_render_js -}}
     {{- else -}}
         {{- $res := resources.Get "js/lib/katex/auto-render.min.js" -}}
-        {{- $katex_auto_render_js = printf "<script defer src=\"%s\" onload=\"renderMathInElement(document.body);\"></script>" $res.RelPermalink -}}
+        {{- $katex_auto_render_js = printf "<script defer src=\"%s\"></script>" $res.RelPermalink -}}
     {{- end -}}
     {{- $katex := delimit (slice $katex_css $katex_js $katex_auto_render_js) "" -}}
+    {{- if $math.copy_tex -}}
+        {{- $katex_copy_tex_css := "" -}}
+        {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.katex_copy_tex_css -}}
+            {{- $katex_copy_tex_css = .Site.Params.cdn.katex_copy_tex_css -}}
+        {{- else -}}
+            {{- $res := resources.Get "css/lib/katex/copy-tex.min.css" -}}
+            {{- $katex_copy_tex_css = printf "<link rel=\"stylesheet\" href=\"%s\">" $res.RelPermalink -}}
+        {{- end -}}
+        {{- $katex_copy_tex_js := "" -}}
+        {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.katex_copy_tex_js -}}
+            {{- $katex_copy_tex_js = .Site.Params.cdn.katex_copy_tex_js -}}
+        {{- else -}}
+            {{- $res := resources.Get "js/lib/katex/copy-tex.min.js" -}}
+            {{- $katex_copy_tex_js = printf "<script defer src=\"%s\"></script>" $res.RelPermalink -}}
+        {{- end -}}
+        {{- $katex = delimit (slice $katex $katex_copy_tex_css $katex_copy_tex_js) "" -}}
+    {{- end -}}
+    {{- if $math.mhchem -}}
+        {{- $katex_mhchem_js := "" -}}
+        {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.katex_mhchem_js -}}
+            {{- $katex_mhchem_js = .Site.Params.cdn.katex_mhchem_js -}}
+        {{- else -}}
+            {{- $res := resources.Get "js/lib/katex/mhchem.min.js" -}}
+            {{- $katex_mhchem_js = printf "<script defer src=\"%s\"></script>" $res.RelPermalink -}}
+        {{- end -}}
+        {{- $katex = delimit (slice $katex $katex_mhchem_js) "" -}}
+    {{- end -}}
     {{- $katex | safeHTML -}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true },
+                    {{- if and $math.block_left_delimiter $math.block_right_delimiter -}}
+                        { left: "{{ $math.block_left_delimiter }}", right: "{{ $math.block_right_delimiter }}", display: true },
+                    {{- end -}}
+                    {{- if and $math.inline_left_delimiter $math.inline_right_delimiter -}}
+                        { left: "{{ $math.inline_left_delimiter }}", right: "{{ $math.inline_right_delimiter }}", display: false },
+                    {{- end -}}
+                ]
+            });
+        });
+    </script>
 {{- end -}}
 
 {{- /* mermaid https://github.com/knsv/mermaid */ -}}
