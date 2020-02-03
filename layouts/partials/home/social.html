@@ -283,3 +283,6 @@
         <i class="far fa-envelope fa-fw" target="_blank" title="Email"></i>
     </a>
 {{- end -}}
+{{- with .Site.Params.Social.Custom}}
+    {{- . | safeHTML -}}
+{{- end -}}

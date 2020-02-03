@@ -1,0 +1,2 @@
+{{- $res := resources.Get "svg/loading.svg" | minify -}}
+<img src="{{ $res.RelPermalink }}" data-sizes="auto" data-src="{{ . }}" alt="featured image" class="lazyload">

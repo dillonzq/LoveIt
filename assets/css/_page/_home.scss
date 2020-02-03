@@ -36,6 +36,7 @@
   .home-description {
     font-size: 1rem;
     font-weight: normal;
+    margin: 0;
     padding: .4rem;
   }
 
@@ -43,7 +44,12 @@
     padding-top: .6rem;
 
     i {
-      font-size: 1.4rem;
+      font-size: 1.45rem;
+    }
+
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
     }
   }
 }

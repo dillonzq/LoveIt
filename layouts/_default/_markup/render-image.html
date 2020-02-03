@@ -1,15 +1,6 @@
 <figure>
-    <img
-        {{ $res := resources.Get "svg/loading.svg" | minify -}}
-        src="{{ $res.RelPermalink }}"
-        data-sizes="auto"
-        data-src="{{ .Destination | safeURL }}"
-        alt="{{ .Text }}"
-        {{ with .Title -}}
-            title="{{ . }}"
-        {{ end -}}
-        class="lazyload"
-        >
+    {{- $loading := resources.Get "svg/loading.svg" | minify -}}
+    <img src="{{ $loading.RelPermalink }}" data-sizes="auto" data-src="{{ .Destination | safeURL }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} class="lazyload">
     <figcaption class="image-caption">
         {{- if .Title -}}
             {{- .Title -}}

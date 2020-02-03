@@ -6,33 +6,7 @@
             {{- .Title -}}
         </h1>
         <div class="post-content">
-            {{- $content := .Content -}}
-
-            {{- $REin := `:\(([\w- ]+?)\):` -}}
-            {{- $REout := `<i class="$1 fa-fw"></i>` -}}
-            {{- $content = replaceRE $REin $REout $content -}}
-
-            {{- $REin = `\[(.+?)\]\^\((.+?)\)` -}}
-            {{- $REout = `<strong><ruby>$1<rt>$2</rt></ruby></strong>` -}}
-            {{- $content = replaceRE $REin $REout $content -}}
-
-            {{- $REin = `<sup>\[return\]</sup>` -}}
-            {{- $REout = `↩︎` -}}
-            {{- $content = replaceRE $REin $REout $content -}}
-
-            {{- $REin = `<(h[23456]) (id=".+?")>` -}}
-            {{- $REout = `<a class="post-dummy-target" $2></a><$1>` -}}
-            {{- $content = replaceRE $REin $REout $content -}}
-
-            {{- $REin = `<(.+) (id="fnref:.+?")>` -}}
-            {{- $REout = `<a class="post-dummy-target" $2></a><$1>` -}}
-            {{- $content = replaceRE $REin $REout $content -}}
-
-            {{- $REin = `<li (id="fn:.+?")(.*?)>\s?<p>` -}}
-            {{- $REout = `<li $2><p><a class="post-dummy-target" $1></a>` -}}
-            {{- $content = replaceRE $REin $REout $content -}}
-
-            {{- $content | safeHTML -}}
+            {{- partial "hook/content.html" .Content | safeHTML -}}
         </div>
     </div>
 {{- end -}}

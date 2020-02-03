@@ -5,13 +5,13 @@
 
     <!--featured_image-->
     {{- with .Params.featured_image -}}
-        {{- $image := $.Params.featured_image_preview | default . -}}
         <div class="post-featured-image-preview">
-            {{- $res := resources.Get "svg/loading.svg" | minify -}}
-            <img src="{{ $res.RelPermalink }}" data-sizes="auto" data-src="{{ $image }}" alt="featured image" class="lazyload">
+            {{- $image := $.Params.featured_image_preview | default . -}}
+            {{- partial "image" $image -}}
         </div>
     {{- end -}}
     <!-- end featured_image-->
+
     <h1 class="post-title post-list-title" itemprop="name headline">
         <a href="{{ .Permalink }}">{{ .Title }}</a>
     </h1>
@@ -40,17 +40,7 @@
                 {{- .Params.description -}}
             </p>
         {{- else -}}
-            {{- $summary := .Summary -}}
-
-            {{- $REin := `:\(([\w- ]+?)\):` -}}
-            {{- $REout := `<i class="$1 fa-fw"></i>` -}}
-            {{- $summary  = replaceRE $REin $REout $summary  -}}
-
-            {{- $REin = `\[(.+?)\]\^\((.+?)\)` -}}
-            {{- $REout = `<strong><ruby>$1<rt>$2</rt></ruby></strong>` -}}
-            {{- $summary  = replaceRE $REin $REout $summary -}}
-
-            {{- $summary  | safeHTML -}}
+            {{- partial "hook/content.html" .Summary | safeHTML -}}
         {{- end -}}
     </div>
     <div class="post-footer">
