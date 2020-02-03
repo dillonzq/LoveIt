@@ -38,6 +38,14 @@ dateFormatToUse = "2006-01-02"
     tabWidth = 4
   # Goldmark is from Hugo 0.60 the default library used for Markdown
   [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      strikethrough = true
+      table = true
+      taskList = true
+      typographer = true
     [markup.goldmark.renderer]
       # whether to use HTML tags directly in the document
       unsafe = true

@@ -1,3 +1,4 @@
+{{- /* Desktop navbar */ -}}
 <nav class="navbar">
     <div class="navbar-container">
         <div class="navbar-header animated bounceIn">
@@ -12,16 +13,17 @@
                     {{- .Name | safeHTML -}}
                 </a>
             {{- end -}}
-            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title={{ T "switchTheme" }}></i></a>
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="{{ T "switchTheme" }}"></i></a>
         </div>
     </div>
 </nav>
 
+{{- /* Mobile navbar */ -}}
 <nav class="navbar-mobile">
     <div class="navbar-container">
         <div class="navbar-header">
             <div class="navbar-header-title animated bounceIn">
-                <a href="{{.Site.BaseURL}}">
+                <a href="{{ .Site.BaseURL }}">
                     {{- .Site.Title -}}
                 </a>
             </div>
@@ -36,7 +38,7 @@
                     {{- .Name | safeHTML -}}
                 </a>
             {{- end -}}
-            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title={{ T "switchTheme" }}></i></a>
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="{{ T "switchTheme" }}"></i></a>
         </div>
     </div>
 </nav>

@@ -4,19 +4,19 @@
 
 {{- define "content" -}}
     <div class="notfound">
-        <h1 class="error-emoji"></h1>
+        <h1 id="error-emoji"></h1>
         <p class="error-text">
             {{- T "pageNotFoundText" -}}&nbsp;
             <a href="{{ .Site.BaseURL }}" title="{{ T "backToHome" }}">↩︎</a>
         </p>
     </div>
     <script>
-        var errorEmojiContainer = document.getElementsByClassName('error-emoji')[0];
-        var emojiArray = [
+        const emojiArray = [
             '\\(o_o)/', '(o^^)o', '(˚Δ˚)b', '(^-^*)', '(≥o≤)', '(^_^)b', '(·_·)',
             '(=\'X\'=)', '(>_<)', '(;-;)', '\\(^Д^)/',
         ];
-        var errorEmoji = emojiArray[Math.floor(Math.random() * emojiArray.length)];
+        const errorEmoji = emojiArray[Math.floor(Math.random() * emojiArray.length)];
+        const errorEmojiContainer = document.getElementById('error-emoji');
         errorEmojiContainer.appendChild(document.createTextNode(errorEmoji));
     </script>
 {{- end -}}

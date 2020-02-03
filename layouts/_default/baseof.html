@@ -1,6 +1,8 @@
+{{- /* LoveIt theme version detection */ -}}
 {{- if ne .Site.Params.version "0.1.X" -}}
   {{- errorf "\n\nThere are two possible situations that led to this error:\n  1. You haven't copied the config.toml yet. See https://github.com/dillonzq/LoveIt#installation \n  2. You have an incompatible update. See https://github.com//dillonzq/LoveIt/blob/master/CHANGELOG.md \n\n有两种可能的情况会导致这个错误发生:\n  1. 你还没有复制 config.toml 参考 https://github.com/dillonzq/LoveIt#installation \n  2. 你进行了一次不兼容的更新 参考 https://github.com//dillonzq/LoveIt/blob/master/CHANGELOG.md \n" -}}
 {{- end -}}
+
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
     <head>
@@ -12,10 +14,13 @@
         {{- partial "head.html" . -}}
     </head>
     <body>
+        {{- /* Check theme isDark before body rendering */ -}}
         <script>
             window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
             window.isDark && document.body.classList.add('dark-theme');
         </script>
+
+        {{- /* Body wrapper */ -}}
         <div class="wrapper">
             {{- partial "header.html" . -}}
             <main class="main">
@@ -24,10 +29,14 @@
                 </div>
             </main>
             {{- partial "footer.html" . -}}
-            {{- partial "scripts.html" . -}}
         </div>
+
+        {{- /* Dynamic to top button */ -}}
         <a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll>
             <span>&nbsp;</span>
         </a>
+
+        {{- /* Load scripts */ -}}
+        {{- partial "scripts.html" . -}}
     </body>
 </html>

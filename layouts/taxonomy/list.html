@@ -4,6 +4,7 @@
 
 {{- define "content" -}}
     <div class="page archive">
+        {{- /* Title */ -}}
         <h2 class="post-title animated pulse faster">
             {{- $taxonomy := .Data.Singular -}}
             {{- if eq $taxonomy "category" -}}
@@ -15,6 +16,7 @@
             {{- end -}}
         </h2>
 
+        {{- /* Paginate */ -}}
         {{- range (.Paginate (.Pages.GroupByDate "2006")).PageGroups -}}
             <h3>{{ .Key }}</h3>
             {{- range .Pages -}}

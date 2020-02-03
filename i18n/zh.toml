@@ -46,6 +46,11 @@ other = "由 %s 强力驱动"
 other = "主题 - "
 # === partials/footer.html ===
 
+# === partials/post/share.html ===
+[share]
+other = "分享到"
+# === partials/post/share.html ===
+
 # === posts/single.html ===
 [toc]
 other = "目录"

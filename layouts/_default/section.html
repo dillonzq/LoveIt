@@ -3,12 +3,13 @@
 {{- end -}}
 
 {{- define "content" -}}
-    {{- $data := .Data -}}
     <div class="page archive">
+        {{- /* Title */ -}}
         <h2 class="post-title animated pulse faster">
             {{- T "all" | humanize}}{{ T .Section | default .Section | humanize -}}
         </h2>
 
+        {{- /* Paginate */ -}}
         {{- range (.Paginate (.Pages.GroupByDate "2006")).PageGroups -}}
             <h3>{{ .Key }}</h3>
             {{- range .Pages -}}

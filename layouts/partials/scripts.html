@@ -1,143 +1,136 @@
-<!-- jQuery https://github.com/jquery/jquery -->
+{{- /* jQuery https://github.com/jquery/jquery */ -}}
 {{- $jquery := "" -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.jquery_js -}}
     {{- $jquery = .Site.Params.cdn.jquery_js -}}
 {{- else -}}
-    {{- $res := resources.Get "js/lib/jquery/jquery.slim.min.js" | resources.Minify -}}
+    {{- $res := resources.Get "js/lib/jquery/jquery.slim.min.js" -}}
     {{- $jquery = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
 {{- end -}}
-<!-- lazysizes https://github.com/aFarkas/lazysizes -->
+
+{{- /* lazysizes https://github.com/aFarkas/lazysizes */ -}}
 {{- $lazysizes := "" -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.lazysizes_js -}}
     {{- $lazysizes = .Site.Params.cdn.lazysizes_js -}}
 {{- else -}}
-    {{- $res := resources.Get "js/lib/lazysizes/lazysizes.min.js" | resources.Minify -}}
+    {{- $res := resources.Get "js/lib/lazysizes/lazysizes.min.js" -}}
     {{- $lazysizes = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
 {{- end -}}
-<!-- Smooth Scroll https://github.com/cferdinandi/smooth-scroll -->
+
+{{- /* Smooth Scroll https://github.com/cferdinandi/smooth-scroll */ -}}
 {{- $smooth_scroll := "" -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.smooth_scroll_js -}}
     {{- $smooth_scroll = .Site.Params.cdn.smooth_scroll_js -}}
 {{- else -}}
-    {{- $res := resources.Get "js/lib/smooth-scroll/smooth-scroll.polyfills.min.js" | resources.Minify -}}
+    {{- $res := resources.Get "js/lib/smooth-scroll/smooth-scroll.polyfills.min.js" -}}
     {{- $smooth_scroll = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
 {{- end -}}
 {{- $smooth_scroll = delimit (slice $smooth_scroll "<script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script>") "" -}}
-<!-- KaTeX https://github.com/KaTeX/KaTeX -->
+
+{{- /* KaTeX https://github.com/KaTeX/KaTeX */ -}}
 {{- $katex_css := "" -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.katex_css -}}
     {{- $katex_css = .Site.Params.cdn.katex_css -}}
 {{- else -}}
-    {{- $res := resources.Get "css/lib/katex/katex.min.css" | resources.Minify -}}
+    {{- $res := resources.Get "css/lib/katex/katex.min.css" -}}
     {{- $katex_css = printf "<link rel=\"stylesheet\" href=\"%s\">" $res.RelPermalink -}}
 {{- end -}}
 {{- $katex_js := "" -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.katex_js -}}
     {{- $katex_js = .Site.Params.cdn.katex_js -}}
 {{- else -}}
-    {{- $res := resources.Get "js/lib/katex/katex.min.js" | resources.Minify -}}
+    {{- $res := resources.Get "js/lib/katex/katex.min.js" -}}
     {{- $katex_js = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
 {{- end -}}
 {{- $katex_auto_render_js := "" -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.katex_auto_render_js -}}
     {{- $katex_auto_render_js = .Site.Params.cdn.katex_auto_render_js -}}
 {{- else -}}
-    {{- $res := resources.Get "js/lib/katex/auto-render.min.js" | resources.Minify -}}
+    {{- $res := resources.Get "js/lib/katex/auto-render.min.js" -}}
     {{- $katex_auto_render_js = printf "<script defer src=\"%s\" onload=\"renderMathInElement(document.body);\"></script>" $res.RelPermalink -}}
 {{- end -}}
 {{- $katex := delimit (slice $katex_css $katex_js $katex_auto_render_js) "" -}}
-<!-- mermaid https://github.com/knsv/mermaid -->
+
+{{- /* mermaid https://github.com/knsv/mermaid */ -}}
 {{- $mermaid := "" -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.mermaid_js -}}
     {{- $mermaid = .Site.Params.cdn.mermaid_js -}}
 {{- else -}}
-    {{- $res := resources.Get "js/lib/mermaid/mermaid.min.js" | resources.Minify -}}
+    {{- $res := resources.Get "js/lib/mermaid/mermaid.min.js" -}}
     {{- $mermaid = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
 {{- end -}}
 {{- $mermaidInit := "<script>mermaid.initialize({startOnLoad: false, theme: null});</script>" -}}
 {{- $mermaid = delimit (slice $mermaid $mermaidInit) "" -}}
-<!-- ECharts https://github.com/apache/incubator-echarts -->
-{{- $echarts_js := "" -}}
-{{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.echarts_js -}}
-    {{- $echarts_js = .Site.Params.cdn.echarts_js -}}
-{{- else -}}
-    {{- $res := resources.Get "js/lib/echarts/echarts.min.js" | resources.Minify -}}
-    {{- $echarts_js = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
-{{- end -}}
-{{- $echarts_macarons_js := "" -}}
-{{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.echarts_macarons_js -}}
-    {{- $echarts_macarons_js = .Site.Params.cdn.echarts_macarons_js -}}
-{{- else -}}
-    {{- $res := resources.Get "js/lib/echarts/macarons.js" | resources.Minify -}}
-    {{- $echarts_macarons_js = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
-{{- end -}}
-{{- $echarts := delimit (slice $echarts_js $echarts_macarons_js) "" -}}
-<!-- TypeIt https://github.com/alexmacarthur/typeit -->
+
+{{- /* TypeIt https://github.com/alexmacarthur/typeit */ -}}
 {{- $typeit := "" -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.typeit_js -}}
     {{- $typeit = .Site.Params.cdn.typeit_js -}}
 {{- else -}}
-    {{- $res := resources.Get "js/lib/typeit/typeit.min.js" | resources.Minify -}}
+    {{- $res := resources.Get "js/lib/typeit/typeit.min.js" -}}
     {{- $typeit = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
 {{- end -}}
-<!-- jQuery.countdown https://github.com/hilios/jQuery.countdown -->
+
+{{- /* jQuery.countdown https://github.com/hilios/jQuery.countdown */ -}}
 {{- $countdown := "" -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.jquery_countdown_js -}}
     {{- $countdown = .Site.Params.cdn.jquery_countdown_js -}}
 {{- else -}}
-    {{- $res := resources.Get "js/lib/jquery-countdown/jquery.countdown.min.js" | resources.Minify -}}
+    {{- $res := resources.Get "js/lib/jquery-countdown/jquery.countdown.min.js" -}}
     {{- $countdown = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
 {{- end -}}
-<!-- APlayer https://github.com/MoePlayer/APlayer -->
+
+{{- /* APlayer https://github.com/MoePlayer/APlayer */ -}}
 {{- $aplayer_css := "" -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.aplayer_css -}}
     {{- $aplayer_css = .Site.Params.cdn.aplayer_css -}}
 {{- else -}}
-    {{- $res := resources.Get "css/lib/aplayer/APlayer.min.css" | resources.Minify -}}
+    {{- $res := resources.Get "css/lib/aplayer/APlayer.min.css" -}}
     {{- $aplayer_css = printf "<link rel=\"stylesheet\" href=\"%s\">" $res.RelPermalink -}}
 {{- end -}}
 {{- $aplayer_js := "" -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.aplayer_js -}}
     {{- $aplayer_js = .Site.Params.cdn.aplayer_js -}}
 {{- else -}}
-    {{- $res := resources.Get "js/lib/aplayer/APlayer.min.js" | resources.Minify -}}
+    {{- $res := resources.Get "js/lib/aplayer/APlayer.min.js" -}}
     {{- $aplayer_js = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
 {{- end -}}
 {{- $aplayer := delimit (slice $aplayer_css $aplayer_js) "" -}}
-<!-- MetingJS https://github.com/metowolf/MetingJS -->
+
+{{- /* MetingJS https://github.com/metowolf/MetingJS */ -}}
 {{- $meting := "" -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.meting_js -}}
     {{- $meting = .Site.Params.cdn.meting_js -}}
 {{- else -}}
-    {{- $res := resources.Get "js/lib/meting/Meting.min.js" | resources.Minify -}}
+    {{- $res := resources.Get "js/lib/meting/Meting.min.js" -}}
     {{- $meting = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
 {{- end -}}
+
+{{- /* ECharts https://github.com/apache/incubator-echarts */ -}}
+{{- $echarts_js := "" -}}
+{{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.echarts_js -}}
+{{- $echarts_js = .Site.Params.cdn.echarts_js -}}
+{{- else -}}
+{{- $res := resources.Get "js/lib/echarts/echarts.min.js" -}}
+{{- $echarts_js = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
+{{- end -}}
+{{- $echarts_macarons_js := "" -}}
+{{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.echarts_macarons_js -}}
+{{- $echarts_macarons_js = .Site.Params.cdn.echarts_macarons_js -}}
+{{- else -}}
+{{- $res := resources.Get "js/lib/echarts/macarons.js" | minify -}}
+{{- $echarts_macarons_js = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
+{{- end -}}
+{{- $echarts := delimit (slice $echarts_js $echarts_macarons_js) "" -}}
 
 {{- $jquery | safeHTML -}}
 {{- $lazysizes | safeHTML -}}
 {{- $smooth_scroll | safeHTML -}}
 
 {{- if .IsPage -}}
-    {{/* dev feature */}}
-    {{- if .Params.dev -}}
-        {{- with .Scratch.Get "echartsMap" -}}
-            {{- $echarts | safeHTML -}}
-            <script>
-                window.echartsMap = {
-                    {{- range $key, $var := . -}}
-                        {{- $key }}: {{ $var | safeJS -}},
-                    {{- end -}}
-                };
-                window.echartsArr=[];
-            </script>
-        {{- end -}}
-    {{- end -}}
-    {{/* dev feature */}}
-
     {{- with .Scratch.Get "mermaidMap" -}}
         {{- $mermaid | safeHTML -}}
         <script>
-            window.mermaidMap = {{ . | jsonify | safeJS }};
+            {{- printf "window.mermaidMap=%s;" (jsonify .) | safeJS -}}
         </script>
     {{- end -}}
 
@@ -153,26 +146,40 @@
     {{- with .Scratch.Get "countdownMap" -}}
         {{- $countdown | safeHTML -}}
         <script>
-            window.countdownMap = {{ . | jsonify | safeJS }};
+            {{- printf "window.countdownMap=%s;" (jsonify .) | safeJS -}}
         </script>
+    {{- end -}}
+
+    {{- /* dev feature */ -}}
+    {{- if .Params.dev -}}
+        {{- with .Scratch.Get "echartsMap" -}}
+            {{- $echarts | safeHTML -}}
+            <script>
+                window.echartsMap = {
+                                { { - range $key, $var := .-} }
+                { { - $key } }: { { $var | safeJS -} },
+                { { - end -} }
+                            };
+                window.echartsArr = [];
+            </script>
+        {{- end -}}
     {{- end -}}
 {{- end -}}
 
-{{- $typeitMap := .Scratch.Get "typeitMap" -}}
-{{- if $typeitMap -}}
+{{- with .Scratch.Get "typeitMap" -}}
     {{- $typeit | safeHTML -}}
     {{- $typeitArr := slice -}}
-    {{- range $key, $val := $typeitMap -}}
+    {{- range $key, $val := . -}}
         {{- $typeitArr = $typeitArr | append (slice $val) -}}
     {{- end -}}
     <script>
-        window.typeitArr = {{ $typeitArr | jsonify | safeJS }};
+        {{- printf "window.typeitArr=%s;" (jsonify $typeitArr) | safeJS -}}
     </script>
 {{- end -}}
 
-{{- $res := resources.Get "/js/blog.js" | resources.Minify -}}
+{{- $res := resources.Get "/js/blog.js" | minify -}}
 <script src="{{ $res.RelPermalink }}"></script>
 
-{{- if not .Site.IsServer -}}
+{{- if eq (getenv "HUGO_ENV") "production" | and .Site.GoogleAnalytics -}}
     {{- template "_internal/google_analytics_async.html" . -}}
 {{- end -}}

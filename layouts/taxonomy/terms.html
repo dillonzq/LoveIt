@@ -8,11 +8,12 @@
     {{- $type := .Type -}}
 
     <div class="page archive">
+        {{- /* Title */ -}}
         <h2 class="post-title animated pulse faster">
             {{- T "all" | humanize}}{{ T $taxonomies | default $taxonomies | humanize -}}
         </h2>
 
-        <!-- Categories Page -->
+        {{- /* Categories Page */ -}}
         {{- if eq $taxonomies "categories" -}}
             <div class="categories-card">
                 {{- range $terms -}}
@@ -44,14 +45,13 @@
                 {{- end -}}
             </div>
 
-        <!-- Tag Cloud Page -->
+        {{- /* Tag Cloud Page */ -}}
         {{- else if eq $taxonomies "tags" -}}
             <div class="tag-cloud-tags">
                 {{- range $.Site.Taxonomies.tags.ByCount -}}
                     <a href="{{ .Page.Permalink }}"> {{ .Page.Title }} <small>({{ .Count }})</small></a>
                 {{- end -}}
             </div>
-
         {{- end -}}
     </div>
 {{- end -}}

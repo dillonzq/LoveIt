@@ -38,6 +38,14 @@ dateFormatToUse = "2006-01-02"
     tabWidth = 4
   # Goldmark 是 Hugo 0.60 以来的默认 Markdown 解析库
   [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      strikethrough = true
+      table = true
+      taskList = true
+      typographer = true
     [markup.goldmark.renderer]
       # 是否在文档中直接使用 HTML 标签
       unsafe = true

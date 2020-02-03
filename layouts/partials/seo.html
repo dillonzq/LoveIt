@@ -1,3 +1,4 @@
+{{- /* Home SEO */ -}}
 {{- if .IsHome -}}
     <script type="application/ld+json">
     {
@@ -25,7 +26,9 @@
         "name": "{{ .Site.Title }}"
     }
     </script>
-{{ else if .IsPage -}}
+
+{{- /* Page SEO */ -}}
+{{- else if .IsPage -}}
     <script type="application/ld+json">
     {
         "@context": "http://schema.org",
