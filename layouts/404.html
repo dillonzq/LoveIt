@@ -1,18 +1,22 @@
-{{ define "title" }}{{ T "pageNotFound" }} | {{ .Site.Title }}{{ end -}}
+{{- define "title" }}
+    {{- T "pageNotFound" | printf "404 %s" }} | {{ .Site.Title -}}
+{{- end -}}
 
-{{ define "content" }}
+{{- define "content" -}}
     <div class="notfound">
-        <h1 class="error-emoji"></h1>
-        <p class="error-text">/* 404 {{ T "pageNotFound" }}. */</p>
-        <p class="error-link"><a href="{{ .Site.BaseURL }}">↑ {{ T "backToHome" }} ↑</a></p>
+        <h1 id="error-emoji"></h1>
+        <p class="error-text">
+            {{- T "pageNotFoundText" -}}&nbsp;
+            <a href="{{ .Site.BaseURL }}" title="{{ T "backToHome" }}">↩︎</a>
+        </p>
     </div>
     <script>
-        var errorEmojiContainer = document.getElementsByClassName('error-emoji')[0];
-        var emojiArray = [
+        const emojiArray = [
             '\\(o_o)/', '(o^^)o', '(˚Δ˚)b', '(^-^*)', '(≥o≤)', '(^_^)b', '(·_·)',
             '(=\'X\'=)', '(>_<)', '(;-;)', '\\(^Д^)/',
         ];
-        var errorEmoji = emojiArray[Math.floor(Math.random() * emojiArray.length)];
+        const errorEmoji = emojiArray[Math.floor(Math.random() * emojiArray.length)];
+        const errorEmojiContainer = document.getElementById('error-emoji');
         errorEmojiContainer.appendChild(document.createTextNode(errorEmoji));
     </script>
-{{ end }}
+{{- end -}}

@@ -1,0 +1,11 @@
+<figure>
+    {{- /* Lazyload */ -}}
+    {{- $loading := resources.Get "svg/loading.svg" | minify -}}
+    <img src="{{ $loading.RelPermalink | safeURL }}" data-sizes="auto" data-src="{{ .Destination | safeURL }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} class="lazyload">
+    {{- $caption := .Title | default .Text -}}
+    {{- with $caption -}}
+        <figcaption class="image-caption">
+            {{- . -}}
+        </figcaption>
+    {{- end -}}
+</figure>

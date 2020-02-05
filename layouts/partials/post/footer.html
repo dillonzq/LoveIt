@@ -1,41 +1,51 @@
-{{ $modify_date := .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
+{{- $modify_date := .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
 <div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>{{ printf (T "lastMod") $modify_date }}</span>
+                <span>
+                    {{- printf (T "lastMod") $modify_date -}}
+                </span>
             </div>
             <div class="post-info-license">
-                {{ if .Params.license }}
-                    <span>{{ printf (T "license") .Params.license | safeHTML }}</span>
-                {{ end }}
+                {{- if .Params.license -}}
+                    <span>
+                        {{- printf (T "license") .Params.license | safeHTML -}}
+                    </span>
+                {{- end -}}
             </div>
         </div>
         <div class="post-info-line">
             <div class="post-info-md">
-                {{ if .Site.Params.linkToMarkdown }}
-                    {{ with .OutputFormats.Get "markdown" }}
-                        <span><a class="link-to-markdown" href="{{ .Permalink }}" target="_blank">{{ T "seeMarkDown" }}</a></span>
-                    {{ end }}
-                {{ end }}
+                {{- if .Site.Params.linkToMarkdown -}}
+                    {{- with .OutputFormats.Get "markdown" -}}
+                        <span>
+                            <a class="link-to-markdown" href="{{ .Permalink }}" target="_blank">
+                                {{- T "seeMarkDown" -}}
+                            </a>
+                        </span>
+                    {{- end -}}
+                {{- end -}}
             </div>
             <div class="post-info-share">
-                {{ if and ( .Param "socialShare" ) (gt (len (.Param "share")) 0) }}
-                    <span>{{ partial "post/share.html" . }}</span>
-                {{ end }}
+                {{- if and ( .Param "socialShare" ) (gt (len (.Param "share")) 0) -}}
+                    <span>
+                        {{- partial "post/share.html" . -}}
+                    </span>
+                {{- end -}}
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
         <section>
-            {{ with .Params.tags }}
-                {{ range . }}
+            {{- with .Params.tags -}}
+                {{- range . -}}
                     <span class="tag">
-                        <a href="{{ "tags/" | absURL }}{{ . | urlize }}/"><i class="fas fa-tag fa-fw"></i>{{ . }}</a>
+                        <a href="{{ "tags/" | absURL }}{{ . | urlize }}/"><i class="fas fa-tag fa-fw"></i>&nbsp;{{ . }}</a>&nbsp;
                     </span>
-                {{ end }}
-            {{ end }}
+                {{- end -}}
+            {{- end -}}
         </section>
         <section>
             <span><a href="javascript:window.history.back();">{{ T "back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{ .Site.BaseURL }}">{{ T "home" }}</a></span>
@@ -43,11 +53,11 @@
     </div>
 
     <div class="post-nav">
-        {{ if .PrevInSection }}
+        {{- if .PrevInSection -}}
             <a href="{{ .PrevInSection.Permalink }}" class="prev" rel="prev" title="{{ .PrevInSection.Title }}"><i class="fas fa-angle-left fa-fw"></i>{{ .PrevInSection.Title }}</a>
-        {{ end }}
+        {{- end -}}
         {{ if .NextInSection }}
             <a href="{{ .NextInSection.Permalink }}" class="next" rel="next" title="{{ .NextInSection.Title }}">{{ .NextInSection.Title }}<i class="fas fa-angle-right fa-fw"></i></a>
-        {{ end }}
+        {{- end -}}
     </div>
 </div>

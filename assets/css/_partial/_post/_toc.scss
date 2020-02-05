@@ -1,0 +1,134 @@
+.post-toc {
+  display: block;
+  position: absolute;
+  width: 360px;
+  margin-left: 1000px;
+  padding: 0 .8rem;
+  border-left: 1px solid $global-border-color;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  top: 12rem;
+
+  .dark-theme & {
+    border-left: 1px solid $global-border-color-dark;
+  }
+
+  .post-toc-title {
+    font-weight: 400;
+    margin: .8rem 0;
+    text-transform: uppercase;
+  }
+
+  .post-toc-content {
+    &.always-active ul {
+      display: block;
+    }
+
+    >nav>ul {
+      margin: .625rem 0;
+    }
+
+    ul {
+      text-indent: -0.85rem;
+      padding-left: .625rem;
+      list-style: none;
+
+      a::before {
+        content: "|";
+        font-weight: bolder;
+        margin-right: .5rem;
+        color: $post-link-color;
+
+        .dark-theme & {
+          color: $post-link-color-dark;
+        }
+      }
+
+      ul {
+        padding-left: 1.25rem;
+        display: none;
+      }
+
+      .has-active > ul {
+        display: block;
+      }
+    }
+
+    .toc-link.active {
+      font-weight: bold;
+      color: $post-link-hover-color;
+
+      .dark-theme & {
+        color: $post-link-hover-color-dark;
+      }
+
+      &::before {
+        font-weight: bolder;
+        color: $post-link-hover-color;
+
+        .dark-theme & {
+          color: $post-link-hover-color-dark;
+        }
+      }
+    }
+  }
+}
+
+.post-toc-mobile {
+  display: none;
+  padding-top: .8rem;
+
+  details {
+    summary {
+      .post-toc-title {
+        display: block;
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.2em;
+        font-weight: bold;
+        line-height: 2em;
+        padding: 0 .625rem;
+        background: $code-background-color;
+
+        i.details {
+          line-height: 2em;
+        }
+
+        .dark-theme & {
+          background: $code-background-color-dark;
+        }
+      }
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+    }
+  }
+
+  details[open] {
+    i.details {
+      transform: rotate(180deg);
+    }
+  }
+
+  .post-toc-content {
+    border: 2px solid $code-background-color;
+
+    >nav>ul {
+      margin: .625rem 0;
+    }
+
+    ul {
+      padding-left: .625rem;
+      list-style: none;
+
+      ul {
+        padding-left: 1.25rem;
+      }
+    }
+
+    .dark-theme & {
+      border: 2px solid $code-background-color-dark;
+    }
+  }
+}

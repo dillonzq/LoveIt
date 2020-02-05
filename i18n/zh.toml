@@ -24,9 +24,14 @@ other = "分类"
 # === Taxonomy ===
 
 # === Pagination ===
-[More]
+[more]
 other = "更多"
 # === Pagination ===
+
+# === partials/header.html ===
+[switchTheme]
+other = "切换主题"
+# === partials/header.html ===
 
 # === partials/comments.html ===
 [valineLang]
@@ -40,6 +45,11 @@ other = "由 %s 强力驱动"
 [theme]
 other = "主题 - "
 # === partials/footer.html ===
+
+# === partials/post/share.html ===
+[share]
+other = "分享到"
+# === partials/post/share.html ===
 
 # === posts/single.html ===
 [toc]
@@ -78,7 +88,7 @@ other = "返回"
 [home]
 other = "主页"
 
-[readmore]
+[readMore]
 other = "阅读全文"
 
 [day]
@@ -92,14 +102,14 @@ other = "分"
 
 [second]
 other = "秒"
-
-[return]
-other = "返回"
 # === posts/single.html ===
 
 # === 404.html ===
 [pageNotFound]
 other = "页面没找到"
+
+[pageNotFoundText]
+other = "抱歉，您要查找的页面不存在。"
 
 [backToHome]
 other = "回到主页"

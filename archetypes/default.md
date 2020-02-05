@@ -1,22 +1,24 @@
 ---
+author: ""
+author_link: ""
 title: "{{ replace .TranslationBaseName "-" " " | title }}"
 date: {{ .Date }}
 lastmod: {{ .Date }}
 draft: true
 description: ""
 show_in_homepage: true
-show_description: false
-license: ''
+description_as_summary: false
+license: ""
 
 tags: []
 categories: []
 
-featured_image: ''
-featured_image_preview: ''
+featured_image: ""
+featured_image_preview: ""
 
 comment: true
 toc: false
-autoCollapseToc: true
+auto_collapse_toc: true
 math: false
 ---
 

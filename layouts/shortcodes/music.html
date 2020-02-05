@@ -1,22 +1,12 @@
-{{ .Page.Scratch.Set "music" "true" -}}
-{{ if .IsNamedParams }}
-    <meting-js server={{ .Get "server" }} type={{ .Get "type" }} id={{ .Get "id" }}
-    {{ with .Get "autoplay" }}
-        autoplay={{ . }}
-    {{ end }}
-    {{ with .Get "mini" }}
-        mini={{ . }}
-    {{ end }}
-    {{ with .Get "fixed" }}
-        fixed={{ . }}
-    {{ end }}
-    {{ with .Get "list-folded" }}
-        list-folded={{ . }}
-    {{ end }}
-    {{ with .Get "list-max-height" }}
-        list-max-height={{ . }}
-    {{ end }}
-    theme="#A9A9B3"></meting-js>
-{{ else }}
-    <meting-js server={{ .Get 0 }} type={{ .Get 1 }} id={{ .Get 2 }} theme="#A9A9B3"></meting-js>></meting-js>
-{{ end }}
+{{- .Page.Scratch.Set "music" "true" -}}
+{{- if .IsNamedParams -}}
+    <meting-js server="{{ .Get "server" }}" type="{{ .Get "type" }}" id="{{ .Get "id" }}" theme="#A9A9B3"
+    {{- with .Get "autoplay" }} autoplay="{{ . }}"{{ end -}}
+    {{- with .Get "mini" }} mini="{{ . }}"{{ end -}}
+    {{- with .Get "fixed" }} fixed="{{ . }}"{{ end -}}
+    {{- with .Get "list-folded" }} list-folded="{{ . }}"{{ end -}}
+    {{- with .Get "list-max-height" }} list-max-height="{{ . }}"{{ end -}}
+    ></meting-js>
+{{- else -}}
+    <meting-js server="{{ .Get 0 }}" type="{{ .Get 1 }}" id="{{ .Get 2 }}" theme="#A9A9B3"></meting-js>
+{{- end -}}

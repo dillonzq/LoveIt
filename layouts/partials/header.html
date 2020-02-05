@@ -1,33 +1,44 @@
+{{- /* Desktop navbar */ -}}
 <nav class="navbar">
     <div class="navbar-container">
         <div class="navbar-header animated bounceIn">
-            <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+            <a href="{{ .Site.BaseURL }}">
+                {{- .Site.Title -}}
+            </a>
         </div>
         <div class="navbar-menu">
-            {{ $currentPage := . }}
-            {{ range .Site.Menus.main }}
-                <a class="menu-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) | or (eq $currentPage.RelPermalink .URL) }} active{{ end }}" href="{{ .URL | absLangURL }}" title="{{ .Title }}">{{ .Name | safeHTML }}</a>
-            {{ end }}
-            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a>
+            {{- $currentPage := . }}
+            {{- range .Site.Menus.main -}}
+                <a class="menu-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) | or (eq $currentPage.RelPermalink .URL) }} active{{ end }}" href="{{ .URL | absLangURL }}" title="{{ .Title }}">
+                    {{- .Pre | safeHTML }}{{ .Name -}}
+                </a>
+            {{- end -}}
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="{{ T "switchTheme" }}"></i></a>
         </div>
     </div>
 </nav>
+
+{{- /* Mobile navbar */ -}}
 <nav class="navbar-mobile">
-     <div class="navbar-container">
+    <div class="navbar-container">
         <div class="navbar-header">
             <div class="navbar-header-title animated bounceIn">
-                <a href="{{.Site.BaseURL}}">{{ .Site.Title }}</a>
+                <a href="{{ .Site.BaseURL }}">
+                    {{- .Site.Title -}}
+                </a>
             </div>
             <div class="menu-toggle" id="menu-toggle">
                 <span></span><span></span><span></span>
             </div>
         </div>
         <div class="navbar-menu" id="mobile-menu">
-            {{ $currentPage := . }}
-            {{ range .Site.Menus.main }}
-                <a class="menu-item" href="{{ .URL | absLangURL }}" title="{{ .Title }}">{{ .Name | safeHTML }}</a>
-            {{ end }}
-            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a>
+            {{- $currentPage := . -}}
+            {{- range .Site.Menus.main -}}
+                <a class="menu-item" href="{{ .URL | absLangURL }}" title="{{ .Title }}">
+                    {{- .Name | safeHTML -}}
+                </a>
+            {{- end -}}
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="{{ T "switchTheme" }}"></i></a>
         </div>
     </div>
 </nav>

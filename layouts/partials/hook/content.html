@@ -1,0 +1,43 @@
+{{- /* Font Awesome */ -}}
+{{- /* :(far fa-circle): -> <i class="far fa-circle fa-fw"></i> */ -}}
+{{- $REin := `:\(([\w- ]+?)\):` -}}
+{{- $REout := `<i class="$1 fa-fw"></i>` -}}
+{{- $content := replaceRE $REin $REout . -}}
+
+{{- /* Ruby */ -}}
+{{- /* [EN]^(English) -> <strong><ruby>EN<rt>English</rt></ruby></strong> */ -}}
+{{- $REin = `\[(.+?)\]\^\((.+?)\)` -}}
+{{- $REout = `<strong><ruby>$1<rt>$2</rt></ruby></strong>` -}}
+{{- $content = replaceRE $REin $REout $content -}}
+
+{{- /* Checkbox */ -}}
+{{- $REin = `<input disabled="" type="checkbox">` -}}
+{{- $REout = `<i class="far fa-check-square fa-fw"></i>` -}}
+{{- $content = replaceRE $REin $REout $content -}}
+
+{{- /* Checkbox checked */ -}}
+{{- $REin = `<input checked="" disabled="" type="checkbox">` -}}
+{{- $REout = `<i class="far fa-square fa-fw"></i>` -}}
+{{- $content = replaceRE $REin $REout $content -}}
+
+{{- /* Fix <sup>[return]</sup> */ -}}
+{{- $REin = `<sup>\[return\]</sup>` -}}
+{{- $REout = `↩︎` -}}
+{{- $content = replaceRE $REin $REout $content -}}
+
+{{- /* Dummy target */ -}}
+{{- $REin = `<(h[23456]) (id=".+?")>` -}}
+{{- $REout = `<a class="post-dummy-target" $2></a><$1>` -}}
+{{- $content = replaceRE $REin $REout $content -}}
+
+{{- /* Dummy target */ -}}
+{{- $REin = `<(.+) (id="fnref:.+?")>` -}}
+{{- $REout = `<a class="post-dummy-target" $2></a><$1>` -}}
+{{- $content = replaceRE $REin $REout $content -}}
+
+{{- /* Dummy target */ -}}
+{{- $REin = `<li (id="fn:.+?")(.*?)>\s?<p>` -}}
+{{- $REout = `<li $2><p><a class="post-dummy-target" $1></a>` -}}
+{{- $content = replaceRE $REin $REout $content -}}
+
+{{- return $content -}}

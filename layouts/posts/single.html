@@ -1,31 +1,32 @@
-{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+{{- define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end -}}
 
-{{ define "content" }}
-    {{ $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
-    {{ $author := .Site.Author.name }}
-    {{ if isset .Params "author" }}
-       {{ $author = .Site.Author.name }}
-    {{ end }}
-
-    <article class="post-warp">
+{{- define "content" -}}
+    <article class="page">
+        {{- /* Title */ -}}
         <h1 class="post-title animated flipInX">{{ .Title }}</h1>
 
+        {{- /* Meta */ -}}
         <div class="post-meta">
             <div class="post-meta-main">
-                <a class="author" href="{{.Site.BaseURL }}" rel="author"><i class="fas fa-user-circle fa-fw"></i>{{ $author }}&nbsp;</a>
-                {{ with .Params.categories -}}
+                {{- $author := .Params.author | default .Site.Author.name -}}
+                {{- $author_link := .Params.author_link | default .Site.Author.link | default .Site.BaseURL -}}
+                <a class="author" href="{{ $author_link }}" rel="author" target="_blank">
+                    <i class="fas fa-user-circle fa-fw"></i>{{ $author }}
+                </a>&nbsp;
+                {{- with .Params.categories -}}
                     <span class="post-category">
-                        {{ T "included" }}
-                        {{ range . }}
+                        {{- T "included" -}}&nbsp;
+                        {{- range . -}}
                             {{- $name := . -}}
                             {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
-                                <i class="far fa-folder fa-fw"></i><a href="{{ .Permalink }}">{{ $name }}</a>
-                            {{ end -}}
-                        {{ end }}
+                                <i class="far fa-folder fa-fw"></i><a href="{{ .Permalink }}">{{ $name | humanize }}</a>&nbsp;
+                            {{- end -}}
+                        {{- end -}}
                     </span>
-                {{- end }}
+                {{- end -}}
             </div>
             <div class="post-meta-other">
+                {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
                 <i class="far fa-calendar-alt fa-fw"></i><time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;
                 <i class="fas fa-pencil-alt fa-fw"></i>{{ T "wordCount" .WordCount }}&nbsp;
                 <i class="far fa-clock fa-fw"></i>{{ T "readingTime" .ReadingTime }}&nbsp;
@@ -37,67 +38,52 @@
             </div>
         </div>
 
-        {{ with .Params.featured_image }}
+        {{- /* Featured image */ -}}
+        {{- with .Params.featured_image -}}
             <div class="post-featured-image">
-                <img src=/images/loading.svg data-sizes=auto data-src={{ . }} alt="featured image" class="lazyload">
+                {{- partial "image" . -}}
             </div>
-        {{ end }}
+        {{- end -}}
 
-        {{ if or .Params.toc (and .Site.Params.toc (ne .Params.toc false)) -}}
+        {{- /* TOC */ -}}
+        {{- if or .Params.toc (and .Site.Params.toc (ne .Params.toc false)) -}}
             <div class="post-toc" id="post-toc">
                 <h2 class="post-toc-title">{{ T "toc" }}</h2>
-                {{- $globalAutoCollapseToc := .Site.Params.autoCollapseToc | default true }}
-                <div class="post-toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false)) }} always-active{{ end }}">
-                    {{ .TableOfContents }}
+                {{- $globalAutoCollapseToc := .Site.Params.auto_collapse_toc | default true }}
+                <div class="post-toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.auto_collapse_toc false)) }} always-active{{ end }}">
+                    {{- .TableOfContents -}}
                 </div>
             </div>
             <div class="post-toc-mobile" id="post-toc-mobile">
                 <details>
-                    <summary><div class="post-toc-title"><span>{{ T "toc" }}</span><span><i class="details icon fas fa-angle-down"></i></span></div></summary>
+                    <summary>
+                        <div class="post-toc-title">
+                            <span>{{ T "toc" }}</span>
+                            <span><i class="details icon fas fa-angle-down"></i></span>
+                        </div>
+                    </summary>
                     <div class="post-toc-content">
-                        {{ $toc := .TableOfContents }}
-                        {{ $toc = replaceRE `id="TableOfContents"` `id="TableOfContentsMobile"` $toc }}
-                        {{ $toc | safeHTML }}
+                        {{- $toc := .TableOfContents -}}
+                        {{- $toc = replaceRE `id="TableOfContents"` `id="TableOfContentsMobile"` $toc -}}
+                        {{- $toc | safeHTML -}}
                     </div>
                 </details>
             </div>
-        {{- end }}
+        {{- end -}}
 
+        {{- /* Content */ -}}
         <div class="post-content">
-            {{ $content := .Content }}
-            {{ $REin := `<img src="([^"]+)" alt="([^"]+)?" />` }}
-            {{ $REout := "<figure><img src=/images/loading.svg data-sizes=auto data-src=$1 alt=$2 class=lazyload><figcaption class=image-caption>$2</figcaption></figure>" }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<img src="([^"]+)" alt="([^"]+)?" title="([^"]+)?" />` }}
-            {{ $REout = "<figure><img src=/images/loading.svg data-src=$1 data-sizes=auto alt=$2 title=$3 class=lazyload><figcaption class=image-caption>$2</figcaption></figure>" }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `:\(([\w- ]+?)\):` }}
-            {{ $REout = `<i class="$1 fa-fw"></i>` }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `\[(.+?)\]\^\((.+?)\)` }}
-            {{ $REout = `<strong><ruby>$1<rt>$2</rt></ruby></strong>` }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<sup>\[return\]</sup>` }}
-            {{ $REout = printf "<sup>[%s]</sup>" (T "return") }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<(h[123456]) (id=".+?")>` }}
-            {{ $REout = `<a class="post-dummy-target" $2></a><$1>` }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<(sup class="footnote-ref") (id="fnref:.+?")>` }}
-            {{ $REout = `<a class="post-dummy-target" $2></a><$1>` }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $REin = `<(li) (id="fn:.+?")>` }}
-            {{ $REout = `<$1><a class="post-dummy-target" $2></a>` }}
-            {{ $content = replaceRE $REin $REout $content }}
-            {{ $content | safeHTML }}
+            {{- partial "hook/content.html" .Content | safeHTML -}}
         </div>
 
-        {{ partial "post/footer.html" . }}
+        {{- /* Footer */ -}}
+        {{- partial "post/footer.html" . -}}
 
+        {{- /* Comment */ -}}
         <div class="post-comment">
-            {{ if ( .Params.comment | default true ) }}
-            {{ partial "comments.html" . }}
-            {{ end }}
+            {{- if ( .Params.comment | default true ) -}}
+                {{- partial "comments.html" . -}}
+            {{- end -}}
         </div>
     </article>
-{{- end }}
+{{- end -}}

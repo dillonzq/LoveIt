@@ -24,9 +24,20 @@
     padding: 0 2%;
     position: relative;
 
-    .categories {
+    .card-item-wrapper {
       width: 100%;
       overflow: hidden;
+
+      .card-item-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        display: inline-block;
+      }
+
+      span {
+        float: right;
+        padding-right: 1rem;
+      }
     }
   }
 }
@@ -69,15 +80,4 @@
 
 .more-post {
   text-align: right;
-}
-
-.categories {
-  h3 {
-    display: inline-block;
-  }
-
-  span {
-    float: right;
-    padding-right: 1rem;
-  }
 }

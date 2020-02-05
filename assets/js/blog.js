@@ -73,12 +73,13 @@ jQuery(function($) {
         });
     };
 
-    _Blog.chroma = function() {
+    _Blog.chroma = function () {
         const blocks = document.querySelectorAll('.highlight > .chroma');
         for (let i = 0; i < blocks.length; i++) {
             const block = blocks[i];
-            const afterHighLight = block.querySelector('pre.chroma > code');
-            const lang = afterHighLight ? afterHighLight.className : '';
+            const codes = block.querySelectorAll('pre.chroma > code');
+            const code = codes[codes.length - 1];
+            const lang = code ? code.className.toLowerCase() : '';
             block.className += ' ' + lang;
         }
     };
@@ -122,7 +123,7 @@ jQuery(function($) {
     _Blog._initToc = function() {
         const $toc = $('#post-toc');
         if ($toc.length && $toc.css('display') !== 'none') {
-            const SPACING = 100;
+            const SPACING = 80;
             const $footer = $('#post-footer');
             const minTop = $toc.position().top;;
             const mainTop = $('main').position().top;
@@ -157,27 +158,23 @@ jQuery(function($) {
             };
             changeTocState();
 
-            const HEADERFIX = 100;
+            const HEADERFIX = 120;
             const $toclink = $('.toc-link');
             const $headerlink = $('.headerlink');
             const $tocLinkLis = $('.post-toc-content li');
-            const activeIndex = function() {
+            const activeIndex = function () {
                 const scrollTop = $(window).scrollTop();
                 const headerlinkTop = $.map($headerlink, function(link) {
                     return $(link).offset().top;
                 });
-                const headerLinksOffsetForSearch = $.map(headerlinkTop, function(offset) {
-                    return offset - HEADERFIX;
-                });
                 const searchActiveTocIndex = function(array, target) {
                     for (let i = 0; i < array.length - 1; i++) {
-                        if (target > array[i] && target <= array[i + 1]) return i;
+                        if ( target < array[i + 1]) return i;
                     }
-                    if (target > array[array.length - 1]) return array.length - 1;
-                    return 0;
+                    return array.length - 1;
                 };
 
-                const activeTocIndex = searchActiveTocIndex(headerLinksOffsetForSearch, scrollTop);
+                const activeTocIndex = searchActiveTocIndex(headerlinkTop, scrollTop + HEADERFIX);
 
                 $($toclink).removeClass('active');
                 $($tocLinkLis).removeClass('has-active');
