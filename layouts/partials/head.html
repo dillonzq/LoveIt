@@ -36,6 +36,8 @@
     <link rel="feed" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ $.Site.Title }}">
 {{- end -}}
 
+{{- template "_internal/opengraph.html" . -}}
+
 {{- $share := .Params.share.enable | default .Site.Params.share.enable | eq true -}}
 {{- if $share | and (.Params.Share.Twitter | default .Site.Params.Share.Twitter | eq true) -}}
     {{- template "_internal/twitter_cards.html" . -}}
