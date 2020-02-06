@@ -1,0 +1,113 @@
+# Translations for English
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === Post ===
+[posts]
+other = "Posts"
+# === Post ===
+
+# === Taxonomy ===
+[all]
+other = "tous "
+
+[tag]
+other = "Tag"
+
+[tags]
+other = "Tags"
+
+[category]
+other = "Catégorie"
+
+[categories]
+other = "Catégories"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "Plus"
+# === Pagination ===
+
+# === partials/header.html ===
+[switchTheme]
+other = "Changer de Thème"
+# === partials/header.html ===
+
+# === partials/comments.html ===
+[valineLang]
+other = "fr"
+# === partials/comments.html ===
+
+# === partials/footer.html ===
+[powered]
+other = "Propulsé par %s"
+
+[theme]
+other = "Thème - "
+# === partials/footer.html ===
+
+# === partials/post/share.html ===
+[share]
+other = "Partager sur"
+# === partials/post/share.html ===
+
+# === posts/single.html ===
+[toc]
+other = "Contenu"
+
+[publish]
+other = "publié sur"
+
+[included]
+other = "inclus dans"
+
+[wordCount]
+other = "environ {{ .Count }} mots"
+
+[readingTime]
+other = "{{ .Count }} min"
+
+[pageviews]
+other = "<span class=leancloud-visitors-count></span> vues"
+
+[author]
+other = "Auteur"
+
+[lastMod]
+other = "Dernière mise à jour le %s"
+
+[license]
+other = "Publié sous licence %s"
+
+[back]
+other = "Retour"
+
+[home]
+other = "Accueil"
+
+[readMore]
+other = "En savoir plus"
+
+[day]
+other = "j"
+
+[hour]
+other = "hr"
+
+[minute]
+other = "min"
+
+[second]
+other = "sec"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Page non trouvée"
+
+[pageNotFoundText]
+other = "Désolé, la page recherchée n'existe pas."
+
+[backToHome]
+other = "Retour à l'accueil"
+# === 404.html ===
