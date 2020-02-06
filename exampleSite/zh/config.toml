@@ -161,6 +161,7 @@ dateFormatToUse = "2006-01-02"
   [params.cdn]
     ## 例如 '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
     fontawesome_free_css = ''
+    forkawesome_css = ''
     animate_css = ''
     gitalk_css = ''
     gitalk_js = ''

@@ -55,12 +55,23 @@
     <link rel="stylesheet" href="{{ $res.RelPermalink }}">
 {{- end -}}
 
+{{- /* Font Awesome https://fontawesome.com/ */ -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.fontawesome_free_css -}}
     {{- .Site.Params.cdn.fontawesome_free_css | safeHTML -}}
 {{- else -}}
     {{- $res := resources.Get "css/lib/fontawesome-free/all.min.css" -}}
     <link rel="stylesheet" href="{{ $res.RelPermalink }}">
 {{- end -}}
+
+{{- /* Fork Awesome https://forkaweso.me/ */ -}}
+{{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.forkawesome_css -}}
+    {{- .Site.Params.cdn.forkawesome_css | safeHTML -}}
+{{- else -}}
+    {{- $res := resources.Get "css/lib/forkawesome/fork-awesome.min.css" -}}
+    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
+{{- end -}}
+
+{{- /* Animate.css https://github.com/daneden/animate.css */ -}}
 {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.animate_css -}}
     {{- .Site.Params.cdn.animate_css | safeHTML -}}
 {{- else -}}
