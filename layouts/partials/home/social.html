@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
 {{- with .Site.Params.Social.Github -}}
     <a href="https://github.com/{{ . }}" rel="me noopener noreffer" target="_blank">
         <i class="fab fa-github-alt fa-fw" title="Github"></i>
@@ -225,32 +224,32 @@
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.Slideshare}}
-    <a href="https://slideshare.com/{{- . -}}" rel="me noopener noreffer" target="_blank">
+    <a href="https://slideshare.com/{{ . }}" rel="me noopener noreffer" target="_blank">
         <i class="fab fa-slideshare fa-fw" title="Slideshare"></i>
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.Jsfiddle}}
-    <a href="https://jsfiddle.com/{{- . -}}" rel="me noopener noreffer" target="_blank">
+    <a href="https://jsfiddle.com/{{ . }}" rel="me noopener noreffer" target="_blank">
         <i class="fab fa-jsfiddle fa-fw" title="Jsfiddle"></i>
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.Deviantart}}
-    <a href="https://{{- . -}}.deviantart.com/" rel="me noopener noreffer" target="_blank">
+    <a href="https://{{ . }}.deviantart.com/" rel="me noopener noreffer" target="_blank">
         <i class="fab fa-deviantart fa-fw" title="Deviantart"></i>
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.Behance}}
-    <a href="https://behance.net/{{- . -}}" rel="me noopener noreffer" target="_blank">
+    <a href="https://behance.net/{{ . }}" rel="me noopener noreffer" target="_blank">
         <i class="fab fa-behance fa-fw" title="Behance"></i>
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.Dribble}}
-    <a href="https://dribbble.com/{{- . -}}" rel="me noopener noreffer" target="_blank">
+    <a href="https://dribbble.com/{{ . }}" rel="me noopener noreffer" target="_blank">
         <i class="fab fa-dribbble fa-fw" title="Dribble"></i>
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.Wordpress}}
-    <a href="https://{{- . -}}.wordpress.com" rel="me noopener noreffer" target="_blank">
+    <a href="https://{{ . }}.wordpress.com" rel="me noopener noreffer" target="_blank">
         <i class="fab fa-wordpress fa-fw" title="Wordpress"></i>
     </a>
 {{- end -}}
@@ -260,43 +259,43 @@
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.Googlescholar}}
-    <a href="https://scholar.google.com/citations?{{- . -}}" rel="me noopener noreffer" target="_blank">
+    <a href="https://scholar.google.com/citations?{{ . }}" rel="me noopener noreffer" target="_blank">
         <i class="fab fa-Googlescholar fa-fw" title="Googlescholar"></i>
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.Researchgate}}
-    <a href="https://www.researchgate.net/profile/{{- . -}}" rel="me noopener noreffer" target="_blank">
+    <a href="https://www.researchgate.net/profile/{{ . }}" rel="me noopener noreffer" target="_blank">
         <i class="fab fa-researchgate fa-fw" title="Researchgate"></i>
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.Mastodon}}
-    <a href="https://mastodon.social/{{- . -}}" rel="me noopener noreffer" target="_blank">
+    <a href="https://mastodon.social/{{ . }}" rel="me noopener noreffer" target="_blank">
         <i class="fab fa-mastodon fa-fw" title="Mastodon"></i>
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.Devto}}
-    <a href="https://dev.to/{{- . -}}" rel="me noopener noreffer" target="_blank">
+    <a href="https://dev.to/{{ . }}" rel="me noopener noreffer" target="_blank">
         <i class="fab fa-dev fa-fw" title="Dev.To"></i>
     </a>
 {{- end -}}
-{{- with .Site.Params.Social.Email}}
-    <a href="mailto:{{ . }}" rel="me noopener noreffer">
-        <i class="far fa-envelope fa-fw" target="_blank" title="Email"></i>
-    </a>
-{{- end -}}
 {{- with .Site.Params.Social.Gitea}}
-    <a href="" rel="me noopener noreffer" target="_blank">
+    <a href="{{ . | safeURL }}" rel="me noopener noreffer" target="_blank">
         <i class="fab fa fa-gitea fa-fw" title="Gitea"></i>
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.XMPP}}
-    <a href="xmpp:{{ . }}" rel="me noopener noreffer" target="_blank">
+    <a href="xmpp:{{ . }}" rel="me noopener noreffer">
         <i class="fab fa fa-xmpp fa-fw" title="XMPP"></i>
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.Matrix}}
     <a href="https://matrix.to/#/{{ . }}" rel="me noopener noreffer" target="_blank">
         <i class="fab fa fa-matrix-org fa-fw" title="Matrix"></i>
+    </a>
+{{- end -}}
+{{- with .Site.Params.Social.Email}}
+    <a href="mailto:{{ . }}" rel="me noopener noreffer">
+        <i class="far fa-envelope fa-fw" title="Email"></i>
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.Custom}}
