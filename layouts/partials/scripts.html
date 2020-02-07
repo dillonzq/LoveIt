@@ -37,8 +37,8 @@
 {{- /* TypeIt https://github.com/alexmacarthur/typeit */ -}}
 {{- with .Scratch.Get "typeitMap" -}}
     {{- $typeit := "" -}}
-    {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.typeit_js -}}
-        {{- $typeit = .Site.Params.cdn.typeit_js -}}
+    {{- if eq (getenv "HUGO_ENV") "production" | and $.Site.Params.cdn.typeit_js -}}
+        {{- $typeit = $.Site.Params.cdn.typeit_js -}}
     {{- else -}}
         {{- $res := resources.Get "js/lib/typeit/typeit.min.js" -}}
         {{- $typeit = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
