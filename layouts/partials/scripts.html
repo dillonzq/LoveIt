@@ -35,17 +35,17 @@
 {{- $smooth_scroll | safeHTML -}}
 
 {{- /* TypeIt https://github.com/alexmacarthur/typeit */ -}}
-{{- with .Scratch.Get "typeitMap" -}}
+{{- if .Scratch.Get "typeitMap" -}}
     {{- $typeit := "" -}}
-    {{- if eq (getenv "HUGO_ENV") "production" | and $.Site.Params.cdn.typeit_js -}}
-        {{- $typeit = $.Site.Params.cdn.typeit_js -}}
+    {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.typeit_js -}}
+        {{- $typeit = .Site.Params.cdn.typeit_js -}}
     {{- else -}}
         {{- $res := resources.Get "js/lib/typeit/typeit.min.js" -}}
         {{- $typeit = printf "<script src=\"%s\"></script>" $res.RelPermalink -}}
     {{- end -}}
     {{- $typeit | safeHTML -}}
     {{- $typeitArr := slice -}}
-    {{- range $key, $val := . -}}
+    {{- range $key, $val := .Scratch.Get "typeitMap" -}}
         {{- $typeitArr = $typeitArr | append (slice $val) -}}
     {{- end -}}
     <script>
@@ -126,7 +126,7 @@
 {{- end -}}
 
 {{- /* mermaid https://github.com/knsv/mermaid */ -}}
-{{- with .Scratch.Get "mermaidMap" -}}
+{{- if .Scratch.Get "mermaidMap" -}}
     {{- $mermaid := "" -}}
     {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.mermaid_js -}}
         {{- $mermaid = .Site.Params.cdn.mermaid_js -}}
@@ -138,7 +138,7 @@
     {{- $mermaid = delimit (slice $mermaid $mermaidInit) "" -}}
     {{- $mermaid | safeHTML -}}
     <script>
-        {{- printf "window.mermaidMap=%s;" (jsonify .) | safeJS -}}
+        {{- printf "window.mermaidMap=%s;" (jsonify .Scratch.Get "mermaidMap") | safeJS -}}
     </script>
 {{- end -}}
 
@@ -174,7 +174,7 @@
 {{- end -}}
 
 {{- /* jQuery.countdown https://github.com/hilios/jQuery.countdown */ -}}
-{{- with .Scratch.Get "countdownMap" -}}
+{{- if .Scratch.Get "countdownMap" -}}
     {{- $countdown := "" -}}
     {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.jquery_countdown_js -}}
         {{- $countdown = .Site.Params.cdn.jquery_countdown_js -}}
@@ -184,14 +184,14 @@
     {{- end -}}
     {{- $countdown | safeHTML -}}
     <script>
-        {{- printf "window.countdownMap=%s;" (jsonify .) | safeJS -}}
+        {{- printf "window.countdownMap=%s;" (jsonify .Scratch.Get "countdownMap") | safeJS -}}
     </script>
 {{- end -}}
 
 {{- /* dev feature */ -}}
 {{- if .Params.dev -}}
     {{- /* ECharts https://github.com/apache/incubator-echarts */ -}}
-    {{- with .Scratch.Get "echartsMap" -}}
+    {{- if .Scratch.Get "echartsMap" -}}
         {{- $echarts_js := "" -}}
         {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.echarts_js -}}
         {{- $echarts_js = .Site.Params.cdn.echarts_js -}}
@@ -210,7 +210,7 @@
         {{- $echarts | safeHTML -}}
         <script>
             window.echartsMap = {
-                {{- range $key, $var := . -}}
+                {{- range $key, $var := .Scratch.Get "echartsMap" -}}
                     {{- $key }}: {{ $var | safeJS -}},
                 {{- end -}}
             };
