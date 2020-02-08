@@ -110,9 +110,11 @@ dateFormatToUse = "2006-01-02"
   description = "关于 LoveIt 主题"
   # 网站关键词
   keywords = ["Theme", "Hugo"]
+  # 网站默认主题 ("light", "dark")
+  defaultTheme = "light"
 
   # 主页信息设置
-  ## [post, other] 主页模式
+  ## 主页模式 ("post", "other")
   home_mode = "post"
   ## 主页在 post 模式下每页 post 显示数量
   home_paginate = 6

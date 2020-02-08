@@ -110,9 +110,11 @@ dateFormatToUse = "2006-01-02"
   description = "About LoveIt Theme"
   # site keywords
   keywords = ["Theme", "Hugo"]
+  # site default theme ("light", "dark")
+  defaultTheme = "light"
 
   # Home Page Info
-  ## [post, other] home mode
+  ##home mode ("post", "other")
   home_mode = "post"
   ## special amount of posts in each home post page
   home_paginate = 6
