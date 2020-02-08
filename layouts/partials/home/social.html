@@ -269,7 +269,8 @@
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.Mastodon}}
-    <a href="https://mastodon.social/{{ . }}" rel="me noopener noreffer" target="_blank">
+    {{ $MastodonPrefix := $.Site.Params.Social.MastodonPrefix | default "https://mastodon.social/" }}
+    <a href="{{ $MastodonPrefix | safeURL }}{{ . }}" rel="me noopener noreffer" target="_blank">
         <i class="fab fa-mastodon fa-fw" title="Mastodon"></i>
     </a>
 {{- end -}}
