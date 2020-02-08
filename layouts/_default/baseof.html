@@ -16,7 +16,11 @@
     <body>
         {{- /* Check theme isDark before body rendering */ -}}
         <script>
-            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            if (!window.localStorage || !window.localStorage.getItem('theme')) {
+                window.isDark = '{{ .Site.Params.defaultTheme }}' === 'dark';
+            } else {
+                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            }
             window.isDark && document.body.classList.add('dark-theme');
         </script>
 

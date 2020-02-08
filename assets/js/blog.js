@@ -14,8 +14,8 @@ jQuery(function($) {
     _Blog.toggleTheme = function() {
         $('.theme-switch').on('click', () => {
             $('body').toggleClass('dark-theme');
-            isDark = !isDark;
-            window.localStorage && window.localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            window.isDark = !window.isDark;
+            window.localStorage && window.localStorage.setItem('theme', window.isDark ? 'dark' : 'light');
             this.echarts();
         });
     };
