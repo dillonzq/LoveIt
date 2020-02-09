@@ -49,7 +49,7 @@
         {{- $typeitArr = $typeitArr | append (slice $val) -}}
     {{- end -}}
     <script>
-        {{- printf "window.typeitArr=%s;" (jsonify $typeitArr) | safeJS -}}
+        {{- printf "window.typeitArr=%s;" ($typeitArr | jsonify) | safeJS -}}
     </script>
 {{- end -}}
 
@@ -138,7 +138,7 @@
     {{- $mermaid = delimit (slice $mermaid $mermaidInit) "" -}}
     {{- $mermaid | safeHTML -}}
     <script>
-        {{- printf "window.mermaidMap=%s;" (jsonify .Scratch.Get "mermaidMap") | safeJS -}}
+        {{- printf "window.mermaidMap=%s;" (.Scratch.Get "mermaidMap" | jsonify) | safeJS -}}
     </script>
 {{- end -}}
 
@@ -184,7 +184,7 @@
     {{- end -}}
     {{- $countdown | safeHTML -}}
     <script>
-        {{- printf "window.countdownMap=%s;" (jsonify .Scratch.Get "countdownMap") | safeJS -}}
+        {{- printf "window.countdownMap=%s;" (.Scratch.Get "countdownMap" | jsonify) | safeJS -}}
     </script>
 {{- end -}}
 
