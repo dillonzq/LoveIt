@@ -107,7 +107,7 @@
 
   p {
     font-size: 1rem;
-    margin: .5rem 0 .5rem 0;
+    margin: .5rem 0;
   }
 
   a {
@@ -319,15 +319,14 @@
 
   kbd {
     display: inline-block;
-    padding: .25em;
+    padding: .25rem;
     background-color: $global-background-color;
     border: 1px solid $global-border-color;
     border-bottom-color: $global-border-color;
     border-radius: 3px;
     -webkit-box-shadow: inset 0 -1px 0 $global-border-color;
     box-shadow: inset 0 -1px 0 $global-border-color;
-    font-size: .8em;
-    line-height: 1.25rem;
+    font-size: .8rem;
     font-family: $code-font-family;
     color: $code-color;
 

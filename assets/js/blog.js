@@ -82,6 +82,23 @@ jQuery(function($) {
             const lang = code ? code.className.toLowerCase() : '';
             block.className += ' ' + lang;
         }
+
+        const nolinenosBlocks = document.querySelectorAll('.highlight > pre.chroma');
+        for (let i = 0; i < nolinenosBlocks.length; i++) {
+            const block = nolinenosBlocks[i];
+            const chroma = document.createElement('div');
+            chroma.className = block.className;
+            const table = document.createElement('table');
+            chroma.appendChild(table);
+            const tbody = document.createElement('tbody');
+            table.appendChild(tbody);
+            const tr = document.createElement('tr');
+            tbody.appendChild(tr);
+            const td = document.createElement('td');
+            tr.appendChild(td);
+            block.parentElement.replaceChild(chroma, block);
+            td.appendChild(block);
+        }
     };
 
     _Blog.responsiveTable = function() {
