@@ -74,15 +74,12 @@
     h5,
     h6,
     p {
+      font-size: 1rem;
       margin: 0;
-      padding: .3rem 0;
+      padding: .2rem 0;
       overflow: hidden;
       overflow-wrap: break-word;
       text-overflow: ellipsis;
-    }
-
-    p {
-      padding: 0;
     }
 
     a {
