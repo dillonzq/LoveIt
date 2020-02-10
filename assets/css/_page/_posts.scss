@@ -60,27 +60,30 @@
   }
 
   .post-content {
-    padding-top: .2rem;
-    font-size: .9rem;
+    display: -webkit-box;
+    margin-top: .3rem;
     width: 100%;
-    max-height: 7rem;
-    overflow: hidden;
+    max-height: 10rem;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 
     h2,
     h3,
     h4,
     h5,
-    h6 {
+    h6,
+    p {
       font-size: 1rem;
-      line-height: 1rem;
-      padding-top: .3rem;
-      padding-bottom: .3rem;
+      margin: 0;
+      padding: .2rem 0;
+      overflow: hidden;
+      overflow-wrap: break-word;
+      text-overflow: ellipsis;
     }
 
-    p {
-    margin: 0;
-    padding-top: .3rem;
-    padding-bottom: .3rem;
+    a {
+      word-break: break-all;
     }
   }
 
