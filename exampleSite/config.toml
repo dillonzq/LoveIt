@@ -306,10 +306,12 @@ dateFormatToUse = "2006-01-02"
     enable = false
     appId = ""
     appKey = ""
+    placeholder = "Your comment ..."
     notify = false
     verify = true
     avatar = "mp"
-    placeholder = "Your comment ..."
+    #meta= ""
+    pageSize = 10
     visitor = true
     recordIP = true
 
