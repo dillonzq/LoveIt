@@ -23,16 +23,16 @@
         {{- end -}}
         <script>
             var gitalk = new Gitalk({
-                id: "{{ .Date }}",
-                title: "{{ .Title }}",
-                clientID: "{{ .Site.Params.gitalk.clientId }}",
-                clientSecret: "{{ .Site.Params.gitalk.clientSecret }}",
-                repo: "{{ .Site.Params.gitalk.repo }}",
-                owner: "{{ .Site.Params.gitalk.owner }}",
-                admin: ["{{ .Site.Params.gitalk.owner }}"],
-                body: decodeURI(location.href)
+                id: '{{ .Date }}',
+                title: '{{ .Title }}',
+                clientID: '{{ .Site.Params.gitalk.clientId }}',
+                clientSecret: '{{ .Site.Params.gitalk.clientSecret }}',
+                repo: '{{ .Site.Params.gitalk.repo }}',
+                owner: '{{ .Site.Params.gitalk.owner }}',
+                admin: ['{{ .Site.Params.gitalk.owner }}'],
+                body: decodeURI(location.href),
             });
-            gitalk.render("gitalk_container");
+            gitalk.render('gitalk_container');
         </script>
         <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by Gitalk.</a></noscript>
     {{- end -}}
@@ -48,11 +48,11 @@
         {{- end -}}
         <script>
             new Valine({
-                el: "#valine_container",
-                appId: "{{ .Site.Params.valine.appId }}",
-                appKey: "{{ .Site.Params.valine.appKey }}",
+                el: '#valine_container',
+                appId: '{{ .Site.Params.valine.appId }}',
+                appKey: '{{ .Site.Params.valine.appKey }}',
                 {{- with .Site.Params.valine.placeholder -}}
-                    placeholder: "{{ . }}",
+                    placeholder: '{{ . }}',
                 {{- end -}}
                 {{- if .Site.Params.valine.notify -}}
                     notify: true,
@@ -61,7 +61,7 @@
                     verify: true,
                 {{- end -}}
                 {{- with .Site.Params.valine.avatar -}}
-                    avatar: "{{ . }}",
+                    avatar: '{{ . }}',
                 {{- end -}}
                 {{- with .Site.Params.valine.meta -}}
                     meta: {{ . | safeJS }},
@@ -69,7 +69,7 @@
                 {{- with .Site.Params.valine.pageSize -}}
                     pageSize: {{ . | safeJS }},
                 {{- end -}}
-                lang: {{ T "valineLang" }},
+                lang: '{{ T "valineLang" }}',
                 {{- if .Site.Params.valine.visitor -}}
                     visitor: true,
                 {{- end -}}

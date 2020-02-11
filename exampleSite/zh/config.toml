@@ -110,8 +110,8 @@ dateFormatToUse = "2006-01-02"
   description = "关于 LoveIt 主题"
   # 网站关键词
   keywords = ["Theme", "Hugo"]
-  # 网站默认主题 ("light", "dark")
-  defaultTheme = "light"
+  # 网站默认主题 ("light", "dark", "auto")
+  defaultTheme = "auto"
 
   # 主页信息设置
   ## 主页模式 ("post", "other")

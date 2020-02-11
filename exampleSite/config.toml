@@ -110,8 +110,8 @@ dateFormatToUse = "2006-01-02"
   description = "About LoveIt Theme"
   # site keywords
   keywords = ["Theme", "Hugo"]
-  # site default theme ("light", "dark")
-  defaultTheme = "light"
+  # site default theme ("light", "dark", "auto")
+  defaultTheme = "auto"
 
   # Home Page Info
   ##home mode ("post", "other")
