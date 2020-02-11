@@ -158,7 +158,6 @@ jQuery(function($) {
             };
             changeTocState();
 
-            const HEADERFIX = 120;
             const $toclink = $('.toc-link');
             const $headerDummyLink = $('.post-dummy-target');
             const $tocLinkLis = $('.post-toc-content li');
@@ -174,7 +173,7 @@ jQuery(function($) {
                     return array.length - 1;
                 };
 
-                const activeTocIndex = searchActiveTocIndex(headerlinkTop, scrollTop + HEADERFIX);
+                const activeTocIndex = searchActiveTocIndex(headerlinkTop, scrollTop);
 
                 $($toclink).removeClass('active');
                 $($tocLinkLis).removeClass('has-active');
