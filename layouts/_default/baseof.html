@@ -17,7 +17,12 @@
         {{- /* Check theme isDark before body rendering */ -}}
         <script>
             if (!window.localStorage || !window.localStorage.getItem('theme')) {
-                window.isDark = '{{ .Site.Params.defaultTheme }}' === 'dark';
+                {{- $theme := .Site.Params.defaultTheme -}}
+                {{- if eq $theme "auto" -}}
+                    window.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                {{- else -}}
+                    window.isDark = '{{ $theme }}' === 'dark';
+                {{- end -}}
             } else {
                 window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
             }
