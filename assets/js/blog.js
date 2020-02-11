@@ -175,13 +175,12 @@ jQuery(function($) {
             };
             changeTocState();
 
-            const HEADERFIX = 120;
             const $toclink = $('.toc-link');
-            const $headerlink = $('.headerlink');
+            const $headerDummyLink = $('.post-dummy-target');
             const $tocLinkLis = $('.post-toc-content li');
             const activeIndex = function () {
                 const scrollTop = $(window).scrollTop();
-                const headerlinkTop = $.map($headerlink, function(link) {
+                const headerlinkTop = $.map($headerDummyLink, function(link) {
                     return $(link).offset().top;
                 });
                 const searchActiveTocIndex = function(array, target) {
@@ -191,7 +190,7 @@ jQuery(function($) {
                     return array.length - 1;
                 };
 
-                const activeTocIndex = searchActiveTocIndex(headerlinkTop, scrollTop + HEADERFIX);
+                const activeTocIndex = searchActiveTocIndex(headerlinkTop, scrollTop);
 
                 $($toclink).removeClass('active');
                 $($tocLinkLis).removeClass('has-active');
