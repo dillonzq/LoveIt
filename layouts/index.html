@@ -1,7 +1,7 @@
 {{- define "content" -}}
     {{- /* Home mode [post] */ -}}
     {{- if eq .Site.Params.home_mode "post" -}}
-        <div class="page">
+        <div class="page home">
             {{- /* Profile */ -}}
             {{- partial "home/profile.html" . -}}
 

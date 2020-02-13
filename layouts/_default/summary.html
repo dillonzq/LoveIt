@@ -1,4 +1,4 @@
-<article class="post" itemscope itemtype="http://schema.org/Article">
+<article class="post summary" itemscope itemtype="http://schema.org/Article">
     {{- /* Featured image */ -}}
     {{- with .Params.featured_image -}}
         <div class="post-featured-image-preview">
@@ -8,7 +8,7 @@
     {{- end -}}
 
     {{- /* Title */ -}}
-    <h1 class="post-title post-list-title" itemprop="name headline">
+    <h1 class="post-title" itemprop="name headline">
         <a href="{{ .Permalink }}">{{ .Title }}</a>
     </h1>
 

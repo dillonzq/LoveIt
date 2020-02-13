@@ -30,6 +30,7 @@ body {
   line-height: 1.5rem;
   background-color: $global-background-color;
   color: $global-font-color;
+  overflow-wrap: break-word;
 
   &::before {
     content: "";
@@ -59,6 +60,7 @@ body {
 a {
   color: $global-link-color;
   text-decoration: none;
+  word-break: break-all;
   transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
 
   &:hover {
