@@ -1,12 +1,12 @@
-/** Post **/
-.post {
-  .post-title {
+/** Single **/
+.single {
+  .single-title {
     margin: 0;
     font-size: 1.8rem;
     line-height: 3rem;
   }
 
-  .post-meta {
+  .meta {
     font-size: .88rem;
     color: $global-font-secondary-color;
 
@@ -19,17 +19,17 @@
     }
 
     a {
-      color: $post-link-color;
+      color: $single-link-color;
 
       .dark-theme & {
-        color: $post-link-color-dark;
+        color: $single-link-color-dark;
       }
 
       &:hover {
-        color: $post-link-hover-color;
+        color: $single-link-hover-color;
 
         .dark-theme & {
-          color: $post-link-hover-color-dark;
+          color: $single-link-hover-color-dark;
         }
       }
     }
@@ -39,7 +39,7 @@
     }
   }
 
-  .post-featured-image {
+  .featured-image {
     padding-top: .6rem;
 
     img {
@@ -51,9 +51,9 @@
     }
   }
 
-  @import "../_partial/_post/toc";
+  @import "../_partial/_single/toc";
 
-  .post-content {
+  .content {
     .post-dummy-target:target {
       display: inline-block;
       position: relative;
@@ -86,10 +86,10 @@
     h2::before {
       content: "#";
       margin-right: .3125rem;
-      color: $post-link-color;
+      color: $single-link-color;
 
       .dark-theme & {
-        color: $post-link-color-dark;
+        color: $single-link-color-dark;
       }
     }
 
@@ -99,10 +99,10 @@
     h6::before {
       content: "|";
       margin-right: .3125rem;
-      color: $post-link-color;
+      color: $single-link-color;
 
       .dark-theme & {
-        color: $post-link-color-dark;
+        color: $single-link-color-dark;
       }
     }
 
@@ -112,18 +112,19 @@
     }
 
     a {
-      color: $post-link-color;
+      word-break: break-all;
+      color: $single-link-color;
 
       .dark-theme & {
-        color: $post-link-color-dark;
+        color: $single-link-color-dark;
       }
     }
 
     a:hover {
-      color: $post-link-hover-color;
+      color: $single-link-hover-color;
 
       .dark-theme &:hover {
-        color: $post-link-hover-color-dark;
+        color: $single-link-hover-color-dark;
         font-weight: bold;
       }
     }
@@ -233,11 +234,11 @@
         width: 3rem;
         height: 2rem;
         font: 6em/1.08em 'PT Sans', sans-serif;
-        color: $post-link-color;
+        color: $single-link-color;
         text-align: center;
 
         .dark-theme & {
-          color: $post-link-color-dark;
+          color: $single-link-color-dark;
         }
       }
 
@@ -246,10 +247,10 @@
         display: block;
         text-align: right;
         font-size: 0.875em;
-        color: $post-link-color;
+        color: $single-link-color;
 
         .dark-theme & {
-          color: $post-link-color-dark;
+          color: $single-link-color-dark;
         }
       }
 
@@ -266,8 +267,8 @@
       }
     }
 
-    @import "../_partial/_post/code";
-    @import "../_partial/_post/admonition";
+    @import "../_partial/_single/code";
+    @import "../_partial/_single/admonition";
 
     .mermaid {
       width: 100%;
@@ -372,6 +373,6 @@
     }
   }
 
-  @import "../_partial/_post/footer";
-  @import "../_partial/_post/comment";
+  @import "../_partial/_single/footer";
+  @import "../_partial/_single/comment";
 }

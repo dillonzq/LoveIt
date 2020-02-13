@@ -7,7 +7,7 @@ jQuery(function($) {
     _Blog.toggleMobileMenu = function() {
         $('#menu-toggle').on('click', () => {
             $('#menu-toggle').toggleClass('active');
-            $('#mobile-menu').toggleClass('active');
+            $('#menu-mobile').toggleClass('active');
         });
     };
 
@@ -102,7 +102,7 @@ jQuery(function($) {
     };
 
     _Blog.responsiveTable = function() {
-        const tables = document.querySelectorAll('.post-content table');
+        const tables = document.querySelectorAll('.content table');
         for (let i = 0; i < tables.length; i++) {
             const table = tables[i];
             const wrapper = document.createElement('div');
@@ -129,7 +129,7 @@ jQuery(function($) {
         for (let i = 0; i < links.length; i++) links[i].className += ' toc-link';
 
         for (let num = 1; num <= 6; num++) {
-            const headers = document.querySelectorAll('.post-content>h' + num);
+            const headers = document.querySelectorAll('.content>h' + num);
             for (let i = 0; i < headers.length; i++) {
                 const header = headers[i];
                 header.innerHTML = `<a href="#${header.id}" class="headerlink"></a>${header.innerHTML}`;

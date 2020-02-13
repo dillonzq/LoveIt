@@ -1,14 +1,14 @@
 {{- define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end -}}
 
 {{- define "content" -}}
-    <div class="page single">
+    <div class="page single special">
         {{- /* Title */ -}}
-        <h1 class="post-title animated pulse faster">
+        <h1 class="single-title animated pulse faster">
             {{- .Title -}}
         </h1>
 
         {{- /* Content */ -}}
-        <div class="post-content">
+        <div class="content">
             {{- partial "hook/content.html" .Content | safeHTML -}}
         </div>
     </div>

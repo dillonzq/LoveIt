@@ -7,11 +7,17 @@
 <html lang="{{ .Site.LanguageCode }}">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>
             {{- block "title" . }}{{ .Site.Title }}{{ end -}}
         </title>
-        {{- partial "head.html" . -}}
+        <meta name="Description" content="{{ .Params.description | default .Site.Params.description }}">
+
+        {{- partial "head/meta.html" . -}}
+        {{- partial "head/link.html" . -}}
+        {{- partial "head/seo.html" . -}}
     </head>
     <body>
         {{- /* Check theme isDark before body rendering */ -}}

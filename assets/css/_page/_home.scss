@@ -1,55 +1,70 @@
 /** Home **/
-.home-intro {
-  transform: translateY(25vh);
-  text-align: center;
+@import "../_partial/_home/summary";
 
-  .home-avatar {
-    padding: 0.6rem;
+@mixin page-home($profile, $posts) {
+  .home {
+    @if $profile {
+      .home-profile {
+        transform: translateY(if($posts, 0, 16vh));
+        padding: if($posts, 2rem, 0) 0;
+        text-align: center;
 
-    img {
-      width: 8rem;
-      height: auto;
-      display: inline-block;
-      -webkit-border-radius: 100%;
-      border-radius: 100%;
-      -webkit-box-shadow: 0 0 0 0.3618em rgba(0, 0, 0, 0.05);
-      box-shadow: 0 0 0 0.3618em rgba(0, 0, 0, 0.05);
-      margin: 0 auto;
-      -webkit-transition: all ease 0.4s;
-      -moz-transition: all ease 0.4s;
-      -o-transition: all ease 0.4s;
-      transition: all ease 0.4s;
-      cursor: pointer;
+        .home-avatar {
+          padding: 0.6rem;
 
-      &:hover {
-        position: relative;
-        -webkit-transform: translateY(-0.75rem);
-        -moz-transform: translateY(-0.75rem);
-        -ms-transform: translateY(-0.75rem);
-        -o-transform: translateY(-0.75rem);
-        transform: translateY(-0.75rem);
-        cursor: pointer;
+          img {
+            width: if($posts, 6rem, 8rem);
+            height: auto;
+            display: inline-block;
+            -webkit-border-radius: 100%;
+            border-radius: 100%;
+            -webkit-box-shadow: 0 0 0 0.3618em rgba(0, 0, 0, 0.05);
+            box-shadow: 0 0 0 0.3618em rgba(0, 0, 0, 0.05);
+            margin: 0 auto;
+            -webkit-transition: all ease 0.4s;
+            -moz-transition: all ease 0.4s;
+            -o-transition: all ease 0.4s;
+            transition: all ease 0.4s;
+            cursor: pointer;
+
+            &:hover {
+              position: relative;
+              -webkit-transform: translateY(-0.75rem);
+              -moz-transform: translateY(-0.75rem);
+              -ms-transform: translateY(-0.75rem);
+              -o-transform: translateY(-0.75rem);
+              transform: translateY(-0.75rem);
+              cursor: pointer;
+            }
+          }
+        }
+
+        .home-description {
+          font-size: 1rem;
+          font-weight: normal;
+          margin: 0;
+          padding: .4rem;
+        }
+
+        .home-social-links {
+          padding-top: .6rem;
+
+          i {
+            font-size: 1.45rem;
+          }
+
+          img {
+            width: 1.5rem;
+            height: 1.5rem;
+          }
+        }
       }
     }
-  }
 
-  .home-description {
-    font-size: 1rem;
-    font-weight: normal;
-    margin: 0;
-    padding: .4rem;
-  }
-
-  .home-social-links {
-    padding-top: .6rem;
-
-    i {
-      font-size: 1.45rem;
-    }
-
-    img {
-      width: 1.5rem;
-      height: 1.5rem;
+    @if $posts {
+      @include summary;
     }
   }
 }
+
+@include page-home($home-profile, $home-posts);

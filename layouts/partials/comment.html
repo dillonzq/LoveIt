@@ -12,13 +12,13 @@
         {{- if .Site.Params.cdn.gitalk_css -}}
             {{- .Site.Params.cdn.gitalk_css | safeHTML -}}
         {{- else -}}
-            {{- $res := resources.Get "css/lib/gitalk/gitalk.css" | resources.Minify -}}
+            {{- $res := resources.Get "css/lib/gitalk/gitalk.css" | minify -}}
             <link rel="stylesheet" href="{{ $res.RelPermalink }}">
         {{- end -}}
         {{- if .Site.Params.cdn.gitalk_js -}}
             {{ .Site.Params.cdn.gitalk_js | safeHTML -}}
         {{- else -}}
-            {{- $res := resources.Get "js/lib/gitalk/gitalk.min.js" | resources.Minify -}}
+            {{- $res := resources.Get "js/lib/gitalk/gitalk.min.js" -}}
             <script src="{{ $res.RelPermalink }}"></script>
         {{- end -}}
         <script>
@@ -43,7 +43,7 @@
         {{- if .Site.Params.cdn.valine_js -}}
             {{- .Site.Params.cdn.valine_js | safeHTML -}}
         {{- else -}}
-            {{- $res := resources.Get "js/lib/valine/Valine.min.js" | resources.Minify -}}
+            {{- $res := resources.Get "js/lib/valine/Valine.min.js" -}}
             <script src="{{ $res.RelPermalink }}"></script>
         {{- end -}}
         <script>

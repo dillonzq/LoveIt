@@ -6,25 +6,8 @@
   padding-top: 6rem;
 }
 
+@import "_single";
+@import "_special";
+@import "_archive";
 @import "_home";
 @import "_404";
-
-@import "_post";
-@import "_posts";
-
-.archive {
-  .post-title {
-    text-align: right;
-    padding-bottom: 2rem;
-  }
-
-  @import "_terms";
-  @import "_tags";
-}
-
-.single {
-  .post-title {
-    text-align: right;
-    padding-bottom: 2rem;
-  }
-}

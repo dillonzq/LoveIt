@@ -1,78 +1,78 @@
-.navbar {
+header.desktop {
   display: block;
   position: fixed;
   width: 100%;
   z-index: 100;
   height: 4rem;
   line-height: 4rem;
-  background-color: $navbar-background-color;
+  background-color: $header-background-color;
 
   .dark-theme & {
-    background-color: $navbar-background-color-dark;
+    background-color: $header-background-color-dark;
   }
 
-  .navbar-container {
+  .header-wrapper {
     width: auto;
     text-align: center;
     margin: 0 4rem;
     display: flex;
     justify-content: space-between;
 
-    .navbar-header a {
+    .header-title a {
       padding: 0 8px;
-      font-size: 20px;
+      font-size: 1.25rem;
 
       i {
-        line-height: 2em;
+        line-height: 2rem;
       }
     }
 
-    .navbar-menu a {
+    .menu a {
       padding: 0 8px;
 
       &.active {
         font-weight: 900;
-        color: $navbar-hover-color;
+        color: $header-hover-color;
 
         .dark-theme & {
-          color: $navbar-hover-color-dark;
+          color: $header-hover-color-dark;
         }
       }
     }
   }
 }
 
-.navbar-mobile {
+header.mobile {
   display: none;
   position: fixed;
   width: 100%;
   z-index: 100;
   transition: all 0.3s ease 0s;
 
-  .navbar-container {
+  .header-wrapper {
     padding: 0;
     margin: 0;
-    height: 4.5em;
-    line-height: 4.5em;
+    height: 4.5rem;
+    line-height: 4.5rem;
     background: $global-background-color;
 
-    .navbar-header {
+    .header-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      font-size: 18px;
-      padding-right: 1em;
-      padding-left: 1em;
+      font-size: 1.125rem;
+      padding-right: 1rem;
+      padding-left: 1rem;
       box-sizing: border-box;
 
-      .navbar-header-title {
-        font-size: 20px;
+      .header-title {
+        font-size: 1.25rem;
       }
 
       .menu-toggle {
         cursor: pointer;
-        line-height: 4.5em;
+        line-height: 4.5rem;
 
         span {
           display: block;
@@ -127,7 +127,7 @@
       }
     }
 
-    .navbar-menu {
+    .menu {
       text-align: center;
       background: $global-background-color;
       border-top: 2px solid $global-font-color;
@@ -136,7 +136,7 @@
 
       a {
         display: block;
-        line-height: 2.5em;
+        line-height: 2.5rem;
       }
 
       &.active {

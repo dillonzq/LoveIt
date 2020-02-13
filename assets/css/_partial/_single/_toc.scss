@@ -37,10 +37,10 @@
         content: "|";
         font-weight: bolder;
         margin-right: .5rem;
-        color: $post-link-color;
+        color: $single-link-color;
 
         .dark-theme & {
-          color: $post-link-color-dark;
+          color: $single-link-color-dark;
         }
       }
 
@@ -56,18 +56,18 @@
 
     .toc-link.active {
       font-weight: bold;
-      color: $post-link-hover-color;
+      color: $single-link-hover-color;
 
       .dark-theme & {
-        color: $post-link-hover-color-dark;
+        color: $single-link-hover-color-dark;
       }
 
       &::before {
         font-weight: bolder;
-        color: $post-link-hover-color;
+        color: $single-link-hover-color;
 
         .dark-theme & {
-          color: $post-link-hover-color-dark;
+          color: $single-link-hover-color-dark;
         }
       }
     }
