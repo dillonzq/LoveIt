@@ -3,6 +3,11 @@
   {{- errorf "\n\nThere are two possible situations that led to this error:\n  1. You haven't copied the config.toml yet. See https://github.com/dillonzq/LoveIt#installation \n  2. You have an incompatible update. See https://github.com//dillonzq/LoveIt/blob/master/CHANGELOG.md \n\n有两种可能的情况会导致这个错误发生:\n  1. 你还没有复制 config.toml 参考 https://github.com/dillonzq/LoveIt#installation \n  2. 你进行了一次不兼容的更新 参考 https://github.com//dillonzq/LoveIt/blob/master/CHANGELOG.md \n" -}}
 {{- end -}}
 
+{{- if eq (getenv "HUGO_ENV") "production" -}}
+    {{- .Scratch.Set "production" true -}}
+    {{- .Scratch.Set "CDN" .Site.Params.cdn -}}
+{{- end -}}
+
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
     <head>
@@ -51,7 +56,7 @@
             <span>&nbsp;</span>
         </a>
 
-        {{- /* Load scripts */ -}}
-        {{- partial "scripts.html" . -}}
+        {{- /* Load script */ -}}
+        {{- partial "script.html" . -}}
     </body>
 </html>

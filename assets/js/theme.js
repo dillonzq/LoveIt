@@ -2,16 +2,20 @@ jQuery(function($) {
 
     'use strict';
 
-    var _Blog = window._Blog || {};
+    var _Theme = window._Theme || {};
 
-    _Blog.toggleMobileMenu = function() {
+    _Theme.scroll = function () {
+        window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});
+    }
+
+    _Theme.toggleMobileMenu = function () {
         $('#menu-toggle').on('click', () => {
             $('#menu-toggle').toggleClass('active');
             $('#menu-mobile').toggleClass('active');
         });
     };
 
-    _Blog.toggleTheme = function() {
+    _Theme.toggleTheme = function () {
         $('.theme-switch').on('click', () => {
             $('body').toggleClass('dark-theme');
             window.isDark = !window.isDark;
@@ -20,17 +24,7 @@ jQuery(function($) {
         });
     };
 
-    _Blog.changeTitle = function() {
-        var currentTitle = document.title;
-        window.onblur = function() {
-            document.title = currentTitle;
-        };
-        window.onfocus = function() {
-            document.title = currentTitle;
-        };
-    };
-
-    _Blog.dynamicToTop = function() {
+    _Theme.dynamicToTop = function () {
         const min = 300;
         var $toTop = $('#dynamic-to-top');
         $(window).scroll(() => {
@@ -73,7 +67,7 @@ jQuery(function($) {
         });
     };
 
-    _Blog.chroma = function () {
+    _Theme.chroma = function () {
         const blocks = document.querySelectorAll('.highlight > .chroma');
         for (let i = 0; i < blocks.length; i++) {
             const block = blocks[i];
@@ -101,7 +95,7 @@ jQuery(function($) {
         }
     };
 
-    _Blog.responsiveTable = function() {
+    _Theme.responsiveTable = function () {
         const tables = document.querySelectorAll('.content table');
         for (let i = 0; i < tables.length; i++) {
             const table = tables[i];
@@ -112,7 +106,7 @@ jQuery(function($) {
         }
     };
 
-    _Blog._refactorToc = function(toc) {
+    _Theme._refactorToc = function(toc) {
         // when headings do not start with `h1`
         const oldTocList = toc.children[0];
         let newTocList = oldTocList;
@@ -124,7 +118,7 @@ jQuery(function($) {
         if (newTocList !== oldTocList) toc.replaceChild(newTocList, oldTocList);
     };
 
-    _Blog._linkToc = function() {
+    _Theme._linkToc = function () {
         const links = document.querySelectorAll('#TableOfContents a:first-child');
         for (let i = 0; i < links.length; i++) links[i].className += ' toc-link';
 
@@ -137,7 +131,7 @@ jQuery(function($) {
         }
     };
 
-    _Blog._initToc = function() {
+    _Theme._initToc = function () {
         const $toc = $('#post-toc');
         if ($toc.length && $toc.css('display') !== 'none') {
             const SPACING = 80;
@@ -145,7 +139,7 @@ jQuery(function($) {
             const minTop = $toc.position().top;;
             const mainTop = $('main').position().top;
             const minScrollTop = minTop + mainTop - SPACING;
-            const changeTocState = function() {
+            const changeTocState = function () {
                 const scrollTop = $(window).scrollTop();
                 const maxTop = $footer.position().top - $toc.height();
                 const maxScrollTop = maxTop + mainTop - SPACING;
@@ -213,7 +207,7 @@ jQuery(function($) {
         }
     };
 
-    _Blog.toc = function() {
+    _Theme.toc = function () {
         const tocContainer = document.getElementById('post-toc');
         if (tocContainer !== null) {
             const toc = document.getElementById('TableOfContents');
@@ -225,15 +219,16 @@ jQuery(function($) {
                 this._linkToc();
                 this._initToc();
                 // Listen for orientation changes
-                window.addEventListener("resize", function() {
-                    this.setTimeout(_Blog._initToc, 0);
+                window.addEventListener("resize", function () {
+                    this.setTimeout(_Theme._initToc, 0);
                 }, false);
             }
         }
     };
 
-    _Blog.mermaid = function() {
+    _Theme.mermaid = function () {
         if (window.mermaidMap) {
+            mermaid.initialize({startOnLoad: false, theme: null});
             const mermaidAPI = mermaid.mermaidAPI
             Object.keys(mermaidMap).forEach((id) => {
                 const element = document.getElementById(id);
@@ -246,7 +241,7 @@ jQuery(function($) {
         }
     }
 
-    _Blog.echarts = function() {
+    _Theme.echarts = function () {
         if (window.echartsMap) {
             for (let i = 0; i < echartsArr.length; i++) {
                 echartsArr[i].dispose();
@@ -257,7 +252,7 @@ jQuery(function($) {
                 myChart.setOption(echartsMap[id]);
                 echartsArr.push(myChart);
             });
-            window.addEventListener("resize", function() {
+            window.addEventListener("resize", function () {
                 this.setTimeout(() => {
                     for (let i = 0; i < echartsArr.length; i++) {
                         echartsArr[i].resize();
@@ -267,7 +262,7 @@ jQuery(function($) {
         }
     }
 
-    _Blog.countdown = function() {
+    _Theme.countdown = function () {
         if (window.countdownMap) {
             Object.keys(countdownMap).forEach(function(id) {
                 $(`#${id}`).countdown(countdownMap[id]['date'], {elapse: true})
@@ -278,7 +273,7 @@ jQuery(function($) {
         }
     };
 
-    _Blog.typeit = function() {
+    _Theme.typeit = function () {
         if (window.typeitArr) {
             for (let i = 0; i < typeitArr.length; i++) {
                 const group = typeitArr[i];
@@ -303,16 +298,16 @@ jQuery(function($) {
     };
 
     $(document).ready(() => {
-        _Blog.toggleMobileMenu();
-        _Blog.toggleTheme();
-        _Blog.changeTitle();
-        _Blog.dynamicToTop();
-        _Blog.chroma();
-        _Blog.responsiveTable();
-        _Blog.mermaid();
-        _Blog.echarts();
-        _Blog.countdown();
-        _Blog.typeit();
-        _Blog.toc();
+        _Theme.scroll();
+        _Theme.toggleMobileMenu();
+        _Theme.toggleTheme();
+        _Theme.dynamicToTop();
+        _Theme.chroma();
+        _Theme.responsiveTable();
+        _Theme.mermaid();
+        _Theme.echarts();
+        _Theme.countdown();
+        _Theme.typeit();
+        _Theme.toc();
     });
 });

@@ -1,3 +1,5 @@
+{{- $CDN := .Scratch.Get "CDN" -}}
+
 <link rel="canonical" href="{{ .Permalink }}" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -28,8 +30,8 @@
 <link rel="stylesheet" href="{{ $res.RelPermalink }}">
 
 {{- /* Font Awesome https://fontawesome.com/ */ -}}
-{{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.fontawesome_free_css -}}
-    {{- .Site.Params.cdn.fontawesome_free_css | safeHTML -}}
+{{- with $CDN.fontawesome_free_css -}}
+    {{- . | safeHTML -}}
 {{- else -}}
     {{- $res := resources.Get "css/lib/fontawesome-free/all.min.css" -}}
     <link rel="stylesheet" href="{{ $res.RelPermalink }}">
@@ -41,8 +43,8 @@
 <link rel="stylesheet" href="{{ $res.RelPermalink }}">
 
 {{- /* Animate.css https://github.com/daneden/animate.css */ -}}
-{{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.cdn.animate_css -}}
-    {{- .Site.Params.cdn.animate_css | safeHTML -}}
+{{- with $CDN.animate_css -}}
+    {{- . | safeHTML -}}
 {{- else -}}
     {{ $res := resources.Get "css/lib/animate/animate.min.css" -}}
     <link rel="stylesheet" href="{{ $res.RelPermalink }}">
