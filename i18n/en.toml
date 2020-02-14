@@ -33,10 +33,10 @@ other = "More"
 other = "Switch Theme"
 # === partials/header.html ===
 
-# === partials/comments.html ===
+# === partials/comment.html ===
 [valineLang]
 other = "en"
-# === partials/comments.html ===
+# === partials/comment.html ===
 
 # === partials/footer.html ===
 [powered]
