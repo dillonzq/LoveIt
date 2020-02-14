@@ -1,5 +1,6 @@
 html {
   font-family: $global-font-family;
+  font-size: 16px;
 }
 
 /* scrollbar, only support webkit */
@@ -25,7 +26,6 @@ html {
 }
 
 body {
-  font-size: 16px;
   font-weight: 400;
   line-height: 1.5rem;
   background-color: $global-background-color;

@@ -52,8 +52,8 @@ header.mobile {
   .header-wrapper {
     padding: 0;
     margin: 0;
-    height: 4.5rem;
-    line-height: 4.5rem;
+    height: 4rem;
+    line-height: 4rem;
     background: $global-background-color;
 
     .header-container {
@@ -72,12 +72,12 @@ header.mobile {
 
       .menu-toggle {
         cursor: pointer;
-        line-height: 4.5rem;
+        line-height: 4rem;
 
         span {
           display: block;
-          background: #000;
-          width: 24px;
+          background: $global-font-color;
+          width: 1.5rem;
           height: 2px;
           -webkit-border-radius: 3px;
           -moz-border-radius: 3px;
@@ -92,11 +92,11 @@ header.mobile {
         }
 
         span:nth-child(1) {
-          margin-bottom: 8px;
+          margin-bottom: .5rem;
         }
 
         span:nth-child(3) {
-          margin-top: 8px;
+          margin-top: .5rem;
         }
 
         &.active {
@@ -107,10 +107,10 @@ header.mobile {
           }
 
           span:nth-child(1) {
-            -moz-transform: rotate(45deg) translate(4px, 6px);
-            -ms-transform: rotate(45deg) translate(4px, 6px);
-            -webkit-transform: rotate(45deg) translate(4px, 6px);
-            transform: rotate(45deg) translate(4px, 6px);
+            -moz-transform: rotate(45deg) translate(.4rem, .5rem);
+            -ms-transform: rotate(45deg) translate(.4rem, .5rem);
+            -webkit-transform: rotate(45deg) translate(.4rem, .5rem);
+            transform: rotate(45deg) translate(.4rem, .5rem);
           }
 
           span:nth-child(2) {
@@ -118,10 +118,10 @@ header.mobile {
           }
 
           span:nth-child(3) {
-            -moz-transform: rotate(-45deg) translate(8px, -10px);
-            -ms-transform: rotate(-45deg) translate(8px, -10px);
-            -webkit-transform: rotate(-45deg) translate(8px, -10px);
-            transform: rotate(-45deg) translate(8px, -10px);
+            -moz-transform: rotate(-45deg) translate(.4rem, -.5rem);
+            -ms-transform: rotate(-45deg) translate(.4rem, -.5rem);
+            -webkit-transform: rotate(-45deg) translate(.4rem, -.5rem);
+            transform: rotate(-45deg) translate(.4rem, -.5rem);
           }
         }
       }
