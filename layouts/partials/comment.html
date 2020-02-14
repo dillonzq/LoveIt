@@ -13,7 +13,7 @@
 
     {{- /* Gitalk Comment System */ -}}
     {{- if .Site.Params.gitalk.owner -}}
-        <div id="gitalk_container"></div>
+        <div id="gitalk"></div>
         {{- with $CDN.gitalk_css -}}
             {{- slice . | $.Scratch.Add "linkCDN" -}}
         {{- else -}}
@@ -36,7 +36,7 @@
                     admin: ['{{ .Site.Params.gitalk.owner }}'],
                     body: decodeURI(location.href),
                 });
-                gitalk.render('gitalk_container');
+                gitalk.render('gitalk');
             });
         </script>
         <noscript>
@@ -46,7 +46,8 @@
 
     {{- /* Valine Comment System */ -}}
     {{- if .Site.Params.valine.enable -}}
-        <div id="valine_container"></div>
+        <div id="valine"></div>
+        {{- slice "css/lib/valine/dark.scss" | .Scratch.Add "linkLocal" -}}
         {{- with $CDN.valine_js -}}
             {{- slice . | $.Scratch.Add "scriptCDN" -}}
         {{- else -}}
@@ -55,7 +56,7 @@
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 new Valine({
-                    el: '#valine_container',
+                    el: '#valine',
                     appId: '{{ .Site.Params.valine.appId }}',
                     appKey: '{{ .Site.Params.valine.appKey }}',
                     {{- with .Site.Params.valine.placeholder -}}
