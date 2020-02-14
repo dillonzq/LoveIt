@@ -38,7 +38,7 @@
 {{- end -}}
 
 {{- /* Fork Awesome https://forkaweso.me/ */ -}}
-{{- $options := dict "targetPath" "css/lib/forkawesome/forkawesome.min.css" "outputStyle" "compressed" "enableSourceMap" true -}}
+{{- $options := dict "targetPath" "css/lib/forkawesome/fork-awesome.min.css" "outputStyle" "compressed" "enableSourceMap" true -}}
 {{- $res := resources.Get "css/lib/forkawesome/fork-awesome.scss"| toCSS $options -}}
 <link rel="stylesheet" href="{{ $res.RelPermalink }}">
 

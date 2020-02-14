@@ -104,6 +104,7 @@
     {{- else -}}
         {{- slice "js/lib/mermaid/mermaid.min.js" | $.Scratch.Add "scriptLocal" -}}
     {{- end -}}
+    {{- slice "css/mermaid.scss" | $.Scratch.Add "linkLocal" -}}
     <script>
         window.mermaidMap = {{ jsonify . | safeJS }};
     </script>
@@ -117,6 +118,7 @@
     {{- else -}}
         {{- slice "css/lib/aplayer/APlayer.min.css" | .Scratch.Add "linkLocal" -}}
     {{- end -}}
+    {{- slice "css/lib/aplayer/dark.scss" | .Scratch.Add "linkLocal" -}}
     {{- with $CDN.aplayer_js -}}
         {{- slice . | $.Scratch.Add "scriptCDN" -}}
     {{- else -}}
@@ -176,7 +178,10 @@
 {{- end -}}
 {{- range .Scratch.Get "linkLocal" -}}
     {{- $res := resources.Get . -}}
-    {{- if not (strings.HasSuffix . ".min.css") -}}
+    {{- if strings.HasSuffix . ".scss" -}}
+        {{- $options := dict "outputStyle" "compressed" "enableSourceMap" true -}}
+        {{- $res = toCSS $options $res -}}
+    {{- else if not (strings.HasSuffix . ".min.css") -}}
         {{- $res = minify $res -}}
     {{- end -}}
     <link rel="stylesheet" href="{{ $res.RelPermalink }}">
