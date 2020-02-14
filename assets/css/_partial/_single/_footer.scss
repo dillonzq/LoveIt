@@ -34,17 +34,17 @@
       .post-info-md
       a {
         font-size: 0.8em;
-        color: $post-link-color;
+        color: $single-link-color;
 
         .dark-theme & {
-          color: $post-link-color-dark;
+          color: $single-link-color-dark;
         }
 
         &:hover {
-          color: $post-link-hover-color;
+          color: $single-link-hover-color;
 
           .dark-theme & {
-            color: $post-link-hover-color-dark;
+            color: $single-link-hover-color-dark;
           }
         }
       }

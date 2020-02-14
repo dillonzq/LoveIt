@@ -5,7 +5,7 @@
     display: inline-block;
     position: relative;
     margin: 5px 10px;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
     transition-duration: .3s;
     transition-property: transform;
     transition-timing-function: ease-out;

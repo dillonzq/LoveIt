@@ -1,0 +1,199 @@
+{{- $CDN := .Scratch.Get "CDN" -}}
+
+{{- /* Google analytics async */ -}}
+{{- if .Scratch.Get "production" | and .Site.GoogleAnalytics -}}
+    {{- template "_internal/google_analytics_async.html" . -}}
+{{- end -}}
+
+{{- /* jQuery https://github.com/jquery/jquery */ -}}
+{{- with $CDN.jquery_js -}}
+    {{- slice . | $.Scratch.Add "scriptCDN" -}}
+{{- else -}}
+    {{- slice "js/lib/jquery/jquery.slim.min.js" | .Scratch.Add "scriptLocal" -}}
+{{- end -}}
+
+{{- /* lazysizes https://github.com/aFarkas/lazysizes */ -}}
+{{- with $CDN.lazysizes_js -}}
+    {{- slice . | $.Scratch.Add "scriptCDN" -}}
+{{- else -}}
+    {{- slice "js/lib/lazysizes/lazysizes.min.js" | .Scratch.Add "scriptLocal" -}}
+{{- end -}}
+
+{{- /* Smooth Scroll https://github.com/cferdinandi/smooth-scroll */ -}}
+{{- with $CDN.smooth_scroll_js -}}
+    {{- slice . | $.Scratch.Add "scriptCDN" -}}
+{{- else -}}
+    {{- slice "js/lib/smooth-scroll/smooth-scroll.polyfills.min.js" | .Scratch.Add "scriptLocal" -}}
+{{- end -}}
+
+{{- /* TypeIt https://github.com/alexmacarthur/typeit */ -}}
+{{- with .Scratch.Get "typeitMap" -}}
+    {{- with $CDN.typeit_js -}}
+        {{- slice . | $.Scratch.Add "scriptCDN" -}}
+    {{- else -}}
+        {{- slice "js/lib/typeit/typeit.min.js" | $.Scratch.Add "scriptLocal" -}}
+    {{- end -}}
+    {{- range $key, $val := . -}}
+        {{- slice $val | $.Scratch.Add "typeitArr" -}}
+    {{- end -}}
+    <script>
+        window.typeitArr = {{ $.Scratch.Get "typeitArr" | jsonify | safeJS }};
+    </script>
+{{- end -}}
+
+{{- /* KaTeX https://github.com/KaTeX/KaTeX */ -}}
+{{- if .Site.Params.math.enable | and (ne .Params.math false) -}}
+    {{- with $CDN.katex_css -}}
+        {{- slice . | $.Scratch.Add "linkCDN" -}}
+    {{- else -}}
+        {{- slice "css/lib/katex/katex.min.css" | .Scratch.Add "linkLocal" -}}
+    {{- end -}}
+    {{- with $CDN.katex_js -}}
+        {{- slice . | $.Scratch.Add "scriptCDN" -}}
+    {{- else -}}
+        {{- slice "js/lib/katex/katex.min.js" | .Scratch.Add "scriptLocal" -}}
+    {{- end -}}
+    {{- with $CDN.katex_auto_render_js -}}
+        {{- slice . | $.Scratch.Add "scriptCDN" -}}
+    {{- else -}}
+        {{- slice "js/lib/katex/auto-render.min.js" | .Scratch.Add "scriptLocal" -}}
+    {{- end -}}
+    {{- $math := .Site.Params.math -}}
+    {{- if $math.copy_tex -}}
+        {{- with $CDN.katex_copy_tex_css -}}
+            {{- slice . | $.Scratch.Add "linkCDN" -}}
+        {{- else -}}
+            {{- slice "css/lib/katex/copy-tex.min.css" | .Scratch.Add "linkLocal" -}}
+        {{- end -}}
+        {{- with $CDN.katex_copy_tex_js -}}
+            {{- slice . | $.Scratch.Add "scriptCDN" -}}
+        {{- else -}}
+            {{- slice "js/lib/katex/copy-tex.min.js" | .Scratch.Add "scriptLocal" -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if $math.mhchem -}}
+        {{- with $CDN.katex_mhchem_js -}}
+            {{- slice . | $.Scratch.Add "scriptCDN" -}}
+        {{- else -}}
+            {{- slice "js/lib/katex/mhchem.min.js" | .Scratch.Add "scriptLocal" -}}
+        {{- end -}}
+    {{- end -}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true },
+                    {{- if and $math.block_left_delimiter $math.block_right_delimiter -}}
+                        { left: "{{ $math.block_left_delimiter }}", right: "{{ $math.block_right_delimiter }}", display: true },
+                    {{- end -}}
+                    {{- if and $math.inline_left_delimiter $math.inline_right_delimiter -}}
+                        { left: "{{ $math.inline_left_delimiter }}", right: "{{ $math.inline_right_delimiter }}", display: false },
+                    {{- end -}}
+                ]
+            });
+        });
+    </script>
+{{- end -}}
+
+{{- /* mermaid https://github.com/knsv/mermaid */ -}}
+{{- with .Scratch.Get "mermaidMap" -}}
+    {{- with $CDN.mermaid_js -}}
+        {{- slice . | $.Scratch.Add "scriptCDN" -}}
+    {{- else -}}
+        {{- slice "js/lib/mermaid/mermaid.min.js" | $.Scratch.Add "scriptLocal" -}}
+    {{- end -}}
+    {{- slice "css/mermaid.scss" | $.Scratch.Add "linkLocal" -}}
+    <script>
+        window.mermaidMap = {{ jsonify . | safeJS }};
+    </script>
+{{- end -}}
+
+{{- /* Music */ -}}
+{{- if .Scratch.Get "music" -}}
+    {{- /* APlayer https://github.com/MoePlayer/APlayer */ -}}
+    {{- with $CDN.aplayer_css -}}
+        {{- slice . | $.Scratch.Add "linkCDN" -}}
+    {{- else -}}
+        {{- slice "css/lib/aplayer/APlayer.min.css" | .Scratch.Add "linkLocal" -}}
+    {{- end -}}
+    {{- slice "css/lib/aplayer/dark.scss" | .Scratch.Add "linkLocal" -}}
+    {{- with $CDN.aplayer_js -}}
+        {{- slice . | $.Scratch.Add "scriptCDN" -}}
+    {{- else -}}
+        {{- slice "js/lib/aplayer/APlayer.min.js" | .Scratch.Add "scriptLocal" -}}
+    {{- end -}}
+
+    {{- /* MetingJS https://github.com/metowolf/MetingJS */ -}}
+    {{- with $CDN.meting_js -}}
+        {{- slice . | $.Scratch.Add "scriptCDN" -}}
+    {{- else -}}
+        {{- slice "js/lib/meting/Meting.min.js" | .Scratch.Add "scriptLocal" -}}
+    {{- end -}}
+{{- end -}}
+
+{{- /* jQuery.countdown https://github.com/hilios/jQuery.countdown */ -}}
+{{- with .Scratch.Get "countdownMap" -}}
+    {{- with $CDN.jquery_countdown_js -}}
+        {{- slice . | $.Scratch.Add "scriptCDN" -}}
+    {{- else -}}
+        {{- slice "js/lib/jquery-countdown/jquery.countdown.min.js" | $.Scratch.Add "scriptLocal" -}}
+    {{- end -}}
+    <script>
+        window.countdownMap = {{ jsonify . | safeJS }};
+    </script>
+{{- end -}}
+
+{{- /* dev feature */ -}}
+{{- if .Params.dev -}}
+    {{- /* ECharts https://github.com/apache/incubator-echarts */ -}}
+    {{- with .Scratch.Get "echartsMap" -}}
+        {{- with $CDN.echarts_js -}}
+            {{- slice . | $.Scratch.Add "scriptCDN" -}}
+        {{- else -}}
+            {{- slice "js/lib/echarts/echarts.min.js" | $.Scratch.Add "scriptLocal" -}}
+        {{- end -}}
+        {{- with $CDN.echarts_macarons_js -}}
+            {{- slice . | $.Scratch.Add "scriptCDN" -}}
+        {{- else -}}
+            {{- slice "js/lib/echarts/macarons.js" | $.Scratch.Add "scriptLocal" -}}
+        {{- end -}}
+        <script>
+            window.echartsMap = {
+                {{- range $key, $var := . -}}
+                    {{- $key }}: {{ $var | safeJS -}},
+                {{- end -}}
+            };
+            window.echartsArr = [];
+        </script>
+    {{- end -}}
+{{- end -}}
+
+{{- /* Theme script */ -}}
+{{- slice "js/theme.js" | .Scratch.Add "scriptLocal" -}}
+
+{{- range .Scratch.Get "linkCDN" -}}
+    {{- safeHTML . -}}
+{{- end -}}
+{{- range .Scratch.Get "linkLocal" -}}
+    {{- $res := resources.Get . -}}
+    {{- if strings.HasSuffix . ".scss" -}}
+        {{- $options := dict "outputStyle" "compressed" "enableSourceMap" true -}}
+        {{- $res = toCSS $options $res -}}
+    {{- else if not (strings.HasSuffix . ".min.css") -}}
+        {{- $res = minify $res -}}
+    {{- end -}}
+    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
+{{- end -}}
+
+{{- range .Scratch.Get "scriptCDN" -}}
+    {{- safeHTML . -}}
+{{- end -}}
+{{- range .Scratch.Get "scriptLocal" -}}
+    {{- $res := resources.Get . -}}
+    {{- if not (strings.HasSuffix . ".min.js") -}}
+        {{- $res = minify $res -}}
+    {{- end -}}
+    <script src="{{ $res.RelPermalink }}"></script>
+{{- end -}}

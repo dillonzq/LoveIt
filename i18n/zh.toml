@@ -33,10 +33,10 @@ other = "更多"
 other = "切换主题"
 # === partials/header.html ===
 
-# === partials/comments.html ===
+# === partials/comment.html ===
 [valineLang]
 other = "zh-cn"
-# === partials/comments.html ===
+# === partials/comment.html ===
 
 # === partials/footer.html ===
 [powered]

@@ -1,30 +1,13 @@
-@import "_home";
-@import "_404";
-
 .page {
   position: relative;
   width: 100%;
   max-width: 980px;
   margin: 0 auto;
   padding-top: 6rem;
-
-  @import "_post";
-  @import "_posts";
 }
 
-.archive {
-  .post-title {
-    text-align: right;
-    padding-bottom: 2rem;
-  }
-
-  @import "_terms";
-  @import "_tags";
-}
-
-.single {
-  .post-title {
-    text-align: right;
-    padding-bottom: 2rem;
-  }
-}
+@import "_single";
+@import "_special";
+@import "_archive";
+@import "_home";
+@import "_404";

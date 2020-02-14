@@ -47,24 +47,24 @@ $selection-color: rgba(38, 139, 211, 0.2) !default;
 $selection-color-dark: rgba(38, 139, 211, 0.3) !default;
 // ========== Selection ========== //
 
-// ========== Navbar ========== //
-// Color of the navbar background
-$navbar-background-color: #fafafa !default;
-$navbar-background-color-dark: #252627 !default;
+// ========== Header ========== //
+// Color of the header background
+$header-background-color: #fafafa !default;
+$header-background-color-dark: #252627 !default;
 
-// Color of the hover navbar item
-$navbar-hover-color: #161209 !default;
-$navbar-hover-color-dark: #fff !default;
-// ========== Navbar ========== //
+// Color of the hover header item
+$header-hover-color: #161209 !default;
+$header-hover-color-dark: #fff !default;
+// ========== Header ========== //
 
-// ========== Post Content ========== //
-// Color of the post link
-$post-link-color: #2d96bd !default;
-$post-link-color-dark: #eee !default;
+// ========== Single Content ========== //
+// Color of the single link
+$single-link-color: #2d96bd !default;
+$single-link-color-dark: #eee !default;
 
-// Color of the hover post link
-$post-link-hover-color: #ef3982 !default;
-$post-link-hover-color-dark: #2d96bd !default;
+// Color of the hover single link
+$single-link-hover-color: #ef3982 !default;
+$single-link-hover-color-dark: #2d96bd !default;
 
 // Color of the table background
 $table-background-color: #fff !default;
@@ -73,7 +73,7 @@ $table-background-color-dark: #272c34 !default;
 // Color of the table thead
 $table-thead-color: #ededed !default;
 $table-thead-color-dark: #20252b !default;
-// ========== Post Content ========== //
+// ========== Single Content ========== //
 
 // ========== Pagination ========== //
 // Color of the link in pagination

@@ -1,13 +1,13 @@
 {{- define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end -}}
 
 {{- define "content" -}}
-    <article class="page">
+    <article class="page single">
         {{- /* Title */ -}}
-        <h1 class="post-title animated flipInX">{{ .Title }}</h1>
+        <h1 class="single-title animated flipInX">{{ .Title }}</h1>
 
         {{- /* Meta */ -}}
-        <div class="post-meta">
-            <div class="post-meta-main">
+        <div class="meta">
+            <div class="meta-line">
                 {{- $author := .Params.author | default .Site.Author.name -}}
                 {{- $author_link := .Params.author_link | default .Site.Author.link | default .Site.BaseURL -}}
                 <a class="author" href="{{ $author_link }}" rel="author" target="_blank">
@@ -25,12 +25,12 @@
                     </span>
                 {{- end -}}
             </div>
-            <div class="post-meta-other">
+            <div class="meta-line">
                 {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
                 <i class="far fa-calendar-alt fa-fw"></i><time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;
                 <i class="fas fa-pencil-alt fa-fw"></i>{{ T "wordCount" .WordCount }}&nbsp;
                 <i class="far fa-clock fa-fw"></i>{{ T "readingTime" .ReadingTime }}&nbsp;
-                {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.valine.enable | and .Site.Params.valine.visitor -}}
+                {{- if .Scratch.Get "production" | and .Site.Params.valine.enable | and .Site.Params.valine.visitor -}}
                     <span id="{{ .RelPermalink | relURL }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
                         <i class="far fa-eye fa-fw"></i>{{ T "pageviews" | safeHTML }}
                     </span>&nbsp;
@@ -40,8 +40,8 @@
 
         {{- /* Featured image */ -}}
         {{- with .Params.featured_image -}}
-            <div class="post-featured-image">
-                {{- partial "image" . -}}
+            <div class="featured-image">
+                {{- partial "hook/image" . -}}
             </div>
         {{- end -}}
 
@@ -72,7 +72,7 @@
         {{- end -}}
 
         {{- /* Content */ -}}
-        <div class="post-content">
+        <div class="content">
             {{- partial "hook/content.html" .Content | safeHTML -}}
         </div>
 
@@ -80,9 +80,9 @@
         {{- partial "post/footer.html" . -}}
 
         {{- /* Comment */ -}}
-        <div class="post-comment">
+        <div class="comment">
             {{- if ( .Params.comment | default true ) -}}
-                {{- partial "comments.html" . -}}
+                {{- partial "comment.html" . -}}
             {{- end -}}
         </div>
     </article>

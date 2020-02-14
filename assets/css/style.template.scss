@@ -1,0 +1,29 @@
+{{- if eq .Site.Params.home_mode "post" -}}
+  $home-profile: true;
+  $home-posts: true;
+{{- else -}}
+  $home-profile: true;
+  $home-posts: false;
+{{- end -}}
+
+@import "_variables";
+
+{{- if fileExists "config/css/_custom.scss" -}}
+  @import "_custom";
+{{- end -}}
+
+@import "_core/normalize";
+@import "_core/base";
+@import "_core/layout";
+
+@import "_page/index";
+
+@import "_partial/header";
+@import "_partial/footer";
+@import "_partial/pagination";
+
+@import "_core/media";
+
+{{- if fileExists "config/css/_custom.scss" -}}
+  @import "_custom";
+{{- end -}}

@@ -1,19 +1,19 @@
-<article class="post" itemscope itemtype="http://schema.org/Article">
+<article class="single summary" itemscope itemtype="http://schema.org/Article">
     {{- /* Featured image */ -}}
     {{- with .Params.featured_image -}}
-        <div class="post-featured-image-preview">
+        <div class="featured-image-preview">
             {{- $image := $.Params.featured_image_preview | default . -}}
-            {{- partial "image" $image -}}
+            {{- partial "hook/image" $image -}}
         </div>
     {{- end -}}
 
     {{- /* Title */ -}}
-    <h1 class="post-title post-list-title" itemprop="name headline">
+    <h1 class="single-title" itemprop="name headline">
         <a href="{{ .Permalink }}">{{ .Title }}</a>
     </h1>
 
     {{- /* Meta */ -}}
-    <div class="post-meta">
+    <div class="meta">
         {{- $author := .Params.author | default .Site.Author.name -}}
         {{- $author_link := .Params.author_link | default .Site.Author.link | default .Site.BaseURL -}}
         <a class="author" href="{{ $author_link }}" rel="author" target="_blank">
@@ -38,7 +38,7 @@
     </div>
 
     {{- /* Summary content */ -}}
-    <div class="post-content">
+    <div class="content">
         {{- if .Params.description_as_summary -}}
             <p>
                 {{- .Params.description -}}

@@ -32,8 +32,8 @@
 }
 
 @media only screen and (max-width: 960px) {
-  .navbar {
-    .navbar-container {
+  header.desktop {
+    .header-wrapper {
       margin: 0 1rem;
     }
   }
@@ -52,11 +52,11 @@
 }
 
 @media only screen and (max-width: 560px) {
-  .navbar {
+  header.desktop {
     display: none;
   }
 
-  .navbar-mobile {
+  header.mobile {
     display: block;
   }
 

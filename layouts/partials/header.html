@@ -1,12 +1,12 @@
-{{- /* Desktop navbar */ -}}
-<nav class="navbar">
-    <div class="navbar-container">
-        <div class="navbar-header animated bounceIn">
+{{- /* Desktop header */ -}}
+<header class="desktop">
+    <div class="header-wrapper">
+        <div class="header-title animated bounceIn">
             <a href="{{ .Site.BaseURL }}">
                 {{- .Site.Title -}}
             </a>
         </div>
-        <div class="navbar-menu">
+        <div class="menu">
             {{- $currentPage := . }}
             {{- range .Site.Menus.main -}}
                 <a class="menu-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) | or (eq $currentPage.RelPermalink .URL) }} active{{ end }}" href="{{ .URL | absLangURL }}" title="{{ .Title }}">
@@ -16,13 +16,13 @@
             <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="{{ T "switchTheme" }}"></i></a>
         </div>
     </div>
-</nav>
+</header>
 
-{{- /* Mobile navbar */ -}}
-<nav class="navbar-mobile">
-    <div class="navbar-container">
-        <div class="navbar-header">
-            <div class="navbar-header-title animated bounceIn">
+{{- /* Mobile header */ -}}
+<header class="mobile">
+    <div class="header-wrapper">
+        <div class="header-container">
+            <div class="header-title animated bounceIn">
                 <a href="{{ .Site.BaseURL }}">
                     {{- .Site.Title -}}
                 </a>
@@ -31,7 +31,7 @@
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="navbar-menu" id="mobile-menu">
+        <div class="menu" id="menu-mobile">
             {{- $currentPage := . -}}
             {{- range .Site.Menus.main -}}
                 <a class="menu-item" href="{{ .URL | absLangURL }}" title="{{ .Title }}">
@@ -41,4 +41,4 @@
             <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="{{ T "switchTheme" }}"></i></a>
         </div>
     </div>
-</nav>
+</header>

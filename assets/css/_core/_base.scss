@@ -30,6 +30,7 @@ body {
   line-height: 1.5rem;
   background-color: $global-background-color;
   color: $global-font-color;
+  overflow-wrap: break-word;
 
   &::before {
     content: "";

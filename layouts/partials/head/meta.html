@@ -1,0 +1,21 @@
+{{- with .Site.Params.google_verification -}}
+    <meta name="google-site-verification" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.bing_verification -}}
+    <meta name="msvalidate.01" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.yandex_verification -}}
+    <meta name="yandex-verification" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.pinterest_verification -}}
+    <meta name="p:domain_verify" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.baidu_verification -}}
+    <meta name="baidu-site-verification" content="{{ . }}" />
+{{- end -}}
+
+{{- template "_internal/opengraph.html" . -}}
+{{- template "_internal/twitter_cards.html" . -}}
+
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#da532c">
