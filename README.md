@@ -91,7 +91,6 @@ I hope you will LoveIt ❤️!
 * Kinds of admonitions shortcode support
 * Custom align and float style shortcodes support
 * Animated typing support by [TypeIt](https://typeitjs.com/)
-* Animated coutdown support by [jQuery.countdown](https://github.com/hilios/jQuery.countdown)
 * Dynamic to top support by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * ...
 
@@ -200,8 +199,6 @@ Thanks to the authors of following resources included in the theme:
 * [lazysizes](https://github.com/aFarkas/lazysizes)
 * [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * [TypeIt](https://typeitjs.com/)
-* [jQuery](https://github.com/jquery/jquery)
-* [jQuery.countdown](https://github.com/hilios/jQuery.countdown)
 * [Katex](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)
 * [APlayer](https://github.com/MoePlayer/APlayer)
