@@ -52,7 +52,6 @@ draft: false
 * :(far fa-bell): 支持多种提醒样式的 shortcode
 * :(fas fa-align-left): 支持自定义对齐和浮动方式的 shortcode
 * :(fas fa-i-cursor): 支持基于 [TypeIt](https://typeitjs.com/) 的打字动画
-* :(far fa-clock): 支持基于 [jQuery.countdown](https://github.com/hilios/jQuery.countdown) 的倒计时动画
 * :(fas fa-arrow-up): 支持基于 [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) 的回到顶部动画
 * ...
 
@@ -69,8 +68,6 @@ LoveIt 根据 MIT 许可协议授权。
 * [lazysizes](https://github.com/aFarkas/lazysizes)
 * [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * [TypeIt](https://typeitjs.com/)
-* [jQuery](https://github.com/jquery/jquery)
-* [jQuery.countdown](https://github.com/hilios/jQuery.countdown)
 * [Katex](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)
 * [APlayer](https://github.com/MoePlayer/APlayer)

@@ -26,11 +26,6 @@
 {{- $content = replaceRE $REin $REout $content -}}
 
 {{- /* Dummy target */ -}}
-{{- $REin = `<(h[23456]) (id=".+?")>` -}}
-{{- $REout = `<a class="post-dummy-target" $2></a><$1>` -}}
-{{- $content = replaceRE $REin $REout $content -}}
-
-{{- /* Dummy target */ -}}
 {{- $REin = `<(.+) (id="fnref:.+?")>` -}}
 {{- $REout = `<a class="post-dummy-target" $2></a><$1>` -}}
 {{- $content = replaceRE $REin $REout $content -}}

@@ -1,15 +1,18 @@
-header.desktop {
-  display: block;
+header {
   position: fixed;
   width: 100%;
-  z-index: 100;
-  height: 4rem;
-  line-height: 4rem;
+  height: $header-height;
+  line-height: $header-height;
   background-color: $header-background-color;
 
   .dark-theme & {
     background-color: $header-background-color-dark;
   }
+}
+
+header.desktop {
+  display: block;
+  z-index: 100;
 
   .header-wrapper {
     width: auto;
@@ -44,17 +47,12 @@ header.desktop {
 
 header.mobile {
   display: none;
-  position: fixed;
-  width: 100%;
   z-index: 100;
   transition: all 0.3s ease 0s;
 
   .header-wrapper {
     padding: 0;
     margin: 0;
-    height: 4rem;
-    line-height: 4rem;
-    background: $global-background-color;
 
     .header-container {
       display: flex;
@@ -82,9 +80,9 @@ header.mobile {
           -webkit-border-radius: 3px;
           -moz-border-radius: 3px;
           border-radius: 3px;
-          -webkit-transition: .2s margin .2s, .2s transform;
-          -moz-transition: .2s margin .2s, .2s transform;
-          transition: .2s margin .2s, .2s transform;
+          -webkit-transition: .1s margin .1s, .1s transform;
+          -moz-transition: .1s margin .1s, .1s transform;
+          transition: .1s margin .1s, .1s transform;
 
           .dark-theme & {
             background: $global-font-color-dark;
@@ -101,9 +99,9 @@ header.mobile {
 
         &.active {
           span {
-            -webkit-transition: .2s margin, .2s transform .2s;
-            -moz-transition: .2s margin, .2s transform .2s;
-            transition: .2s margin, .2s transform .2s;
+            -webkit-transition: .1s margin, .1s transform .1s;
+            -moz-transition: .1s margin, .1s transform .1s;
+            transition: .1s margin, .1s transform .1s;
           }
 
           span:nth-child(1) {
@@ -147,10 +145,6 @@ header.mobile {
         background: $global-background-color-dark;
         border-top: 2px solid $global-font-color-dark;
       }
-    }
-
-    .dark-theme & {
-      background: $global-background-color-dark;
     }
   }
 }

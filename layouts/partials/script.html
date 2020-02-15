@@ -5,13 +5,6 @@
     {{- template "_internal/google_analytics_async.html" . -}}
 {{- end -}}
 
-{{- /* jQuery https://github.com/jquery/jquery */ -}}
-{{- with $CDN.jquery_js -}}
-    {{- slice . | $.Scratch.Add "scriptCDN" -}}
-{{- else -}}
-    {{- slice "js/lib/jquery/jquery.slim.min.js" | .Scratch.Add "scriptLocal" -}}
-{{- end -}}
-
 {{- /* lazysizes https://github.com/aFarkas/lazysizes */ -}}
 {{- with $CDN.lazysizes_js -}}
     {{- slice . | $.Scratch.Add "scriptCDN" -}}
@@ -131,18 +124,6 @@
     {{- else -}}
         {{- slice "js/lib/meting/Meting.min.js" | .Scratch.Add "scriptLocal" -}}
     {{- end -}}
-{{- end -}}
-
-{{- /* jQuery.countdown https://github.com/hilios/jQuery.countdown */ -}}
-{{- with .Scratch.Get "countdownMap" -}}
-    {{- with $CDN.jquery_countdown_js -}}
-        {{- slice . | $.Scratch.Add "scriptCDN" -}}
-    {{- else -}}
-        {{- slice "js/lib/jquery-countdown/jquery.countdown.min.js" | $.Scratch.Add "scriptLocal" -}}
-    {{- end -}}
-    <script>
-        window.countdownMap = {{ jsonify . | safeJS }};
-    </script>
 {{- end -}}
 
 {{- /* dev feature */ -}}
