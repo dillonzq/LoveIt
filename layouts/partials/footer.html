@@ -8,7 +8,7 @@
         <div class="copyright-line">
             {{- /* Copyright year */ -}}
             <i class="far fa-copyright fa-fw"></i>
-            {{- with .Site.Params.since -}}
+            {{- with .Site.Params.footer.since -}}
                 <span itemprop="copyrightYear">
                     {{- if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year -}}
                 </span>
@@ -22,12 +22,12 @@
             {{- end -}}
 
             {{- /* License */ -}}
-            {{- with .Site.Params.license -}}
+            {{- with .Site.Params.footer.license -}}
                 &nbsp;|&nbsp;<span class="license">{{ . | safeHTML }}</span>
             {{- end -}}
 
             {{- /* ICP */ -}}
-            {{- with .Site.Params.icp -}}
+            {{- with .Site.Params.footer.icp -}}
                 <span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
                 <span class="icp">{{ . | safeHTML }}</span>
             {{- end -}}

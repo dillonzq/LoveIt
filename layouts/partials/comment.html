@@ -1,8 +1,8 @@
-{{- if .Scratch.Get "production" | and .IsPage | and (ne .Params.comment false) -}}
+{{- if .Scratch.Get "production" | and .IsPage | and (ne .Site.Params.comment.enable false) | and (ne .Params.comment false) -}}
     {{- $CDN := .Scratch.Get "CDN" -}}
 
     {{- /* Disqus Comment System */ -}}
-    {{- with .Site.Params.disqus.shortname -}}
+    {{- with .Site.Params.comment.disqus.shortname -}}
         <div id="disqus_thread"></div>
         {{- $script := printf `<script src="https://%s.disqus.com/embed.js"></script>` . -}}
         {{- slice $script | $.Scratch.Add "scriptCDN" -}}
@@ -12,7 +12,8 @@
     {{- end -}}
 
     {{- /* Gitalk Comment System */ -}}
-    {{- if .Site.Params.gitalk.owner -}}
+    {{- if .Site.Params.comment.gitalk.owner -}}
+        {{- $gitalk := .Site.Params.comment.gitalk -}}
         <div id="gitalk"></div>
         {{- with $CDN.gitalk_css -}}
             {{- slice . | $.Scratch.Add "linkCDN" -}}
@@ -29,11 +30,11 @@
                 var gitalk = new Gitalk({
                     id: '{{ .Date }}',
                     title: '{{ .Title }}',
-                    clientID: '{{ .Site.Params.gitalk.clientId }}',
-                    clientSecret: '{{ .Site.Params.gitalk.clientSecret }}',
-                    repo: '{{ .Site.Params.gitalk.repo }}',
-                    owner: '{{ .Site.Params.gitalk.owner }}',
-                    admin: ['{{ .Site.Params.gitalk.owner }}'],
+                    clientID: '{{ $gitalk.clientId }}',
+                    clientSecret: '{{ $gitalk.clientSecret }}',
+                    repo: '{{ $gitalk.repo }}',
+                    owner: '{{ $gitalk.owner }}',
+                    admin: ['{{ $gitalk.owner }}'],
                     body: decodeURI(location.href),
                 });
                 gitalk.render('gitalk');
@@ -45,7 +46,8 @@
     {{- end -}}
 
     {{- /* Valine Comment System */ -}}
-    {{- if .Site.Params.valine.enable -}}
+    {{- if .Site.Params.comment.valine.enable -}}
+        {{- $valine := .Site.Params.comment.valine -}}
         <div id="valine"></div>
         {{- slice "css/lib/valine/dark.scss" | .Scratch.Add "linkLocal" -}}
         {{- with $CDN.valine_js -}}
@@ -57,31 +59,31 @@
             document.addEventListener("DOMContentLoaded", function(event) {
                 new Valine({
                     el: '#valine',
-                    appId: '{{ .Site.Params.valine.appId }}',
-                    appKey: '{{ .Site.Params.valine.appKey }}',
-                    {{- with .Site.Params.valine.placeholder -}}
+                    appId: '{{ $valine.appId }}',
+                    appKey: '{{ $valine.appKey }}',
+                    {{- with $valine.placeholder -}}
                         placeholder: '{{ . }}',
                     {{- end -}}
-                    {{- if .Site.Params.valine.notify -}}
+                    {{- if $valine.notify -}}
                         notify: true,
                     {{- end -}}
-                    {{- if .Site.Params.valine.verify -}}
+                    {{- if $valine.verify -}}
                         verify: true,
                     {{- end -}}
-                    {{- with .Site.Params.valine.avatar -}}
+                    {{- with $valine.avatar -}}
                         avatar: '{{ . }}',
                     {{- end -}}
-                    {{- with .Site.Params.valine.meta -}}
+                    {{- with $valine.meta -}}
                         meta: {{ . | safeJS }},
                     {{- end -}}
-                    {{- with .Site.Params.valine.pageSize -}}
+                    {{- with $valine.pageSize -}}
                         pageSize: {{ . | safeJS }},
                     {{- end -}}
                     lang: '{{ T "valineLang" }}',
-                    {{- if .Site.Params.valine.visitor -}}
+                    {{- if $valine.visitor -}}
                         visitor: true,
                     {{- end -}}
-                    {{- if .Site.Params.valine.recordIP -}}
+                    {{- if $valine.recordIP -}}
                         recordIP: true,
                     {{- end -}}
                 });
@@ -93,16 +95,17 @@
     {{- end -}}
 
     {{- /* Facebook Comment System */ -}}
-    {{- if .Site.Params.facebook.enable -}}
+    {{- if .Site.Params.comment.facebook.enable -}}
+        {{- $facebook := .Site.Params.comment.facebook -}}
         <div id="fb-root"></div>
         <div
             class="fb-comments"
             data-href="{{ .Site.Params.baseURL }}{{ .Permalink | absURL }}"
-            data-width="{{ .Site.Params.facebook.width }}"
-            data-numposts="{{ .Site.Params.facebook.numPosts }}"
+            data-width="{{ $facebook.width }}"
+            data-numposts="{{ $facebook.numPosts }}"
         ></div>
         {{- $script := `<script src="https://connect.facebook.net/%s/sdk.js#xfbml=1&version=v5.0&appId=%s&autoLogAppEvents=1" crossorigin="anonymous"></script>` -}}
-        {{- $script = printf $script .Site.Params.facebook.languageCode .Site.Params.facebook.appId -}}
+        {{- $script = printf $script $facebook.languageCode $facebook.appId -}}
         {{- slice $script | .Scratch.Add "scriptCDN" -}}
         <noscript>
             Please enable JavaScript to view the <a href="https://developers.facebook.com/docs/plugins/comments/">comments powered by Facebook.</a>
