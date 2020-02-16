@@ -13,13 +13,12 @@ jobs:
       - checkout
       - run: git submodule sync
       - run: git submodule update --init
-      - run: cd << parameters.example-site-path >>
       - run:
-          name: "Run Hugo"
-          command: HUGO_ENV=production hugo --themesDir << parameters.theme-path >> -v --minify --gc
-      - run:
-          name: "Test Website"
-          command: htmlproofer public --allow-hash-href --empty-alt-ignore --disable-external
+          command: |
+            cd << parameters.example-site-path >>
+            pwd
+            HUGO_ENV=production hugo --themesDir << parameters.theme-path >> -v --minify --gc
+            htmlproofer public --allow-hash-href --empty-alt-ignore --disable-external
 workflows:
   build-check-exampleSite:
     jobs:
