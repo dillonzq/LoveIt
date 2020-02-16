@@ -54,16 +54,15 @@
       }
     }
 
-    .toc-link.active {
+    a.active {
       font-weight: bold;
-      color: $single-link-hover-color;
+      color: $single-link-color;
 
       .dark-theme & {
-        color: $single-link-hover-color-dark;
+        color: $single-link-color-dark;
       }
 
       &::before {
-        font-weight: bolder;
         color: $single-link-hover-color;
 
         .dark-theme & {
