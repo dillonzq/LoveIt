@@ -25,14 +25,4 @@
 {{- $REout = `↩︎` -}}
 {{- $content = replaceRE $REin $REout $content -}}
 
-{{- /* Dummy target */ -}}
-{{- $REin = `<(.+) (id="fnref:.+?")>` -}}
-{{- $REout = `<a class="post-dummy-target" $2></a><$1>` -}}
-{{- $content = replaceRE $REin $REout $content -}}
-
-{{- /* Dummy target */ -}}
-{{- $REin = `<li (id="fn:.+?")(.*?)>\s?<p>` -}}
-{{- $REout = `<li $2><p><a class="post-dummy-target" $1></a>` -}}
-{{- $content = replaceRE $REin $REout $content -}}
-
 {{- return $content -}}

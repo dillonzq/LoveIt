@@ -54,13 +54,6 @@
   @import "../_partial/_single/toc";
 
   .content {
-    .post-dummy-target:target {
-      display: inline-block;
-      position: relative;
-      top: -5.6rem;
-      visibility: hidden;
-    }
-
     h1,
     h2,
     h3,
@@ -73,17 +66,6 @@
       .dark-theme & {
         font-weight: bolder;
       }
-    }
-
-    h2::before,
-    h3::before,
-    h4::before,
-    h5::before,
-    h6::before {
-      display: block;
-      content: "";
-      height: 1.2 * $header-height;
-      margin: -1.2 * $header-height 0 0;
     }
 
     h2 > a:first-child::before {

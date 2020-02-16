@@ -9,10 +9,6 @@
     };
 
     class Theme {
-        initSmoothScroll() {
-            new SmoothScroll('[smooth-scroll]', {speed: 300, speedAsDuration: true});
-        }
-
         initMobileMenu() {
             document.getElementById('menu-toggle').onclick = () => {
                 document.getElementById('menu-toggle').classList.toggle('active');
@@ -34,7 +30,7 @@
         initDynamicToTop() {
             const min = 300;
             const toTopButton = document.getElementById('dynamic-to-top');
-            window.onscroll = () => {
+            document.addEventListener('scroll', () => {
                 const scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
                 if (typeof document.body.style.maxHeight === 'undefined') {
                     toTopButton.style.position = 'absolute';
@@ -69,7 +65,7 @@
                         }
                     })(document.getElementById('dynamic-to-top'));
                 }
-            };
+            }, false);
         }
 
         initHighlight() {
@@ -104,7 +100,20 @@
             });
         }
 
+        initHeaderLink() {
+            for (let num = 1; num <= 6; num++) {
+                forEachElement(document.querySelectorAll('.content > h' + num), (header) => {
+                    header.classList.add('headerLink');
+                    header.innerHTML = `<a href="#${header.id}"></a>${header.innerHTML}`;
+                });
+            }
+        }
+
         _refactorToc(toc) {
+            forEachElement(toc.querySelectorAll('a:first-child'), (link) => {
+                link.classList.add('toc-link');
+            });
+
             // when headings do not start with `h1`
             const oldTocList = toc.children[0];
             let newTocList = oldTocList;
@@ -116,43 +125,30 @@
             if (newTocList !== oldTocList) toc.replaceChild(newTocList, oldTocList);
         }
 
-        _linkToc() {
-            forEachElement(document.querySelectorAll('#TableOfContents a:first-child'), (link) => {
-                link.classList.add('toc-link');
-            });
-            for (let num = 1; num <= 6; num++) {
-                forEachElement(document.querySelectorAll('.content > h' + num), (header) => {
-                    header.classList.add('headerLink');
-                    header.innerHTML = `<a href="#${header.id}"></a>${header.innerHTML}`;
-                });
-            }
-        }
-
-        _initTocState() {
-            const toc = document.getElementById('post-toc');
-            if (toc && window.getComputedStyle(toc, null).display !== 'none') {
-                const HEADER_SPACING = 80;
-                const minTop = toc.offsetTop;
-                const minScrollTop = minTop - HEADER_SPACING;
+        _initTocState(tocContainer) {
+            if (window.getComputedStyle(tocContainer, null).display !== 'none') {
+                const TOP_SPACING = 80;
+                const minTop = tocContainer.offsetTop;
+                const minScrollTop = minTop - TOP_SPACING;
                 const footerTop = document.getElementById('post-footer').offsetTop;
-                const toclinks = toc.getElementsByClassName('toc-link');
+                const toclinks = tocContainer.getElementsByClassName('toc-link');
                 const headerLinks = document.getElementsByClassName('headerLink') || [];
-                const tocLinkLis = toc.querySelectorAll('.post-toc-content li');
-                const INDEX_SPACING = 10;
+                const tocLinkLis = tocContainer.querySelectorAll('.post-toc-content li');
+                const INDEX_SPACING = document.getElementById('header-desktop').getBoundingClientRect().height + 5;
 
                 const changeTocState = () => {
                     const scrollTop = document.documentElement.scrollTop;
-                    const maxTop = footerTop - toc.getBoundingClientRect().height;
-                    const maxScrollTop = maxTop - HEADER_SPACING;
+                    const maxTop = footerTop - tocContainer.getBoundingClientRect().height;
+                    const maxScrollTop = maxTop - TOP_SPACING;
                     if (scrollTop < minScrollTop) {
-                        toc.style.position = 'absolute';
-                        toc.style.top = `${minTop}px`;
+                        tocContainer.style.position = 'absolute';
+                        tocContainer.style.top = `${minTop}px`;
                     } else if (scrollTop > maxScrollTop) {
-                        toc.style.position = 'absolute';
-                        toc.style.top = `${maxTop}px`;
+                        tocContainer.style.position = 'absolute';
+                        tocContainer.style.top = `${maxTop}px`;
                     } else {
-                        toc.style.position = 'fixed';
-                        toc.style.top = `${HEADER_SPACING}px`;
+                        tocContainer.style.position = 'fixed';
+                        tocContainer.style.top = `${TOP_SPACING}px`;
                     }
 
                     forEachElement(toclinks, (link) => { link.classList.remove('active'); });
@@ -179,7 +175,7 @@
                 changeTocState();
 
                 if (!this._initTocOnce) {
-                    window.onscroll = changeTocState;
+                    document.addEventListener('scroll', changeTocState, false);
                     this._initTocOnce = true;
                 }
             }
@@ -193,10 +189,11 @@
                     tocContainer.parentElement.removeChild(tocContainer);
                 } else {
                     this._refactorToc(toc);
-                    this._linkToc();
-                    this._initTocState();
+                    this._initTocState(tocContainer);
                     window.addEventListener("resize", () => {
-                        window.setTimeout(this._initTocState, 0);
+                        window.setTimeout(() => {
+                            this._initTocState(tocContainer);
+                        }, 0);
                     }, false);
                 }
             }
@@ -261,17 +258,22 @@
             }
         }
 
+        initSmoothScroll() {
+            new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true, header: '#header-desktop'});
+        }
+
         init() {
-            this.initSmoothScroll();
             this.initMobileMenu();
             this.initSwitchTheme();
             this.initDynamicToTop();
             this.initHighlight();
             this.initTable();
+            this.initHeaderLink();
             this.initMermaid();
             this.initEcharts();
             this.initTypeit();
             this.initToc();
+            this.initSmoothScroll();
         }
     }
 
