@@ -54,13 +54,6 @@
   @import "../_partial/_single/toc";
 
   .content {
-    .post-dummy-target:target {
-      display: inline-block;
-      position: relative;
-      top: -5.6rem;
-      visibility: hidden;
-    }
-
     h1,
     h2,
     h3,
@@ -68,22 +61,14 @@
     h5,
     h6 {
       font-weight: bold;
+      margin: 1.2rem 0;
 
       .dark-theme & {
         font-weight: bolder;
       }
     }
 
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      padding-top: .8rem;
-      padding-bottom: .3rem;
-    }
-
-    h2::before {
+    h2 > a:first-child::before {
       content: "#";
       margin-right: .3125rem;
       color: $single-link-color;
@@ -93,16 +78,18 @@
       }
     }
 
-    h3::before,
-    h4::before,
-    h5::before,
-    h6::before {
-      content: "|";
-      margin-right: .3125rem;
-      color: $single-link-color;
+    h3,
+    h4,
+    h5,
+    h6 {
+      & > a:first-child::before {
+        content: "|";
+        margin-right: .3125rem;
+        color: $single-link-color;
 
-      .dark-theme & {
-        color: $single-link-color-dark;
+        .dark-theme & {
+          color: $single-link-color-dark;
+        }
       }
     }
 

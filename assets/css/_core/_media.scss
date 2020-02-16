@@ -32,7 +32,7 @@
 }
 
 @media only screen and (max-width: 960px) {
-  header.desktop {
+  #header-desktop {
     .header-wrapper {
       margin: 0 1rem;
     }
@@ -52,16 +52,17 @@
 }
 
 @media only screen and (max-width: 560px) {
-  header.desktop {
+  #header-desktop {
     display: none;
   }
 
-  header.mobile {
+  #header-mobile {
     display: block;
   }
 
   .page {
     max-width: 100%;
+    padding-top: $page-padding-top-mobile;
 
     .categories-card {
       .card-item {
@@ -79,9 +80,5 @@
         display: block;
       }
     }
-  }
-
-  .dynamic-to-top {
-    display: none !important;
   }
 }

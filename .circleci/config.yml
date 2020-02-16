@@ -1,0 +1,32 @@
+version: 2.1
+jobs:
+  build-check:
+    parameters:
+      example-site-path:
+        type: string
+      theme-path:
+        type: string
+    docker:
+      - image: cibuilds/hugo:0.64
+    working_directory: ~/LoveIt
+    steps:
+      - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
+      - run:
+          command: |
+            cd << parameters.example-site-path >>
+            pwd
+            HUGO_ENV=production hugo --themesDir << parameters.theme-path >> -v --minify --gc
+            htmlproofer public --allow-hash-href --empty-alt-ignore --disable-external
+workflows:
+  build-check-exampleSite:
+    jobs:
+      - build-check:
+          example-site-path: exampleSite
+          theme-path: ../..
+  build-check-exampleSite-zh:
+    jobs:
+      - build-check:
+          example-site-path: exampleSite/zh
+          theme-path: ../../..

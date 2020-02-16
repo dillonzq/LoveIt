@@ -112,6 +112,10 @@ dateFormatToUse = "2006-01-02"
   keywords = ["Theme", "Hugo"]
   # 网站默认主题 ("light", "dark", "auto")
   defaultTheme = "auto"
+  # 桌面端导航栏模式 ("fixed", "normal", "auto")
+  desktopHeaderMode = "fixed"
+  # 移动端导航栏模式 ("fixed", "normal", "auto")
+  mobileHeaderMode = "auto"
 
   # 主页信息设置
   ## 主页模式 ("post", "other")
@@ -167,7 +171,6 @@ dateFormatToUse = "2006-01-02"
     gitalk_css = ''
     gitalk_js = ''
     valine_js = ''
-    jquery_js = ''
     lazysizes_js = ''
     smooth_scroll_js = ''
     katex_css = ''
@@ -180,7 +183,6 @@ dateFormatToUse = "2006-01-02"
     echarts_js = ''
     echarts_macarons_js = ''
     typeit_js = ''
-    jquery_countdown_js = ''
     aplayer_css = ''
     aplayer_js = ''
     meting_js = ''
