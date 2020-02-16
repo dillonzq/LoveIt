@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build-check:
     parameters:
@@ -21,7 +21,6 @@ jobs:
           name: "Test Website"
           command: htmlproofer public --allow-hash-href --empty-alt-ignore --disable-external
 workflows:
-  version: 2
   build-check-exampleSite:
     jobs:
       - build-check:
