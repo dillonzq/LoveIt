@@ -242,38 +242,38 @@ dateFormatToUse = "2006-01-02"
   # 数学公式 (KaTeX https://katex.org/)
   [params.math]
     enable = true
-    block_left_delimiter = ""
-    block_right_delimiter = ""
-    inline_left_delimiter = "$"
-    inline_right_delimiter = "$"
+    blockLeftDelimiter = ""
+    blockRightDelimiter = ""
+    inlineLeftDelimiter = "$"
+    inlineRightDelimiter = "$"
     # KaTeX 插件 copy_tex
-    copy_tex = true
+    copyTex = true
     # KaTeX 插件 mhchem
     mhchem = true
 
   # CSS 和 JS 文件的 CDN 设置
   [params.cdn]
     ## 例如 '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
-    fontawesome_free_css = ''
-    animate_css = ''
-    gitalk_css = ''
-    gitalk_js = ''
-    valine_js = ''
-    lazysizes_js = ''
-    smooth_scroll_js = ''
-    katex_css = ''
-    katex_js = ''
-    katex_auto_render_js = ''
-    katex_copy_tex_css = ''
-    katex_copy_tex_js = ''
-    katex_mhchem_js = ''
-    mermaid_js = ''
-    echarts_js = ''
-    echarts_macarons_js = ''
-    typeit_js = ''
-    aplayer_css = ''
-    aplayer_js = ''
-    meting_js = ''
+    fontawesomeFreeCSS = ''
+    animateCSS = ''
+    gitalkCSS = ''
+    gitalkJS = ''
+    valineJS = ''
+    lazysizesJS = ''
+    smoothScrollJS = ''
+    katexCSS = ''
+    katexJS = ''
+    katexAutoRenderJS = ''
+    katexCopyTexCSS = ''
+    katexCopyTexJS = ''
+    katexMhchemJS = ''
+    mermaidJS = ''
+    echartsJS = ''
+    echartsMacaronsJS = ''
+    typeitJS = ''
+    aplayerCSS = ''
+    aplayerJS = ''
+    metingJS = ''
 
   # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]

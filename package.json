@@ -18,8 +18,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run build && npm run copy",
-      "pre-push": "npm run build && npm run copy"
+      "pre-commit": "npm run build && npm run copy && git add .",
+      "pre-push": "npm run build && npm run copy && git add ."
     }
   },
   "repository": {

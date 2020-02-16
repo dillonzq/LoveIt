@@ -15,12 +15,12 @@
     {{- if .Site.Params.comment.gitalk.owner -}}
         {{- $gitalk := .Site.Params.comment.gitalk -}}
         <div id="gitalk"></div>
-        {{- with $CDN.gitalk_css -}}
+        {{- with $CDN.gitalkCSS -}}
             {{- slice . | $.Scratch.Add "linkCDN" -}}
         {{- else -}}
             {{- slice "css/lib/gitalk/gitalk.css" | .Scratch.Add "linkLocal" -}}
         {{- end -}}
-        {{- with $CDN.gitalk_js -}}
+        {{- with $CDN.gitalkJS -}}
             {{- slice . | $.Scratch.Add "scriptCDN" -}}
         {{- else -}}
             {{- slice "css/lib/gitalk/gitalk.min.js" | .Scratch.Add "scriptLocal" -}}
@@ -50,7 +50,7 @@
         {{- $valine := .Site.Params.comment.valine -}}
         <div id="valine"></div>
         {{- slice "css/lib/valine/dark.scss" | .Scratch.Add "linkLocal" -}}
-        {{- with $CDN.valine_js -}}
+        {{- with $CDN.valineJS -}}
             {{- slice . | $.Scratch.Add "scriptCDN" -}}
         {{- else -}}
             {{- slice "js/lib/valine/Valine.min.js" | .Scratch.Add "scriptLocal" -}}
