@@ -112,6 +112,10 @@ dateFormatToUse = "2006-01-02"
   keywords = ["Theme", "Hugo"]
   # site default theme ("light", "dark", "auto")
   defaultTheme = "auto"
+  # desktop header mode ("fixed", "normal", "auto")
+  desktopHeaderMode = "fixed"
+  # mobile header mode ("fixed", "normal", "auto")
+  mobileHeaderMode = "auto"
 
   # Home Page Info
   ##home mode ("post", "other")

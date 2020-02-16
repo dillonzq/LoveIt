@@ -1,14 +1,26 @@
 (() => {
     'use strict';
 
-    const forEachElement = (elements, handler) => {
-        elements = elements || [];
-        for (let i = 0; i < elements.length; i++) {
-            handler(elements[i]);
+    class Util {
+        forEach(elements, handler) {
+            elements = elements || [];
+            for (let i = 0; i < elements.length; i++) {
+                handler(elements[i]);
+            }
         }
-    };
+
+        getScrollTop() {
+            return (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+        }
+    }
 
     class Theme {
+        constructor() {
+            this.util = new Util();
+            this.scrollTop = 0;
+            this.scrollEvents = [];
+        }
+
         initMobileMenu() {
             document.getElementById('menu-toggle').onclick = () => {
                 document.getElementById('menu-toggle').classList.toggle('active');
@@ -17,7 +29,7 @@
         }
 
         initSwitchTheme() {
-            forEachElement(document.getElementsByClassName('theme-switch'), (button) => {
+            this.util.forEach(document.getElementsByClassName('theme-switch'), (button) => {
                 button.onclick = () => {
                     document.body.classList.toggle('dark-theme');
                     window.isDark = !window.isDark;
@@ -27,55 +39,14 @@
             });
         }
 
-        initDynamicToTop() {
-            const min = 300;
-            const toTopButton = document.getElementById('dynamic-to-top');
-            document.addEventListener('scroll', () => {
-                const scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
-                if (typeof document.body.style.maxHeight === 'undefined') {
-                    toTopButton.style.position = 'absolute';
-                    toTopButton.style.top = scrollTop + window.document.documentElement.clientHeight - 20;
-                }
-                if (scrollTop > min) {
-                    (function fadeIn(el, display){
-                        display = display || 'block';
-                        if (el.style.display !== display) {
-                            el.style.opacity = 0;
-                            el.style.display = display;
-                            (function fade() {
-                                let val = parseFloat(el.style.opacity);
-                                if ((val += .1) <= 1) {
-                                    el.style.opacity = val;
-                                    requestAnimationFrame(fade);
-                                }
-                            })();
-                        }
-                    })(document.getElementById('dynamic-to-top'));
-                } else {
-                    (function fadeOut(el){
-                        if (el.style.display !== 'none') {
-                            el.style.opacity = 1;
-                            (function fade() {
-                                if ((el.style.opacity -= .1) < 0) {
-                                    el.style.display = 'none';
-                                } else {
-                                    requestAnimationFrame(fade);
-                                }
-                            })();
-                        }
-                    })(document.getElementById('dynamic-to-top'));
-                }
-            }, false);
-        }
-
         initHighlight() {
-            forEachElement(document.querySelectorAll('.highlight > .chroma'), (block) => {
+            this.util.forEach(document.querySelectorAll('.highlight > .chroma'), (block) => {
                 const codes = block.querySelectorAll('pre.chroma > code');
                 const code = codes[codes.length - 1];
                 const lang = code ? code.className.toLowerCase() : '';
                 block.className += ' ' + lang;
             });
-            forEachElement(document.querySelectorAll('.highlight > pre.chroma'), (block) => {
+            this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), (block) => {
                 const chroma = document.createElement('div');
                 chroma.className = block.className;
                 const table = document.createElement('table');
@@ -92,7 +63,7 @@
         }
 
         initTable() {
-            forEachElement(document.querySelectorAll('.content table'), (table) => {
+            this.util.forEach(document.querySelectorAll('.content table'), (table) => {
                 const wrapper = document.createElement('div');
                 wrapper.className = 'table-wrapper';
                 table.parentElement.replaceChild(wrapper, table);
@@ -102,7 +73,7 @@
 
         initHeaderLink() {
             for (let num = 1; num <= 6; num++) {
-                forEachElement(document.querySelectorAll('.content > h' + num), (header) => {
+                this.util.forEach(document.querySelectorAll('.content > h' + num), (header) => {
                     header.classList.add('headerLink');
                     header.innerHTML = `<a href="#${header.id}"></a>${header.innerHTML}`;
                 });
@@ -110,7 +81,7 @@
         }
 
         _refactorToc(toc) {
-            forEachElement(toc.querySelectorAll('a:first-child'), (link) => {
+            this.util.forEach(toc.querySelectorAll('a:first-child'), (link) => {
                 link.classList.add('toc-link');
             });
 
@@ -127,19 +98,21 @@
 
         _initTocState(tocContainer) {
             if (window.getComputedStyle(tocContainer, null).display !== 'none') {
-                const TOP_SPACING = 80;
+                const fixed = window.desktopHeaderMode !== 'normal';
+                const fixedHeight = document.getElementById('header-desktop').getBoundingClientRect().height;
+                const TOP_SPACING = 20 + (fixed ? fixedHeight : 0);
                 const minTop = tocContainer.offsetTop;
-                const minScrollTop = minTop - TOP_SPACING;
+                const minScrollTop = minTop - TOP_SPACING + (fixed ? 0 : fixedHeight);
                 const footerTop = document.getElementById('post-footer').offsetTop;
                 const toclinks = tocContainer.getElementsByClassName('toc-link');
                 const headerLinks = document.getElementsByClassName('headerLink') || [];
                 const tocLinkLis = tocContainer.querySelectorAll('.post-toc-content li');
-                const INDEX_SPACING = document.getElementById('header-desktop').getBoundingClientRect().height + 5;
+                const INDEX_SPACING = 5 + (fixed ? fixedHeight : 0);
 
                 const changeTocState = () => {
-                    const scrollTop = document.documentElement.scrollTop;
+                    const scrollTop = this.util.getScrollTop();
                     const maxTop = footerTop - tocContainer.getBoundingClientRect().height;
-                    const maxScrollTop = maxTop - TOP_SPACING;
+                    const maxScrollTop = maxTop - TOP_SPACING + (fixed ? 0 : fixedHeight);
                     if (scrollTop < minScrollTop) {
                         tocContainer.style.position = 'absolute';
                         tocContainer.style.top = `${minTop}px`;
@@ -151,8 +124,8 @@
                         tocContainer.style.top = `${TOP_SPACING}px`;
                     }
 
-                    forEachElement(toclinks, (link) => { link.classList.remove('active'); });
-                    forEachElement(tocLinkLis, (link) => { link.classList.remove('has-active'); });
+                    this.util.forEach(toclinks, (link) => { link.classList.remove('active'); });
+                    this.util.forEach(tocLinkLis, (link) => { link.classList.remove('has-active'); });
                     let activeTocIndex = headerLinks.length - 1;
                     for (let i = 0; i < headerLinks.length - 1; i++) {
                         const thisTop = headerLinks[i].getBoundingClientRect().top;
@@ -175,7 +148,7 @@
                 changeTocState();
 
                 if (!this._initTocOnce) {
-                    document.addEventListener('scroll', changeTocState, false);
+                    this.scrollEvents.push(changeTocState);
                     this._initTocOnce = true;
                 }
             }
@@ -190,7 +163,7 @@
                 } else {
                     this._refactorToc(toc);
                     this._initTocState(tocContainer);
-                    window.addEventListener("resize", () => {
+                    window.addEventListener('resize', () => {
                         window.setTimeout(() => {
                             this._initTocState(tocContainer);
                         }, 0);
@@ -258,14 +231,71 @@
             }
         }
 
-        initSmoothScroll() {
-            new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true, header: '#header-desktop'});
+        initScroll() {
+            for (let i = 0; i < this.scrollEvents.length; i++) {
+                document.addEventListener('scroll', this.scrollEvents[i], false);
+            }
+            const initSmoothScroll = () => {
+                const isMobile = window.matchMedia('only screen and (max-width: 560px)').matches;
+                if ((!isMobile && window.desktopHeaderMode === 'normal')
+                 || (isMobile && window.mobileHeaderMode === 'normal')) {
+                    new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true});
+                } else {
+                    new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true, header: '#header-desktop'});
+                }
+            };
+            initSmoothScroll();
+            window.addEventListener('resize', () => {
+                window.setTimeout(() => {
+                    initSmoothScroll();
+                }, 0);
+            }, false);
+            const headers = [];
+            if (window.desktopHeaderMode === 'auto') headers.push(document.getElementById('header-desktop'));
+            if (window.mobileHeaderMode === 'auto') headers.push(document.getElementById('header-mobile'));
+            this.util.forEach(headers, (header) => {
+                header.classList.add('animated');
+                header.classList.add('faster');
+            });
+            const toTopButton = document.getElementById('dynamic-to-top');
+            document.addEventListener('scroll', () => {
+                const scrollTop = this.util.getScrollTop();
+                this.util.forEach(headers, (header) => {
+                    if (this.scrollTop < scrollTop) {
+                        if (!header.classList.contains('fadeOutUp')) {
+                            header.classList.remove('fadeInDown');
+                            header.classList.add('fadeOutUp');
+                        }
+                    } else {
+                        if (!header.classList.contains('fadeInDown')) {
+                            header.classList.remove('fadeOutUp');
+                            header.classList.add('fadeInDown');
+                        }
+                    }
+                    if (scrollTop > 600) {
+                        if (this.scrollTop < scrollTop) {
+                            if (!toTopButton.classList.contains('fadeOut')) {
+                                toTopButton.classList.remove('fadeIn');
+                                toTopButton.classList.add('fadeOut');
+                            }
+                        } else {
+                            toTopButton.style.display = 'block';
+                            if (!toTopButton.classList.contains('fadeIn')) {
+                                toTopButton.classList.remove('fadeOut');
+                                toTopButton.classList.add('fadeIn');
+                            }
+                        }
+                    } else {
+                        toTopButton.style.display = 'none';
+                    }
+                });
+                this.scrollTop = scrollTop;
+            }, false);
         }
 
         init() {
             this.initMobileMenu();
             this.initSwitchTheme();
-            this.initDynamicToTop();
             this.initHighlight();
             this.initTable();
             this.initHeaderLink();
@@ -273,7 +303,7 @@
             this.initEcharts();
             this.initTypeit();
             this.initToc();
-            this.initSmoothScroll();
+            this.initScroll();
         }
     }
 
@@ -285,6 +315,6 @@
     if (document.readyState !== 'loading') {
         themeInit();
     } else {
-        document.addEventListener('DOMContentLoaded', themeInit);
+        document.addEventListener('DOMContentLoaded', themeInit, false);
     }
 })();

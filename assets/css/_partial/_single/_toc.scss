@@ -7,7 +7,7 @@
   border-left: 1px solid $global-border-color;
   overflow-wrap: break-word;
   box-sizing: border-box;
-  top: 12rem;
+  top: $post-toc-top;
 
   .dark-theme & {
     border-left: 1px solid $global-border-color-dark;

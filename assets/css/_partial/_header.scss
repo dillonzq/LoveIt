@@ -1,8 +1,6 @@
 header {
-  position: fixed;
   width: 100%;
-  height: $header-height;
-  line-height: $header-height;
+  z-index: 100;
   background-color: $header-background-color;
 
   .dark-theme & {
@@ -12,7 +10,9 @@ header {
 
 #header-desktop {
   display: block;
-  z-index: 100;
+  position: $header-position-desktop;
+  height: $header-height-desktop;
+  line-height: $header-height-desktop;
 
   .header-wrapper {
     width: auto;
@@ -47,12 +47,14 @@ header {
 
 #header-mobile {
   display: none;
-  z-index: 100;
-  transition: all 0.3s ease 0s;
+  position: $header-position-mobile;
+  height: $header-height-mobile;
+  line-height: $header-height-mobile;
 
   .header-wrapper {
     padding: 0;
     margin: 0;
+    transition: all 0.3s ease 0s;
 
     .header-container {
       display: flex;

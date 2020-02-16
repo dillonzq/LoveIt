@@ -62,6 +62,7 @@
 
   .page {
     max-width: 100%;
+    padding-top: $page-padding-top-mobile;
 
     .categories-card {
       .card-item {
@@ -79,9 +80,5 @@
         display: block;
       }
     }
-  }
-
-  .dynamic-to-top {
-    display: none !important;
   }
 }

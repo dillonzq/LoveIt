@@ -112,6 +112,10 @@ dateFormatToUse = "2006-01-02"
   keywords = ["Theme", "Hugo"]
   # 网站默认主题 ("light", "dark", "auto")
   defaultTheme = "auto"
+  # 桌面端导航栏模式 ("fixed", "normal", "auto")
+  desktopHeaderMode = "fixed"
+  # 移动端导航栏模式 ("fixed", "normal", "auto")
+  mobileHeaderMode = "auto"
 
   # 主页信息设置
   ## 主页模式 ("post", "other")

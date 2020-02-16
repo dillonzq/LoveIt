@@ -47,7 +47,8 @@ $selection-color-dark: rgba(38, 139, 211, 0.3) !default;
 
 // ========== Header ========== //
 // Height of the header
-$header-height: 4rem !default;
+$header-height-desktop: 4rem !default;
+$header-height-mobile: 4rem !default;
 
 // Color of the header background
 $header-background-color: #fafafa !default;

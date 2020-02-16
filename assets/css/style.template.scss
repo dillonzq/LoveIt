@@ -8,6 +8,24 @@
   $home-posts: false;
 {{- end -}}
 
+{{- if eq .Site.Params.desktopHeaderMode "normal" -}}
+  $header-position-desktop: static;
+  $page-padding-top-desktop: 1rem;
+  $post-toc-top: 7rem;
+{{- else -}}
+  $header-position-desktop: fixed;
+  $page-padding-top-desktop: 6rem;
+  $post-toc-top: 12rem;
+{{- end -}}
+
+{{- if eq .Site.Params.mobileHeaderMode "normal" -}}
+  $header-position-mobile: static;
+  $page-padding-top-mobile: 1rem;
+{{- else -}}
+  $header-position-mobile: fixed;
+  $page-padding-top-mobile: 6rem;
+{{- end -}}
+
 @import "_variables";
 
 {{- if fileExists "config/css/_custom.scss" -}}
