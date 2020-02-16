@@ -151,9 +151,6 @@
     {{- end -}}
 {{- end -}}
 
-{{- /* Theme script */ -}}
-{{- slice "js/theme.js" | .Scratch.Add "scriptLocal" -}}
-
 {{- range .Scratch.Get "linkCDN" -}}
     {{- safeHTML . -}}
 {{- end -}}
@@ -178,3 +175,6 @@
     {{- end -}}
     <script src="{{ $res.RelPermalink }}"></script>
 {{- end -}}
+
+{{- /* Theme script */ -}}
+<script src=/js/theme.min.js></script>
