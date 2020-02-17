@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="{{ $res.RelPermalink }}">
 
 {{- /* Font Awesome https://fontawesome.com/ */ -}}
-{{- with $CDN.fontawesome_free_css -}}
+{{- with $CDN.fontawesomeFreeCSS -}}
     {{- . | safeHTML -}}
 {{- else -}}
     {{- $res := resources.Get "css/lib/fontawesome-free/all.min.css" -}}
@@ -43,7 +43,7 @@
 <link rel="stylesheet" href="{{ $res.RelPermalink }}">
 
 {{- /* Animate.css https://github.com/daneden/animate.css */ -}}
-{{- with $CDN.animate_css -}}
+{{- with $CDN.animateCSS -}}
     {{- . | safeHTML -}}
 {{- else -}}
     {{ $res := resources.Get "css/lib/animate/animate.min.css" -}}

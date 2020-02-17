@@ -17,7 +17,7 @@
         </div>
         <div class="post-info-line">
             <div class="post-info-md">
-                {{- if .Site.Params.linkToMarkdown -}}
+                {{- if .Site.Params.page.linkToMarkdown -}}
                     {{- with .OutputFormats.Get "markdown" -}}
                         <span>
                             <a class="link-to-markdown" href="{{ .Permalink }}" target="_blank">
@@ -28,7 +28,7 @@
                 {{- end -}}
             </div>
             <div class="post-info-share">
-                {{- if and ( .Param "socialShare" ) (gt (len (.Param "share")) 0) -}}
+                {{- if .Site.Params.page.socialShare -}}
                     <span>
                         {{- partial "post/share.html" . -}}
                     </span>

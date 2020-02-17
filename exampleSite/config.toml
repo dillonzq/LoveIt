@@ -112,84 +112,47 @@ dateFormatToUse = "2006-01-02"
   keywords = ["Theme", "Hugo"]
   # site default theme ("light", "dark", "auto")
   defaultTheme = "auto"
-  # desktop header mode ("fixed", "normal", "auto")
-  desktopHeaderMode = "fixed"
-  # mobile header mode ("fixed", "normal", "auto")
-  mobileHeaderMode = "auto"
-
-  # Home Page Info
-  ##home mode ("post", "other")
-  home_mode = "post"
-  ## special amount of posts in each home post page
-  home_paginate = 6
-  ## URL of avatar shown in home page
-  avatar = "images/avatar.png"
-  ## subtitle shown in home page
-  subtitle = "A Clean, Elegant but Advanced Hugo Theme"
-
-  # whether to show social share links in post page
-  socialShare = true
-
-  # Footer CopyRight Info
-  ## Site creation time
-  since = 2019
-  ## ICP info only in China (HTML format is allowed)
-  icp = ""
-  ## license info (HTML format is allowed)
-  license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
-
   # public git repo url to link lastmod git commit only then enableGitInfo is true
   gitRepo = ""
 
-  # mathematical formulas (KaTeX)
-  [params.math]
-    enable = true
-    block_left_delimiter = ""
-    block_right_delimiter = ""
-    inline_left_delimiter = "$"
-    inline_right_delimiter = "$"
-    # KaTeX extension copy_tex
-    copy_tex = true
-    # KaTeX extension mhchem
-    mhchem = true
+  # Header info
+  [params.header]
+    # desktop header mode ("fixed", "normal", "auto")
+    desktopMode = "fixed"
+    # mobile header mode ("fixed", "normal", "auto")
+    mobileMode = "auto"
 
-  # whether to show link to Raw Markdown content of the post
-  linkToMarkdown = true
+  # Footer Copyright Info
+  [params.footer]
+    # Site creation time
+    since = 2019
+    # ICP info only in China (HTML format is allowed)
+    icp = ""
+    # license info (HTML format is allowed)
+    license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
 
-  # site verification code for Google/Bing/Yandex/Pinterest/Baidu
-  google_verification = ""
-  bing_verification = ""
-  yandex_verification = ""
-  pinterest_verification = ""
-  baidu_verification = ""
-
-  # CSS and JS Files CDN
-  [params.cdn]
-    ## for example '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
-    fontawesome_free_css = ''
-    animate_css = ''
-    gitalk_css = ''
-    gitalk_js = ''
-    valine_js = ''
-    lazysizes_js = ''
-    smooth_scroll_js = ''
-    katex_css = ''
-    katex_js = ''
-    katex_auto_render_js = ''
-    katex_copy_tex_css = ''
-    katex_copy_tex_js = ''
-    katex_mhchem_js = ''
-    mermaid_js = ''
-    echarts_js = ''
-    echarts_macarons_js = ''
-    typeit_js = ''
-    aplayer_css = ''
-    aplayer_js = ''
-    meting_js = ''
-
-  # Gravatar Info for preferred avatar in home page
-  [params.gravatar]
-    email = ""
+  # Home Page Info
+  [params.home]
+    # Home Page Profile
+    [params.home.profile]
+      enable = true
+      # Gravatar Email for preferred avatar in home page
+      gravatarEmail = ""
+      # URL of avatar shown in home page
+      avatarURL = "images/avatar.png"
+      # subtitle shown in home page
+      subtitle = "A Clean, Elegant but Advanced Hugo Theme"
+      # whether to use typeit animation for subtitle
+      typeit = true
+      # whether to show social links
+      social = true
+    # Home Page Posts
+    [params.home.posts]
+      enable = true
+      # special amount of posts in each home posts page
+      paginate = 6
+      # default behavior when you don't set "hiddenFromHomePage" in front matter
+      defaultHiddenFromHomePage = false
 
   # Social Info in home page
   [params.social]
@@ -257,6 +220,13 @@ dateFormatToUse = "2006-01-02"
     #XMPP = "xxxx"
     #Matrix ="xxxx"
 
+  # Page config
+  [params.page]
+    # whether to show social share links in post page
+    socialShare = true
+    # whether to show link to Raw Markdown content of the post
+    linkToMarkdown = true
+
   # Social Share Links in post page
   [params.share]
     enable = true
@@ -270,6 +240,50 @@ dateFormatToUse = "2006-01-02"
     #Tumblr = true
     #VKontakte = true
     #Weibo = true
+
+  # mathematical formulas (KaTeX)
+  [params.math]
+    enable = true
+    blockLeftDelimiter = ""
+    blockRightDelimiter = ""
+    inlineLeftDelimiter = "$"
+    inlineRightDelimiter = "$"
+    # KaTeX extension copy_tex
+    copyTex = true
+    # KaTeX extension mhchem
+    mhchem = true
+
+  # CSS and JS Files CDN
+  [params.cdn]
+    ## for example '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
+    fontawesomeFreeCSS = ''
+    animateCSS = ''
+    gitalkCSS = ''
+    gitalkJS = ''
+    valineJS = ''
+    lazysizesJS = ''
+    smoothScrollJS = ''
+    katexCSS = ''
+    katexJS = ''
+    katexAutoRenderJS = ''
+    katexCopyTexCSS = ''
+    katexCopyTexJS = ''
+    katexMhchemJS = ''
+    mermaidJS = ''
+    echartsJS = ''
+    echartsMacaronsJS = ''
+    typeitJS = ''
+    aplayerCSS = ''
+    aplayerJS = ''
+    metingJS = ''
+
+  # site verification code for Google/Bing/Yandex/Pinterest/Baidu
+  [params.verification]
+    google = ""
+    bing = ""
+    yandex = ""
+    pinterest = ""
+    baidu = ""
 
   # Publisher Info just for SEO
   [params.publisher]
@@ -291,39 +305,43 @@ dateFormatToUse = "2006-01-02"
     width = 800
     height = 600
 
-  # Disqus Comment Config (https://disqus.com/)
-  [params.disqus]
-    # Disqus shortname to use Disqus in posts
-    shortname = "dillonzq"
+  # Comment Config
+  [params.comment]
+    enable = true
 
-  # Gittalk Comment Config (https://github.com/gitalk/gitalk)
-  [params.gitalk]
-    owner = ""
-    repo = ""
-    clientId = ""
-    clientSecret = ""
+    # Disqus Comment Config (https://disqus.com/)
+    [params.comment.disqus]
+      # Disqus shortname to use Disqus in posts
+      shortname = "dillonzq"
 
-  # Valine Comment Config (https://github.com/xCss/Valine)
-  [params.valine]
-    enable = false
-    appId = ""
-    appKey = ""
-    placeholder = "Your comment ..."
-    notify = false
-    verify = true
-    avatar = "mp"
-    #meta= ""
-    pageSize = 10
-    visitor = true
-    recordIP = true
+    # Gittalk Comment Config (https://github.com/gitalk/gitalk)
+    [params.comment.gitalk]
+      owner = ""
+      repo = ""
+      clientId = ""
+      clientSecret = ""
 
-  # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
-  [params.facebook]
-    enable = false
-    width = "100%"
-    numPosts = 10
-    appId = ""
-    languageCode = "en_US"
+    # Valine Comment Config (https://github.com/xCss/Valine)
+    [params.comment.valine]
+      enable = false
+      appId = ""
+      appKey = ""
+      placeholder = "Your comment ..."
+      notify = false
+      verify = true
+      avatar = "mp"
+      #meta= ""
+      pageSize = 10
+      visitor = true
+      recordIP = true
+
+    # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
+    [params.comment.facebook]
+      enable = false
+      width = "100%"
+      numPosts = 10
+      appId = ""
+      languageCode = "en_US"
 
 # Privacy Info (https://gohugo.io/about/hugo-and-gdpr/)
 [privacy]

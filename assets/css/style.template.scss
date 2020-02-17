@@ -1,14 +1,9 @@
 @charset 'utf-8';
 
-{{- if eq .Site.Params.home_mode "post" -}}
-  $home-profile: true;
-  $home-posts: true;
-{{- else -}}
-  $home-profile: true;
-  $home-posts: false;
-{{- end -}}
+$home-profile: {{- if .Site.Params.home.profile.enable -}}true{{ else }}false{{ end }};
+$home-posts: {{- if .Site.Params.home.posts.enable -}}true{{ else }}false{{ end }};
 
-{{- if eq .Site.Params.desktopHeaderMode "normal" -}}
+{{- if eq .Site.Params.header.desktopMode "normal" -}}
   $header-position-desktop: static;
   $page-padding-top-desktop: 1rem;
   $post-toc-top: 7rem;
@@ -18,7 +13,7 @@
   $post-toc-top: 12rem;
 {{- end -}}
 
-{{- if eq .Site.Params.mobileHeaderMode "normal" -}}
+{{- if eq .Site.Params.header.mobileMode "normal" -}}
   $header-position-mobile: static;
   $page-padding-top-mobile: 1rem;
 {{- else -}}

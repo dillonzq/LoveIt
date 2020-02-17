@@ -6,14 +6,14 @@
 {{- end -}}
 
 {{- /* lazysizes https://github.com/aFarkas/lazysizes */ -}}
-{{- with $CDN.lazysizes_js -}}
+{{- with $CDN.lazysizesJS -}}
     {{- slice . | $.Scratch.Add "scriptCDN" -}}
 {{- else -}}
     {{- slice "js/lib/lazysizes/lazysizes.min.js" | .Scratch.Add "scriptLocal" -}}
 {{- end -}}
 
 {{- /* Smooth Scroll https://github.com/cferdinandi/smooth-scroll */ -}}
-{{- with $CDN.smooth_scroll_js -}}
+{{- with $CDN.smoothScrollJS -}}
     {{- slice . | $.Scratch.Add "scriptCDN" -}}
 {{- else -}}
     {{- slice "js/lib/smooth-scroll/smooth-scroll.polyfills.min.js" | .Scratch.Add "scriptLocal" -}}
@@ -21,7 +21,7 @@
 
 {{- /* TypeIt https://github.com/alexmacarthur/typeit */ -}}
 {{- with .Scratch.Get "typeitMap" -}}
-    {{- with $CDN.typeit_js -}}
+    {{- with $CDN.typeitJS -}}
         {{- slice . | $.Scratch.Add "scriptCDN" -}}
     {{- else -}}
         {{- slice "js/lib/typeit/typeit.min.js" | $.Scratch.Add "scriptLocal" -}}
@@ -36,36 +36,36 @@
 
 {{- /* KaTeX https://github.com/KaTeX/KaTeX */ -}}
 {{- if .Site.Params.math.enable | and (ne .Params.math false) -}}
-    {{- with $CDN.katex_css -}}
+    {{- with $CDN.katexCSS -}}
         {{- slice . | $.Scratch.Add "linkCDN" -}}
     {{- else -}}
         {{- slice "css/lib/katex/katex.min.css" | .Scratch.Add "linkLocal" -}}
     {{- end -}}
-    {{- with $CDN.katex_js -}}
+    {{- with $CDN.katexJS -}}
         {{- slice . | $.Scratch.Add "scriptCDN" -}}
     {{- else -}}
         {{- slice "js/lib/katex/katex.min.js" | .Scratch.Add "scriptLocal" -}}
     {{- end -}}
-    {{- with $CDN.katex_auto_render_js -}}
+    {{- with $CDN.katexAutoRenderJS -}}
         {{- slice . | $.Scratch.Add "scriptCDN" -}}
     {{- else -}}
         {{- slice "js/lib/katex/auto-render.min.js" | .Scratch.Add "scriptLocal" -}}
     {{- end -}}
     {{- $math := .Site.Params.math -}}
-    {{- if $math.copy_tex -}}
-        {{- with $CDN.katex_copy_tex_css -}}
+    {{- if $math.copyTex -}}
+        {{- with $CDN.katexCopyTexCSS -}}
             {{- slice . | $.Scratch.Add "linkCDN" -}}
         {{- else -}}
             {{- slice "css/lib/katex/copy-tex.min.css" | .Scratch.Add "linkLocal" -}}
         {{- end -}}
-        {{- with $CDN.katex_copy_tex_js -}}
+        {{- with $CDN.katexCopyTexJS -}}
             {{- slice . | $.Scratch.Add "scriptCDN" -}}
         {{- else -}}
             {{- slice "js/lib/katex/copy-tex.min.js" | .Scratch.Add "scriptLocal" -}}
         {{- end -}}
     {{- end -}}
     {{- if $math.mhchem -}}
-        {{- with $CDN.katex_mhchem_js -}}
+        {{- with $CDN.katexMhchemJS -}}
             {{- slice . | $.Scratch.Add "scriptCDN" -}}
         {{- else -}}
             {{- slice "js/lib/katex/mhchem.min.js" | .Scratch.Add "scriptLocal" -}}
@@ -78,11 +78,11 @@
                     { left: "$$", right: "$$", display: true },
                     { left: "\\(", right: "\\)", display: false },
                     { left: "\\[", right: "\\]", display: true },
-                    {{- if and $math.block_left_delimiter $math.block_right_delimiter -}}
-                        { left: "{{ $math.block_left_delimiter }}", right: "{{ $math.block_right_delimiter }}", display: true },
+                    {{- if and $math.blockLeftDelimiter $math.blockRightDelimiter -}}
+                        { left: "{{ $math.blockLeftDelimiter }}", right: "{{ $math.blockRightDelimiter }}", display: true },
                     {{- end -}}
-                    {{- if and $math.inline_left_delimiter $math.inline_right_delimiter -}}
-                        { left: "{{ $math.inline_left_delimiter }}", right: "{{ $math.inline_right_delimiter }}", display: false },
+                    {{- if and $math.inlineLeftDelimiter $math.inlineRightDelimiter -}}
+                        { left: "{{ $math.inlineLeftDelimiter }}", right: "{{ $math.inlineRightDelimiter }}", display: false },
                     {{- end -}}
                 ]
             });
@@ -92,7 +92,7 @@
 
 {{- /* mermaid https://github.com/knsv/mermaid */ -}}
 {{- with .Scratch.Get "mermaidMap" -}}
-    {{- with $CDN.mermaid_js -}}
+    {{- with $CDN.mermaidJS -}}
         {{- slice . | $.Scratch.Add "scriptCDN" -}}
     {{- else -}}
         {{- slice "js/lib/mermaid/mermaid.min.js" | $.Scratch.Add "scriptLocal" -}}
@@ -106,20 +106,20 @@
 {{- /* Music */ -}}
 {{- if .Scratch.Get "music" -}}
     {{- /* APlayer https://github.com/MoePlayer/APlayer */ -}}
-    {{- with $CDN.aplayer_css -}}
+    {{- with $CDN.aplayerCSS -}}
         {{- slice . | $.Scratch.Add "linkCDN" -}}
     {{- else -}}
         {{- slice "css/lib/aplayer/APlayer.min.css" | .Scratch.Add "linkLocal" -}}
     {{- end -}}
     {{- slice "css/lib/aplayer/dark.scss" | .Scratch.Add "linkLocal" -}}
-    {{- with $CDN.aplayer_js -}}
+    {{- with $CDN.aplayerJS -}}
         {{- slice . | $.Scratch.Add "scriptCDN" -}}
     {{- else -}}
         {{- slice "js/lib/aplayer/APlayer.min.js" | .Scratch.Add "scriptLocal" -}}
     {{- end -}}
 
     {{- /* MetingJS https://github.com/metowolf/MetingJS */ -}}
-    {{- with $CDN.meting_js -}}
+    {{- with $CDN.metingJS -}}
         {{- slice . | $.Scratch.Add "scriptCDN" -}}
     {{- else -}}
         {{- slice "js/lib/meting/Meting.min.js" | .Scratch.Add "scriptLocal" -}}
@@ -130,12 +130,12 @@
 {{- if .Params.dev -}}
     {{- /* ECharts https://github.com/apache/incubator-echarts */ -}}
     {{- with .Scratch.Get "echartsMap" -}}
-        {{- with $CDN.echarts_js -}}
+        {{- with $CDN.echartsJS -}}
             {{- slice . | $.Scratch.Add "scriptCDN" -}}
         {{- else -}}
             {{- slice "js/lib/echarts/echarts.min.js" | $.Scratch.Add "scriptLocal" -}}
         {{- end -}}
-        {{- with $CDN.echarts_macarons_js -}}
+        {{- with $CDN.echartsMacaronsJS -}}
             {{- slice . | $.Scratch.Add "scriptCDN" -}}
         {{- else -}}
             {{- slice "js/lib/echarts/macarons.js" | $.Scratch.Add "scriptLocal" -}}
@@ -150,9 +150,6 @@
         </script>
     {{- end -}}
 {{- end -}}
-
-{{- /* Theme script */ -}}
-{{- slice "js/theme.js" | .Scratch.Add "scriptLocal" -}}
 
 {{- range .Scratch.Get "linkCDN" -}}
     {{- safeHTML . -}}
@@ -178,3 +175,6 @@
     {{- end -}}
     <script src="{{ $res.RelPermalink }}"></script>
 {{- end -}}
+
+{{- /* Theme script */ -}}
+<script src=/js/theme.min.js></script>

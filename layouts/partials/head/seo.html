@@ -1,3 +1,19 @@
+{{- with .Site.Params.verification.google -}}
+    <meta name="google-site-verification" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.verification.bing -}}
+    <meta name="msvalidate.01" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.verification.yandex -}}
+    <meta name="yandex-verification" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.verification.pinterest -}}
+    <meta name="p:domain_verify" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.verification.baidu -}}
+    <meta name="baidu-site-verification" content="{{ . }}" />
+{{- end -}}
+
 {{- /* Home SEO */ -}}
 {{- if .IsHome -}}
     <script type="application/ld+json">

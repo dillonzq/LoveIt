@@ -112,84 +112,47 @@ dateFormatToUse = "2006-01-02"
   keywords = ["Theme", "Hugo"]
   # 网站默认主题 ("light", "dark", "auto")
   defaultTheme = "auto"
-  # 桌面端导航栏模式 ("fixed", "normal", "auto")
-  desktopHeaderMode = "fixed"
-  # 移动端导航栏模式 ("fixed", "normal", "auto")
-  mobileHeaderMode = "auto"
-
-  # 主页信息设置
-  ## 主页模式 ("post", "other")
-  home_mode = "post"
-  ## 主页在 post 模式下每页 post 显示数量
-  home_paginate = 6
-  ## 主页显示头像的 URL
-  avatar = "images/avatar.png"
-  ## 主页显示的网站副标题
-  subtitle = "一个简洁、优雅且高效的 Hugo 主题"
-
-  # 在文章页面是否使用分享功能
-  socialShare = true
-
-  # 页面底部版权信息设置
-  ## 网站创立年份
-  since = 2019
-  ## ICP 备案信息，仅在中国使用 (允许使用 HTML 格式)
-  icp = ""
-  ## 许可协议信息 (允许使用 HTML 格式)
-  license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
-
   # 用于生成文章上次修改时间的公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = ""
 
-  # 数学公式 (KaTeX https://katex.org/)
-  [params.math]
-    enable = true
-    block_left_delimiter = ""
-    block_right_delimiter = ""
-    inline_left_delimiter = "$"
-    inline_right_delimiter = "$"
-    # KaTeX 插件 copy_tex
-    copy_tex = true
-    # KaTeX 插件 mhchem
-    mhchem = true
+  # 页面头部导航栏信息
+  [params.header]
+    # 桌面端导航栏模式 ("fixed", "normal", "auto")
+    desktopMode = "fixed"
+    # 移动端导航栏模式 ("fixed", "normal", "auto")
+    mobileMode = "auto"
 
-  # 是否在文章页面显示原始 Markdown 文档链接
-  linkToMarkdown = true
+  # 页面底部版权信息设置
+  [params.footer]
+    # 网站创立年份
+    since = 2019
+    # ICP 备案信息，仅在中国使用 (允许使用 HTML 格式)
+    icp = ""
+    # 许可协议信息 (允许使用 HTML 格式)
+    license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
 
-  # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
-  google_verification = ""
-  bing_verification = ""
-  yandex_verification = ""
-  pinterest_verification = ""
-  baidu_verification = ""
-
-  # CSS 和 JS 文件的 CDN 设置
-  [params.cdn]
-    ## 例如 '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
-    fontawesome_free_css = ''
-    animate_css = ''
-    gitalk_css = ''
-    gitalk_js = ''
-    valine_js = ''
-    lazysizes_js = ''
-    smooth_scroll_js = ''
-    katex_css = ''
-    katex_js = ''
-    katex_auto_render_js = ''
-    katex_copy_tex_css = ''
-    katex_copy_tex_js = ''
-    katex_mhchem_js = ''
-    mermaid_js = ''
-    echarts_js = ''
-    echarts_macarons_js = ''
-    typeit_js = ''
-    aplayer_css = ''
-    aplayer_js = ''
-    meting_js = ''
-
-  # Gravatar 信息，用于优先在主页显示的头像
-  [params.gravatar]
-    email = ""
+  # 主页信息设置
+  [params.home]
+    # 主页个人信息
+    [params.home.profile]
+      enable = true
+      # Gravatar 邮箱，用于优先在主页显示的头像
+      gravatarEmail = ""
+      # 主页显示头像的 URL
+      avatarURL = "images/avatar.png"
+      # 主页显示的网站副标题
+      subtitle = "一个简洁、优雅且高效的 Hugo 主题"
+      # 是否为副标题显示打字机动画
+      typeit = true
+      # 是否显示社交账号
+      social = true
+    # 主页文章列表
+    [params.home.posts]
+      enable = true
+      # 主页每页显示文章数量
+      paginate = 6
+      # 当你没有在文章前面设置 "hiddenFromHomePage" 时的默认行为
+      defaultHiddenFromHomePage = false
 
   # 主页的社交信息设置
   [params.social]
@@ -257,6 +220,13 @@ dateFormatToUse = "2006-01-02"
     #XMPP = "xxxx"
     #Matrix ="xxxx"
 
+  # 文章页面配置
+  [params.page]
+    # 在文章页面是否使用分享功能
+    socialShare = true
+    # 是否在文章页面显示原始 Markdown 文档链接
+    linkToMarkdown = true
+
   # 文章页面的分享信息设置
   [params.share]
     enable = true
@@ -270,6 +240,50 @@ dateFormatToUse = "2006-01-02"
     #Tumblr = true
     #VKontakte = true
     #Weibo = true
+
+  # 数学公式 (KaTeX https://katex.org/)
+  [params.math]
+    enable = true
+    blockLeftDelimiter = ""
+    blockRightDelimiter = ""
+    inlineLeftDelimiter = "$"
+    inlineRightDelimiter = "$"
+    # KaTeX 插件 copy_tex
+    copyTex = true
+    # KaTeX 插件 mhchem
+    mhchem = true
+
+  # CSS 和 JS 文件的 CDN 设置
+  [params.cdn]
+    ## 例如 '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
+    fontawesomeFreeCSS = ''
+    animateCSS = ''
+    gitalkCSS = ''
+    gitalkJS = ''
+    valineJS = ''
+    lazysizesJS = ''
+    smoothScrollJS = ''
+    katexCSS = ''
+    katexJS = ''
+    katexAutoRenderJS = ''
+    katexCopyTexCSS = ''
+    katexCopyTexJS = ''
+    katexMhchemJS = ''
+    mermaidJS = ''
+    echartsJS = ''
+    echartsMacaronsJS = ''
+    typeitJS = ''
+    aplayerCSS = ''
+    aplayerJS = ''
+    metingJS = ''
+
+  # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
+  [params.verification]
+    google = ""
+    bing = ""
+    yandex = ""
+    pinterest = ""
+    baidu = ""
 
   # 出版者信息，仅用于 SEO
   [params.publisher]
@@ -291,39 +305,43 @@ dateFormatToUse = "2006-01-02"
     width = 800
     height = 600
 
-  # Disqus 评论系统设置 (https://disqus.com/)
-  [params.disqus]
-    # Disqus 的用户名，用来在文章中启用 Disqus 评论系统
-    shortname = "dillonzq"
+  # 评论系统设置
+  [params.comment]
+    enable = true
 
-  # Gittalk 评论系统设置 (https://github.com/gitalk/gitalk)
-  [params.gitalk]
-    owner = ""
-    repo = ""
-    clientId = ""
-    clientSecret = ""
+    # Disqus 评论系统设置 (https://disqus.com/)
+    [params.comment.disqus]
+      # Disqus 的用户名，用来在文章中启用 Disqus 评论系统
+      shortname = "dillonzq"
 
-  # Valine 评论系统设置 (https://github.com/xCss/Valine)
-  [params.valine]
-    enable = false
-    appId = ""
-    appKey = ""
-    placeholder = "你的评论 ..."
-    notify = false
-    verify = true
-    avatar = "mp"
-    #meta= ""
-    pageSize = 10
-    visitor = true
-    recordIP = true
+    # Gittalk 评论系统设置 (https://github.com/gitalk/gitalk)
+    [params.comment.gitalk]
+      owner = ""
+      repo = ""
+      clientId = ""
+      clientSecret = ""
 
-  # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
-  [params.facebook]
-    enable = false
-    width = "100%"
-    numPosts = 10
-    appId = ""
-    languageCode = "en_US"
+    # Valine 评论系统设置 (https://github.com/xCss/Valine)
+    [params.comment.valine]
+      enable = false
+      appId = ""
+      appKey = ""
+      placeholder = "你的评论 ..."
+      notify = false
+      verify = true
+      avatar = "mp"
+      #meta= ""
+      pageSize = 10
+      visitor = true
+      recordIP = true
+
+    # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
+    [params.comment.facebook]
+      enable = false
+      width = "100%"
+      numPosts = 10
+      appId = ""
+      languageCode = "en_US"
 
 # 隐私信息设置 (https://gohugo.io/about/hugo-and-gdpr/)
 [privacy]

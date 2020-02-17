@@ -1,30 +1,24 @@
 ---
-author: "Hugo Authors"
-author_link: "https://gohugo.io/"
 title: "Placeholder Text"
 date: 2019-08-01T18:02:41+08:00
 lastmod: 2019-08-01T18:02:41+08:00
 draft: false
+author: "Hugo Authors"
+authorLink: "https://gohugo.io/"
 description: "Lorem Ipsum Dolor Si Amet"
-show_in_homepage: true
-description_as_summary: false
 license: ""
 
-tags: [
-  "markdown",
-  "text",
-]
-categories: [
-  "theme",
-]
+tags: ["markdown", "text"]
+categories: ["theme"]
+hiddenFromHomePage: false
 
-featured_image: ""
-featured_image_preview: ""
+featuredImage: ""
+featuredImagePreview: ""
 
-comment: true
 toc: false
-auto_collapse_toc: true
+autoCollapseToc: true
 math: false
+comment: true
 ---
 
 Lorem est tota propiore conpellat pectoribus de
