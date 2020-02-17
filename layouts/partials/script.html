@@ -1,8 +1,13 @@
 {{- $CDN := .Scratch.Get "CDN" -}}
 
-{{- /* Google analytics async */ -}}
-{{- if .Scratch.Get "production" | and .Site.GoogleAnalytics -}}
-    {{- template "_internal/google_analytics_async.html" . -}}
+{{- /* Fork Awesome https://forkaweso.me/ */ -}}
+{{- if .Scratch.Get "forkawesome" -}}
+    {{- slice "css/lib/forkawesome/fork-awesome.scss" | .Scratch.Add "linkLocal" -}}
+{{- end -}}
+
+{{- /* iconfont https://www.iconfont.cn/ */ -}}
+{{- if .Scratch.Get "iconfont" -}}
+    {{- slice "css/lib/iconfont/iconfont.css" | .Scratch.Add "linkLocal" -}}
 {{- end -}}
 
 {{- /* lazysizes https://github.com/aFarkas/lazysizes */ -}}
@@ -178,3 +183,8 @@
 
 {{- /* Theme script */ -}}
 <script src=/js/theme.min.js></script>
+
+{{- /* Google analytics async */ -}}
+{{- if .Scratch.Get "production" | and .Site.GoogleAnalytics -}}
+    {{- template "_internal/google_analytics_async.html" . -}}
+{{- end -}}

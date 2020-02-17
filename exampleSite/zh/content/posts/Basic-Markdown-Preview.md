@@ -10,10 +10,10 @@ license: ""
 
 tags: ["Hugo", "主题"]
 categories: ["预览"]
+hiddenFromHomePage: false
 
 featuredImage: ""
 featuredImagePreview: ""
-hiddenFromHomePage: false
 
 toc: true
 autoCollapseToc: true

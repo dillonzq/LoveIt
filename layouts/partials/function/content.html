@@ -25,4 +25,4 @@
 {{- $REout = `↩︎` -}}
 {{- $content = replaceRE $REin $REout $content -}}
 
-{{- return $content -}}
+{{- $content | safeHTML -}}

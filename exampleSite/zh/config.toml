@@ -218,7 +218,8 @@ dateFormatToUse = "2006-01-02"
     #Devto = "xxxx"
     #Gitea = "xxxx"
     #XMPP = "xxxx"
-    #Matrix ="xxxx"
+    #Matrix = "xxxx"
+    #Bilibili = ""
 
   # 文章页面配置
   [params.page]
