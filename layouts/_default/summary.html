@@ -3,7 +3,7 @@
     {{- with .Params.featuredImage -}}
         <div class="featured-image-preview">
             {{- $image := $.Params.featuredImagePreview | default . -}}
-            {{- partial "hook/image" $image -}}
+            {{- partial "function/image.html" (dict "src" $image "alt" "featured image") -}}
         </div>
     {{- end -}}
 
@@ -39,7 +39,7 @@
 
     {{- /* Summary content */ -}}
     <div class="content">
-        {{- partial "hook/content.html" .Summary | safeHTML -}}
+        {{- partial "function/content.html" .Summary -}}
     </div>
 
     {{- /* Footer */ -}}

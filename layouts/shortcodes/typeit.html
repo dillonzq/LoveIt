@@ -34,23 +34,8 @@
         {{- printf "<%s id=%s></%s>" $tag $id $tag | safeHTML -}}
     {{- end -}}
 
-    {{- $typeitMap := .Page.Scratch.Get "typeitMap" -}}
-    {{- $group := slice $id -}}
-    {{- with .Get "group" -}}
-        {{- if $typeitMap -}}
-            {{- if index $typeitMap . -}}
-                {{- $group = index $typeitMap . | append $id -}}
-            {{- end -}}
-            {{- $typeitMap = dict . $group | merge $typeitMap -}}
-        {{- else -}}
-            {{- $typeitMap = dict . $group -}}
-        {{- end -}}
-    {{- else -}}
-        {{- if $typeitMap -}}
-            {{- $typeitMap = dict $id $group | merge $typeitMap -}}
-        {{- else -}}
-            {{- $typeitMap = dict $id $group -}}
-        {{- end -}}
-    {{- end -}}
-    {{- .Page.Scratch.Set "typeitMap" $typeitMap -}}
+    {{- $key := .Get "group" | default $id -}}
+    {{- $group := index (.Page.Scratch.Get "typeitMap" | default dict) $key -}}
+    {{- $group = $group | default slice | append $id -}}
+    {{- .Page.Scratch.SetInMap "typeitMap" $key $group -}}
 </div>

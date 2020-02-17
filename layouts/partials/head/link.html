@@ -37,11 +37,6 @@
     <link rel="stylesheet" href="{{ $res.RelPermalink }}">
 {{- end -}}
 
-{{- /* Fork Awesome https://forkaweso.me/ */ -}}
-{{- $options := dict "targetPath" "css/lib/forkawesome/fork-awesome.min.css" "outputStyle" "compressed" "enableSourceMap" true -}}
-{{- $res := resources.Get "css/lib/forkawesome/fork-awesome.scss"| toCSS $options -}}
-<link rel="stylesheet" href="{{ $res.RelPermalink }}">
-
 {{- /* Animate.css https://github.com/daneden/animate.css */ -}}
 {{- with $CDN.animateCSS -}}
     {{- . | safeHTML -}}

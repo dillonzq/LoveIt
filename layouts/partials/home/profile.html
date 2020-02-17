@@ -19,11 +19,7 @@
                     {{- . | safeHTML -}}
                 </div>
                 <div id={{ $id }} class="typeit"></div>
-                {{- with $.Scratch.Get "typeitMap" -}}
-                    {{- $.Scratch.Set "typeitMap" (dict $id (slice $id) | merge .) -}}
-                {{- else -}}
-                    {{- $.Scratch.Set "typeitMap" (dict $id (slice $id)) -}}
-                {{- end -}}
+                {{- $.Scratch.SetInMap "typeitMap" $id (slice $id) -}}
             {{- else -}}
                 {{- . | safeHTML -}}
             {{- end -}}

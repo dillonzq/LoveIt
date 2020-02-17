@@ -1,0 +1,3 @@
+{{- /* Lazyload */ -}}
+{{- $res := resources.Get "svg/loading.svg" | minify -}}
+<img src="{{ $res.RelPermalink | safeURL }}" data-sizes="auto" data-src="{{ index . `src` | safeURL }}" alt="{{ index . `alt` }}" title="{{ index . `title` | default (index . `alt`) }}" class="lazyload">

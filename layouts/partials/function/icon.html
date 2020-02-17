@@ -1,0 +1,23 @@
+{{- $type := index . "type" | default "fa" }}
+{{- $classList := split (index . "class") " " }}
+{{- $scratch := index . "scratch" }}
+{{- /* Font Awesome */ -}}
+{{- if eq $type "fa" -}}
+    <i class="{{ delimit $classList ` ` }}"></i>
+{{- /* Fork Awesome */ -}}
+{{- else if eq $type "fo" -}}
+    {{- $newClassList := slice -}}
+    {{- range $classList -}}
+        {{- if eq . "fa" -}}
+            {{- $newClassList = $newClassList | append "fo" -}}
+        {{- else -}}
+            {{- $newClassList = $newClassList | append (replaceRE `^fa\-(.+)$` `fo-$1` .) -}}
+        {{- end -}}
+    {{- end -}}
+    <i class="{{ delimit $newClassList ` ` }}"></i>
+    {{- $scratch.Set "forkawesome" true -}}
+{{- /* Others */ -}}
+{{- else -}}
+    <span class="{{ delimit $classList ` ` }}"></span>
+    {{- $scratch.Set "iconfont" true -}}
+{{- end -}}

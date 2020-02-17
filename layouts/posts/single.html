@@ -41,7 +41,7 @@
         {{- /* Featured image */ -}}
         {{- with .Params.featuredImage -}}
             <div class="featured-image">
-                {{- partial "hook/image" . -}}
+                {{- partial "function/image.html" (dict "src" . "alt" "featured image") -}}
             </div>
         {{- end -}}
 
@@ -73,7 +73,7 @@
 
         {{- /* Content */ -}}
         <div class="content">
-            {{- partial "hook/content.html" .Content | safeHTML -}}
+            {{- partial "function/content.html" .Content -}}
         </div>
 
         {{- /* Footer */ -}}
