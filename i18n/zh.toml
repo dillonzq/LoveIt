@@ -79,7 +79,7 @@ other = "本文于 %s 更新"
 [license]
 other = "采用 %s 协议发布"
 
-[seeMarkDown]
+[seeMarkdown]
 other = "阅读原始文档"
 
 [back]

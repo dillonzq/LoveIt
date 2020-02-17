@@ -10,18 +10,27 @@
     {{- slice "css/lib/iconfont/iconfont.css" | .Scratch.Add "linkLocal" -}}
 {{- end -}}
 
-{{- /* lazysizes https://github.com/aFarkas/lazysizes */ -}}
-{{- with $CDN.lazysizesJS -}}
-    {{- slice . | $.Scratch.Add "scriptCDN" -}}
-{{- else -}}
-    {{- slice "js/lib/lazysizes/lazysizes.min.js" | .Scratch.Add "scriptLocal" -}}
-{{- end -}}
-
 {{- /* Smooth Scroll https://github.com/cferdinandi/smooth-scroll */ -}}
 {{- with $CDN.smoothScrollJS -}}
     {{- slice . | $.Scratch.Add "scriptCDN" -}}
 {{- else -}}
     {{- slice "js/lib/smooth-scroll/smooth-scroll.polyfills.min.js" | .Scratch.Add "scriptLocal" -}}
+{{- end -}}
+
+{{- /* Sharer.js https://github.com/ellisonleao/sharer.js */ -}}
+{{- if .Scratch.Get "share" -}}
+    {{- with $CDN.sharerJS -}}
+        {{- slice . | $.Scratch.Add "scriptCDN" -}}
+    {{- else -}}
+        {{- slice "js/lib/sharer/sharer.min.js" | .Scratch.Add "scriptLocal" -}}
+    {{- end -}}
+{{- end -}}
+
+{{- /* lazysizes https://github.com/aFarkas/lazysizes */ -}}
+{{- with $CDN.lazysizesJS -}}
+    {{- slice . | $.Scratch.Add "scriptCDN" -}}
+{{- else -}}
+    {{- slice "js/lib/lazysizes/lazysizes.min.js" | .Scratch.Add "scriptLocal" -}}
 {{- end -}}
 
 {{- /* TypeIt https://github.com/alexmacarthur/typeit */ -}}

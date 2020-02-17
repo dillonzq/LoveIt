@@ -82,7 +82,7 @@
     {{- partial "function/icon-link.html" $options -}}
 {{- end -}}
 
-{{- /* 013: Tumblr */ -}}
+{{- /* 013: Quora */ -}}
 {{- with .Site.Params.Social.Quora -}}
     {{- $options := dict "href" (printf "https://www.quora.com/profile/%s" .) "title" "Quora" -}}
     {{- $options = dict "class" "fab fa-quora fa-fw" | merge $options -}}
@@ -152,9 +152,9 @@
     {{- partial "function/icon-link.html" $options -}}
 {{- end -}}
 
-{{- /* 023: VKontakte */ -}}
-{{- with .Site.Params.Social.VKontakte -}}
-    {{- $options := dict "href" (printf "https://vk.com/%s" .) "title" "VKontakte" -}}
+{{- /* 023: VK */ -}}
+{{- with .Site.Params.Social.VK -}}
+    {{- $options := dict "href" (printf "https://vk.com/%s" .) "title" "VK" -}}
     {{- $options = dict "class" "fab fa-vk fa-fw" | merge $options -}}
     {{- partial "function/icon-link.html" $options -}}
 {{- end -}}

@@ -31,20 +31,23 @@
         }
       }
 
-      .post-info-md
-      a {
-        font-size: 0.8em;
-        color: $single-link-color;
+      .post-info-md {
+        width: 8rem;
 
-        .dark-theme & {
-          color: $single-link-color-dark;
-        }
-
-        &:hover {
-          color: $single-link-hover-color;
+        a {
+          font-size: 0.8rem;
+          color: $single-link-color;
 
           .dark-theme & {
-            color: $single-link-hover-color-dark;
+            color: $single-link-color-dark;
+          }
+
+          &:hover {
+            color: $single-link-hover-color;
+
+            .dark-theme & {
+              color: $single-link-hover-color-dark;
+            }
           }
         }
       }
