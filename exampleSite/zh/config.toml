@@ -151,6 +151,8 @@ dateFormatToUse = "2006-01-02"
       enable = true
       # 主页每页显示文章数量
       paginate = 6
+      # 当你没有在文章前面设置 "hiddenFromHomePage" 时的默认行为
+      defaultHiddenFromHomePage = false
 
   # 主页的社交信息设置
   [params.social]

@@ -64,7 +64,7 @@
 
     {{- /* Share on Weibo */ -}}
     {{- if .Params.Share.Weibo | default .Site.Params.Share.Weibo | eq true -}}
-        <a href="//service.weibo.com/share/share.php?url={{ .Permalink }}&amp;appkey=&amp;title={{ .Title }}{{ with $.Params.featured_image }}&amp;pic={{ . }}{{- end -}}" target="_blank" title="{{ T "share" }} Weibo">
+        <a href="//service.weibo.com/share/share.php?url={{ .Permalink }}&amp;appkey=&amp;title={{ .Title }}{{ with $.Params.featuredImage }}&amp;pic={{ . }}{{- end -}}" target="_blank" title="{{ T "share" }} Weibo">
             <i class="fab fa-weibo fa-fw"></i>
         </a>
     {{- end -}}

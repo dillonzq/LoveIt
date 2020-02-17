@@ -1,8 +1,8 @@
 <article class="single summary" itemscope itemtype="http://schema.org/Article">
     {{- /* Featured image */ -}}
-    {{- with .Params.featured_image -}}
+    {{- with .Params.featuredImage -}}
         <div class="featured-image-preview">
-            {{- $image := $.Params.featured_image_preview | default . -}}
+            {{- $image := $.Params.featuredImagePreview | default . -}}
             {{- partial "hook/image" $image -}}
         </div>
     {{- end -}}
@@ -15,8 +15,8 @@
     {{- /* Meta */ -}}
     <div class="meta">
         {{- $author := .Params.author | default .Site.Author.name -}}
-        {{- $author_link := .Params.author_link | default .Site.Author.link | default .Site.BaseURL -}}
-        <a class="author" href="{{ $author_link }}" rel="author" target="_blank">
+        {{- $authorLink := .Params.authorLink | default .Site.Author.link | default .Site.BaseURL -}}
+        <a class="author" href="{{ $authorLink }}" rel="author" target="_blank">
             <i class="fas fa-user-circle fa-fw"></i>{{ $author }}
         </a>
 
@@ -39,13 +39,7 @@
 
     {{- /* Summary content */ -}}
     <div class="content">
-        {{- if .Params.description_as_summary -}}
-            <p>
-                {{- .Params.description -}}
-            </p>
-        {{- else -}}
-            {{- partial "hook/content.html" .Summary | safeHTML -}}
-        {{- end -}}
+        {{- partial "hook/content.html" .Summary | safeHTML -}}
     </div>
 
     {{- /* Footer */ -}}

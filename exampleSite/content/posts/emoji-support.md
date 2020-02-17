@@ -1,29 +1,24 @@
 ---
-author: "Hugo Authors"
-author_link: "https://gohugo.io/"
 title: "Emoji Support"
 date: 2019-10-01T17:55:28+08:00
 lastmod: 2019-10-01T17:55:28+08:00
 draft: false
+author: "Hugo Authors"
+authorLink: "https://gohugo.io/"
 description: "Guide to emoji usage in Hugo"
-show_in_homepage: true
-description_as_summary: false
 license: ""
 
-tags: [
-  "emoji",
-]
-categories: [
-  "theme",
-]
+tags: ["emoji"]
+categories: ["theme"]
+hiddenFromHomePage: false
 
-featured_image: /images/emoji.jpg
-featured_image_preview: ""
+featuredImage: /images/emoji.jpg
+featuredImagePreview: ""
 
-comment: true
 toc: false
-auto_collapse_toc: true
+autoCollapseToc: true
 math: false
+comment: true
 ---
 
 Emoji can be enabled in a Hugo project in a number of ways.

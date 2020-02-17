@@ -9,8 +9,8 @@
         <div class="meta">
             <div class="meta-line">
                 {{- $author := .Params.author | default .Site.Author.name -}}
-                {{- $author_link := .Params.author_link | default .Site.Author.link | default .Site.BaseURL -}}
-                <a class="author" href="{{ $author_link }}" rel="author" target="_blank">
+                {{- $authorLink := .Params.authorLink | default .Site.Author.link | default .Site.BaseURL -}}
+                <a class="author" href="{{ $authorLink }}" rel="author" target="_blank">
                     <i class="fas fa-user-circle fa-fw"></i>{{ $author }}
                 </a>&nbsp;
                 {{- with .Params.categories -}}
@@ -39,7 +39,7 @@
         </div>
 
         {{- /* Featured image */ -}}
-        {{- with .Params.featured_image -}}
+        {{- with .Params.featuredImage -}}
             <div class="featured-image">
                 {{- partial "hook/image" . -}}
             </div>
@@ -49,8 +49,8 @@
         {{- if or .Params.toc (and .Site.Params.toc (ne .Params.toc false)) -}}
             <div class="post-toc" id="post-toc">
                 <h2 class="post-toc-title">{{ T "toc" }}</h2>
-                {{- $globalAutoCollapseToc := .Site.Params.auto_collapse_toc | default true }}
-                <div class="post-toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.auto_collapse_toc false)) }} always-active{{ end }}">
+                {{- $globalAutoCollapseToc := .Site.Params.autoCollapseToc | default true }}
+                <div class="post-toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false)) }} always-active{{ end }}">
                     {{- .TableOfContents -}}
                 </div>
             </div>

@@ -1,30 +1,24 @@
 ---
-author: ""
-author_link: ""
 title: "Markdown 基本语法预览"
 date: 2019-08-25T16:22:42+08:00
 lastmod: 2019-08-25T16:22:42+08:00
 draft: false
+author: ""
+authorLink: ""
 description: "这是一篇用于预览 Markdown 基本语法的文章。"
-show_in_homepage: true
-description_as_summary: false
 license: ""
 
-tags: [
-    "Hugo",
-    "主题",
-]
-categories: [
-    "预览",
-]
+tags: ["Hugo", "主题"]
+categories: ["预览"]
 
-featured_image: ""
-featured_image_preview: ""
+featuredImage: ""
+featuredImagePreview: ""
+hiddenFromHomePage: false
 
-comment: true
 toc: true
-auto_collapse_toc: true
+autoCollapseToc: true
 math: true
+comment: true
 ---
 
 这是一篇用于预览 :(fab fa-markdown): Markdown 基本语法的文章。

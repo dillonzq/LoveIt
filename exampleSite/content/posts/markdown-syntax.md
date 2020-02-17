@@ -1,31 +1,24 @@
 ---
-author: "Hugo Authors"
-author_link: "https://gohugo.io/"
 title: "Markdown Syntax Guide"
 date: 2019-12-01T21:57:40+08:00
 lastmod: 2020-01-01T16:45:40+08:00
 draft: false
+author: "Hugo Authors"
+authorLink: "https://gohugo.io/"
 description: "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
-show_in_homepage: true
-description_as_summary: false
 license: ""
 
-tags: [
-    "markdown",
-    "css",
-    "html",
-]
-categories: [
-    "theme",
-]
+tags: ["markdown", "css", "html"]
+categories: ["theme"]
+hiddenFromHomePage: false
 
-featured_image: /images/markdown.png
-featured_image_preview: ""
+featuredImage: /images/markdown.png
+featuredImagePreview: ""
 
-comment: true
 toc: true
-auto_collapse_toc: true
+autoCollapseToc: true
 math: true
+comment: true
 ---
 
 This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.

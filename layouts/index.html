@@ -9,7 +9,11 @@
         {{- if .Site.Params.home.posts.enable -}}
             {{- /* Paginate */ -}}
             {{- $paginator := where .Site.RegularPages "Type" "posts" -}}
-            {{- $paginator = where $paginator "Params.show_in_homepage" "!=" false -}}
+            {{- if ne .Site.Params.home.posts.mode.defaultHiddenFromHomePage false -}}
+                {{- $paginator = where $paginator "Params.hiddenfromhomepage" "!=" true -}}
+            {{- else -}}
+                {{- $paginator = where $paginator "Params.hiddenfromhomepage" false -}}
+            {{- end -}}
             {{- with .Site.Params.home.posts.paginate -}}
                 {{- $paginator = $.Paginate $paginator . -}}
             {{- else -}}
