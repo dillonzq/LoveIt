@@ -219,6 +219,7 @@ dateFormatToUse = "2006-01-02"
     #Gitea = "xxxx"
     #XMPP = "xxxx"
     #Matrix ="xxxx"
+    #Bilibili = ""
 
   # Page config
   [params.page]

@@ -412,7 +412,14 @@
     {{- partial "function/icon-link.html" $options -}}
 {{- end -}}
 
-{{- /* 058: Email */ -}}
+{{- /* 058: bilibili */ -}}
+{{- with .Site.Params.Social.Bilibili -}}
+    {{- $options := dict "href" (printf "https://space.bilibili.com/%s" .) "title" "bilibili" -}}
+    {{- $options = dict "class" "loveit it-bilibili-fill" "type" "other" "scratch" $.Scratch | merge $options -}}
+    {{- partial "function/icon-link.html" $options -}}
+{{- end -}}
+
+{{- /* 059: Email */ -}}
 {{- with .Site.Params.Social.Email -}}
     {{- $options := dict "href" (printf "mailto:%s" .) "title" "Email" -}}
     {{- $options = dict "class" "far fa-envelope fa-fw" | merge $options -}}

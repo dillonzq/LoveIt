@@ -5,6 +5,11 @@
     {{- slice "css/lib/forkawesome/fork-awesome.scss" | .Scratch.Add "linkLocal" -}}
 {{- end -}}
 
+{{- /* iconfont https://www.iconfont.cn/ */ -}}
+{{- if .Scratch.Get "iconfont" -}}
+    {{- slice "css/lib/iconfont/iconfont.css" | .Scratch.Add "linkLocal" -}}
+{{- end -}}
+
 {{- /* lazysizes https://github.com/aFarkas/lazysizes */ -}}
 {{- with $CDN.lazysizesJS -}}
     {{- slice . | $.Scratch.Add "scriptCDN" -}}
