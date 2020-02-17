@@ -79,6 +79,9 @@ other = "The article was updated on %s"
 [license]
 other = "Published under the %s license"
 
+[seeMarkdown]
+other = "Read Markdown"
+
 [back]
 other = "Back"
 
