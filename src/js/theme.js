@@ -147,7 +147,7 @@
         initToc() {
             const tocContainer = document.getElementById('post-toc');
             if (tocContainer !== null) {
-                const toc = tocContainer.getElementById('TableOfContents');
+                const toc = document.getElementById('TableOfContents');
                 if (toc === null) {
                     tocContainer.parentElement.removeChild(tocContainer);
                 } else {
