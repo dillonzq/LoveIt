@@ -1,25 +1,25 @@
-<!-- only the trailing newline is retained -->
-{{- $content := replaceRE `(?s)^\n*(.*?)\n*$` "$1\n" .Inner -}}
-<!-- shuffle md5 as id -->
+{{- /* only the trailing newline is retained */ -}}
+{{- $content := replaceRE `(?s)^\n*(.*?)\n*$` "$1\n" .Inner | .Page.RenderString -}}
+{{- /* shuffle md5 as id */ -}}
 {{- $id := delimit (split (md5 $content) "" | shuffle) "" | printf "typeit-%s" -}}
 
 <div class={{ .Get "class" | default "typeit" }}>
-    <!-- raw html content -->
+    {{- /* raw html content */ -}}
     {{- if .Get "raw" -}}
         <div id={{ printf "r%s" $id }} hidden=true>
             {{- $content | safeHTML -}}
         </div>
         <div id={{ $id }}></div>
     {{- else if .Get "code" -}}
-        <!-- highlight code content without line number -->
+        {{- /* highlight code content without line number */ -}}
         {{- $content = highlight $content (.Get "code") "linenos=false" -}}
-        <!-- delete outer label -->
+        {{- /* delete outer label */ -}}
         {{- $content = replaceRE `<div class="highlight"><pre class="chroma"><code[^<>]*>(?s)(.*)</code></pre></div>` "$1" $content -}}
-        <!-- parsing markdown links -->
+        {{- /* parsing markdown links */ -}}
         {{- $content = replaceRE `(<span[^<>]*>)([^<>]*)\[([^<>]+)\]\(([^<>]+)\)([^<>]*)(</span>)` "$1$2$6<a href=$4>$3</a>$1$5$6" $content -}}
-        <!-- replace " " to "&nbsp;" and replace "\n" to "<br />" -->
+        {{- /* replace " " to "&nbsp;" and replace "\n" to "<br />" */ -}}
         {{- $content = replaceRE ` ` "&nbsp;" $content | replaceRE `(<\w+)&nbsp;` "$1 " | replaceRE `\n` "<br />" -}}
-        <!-- fix "<br />" location error which is a bug of Typeit HTML parser -->
+        {{- /* fix "<br />" location error which is a bug of Typeit HTML parser */ -}}
         {{- $content = replaceRE `<br /></span>` "</span><br />" $content -}}
         <div id={{ printf "r%s" $id }} hidden=true>
             {{- $content | safeHTML -}}
@@ -27,7 +27,7 @@
         <div class="highlight" id={{ $id }}></div>
     {{- else -}}
         {{- $tag := .Get "tag" | default "p" -}}
-        {{- $content = $content | markdownify | chomp -}}
+        {{- $content = $content | chomp -}}
         <div id={{ printf "r%s" $id }} hidden=true>
             {{- $content | safeHTML -}}
         </div>

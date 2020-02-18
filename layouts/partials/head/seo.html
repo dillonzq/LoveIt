@@ -76,12 +76,12 @@
         "wordcount": {{ .WordCount }},
         "url": "{{ .Permalink }}",
         {{- if not .PublishDate.IsZero -}}
-            "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+            "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" }}",
         {{- else if not .Date.IsZero -}}
-            "datePublished": "{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+            "datePublished": "{{ .Date.Format "2006-01-02T15:04:05-07:00" }}",
         {{- end -}}
         {{- with .Lastmod -}}
-            "dateModified": "{{ .Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+            "dateModified": "{{ .Format "2006-01-02T15:04:05-07:00" }}",
         {{- end -}}
         {{- with .Site.Copyright -}}
             "license": "{{ . }}",

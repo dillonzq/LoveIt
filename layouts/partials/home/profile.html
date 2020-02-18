@@ -16,12 +16,16 @@
             {{- if $.Site.Params.home.profile.typeit -}}
                 {{- $id := md5 . | printf "tp-%s" -}}
                 <div id={{ printf "r%s" $id }} hidden=true>
-                    {{- . | safeHTML -}}
+                    {{- /* FIXME: https://github.com/gohugoio/hugo/issues/6882 */ -}}
+                    {{- /* . | $.RenderString | safeHTML */ -}}
+                    {{- . | markdownify | safeHTML -}}
                 </div>
                 <div id={{ $id }} class="typeit"></div>
                 {{- $.Scratch.SetInMap "typeitMap" $id (slice $id) -}}
             {{- else -}}
-                {{- . | safeHTML -}}
+                {{- /* FIXME: https://github.com/gohugoio/hugo/issues/6882 */ -}}
+                {{- /* . | $.RenderString | safeHTML */ -}}
+                {{- . | markdownify | safeHTML -}}
             {{- end -}}
         </h2>
     {{- end -}}

@@ -2,7 +2,7 @@
     {{- partial "function/image.html" (dict "src" .Destination "alt" .Text "title" .Title ) -}}
     {{- with .Title | default .Text -}}
         <figcaption class="image-caption">
-            {{- . -}}
+            {{- . | safeHTML -}}
         </figcaption>
     {{- end -}}
 </figure>

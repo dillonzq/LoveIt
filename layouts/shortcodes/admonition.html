@@ -1,4 +1,5 @@
-{{- $_hugo_config := `{ "version": 1 }` -}}
+{{- $inner := .Inner | .Page.RenderString -}}
+
 {{- $iconMap := dict "note" "fas fa-pencil-alt" -}}
 {{- $iconMap  = dict "abstract" "fas fa-list-ul" | merge $iconMap -}}
 {{- $iconMap  = dict "info" "fas fa-info-circle" | merge $iconMap -}}
@@ -22,14 +23,14 @@
                     <i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}"></i>{{ . }}<i class="details {{ $iconDetails }}"></i>
                 </summary>
             {{- end -}}
-            {{- .Inner -}}
+            {{- $inner -}}
         </details>
     {{- else -}}
         <div class="admonition {{ $type }}">
             {{- with .Get "title" -}}
                 <p class="admonition-title"><i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}"></i>{{ . }}</p>
             {{- end -}}
-            {{- .Inner -}}
+            {{- $inner -}}
         </div>
     {{- end -}}
 {{- else -}}
@@ -41,14 +42,14 @@
                     <i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}"></i>{{ . }}<i class="details {{ $iconDetails }}"></i>
                 </summary>
             {{- end -}}
-            {{- .Inner -}}
+            {{- $inner -}}
         </details>
     {{- else -}}
         <div class="admonition {{ $type }}">
             {{- with .Get 1 -}}
                 <p class="admonition-title"><i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}"></i>{{ . }}</p>
             {{- end -}}
-            {{- .Inner -}}
+            {{- $inner -}}
         </div>
     {{- end -}}
 {{- end -}}
