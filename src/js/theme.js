@@ -84,16 +84,6 @@
             this.util.forEach(toc.querySelectorAll('a:first-child'), (link) => {
                 link.classList.add('toc-link');
             });
-
-            // when headings do not start with `h1`
-            const oldTocList = toc.children[0];
-            let newTocList = oldTocList;
-            let temp;
-            while (newTocList.children.length === 1
-                && (temp = newTocList.children[0].children[0]).tagName === 'UL') {
-                newTocList = temp;
-            }
-            if (newTocList !== oldTocList) toc.replaceChild(newTocList, oldTocList);
         }
 
         _initTocState(tocContainer) {
@@ -157,7 +147,7 @@
         initToc() {
             const tocContainer = document.getElementById('post-toc');
             if (tocContainer !== null) {
-                const toc = document.getElementById('TableOfContents');
+                const toc = tocContainer.getElementById('TableOfContents');
                 if (toc === null) {
                     tocContainer.parentElement.removeChild(tocContainer);
                 } else {

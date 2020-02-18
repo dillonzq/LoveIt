@@ -47,14 +47,14 @@
 
         {{- /* TOC */ -}}
         {{- if or .Params.toc (and .Site.Params.toc (ne .Params.toc false)) -}}
-            <div class="post-toc" id="post-toc">
+            <aside class="post-toc" id="post-toc">
                 <h2 class="post-toc-title">{{ T "toc" }}</h2>
                 {{- $globalAutoCollapseToc := .Site.Params.autoCollapseToc | default true }}
                 <div class="post-toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false)) }} always-active{{ end }}">
                     {{- .TableOfContents -}}
                 </div>
-            </div>
-            <div class="post-toc-mobile" id="post-toc-mobile">
+            </aside>
+            <aside class="post-toc-mobile" id="post-toc-mobile">
                 <details>
                     <summary>
                         <div class="post-toc-title">
@@ -68,7 +68,7 @@
                         {{- $toc | safeHTML -}}
                     </div>
                 </details>
-            </div>
+            </aside>
         {{- end -}}
 
         {{- /* Content */ -}}

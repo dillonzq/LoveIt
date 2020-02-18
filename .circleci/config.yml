@@ -7,7 +7,7 @@ jobs:
       theme-path:
         type: string
     docker:
-      - image: cibuilds/hugo:0.64
+      - image: cibuilds/hugo:0.62
     working_directory: ~/LoveIt
     steps:
       - checkout
@@ -15,10 +15,9 @@ jobs:
       - run: git submodule update --init
       - run:
           command: |
-            cd << parameters.example-site-path >>
-            pwd
-            HUGO_ENV=production hugo --themesDir << parameters.theme-path >> -v --minify --gc
-            htmlproofer public --allow-hash-href --empty-alt-ignore --disable-external
+            cd << parameters.example-site-path >> && pwd
+            HUGO_ENV=production hugo --themesDir << parameters.theme-path >> -v --gc
+            htmlproofer public --check-html --allow-hash-href --empty-alt-ignore --disable-external
 workflows:
   build-check-exampleSite:
     jobs:

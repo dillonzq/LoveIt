@@ -37,7 +37,7 @@
             {{- $currentPage := . -}}
             {{- range .Site.Menus.main -}}
                 <a class="menu-item" href="{{ .URL | absLangURL }}" title="{{ .Title }}">
-                    {{- .Name | safeHTML -}}
+                    {{- .Pre | safeHTML }}{{ .Name -}}
                 </a>
             {{- end -}}
             <a href="javascript:void(0);" class="theme-switch" title="{{ T "switchTheme" }}">

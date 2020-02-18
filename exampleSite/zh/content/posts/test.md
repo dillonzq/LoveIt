@@ -381,7 +381,6 @@ Here is a story about love...
 {{< /typeit >}}
 
 {{< typeit group="test" code="java" >}}
-u.accepted(); // [2018/01/05](/since/) special
 int a = 1;
 {{< /typeit >}}
 
