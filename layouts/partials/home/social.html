@@ -302,7 +302,7 @@
 {{- /* 044: 知乎 */ -}}
 {{- with .Site.Params.Social.Zhihu -}}
     {{- $options := dict "href" (printf "https://www.zhihu.com/people/%s" .) "title" "知乎" -}}
-    {{- $options = dict "class" "fab fa-zhihu fa-fw" | merge $options -}}
+    {{- $options = dict "class" "loveit it-zhihu-line" "type" "other" "scratch" $.Scratch | merge $options -}}
     {{- partial "function/icon-link.html" $options -}}
 {{- end -}}
 

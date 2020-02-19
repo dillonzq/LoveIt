@@ -15,7 +15,7 @@
     {{- /* Meta */ -}}
     <div class="meta">
         {{- $author := .Params.author | default .Site.Author.name -}}
-        {{- $authorLink := .Params.authorLink | default .Site.Author.link | default .Site.BaseURL -}}
+        {{- $authorLink := .Params.authorLink | default .Site.Author.link | default (relLangURL "/") -}}
         <a class="author" href="{{ $authorLink }}" rel="author" target="_blank">
             <i class="fas fa-user-circle fa-fw"></i>{{ $author }}
         </a>

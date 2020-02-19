@@ -2,14 +2,14 @@
 <header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title animated bounceIn">
-            <a href="{{ .Site.BaseURL }}">
+            <a href="{{ `/` | relLangURL }}">
                 {{- .Site.Title -}}
             </a>
         </div>
         <div class="menu">
             {{- $currentPage := . }}
             {{- range .Site.Menus.main -}}
-                <a class="menu-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) | or (eq $currentPage.RelPermalink .URL) }} active{{ end }}" href="{{ .URL | absLangURL }}" title="{{ .Title }}">
+                <a class="menu-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) | or (eq $currentPage.RelPermalink .URL) }} active{{ end }}" href="{{ .URL | relLangURL }}" title="{{ .Title }}">
                     {{- .Pre | safeHTML }}{{ .Name -}}
                 </a>
             {{- end -}}
@@ -25,7 +25,7 @@
     <div class="header-wrapper">
         <div class="header-container">
             <div class="header-title animated bounceIn">
-                <a href="{{ .Site.BaseURL }}">
+                <a href="{{ `/` | relLangURL }}">
                     {{- .Site.Title -}}
                 </a>
             </div>
