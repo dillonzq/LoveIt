@@ -248,6 +248,9 @@ dateFormatToUse = "2006-01-02"
     #Mastodon = "xxxx"
     #Thingiverse = "xxxx"
     #Devto = "xxxx"
+    #Gitea = "xxxx"
+    #XMPP = "xxxx"
+    #Matrix ="xxxx"
 
   # 文章页面的分享信息设置
   [params.share]

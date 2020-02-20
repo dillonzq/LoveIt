@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
 {{- with .Site.Params.Social.Github -}}
     <a href="https://github.com/{{ . }}" rel="me noopener noreffer" target="_blank">
         <i class="fab fa-github-alt fa-fw" title="Github"></i>
@@ -281,6 +282,21 @@
 {{- with .Site.Params.Social.Email}}
     <a href="mailto:{{ . }}" rel="me noopener noreffer">
         <i class="far fa-envelope fa-fw" target="_blank" title="Email"></i>
+    </a>
+{{- end -}}
+{{- with .Site.Params.Social.Gitea}}
+    <a href="" rel="me noopener noreffer" target="_blank">
+        <i class="fab fa fa-gitea fa-fw" title="Gitea"></i>
+    </a>
+{{- end -}}
+{{- with .Site.Params.Social.XMPP}}
+    <a href="xmpp:{{ . }}" rel="me noopener noreffer" target="_blank">
+        <i class="fab fa fa-xmpp fa-fw" title="XMPP"></i>
+    </a>
+{{- end -}}
+{{- with .Site.Params.Social.Matrix}}
+    <a href="https://matrix.to/#/{{ . }}" rel="me noopener noreffer" target="_blank">
+        <i class="fab fa fa-matrix-org fa-fw" title="Matrix"></i>
     </a>
 {{- end -}}
 {{- with .Site.Params.Social.Custom}}
