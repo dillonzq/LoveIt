@@ -1,30 +1,14 @@
 @charset 'utf-8';
 
-$home-profile: {{- if .Site.Params.home.profile.enable -}}true{{ else }}false{{ end }};
-$home-posts: {{- if .Site.Params.home.posts.enable -}}true{{ else }}false{{ end }};
-
-{{- if eq .Site.Params.header.desktopMode "normal" -}}
-  $header-position-desktop: static;
-  $page-padding-top-desktop: 1rem;
-  $post-toc-top: 7rem;
-{{- else -}}
-  $header-position-desktop: fixed;
-  $page-padding-top-desktop: 6rem;
-  $post-toc-top: 12rem;
-{{- end -}}
-
-{{- if eq .Site.Params.header.mobileMode "normal" -}}
-  $header-position-mobile: static;
-  $page-padding-top-mobile: 1rem;
-{{- else -}}
-  $header-position-mobile: fixed;
-  $page-padding-top-mobile: 6rem;
-{{- end -}}
+$home-profile: {{ if .Site.Params.home.profile.enable }}true{{ else }}false{{ end }};
+$home-posts: {{ if .Site.Params.home.posts.enable }}true{{ else }}false{{ end }};
+$header-normal-mode-desktop: {{ if eq .Site.Params.header.desktopMode "normal" }}true{{ else }}false{{ end }};
+$header-normal-mode-mobile: {{ if eq .Site.Params.header.mobileMode "normal" }}true{{ else }}false{{ end }};
 
 @import "_variables";
 
-{{- if fileExists "config/css/_custom.scss" -}}
-  @import "_custom";
+{{- if fileExists "config/css/_override.scss" -}}
+  @import "_override";
 {{- end -}}
 
 @import "_core/normalize";

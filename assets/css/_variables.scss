@@ -54,6 +54,17 @@ $header-height-mobile: 4rem !default;
 $header-background-color: #f8f8f8 !default;
 $header-background-color-dark: #252627 !default;
 
+// Position of the header
+$header-position-desktop: if($header-normal-mode-desktop, static, fixed) !default;
+$header-position-mobile: if($header-normal-mode-mobile, static, fixed) !default;
+
+// Top of the page padding
+$page-padding-top-desktop: if($header-normal-mode-desktop, 1rem, 6rem) !default;
+$page-padding-top-mobile: if($header-normal-mode-mobile, 1rem, 6rem) !default;
+
+// Top of the post toc
+$post-toc-top: if($header-normal-mode-desktop, 7rem, 12rem) !default;
+
 // Color of the hover header item
 $header-hover-color: #161209 !default;
 $header-hover-color-dark: #fff !default;
