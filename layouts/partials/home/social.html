@@ -378,8 +378,8 @@
 
 {{- /* 055: Mastodon */ -}}
 {{- with .Site.Params.Social.Mastodon -}}
-    {{- $MastodonPrefix := $.Site.Params.Social.MastodonPrefix | default "https://mastodon.social/" -}}
-    {{- $options := dict "href" $MastodonPrefix "title" "Mastodon" -}}
+    {{- $MastodonPrefix := $.Site.Params.Social.MastodonPrefix | default "https://mastodon.social" -}}
+    {{- $options := dict "href" (printf "%s/%s" $MastodonPrefix .) "title" "Mastodon" -}}
     {{- $options = dict "class" "fab fa-mastodon fa-fw" | merge $options -}}
     {{- partial "function/icon-link.html" $options -}}
 {{- end -}}

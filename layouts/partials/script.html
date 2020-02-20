@@ -1,4 +1,5 @@
 {{- $CDN := .Scratch.Get "CDN" -}}
+{{- $localScratch := newScratch -}}
 
 {{- /* Fork Awesome https://forkaweso.me/ */ -}}
 {{- if .Scratch.Get "forkawesome" -}}
@@ -41,10 +42,10 @@
         {{- slice "js/lib/typeit/typeit.min.js" | $.Scratch.Add "scriptLocal" -}}
     {{- end -}}
     {{- range $key, $val := . -}}
-        {{- slice $val | $.Scratch.Add "typeitArr" -}}
+        {{- slice $val | $localScratch.Add "typeitArr" -}}
     {{- end -}}
     <script>
-        window.typeitArr = {{ $.Scratch.Get "typeitArr" | jsonify | safeJS }};
+        window.typeitArr = {{ $localScratch.Get "typeitArr" | jsonify | safeJS }};
     </script>
 {{- end -}}
 
