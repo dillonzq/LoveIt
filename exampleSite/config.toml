@@ -37,22 +37,22 @@ themesDir = "../.."
       [[languages.en.menu.main]]
         identifier = "posts"
         name = "Posts"
-        url = "posts"
+        url = "/posts/"
         weight = 1
       [[languages.en.menu.main]]
         identifier = "tags"
         name = "Tags"
-        url = "tags"
+        url = "/tags/"
         weight = 2
       [[languages.en.menu.main]]
         identifier = "categories"
         name = "Categories"
-        url = "categories"
+        url = "/categories/"
         weight = 3
       [[languages.en.menu.main]]
         identifier = "about"
         name = "About"
-        url = "about"
+        url = "/about/"
         weight = 4
       [[languages.en.menu.main]]
         identifier = "zh"
@@ -332,22 +332,22 @@ themesDir = "../.."
       [[languages.zh.menu.main]]
         identifier = "posts"
         name = "文章"
-        url = "posts"
+        url = "/posts/"
         weight = 1
       [[languages.zh.menu.main]]
         identifier = "tags"
         name = "标签"
-        url = "tags"
+        url = "/tags/"
         weight = 2
       [[languages.zh.menu.main]]
         identifier = "categories"
         name = "分类"
-        url = "categories"
+        url = "/categories/"
         weight = 3
       [[languages.zh.menu.main]]
         identifier = "about"
         name = "关于"
-        url = "about"
+        url = "/about/"
         weight = 4
       [[languages.zh.menu.main]]
         identifier = "en"

@@ -7,9 +7,8 @@
             </a>
         </div>
         <div class="menu">
-            {{- $currentPage := . }}
             {{- range .Site.Menus.main -}}
-                <a class="menu-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) | or (eq $currentPage.RelPermalink .URL) }} active{{ end }}" href="{{ .URL | relLangURL }}" title="{{ .Title }}">
+                <a class="menu-item{{ if $.IsMenuCurrent "main" . | or ($.HasMenuCurrent "main" .) | or (.URL | relLangURL | string | eq $.RelPermalink ) }} active{{ end }}" href="{{ .URL | relLangURL }}"{{ with .Title }} title="{{ . }}"{{ end }}>
                     {{- .Pre | safeHTML }}{{ .Name -}}
                 </a>
             {{- end -}}
