@@ -46,7 +46,7 @@
         {{- /* Featured image */ -}}
         {{- with .Params.featuredImage -}}
             <div class="featured-image">
-                {{- partial "function/image.html" (dict "src" . "alt" "featured image") -}}
+                {{- partial "plugin/image.html" (dict "src" . "alt" "featured image") -}}
             </div>
         {{- end -}}
 
@@ -66,7 +66,7 @@
                         </div>
                     </summary>
                     <div class="toc-content" id="toc-content-static">
-                        {{- .TableOfContents -}}
+                        {{- partial "single/content.html" .TableOfContents -}}
                     </div>
                 </details>
             </div>
@@ -74,11 +74,11 @@
 
         {{- /* Content */ -}}
         <div class="content">
-            {{- partial "function/content.html" .Content -}}
+            {{- partial "single/content.html" .Content -}}
         </div>
 
         {{- /* Footer */ -}}
-        {{- partial "post/footer.html" . -}}
+        {{- partial "single/footer.html" . -}}
 
         {{- /* Comment */ -}}
         <div class="comment">
