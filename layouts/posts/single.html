@@ -6,26 +6,31 @@
         <h1 class="single-title animated flipInX">{{ .Title }}</h1>
 
         {{- /* Meta */ -}}
-        <div class="meta">
-            <div class="meta-line">
+        <div class="post-meta">
+            <div class="post-meta-line">
                 {{- $author := .Params.author | default .Site.Author.name -}}
                 {{- $authorLink := .Params.authorLink | default .Site.Author.link | default (relLangURL "/") -}}
-                <a class="author" href="{{ $authorLink }}" rel="author" target="_blank">
-                    <i class="fas fa-user-circle fa-fw"></i>{{ $author }}
-                </a>&nbsp;
+                <span class="post-author">
+                    <a class="author" href="{{ $authorLink }}" rel="author" target="_blank">
+                        <i class="fas fa-user-circle fa-fw"></i>{{ $author }}
+                    </a>
+                </span>
+
                 {{- with .Params.categories -}}
-                    <span class="post-category">
-                        {{- T "included" -}}&nbsp;
+                    &nbsp;<span class="post-category">
+                        {{- T "included" -}}
                         {{- range . -}}
-                            {{- $name := . -}}
-                            {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
-                                <i class="far fa-folder fa-fw"></i><a href="{{ .Permalink }}">{{ $name | humanize }}</a>&nbsp;
-                            {{- end -}}
+                            &nbsp;
+                            <span>
+                                <a href="{{ `/categories/` | relLangURL }}{{ urlize .}}">
+                                    <i class="far fa-folder fa-fw"></i>{{ . | humanize }}
+                                </a>
+                            </span>
                         {{- end -}}
                     </span>
                 {{- end -}}
             </div>
-            <div class="meta-line">
+            <div class="post-meta-line">
                 {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
                 <i class="far fa-calendar-alt fa-fw"></i><time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;
                 <i class="fas fa-pencil-alt fa-fw"></i>{{ T "wordCount" .WordCount }}&nbsp;

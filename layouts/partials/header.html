@@ -35,7 +35,7 @@
         <div class="menu" id="menu-mobile">
             {{- $currentPage := . -}}
             {{- range .Site.Menus.main -}}
-                <a class="menu-item" href="{{ .URL | absLangURL }}" title="{{ .Title }}">
+                <a class="menu-item" href="{{ .URL | relLangURL }}" title="{{ .Title }}">
                     {{- .Pre | safeHTML }}{{ .Name -}}
                 </a>
             {{- end -}}
