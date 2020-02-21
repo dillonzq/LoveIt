@@ -44,7 +44,11 @@
 
     {{- /* Summary content */ -}}
     <div class="content">
-        {{- partial "single/content.html" .Summary -}}
+        {{- with .Summary -}}
+            {{- partial "single/content.html" . -}}
+        {{- else -}}
+            {{- .Description | safeHTML -}}
+        {{- end -}}
     </div>
 
     {{- /* Footer */ -}}
