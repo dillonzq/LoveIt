@@ -2,8 +2,7 @@
   .page {
     max-width: 780px;
 
-    .post-toc {
-      width: 300px;
+    #toc-auto {
       margin-left: 800px;
     }
   }
@@ -13,8 +12,7 @@
   .page {
     max-width: 680px;
 
-    .post-toc {
-      width: 240px;
+    #toc-auto {
       margin-left: 700px;
     }
   }
@@ -24,8 +22,7 @@
   .page {
     max-width: 560px;
 
-    .post-toc {
-      width: 180px;
+    #toc-auto {
       margin-left: 580px;
     }
   }
@@ -41,11 +38,11 @@
   .page {
     max-width: 80%;
 
-    .post-toc {
+    #toc-auto {
       display: none;
     }
 
-    .post-toc-mobile {
+    #toc-static {
       display: block;
     }
   }

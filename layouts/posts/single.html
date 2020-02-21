@@ -47,28 +47,24 @@
 
         {{- /* TOC */ -}}
         {{- if or .Params.toc (and .Site.Params.toc (ne .Params.toc false)) -}}
-            <aside class="post-toc" id="post-toc">
-                <h2 class="post-toc-title">{{ T "toc" }}</h2>
+            <div class="toc-auto" id="toc-auto">
+                <h2 class="toc-title">{{ T "toc" }}</h2>
                 {{- $globalAutoCollapseToc := .Site.Params.autoCollapseToc | default true }}
-                <div class="post-toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false)) }} always-active{{ end }}">
-                    {{- .TableOfContents -}}
-                </div>
-            </aside>
-            <aside class="post-toc-mobile" id="post-toc-mobile">
+                <div class="toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false)) }} always-active{{ end }}" id="toc-content-auto"></div>
+            </div>
+            <div class="toc-static" id="toc-static">
                 <details>
                     <summary>
-                        <div class="post-toc-title">
+                        <div class="toc-title">
                             <span>{{ T "toc" }}</span>
                             <span><i class="details icon fas fa-angle-down"></i></span>
                         </div>
                     </summary>
-                    <div class="post-toc-content">
-                        {{- $toc := .TableOfContents -}}
-                        {{- $toc = replaceRE `id="TableOfContents"` `id="TableOfContentsMobile"` $toc -}}
-                        {{- $toc | safeHTML -}}
+                    <div class="toc-content" id="toc-content-static">
+                        {{- .TableOfContents -}}
                     </div>
                 </details>
-            </aside>
+            </div>
         {{- end -}}
 
         {{- /* Content */ -}}

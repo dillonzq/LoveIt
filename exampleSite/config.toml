@@ -59,7 +59,7 @@ themesDir = "../.."
         pre = '<i class="fas fa-language fa-fw"></i>'
         name = ""
         title = "简体中文"
-        url = "zh"
+        url = "/zh/"
         weight = 5
       [languages.en.params]
         # LoveIt theme version
