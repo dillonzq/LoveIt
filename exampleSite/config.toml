@@ -9,6 +9,16 @@ theme = "LoveIt"
 # 主题目录
 themesDir = "../.."
 
+# whether to use robots.txt
+# 是否使用 robots.txt
+enableRobotsTXT = true
+# whether to use git commit log to generate lastmod record
+# 是否使用 git 信息来生成文章的上次修改时间
+enableGitInfo = false
+# whether to use emoji code
+# 是否使用 emoji 代码
+enableEmoji = true
+
 [languages]
   [languages.en]
     weight = 1
@@ -16,16 +26,10 @@ themesDir = "../.."
     languageCode = "en"
     # website title
     title = "LoveIt Theme"
-    # whether to use git commit log to generate lastmod record
-    enableGitInfo = false
     # whether to include chinese/japanese/korean
     hasCJKLanguage = false
     # default amount of posts in each pages
     paginate = 12
-    # whether to use emoji code
-    enableEmoji = true
-    # whether to use robots.txt
-    enableRobotsTXT = true
     # [UA-XXXXXXXX-X] google analytics code
     googleAnalytics = ""
     # copyright description used only for seo schema
@@ -311,16 +315,10 @@ themesDir = "../.."
     languageCode = "zh"
     # 网站标题
     title = "LoveIt 主题"
-    # 是否使用 git 信息来生成文章的上次修改时间
-    enableGitInfo = false
     # 是否包括中日韩文字
     hasCJKLanguage = true
     # 默认每页列表显示的文章数目
     paginate = 12
-    # 是否使用 emoji 代码
-    enableEmoji = true
-    # 是否使用 robots.txt
-    enableRobotsTXT = true
     # [UA-XXXXXXXX-X] 谷歌分析代号
     googleAnalytics = ""
     # 版权描述，仅仅用于 SEO

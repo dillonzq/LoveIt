@@ -131,3 +131,21 @@
     }
   }
 }
+
+.toc {
+  ruby {
+    background: $code-background-color;
+
+    rt {
+      color: $global-font-secondary-color;
+    }
+
+    .dark-theme & {
+      background: $code-background-color-dark;
+
+      rt {
+        color: $global-font-secondary-color-dark;
+      }
+    }
+  }
+}

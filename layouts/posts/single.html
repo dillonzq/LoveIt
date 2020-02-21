@@ -52,12 +52,12 @@
 
         {{- /* TOC */ -}}
         {{- if or .Params.toc (and .Site.Params.toc (ne .Params.toc false)) -}}
-            <div class="toc-auto" id="toc-auto">
+            <div class="toc" id="toc-auto">
                 <h2 class="toc-title">{{ T "toc" }}</h2>
                 {{- $globalAutoCollapseToc := .Site.Params.autoCollapseToc | default true }}
                 <div class="toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false)) }} always-active{{ end }}" id="toc-content-auto"></div>
             </div>
-            <div class="toc-static" id="toc-static">
+            <div class="toc" id="toc-static">
                 <details>
                     <summary>
                         <div class="toc-title">
@@ -66,7 +66,10 @@
                         </div>
                     </summary>
                     <div class="toc-content" id="toc-content-static">
-                        {{- partial "single/content.html" .TableOfContents -}}
+                        {{- $toc := .TableOfContents -}}
+                        {{- $toc = partial "function/fontawesome.html" $toc -}}
+                        {{- $toc = partial "function/ruby.html" $toc -}}
+                        {{- $toc | safeHTML -}}
                     </div>
                 </details>
             </div>
