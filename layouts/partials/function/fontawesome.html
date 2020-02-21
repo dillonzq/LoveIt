@@ -1,0 +1,5 @@
+{{- /* Font Awesome */ -}}
+{{- /* :(far fa-circle): -> <i class="far fa-circle fa-fw"></i> */ -}}
+{{- $REin := `:\(([\w- ]+?)\):` -}}
+{{- $REout := `<i class="$1 fa-fw"></i>` -}}
+{{- return replaceRE $REin $REout . -}}

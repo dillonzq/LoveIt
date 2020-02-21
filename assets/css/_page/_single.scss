@@ -54,7 +54,6 @@
   @import "../_partial/_single/toc";
 
   .content {
-    h1,
     h2,
     h3,
     h4,
@@ -66,22 +65,7 @@
       .dark-theme & {
         font-weight: bolder;
       }
-    }
 
-    h2 > a:first-child::before {
-      content: "#";
-      margin-right: .3125rem;
-      color: $single-link-color;
-
-      .dark-theme & {
-        color: $single-link-color-dark;
-      }
-    }
-
-    h3,
-    h4,
-    h5,
-    h6 {
       & > a:first-child::before {
         content: "|";
         margin-right: .3125rem;
@@ -91,6 +75,10 @@
           color: $single-link-color-dark;
         }
       }
+    }
+
+    h2 > a:first-child::before {
+      content: "#";
     }
 
     p {

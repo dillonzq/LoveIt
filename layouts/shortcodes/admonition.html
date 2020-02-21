@@ -23,14 +23,18 @@
                     <i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}"></i>{{ . }}<i class="details {{ $iconDetails }}"></i>
                 </summary>
             {{- end -}}
-            {{- $inner -}}
+            <div class="admonition-content">
+                {{- $inner -}}
+            </div>
         </details>
     {{- else -}}
         <div class="admonition {{ $type }}">
             {{- with .Get "title" -}}
                 <p class="admonition-title"><i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}"></i>{{ . }}</p>
             {{- end -}}
-            {{- $inner -}}
+            <div class="admonition-content">
+                {{- $inner -}}
+            </div>
         </div>
     {{- end -}}
 {{- else -}}
@@ -42,14 +46,18 @@
                     <i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}"></i>{{ . }}<i class="details {{ $iconDetails }}"></i>
                 </summary>
             {{- end -}}
-            {{- $inner -}}
+            <div class="admonition-content">
+                {{- $inner -}}
+            </div>
         </details>
     {{- else -}}
         <div class="admonition {{ $type }}">
             {{- with .Get 1 -}}
                 <p class="admonition-title"><i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}"></i>{{ . }}</p>
             {{- end -}}
-            {{- $inner -}}
+            <div class="admonition-content">
+                {{- $inner -}}
+            </div>
         </div>
     {{- end -}}
 {{- end -}}

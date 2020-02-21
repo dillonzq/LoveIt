@@ -1,0 +1,5 @@
+{{- /* Ruby */ -}}
+{{- /* [EN]^(English) -> <strong><ruby>EN<rt>English</rt></ruby></strong> */ -}}
+{{- $REin := `\[(.+?)\]\^\((.+?)\)` -}}
+{{- $REout := `<strong><ruby>$1<rt>$2</rt></ruby></strong>` -}}
+{{- return replaceRE $REin $REout . -}}

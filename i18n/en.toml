@@ -46,10 +46,10 @@ other = "Powered by %s"
 other = "Theme - "
 # === partials/footer.html ===
 
-# === partials/post/share.html ===
+# === partials/plugin/share.html ===
 [share]
 other = "Share on"
-# === partials/post/share.html ===
+# === partials/plugin/share.html ===
 
 # === posts/single.html ===
 [toc]

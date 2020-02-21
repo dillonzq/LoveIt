@@ -46,18 +46,18 @@
         {{- /* Featured image */ -}}
         {{- with .Params.featuredImage -}}
             <div class="featured-image">
-                {{- partial "function/image.html" (dict "src" . "alt" "featured image") -}}
+                {{- partial "plugin/image.html" (dict "src" . "alt" "featured image") -}}
             </div>
         {{- end -}}
 
         {{- /* TOC */ -}}
         {{- if or .Params.toc (and .Site.Params.toc (ne .Params.toc false)) -}}
-            <div class="toc-auto" id="toc-auto">
+            <div class="toc" id="toc-auto">
                 <h2 class="toc-title">{{ T "toc" }}</h2>
                 {{- $globalAutoCollapseToc := .Site.Params.autoCollapseToc | default true }}
                 <div class="toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false)) }} always-active{{ end }}" id="toc-content-auto"></div>
             </div>
-            <div class="toc-static" id="toc-static">
+            <div class="toc" id="toc-static">
                 <details>
                     <summary>
                         <div class="toc-title">
@@ -66,7 +66,10 @@
                         </div>
                     </summary>
                     <div class="toc-content" id="toc-content-static">
-                        {{- .TableOfContents -}}
+                        {{- $toc := .TableOfContents -}}
+                        {{- $toc = partial "function/fontawesome.html" $toc -}}
+                        {{- $toc = partial "function/ruby.html" $toc -}}
+                        {{- $toc | safeHTML -}}
                     </div>
                 </details>
             </div>
@@ -74,11 +77,11 @@
 
         {{- /* Content */ -}}
         <div class="content">
-            {{- partial "function/content.html" .Content -}}
+            {{- partial "single/content.html" .Content -}}
         </div>
 
         {{- /* Footer */ -}}
-        {{- partial "post/footer.html" . -}}
+        {{- partial "single/footer.html" . -}}
 
         {{- /* Comment */ -}}
         <div class="comment">

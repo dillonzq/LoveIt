@@ -14,6 +14,10 @@
     font-weight: 700;
   }
 
+  .admonition-content {
+    margin: .5rem 0;
+  }
+
   i.icon {
     font-size: 16px;
     color: map-get($admonition-color-map, 'note');

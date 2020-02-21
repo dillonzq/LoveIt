@@ -59,31 +59,47 @@
       overflow: hidden;
       text-overflow: ellipsis;
       overflow-wrap: break-word;
-    }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p {
-      font-size: 1rem;
-      display: inline;
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p {
+        font-size: 1rem;
+        display: inline;
 
-      &::after {
-        content: "\A";
-        white-space: pre;
+        &::after {
+          content: "\A";
+          white-space: pre;
+        }
       }
-    }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      line-height: 2;
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        line-height: 2;
+
+        &::before {
+          content: "|";
+          margin-right: .3125rem;
+          color: $single-link-color;
+
+          .dark-theme & {
+            color: $single-link-color-dark;
+          }
+        }
+      }
+
+      h2 {
+        font-size: 1.2rem;
+
+        &::before {
+          content: "#";
+        }
+      }
     }
 
     .post-footer {
