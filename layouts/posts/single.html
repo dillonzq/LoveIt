@@ -6,26 +6,31 @@
         <h1 class="single-title animated flipInX">{{ .Title }}</h1>
 
         {{- /* Meta */ -}}
-        <div class="meta">
-            <div class="meta-line">
+        <div class="post-meta">
+            <div class="post-meta-line">
                 {{- $author := .Params.author | default .Site.Author.name -}}
-                {{- $authorLink := .Params.authorLink | default .Site.Author.link | default .Site.BaseURL -}}
-                <a class="author" href="{{ $authorLink }}" rel="author" target="_blank">
-                    <i class="fas fa-user-circle fa-fw"></i>{{ $author }}
-                </a>&nbsp;
+                {{- $authorLink := .Params.authorLink | default .Site.Author.link | default (relLangURL "/") -}}
+                <span class="post-author">
+                    <a class="author" href="{{ $authorLink }}" rel="author" target="_blank">
+                        <i class="fas fa-user-circle fa-fw"></i>{{ $author }}
+                    </a>
+                </span>
+
                 {{- with .Params.categories -}}
-                    <span class="post-category">
-                        {{- T "included" -}}&nbsp;
+                    &nbsp;<span class="post-category">
+                        {{- T "included" -}}
                         {{- range . -}}
-                            {{- $name := . -}}
-                            {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
-                                <i class="far fa-folder fa-fw"></i><a href="{{ .Permalink }}">{{ $name | humanize }}</a>&nbsp;
-                            {{- end -}}
+                            &nbsp;
+                            <span>
+                                <a href="{{ `/categories/` | relLangURL }}{{ urlize .}}">
+                                    <i class="far fa-folder fa-fw"></i>{{ . | humanize }}
+                                </a>
+                            </span>
                         {{- end -}}
                     </span>
                 {{- end -}}
             </div>
-            <div class="meta-line">
+            <div class="post-meta-line">
                 {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
                 <i class="far fa-calendar-alt fa-fw"></i><time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;
                 <i class="fas fa-pencil-alt fa-fw"></i>{{ T "wordCount" .WordCount }}&nbsp;
@@ -47,28 +52,24 @@
 
         {{- /* TOC */ -}}
         {{- if or .Params.toc (and .Site.Params.toc (ne .Params.toc false)) -}}
-            <aside class="post-toc" id="post-toc">
-                <h2 class="post-toc-title">{{ T "toc" }}</h2>
+            <div class="toc-auto" id="toc-auto">
+                <h2 class="toc-title">{{ T "toc" }}</h2>
                 {{- $globalAutoCollapseToc := .Site.Params.autoCollapseToc | default true }}
-                <div class="post-toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false)) }} always-active{{ end }}">
-                    {{- .TableOfContents -}}
-                </div>
-            </aside>
-            <aside class="post-toc-mobile" id="post-toc-mobile">
+                <div class="toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false)) }} always-active{{ end }}" id="toc-content-auto"></div>
+            </div>
+            <div class="toc-static" id="toc-static">
                 <details>
                     <summary>
-                        <div class="post-toc-title">
+                        <div class="toc-title">
                             <span>{{ T "toc" }}</span>
                             <span><i class="details icon fas fa-angle-down"></i></span>
                         </div>
                     </summary>
-                    <div class="post-toc-content">
-                        {{- $toc := .TableOfContents -}}
-                        {{- $toc = replaceRE `id="TableOfContents"` `id="TableOfContentsMobile"` $toc -}}
-                        {{- $toc | safeHTML -}}
+                    <div class="toc-content" id="toc-content-static">
+                        {{- .TableOfContents -}}
                     </div>
                 </details>
-            </aside>
+            </div>
         {{- end -}}
 
         {{- /* Content */ -}}

@@ -20,7 +20,7 @@
     {
         "@context": "http://schema.org",
         "@type": "WebSite",
-        "url": "{{ .Site.BaseURL }}",
+        "url": "{{ relLangURL `/` }}",
         {{- with .Site.Author.name -}}
             "author": {
                 "@type": "Person",

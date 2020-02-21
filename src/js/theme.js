@@ -12,20 +12,41 @@
         getScrollTop() {
             return (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
         }
+
+        isMobile() {
+            return window.matchMedia('only screen and (max-width: 560px)').matches;
+        }
+
+        isTocStatic() {
+            return window.matchMedia('only screen and (max-width: 960px)').matches;
+        }
     }
 
     class Theme {
         constructor() {
             this.util = new Util();
-            this.scrollTop = 0;
-            this.scrollEvents = [];
+            this.newScrollTop = this.util.getScrollTop();
+            this.oldScrollTop = this.newScrollTop;
+            this.scrollEventSet = new Set();
+            this.resizeEventSet = new Set();
         }
 
-        initMobileMenu() {
-            document.getElementById('menu-toggle').onclick = () => {
-                document.getElementById('menu-toggle').classList.toggle('active');
-                document.getElementById('menu-mobile').classList.toggle('active');
-            };
+        initMenuMobile() {
+            const menuToggleMobile = document.getElementById('menu-toggle-mobile');
+            const menuMobile = document.getElementById('menu-mobile');
+            this._menuMobileOnScroll = this._menuMobileOnScroll || (() => {
+                menuToggleMobile.classList.remove('active');
+                menuMobile.classList.remove('active');
+            });
+            if (this.util.isMobile()) {
+                menuToggleMobile.onclick = () => {
+                    menuToggleMobile.classList.toggle('active');
+                    menuMobile.classList.toggle('active');
+                };
+                this.scrollEventSet.add(this._menuMobileOnScroll);
+            } else {
+                this.scrollEventSet.delete(this._menuMobileOnScroll);
+            }
         }
 
         initSwitchTheme() {
@@ -80,46 +101,55 @@
             }
         }
 
-        _refactorToc(toc) {
-            this.util.forEach(toc.querySelectorAll('a:first-child'), (link) => {
-                link.classList.add('toc-link');
-            });
-        }
-
-        _initTocState(tocContainer) {
-            if (window.getComputedStyle(tocContainer, null).display !== 'none') {
-                const fixed = window.desktopHeaderMode !== 'normal';
-                const fixedHeight = document.getElementById('header-desktop').getBoundingClientRect().height;
-                const TOP_SPACING = 20 + (fixed ? fixedHeight : 0);
-                const minTop = tocContainer.offsetTop;
-                const minScrollTop = minTop - TOP_SPACING + (fixed ? 0 : fixedHeight);
-                const footerTop = document.getElementById('post-footer').offsetTop;
-                const toclinks = tocContainer.getElementsByClassName('toc-link');
-                const headerLinks = document.getElementsByClassName('headerLink') || [];
-                const tocLinkLis = tocContainer.querySelectorAll('.post-toc-content li');
-                const INDEX_SPACING = 5 + (fixed ? fixedHeight : 0);
-
-                const changeTocState = () => {
-                    const scrollTop = this.util.getScrollTop();
-                    const maxTop = footerTop - tocContainer.getBoundingClientRect().height;
-                    const maxScrollTop = maxTop - TOP_SPACING + (fixed ? 0 : fixedHeight);
-                    if (scrollTop < minScrollTop) {
-                        tocContainer.style.position = 'absolute';
-                        tocContainer.style.top = `${minTop}px`;
-                    } else if (scrollTop > maxScrollTop) {
-                        tocContainer.style.position = 'absolute';
-                        tocContainer.style.top = `${maxTop}px`;
+        initToc() {
+            const tocCore = document.getElementById('TableOfContents');
+            if (tocCore === null) return;
+            if (this.util.isTocStatic()) {
+                const tocContentStatic = document.getElementById('toc-content-static');
+                if (tocCore.parentElement !== tocContentStatic) {
+                    tocCore.parentElement.removeChild(tocCore);
+                    tocContentStatic.appendChild(tocCore);
+                }
+                if (this._tocOnScroll) this.scrollEventSet.delete(this._tocOnScroll);
+            } else {
+                const tocContentAuto = document.getElementById('toc-content-auto');
+                if (tocCore.parentElement !== tocContentAuto) {
+                    tocCore.parentElement.removeChild(tocCore);
+                    tocContentAuto.appendChild(tocCore);
+                }
+                const toc = document.getElementById('toc-auto');
+                const page = document.getElementsByClassName('page')[0];
+                toc.style.maxWidth = `${page.getBoundingClientRect().left - 40}px`;
+                this._tocLinks = this._tocLinks || tocCore.getElementsByTagName('a');
+                this._tocLis = this._tocLis || tocCore.getElementsByTagName('li');
+                this._headerLinks = this._headerLinks || document.getElementsByClassName('headerLink') || [];
+                const headerIsFixed = window.desktopHeaderMode !== 'normal';
+                const headerHeight = document.getElementById('header-desktop').offsetHeight;
+                const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
+                const minTocTop = toc.offsetTop;
+                const minScrollTop = minTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
+                this._tocOnScroll = this._tocOnScroll || (() => {
+                    const footerTop = document.getElementById('post-footer').offsetTop;
+                    const maxTocTop = footerTop - toc.getBoundingClientRect().height;
+                    const maxScrollTop = maxTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
+                    if (this.newScrollTop < minScrollTop) {
+                        toc.style.position = 'absolute';
+                        toc.style.top = `${minTocTop}px`;
+                    } else if (this.newScrollTop > maxScrollTop) {
+                        toc.style.position = 'absolute';
+                        toc.style.top = `${maxTocTop}px`;
                     } else {
-                        tocContainer.style.position = 'fixed';
-                        tocContainer.style.top = `${TOP_SPACING}px`;
+                        toc.style.position = 'fixed';
+                        toc.style.top = `${TOP_SPACING}px`;
                     }
 
-                    this.util.forEach(toclinks, (link) => { link.classList.remove('active'); });
-                    this.util.forEach(tocLinkLis, (link) => { link.classList.remove('has-active'); });
-                    let activeTocIndex = headerLinks.length - 1;
-                    for (let i = 0; i < headerLinks.length - 1; i++) {
-                        const thisTop = headerLinks[i].getBoundingClientRect().top;
-                        const nextTop = headerLinks[i + 1].getBoundingClientRect().top;
+                    this.util.forEach(this._tocLinks, (link) => { link.classList.remove('active'); });
+                    this.util.forEach(this._tocLis, (link) => { link.classList.remove('has-active'); });
+                    const INDEX_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
+                    let activeTocIndex = this._headerLinks.length - 1;
+                    for (let i = 0; i < this._headerLinks.length - 1; i++) {
+                        const thisTop = this._headerLinks[i].getBoundingClientRect().top;
+                        const nextTop = this._headerLinks[i + 1].getBoundingClientRect().top;
                         if ((i == 0 && thisTop > INDEX_SPACING)
                          || (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)) {
                             activeTocIndex = i;
@@ -127,47 +157,25 @@
                         }
                     }
                     if (activeTocIndex !== -1) {
-                        toclinks[activeTocIndex].classList.add('active');
-                        let parent = toclinks[activeTocIndex].parentElement;
-                        while (parent.tagName !== 'NAV') {
+                        this._tocLinks[activeTocIndex].classList.add('active');
+                        let parent = this._tocLinks[activeTocIndex].parentElement;
+                        while (parent !== tocCore) {
                             parent.classList.add('has-active');
                             parent = parent.parentElement.parentElement;
                         }
                     }
-                };
-                changeTocState();
-
-                if (!this._initTocOnce) {
-                    this.scrollEvents.push(changeTocState);
-                    this._initTocOnce = true;
-                }
-            }
-        }
-
-        initToc() {
-            const tocContainer = document.getElementById('post-toc');
-            if (tocContainer !== null) {
-                const toc = document.getElementById('TableOfContents');
-                if (toc === null) {
-                    tocContainer.parentElement.removeChild(tocContainer);
-                } else {
-                    this._refactorToc(toc);
-                    this._initTocState(tocContainer);
-                    window.addEventListener('resize', () => {
-                        window.setTimeout(() => {
-                            this._initTocState(tocContainer);
-                        }, 0);
-                    }, false);
-                }
+                });
+                this._tocOnScroll();
+                this.scrollEventSet.add(this._tocOnScroll);
             }
         }
 
         initMermaid() {
             if (window.mermaidMap) {
                 mermaid.initialize({startOnLoad: false, theme: null});
-                Object.keys(mermaidMap).forEach((id) => {
+                Object.keys(window.mermaidMap).forEach((id) => {
                     const element = document.getElementById(id);
-                    mermaid.mermaidAPI.render("d" + id, mermaidMap[id], (svgCode) => {
+                    mermaid.mermaidAPI.render("d" + id, window.mermaidMap[id], (svgCode) => {
                         element.innerHTML = svgCode;
                         const svg = element.firstChild;
                         svg.style.width = "100%"
@@ -178,29 +186,29 @@
 
         initEcharts() {
             if (window.echartsMap) {
-                for (let i = 0; i < echartsArr.length; i++) {
-                    echartsArr[i].dispose();
+                this._echartsArr = this._echartsArr || [];
+                for (let i = 0; i < this._echartsArr.length; i++) {
+                    this._echartsArr[i].dispose();
                 }
-                echartsArr = [];
-                Object.keys(echartsMap).forEach((id) => {
-                    let myChart = echarts.init(document.getElementById(id), window.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
-                    myChart.setOption(echartsMap[id]);
-                    echartsArr.push(myChart);
+                this._echartsArr = [];
+                Object.keys(window.echartsMap).forEach((id) => {
+                    const chart = echarts.init(document.getElementById(id), window.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
+                    chart.setOption(window.echartsMap[id]);
+                    this._echartsArr.push(chart);
                 });
-                window.addEventListener("resize", function () {
-                    this.setTimeout(() => {
-                        for (let i = 0; i < echartsArr.length; i++) {
-                            echartsArr[i].resize();
-                        }
-                    }, 0);
-                }, false);
+                this._echartsOnResize = this._echartsOnResize || (() => {
+                    for (let i = 0; i < this._echartsArr.length; i++) {
+                        this._echartsArr[i].resize();
+                    }
+                });
+                this.resizeEventSet.add(this._echartsOnResize);
             }
         }
 
         initTypeit() {
             if (window.typeitArr) {
-                for (let i = 0; i < typeitArr.length; i++) {
-                    const group = typeitArr[i];
+                for (let i = 0; i < window.typeitArr.length; i++) {
+                    const group = window.typeitArr[i];
                     (function typeone(i) {
                         const content = document.getElementById(`r${group[i]}`).innerHTML;
                         if (i === group.length - 1) {
@@ -221,25 +229,16 @@
             }
         }
 
-        initScroll() {
-            for (let i = 0; i < this.scrollEvents.length; i++) {
-                document.addEventListener('scroll', this.scrollEvents[i], false);
+        initSmoothScroll() {
+            if ((!this.util.isMobile() && window.desktopHeaderMode === 'normal')
+              || (this.util.isMobile() && window.mobileHeaderMode === 'normal')) {
+                new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true});
+            } else {
+                new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true, header: '#header-desktop'});
             }
-            const initSmoothScroll = () => {
-                const isMobile = window.matchMedia('only screen and (max-width: 560px)').matches;
-                if ((!isMobile && window.desktopHeaderMode === 'normal')
-                 || (isMobile && window.mobileHeaderMode === 'normal')) {
-                    new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true});
-                } else {
-                    new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true, header: '#header-desktop'});
-                }
-            };
-            initSmoothScroll();
-            window.addEventListener('resize', () => {
-                window.setTimeout(() => {
-                    initSmoothScroll();
-                }, 0);
-            }, false);
+        }
+
+        onScroll() {
             const headers = [];
             if (window.desktopHeaderMode === 'auto') headers.push(document.getElementById('header-desktop'));
             if (window.mobileHeaderMode === 'auto') headers.push(document.getElementById('header-mobile'));
@@ -248,43 +247,57 @@
                 header.classList.add('faster');
             });
             const toTopButton = document.getElementById('dynamic-to-top');
-            document.addEventListener('scroll', () => {
-                const scrollTop = this.util.getScrollTop();
+            const MIN_SCROLL = 20;
+            window.addEventListener('scroll', () => {
+                this.newScrollTop = this.util.getScrollTop();
+                const scroll = this.newScrollTop - this.oldScrollTop;
                 this.util.forEach(headers, (header) => {
-                    if (this.scrollTop < scrollTop) {
-                        if (!header.classList.contains('fadeOutUp')) {
-                            header.classList.remove('fadeInDown');
-                            header.classList.add('fadeOutUp');
-                        }
-                    } else {
-                        if (!header.classList.contains('fadeInDown')) {
-                            header.classList.remove('fadeOutUp');
-                            header.classList.add('fadeInDown');
-                        }
-                    }
-                    if (scrollTop > 600) {
-                        if (this.scrollTop < scrollTop) {
-                            if (!toTopButton.classList.contains('fadeOut')) {
-                                toTopButton.classList.remove('fadeIn');
-                                toTopButton.classList.add('fadeOut');
-                            }
-                        } else {
-                            toTopButton.style.display = 'block';
-                            if (!toTopButton.classList.contains('fadeIn')) {
-                                toTopButton.classList.remove('fadeOut');
-                                toTopButton.classList.add('fadeIn');
-                            }
-                        }
-                    } else {
-                        toTopButton.style.display = 'none';
+                    if (scroll > MIN_SCROLL) {
+                        header.classList.remove('fadeInDown');
+                        header.classList.add('fadeOutUp');
+                    } else if (scroll < - MIN_SCROLL) {
+                        header.classList.remove('fadeOutUp');
+                        header.classList.add('fadeInDown');
                     }
                 });
-                this.scrollTop = scrollTop;
+                if (this.newScrollTop > 400) {
+                    if (scroll > MIN_SCROLL) {
+                        toTopButton.classList.remove('fadeIn');
+                        toTopButton.classList.add('fadeOut');
+                    } else if (scroll < - MIN_SCROLL) {
+                        toTopButton.style.display = 'block';
+                        toTopButton.classList.remove('fadeOut');
+                        toTopButton.classList.add('fadeIn');
+                    }
+                } else {
+                    toTopButton.style.display = 'none';
+                }
+                if (!this._scrollTimeout) {
+                    this._scrollTimeout = window.setTimeout(() => {
+                        this._scrollTimeout = null;
+                        for (let event of this.scrollEventSet) event();
+                    }, 10);
+                }
+                this.oldScrollTop = this.newScrollTop;
+            }, false);
+        }
+
+        onResize() {
+            window.addEventListener('resize', () => {
+                if (!this._resizeTimeout) {
+                    this._resizeTimeout = window.setTimeout(() => {
+                        this._resizeTimeout = null;
+                        for (let event of this.resizeEventSet) event();
+                        this.initMenuMobile();
+                        this.initToc();
+                        this.initSmoothScroll();
+                    }, 100);
+                }
             }, false);
         }
 
         init() {
-            this.initMobileMenu();
+            this.initMenuMobile();
             this.initSwitchTheme();
             this.initHighlight();
             this.initTable();
@@ -293,7 +306,10 @@
             this.initEcharts();
             this.initTypeit();
             this.initToc();
-            this.initScroll();
+            this.initSmoothScroll();
+
+            this.onScroll();
+            this.onResize();
         }
     }
 

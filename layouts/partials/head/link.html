@@ -22,10 +22,10 @@
 
 {{- /* style.min.css */ -}}
 {{- $res := resources.Get "css/style.template.scss" -}}
-{{- $options := dict "targetPath" "css/style.min.css" "outputStyle" "compressed" "enableSourceMap" true -}}
-{{- if fileExists "config/css/_custom.scss" -}}
-    {{- $options = dict "includePaths" (slice "config/css") | merge $options -}}
-{{- end -}}
+{{- $options := dict "targetPath" "css/style.min.css" -}}
+{{- $options  = dict "includePaths" (slice "config/css") | merge $options -}}
+{{- $options  = dict "outputStyle" "compressed" | merge $options -}}
+{{- $options  = dict "enableSourceMap" true | merge $options -}}
 {{- $res = resources.ExecuteAsTemplate "style.scss" . $res | toCSS $options -}}
 <link rel="stylesheet" href="{{ $res.RelPermalink }}">
 

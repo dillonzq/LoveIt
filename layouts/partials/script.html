@@ -90,14 +90,15 @@
         document.addEventListener("DOMContentLoaded", function () {
             renderMathInElement(document.body, {
                 delimiters: [
+                    { left: "$", right: "$", display: false },
                     { left: "$$", right: "$$", display: true },
                     { left: "\\(", right: "\\)", display: false },
                     { left: "\\[", right: "\\]", display: true },
-                    {{- if and $math.blockLeftDelimiter $math.blockRightDelimiter -}}
-                        { left: "{{ $math.blockLeftDelimiter }}", right: "{{ $math.blockRightDelimiter }}", display: true },
-                    {{- end -}}
                     {{- if and $math.inlineLeftDelimiter $math.inlineRightDelimiter -}}
                         { left: "{{ $math.inlineLeftDelimiter }}", right: "{{ $math.inlineRightDelimiter }}", display: false },
+                    {{- end -}}
+                    {{- if and $math.blockLeftDelimiter $math.blockRightDelimiter -}}
+                        { left: "{{ $math.blockLeftDelimiter }}", right: "{{ $math.blockRightDelimiter }}", display: true },
                     {{- end -}}
                 ]
             });
@@ -161,7 +162,6 @@
                     {{- $key }}: {{ $var | safeJS -}},
                 {{- end -}}
             };
-            window.echartsArr = [];
         </script>
     {{- end -}}
 {{- end -}}

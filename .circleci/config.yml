@@ -24,8 +24,3 @@ workflows:
       - build-check:
           example-site-path: exampleSite
           theme-path: ../..
-  build-check-exampleSite-zh:
-    jobs:
-      - build-check:
-          example-site-path: exampleSite/zh
-          theme-path: ../../..

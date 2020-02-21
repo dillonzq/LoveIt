@@ -1,25 +1,25 @@
-.post-toc {
+#toc-auto {
   display: block;
   position: absolute;
-  width: 360px;
+  width: 100%;
   margin-left: 1000px;
   padding: 0 .8rem;
   border-left: 1px solid $global-border-color;
   overflow-wrap: break-word;
   box-sizing: border-box;
-  top: $post-toc-top;
+  top: if($header-normal-mode-desktop, 7rem, 12rem);
 
   .dark-theme & {
     border-left: 1px solid $global-border-color-dark;
   }
 
-  .post-toc-title {
+  .toc-title {
     font-weight: 400;
     margin: .8rem 0;
     text-transform: uppercase;
   }
 
-  .post-toc-content {
+  .toc-content {
     &.always-active ul {
       display: block;
     }
@@ -73,13 +73,13 @@
   }
 }
 
-.post-toc-mobile {
+#toc-static {
   display: none;
   padding-top: .8rem;
 
   details {
     summary {
-      .post-toc-title {
+      .toc-title {
         display: block;
         display: flex;
         justify-content: space-between;
@@ -110,7 +110,7 @@
     }
   }
 
-  .post-toc-content {
+  .toc-content {
     border: 2px solid $code-background-color;
 
     >nav>ul {
