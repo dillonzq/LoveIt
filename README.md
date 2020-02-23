@@ -138,8 +138,8 @@ A few suggestions to help you get a good looking site quickly:
 
 If you want to change some styling to fit your own website needs, you can edit them:
 
-* `assets/css/_varibales.scss`: You can override the variables in `_variables.scss` to customize the style
-* `assets/css/_custom.scss`: You can put your custom css in this file
+* `config/css/_varibales.scss`: You can override the variables in `_variables.scss` to customize the style
+* `config/css/_custom.scss`: You can put your custom css in this file
 
 ## Favicons, Browserconfig, Manifest
 
