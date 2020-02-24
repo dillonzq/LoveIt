@@ -14,7 +14,6 @@
     <a class="lightgallery" href="{{ $large | safeURL }}" title="{{ $description }}" data-thumbnail="{{ $small | safeURL }}"{{ if $title }} data-sub-html="<h2>{{ $title }}</h2><p>{{ $description }}</p>"{{ end }}>
         <img
             class="lazyload"
-            loading="lazy"
             src="{{ $loading.RelPermalink | safeURL }}"
             data-sizes="auto"
             data-srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
@@ -25,7 +24,6 @@
 {{- else -}}
     <img
         class="lazyload"
-        loading="lazy"
         src="{{ $loading.RelPermalink | safeURL }}"
         data-sizes="auto"
         data-srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"

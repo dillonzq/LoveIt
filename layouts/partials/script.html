@@ -34,11 +34,6 @@
     {{- else -}}
         {{- slice "lib/lazysizes/lazysizes.min.js" | $scratch.Add "scriptLocal" -}}
     {{- end -}}
-    {{- with $CDN.lazysizesNativeLoadingJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
-    {{- else -}}
-        {{- slice "lib/lazysizes/ls.native-loading.min.js" | $scratch.Add "scriptLocal" -}}
-    {{- end -}}
 {{- end -}}
 
 {{- /* lightgallery.js */ -}}
