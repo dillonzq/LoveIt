@@ -21,6 +21,22 @@
     <link rel="feed" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ $.Site.Title }}">
 {{- end -}}
 
+{{- /* Font Awesome */ -}}
+{{- with $CDN.fontawesomeFreeCSS -}}
+    {{- . | safeHTML -}}
+{{- else -}}
+    {{- $res := resources.Get "lib/fontawesome-free/all.min.css" -}}
+    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
+{{- end -}}
+
+{{- /* Animate.css */ -}}
+{{- with $CDN.animateCSS -}}
+    {{- . | safeHTML -}}
+{{- else -}}
+    {{ $res := resources.Get "lib/animate/animate.min.css" -}}
+    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
+{{- end -}}
+
 {{- /* style.min.css */ -}}
 {{- $res := resources.Get "css/style.template.scss" -}}
 {{- $options := dict "targetPath" "css/style.min.css" -}}
@@ -29,19 +45,3 @@
 {{- $options  = dict "enableSourceMap" true | merge $options -}}
 {{- $res = resources.ExecuteAsTemplate "style.scss" . $res | toCSS $options -}}
 <link rel="stylesheet" href="{{ $res.RelPermalink }}">
-
-{{- /* Font Awesome https://fontawesome.com/ */ -}}
-{{- with $CDN.fontawesomeFreeCSS -}}
-    {{- . | safeHTML -}}
-{{- else -}}
-    {{- $res := resources.Get "css/lib/fontawesome-free/all.min.css" -}}
-    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
-{{- end -}}
-
-{{- /* Animate.css https://github.com/daneden/animate.css */ -}}
-{{- with $CDN.animateCSS -}}
-    {{- . | safeHTML -}}
-{{- else -}}
-    {{ $res := resources.Get "css/lib/animate/animate.min.css" -}}
-    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
-{{- end -}}

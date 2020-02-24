@@ -515,34 +515,46 @@ enableEmoji = true
   # CSS and JS Files CDN
   # CSS 和 JS 文件的 CDN 设置
   [params.cdn]
-    ## for example '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
-    ## 例如 '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
+    # fontawesome-free@5.12.1 https://fontawesome.com/
     fontawesomeFreeCSS = ''
+    # animate.css@3.7.2 https://github.com/daneden/animate.css
     animateCSS = ''
-    gitalkCSS = ''
-    gitalkJS = ''
-    valineJS = ''
+    # smooth-scroll@16.1.2 https://github.com/cferdinandi/smooth-scroll
+    smoothScrollJS = ''
+    # sharer@0.4.0 https://github.com/ellisonleao/sharer.js
+    sharerJS = ''
+    # lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
     lazysizesJS = ''
     lazysizesNativeLoadingJS = ''
+    # lightgallery@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0 https://github.com/sachinchoolur/lightgallery.js
     lightgalleryCSS = ''
     lightgalleryJS = ''
     lightgalleryThumbnailJS = ''
     lightgalleryZoomJS = ''
-    smoothScrollJS = ''
-    sharerJS = ''
+    # typeit@6.5.1 https://github.com/alexmacarthur/typeit
+    typeitJS = ''
+    # katex@0.11.1 https://github.com/KaTeX/KaTeX
     katexCSS = ''
     katexJS = ''
     katexAutoRenderJS = ''
     katexCopyTexCSS = ''
     katexCopyTexJS = ''
     katexMhchemJS = ''
+    # mermaid@8.4.2 https://github.com/knsv/mermaid
     mermaidJS = ''
-    echartsJS = ''
-    echartsMacaronsJS = ''
-    typeitJS = ''
+    # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
     aplayerCSS = ''
     aplayerJS = ''
+    # meting@2.0.1 https://github.com/metowolf/MetingJS
     metingJS = ''
+    # echarts@4.5.0 https://github.com/apache/incubator-echarts
+    echartsJS = ''
+    echartsMacaronsJS = ''
+    # gitalk@1.5.0 https://github.com/gitalk/gitalk
+    gitalkCSS = ''
+    gitalkJS = ''
+    # valine@1.3.10 https://valine.js.org/
+    valineJS = ''
 
 # Markup related configuration in Hugo
 # Hugo 解析文档的配置

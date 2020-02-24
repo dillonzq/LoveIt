@@ -20,12 +20,12 @@
         {{- with $CDN.gitalkCSS -}}
             {{- slice . | $scratch.Add "linkCDN" -}}
         {{- else -}}
-            {{- slice "css/lib/gitalk/gitalk.css" | $scratch.Add "linkLocal" -}}
+            {{- slice "lib/gitalk/gitalk.css" | $scratch.Add "linkLocal" -}}
         {{- end -}}
         {{- with $CDN.gitalkJS -}}
             {{- slice . | $scratch.Add "scriptCDN" -}}
         {{- else -}}
-            {{- slice "css/lib/gitalk/gitalk.min.js" | $scratch.Add "scriptLocal" -}}
+            {{- slice "lib/gitalk/gitalk.min.js" | $scratch.Add "scriptLocal" -}}
         {{- end -}}
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
@@ -51,11 +51,11 @@
     {{- if .Site.Params.comment.valine.enable -}}
         {{- $valine := .Site.Params.comment.valine -}}
         <div id="valine"></div>
-        {{- slice "css/lib/valine/dark.scss" | $scratch.Add "linkLocal" -}}
+        {{- slice "lib/valine/dark.scss" | $scratch.Add "linkLocal" -}}
         {{- with $CDN.valineJS -}}
             {{- slice . | $scratch.Add "scriptCDN" -}}
         {{- else -}}
-            {{- slice "js/lib/valine/Valine.min.js" | $scratch.Add "scriptLocal" -}}
+            {{- slice "lib/valine/Valine.min.js" | $scratch.Add "scriptLocal" -}}
         {{- end -}}
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
