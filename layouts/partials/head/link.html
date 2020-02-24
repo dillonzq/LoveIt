@@ -25,16 +25,16 @@
 {{- with $CDN.fontawesomeFreeCSS -}}
     {{- . | safeHTML -}}
 {{- else -}}
-    {{- $res := resources.Get "lib/fontawesome-free/all.min.css" -}}
-    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
+    {{- $res := resources.Get "lib/fontawesome-free/all.min.css" | resources.Fingerprint "sha256" -}}
+    <link rel="stylesheet" href="{{ $res.RelPermalink }}" integrity="{{ $res.Data.Integrity }}">
 {{- end -}}
 
 {{- /* Animate.css */ -}}
 {{- with $CDN.animateCSS -}}
     {{- . | safeHTML -}}
 {{- else -}}
-    {{ $res := resources.Get "lib/animate/animate.min.css" -}}
-    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
+    {{ $res := resources.Get "lib/animate/animate.min.css" | resources.Fingerprint "sha256" -}}
+    <link rel="stylesheet" href="{{ $res.RelPermalink }}" integrity="{{ $res.Data.Integrity }}">
 {{- end -}}
 
 {{- /* style.min.css */ -}}
@@ -43,5 +43,5 @@
 {{- $options  = dict "includePaths" (slice "config/css") | merge $options -}}
 {{- $options  = dict "outputStyle" "compressed" | merge $options -}}
 {{- $options  = dict "enableSourceMap" true | merge $options -}}
-{{- $res = resources.ExecuteAsTemplate "style.scss" . $res | toCSS $options -}}
-<link rel="stylesheet" href="{{ $res.RelPermalink }}">
+{{- $res = resources.ExecuteAsTemplate "style.scss" . $res | toCSS $options | resources.Fingerprint "sha256" -}}
+<link rel="stylesheet" href="{{ $res.RelPermalink }}" integrity="{{ $res.Data.Integrity }}">

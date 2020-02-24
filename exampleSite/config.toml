@@ -540,17 +540,17 @@ enableEmoji = true
     katexCopyTexCSS = ''
     katexCopyTexJS = ''
     katexMhchemJS = ''
-    # mermaid@8.4.2 https://github.com/knsv/mermaid
+    # mermaid@8.4.8 https://github.com/knsv/mermaid
     mermaidJS = ''
     # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
     aplayerCSS = ''
     aplayerJS = ''
     # meting@2.0.1 https://github.com/metowolf/MetingJS
     metingJS = ''
-    # echarts@4.5.0 https://github.com/apache/incubator-echarts
+    # echarts@4.6.0 https://echarts.apache.org/
     echartsJS = ''
     echartsMacaronsJS = ''
-    # gitalk@1.5.0 https://github.com/gitalk/gitalk
+    # gitalk@1.6.0 https://github.com/gitalk/gitalk
     gitalkCSS = ''
     gitalkJS = ''
     # valine@1.3.10 https://valine.js.org/

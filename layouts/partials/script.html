@@ -157,7 +157,7 @@
     {{- else -}}
         {{- slice "lib/mermaid/mermaid.min.js" | $scratch.Add "scriptLocal" -}}
     {{- end -}}
-    {{- slice "css/mermaid.scss" | $scratch.Add "linkLocal" -}}
+    {{- slice "lib/mermaid/mermaid.scss" | $scratch.Add "linkLocal" -}}
     <script>
         window.mermaidMap = {{ jsonify . | safeJS }};
     </script>
@@ -210,6 +210,10 @@
     {{- end -}}
 {{- end -}}
 
+{{- /* Theme script */ -}}
+{{- slice "js/theme.min.js" | $scratch.Add "scriptLocal" -}}
+{{- $_ := (resources.Get "js/theme.min.js.map").RelPermalink -}}
+
 {{- range $scratch.Get "linkCDN" -}}
     {{- safeHTML . -}}
 {{- end -}}
@@ -221,7 +225,8 @@
     {{- else if not (strings.HasSuffix . ".min.css") -}}
         {{- $res = minify $res -}}
     {{- end -}}
-    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
+    {{- $res = $res | resources.Fingerprint "sha256" -}}
+    <link rel="stylesheet" href="{{ $res.RelPermalink }}" integrity="{{ $res.Data.Integrity }}">
 {{- end -}}
 
 {{- range $scratch.Get "scriptCDN" -}}
@@ -232,11 +237,9 @@
     {{- if not (strings.HasSuffix . ".min.js") -}}
         {{- $res = minify $res -}}
     {{- end -}}
-    <script src="{{ $res.RelPermalink }}"></script>
+    {{- $res = $res | resources.Fingerprint "sha256" -}}
+    <script src="{{ $res.RelPermalink }}" integrity="{{ $res.Data.Integrity }}"></script>
 {{- end -}}
-
-{{- /* Theme script */ -}}
-<script src=/js/theme.min.js></script>
 
 {{- /* Google analytics async */ -}}
 {{- if $scratch.Get "production" | and .Site.GoogleAnalytics -}}
