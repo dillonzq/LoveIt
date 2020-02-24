@@ -3,7 +3,7 @@
     {{- with .Params.featuredImage -}}
         <div class="featured-image-preview">
             {{- $image := $.Params.featuredImagePreview | default . -}}
-            {{- partial "plugin/image.html" (dict "src" $image "alt" "featured image") -}}
+            {{- partial "plugin/image.html" (dict "src" $image "description" $.Description "context" $) -}}
         </div>
     {{- end -}}
 

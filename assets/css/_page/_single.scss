@@ -168,26 +168,35 @@
 
     figure {
       text-align: center;
-    }
 
-    .image-caption:not(:empty) {
-      min-width: 20%;
-      max-width: 80%;
-      display: inline-block;
-      padding: .625rem;
-      margin: 0 auto;
-      border-bottom: 1px solid #d9d9d9;
-      font-size: .875rem;
-      color: #969696;
-      line-height: 1.7;
+      .image-caption:not(:empty) {
+        min-width: 20%;
+        max-width: 80%;
+        display: inline-block;
+        padding: .625rem;
+        margin: 0 auto;
+        border-bottom: 1px solid #d9d9d9;
+        font-size: .875rem;
+        color: #969696;
+        line-height: 1.7;
+      }
+
+      a.lightgallery:hover img {
+        transform: scale(1.02);
+      }
     }
 
     img {
       display: block;
-      max-width: 100%;
+      max-width: 90%;
       height: auto;
       margin: 0 auto;
       overflow: hidden;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .lazyloading {
+      object-fit: none;
     }
 
     blockquote {

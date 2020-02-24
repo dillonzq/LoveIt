@@ -66,8 +66,6 @@ enableEmoji = true
         url = "/zh/"
         weight = 5
       [languages.en.params]
-        # LoveIt theme version
-        version = "0.1.X"
         # site description
         description = "About LoveIt Theme"
         # site keywords
@@ -76,20 +74,6 @@ enableEmoji = true
         defaultTheme = "auto"
         # public git repo url to link lastmod git commit only then enableGitInfo is true
         gitRepo = ""
-        # Header info
-        [languages.en.params.header]
-          # desktop header mode ("fixed", "normal", "auto")
-          desktopMode = "fixed"
-          # mobile header mode ("fixed", "normal", "auto")
-          mobileMode = "auto"
-        # Footer Copyright Info
-        [languages.en.params.footer]
-          # Site creation time
-          since = 2019
-          # ICP info only in China (HTML format is allowed)
-          icp = ""
-          # license info (HTML format is allowed)
-          license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
         # Home Page Info
         [languages.en.params.home]
           # Home Page Profile
@@ -98,7 +82,7 @@ enableEmoji = true
             # Gravatar Email for preferred avatar in home page
             gravatarEmail = ""
             # URL of avatar shown in home page
-            avatarURL = "images/avatar.png"
+            avatarURL = "/images/avatar.png"
             # subtitle shown in home page
             subtitle = "A Clean, Elegant but Advanced Hugo Theme"
             # whether to use typeit animation for subtitle
@@ -178,12 +162,6 @@ enableEmoji = true
           # XMPP = "xxxx"
           # Matrix = "xxxx"
           # Bilibili = "xxxx"
-        # Page config
-        [languages.en.params.page]
-          # whether to show social share links in post page
-          socialShare = true
-          # whether to show link to Raw Markdown content of the post
-          linkToMarkdown = true
         # Social Share Links in post page
         [languages.en.params.share]
           enable = true
@@ -214,67 +192,6 @@ enableEmoji = true
           # Skype = true
           # Trello = true
           # Mix = true
-        # mathematical formulas (KaTeX)
-        [languages.en.params.math]
-          enable = true
-          # default inline delimiter is $ ... $ and \\( ... \\)
-          inlineLeftDelimiter = ""
-          inlineRightDelimiter = ""
-          # default block delimiter is $$ ... $$ and \\[ ... \\]
-          blockLeftDelimiter = ""
-          blockRightDelimiter = ""
-          # KaTeX extension copy_tex
-          copyTex = true
-          # KaTeX extension mhchem
-          mhchem = true
-        # CSS and JS Files CDN
-        [languages.en.params.cdn]
-          ## for example '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
-          fontawesomeFreeCSS = ''
-          animateCSS = ''
-          gitalkCSS = ''
-          gitalkJS = ''
-          valineJS = ''
-          lazysizesJS = ''
-          smoothScrollJS = ''
-          sharerJS = ''
-          katexCSS = ''
-          katexJS = ''
-          katexAutoRenderJS = ''
-          katexCopyTexCSS = ''
-          katexCopyTexJS = ''
-          katexMhchemJS = ''
-          mermaidJS = ''
-          echartsJS = ''
-          echartsMacaronsJS = ''
-          typeitJS = ''
-          aplayerCSS = ''
-          aplayerJS = ''
-          metingJS = ''
-        # site verification code for Google/Bing/Yandex/Pinterest/Baidu
-        [languages.en.params.verification]
-          google = ""
-          bing = ""
-          yandex = ""
-          pinterest = ""
-          baidu = ""
-        # Publisher Info just for SEO
-        [languages.en.params.publisher]
-          name = "xxxx"
-          [languages.en.params.publisher.logo]
-            url = "logo.png"
-            width = 127
-            height = 40
-        # Website Log Info just for SEO
-        [languages.en.params.logo]
-          url = "logo.png"
-          width = 127
-          height = 40
-        # Website Image Info just for SEO
-        [languages.en.params.image]
-          url = "cover.png"
-          width = 800
-          height = 600
         # Comment Config
         [languages.en.params.comment]
           enable = true
@@ -355,8 +272,6 @@ enableEmoji = true
         url = "../"
         weight = 5
     [languages.zh.params]
-      # LoveIt 主题版本
-      version = "0.1.X"
       # 网站描述
       description = "关于 LoveIt 主题"
       # 网站关键词
@@ -365,20 +280,6 @@ enableEmoji = true
       defaultTheme = "auto"
       # 用于生成文章上次修改时间的公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
       gitRepo = ""
-      # 页面头部导航栏信息
-      [languages.zh.params.header]
-        # 桌面端导航栏模式 ("fixed", "normal", "auto")
-        desktopMode = "fixed"
-        # 移动端导航栏模式 ("fixed", "normal", "auto")
-        mobileMode = "auto"
-      # 页面底部版权信息设置
-      [languages.zh.params.footer]
-        # 网站创立年份
-        since = 2019
-        # ICP 备案信息，仅在中国使用 (允许使用 HTML 格式)
-        icp = ""
-        # 许可协议信息 (允许使用 HTML 格式)
-        license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
       # 主页信息设置
       [languages.zh.params.home]
         # 主页个人信息
@@ -387,7 +288,7 @@ enableEmoji = true
           # Gravatar 邮箱，用于优先在主页显示的头像
           gravatarEmail = ""
           # 主页显示头像的 URL
-          avatarURL = "images/avatar.png"
+          avatarURL = "/images/avatar.png"
           # 主页显示的网站副标题
           subtitle = "一个简洁、优雅且高效的 Hugo 主题"
           # 是否为副标题显示打字机动画
@@ -467,12 +368,6 @@ enableEmoji = true
         # XMPP = "xxxx@example.com"
         # Matrix = "xxxx"
         Bilibili = "xxxx"
-      # 文章页面配置
-      [languages.zh.params.page]
-        # 在文章页面是否使用分享功能
-        socialShare = true
-        # 是否在文章页面显示原始 Markdown 文档链接
-        linkToMarkdown = true
       # 文章页面的分享信息设置
       [languages.zh.params.share]
         enable = true
@@ -503,67 +398,6 @@ enableEmoji = true
         # Skype = true
         # Trello = true
         # Mix = true
-      # 数学公式 (KaTeX https://katex.org/)
-      [languages.zh.params.math]
-        enable = true
-        # 默认内联定界符是 $ ... $ 和 \\( ... \\)
-        inlineLeftDelimiter = ""
-        inlineRightDelimiter = ""
-        # 默认块定界符是 $$ ... $$ 和 \\[ ... \\]
-        blockLeftDelimiter = ""
-        blockRightDelimiter = ""
-        # KaTeX 插件 copy_tex
-        copyTex = true
-        # KaTeX 插件 mhchem
-        mhchem = true
-      # CSS 和 JS 文件的 CDN 设置
-      [languages.zh.params.cdn]
-        ## 例如 '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
-        fontawesomeFreeCSS = ''
-        animateCSS = ''
-        gitalkCSS = ''
-        gitalkJS = ''
-        valineJS = ''
-        lazysizesJS = ''
-        smoothScrollJS = ''
-        sharerJS = ''
-        katexCSS = ''
-        katexJS = ''
-        katexAutoRenderJS = ''
-        katexCopyTexCSS = ''
-        katexCopyTexJS = ''
-        katexMhchemJS = ''
-        mermaidJS = ''
-        echartsJS = ''
-        echartsMacaronsJS = ''
-        typeitJS = ''
-        aplayerCSS = ''
-        aplayerJS = ''
-        metingJS = ''
-      # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
-      [languages.zh.params.verification]
-        google = ""
-        bing = ""
-        yandex = ""
-        pinterest = ""
-        baidu = ""
-      # 出版者信息，仅用于 SEO
-      [languages.zh.params.publisher]
-        name = "xxxx"
-        [languages.zh.params.publisher.logo]
-          url = "logo.png"
-          width = 127
-          height = 40
-      # 网站图标信息，仅用于 SEO
-      [languages.zh.params.logo]
-        url = "logo.png"
-        width = 127
-        height = 40
-      #  网站图标信息，仅用于 SEO
-      [languages.zh.params.image]
-        url = "cover.png"
-        width = 800
-        height = 600
       # 评论系统设置
       [languages.zh.params.comment]
         enable = true
@@ -597,6 +431,118 @@ enableEmoji = true
           numPosts = 10
           appId = ""
           languageCode = "en_US"
+
+[params]
+  # LoveIt theme version
+  # LoveIt 主题版本
+  version = "0.1.X"
+  # Header info
+  # 页面头部导航栏信息
+  [params.header]
+    # desktop header mode ("fixed", "normal", "auto")
+    # 桌面端导航栏模式 ("fixed", "normal", "auto")
+    desktopMode = "fixed"
+    # mobile header mode ("fixed", "normal", "auto")
+    # 移动端导航栏模式 ("fixed", "normal", "auto")
+    mobileMode = "auto"
+  # Footer Copyright Info
+  # 页面底部版权信息设置
+  [params.footer]
+    # Site creation time
+    # 网站创立年份
+    since = 2019
+    # ICP info only in China (HTML format is allowed)
+    # ICP 备案信息，仅在中国使用 (允许使用 HTML 格式)
+    icp = ""
+    # license info (HTML format is allowed)
+    # 许可协议信息 (允许使用 HTML 格式)
+    license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+  # Page config
+  # 文章页面配置
+  [params.page]
+    # whether to use lightgallery in the page
+    # 是否在文章页面使用 lightgallery
+    lightgallery = true
+    # whether to show link to Raw Markdown content of the post
+    # 是否在文章页面显示原始 Markdown 文档链接
+    linkToMarkdown = true
+  # mathematical formulas (KaTeX)
+  # 数学公式 (KaTeX https://katex.org/)
+  [params.math]
+    enable = true
+    # default block delimiter is $$ ... $$ and \\[ ... \\]
+    # 默认块定界符是 $$ ... $$ 和 \\[ ... \\]
+    blockLeftDelimiter = ""
+    blockRightDelimiter = ""
+    # default inline delimiter is $ ... $ and \\( ... \\)
+    # 默认内联定界符是 $ ... $ 和 \\( ... \\)
+    inlineLeftDelimiter = ""
+    inlineRightDelimiter = ""
+    # KaTeX extension copy_tex
+    # KaTeX 插件 copy_tex
+    copyTex = true
+    # KaTeX extension mhchem
+    # KaTeX 插件 mhchem
+    mhchem = true
+  # site verification code for Google/Bing/Yandex/Pinterest/Baidu
+  # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
+  [params.verification]
+    google = ""
+    bing = ""
+    yandex = ""
+    pinterest = ""
+    baidu = ""
+  # Publisher Info just for SEO
+  # 出版者信息，仅用于 SEO
+  [params.publisher]
+    name = "xxxx"
+    [params.publisher.logo]
+      url = "logo.png"
+      width = 127
+      height = 40
+  # Website Log Info just for SEO
+  # 网站 Logo 信息，仅用于 SEO
+  [params.logo]
+    url = "logo.png"
+    width = 127
+    height = 40
+  # Website Image Info just for SEO
+  #  网站图标信息，仅用于 SEO
+  [params.image]
+    url = "cover.png"
+    width = 800
+    height = 600
+  # CSS and JS Files CDN
+  # CSS 和 JS 文件的 CDN 设置
+  [params.cdn]
+    ## for example '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
+    ## 例如 '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css" integrity="sha256-fdcFNFiBMrNfWL6OcAGQz6jDgNTRxnrLEd4vJYFWScE=" crossorigin="anonymous">'
+    fontawesomeFreeCSS = ''
+    animateCSS = ''
+    gitalkCSS = ''
+    gitalkJS = ''
+    valineJS = ''
+    lazysizesJS = ''
+    lazysizesNativeLoadingJS = ''
+    lightgalleryCSS = ''
+    lightgalleryJS = ''
+    lightgalleryThumbnailJS = ''
+    lightgalleryZoomJS = ''
+    smoothScrollJS = ''
+    sharerJS = ''
+    katexCSS = ''
+    katexJS = ''
+    katexAutoRenderJS = ''
+    katexCopyTexCSS = ''
+    katexCopyTexJS = ''
+    katexMhchemJS = ''
+    mermaidJS = ''
+    echartsJS = ''
+    echartsMacaronsJS = ''
+    typeitJS = ''
+    aplayerCSS = ''
+    aplayerJS = ''
+    metingJS = ''
 
 # Markup related configuration in Hugo
 # Hugo 解析文档的配置

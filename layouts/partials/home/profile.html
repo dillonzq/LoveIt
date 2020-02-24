@@ -1,3 +1,5 @@
+{{- $scratch := .Scratch.Get "scratch" -}}
+
 <div class="home-profile">
     {{- $avatar := .Site.Params.home.profile.avatarURL -}}
     {{- with .Site.Params.home.profile.gravatarEmail -}}
@@ -6,7 +8,7 @@
     {{- with $avatar -}}
         <div class="home-avatar">
             <a href="/posts">
-                <img src={{ . | relURL }} alt="avatar" title="{{ T "home" }}">
+                {{- partial "plugin/image.html" (dict "src-s" . "title" "avatar" "description" (T "home") "context" $) -}}
             </a>
         </div>
     {{- end -}}
@@ -16,16 +18,12 @@
             {{- if $.Site.Params.home.profile.typeit -}}
                 {{- $id := md5 . | printf "tp-%s" -}}
                 <div id={{ printf "r%s" $id }} hidden=true>
-                    {{- /* FIXME: https://github.com/gohugoio/hugo/issues/6882 */ -}}
-                    {{- /* . | $.RenderString | safeHTML */ -}}
-                    {{- . | markdownify | safeHTML -}}
+                    {{- . -}}
                 </div>
                 <div id={{ $id }} class="typeit"></div>
-                {{- $.Scratch.SetInMap "typeitMap" $id (slice $id) -}}
+                {{- $scratch.SetInMap "typeitMap" $id (slice $id) -}}
             {{- else -}}
-                {{- /* FIXME: https://github.com/gohugoio/hugo/issues/6882 */ -}}
-                {{- /* . | $.RenderString | safeHTML */ -}}
-                {{- . | markdownify | safeHTML -}}
+                {{- . -}}
             {{- end -}}
         </h2>
     {{- end -}}

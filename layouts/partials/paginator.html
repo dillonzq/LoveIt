@@ -1,6 +1,6 @@
-{{- if gt $.Paginator.TotalPages 1 -}}
+{{- if gt .Paginator.TotalPages 1 -}}
     <ul class="pagination">
-        {{- $.Scratch.Set "paginator.ellipsed" false -}}
+        {{- .Scratch.Set "paginator.ellipsed" false -}}
         {{- range $.Paginator.Pagers -}}
             {{- $right := sub .TotalPages .PageNumber -}}
             {{- $showNumber := or (le .PageNumber 1) (eq $right 0) -}}

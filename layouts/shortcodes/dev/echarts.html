@@ -1,4 +1,6 @@
-<!-- shuffle md5 as id -->
+{{- $scratch := .Page.Scratch.Get "scratch" -}}
+
+{{- /* shuffle md5 as id */ -}}
 {{- $id := delimit (split (md5 .Inner) "" | shuffle) "" | printf "echarts-%s" -}}
 <div class="echarts" id="{{ $id }}"></div>
-{{- .Page.Scratch.SetInMap "echartsMap" $id (printf "{%s}" .Inner) -}}
+{{- $scratch.SetInMap "echartsMap" $id (printf "{%s}" .Inner) -}}

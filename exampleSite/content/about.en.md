@@ -2,6 +2,8 @@
 title: "About LoveIt"
 date: 2019-08-02T11:04:49+08:00
 draft: false
+
+lightgallery: true
 ---
 
 [LoveIt :(far fa-heart):](https://github.com/dillonzq/LoveIt) is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/) developed by [Dillon](https://dillonzq.com).

@@ -1,3 +1,5 @@
+{{- $scratch := .Page.Scratch.Get "scratch" -}}
+
 {{- /* only the trailing newline is retained */ -}}
 {{- $content := replaceRE `(?s)^\n*(.*?)\n*$` "$1\n" .Inner | .Page.RenderString -}}
 {{- /* shuffle md5 as id */ -}}
@@ -35,7 +37,7 @@
     {{- end -}}
 
     {{- $key := .Get "group" | default $id -}}
-    {{- $group := index (.Page.Scratch.Get "typeitMap" | default dict) $key -}}
+    {{- $group := index ($scratch.Get "typeitMap" | default dict) $key -}}
     {{- $group = $group | default slice | append $id -}}
-    {{- .Page.Scratch.SetInMap "typeitMap" $key $group -}}
+    {{- $scratch.SetInMap "typeitMap" $key $group -}}
 </div>

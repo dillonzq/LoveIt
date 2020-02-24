@@ -17,18 +17,25 @@ featuredImagePreview: ""
 
 toc: true
 autoCollapseToc: true
+lightgallery: true
 math: true
 comment: false
 dev: true
 ---
 
-## :(fas fa-rocket): This is a test page
+## & :(fas fa-rocket): This is a test page
 
 [https://www.aol.com/article/entertainment/2020/02/10/oscars-viewership-hits-new-low-with-236-million-viewers/23923047/](https://www.aol.com/article/entertainment/2020/02/10/oscars-viewership-hits-new-low-with-236-million-viewers/23923047/)
 
 Test all features in development.
 
 <!--more-->
+
+## Test Img
+
+![Web Image 1](https://static.dillonzq.com/images/20190817130904-U6cPUk.jpg "Web Image")
+
+![Local Image](/images/Apple-Devices-Preview.png "Local Image")
 
 ## Test Code
 
@@ -43,11 +50,11 @@ class DataHolder<T>{
     T item;
 
     public void setData(T t) {
-    	this.item=t;
+        this.item=t;
     }
 
     public T getData() {
-    	return this.item;
+        return this.item;
     }
 }
 ```
@@ -383,10 +390,6 @@ Here is a story about love...
 {{< typeit group="test" code="java" >}}
 int a = 1;
 {{< /typeit >}}
-
-## Test Img
-
-![Gif](https://static.dillonzq.com/images/20190817130904-U6cPUk.jpg "Title")
 
 ## Test Align
 
