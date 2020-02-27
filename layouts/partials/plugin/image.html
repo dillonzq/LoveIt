@@ -1,34 +1,29 @@
 {{- /* lazysizes and lightgallery.js */ -}}
-{{- $src := index . "src" -}}
-{{- $small := index . "src-s" | default $src -}}
-{{- $large := index . "src-l" | default $src -}}
-{{- $title := index . "title" -}}
-{{- $description := index . "description" -}}
-{{- $context := index . "context" -}}
-{{- $scratch := $context.Scratch.Get "scratch" -}}
+{{- $small := .src_s | default .src -}}
+{{- $large := .src_l | default .src -}}
 {{- $loading := resources.Get "svg/loading.svg" | minify -}}
-{{- if not (index . "src") | and (index . "src-s") -}}
+{{- if not .src | and .src_s -}}
     {{- $loading = resources.Get "svg/loading.small.svg" | minify -}}
 {{- end -}}
-{{- if index . "lightgallery" -}}
-    <a class="lightgallery" href="{{ $large | safeURL }}" title="{{ $description }}" data-thumbnail="{{ $small | safeURL }}"{{ if $title }} data-sub-html="<h2>{{ $title }}</h2><p>{{ $description }}</p>"{{ end }}>
+{{- if .lightgallery -}}
+    <a class="lightgallery" href="{{ $large | safeURL }}" title="{{ .description }}" data-thumbnail="{{ $small | safeURL }}"{{ if .title }} data-sub-html="<h2>{{ .title }}</h2><p>{{ .description }}</p>"{{ end }}>
         <img
             class="lazyload"
             src="{{ $loading.RelPermalink | safeURL }}"
             data-sizes="auto"
-            data-srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
-            data-src="{{ $src | safeURL }}"
-            alt="{{ $title | default $description }}" />
+            data-srcset="{{ $small | safeURL }}, {{ .src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
+            data-src="{{ .src | safeURL }}"
+            alt="{{ .title | default .description }}" />
     </a>
-    {{- $scratch.Set "lightgallery" true -}}
+    {{- .scratch.Set "lightgallery" true -}}
 {{- else -}}
     <img
         class="lazyload"
         src="{{ $loading.RelPermalink | safeURL }}"
         data-sizes="auto"
-        data-srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
-        data-src="{{ $src | safeURL }}"
-        alt="{{ $title | default $description }}"
-        title="{{ $description }}" />
+        data-srcset="{{ $small | safeURL }}, {{ .src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
+        data-src="{{ .src | safeURL }}"
+        alt="{{ .title | default .description }}"
+        title="{{ .description }}" />
 {{- end -}}
-{{- $scratch.Set "lazysizes" true -}}
+{{- .scratch.Set "lazysizes" true -}}

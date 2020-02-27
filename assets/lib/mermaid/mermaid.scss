@@ -1,11 +1,15 @@
-.mermaid {
+.page .mermaid {
   width: 100%;
   margin: 3% auto;
   text-align: center;
 
+  & > svg {
+    max-width: 100%;
+  }
+
   @import "themes/neutral/index";
 
   .dark-theme & {
-    @import "themes/dark/index";
+    @import "themes/darker/index";
   }
 }

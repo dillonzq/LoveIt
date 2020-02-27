@@ -97,7 +97,7 @@
     {{- /* 014: Instapaper */ -}}
     {{- if .Params.Share.Instapaper | default .Site.Params.Share.Instapaper | eq true -}}
         <a href="javascript:void(0);" title="{{ T `share` }} Instapaper" data-sharer="instapaper" data-url="{{ .Permalink }}" data-title="{{ .Title }}" data-description="{{ .Description }}">
-            {{- partial "plugin/icon.html" (dict "class" "loveit it-instapaper-fill" "type" "other" "context" .) -}}
+            {{- partial "plugin/icon.html" (dict "class" "loveit it-instapaper-fill" "type" "other" "scratch" $scratch) -}}
         </a>
     {{- end -}}
 
@@ -146,7 +146,7 @@
     {{- /* 021: Myspace */ -}}
     {{- if .Params.Share.Myspace | default .Site.Params.Share.Myspace | eq true -}}
         <a href="javascript:void(0);" title="{{ T `share` }} Myspace" data-sharer="myspace" data-url="{{ .Permalink }}" data-title="{{ .Title }}" data-description="{{ .Description }}">
-            {{- partial "plugin/icon.html" (dict "class" "loveit it-myspace-fill" "type" "other" "context" .) -}}
+            {{- partial "plugin/icon.html" (dict "class" "loveit it-myspace-fill" "type" "other" "scratch" $scratch) -}}
         </a>
     {{- end -}}
 
@@ -160,7 +160,7 @@
     {{- /* 023: 百度 */ -}}
     {{- if .Params.Share.Baidu | default .Site.Params.Share.Baidu | eq true -}}
         <a href="javascript:void(0);" title="{{ T `share` }} 百度" data-sharer="baidu" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
-            {{- partial "plugin/icon.html" (dict "class" "loveit it-baidu-fill" "type" "other" "context" .) -}}
+            {{- partial "plugin/icon.html" (dict "class" "loveit it-baidu-fill" "type" "other" "scratch" $scratch) -}}
         </a>
     {{- end -}}
 

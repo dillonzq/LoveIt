@@ -1,3 +1,5 @@
+{{- $scratch := .Scratch.Get "scratch" -}}
+
 {{- /* 001: Github */ -}}
 {{- with .Site.Params.Social.Github -}}
     {{- $options := dict "href" (printf "https://github.com/%s" .) "title" "GitHub" "rel" "me" -}}
@@ -302,7 +304,7 @@
 {{- /* 044: 知乎 */ -}}
 {{- with .Site.Params.Social.Zhihu -}}
     {{- $options := dict "href" (printf "https://www.zhihu.com/people/%s" .) "title" "知乎" "rel" "me" -}}
-    {{- $options = dict "icon" (dict "class" "loveit it-zhihu-line" "type" "other" "context" $) | merge $options -}}
+    {{- $options = dict "icon" (dict "class" "loveit it-zhihu-line" "type" "other" "scratch" $scratch) | merge $options -}}
     {{- partial "plugin/link.html" $options -}}
 {{- end -}}
 
@@ -394,28 +396,28 @@
 {{- /* 055: Gitea */ -}}
 {{- with .Site.Params.Social.Gitea -}}
     {{- $options := dict "href" . "title" "Gitea" "rel" "me" -}}
-    {{- $options = dict "icon" (dict "class" "fa fa-gitea fa-fw" "type" "fo" "context" $) | merge $options -}}
+    {{- $options = dict "icon" (dict "class" "fa fa-gitea fa-fw" "type" "fo" "scratch" $scratch) | merge $options -}}
     {{- partial "plugin/link.html" $options -}}
 {{- end -}}
 
 {{- /* 056: XMPP */ -}}
 {{- with .Site.Params.Social.XMPP -}}
     {{- $options := dict "href" (printf "xmpp:%s" .) "title" "XMPP" "rel" "me" -}}
-    {{- $options = dict "icon" (dict "class" "fa fa-xmpp fa-fw" "type" "fo" "context" $) | merge $options -}}
+    {{- $options = dict "icon" (dict "class" "fa fa-xmpp fa-fw" "type" "fo" "scratch" $scratch) | merge $options -}}
     {{- partial "plugin/link.html" $options -}}
 {{- end -}}
 
 {{- /* 057: Matrix */ -}}
 {{- with .Site.Params.Social.Matrix -}}
     {{- $options := dict "href" (printf "https://matrix.to/#/%s" .) "title" "Matrix" "rel" "me" -}}
-    {{- $options = dict "icon" (dict "class" "fa fa-matrix-org fa-fw" "type" "fo" "context" $) | merge $options -}}
+    {{- $options = dict "icon" (dict "class" "fa fa-matrix-org fa-fw" "type" "fo" "scratch" $scratch) | merge $options -}}
     {{- partial "plugin/link.html" $options -}}
 {{- end -}}
 
 {{- /* 058: bilibili */ -}}
 {{- with .Site.Params.Social.Bilibili -}}
     {{- $options := dict "href" (printf "https://space.bilibili.com/%s" .) "title" "bilibili" "rel" "me" -}}
-    {{- $options = dict "icon" (dict "class" "loveit it-bilibili-fill" "type" "other" "context" $) | merge $options -}}
+    {{- $options = dict "icon" (dict "class" "loveit it-bilibili-fill" "type" "other" "scratch" $scratch) | merge $options -}}
     {{- partial "plugin/link.html" $options -}}
 {{- end -}}
 

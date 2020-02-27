@@ -146,7 +146,7 @@
 {{- end -}}
 
 {{- /* mermaid */ -}}
-{{- with $scratch.Get "mermaidMap" -}}
+{{- with $scratch.Get "mermaidArr" -}}
     {{- with $CDN.mermaidJS -}}
         {{- slice . | $scratch.Add "scriptCDN" -}}
     {{- else -}}
@@ -154,7 +154,24 @@
     {{- end -}}
     {{- slice "lib/mermaid/mermaid.scss" | $scratch.Add "linkLocal" -}}
     <script>
-        window.mermaidMap = {{ jsonify . | safeJS }};
+        window.mermaidArr = {{ jsonify . | safeJS }};
+    </script>
+{{- end -}}
+
+{{- /* ECharts */ -}}
+{{- with $scratch.Get "echartsArr" -}}
+    {{- with $CDN.echartsJS -}}
+        {{- slice . | $scratch.Add "scriptCDN" -}}
+    {{- else -}}
+        {{- slice "lib/echarts/echarts.min.js" | $scratch.Add "scriptLocal" -}}
+    {{- end -}}
+    {{- with $CDN.echartsMacaronsJS -}}
+        {{- slice . | $scratch.Add "scriptCDN" -}}
+    {{- else -}}
+        {{- slice "lib/echarts/macarons.js" | $scratch.Add "scriptLocal" -}}
+    {{- end -}}
+    <script>
+        window.echartsArr = {{ jsonify . | safeJS }};
     </script>
 {{- end -}}
 
@@ -181,28 +198,14 @@
     {{- end -}}
 {{- end -}}
 
-{{- /* dev feature */ -}}
+{{- /* Dev feature */ -}}
 {{- if .Params.dev -}}
-    {{- /* ECharts */ -}}
-    {{- with $scratch.Get "echartsMap" -}}
-        {{- with $CDN.echartsJS -}}
-            {{- slice . | $scratch.Add "scriptCDN" -}}
-        {{- else -}}
-            {{- slice "lib/echarts/echarts.min.js" | $scratch.Add "scriptLocal" -}}
-        {{- end -}}
-        {{- with $CDN.echartsMacaronsJS -}}
-            {{- slice . | $scratch.Add "scriptCDN" -}}
-        {{- else -}}
-            {{- slice "lib/echarts/macarons.js" | $scratch.Add "scriptLocal" -}}
-        {{- end -}}
-        <script>
-            window.echartsMap = {
-                {{- range $key, $var := . -}}
-                    {{- $key }}: {{ $var | safeJS -}},
-                {{- end -}}
-            };
-        </script>
-    {{- end -}}
+{{- end -}}
+
+{{- with $scratch.Get "contentMap" -}}
+    <script>
+        window.contentMap = {{ jsonify . | safeJS }};
+    </script>
 {{- end -}}
 
 {{- /* Theme script */ -}}

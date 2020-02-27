@@ -1,6 +1,5 @@
 {{- $scratch := .Page.Scratch.Get "scratch" -}}
 
-{{- /* shuffle md5 as id */ -}}
-{{- $id := delimit (split (md5 .Inner) "" | shuffle) "" | printf "mermaid-%s" -}}
+{{- $id := partial "function/id.html" (dict "content" (trim .Inner "\n") "scratch" $scratch) -}}
 <div class="mermaid" id="{{ $id }}"></div>
-{{- $scratch.SetInMap "mermaidMap" $id (trim .Inner "\n") -}}
+{{- slice $id | $scratch.Add "mermaidArr" -}}

@@ -8,7 +8,7 @@
     {{- with $avatar -}}
         <div class="home-avatar">
             <a href="/posts">
-                {{- partial "plugin/image.html" (dict "src-s" . "title" "avatar" "description" (T "home") "context" $) -}}
+                {{- partial "plugin/image.html" (dict "src_s" . "title" "avatar" "description" (T "home") "scratch" $scratch) -}}
             </a>
         </div>
     {{- end -}}
@@ -16,11 +16,8 @@
     {{- with .Site.Params.home.profile.subtitle -}}
         <h2 class="home-description">
             {{- if $.Site.Params.home.profile.typeit -}}
-                {{- $id := md5 . | printf "tp-%s" -}}
-                <div id={{ printf "r%s" $id }} hidden=true>
-                    {{- . -}}
-                </div>
-                <div id={{ $id }} class="typeit"></div>
+                {{- $id := partial "function/id.html" (dict "content" . "scratch" $scratch) -}}
+                <div id="{{ $id }}" class="typeit"></div>
                 {{- $scratch.SetInMap "typeitMap" $id (slice $id) -}}
             {{- else -}}
                 {{- . -}}
