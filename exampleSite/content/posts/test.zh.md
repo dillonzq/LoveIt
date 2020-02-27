@@ -17,9 +17,9 @@ featuredImagePreview: ""
 
 toc: true
 autoCollapseToc: true
+lightgallery: true
 math: true
 comment: false
-dev: true
 ---
 
 ## :(fas fa-rocket): This is a test page
@@ -29,6 +29,12 @@ dev: true
 Test all features in development.
 
 <!--more-->
+
+## Test Img
+
+![Web Image 1](https://static.dillonzq.com/images/20190817130904-U6cPUk.jpg "Web Image")
+
+![Local Image](/images/Apple-Devices-Preview.png "Local Image")
 
 ## Test Code
 
@@ -43,11 +49,11 @@ class DataHolder<T>{
     T item;
 
     public void setData(T t) {
-    	this.item=t;
+        this.item=t;
     }
 
     public T getData() {
-    	return this.item;
+        return this.item;
     }
 }
 ```
@@ -124,44 +130,47 @@ _Blog.chroma = function () {
 
 ## Test ECharts
 
-{{< dev/echarts >}}
-title : {
-    text: '某站点用户访问来源',
-    subtext: '纯属虚构',
-    x:'center'
-},
-tooltip : {
-    trigger: 'item',
-    formatter: "{a} <br/>{b} : {c} ({d}%)"
-},
-legend: {
-    orient: 'vertical',
-    left: 'left',
-    data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
-},
-series : [
-    {
-        name: '访问来源',
-        type: 'pie',
-        radius : '55%',
-        center: ['50%', '60%'],
-        data:[
-            {value:335, name:'直接访问'},
-            {value:310, name:'邮件营销'},
-            {value:234, name:'联盟广告'},
-            {value:135, name:'视频广告'},
-            {value:1548, name:'搜索引擎'}
-        ],
-        itemStyle: {
-            emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-        }
-    }
-]
-{{< /dev/echarts >}}
+{{< echarts >}}
+title:
+  text: 某站点用户访问来源
+  subtext: 纯属虚构
+  x: center
+tooltip:
+  trigger: item
+  formatter: '{a} <br/>{b} : {c} ({d}%)'
+legend:
+  orient: vertical
+  left: left
+  data:
+    - 直接访问
+    - 邮件营销
+    - 联盟广告
+    - 视频广告
+    - 搜索引擎
+series:
+  - name: 访问来源
+    type: pie
+    radius: 55%
+    center:
+      - 50%
+      - 60%
+    data:
+      - value: 335
+        name: 直接访问
+      - value: 310
+        name: 邮件营销
+      - value: 234
+        name: 联盟广告
+      - value: 135
+        name: 视频广告
+      - value: 1548
+        name: 搜索引擎
+    itemStyle:
+      emphasis:
+        shadowBlur: 10
+        shadowOffsetX: 0
+        shadowColor: 'rgba(0, 0, 0, 0.5)'
+{{< /echarts >}}
 
 ## Test Mermaid
 
@@ -383,10 +392,6 @@ Here is a story about love...
 {{< typeit group="test" code="java" >}}
 int a = 1;
 {{< /typeit >}}
-
-## Test Img
-
-![Gif](https://static.dillonzq.com/images/20190817130904-U6cPUk.jpg "Title")
 
 ## Test Align
 

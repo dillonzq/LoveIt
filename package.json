@@ -12,7 +12,7 @@
     "husky": "^4.2.3"
   },
   "scripts": {
-    "build": "npx babel src --out-file static/js/theme.min.js --source-maps",
+    "build": "npx babel src --out-file assets/js/theme.min.js --source-maps",
     "start": "hugo server --source=exampleSite --themesDir=../.. --disableFastRender -D",
     "copy": "HUGO_ENV=production hugo -v --source=exampleSite --themesDir=../.. -D --gc --minify && rm -rf resources && cp -rf exampleSite/resources resources"
   },

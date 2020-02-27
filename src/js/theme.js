@@ -171,29 +171,27 @@
         }
 
         initMermaid() {
-            if (window.mermaidMap) {
-                mermaid.initialize({startOnLoad: false, theme: null});
-                Object.keys(window.mermaidMap).forEach((id) => {
+            if (window.mermaidArr) {
+                mermaid.initialize({startOnLoad: false, theme: 'null'});
+                this.util.forEach(window.mermaidArr, (id) => {
                     const element = document.getElementById(id);
-                    mermaid.mermaidAPI.render("d" + id, window.mermaidMap[id], (svgCode) => {
+                    mermaid.mermaidAPI.render('svg-' + id, window.contentMap[id], (svgCode) => {
                         element.innerHTML = svgCode;
-                        const svg = element.firstChild;
-                        svg.style.width = "100%"
                     }, element);
                 });
             }
         }
 
         initEcharts() {
-            if (window.echartsMap) {
+            if (window.echartsArr) {
                 this._echartsArr = this._echartsArr || [];
                 for (let i = 0; i < this._echartsArr.length; i++) {
                     this._echartsArr[i].dispose();
                 }
                 this._echartsArr = [];
-                Object.keys(window.echartsMap).forEach((id) => {
+                this.util.forEach(window.echartsArr, (id) => {
                     const chart = echarts.init(document.getElementById(id), window.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
-                    chart.setOption(window.echartsMap[id]);
+                    chart.setOption(JSON.parse(window.contentMap[id]));
                     this._echartsArr.push(chart);
                 });
                 this._echartsOnResize = this._echartsOnResize || (() => {
@@ -210,15 +208,15 @@
                 for (let i = 0; i < window.typeitArr.length; i++) {
                     const group = window.typeitArr[i];
                     (function typeone(i) {
-                        const content = document.getElementById(`r${group[i]}`).innerHTML;
+                        const id = group[i];
                         if (i === group.length - 1) {
-                            new TypeIt(`#${group[i]}`, {
-                                strings: content,
+                            new TypeIt(`#${id}`, {
+                                strings: window.contentMap[id],
                             }).go();
                             return;
                         }
-                        let instance = new TypeIt(`#${group[i]}`, {
-                            strings: content,
+                        let instance = new TypeIt(`#${id}`, {
+                            strings: window.contentMap[id],
                             afterComplete: () => {
                                 instance.destroy();
                                 typeone(i + 1);
@@ -291,6 +289,7 @@
                         this.initMenuMobile();
                         this.initToc();
                         this.initSmoothScroll();
+                        this.initMermaid()
                     }, 100);
                 }
             }, false);

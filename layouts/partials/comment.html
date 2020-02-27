@@ -1,11 +1,13 @@
-{{- if .Scratch.Get "production" | and .IsPage | and (ne .Site.Params.comment.enable false) | and (ne .Params.comment false) -}}
-    {{- $CDN := .Scratch.Get "CDN" -}}
+{{- $scratch := .Scratch.Get "scratch" -}}
+
+{{- if $scratch.Get "production" | and (ne .Site.Params.comment.enable false) | and (ne .Params.comment false) -}}
+    {{- $CDN := $scratch.Get "CDN" -}}
 
     {{- /* Disqus Comment System */ -}}
     {{- with .Site.Params.comment.disqus.shortname -}}
         <div id="disqus_thread"></div>
         {{- $script := printf `<script src="https://%s.disqus.com/embed.js"></script>` . -}}
-        {{- slice $script | $.Scratch.Add "scriptCDN" -}}
+        {{- slice $script | $scratch.Add "scriptCDN" -}}
         <noscript>
             Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
         </noscript>
@@ -16,14 +18,14 @@
         {{- $gitalk := .Site.Params.comment.gitalk -}}
         <div id="gitalk"></div>
         {{- with $CDN.gitalkCSS -}}
-            {{- slice . | $.Scratch.Add "linkCDN" -}}
+            {{- slice . | $scratch.Add "linkCDN" -}}
         {{- else -}}
-            {{- slice "css/lib/gitalk/gitalk.css" | .Scratch.Add "linkLocal" -}}
+            {{- slice "lib/gitalk/gitalk.css" | $scratch.Add "linkLocal" -}}
         {{- end -}}
         {{- with $CDN.gitalkJS -}}
-            {{- slice . | $.Scratch.Add "scriptCDN" -}}
+            {{- slice . | $scratch.Add "scriptCDN" -}}
         {{- else -}}
-            {{- slice "css/lib/gitalk/gitalk.min.js" | .Scratch.Add "scriptLocal" -}}
+            {{- slice "lib/gitalk/gitalk.min.js" | $scratch.Add "scriptLocal" -}}
         {{- end -}}
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
@@ -49,11 +51,11 @@
     {{- if .Site.Params.comment.valine.enable -}}
         {{- $valine := .Site.Params.comment.valine -}}
         <div id="valine"></div>
-        {{- slice "css/lib/valine/dark.scss" | .Scratch.Add "linkLocal" -}}
+        {{- slice "lib/valine/dark.scss" | $scratch.Add "linkLocal" -}}
         {{- with $CDN.valineJS -}}
-            {{- slice . | $.Scratch.Add "scriptCDN" -}}
+            {{- slice . | $scratch.Add "scriptCDN" -}}
         {{- else -}}
-            {{- slice "js/lib/valine/Valine.min.js" | .Scratch.Add "scriptLocal" -}}
+            {{- slice "lib/valine/Valine.min.js" | $scratch.Add "scriptLocal" -}}
         {{- end -}}
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
@@ -106,7 +108,7 @@
         ></div>
         {{- $script := `<script src="https://connect.facebook.net/%s/sdk.js#xfbml=1&version=v5.0&appId=%s&autoLogAppEvents=1" crossorigin="anonymous"></script>` -}}
         {{- $script = printf $script $facebook.languageCode $facebook.appId -}}
-        {{- slice $script | .Scratch.Add "scriptCDN" -}}
+        {{- slice $script | $scratch.Add "scriptCDN" -}}
         <noscript>
             Please enable JavaScript to view the <a href="https://developers.facebook.com/docs/plugins/comments/">comments powered by Facebook.</a>
         </noscript>

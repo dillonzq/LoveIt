@@ -2,6 +2,8 @@
 title: "关于 LoveIt"
 date: 2019-08-02T11:04:49+08:00
 draft: false
+
+lightgallery: true
 ---
 
 [LoveIt :(far fa-heart):](https://github.com/dillonzq/LoveIt) 是一个由 [Dillon](https://dillonzq.com) 开发的**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。

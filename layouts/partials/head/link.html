@@ -1,4 +1,5 @@
-{{- $CDN := .Scratch.Get "CDN" -}}
+{{- $scratch := .Scratch.Get "scratch" -}}
+{{- $CDN := $scratch.Get "CDN" -}}
 
 <link rel="canonical" href="{{ .Permalink }}" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -20,27 +21,27 @@
     <link rel="feed" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ $.Site.Title }}">
 {{- end -}}
 
+{{- /* Font Awesome */ -}}
+{{- with $CDN.fontawesomeFreeCSS -}}
+    {{- . | safeHTML -}}
+{{- else -}}
+    {{- $res := resources.Get "lib/fontawesome-free/all.min.css" | resources.Fingerprint "sha256" -}}
+    <link rel="stylesheet" href="{{ $res.RelPermalink }}" integrity="{{ $res.Data.Integrity }}">
+{{- end -}}
+
+{{- /* Animate.css */ -}}
+{{- with $CDN.animateCSS -}}
+    {{- . | safeHTML -}}
+{{- else -}}
+    {{ $res := resources.Get "lib/animate/animate.min.css" | resources.Fingerprint "sha256" -}}
+    <link rel="stylesheet" href="{{ $res.RelPermalink }}" integrity="{{ $res.Data.Integrity }}">
+{{- end -}}
+
 {{- /* style.min.css */ -}}
 {{- $res := resources.Get "css/style.template.scss" -}}
 {{- $options := dict "targetPath" "css/style.min.css" -}}
 {{- $options  = dict "includePaths" (slice "config/css") | merge $options -}}
 {{- $options  = dict "outputStyle" "compressed" | merge $options -}}
 {{- $options  = dict "enableSourceMap" true | merge $options -}}
-{{- $res = resources.ExecuteAsTemplate "style.scss" . $res | toCSS $options -}}
-<link rel="stylesheet" href="{{ $res.RelPermalink }}">
-
-{{- /* Font Awesome https://fontawesome.com/ */ -}}
-{{- with $CDN.fontawesomeFreeCSS -}}
-    {{- . | safeHTML -}}
-{{- else -}}
-    {{- $res := resources.Get "css/lib/fontawesome-free/all.min.css" -}}
-    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
-{{- end -}}
-
-{{- /* Animate.css https://github.com/daneden/animate.css */ -}}
-{{- with $CDN.animateCSS -}}
-    {{- . | safeHTML -}}
-{{- else -}}
-    {{ $res := resources.Get "css/lib/animate/animate.min.css" -}}
-    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
-{{- end -}}
+{{- $res = resources.ExecuteAsTemplate "style.scss" . $res | toCSS $options | resources.Fingerprint "sha256" -}}
+<link rel="stylesheet" href="{{ $res.RelPermalink }}" integrity="{{ $res.Data.Integrity }}">

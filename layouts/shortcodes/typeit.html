@@ -1,14 +1,12 @@
+{{- $scratch := .Page.Scratch.Get "scratch" -}}
+
 {{- /* only the trailing newline is retained */ -}}
-{{- $content := replaceRE `(?s)^\n*(.*?)\n*$` "$1\n" .Inner | .Page.RenderString -}}
-{{- /* shuffle md5 as id */ -}}
-{{- $id := delimit (split (md5 $content) "" | shuffle) "" | printf "typeit-%s" -}}
+{{- $content := replaceRE `(?s)^\n*(.*?)\n*$` "$1\n" .Inner | .Page.RenderString | chomp -}}
+{{- $id := partial "function/id.html" (dict "content" $content "scratch" $scratch) -}}
 
 <div class={{ .Get "class" | default "typeit" }}>
     {{- /* raw html content */ -}}
     {{- if .Get "raw" -}}
-        <div id={{ printf "r%s" $id }} hidden=true>
-            {{- $content | safeHTML -}}
-        </div>
         <div id={{ $id }}></div>
     {{- else if .Get "code" -}}
         {{- /* highlight code content without line number */ -}}
@@ -21,21 +19,14 @@
         {{- $content = replaceRE ` ` "&nbsp;" $content | replaceRE `(<\w+)&nbsp;` "$1 " | replaceRE `\n` "<br />" -}}
         {{- /* fix "<br />" location error which is a bug of Typeit HTML parser */ -}}
         {{- $content = replaceRE `<br /></span>` "</span><br />" $content -}}
-        <div id={{ printf "r%s" $id }} hidden=true>
-            {{- $content | safeHTML -}}
-        </div>
         <div class="highlight" id={{ $id }}></div>
     {{- else -}}
         {{- $tag := .Get "tag" | default "p" -}}
-        {{- $content = $content | chomp -}}
-        <div id={{ printf "r%s" $id }} hidden=true>
-            {{- $content | safeHTML -}}
-        </div>
         {{- printf "<%s id=%s></%s>" $tag $id $tag | safeHTML -}}
     {{- end -}}
 
     {{- $key := .Get "group" | default $id -}}
-    {{- $group := index (.Page.Scratch.Get "typeitMap" | default dict) $key -}}
+    {{- $group := index ($scratch.Get "typeitMap" | default dict) $key -}}
     {{- $group = $group | default slice | append $id -}}
-    {{- .Page.Scratch.SetInMap "typeitMap" $key $group -}}
+    {{- $scratch.SetInMap "typeitMap" $key $group -}}
 </div>

@@ -17,6 +17,7 @@ featuredImagePreview: ""
 
 toc: false
 autoCollapseToc: true
+lightgallery: true
 math: false
 comment: true
 ---
@@ -26,9 +27,9 @@ Hugo ships with several [Built-in Shortcodes](https://gohugo.io/content-manageme
 
 ---
 
-## Instagram Simple Shortcode
+## Instagram Shortcode
 
-{{< instagram_simple BGvuInzyFAe hidecaption >}}
+{{< instagram BGvuInzyFAe hidecaption >}}
 
 <br>
 
@@ -42,9 +43,9 @@ Hugo ships with several [Built-in Shortcodes](https://gohugo.io/content-manageme
 
 ---
 
-## Twitter Simple Shortcode
+## Twitter Shortcode
 
-{{< twitter_simple 1085870671291310081 >}}
+{{< twitter 1085870671291310081 >}}
 
 <br>
 

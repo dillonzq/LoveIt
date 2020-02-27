@@ -1,6 +1,5 @@
-{{- $type := index . "type" | default "fa" -}}
-{{- $classList := split (index . "class") " " -}}
-{{- $scratch := index . "scratch" -}}
+{{- $type := .type | default "fa" -}}
+{{- $classList := split .class " " -}}
 {{- /* Fork Awesome */ -}}
 {{- if eq $type "fo" -}}
     {{- $newClassList := slice -}}
@@ -12,11 +11,11 @@
         {{- end -}}
     {{- end -}}
     {{- $classList = $newClassList -}}
-    {{- $scratch.Set "forkawesome" true -}}
+    {{- .scratch.Set "forkawesome" true -}}
 
 {{- /* default is Font Awesome */ -}}
 {{- /* Others */ -}}
 {{- else if ne $type "fa" -}}
-    {{- $scratch.Set "iconfont" true -}}
+    {{- .scratch.Set "iconfont" true -}}
 {{- end -}}
 <i class="{{ delimit $classList ` ` }}"></i>

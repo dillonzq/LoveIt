@@ -1,6 +1,7 @@
 <figure>
-    {{- partial "plugin/image.html" (dict "src" .Destination "alt" .Text "title" .Title ) -}}
-    {{- with .Title | default .Text -}}
+    {{- $lightgallery := ne .Page.Site.Params.page.lightgallery false | and (ne .Page.Params.lightgallery false) -}}
+    {{- partial "plugin/image.html" (dict "src" .Destination "title" .Title "description" .Text "lightgallery" $lightgallery "scratch" (.Page.Scratch.Get "scratch")) -}}
+    {{- with (.Title | default .Text) -}}
         <figcaption class="image-caption">
             {{- . | safeHTML -}}
         </figcaption>

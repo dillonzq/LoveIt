@@ -1,6 +1,7 @@
 {{- define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end -}}
 
 {{- define "content" -}}
+    {{- $scratch := .Scratch.Get "scratch" -}}
     <article class="page single">
         {{- /* Title */ -}}
         <h1 class="single-title animated flipInX">{{ .Title }}</h1>
@@ -35,7 +36,7 @@
                 <i class="far fa-calendar-alt fa-fw"></i><time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;
                 <i class="fas fa-pencil-alt fa-fw"></i>{{ T "wordCount" .WordCount }}&nbsp;
                 <i class="far fa-clock fa-fw"></i>{{ T "readingTime" .ReadingTime }}&nbsp;
-                {{- if .Scratch.Get "production" | and .Site.Params.valine.enable | and .Site.Params.valine.visitor -}}
+                {{- if $scratch.Get "production" | and .Site.Params.valine.enable | and .Site.Params.valine.visitor -}}
                     <span id="{{ .RelPermalink | relURL }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
                         <i class="far fa-eye fa-fw"></i>{{ T "pageviews" | safeHTML }}
                     </span>&nbsp;
@@ -46,7 +47,7 @@
         {{- /* Featured image */ -}}
         {{- with .Params.featuredImage -}}
             <div class="featured-image">
-                {{- partial "plugin/image.html" (dict "src" . "alt" "featured image") -}}
+                {{- partial "plugin/image.html" (dict "src" . "description" $.Description "scratch" $scratch) -}}
             </div>
         {{- end -}}
 
@@ -76,7 +77,7 @@
         {{- end -}}
 
         {{- /* Content */ -}}
-        <div class="content">
+        <div class="content" id="content">
             {{- partial "single/content.html" .Content -}}
         </div>
 

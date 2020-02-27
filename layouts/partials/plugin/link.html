@@ -1,9 +1,8 @@
-{{- $href := index . "href" -}}
-<a href="{{ $href | safeURL }}"{{ with index . "title" }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix $href "http" }} target="_blank"{{ end }} rel="noopener noreffer{{ with index . `rel` }} {{ . }}{{ end }}">
-    {{- with index . "icon" -}}
+<a href="{{ .href | safeURL }}"{{ with .title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .href "http" }} target="_blank"{{ end }} rel="noopener noreffer{{ with .rel }} {{ . }}{{ end }}">
+    {{- with .icon -}}
         {{- partial "plugin/icon.html" . -}}
     {{- end -}}
-    {{- with index . "content" -}}
+    {{- with .content -}}
         {{- . | safeHTML -}}
     {{- end -}}
 </a>
