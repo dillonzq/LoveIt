@@ -1,9 +1,9 @@
 {{- /* Checkbox unchecked */ -}}
 {{- $REin := `<input disabled="" type="checkbox">` -}}
-{{- $REout := `<i class="far fa-check-square fa-fw"></i>` -}}
+{{- $REout := `<i class="far fa-square fa-fw"></i>` -}}
 {{- $content := replaceRE $REin $REout . -}}
 
 {{- /* Checkbox checked */ -}}
 {{- $REin = `<input checked="" disabled="" type="checkbox">` -}}
-{{- $REout = `<i class="far fa-square fa-fw"></i>` -}}
+{{- $REout = `<i class="far fa-check-square fa-fw"></i>` -}}
 {{- return replaceRE $REin $REout $content -}}
