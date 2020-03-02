@@ -158,14 +158,6 @@ Customize `browserconfig.xml` and `site.webmanifest` to set theme-color and back
 
 ## Tips
 
-### Set `production` environment when generating site
-
-Because some features are only in production mode, so you need to add a `production` environment variables when generating your site.
-
-```bash
-  HUGO_ENV=production hugo --gc --minify
-```
-
 ### How to toggle dark-light mode
 
 * You can click the circle icon to toggle dark-light mode. In the desktop version the circle icon is to the right and in the mobile version is positioned to the left, close to the site title.

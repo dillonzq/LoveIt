@@ -5,7 +5,7 @@
 
 {{- $scratch := newScratch -}}
 {{- .Scratch.Set "scratch" $scratch -}}
-{{- if eq (getenv "HUGO_ENV") "production" -}}
+{{- if eq hugo.Environment "production" -}}
     {{- $scratch.Set "production" true -}}
     {{- $scratch.Set "CDN" .Site.Params.cdn -}}
 {{- end -}}
