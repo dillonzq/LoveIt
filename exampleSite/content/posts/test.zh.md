@@ -393,11 +393,11 @@ Here is a story about love...
 int a = 1;
 {{< /typeit >}}
 
-## Test Align
+## Test Style
 
-{{% align right %}}
+{{< style "text-align: right">}}
 **Test Text**
-{{% /align %}}
+{{< /style >}}
 
 ## Test Katex
 
