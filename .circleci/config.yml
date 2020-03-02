@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run: git submodule sync
       - run: git submodule update --init
-      - run: HUGO_ENV=production hugo --source=exampleSite -v --gc
+      - run: hugo --source=exampleSite -v --gc
       - run: htmlproofer exampleSite/public --check-html --allow-hash-href --empty-alt-ignore --disable-external
 
 workflows:
