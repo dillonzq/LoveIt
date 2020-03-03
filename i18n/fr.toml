@@ -67,8 +67,8 @@ other = "environ {{ .Count }} mots"
 [readingTime]
 other = "{{ .Count }} min"
 
-[pageviews]
-other = "<span class=leancloud-visitors-count></span> vues"
+[views]
+other = "vues"
 
 [author]
 other = "Auteur"
@@ -79,6 +79,9 @@ other = "Dernière mise à jour le %s"
 [license]
 other = "Publié sous licence %s"
 
+[seeMarkdown]
+other = "Lire Markdown"
+
 [back]
 other = "Retour"
 
@@ -87,18 +90,6 @@ other = "Accueil"
 
 [readMore]
 other = "En savoir plus"
-
-[day]
-other = "j"
-
-[hour]
-other = "hr"
-
-[minute]
-other = "min"
-
-[second]
-other = "sec"
 # === posts/single.html ===
 
 # === 404.html ===

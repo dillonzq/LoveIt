@@ -67,8 +67,8 @@ other = "about {{ .Count }} words"
 [readingTime]
 other = "{{ .Count }} min"
 
-[pageviews]
-other = "<span class=leancloud-visitors-count></span> pageviews"
+[views]
+other = "views"
 
 [author]
 other = "Author"
@@ -90,18 +90,6 @@ other = "Home"
 
 [readMore]
 other = "Read More"
-
-[day]
-other = "d"
-
-[hour]
-other = "hr"
-
-[minute]
-other = "min"
-
-[second]
-other = "sec"
 # === posts/single.html ===
 
 # === 404.html ===

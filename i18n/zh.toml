@@ -67,8 +67,8 @@ other = "约 {{ .Count }} 字"
 [readingTime]
 other = "预计阅读 {{ .Count }} 分钟"
 
-[pageviews]
-other = "<span class=leancloud-visitors-count></span> 次阅读"
+[views]
+other = "次阅读"
 
 [author]
 other = "作者"
@@ -90,18 +90,6 @@ other = "主页"
 
 [readMore]
 other = "阅读全文"
-
-[day]
-other = "天"
-
-[hour]
-other = "时"
-
-[minute]
-other = "分"
-
-[second]
-other = "秒"
 # === posts/single.html ===
 
 # === 404.html ===
