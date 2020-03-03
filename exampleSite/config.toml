@@ -12,9 +12,9 @@ themesDir = "../.."
 # whether to use robots.txt
 # 是否使用 robots.txt
 enableRobotsTXT = true
-# whether to use git commit log to generate lastmod record
-# 是否使用 git 信息来生成文章的上次修改时间
-enableGitInfo = false
+# whether to use git commit log
+# 是否使用 git 信息
+enableGitInfo = true
 # whether to use emoji code
 # 是否使用 emoji 代码
 enableEmoji = true
@@ -67,8 +67,6 @@ enableEmoji = true
         keywords = ["Theme", "Hugo"]
         # site default theme ("light", "dark", "auto")
         defaultTheme = "auto"
-        # public git repo url to link lastmod git commit only then enableGitInfo is true
-        gitRepo = ""
         # Home Page Info
         [languages.en.params.home]
           # Home Page Profile
@@ -268,8 +266,6 @@ enableEmoji = true
       keywords = ["Theme", "Hugo"]
       # 网站默认主题 ("light", "dark", "auto")
       defaultTheme = "auto"
-      # 用于生成文章上次修改时间的公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
-      gitRepo = ""
       # 主页信息设置
       [languages.zh.params.home]
         # 主页个人信息
@@ -426,6 +422,9 @@ enableEmoji = true
   # LoveIt theme version
   # LoveIt 主题版本
   version = "0.1.X"
+  # public git repo url only then enableGitInfo is true
+  # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
+  gitRepo = "https://github.com/dillonzq/LoveIt"
   # Header info
   # 页面头部导航栏信息
   [params.header]
