@@ -38,7 +38,7 @@
                 <i class="far fa-clock fa-fw"></i>{{ T "readingTime" .ReadingTime }}&nbsp;
                 {{- if $scratch.Get "production" | and .Site.Params.valine.enable | and .Site.Params.valine.visitor -}}
                     <span id="{{ .RelPermalink | relURL }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
-                        <i class="far fa-eye fa-fw"></i>{{ T "pageviews" | safeHTML }}
+                        <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;{{ T "views" }}
                     </span>&nbsp;
                 {{- end -}}
             </div>
