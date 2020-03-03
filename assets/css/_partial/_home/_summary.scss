@@ -30,24 +30,6 @@
       font-size: 1.6rem;
     }
 
-    .post-meta {
-      a {
-        color: $global-font-secondary-color !important;
-
-        .dark-theme & {
-          color: $global-font-secondary-color-dark !important;
-        }
-
-        &:hover {
-          color: $global-link-hover-color !important;
-
-          .dark-theme & {
-            color: $global-link-hover-color-dark !important;
-          }
-        }
-      }
-    }
-
     .content {
       display: -moz-box;
       display: -webkit-box;
@@ -59,6 +41,11 @@
       overflow: hidden;
       text-overflow: ellipsis;
       overflow-wrap: break-word;
+      color: $global-font-secondary-color;
+
+      .dark-theme & {
+        color: $global-font-secondary-color-dark;
+      }
 
       h2,
       h3,

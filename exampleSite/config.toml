@@ -26,6 +26,8 @@ enableEmoji = true
     languageCode = "en"
     # website title
     title = "LoveIt Theme"
+    # language name
+    languageName = "English"
     # whether to include chinese/japanese/korean
     hasCJKLanguage = false
     # default amount of posts in each pages
@@ -58,13 +60,6 @@ enableEmoji = true
         name = "About"
         url = "/about/"
         weight = 4
-      [[languages.en.menu.main]]
-        identifier = "zh"
-        pre = '<i class="fas fa-language fa-fw"></i>'
-        name = ""
-        title = "简体中文"
-        url = "/zh/"
-        weight = 5
       [languages.en.params]
         # site description
         description = "About LoveIt Theme"
@@ -232,6 +227,8 @@ enableEmoji = true
     languageCode = "zh"
     # 网站标题
     title = "LoveIt 主题"
+    # 语言名称
+    languageName = "简体中文"
     # 是否包括中日韩文字
     hasCJKLanguage = true
     # 默认每页列表显示的文章数目
@@ -264,13 +261,6 @@ enableEmoji = true
         name = "关于"
         url = "/about/"
         weight = 4
-      [[languages.zh.menu.main]]
-        identifier = "en"
-        pre = '<i class="fas fa-language fa-fw"></i>'
-        name = ""
-        title = "English"
-        url = "../"
-        weight = 5
     [languages.zh.params]
       # 网站描述
       description = "关于 LoveIt 主题"
