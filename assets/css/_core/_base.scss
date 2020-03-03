@@ -27,7 +27,7 @@ html {
 }
 
 body {
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.5rem;
   background-color: $global-background-color;
   color: $global-font-color;
@@ -56,6 +56,10 @@ body {
     color: $global-font-color-dark;
     background-color: $global-background-color-dark;
   }
+}
+
+b, strong {
+  font-weight: bold;
 }
 
 a {
