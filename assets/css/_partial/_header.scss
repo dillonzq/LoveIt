@@ -6,6 +6,10 @@ header {
   .dark-theme & {
     background-color: $header-background-color-dark;
   }
+
+  .header-title {
+    font-weight: bold;
+  }
 }
 
 #header-desktop {
