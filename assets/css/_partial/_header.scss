@@ -6,6 +6,32 @@ header {
   .dark-theme & {
     background-color: $header-background-color-dark;
   }
+
+  .header-title {
+    font-weight: bold;
+  }
+
+  .select-language {
+    font-weight: $global-font-weight;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    color: $global-font-color;
+
+    .dark-theme & {
+      color: $global-font-color-dark;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 #header-desktop {

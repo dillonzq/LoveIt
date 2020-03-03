@@ -1,6 +1,8 @@
 html {
   font-family: $global-font-family;
-  font-size: 16px;
+  font-size: $global-font-size;
+  font-weight: $global-font-weight;
+  line-height: $global-line-height;
   width:100%;
 }
 
@@ -27,8 +29,6 @@ html {
 }
 
 body {
-  font-weight: 300;
-  line-height: 1.5rem;
   background-color: $global-background-color;
   color: $global-font-color;
   overflow-wrap: break-word;
@@ -78,6 +78,10 @@ a {
       color: $global-link-hover-color-dark;
     }
   }
+}
+
+b, strong {
+  font-weight: bold;
 }
 
 #dynamic-to-top {

@@ -1,4 +1,4 @@
-# Translations for English
+# Translations for French
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === Post ===
@@ -8,7 +8,7 @@ other = "Posts"
 
 # === Taxonomy ===
 [all]
-other = "all "
+other = "tous "
 
 [tag]
 other = "Tag"
@@ -17,88 +17,88 @@ other = "Tag"
 other = "Tags"
 
 [category]
-other = "Category"
+other = "Catégorie"
 
 [categories]
-other = "Categories"
+other = "Catégories"
 # === Taxonomy ===
 
 # === Pagination ===
 [more]
-other = "More"
+other = "Plus"
 # === Pagination ===
 
 # === partials/header.html ===
 [switchTheme]
-other = "Switch Theme"
+other = "Changer de Thème"
 # === partials/header.html ===
 
-# === partials/comment.html ===
+# === partials/comments.html ===
 [valineLang]
-other = "en"
-# === partials/comment.html ===
+other = "fr"
+# === partials/comments.html ===
 
 # === partials/footer.html ===
 [powered]
-other = "Powered by %s"
+other = "Propulsé par %s"
 
 [theme]
-other = "Theme - "
+other = "Thème - "
 # === partials/footer.html ===
 
-# === partials/plugin/share.html ===
+# === partials/post/share.html ===
 [share]
-other = "Share on"
-# === partials/plugin/share.html ===
+other = "Partager sur"
+# === partials/post/share.html ===
 
 # === posts/single.html ===
 [toc]
-other = "Contents"
+other = "Contenu"
 
 [publish]
-other = "published on"
+other = "publié sur"
 
 [included]
-other = "included in"
+other = "inclus dans"
 
 [wordCount]
-other = "about {{ .Count }} words"
+other = "environ {{ .Count }} mots"
 
 [readingTime]
 other = "{{ .Count }} min"
 
 [views]
-other = "views"
+other = "vues"
 
 [author]
-other = "Author"
+other = "Auteur"
 
 [lastMod]
-other = "The article was updated on %s"
+other = "Dernière mise à jour le %s"
 
 [license]
-other = "Published under the %s license"
+other = "Publié sous licence %s"
 
 [seeMarkdown]
-other = "Read Markdown"
+other = "Lire Markdown"
 
 [back]
-other = "Back"
+other = "Retour"
 
 [home]
-other = "Home"
+other = "Accueil"
 
 [readMore]
-other = "Read More"
+other = "En savoir plus"
 # === posts/single.html ===
 
 # === 404.html ===
 [pageNotFound]
-other = "Page not found"
+other = "Page non trouvée"
 
 [pageNotFoundText]
-other = "The page you're looking for doesn't exist. Sorry."
+other = "Désolé, la page recherchée n'existe pas."
 
 [backToHome]
-other = "Back to Home"
+other = "Retour à l'accueil"
 # === 404.html ===
