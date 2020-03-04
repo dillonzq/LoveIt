@@ -63,7 +63,7 @@
                 <span class="menu-item">
                     <i class="fas fa-language fa-fw"></i>&nbsp;
                     <select class="select-language" onchange="location = this.value;">
-                        {{- range .Site.Home.AllTranslations -}}
+                        {{- range .Page.AllTranslations -}}
                             {{- $translation := . -}}
                             {{- range $.Site.Languages -}}
                                 {{- if eq $translation.Lang .Lang -}}
