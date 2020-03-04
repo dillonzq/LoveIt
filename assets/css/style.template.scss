@@ -1,7 +1,7 @@
 @charset 'utf-8';
 
 $home-profile: {{ if .Site.Params.home.profile.enable }}true{{ else }}false{{ end }};
-$home-posts: {{ if .Site.Params.home.posts.enable }}true{{ else }}false{{ end }};
+$home-posts: {{ if ne .Site.Params.home.posts.enable false }}true{{ else }}false{{ end }};
 $header-normal-mode-desktop: {{ if eq .Site.Params.header.desktopMode "normal" }}true{{ else }}false{{ end }};
 $header-normal-mode-mobile: {{ if eq .Site.Params.header.mobileMode "normal" }}true{{ else }}false{{ end }};
 

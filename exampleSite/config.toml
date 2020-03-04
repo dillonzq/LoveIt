@@ -1,6 +1,6 @@
 baseURL = "/"
-# [en, zh, ...] determines default content language
-# [en, zh, ...] 设置默认的语言
+# [en, zh-CN, ...] determines default content language
+# [en, zh-CN, ...] 设置默认的语言
 defaultContentLanguage = "en"
 # theme
 # 主题
@@ -28,7 +28,7 @@ enableEmoji = true
     title = "LoveIt Theme"
     # language name
     languageName = "English"
-    # whether to include chinese/japanese/korean
+    # whether to include Chinese/Japanese/Korean
     hasCJKLanguage = false
     # default amount of posts in each pages
     paginate = 12
@@ -219,10 +219,10 @@ enableEmoji = true
             appId = ""
             languageCode = "en_US"
 
-  [languages.zh]
+  [languages.zh-CN]
     weight = 2
     # 网站语言
-    languageCode = "zh"
+    languageCode = "zh-CN"
     # 网站标题
     title = "LoveIt 主题"
     # 语言名称
@@ -238,28 +238,28 @@ enableEmoji = true
     # 日期格式
     dateFormatToUse = "2006-01-02"
     # 菜单信息
-    [languages.zh.menu]
-      [[languages.zh.menu.main]]
+    [languages.zh-CN.menu]
+      [[languages.zh-CN.menu.main]]
         identifier = "posts"
         name = "文章"
         url = "/posts/"
         weight = 1
-      [[languages.zh.menu.main]]
+      [[languages.zh-CN.menu.main]]
         identifier = "tags"
         name = "标签"
         url = "/tags/"
         weight = 2
-      [[languages.zh.menu.main]]
+      [[languages.zh-CN.menu.main]]
         identifier = "categories"
         name = "分类"
         url = "/categories/"
         weight = 3
-      [[languages.zh.menu.main]]
+      [[languages.zh-CN.menu.main]]
         identifier = "about"
         name = "关于"
         url = "/about/"
         weight = 4
-    [languages.zh.params]
+    [languages.zh-CN.params]
       # 网站描述
       description = "关于 LoveIt 主题"
       # 网站关键词
@@ -267,9 +267,9 @@ enableEmoji = true
       # 网站默认主题 ("light", "dark", "auto")
       defaultTheme = "auto"
       # 主页信息设置
-      [languages.zh.params.home]
+      [languages.zh-CN.params.home]
         # 主页个人信息
-        [languages.zh.params.home.profile]
+        [languages.zh-CN.params.home.profile]
           enable = true
           # Gravatar 邮箱，用于优先在主页显示的头像
           gravatarEmail = ""
@@ -282,14 +282,14 @@ enableEmoji = true
           # 是否显示社交账号
           social = true
         # 主页文章列表
-        [languages.zh.params.home.posts]
+        [languages.zh-CN.params.home.posts]
           enable = true
           # 主页每页显示文章数量
           paginate = 6
           # 当你没有在文章前面设置 "hiddenFromHomePage" 时的默认行为
           defaultHiddenFromHomePage = false
       # 主页的社交信息设置
-      [languages.zh.params.social]
+      [languages.zh-CN.params.social]
         GitHub = "xxxx"
         # Linkedin = "xxxx"
         Twitter = "xxxx"
@@ -355,7 +355,7 @@ enableEmoji = true
         # Matrix = "xxxx"
         Bilibili = "xxxx"
       # 文章页面的分享信息设置
-      [languages.zh.params.share]
+      [languages.zh-CN.params.share]
         enable = true
         Twitter = true
         Facebook = true
@@ -385,20 +385,20 @@ enableEmoji = true
         # Trello = true
         # Mix = true
       # 评论系统设置
-      [languages.zh.params.comment]
+      [languages.zh-CN.params.comment]
         enable = true
         # Disqus 评论系统设置 (https://disqus.com/)
-        [languages.zh.params.comment.disqus]
+        [languages.zh-CN.params.comment.disqus]
           # Disqus 的用户名，用来在文章中启用 Disqus 评论系统
           shortname = "dillonzq"
         # Gittalk 评论系统设置 (https://github.com/gitalk/gitalk)
-        [languages.zh.params.comment.gitalk]
+        [languages.zh-CN.params.comment.gitalk]
           owner = ""
           repo = ""
           clientId = ""
           clientSecret = ""
         # Valine 评论系统设置 (https://github.com/xCss/Valine)
-        [languages.zh.params.comment.valine]
+        [languages.zh-CN.params.comment.valine]
           enable = false
           appId = ""
           appKey = ""
@@ -411,7 +411,7 @@ enableEmoji = true
           visitor = true
           recordIP = true
         # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
-        [languages.zh.params.comment.facebook]
+        [languages.zh-CN.params.comment.facebook]
           enable = false
           width = "100%"
           numPosts = 10
