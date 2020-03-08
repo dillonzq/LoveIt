@@ -1,4 +1,4 @@
-# LoveIt Theme | Hugo [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit-en/deploys)
+# LoveIt Theme | Hugo [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases) [![Hugo](https://img.shields.io/badge/Hugo-%5E0.62.0-blue?style=flat-square&logo=hugo)](https://gohugo.io/) [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE) [![CircleCI](https://img.shields.io/circleci/build/github/dillonzq/LoveIt/develop?label=CI&style=flat-square&logo=circleci)](https://app.circleci.com/pipelines/github/dillonzq/LoveIt)
 
@@ -13,9 +13,9 @@ read [Why choose LoveIt](#why-choose-loveit) so that you can choose the one that
 
 ![Hugo Theme LoveIt](images/Apple-Devices-Preview.png)
 
-## [Demo Site](https://hugo-loveit-en.netlify.com)
+## [Demo Site](https://hugo-loveit.netlify.com)
 
-To see this theme in action, here is a live [demo site](https://hugo-loveit-en.netlify.com) which is rendered with **LoveIt** theme.
+To see this theme in action, here is a live [demo site](https://hugo-loveit.netlify.com) which is rendered with **LoveIt** theme.
 
 ## Why choose LoveIt
 
@@ -99,7 +99,7 @@ I hope you will LoveIt ❤️!
 
 ## Documentation
 
-* [Documentation Page](https://hugo-loveit-en.netlify.com/categories/documentation/)
+* [Documentation Page](https://hugo-loveit.netlify.com/categories/documentation/)
 * Build Documentation Locally:
 
     ```bash

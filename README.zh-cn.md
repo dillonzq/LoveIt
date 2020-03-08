@@ -1,4 +1,4 @@
-# LoveIt 主题 | Hugo [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit-en/deploys)
+# LoveIt 主题 | Hugo [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases) [![Hugo](https://img.shields.io/badge/Hugo-%5E0.62.0-blue?style=flat-square&logo=hugo)](https://gohugo.io/) [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE) [![CircleCI](https://img.shields.io/circleci/build/github/dillonzq/LoveIt/develop?label=CI&style=flat-square&logo=circleci)](https://app.circleci.com/pipelines/github/dillonzq/LoveIt)
 
@@ -12,9 +12,9 @@
 
 ![Hugo 主题 LoveIt](images/Apple-Devices-Preview.png)
 
-## 主题[预览](https://hugo-loveit-en.netlify.com/zh-cn/)
+## 主题[预览](https://hugo-loveit.netlify.com/zh-cn/)
 
-为了直观地浏览主题特性，这里有一个基于 **LoveIt** 主题渲染的 [预览网站](https://hugo-loveit-zh.netlify.com)。
+为了直观地浏览主题特性，这里有一个基于 **LoveIt** 主题渲染的 [预览网站](https://hugo-loveit.netlify.com/zh-cn/)。
 
 ## 为什么选择 LoveIt
 
@@ -94,7 +94,7 @@
 
 ## 文档
 
-* [文档页面](https://hugo-loveit-en.netlify.com/zh-cn/categories/documentation/)
+* [文档页面](https://hugo-loveit.netlify.com/zh-cn/categories/documentation/)
 * 在本地构建文档:
 
     ```bash
