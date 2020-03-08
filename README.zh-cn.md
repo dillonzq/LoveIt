@@ -12,9 +12,9 @@
 
 ![Hugo 主题 LoveIt](images/Apple-Devices-Preview.png)
 
-## 主题[预览](https://hugo-loveit.netlify.com/zh-cn/)
+## 主题[预览](https://hugoloveit.com/zh-cn/)
 
-为了直观地浏览主题特性，这里有一个基于 **LoveIt** 主题渲染的 [预览网站](https://hugo-loveit.netlify.com/zh-cn/)。
+为了直观地浏览主题特性，这里有一个基于 **LoveIt** 主题渲染的 [预览网站](https://hugoloveit.com/zh-cn/)。
 
 ## 为什么选择 LoveIt
 
@@ -94,7 +94,7 @@
 
 ## 文档
 
-* [文档页面](https://hugo-loveit.netlify.com/zh-cn/categories/documentation/)
+* [文档页面](https://hugoloveit.com/zh-cn/categories/documentation/)
 * 在本地构建文档:
 
     ```bash

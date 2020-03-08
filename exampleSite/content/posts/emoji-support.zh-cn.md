@@ -427,8 +427,8 @@ Emoji 符号清单是 emoji 代码的非常有用的参考.
 
 #### 两栖动物
 
-| | icon | code | |
-| - | :-: | - | - |
+| icon | code | icon | code |
+| :-: | - | :-: | - |
 | <span class="emoji">:frog:</span> | `frog` |
 
 #### 爬虫类
@@ -678,8 +678,8 @@ Emoji 符号清单是 emoji 代码的非常有用的参考.
 
 #### 旅馆
 
-| | icon | code | |
-| - | :-: | - | - |
+| icon | code | icon | code |
+| :-: | - | :-: | - |
 | <span class="emoji">:bellhop_bell:</span> | `bellhop_bell` |
 
 #### 时间

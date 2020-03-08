@@ -13,9 +13,9 @@ read [Why choose LoveIt](#why-choose-loveit) so that you can choose the one that
 
 ![Hugo Theme LoveIt](images/Apple-Devices-Preview.png)
 
-## [Demo Site](https://hugo-loveit.netlify.com)
+## [Demo Site](https://hugoloveit.com/)
 
-To see this theme in action, here is a live [demo site](https://hugo-loveit.netlify.com) which is rendered with **LoveIt** theme.
+To see this theme in action, here is a live [demo site](https://hugoloveit.com/) which is rendered with **LoveIt** theme.
 
 ## Why choose LoveIt
 
@@ -99,7 +99,7 @@ I hope you will LoveIt ❤️!
 
 ## Documentation
 
-* [Documentation Page](https://hugo-loveit.netlify.com/categories/documentation/)
+* [Documentation Page](https://hugoloveit.com/categories/documentation/)
 * Build Documentation Locally:
 
     ```bash
