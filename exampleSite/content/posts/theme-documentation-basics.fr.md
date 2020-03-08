@@ -13,7 +13,7 @@ tags: ["installation", "configuration"]
 categories: ["documentation"]
 hiddenFromHomePage: false
 
-featuredImage: "/images/theme-documentation-basics/featured-image.webp"
+featuredImage: "/images/theme-documentation-basics/featured-image.jpg"
 featuredImagePreview: ""
 
 toc: true
