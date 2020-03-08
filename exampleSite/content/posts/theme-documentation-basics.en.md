@@ -57,7 +57,7 @@ cd my_website
 
 The **LoveIt** theme’s repository is: [https://github.com/dillonzq/LoveIt](https://github.com/dillonzq/LoveIt).
 
-You can download the **latest release** of the theme as :(far fa-file-archive): .zip file and extract it in the `themes` directory.
+You can download the [latest release :(far fa-file-archive): .zip file](https://github.com/dillonzq/LoveIt/releases) of the theme and extract it in the `themes` directory.
 
 Alternatively, clone this repository to the `themes` directory:
 
