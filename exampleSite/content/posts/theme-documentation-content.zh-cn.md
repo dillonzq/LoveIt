@@ -98,7 +98,7 @@ comment: true
 
 **LoveIt** 主题使用内容摘要在主页中显示大致文章信息。Hugo 支持生成文章的摘要.
 
-![文章摘要预览] Preview](/images/theme-documentation-content/summary.png "文章摘要预览")
+![文章摘要预览](/images/theme-documentation-content/summary.png "文章摘要预览")
 
 ### 自动摘要拆分
 

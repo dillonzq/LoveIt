@@ -57,7 +57,7 @@ cd my_website
 
 **LoveIt** 主题的仓库是: [https://github.com/dillonzq/LoveIt](https://github.com/dillonzq/LoveIt).
 
-你可以下载主题的 :(far fa-file-archive): .zip 文件的 **最新发布版本** 并且解压放到 `themes` 目录.
+你可以下载主题的 [最新版本 :(far fa-file-archive): .zip 文件](https://github.com/dillonzq/LoveIt/releases) 并且解压放到 `themes` 目录.
 
 另外, 也可以直接把这个主题克隆到 `themes` 目录:
 
