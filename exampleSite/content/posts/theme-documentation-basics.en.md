@@ -131,7 +131,7 @@ When building the website, you can set a theme by using `--theme` option. Howeve
 Here is the way to create your first post:
 
 ```bash
-  hugo new posts/first_post.md
+hugo new posts/first_post.md
 ```
 
 Feel free to edit the post file by adding some sample content and replacing the title value in the beginning of the file.
