@@ -6,55 +6,69 @@ draft: false
 lightgallery: true
 ---
 
+<div class="badge">
+
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases) [![Hugo](https://img.shields.io/badge/Hugo-%5E0.62.0-blue?style=flat-square&logo=hugo)](https://gohugo.io/) [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
+
+</div>
+
+<style>
+  .badge img { height: 1.2rem; }
+</style>
+
 [LoveIt :(far fa-heart):](https://github.com/dillonzq/LoveIt) 是一个由 [Dillon](https://dillonzq.com) 开发的**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 
 它的原型基于 [LeaveIt 主题](https://github.com/liuzc/LeaveIt/) 和 [KeepIt 主题](https://github.com/liuzc/LeaveIt/)。
 
-![Hugo 主题 LoveIt](/images/Apple-Devices-Preview.png)
+![Hugo 主题 LoveIt](/images/Apple-Devices-Preview.png "Hugo Theme LoveIt")
 
 ### 特性
 
 #### 性能和 SEO
 
-* :(fas fa-rocket): 性能优化：在 [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights) 中， 99/100 的移动设备得分和 100/100 的桌面设备得分
-* :(fab fa-searchengin): 使用基于 JSON-LD 格式 的 SEO SCHEMA 文件进行 SEO 优化
-* :(fab fa-google): 支持 [Google Analytics](https://analytics.google.com/analytics)
-* :(fas fa-search): 支持搜索引擎的网站验证 (Google, Bind, Yandex and Baidu)
-* :(fas fa-tachometer-alt): 支持所有第三方库的 CDN
-* :(far fa-images): 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为懒加载
+* :(fas fa-rocket): **性能**优化：在 [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights) 中， 99/100 的移动设备得分和 100/100 的桌面设备得分
+* :(fab fa-searchengin): 使用基于 JSON-LD 格式 的 **SEO SCHEMA** 文件进行 SEO 优化
+* :(fab fa-google): 支持 **[Google Analytics](https://analytics.google.com/analytics)**
+* :(fas fa-search): 支持搜索引擎的**网站验证** (Google, Bind, Yandex and Baidu)
+* :(fas fa-tachometer-alt): 支持所有第三方库的 **CDN**
+* :(fas fa-cloud-download-alt): 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为**懒加载**
 
 #### 外观和布局
 
-* :(fas fa-desktop): / :(fas fa-mobile): 响应式布局
-* :(fas fa-moon): / :(fas fa-sun): 模式
-* :(fas fa-layer-group): 页面和列表保持一致的视觉样式
-* :(fas fa-ellipsis-h): 支持分页
-* :(far fa-list-alt): 易用和自动展开的文章目录，同时适配移动端
-* :(fas fa-language): 支持多语言和国际化
-* :(fab fa-css3-alt): 美观的 CSS 动画
+* :(fas fa-desktop): / :(fas fa-mobile): **响应式**布局
+* :(fas fa-moon): / :(fas fa-sun): **夜晚/白天** 主题模式
+* :(fas fa-layer-group): 全局一致的**设计语言**
+* :(fas fa-ellipsis-h): 支持**分页**
+* :(far fa-list-alt): 易用和自动展开的**文章目录**
+* :(fas fa-language): 支持**多语言**和国际化
+* :(fab fa-css3-alt): 美观的 **CSS 动画**
 
 #### 社交和评论系统
 
-* :(far fa-user): 支持 [Gravatar](https://gravatar.com) 头像
-* :(fas fa-user-circle): 支持本地头像
-* :(far fa-id-card): 支持多达 54 种社交链接
-* :(fas fa-share-square): 支持文章分享
-* :(far fa-comment): 支持 [Disqus](https://disqus.com) 评论系统
-* :(far fa-comment-dots): 支持 [Gitalk](https://github.com/gitalk/gitalk) 评论系统
-* :(far fa-comment-alt): 支持 [Valine](https://valine.js.org/) 评论系统
+* :(far fa-user): 支持 **[Gravatar](https://gravatar.com)** 头像
+* :(fas fa-user-circle): 支持本地**头像**
+* :(far fa-id-card): 支持多达 **59** 种社交链接
+* :(fas fa-share-square): 支持多达 **28** 种网站分享
+* :(far fa-comment): 支持 **[Disqus](https://disqus.com)** 评论系统
+* :(far fa-comment-dots): 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
+* :(far fa-comment-alt): 支持 **[Valine](https://valine.js.org/)** 评论系统
+* :(far fa-comments): 支持 **[Facebook](https://developers.facebook.com/docs/plugins/comments/) 评论**系统
 
 #### 扩展功能
 
-* :(fas fa-code): 基于 Hugo 使用的 chroma 进行代码高亮
-* :(fab fa-font-awesome): 使用 [Font Awesome](https://fontawesome.com/) 图标的扩展 Markdown 语法
-* :(fas fa-square-root-alt): 支持基于 [Katex](https://katex.org/) 的数学公式
-* :(fas fa-project-diagram): 支持基于 [mermaid](https://github.com/knsv/mermaid) 的图表和流程图生成功能
-* :(fas fa-music): 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的内嵌音乐播放器
-* :(fas fa-tv): 支持内嵌 Bilibili 视频
-* :(far fa-bell): 支持多种提醒样式的 shortcode
-* :(fas fa-align-left): 支持自定义对齐和浮动方式的 shortcode
-* :(fas fa-i-cursor): 支持基于 [TypeIt](https://typeitjs.com/) 的打字动画
-* :(fas fa-arrow-up): 支持基于 [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) 的回到顶部动画
+* :(fas fa-code): 支持**代码高亮**
+* :(far fa-images): 支持基于 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 的**图片画廊**
+* :(fab fa-font-awesome): 支持 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
+* :(far fa-sticky-note): 支持**上标注释**的扩展 Markdown 语法
+* :(fas fa-square-root-alt): 支持基于 [Katex](https://katex.org/) 的**数学公式**
+* :(fas fa-project-diagram): 支持基于 [mermaid](https://github.com/knsv/mermaid) 的**图表** shortcode
+* :(fas fa-chart-pie): 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化** shortcode
+* :(fas fa-music): 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的**音乐播放器** shortcode
+* :(fas fa-tv): 支持 **Bilibili 视频** shortcode
+* :(far fa-bell): 支持多种**注释**的 shortcode
+* :(fas fa-align-left): 支持**自定义样式**的 shortcode
+* :(fas fa-i-cursor): 支持基于 [TypeIt](https://typeitjs.com/) 的**打字动画** shortcode
+* :(fas fa-arrow-down): 支持基于 [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) 的**滚动动画**
 * ...
 
 ### 许可协议
@@ -63,15 +77,18 @@ LoveIt 根据 MIT 许可协议授权。
 
 更多信息请查看 [LICENSE 文件](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)。
 
-感谢以下在主题中使用过的项目的作者：
+LoveIt 主题中用到了以下项目，感谢它们的作者：
 
 * [Font Awesome](https://fontawesome.com/)
+* [Fork Awesome](https://forkaweso.me/Fork-Awesome/)
 * [Animate.css](https://daneden.github.io/animate.css/)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
+* [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * [TypeIt](https://typeitjs.com/)
 * [Katex](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)
+* [ECharts](https://echarts.apache.org/)
 * [APlayer](https://github.com/MoePlayer/APlayer)
 * [MetingJS](https://github.com/metowolf/MetingJS)
 * [Gitalk](https://github.com/gitalk/gitalk)

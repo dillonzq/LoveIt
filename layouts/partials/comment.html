@@ -81,7 +81,7 @@
                     {{- with $valine.pageSize -}}
                         pageSize: {{ . | safeJS }},
                     {{- end -}}
-                    lang: '{{ T "valineLang" }}',
+                    lang: '{{ $valine.lang | default "en" }}',
                     {{- if $valine.visitor -}}
                         visitor: true,
                     {{- end -}}

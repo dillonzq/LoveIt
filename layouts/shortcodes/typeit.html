@@ -1,32 +1,33 @@
 {{- $scratch := .Page.Scratch.Get "scratch" -}}
 
-{{- /* only the trailing newline is retained */ -}}
-{{- $content := replaceRE `(?s)^\n*(.*?)\n*$` "$1\n" .Inner | .Page.RenderString | chomp -}}
+{{- $content := .Inner -}}
+{{- $classList := .Get "class" | slice -}}
+{{- $tag := .Get "tag" | default "div" -}}
+
+{{- with .Get "code" -}}
+    {{- /* highlight code content without line number */ -}}
+    {{- $content = highlight $content . "linenos=false" -}}
+    {{- /* delete outer label */ -}}
+    {{- $content = replaceRE `<div class="highlight"><pre class="chroma"><code[^<>]*>(?s)(.*)</code></pre></div>` "$1" $content -}}
+    {{- /* parsing markdown links */ -}}
+    {{- $content = replaceRE `(<span[^<>]*>)([^<>]*)\[([^<>]+)\]\(([^<>]+)\)([^<>]*)(</span>)` "$1$2$6<a href=$4>$3</a>$1$5$6" $content -}}
+    {{- /* replace " " to "&nbsp;" and replace "\n" to "<br />" */ -}}
+    {{- $content = replaceRE ` ` "&nbsp;" $content | replaceRE `(<\w+)&nbsp;` "$1 " | replaceRE `\n` "<br />" -}}
+    {{- /* fix "<br />" location error which is a bug of Typeit HTML parser */ -}}
+    {{- $content = replaceRE `<br /></span>` "</span><br />" $content -}}
+    {{- $classList = $classList | append "highlight" -}}
+{{- else -}}
+    {{- $content = $content | .Page.RenderString -}}
+{{- end -}}
+
+{{- /* trim the newline */ -}}
+{{- $content = trim $content "\n" -}}
 {{- $id := partial "function/id.html" (dict "content" $content "scratch" $scratch) -}}
+{{- $key := .Get "group" | default $id -}}
+{{- $group := index ($scratch.Get "typeitMap" | default dict) $key -}}
+{{- $group = $group | default slice | append $id -}}
+{{- $scratch.SetInMap "typeitMap" $key $group -}}
 
-<div class={{ .Get "class" | default "typeit" }}>
-    {{- /* raw html content */ -}}
-    {{- if .Get "raw" -}}
-        <div id={{ $id }}></div>
-    {{- else if .Get "code" -}}
-        {{- /* highlight code content without line number */ -}}
-        {{- $content = highlight $content (.Get "code") "linenos=false" -}}
-        {{- /* delete outer label */ -}}
-        {{- $content = replaceRE `<div class="highlight"><pre class="chroma"><code[^<>]*>(?s)(.*)</code></pre></div>` "$1" $content -}}
-        {{- /* parsing markdown links */ -}}
-        {{- $content = replaceRE `(<span[^<>]*>)([^<>]*)\[([^<>]+)\]\(([^<>]+)\)([^<>]*)(</span>)` "$1$2$6<a href=$4>$3</a>$1$5$6" $content -}}
-        {{- /* replace " " to "&nbsp;" and replace "\n" to "<br />" */ -}}
-        {{- $content = replaceRE ` ` "&nbsp;" $content | replaceRE `(<\w+)&nbsp;` "$1 " | replaceRE `\n` "<br />" -}}
-        {{- /* fix "<br />" location error which is a bug of Typeit HTML parser */ -}}
-        {{- $content = replaceRE `<br /></span>` "</span><br />" $content -}}
-        <div class="highlight" id={{ $id }}></div>
-    {{- else -}}
-        {{- $tag := .Get "tag" | default "p" -}}
-        {{- printf "<%s id=%s></%s>" $tag $id $tag | safeHTML -}}
-    {{- end -}}
-
-    {{- $key := .Get "group" | default $id -}}
-    {{- $group := index ($scratch.Get "typeitMap" | default dict) $key -}}
-    {{- $group = $group | default slice | append $id -}}
-    {{- $scratch.SetInMap "typeitMap" $key $group -}}
+<div class="typeit">
+    {{- printf `<%s id="%s" class="%s"></%s>` $tag $id (delimit $classList " ") $tag | safeHTML -}}
 </div>

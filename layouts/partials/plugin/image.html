@@ -15,7 +15,9 @@
             data-src="{{ .src | safeURL }}"
             alt="{{ .title | default .description }}" />
     </a>
-    {{- .scratch.Set "lightgallery" true -}}
+    {{- with .scratch -}}
+        {{- .Set "lightgallery" true -}}
+    {{- end -}}
 {{- else -}}
     <img
         class="lazyload"
@@ -26,4 +28,3 @@
         alt="{{ .title | default .description }}"
         title="{{ .description }}" />
 {{- end -}}
-{{- .scratch.Set "lazysizes" true -}}

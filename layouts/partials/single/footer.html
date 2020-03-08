@@ -23,7 +23,7 @@
         </div>
         <div class="post-info-line">
             <div class="post-info-md">
-                {{- if .Site.Params.page.linkToMarkdown -}}
+                {{- if ne .Site.Params.page.linkToMarkdown false | and (ne .Params.linkToMarkdown false)  -}}
                     {{- with .OutputFormats.Get "markdown" -}}
                         <span>
                             <a class="link-to-markdown" href="{{ .Permalink }}" target="_blank">

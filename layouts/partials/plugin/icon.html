@@ -11,11 +11,15 @@
         {{- end -}}
     {{- end -}}
     {{- $classList = $newClassList -}}
-    {{- .scratch.Set "forkawesome" true -}}
+    {{- with .scratch -}}
+        {{- .Set "forkawesome" true -}}
+    {{- end -}}
 
 {{- /* default is Font Awesome */ -}}
 {{- /* Others */ -}}
 {{- else if ne $type "fa" -}}
-    {{- .scratch.Set "iconfont" true -}}
+    {{- with .scratch -}}
+        {{- .Set "iconfont" true -}}
+    {{- end -}}
 {{- end -}}
 <i class="{{ delimit $classList ` ` }}"></i>

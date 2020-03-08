@@ -28,16 +28,14 @@
 {{- end -}}
 
 {{- /* lazysizes */ -}}
-{{- if $scratch.Get "lazysizes" -}}
-    {{- with $CDN.lazysizesJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
-    {{- else -}}
-        {{- slice "lib/lazysizes/lazysizes.min.js" | $scratch.Add "scriptLocal" -}}
-    {{- end -}}
+{{- with $CDN.lazysizesJS -}}
+    {{- slice . | $scratch.Add "scriptCDN" -}}
+{{- else -}}
+    {{- slice "lib/lazysizes/lazysizes.min.js" | $scratch.Add "scriptLocal" -}}
 {{- end -}}
 
 {{- /* lightgallery.js */ -}}
-{{- if $scratch.Get "lightgallery" -}}
+{{- if ne .Page.Site.Params.page.lightgallery false | and (ne .Page.Params.lightgallery false) -}}
     {{- with $CDN.lightgalleryCSS -}}
         {{- slice . | $scratch.Add "linkCDN" -}}
     {{- else -}}
@@ -139,7 +137,8 @@
                     {{- if and $math.inlineLeftDelimiter $math.inlineRightDelimiter -}}
                         { left: '{{ $math.inlineLeftDelimiter }}', right: '{{ $math.inlineRightDelimiter }}', display: false },
                     {{- end -}}
-                ]
+                ],
+                strict: false,
             });
         });
     </script>

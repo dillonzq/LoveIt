@@ -1,28 +1,32 @@
 ---
+weight: 1
 title: "Theme Documentation - Basics"
-date: 2020-02-18T21:29:01+08:00
-lastmod: 2020-02-18T21:29:01+08:00
+date: 2020-03-06T21:29:01+08:00
+lastmod: 2020-03-06T21:29:01+08:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
-description: "Discover what the Hugo LoveIt theme is all about and the core-concepts behind it"
+description: "Discover what the Hugo - LoveIt theme is all about and the core-concepts behind it."
 license: ""
 
 tags: ["installation", "configuration"]
 categories: ["documentation"]
 hiddenFromHomePage: false
 
-featuredImage: "/images/theme-documentation-basics.webp"
+featuredImage: "/images/theme-documentation-basics/featured-image.webp"
 featuredImagePreview: ""
 
 toc: true
 autoCollapseToc: false
+math: false
 lightgallery: true
-math: true
+linkToMarkdown: true
+share:
+  enable: true
 comment: true
 ---
 
-Discover what the Hugo **LoveIt** theme is all about and the core-concepts behind it.
+Discover what the Hugo - **LoveIt** theme is all about and the core-concepts behind it.
 
 <!--more-->
 
@@ -30,17 +34,17 @@ Discover what the Hugo **LoveIt** theme is all about and the core-concepts behin
 
 Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only dependency of this theme.
 
-Just download latest version of [Hugo (> 0.62.0)](https://gohugo.io/getting-started/installing/) for your OS (Windows, Linux, Mac).
+Just install latest version of [:(far fa-file-archive): Hugo (> 0.62.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
 
 {{< admonition note "Why not support earlier versions of Hugo?" >}}
-Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup/#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/), this theme only supports Hugo versions above v0.62.0.
+Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup/#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/), this theme only supports Hugo versions above **v0.62.0**.
 {{< /admonition >}}
 
 ## 2 Installation
 
 The following steps are here to help you initialize your new website. If you don’t know Hugo at all, we strongly suggest you learn more about it by following this [great documentation for beginners](https://gohugo.io/getting-started/quick-start/).
 
-### 2.1 Create your project
+### 2.1 Create Your Project
 
 Hugo provides a `new` command to create a new website:
 
@@ -49,31 +53,32 @@ hugo new site my_website
 cd my_website
 ```
 
-### 2.2 Install the theme
+### 2.2 Install the Theme
 
 The **LoveIt** theme’s repository is: [https://github.com/dillonzq/LoveIt](https://github.com/dillonzq/LoveIt).
 
-Clone this repository to your hugo **themes** directory:
+You can download the **latest release** of the theme as :(far fa-file-archive): .zip file and extract it in the `themes` directory.
+
+Alternatively, clone this repository to the `themes` directory:
 
 ```bash
-  git clone -b master https://github.com/dillonzq/LoveIt.git themes/LoveIt
+git clone -b master https://github.com/dillonzq/LoveIt.git themes/LoveIt
 ```
 
 Or, create an empty git repository and make this repository a submodule of your site directory:
 
 ```bash
-  git init
-  git submodule -b master add https://github.com/dillonzq/LoveIt.git themes/LoveIt
+git init
+git submodule -b master add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 ```
 
-Alternatively, you can download the latest release of the theme as .zip file and extract it in the **themes** directory.
-
-### 2.3 Basic configuration
+### 2.3 Basic Configuration {#basic-configuration}
 
 The following is a basic configuration for the LoveIt theme:
 
 ```toml
 baseURL = "http://example.org/"
+# language code
 languageCode = "en"
 title = "My New Hugo Site"
 
@@ -83,13 +88,45 @@ theme = "LoveIt"
 [params]
   # LoveIt theme version
   version = "0.1.X"
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    # you can add extra information before the name (HTML format is allowed), such as icons
+    pre = ""
+    name = "Posts"
+    url = "/posts/"
+    # title will be shown when you hover on this menu link
+    title = ""
+    weight = 1
+  [[menu.main]]
+    identifier = "tags"
+    pre = ""
+    name = "Tags"
+    url = "/tags/"
+    title = ""
+    weight = 2
+  [[menu.main]]
+    identifier = "categories"
+    pre = ""
+    name = "Categories"
+    url = "/categories/"
+    title = ""
+    weight = 3
+  [[menu.main]]
+    identifier = "about"
+    pre = ""
+    name = "About"
+    url = "/about/"
+    title = ""
+    weight = 4
 ```
 
-{{< admonition note >}}
+{{< admonition >}}
 When building the website, you can set a theme by using `--theme` option. However, we suggest you modify the configuration file (**config.toml**) and set the theme as the default.
 {{< /admonition >}}
 
-### 2.4 Create your first post
+### 2.4 Create Your First Post
 
 Here is the way to create your first post:
 
@@ -99,11 +136,11 @@ Here is the way to create your first post:
 
 Feel free to edit the post file by adding some sample content and replacing the title value in the beginning of the file.
 
-{{< admonition note >}}
+{{< admonition >}}
 By default all posts and pages are created as a draft. If you want to render these pages, remove the property `draft: true` from the metadata or set the property `draft: false`.
 {{< /admonition >}}
 
-### 2.5 Launching the website locally
+### 2.5 Launching the Website Locally
 
 Launch by using the following command:
 
@@ -113,11 +150,13 @@ hugo serve
 
 Go to `http://localhost:1313`.
 
+![Basic configuration preview](/images/theme-documentation-basics/basic-configuration-preview.png "Basic configuration preview")
+
 {{< admonition tip >}}
 When you run `hugo serve`, when the contents of the files change, the page automatically refreshes with the changes.
 {{< /admonition >}}
 
-### 2.6 Build the website
+### 2.6 Build the Website
 
 When your site is ready to deploy, run the following command:
 
@@ -129,42 +168,20 @@ A `public` folder will be generated, containing all static content and assets fo
 
 {{< admonition tip >}}
 The website can be automatically published and hosted with [Netlify](https://www.netlify.com/) (Read more about [Automated HUGO deployments with Netlify](https://www.netlify.com/blog/2015/07/30/hosting-hugo-on-netlifyinsanely-fast-deploys/)).
-Alternatively, you can use [Github pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/).
+Alternatively, you can use [AWS Amplify](https://gohugo.io/hosting-and-deployment/hosting-on-aws-amplify/), [Github pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/), [Render](https://gohugo.io/hosting-and-deployment/hosting-on-render/) and more...
 {{< /admonition >}}
 
 ## 3 Configuration
 
-### 3.1 `config.toml`
+### 3.1 Site Configuration {#site-configuration}
 
-On top of [Hugo global configuration](https://gohugo.io/overview/configuration/), **LoveIt** lets you define the following parameters in your `config.toml` (here, values are default).
+In addition to [Hugo global configuration](https://gohugo.io/overview/configuration/) and [menu configuration](#basic-configuration), **LoveIt** lets you define the following parameters in your site configuration (here is a `config.toml`, whose values are default).
 
 {{< admonition >}}
 Note that some of these parameters are explained in details in other sections of this documentation.
 {{< /admonition >}}
 
 ```toml
-[menu]
-  [[menu.main]]
-    identifier = "posts"
-    name = "Posts"
-    url = "/posts/"
-    weight = 1
-  [[menu.main]]
-    identifier = "tags"
-    name = "Tags"
-    url = "/tags/"
-    weight = 2
-  [[menu.main]]
-    identifier = "categories"
-    name = "Categories"
-    url = "/categories/"
-    weight = 3
-  [[menu.main]]
-    identifier = "about"
-    name = "About"
-    url = "/about/"
-    weight = 4
-
 [params]
   # LoveIt theme version
   version = "0.1.X"
@@ -174,7 +191,7 @@ Note that some of these parameters are explained in details in other sections of
   keywords = ["Theme", "Hugo"]
   # site default theme ("light", "dark", "auto")
   defaultTheme = "auto"
-  # public git repo url to link lastmod git commit only then enableGitInfo is true
+  # public git repo url only then enableGitInfo is true
   gitRepo = ""
   # Header info
   [params.header]
@@ -200,7 +217,7 @@ Note that some of these parameters are explained in details in other sections of
       # URL of avatar shown in home page
       avatarURL = "/images/avatar.png"
       # subtitle shown in home page
-      subtitle = "A Clean, Elegant but Advanced Hugo Theme"
+      subtitle = "This is my new hugo site"
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links
@@ -285,7 +302,7 @@ Note that some of these parameters are explained in details in other sections of
     lightgallery = true
     # whether to show link to Raw Markdown content of the post
     linkToMarkdown = true
-  # mathematical formulas (KaTeX)
+  # mathematical formulas (KaTeX https://katex.org/)
   [params.math]
     enable = true
     # default block delimiter is $$ ... $$ and \\[ ... \\]
@@ -350,8 +367,9 @@ Note that some of these parameters are explained in details in other sections of
       notify = false
       verify = true
       avatar = "mp"
-      # meta= ""
+      meta= ""
       pageSize = 10
+      lang = "en"
       visitor = true
       recordIP = true
     # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
@@ -502,9 +520,11 @@ Note that some of these parameters are explained in details in other sections of
   taxonomyTerm = ["HTML"]
 ```
 
+![Complete configuration preview](/images/theme-documentation-basics/complete-configuration-preview.gif "Complete configuration preview")
+
 ### 3.2 Favicons, Browserconfig, Manifest
 
-It is recommended to put your own favicons
+It is recommended to put your own favicons:
 
 * apple-touch-icon.png (180x180)
 * favicon-32x32.png (32x32)
@@ -517,17 +537,17 @@ into `/static`. They’re easily created via [https://realfavicongenerator.net/]
 
 Customize `browserconfig.xml` and `site.webmanifest` to set theme-color and background-color.
 
-### 3.3 Add logo and cover for SEO
+### 3.3 Add Logo and Cover for SEO
 
 Add a logo image (127x40) and a cover image (800x600) in the `static` directory.
 
 ### 3.4 Style Customization
 
-**LoveIt** has been built to be as configurable as possible by defining custom `.scss` style files.
+**LoveIt** theme has been built to be as configurable as possible by defining custom `.scss` style files.
 
 The directory including the custom `.scss` style files is `config/css` relative to **your project path**.
 
-In `_override.scss`, you can override the variables in `assets/css/_variables.scss` relative to **LoveIt directory** to customize the style.
+In `_override.scss`, you can override the variables in `themes/LoveIt/assets/css/_variables.scss` to customize the style.
 
 Here is a example:
 
@@ -537,3 +557,154 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 ```
 
 In `_custom.scss`, you can add some css style code to customize the style.
+
+## 4 Multilingual and i18n
+
+**LoveIt** theme is fully compatible with Hugo multilingual mode.
+
+It provides:
+
+* Translation strings for default values (**English**, **Chinese** and **French**). **Feel free to contribute!**
+* In-browser language switching
+
+![Language Switch](/images/theme-documentation-basics/language-switch.gif "Language Switch")
+
+### 4.1 Basic Configuration
+
+After learning [how Hugo handle multilingual websites](https://gohugo.io/content-management/multilingual), define your languages in your [site configuration](#site-configuration).
+
+For example with English, Chinese and French website:
+
+```toml
+# [en, zh-CN, fr, ...] determines default content language
+defaultContentLanguage = "en"
+
+[languages]
+  [languages.en]
+    weight = 1
+    title = "My New Hugo Site"
+    languageCode = "en"
+    languageName = "English"
+    [[languages.en.menu.main]]
+      identifier = "posts"
+      pre = ""
+      name = "Posts"
+      url = "/posts/"
+      title = ""
+      weight = 1
+    [[languages.en.menu.main]]
+      identifier = "tags"
+      pre = ""
+      name = "Tags"
+      url = "/tags/"
+      title = ""
+      weight = 2
+    [[languages.en.menu.main]]
+      identifier = "categories"
+      pre = ""
+      name = "Categories"
+      url = "/categories/"
+      title = ""
+      weight = 3
+    [[languages.en.menu.main]]
+      identifier = "about"
+      pre = ""
+      name = "About"
+      url = "/about/"
+      title = ""
+      weight = 4
+
+  [languages.zh-CN]
+    weight = 2
+    title = "我的全新 Hugo 网站"
+    languageCode = "zh-CN"
+    languageName = "简体中文"
+    # whether to include Chinese/Japanese/Korean
+    hasCJKLanguage = true
+    [[languages.zh-CN.menu.main]]
+      identifier = "posts"
+      pre = ""
+      name = "文章"
+      url = "/posts/"
+      title = ""
+      weight = 1
+    [[languages.zh-CN.menu.main]]
+      identifier = "tags"
+      pre = ""
+      name = "标签"
+      url = "/tags/"
+      title = ""
+      weight = 2
+    [[languages.zh-CN.menu.main]]
+      identifier = "categories"
+      pre = ""
+      name = "分类"
+      url = "/categories/"
+      title = ""
+      weight = 3
+    [[languages.zh-CN.menu.main]]
+      identifier = "about"
+      pre = ""
+      name = "关于"
+      url = "/about/"
+      title = ""
+      weight = 4
+
+  [languages.fr]
+    weight = 3
+    title = "Mon nouveau site Hugo"
+    languageCode = "fr"
+    languageName = "Français"
+    [[languages.fr.menu.main]]
+      identifier = "posts"
+      pre = ""
+      name = "Postes"
+      url = "/posts/"
+      title = ""
+      weight = 1
+    [[languages.fr.menu.main]]
+      identifier = "tags"
+      pre = ""
+      name = "Balises"
+      url = "/tags/"
+      title = ""
+      weight = 2
+    [[languages.fr.menu.main]]
+      identifier = "categories"
+      name = "Catégories"
+      pre = ""
+      url = "/categories/"
+      title = ""
+      weight = 3
+    [[languages.fr.menu.main]]
+      identifier = "about"
+      pre = ""
+      name = "À propos"
+      url = "/about/"
+      title = ""
+      weight = 4
+```
+
+Then, for each new page, append the language code to the file name.
+
+Single file `my-page.md` is split in three files:
+
+* in English: `my-page.en.md`
+* in Chinese: `my-page.zh-cn.md`
+* in French: `my-page.fr.md`
+
+{{< admonition >}}
+Be aware that only translated pages are displayed in menu. It’s not replaced with default language content.
+{{< /admonition >}}
+
+{{< admonition tip >}}
+Use [Front Matter parameter](https://gohugo.io/content-management/multilingual/#translate-your-content) to translate urls too.
+{{< /admonition >}}
+
+### 4.2 Overwrite Translation Strings
+
+Translations strings are used for common default values used in the theme. Translations are available in **English**, **Chinese** and **French**, but you may use another language or want to override default values.
+
+To override these values, create a new file in your local i18n folder `i18n/<languageCode>.toml` and inspire yourself from `themes/LoveIt/i18n/en.toml`.
+
+By the way, as these translations could be used by other people, please take the time to propose a translation by [making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!

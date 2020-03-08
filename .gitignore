@@ -1,8 +1,9 @@
 # Hugo default output directory
 public/
 /exampleSite/resources/
-/exampleSite/zh/resources/
+
 node_modules/
+build/
 
 ## OS Files
 # Windows

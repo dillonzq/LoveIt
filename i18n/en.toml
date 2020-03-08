@@ -7,8 +7,8 @@ other = "Posts"
 # === Post ===
 
 # === Taxonomy ===
-[all]
-other = "all "
+[allSome]
+other = "All %s"
 
 [tag]
 other = "Tag"
@@ -33,26 +33,21 @@ other = "More"
 other = "Switch Theme"
 # === partials/header.html ===
 
-# === partials/comment.html ===
-[valineLang]
-other = "en"
-# === partials/comment.html ===
-
 # === partials/footer.html ===
-[powered]
+[poweredBySome]
 other = "Powered by %s"
 
 [theme]
-other = "Theme - "
+other = "Theme"
 # === partials/footer.html ===
 
 # === partials/plugin/share.html ===
-[share]
+[shareOn]
 other = "Share on"
 # === partials/plugin/share.html ===
 
 # === posts/single.html ===
-[toc]
+[contents]
 other = "Contents"
 
 [publish]
@@ -102,3 +97,41 @@ other = "The page you're looking for doesn't exist. Sorry."
 [backToHome]
 other = "Back to Home"
 # === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Note"
+
+[abstract]
+other = "Abstract"
+
+[info]
+other = "Info"
+
+[tip]
+other = "Tip"
+
+[success]
+other = "Success"
+
+[question]
+other = "Question"
+
+[warning]
+other = "Warning"
+
+[failure]
+other = "Failure"
+
+[danger]
+other = "Danger"
+
+[bug]
+other = "Bug"
+
+[example]
+other = "Example"
+
+[quote]
+other = "Quote"
+# === shortcodes/admonition.html ===

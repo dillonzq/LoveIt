@@ -88,6 +88,7 @@
 
     a {
       word-break: break-all;
+      word-break: break-word;
       color: $single-link-color;
 
       .dark-theme & {
@@ -181,18 +182,18 @@
         line-height: 1.7;
       }
 
+      img {
+        display: block;
+        max-width: 96%;
+        height: auto;
+        margin: 0 auto;
+        overflow: hidden;
+        transition: all 0.2s ease-in-out;
+      }
+
       a.lightgallery:hover img {
         transform: scale(1.02);
       }
-    }
-
-    img {
-      display: block;
-      max-width: 96%;
-      height: auto;
-      margin: 0 auto;
-      overflow: hidden;
-      transition: all 0.2s ease-in-out;
     }
 
     .lazyloading {

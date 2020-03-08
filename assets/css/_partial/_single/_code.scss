@@ -19,7 +19,6 @@ code, pre, .highlight table, .highlight tr, .highlight td {
 
 .highlight > .chroma {
   margin: 1rem 0;
-  line-height: round($code-font-size * 1.4);
 
   code, pre {
     margin: 0;
@@ -30,7 +29,6 @@ code, pre, .highlight table, .highlight tr, .highlight td {
     display: block;
     padding: .4rem;
     font-family: $global-font-family;
-    font-size: $code-font-size;
     font-weight: bold;
     color: $code-info-color;
     background: darken($code-background-color, 3%);
@@ -88,6 +86,8 @@ code, pre, .highlight table, .highlight tr, .highlight td {
 
 .highlight {
   font-family: $code-font-family;
+  font-size: $code-font-size;
+  line-height: round($code-font-size * 1.4);
   /* Comment */  .c,
   /* CommentHashbang */  .ch,
   /* CommentMultiline */  .cm,

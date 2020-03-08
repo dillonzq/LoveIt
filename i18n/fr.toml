@@ -7,14 +7,14 @@ other = "Posts"
 # === Post ===
 
 # === Taxonomy ===
-[all]
-other = "tous "
+[allSome]
+other = "Tous %s"
 
 [tag]
-other = "Tag"
+other = "Balise"
 
 [tags]
-other = "Tags"
+other = "Balises"
 
 [category]
 other = "Catégorie"
@@ -33,26 +33,21 @@ other = "Plus"
 other = "Changer de Thème"
 # === partials/header.html ===
 
-# === partials/comments.html ===
-[valineLang]
-other = "fr"
-# === partials/comments.html ===
-
 # === partials/footer.html ===
-[powered]
+[poweredBySome]
 other = "Propulsé par %s"
 
 [theme]
-other = "Thème - "
+other = "Thème"
 # === partials/footer.html ===
 
-# === partials/post/share.html ===
-[share]
+# === partials/plugin/share.html ===
+[shareOn]
 other = "Partager sur"
-# === partials/post/share.html ===
+# === partials/plugin/share.html ===
 
 # === posts/single.html ===
-[toc]
+[contents]
 other = "Contenu"
 
 [publish]
@@ -102,3 +97,41 @@ other = "Désolé, la page recherchée n'existe pas."
 [backToHome]
 other = "Retour à l'accueil"
 # === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Remarque"
+
+[abstract]
+other = "Abstrait"
+
+[info]
+other = "Info"
+
+[tip]
+other = "Astuces"
+
+[success]
+other = "Succès"
+
+[question]
+other = "Question"
+
+[warning]
+other = "Avertissement"
+
+[failure]
+other = "Échec"
+
+[danger]
+other = "Danger"
+
+[bug]
+other = "Bug"
+
+[example]
+other = "Exemple"
+
+[quote]
+other = "Citation"
+# === shortcodes/admonition.html ===

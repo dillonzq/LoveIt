@@ -14,7 +14,7 @@
             {{- end -}}
             {{- if .Site.IsMultiLingual -}}
                 &nbsp;|&nbsp;
-                <span class="menu-item">
+                <a href="javascript:void(0);" class="menu-item">
                     <i class="fas fa-language fa-fw"></i>&nbsp;
                     <select class="select-language" onchange="location = this.value;">
                         {{- range .Page.AllTranslations -}}
@@ -30,7 +30,7 @@
                             {{- end -}}
                         {{- end -}}
                     </select>
-                </span>
+                </a>
             {{- end -}}
             <a href="javascript:void(0);" class="theme-switch" title="{{ T "switchTheme" }}">
                 <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
@@ -60,7 +60,7 @@
                 </a>
             {{- end -}}
             {{- if .Site.IsMultiLingual -}}
-                <span class="menu-item">
+                <a href="javascript:void(0);" class="menu-item">
                     <i class="fas fa-language fa-fw"></i>&nbsp;
                     <select class="select-language" onchange="location = this.value;">
                         {{- range .Page.AllTranslations -}}
@@ -76,7 +76,7 @@
                             {{- end -}}
                         {{- end -}}
                     </select>
-                </span>
+                </a>
             {{- end -}}
             <a href="javascript:void(0);" class="theme-switch" title="{{ T "switchTheme" }}">
                 <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
