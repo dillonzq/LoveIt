@@ -1,0 +1,11 @@
+{{- $content := . -}}
+
+{{- $content = partial "function/fontawesome.html" $content -}}
+
+{{- $content = partial "function/ruby.html" $content -}}
+
+{{- $content = partial "function/checkbox.html" $content -}}
+
+{{- $content = partial "function/escape.html" $content -}}
+
+{{- $content | safeHTML -}}

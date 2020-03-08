@@ -1,12 +1,13 @@
-@charset 'utf-8';
-
 // ==============================
 // Variables
 // ==============================
 
 // ========== Global ========== //
-// Font family
+// Font and Line Height
 $global-font-family: -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft Yahei, Segoe UI, Helvetica, Arial, sans-serif, Segoe UI Emoji !default;
+$global-font-size: 16px;
+$global-font-weight: 400;
+$global-line-height: 1.5rem;
 
 // Color of the background
 $global-background-color: #fff !default;
@@ -47,24 +48,36 @@ $selection-color: rgba(38, 139, 211, 0.2) !default;
 $selection-color-dark: rgba(38, 139, 211, 0.3) !default;
 // ========== Selection ========== //
 
-// ========== Navbar ========== //
-// Color of the navbar background
-$navbar-background-color: #fafafa !default;
-$navbar-background-color-dark: #252627 !default;
+// ========== Header ========== //
+// Height of the header
+$header-height-desktop: 4rem !default;
+$header-height-mobile: 4rem !default;
 
-// Color of the hover navbar item
-$navbar-hover-color: #161209 !default;
-$navbar-hover-color-dark: #fff !default;
-// ========== Navbar ========== //
+// Color of the header background
+$header-background-color: #f8f8f8 !default;
+$header-background-color-dark: #252627 !default;
 
-// ========== Post Content ========== //
-// Color of the post link
-$post-link-color: #2d96bd !default;
-$post-link-color-dark: #eee !default;
+// Position of the header
+$header-position-desktop: if($header-normal-mode-desktop, static, fixed) !default;
+$header-position-mobile: if($header-normal-mode-mobile, static, fixed) !default;
 
-// Color of the hover post link
-$post-link-hover-color: #ef3982 !default;
-$post-link-hover-color-dark: #2d96bd !default;
+// Top of the page padding
+$page-padding-top-desktop: if($header-normal-mode-desktop, 1rem, 6rem) !default;
+$page-padding-top-mobile: if($header-normal-mode-mobile, 1rem, 6rem) !default;
+
+// Color of the hover header item
+$header-hover-color: #161209 !default;
+$header-hover-color-dark: #fff !default;
+// ========== Header ========== //
+
+// ========== Single Content ========== //
+// Color of the single link
+$single-link-color: #2d96bd !default;
+$single-link-color-dark: #eee !default;
+
+// Color of the hover single link
+$single-link-hover-color: #ef3982 !default;
+$single-link-hover-color-dark: #2d96bd !default;
 
 // Color of the table background
 $table-background-color: #fff !default;
@@ -73,7 +86,7 @@ $table-background-color-dark: #272c34 !default;
 // Color of the table thead
 $table-thead-color: #ededed !default;
 $table-thead-color-dark: #20252b !default;
-// ========== Post Content ========== //
+// ========== Single Content ========== //
 
 // ========== Pagination ========== //
 // Color of the link in pagination
@@ -110,48 +123,207 @@ $code-type-map: (
   language-c: 'C',
   language-cs: 'C#',
   language-cpp: 'C++',
-  language-css: 'CSS',
+  language-clojure: 'Clojure',
   language-coffeescript: 'CoffeeScript',
-  language-html: 'HTML',
-  language-xml: 'XML',
-  language-http: 'HTTP',
-  language-json: 'JSON',
-  language-java: 'Java',
-  language-js: 'JavaScript',
-  language-javascript: 'JavaScript',
-  language-makefile: 'Makefile',
-  language-markdown: 'Markdown',
-  language-objectivec: 'Objective-C',
-  language-php: 'PHP',
-  language-perl: 'Perl',
-  language-python: 'Python',
-  language-ruby: 'Ruby',
-  language-sql: 'SQL',
-  language-shell: 'Shell',
+  language-css: 'CSS',
+  language-dart: 'Dart',
+  language-diff: 'Diff',
   language-erlang: 'Erlang',
   language-go: 'Go',
   language-go-html-template: 'Go HTML Template',
   language-groovy: 'Groovy',
   language-haskell: 'Haskell',
+  language-html: 'HTML',
+  language-http: 'HTTP',
+  language-xml: 'XML',
+  language-java: 'Java',
+  language-js: 'JavaScript',
+  language-javascript: 'JavaScript',
+  language-json: 'JSON',
   language-kotlin: 'Kotlin',
-  language-clojure: 'Clojure',
+  language-latex: 'LaTeX',
   language-less: 'Less',
   language-lisp: 'Lisp',
   language-lua: 'Lua',
+  language-makefile: 'Makefile',
+  language-markdown: 'Markdown',
   language-matlab: 'Matlab',
+  language-objectivec: 'Objective-C',
+  language-php: 'PHP',
+  language-perl: 'Perl',
+  language-python: 'Python',
+  language-r: 'R',
+  language-ruby: 'Ruby',
   language-rust: 'Rust',
-  language-scss: 'Scss',
   language-scala: 'Scala',
+  language-scss: 'Scss',
+  language-shell: 'Shell',
+  language-sql: 'SQL',
   language-swift: 'Swift',
+  language-tex: 'TeX',
+  language-toml: 'TOML',
+  language-ts: 'TypeScript',
   language-typescript: 'TypeScript',
+  language-vue: 'Vue',
   language-yml: 'YAML',
   language-yaml: 'YAML',
-  language-toml: 'TOML',
-  language-diff: 'Diff',
+) !default;
+
+// Color map of the code highlight
+$code-highlight-color-map: (
+  /* Parentheses */ 'p': #a9a9b3,
+  /* Keyword */ 'k': #b501a9,
+  /* KeywordConstant */ 'kc': #b501a9,
+  /* KeywordDeclaration */ 'kd': #b501a9,
+  /* KeywordNamespace */ 'kn': #b501a9,
+  /* KeywordPseudo */ 'kp': #b501a9,
+  /* KeywordReserved */ 'kr': #b501a9,
+  /* KeywordType */ 'kt': #b501a9,
+  /* Name */ 'n': #333333,
+  /* NameAttribute */ 'na': #2b77fa,
+  /* NameBuiltin */ 'nb': #f74840,
+  /* NameBuiltinPseudo */ 'bp': #f74840,
+  /* NameClass */ 'nc': #cb8100,
+  /* NameConstant */ 'no': #2b77fa,
+  /* NameDecorator */ 'nd': #0086c1,
+  /* NameEntity */ 'ni': #2b77fa,
+  /* NameException */ 'ne': #2b77fa,
+  /* NameFunction */ 'nf': #2b77fa,
+  /* NameFunctionMagic */ 'fm': #1ccad6,
+  /* NameLabel */ 'nl': #2b77fa,
+  /* NameNamespace */ 'nn': #2b77fa,
+  /* NameOther */ 'nx': #333333,
+  /* NameProperty */ 'py': #2b77fa,
+  /* NameTag */ 'nt': #2b77fa,
+  /* NameVariable */ 'nv': #2b77fa,
+  /* NameVariableClass */ 'vc': #2b77fa,
+  /* NameVariableGlobal */ 'vg': #2b77fa,
+  /* NameVariableInstance */ 'vi': #2b77fa,
+  /* NameVariableMagic */ 'vm': #2b77fa,
+  /* Literal */ 'l': #2aa198,
+  /* LiteralDate */ 'ld': #2aa198,
+  /* LiteralString */ 's': #24a443,
+  /* LiteralStringAffix */ 'sa': #24a443,
+  /* LiteralStringBacktick */ 'sb': #24a443,
+  /* LiteralStringChar */ 'sc': #24a443,
+  /* LiteralStringDelimiter */ 'dl': #24a443,
+  /* LiteralStringDoc */ 'sd': #24a443,
+  /* LiteralStringDouble */ 's2': #24a443,
+  /* LiteralStringEscape */ 'se': #24a443,
+  /* LiteralStringHeredoc */ 'sh': #24a443,
+  /* LiteralStringInterpol */ 'si': #24a443,
+  /* LiteralStringOther */ 'sx': #24a443,
+  /* LiteralStringRegex */ 'sr': #24a443,
+  /* LiteralStringSingle */ 's1': #24a443,
+  /* LiteralStringSymbol */ 'ss': #24a443,
+  /* LiteralNumber */ 'm': #e2893c,
+  /* LiteralNumberBin */ 'mb': #e2893c,
+  /* LiteralNumberFloat */ 'mf': #e2893c,
+  /* LiteralNumberHex */ 'mh': #e2893c,
+  /* LiteralNumberInteger */ 'mi': #e2893c,
+  /* LiteralNumberIntegerLong */ 'il': #e2893c,
+  /* LiteralNumberOct */ 'mo': #e2893c,
+  /* Operator */ 'o': #f19b04,
+  /* OperatorWord */ 'ow': #b501a9,
+  /* Comment */ 'c': #a0a1a8,
+  /* CommentHashbang */ 'ch': #a0a1a8,
+  /* CommentMultiline */ 'cm': #a0a1a8,
+  /* CommentSingle */ 'c1': #a0a1a8,
+  /* CommentSpecial */ 'cs': #a0a1a8,
+  /* CommentPreproc */ 'cp': #a0a1a8,
+  /* CommentPreprocFile */ 'cpf': #a0a1a8,
+  /* Generic */ 'g': #e72d40,
+  /* GenericDeleted */ 'gd': #e72d40,
+  /* GenericEmph */ 'ge': #e72d40,
+  /* GenericError */ 'gr': #e72d40,
+  /* GenericHeading */ 'gh': #e72d40,
+  /* GenericInserted */ 'gi': #e72d40,
+  /* GenericOutput */ 'go': #e72d40,
+  /* GenericPrompt */ 'gp': #e72d40,
+  /* GenericStrong */ 'gs': #e72d40,
+  /* GenericSubheading */ 'gu': #e72d40,
+  /* GenericTraceback */ 'gt': #e72d40,
+  /* TextWhitespace */ 'w': #bbbbbb,
+) !default;
+$code-highlight-color-map-dark: (
+  /* Parentheses */ 'p': #a9a9b3,
+  /* Keyword */ 'k': #d371e3,
+  /* KeywordConstant */ 'kc': #d371e3,
+  /* KeywordDeclaration */ 'kd': #d371e3,
+  /* KeywordNamespace */ 'kn': #d371e3,
+  /* KeywordPseudo */ 'kp': #d371e3,
+  /* KeywordReserved */ 'kr': #d371e3,
+  /* KeywordType */ 'kt': #d371e3,
+  /* Name */ 'n': #a9b2c0,
+  /* NameAttribute */ 'na': #41b0f5,
+  /* NameBuiltin */ 'nb': #19b9c4,
+  /* NameBuiltinPseudo */ 'bp': #ecbf6f,
+  /* NameClass */ 'nc': #ecbf6f,
+  /* NameConstant */ 'no': #41b0f5,
+  /* NameDecorator */ 'nd': #ecbf6f,
+  /* NameEntity */ 'ni': #41b0f5,
+  /* NameException */ 'ne': #41b0f5,
+  /* NameFunction */ 'nf': #41b0f5,
+  /* NameFunctionMagic */ 'fm': #19b9c4,
+  /* NameLabel */ 'nl': #41b0f5,
+  /* NameNamespace */ 'nn': #41b0f5,
+  /* NameOther */ 'nx': #a9a9b3,
+  /* NameProperty */ 'py': #41b0f5,
+  /* NameTag */ 'nt': #41b0f5,
+  /* NameVariable */ 'nv': #41b0f5,
+  /* NameVariableClass */ 'vc': #41b0f5,
+  /* NameVariableGlobal */ 'vg': #41b0f5,
+  /* NameVariableInstance */ 'vi': #41b0f5,
+  /* NameVariableMagic */ 'vm': #41b0f5,
+  /* Literal */ 'l': #2aa198,
+  /* LiteralDate */ 'ld': #2aa198,
+  /* LiteralString */ 's': #8cc570,
+  /* LiteralStringAffix */ 'sa': #8cc570,
+  /* LiteralStringBacktick */ 'sb': #8cc570,
+  /* LiteralStringChar */ 'sc': #8cc570,
+  /* LiteralStringDelimiter */ 'dl': #8cc570,
+  /* LiteralStringDoc */ 'sd': #8cc570,
+  /* LiteralStringDouble */ 's2': #8cc570,
+  /* LiteralStringEscape */ 'se': #8cc570,
+  /* LiteralStringHeredoc */ 'sh': #8cc570,
+  /* LiteralStringInterpol */ 'si': #8cc570,
+  /* LiteralStringOther */ 'sx': #8cc570,
+  /* LiteralStringRegex */ 'sr': #8cc570,
+  /* LiteralStringSingle */ 's1': #8cc570,
+  /* LiteralStringSymbol */ 'ss': #8cc570,
+  /* LiteralNumber */ 'm': #db985c,
+  /* LiteralNumberBin */ 'mb': #db985c,
+  /* LiteralNumberFloat */ 'mf': #db985c,
+  /* LiteralNumberHex */ 'mh': #db985c,
+  /* LiteralNumberInteger */ 'mi': #db985c,
+  /* LiteralNumberIntegerLong */ 'il': #db985c,
+  /* LiteralNumberOct */ 'mo': #db985c,
+  /* Operator */ 'o': #ecbf6f,
+  /* OperatorWord */ 'ow': #d371e3,
+  /* Comment */ 'c': #7e848f,
+  /* CommentHashbang */ 'ch': #7e848f,
+  /* CommentMultiline */ 'cm': #7e848f,
+  /* CommentSingle */ 'c1': #7e848f,
+  /* CommentSpecial */ 'cs': #7e848f,
+  /* CommentPreproc */ 'cp': #7e848f,
+  /* CommentPreprocFile */ 'cpf': #7e848f,
+  /* Generic */ 'g': #f16372,
+  /* GenericDeleted */ 'gd': #f16372,
+  /* GenericEmph */ 'ge': #f16372,
+  /* GenericError */ 'gr': #f16372,
+  /* GenericHeading */ 'gh': #f16372,
+  /* GenericInserted */ 'gi': #f16372,
+  /* GenericOutput */ 'go': #f16372,
+  /* GenericPrompt */ 'gp': #f16372,
+  /* GenericStrong */ 'gs': #f16372,
+  /* GenericSubheading */ 'gu': #f16372,
+  /* GenericTraceback */ 'gt': #f16372,
+  /* TextWhitespace */ 'w': #bbbbbb,
 ) !default;
 // ========== Code ========== //
 
 // ========== Admonition ========== //
+// Color map of the admonition
 $admonition-color-map: (
   'note': #448aff,
   'abstract': #00b0ff,
@@ -167,6 +339,7 @@ $admonition-color-map: (
   'quote': #9e9e9e,
 ) !default;
 
+// Color map of the admonition background
 $admonition-background-color-map: (
   'note': rgba(68,138,255,.1),
   'abstract': rgba(0,176,255,.1),

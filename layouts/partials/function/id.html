@@ -1,0 +1,8 @@
+{{- /* ID */ -}}
+{{- /* Content -> unique ID */ -}}
+{{- /* shuffle md5 as id */ -}}
+{{- $id := delimit (split (md5 now.Unix) "" | shuffle | first 6) "" | printf "id-%s" -}}
+{{- with .scratch -}}
+    {{- .SetInMap "contentMap" $id $.content -}}
+{{- end -}}
+{{- return $id -}}

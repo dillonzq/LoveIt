@@ -3,20 +3,42 @@
   {{- errorf "\n\nThere are two possible situations that led to this error:\n  1. You haven't copied the config.toml yet. See https://github.com/dillonzq/LoveIt#installation \n  2. You have an incompatible update. See https://github.com//dillonzq/LoveIt/blob/master/CHANGELOG.md \n\n有两种可能的情况会导致这个错误发生:\n  1. 你还没有复制 config.toml 参考 https://github.com/dillonzq/LoveIt#installation \n  2. 你进行了一次不兼容的更新 参考 https://github.com//dillonzq/LoveIt/blob/master/CHANGELOG.md \n" -}}
 {{- end -}}
 
+{{- $scratch := newScratch -}}
+{{- .Scratch.Set "scratch" $scratch -}}
+{{- if eq hugo.Environment "production" -}}
+    {{- $scratch.Set "production" true -}}
+    {{- $scratch.Set "CDN" .Site.Params.cdn -}}
+{{- end -}}
+
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>
             {{- block "title" . }}{{ .Site.Title }}{{ end -}}
         </title>
-        {{- partial "head.html" . -}}
+        <meta name="Description" content="{{ .Params.description | default .Site.Params.description }}">
+
+        {{- partial "head/meta.html" . -}}
+        {{- partial "head/link.html" . -}}
+        {{- partial "head/seo.html" . -}}
     </head>
     <body>
         {{- /* Check theme isDark before body rendering */ -}}
         <script>
-            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            if (!window.localStorage || !window.localStorage.getItem('theme')) {
+                {{- $theme := .Site.Params.defaultTheme -}}
+                {{- if eq $theme "auto" -}}
+                    window.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                {{- else -}}
+                    window.isDark = '{{ $theme }}' === 'dark';
+                {{- end -}}
+            } else {
+                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            }
             window.isDark && document.body.classList.add('dark-theme');
         </script>
 
@@ -32,11 +54,11 @@
         </div>
 
         {{- /* Dynamic to top button */ -}}
-        <a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll>
+        <a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
             <span>&nbsp;</span>
         </a>
 
-        {{- /* Load scripts */ -}}
-        {{- partial "scripts.html" . -}}
+        {{- /* Load JavaScript scripts and CSS */ -}}
+        {{- partial "assets.html" . -}}
     </body>
 </html>

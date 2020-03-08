@@ -1,44 +1,91 @@
-{{- /* Desktop navbar */ -}}
-<nav class="navbar">
-    <div class="navbar-container">
-        <div class="navbar-header animated bounceIn">
-            <a href="{{ .Site.BaseURL }}">
+{{- /* Desktop header */ -}}
+<header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title animated bounceIn">
+            <a href="{{ `/` | relLangURL }}">
                 {{- .Site.Title -}}
             </a>
         </div>
-        <div class="navbar-menu">
-            {{- $currentPage := . }}
+        <div class="menu">
             {{- range .Site.Menus.main -}}
-                <a class="menu-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) | or (eq $currentPage.RelPermalink .URL) }} active{{ end }}" href="{{ .URL | absLangURL }}" title="{{ .Title }}">
+                <a class="menu-item{{ if $.IsMenuCurrent "main" . | or ($.HasMenuCurrent "main" .) | or (.URL | relLangURL | string | eq $.RelPermalink ) }} active{{ end }}" href="{{ .URL | relLangURL }}"{{ with .Title }} title="{{ . }}"{{ end }}>
                     {{- .Pre | safeHTML }}{{ .Name -}}
                 </a>
             {{- end -}}
-            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="{{ T "switchTheme" }}"></i></a>
+            {{- if .Site.IsMultiLingual -}}
+                &nbsp;|&nbsp;
+                <a href="javascript:void(0);" class="menu-item">
+                    <i class="fas fa-language fa-fw"></i>&nbsp;
+                    <select class="select-language" onchange="location = this.value;">
+                        {{- range .Page.AllTranslations -}}
+                            {{- $translation := . -}}
+                            {{- range $.Site.Languages -}}
+                                {{- if eq $translation.Lang .Lang -}}
+                                    {{- if eq $.Page.Lang .Lang -}}
+                                        <option value="{{ $translation.Permalink }}" selected>{{ .LanguageName }}</option>
+                                    {{- else -}}
+                                        <option value="{{ $translation.Permalink }}">{{ .LanguageName }}</option>
+                                    {{- end -}}
+                                {{- end -}}
+                            {{- end -}}
+                        {{- end -}}
+                    </select>
+                </a>
+            {{- end -}}
+            <a href="javascript:void(0);" class="theme-switch" title="{{ T "switchTheme" }}">
+                <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
+            </a>
         </div>
     </div>
-</nav>
+</header>
 
-{{- /* Mobile navbar */ -}}
-<nav class="navbar-mobile">
-    <div class="navbar-container">
-        <div class="navbar-header">
-            <div class="navbar-header-title animated bounceIn">
-                <a href="{{ .Site.BaseURL }}">
+{{- /* Mobile header */ -}}
+<header class="mobile" id="header-mobile">
+    <div class="header-wrapper">
+        <div class="header-container">
+            <div class="header-title animated bounceIn">
+                <a href="{{ `/` | relLangURL }}">
                     {{- .Site.Title -}}
                 </a>
             </div>
-            <div class="menu-toggle" id="menu-toggle">
+            <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="navbar-menu" id="mobile-menu">
+        <div class="menu" id="menu-mobile">
             {{- $currentPage := . -}}
             {{- range .Site.Menus.main -}}
-                <a class="menu-item" href="{{ .URL | absLangURL }}" title="{{ .Title }}">
-                    {{- .Name | safeHTML -}}
+                <a class="menu-item" href="{{ .URL | relLangURL }}" title="{{ .Title }}">
+                    {{- .Pre | safeHTML }}{{ .Name -}}
                 </a>
             {{- end -}}
-            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="{{ T "switchTheme" }}"></i></a>
+            {{- if .Site.IsMultiLingual -}}
+                <a href="javascript:void(0);" class="menu-item">
+                    <i class="fas fa-language fa-fw"></i>&nbsp;
+                    <select class="select-language" onchange="location = this.value;">
+                        {{- range .Page.AllTranslations -}}
+                            {{- $translation := . -}}
+                            {{- range $.Site.Languages -}}
+                                {{- if eq $translation.Lang .Lang -}}
+                                    {{- if eq $.Page.Lang .Lang -}}
+                                        <option value="{{ $translation.Permalink }}" selected>{{ .LanguageName }}</option>
+                                    {{- else -}}
+                                        <option value="{{ $translation.Permalink }}">{{ .LanguageName }}</option>
+                                    {{- end -}}
+                                {{- end -}}
+                            {{- end -}}
+                        {{- end -}}
+                    </select>
+                </a>
+            {{- end -}}
+            <a href="javascript:void(0);" class="theme-switch" title="{{ T "switchTheme" }}">
+                <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
+            </a>
         </div>
     </div>
-</nav>
+</header>
+
+<script>
+    window.desktopHeaderMode = {{ .Site.Params.header.desktopMode }};
+    window.mobileHeaderMode = {{ .Site.Params.header.mobileMode }};
+</script>

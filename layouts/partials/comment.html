@@ -1,0 +1,116 @@
+{{- $scratch := .Scratch.Get "scratch" -}}
+
+{{- if $scratch.Get "production" | and (ne .Site.Params.comment.enable false) | and (ne .Params.comment false) -}}
+    {{- $CDN := $scratch.Get "CDN" -}}
+
+    {{- /* Disqus Comment System */ -}}
+    {{- with .Site.Params.comment.disqus.shortname -}}
+        <div id="disqus_thread"></div>
+        {{- $script := printf `<script src="https://%s.disqus.com/embed.js"></script>` . -}}
+        {{- slice $script | $scratch.Add "scriptCDN" -}}
+        <noscript>
+            Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    {{- end -}}
+
+    {{- /* Gitalk Comment System */ -}}
+    {{- if .Site.Params.comment.gitalk.owner -}}
+        {{- $gitalk := .Site.Params.comment.gitalk -}}
+        <div id="gitalk"></div>
+        {{- with $CDN.gitalkCSS -}}
+            {{- slice . | $scratch.Add "linkCDN" -}}
+        {{- else -}}
+            {{- slice "lib/gitalk/gitalk.css" | $scratch.Add "linkLocal" -}}
+        {{- end -}}
+        {{- with $CDN.gitalkJS -}}
+            {{- slice . | $scratch.Add "scriptCDN" -}}
+        {{- else -}}
+            {{- slice "lib/gitalk/gitalk.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- end -}}
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                var gitalk = new Gitalk({
+                    id: '{{ .Date }}',
+                    title: '{{ .Title }}',
+                    clientID: '{{ $gitalk.clientId }}',
+                    clientSecret: '{{ $gitalk.clientSecret }}',
+                    repo: '{{ $gitalk.repo }}',
+                    owner: '{{ $gitalk.owner }}',
+                    admin: ['{{ $gitalk.owner }}'],
+                    body: decodeURI(location.href),
+                });
+                gitalk.render('gitalk');
+            });
+        </script>
+        <noscript>
+            Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by Gitalk.</a>
+        </noscript>
+    {{- end -}}
+
+    {{- /* Valine Comment System */ -}}
+    {{- if .Site.Params.comment.valine.enable -}}
+        {{- $valine := .Site.Params.comment.valine -}}
+        <div id="valine"></div>
+        {{- slice "lib/valine/dark.scss" | $scratch.Add "linkLocal" -}}
+        {{- with $CDN.valineJS -}}
+            {{- slice . | $scratch.Add "scriptCDN" -}}
+        {{- else -}}
+            {{- slice "lib/valine/Valine.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- end -}}
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                new Valine({
+                    el: '#valine',
+                    appId: '{{ $valine.appId }}',
+                    appKey: '{{ $valine.appKey }}',
+                    {{- with $valine.placeholder -}}
+                        placeholder: '{{ . }}',
+                    {{- end -}}
+                    {{- if $valine.notify -}}
+                        notify: true,
+                    {{- end -}}
+                    {{- if $valine.verify -}}
+                        verify: true,
+                    {{- end -}}
+                    {{- with $valine.avatar -}}
+                        avatar: '{{ . }}',
+                    {{- end -}}
+                    {{- with $valine.meta -}}
+                        meta: {{ . | safeJS }},
+                    {{- end -}}
+                    {{- with $valine.pageSize -}}
+                        pageSize: {{ . | safeJS }},
+                    {{- end -}}
+                    lang: '{{ $valine.lang | default "en" }}',
+                    {{- if $valine.visitor -}}
+                        visitor: true,
+                    {{- end -}}
+                    {{- if $valine.recordIP -}}
+                        recordIP: true,
+                    {{- end -}}
+                });
+            });
+        </script>
+        <noscript>
+            Please enable JavaScript to view the <a href="https://valine.js.org/">comments powered by Valine.</a>
+        </noscript>
+    {{- end -}}
+
+    {{- /* Facebook Comment System */ -}}
+    {{- if .Site.Params.comment.facebook.enable -}}
+        {{- $facebook := .Site.Params.comment.facebook -}}
+        <div id="fb-root"></div>
+        <div
+            class="fb-comments"
+            data-href="{{ .Site.Params.baseURL }}{{ .Permalink | absURL }}"
+            data-width="{{ $facebook.width }}"
+            data-numposts="{{ $facebook.numPosts }}"
+        ></div>
+        {{- $script := `<script src="https://connect.facebook.net/%s/sdk.js#xfbml=1&version=v5.0&appId=%s&autoLogAppEvents=1" crossorigin="anonymous"></script>` -}}
+        {{- $script = printf $script $facebook.languageCode $facebook.appId -}}
+        {{- slice $script | $scratch.Add "scriptCDN" -}}
+        <noscript>
+            Please enable JavaScript to view the <a href="https://developers.facebook.com/docs/plugins/comments/">comments powered by Facebook.</a>
+        </noscript>
+    {{- end -}}
+{{- end -}}

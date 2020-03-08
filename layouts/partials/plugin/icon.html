@@ -1,0 +1,25 @@
+{{- $type := .type | default "fa" -}}
+{{- $classList := split .class " " -}}
+{{- /* Fork Awesome */ -}}
+{{- if eq $type "fo" -}}
+    {{- $newClassList := slice -}}
+    {{- range $classList -}}
+        {{- if eq . "fa" -}}
+            {{- $newClassList = $newClassList | append "fo" -}}
+        {{- else -}}
+            {{- $newClassList = $newClassList | append (replaceRE `^fa\-(.+)$` `fo-$1` .) -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $classList = $newClassList -}}
+    {{- with .scratch -}}
+        {{- .Set "forkawesome" true -}}
+    {{- end -}}
+
+{{- /* default is Font Awesome */ -}}
+{{- /* Others */ -}}
+{{- else if ne $type "fa" -}}
+    {{- with .scratch -}}
+        {{- .Set "iconfont" true -}}
+    {{- end -}}
+{{- end -}}
+<i class="{{ delimit $classList ` ` }}"></i>

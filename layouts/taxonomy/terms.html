@@ -9,7 +9,7 @@
 
     <div class="page archive">
         {{- /* Title */ -}}
-        <h2 class="post-title animated pulse faster">
+        <h2 class="single-title animated pulse faster">
             {{- T "all" | humanize}}{{ T $taxonomies | default $taxonomies | humanize -}}
         </h2>
 
@@ -36,7 +36,7 @@
                             {{- end -}}
                             {{- if gt (len $pages) 5 -}}
                                 <span class="more-post">
-                                    <a href="{{ .Permalink }}" class="more-post-link">{{ T "more" }} >></a>
+                                    <a href="{{ .Permalink }}" class="more-single-link">{{ T "more" }} >></a>
                                 </span>
                             {{- end -}}
                         </div>

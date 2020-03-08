@@ -1,0 +1,109 @@
+code {
+  font-size: $code-font-size;
+  font-family: $code-font-family;
+  padding: .2rem .4rem;
+  color: $code-color;
+
+  .dark-theme & {
+    color: $code-color-dark;
+  }
+}
+
+code, pre, .highlight table, .highlight tr, .highlight td {
+  background: $code-background-color;
+
+  .dark-theme & {
+    background: $code-background-color-dark;
+  }
+}
+
+.highlight > .chroma {
+  margin: 1rem 0;
+
+  code, pre {
+    margin: 0;
+    padding: 0;
+  }
+
+  &::before {
+    display: block;
+    padding: .4rem;
+    font-family: $global-font-family;
+    font-weight: bold;
+    color: $code-info-color;
+    background: darken($code-background-color, 3%);
+    content: 'Code';
+
+    .dark-theme & {
+      color: $code-info-color-dark;
+      background: darken($code-background-color-dark, 3%);
+    }
+  }
+
+  @each $type, $text in $code-type-map {
+    &.#{$type}::before {
+      content: $text;
+    }
+  }
+
+  table, tr, td {
+    margin: 0;
+    border: none !important;
+  }
+
+  td {
+    padding: .2rem .4rem;
+  }
+
+  .lntd {
+    &:first-child {
+      width: 1.2rem;
+
+      /* LineNumbersTable */
+      .lnt {
+        color: $code-info-color;
+      }
+
+      /* LineHighlight */
+      .hl {
+        font-weight: bolder;
+      }
+    }
+
+    &:last-child {
+      /* LineHighlight */
+      .hl {
+        display: block;
+        background-color: darken($code-background-color, 5%);
+
+        .dark-theme & {
+          background-color: darken($code-background-color-dark, 5%);
+        }
+      }
+    }
+  }
+}
+
+.highlight {
+  font-family: $code-font-family;
+  font-size: $code-font-size;
+  line-height: round($code-font-size * 1.4);
+  /* Comment */  .c,
+  /* CommentHashbang */  .ch,
+  /* CommentMultiline */  .cm,
+  /* CommentSingle */  .c1,
+  /* CommentSpecial */  .cs,
+  /* CommentPreproc */  .cp,
+  /* CommentPreprocFile */  .cpf { font-style: italic }
+  /* GenericUnderline */  .gl { text-decoration: underline }
+
+  @each $class, $color in $code-highlight-color-map {
+    .#{$class} { color: $color; }
+  }
+
+  .dark-theme & {
+    @each $class, $color in $code-highlight-color-map-dark {
+      .#{$class} { color: $color; }
+    }
+  }
+}

@@ -7,8 +7,8 @@ other = "Posts"
 # === Post ===
 
 # === Taxonomy ===
-[all]
-other = "all "
+[allSome]
+other = "All %s"
 
 [tag]
 other = "Tag"
@@ -33,26 +33,21 @@ other = "More"
 other = "Switch Theme"
 # === partials/header.html ===
 
-# === partials/comments.html ===
-[valineLang]
-other = "en"
-# === partials/comments.html ===
-
 # === partials/footer.html ===
-[powered]
+[poweredBySome]
 other = "Powered by %s"
 
 [theme]
-other = "Theme - "
+other = "Theme"
 # === partials/footer.html ===
 
-# === partials/post/share.html ===
-[share]
+# === partials/plugin/share.html ===
+[shareOn]
 other = "Share on"
-# === partials/post/share.html ===
+# === partials/plugin/share.html ===
 
 # === posts/single.html ===
-[toc]
+[contents]
 other = "Contents"
 
 [publish]
@@ -67,8 +62,8 @@ other = "about {{ .Count }} words"
 [readingTime]
 other = "{{ .Count }} min"
 
-[pageviews]
-other = "<span class=leancloud-visitors-count></span> pageviews"
+[views]
+other = "views"
 
 [author]
 other = "Author"
@@ -79,6 +74,9 @@ other = "The article was updated on %s"
 [license]
 other = "Published under the %s license"
 
+[seeMarkdown]
+other = "Read Markdown"
+
 [back]
 other = "Back"
 
@@ -87,18 +85,6 @@ other = "Home"
 
 [readMore]
 other = "Read More"
-
-[day]
-other = "d"
-
-[hour]
-other = "hr"
-
-[minute]
-other = "min"
-
-[second]
-other = "sec"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -111,3 +97,41 @@ other = "The page you're looking for doesn't exist. Sorry."
 [backToHome]
 other = "Back to Home"
 # === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Note"
+
+[abstract]
+other = "Abstract"
+
+[info]
+other = "Info"
+
+[tip]
+other = "Tip"
+
+[success]
+other = "Success"
+
+[question]
+other = "Question"
+
+[warning]
+other = "Warning"
+
+[failure]
+other = "Failure"
+
+[danger]
+other = "Danger"
+
+[bug]
+other = "Bug"
+
+[example]
+other = "Example"
+
+[quote]
+other = "Quote"
+# === shortcodes/admonition.html ===

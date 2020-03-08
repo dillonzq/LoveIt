@@ -1,70 +1,75 @@
 {{- define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end -}}
 
 {{- define "content" -}}
-    <article class="page">
+    {{- $scratch := .Scratch.Get "scratch" -}}
+    <article class="page single">
         {{- /* Title */ -}}
-        <h1 class="post-title animated flipInX">{{ .Title }}</h1>
+        <h1 class="single-title animated flipInX">{{ .Title }}</h1>
 
         {{- /* Meta */ -}}
         <div class="post-meta">
-            <div class="post-meta-main">
-                {{- $author := .Params.author | default .Site.Author.name -}}
-                {{- $author_link := .Params.author_link | default .Site.Author.link | default .Site.BaseURL -}}
-                <a class="author" href="{{ $author_link }}" rel="author" target="_blank">
-                    <i class="fas fa-user-circle fa-fw"></i>{{ $author }}
-                </a>&nbsp;
+            <div class="post-meta-line">
+                {{- $author := .Params.author | default .Site.Author.name | default (T "author") -}}
+                {{- $authorLink := .Params.authorLink | default .Site.Author.link | default (relLangURL "/") -}}
+                <span class="post-author">
+                    <a class="author" href="{{ $authorLink }}" rel="author" target="_blank">
+                        <i class="fas fa-user-circle fa-fw"></i>{{ $author }}
+                    </a>
+                </span>
+
                 {{- with .Params.categories -}}
-                    <span class="post-category">
-                        {{- T "included" -}}&nbsp;
+                    &nbsp;<span class="post-category">
+                        {{- T "included" -}}
                         {{- range . -}}
-                            {{- $name := . -}}
-                            {{- with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize))) -}}
-                                <i class="far fa-folder fa-fw"></i><a href="{{ .Permalink }}">{{ $name | humanize }}</a>&nbsp;
-                            {{- end -}}
+                            &nbsp;
+                            <span>
+                                <a href="{{ `/categories/` | relLangURL }}{{ urlize .}}">
+                                    <i class="far fa-folder fa-fw"></i>{{ . | humanize }}
+                                </a>
+                            </span>
                         {{- end -}}
                     </span>
                 {{- end -}}
             </div>
-            <div class="post-meta-other">
+            <div class="post-meta-line">
                 {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
                 <i class="far fa-calendar-alt fa-fw"></i><time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;
                 <i class="fas fa-pencil-alt fa-fw"></i>{{ T "wordCount" .WordCount }}&nbsp;
                 <i class="far fa-clock fa-fw"></i>{{ T "readingTime" .ReadingTime }}&nbsp;
-                {{- if eq (getenv "HUGO_ENV") "production" | and .Site.Params.valine.enable | and .Site.Params.valine.visitor -}}
+                {{- if $scratch.Get "production" | and .Site.Params.valine.enable | and .Site.Params.valine.visitor -}}
                     <span id="{{ .RelPermalink | relURL }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
-                        <i class="far fa-eye fa-fw"></i>{{ T "pageviews" | safeHTML }}
+                        <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;{{ T "views" }}
                     </span>&nbsp;
                 {{- end -}}
             </div>
         </div>
 
         {{- /* Featured image */ -}}
-        {{- with .Params.featured_image -}}
-            <div class="post-featured-image">
-                {{- partial "image" . -}}
+        {{- with .Params.featuredImage -}}
+            <div class="featured-image">
+                {{- partial "plugin/image.html" (dict "src" . "description" $.Description "scratch" $scratch) -}}
             </div>
         {{- end -}}
 
         {{- /* TOC */ -}}
         {{- if or .Params.toc (and .Site.Params.toc (ne .Params.toc false)) -}}
-            <div class="post-toc" id="post-toc">
-                <h2 class="post-toc-title">{{ T "toc" }}</h2>
-                {{- $globalAutoCollapseToc := .Site.Params.auto_collapse_toc | default true }}
-                <div class="post-toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.auto_collapse_toc false)) }} always-active{{ end }}">
-                    {{- .TableOfContents -}}
-                </div>
+            <div class="toc" id="toc-auto">
+                <h2 class="toc-title">{{ T "contents" }}</h2>
+                {{- $globalAutoCollapseToc := .Site.Params.autoCollapseToc | default true }}
+                <div class="toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false)) }} always-active{{ end }}" id="toc-content-auto"></div>
             </div>
-            <div class="post-toc-mobile" id="post-toc-mobile">
+            <div class="toc" id="toc-static">
                 <details>
                     <summary>
-                        <div class="post-toc-title">
-                            <span>{{ T "toc" }}</span>
+                        <div class="toc-title">
+                            <span>{{ T "contents" }}</span>
                             <span><i class="details icon fas fa-angle-down"></i></span>
                         </div>
                     </summary>
-                    <div class="post-toc-content">
+                    <div class="toc-content" id="toc-content-static">
                         {{- $toc := .TableOfContents -}}
-                        {{- $toc = replaceRE `id="TableOfContents"` `id="TableOfContentsMobile"` $toc -}}
+                        {{- $toc = partial "function/fontawesome.html" $toc -}}
+                        {{- $toc = partial "function/ruby.html" $toc -}}
                         {{- $toc | safeHTML -}}
                     </div>
                 </details>
@@ -72,17 +77,17 @@
         {{- end -}}
 
         {{- /* Content */ -}}
-        <div class="post-content">
-            {{- partial "hook/content.html" .Content | safeHTML -}}
+        <div class="content" id="content">
+            {{- partial "single/content.html" .Content -}}
         </div>
 
         {{- /* Footer */ -}}
-        {{- partial "post/footer.html" . -}}
+        {{- partial "single/footer.html" . -}}
 
         {{- /* Comment */ -}}
-        <div class="post-comment">
+        <div class="comment">
             {{- if ( .Params.comment | default true ) -}}
-                {{- partial "comments.html" . -}}
+                {{- partial "comment.html" . -}}
             {{- end -}}
         </div>
     </article>

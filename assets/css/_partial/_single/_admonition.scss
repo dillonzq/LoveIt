@@ -1,0 +1,82 @@
+.admonition {
+  position: relative;
+  margin: .9765em 0;
+  padding: 0 .75rem;
+  background-color: map-get($admonition-background-color-map, 'note');
+  border-left: .25rem solid map-get($admonition-color-map, 'note');
+  overflow: auto;
+
+  .admonition-title {
+    margin: 0 -0.75rem;
+    padding: .2rem .75rem .2rem 1.8rem;
+    border-bottom: .05rem solid map-get($admonition-background-color-map, 'note');
+    background-color: map-get($admonition-background-color-map, 'note');
+  }
+
+  .admonition-content {
+    margin: .5rem 0;
+  }
+
+  i.icon {
+    font-size: 0.85rem;
+    color: map-get($admonition-color-map, 'note');
+    cursor: auto;
+    position: absolute;
+    left: .6rem;
+    top: .6rem;
+  }
+
+  @each $type, $color in $admonition-color-map {
+    &.#{$type} {
+      border-left-color: $color;
+
+      i.icon {
+        color: $color;
+      }
+    }
+  }
+
+  @each $type, $color in $admonition-background-color-map {
+    &.#{$type} {
+      background-color: $color;
+
+      .admonition-title {
+        border-bottom-color: $color;
+        background-color: $color;
+      }
+    }
+  }
+
+  &:last-child {
+    margin-bottom: .75rem;
+  }
+}
+
+details.admonition {
+  summary {
+    display: block;
+    outline: none;
+    cursor: pointer;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    i.details {
+      position: absolute;
+      top: .5rem;
+      right: .5rem;
+      color: $global-font-color;
+
+      .dark-theme & {
+        color: $global-font-color-dark;
+      }
+    }
+  }
+}
+
+details.admonition[open] {
+  i.details {
+    transform: rotate(180deg);
+  }
+}

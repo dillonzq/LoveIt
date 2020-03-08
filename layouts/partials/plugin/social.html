@@ -1,0 +1,434 @@
+{{- $scratch := .Scratch.Get "scratch" -}}
+
+{{- /* 001: Github */ -}}
+{{- with .Site.Params.Social.Github -}}
+    {{- $options := dict "href" (printf "https://github.com/%s" .) "title" "GitHub" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-github-alt fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 002: LinkedIn */ -}}
+{{- with .Site.Params.Social.LinkedIn -}}
+    {{- $options := dict "href" (printf "https://linkedin.com/in/%s" .) "title" "LinkedIn" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-linkedin fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 003: Twitter */ -}}
+{{- with .Site.Params.Social.Twitter -}}
+    {{- $options := dict "href" (printf "https://twitter.com/%s" .) "title" "Twitter" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-twitter fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 004: Instagram */ -}}
+{{- with .Site.Params.Social.Instagram -}}
+    {{- $options := dict "href" (printf "https://www.instagram.com/%s" .) "title" "Instagram" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-instagram fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 005: Facebook */ -}}
+{{- with .Site.Params.Social.Facebook -}}
+    {{- $options := dict "href" (printf "https://facebook.com/%s" .) "title" "Facebook" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-facebook fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 006: Telegram */ -}}
+{{- with .Site.Params.Social.Telegram -}}
+    {{- $options := dict "href" (printf "https://t.me/%s" .) "title" "Telegram" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-telegram-plane fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 007: Medium */ -}}
+{{- with .Site.Params.Social.Medium -}}
+    {{- $options := dict "href" (printf "https://medium.com/%s" .) "title" "Medium" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-medium fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 008: Medium */ -}}
+{{- with .Site.Params.Social.Gitlab -}}
+    {{- $options := dict "href" (printf "https://gitlab.com/%s" .) "title" "GitLab" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-gitlab fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 009: YouTube Legacy */ -}}
+{{- with .Site.Params.Social.Youtubelegacy -}}
+    {{- $options := dict "href" (printf "https://www.youtube.com/user/%s" .) "title" "YouTube" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-youtube fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 010: YouTube Custom */ -}}
+{{- with .Site.Params.Social.Youtubecustom -}}
+    {{- $options := dict "href" (printf "https://www.youtube.com/c/%s" .) "title" "YouTube" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-youtube fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 011: Youtube Channel */ -}}
+{{- with .Site.Params.Social.Youtubechannel -}}
+    {{- $options := dict "href" (printf "https://www.youtube.com/channel/%s" .) "title" "YouTube" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-youtube fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 012: Tumblr */ -}}
+{{- with .Site.Params.Social.Tumblr -}}
+    {{- $options := dict "href" (printf "https://%s.tumblr.com" .) "title" "Tumblr" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-tumblr fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 013: Quora */ -}}
+{{- with .Site.Params.Social.Quora -}}
+    {{- $options := dict "href" (printf "https://www.quora.com/profile/%s" .) "title" "Quora" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-quora fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 014: Keybase */ -}}
+{{- with .Site.Params.Social.Keybase -}}
+    {{- $options := dict "href" (printf "https://keybase.io/%s" .) "title" "Keybase" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-keybase fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 015: Pinterest */ -}}
+{{- with .Site.Params.Social.Pinterest -}}
+    {{- $options := dict "href" (printf "https://www.pinterest.com/%s" .) "title" "Pinterest" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-pinterest fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 016: Reddit */ -}}
+{{- with .Site.Params.Social.Reddit -}}
+    {{- $options := dict "href" (printf "https://www.reddit.com/user/%s" .) "title" "Reddit" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-reddit fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 017: CodePen */ -}}
+{{- with .Site.Params.Social.Codepen -}}
+    {{- $options := dict "href" (printf "https://codepen.io/%s" .) "title" "CodePen" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-codepen fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 018: freeCodeCamp */ -}}
+{{- with .Site.Params.Social.FreeCodeCamp -}}
+    {{- $options := dict "href" (printf "https://freecodecamp.org/%s" .) "title" "freeCodeCamp" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-free-code-camp fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 019: Bitbucket */ -}}
+{{- with .Site.Params.Social.Bitbucket -}}
+    {{- $options := dict "href" (printf "https://bitbucket.org/%s" .) "title" "Bitbucket" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-bitbucket fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 020: Stack Overflow */ -}}
+{{- with .Site.Params.Social.Stackoverflow -}}
+    {{- $options := dict "href" (printf "https://stackoverflow.com/users/%s" .) "title" "Stack Overflow" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-stack-overflow fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 021: 微博 */ -}}
+{{- with .Site.Params.Social.Weibo -}}
+    {{- $options := dict "href" (printf "https://weibo.com/%s" .) "title" "微博" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-weibo fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 022: OK.RU */ -}}
+{{- with .Site.Params.Social.Odnoklassniki -}}
+    {{- $options := dict "href" (printf "https://ok.ru/%s" .) "title" "OK.RU" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-odnoklassniki fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 023: VK */ -}}
+{{- with .Site.Params.Social.VK -}}
+    {{- $options := dict "href" (printf "https://vk.com/%s" .) "title" "VK" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-vk fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 024: Flickr */ -}}
+{{- with .Site.Params.Social.Flickr -}}
+    {{- $options := dict "href" (printf "https://www.flickr.com/photos/%s" .) "title" "Flickr" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-flickr fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 025: Xing */ -}}
+{{- with .Site.Params.Social.Xing -}}
+    {{- $options := dict "href" (printf "https://www.xing.com/profile/%s" .) "title" "Xing" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-xing fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 026: Snapchat */ -}}
+{{- with .Site.Params.Social.Snapchat -}}
+    {{- $options := dict "href" (printf "https://www.snapchat.com/add/%s" .) "title" "Snapchat" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-snapchat fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 027: SoundCloud */ -}}
+{{- with .Site.Params.Social.Soundcloud -}}
+    {{- $options := dict "href" (printf "https://soundcloud.com/%s" .) "title" "SoundCloud" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-soundcloud fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 028: Spotify */ -}}
+{{- with .Site.Params.Social.Spotify -}}
+    {{- $options := dict "href" (printf "https://open.spotify.com/user/%s" .) "title" "Spotify" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-spotify fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 029: Bandcamp */ -}}
+{{- with .Site.Params.Social.Bandcamp -}}
+    {{- $options := dict "href" (printf "https://%s.bandcamp.com/" .) "title" "Bandcamp" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-bandcamp fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 030: PayPal */ -}}
+{{- with .Site.Params.Social.Paypal -}}
+    {{- $options := dict "href" (printf "https://paypal.me/%s" .) "title" "PayPal" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-paypal fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 031: 500px */ -}}
+{{- with .Site.Params.Social.Fivehundredpx -}}
+    {{- $options := dict "href" (printf "https://500px.com/%s" .) "title" "500px" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-500px fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 032: Mix */ -}}
+{{- with .Site.Params.Social.Mix -}}
+    {{- $options := dict "href" (printf "https://mix.com/%s" .) "title" "Mix" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-mix fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 033: Goodreads */ -}}
+{{- with .Site.Params.Social.Goodreads -}}
+    {{- $options := dict "href" (printf "https://www.goodreads.com/user/show/%s" .) "title" "Goodreads" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-goodreads fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 034: Last.fm */ -}}
+{{- with .Site.Params.Social.Lastfm -}}
+    {{- $options := dict "href" (printf "https://www.last.fm/user/%s" .) "title" "Last.fm" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-lastfm fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 035: Foursquare */ -}}
+{{- with .Site.Params.Social.Foursquare -}}
+    {{- $options := dict "href" (printf "https://foursquare.com/%s" .) "title" "Foursquare" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-foursquare fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 036: Hacker News */ -}}
+{{- with .Site.Params.Social.Hackernews -}}
+    {{- $options := dict "href" (printf "https://news.ycombinator.com/user?id=%s" .) "title" "Hacker News" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-hacker-news fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 037: Kickstarter */ -}}
+{{- with .Site.Params.Social.Kickstarter -}}
+    {{- $options := dict "href" (printf "https://kickstarter.com/profile/%s" .) "title" "Kickstarter" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-kickstarter fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 038: Patreon */ -}}
+{{- with .Site.Params.Social.Patreon -}}
+    {{- $options := dict "href" (printf "https://patreon.com/%s" .) "title" "Patreon" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-patreon fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 039: Steam */ -}}
+{{- with .Site.Params.Social.Steam -}}
+    {{- $options := dict "href" (printf "https://steamcommunity.com/id/%s" .) "title" "Steam" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-steam fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 040: Twitch */ -}}
+{{- with .Site.Params.Social.Twitch -}}
+    {{- $options := dict "href" (printf "https://www.twitch.tv/%s" .) "title" "Twitch" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-twitch fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 041: Strava */ -}}
+{{- with .Site.Params.Social.Strava -}}
+    {{- $options := dict "href" (printf "https://www.strava.com/athletes/%s" .) "title" "Strava" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-strava fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 042: Skype */ -}}
+{{- with .Site.Params.Social.Skype -}}
+    {{- $options := dict "href" (printf "skype:%s" .) "title" "Skype" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-skype fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 043: WhatsApp */ -}}
+{{- with .Site.Params.Social.Whatsapp -}}
+    {{- $options := dict "href" (printf "https://wa.me/%s" .) "title" "WhatsApp" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-whatsapp fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 044: 知乎 */ -}}
+{{- with .Site.Params.Social.Zhihu -}}
+    {{- $options := dict "href" (printf "https://www.zhihu.com/people/%s" .) "title" "知乎" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "loveit it-zhihu-line" "type" "other" "scratch" $scratch) | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 045: Angellist */ -}}
+{{- with .Site.Params.Social.Angellist -}}
+    {{- $options := dict "href" (printf "https://angel.co/%s" .) "title" "Angellist" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-angellist fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 046: SlideShare */ -}}
+{{- with .Site.Params.Social.Slideshare -}}
+    {{- $options := dict "href" (printf "https://slideshare.com/%s" .) "title" "SlideShare" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-slideshare fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 047: JSFiddle */ -}}
+{{- with .Site.Params.Social.Jsfiddle -}}
+    {{- $options := dict "href" (printf "https://jsfiddle.com/%s" .) "title" "JSFiddle" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-jsfiddle fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 048: DeviantArt */ -}}
+{{- with .Site.Params.Social.Deviantart -}}
+    {{- $options := dict "href" (printf "https://%s.deviantart.com/" .) "title" "DeviantArt" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-deviantart fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 049: Behance */ -}}
+{{- with .Site.Params.Social.Behance -}}
+    {{- $options := dict "href" (printf "https://behance.net/%s" .) "title" "Behance" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-behance fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 050: Dribbble */ -}}
+{{- with .Site.Params.Social.Dribble -}}
+    {{- $options := dict "href" (printf "https://dribbble.com/%s" .) "title" "Dribbble" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-dribbble fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 051: WordPress */ -}}
+{{- with .Site.Params.Social.Wordpress -}}
+    {{- $options := dict "href" (printf "https://%s.wordpress.com/" .) "title" "WordPress" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-wordpress fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 052: Vine */ -}}
+{{- with .Site.Params.Social.Vine -}}
+    {{- $options := dict "href" (printf "https://vine.co/%s" .) "title" "Vine" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-vine fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 053: Google Scholar */ -}}
+{{- with .Site.Params.Social.Googlescholar -}}
+    {{- $options := dict "href" (printf "https://scholar.google.com/citations?%s" .) "title" "Google Scholar" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-google fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 054: ResearchGate */ -}}
+{{- with .Site.Params.Social.Researchgate -}}
+    {{- $options := dict "href" (printf "https://www.researchgate.net/profile/%s" .) "title" "ResearchGate" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-researchgate fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 055: Mastodon */ -}}
+{{- with .Site.Params.Social.Mastodon -}}
+    {{- $MastodonPrefix := $.Site.Params.Social.MastodonPrefix | default "https://mastodon.social" -}}
+    {{- $options := dict "href" (printf "%s/%s" $MastodonPrefix .) "title" "Mastodon" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-mastodon fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 054: Dev.To */ -}}
+{{- with .Site.Params.Social.Devto -}}
+    {{- $options := dict "href" (printf "https://dev.to/%s" .) "title" "Dev.To" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fab fa-dev fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 055: Gitea */ -}}
+{{- with .Site.Params.Social.Gitea -}}
+    {{- $options := dict "href" . "title" "Gitea" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fa fa-gitea fa-fw" "type" "fo" "scratch" $scratch) | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 056: XMPP */ -}}
+{{- with .Site.Params.Social.XMPP -}}
+    {{- $options := dict "href" (printf "xmpp:%s" .) "title" "XMPP" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fa fa-xmpp fa-fw" "type" "fo" "scratch" $scratch) | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 057: Matrix */ -}}
+{{- with .Site.Params.Social.Matrix -}}
+    {{- $options := dict "href" (printf "https://matrix.to/#/%s" .) "title" "Matrix" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "fa fa-matrix-org fa-fw" "type" "fo" "scratch" $scratch) | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 058: bilibili */ -}}
+{{- with .Site.Params.Social.Bilibili -}}
+    {{- $options := dict "href" (printf "https://space.bilibili.com/%s" .) "title" "bilibili" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "loveit it-bilibili-fill" "type" "other" "scratch" $scratch) | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* 059: Email */ -}}
+{{- with .Site.Params.Social.Email -}}
+    {{- $options := dict "href" (printf "mailto:%s" .) "title" "Email" "rel" "me" -}}
+    {{- $options = dict "icon" (dict "class" "far fa-envelope fa-fw") | merge $options -}}
+    {{- partial "plugin/link.html" $options -}}
+{{- end -}}
+
+{{- /* Custom */ -}}
+{{- with .Site.Params.Social.Custom -}}
+    {{- . | safeHTML -}}
+{{- end -}}

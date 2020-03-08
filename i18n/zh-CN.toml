@@ -1,0 +1,137 @@
+# Translations for Simplified Chinese
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === Post ===
+[posts]
+other = "文章"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "所有%s"
+
+[tag]
+other = "标签"
+
+[tags]
+other = "标签"
+
+[category]
+other = "分类"
+
+[categories]
+other = "分类"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "更多"
+# === Pagination ===
+
+# === partials/header.html ===
+[switchTheme]
+other = "切换主题"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "由 %s 强力驱动"
+
+[theme]
+other = "主题"
+# === partials/footer.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "分享到"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "目录"
+
+[publish]
+other = "发布于"
+
+[included]
+other = "收录于"
+
+[wordCount]
+other = "约 {{ .Count }} 字"
+
+[readingTime]
+other = "预计阅读 {{ .Count }} 分钟"
+
+[views]
+other = "次阅读"
+
+[author]
+other = "作者"
+
+[lastMod]
+other = "本文于 %s 更新"
+
+[license]
+other = "采用 %s 协议发布"
+
+[seeMarkdown]
+other = "阅读原始文档"
+
+[back]
+other = "返回"
+
+[home]
+other = "主页"
+
+[readMore]
+other = "阅读全文"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "页面没找到"
+
+[pageNotFoundText]
+other = "抱歉，您要查找的页面不存在。"
+
+[backToHome]
+other = "回到主页"
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "注意"
+
+[abstract]
+other = "摘要"
+
+[info]
+other = "信息"
+
+[tip]
+other = "技巧"
+
+[success]
+other = "成功"
+
+[question]
+other = "问题"
+
+[warning]
+other = "警告"
+
+[failure]
+other = "失败"
+
+[danger]
+other = "危险"
+
+[bug]
+other = "Bug"
+
+[example]
+other = "示例"
+
+[quote]
+other = "引用"
+# === shortcodes/admonition.html ===

@@ -1,0 +1,137 @@
+# Translations for French
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === Post ===
+[posts]
+other = "Posts"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "Tous %s"
+
+[tag]
+other = "Balise"
+
+[tags]
+other = "Balises"
+
+[category]
+other = "Catégorie"
+
+[categories]
+other = "Catégories"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "Plus"
+# === Pagination ===
+
+# === partials/header.html ===
+[switchTheme]
+other = "Changer de Thème"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Propulsé par %s"
+
+[theme]
+other = "Thème"
+# === partials/footer.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "Partager sur"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "Contenu"
+
+[publish]
+other = "publié sur"
+
+[included]
+other = "inclus dans"
+
+[wordCount]
+other = "environ {{ .Count }} mots"
+
+[readingTime]
+other = "{{ .Count }} min"
+
+[views]
+other = "vues"
+
+[author]
+other = "Auteur"
+
+[lastMod]
+other = "Dernière mise à jour le %s"
+
+[license]
+other = "Publié sous licence %s"
+
+[seeMarkdown]
+other = "Lire Markdown"
+
+[back]
+other = "Retour"
+
+[home]
+other = "Accueil"
+
+[readMore]
+other = "En savoir plus"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Page non trouvée"
+
+[pageNotFoundText]
+other = "Désolé, la page recherchée n'existe pas."
+
+[backToHome]
+other = "Retour à l'accueil"
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Remarque"
+
+[abstract]
+other = "Abstrait"
+
+[info]
+other = "Info"
+
+[tip]
+other = "Astuces"
+
+[success]
+other = "Succès"
+
+[question]
+other = "Question"
+
+[warning]
+other = "Avertissement"
+
+[failure]
+other = "Échec"
+
+[danger]
+other = "Danger"
+
+[bug]
+other = "Bug"
+
+[example]
+other = "Exemple"
+
+[quote]
+other = "Citation"
+# === shortcodes/admonition.html ===

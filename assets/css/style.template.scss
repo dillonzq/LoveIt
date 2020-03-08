@@ -1,0 +1,28 @@
+@charset 'utf-8';
+
+$home-profile: {{ if .Site.Params.home.profile.enable }}true{{ else }}false{{ end }};
+$home-posts: {{ if ne .Site.Params.home.posts.enable false }}true{{ else }}false{{ end }};
+$header-normal-mode-desktop: {{ if eq .Site.Params.header.desktopMode "normal" }}true{{ else }}false{{ end }};
+$header-normal-mode-mobile: {{ if eq .Site.Params.header.mobileMode "normal" }}true{{ else }}false{{ end }};
+
+@import "_variables";
+
+{{- if fileExists "config/css/_override.scss" -}}
+  @import "_override";
+{{- end -}}
+
+@import "_core/normalize";
+@import "_core/base";
+@import "_core/layout";
+
+@import "_page/index";
+
+@import "_partial/header";
+@import "_partial/footer";
+@import "_partial/pagination";
+
+@import "_core/media";
+
+{{- if fileExists "config/css/_custom.scss" -}}
+  @import "_custom";
+{{- end -}}

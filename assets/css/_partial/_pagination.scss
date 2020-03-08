@@ -1,4 +1,4 @@
-  /** pagination **/
+/** pagination **/
 .pagination {
   display: flex;
   flex-direction: row;
@@ -6,7 +6,7 @@
   list-style: none;
   white-space: nowrap;
   width: 100%;
-  padding-top: 1rem;
+  padding: 1rem 0 0;
 
   a {
     -webkit-font-smoothing: antialiased;

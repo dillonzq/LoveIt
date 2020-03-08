@@ -1,0 +1,69 @@
+{{- $modify_date := .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
+<div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>
+                    {{- printf (T "lastMod") $modify_date -}}
+                    {{- with .GitInfo -}}
+                        {{- $gitHash := .Hash -}}
+                        &nbsp;<a class="git-hash" {{ with $.Site.Params.gitRepo }}href="{{ printf `%s/commit/%s` . $gitHash }}" target="_blank"{{ else }}href="javascript:void(0);"{{ end }} title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ $gitHash }}: {{ .Subject }}">
+                            <i class="fas fa-hashtag fa-fw"></i>{{- .AbbreviatedHash -}}
+                        </a>
+                    {{- end -}}
+                </span>
+            </div>
+            <div class="post-info-license">
+                {{- if .Params.license -}}
+                    <span>
+                        {{- printf (T "license") .Params.license | safeHTML -}}
+                    </span>
+                {{- end -}}
+            </div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md">
+                {{- if ne .Site.Params.page.linkToMarkdown false | and (ne .Params.linkToMarkdown false)  -}}
+                    {{- with .OutputFormats.Get "markdown" -}}
+                        <span>
+                            <a class="link-to-markdown" href="{{ .Permalink }}" target="_blank">
+                                {{- T "seeMarkdown" -}}
+                            </a>
+                        </span>
+                    {{- end -}}
+                {{- end -}}
+            </div>
+            <div class="post-info-share">
+                <span>
+                    {{- partial "plugin/share.html" . -}}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section>
+            {{- with .Params.tags -}}
+                {{- range . -}}
+                    <span>
+                        <a href="{{ `/tags/` | relLangURL }}{{ urlize .}}">
+                            <i class="fas fa-tag fa-fw"></i>{{ . }}
+                        </a>
+                    </span>&nbsp;
+                {{- end -}}
+            {{- end -}}
+        </section>
+        <section>
+            <span><a href="javascript:window.history.back();">{{ T "back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{  `/` | relLangURL  }}">{{ T "home" }}</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        {{- if .PrevInSection -}}
+            <a href="{{ .PrevInSection.Permalink }}" class="prev" rel="prev" title="{{ .PrevInSection.Title }}"><i class="fas fa-angle-left fa-fw"></i>{{ .PrevInSection.Title }}</a>
+        {{- end -}}
+        {{ if .NextInSection }}
+            <a href="{{ .NextInSection.Permalink }}" class="next" rel="next" title="{{ .NextInSection.Title }}">{{ .NextInSection.Title }}<i class="fas fa-angle-right fa-fw"></i></a>
+        {{- end -}}
+    </div>
+</div>

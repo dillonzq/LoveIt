@@ -1,0 +1,18 @@
+<figure{{ with .Get "class" }} class="{{ . }}"{{ end }}>
+    {{- $options := .Get "src" | dict "src" -}}
+    {{- $options = .Get "src_s" | dict "src_s" | merge $options -}}
+    {{- $options = .Get "src_l" | dict "src_l" | merge $options -}}
+    {{- $title := .Get "title" | $.Page.RenderString  -}}
+    {{- $options = $title | dict "title" | merge $options -}}
+    {{- $description := .Get "description" | $.Page.RenderString  -}}
+    {{- $options = $description | dict "description" | merge $options -}}
+    {{- $lightgallery := ne .Page.Site.Params.page.lightgallery false | and (ne .Page.Params.lightgallery false) -}}
+    {{- $options = $lightgallery | dict "lightgallery" | merge $options -}}
+    {{- $options = .Page.Scratch.Get "scratch" | dict "scratch" | merge $options -}}
+    {{- partial "plugin/image.html" $options -}}
+    {{- with $title | default $description -}}
+        <figcaption class="image-caption">
+            {{- . | safeHTML -}}
+        </figcaption>
+    {{- end -}}
+</figure>

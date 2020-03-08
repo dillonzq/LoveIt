@@ -1,0 +1,151 @@
+#toc-auto {
+  display: block;
+  position: absolute;
+  width: 100%;
+  margin-left: 1000px;
+  padding: 0 .8rem;
+  border-left: 1px solid $global-border-color;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  top: if($header-normal-mode-desktop, 7rem, 12rem);
+
+  .dark-theme & {
+    border-left: 1px solid $global-border-color-dark;
+  }
+
+  .toc-title {
+    font-weight: 400;
+    margin: .8rem 0;
+    text-transform: uppercase;
+  }
+
+  .toc-content {
+    &.always-active ul {
+      display: block;
+    }
+
+    >nav>ul {
+      margin: .625rem 0;
+    }
+
+    ul {
+      text-indent: -0.85rem;
+      padding-left: .625rem;
+      list-style: none;
+
+      a::before {
+        content: "|";
+        font-weight: bolder;
+        margin-right: .5rem;
+        color: $single-link-color;
+
+        .dark-theme & {
+          color: $single-link-color-dark;
+        }
+      }
+
+      ul {
+        padding-left: 1.25rem;
+        display: none;
+      }
+
+      .has-active > ul {
+        display: block;
+      }
+    }
+
+    a.active {
+      font-weight: bold;
+      color: $single-link-color;
+
+      .dark-theme & {
+        color: $single-link-color-dark;
+      }
+
+      &::before {
+        color: $single-link-hover-color;
+
+        .dark-theme & {
+          color: $single-link-hover-color-dark;
+        }
+      }
+    }
+  }
+}
+
+#toc-static {
+  display: none;
+  padding-top: .8rem;
+
+  details {
+    summary {
+      .toc-title {
+        display: block;
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.2em;
+        font-weight: bold;
+        line-height: 2em;
+        padding: 0 .625rem;
+        background: $code-background-color;
+
+        i.details {
+          line-height: 2em;
+        }
+
+        .dark-theme & {
+          background: $code-background-color-dark;
+        }
+      }
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+    }
+  }
+
+  details[open] {
+    i.details {
+      transform: rotate(180deg);
+    }
+  }
+
+  .toc-content {
+    border: 2px solid $code-background-color;
+
+    >nav>ul {
+      margin: .625rem 0;
+    }
+
+    ul {
+      padding-left: .625rem;
+      list-style: none;
+
+      ul {
+        padding-left: 1.25rem;
+      }
+    }
+
+    .dark-theme & {
+      border: 2px solid $code-background-color-dark;
+    }
+  }
+}
+
+.toc {
+  ruby {
+    background: $code-background-color;
+
+    rt {
+      color: $global-font-secondary-color;
+    }
+
+    .dark-theme & {
+      background: $code-background-color-dark;
+
+      rt {
+        color: $global-font-secondary-color-dark;
+      }
+    }
+  }
+}
