@@ -426,8 +426,8 @@ The emoji cheat sheet is a useful reference for emoji shorthand codes.
 
 #### Animal Amphibian
 
-| | icon | code | |
-| - | :-: | - | - |
+| icon | code | icon | code |
+| :-: | - | :-: | - |
 | <span class="emoji">:frog:</span> | `frog` |
 
 #### Animal Reptile
@@ -677,8 +677,8 @@ The emoji cheat sheet is a useful reference for emoji shorthand codes.
 
 #### Hotel
 
-| | icon | code | |
-| - | :-: | - | - |
+| icon | code | icon | code |
+| :-: | - | :-: | - |
 | <span class="emoji">:bellhop_bell:</span> | `bellhop_bell` |
 
 #### Time
