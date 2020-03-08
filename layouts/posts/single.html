@@ -9,7 +9,7 @@
         {{- /* Meta */ -}}
         <div class="post-meta">
             <div class="post-meta-line">
-                {{- $author := .Params.author | default .Site.Author.name -}}
+                {{- $author := .Params.author | default .Site.Author.name | default (T "author") -}}
                 {{- $authorLink := .Params.authorLink | default .Site.Author.link | default (relLangURL "/") -}}
                 <span class="post-author">
                     <a class="author" href="{{ $authorLink }}" rel="author" target="_blank">
@@ -54,7 +54,7 @@
         {{- /* TOC */ -}}
         {{- if or .Params.toc (and .Site.Params.toc (ne .Params.toc false)) -}}
             <div class="toc" id="toc-auto">
-                <h2 class="toc-title">{{ T "toc" }}</h2>
+                <h2 class="toc-title">{{ T "contents" }}</h2>
                 {{- $globalAutoCollapseToc := .Site.Params.autoCollapseToc | default true }}
                 <div class="toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false)) }} always-active{{ end }}" id="toc-content-auto"></div>
             </div>
@@ -62,7 +62,7 @@
                 <details>
                     <summary>
                         <div class="toc-title">
-                            <span>{{ T "toc" }}</span>
+                            <span>{{ T "contents" }}</span>
                             <span><i class="details icon fas fa-angle-down"></i></span>
                         </div>
                     </summary>

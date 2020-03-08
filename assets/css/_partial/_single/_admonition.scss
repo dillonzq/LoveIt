@@ -8,10 +8,9 @@
 
   .admonition-title {
     margin: 0 -0.75rem;
-    padding: .5rem .75rem .5rem 2.5rem;
-    border-bottom: .1rem solid map-get($admonition-background-color-map, 'note');
+    padding: .2rem .75rem .2rem 1.8rem;
+    border-bottom: .05rem solid map-get($admonition-background-color-map, 'note');
     background-color: map-get($admonition-background-color-map, 'note');
-    font-weight: 700;
   }
 
   .admonition-content {
@@ -19,12 +18,12 @@
   }
 
   i.icon {
-    font-size: 16px;
+    font-size: 0.85rem;
     color: map-get($admonition-color-map, 'note');
     cursor: auto;
     position: absolute;
-    left: .75rem;
-    top: .75rem;
+    left: .6rem;
+    top: .6rem;
   }
 
   @each $type, $color in $admonition-color-map {
@@ -65,8 +64,8 @@ details.admonition {
 
     i.details {
       position: absolute;
-      top: .75rem;
-      right: .75rem;
+      top: .5rem;
+      right: .5rem;
       color: $global-font-color;
 
       .dark-theme & {

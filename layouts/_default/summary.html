@@ -16,7 +16,7 @@
 
     {{- /* Meta */ -}}
     <div class="post-meta">
-        {{- $author := .Params.author | default .Site.Author.name -}}
+        {{- $author := .Params.author | default .Site.Author.name | default (T "author") -}}
         {{- $authorLink := .Params.authorLink | default .Site.Author.link | default (relLangURL "/") -}}
         <span class="post-author">
             <a class="author" href="{{ $authorLink }}" rel="author" target="_blank">

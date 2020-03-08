@@ -1,6 +1,6 @@
 baseURL = "/"
-# [en, zh-CN, ...] determines default content language
-# [en, zh-CN, ...] 设置默认的语言
+# [en, zh-CN, fr, ...] determines default content language
+# [en, zh-CN, fr, ...] 设置默认的语言
 defaultContentLanguage = "en"
 # theme
 # 主题
@@ -42,24 +42,41 @@ enableEmoji = true
     [languages.en.menu]
       [[languages.en.menu.main]]
         identifier = "posts"
+        # you can add extra information before the name (HTML format is allowed), such as icons
+        pre = ""
         name = "Posts"
         url = "/posts/"
+        # title will be shown when you hover on this menu link.
+        title = ""
         weight = 1
       [[languages.en.menu.main]]
         identifier = "tags"
+        pre = ""
         name = "Tags"
         url = "/tags/"
+        title = ""
         weight = 2
       [[languages.en.menu.main]]
         identifier = "categories"
+        pre = ""
         name = "Categories"
         url = "/categories/"
+        title = ""
         weight = 3
       [[languages.en.menu.main]]
+        identifier = "documentation"
+        pre = ""
+        name = "Documentation"
+        url = "/categories/documentation/"
+        title = ""
+        weight = 4
+      [[languages.en.menu.main]]
         identifier = "about"
+        pre = ""
         name = "About"
         url = "/about/"
-        weight = 4
+        title = ""
+        weight = 5
       [languages.en.params]
         # site description
         description = "About LoveIt Theme"
@@ -207,8 +224,9 @@ enableEmoji = true
             notify = false
             verify = true
             avatar = "mp"
-            # meta= ""
+            meta= ""
             pageSize = 10
+            lang = "en"
             visitor = true
             recordIP = true
           # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
@@ -241,24 +259,39 @@ enableEmoji = true
     [languages.zh-CN.menu]
       [[languages.zh-CN.menu.main]]
         identifier = "posts"
+        pre = ""
         name = "文章"
         url = "/posts/"
+        title = ""
         weight = 1
       [[languages.zh-CN.menu.main]]
         identifier = "tags"
+        pre = ""
         name = "标签"
         url = "/tags/"
+        title = ""
         weight = 2
       [[languages.zh-CN.menu.main]]
         identifier = "categories"
+        pre = ""
         name = "分类"
         url = "/categories/"
+        title = ""
         weight = 3
       [[languages.zh-CN.menu.main]]
+        identifier = "documentation"
+        pre = ""
+        name = "主题文档"
+        url = "/categories/documentation/"
+        title = ""
+        weight = 4
+      [[languages.zh-CN.menu.main]]
         identifier = "about"
+        pre = ""
         name = "关于"
         url = "/about/"
-        weight = 4
+        title = ""
+        weight = 5
     [languages.zh-CN.params]
       # 网站描述
       description = "关于 LoveIt 主题"
@@ -406,8 +439,9 @@ enableEmoji = true
           notify = false
           verify = true
           avatar = "mp"
-          # meta= ""
+          meta= ""
           pageSize = 10
+          lang = "zh-cn"
           visitor = true
           recordIP = true
         # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
@@ -416,7 +450,222 @@ enableEmoji = true
           width = "100%"
           numPosts = 10
           appId = ""
-          languageCode = "en_US"
+          languageCode = "zh_CN"
+
+  [languages.fr]
+    weight = 3
+    # language code
+    languageCode = "fr"
+    # website title
+    title = "LoveIt Thème"
+    # language name
+    languageName = "Français"
+    # whether to include Chinese/Japanese/Korean
+    hasCJKLanguage = false
+    # default amount of posts in each pages
+    paginate = 12
+    # [UA-XXXXXXXX-X] google analytics code
+    googleAnalytics = ""
+    # copyright description used only for seo schema
+    copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+    # date format
+    dateFormatToUse = "2006-01-02"
+    # Menu Info
+    [languages.fr.menu]
+      [[languages.fr.menu.main]]
+        identifier = "posts"
+        pre = ""
+        name = "Postes"
+        url = "/posts/"
+        title = ""
+        weight = 1
+      [[languages.fr.menu.main]]
+        identifier = "tags"
+        pre = ""
+        name = "Balises"
+        url = "/tags/"
+        title = ""
+        weight = 2
+      [[languages.fr.menu.main]]
+        identifier = "categories"
+        pre = ""
+        name = "Catégories"
+        url = "/categories/"
+        title = ""
+        weight = 3
+      [[languages.fr.menu.main]]
+        identifier = "documentation"
+        pre = ""
+        name = "Documentation"
+        url = "/categories/documentation/"
+        title = ""
+        weight = 4
+      [[languages.fr.menu.main]]
+        identifier = "about"
+        pre = ""
+        name = "À propos"
+        url = "/about/"
+        title = ""
+        weight = 5
+      [languages.fr.params]
+        # site description
+        description = "À propos du thème LoveIt"
+        # site keywords
+        keywords = ["Thème", "Hugo"]
+        # site default theme ("light", "dark", "auto")
+        defaultTheme = "auto"
+        # Home Page Info
+        [languages.fr.params.home]
+          # Home Page Profile
+          [languages.fr.params.home.profile]
+            enable = true
+            # Gravatar Email for preferred avatar in home page
+            gravatarEmail = ""
+            # URL of avatar shown in home page
+            avatarURL = "/images/avatar.png"
+            # subtitle shown in home page
+            subtitle = "Un thème Hugo simple, élégant et efficace"
+            # whether to use typeit animation for subtitle
+            typeit = true
+            # whether to show social links
+            social = true
+          # Home Page Posts
+          [languages.fr.params.home.posts]
+            enable = true
+            # special amount of posts in each home posts page
+            paginate = 6
+            # default behavior when you don't set "hiddenFromHomePage" in front matter
+            defaultHiddenFromHomePage = false
+        # Social Info in home page
+        [languages.fr.params.social]
+          GitHub = "xxxx"
+          Linkedin = "xxxx"
+          Twitter = "xxxx"
+          Instagram = "xxxx"
+          Email = "xxxx@xxxx.com"
+          Facebook = "xxxx"
+          Telegram = "xxxx"
+          # Medium = "xxxx"
+          # Gitlab = "xxxx"
+          Youtubelegacy = "xxxx"
+          # Youtubecustom = "xxxx"
+          # Youtubechannel = "xxxx"
+          # Tumblr ="xxxx"
+          # Quora = "xxxx"
+          # Keybase = "xxxx"
+          # Pinterest = "xxxx"
+          # Reddit = "xxxx"
+          # Codepen = "xxxx"
+          # FreeCodeCamp = "xxxx"
+          # Bitbucket = "xxxx"
+          # Stackoverflow = "xxxx"
+          # Weibo = "xxxx"
+          # Odnoklassniki = "xxxx"
+          # VK = "xxxx"
+          # Flickr = "xxxx"
+          # Xing = "xxxx"
+          # Snapchat = "xxxx"
+          # Soundcloud = "xxxx"
+          # Spotify = "xxxx"
+          # Bandcamp = "xxxx"
+          # Paypal = "xxxx"
+          # Fivehundredpx = "xxxx"
+          # Mix = "xxxx"
+          # Goodreads = "xxxx"
+          # Lastfm = "xxxx"
+          # Foursquare = "xxxx"
+          # Hackernews = "xxxx"
+          # Kickstarter = "xxxx"
+          # Patreon = "xxxx"
+          # Steam = "xxxx"
+          # Twitch = "xxxx"
+          # Strava = "xxxx"
+          # Skype = "xxxx"
+          # Whatsapp = "xxxx"
+          # Zhihu = "xxxx"
+          # Douban = "xxxx"
+          # Angellist = "xxxx"
+          # Slidershare = "xxxx"
+          # Jsfiddle = "xxxx"
+          # Deviantart = "xxxx"
+          # Behance = "xxxx"
+          # Dribble = "xxxx"
+          # Wordpress = "xxxx"
+          # Vine = "xxxx"
+          # Googlescholar = "xxxx"
+          # Researchgate = "xxxx"
+          # Mastodon = "xxxx"
+          # MastodonPrefix = "https://mastodon.technology/"
+          # Thingiverse = "xxxx"
+          # Devto = "xxxx"
+          # Gitea = "xxxx"
+          # XMPP = "xxxx"
+          # Matrix = "xxxx"
+          # Bilibili = "xxxx"
+        # Social Share Links in post page
+        [languages.fr.params.share]
+          enable = true
+          Twitter = true
+          Facebook = true
+          Linkedin = true
+          Whatsapp = true
+          Pinterest = true
+          # Tumblr = true
+          HackerNews = true
+          # Reddit = true
+          # VK = true
+          # Buffer = true
+          # Xing = true
+          # Line = true
+          # Instapaper = true
+          # Pocket = true
+          # Digg = true
+          # Stumbleupon = true
+          # Flipboard = true
+          # Weibo = true
+          # Renren = true
+          # Myspace = true
+          # Blogger = true
+          # Baidu = true
+          # Odnoklassniki = true
+          # Evernote = true
+          # Skype = true
+          # Trello = true
+          # Mix = true
+        # Comment Config
+        [languages.fr.params.comment]
+          enable = true
+          # Disqus Comment Config (https://disqus.com/)
+          [languages.fr.params.comment.disqus]
+            # Disqus shortname to use Disqus in posts
+            shortname = "dillonzq"
+          # Gittalk Comment Config (https://github.com/gitalk/gitalk)
+          [languages.fr.params.comment.gitalk]
+            owner = ""
+            repo = ""
+            clientId = ""
+            clientSecret = ""
+          # Valine Comment Config (https://github.com/xCss/Valine)
+          [languages.fr.params.comment.valine]
+            enable = false
+            appId = ""
+            appKey = ""
+            placeholder = "Votre commentaire ..."
+            notify = false
+            verify = true
+            avatar = "mp"
+            meta= ""
+            pageSize = 10
+            lang = "en"
+            visitor = true
+            recordIP = true
+          # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
+          [languages.fr.params.comment.facebook]
+            enable = false
+            width = "100%"
+            numPosts = 10
+            appId = ""
+            languageCode = "fr"
 
 [params]
   # LoveIt theme version
@@ -455,7 +704,7 @@ enableEmoji = true
     # whether to show link to Raw Markdown content of the post
     # 是否在文章页面显示原始 Markdown 文档链接
     linkToMarkdown = true
-  # mathematical formulas (KaTeX)
+  # mathematical formulas (KaTeX https://katex.org/)
   # 数学公式 (KaTeX https://katex.org/)
   [params.math]
     enable = true
@@ -496,7 +745,7 @@ enableEmoji = true
     width = 127
     height = 40
   # Website Image Info just for SEO
-  #  网站图标信息，仅用于 SEO
+  # 网站图标信息，仅用于 SEO
   [params.image]
     url = "cover.png"
     width = 800
@@ -548,7 +797,7 @@ enableEmoji = true
 # Hugo 解析文档的配置
 [markup]
   # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
-  # 代码高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
+  # 语法高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
   [markup.highlight]
     codeFences = true
     guessSyntax = true

@@ -7,8 +7,8 @@ other = "文章"
 # === Post ===
 
 # === Taxonomy ===
-[all]
-other = "所有"
+[allSome]
+other = "所有%s"
 
 [tag]
 other = "标签"
@@ -33,26 +33,21 @@ other = "更多"
 other = "切换主题"
 # === partials/header.html ===
 
-# === partials/comment.html ===
-[valineLang]
-other = "zh-cn"
-# === partials/comment.html ===
-
 # === partials/footer.html ===
-[powered]
+[poweredBySome]
 other = "由 %s 强力驱动"
 
 [theme]
-other = "主题 - "
+other = "主题"
 # === partials/footer.html ===
 
 # === partials/plugin/share.html ===
-[share]
+[shareOn]
 other = "分享到"
 # === partials/plugin/share.html ===
 
 # === posts/single.html ===
-[toc]
+[contents]
 other = "目录"
 
 [publish]
@@ -102,3 +97,41 @@ other = "抱歉，您要查找的页面不存在。"
 [backToHome]
 other = "回到主页"
 # === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "注意"
+
+[abstract]
+other = "摘要"
+
+[info]
+other = "信息"
+
+[tip]
+other = "技巧"
+
+[success]
+other = "成功"
+
+[question]
+other = "问题"
+
+[warning]
+other = "警告"
+
+[failure]
+other = "失败"
+
+[danger]
+other = "危险"
+
+[bug]
+other = "Bug"
+
+[example]
+other = "示例"
+
+[quote]
+other = "引用"
+# === shortcodes/admonition.html ===

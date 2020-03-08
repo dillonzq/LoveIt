@@ -58,6 +58,10 @@ body {
   }
 }
 
+b, strong {
+  font-weight: bold;
+}
+
 a {
   color: $global-link-color;
   text-decoration: none;
