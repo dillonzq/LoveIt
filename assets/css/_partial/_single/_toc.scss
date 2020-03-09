@@ -83,7 +83,6 @@
         display: block;
         display: flex;
         justify-content: space-between;
-        font-size: 1.2em;
         font-weight: bold;
         line-height: 2em;
         padding: 0 .625rem;
@@ -133,6 +132,14 @@
 }
 
 .toc {
+  .toc-title {
+    font-size: $toc-title-font-size;
+  }
+
+  .toc-content {
+    font-size: $toc-content-font-size;
+  }
+
   ruby {
     background: $code-background-color;
 
