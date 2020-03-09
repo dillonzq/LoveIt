@@ -6,15 +6,7 @@ draft: false
 lightgallery: true
 ---
 
-<div class="badge">
-
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases) [![Hugo](https://img.shields.io/badge/Hugo-%5E0.62.0-blue?style=flat-square&logo=hugo)](https://gohugo.io/) [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
-
-</div>
-
-<style>
-  .badge img { height: 1.2rem; }
-</style>
 
 [LoveIt :(far fa-heart):](https://github.com/dillonzq/LoveIt) 是一个由 [Dillon](https://dillonzq.com) 开发的**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 

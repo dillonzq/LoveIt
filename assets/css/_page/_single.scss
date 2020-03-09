@@ -167,6 +167,11 @@
       }
     }
 
+    img {
+      max-width: 96%;
+      min-height: 1.2rem;
+    }
+
     figure {
       text-align: center;
 
@@ -184,7 +189,6 @@
 
       img {
         display: block;
-        max-width: 96%;
         height: auto;
         margin: 0 auto;
         overflow: hidden;
