@@ -3,6 +3,7 @@ title: "关于 LoveIt"
 date: 2019-08-02T11:04:49+08:00
 draft: false
 
+math: true
 lightgallery: true
 ---
 
@@ -52,7 +53,7 @@ lightgallery: true
 * :(far fa-images): 支持基于 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 的**图片画廊**
 * :(fab fa-font-awesome): 支持 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
 * :(far fa-sticky-note): 支持**上标注释**的扩展 Markdown 语法
-* :(fas fa-square-root-alt): 支持基于 [Katex](https://katex.org/) 的**数学公式**
+* :(fas fa-square-root-alt): 支持基于 [$ \KaTeX $](https://katex.org/) 的**数学公式**
 * :(fas fa-project-diagram): 支持基于 [mermaid](https://github.com/knsv/mermaid) 的**图表** shortcode
 * :(fas fa-chart-pie): 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化** shortcode
 * :(fas fa-music): 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的**音乐播放器** shortcode
@@ -78,7 +79,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * [TypeIt](https://typeitjs.com/)
-* [Katex](https://katex.org/)
+* [$ \KaTeX $](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)
 * [ECharts](https://echarts.apache.org/)
 * [APlayer](https://github.com/MoePlayer/APlayer)

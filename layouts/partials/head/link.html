@@ -26,7 +26,7 @@
     {{- . | safeHTML -}}
 {{- else -}}
     {{- $res := resources.Get "lib/fontawesome-free/all.min.css" -}}
-    {{- $stylesheet := (dict "resource" $res "fingerprint" ($scratch.Get "fingerprint")) -}}
+    {{- $stylesheet := dict "resource" $res "fingerprint" ($scratch.Get "fingerprint") -}}
     {{- partial "plugin/stylesheet.html" $stylesheet -}}
 {{- end -}}
 
@@ -35,7 +35,7 @@
     {{- . | safeHTML -}}
 {{- else -}}
     {{- $res := resources.Get "lib/fontawesome-free/all.min.css" -}}
-    {{- $stylesheet := (dict "resource" $res "fingerprint" ($scratch.Get "fingerprint")) -}}
+    {{- $stylesheet := dict "resource" $res "fingerprint" ($scratch.Get "fingerprint") -}}
     {{- partial "plugin/stylesheet.html" $stylesheet -}}
 {{- end -}}
 
@@ -46,5 +46,5 @@
 {{- $options  = dict "outputStyle" "compressed" | merge $options -}}
 {{- $options  = dict "enableSourceMap" true | merge $options -}}
 {{- $res = resources.ExecuteAsTemplate "style.scss" . $res | toCSS $options -}}
-{{- $stylesheet := (dict "resource" $res "fingerprint" ($scratch.Get "fingerprint")) -}}
+{{- $stylesheet := dict "resource" $res "fingerprint" ($scratch.Get "fingerprint") -}}
 {{- partial "plugin/stylesheet.html" $stylesheet -}}

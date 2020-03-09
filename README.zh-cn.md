@@ -29,7 +29,7 @@
 * 易用和自动展开的**文章目录**
 * 支持基于 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
 * 支持**上标注释**的扩展 Markdown 语法
-* 支持基于 [Katex](https://katex.org/) 的**数学公式**
+* 支持基于 [KaTeX](https://katex.org/) 的**数学公式**
 * 支持基于 [mermaid](https://github.com/knsv/mermaid) 的**图表**生成功能
 * 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化**生成功能
 * 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的内嵌**音乐播放器**
@@ -81,7 +81,7 @@
 * 支持基于 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 的**图片画廊**
 * 支持 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
 * 支持**上标注释**的扩展 Markdown 语法
-* 支持基于 [Katex](https://katex.org/) 的**数学公式**
+* 支持基于 [KaTeX](https://katex.org/) 的**数学公式**
 * 支持基于 [mermaid](https://github.com/knsv/mermaid) 的**图表** shortcode
 * 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化** shortcode
 * 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的**音乐播放器** shortcode
@@ -118,7 +118,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * [TypeIt](https://typeitjs.com/)
-* [Katex](https://katex.org/)
+* [KaTeX](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)
 * [ECharts](https://echarts.apache.org/)
 * [APlayer](https://github.com/MoePlayer/APlayer)

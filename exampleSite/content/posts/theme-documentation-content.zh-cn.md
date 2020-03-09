@@ -155,13 +155,13 @@ comment: true
 
 ### 数学公式
 
-**LoveIt** 基于 [KaTeX](https://katex.org/) 提供数学公式的支持.
+**LoveIt** 基于 [$ \KaTeX $](https://katex.org/) 提供数学公式的支持.
 
 在你的 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `[params.math]` 下面设置属性 `enable = true`,
 并在文章的前置参数中设置属性 `math: true`来启用数学公式的自动渲染.
 
 {{< admonition tip >}}
-有一份 [KaTeX 中支持的 TeX 函数](https://katex.org/docs/supported.html) 清单.
+有一份 [$ \KaTeX $ 中支持的 $ \TeX $ 函数](https://katex.org/docs/supported.html) 清单.
 {{< /admonition >}}
 
 #### 公式块
@@ -185,12 +185,12 @@ $$ c = \pm\sqrt{a^2 + b^2} $$
 默认的行内公式分割符是  `$`/`$` 和 `\\(`/`\\)`:
 
 ```markdown
-$ c = \pm\sqrt{a^2 + b^2} $ and \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\)
+$ c = \pm\sqrt{a^2 + b^2} $ 和 \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\)
 ```
 
 呈现的输出效果如下:
 
-$ c = \pm\sqrt{a^2 + b^2} $ and \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\)
+$ c = \pm\sqrt{a^2 + b^2} $ 和 \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\)
 
 {{< admonition tip >}}
 你可以在 [网站配置](../theme-documentation-basics/#site-configuration) 中自定义公式块和行内公式的分割符.
@@ -198,9 +198,9 @@ $ c = \pm\sqrt{a^2 + b^2} $ and \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^
 
 #### Copy-tex
 
-**[Copy-tex](https://github.com/Khan/KaTeX/tree/master/contrib/copy-tex)** 是一个 **KaTex** 的插件.
+**[Copy-tex](https://github.com/Khan/KaTeX/tree/master/contrib/copy-tex)** 是一个 **$ \KaTeX $** 的插件.
 
-通过这个扩展, 在选择并复制 KaTeX 渲染的公式时, 会将其 LaTeX 源代码复制到剪贴板.
+通过这个扩展, 在选择并复制 $ \KaTeX $ 渲染的公式时, 会将其 $ \LaTeX $ 源代码复制到剪贴板.
 
 在你的 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `[params.math]` 下面设置属性 `copyTex = true` 来启用 Copy-tex.
 
@@ -208,7 +208,7 @@ $ c = \pm\sqrt{a^2 + b^2} $ and \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^
 
 #### mhchem
 
-**[mhchem](https://github.com/Khan/KaTeX/tree/master/contrib/mhchem)** 是一个 **KaTex** 的插件.
+**[mhchem](https://github.com/Khan/KaTeX/tree/master/contrib/mhchem)** 是一个 **$ \KaTeX $** 的插件.
 
 通过这个扩展, 你可以在文章中轻松编写漂亮的化学方程式.
 
