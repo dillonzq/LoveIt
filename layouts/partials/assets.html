@@ -35,7 +35,7 @@
 {{- end -}}
 
 {{- /* lightgallery.js */ -}}
-{{- if ne .Page.Site.Params.page.lightgallery false | and (ne .Page.Params.lightgallery false) -}}
+{{- if ne .Site.Params.page.lightgallery false | and (ne .Params.lightgallery false) -}}
     {{- with $CDN.lightgalleryCSS -}}
         {{- slice . | $scratch.Add "linkCDN" -}}
     {{- else -}}
@@ -222,8 +222,8 @@
     {{- else if not (strings.HasSuffix . ".min.css") -}}
         {{- $res = minify $res -}}
     {{- end -}}
-    {{- $res = $res | resources.Fingerprint "sha256" -}}
-    <link rel="stylesheet" href="{{ $res.RelPermalink }}" integrity="{{ $res.Data.Integrity }}">
+    {{- $stylesheet := (dict "resource" $res "fingerprint" ($scratch.Get "fingerprint")) -}}
+    {{- partial "plugin/stylesheet.html" $stylesheet -}}
 {{- end -}}
 
 {{- range $scratch.Get "scriptCDN" -}}
@@ -234,8 +234,8 @@
     {{- if not (strings.HasSuffix . ".min.js") -}}
         {{- $res = minify $res -}}
     {{- end -}}
-    {{- $res = $res | resources.Fingerprint "sha256" -}}
-    <script src="{{ $res.RelPermalink }}" integrity="{{ $res.Data.Integrity }}"></script>
+    {{- $script := (dict "resource" $res "fingerprint" ($scratch.Get "fingerprint")) -}}
+    {{- partial "plugin/script.html" $script -}}
 {{- end -}}
 
 {{- /* Google analytics async */ -}}

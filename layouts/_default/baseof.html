@@ -8,6 +8,7 @@
 {{- if eq hugo.Environment "production" -}}
     {{- $scratch.Set "production" true -}}
     {{- $scratch.Set "CDN" .Site.Params.cdn -}}
+    {{- $scratch.Set "fingerprint" .Site.Params.fingerprint -}}
 {{- end -}}
 
 <!DOCTYPE html>

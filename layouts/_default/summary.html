@@ -11,7 +11,7 @@
 
     {{- /* Title */ -}}
     <h1 class="single-title" itemprop="name headline">
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     </h1>
 
     {{- /* Meta */ -}}
@@ -55,7 +55,7 @@
 
     {{- /* Footer */ -}}
     <div class="post-footer">
-        <a href="{{ .Permalink }}">{{ T "readMore" }}</a>
+        <a href="{{ .RelPermalink }}">{{ T "readMore" }}</a>
         {{- with .Params.tags -}}
             <div class="post-tags">
                 {{- range . -}}

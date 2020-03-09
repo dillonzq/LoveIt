@@ -193,6 +193,9 @@ hugo
   defaultTheme = "auto"
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = ""
+  # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+  # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI ("sha256", "sha384", "sha512", "md5")
+  fingerprint = ""
   # 页面头部导航栏信息
   [params.header]
     # 桌面端导航栏模式 ("fixed", "normal", "auto")

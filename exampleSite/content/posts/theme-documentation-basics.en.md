@@ -193,6 +193,9 @@ Note that some of these parameters are explained in details in other sections of
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
   gitRepo = ""
+  # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+  # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
+  fingerprint = ""
   # Header info
   [params.header]
     # desktop header mode ("fixed", "normal", "auto")

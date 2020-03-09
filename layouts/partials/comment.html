@@ -6,7 +6,7 @@
     {{- /* Disqus Comment System */ -}}
     {{- with .Site.Params.comment.disqus.shortname -}}
         <div id="disqus_thread"></div>
-        {{- $script := printf `<script src="https://%s.disqus.com/embed.js"></script>` . -}}
+        {{- $script := printf `<script defer src="https://%s.disqus.com/embed.js"></script>` . -}}
         {{- slice $script | $scratch.Add "scriptCDN" -}}
         <noscript>
             Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>

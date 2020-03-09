@@ -208,7 +208,7 @@ enableEmoji = true
           # Disqus Comment Config (https://disqus.com/)
           [languages.en.params.comment.disqus]
             # Disqus shortname to use Disqus in posts
-            shortname = "dillonzq"
+            shortname = ""
           # Gittalk Comment Config (https://github.com/gitalk/gitalk)
           [languages.en.params.comment.gitalk]
             owner = ""
@@ -423,7 +423,7 @@ enableEmoji = true
         # Disqus 评论系统设置 (https://disqus.com/)
         [languages.zh-CN.params.comment.disqus]
           # Disqus 的用户名，用来在文章中启用 Disqus 评论系统
-          shortname = "dillonzq"
+          shortname = ""
         # Gittalk 评论系统设置 (https://github.com/gitalk/gitalk)
         [languages.zh-CN.params.comment.gitalk]
           owner = ""
@@ -638,7 +638,7 @@ enableEmoji = true
           # Disqus Comment Config (https://disqus.com/)
           [languages.fr.params.comment.disqus]
             # Disqus shortname to use Disqus in posts
-            shortname = "dillonzq"
+            shortname = ""
           # Gittalk Comment Config (https://github.com/gitalk/gitalk)
           [languages.fr.params.comment.gitalk]
             owner = ""
@@ -674,6 +674,9 @@ enableEmoji = true
   # public git repo url only then enableGitInfo is true
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = "https://github.com/dillonzq/LoveIt"
+  # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
+  # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI ("sha256", "sha384", "sha512", "md5")
+  fingerprint = ""
   # Header info
   # 页面头部导航栏信息
   [params.header]
