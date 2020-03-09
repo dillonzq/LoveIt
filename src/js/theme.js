@@ -96,7 +96,7 @@
             for (let num = 1; num <= 6; num++) {
                 this.util.forEach(document.querySelectorAll('.page.single .content > h' + num), (header) => {
                     header.classList.add('headerLink');
-                    header.innerHTML = `<a href="#${header.id}"></a>${header.innerHTML}`;
+                    header.innerHTML = `<a href="#${header.id}" class="header-mark"></a>${header.innerHTML}`;
                 });
             }
         }
