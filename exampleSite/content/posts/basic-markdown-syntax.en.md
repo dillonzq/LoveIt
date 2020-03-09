@@ -618,7 +618,7 @@ The HTML looks like this:
 </table>
 ```
 
-{{< admonition "Right or center aligned text" >}}
+{{< admonition note "Right or center aligned text" >}}
 Adding a colon on the right side of the dashes below any heading will right align text for that column.
 
 Adding colons on both sides of the dashes below any heading will center align text for that column.

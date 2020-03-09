@@ -222,7 +222,7 @@
     {{- else if not (strings.HasSuffix . ".min.css") -}}
         {{- $res = minify $res -}}
     {{- end -}}
-    {{- $stylesheet := (dict "resource" $res "fingerprint" ($scratch.Get "fingerprint")) -}}
+    {{- $stylesheet := dict "resource" $res "fingerprint" ($scratch.Get "fingerprint") -}}
     {{- partial "plugin/stylesheet.html" $stylesheet -}}
 {{- end -}}
 
@@ -234,7 +234,7 @@
     {{- if not (strings.HasSuffix . ".min.js") -}}
         {{- $res = minify $res -}}
     {{- end -}}
-    {{- $script := (dict "resource" $res "fingerprint" ($scratch.Get "fingerprint")) -}}
+    {{- $script := dict "resource" $res "fingerprint" ($scratch.Get "fingerprint") -}}
     {{- partial "plugin/script.html" $script -}}
 {{- end -}}
 

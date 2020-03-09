@@ -160,13 +160,13 @@ This part is shown in the [emoji support page](../emoji-support/).
 
 ### Mathematical Formula
 
-**LoveIt** theme supports mathematical formulas based on [KaTeX](https://katex.org/).
+**LoveIt** theme supports mathematical formulas based on [$ \KaTeX $](https://katex.org/).
 
 Set the property `enable = true` under `[params.math]` in your [site configuration](../theme-documentation-basics/#site-configuration)
 and the property `math: true` of the article front matter to enable the automatic rendering of mathematical formulas.
 
 {{< admonition tip >}}
-Here is a list of [TeX functions supported by KaTeX](https://katex.org/docs/supported.html).
+Here is a list of [$ \TeX $ functions supported by $ \KaTeX $](https://katex.org/docs/supported.html).
 {{< /admonition >}}
 
 #### Block Formula
@@ -203,9 +203,9 @@ You can add more block and inline delimiters in your [site configuration](../the
 
 #### Copy-tex
 
-**[Copy-tex](https://github.com/Khan/KaTeX/tree/master/contrib/copy-tex)** is an extension for **KaTex**.
+**[Copy-tex](https://github.com/Khan/KaTeX/tree/master/contrib/copy-tex)** is an extension for **$ \KaTeX $**.
 
-By the extension, when selecting and copying KaTeX-rendered elements, copies their LaTeX source to the clipboard.
+By the extension, when selecting and copying $ \KaTeX $ rendered elements, copies their $ \LaTeX $ source to the clipboard.
 
 Set the property `copyTex = true` under `[params.math]` in your [site configuration](../theme-documentation-basics/#site-configuration) to enable Copy-tex.
 
@@ -213,7 +213,7 @@ Select and copy the formula rendered in the previous section, and you can find t
 
 #### mhchem
 
-**[mhchem](https://github.com/Khan/KaTeX/tree/master/contrib/mhchem)** is an extension for **KaTex**.
+**[mhchem](https://github.com/Khan/KaTeX/tree/master/contrib/mhchem)** is an extension for **$ \KaTeX $**.
 
 By the extension, you can write beautiful chemical equations easily in the article.
 
