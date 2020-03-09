@@ -6,5 +6,5 @@
         </figcaption>
     </figure>
 {{- else -}}
-    {{- partial "plugin/image.html" (dict "src" .Destination "title" .Title "description" .Text "lightgallery" false "scratch" (.Page.Scratch.Get "scratch")) -}}
+    {{- partial "plugin/image.html" (dict "src_s" .Destination "title" .Title "description" .Text "lightgallery" false "scratch" (.Page.Scratch.Get "scratch")) -}}
 {{- end -}}
