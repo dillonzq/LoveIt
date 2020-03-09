@@ -168,7 +168,7 @@
     }
 
     img {
-      max-width: 96%;
+      max-width: 100%;
       min-height: 1.2rem;
     }
 
@@ -192,11 +192,6 @@
         height: auto;
         margin: 0 auto;
         overflow: hidden;
-        transition: all 0.2s ease-in-out;
-      }
-
-      a.lightgallery:hover img {
-        transform: scale(1.02);
       }
     }
 

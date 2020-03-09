@@ -29,6 +29,9 @@ other = "更多"
 # === Pagination ===
 
 # === partials/header.html ===
+[selectLanguage]
+other = "选择语言"
+
 [switchTheme]
 other = "切换主题"
 # === partials/header.html ===

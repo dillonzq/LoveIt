@@ -14,9 +14,9 @@
             {{- end -}}
             {{- if .Site.IsMultiLingual -}}
                 &nbsp;|&nbsp;
-                <a href="javascript:void(0);" class="menu-item">
+                <a href="javascript:void(0);" class="menu-item" title="{{ T "selectLanguage" }}">
                     <i class="fas fa-language fa-fw"></i>&nbsp;
-                    <select class="select-language" onchange="location = this.value;">
+                    <select class="language-select" onchange="location = this.value;">
                         {{- range .Page.AllTranslations -}}
                             {{- $translation := . -}}
                             {{- range $.Site.Languages -}}
@@ -33,7 +33,7 @@
                 </a>
             {{- end -}}
             <a href="javascript:void(0);" class="theme-switch" title="{{ T "switchTheme" }}">
-                <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
+                <i class="fas fa-adjust fa-fw "></i>
             </a>
         </div>
     </div>
@@ -60,9 +60,9 @@
                 </a>
             {{- end -}}
             {{- if .Site.IsMultiLingual -}}
-                <a href="javascript:void(0);" class="menu-item">
+                <a href="javascript:void(0);" class="menu-item" title="{{ T "selectLanguage" }}">
                     <i class="fas fa-language fa-fw"></i>&nbsp;
-                    <select class="select-language" onchange="location = this.value;">
+                    <select class="language-select" onchange="location = this.value;">
                         {{- range .Page.AllTranslations -}}
                             {{- $translation := . -}}
                             {{- range $.Site.Languages -}}
@@ -79,7 +79,7 @@
                 </a>
             {{- end -}}
             <a href="javascript:void(0);" class="theme-switch" title="{{ T "switchTheme" }}">
-                <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
+                <i class="fas fa-adjust fa-fw"></i>
             </a>
         </div>
     </div>
