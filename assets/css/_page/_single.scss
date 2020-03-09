@@ -66,7 +66,7 @@
         font-weight: bolder;
       }
 
-      & > a:first-child::before {
+      & > .header-mark::before {
         content: "|";
         margin-right: .3125rem;
         color: $single-link-color;
@@ -77,7 +77,7 @@
       }
     }
 
-    h2 > a:first-child::before {
+    h2 > .header-mark::before {
       content: "#";
     }
 
