@@ -119,7 +119,7 @@
                 }
                 const toc = document.getElementById('toc-auto');
                 const page = document.getElementsByClassName('page')[0];
-                toc.style.maxWidth = `${page.getBoundingClientRect().left - 40}px`;
+                toc.style.maxWidth = `${page.getBoundingClientRect().left - 20}px`;
                 this._tocLinks = this._tocLinks || tocCore.getElementsByTagName('a');
                 this._tocLis = this._tocLis || tocCore.getElementsByTagName('li');
                 this._headerLinks = this._headerLinks || document.getElementsByClassName('headerLink') || [];
