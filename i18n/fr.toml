@@ -29,6 +29,9 @@ other = "Plus"
 # === Pagination ===
 
 # === partials/header.html ===
+[selectLanguage]
+other = "Choisir la langue"
+
 [switchTheme]
 other = "Changer de Thème"
 # === partials/header.html ===
