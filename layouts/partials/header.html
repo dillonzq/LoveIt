@@ -22,9 +22,9 @@
                             {{- range $.Site.Languages -}}
                                 {{- if eq $translation.Lang .Lang -}}
                                     {{- if eq $.Page.Lang .Lang -}}
-                                        <option value="{{ $translation.Permalink }}" selected>{{ .LanguageName }}</option>
+                                        <option value="{{ $translation.RelPermalink }}" selected>{{ .LanguageName }}</option>
                                     {{- else -}}
-                                        <option value="{{ $translation.Permalink }}">{{ .LanguageName }}</option>
+                                        <option value="{{ $translation.RelPermalink }}">{{ .LanguageName }}</option>
                                     {{- end -}}
                                 {{- end -}}
                             {{- end -}}
@@ -68,9 +68,9 @@
                             {{- range $.Site.Languages -}}
                                 {{- if eq $translation.Lang .Lang -}}
                                     {{- if eq $.Page.Lang .Lang -}}
-                                        <option value="{{ $translation.Permalink }}" selected>{{ .LanguageName }}</option>
+                                        <option value="{{ $translation.RelPermalink }}" selected>{{ .LanguageName }}</option>
                                     {{- else -}}
-                                        <option value="{{ $translation.Permalink }}">{{ .LanguageName }}</option>
+                                        <option value="{{ $translation.RelPermalink }}">{{ .LanguageName }}</option>
                                     {{- end -}}
                                 {{- end -}}
                             {{- end -}}
