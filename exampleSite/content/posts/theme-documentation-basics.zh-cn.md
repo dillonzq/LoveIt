@@ -444,7 +444,7 @@ hugo
     # echarts@4.6.0 https://echarts.apache.org/
     echartsJS = ''
     echartsMacaronsJS = ''
-    # gitalk@1.6.0 https://github.com/gitalk/gitalk
+    # gitalk@1.6.2 https://github.com/gitalk/gitalk
     gitalkCSS = ''
     gitalkJS = ''
     # valine@1.3.10 https://valine.js.org/
