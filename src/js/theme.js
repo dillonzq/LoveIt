@@ -14,7 +14,7 @@
         }
 
         isMobile() {
-            return window.matchMedia('only screen and (max-width: 560px)').matches;
+            return window.matchMedia('only screen and (max-width: 720px)').matches;
         }
 
         isTocStatic() {
