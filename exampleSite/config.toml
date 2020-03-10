@@ -217,9 +217,9 @@ enableEmoji = true
             clientSecret = ""
           # Valine Comment Config (https://github.com/xCss/Valine)
           [languages.en.params.comment.valine]
-            enable = false
-            appId = ""
-            appKey = ""
+            enable = true
+            appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
+            appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
             placeholder = "Your comment ..."
             notify = false
             verify = true
@@ -432,9 +432,9 @@ enableEmoji = true
           clientSecret = ""
         # Valine 评论系统设置 (https://github.com/xCss/Valine)
         [languages.zh-cn.params.comment.valine]
-          enable = false
-          appId = ""
-          appKey = ""
+          enable = true
+          appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
+          appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
           placeholder = "你的评论 ..."
           notify = false
           verify = true
@@ -649,9 +649,9 @@ enableEmoji = true
             clientSecret = ""
           # Valine Comment Config (https://github.com/xCss/Valine)
           [languages.fr.params.comment.valine]
-            enable = false
-            appId = ""
-            appKey = ""
+            enable = true
+            appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
+            appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
             placeholder = "Votre commentaire ..."
             notify = false
             verify = true
