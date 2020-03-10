@@ -606,7 +606,7 @@ Just insert your ECharts option in `JSON`/`YAML`/`TOML` format in the `echarts` 
 Example `echarts` Input in `JSON` format:
 
 ```json
-{{/* echarts */}}
+{{</* echarts */>}}
 {
   "title": {
     "text": "Summary Line Chart",
