@@ -34,7 +34,7 @@
 {{- with $CDN.animateCSS -}}
     {{- . | safeHTML -}}
 {{- else -}}
-    {{- $res := resources.Get "lib/fontawesome-free/all.min.css" -}}
+    {{- $res := resources.Get "lib/animate/animate.min.css" -}}
     {{- $stylesheet := dict "resource" $res "fingerprint" ($scratch.Get "fingerprint") -}}
     {{- partial "plugin/stylesheet.html" $stylesheet -}}
 {{- end -}}

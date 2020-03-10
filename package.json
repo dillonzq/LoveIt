@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "npx babel src --out-file assets/js/theme.min.js --source-maps",
-    "start": "hugo server --source=exampleSite --themesDir=../.. --disableFastRender",
+    "start": "npm run build && hugo server --source=exampleSite --themesDir=../.. --disableFastRender",
     "copy": "hugo -v --source=exampleSite --themesDir=../.. -D --gc --minify && rm -rf resources && cp -rf exampleSite/resources resources"
   },
   "husky": {
