@@ -1,0 +1,7 @@
+{{- $res := .resource -}}
+{{- with .fingerprint -}}
+    {{- $res = $res | resources.Fingerprint . -}}
+    <link rel="stylesheet" href="{{ $res.RelPermalink }}" integrity="{{ $res.Data.Integrity }}">
+{{- else -}}
+    <link rel="stylesheet" href="{{ $res.RelPermalink }}">
+{{- end -}}

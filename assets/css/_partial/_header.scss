@@ -11,7 +11,7 @@ header {
     font-weight: bold;
   }
 
-  .select-language {
+  .language-select {
     font-weight: $global-font-weight;
     border: none;
     box-shadow: none;
@@ -31,6 +31,10 @@ header {
     &:hover {
       cursor: pointer;
     }
+  }
+
+  .theme-switch i {
+    transform: rotate(225deg);
   }
 }
 

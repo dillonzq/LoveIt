@@ -66,7 +66,7 @@
         font-weight: bolder;
       }
 
-      & > a:first-child::before {
+      & > .header-mark::before {
         content: "|";
         margin-right: .3125rem;
         color: $single-link-color;
@@ -77,7 +77,7 @@
       }
     }
 
-    h2 > a:first-child::before {
+    h2 > .header-mark::before {
       content: "#";
     }
 
@@ -167,6 +167,11 @@
       }
     }
 
+    img {
+      max-width: 100%;
+      min-height: 1.2rem;
+    }
+
     figure {
       text-align: center;
 
@@ -184,15 +189,9 @@
 
       img {
         display: block;
-        max-width: 96%;
         height: auto;
         margin: 0 auto;
         overflow: hidden;
-        transition: all 0.2s ease-in-out;
-      }
-
-      a.lightgallery:hover img {
-        transform: scale(1.02);
       }
     }
 

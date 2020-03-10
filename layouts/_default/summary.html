@@ -11,7 +11,7 @@
 
     {{- /* Title */ -}}
     <h1 class="single-title" itemprop="name headline">
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     </h1>
 
     {{- /* Meta */ -}}
@@ -19,9 +19,8 @@
         {{- $author := .Params.author | default .Site.Author.name | default (T "author") -}}
         {{- $authorLink := .Params.authorLink | default .Site.Author.link | default (relLangURL "/") -}}
         <span class="post-author">
-            <a class="author" href="{{ $authorLink }}" rel="author" target="_blank">
-                <i class="fas fa-user-circle fa-fw"></i>{{ $author }}
-            </a>
+            {{- $link := dict "class" "author" "href" $authorLink "title" "Author" "rel" "author" "icon" (dict "class" "fas fa-user-circle fa-fw") "content" $author -}}
+            {{- partial "plugin/link.html" $link -}}
         </span>
 
         {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
@@ -55,7 +54,7 @@
 
     {{- /* Footer */ -}}
     <div class="post-footer">
-        <a href="{{ .Permalink }}">{{ T "readMore" }}</a>
+        <a href="{{ .RelPermalink }}">{{ T "readMore" }}</a>
         {{- with .Params.tags -}}
             <div class="post-tags">
                 {{- range . -}}

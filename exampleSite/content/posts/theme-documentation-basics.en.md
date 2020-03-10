@@ -78,6 +78,8 @@ The following is a basic configuration for the LoveIt theme:
 
 ```toml
 baseURL = "http://example.org/"
+# [en, zh-cn, fr, ...] determines default content language
+defaultContentLanguage = "en"
 # language code
 languageCode = "en"
 title = "My New Hugo Site"
@@ -113,13 +115,6 @@ theme = "LoveIt"
     url = "/categories/"
     title = ""
     weight = 3
-  [[menu.main]]
-    identifier = "about"
-    pre = ""
-    name = "About"
-    url = "/about/"
-    title = ""
-    weight = 4
 ```
 
 {{< admonition >}}
@@ -186,13 +181,16 @@ Note that some of these parameters are explained in details in other sections of
   # LoveIt theme version
   version = "0.1.X"
   # site description
-  description = "About LoveIt Theme"
+  description = "This is My New Hugo Site"
   # site keywords
   keywords = ["Theme", "Hugo"]
   # site default theme ("light", "dark", "auto")
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
   gitRepo = ""
+  # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+  # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
+  fingerprint = ""
   # Header info
   [params.header]
     # desktop header mode ("fixed", "normal", "auto")
@@ -217,7 +215,7 @@ Note that some of these parameters are explained in details in other sections of
       # URL of avatar shown in home page
       avatarURL = "/images/avatar.png"
       # subtitle shown in home page
-      subtitle = "This is my new hugo site"
+      subtitle = "This is My New Hugo Site"
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links
@@ -350,10 +348,14 @@ Note that some of these parameters are explained in details in other sections of
     enable = true
     # Disqus Comment Config (https://disqus.com/)
     [params.comment.disqus]
+      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+      enable = false
       # Disqus shortname to use Disqus in posts
-      shortname = "dillonzq"
-    # Gittalk Comment Config (https://github.com/gitalk/gitalk)
+      shortname = ""
+    # Gitalk Comment Config (https://github.com/gitalk/gitalk)
     [params.comment.gitalk]
+      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+      enable = false
       owner = ""
       repo = ""
       clientId = ""
@@ -440,7 +442,7 @@ Note that some of these parameters are explained in details in other sections of
     # echarts@4.6.0 https://echarts.apache.org/
     echartsJS = ''
     echartsMacaronsJS = ''
-    # gitalk@1.6.0 https://github.com/gitalk/gitalk
+    # gitalk@1.6.2 https://github.com/gitalk/gitalk
     gitalkCSS = ''
     gitalkJS = ''
     # valine@1.3.10 https://valine.js.org/
@@ -520,7 +522,7 @@ Note that some of these parameters are explained in details in other sections of
   taxonomyTerm = ["HTML"]
 ```
 
-![Complete configuration preview](/images/theme-documentation-basics/complete-configuration-preview.gif "Complete configuration preview")
+![Complete configuration preview](/images/theme-documentation-basics/complete-configuration-preview.png "Complete configuration preview")
 
 ### 3.2 Favicons, Browserconfig, Manifest
 
@@ -576,7 +578,7 @@ After learning [how Hugo handle multilingual websites](https://gohugo.io/content
 For example with English, Chinese and French website:
 
 ```toml
-# [en, zh-CN, fr, ...] determines default content language
+# [en, zh-cn, fr, ...] determines default content language
 defaultContentLanguage = "en"
 
 [languages]
@@ -606,49 +608,36 @@ defaultContentLanguage = "en"
       url = "/categories/"
       title = ""
       weight = 3
-    [[languages.en.menu.main]]
-      identifier = "about"
-      pre = ""
-      name = "About"
-      url = "/about/"
-      title = ""
-      weight = 4
 
-  [languages.zh-CN]
+  [languages.zh-cn]
     weight = 2
     title = "我的全新 Hugo 网站"
+    # language code, CN only here
     languageCode = "zh-CN"
     languageName = "简体中文"
     # whether to include Chinese/Japanese/Korean
     hasCJKLanguage = true
-    [[languages.zh-CN.menu.main]]
+    [[languages.zh-cn.menu.main]]
       identifier = "posts"
       pre = ""
       name = "文章"
       url = "/posts/"
       title = ""
       weight = 1
-    [[languages.zh-CN.menu.main]]
+    [[languages.zh-cn.menu.main]]
       identifier = "tags"
       pre = ""
       name = "标签"
       url = "/tags/"
       title = ""
       weight = 2
-    [[languages.zh-CN.menu.main]]
+    [[languages.zh-cn.menu.main]]
       identifier = "categories"
       pre = ""
       name = "分类"
       url = "/categories/"
       title = ""
       weight = 3
-    [[languages.zh-CN.menu.main]]
-      identifier = "about"
-      pre = ""
-      name = "关于"
-      url = "/about/"
-      title = ""
-      weight = 4
 
   [languages.fr]
     weight = 3
@@ -676,13 +665,6 @@ defaultContentLanguage = "en"
       url = "/categories/"
       title = ""
       weight = 3
-    [[languages.fr.menu.main]]
-      identifier = "about"
-      pre = ""
-      name = "À propos"
-      url = "/about/"
-      title = ""
-      weight = 4
 ```
 
 Then, for each new page, append the language code to the file name.

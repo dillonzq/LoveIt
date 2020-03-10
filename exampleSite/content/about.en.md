@@ -3,18 +3,11 @@ title: "About LoveIt"
 date: 2019-08-02T11:04:49+08:00
 draft: false
 
+math: true
 lightgallery: true
 ---
 
-<div class="badge">
-
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases) [![Hugo](https://img.shields.io/badge/Hugo-%5E0.62.0-blue?style=flat-square&logo=hugo)](https://gohugo.io/) [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
-
-</div>
-
-<style>
-  .badge img { height: 1.2rem; }
-</style>
 
 [LoveIt :(far fa-heart):](https://github.com/dillonzq/LoveIt) is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/) developed by [Dillon](https://dillonzq.com).
 
@@ -60,7 +53,7 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 * :(far fa-images): **Images gallery** supported by [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * :(fab fa-font-awesome): Extended markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
 * :(far fa-sticky-note): Extended markdown syntax for **ruby annotation**
-* :(fas fa-square-root-alt): **Mathematical formula** supported by [Katex](https://katex.org/)
+* :(fas fa-square-root-alt): **Mathematical formula** supported by [$ \KaTeX $](https://katex.org/)
 * :(fas fa-project-diagram): **Diagrams** shortcode supported by [mermaid](https://github.com/knsv/mermaid)
 * :(fas fa-chart-pie): **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
 * :(fas fa-music): **Music player** shortcode supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
@@ -86,7 +79,7 @@ Thanks to the authors of following resources included in the theme:
 * [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * [TypeIt](https://typeitjs.com/)
-* [Katex](https://katex.org/)
+* [$ \KaTeX $](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)
 * [ECharts](https://echarts.apache.org/)
 * [APlayer](https://github.com/MoePlayer/APlayer)

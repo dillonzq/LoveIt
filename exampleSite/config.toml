@@ -1,6 +1,6 @@
 baseURL = "/"
-# [en, zh-CN, fr, ...] determines default content language
-# [en, zh-CN, fr, ...] 设置默认的语言
+# [en, zh-cn, fr, ...] determines default content language
+# [en, zh-cn, fr, ...] 设置默认的语言
 defaultContentLanguage = "en"
 # theme
 # 主题
@@ -208,8 +208,8 @@ enableEmoji = true
           # Disqus Comment Config (https://disqus.com/)
           [languages.en.params.comment.disqus]
             # Disqus shortname to use Disqus in posts
-            shortname = "dillonzq"
-          # Gittalk Comment Config (https://github.com/gitalk/gitalk)
+            shortname = ""
+          # Gitalk Comment Config (https://github.com/gitalk/gitalk)
           [languages.en.params.comment.gitalk]
             owner = ""
             repo = ""
@@ -217,9 +217,9 @@ enableEmoji = true
             clientSecret = ""
           # Valine Comment Config (https://github.com/xCss/Valine)
           [languages.en.params.comment.valine]
-            enable = false
-            appId = ""
-            appKey = ""
+            enable = true
+            appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
+            appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
             placeholder = "Your comment ..."
             notify = false
             verify = true
@@ -237,9 +237,9 @@ enableEmoji = true
             appId = ""
             languageCode = "en_US"
 
-  [languages.zh-CN]
+  [languages.zh-cn]
     weight = 2
-    # 网站语言
+    # 网站语言, 仅在这里 CN 大写
     languageCode = "zh-CN"
     # 网站标题
     title = "LoveIt 主题"
@@ -256,43 +256,43 @@ enableEmoji = true
     # 日期格式
     dateFormatToUse = "2006-01-02"
     # 菜单信息
-    [languages.zh-CN.menu]
-      [[languages.zh-CN.menu.main]]
+    [languages.zh-cn.menu]
+      [[languages.zh-cn.menu.main]]
         identifier = "posts"
         pre = ""
         name = "文章"
         url = "/posts/"
         title = ""
         weight = 1
-      [[languages.zh-CN.menu.main]]
+      [[languages.zh-cn.menu.main]]
         identifier = "tags"
         pre = ""
         name = "标签"
         url = "/tags/"
         title = ""
         weight = 2
-      [[languages.zh-CN.menu.main]]
+      [[languages.zh-cn.menu.main]]
         identifier = "categories"
         pre = ""
         name = "分类"
         url = "/categories/"
         title = ""
         weight = 3
-      [[languages.zh-CN.menu.main]]
+      [[languages.zh-cn.menu.main]]
         identifier = "documentation"
         pre = ""
         name = "主题文档"
         url = "/categories/documentation/"
         title = ""
         weight = 4
-      [[languages.zh-CN.menu.main]]
+      [[languages.zh-cn.menu.main]]
         identifier = "about"
         pre = ""
         name = "关于"
         url = "/about/"
         title = ""
         weight = 5
-    [languages.zh-CN.params]
+    [languages.zh-cn.params]
       # 网站描述
       description = "关于 LoveIt 主题"
       # 网站关键词
@@ -300,9 +300,9 @@ enableEmoji = true
       # 网站默认主题 ("light", "dark", "auto")
       defaultTheme = "auto"
       # 主页信息设置
-      [languages.zh-CN.params.home]
+      [languages.zh-cn.params.home]
         # 主页个人信息
-        [languages.zh-CN.params.home.profile]
+        [languages.zh-cn.params.home.profile]
           enable = true
           # Gravatar 邮箱，用于优先在主页显示的头像
           gravatarEmail = ""
@@ -315,14 +315,14 @@ enableEmoji = true
           # 是否显示社交账号
           social = true
         # 主页文章列表
-        [languages.zh-CN.params.home.posts]
+        [languages.zh-cn.params.home.posts]
           enable = true
           # 主页每页显示文章数量
           paginate = 6
           # 当你没有在文章前面设置 "hiddenFromHomePage" 时的默认行为
           defaultHiddenFromHomePage = false
       # 主页的社交信息设置
-      [languages.zh-CN.params.social]
+      [languages.zh-cn.params.social]
         GitHub = "xxxx"
         # Linkedin = "xxxx"
         Twitter = "xxxx"
@@ -388,7 +388,7 @@ enableEmoji = true
         # Matrix = "xxxx"
         Bilibili = "xxxx"
       # 文章页面的分享信息设置
-      [languages.zh-CN.params.share]
+      [languages.zh-cn.params.share]
         enable = true
         Twitter = true
         Facebook = true
@@ -418,23 +418,23 @@ enableEmoji = true
         # Trello = true
         # Mix = true
       # 评论系统设置
-      [languages.zh-CN.params.comment]
+      [languages.zh-cn.params.comment]
         enable = true
         # Disqus 评论系统设置 (https://disqus.com/)
-        [languages.zh-CN.params.comment.disqus]
-          # Disqus 的用户名，用来在文章中启用 Disqus 评论系统
-          shortname = "dillonzq"
-        # Gittalk 评论系统设置 (https://github.com/gitalk/gitalk)
-        [languages.zh-CN.params.comment.gitalk]
+        [languages.zh-cn.params.comment.disqus]
+          # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
+          shortname = ""
+        # Gitalk 评论系统设置 (https://github.com/gitalk/gitalk)
+        [languages.zh-cn.params.comment.gitalk]
           owner = ""
           repo = ""
           clientId = ""
           clientSecret = ""
         # Valine 评论系统设置 (https://github.com/xCss/Valine)
-        [languages.zh-CN.params.comment.valine]
-          enable = false
-          appId = ""
-          appKey = ""
+        [languages.zh-cn.params.comment.valine]
+          enable = true
+          appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
+          appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
           placeholder = "你的评论 ..."
           notify = false
           verify = true
@@ -445,7 +445,7 @@ enableEmoji = true
           visitor = true
           recordIP = true
         # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
-        [languages.zh-CN.params.comment.facebook]
+        [languages.zh-cn.params.comment.facebook]
           enable = false
           width = "100%"
           numPosts = 10
@@ -637,19 +637,21 @@ enableEmoji = true
           enable = true
           # Disqus Comment Config (https://disqus.com/)
           [languages.fr.params.comment.disqus]
+            enable = false
             # Disqus shortname to use Disqus in posts
-            shortname = "dillonzq"
-          # Gittalk Comment Config (https://github.com/gitalk/gitalk)
+            shortname = ""
+          # Gitalk Comment Config (https://github.com/gitalk/gitalk)
           [languages.fr.params.comment.gitalk]
+            enable = false
             owner = ""
             repo = ""
             clientId = ""
             clientSecret = ""
           # Valine Comment Config (https://github.com/xCss/Valine)
           [languages.fr.params.comment.valine]
-            enable = false
-            appId = ""
-            appKey = ""
+            enable = true
+            appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
+            appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
             placeholder = "Votre commentaire ..."
             notify = false
             verify = true
@@ -674,6 +676,9 @@ enableEmoji = true
   # public git repo url only then enableGitInfo is true
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = "https://github.com/dillonzq/LoveIt"
+  # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
+  # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI ("sha256", "sha384", "sha512", "md5")
+  fingerprint = ""
   # Header info
   # 页面头部导航栏信息
   [params.header]
@@ -787,7 +792,7 @@ enableEmoji = true
     # echarts@4.6.0 https://echarts.apache.org/
     echartsJS = ''
     echartsMacaronsJS = ''
-    # gitalk@1.6.0 https://github.com/gitalk/gitalk
+    # gitalk@1.6.2 https://github.com/gitalk/gitalk
     gitalkCSS = ''
     gitalkJS = ''
     # valine@1.3.10 https://valine.js.org/

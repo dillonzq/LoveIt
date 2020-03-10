@@ -78,9 +78,14 @@ git submodule -b master add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 
 ```toml
 baseURL = "http://example.org/"
-# 语言代码
-languageCode = "en"
-title = "My New Hugo Site"
+# [en, zh-cn, fr, ...] 设置默认的语言
+defaultContentLanguage = "zh-cn"
+# 网站语言, 仅在这里 CN 大写
+languageCode = "zh-CN"
+# 是否包括中日韩文字
+hasCJKLanguage = true
+# 网站标题
+title = "我的全新 Hugo 网站"
 
 # 更改使用 Hugo 构建网站时使用的默认主题
 theme = "LoveIt"
@@ -94,7 +99,7 @@ theme = "LoveIt"
     identifier = "posts"
     # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
     pre = ""
-    name = "Posts"
+    name = "文章"
     url = "/posts/"
     # 当你将鼠标悬停在此菜单链接上时, 将显示的标题
     title = ""
@@ -102,24 +107,17 @@ theme = "LoveIt"
   [[menu.main]]
     identifier = "tags"
     pre = ""
-    name = "Tags"
+    name = "标签"
     url = "/tags/"
     title = ""
     weight = 2
   [[menu.main]]
     identifier = "categories"
     pre = ""
-    name = "Categories"
+    name = "分类"
     url = "/categories/"
     title = ""
     weight = 3
-  [[menu.main]]
-    identifier = "about"
-    pre = ""
-    name = "About"
-    url = "/about/"
-    title = ""
-    weight = 4
 ```
 
 {{< admonition >}}
@@ -150,7 +148,7 @@ hugo serve
 
 去查看 `http://localhost:1313`.
 
-![基本配置下的预览](/images/theme-documentation-basics/basic-configuration-preview.png "基本配置下的预览")
+![基本配置下的预览](/images/theme-documentation-basics/basic-configuration-preview.zh-cn.png "基本配置下的预览")
 
 {{< admonition tip >}}
 当你运行 `hugo serve` 时, 当文件内容更改时, 页面会随着更改自动刷新.
@@ -186,13 +184,16 @@ hugo
   # LoveIt 主题版本
   version = "0.1.X"
   # 网站描述
-  description = "About LoveIt Theme"
+  description = "这是我的全新 Hugo 网站"
   # 网站关键词
   keywords = ["Theme", "Hugo"]
   # 网站默认主题样式 ("light", "dark", "auto")
   defaultTheme = "auto"
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = ""
+  # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+  # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI ("sha256", "sha384", "sha512", "md5")
+  fingerprint = ""
   # 页面头部导航栏信息
   [params.header]
     # 桌面端导航栏模式 ("fixed", "normal", "auto")
@@ -217,7 +218,7 @@ hugo
       # 主页显示头像的 URL
       avatarURL = "/images/avatar.png"
       # 主页显示的网站副标题
-      subtitle = "This is my new hugo site"
+      subtitle = "这是我的全新 Hugo 网站"
       # 是否为副标题显示打字机动画
       typeit = true
       # 是否显示社交账号
@@ -232,15 +233,15 @@ hugo
   # 主页的社交信息设置
   [params.social]
     GitHub = "xxxx"
-    Linkedin = "xxxx"
-    Twitter = "xxxx"
-    Instagram = "xxxx"
+    # Linkedin = "xxxx"
+    # Twitter = "xxxx"
+    # Instagram = "xxxx"
     Email = "xxxx@xxxx.com"
-    Facebook = "xxxx"
-    Telegram = "xxxx"
+    # Facebook = "xxxx"
+    # Telegram = "xxxx"
     # Medium = "xxxx"
     # Gitlab = "xxxx"
-    Youtubelegacy = "xxxx"
+    # Youtubelegacy = "xxxx"
     # Youtubecustom = "xxxx"
     # Youtubechannel = "xxxx"
     # Tumblr ="xxxx"
@@ -252,7 +253,7 @@ hugo
     # FreeCodeCamp = "xxxx"
     # Bitbucket = "xxxx"
     # Stackoverflow = "xxxx"
-    # Weibo = "xxxx"
+    Weibo = "xxxx"
     # Odnoklassniki = "xxxx"
     # VK = "xxxx"
     # Flickr = "xxxx"
@@ -275,8 +276,8 @@ hugo
     # Strava = "xxxx"
     # Skype = "xxxx"
     # Whatsapp = "xxxx"
-    # Zhihu = "xxxx"
-    # Douban = "xxxx"
+    Zhihu = "xxxx"
+    Douban = "xxxx"
     # Angellist = "xxxx"
     # Slidershare = "xxxx"
     # Jsfiddle = "xxxx"
@@ -294,8 +295,7 @@ hugo
     # Gitea = "xxxx"
     # XMPP = "xxxx"
     # Matrix = "xxxx"
-    # Bilibili = "xxxx"
-
+    Bilibili = "xxxx"
   # 文章页面配置
   [params.page]
     # 是否在文章页面使用 lightgallery
@@ -320,11 +320,11 @@ hugo
     enable = true
     Twitter = true
     Facebook = true
-    Linkedin = true
-    Whatsapp = true
-    Pinterest = true
+    # Linkedin = true
+    # Whatsapp = true
+    # Pinterest = true
     # Tumblr = true
-    HackerNews = true
+    # HackerNews = true
     # Reddit = true
     # VK = true
     # Buffer = true
@@ -335,13 +335,13 @@ hugo
     # Digg = true
     # Stumbleupon = true
     # Flipboard = true
-    # Weibo = true
+    Weibo = true
     # Renren = true
     # Myspace = true
     # Blogger = true
     # Baidu = true
     # Odnoklassniki = true
-    # Evernote = true
+    Evernote = true
     # Skype = true
     # Trello = true
     # Mix = true
@@ -350,10 +350,14 @@ hugo
     enable = true
     # Disqus 评论系统设置 (https://disqus.com/)
     [params.comment.disqus]
-      # Disqus 的用户名，用来在文章中启用 Disqus 评论系统
-      shortname = "dillonzq"
-    # Gittalk 评论系统设置 (https://github.com/gitalk/gitalk)
+      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+      enable = false
+      # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
+      shortname = ""
+    # Gitalk 评论系统设置 (https://github.com/gitalk/gitalk)
     [params.comment.gitalk]
+      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+      enable = false
       owner = ""
       repo = ""
       clientId = ""
@@ -440,7 +444,7 @@ hugo
     # echarts@4.6.0 https://echarts.apache.org/
     echartsJS = ''
     echartsMacaronsJS = ''
-    # gitalk@1.6.0 https://github.com/gitalk/gitalk
+    # gitalk@1.6.2 https://github.com/gitalk/gitalk
     gitalkCSS = ''
     gitalkJS = ''
     # valine@1.3.10 https://valine.js.org/
@@ -520,7 +524,7 @@ hugo
   taxonomyTerm = ["HTML"]
 ```
 
-![完整配置下的预览](/images/theme-documentation-basics/complete-configuration-preview.gif "完整配置下的预览")
+![完整配置下的预览](/images/theme-documentation-basics/complete-configuration-preview.zh-cn.png "完整配置下的预览")
 
 ### 3.2 网站图标, 浏览器配置, 网站清单
 
@@ -576,8 +580,8 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 例如, 一个支持英语, 中文和法语的网站配置:
 
 ```toml
-# [en, zh-CN, fr, ...] 设置默认的语言
-defaultContentLanguage = "en"
+# [en, zh-cn, fr, ...] 设置默认的语言
+defaultContentLanguage = "zh-cn"
 
 [languages]
   [languages.en]
@@ -606,49 +610,36 @@ defaultContentLanguage = "en"
       url = "/categories/"
       title = ""
       weight = 3
-    [[languages.en.menu.main]]
-      identifier = "about"
-      pre = ""
-      name = "About"
-      url = "/about/"
-      title = ""
-      weight = 4
 
-  [languages.zh-CN]
+  [languages.zh-cn]
     weight = 2
     title = "我的全新 Hugo 网站"
+    # 网站语言, 仅在这里 CN 大写
     languageCode = "zh-CN"
     languageName = "简体中文"
     # 是否包括中日韩文字
     hasCJKLanguage = true
-    [[languages.zh-CN.menu.main]]
+    [[languages.zh-cn.menu.main]]
       identifier = "posts"
       pre = ""
       name = "文章"
       url = "/posts/"
       title = ""
       weight = 1
-    [[languages.zh-CN.menu.main]]
+    [[languages.zh-cn.menu.main]]
       identifier = "tags"
       pre = ""
       name = "标签"
       url = "/tags/"
       title = ""
       weight = 2
-    [[languages.zh-CN.menu.main]]
+    [[languages.zh-cn.menu.main]]
       identifier = "categories"
       pre = ""
       name = "分类"
       url = "/categories/"
       title = ""
       weight = 3
-    [[languages.zh-CN.menu.main]]
-      identifier = "about"
-      pre = ""
-      name = "关于"
-      url = "/about/"
-      title = ""
-      weight = 4
 
   [languages.fr]
     weight = 3
@@ -676,13 +667,6 @@ defaultContentLanguage = "en"
       url = "/categories/"
       title = ""
       weight = 3
-    [[languages.fr.menu.main]]
-      identifier = "about"
-      pre = ""
-      name = "À propos"
-      url = "/about/"
-      title = ""
-      weight = 4
 ```
 
 然后, 对于每个新页面, 将语言代码附加到文件名中.

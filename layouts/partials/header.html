@@ -14,26 +14,28 @@
             {{- end -}}
             {{- if .Site.IsMultiLingual -}}
                 &nbsp;|&nbsp;
-                <a href="javascript:void(0);" class="menu-item">
-                    <i class="fas fa-language fa-fw"></i>&nbsp;
-                    <select class="select-language" onchange="location = this.value;">
-                        {{- range .Page.AllTranslations -}}
-                            {{- $translation := . -}}
-                            {{- range $.Site.Languages -}}
-                                {{- if eq $translation.Lang .Lang -}}
-                                    {{- if eq $.Page.Lang .Lang -}}
-                                        <option value="{{ $translation.Permalink }}" selected>{{ .LanguageName }}</option>
-                                    {{- else -}}
-                                        <option value="{{ $translation.Permalink }}">{{ .LanguageName }}</option>
+                <a href="javascript:void(0);" class="menu-item" title="{{ T "selectLanguage" }}">
+                    <label for="language-select-desktop">
+                        <i class="fas fa-language fa-fw"></i>&nbsp;
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;">
+                            {{- range .Page.AllTranslations -}}
+                                {{- $translation := . -}}
+                                {{- range $.Site.Languages -}}
+                                    {{- if eq $translation.Lang .Lang -}}
+                                        {{- if eq $.Page.Lang .Lang -}}
+                                            <option value="{{ $translation.RelPermalink }}" selected>{{ .LanguageName }}</option>
+                                        {{- else -}}
+                                            <option value="{{ $translation.RelPermalink }}">{{ .LanguageName }}</option>
+                                        {{- end -}}
                                     {{- end -}}
                                 {{- end -}}
                             {{- end -}}
-                        {{- end -}}
-                    </select>
+                        </select>
+                    </label>
                 </a>
             {{- end -}}
             <a href="javascript:void(0);" class="theme-switch" title="{{ T "switchTheme" }}">
-                <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
+                <i class="fas fa-adjust fa-fw "></i>
             </a>
         </div>
     </div>
@@ -60,26 +62,28 @@
                 </a>
             {{- end -}}
             {{- if .Site.IsMultiLingual -}}
-                <a href="javascript:void(0);" class="menu-item">
-                    <i class="fas fa-language fa-fw"></i>&nbsp;
-                    <select class="select-language" onchange="location = this.value;">
-                        {{- range .Page.AllTranslations -}}
-                            {{- $translation := . -}}
-                            {{- range $.Site.Languages -}}
-                                {{- if eq $translation.Lang .Lang -}}
-                                    {{- if eq $.Page.Lang .Lang -}}
-                                        <option value="{{ $translation.Permalink }}" selected>{{ .LanguageName }}</option>
-                                    {{- else -}}
-                                        <option value="{{ $translation.Permalink }}">{{ .LanguageName }}</option>
+                <a href="javascript:void(0);" class="menu-item" title="{{ T "selectLanguage" }}">
+                    <label for="language-select-mobile">
+                        <i class="fas fa-language fa-fw"></i>&nbsp;
+                        <select class="language-select" id="language-select-mobile" onchange="location = this.value;">
+                            {{- range .Page.AllTranslations -}}
+                                {{- $translation := . -}}
+                                {{- range $.Site.Languages -}}
+                                    {{- if eq $translation.Lang .Lang -}}
+                                        {{- if eq $.Page.Lang .Lang -}}
+                                            <option value="{{ $translation.RelPermalink }}" selected>{{ .LanguageName }}</option>
+                                        {{- else -}}
+                                            <option value="{{ $translation.RelPermalink }}">{{ .LanguageName }}</option>
+                                        {{- end -}}
                                     {{- end -}}
                                 {{- end -}}
                             {{- end -}}
-                        {{- end -}}
-                    </select>
+                        </select>
+                    </label>
                 </a>
             {{- end -}}
             <a href="javascript:void(0);" class="theme-switch" title="{{ T "switchTheme" }}">
-                <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
+                <i class="fas fa-adjust fa-fw"></i>
             </a>
         </div>
     </div>

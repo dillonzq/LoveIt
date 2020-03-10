@@ -30,7 +30,7 @@ Compared to the original LeaveIt theme and the KeepIt theme, the LoveIt theme ha
 * Easy-to-use and self-expanding **table of contents**
 * Extended markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
 * Extended markdown syntax for **ruby annotation**
-* **Mathematical formula** support by [Katex](https://katex.org/)
+* **Mathematical formula** support by [KaTeX](https://katex.org/)
 * **Diagram syntax** shortcode support by [mermaid](https://github.com/knsv/mermaid)
 * **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
 * Embedded **music player** support by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
@@ -86,7 +86,7 @@ I hope you will LoveIt ❤️!
 * **Images gallery** supported by [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * Extended markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
 * Extended markdown syntax for **ruby annotation**
-* **Mathematical formula** supported by [Katex](https://katex.org/)
+* **Mathematical formula** supported by [KaTeX](https://katex.org/)
 * **Diagrams** shortcode supported by [mermaid](https://github.com/knsv/mermaid)
 * **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
 * **Music player** shortcode supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
@@ -123,7 +123,7 @@ Thanks to the authors of following resources included in the theme:
 * [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * [TypeIt](https://typeitjs.com/)
-* [Katex](https://katex.org/)
+* [KaTeX](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)
 * [ECharts](https://echarts.apache.org/)
 * [APlayer](https://github.com/MoePlayer/APlayer)

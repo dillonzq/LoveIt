@@ -1,4 +1,4 @@
-<a href="{{ .href | safeURL }}"{{ with .title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .href "http" }} target="_blank"{{ end }} rel="noopener noreffer{{ with .rel }} {{ . }}{{ end }}">
+<a href="{{ .href | safeURL }}"{{ with .title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .href "http" }} target="_blank"{{ end }} rel="noopener noreffer{{ with .rel }} {{ . }}{{ end }}"{{ with .class }} class="{{ . }}"{{ end }}>
     {{- with .icon -}}
         {{- partial "plugin/icon.html" . -}}
     {{- end -}}
