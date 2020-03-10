@@ -4,9 +4,9 @@
     {{- $CDN := $scratch.Get "CDN" -}}
 
     {{- /* Disqus Comment System */ -}}
-    {{- with .Site.Params.comment.disqus.shortname -}}
+    {{- if .Site.Params.comment.disqus.enable -}}
         <div id="disqus_thread"></div>
-        {{- $script := printf `<script defer src="https://%s.disqus.com/embed.js"></script>` . -}}
+        {{- $script := printf `<script defer src="https://%s.disqus.com/embed.js"></script>` .Site.Params.comment.disqus.shortname -}}
         {{- slice $script | $scratch.Add "scriptCDN" -}}
         <noscript>
             Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
@@ -14,7 +14,7 @@
     {{- end -}}
 
     {{- /* Gitalk Comment System */ -}}
-    {{- if .Site.Params.comment.gitalk.owner -}}
+    {{- if .Site.Params.comment.gitalk.enable -}}
         {{- $gitalk := .Site.Params.comment.gitalk -}}
         <div id="gitalk"></div>
         {{- with $CDN.gitalkCSS -}}
