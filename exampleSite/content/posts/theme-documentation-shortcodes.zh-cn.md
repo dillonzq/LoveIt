@@ -603,7 +603,7 @@ ECharts 提供了常规的 [折线图](https://echarts.apache.org/zh/option.html
 一个 `JSON` 格式的 `echarts` 示例:
 
 ```json
-{{/* echarts */}}
+{{</* echarts */>}}
 {
   "title": {
     "text": "折线统计图",
