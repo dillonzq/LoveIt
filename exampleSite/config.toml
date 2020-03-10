@@ -209,7 +209,7 @@ enableEmoji = true
           [languages.en.params.comment.disqus]
             # Disqus shortname to use Disqus in posts
             shortname = ""
-          # Gittalk Comment Config (https://github.com/gitalk/gitalk)
+          # Gitalk Comment Config (https://github.com/gitalk/gitalk)
           [languages.en.params.comment.gitalk]
             owner = ""
             repo = ""
@@ -422,9 +422,9 @@ enableEmoji = true
         enable = true
         # Disqus 评论系统设置 (https://disqus.com/)
         [languages.zh-cn.params.comment.disqus]
-          # Disqus 的用户名，用来在文章中启用 Disqus 评论系统
+          # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
           shortname = ""
-        # Gittalk 评论系统设置 (https://github.com/gitalk/gitalk)
+        # Gitalk 评论系统设置 (https://github.com/gitalk/gitalk)
         [languages.zh-cn.params.comment.gitalk]
           owner = ""
           repo = ""
@@ -637,10 +637,12 @@ enableEmoji = true
           enable = true
           # Disqus Comment Config (https://disqus.com/)
           [languages.fr.params.comment.disqus]
+            enable = false
             # Disqus shortname to use Disqus in posts
             shortname = ""
-          # Gittalk Comment Config (https://github.com/gitalk/gitalk)
+          # Gitalk Comment Config (https://github.com/gitalk/gitalk)
           [languages.fr.params.comment.gitalk]
+            enable = false
             owner = ""
             repo = ""
             clientId = ""

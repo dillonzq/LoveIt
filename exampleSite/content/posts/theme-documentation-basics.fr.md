@@ -353,10 +353,14 @@ Note that some of these parameters are explained in details in other sections of
     enable = true
     # Disqus Comment Config (https://disqus.com/)
     [params.comment.disqus]
+      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+      enable = false
       # Disqus shortname to use Disqus in posts
       shortname = ""
-    # Gittalk Comment Config (https://github.com/gitalk/gitalk)
+    # Gitalk Comment Config (https://github.com/gitalk/gitalk)
     [params.comment.gitalk]
+      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+      enable = false
       owner = ""
       repo = ""
       clientId = ""

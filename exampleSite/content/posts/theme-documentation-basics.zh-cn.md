@@ -350,10 +350,14 @@ hugo
     enable = true
     # Disqus 评论系统设置 (https://disqus.com/)
     [params.comment.disqus]
-      # Disqus 的用户名，用来在文章中启用 Disqus 评论系统
+      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+      enable = false
+      # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
       shortname = ""
-    # Gittalk 评论系统设置 (https://github.com/gitalk/gitalk)
+    # Gitalk 评论系统设置 (https://github.com/gitalk/gitalk)
     [params.comment.gitalk]
+      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+      enable = false
       owner = ""
       repo = ""
       clientId = ""
