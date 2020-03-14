@@ -20,15 +20,18 @@
     {
         "@context": "http://schema.org",
         "@type": "WebSite",
-        "url": "{{ relLangURL `/` }}",
+        "url": "{{ .Permalink }}",
+        {{- with .Site.LanguageCode -}}
+            "inLanguage": "{{ . }}",
+        {{- end -}}
         {{- with .Site.Author.name -}}
             "author": {
                 "@type": "Person",
-                "name": "{{ . }}"
+                "name": "{{ . | safeJS }}"
             },
         {{- end -}}
         {{- with .Site.Params.description -}}
-            "description": "{{ . }}",
+            "description": "{{ . | safeJS }}",
         {{- end -}}
         {{- with .Site.Params.image -}}
             "image": "{{ .url | absURL }}",
@@ -37,9 +40,9 @@
             "thumbnailUrl": "{{ .url | absURL }}",
         {{- end -}}
         {{- with .Site.Copyright -}}
-            "license": "{{ . }}",
+            "license": "{{ . | safeJS }}",
         {{- end -}}
-        "name": "{{ .Site.Title }}"
+        "name": "{{ .Site.Title | safeJS }}"
     }
     </script>
 
@@ -49,19 +52,13 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "{{ .Title }}",
+        "headline": "{{ .Title | safeJS }}",
+        "inLanguage": "{{ .Site.LanguageCode }}",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "{{ .Permalink }}"
         },
-        {{- if ge (.Param "lua.image.width") 696 -}}
-            "image": {
-                "@type": "ImageObject",
-                "url": "{{ .Param "lua.image.url" | absURL }}",
-                "width": {{ .Param "lua.image.width" }},
-                "height": {{ .Param "lua.image.height" }}
-            },
-        {{- else if ge .Site.Params.image.width 696 -}}
+        {{- if ge .Site.Params.image.width 696 -}}
             "image": {
                 "@type": "ImageObject",
                 "url": "{{ .Site.Params.image.url | absURL }}",
@@ -76,20 +73,20 @@
         "wordcount": {{ .WordCount }},
         "url": "{{ .Permalink }}",
         {{- if not .PublishDate.IsZero -}}
-            "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" }}",
+            "datePublished": "{{ .PublishDate.Format "2006-01-02" }}",
         {{- else if not .Date.IsZero -}}
-            "datePublished": "{{ .Date.Format "2006-01-02T15:04:05-07:00" }}",
+            "datePublished": "{{ .Date.Format "2006-01-02" }}",
         {{- end -}}
         {{- with .Lastmod -}}
-            "dateModified": "{{ .Format "2006-01-02T15:04:05-07:00" }}",
+            "dateModified": "{{ .Format "2006-01-02" }}",
         {{- end -}}
         {{- with .Site.Copyright -}}
-            "license": "{{ . }}",
+            "license": "{{ . | safeJS }}",
         {{- end -}}
         {{- with .Site.Params.publisher -}}
             "publisher": {
                 "@type": "Organization",
-                "name": "{{ .name }}",
+                "name": "{{ .name | safeJS }}",
                 "logo": {
                 "@type": "ImageObject",
                 "url": "{{ .logo.url | absURL }}",
@@ -98,13 +95,13 @@
                 }
             },
         {{- end -}}
-        {{- with .Site.Author.Name -}}
+        {{- with .Params.author | default .Site.Author.name | default (T "author") -}}
             "author": {
                 "@type": "Person",
-                "name": "{{ . }}"
+                "name": "{{ . | safeJS }}"
             },
         {{- end -}}
-        "description": "{{ .Description }}"
+        "description": "{{ .Description | safeJS }}"
     }
     </script>
 {{- end -}}
