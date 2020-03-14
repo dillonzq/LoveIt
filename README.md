@@ -14,7 +14,7 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 Since the three themes have a similar look, if you have questions about their differences,
 read [Why choose LoveIt](#why-choose-loveit) so that you can choose the one that works best for you.
 
-![Hugo Theme LoveIt](images/Apple-Devices-Preview.png)
+![Hugo Theme LoveIt](https://github.com/dillonzq/LoveIt/raw/develop/images/Apple-Devices-Preview.png)
 
 ## [Demo Site](https://hugoloveit.com/)
 

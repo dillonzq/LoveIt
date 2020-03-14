@@ -9,6 +9,7 @@
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
     "babel-preset-minify": "^0.5.1",
+    "minimist": ">=1.2.2",
     "husky": "^4.2.3"
   },
   "scripts": {

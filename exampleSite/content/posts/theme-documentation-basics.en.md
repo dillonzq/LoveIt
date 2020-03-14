@@ -547,9 +547,9 @@ Add a logo image (127x40) and a cover image (800x600) in the `static` directory.
 
 **LoveIt** theme has been built to be as configurable as possible by defining custom `.scss` style files.
 
-The directory including the custom `.scss` style files is `config/css` relative to **your project path**.
+The directory including the custom `.scss` style files is `config/css` relative to **your project root directory**.
 
-In `_override.scss`, you can override the variables in `themes/LoveIt/assets/css/_variables.scss` to customize the style.
+In `config/css/_override.scss`, you can override the variables in `themes/LoveIt/assets/css/_variables.scss` to customize the style.
 
 Here is a example:
 
@@ -558,7 +558,7 @@ Here is a example:
 $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospace;
 ```
 
-In `_custom.scss`, you can add some css style code to customize the style.
+In `config/css/_custom.scss`, you can add some css style code to customize the style.
 
 ## 4 Multilingual and i18n
 

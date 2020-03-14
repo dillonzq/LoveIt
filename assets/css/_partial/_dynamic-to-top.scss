@@ -1,0 +1,39 @@
+#dynamic-to-top {
+  display: none;
+  overflow: hidden;
+  width: auto;
+  z-index: 100;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  top: auto;
+  left: auto;
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  padding: .6rem .6rem;
+  color: $global-font-secondary-color;
+  background: $header-background-color;
+  border: 1px solid $global-border-color;
+  border-radius: 2rem;
+
+  &:hover, &:active {
+    color: $global-font-color;
+    background: $global-background-color;
+    cursor: pointer;
+  }
+
+  &:active, &:focus, &:hover {
+    outline: none;
+  }
+
+  .dark-theme & {
+    color: $global-font-secondary-color-dark;
+    background: $header-background-color-dark;
+    border-color: $global-border-color-dark;
+
+    &:hover, &:active {
+      color: $global-font-color-dark;
+      background: $global-background-color-dark;
+    }
+  }
+}
