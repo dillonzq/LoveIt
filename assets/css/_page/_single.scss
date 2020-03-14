@@ -142,6 +142,7 @@
         margin: .625rem 0;
         border-spacing: 0;
         background: $table-background-color;
+        border-collapse: collapse;
 
         .dark-theme & {
           background: $table-background-color-dark;
