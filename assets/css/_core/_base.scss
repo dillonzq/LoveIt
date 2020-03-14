@@ -75,12 +75,4 @@ a {
   }
 }
 
-b, strong {
-  font-weight: bold;
-
-  .dark-theme & {
-    color: #ddd;
-  }
-}
-
 @import "../_partial/dynamic-to-top";
