@@ -44,12 +44,10 @@
     <div class="post-info-more">
         <section>
             {{- with .Params.tags -}}
-                {{- range . -}}
-                    <span>
-                        <a href="{{ `/tags/` | relLangURL }}{{ urlize .}}">
-                            <i class="fas fa-tag fa-fw"></i>{{ . }}
-                        </a>
-                    </span>&nbsp;
+                <i class="fas fa-tags fa-fw"></i>&nbsp;
+                {{- range $index, $value := . -}}
+                    {{- if gt $index 0 }},&nbsp;{{ end -}}
+                    <a href="{{ `/tags/` | relLangURL }}{{ urlize $value }}">{{ $value }}</a>
                 {{- end -}}
             {{- end -}}
         </section>

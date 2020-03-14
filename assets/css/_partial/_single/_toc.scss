@@ -2,12 +2,13 @@
   display: block;
   position: absolute;
   width: 100%;
+  max-width: 1000px;
   margin-left: 1000px;
   padding: 0 .8rem;
   border-left: 1px solid $global-border-color;
   overflow-wrap: break-word;
   box-sizing: border-box;
-  top: if($header-normal-mode-desktop, 7rem, 12rem);
+  top: if($header-normal-mode-desktop, 5rem, 10rem);
 
   .dark-theme & {
     border-left: 1px solid $global-border-color-dark;
