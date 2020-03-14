@@ -30,11 +30,6 @@ Découvrez en quoi consiste le thème Hugo - **LoveIt** et les concepts fondamen
 
 <!--more-->
 
-{{< admonition warning >}}
-Sorry, this article has not been completely translated into **French**.
-Welcome to take the time to propose a translation by [making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
-{{< /admonition >}}
-
 ## 1 Requirements
 
 Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only dependency of this theme.
@@ -552,9 +547,9 @@ Add a logo image (127x40) and a cover image (800x600) in the `static` directory.
 
 **LoveIt** theme has been built to be as configurable as possible by defining custom `.scss` style files.
 
-The directory including the custom `.scss` style files is `config/css` relative to **your project path**.
+The directory including the custom `.scss` style files is `config/css` relative to **your project root directory**.
 
-In `_override.scss`, you can override the variables in `themes/LoveIt/assets/css/_variables.scss` to customize the style.
+In `config/css/_override.scss`, you can override the variables in `themes/LoveIt/assets/css/_variables.scss` to customize the style.
 
 Here is a example:
 
@@ -563,7 +558,7 @@ Here is a example:
 $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospace;
 ```
 
-In `_custom.scss`, you can add some css style code to customize the style.
+In `config/css/_custom.scss`, you can add some css style code to customize the style.
 
 ## 4 Multilingual and i18n
 

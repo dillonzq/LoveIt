@@ -74,10 +74,10 @@
         &::before {
           content: "|";
           margin-right: .3125rem;
-          color: $single-link-color;
+          color: $global-link-color;
 
           .dark-theme & {
-            color: $single-link-color-dark;
+            color: $global-link-color-dark;
           }
         }
       }
@@ -89,6 +89,28 @@
           content: "#";
         }
       }
+
+      a {
+        color: $global-link-color;
+
+        .dark-theme & {
+          color: $global-link-color-dark;
+        }
+
+        &:hover {
+          color: $global-link-hover-color;
+
+          .dark-theme & {
+            color: $global-link-hover-color-dark;
+          }
+        }
+      }
+
+      b, strong {
+        .dark-theme & {
+          color: $global-font-secondary-color-dark;
+        }
+      }
     }
 
     .post-footer {
@@ -96,20 +118,20 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: .875rem !important;
+      font-size: .875rem;
 
       a {
-        color: $single-link-color !important;
+        color: $single-link-color;
 
         .dark-theme & {
-          color: $single-link-color-dark !important;
+          color: $single-link-color-dark;
         }
 
         &:hover {
-          color: $single-link-hover-color !important;
+          color: $single-link-hover-color;
 
           .dark-theme & {
-            color: $single-link-hover-color-dark !important;
+            color: $single-link-hover-color-dark;
           }
         }
       }
@@ -118,17 +140,17 @@
         padding: 0;
 
         a {
-          color: $global-link-color !important;
+          color: $global-link-color;
 
           .dark-theme & {
-            color: $global-link-color-dark !important;
+            color: $global-link-color-dark;
           }
 
           &:hover {
-            color: $global-link-hover-color !important;
+            color: $global-link-hover-color;
 
             .dark-theme & {
-              color: $global-link-hover-color-dark !important;
+              color: $global-link-hover-color-dark;
             }
           }
         }
