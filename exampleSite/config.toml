@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://example.com"
 # [en, zh-cn, fr, ...] determines default content language
 # [en, zh-cn, fr, ...] 设置默认的语言
 defaultContentLanguage = "en"
@@ -25,7 +25,7 @@ enableEmoji = true
     # language code
     languageCode = "en"
     # website title
-    title = "LoveIt Theme"
+    title = "LoveIt"
     # language name
     languageName = "English"
     # whether to include Chinese/Japanese/Korean
@@ -66,7 +66,7 @@ enableEmoji = true
       [[languages.en.menu.main]]
         identifier = "documentation"
         pre = ""
-        name = "Documentation"
+        name = "Docs"
         url = "/categories/documentation/"
         title = ""
         weight = 4
@@ -77,6 +77,13 @@ enableEmoji = true
         url = "/about/"
         title = ""
         weight = 5
+      [[languages.en.menu.main]]
+        identifier = "github"
+        pre = "<i class='fab fa-github fa-fw'></i>"
+        name = ""
+        url = "https://github.com/dillonzq/LoveIt"
+        title = "GitHub"
+        weight = 6
       [languages.en.params]
         # site description
         description = "About LoveIt Theme"
@@ -242,7 +249,7 @@ enableEmoji = true
     # 网站语言, 仅在这里 CN 大写
     languageCode = "zh-CN"
     # 网站标题
-    title = "LoveIt 主题"
+    title = "LoveIt"
     # 语言名称
     languageName = "简体中文"
     # 是否包括中日韩文字
@@ -260,7 +267,7 @@ enableEmoji = true
       [[languages.zh-cn.menu.main]]
         identifier = "posts"
         pre = ""
-        name = "文章"
+        name = "所有文章"
         url = "/posts/"
         title = ""
         weight = 1
@@ -281,7 +288,7 @@ enableEmoji = true
       [[languages.zh-cn.menu.main]]
         identifier = "documentation"
         pre = ""
-        name = "主题文档"
+        name = "文档"
         url = "/categories/documentation/"
         title = ""
         weight = 4
@@ -292,6 +299,13 @@ enableEmoji = true
         url = "/about/"
         title = ""
         weight = 5
+      [[languages.zh-cn.menu.main]]
+        identifier = "github"
+        pre = "<i class='fab fa-github fa-fw'></i>"
+        name = ""
+        url = "https://github.com/dillonzq/LoveIt"
+        title = "GitHub"
+        weight = 6
     [languages.zh-cn.params]
       # 网站描述
       description = "关于 LoveIt 主题"
@@ -457,7 +471,7 @@ enableEmoji = true
     # language code
     languageCode = "fr"
     # website title
-    title = "LoveIt Thème"
+    title = "LoveIt"
     # language name
     languageName = "Français"
     # whether to include Chinese/Japanese/Korean
@@ -496,7 +510,7 @@ enableEmoji = true
       [[languages.fr.menu.main]]
         identifier = "documentation"
         pre = ""
-        name = "Documentation"
+        name = "Docs"
         url = "/categories/documentation/"
         title = ""
         weight = 4
@@ -507,6 +521,13 @@ enableEmoji = true
         url = "/about/"
         title = ""
         weight = 5
+      [[languages.fr.menu.main]]
+        identifier = "github"
+        pre = "<i class='fab fa-github fa-fw'></i>"
+        name = ""
+        url = "https://github.com/dillonzq/LoveIt"
+        title = "GitHub"
+        weight = 6
       [languages.fr.params]
         # site description
         description = "À propos du thème LoveIt"

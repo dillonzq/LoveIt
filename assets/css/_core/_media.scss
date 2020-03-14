@@ -31,7 +31,7 @@
 @media only screen and (max-width: 960px) {
   #header-desktop {
     .header-wrapper {
-      margin: 0 1rem;
+      padding: 0 1rem;
     }
   }
 
@@ -48,7 +48,7 @@
   }
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 680px) {
   #header-desktop {
     display: none;
   }

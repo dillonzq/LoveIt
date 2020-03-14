@@ -29,15 +29,14 @@
         </span>
 
         {{- with .Params.categories -}}
-            &nbsp;<span class="post-category">
+            &nbsp;
+            <span class="post-category">
                 {{- T "included" -}}
-                {{- range . -}}
-                    &nbsp;
-                    <span>
-                        <a href="{{ `/categories/` | relLangURL }}{{ urlize .}}">
-                            <i class="far fa-folder fa-fw"></i>{{ . | humanize }}
-                        </a>
-                    </span>
+                {{- range $index, $value := . -}}
+                    {{- if gt $index 0 }}&nbsp;{{ end -}}
+                    <a href="{{ `/categories/` | relLangURL }}{{ urlize $value }}">
+                        <i class="far fa-folder fa-fw"></i>{{ $value | humanize }}
+                    </a>
                 {{- end -}}
             </span>
         {{- end -}}
@@ -57,12 +56,10 @@
         <a href="{{ .RelPermalink }}">{{ T "readMore" }}</a>
         {{- with .Params.tags -}}
             <div class="post-tags">
-                {{- range . -}}
-                    &nbsp;<span>
-                        <a href="{{ `/tags/` | relLangURL }}{{ urlize .}}">
-                            <i class="fas fa-tag fa-fw"></i>{{ . }}
-                        </a>
-                    </span>
+                <i class="fas fa-tags fa-fw"></i>&nbsp;
+                {{- range $index, $value := . -}}
+                    {{- if gt $index 0 }},&nbsp;{{ end -}}
+                    <a href="{{ `/tags/` | relLangURL }}{{ urlize $value }}">{{ $value }}</a>
                 {{- end -}}
             </div>
         {{- end -}}

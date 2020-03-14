@@ -50,8 +50,8 @@ $selection-color-dark: rgba(38, 139, 211, 0.3) !default;
 
 // ========== Header ========== //
 // Height of the header
-$header-height-desktop: 4rem !default;
-$header-height-mobile: 4rem !default;
+$header-height-desktop: 3.5rem !default;
+$header-height-mobile: 3.5rem !default;
 
 // Color of the header background
 $header-background-color: #f8f8f8 !default;
@@ -62,8 +62,8 @@ $header-position-desktop: if($header-normal-mode-desktop, static, fixed) !defaul
 $header-position-mobile: if($header-normal-mode-mobile, static, fixed) !default;
 
 // Top of the page padding
-$page-padding-top-desktop: if($header-normal-mode-desktop, 1rem, 6rem) !default;
-$page-padding-top-mobile: if($header-normal-mode-mobile, 1rem, 6rem) !default;
+$page-padding-top-desktop: if($header-normal-mode-desktop, 0, $header-height-desktop) !default;
+$page-padding-top-mobile: if($header-normal-mode-mobile, 0, $header-height-mobile) !default;
 
 // Color of the hover header item
 $header-hover-color: #161209 !default;
@@ -77,11 +77,11 @@ $toc-content-font-size: 0.9rem !default;
 
 // Color of the single link
 $single-link-color: #2d96bd !default;
-$single-link-color-dark: #eee !default;
+$single-link-color-dark: #55bde2 !default;
 
 // Color of the hover single link
 $single-link-hover-color: #ef3982 !default;
-$single-link-hover-color-dark: #2d96bd !default;
+$single-link-hover-color-dark: #bdebfc !default;
 
 // Color of the table background
 $table-background-color: #fff !default;

@@ -1,5 +1,5 @@
 {{- define "title" -}}
-    {{- T "all" }}{{ T .Data.Plural | default (humanize .Data.Plural) }} | {{ .Site.Title -}}
+    {{- .Title | default (T .Data.Plural) | default (humanize .Data.Plural) }} | {{ .Site.Title -}}
 {{- end -}}
 
 {{- define "content" -}}

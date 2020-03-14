@@ -1,5 +1,5 @@
 {{- define "title" -}}
-    {{- .Title | humanize }} | {{ T .Data.Singular | default (humanize .Data.Singular) }} | {{ .Site.Title -}}
+    {{- .Title }} | {{ T .Data.Singular | default (humanize .Data.Singular) }} | {{ .Site.Title -}}
 {{- end -}}
 
 {{- define "content" -}}

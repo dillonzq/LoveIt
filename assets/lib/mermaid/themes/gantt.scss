@@ -59,6 +59,7 @@
   text {
     font-family: 'trebuchet ms', verdana, arial;
     font-family: var(--mermaid-font-family);
+    fill: $taskTextOutsideColor;
   }
 }
 
@@ -151,12 +152,12 @@
 .taskTextOutside0,
 .taskTextOutside2
 {
-  fill: $taskTextOutsideColor;
+  fill: $taskTextOutsideColor !important;
 }
 
 .taskTextOutside1,
 .taskTextOutside3 {
-  fill: $taskTextOutsideColor;
+  fill: $taskTextOutsideColor !important;
 }
 
 
@@ -174,7 +175,7 @@
 .activeText1,
 .activeText2,
 .activeText3 {
-  fill: $taskTextDarkColor !important;
+  fill: $taskTextDarkColor;
 }
 
 
@@ -193,7 +194,7 @@
 .doneText1,
 .doneText2,
 .doneText3 {
-  fill: $taskTextDarkColor !important;
+  fill: $taskTextDarkColor;
 }
 
 
@@ -239,20 +240,20 @@
 .doneCritText1,
 .doneCritText2,
 .doneCritText3 {
-  fill: $taskTextDarkColor !important;
+  fill: $taskTextDarkColor;
 }
 
 .activeCritText0,
 .activeCritText1,
 .activeCritText2,
 .activeCritText3 {
-  fill: $taskTextDarkColor !important;
+  fill: $taskTextDarkColor;
 }
 
 .titleText {
   text-anchor: middle;
   font-size: 18px;
-  fill: $taskTextDarkColor;
+  fill: $taskTextOutsideColor;
   font-family: 'trebuchet ms', verdana, arial;
   font-family: var(--mermaid-font-family);
 }

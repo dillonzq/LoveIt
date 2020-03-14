@@ -1,22 +1,26 @@
 {{- /* Desktop header */ -}}
 <header class="desktop" id="header-desktop">
     <div class="header-wrapper">
-        <div class="header-title animated bounceIn">
+        <div class="header-title">
             <a href="{{ `/` | relLangURL }}">
                 {{- .Site.Title -}}
             </a>
         </div>
         <div class="menu">
             {{- range .Site.Menus.main -}}
-                <a class="menu-item{{ if $.IsMenuCurrent "main" . | or ($.HasMenuCurrent "main" .) | or (.URL | relLangURL | string | eq $.RelPermalink ) }} active{{ end }}" href="{{ .URL | relLangURL }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+                <a class="menu-item{{ if $.IsMenuCurrent "main" . | or ($.HasMenuCurrent "main" .) | or (.URL | relLangURL | string | eq $.RelPermalink ) }} active{{ end }}" href="{{ .URL | relLangURL }}"{{ with .Title }} title="{{ . }}"{{ end }} rel="noopener noreffer"{{ if strings.HasPrefix .URL "http" }} target="_blank"{{ end }}>
                     {{- .Pre | safeHTML }}{{ .Name -}}
                 </a>
             {{- end -}}
+            <span class="menu-item">|</span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a>
             {{- if .Site.IsMultiLingual -}}
-                &nbsp;|&nbsp;
                 <a href="javascript:void(0);" class="menu-item" title="{{ T "selectLanguage" }}">
-                    <i class="fas fa-language fa-fw"></i>&nbsp;
-                    <select class="language-select" onchange="location = this.value;">
+                    {{- .Language.LanguageName -}}
+                    <i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;">
                         {{- range .Page.AllTranslations -}}
                             {{- $translation := . -}}
                             {{- range $.Site.Languages -}}
@@ -32,9 +36,6 @@
                     </select>
                 </a>
             {{- end -}}
-            <a href="javascript:void(0);" class="theme-switch" title="{{ T "switchTheme" }}">
-                <i class="fas fa-adjust fa-fw "></i>
-            </a>
         </div>
     </div>
 </header>
@@ -43,7 +44,7 @@
 <header class="mobile" id="header-mobile">
     <div class="header-wrapper">
         <div class="header-container">
-            <div class="header-title animated bounceIn">
+            <div class="header-title">
                 <a href="{{ `/` | relLangURL }}">
                     {{- .Site.Title -}}
                 </a>
@@ -55,13 +56,17 @@
         <div class="menu" id="menu-mobile">
             {{- $currentPage := . -}}
             {{- range .Site.Menus.main -}}
-                <a class="menu-item" href="{{ .URL | relLangURL }}" title="{{ .Title }}">
+                <a class="menu-item" href="{{ .URL | relLangURL }}" title="{{ .Title }}" rel="noopener noreffer"{{ if strings.HasPrefix .URL "http" }} target="_blank"{{ end }}>
                     {{- .Pre | safeHTML }}{{ .Name -}}
                 </a>
             {{- end -}}
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a>
             {{- if .Site.IsMultiLingual -}}
                 <a href="javascript:void(0);" class="menu-item" title="{{ T "selectLanguage" }}">
-                    <i class="fas fa-language fa-fw"></i>&nbsp;
+                    {{- .Language.LanguageName -}}
+                    <i class="fas fa-chevron-right fa-fw"></i>
                     <select class="language-select" onchange="location = this.value;">
                         {{- range .Page.AllTranslations -}}
                             {{- $translation := . -}}
@@ -78,9 +83,6 @@
                     </select>
                 </a>
             {{- end -}}
-            <a href="javascript:void(0);" class="theme-switch" title="{{ T "switchTheme" }}">
-                <i class="fas fa-adjust fa-fw"></i>
-            </a>
         </div>
     </div>
 </header>

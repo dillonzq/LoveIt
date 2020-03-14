@@ -1,9 +1,9 @@
 /** Single **/
 .single {
   .single-title {
-    margin: 0;
-    font-size: 1.8rem;
-    line-height: 3rem;
+    margin: 0.8rem 0;
+    font-size: 1.6rem;
+    line-height: 140%;
   }
 
   .post-meta {
@@ -22,14 +22,14 @@
       color: $single-link-color;
 
       .dark-theme & {
-        color: $single-link-color-dark;
+        color: $global-link-color-dark;
       }
 
       &:hover {
         color: $single-link-hover-color;
 
         .dark-theme & {
-          color: $single-link-hover-color-dark;
+          color: $global-link-hover-color-dark;
         }
       }
     }
@@ -101,7 +101,6 @@
 
       .dark-theme &:hover {
         color: $single-link-hover-color-dark;
-        font-weight: bold;
       }
     }
 
@@ -143,6 +142,7 @@
         margin: .625rem 0;
         border-spacing: 0;
         background: $table-background-color;
+        border-collapse: collapse;
 
         .dark-theme & {
           background: $table-background-color-dark;
@@ -179,12 +179,10 @@
         min-width: 20%;
         max-width: 80%;
         display: inline-block;
-        padding: .625rem;
+        padding: .5rem;
         margin: 0 auto;
-        border-bottom: 1px solid #d9d9d9;
         font-size: .875rem;
         color: #969696;
-        line-height: 1.7;
       }
 
       img {
@@ -252,31 +250,10 @@
     }
 
     @import "../_partial/_single/code";
+    @import "../_partial/_single/instagram";
     @import "../_partial/_single/admonition";
-
-    .echarts {
-      width: 100%;
-      height: 30rem;
-      margin: 3% auto;
-      text-align: center;
-    }
-
-    .bilibili {
-      position: relative;
-      width: 100%;
-      height: 0;
-      padding-bottom: 75%;
-      margin: 3% auto;
-      text-align: center;
-
-      iframe {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-      }
-    }
+    @import "../_partial/_single/echarts";
+    @import "../_partial/_single/bilibili";
 
     hr {
       margin: 1rem 0;

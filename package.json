@@ -9,12 +9,13 @@
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
     "babel-preset-minify": "^0.5.1",
+    "minimist": ">=1.2.2",
     "husky": "^4.2.3"
   },
   "scripts": {
-    "build": "npx babel src --out-file assets/js/theme.min.js --source-maps",
-    "start": "hugo server --source=exampleSite --themesDir=../.. --disableFastRender",
-    "copy": "hugo -v --source=exampleSite --themesDir=../.. -D --gc --minify && rm -rf resources && cp -rf exampleSite/resources resources"
+    "build": "npx babel src --out-file assets/js/theme.min.js --source-maps && hugo -v --source=exampleSite --themesDir=../.. -D --gc",
+    "start": "npm run build && hugo server --source=exampleSite --themesDir=../.. --disableFastRender",
+    "copy": "rm -rf resources && cp -rf exampleSite/resources resources"
   },
   "husky": {
     "hooks": {
