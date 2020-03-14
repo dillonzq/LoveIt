@@ -80,6 +80,8 @@
 
   details {
     summary {
+      list-style: none;
+
       .toc-title {
         display: block;
         display: flex;
@@ -119,7 +121,6 @@
 
     ul {
       padding-left: .625rem;
-      list-style: none;
 
       ul {
         padding-left: 1.25rem;
