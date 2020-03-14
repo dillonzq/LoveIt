@@ -8,25 +8,21 @@ header {
   }
 
   .header-title {
+    font-size: 1.5rem;
     font-weight: bold;
   }
 
+  .menu .menu-item {
+    position: relative;
+  }
+
   .language-select {
-    font-weight: $global-font-weight;
-    border: none;
-    box-shadow: none;
-    background: transparent;
-    background-image: none;
-    -webkit-appearance: none;
-    color: $global-font-color;
-
-    .dark-theme & {
-      color: $global-font-color-dark;
-    }
-
-    &:focus {
-      outline: none;
-    }
+    position: absolute;
+    opacity: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
 
     &:hover {
       cursor: pointer;
@@ -47,23 +43,20 @@ header {
   .header-wrapper {
     width: auto;
     text-align: center;
-    margin: 0 4rem;
+    padding: 0 3rem;
     display: flex;
     justify-content: space-between;
 
-    .header-title a {
-      padding: 0 8px;
-      font-size: 1.25rem;
+    .menu {
+      .menu-item {
+        margin: 0 .5rem;
 
-      i {
-        line-height: 2rem;
+        &.theme-switch {
+          margin: 0 .3rem;
+        }
       }
-    }
 
-    .menu a {
-      padding: 0 8px;
-
-      &.active {
+      a.active {
         font-weight: 900;
         color: $header-hover-color;
 
@@ -95,10 +88,6 @@ header {
       padding-right: 1rem;
       padding-left: 1rem;
       box-sizing: border-box;
-
-      .header-title {
-        font-size: 1.25rem;
-      }
 
       .menu-toggle {
         cursor: pointer;

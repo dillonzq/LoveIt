@@ -14,7 +14,7 @@
         }
 
         isMobile() {
-            return window.matchMedia('only screen and (max-width: 720px)').matches;
+            return window.matchMedia('only screen and (max-width: 680px)').matches;
         }
 
         isTocStatic() {
@@ -258,14 +258,14 @@
                         header.classList.add('fadeInDown');
                     }
                 });
-                if (this.newScrollTop > 400) {
+                if (this.newScrollTop > 200) {
                     if (scroll > MIN_SCROLL) {
-                        toTopButton.classList.remove('fadeIn');
-                        toTopButton.classList.add('fadeOut');
+                        toTopButton.classList.remove('fadeInUp');
+                        toTopButton.classList.add('fadeOutDown');
                     } else if (scroll < - MIN_SCROLL) {
                         toTopButton.style.display = 'block';
-                        toTopButton.classList.remove('fadeOut');
-                        toTopButton.classList.add('fadeIn');
+                        toTopButton.classList.remove('fadeOutDown');
+                        toTopButton.classList.add('fadeInUp');
                     }
                 } else {
                     toTopButton.style.display = 'none';
