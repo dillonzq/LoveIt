@@ -1,0 +1,3 @@
+.dark-theme .v *,.dark-theme .v .vwrap input,.dark-theme .v .vwrap input::placeholder,.dark-theme .v .veditor,.dark-theme .v .veditor::placeholder,.dark-theme .v a,.dark-theme .v a:hover{color:rgba(255,255,255,0.75);opacity:1}.dark-theme .v .vbtn{color:rgba(255,255,255,0.75);background:#333;border:none}.dark-theme .v .vbtn:hover{color:#3090e4;border-color:#3090e4}.dark-theme .v .vlist .vcard .vhead .vsys{background:#333}.dark-theme .v code,.dark-theme .v pre{background:#272C34}.dark-theme .v .vmark .vinput{color:#0e0f10}.v code,.v pre{text-align:left}
+
+/*# sourceMappingURL=valine.css.map */
