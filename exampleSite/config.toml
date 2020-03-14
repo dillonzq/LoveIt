@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://example.com"
 # [en, zh-cn, fr, ...] determines default content language
 # [en, zh-cn, fr, ...] 设置默认的语言
 defaultContentLanguage = "en"
