@@ -51,7 +51,7 @@
     {{- if .Site.Params.comment.valine.enable -}}
         {{- $valine := .Site.Params.comment.valine -}}
         <div id="valine"></div>
-        {{- slice "lib/valine/dark.scss" | $scratch.Add "linkLocal" -}}
+        {{- slice "lib/valine/valine.scss" | $scratch.Add "linkLocal" -}}
         {{- with $CDN.valineJS -}}
             {{- slice . | $scratch.Add "scriptCDN" -}}
         {{- else -}}

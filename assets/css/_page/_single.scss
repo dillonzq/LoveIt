@@ -250,31 +250,10 @@
     }
 
     @import "../_partial/_single/code";
+    @import "../_partial/_single/instagram";
     @import "../_partial/_single/admonition";
-
-    .echarts {
-      width: 100%;
-      height: 30rem;
-      margin: 3% auto;
-      text-align: center;
-    }
-
-    .bilibili {
-      position: relative;
-      width: 100%;
-      height: 0;
-      padding-bottom: 75%;
-      margin: 3% auto;
-      text-align: center;
-
-      iframe {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-      }
-    }
+    @import "../_partial/_single/echarts";
+    @import "../_partial/_single/bilibili";
 
     hr {
       margin: 1rem 0;
