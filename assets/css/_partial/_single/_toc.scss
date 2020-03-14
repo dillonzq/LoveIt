@@ -81,6 +81,11 @@
   details {
     summary {
       list-style: none;
+      background: darken($code-background-color, 3%);
+
+      .dark-theme & {
+        background: darken($code-background-color-dark, 3%);
+      }
 
       .toc-title {
         display: block;
@@ -89,14 +94,13 @@
         font-weight: bold;
         line-height: 2em;
         padding: 0 .625rem;
-        background: $code-background-color;
 
         i.details {
           line-height: 2em;
         }
 
-        .dark-theme & {
-          background: $code-background-color-dark;
+        &:hover {
+          cursor: pointer;
         }
       }
 
@@ -113,14 +117,15 @@
   }
 
   .toc-content {
-    border: 2px solid $code-background-color;
+    background-color: $code-background-color;
 
-    >nav>ul {
-      margin: .625rem 0;
+    > nav > ul {
+      margin: 0;
+      padding: .4rem .8rem;
     }
 
     ul {
-      padding-left: .625rem;
+      list-style: none;
 
       ul {
         padding-left: 1.25rem;
@@ -128,7 +133,7 @@
     }
 
     .dark-theme & {
-      border: 2px solid $code-background-color-dark;
+      background-color: $code-background-color-dark;
     }
   }
 }

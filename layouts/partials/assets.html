@@ -8,7 +8,11 @@
 
 {{- /* iconfont */ -}}
 {{- if $scratch.Get "iconfont" -}}
-    {{- slice "lib/iconfont/iconfont.css" | $scratch.Add "linkLocal" -}}
+    {{- with $CDN.iconfontCSS -}}
+        {{- slice . | $scratch.Add "linkCDN" -}}
+    {{- else -}}
+        {{- slice "lib/iconfont/iconfont.css" | $scratch.Add "linkLocal" -}}
+    {{- end -}}
 {{- end -}}
 
 {{- /* Smooth Scroll */ -}}

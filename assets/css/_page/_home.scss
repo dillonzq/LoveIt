@@ -48,14 +48,11 @@
 
         .home-social-links {
           padding-top: .6rem;
-
-          i {
-            font-size: 1.45rem;
-          }
+          font-size: 1.5rem;
+          line-height: 1.5rem;
 
           img {
-            width: 1.5rem;
-            height: 1.5rem;
+            max-height: 1.4rem;
           }
         }
       }
