@@ -88,10 +88,10 @@
     & a.next {
       font-size: 1rem;
       font-weight: 600;
-
-      transition-duration: .3s;
-      transition-property: transform;
-      transition-timing-function: ease-out;
+      -webkit-transition: all ease-out .3s;
+      -moz-transition: all ease-out .3s;
+      -o-transition: all ease-out .3s;
+      transition: all ease-out .3s;
     }
 
     & a.prev {
@@ -99,6 +99,10 @@
     }
 
     & a.prev:hover {
+      -webkit-transform: translateX(-4px);
+      -moz-transform: translateX(-4px);
+      -ms-transform: translateX(-4px);
+      -o-transform: translateX(-4px);
       transform: translateX(-4px);
     }
 
@@ -107,6 +111,10 @@
     }
 
     & a.next:hover {
+      -webkit-transform: translateX(4px);
+      -moz-transform: translateX(4px);
+      -ms-transform: translateX(4px);
+      -o-transform: translateX(4px);
       transform: translateX(4px);
     }
   }

@@ -86,12 +86,20 @@
       margin: .5rem 0;
     }
 
+    b, strong {
+      font-weight: bold;
+
+      .dark-theme & {
+        color: #ddd;
+      }
+    }
+
     a {
       word-break: break-all;
       word-break: break-word;
       color: $single-link-color;
 
-      .dark-theme & {
+      .dark-theme &, .dark-theme & b, .dark-theme & strong {
         color: $single-link-color-dark;
       }
     }
@@ -99,7 +107,7 @@
     a:hover {
       color: $single-link-hover-color;
 
-      .dark-theme &:hover {
+      .dark-theme &, .dark-theme & b, .dark-theme & strong {
         color: $single-link-hover-color-dark;
       }
     }

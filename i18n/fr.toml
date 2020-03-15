@@ -54,7 +54,7 @@ other = "Partager sur"
 other = "Contenu"
 
 [publish]
-other = "publié sur"
+other = "publié le"
 
 [included]
 other = "inclus dans"
