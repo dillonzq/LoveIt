@@ -51,12 +51,16 @@
         }
 
         .home-social-links {
-          padding-top: .6rem;
-          font-size: 1.5rem;
-          line-height: 1.5rem;
+          padding: .6rem 0;
+
+          a, i {
+            font-size: 1.6rem;
+            line-height: 2rem;
+          }
 
           img {
-            max-height: 1.4rem;
+            height: 1.4rem;
+            padding: 0 .25rem;
           }
         }
       }
