@@ -6,14 +6,19 @@
     position: relative;
     margin: 5px 10px;
     overflow-wrap: break-word;
-    transition-duration: .3s;
-    transition-property: transform;
-    transition-timing-function: ease-out;
+    -webkit-transition: all ease-out .3s;
+    -moz-transition: all ease-out .3s;
+    -o-transition: all ease-out .3s;
+    transition: all ease-out .3s;
 
     &:active,
     &:focus,
     &:hover {
       color: $global-link-hover-color;
+      -webkit-transform: scale(1.2);
+      -moz-transform: scale(1.2);
+      -ms-transform: scale(1.2);
+      -o-transform: scale(1.2);
       transform: scale(1.2);
 
       .dark-theme & {
