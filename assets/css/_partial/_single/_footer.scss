@@ -77,6 +77,14 @@
     font-size: 0.9rem;
   }
 
+  .post-tags {
+    max-width: 65%;
+
+    * {
+      display: inline;
+    }
+  }
+
   .post-nav {
     &::before,
     &::after {
