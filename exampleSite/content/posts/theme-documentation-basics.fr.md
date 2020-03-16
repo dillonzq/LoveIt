@@ -1,6 +1,7 @@
 ---
 weight: 1
 title: "Thème Documentation - Concepts de Base"
+subtitle: ""
 date: 2020-03-06T21:40:32+08:00
 lastmod: 2020-03-06T21:40:32+08:00
 draft: false
@@ -37,7 +38,7 @@ Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only depende
 Just install latest version of [:(far fa-file-archive): Hugo (> 0.62.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
 
 {{< admonition note "Why not support earlier versions of Hugo?" >}}
-Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup/#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/), this theme only supports Hugo versions above **v0.62.0**.
+Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup/#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/), this theme only supports Hugo versions above **0.62.0**.
 {{< /admonition >}}
 
 ## 2 Installation
@@ -188,7 +189,7 @@ Note that some of these parameters are explained in details in other sections of
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
   gitRepo = ""
-  # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+  # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): 0.1.1
   # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
   # Header info
@@ -348,13 +349,13 @@ Note that some of these parameters are explained in details in other sections of
     enable = true
     # Disqus Comment Config (https://disqus.com/)
     [params.comment.disqus]
-      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): 0.1.1
       enable = false
       # Disqus shortname to use Disqus in posts
       shortname = ""
     # Gitalk Comment Config (https://github.com/gitalk/gitalk)
     [params.comment.gitalk]
-      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): 0.1.1
       enable = false
       owner = ""
       repo = ""

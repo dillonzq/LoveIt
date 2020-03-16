@@ -5,6 +5,9 @@
     <article class="page single">
         {{- /* Title */ -}}
         <h1 class="single-title animated flipInX">{{ .Title }}</h1>
+        {{- with .Params.subtitle -}}
+            <h2 class="single-subtitle">{{ . }}</h2>
+        {{- end -}}
 
         {{- /* Meta */ -}}
         <div class="post-meta">

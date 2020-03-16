@@ -1,6 +1,7 @@
 ---
 weight: 2
 title: "Thème Documentation - Contenu"
+subtitle: ""
 date: 2020-03-05T16:30:05+08:00
 lastmod: 2020-03-05T16:30:05+08:00
 draft: false
@@ -30,11 +31,6 @@ Découvrez comment créer et organiser votre contenu rapidement et intuitivement
 
 <!--more-->
 
-{{< admonition warning >}}
-Sorry, this article has not been completely translated into **French**.
-Welcome to take the time to propose a translation by [making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
-{{< /admonition >}}
-
 ## 1 Contents Organization
 
 A few suggestions to help you get a good looking site quickly:
@@ -52,6 +48,7 @@ Here is a default front matter from the default archetype:
 ```yaml
 ---
 title: "My First Post"
+subtitle: ""
 date: 2020-03-04T15:58:26+08:00
 lastmod: 2020-03-04T15:58:26+08:00
 draft: true
@@ -79,6 +76,7 @@ comment: true
 ```
 
 * **title**: the title for the content.
+* **subtitle**: the subtitle for the content. **LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): 0.2.0**
 * **date**: the datetime assigned to this page, which is usually fetched from the `date` field in front matter, but this behaviour is configurabl in the [site configuration](../theme-documentation-basics/#site-configuration).
 * **lastmod**: the datetime at which the content was last modified.
 * **draft**: if `true`, the content will not be rendered unless the `--buildDrafts`/`-D` flag is passed to the `hugo` command.
