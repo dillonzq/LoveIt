@@ -1,6 +1,7 @@
 ---
 weight: 2
 title: "主题文档 - 内容"
+subtitle: ""
 date: 2020-03-05T16:30:05+08:00
 lastmod: 2020-03-05T16:30:05+08:00
 draft: false
@@ -47,6 +48,7 @@ comment: true
 ```yaml
 ---
 title: "我的第一篇文章"
+subtitle: ""
 date: 2020-03-04T15:58:26+08:00
 lastmod: 2020-03-04T15:58:26+08:00
 draft: true
@@ -74,6 +76,7 @@ comment: true
 ```
 
 * **title**: 文章标题.
+* **subtitle**: 文章副标题. **LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): 0.2.0**
 * **date**: 这篇文章创建的日期时间. 它通常是从文章的前置参数中的 `date` 字段获取的, 但是也可以在 [网站配置](../theme-documentation-basics/#site-configuration) 中设置.
 * **lastmod**: 上次修改内容的日期时间.
 * **draft**: 如果设为 `true`, 除非 `hugo` 命令使用了 `--buildDrafts`/`-D` 参数, 这篇文章不会被渲染.

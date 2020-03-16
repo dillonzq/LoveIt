@@ -6,6 +6,9 @@
         <h1 class="single-title animated pulse faster">
             {{- .Title -}}
         </h1>
+        {{- with .Params.subtitle -}}
+            <h2 class="single-subtitle">{{ . }}</h2>
+        {{- end -}}
 
         {{- /* Content */ -}}
         <div class="content" id="content">

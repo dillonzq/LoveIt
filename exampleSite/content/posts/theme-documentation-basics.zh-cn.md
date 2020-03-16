@@ -1,6 +1,7 @@
 ---
 weight: 1
 title: "主题文档 - 基本概念"
+subtitle: ""
 date: 2020-03-06T21:40:32+08:00
 lastmod: 2020-03-06T21:40:32+08:00
 draft: false
@@ -37,7 +38,7 @@ comment: true
 直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive): Hugo (> 0.62.0)](https://gohugo.io/getting-started/installing/).
 
 {{< admonition note "为什么不支持早期版本的 Hugo?" >}}
-由于 [Markdown 渲染钩子函数](https://gohugo.io/getting-started/configuration-markup/#markdown-render-hooks) 在 [Hugo 圣诞节版本](https://gohugo.io/news/0.62.0-relnotes/) 中被引入, 本主题只支持高于 **v0.62.0** 的 Hugo 版本.
+由于 [Markdown 渲染钩子函数](https://gohugo.io/getting-started/configuration-markup/#markdown-render-hooks) 在 [Hugo 圣诞节版本](https://gohugo.io/news/0.62.0-relnotes/) 中被引入, 本主题只支持高于 **0.62.0** 的 Hugo 版本.
 {{< /admonition >}}
 
 ## 2 安装
@@ -191,7 +192,7 @@ hugo
   defaultTheme = "auto"
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = ""
-  # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+  # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): 0.1.1
   # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
   # 页面头部导航栏信息
@@ -350,13 +351,13 @@ hugo
     enable = true
     # Disqus 评论系统设置 (https://disqus.com/)
     [params.comment.disqus]
-      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): 0.1.1
       enable = false
       # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
       shortname = ""
     # Gitalk 评论系统设置 (https://github.com/gitalk/gitalk)
     [params.comment.gitalk]
-      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): 0.1.1
       enable = false
       owner = ""
       repo = ""
