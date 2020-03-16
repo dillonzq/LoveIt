@@ -243,6 +243,6 @@
 {{- end -}}
 
 {{- /* Google analytics async */ -}}
-{{- if $scratch.Get "production" | and .Site.GoogleAnalytics -}}
+{{- if hugo.IsProduction | and .Site.GoogleAnalytics -}}
     {{- template "_internal/google_analytics_async.html" . -}}
 {{- end -}}

@@ -1,6 +1,6 @@
 {{- $scratch := .Scratch.Get "scratch" -}}
 
-{{- if $scratch.Get "production" | and (ne .Site.Params.comment.enable false) | and (ne .Params.comment false) -}}
+{{- if hugo.IsProduction | and (ne .Site.Params.comment.enable false) | and (ne .Params.comment false) -}}
     {{- $CDN := $scratch.Get "CDN" -}}
 
     {{- /* Disqus Comment System */ -}}

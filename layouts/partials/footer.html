@@ -1,8 +1,11 @@
+{{- $scratch := .Scratch.Get "scratch" -}}
+
 <footer class="footer">
     <div class="copyright">
         {{- /* Hugo and LoveIt */ -}}
         <div class="copyright-line">
-            {{- printf (T "poweredBySome") `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>` | safeHTML }} | {{ T "theme" }} - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer"><i class="far fa-heart fa-fw"></i> LoveIt</a>
+            {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo %s">Hugo</a>` hugo.Version -}}
+            {{- printf (T "poweredBySome") $hugo | safeHTML }} | {{ T "theme" }} - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt v{{ $scratch.Get "version" }}"><i class="far fa-heart fa-fw"></i> LoveIt</a>
         </div>
 
         <div class="copyright-line">
