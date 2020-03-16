@@ -132,15 +132,19 @@
                     const footerTop = document.getElementById('post-footer').offsetTop;
                     const maxTocTop = footerTop - toc.getBoundingClientRect().height;
                     const maxScrollTop = maxTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
+                    const rect = page.getBoundingClientRect();
                     if (this.newScrollTop < minScrollTop) {
                         toc.style.position = 'absolute';
                         toc.style.top = `${minTocTop}px`;
+                        toc.style.left = `${rect.width + 20}px`;
                     } else if (this.newScrollTop > maxScrollTop) {
                         toc.style.position = 'absolute';
                         toc.style.top = `${maxTocTop}px`;
+                        toc.style.left = `${rect.width + 20}px`;
                     } else {
                         toc.style.position = 'fixed';
                         toc.style.top = `${TOP_SPACING}px`;
+                        toc.style.left = `${rect.left + rect.width + 20}px`;
                     }
 
                     this.util.forEach(this._tocLinks, (link) => { link.classList.remove('active'); });
@@ -245,7 +249,7 @@
                 header.classList.add('faster');
             });
             const toTopButton = document.getElementById('dynamic-to-top');
-            const MIN_SCROLL = 20;
+            const MIN_SCROLL = 10;
             window.addEventListener('scroll', () => {
                 this.newScrollTop = this.util.getScrollTop();
                 const scroll = this.newScrollTop - this.oldScrollTop;
@@ -260,12 +264,12 @@
                 });
                 if (this.newScrollTop > 200) {
                     if (scroll > MIN_SCROLL) {
-                        toTopButton.classList.remove('fadeInUp');
-                        toTopButton.classList.add('fadeOutDown');
+                        toTopButton.classList.remove('fadeIn');
+                        toTopButton.classList.add('fadeOut');
                     } else if (scroll < - MIN_SCROLL) {
                         toTopButton.style.display = 'block';
-                        toTopButton.classList.remove('fadeOutDown');
-                        toTopButton.classList.add('fadeInUp');
+                        toTopButton.classList.remove('fadeOut');
+                        toTopButton.classList.add('fadeIn');
                     }
                 } else {
                     toTopButton.style.display = 'none';
