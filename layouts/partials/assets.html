@@ -243,6 +243,6 @@
 {{- end -}}
 
 {{- /* Google analytics async */ -}}
-{{- if hugo.IsProduction | and .Site.GoogleAnalytics -}}
+{{- if eq hugo.Environment "production" | and .Site.GoogleAnalytics -}}
     {{- template "_internal/google_analytics_async.html" . -}}
 {{- end -}}

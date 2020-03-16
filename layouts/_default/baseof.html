@@ -1,6 +1,6 @@
 {{- $scratch := newScratch -}}
 {{- .Scratch.Set "scratch" $scratch -}}
-{{- if hugo.IsProduction -}}
+{{- if eq hugo.Environment "production" -}}
     {{- $scratch.Set "CDN" .Site.Params.cdn -}}
     {{- $scratch.Set "fingerprint" .Site.Params.fingerprint -}}
 {{- end -}}

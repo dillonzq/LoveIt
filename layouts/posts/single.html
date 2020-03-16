@@ -37,7 +37,7 @@
                 <i class="far fa-calendar-alt fa-fw"></i><time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;
                 <i class="fas fa-pencil-alt fa-fw"></i>{{ T "wordCount" .WordCount }}&nbsp;
                 <i class="far fa-clock fa-fw"></i>{{ T "readingTime" .ReadingTime }}&nbsp;
-                {{- if hugo.IsProduction | and .Site.Params.comment.valine.enable | and .Site.Params.comment.valine.visitor -}}
+                {{- if eq hugo.Environment "production" | and .Site.Params.comment.valine.enable | and .Site.Params.comment.valine.visitor -}}
                     <span id="{{ .RelPermalink | relURL }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
                         <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;{{ T "views" }}
                     </span>&nbsp;
