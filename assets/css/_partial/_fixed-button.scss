@@ -1,13 +1,12 @@
-#dynamic-to-top {
+.fixed-button {
   display: none;
   overflow: hidden;
   width: auto;
   z-index: 100;
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
   top: auto;
   left: auto;
+  right: 1.5rem;
   font-size: 1rem;
   line-height: 1.3rem;
   padding: .6rem .6rem;
@@ -34,4 +33,12 @@
       color: $global-font-color-dark;
     }
   }
+}
+
+#top-button {
+  bottom: 1.5rem;
+}
+
+#comment-button {
+  bottom: 4.5rem;
 }

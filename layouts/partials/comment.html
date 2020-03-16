@@ -5,7 +5,7 @@
 
     {{- /* Disqus Comment System */ -}}
     {{- if .Site.Params.comment.disqus.enable -}}
-        <div id="disqus_thread"></div>
+        <div id="disqus_thread" class="comment"></div>
         {{- $script := printf `<script defer src="https://%s.disqus.com/embed.js"></script>` .Site.Params.comment.disqus.shortname -}}
         {{- slice $script | $scratch.Add "scriptCDN" -}}
         <noscript>
@@ -16,7 +16,7 @@
     {{- /* Gitalk Comment System */ -}}
     {{- if .Site.Params.comment.gitalk.enable -}}
         {{- $gitalk := .Site.Params.comment.gitalk -}}
-        <div id="gitalk"></div>
+        <div id="gitalk" class="comment"></div>
         {{- with $CDN.gitalkCSS -}}
             {{- slice . | $scratch.Add "linkCDN" -}}
         {{- else -}}
@@ -50,7 +50,7 @@
     {{- /* Valine Comment System */ -}}
     {{- if .Site.Params.comment.valine.enable -}}
         {{- $valine := .Site.Params.comment.valine -}}
-        <div id="valine"></div>
+        <div id="valine" class="comment"></div>
         {{- slice "lib/valine/valine.scss" | $scratch.Add "linkLocal" -}}
         {{- with $CDN.valineJS -}}
             {{- slice . | $scratch.Add "scriptCDN" -}}
@@ -99,7 +99,7 @@
     {{- /* Facebook Comment System */ -}}
     {{- if .Site.Params.comment.facebook.enable -}}
         {{- $facebook := .Site.Params.comment.facebook -}}
-        <div id="fb-root"></div>
+        <div id="fb-root" class="comment"></div>
         <div
             class="fb-comments"
             data-href="{{ .Site.Params.baseURL }}{{ .Permalink | absURL }}"
