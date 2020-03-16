@@ -1,7 +1,8 @@
 html {
   font-family: $global-font-family;
-  font-size: $global-font-size;
   font-weight: $global-font-weight;
+  font-display: swap;
+  font-size: $global-font-size;
   line-height: $global-line-height;
   width:100%;
 }

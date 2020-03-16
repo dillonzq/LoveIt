@@ -1,14 +1,13 @@
 #toc-auto {
   display: block;
   position: absolute;
-  width: 100%;
-  max-width: 1000px;
-  margin-left: 1000px;
+  width: 1000px;
   padding: 0 .8rem;
   border-left: 1px solid $global-border-color;
   overflow-wrap: break-word;
   box-sizing: border-box;
   top: if($header-normal-mode-desktop, 5rem, 10rem);
+  left: 10000px;
 
   .dark-theme & {
     border-left: 1px solid $global-border-color-dark;

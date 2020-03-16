@@ -1,7 +1,7 @@
 /** Single **/
 .single {
   .single-title {
-    margin: 0.8rem 0;
+    margin: 1rem 0 .5rem;
     font-size: 1.6rem;
     line-height: 140%;
   }
@@ -44,7 +44,7 @@
 
     img {
       display: block;
-      max-width: 100%;
+      width: 100%;
       height: auto;
       margin: 0 auto;
       overflow: hidden;
