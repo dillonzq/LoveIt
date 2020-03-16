@@ -224,6 +224,9 @@ hugo
       typeit = true
       # 是否显示社交账号
       social = true
+      # {{< version 0.2.0 >}}
+      # 免责声明 (允许使用 HTML 格式)
+      disclaimer = ""
     # 主页文章列表
     [params.home.posts]
       enable = true

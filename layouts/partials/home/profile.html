@@ -14,7 +14,7 @@
     {{- end -}}
 
     {{- with .Site.Params.home.profile.subtitle -}}
-        <h2 class="home-description">
+        <h2 class="home-subtitle">
             {{- if $.Site.Params.home.profile.typeit -}}
                 {{- $id := partial "function/id.html" (dict "content" . "scratch" $scratch) -}}
                 <div id="{{ $id }}" class="typeit"></div>
@@ -25,9 +25,13 @@
         </h2>
     {{- end -}}
 
-    <div class="home-social-links">
-        {{- if .Site.Params.home.profile.social -}}
-            {{- partial "plugin/social.html" . -}}
-        {{- end -}}
-    </div>
+    {{- if .Site.Params.home.profile.social -}}
+        {{- partial "plugin/social.html" (dict "social" .Site.Params.social "scratch" $scratch) -}}
+    {{- end -}}
+
+    {{- with .Site.Params.home.profile.disclaimer -}}
+        <h3 class="home-disclaimer">
+            {{- . | safeHTML -}}
+        </h3>
+    {{- end -}}
 </div>
