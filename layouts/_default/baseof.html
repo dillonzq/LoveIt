@@ -54,10 +54,12 @@
             {{- partial "footer.html" . -}}
         </div>
 
-        {{- /* Dynamic to top button */ -}}
-        <a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
-            <i class="fas fa-arrow-up fa-fw"></i>
-        </a>
+        <div id="fixed-btn-container">
+            {{- /* top button */ -}}
+            <a href="#" id="top-button" class="fixed-button animated faster">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a>
+        </div>
 
         {{- /* Load JavaScript scripts and CSS */ -}}
         {{- partial "assets.html" . -}}

@@ -248,7 +248,17 @@
                 header.classList.add('animated');
                 header.classList.add('faster');
             });
-            const toTopButton = document.getElementById('dynamic-to-top');
+            const comments = document.getElementsByClassName('comment') || [];
+            if (comments.length) {
+                const container = document.getElementById('fixed-btn-container');
+                const button = document.createElement('a');
+                button.href = `#${comments[0].id}`;
+                button.id = 'comment-button';
+                button.className = 'fixed-button animated faster';
+                button.innerHTML = '<i class="fas fa-comment fa-fw"></i>';
+                container.appendChild(button);
+            }
+            const buttons = document.getElementsByClassName('fixed-button');
             const MIN_SCROLL = 10;
             window.addEventListener('scroll', () => {
                 this.newScrollTop = this.util.getScrollTop();
@@ -262,18 +272,20 @@
                         header.classList.add('fadeInDown');
                     }
                 });
-                if (this.newScrollTop > 200) {
-                    if (scroll > MIN_SCROLL) {
-                        toTopButton.classList.remove('fadeIn');
-                        toTopButton.classList.add('fadeOut');
-                    } else if (scroll < - MIN_SCROLL) {
-                        toTopButton.style.display = 'block';
-                        toTopButton.classList.remove('fadeOut');
-                        toTopButton.classList.add('fadeIn');
+                this.util.forEach(buttons, (button) => {
+                    if (this.newScrollTop > 20) {
+                        if (scroll > MIN_SCROLL) {
+                            button.classList.remove('fadeIn');
+                            button.classList.add('fadeOut');
+                        } else if (scroll < - MIN_SCROLL) {
+                            button.style.display = 'block';
+                            button.classList.remove('fadeOut');
+                            button.classList.add('fadeIn');
+                        }
+                    } else {
+                        button.style.display = 'none';
                     }
-                } else {
-                    toTopButton.style.display = 'none';
-                }
+                });
                 if (!this._scrollTimeout) {
                     this._scrollTimeout = window.setTimeout(() => {
                         this._scrollTimeout = null;

@@ -83,10 +83,8 @@
         {{- partial "single/footer.html" . -}}
 
         {{- /* Comment */ -}}
-        <div class="comment">
-            {{- if ( .Params.comment | default true ) -}}
-                {{- partial "comment.html" . -}}
-            {{- end -}}
-        </div>
+        {{- if ( .Params.comment | default true ) -}}
+            {{- partial "comment.html" . -}}
+        {{- end -}}
     </article>
 {{- end -}}
