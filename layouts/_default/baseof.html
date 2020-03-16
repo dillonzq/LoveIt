@@ -58,10 +58,15 @@
             {{- partial "footer.html" . -}}
         </div>
 
-        <div id="fixed-btn-container">
+        <div id="fixed-buttons" class="animated faster">
             {{- /* top button */ -}}
-            <a href="#" id="top-button" class="fixed-button animated faster">
+            <a href="#" id="top-button" class="fixed-button" title="{{ T `backToTop` }}">
                 <i class="fas fa-arrow-up fa-fw"></i>
+            </a>
+
+            {{- /* comment button */ -}}
+            <a href="#" id="comment-button" class="fixed-button" title="{{ T `viewComments` }}">
+                <i class="fas fa-comment fa-fw"></i>
             </a>
         </div>
 

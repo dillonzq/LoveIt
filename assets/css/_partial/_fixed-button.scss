@@ -1,11 +1,11 @@
+#fixed-buttons {
+  display: none;
+}
+
 .fixed-button {
   display: none;
-  overflow: hidden;
-  width: auto;
   z-index: 100;
   position: fixed;
-  top: auto;
-  left: auto;
   right: 1.5rem;
   font-size: 1rem;
   line-height: 1.3rem;
@@ -36,6 +36,7 @@
 }
 
 #top-button {
+  display: block;
   bottom: 1.5rem;
 }
 
