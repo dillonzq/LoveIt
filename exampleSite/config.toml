@@ -216,10 +216,12 @@ enableEmoji = true
           enable = true
           # Disqus Comment Config (https://disqus.com/)
           [languages.en.params.comment.disqus]
+            enable = false
             # Disqus shortname to use Disqus in posts
             shortname = ""
           # Gitalk Comment Config (https://github.com/gitalk/gitalk)
           [languages.en.params.comment.gitalk]
+            enable = false
             owner = ""
             repo = ""
             clientId = ""
@@ -436,10 +438,12 @@ enableEmoji = true
         enable = true
         # Disqus 评论系统设置 (https://disqus.com/)
         [languages.zh-cn.params.comment.disqus]
+          enable = false
           # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
           shortname = ""
         # Gitalk 评论系统设置 (https://github.com/gitalk/gitalk)
         [languages.zh-cn.params.comment.gitalk]
+          enable = false
           owner = ""
           repo = ""
           clientId = ""
@@ -691,7 +695,7 @@ enableEmoji = true
 [params]
   # LoveIt theme version
   # LoveIt 主题版本
-  version = "0.1.X"
+  version = "0.2.X"
   # public git repo url only then enableGitInfo is true
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = "https://github.com/dillonzq/LoveIt"

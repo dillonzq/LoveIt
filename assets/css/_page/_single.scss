@@ -314,6 +314,16 @@
         word-break: break-all;
       }
     }
+
+    .version {
+      font-weight: bold;
+      font-style: normal;
+      color: $global-highlight-color;
+
+      .dark-theme & {
+        color: $global-highlight-color-dark;
+      }
+    }
   }
 
   @import "../_partial/_single/footer";

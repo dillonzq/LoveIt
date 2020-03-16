@@ -189,7 +189,7 @@ Note that some of these parameters are explained in details in other sections of
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
   gitRepo = ""
-  # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): 0.1.1
+  # {{< version 0.1.1 >}}
   # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
   # Header info
@@ -349,13 +349,13 @@ Note that some of these parameters are explained in details in other sections of
     enable = true
     # Disqus Comment Config (https://disqus.com/)
     [params.comment.disqus]
-      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): 0.1.1
+      # {{< version 0.1.1 >}}
       enable = false
       # Disqus shortname to use Disqus in posts
       shortname = ""
     # Gitalk Comment Config (https://github.com/gitalk/gitalk)
     [params.comment.gitalk]
-      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): 0.1.1
+      # {{< version 0.1.1 >}}
       enable = false
       owner = ""
       repo = ""

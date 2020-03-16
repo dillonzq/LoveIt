@@ -1,6 +1,6 @@
 {
   "name": "loveit-src",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "LoveIt theme source file",
   "main": "index.js",
   "dependencies": {},
