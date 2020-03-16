@@ -8,7 +8,7 @@ header {
   }
 
   .header-title {
-    font-size: 1.5rem;
+    font-family: $header-title-font-family;
     font-weight: bold;
     overflow: hidden;
     white-space: nowrap;
@@ -55,6 +55,7 @@ header {
     justify-content: space-between;
 
     .header-title {
+      font-size: $header-title-font-size-desktop;
       max-width: 30%;
     }
 
@@ -105,6 +106,7 @@ header {
 
       .header-title {
         max-width: 80%;
+        font-size: $header-title-font-size-mobile;
       }
 
       .menu-toggle {
