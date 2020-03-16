@@ -49,7 +49,7 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 
 * :(far fa-user): **Gravatar** supported by [Gravatar](https://gravatar.com)
 * :(fas fa-user-circle): Local **Avatar** support
-* :(far fa-id-card): Up to **59** social sites supported
+* :(far fa-id-card): Up to **61** social sites supported
 * :(fas fa-share-square): Up to **28** share sites support
 * :(far fa-comment): **Disqus** comment system supported by [Disqus](https://disqus.com)
 * :(far fa-comment-dots): **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)

@@ -221,6 +221,9 @@ Note that some of these parameters are explained in details in other sections of
       typeit = true
       # whether to show social links
       social = true
+      # {{< version 0.2.0 >}}
+      # disclaimer (HTML format is allowed)
+      disclaimer = ""
     # Home Page Posts
     [params.home.posts]
       enable = true

@@ -10,7 +10,7 @@
         -ms-transform: translateY(if($posts, 0, 16vh));
         -o-transform: translateY(if($posts, 0, 16vh));
         transform: translateY(if($posts, 0, 16vh));
-        padding: if($posts, 2rem, 0) 0;
+        padding: if($posts, 2rem, 0) 0 .5rem;
         text-align: center;
 
         .home-avatar {
@@ -43,15 +43,15 @@
           }
         }
 
-        .home-description {
+        .home-subtitle {
           font-size: 1rem;
           font-weight: normal;
           margin: 0;
           padding: .4rem;
         }
 
-        .home-social-links {
-          padding: .6rem 0;
+        .social-links {
+          padding: .4rem 0;
 
           a, i {
             font-size: 1.6rem;
@@ -61,6 +61,19 @@
           img {
             height: 1.4rem;
             padding: 0 .25rem;
+          }
+        }
+
+        .home-disclaimer {
+          font-size: 1rem;
+          line-height: 1.4rem;
+          font-weight: normal;
+          margin: 0;
+          padding: .4rem;
+          color: $global-font-secondary-color;
+
+          .dark-theme & {
+            color: $global-font-secondary-color-dark;
           }
         }
       }
