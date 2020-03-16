@@ -9,6 +9,10 @@ theme = "LoveIt"
 # 主题目录
 themesDir = "../.."
 
+# website title
+# 网站标题
+title = "LoveIt"
+
 # whether to use robots.txt
 # 是否使用 robots.txt
 enableRobotsTXT = true
@@ -24,8 +28,6 @@ enableEmoji = true
     weight = 1
     # language code
     languageCode = "en"
-    # website title
-    title = "LoveIt"
     # language name
     languageName = "English"
     # whether to include Chinese/Japanese/Korean
@@ -248,8 +250,6 @@ enableEmoji = true
     weight = 2
     # 网站语言, 仅在这里 CN 大写
     languageCode = "zh-CN"
-    # 网站标题
-    title = "LoveIt"
     # 语言名称
     languageName = "简体中文"
     # 是否包括中日韩文字
@@ -470,8 +470,6 @@ enableEmoji = true
     weight = 3
     # language code
     languageCode = "fr"
-    # website title
-    title = "LoveIt"
     # language name
     languageName = "Français"
     # whether to include Chinese/Japanese/Korean

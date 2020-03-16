@@ -57,6 +57,12 @@ $header-height-mobile: 3.5rem !default;
 $header-background-color: #f8f8f8 !default;
 $header-background-color-dark: #252627 !default;
 
+// Font style of the header title
+$header-title-font-family: $global-font-family !default;
+
+$header-title-font-size-desktop: 1.5rem !default;
+$header-title-font-size-mobile: 1.5rem !default;
+
 // Position of the header
 $header-position-desktop: if($header-normal-mode-desktop, static, fixed) !default;
 $header-position-mobile: if($header-normal-mode-mobile, static, fixed) !default;
