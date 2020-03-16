@@ -250,15 +250,11 @@
             });
             const comments = document.getElementsByClassName('comment') || [];
             if (comments.length) {
-                const container = document.getElementById('fixed-btn-container');
-                const button = document.createElement('a');
+                const button = document.getElementById('comment-button');
                 button.href = `#${comments[0].id}`;
-                button.id = 'comment-button';
-                button.className = 'fixed-button animated faster';
-                button.innerHTML = '<i class="fas fa-comment fa-fw"></i>';
-                container.appendChild(button);
+                button.style.display = 'block';
             }
-            const buttons = document.getElementsByClassName('fixed-button');
+            const fixedButtons = document.getElementById('fixed-buttons');
             const MIN_SCROLL = 10;
             window.addEventListener('scroll', () => {
                 this.newScrollTop = this.util.getScrollTop();
@@ -272,20 +268,18 @@
                         header.classList.add('fadeInDown');
                     }
                 });
-                this.util.forEach(buttons, (button) => {
-                    if (this.newScrollTop > 20) {
-                        if (scroll > MIN_SCROLL) {
-                            button.classList.remove('fadeIn');
-                            button.classList.add('fadeOut');
-                        } else if (scroll < - MIN_SCROLL) {
-                            button.style.display = 'block';
-                            button.classList.remove('fadeOut');
-                            button.classList.add('fadeIn');
-                        }
-                    } else {
-                        button.style.display = 'none';
+                if (this.newScrollTop > 20) {
+                    if (scroll > MIN_SCROLL) {
+                        fixedButtons.classList.remove('fadeIn');
+                        fixedButtons.classList.add('fadeOut');
+                    } else if (scroll < - MIN_SCROLL) {
+                        fixedButtons.style.display = 'block';
+                        fixedButtons.classList.remove('fadeOut');
+                        fixedButtons.classList.add('fadeIn');
                     }
-                });
+                } else {
+                    fixedButtons.style.display = 'none';
+                }
                 if (!this._scrollTimeout) {
                     this._scrollTimeout = window.setTimeout(() => {
                         this._scrollTimeout = null;

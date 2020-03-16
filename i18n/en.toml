@@ -1,6 +1,14 @@
 # Translations for English
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
+# === baseof ==
+[backToTop]
+other = "Back to Top"
+
+[viewComments]
+other = "View Comments"
+# === baseof ==
+
 # === Post ===
 [posts]
 other = "Posts"
