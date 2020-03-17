@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![CircleCI](https://img.shields.io/circleci/build/github/dillonzq/LoveIt/develop?label=CI&style=flat-square&logo=circleci)](https://app.circleci.com/pipelines/github/dillonzq/LoveIt)
 
-[English README](README.md) | 中文说明
+[English README](https://github.com/dillonzq/LoveIt/blob/master/README.md) | 中文说明
 
 [LoveIt](https://github.com/dillonzq/LoveIt) 是一个**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 
@@ -13,7 +13,7 @@
 
 由于三个主题外观的相似性，如果你对于它们的不同之处有疑问，请阅读 [为什么选择 LoveIt](#为什么选择-LoveIt)，以便你能选择最适合你的一个。
 
-![Hugo 主题 LoveIt](https://github.com/dillonzq/LoveIt/raw/develop/images/Apple-Devices-Preview.png)
+![Hugo 主题 LoveIt](https://github.com/dillonzq/LoveIt/raw/master/images/Apple-Devices-Preview.png)
 
 ## 主题[预览](https://hugoloveit.com/zh-cn/)
 

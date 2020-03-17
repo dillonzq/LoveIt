@@ -1,6 +1,8 @@
 .tag-cloud-tags {
   margin: 10px 0;
 
+  @include link(true, true);
+
   a {
     display: inline-block;
     position: relative;
@@ -14,23 +16,18 @@
     &:active,
     &:focus,
     &:hover {
-      color: $global-link-hover-color;
       -webkit-transform: scale(1.2);
       -moz-transform: scale(1.2);
       -ms-transform: scale(1.2);
       -o-transform: scale(1.2);
       transform: scale(1.2);
-
-      .dark-theme & {
-        color: $global-link-hover-color-dark;
-      }
     }
 
     small {
       color: $global-font-secondary-color;
 
       .dark-theme & {
-        color: $global-link-hover-color-dark;
+        color: $global-font-secondary-color-dark;
       }
     }
   }

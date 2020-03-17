@@ -208,7 +208,7 @@ hugo
     # ICP 备案信息，仅在中国使用 (允许使用 HTML 格式)
     icp = ""
     # 许可协议信息 (允许使用 HTML 格式)
-    license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+    license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
   # 文章页面配置
   [params.home]
     # 主页信息设置
@@ -306,7 +306,7 @@ hugo
     lightgallery = true
     # 是否在文章页面显示原始 Markdown 文档链接
     linkToMarkdown = true
-  # 数学公式 (KaTeX https://katex.org/)
+  # {{< link "https://katex.org/" KaTeX >}} 数学公式
   [params.math]
     enable = true
     # 默认块定界符是 $$ ... $$ 和 \\[ ... \\]
@@ -352,13 +352,13 @@ hugo
   # 评论系统设置
   [params.comment]
     enable = true
-    # Disqus 评论系统设置 (https://disqus.com/)
+    # {{< link "https://disqus.com/" Disqus >}} 评论系统设置
     [params.comment.disqus]
       # {{< version 0.1.1 >}}
       enable = false
       # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
       shortname = ""
-    # Gitalk 评论系统设置 (https://github.com/gitalk/gitalk)
+    # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} 评论系统设置
     [params.comment.gitalk]
       # {{< version 0.1.1 >}}
       enable = false
@@ -366,7 +366,7 @@ hugo
       repo = ""
       clientId = ""
       clientSecret = ""
-    # Valine 评论系统设置 (https://github.com/xCss/Valine)
+    # {{< link "https://github.com/xCss/Valine" Valine >}} 评论系统设置
     [params.comment.valine]
       enable = false
       appId = ""
@@ -380,7 +380,7 @@ hugo
       lang = "en"
       visitor = true
       recordIP = true
-    # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
+    # # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook 评论系统" >}}设置
     [params.comment.facebook]
       enable = false
       width = "100%"
@@ -414,58 +414,57 @@ hugo
     height = 600
   # CSS 和 JS 文件的 CDN 设置
   [params.cdn]
-    # fontawesome-free@5.12.1 https://fontawesome.com/
+    # {{< link "https://fontawesome.com/" "fontawesome-free" >}}@5.12.1
     fontawesomeFreeCSS = ''
     # animate.css@3.7.2 https://github.com/daneden/animate.css
     animateCSS = ''
-    # smooth-scroll@16.1.2 https://github.com/cferdinandi/smooth-scroll
+    # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.2
     smoothScrollJS = ''
-    # sharer@0.4.0 https://github.com/ellisonleao/sharer.js
+    # {{< link "https://github.com/ellisonleao/sharer.js" "sharer" >}}@0.4.0
     sharerJS = ''
-    # lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
+    # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
     lazysizesJS = ''
-    # lightgallery@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0 https://github.com/sachinchoolur/lightgallery.js
+    # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery" >}}@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0
     lightgalleryCSS = ''
     lightgalleryJS = ''
     lightgalleryThumbnailJS = ''
     lightgalleryZoomJS = ''
-    # typeit@6.5.1 https://github.com/alexmacarthur/typeit
+    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@6.5.1
     typeitJS = ''
-    # katex@0.11.1 https://github.com/KaTeX/KaTeX
+    # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
     katexCSS = ''
     katexJS = ''
     katexAutoRenderJS = ''
     katexCopyTexCSS = ''
     katexCopyTexJS = ''
     katexMhchemJS = ''
-    # mermaid@8.4.8 https://github.com/knsv/mermaid
+    # {{< link "https://github.com/knsv/mermaid" "mermaid" >}}@8.4.8
     mermaidJS = ''
-    # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
+    # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
     aplayerCSS = ''
     aplayerJS = ''
-    # meting@2.0.1 https://github.com/metowolf/MetingJS
+    # {{< link "https://github.com/metowolf/MetingJS" "meting" >}}@2.0.1
     metingJS = ''
-    # echarts@4.6.0 https://echarts.apache.org/
+    # {{< link "https://echarts.apache.org/" "echarts" >}}@4.6.0
     echartsJS = ''
     echartsMacaronsJS = ''
-    # gitalk@1.6.2 https://github.com/gitalk/gitalk
+    # {{< link "https://github.com/gitalk/gitalk" "gitalk" >}}@1.6.2
     gitalkCSS = ''
     gitalkJS = ''
-    # valine@1.3.10 https://valine.js.org/
+    # {{< link "https://valine.js.org/" "valine" >}}@1.3.10
     valineJS = ''
 
 # Hugo 解析文档的配置
 [markup]
-  # 语法高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
+  # {{< link "https://gohugo.io/content-management/syntax-highlighting" "语法高亮设置" >}}
   [markup.highlight]
     codeFences = true
     guessSyntax = true
-    lineNoStart = 1
     lineNos = true
-    lineNumbersInTable = true
+    lineNumbersInTable = false
+    # false 是必要的设置
+    # ({{< link "https://github.com/dillonzq/LoveIt/issues/158" >}})
     noClasses = false
-    style = "monokai"
-    tabWidth = 4
   # Goldmark 是 Hugo 0.60 以来的默认 Markdown 解析库
   [markup.goldmark]
     [markup.goldmark.extensions]
@@ -495,12 +494,12 @@ hugo
   filename = "sitemap.xml"
   priority = 0.5
 
-# Permalinks 信息 (https://gohugo.io/content-management/urls/#permalinks)
+# {{< link "https://gohugo.io/content-management/urls/#permalinks" "Permalinks 信息" >}}
 [Permalinks]
   # posts = ":year/:month/:filename"
   posts = ":filename"
 
-# 隐私信息设置 (https://gohugo.io/about/hugo-and-gdpr/)
+# {{< link "https://gohugo.io/about/hugo-and-gdpr/" "隐私信息设置" >}}
 [privacy]
   [privacy.googleAnalytics]
     anonymizeIP = true

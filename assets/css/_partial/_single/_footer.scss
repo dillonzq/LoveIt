@@ -21,21 +21,7 @@
           color: $global-font-secondary-color-dark;
         }
 
-        a {
-          color: $single-link-color;
-
-          .dark-theme & {
-            color: $single-link-color-dark;
-          }
-
-          &:hover {
-            color: $single-link-hover-color;
-
-            .dark-theme & {
-              color: $single-link-hover-color-dark;
-            }
-          }
-        }
+        @include link(false, false);
       }
 
       .post-info-license {
@@ -51,21 +37,7 @@
         font-size: 0.8rem;
         width: 8rem;
 
-        a {
-          color: $single-link-color;
-
-          .dark-theme & {
-            color: $single-link-color-dark;
-          }
-
-          &:hover {
-            color: $single-link-hover-color;
-
-            .dark-theme & {
-              color: $single-link-hover-color-dark;
-            }
-          }
-        }
+        @include link(false, false);
       }
     }
   }

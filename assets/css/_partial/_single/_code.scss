@@ -46,23 +46,12 @@ code, pre, .highlight table, .highlight tr, .highlight td {
     }
   }
 
+  .ln {
+    padding-right: .8rem;
+  }
+
   .lntd {
-    &:first-child {
-      width: 1.2rem;
-
-      /* LineNumbersTable */
-      .lnt {
-        color: $code-info-color;
-      }
-
-      /* LineHighlight */
-      .hl {
-        font-weight: bolder;
-      }
-    }
-
     &:last-child {
-      /* LineHighlight */
       .hl {
         display: block;
         background-color: darken($code-background-color, 5%);
@@ -71,6 +60,14 @@ code, pre, .highlight table, .highlight tr, .highlight td {
           background-color: darken($code-background-color-dark, 5%);
         }
       }
+    }
+  }
+
+  .ln, .lnt {
+    color: $global-font-secondary-color;
+
+    .dark-theme & {
+      color: $global-font-secondary-color-dark;
     }
   }
 }
@@ -103,6 +100,7 @@ code, pre, .highlight table, .highlight tr, .highlight td {
   table, tr, td {
     margin: 0;
     border: none !important;
+    white-space: nowrap;
   }
 
   td {
@@ -119,21 +117,7 @@ code, pre, .highlight table, .highlight tr, .highlight td {
     padding: .4rem .8rem;
     background-color: darken($code-background-color, 5%);
 
-    a {
-      color: $single-link-color;
-
-      .dark-theme & {
-        color: $single-link-color-dark;
-      }
-    }
-
-    a:hover {
-      color: $single-link-hover-color;
-
-      .dark-theme &:hover {
-        color: $single-link-hover-color-dark;
-      }
-    }
+    @include link(false, false);
 
     .dark-theme & {
       background-color: darken($code-background-color-dark, 5%);

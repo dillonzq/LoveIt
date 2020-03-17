@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![CircleCI](https://img.shields.io/circleci/build/github/dillonzq/LoveIt/develop?label=CI&style=flat-square&logo=circleci)](https://app.circleci.com/pipelines/github/dillonzq/LoveIt)
 
-English README | [中文说明](README.zh-cn.md)
+English README | [中文说明](https://github.com/dillonzq/LoveIt/blob/master/README.zh-cn.md)
 
 **LoveIt** is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
 
@@ -14,7 +14,7 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 Since the three themes have a similar look, if you have questions about their differences,
 read [Why choose LoveIt](#why-choose-loveit) so that you can choose the one that works best for you.
 
-![Hugo Theme LoveIt](https://github.com/dillonzq/LoveIt/raw/develop/images/Apple-Devices-Preview.png)
+![Hugo Theme LoveIt](https://github.com/dillonzq/LoveIt/raw/master/images/Apple-Devices-Preview.png)
 
 ## [Demo Site](https://hugoloveit.com/)
 

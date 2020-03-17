@@ -60,20 +60,9 @@ body {
 }
 
 a {
-  color: $global-link-color;
   text-decoration: none;
-
-  &:hover {
-    color: $global-link-hover-color;
-  }
-
-  .dark-theme & {
-    color: $global-link-color-dark;
-
-    &:hover {
-      color: $global-link-hover-color-dark;
-    }
-  }
 }
+
+@include link(true, true);
 
 @import "../_partial/fixed-button";
