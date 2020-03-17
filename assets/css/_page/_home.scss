@@ -1,6 +1,4 @@
 /** Home **/
-@import "../_partial/_home/summary";
-
 @mixin page-home($profile, $posts) {
   .home {
     @if $profile {

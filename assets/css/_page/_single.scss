@@ -26,21 +26,7 @@
       color: $global-font-secondary-color-dark;
     }
 
-    a {
-      color: $single-link-color;
-
-      .dark-theme & {
-        color: $global-link-color-dark;
-      }
-
-      &:hover {
-        color: $single-link-hover-color;
-
-        .dark-theme & {
-          color: $global-link-hover-color-dark;
-        }
-      }
-    }
+    @include link(false, true);
 
     .author {
       font-size: 1.05rem;
@@ -102,22 +88,19 @@
       }
     }
 
+    @include link(false, false);
+
     a {
       word-break: break-all;
       word-break: break-word;
-      color: $single-link-color;
 
-      .dark-theme &, .dark-theme & b, .dark-theme & strong {
+      .dark-theme & b, .dark-theme & strong {
         color: $single-link-color-dark;
       }
     }
 
-    a:hover {
-      color: $single-link-hover-color;
-
-      .dark-theme &, .dark-theme & b, .dark-theme & strong {
-        color: $single-link-hover-color-dark;
-      }
+    .dark-theme a:hover b, .dark-theme a:hover strong {
+      color: $single-link-hover-color-dark;
     }
 
     ul {

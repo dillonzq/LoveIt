@@ -31,6 +31,11 @@ Découvrez comment créer et organiser votre contenu rapidement et intuitivement
 
 <!--more-->
 
+{{< admonition warning >}}
+Sorry, this article has not been completely translated into **French**.
+Welcome to take the time to propose a translation by [making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
+{{< /admonition >}}
+
 ## 1 Contents Organization
 
 A few suggestions to help you get a good looking site quickly:
