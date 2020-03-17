@@ -256,9 +256,9 @@ Example basic `link` Input:
 Or
 {{</* link href="https://assemble.io" */>}}
 
-{{</* link "contact@revolunet.com" */>}}
+{{</* link "mailto:contact@revolunet.com" */>}}
 Or
-{{</* link href="contact@revolunet.com" */>}}
+{{</* link href="mailto:contact@revolunet.com" */>}}
 
 {{</* link "https://assemble.io" Assemble */>}}
 Or
@@ -268,7 +268,7 @@ Or
 The rendered output looks like this:
 
 * {{< link "https://assemble.io" >}}
-* {{< link "contact@revolunet.com" >}}
+* {{< link "mailto:contact@revolunet.com" >}}
 * {{< link "https://assemble.io" Assemble >}}
 
 #### Add a Title

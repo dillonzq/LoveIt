@@ -259,9 +259,9 @@ This is a right-aligned paragraph.
 或者
 {{</* link href="https://assemble.io" */>}}
 
-{{</* link "contact@revolunet.com" */>}}
+{{</* link "mailto:contact@revolunet.com" */>}}
 或者
-{{</* link href="contact@revolunet.com" */>}}
+{{</* link href="mailto:contact@revolunet.com" */>}}
 
 {{</* link "https://assemble.io" Assemble */>}}
 或者
@@ -271,7 +271,7 @@ This is a right-aligned paragraph.
 呈现的输出效果如下:
 
 * {{< link "https://assemble.io" >}}
-* {{< link "contact@revolunet.com" >}}
+* {{< link "mailto:contact@revolunet.com" >}}
 * {{< link "https://assemble.io" Assemble >}}
 
 #### 添加一个标题
