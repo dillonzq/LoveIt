@@ -219,6 +219,73 @@ This is a right-aligned paragraph.
 This is a right-aligned paragraph.
 {{< /style >}}
 
+### `link`
+
+{{< admonition >}}
+{{< version 1.2.0 >}}
+{{< /admonition >}}
+
+`link` shortcode 是 [Markdown 链接语法](../basic-markdown-syntax/#links) 的替代.
+`link` shortcode 可以提供一些其它的功能并且可以在代码块中使用.
+
+`link` shortcode 可以使用以下命名参数:
+
+* **href**
+
+    链接的目标.
+
+* **content**
+
+    链接的内容 (允许 HTML 格式).
+
+* **title**
+
+    HTML `a` 标签 的 `title` 属性, 当悬停在链接上会显示的提示.
+
+* **rel**
+
+    HTML `a` 标签 的 `rel` 补充属性.
+
+* **class**
+
+    HTML `a` 标签 的 `class` 属性.
+
+#### 基本 `link`
+
+一个基本的 `link` 示例:
+
+```markdown
+{{</* link "https://assemble.io" */>}}
+或者
+{{</* link href="https://assemble.io" */>}}
+
+{{</* link "contact@revolunet.com" */>}}
+或者
+{{</* link href="contact@revolunet.com" */>}}
+
+{{</* link "https://assemble.io" Assemble */>}}
+或者
+{{</* link href="https://assemble.io" content=Assemble */>}}
+```
+
+呈现的输出效果如下:
+
+* {{< link "https://assemble.io" >}}
+* {{< link "contact@revolunet.com" >}}
+* {{< link "https://assemble.io" Assemble >}}
+
+#### 添加一个标题
+
+```markdown
+{{</* link "https://github.com/upstage/" Upstage "Visit Upstage!" */>}}
+或者
+{{</* link href="https://github.com/upstage/" content=Upstage title="Visit Upstage!" */>}}
+```
+
+呈现的输出效果如下 (将鼠标悬停在链接上，会有一行提示):
+
+{{< link "https://github.com/upstage/" Upstage "Visit Upstage!" >}}
+
 ### `image`
 
 `image` shortcode 是 [`figure` shortcode](#figure) 的替代. `image` shortcode 可以充分利用 [lazysizes](https://github.com/aFarkas/lazysizes) 和 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 两个依赖库.
@@ -333,7 +400,7 @@ This is a right-aligned paragraph.
 {{</* admonition type=tip title="This is a tip" details=true */>}}
 一个 **技巧** 横幅
 {{</* /admonition */>}}
-Or
+或者
 {{</* admonition tip "This is a tip" true */>}}
 一个 **技巧** 横幅
 {{</* /admonition */>}}
@@ -1016,7 +1083,7 @@ data = [
 
 ```markdown
 {{</* music auto="https://music.163.com/#/playlist?id=60198" */>}}
-Or
+或者
 {{</* music "https://music.163.com/#/playlist?id=60198" */>}}
 ```
 
@@ -1030,7 +1097,7 @@ Or
 
 ```markdown
 {{</* music server="netease" type="song" id="1868553" */>}}
-Or
+或者
 {{</* music netease song 1868553 */>}}
 ```
 
@@ -1052,7 +1119,7 @@ https://www.bilibili.com/video/av47027633
 
 ```markdown
 {{</* bilibili 47027633 */>}}
-Or
+或者
 {{</* bilibili av=47027633 */>}}
 ```
 
@@ -1070,7 +1137,7 @@ https://www.bilibili.com/video/av36570401?p=3
 
 ```markdown
 {{</* bilibili 36570401 3 */>}}
-Or
+或者
 {{</* bilibili av=36570401 p=3 */>}}
 ```
 

@@ -217,6 +217,72 @@ The rendered output looks like this:
 This is a right-aligned paragraph.
 {{< /style >}}
 
+### `link`
+
+{{< admonition >}}
+{{< version 1.2.0 >}}
+{{< /admonition >}}
+
+`link` shortcode is an alternative to [Markdown link syntax](../basic-markdown-syntax/#links). `link` shortcode can provide some other features and can be used in code blocks.
+
+The `link` shortcode can use the following named parameters:
+
+* **href**
+
+    Destination of the link.
+
+* **content**
+
+    Content of the link (HTML format is allowed).
+
+* **title**
+
+    `title` attribute of the HTML `a` tag, which will be shown when hovering on the link.
+
+* **rel**
+
+    Additional `rel` attributes of the HTML `a` tag.
+
+* **class**
+
+    `class` attribute of the HTML `a` tag.
+
+#### Basic `link`
+
+Example basic `link` Input:
+
+```markdown
+{{</* link "https://assemble.io" */>}}
+Or
+{{</* link href="https://assemble.io" */>}}
+
+{{</* link "contact@revolunet.com" */>}}
+Or
+{{</* link href="contact@revolunet.com" */>}}
+
+{{</* link "https://assemble.io" Assemble */>}}
+Or
+{{</* link href="https://assemble.io" content=Assemble */>}}
+```
+
+The rendered output looks like this:
+
+* {{< link "https://assemble.io" >}}
+* {{< link "contact@revolunet.com" >}}
+* {{< link "https://assemble.io" Assemble >}}
+
+#### Add a Title
+
+```markdown
+{{</* link "https://github.com/upstage/" Upstage "Visit Upstage!" */>}}
+Or
+{{</* link href="https://github.com/upstage/" content=Upstage title="Visit Upstage!" */>}}
+```
+
+The rendered output looks like this (hover over the link, there should be a tooltip):
+
+{{< link "https://github.com/upstage/" Upstage "Visit Upstage!" >}}
+
 ### `image`
 
 `image` shortcode is an alternative to [`figure` shortcode](#figure). `image` shortcode can take full advantage of the dependent libraries of [lazysizes](https://github.com/aFarkas/lazysizes) and [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js).
