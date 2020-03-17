@@ -390,6 +390,17 @@ Note that some of these parameters are explained in details in other sections of
       numPosts = 10
       appId = ""
       languageCode = "en_US"
+    # {{< version 0.2.0 >}}
+    # {{< link "https://comments.app/" "Telegram Comments" >}} Config
+    [params.comment.telegram]
+      enable = false
+      siteID = ""
+      limit = 5
+      height = ""
+      color = ""
+      colorful = true
+      dislikes = false
+      outlined = false
 
   # site verification code for Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]

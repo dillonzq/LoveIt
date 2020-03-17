@@ -31,16 +31,17 @@ Compared to the original LeaveIt theme and the KeepIt theme, the LoveIt theme ha
 * More readable **dark mode**
 * Some beautiful **CSS animations**
 * Easy-to-use and self-expanding **table of contents**
+* More **social links**, **share sites** and **comment system**
 * Extended markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
 * Extended markdown syntax for **ruby annotation**
-* **Mathematical formula** support by [KaTeX](https://katex.org/)
-* **Diagram syntax** shortcode support by [mermaid](https://github.com/knsv/mermaid)
+* **Mathematical formula** supported by [KaTeX](https://katex.org/)
+* **Diagram syntax** shortcode supported by [mermaid](https://github.com/knsv/mermaid)
 * **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
-* Embedded **music player** support by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
-* **Bilibili** player support
-* Kinds of **admonitions** shortcode support
-* Custom style shortcodes support
-* **CDN** for all third-party libraries support
+* Embedded **music player** supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
+* **Bilibili** player supported
+* Kinds of **admonitions** shortcode supported
+* Custom style shortcodes supported
+* **CDN** for all third-party libraries supported
 * ...
 
 In short,
@@ -57,9 +58,9 @@ I hope you will LoveIt ❤️!
 
 * Optimized for **performance**: 99/100 on mobile and 100/100 on desktop in [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
 * Optimized SEO performance with a correct **SEO SCHEMA** based on JSON-LD
-* [**Google Analytics**](https://analytics.google.com/analytics) support
-* Search engine **verification** support (Google, Bind, Yandex and Baidu)
-* **CDN** for third-party libraries support
+* [**Google Analytics**](https://analytics.google.com/analytics) supported
+* Search engine **verification** supported (Google, Bind, Yandex and Baidu)
+* **CDN** for third-party libraries supported
 * Automatically converted images with **Lazy Load** by [lazysizes](https://github.com/aFarkas/lazysizes)
 
 ### Appearance and Layout
@@ -67,21 +68,22 @@ I hope you will LoveIt ❤️!
 * **Responsive** layout
 * **Dark/Light** mode
 * Globally consistent **design language**
-* **Pagination** support
+* **Pagination** supported
 * Easy-to-use and self-expanding **table of contents**
-* **Multilanguage** support and i18n ready
+* **Multilanguage** supported and i18n ready
 * Beautiful **CSS animation**
 
 ### Social and Comment Systems
 
 * **Gravatar** supported by [Gravatar](https://gravatar.com)
-* Local **Avatar** support
-* Up to **61** social sites supported
-* Up to **28** share sites support
+* Local **Avatar** supported
+* Up to **61** social links supported
+* Up to **28** share sites supported
 * **Disqus** comment system supported by [Disqus](https://disqus.com)
 * **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
 * **Valine** comment system supported by [Valine](https://valine.js.org/)
 * **Facebook comments** system supported by [Facebook](https://developers.facebook.com/docs/plugins/comments/)
+* **Telegram Comments** system supported by [Comments](https://comments.app/)
 
 ### Extended Features
 

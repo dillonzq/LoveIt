@@ -113,4 +113,14 @@
             Please enable JavaScript to view the <a href="https://developers.facebook.com/docs/plugins/comments/">comments powered by Facebook.</a>
         </noscript>
     {{- end -}}
+
+    {{- /* Telegram Comments System */ -}}
+    {{- if .Site.Params.comment.telegram.enable -}}
+        {{- $telegram := .Site.Params.comment.telegram -}}
+        <div id="telegram-comments" class="comment"></div>
+        <script async src="https://comments.app/js/widget.js?2" data-comments-app-website="{{ $telegram.siteID }}" data-limit="{{ $telegram.limit | default 5 }}"{{ with $telegram.height }} data-height="{{ . }}"{{ end }}{{ with $telegram.color }} data-color="{{ . }}"{{ end }}{{ if $telegram.colorful }} data-colorful="1"{{ end }}{{ if $telegram.dislikes }} data-dislikes="1"{{ end }}{{ if $telegram.outlined }} data-outlined="1"{{ end }}></script>
+        <noscript>
+            Please enable JavaScript to view the <a href="https://comments.app/">comments powered by Telegram Comments.</a>
+        </noscript>
+    {{- end -}}
 {{- end -}}

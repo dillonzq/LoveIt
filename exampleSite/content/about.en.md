@@ -25,9 +25,9 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 
 * :(fas fa-rocket): Optimized for **performance**: 99/100 on mobile and 100/100 on desktop in [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
 * :(fab fa-searchengin): Optimized SEO performance with a correct **SEO SCHEMA** based on JSON-LD
-* :(fab fa-google): [**Google Analytics**](https://analytics.google.com/analytics) support
-* :(fas fa-search): Search engine **verification** support (Google, Bind, Yandex and Baidu)
-* :(fas fa-tachometer-alt): **CDN** for third-party libraries support
+* :(fab fa-google): [**Google Analytics**](https://analytics.google.com/analytics) supported
+* :(fas fa-search): Search engine **verification** supported (Google, Bind, Yandex and Baidu)
+* :(fas fa-tachometer-alt): **CDN** for third-party libraries supported
 * :(fas fa-cloud-download-alt): Automatically converted images with **Lazy Load** by [lazysizes](https://github.com/aFarkas/lazysizes)
 
 #### Appearance and Layout
@@ -35,21 +35,22 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 * :(fas fa-desktop): / :(fas fa-mobile): **Responsive** layout
 * :(fas fa-moon): / :(fas fa-sun): **Dark/Light** mode
 * :(fas fa-layer-group): Globally consistent **design language**
-* :(fas fa-ellipsis-h): **Pagination** support
+* :(fas fa-ellipsis-h): **Pagination** supported
 * :(far fa-list-alt): Easy-to-use and self-expanding **table of contents**
-* :(fas fa-language): **Multilanguage** support and i18n ready
+* :(fas fa-language): **Multilanguage** supported and i18n ready
 * :(fab fa-css3-alt): Beautiful **CSS animation**
 
 #### Social and Comment Systems
 
 * :(far fa-user): **Gravatar** supported by [Gravatar](https://gravatar.com)
-* :(fas fa-user-circle): Local **Avatar** support
-* :(far fa-id-card): Up to **61** social sites supported
-* :(fas fa-share-square): Up to **28** share sites support
+* :(fas fa-user-circle): Local **Avatar** supported
+* :(far fa-id-card): Up to **61** social links supported
+* :(fas fa-share-square): Up to **28** share sites supported
 * :(far fa-comment): **Disqus** comment system supported by [Disqus](https://disqus.com)
 * :(far fa-comment-dots): **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
 * :(far fa-comment-alt): **Valine** comment system supported by [Valine](https://valine.js.org/)
 * :(far fa-comments): **Facebook comments** system supported by [Facebook](https://developers.facebook.com/docs/plugins/comments/)
+* :(fas fa-comments): **Telegram Comments** system supported by [Comments](https://comments.app/)
 
 #### Extended Features
 

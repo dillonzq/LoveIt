@@ -30,6 +30,7 @@
 * 可读性更强的**暗黑模式**
 * 一些美观的 **CSS 动画**
 * 易用和自动展开的**文章目录**
+* 支持更多的**社交链接**、**网站分享**和**评论系统**
 * 支持基于 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
 * 支持**上标注释**的扩展 Markdown 语法
 * 支持基于 [KaTeX](https://katex.org/) 的**数学公式**
@@ -77,6 +78,7 @@
 * 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
 * 支持 **[Valine](https://valine.js.org/)** 评论系统
 * 支持 **[Facebook](https://developers.facebook.com/docs/plugins/comments/) 评论**系统
+* 支持 **[Telegram Comments](https://comments.app/) 评论**系统
 
 ### 扩展功能
 
