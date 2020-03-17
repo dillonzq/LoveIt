@@ -28,7 +28,7 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 
 #### Performance and SEO
 
-* :(fas fa-rocket): Optimized for **performance**: 99/100 on mobile and 100/100 on desktop in [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
+* :(fas fa-rocket): Optimized for **performance**: [99]/[100] on mobile and [100]/[100] on desktop in [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
 * :(fab fa-searchengin): Optimized SEO performance with a correct **SEO SCHEMA** based on JSON-LD
 * :(fab fa-google): [**Google Analytics**](https://analytics.google.com/analytics) supported
 * :(fas fa-search): Search engine **verification** supported (Google, Bind, Yandex and Baidu)
@@ -37,8 +37,8 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 
 #### Appearance and Layout
 
-* :(fas fa-desktop): / :(fas fa-mobile): **Responsive** layout
-* :(fas fa-moon): / :(fas fa-sun): **Dark/Light** mode
+* [:(fas fa-desktop):]/[:(fas fa-mobile):] **Responsive** layout
+* [:(fas fa-sun):]/[:(fas fa-moon):] **[Light]/[Dark]** mode
 * :(fas fa-layer-group): Globally consistent **design language**
 * :(fas fa-ellipsis-h): **Pagination** supported
 * :(far fa-list-alt): Easy-to-use and self-expanding **table of contents**

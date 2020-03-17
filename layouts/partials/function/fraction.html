@@ -1,0 +1,5 @@
+{{- /* Fraction */ -}}
+{{- /* [A]/[B] -> <sup>A</sup>/<sub>B</sub> */ -}}
+{{- $REin := `\[(.+?)\]/\[(.+?)\]` -}}
+{{- $REout := `<sup>$1</sup>/<sub>$2</sub>` -}}
+{{- return replaceRE $REin $REout . -}}

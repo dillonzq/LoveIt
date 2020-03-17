@@ -246,6 +246,26 @@ The rendered output looks like this:
 
 [Hugo]^(An open-source static site generator)
 
+### Fraction
+
+{{< admonition warning >}}
+{{< version 0.2.0 >}}
+{{< /admonition >}}
+
+An extended Markdown syntax for **fraction** is supported in **LoveIt** theme:
+
+```markdown
+[Light]{?/}[Dark]
+
+[99]{?/}[100]
+```
+
+The rendered output looks like this:
+
+[Light]/[Dark]
+
+[90]/[100]
+
 ### Font Awesome
 
 **LoveIt** theme uses [Font Awesome](https://fontawesome.com/) as the icon library.
