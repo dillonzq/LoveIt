@@ -35,10 +35,14 @@ comment: true
 
 由于 Hugo 提供的便利性, [Hugo](https://gohugo.io/) 本身是这个主题唯一的依赖.
 
-直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive): Hugo (> 0.62.0)](https://gohugo.io/getting-started/installing/).
+直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive): Hugo extended (> 0.62.0)](https://gohugo.io/getting-started/installing/).
 
 {{< admonition note "为什么不支持早期版本的 Hugo?" >}}
 由于 [Markdown 渲染钩子函数](https://gohugo.io/getting-started/configuration-markup/#markdown-render-hooks) 在 [Hugo 圣诞节版本](https://gohugo.io/news/0.62.0-relnotes/) 中被引入, 本主题只支持高于 **0.62.0** 的 Hugo 版本.
+{{< /admonition >}}
+
+{{< admonition note "为什么需要 Hugo extended 版本?" >}}
+由于本主题需要转换 SCSS 文件为 CSS 文件, Hugo extended 版本是必要的.
 {{< /admonition >}}
 
 ## 2 安装

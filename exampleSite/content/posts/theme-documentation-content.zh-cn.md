@@ -241,6 +241,26 @@ $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
 [Hugo]^(一个开源的静态网站生成工具)
 
+### 分数
+
+{{< admonition warning >}}
+{{< version 0.2.0 >}}
+{{< /admonition >}}
+
+**LoveIt** 主题支持一种 **分数** Markdown 扩展语法:
+
+```markdown
+[白天]{?/}[夜晚]
+
+[99]{?/}[100]
+```
+
+呈现的输出效果如下:
+
+[白天]/[夜晚]
+
+[90]/[100]
+
 ### Font Awesome
 
 **LoveIt** 主题使用 [Font Awesome](https://fontawesome.com/) 作为图标库.

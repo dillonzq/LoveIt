@@ -23,7 +23,7 @@ lightgallery: true
 
 #### 性能和 SEO
 
-* :(fas fa-rocket): **性能**优化：在 [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights) 中， 99/100 的移动设备得分和 100/100 的桌面设备得分
+* :(fas fa-rocket): **性能**优化：在 [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights) 中， [99]/[100] 的移动设备得分和 [100]/[100] 的桌面设备得分
 * :(fab fa-searchengin): 使用基于 JSON-LD 格式 的 **SEO SCHEMA** 文件进行 SEO 优化
 * :(fab fa-google): 支持 **[Google Analytics](https://analytics.google.com/analytics)**
 * :(fas fa-search): 支持搜索引擎的**网站验证** (Google, Bind, Yandex and Baidu)
@@ -32,8 +32,8 @@ lightgallery: true
 
 #### 外观和布局
 
-* :(fas fa-desktop): / :(fas fa-mobile): **响应式**布局
-* :(fas fa-moon): / :(fas fa-sun): **夜晚/白天** 主题模式
+* [:(fas fa-desktop):]/[:(fas fa-mobile):] **响应式**布局
+* [:(fas fa-sun):]/[:(fas fa-moon):] **[白天]/[夜晚]** 主题模式
 * :(fas fa-layer-group): 全局一致的**设计语言**
 * :(fas fa-ellipsis-h): 支持**分页**
 * :(far fa-list-alt): 易用和自动展开的**文章目录**

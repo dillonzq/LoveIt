@@ -221,8 +221,8 @@ This is a right-aligned paragraph.
 
 ### `link`
 
-{{< admonition >}}
-{{< version 1.2.0 >}}
+{{< admonition warning >}}
+{{< version 2.2.0 >}}
 {{< /admonition >}}
 
 `link` shortcode 是 [Markdown 链接语法](../basic-markdown-syntax/#links) 的替代.

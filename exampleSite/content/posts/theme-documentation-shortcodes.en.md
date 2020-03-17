@@ -219,8 +219,8 @@ This is a right-aligned paragraph.
 
 ### `link`
 
-{{< admonition >}}
-{{< version 1.2.0 >}}
+{{< admonition warning >}}
+{{< version 0.2.0 >}}
 {{< /admonition >}}
 
 `link` shortcode is an alternative to [Markdown link syntax](../basic-markdown-syntax/#links). `link` shortcode can provide some other features and can be used in code blocks.

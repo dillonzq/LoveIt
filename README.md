@@ -66,7 +66,7 @@ I hope you will LoveIt ❤️!
 ### Appearance and Layout
 
 * **Responsive** layout
-* **Dark/Light** mode
+* **Light/Dark** mode
 * Globally consistent **design language**
 * **Pagination** supported
 * Easy-to-use and self-expanding **table of contents**
