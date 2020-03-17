@@ -386,7 +386,18 @@ hugo
       width = "100%"
       numPosts = 10
       appId = ""
-      languageCode = "en_US"
+      languageCode = "zh_CN"
+    # {{< version 0.2.0 >}}
+    # {{< link "https://comments.app/" "Telegram Comments" >}} 评论系统设置
+    [params.comment.telegram]
+      enable = false
+      siteID = ""
+      limit = 5
+      height = ""
+      color = ""
+      colorful = true
+      dislikes = false
+      outlined = false
 
   # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]

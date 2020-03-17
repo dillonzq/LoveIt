@@ -50,6 +50,7 @@ lightgallery: true
 * :(far fa-comment-dots): 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
 * :(far fa-comment-alt): 支持 **[Valine](https://valine.js.org/)** 评论系统
 * :(far fa-comments): 支持 **[Facebook](https://developers.facebook.com/docs/plugins/comments/) 评论**系统
+* :(fas fa-comments): 支持 **[Telegram Comments](https://comments.app/) 评论**系统
 
 #### 扩展功能
 
