@@ -51,7 +51,7 @@ Hugo ships with a set of predefined shortcodes that represent very common usage.
 
 [Documentation of `figure`](https://gohugo.io/content-management/shortcodes/#figure)
 
-Example `figure` Input:
+Example `figure` input:
 
 ```markdown
 {{</* figure src="/images/theme-documentation-shortcodes/lighthouse.jpg" title="Lighthouse (figure)" */>}}
@@ -76,7 +76,7 @@ The HTML looks like this:
 
 [Documentation of `gist`](https://gohugo.io/content-management/shortcodes/#gist)
 
-Example `gist` Input:
+Example `gist` input:
 
 ```markdown
 {{</* gist spf13 7896402 */>}}
@@ -96,7 +96,7 @@ The HTML looks like this:
 
 [Documentation of `highlight`](https://gohugo.io/content-management/shortcodes/#instagram)
 
-Example `highlight` Input:
+Example `highlight` input:
 
 ```markdown
 {{</* highlight html */>}}
@@ -128,7 +128,7 @@ The rendered output looks like this:
 
 [Documentation of `instagram`](https://gohugo.io/content-management/shortcodes/#instagram)
 
-Example `instagram` Input:
+Example `instagram` input:
 
 ```markdown
 {{</* instagram BWNjjyYFxVx hidecaption */>}}
@@ -142,7 +142,7 @@ The rendered output looks like this:
 
 [Documentation of `param`](https://gohugo.io/content-management/shortcodes/#param)
 
-Example `param` Input:
+Example `param` input:
 
 ```markdown
 {{</* param description */>}}
@@ -160,7 +160,7 @@ The rendered output looks like this:
 
 [Documentation of `tweet`](https://gohugo.io/content-management/shortcodes/#tweet)
 
-Example `tweet` Input:
+Example `tweet` input:
 
 ```markdown
 {{</* tweet 877500564405444608 */>}}
@@ -174,7 +174,7 @@ The rendered output looks like this:
 
 [Documentation of `vimeo`](https://gohugo.io/content-management/shortcodes/#vimeo)
 
-Example `vimeo` Input:
+Example `vimeo` input:
 
 ```markdown
 {{</* vimeo 146022717 */>}}
@@ -188,7 +188,7 @@ The rendered output looks like this:
 
 [Documentation of `youtube`](https://gohugo.io/content-management/shortcodes/#youtube)
 
-Example `youtube` Input:
+Example `youtube` input:
 
 ```markdown
 {{</* youtube w7Ft2ymGmfc */>}}
@@ -206,9 +206,13 @@ The rendered output looks like this:
 
 `style` is a shortcode to insert custom style in your post.
 
-The `style` shortcode can use two parameters. The first is the custom style content and the second is the HTML tag around the content you want to change style, and whose default value is `p`.
+The `style` shortcode has two positional parameters.
 
-Example `style` Input:
+The **first** one is the custom style content.
+
+And the **second** one is the HTML tag around the content you want to change style, and whose default value is `p`.
+
+Example `style` input:
 
 ```markdown
 {{</* style "text-align: right" */>}}
@@ -225,36 +229,36 @@ This is a right-aligned paragraph.
 ### `link`
 
 {{< admonition warning >}}
-{{< version 2.2.0 >}}
+{{< version 0.2.0 >}}
 {{< /admonition >}}
 
 `link` shortcode is an alternative to [Markdown link syntax](../basic-markdown-syntax/#links). `link` shortcode can provide some other features and can be used in code blocks.
 
-The `link` shortcode can use the following named parameters:
+The `link` shortcode has the following named parameters:
 
-* **href**
+* **href** *[required]* (**first** positional parameter)
 
     Destination of the link.
 
-* **content**
+* **content** *[optional]* (**second** positional parameter)
 
-    Content of the link (HTML format is allowed).
+    Content of the link, default is the value of **href** parameter.
 
-* **title**
+    *Markdown or HTML format is supported.*
+
+* **title** *[optional]* (**third** positional parameter)
 
     `title` attribute of the HTML `a` tag, which will be shown when hovering on the link.
 
-* **rel**
-
-    Additional `rel` attributes of the HTML `a` tag.
-
-* **class**
+* **class** *[optional]*
 
     `class` attribute of the HTML `a` tag.
 
-#### Basic `link`
+* **rel** *[optional]*
 
-Example basic `link` Input:
+    Additional `rel` attributes of the HTML `a` tag.
+
+Example `link` input:
 
 ```markdown
 {{</* link "https://assemble.io" */>}}
@@ -276,7 +280,7 @@ The rendered output looks like this:
 * {{< link "mailto:contact@revolunet.com" >}}
 * {{< link "https://assemble.io" Assemble >}}
 
-#### Add a Title
+Example `link` input with a title:
 
 ```markdown
 {{</* link "https://github.com/upstage/" Upstage "Visit Upstage!" */>}}
@@ -292,45 +296,75 @@ The rendered output looks like this (hover over the link, there should be a tool
 
 `image` shortcode is an alternative to [`figure` shortcode](#figure). `image` shortcode can take full advantage of the dependent libraries of [lazysizes](https://github.com/aFarkas/lazysizes) and [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js).
 
-The `image` shortcode can use the following named parameters:
+The `image` shortcode has the following named parameters:
 
-* **src**
+* **src** *[required]* (**first** positional parameter)
 
     URL of the image to be displayed.
 
-* **description**
+* **alt** *[optional]* (**second** positional parameter)
 
-    Image description.
+    Alternate text for the image if the image cannot be displayed, default is the value of **src** parameter.
 
-* **title**
+    *Markdown or HTML format is supported.*
 
-    Image title.
+* **caption** *[optional]* (**third** positional parameter)
 
-* **class**
+    Image caption.
+
+    *Markdown or HTML format is supported.*
+
+* **title** *[optional]*
+
+    Image title that will be shown when hovering on the image.
+
+* **class** *[optional]*
 
     `class` attribute of the HTML `figure` tag.
 
-* **src_s**
+* **src_s** *[optional]*
 
-    URL of the image thumbnail, used for lightgallery.
+    URL of the image thumbnail, used for lightgallery, default is the value of **src** parameter.
 
-* **src_l**
+* **src_l** *[optional]*
 
-    URL of the HD image, used for lightgallery.
+    URL of the HD image, used for lightgallery, default is the value of **src** parameter.
 
-Example `image` Input:
+* **height** *[optional]*
+
+    `height` attribute of the image.
+
+* **width** *[optional]*
+
+    `width` attribute of the image.
+
+* **linked** *[optional]*
+
+    Whether the image needs to be hyperlinked, default is `true`.
+
+* **rel** *[optional]*
+
+    Additional `rel` attributes of the HTML `a` tag, if **linked** parameter is set to `true`.
+
+* **large** *[optional]*
+
+    Whether the image is large used for loading animation, if **linked** parameter is set to `false`.
+
+Example `image` input:
 
 ```markdown
-{{</* image src="/images/theme-documentation-shortcodes/lighthouse.jpg" title="Lighthouse (`image`)" src-s="/images/theme-documentation-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-shortcodes/lighthouse-large.jpg" */>}}
+{{</* image src="/images/theme-documentation-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-shortcodes/lighthouse-large.jpg" */>}}
 ```
 
 The rendered output looks like this:
 
-{{< image src="/images/theme-documentation-shortcodes/lighthouse.jpg" title="Lighthouse (`image`)" src-s="/images/theme-documentation-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-shortcodes/lighthouse-large.jpg" >}}
+{{< image src="/images/theme-documentation-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-shortcodes/lighthouse-large.jpg" >}}
 
 ### `admonition`
 
-The `admonition` shortcode supports **12** types of banners to help you put notice in your page and `Markdown` format is supported.
+The `admonition` shortcode supports **12** types of banners to help you put notice in your page.
+
+*Markdown or HTML format in the content is supported.*
 
 {{< admonition >}}
 A **note** banner
@@ -380,23 +414,21 @@ An **example** banner
 A **quote** banner
 {{< /admonition >}}
 
-The `admonition` shortcode can use the following named parameters:
+The `admonition` shortcode has the following named parameters:
 
-* **type**
+* **type** *[optional]* (**first** positional parameter)
 
-    Type of the `admonition` banner, default is **note**
+    Type of the `admonition` banner, default is `note`.
 
-* **title**
+* **title** *[optional]* (**second** positional parameter)
 
-    Title of the `admonition` banner, default is the type name of the banner
+    Title of the `admonition` banner, default is the value of **type** parameter.
 
-* **details**
+* **details** *[optional]* (**third** positional parameter)
 
-    if `true`, the content will be expandable/collapsible.
+    Whether the content will be expandable/collapsible, default is `false`.
 
-You can also use the positional parameters in the order of **type**, **title** and **details**.
-
-Example `admonition` Input:
+Example `admonition` input:
 
 ```markdown
 {{</* admonition type=tip title="This is a tip" details=true */>}}
@@ -422,7 +454,7 @@ Just insert your mermaid code in the `mermaid` shortcode and that’s it.
 
 #### Flowchart {#flowchart}
 
-Example **flowchart** `mermaid` Input:
+Example **flowchart** `mermaid` input:
 
 ```markdown
 {{</* mermaid */>}}
@@ -446,7 +478,7 @@ graph LR;
 
 #### Sequence Diagram {#sequence-diagram}
 
-Example **sequence diagram** `mermaid` Input:
+Example **sequence diagram** `mermaid` input:
 
 ```markdown
 {{</* mermaid */>}}
@@ -482,7 +514,7 @@ sequenceDiagram
 
 #### GANTT {#gantt}
 
-Example **GANTT** `mermaid` Input:
+Example **GANTT** `mermaid` input:
 
 ```markdown
 {{</* mermaid */>}}
@@ -526,7 +558,7 @@ gantt
 
 #### Class Diagram {#class-diagram}
 
-Example **class diagram** `mermaid` Input:
+Example **class diagram** `mermaid` input:
 
 ```markdown
 {{</* mermaid */>}}
@@ -568,7 +600,7 @@ classDiagram
 
 #### State Diagram {#state-diagram}
 
-Example **state diagram** `mermaid` Input:
+Example **state diagram** `mermaid` input:
 
 ```markdown
 {{</* mermaid */>}}
@@ -596,7 +628,7 @@ stateDiagram
 
 #### Git Graph {#git-graph}
 
-Example **git graph** `mermaid` Input:
+Example **git graph** `mermaid` input:
 
 ```markdown
 {{</* mermaid */>}}
@@ -642,7 +674,7 @@ end
 
 #### Pie {#pie}
 
-Example **pie** `mermaid` Input:
+Example **pie** `mermaid` input:
 
 ```markdown
 {{</* mermaid */>}}
@@ -670,7 +702,7 @@ The basic chart types ECharts supports include [line series](https://echarts.apa
 
 Just insert your ECharts option in `JSON`/`YAML`/`TOML` format in the `echarts` shortcode and that’s it.
 
-Example `echarts` Input in `JSON` format:
+Example `echarts` input in `JSON` format:
 
 ```json
 {{</* echarts */>}}
@@ -1044,32 +1076,29 @@ The rendered output looks like this:
 
 The `music` shortcode embeds a responsive music player based on [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS).
 
-The `music` shortcode can use the following named parameters:
-
-|parameter       |default       |description|
-|:---------------|:------------:|:----------|
-|url             |**require**   |music URL|
-|name            |options       |music name|
-|artist          |options       |music artist|
-|cover           |options       |music cover URL|
-|server          |**require**   |music platform: `netease`, `tencent`, `kugou`, `xiami`, `baidu`|
-|type            |**require**   |`song`, `playlist`, `album`, `search`, `artist`|
-|id              |**require**   |song id / playlist id / album id / search keyword|
-|auto            |options       |music link, support: `netease`, `tencent`, `xiami`|
-|fixed           |`false`       |enable fixed mode|
-|mini            |`false`       |enable mini mode|
-|autoplay        |`false`       |audio autoplay|
-|theme           |`#a9a9b3`     |main color|
-|loop            |`all`         |player loop play, values: 'all', 'one', 'none'|
-|order           |`list`        |player play order, values: 'list', 'random'|
-|volume          |`0.7`         |default volume, notice that player will remember user setting, default volume will not work after user set volume themselves|
-|mutex           |`true`        |prevent to play multiple player at the same time, pause other players when this player start play|
-|list-folded     |`false`       |indicate whether list should folded at first|
-|list-max-height |`340px`       |list max height|
+There are three ways to use it the `music` shortcode.
 
 #### Custom Music URL {#custom-music-url}
 
-Example `music` Input:
+The `music` shortcode has the following named parameters by custom music URL:
+
+* **server** *[required]*
+
+    URL of the custom music.
+
+* **name** *[optional]*
+
+    Name of the custom music.
+
+* **artist** *[optional]*
+
+    Artist of the custom music.
+
+* **cover** *[required]*
+
+    URL of the custom music cover.
+
+Example `music` input by custom music URL:
 
 ```markdown
 {{</* music url="https://rainymood.com/audio1110/0.m4a" name=rainymood artist=rainymood cover="https://rainymood.com/i/badge.jpg" */>}}
@@ -1081,7 +1110,14 @@ The rendered output looks like this:
 
 #### Music Platform URL Automatic Identification {#automatic-identification}
 
-Example `music` Input:
+The `music` shortcode has one named parameter by music platform URL automatic identification:
+
+* **auto** *[required]* (**first** positional parameter)
+
+    URL of the music platform URL for automatic identification,
+    which supports `netease`, `tencent` and `xiami` music platform.
+
+Example `music` input by music platform URL automatic identification:
 
 ```markdown
 {{</* music auto="https://music.163.com/#/playlist?id=60198" */>}}
@@ -1095,7 +1131,25 @@ The rendered output looks like this:
 
 #### Custom Server, Type and ID {#custom-server}
 
-Example `music` Input:
+The `music` shortcode has the following named parameters by custom music platform:
+
+* **server** *[required]* (**first** positional parameter)
+
+    [`netease`, `tencent`, `kugou`, `xiami`, `baidu`]
+
+    Music platform.
+
+* **type** *[required]* (**second** positional parameter)
+
+    [`song`, `playlist`, `album`, `search`, `artist`]
+
+    Type of the music.
+
+* **id** *[required]* (**third** positional parameter)
+
+    Song ID, or playlist ID, or album ID, or search keyword, or artist ID.
+
+Example `music` input by custom music platform:
 
 ```markdown
 {{</* music server="netease" type="song" id="1868553" */>}}
@@ -1107,6 +1161,56 @@ The rendered output looks like this:
 
 {{< music netease song 1868553 >}}
 
+#### Other Parameters
+
+The `music` shortcode has other named parameters applying to the above three ways:
+
+* **theme** *[optional]*
+
+    Main color of the music player, default is `#a9a9b3`.
+
+* **fixed** *[optional]*
+
+    Whether to enable fixed mode, default is `false`.
+
+* **mini** *[optional]*
+
+    Whether to enable mini mode, default is `false`.
+
+* **autoplay** *[optional]*
+
+    Whether to autoplay music, default is `false`.
+
+* **volume** *[optional]*
+
+    Default volume when the player is first opened, which will be remembered in the browser, default is `0.7`.
+
+* **mutex** *[optional]*
+
+    Whether to pause other players when this player starts playing, default is `true`.
+
+The `music` shortcode has the following named parameters only applying to the type of music list:
+
+* **loop** *[optional]*
+
+    [`all`, `one`, `none`]
+
+    Loop mode of the music list, default is `none`.
+
+* **order** *[optional]*
+
+    [`list`, `random`]
+
+    Play order of the music list, default is `list`.
+
+* **list-folded** *[optional]*
+
+    Whether the music list should be folded at first, default is `false`.
+
+* **list-max-height** *[optional]*
+
+    Max height of the music list, default is `340px`.
+
 ### `bilibili`
 
 The `bilibili` shortcode embeds a responsive video player for bilibili videos.
@@ -1117,7 +1221,7 @@ When the video only has one part, only the `av` ID of the video is required, e.g
 https://www.bilibili.com/video/av47027633
 ```
 
-Example `bilibili` Input:
+Example `bilibili` input:
 
 ```markdown
 {{</* bilibili 47027633 */>}}
@@ -1136,7 +1240,7 @@ When the video has multiple parts, in addition to the `av` ID of the video,
 https://www.bilibili.com/video/av36570401?p=3
 ```
 
-Example `bilibili` Input with `p`:
+Example `bilibili` input with `p`:
 
 ```markdown
 {{</* bilibili 36570401 3 */>}}
@@ -1158,7 +1262,7 @@ Just insert your content in the `typeit` shortcode and that’s it.
 
 Simple content is allowed in `Markdown` format and **without** rich block content such as images and more...
 
-Example `typeit` Input:
+Example `typeit` input:
 
 ```markdown
 {{</* typeit */>}}
@@ -1174,7 +1278,7 @@ This is a *paragraph* with **typing animation** based on [TypeIt](https://typeit
 
 Alternatively, you can use custom **HTML tags**.
 
-Example `typeit` Input with `h4` tag:
+Example `typeit` input with `h4` tag:
 
 ```markdown
 {{</* typeit tag=h4 */>}}
@@ -1192,7 +1296,7 @@ This is a *paragraph* with **typing animation** based on [TypeIt](https://typeit
 
 Code content is allowed and will be highlighted by named parameter `code` for the type of code language.
 
-Example `typeit` Input with `code`:
+Example `typeit` input with `code`:
 
 ```markdown
 {{</* typeit code=java */>}}
@@ -1221,7 +1325,7 @@ But sometimes you may want to start a set of `typeit` contents in order.
 
 A set of `typeit` contents with the same value of named parameter `group` will start typing animation in sequence.
 
-Example `typeit` Input with `group`:
+Example `typeit` input with `group`:
 
 ```markdown
 {{</* typeit group=paragraph */>}}

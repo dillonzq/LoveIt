@@ -44,7 +44,7 @@ enableEmoji = true
     [languages.en.menu]
       [[languages.en.menu.main]]
         identifier = "posts"
-        # you can add extra information before the name (HTML format is allowed), such as icons
+        # you can add extra information before the name (HTML format is supported), such as icons
         pre = ""
         name = "Posts"
         url = "/posts/"
@@ -108,7 +108,7 @@ enableEmoji = true
           typeit = true
           # whether to show social links
           social = true
-          # disclaimer (HTML format is allowed)
+          # disclaimer (HTML format is supported)
           disclaimer = ""
         # Home Page Posts
         [languages.en.params.home.posts]
@@ -342,7 +342,7 @@ enableEmoji = true
           typeit = true
           # 是否显示社交账号
           social = true
-          # 免责声明 (允许使用 HTML 格式)
+          # 免责声明 (支持 HTML 格式)
           disclaimer = ""
         # 主页文章列表
         [languages.zh-cn.params.home.posts]
@@ -576,7 +576,7 @@ enableEmoji = true
           typeit = true
           # whether to show social links
           social = true
-          # disclaimer (HTML format is allowed)
+          # disclaimer (HTML format is supported)
           disclaimer = ""
         # Home Page Posts
         [languages.fr.params.home.posts]
@@ -753,11 +753,11 @@ enableEmoji = true
     # Site creation time
     # 网站创立年份
     since = 2019
-    # ICP info only in China (HTML format is allowed)
-    # ICP 备案信息，仅在中国使用 (允许使用 HTML 格式)
+    # ICP info only in China (HTML format is supported)
+    # ICP 备案信息，仅在中国使用 (支持 HTML 格式)
     icp = ""
-    # license info (HTML format is allowed)
-    # 许可协议信息 (允许使用 HTML 格式)
+    # license info (HTML format is supported)
+    # 许可协议信息 (支持 HTML 格式)
     license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
   # Page config
   # 文章页面配置

@@ -42,7 +42,7 @@ Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-ma
 {{< /admonition >}}
 
 {{< admonition note "Why need the Hugo extended version?" >}}
-Since this theme processes SCSS to CSS, the Hugo extended version is needed.
+Since this theme processes SCSS to CSS, Hugo needs to be the extended version.
 {{< /admonition >}}
 
 ## 2 Installation
@@ -99,7 +99,7 @@ theme = "LoveIt"
 [menu]
   [[menu.main]]
     identifier = "posts"
-    # you can add extra information before the name (HTML format is allowed), such as icons
+    # you can add extra information before the name (HTML format is supported), such as icons
     pre = ""
     name = "Posts"
     url = "/posts/"
@@ -206,9 +206,9 @@ Note that some of these parameters are explained in details in other sections of
   [params.footer]
     # Site creation time
     since = 2019
-    # ICP info only in China (HTML format is allowed)
+    # ICP info only in China (HTML format is supported)
     icp = ""
-    # license info (HTML format is allowed)
+    # license info (HTML format is supported)
     license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
   # Home Page Info
   [params.home]
@@ -226,7 +226,7 @@ Note that some of these parameters are explained in details in other sections of
       # whether to show social links
       social = true
       # {{< version 0.2.0 >}}
-      # disclaimer (HTML format is allowed)
+      # disclaimer (HTML format is supported)
       disclaimer = ""
     # Home Page Posts
     [params.home.posts]
