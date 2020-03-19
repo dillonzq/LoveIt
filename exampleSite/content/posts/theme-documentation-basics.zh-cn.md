@@ -209,9 +209,9 @@ hugo
   [params.footer]
     # 网站创立年份
     since = 2019
-    # ICP 备案信息，仅在中国使用 (允许使用 HTML 格式)
+    # ICP 备案信息，仅在中国使用 (支持 HTML 格式)
     icp = ""
-    # 许可协议信息 (允许使用 HTML 格式)
+    # 许可协议信息 (支持 HTML 格式)
     license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
   # 文章页面配置
   [params.home]
@@ -229,7 +229,7 @@ hugo
       # 是否显示社交账号
       social = true
       # {{< version 0.2.0 >}}
-      # 免责声明 (允许使用 HTML 格式)
+      # 免责声明 (支持 HTML 格式)
       disclaimer = ""
     # 主页文章列表
     [params.home.posts]

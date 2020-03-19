@@ -1,18 +1,28 @@
-<figure{{ with .Get "class" }} class="{{ . }}"{{ end }}>
-    {{- $options := .Get "src" | dict "src" -}}
-    {{- $options = .Get "src_s" | dict "src_s" | merge $options -}}
-    {{- $options = .Get "src_l" | dict "src_l" | merge $options -}}
-    {{- $title := .Get "title" | $.Page.RenderString  -}}
-    {{- $options = $title | dict "title" | merge $options -}}
-    {{- $description := .Get "description" | $.Page.RenderString  -}}
-    {{- $options = $description | dict "description" | merge $options -}}
-    {{- $lightgallery := ne .Page.Site.Params.page.lightgallery false | and (ne .Page.Params.lightgallery false) -}}
-    {{- $options = $lightgallery | dict "lightgallery" | merge $options -}}
-    {{- $options = .Page.Scratch.Get "scratch" | dict "scratch" | merge $options -}}
-    {{- partial "plugin/image.html" $options -}}
-    {{- with $title | default $description -}}
+{{- $options := cond .IsNamedParams (.Get "src") (.Get 0) | dict "src" -}}
+{{- $options = cond .IsNamedParams (.Get "alt") (.Get 1) | .Page.RenderString | dict "alt" | merge $options -}}
+{{- $caption := cond .IsNamedParams (.Get "caption") (.Get 2) | .Page.RenderString -}}
+{{- $options = dict "caption" $caption | merge $options -}}
+
+{{- if .IsNamedParams -}}
+    {{- $options = dict "title" (.Get "title") | merge $options -}}
+    {{- $options = dict "src_s" (.Get "src_s") | merge $options -}}
+    {{- $options = dict "src_l" (.Get "src_l") | merge $options -}}
+    {{- $options = dict "height" (.Get "height") | merge $options -}}
+    {{- $options = dict "width" (.Get "width") | merge $options -}}
+    {{- $options = dict "large" (.Get "large") | merge $options -}}
+    {{- $options = .Get "linked" | ne false | dict "linked" | merge $options -}}
+    {{- $options = dict "rel" (.Get "rel") | merge $options -}}
+{{- else -}}
+    {{- $options = cond $caption true false | dict "linked" | merge $options -}}
+{{- end -}}
+
+{{- with $caption -}}
+    <figure{{ with cond $.IsNamedParams ($.Get "class") "" }} class="{{ . }}"{{ end }}>
+        {{- partial "plugin/image.html" $options -}}
         <figcaption class="image-caption">
             {{- . | safeHTML -}}
         </figcaption>
-    {{- end -}}
-</figure>
+    </figure>
+{{- else -}}
+    {{- partial "plugin/image.html" $options -}}
+{{- end -}}

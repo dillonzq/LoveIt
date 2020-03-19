@@ -202,8 +202,11 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 `style` shortcode 用来在你的文章中插入自定义样式.
 
-`style` shortcode 使用两个参数.
-第一个是自定义样式的内容, 第二个是包裹你要更改样式的内容的 HTML 标签, 默认值是 `p`.
+`style` shortcode 有两个位置参数.
+
+第一个参数是自定义样式的内容.
+
+第二个参数是包裹你要更改样式的内容的 HTML 标签, 默认值是 `p`.
 
 一个 `style` 示例:
 
@@ -228,31 +231,31 @@ This is a right-aligned paragraph.
 `link` shortcode 是 [Markdown 链接语法](../basic-markdown-syntax/#links) 的替代.
 `link` shortcode 可以提供一些其它的功能并且可以在代码块中使用.
 
-`link` shortcode 可以使用以下命名参数:
+`link` shortcode 有以下命名参数:
 
-* **href**
+* **href** *[必需]* (**第一个**位置参数)
 
     链接的目标.
 
-* **content**
+* **content** *[可选]* (**第二个**位置参数)
 
-    链接的内容 (允许 HTML 格式).
+    链接的内容, 默认值是 **href** 参数的值.
 
-* **title**
+    *支持 Markdown 或者 HTML 格式.*
+
+* **title** *[可选]* (**第三个**位置参数)
 
     HTML `a` 标签 的 `title` 属性, 当悬停在链接上会显示的提示.
 
-* **rel**
+* **rel** *[可选]*
 
     HTML `a` 标签 的 `rel` 补充属性.
 
-* **class**
+* **class** *[可选]*
 
     HTML `a` 标签 的 `class` 属性.
 
-#### 基本 `link`
-
-一个基本的 `link` 示例:
+一个 `link` 示例:
 
 ```markdown
 {{</* link "https://assemble.io" */>}}
@@ -274,7 +277,7 @@ This is a right-aligned paragraph.
 * {{< link "mailto:contact@revolunet.com" >}}
 * {{< link "https://assemble.io" Assemble >}}
 
-#### 添加一个标题
+一个带有标题的 `link` 示例:
 
 ```markdown
 {{</* link "https://github.com/upstage/" Upstage "Visit Upstage!" */>}}
@@ -290,45 +293,75 @@ This is a right-aligned paragraph.
 
 `image` shortcode 是 [`figure` shortcode](#figure) 的替代. `image` shortcode 可以充分利用 [lazysizes](https://github.com/aFarkas/lazysizes) 和 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 两个依赖库.
 
-`image` shortcode 可以使用以下命名参数:
+`image` shortcode 有以下命名参数:
 
-* **src**
+* **src** *[必需]* (**第一个**位置参数)
 
     图片的 URL.
 
-* **description**
+* **alt** *[可选]* (**第二个**位置参数)
 
-    图片描述.
+    图片无法显示时的替代文本, 默认值是 **src** 参数的值.
 
-* **title**
+    *支持 Markdown 或者 HTML 格式.*
+
+* **caption** *[可选]* (**第三个**位置参数)
 
     图片标题.
 
-* **class**
+    *支持 Markdown 或者 HTML 格式.*
+
+* **title** *[可选]*
+
+    当悬停在图片上会显示的提示.
+
+* **class** *[可选]*
 
     HTML `figure` 标签的 `class` 属性.
 
-* **src_s**
+* **src_s** *[可选]*
 
-    图片缩略图的 URL, 用在画廊模式中.
+    图片缩略图的 URL, 用在画廊模式中, 默认值是 **src** 参数的值.
 
-* **src_l**
+* **src_l** *[可选]*
 
-    高清图片的 URL, 用在画廊模式中.
+    高清图片的 URL, 用在画廊模式中, 默认值是 **src** 参数的值.
+
+* **height** *[可选]*
+
+    图片的 `height` 属性.
+
+* **width** *[可选]*
+
+    图片的 `width` 属性.
+
+* **linked** *[可选]*
+
+    图片是否需要被链接, 默认值是 `true`.
+
+* **rel** *[可选]*
+
+    HTML `a` 标签 的 `rel` 补充属性, 仅在 **linked** 属性设置成 `true` 时有效.
+
+* **large** *[可选]*
+
+    图片是否是大尺寸的, 用来加载动画, 仅在 **linked** 属性设置成 `false` 时有效.
 
 一个 `image` 示例:
 
 ```markdown
-{{</* image src="/images/theme-documentation-shortcodes/lighthouse.jpg" title="Lighthouse (`image`)" src-s="/images/theme-documentation-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-shortcodes/lighthouse-large.jpg" */>}}
+{{</* image src="/images/theme-documentation-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-shortcodes/lighthouse-large.jpg" */>}}
 ```
 
 呈现的输出效果如下:
 
-{{< image src="/images/theme-documentation-shortcodes/lighthouse.jpg" title="Lighthouse (`image`)" src-s="/images/theme-documentation-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-shortcodes/lighthouse-large.jpg" >}}
+{{< image src="/images/theme-documentation-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-shortcodes/lighthouse-large.jpg" >}}
 
 ### `admonition`
 
-`admonition` shortcode 支持 **12** 种 帮助你在页面中插入提示的横幅. 同时, `Markdown` 格式文本是支持的.
+`admonition` shortcode 支持 **12** 种 帮助你在页面中插入提示的横幅.
+
+*支持 Markdown 或者 HTML 格式.*
 
 {{< admonition >}}
 一个 **注意** 横幅
@@ -378,21 +411,19 @@ This is a right-aligned paragraph.
 一个 **引用** 横幅
 {{< /admonition >}}
 
-`admonition` shortcode 可以使用以下命名参数:
+`admonition` shortcode 有以下命名参数:
 
-* **type**
+* **type** *[必需]* (**第一个**位置参数)
 
-    `admonition` 横幅的类型, 默认值是 **note**
+    `admonition` 横幅的类型, 默认值是 `note`.
 
-* **title**
+* **title** *[可选]* (**第二个**位置参数)
 
-    `admonition` 横幅的标题, 默认值是横幅的类型名称
+    `admonition` 横幅的标题, 默认值是 **type** 参数的值.
 
-* **details**
+* **details** *[可选]* (**第三个**位置参数)
 
-    如果设为 `true`, 横幅内容将是可展开/可折叠.
-
-你还可以按 **type**, **title** 和 **details** 的顺序使用位置参数.
+    横幅内容是否可展开/可折叠, 默认值是 `false`.
 
 一个 `admonition` 示例:
 
@@ -1042,6 +1073,8 @@ data = [
 
 `music` shortcode 基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 提供了一个内嵌的响应式音乐播放器.
 
+有三种方式使用 `music` shortcode.
+
 `music` shortcode 可以使用以下命名参数:
 
 |参数             |默认值         |描述|
@@ -1067,7 +1100,25 @@ data = [
 
 #### 自定义音乐 URL {#custom-music-url}
 
-一个 `music` 示例:
+`music` shortcode 有以下命名参数来使用自定义音乐 URL:
+
+* **server** *[必需]*
+
+    音乐的链接.
+
+* **type** *[可选]*
+
+    音乐的名称.
+
+* **artist** *[可选]*
+
+    音乐的创作者.
+
+* **cover** *[可选]*
+
+    音乐的封面链接.
+
+一个使用自定义音乐 URL 的 `music` 示例:
 
 ```markdown
 {{</* music url="https://rainymood.com/audio1110/0.m4a" name=rainymood artist=rainymood cover="https://rainymood.com/i/badge.jpg" */>}}
@@ -1077,9 +1128,15 @@ data = [
 
 {{< music url="https://rainymood.com/audio1110/0.m4a" name=rainymood artist=rainymood cover="https://rainymood.com/i/badge.jpg" >}}
 
-#### 来自音乐平台的 URL 自动识别 {#automatic-identification}
+#### 音乐平台 URL 的自动识别 {#automatic-identification}
 
-一个 `music` 示例:
+`music` shortcode 有一个命名参数来使用音乐平台 URL 的自动识别:
+
+* **auto** *[必需]]* (**第一个**位置参数)
+
+    用来自动识别的音乐平台 URL, 支持 `netease`, `tencent` 和 `xiami` 平台.
+
+一个使用音乐平台 URL 的自动识别的 `music` 示例:
 
 ```markdown
 {{</* music auto="https://music.163.com/#/playlist?id=60198" */>}}
@@ -1091,9 +1148,27 @@ data = [
 
 {{< music auto="https://music.163.com/#/playlist?id=60198" >}}
 
-#### 自定义平台, 类型和 ID {#custom-server}
+#### 自定义音乐平台, 类型和 ID {#custom-server}
 
-一个 `music` 示例:
+`music` shortcode 有以下命名参数来使用自定义音乐平台:
+
+* **server** *[必需]* (**第一个**位置参数)
+
+    [`netease`, `tencent`, `kugou`, `xiami`, `baidu`]
+
+    音乐平台.
+
+* **type** *[必需]* (**第二个**位置参数)
+
+    [`song`, `playlist`, `album`, `search`, `artist`]
+
+    音乐类型.
+
+* **id** *[必需]* (**第三个**位置参数)
+
+    歌曲 ID, 或者播放列表 ID, 或者专辑 ID, 或者搜索关键词, 或者创作者 ID.
+
+一个使用自定义音乐平台的 `music` 示例:
 
 ```markdown
 {{</* music server="netease" type="song" id="1868553" */>}}
@@ -1104,6 +1179,56 @@ data = [
 呈现的输出效果如下:
 
 {{< music netease song 1868553 >}}
+
+#### 其它参数
+
+`music` shortcode 有一些可以应用于以上三种方式的其它命名参数:
+
+* **theme** *[可选]*
+
+    音乐播放器的主题色, 默认值是 `#a9a9b3`.
+
+* **fixed** *[可选]*
+
+    是否开启固定模式, 默认值是 `false`.
+
+* **mini** *[可选]*
+
+    是否开启迷你模式, 默认值是 `false`.
+
+* **autoplay** *[可选]*
+
+    是否自动播放音乐, 默认值是 `false`.
+
+* **volume** *[可选]*
+
+    第一次打开播放器时的默认音量, 会被保存在浏览器缓存中, 默认值是 `0.7`.
+
+* **mutex** *[可选]*
+
+    是否自动暂停其它播放器, 默认值是 `true`.
+
+`music` shortcode 还有一些只适用于音乐列表方式的其它命名参数:
+
+* **loop** *[可选]*
+
+    [`all`, `one`, `none`]
+
+    音乐列表的循环模式, 默认值是 `none`.
+
+* **order** *[可选]*
+
+    [`list`, `random`]
+
+    音乐列表的播放顺序, 默认值是 `list`.
+
+* **list-folded** *[可选]*
+
+    初次打开的时候音乐列表是否折叠, 默认值是 `false`.
+
+* **list-max-height** *[可选]*
+
+    音乐列表的最大高度, 默认值是 `340px`.
 
 ### `bilibili`
 
