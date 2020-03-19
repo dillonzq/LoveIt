@@ -228,9 +228,7 @@ This is a right-aligned paragraph.
 
 ### `link`
 
-{{< admonition warning >}}
 {{< version 0.2.0 >}}
-{{< /admonition >}}
 
 `link` shortcode is an alternative to [Markdown link syntax](../basic-markdown-syntax/#links). `link` shortcode can provide some other features and can be used in code blocks.
 
@@ -293,6 +291,8 @@ The rendered output looks like this (hover over the link, there should be a tool
 {{< link "https://github.com/upstage/" Upstage "Visit Upstage!" >}}
 
 ### `image`
+
+{{< version 0.2.0 changed >}}
 
 `image` shortcode is an alternative to [`figure` shortcode](#figure). `image` shortcode can take full advantage of the dependent libraries of [lazysizes](https://github.com/aFarkas/lazysizes) and [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js).
 

@@ -76,7 +76,7 @@ comment: true
 ```
 
 * **title**: 文章标题.
-* **subtitle**: 文章副标题. **{{< version 0.2.0 >}}**
+* **subtitle**: {{< version 0.2.0 >}} 文章副标题.
 * **date**: 这篇文章创建的日期时间. 它通常是从文章的前置参数中的 `date` 字段获取的, 但是也可以在 [网站配置](../theme-documentation-basics/#site-configuration) 中设置.
 * **lastmod**: 上次修改内容的日期时间.
 * **draft**: 如果设为 `true`, 除非 `hugo` 命令使用了 `--buildDrafts`/`-D` 参数, 这篇文章不会被渲染.
@@ -243,9 +243,7 @@ $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
 ### 分数
 
-{{< admonition warning >}}
 {{< version 0.2.0 >}}
-{{< /admonition >}}
 
 **LoveIt** 主题支持一种 **分数** Markdown 扩展语法:
 

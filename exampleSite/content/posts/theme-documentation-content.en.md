@@ -76,7 +76,7 @@ comment: true
 ```
 
 * **title**: the title for the content.
-* **subtitle**: the subtitle for the content. {{< version 0.2.0 >}}
+* **subtitle**: {{< version 0.2.0 >}} the subtitle for the content.
 * **date**: the datetime assigned to this page, which is usually fetched from the `date` field in front matter, but this behaviour is configurabl in the [site configuration](../theme-documentation-basics/#site-configuration).
 * **lastmod**: the datetime at which the content was last modified.
 * **draft**: if `true`, the content will not be rendered unless the `--buildDrafts`/`-D` flag is passed to the `hugo` command.
@@ -243,9 +243,7 @@ The rendered output looks like this:
 
 ### Fraction
 
-{{< admonition warning >}}
 {{< version 0.2.0 >}}
-{{< /admonition >}}
 
 An extended Markdown syntax for **fraction** is supported in **LoveIt** theme:
 

@@ -331,8 +331,16 @@
     }
 
     .version {
-      font-weight: bold;
-      font-style: normal;
+      img {
+        min-height: 1.2rem;
+        vertical-align: sub;
+      }
+
+      &.small {
+        img {
+          min-height: 1rem;
+        }
+      }
     }
   }
 
