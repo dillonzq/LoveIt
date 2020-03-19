@@ -42,7 +42,7 @@ Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-ma
 {{< /admonition >}}
 
 {{< admonition note "Why need the Hugo extended version?" >}}
-Since this theme processes SCSS to CSS, Hugo needs to be the extended version.
+Since this theme processes SCSS to CSS, Hugo needs to be the **extended** version.
 {{< /admonition >}}
 
 ## 2 Installation
@@ -193,8 +193,8 @@ Note that some of these parameters are explained in details in other sections of
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
   gitRepo = ""
-  # {{< version 0.1.1 >}}
-  # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
+  # {{< version 0.1.1 new small >}} which hash function used for SRI, when empty, no SRI is used
+  # ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
   # Header info
   [params.header]
@@ -225,8 +225,7 @@ Note that some of these parameters are explained in details in other sections of
       typeit = true
       # whether to show social links
       social = true
-      # {{< version 0.2.0 >}}
-      # disclaimer (HTML format is supported)
+      # {{< version 0.2.0 new small >}} disclaimer (HTML format is supported)
       disclaimer = ""
     # Home Page Posts
     [params.home.posts]
@@ -356,13 +355,13 @@ Note that some of these parameters are explained in details in other sections of
     enable = true
     # {{< link "https://disqus.com/" Disqus >}} Comment Config
     [params.comment.disqus]
-      # {{< version 0.1.1 >}}
+      # {{< version 0.1.1 new small >}}
       enable = false
       # Disqus shortname to use Disqus in posts
       shortname = ""
     # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} Comment Config
     [params.comment.gitalk]
-      # {{< version 0.1.1 >}}
+      # {{< version 0.1.1 new small >}}
       enable = false
       owner = ""
       repo = ""
@@ -389,8 +388,7 @@ Note that some of these parameters are explained in details in other sections of
       numPosts = 10
       appId = ""
       languageCode = "en_US"
-    # {{< version 0.2.0 >}}
-    # {{< link "https://comments.app/" "Telegram Comments" >}} Config
+    # {{< version 0.2.0 new small >}} {{< link "https://comments.app/" "Telegram Comments" >}} Config
     [params.comment.telegram]
       enable = false
       siteID = ""

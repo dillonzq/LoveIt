@@ -146,3 +146,14 @@ other = "Exemple"
 [quote]
 other = "Citation"
 # === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "NOUVEAU"
+
+[changed]
+other = "CHANGE"
+
+[deleted]
+other = "EFFACE"
+# === shortcodes/version.html ===

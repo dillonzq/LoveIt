@@ -224,9 +224,7 @@ This is a right-aligned paragraph.
 
 ### `link`
 
-{{< admonition warning >}}
-{{< version 2.2.0 >}}
-{{< /admonition >}}
+{{< version 0.2.0 >}}
 
 `link` shortcode 是 [Markdown 链接语法](../basic-markdown-syntax/#links) 的替代.
 `link` shortcode 可以提供一些其它的功能并且可以在代码块中使用.
@@ -290,6 +288,8 @@ This is a right-aligned paragraph.
 {{< link "https://github.com/upstage/" Upstage "Visit Upstage!" >}}
 
 ### `image`
+
+{{< version 0.2.0 changed >}}
 
 `image` shortcode 是 [`figure` shortcode](#figure) 的替代. `image` shortcode 可以充分利用 [lazysizes](https://github.com/aFarkas/lazysizes) 和 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 两个依赖库.
 

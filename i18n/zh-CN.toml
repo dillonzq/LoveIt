@@ -146,3 +146,14 @@ other = "示例"
 [quote]
 other = "引用"
 # === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "新增"
+
+[changed]
+other = "更改"
+
+[deleted]
+other = "删除"
+# === shortcodes/version.html ===

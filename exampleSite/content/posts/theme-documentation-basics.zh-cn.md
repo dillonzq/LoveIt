@@ -42,7 +42,7 @@ comment: true
 {{< /admonition >}}
 
 {{< admonition note "为什么需要 Hugo extended 版本?" >}}
-由于本主题需要转换 SCSS 文件为 CSS 文件, Hugo extended 版本是必要的.
+由于本主题需要转换 SCSS 文件为 CSS 文件, Hugo **extended** 版本是必要的.
 {{< /admonition >}}
 
 ## 2 安装
@@ -196,8 +196,8 @@ hugo
   defaultTheme = "auto"
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = ""
-  # {{< version 0.1.1 >}}
-  # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI ("sha256", "sha384", "sha512", "md5")
+  # {{< version 0.1.1 new small >}} 哪种哈希函数用来 SRI, 为空时表示不使用 SRI
+  # ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
   # 页面头部导航栏信息
   [params.header]
@@ -228,8 +228,7 @@ hugo
       typeit = true
       # 是否显示社交账号
       social = true
-      # {{< version 0.2.0 >}}
-      # 免责声明 (支持 HTML 格式)
+      # {{< version 0.2.0 new small >}} 免责声明 (支持 HTML 格式)
       disclaimer = ""
     # 主页文章列表
     [params.home.posts]
@@ -358,13 +357,13 @@ hugo
     enable = true
     # {{< link "https://disqus.com/" Disqus >}} 评论系统设置
     [params.comment.disqus]
-      # {{< version 0.1.1 >}}
+      # {{< version 0.1.1 new small >}}
       enable = false
       # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
       shortname = ""
     # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} 评论系统设置
     [params.comment.gitalk]
-      # {{< version 0.1.1 >}}
+      # {{< version 0.1.1 new small >}}
       enable = false
       owner = ""
       repo = ""
@@ -391,8 +390,7 @@ hugo
       numPosts = 10
       appId = ""
       languageCode = "zh_CN"
-    # {{< version 0.2.0 >}}
-    # {{< link "https://comments.app/" "Telegram Comments" >}} 评论系统设置
+    # {{< version 0.2.0 new small >}} {{< link "https://comments.app/" "Telegram Comments" >}} 评论系统设置
     [params.comment.telegram]
       enable = false
       siteID = ""
