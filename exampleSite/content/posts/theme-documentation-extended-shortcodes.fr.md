@@ -1,9 +1,9 @@
 ---
-weight: 3
-title: "Thème Documentation - Shortcodes"
+weight: 4
+title: "Thème Documentation - Extended Shortcodes"
 subtitle: ""
-date: 2020-03-04T16:29:59+08:00
-lastmod: 2020-03-04T16:29:59+08:00
+date: 2020-03-03T16:29:59+08:00
+lastmod: 2020-03-03T16:29:59+08:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
@@ -14,8 +14,8 @@ tags: ["shortcodes"]
 categories: ["documentation"]
 hiddenFromHomePage: false
 
-featuredImage: "/images/theme-documentation-shortcodes/featured-image.jpg"
-featuredImagePreview: ""
+featuredImage: "/images/theme-documentation-extended-shortcodes/featured-image.jpg"
+featuredImagePreview: "/images/theme-documentation-extended-shortcodes/featured-image-preview.jpg"
 
 toc: true
 autoCollapseToc: true
@@ -36,173 +36,7 @@ Sorry, this article has not been completely translated into **French**.
 Welcome to take the time to propose a translation by [making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
 {{< /admonition >}}
 
-Hugo uses Markdown for its simple content format. However, there are a lot of things that Markdown doesn’t support well. You could use pure HTML to expand possibilities.
-
-But this happens to be a bad idea. Everyone uses Markdown because it’s pure and simple to read even non-rendered. You should avoid HTML to keep it as simple as possible.
-
-To avoid this limitations, Hugo created [shortcodes](https://gohugo.io/extras/shortcodes/).
-A shortcode is a simple snippet that can generate reasonable HTML code and conforms to Markdown's design philosophy.
-
-## Hugo’s Built-in Shortcodes
-
-Hugo ships with a set of predefined shortcodes that represent very common usage. These shortcodes are provided for author convenience and to keep your markdown content clean.
-
-### `figure` {#figure}
-
-[Documentation of `figure`](https://gohugo.io/content-management/shortcodes/#figure)
-
-Example `figure` input:
-
-```markdown
-{{</* figure src="/images/theme-documentation-shortcodes/lighthouse.jpg" title="Lighthouse (figure)" */>}}
-```
-
-The rendered output looks like this:
-
-{{< figure src="/images/theme-documentation-shortcodes/lighthouse.jpg" title="Lighthouse (figure)" >}}
-
-The HTML looks like this:
-
-```html
-<figure>
-    <img src="/images/theme-documentation-shortcodes/lighthouse.jpg"/>
-    <figcaption>
-        <h4>Lighthouse (figure)</h4>
-    </figcaption>
-</figure>
-```
-
-### `gist`
-
-[Documentation of `gist`](https://gohugo.io/content-management/shortcodes/#gist)
-
-Example `gist` input:
-
-```markdown
-{{</* gist spf13 7896402 */>}}
-```
-
-The rendered output looks like this:
-
-{{< gist spf13 7896402 >}}
-
-The HTML looks like this:
-
-```html
-<script type="application/javascript" src="https://gist.github.com/spf13/7896402.js"></script>
-```
-
-### `highlight`
-
-[Documentation of `highlight`](https://gohugo.io/content-management/shortcodes/#instagram)
-
-Example `highlight` input:
-
-```markdown
-{{</* highlight html */>}}
-<section id="main">
-    <div>
-        <h1 id="title">{{ .Title }}</h1>
-        {{ range .Pages }}
-            {{ .Render "summary"}}
-        {{ end }}
-    </div>
-</section>
-{{</* /highlight */>}}
-```
-
-The rendered output looks like this:
-
-{{< highlight html >}}
-<section id="main">
-    <div>
-        <h1 id="title">{{ .Title }}</h1>
-        {{ range .Pages }}
-            {{ .Render "summary"}}
-        {{ end }}
-    </div>
-</section>
-{{< /highlight >}}
-
-### `instagram`
-
-[Documentation of `instagram`](https://gohugo.io/content-management/shortcodes/#instagram)
-
-Example `instagram` input:
-
-```markdown
-{{</* instagram BWNjjyYFxVx hidecaption */>}}
-```
-
-The rendered output looks like this:
-
-{{< instagram BWNjjyYFxVx hidecaption >}}
-
-### `param`
-
-[Documentation of `param`](https://gohugo.io/content-management/shortcodes/#param)
-
-Example `param` input:
-
-```markdown
-{{</* param description */>}}
-```
-
-The rendered output looks like this:
-
-{{< param description >}}
-
-### `ref` and `relref` {#ref-and-relref}
-
-[Documentation of `ref` and `relref`](https://gohugo.io/content-management/shortcodes/#ref-and-relref)
-
-### `tweet`
-
-[Documentation of `tweet`](https://gohugo.io/content-management/shortcodes/#tweet)
-
-Example `tweet` input:
-
-```markdown
-{{</* tweet 877500564405444608 */>}}
-```
-
-The rendered output looks like this:
-
-{{< tweet 877500564405444608 >}}
-
-### `vimeo`
-
-[Documentation of `vimeo`](https://gohugo.io/content-management/shortcodes/#vimeo)
-
-Example `vimeo` input:
-
-```markdown
-{{</* vimeo 146022717 */>}}
-```
-
-The rendered output looks like this:
-
-{{< vimeo 146022717 >}}
-
-### `youtube`
-
-[Documentation of `youtube`](https://gohugo.io/content-management/shortcodes/#youtube)
-
-Example `youtube` input:
-
-```markdown
-{{</* youtube w7Ft2ymGmfc */>}}
-```
-
-The rendered output looks like this:
-
-{{< youtube w7Ft2ymGmfc >}}
-
-## LoveIt Shortcodes
-
-**LoveIt** provides multiple shortcodes on top of existing ones.
-
-### `style`
+## `style`
 
 `style` is a shortcode to insert custom style in your post.
 
@@ -226,7 +60,7 @@ The rendered output looks like this:
 This is a right-aligned paragraph.
 {{< /style >}}
 
-### `link`
+## `link`
 
 {{< version 0.2.0 >}}
 
@@ -290,7 +124,7 @@ The rendered output looks like this (hover over the link, there should be a tool
 
 {{< link "https://github.com/upstage/" Upstage "Visit Upstage!" >}}
 
-### `image`
+## `image`
 
 {{< version 0.2.0 changed >}}
 
@@ -353,14 +187,14 @@ The `image` shortcode has the following named parameters:
 Example `image` input:
 
 ```markdown
-{{</* image src="/images/theme-documentation-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-shortcodes/lighthouse-large.jpg" */>}}
+{{</* image src="/images/theme-documentation-extended-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-extended-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-extended-shortcodes/lighthouse-large.jpg" */>}}
 ```
 
 The rendered output looks like this:
 
-{{< image src="/images/theme-documentation-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-shortcodes/lighthouse-large.jpg" >}}
+{{< image src="/images/theme-documentation-extended-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-extended-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-extended-shortcodes/lighthouse-large.jpg" >}}
 
-### `admonition`
+## `admonition`
 
 The `admonition` shortcode supports **12** types of banners to help you put notice in your page.
 
@@ -446,13 +280,13 @@ The rendered output looks like this:
 A **tip** banner
 {{< /admonition >}}
 
-### `mermaid`
+## `mermaid`
 
 [mermaid](https://mermaidjs.github.io/) is a library helping you to generate diagram and flowcharts from text, in a similar manner as Markdown.
 
 Just insert your mermaid code in the `mermaid` shortcode and that’s it.
 
-#### Flowchart {#flowchart}
+### Flowchart {#flowchart}
 
 Example **flowchart** `mermaid` input:
 
@@ -476,7 +310,7 @@ graph LR;
     C -->|Two| E[Result two]
 {{< /mermaid >}}
 
-#### Sequence Diagram {#sequence-diagram}
+### Sequence Diagram {#sequence-diagram}
 
 Example **sequence diagram** `mermaid` input:
 
@@ -512,7 +346,7 @@ sequenceDiagram
     Bob-->John: Jolly good!
 {{< /mermaid >}}
 
-#### GANTT {#gantt}
+### GANTT {#gantt}
 
 Example **GANTT** `mermaid` input:
 
@@ -556,7 +390,7 @@ gantt
     Add to mermaid                      :1d
 {{< /mermaid >}}
 
-#### Class Diagram {#class-diagram}
+### Class Diagram {#class-diagram}
 
 Example **class diagram** `mermaid` input:
 
@@ -598,7 +432,7 @@ classDiagram
     Class08 <--> C2: Cool label
 {{< /mermaid >}}
 
-#### State Diagram {#state-diagram}
+### State Diagram {#state-diagram}
 
 Example **state diagram** `mermaid` input:
 
@@ -626,7 +460,7 @@ stateDiagram
     Crash --> [*]
 {{< /mermaid >}}
 
-#### Git Graph {#git-graph}
+### Git Graph {#git-graph}
 
 Example **git graph** `mermaid` input:
 
@@ -672,7 +506,7 @@ end
     merge newbranch
 {{< /mermaid >}}
 
-#### Pie {#pie}
+### Pie {#pie}
 
 Example **pie** `mermaid` input:
 
@@ -694,7 +528,7 @@ pie
     "Rats" : 15
 {{< /mermaid >}}
 
-### `echarts`
+## `echarts`
 
 [ECharts](https://echarts.apache.org/) is a library helping you to generate interactive data visualization.
 
@@ -1072,13 +906,13 @@ The rendered output looks like this:
 }
 {{< /echarts >}}
 
-### `music`
+## `music`
 
 The `music` shortcode embeds a responsive music player based on [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS).
 
 There are three ways to use it the `music` shortcode.
 
-#### Custom Music URL {#custom-music-url}
+### Custom Music URL {#custom-music-url}
 
 The `music` shortcode has the following named parameters by custom music URL:
 
@@ -1108,7 +942,7 @@ The rendered output looks like this:
 
 {{< music url="https://rainymood.com/audio1110/0.m4a" name=rainymood artist=rainymood cover="https://rainymood.com/i/badge.jpg" >}}
 
-#### Music Platform URL Automatic Identification {#automatic-identification}
+### Music Platform URL Automatic Identification {#automatic-identification}
 
 The `music` shortcode has one named parameter by music platform URL automatic identification:
 
@@ -1129,7 +963,7 @@ The rendered output looks like this:
 
 {{< music auto="https://music.163.com/#/playlist?id=60198" >}}
 
-#### Custom Server, Type and ID {#custom-server}
+### Custom Server, Type and ID {#custom-server}
 
 The `music` shortcode has the following named parameters by custom music platform:
 
@@ -1161,13 +995,13 @@ The rendered output looks like this:
 
 {{< music netease song 1868553 >}}
 
-#### Other Parameters
+### Other Parameters {#other-parameters}
 
 The `music` shortcode has other named parameters applying to the above three ways:
 
 * **theme** *[optional]*
 
-    Main color of the music player, default is `#a9a9b3`.
+    {{< version 0.2.0 changed >}} Main color of the music player, default is `#448aff`.
 
 * **fixed** *[optional]*
 
@@ -1211,7 +1045,7 @@ The `music` shortcode has the following named parameters only applying to the ty
 
     Max height of the music list, default is `340px`.
 
-### `bilibili`
+## `bilibili`
 
 The `bilibili` shortcode embeds a responsive video player for bilibili videos.
 
@@ -1252,13 +1086,13 @@ The rendered output looks like this:
 
 {{< bilibili av=36570401 p=3 >}}
 
-### `typeit`
+## `typeit`
 
 The `typeit` shortcode provides typing animation based on [TypeIt](https://typeitjs.com/).
 
 Just insert your content in the `typeit` shortcode and that’s it.
 
-#### Simple Content {#simple-content}
+### Simple Content {#simple-content}
 
 Simple content is allowed in `Markdown` format and **without** rich block content such as images and more...
 
@@ -1292,7 +1126,7 @@ The rendered output looks like this:
 This is a *paragraph* with **typing animation** based on [TypeIt](https://typeitjs.com/)...
 {{< /typeit >}}
 
-#### Code Content {#code-content}
+### Code Content {#code-content}
 
 Code content is allowed and will be highlighted by named parameter `code` for the type of code language.
 
@@ -1318,7 +1152,7 @@ public class HelloWorld {
 }
 {{< /typeit >}}
 
-#### Group Content {#group-content}
+### Group Content {#group-content}
 
 All typing animations start at the same time by default.
 But sometimes you may want to start a set of `typeit` contents in order.
