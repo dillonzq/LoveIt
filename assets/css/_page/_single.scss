@@ -91,8 +91,14 @@
       .dark-theme & {
         font-weight: bolder;
       }
+    }
 
-      & > .header-mark::before {
+    > h2,
+    > h3,
+    > h4,
+    > h5,
+    > h6 {
+      > .header-mark::before {
         content: "|";
         margin-right: .3125rem;
         color: $single-link-color;
@@ -103,7 +109,7 @@
       }
     }
 
-    h2 > .header-mark::before {
+    > h2 > .header-mark::before {
       content: "#";
     }
 
@@ -284,6 +290,7 @@
     @import "../_partial/_single/instagram";
     @import "../_partial/_single/admonition";
     @import "../_partial/_single/echarts";
+    @import "../_partial/_single/mapbox";
     @import "../_partial/_single/bilibili";
 
     hr {

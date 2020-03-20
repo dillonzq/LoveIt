@@ -33,7 +33,7 @@ lightgallery: true
 #### 外观和布局
 
 * [:(fas fa-desktop):]/[:(fas fa-mobile):] **响应式**布局
-* [:(fas fa-sun):]/[:(fas fa-moon):] **[白天]/[夜晚]** 主题模式
+* [:(fas fa-sun):]/[:(fas fa-moon):] **[浅色]/[深色]** 主题模式
 * :(fas fa-layer-group): 全局一致的**设计语言**
 * :(fas fa-ellipsis-h): 支持**分页**
 * :(far fa-list-alt): 易用和自动展开的**文章目录**

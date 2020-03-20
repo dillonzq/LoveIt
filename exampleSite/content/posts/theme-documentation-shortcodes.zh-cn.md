@@ -211,14 +211,14 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 一个 `style` 示例:
 
 ```markdown
-{{</* style "text-align: right" */>}}
+{{</* style "text-align: right;" */>}}
 This is a right-aligned paragraph.
 {{</* /style */>}}
 ```
 
 呈现的输出效果如下:
 
-{{< style "text-align: right" >}}
+{{< style "text-align: right;" >}}
 This is a right-aligned paragraph.
 {{< /style >}}
 

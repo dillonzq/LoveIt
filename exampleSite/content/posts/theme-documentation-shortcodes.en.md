@@ -210,14 +210,14 @@ And the **second** one is the HTML tag around the content you want to change sty
 Example `style` input:
 
 ```markdown
-{{</* style "text-align: right" */>}}
+{{</* style "text-align: right;" */>}}
 This is a right-aligned paragraph.
 {{</* /style */>}}
 ```
 
 The rendered output looks like this:
 
-{{< style "text-align: right" >}}
+{{< style "text-align: right;" >}}
 This is a right-aligned paragraph.
 {{< /style >}}
 
