@@ -20,6 +20,14 @@ featuredImagePreview: ""
 toc: true
 autoCollapseToc: false
 math: true
+mapbox:
+    accessToken: ""
+    lightStyle: ""
+    darkStyle: ""
+    navigation: true
+    geolocate: true
+    scale: true
+    fullscreen: true
 lightgallery: true
 linkToMarkdown: true
 share:
@@ -44,7 +52,7 @@ A few suggestions to help you get a good looking site quickly:
 * Keep static pages in the `content` directory, for example: `content/about.md`
 * Keep media like images in the `static` directory, for example: `static/images/screenshot.png`
 
-## 2 Front Matter
+## 2 Front Matter {#front-matter}
 
 **Hugo** allows you to add front matter in `yaml`, `toml` or `json` to your content files.
 
@@ -72,6 +80,14 @@ featuredImagePreview: ""
 toc: false
 autoCollapseToc: true
 math: true
+mapbox:
+    accessToken: ""
+    lightStyle: ""
+    darkStyle: ""
+    navigation: true
+    geolocate: true
+    scale: true
+    fullscreen: true
 lightgallery: true
 linkToMarkdown: true
 share:
@@ -97,6 +113,7 @@ comment: true
 * **toc**: if `true`, the content will show the table of the contents.
 * **autoCollapseToc**: if `true`, the table of the contents will be automatically collapsed.
 * **math**: if `true`, the mathematical formula in the content will be automatically rendered.
+* **mapbox**: {{< version 0.2.0 >}} the same as `params.mapbox` in the [site configuration](../theme-documentation-basics/#site-configuration).
 * **lightgallery**: if `true`, images in the content will be shown as the gallery.
 * **linkToMarkdown**: if `true`, the footer of the content will show the link to the orignal Markdown file.
 * **share**: the same as `params.share` in the [site configuration](../theme-documentation-basics/#site-configuration).

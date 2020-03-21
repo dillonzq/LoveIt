@@ -33,9 +33,11 @@
 * 支持更多的**社交链接**、**网站分享**和**评论系统**
 * 支持基于 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
 * 支持**上标注释**的扩展 Markdown 语法
+* 支持**分数**的扩展 Markdown 语法
 * 支持基于 [KaTeX](https://katex.org/) 的**数学公式**
 * 支持基于 [mermaid](https://github.com/knsv/mermaid) 的**图表**生成功能
 * 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化**生成功能
+* 支持基于 [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) 的 **Mapbox** 地图显示功能
 * 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的内嵌**音乐播放器**
 * 支持内嵌 **Bilibili** 视频
 * 支持多种**注释**的 shortcode
@@ -86,9 +88,11 @@
 * 支持基于 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 的**图片画廊**
 * 支持 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
 * 支持**上标注释**的扩展 Markdown 语法
+* 支持**分数**的扩展 Markdown 语法
 * 支持基于 [KaTeX](https://katex.org/) 的**数学公式**
 * 支持基于 [mermaid](https://github.com/knsv/mermaid) 的**图表** shortcode
 * 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化** shortcode
+* 支持基于 [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) 的 **Mapbox** shortcode
 * 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的**音乐播放器** shortcode
 * 支持 **Bilibili 视频** shortcode
 * 支持多种**注释**的 shortcode
@@ -126,6 +130,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [KaTeX](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)
 * [ECharts](https://echarts.apache.org/)
+* [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * [APlayer](https://github.com/MoePlayer/APlayer)
 * [MetingJS](https://github.com/metowolf/MetingJS)
 * [Gitalk](https://github.com/gitalk/gitalk)

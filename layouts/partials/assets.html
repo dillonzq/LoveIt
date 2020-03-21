@@ -189,6 +189,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             mapboxgl.accessToken = '{{ .Params.mapbox.accessToken | default .Site.Params.mapbox.accessToken }}';
+            mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.0/mapbox-gl-rtl-text.js');
         });
     </script>
 {{- end -}}

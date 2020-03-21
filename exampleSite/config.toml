@@ -768,8 +768,8 @@ enableEmoji = true
     # whether to show link to Raw Markdown content of the post
     # 是否在文章页面显示原始 Markdown 文档链接
     linkToMarkdown = true
-  # mathematical formulas config (KaTeX https://katex.org/)
-  # 数学公式配置 (KaTeX https://katex.org/)
+  # KaTeX mathematical formulas config (KaTeX https://katex.org/)
+  # KaTeX 数学公式配置 (KaTeX https://katex.org/)
   [params.math]
     enable = true
     # default block delimiter is $$ ... $$ and \\[ ... \\]
@@ -786,17 +786,18 @@ enableEmoji = true
     # KaTeX extension mhchem
     # KaTeX 插件 mhchem
     mhchem = true
-  # mapbox config (Mapbox GLJS https://docs.mapbox.com/mapbox-gl-js)
-  # mapbox 配置 (Mapbox GLJS https://docs.mapbox.com/mapbox-gl-js)
+  # Mapbox GL JS config (Mapbox GL JS https://docs.mapbox.com/mapbox-gl-js)
+  # Mapbox GL JS 配置 (Mapbox GL JS https://docs.mapbox.com/mapbox-gl-js)
   [params.mapbox]
-    # mapbox 的 access token
+    # access token of Mapbox GL JS
+    # Mapbox GL JS 的 access token
     accessToken = "pk.eyJ1IjoiZGlsbG9uenEiLCJhIjoiY2s2czd2M2x3MDA0NjNmcGxmcjVrZmc2cyJ9.aSjv2BNuZUfARvxRYjSVZQ"
     # style for the light theme
     # 浅色主题的地图样式
-    lightStyle = "mapbox://styles/mapbox/streets-v9"
+    lightStyle = "mapbox://styles/mapbox/light-v9?optimize=true"
     # style for the dark theme
     # 深色主题的地图样式
-    darkStyle = "mapbox://styles/mapbox/dark-v8"
+    darkStyle = "mapbox://styles/mapbox/dark-v9?optimize=true"
     # whether to add NavigationControl (https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol)
     # 是否添加 NavigationControl (https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol)
     navigation = true

@@ -17,7 +17,7 @@ lightgallery: true
 
 它的原型基于 [LeaveIt 主题](https://github.com/liuzc/LeaveIt/) 和 [KeepIt 主题](https://github.com/liuzc/LeaveIt/)。
 
-![Hugo 主题 LoveIt](/images/Apple-Devices-Preview.png "Hugo Theme LoveIt")
+![Hugo 主题 LoveIt](/images/Apple-Devices-Preview.png "Hugo 主题 LoveIt")
 
 ### 特性
 
@@ -58,11 +58,13 @@ lightgallery: true
 * :(far fa-images): 支持基于 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 的**图片画廊**
 * :(fab fa-font-awesome): 支持 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
 * :(far fa-sticky-note): 支持**上标注释**的扩展 Markdown 语法
+* :(fas fa-percentage): 支持**分数**的扩展 Markdown 语法
 * :(fas fa-square-root-alt): 支持基于 [$ \KaTeX $](https://katex.org/) 的**数学公式**
 * :(fas fa-project-diagram): 支持基于 [mermaid](https://github.com/knsv/mermaid) 的**图表** shortcode
 * :(fas fa-chart-pie): 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化** shortcode
+* :(fas fa-map-marked-alt): 支持基于 [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) 的 **Mapbox** shortcode
 * :(fas fa-music): 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的**音乐播放器** shortcode
-* :(fas fa-tv): 支持 **Bilibili 视频** shortcode
+* :(fas fa-video): 支持 **Bilibili 视频** shortcode
 * :(far fa-bell): 支持多种**注释**的 shortcode
 * :(fas fa-align-left): 支持**自定义样式**的 shortcode
 * :(fas fa-i-cursor): 支持基于 [TypeIt](https://typeitjs.com/) 的**打字动画** shortcode
@@ -87,6 +89,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [$ \KaTeX $](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)
 * [ECharts](https://echarts.apache.org/)
+* [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * [APlayer](https://github.com/MoePlayer/APlayer)
 * [MetingJS](https://github.com/metowolf/MetingJS)
 * [Gitalk](https://github.com/gitalk/gitalk)

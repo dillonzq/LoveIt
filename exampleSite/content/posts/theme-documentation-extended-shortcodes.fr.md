@@ -20,6 +20,14 @@ featuredImagePreview: "/images/theme-documentation-extended-shortcodes/featured-
 toc: true
 autoCollapseToc: true
 math: false
+mapbox:
+    accessToken: ""
+    lightStyle: ""
+    darkStyle: ""
+    navigation: true
+    geolocate: true
+    scale: true
+    fullscreen: true
 lightgallery: true
 linkToMarkdown: true
 share:
@@ -74,7 +82,7 @@ The `link` shortcode has the following named parameters:
 
 * **content** *[optional]* (**second** positional parameter)
 
-    Content of the link, default is the value of **href** parameter.
+    Content of the link, default value is the value of **href** parameter.
 
     *Markdown or HTML format is supported.*
 
@@ -138,7 +146,7 @@ The `image` shortcode has the following named parameters:
 
 * **alt** *[optional]* (**second** positional parameter)
 
-    Alternate text for the image if the image cannot be displayed, default is the value of **src** parameter.
+    Alternate text for the image if the image cannot be displayed, default value is the value of **src** parameter.
 
     *Markdown or HTML format is supported.*
 
@@ -158,11 +166,11 @@ The `image` shortcode has the following named parameters:
 
 * **src_s** *[optional]*
 
-    URL of the image thumbnail, used for lightgallery, default is the value of **src** parameter.
+    URL of the image thumbnail, used for lightgallery, default value is the value of **src** parameter.
 
 * **src_l** *[optional]*
 
-    URL of the HD image, used for lightgallery, default is the value of **src** parameter.
+    URL of the HD image, used for lightgallery, default value is the value of **src** parameter.
 
 * **height** *[optional]*
 
@@ -174,7 +182,7 @@ The `image` shortcode has the following named parameters:
 
 * **linked** *[optional]*
 
-    Whether the image needs to be hyperlinked, default is `true`.
+    Whether the image needs to be hyperlinked, default value is `true`.
 
 * **rel** *[optional]*
 
@@ -252,15 +260,15 @@ The `admonition` shortcode has the following named parameters:
 
 * **type** *[optional]* (**first** positional parameter)
 
-    Type of the `admonition` banner, default is `note`.
+    Type of the `admonition` banner, default value is `note`.
 
 * **title** *[optional]* (**second** positional parameter)
 
-    Title of the `admonition` banner, default is the value of **type** parameter.
+    Title of the `admonition` banner, default value is the value of **type** parameter.
 
 * **details** *[optional]* (**third** positional parameter)
 
-    Whether the content will be expandable/collapsible, default is `false`.
+    Whether the content will be expandable/collapsible, default value is `false`.
 
 Example `admonition` input:
 
@@ -906,6 +914,80 @@ The rendered output looks like this:
 }
 {{< /echarts >}}
 
+## `mapbox`
+
+{{< version 0.2.0 >}}
+
+[Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) is a JavaScript library that uses WebGL to render interactive maps from [vector tiles](https://docs.mapbox.com/help/glossary/vector-tiles/) and [Mapbox styles](https://docs.mapbox.com/mapbox-gl-js/style-spec/).
+
+The `mapbox` shortcode has the following named parameters to use Mapbox GL JS:
+
+* **lng** *[required]* (**first** positional parameter)
+
+    Longitude of the inital centerpoint of the map, measured in degrees.
+
+* **lat** *[required]* (**second** positional parameter)
+
+    Latitude of the inital centerpoint of the map, measured in degrees.
+
+* **zoom** *[optional]* (**third** positional parameter)
+
+    The initial zoom level of the map, default value is `10`.
+
+* **marked** *[optional]* (**fourth** positional parameter)
+
+    Whether to add a marker at the inital centerpoint of the map, default value is `true`.
+
+* **light-style** *[optional]* (**fifth** positional parameter)
+
+    Style for the light theme, default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+
+* **dark-style** *[optional]* (**sixth** positional parameter)
+
+    Style for the dark theme, default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+
+* **navigation** *[optional]*
+
+    Whether to add [NavigationControl](https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol), default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+
+* **geolocate** *[optional]*
+
+    Whether to add [GeolocateControl](https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol), default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+
+* **scale** *[optional]*
+
+    Whether to add [ScaleControl](https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol), default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+
+* **fullscreen** *[optional]*
+
+    Whether to add [FullscreenControl](https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol), default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+
+* **width** *[optional]*
+
+    Width of the map, default value is `100%`.
+
+* **height** *[optional]*
+
+    Height of the map, default value is `20rem`.
+
+Example `mapbox` input:
+
+```markdown
+{{</* mapbox 121.485 31.233 12 */>}}
+Or
+{{</* mapbox lng=121.485 lat=31.233 zoom=12 */>}}
+
+{{</* mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/navigation-preview-day-v4" "mapbox://styles/mapbox/navigation-preview-night-v4" */>}}
+Or
+{{</* mapbox lng=-122.252 lat=37.453 zoom=10 marked=false light-style="mapbox://styles/mapbox/navigation-preview-day-v4" dark-style="mapbox://styles/mapbox/navigation-preview-night-v4" */>}}
+```
+
+The rendered output looks like this:
+
+{{< mapbox 121.485 31.233 12 >}}
+
+{{< mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/navigation-preview-day-v4?optimize=true" "mapbox://styles/mapbox/navigation-preview-night-v4?optimize=true" >}}
+
 ## `music`
 
 The `music` shortcode embeds a responsive music player based on [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS).
@@ -1001,27 +1083,27 @@ The `music` shortcode has other named parameters applying to the above three way
 
 * **theme** *[optional]*
 
-    {{< version 0.2.0 changed >}} Main color of the music player, default is `#448aff`.
+    {{< version 0.2.0 changed >}} Main color of the music player, default value is `#448aff`.
 
 * **fixed** *[optional]*
 
-    Whether to enable fixed mode, default is `false`.
+    Whether to enable fixed mode, default value is `false`.
 
 * **mini** *[optional]*
 
-    Whether to enable mini mode, default is `false`.
+    Whether to enable mini mode, default value is `false`.
 
 * **autoplay** *[optional]*
 
-    Whether to autoplay music, default is `false`.
+    Whether to autoplay music, default value is `false`.
 
 * **volume** *[optional]*
 
-    Default volume when the player is first opened, which will be remembered in the browser, default is `0.7`.
+    Default volume when the player is first opened, which will be remembered in the browser, default value is `0.7`.
 
 * **mutex** *[optional]*
 
-    Whether to pause other players when this player starts playing, default is `true`.
+    Whether to pause other players when this player starts playing, default value is `true`.
 
 The `music` shortcode has the following named parameters only applying to the type of music list:
 
@@ -1029,21 +1111,21 @@ The `music` shortcode has the following named parameters only applying to the ty
 
     [`all`, `one`, `none`]
 
-    Loop mode of the music list, default is `none`.
+    Loop mode of the music list, default value is `none`.
 
 * **order** *[optional]*
 
     [`list`, `random`]
 
-    Play order of the music list, default is `list`.
+    Play order of the music list, default value is `list`.
 
 * **list-folded** *[optional]*
 
-    Whether the music list should be folded at first, default is `false`.
+    Whether the music list should be folded at first, default value is `false`.
 
 * **list-max-height** *[optional]*
 
-    Max height of the music list, default is `340px`.
+    Max height of the music list, default value is `340px`.
 
 ## `bilibili`
 

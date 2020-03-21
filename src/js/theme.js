@@ -222,6 +222,9 @@
                     style: window.isDark ? options['dark-style'] : options['light-style'],
                     attributionControl: false,
                 });
+                if (options['marked']) {
+                    new mapboxgl.Marker().setLngLat([options['lng'], options['lat']]).addTo(mapbox);
+                }
                 if (options['navigation']) {
                     mapbox.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
                 }
@@ -241,7 +244,6 @@
                     mapbox.addControl(new mapboxgl.FullscreenControl());
                 }
                 mapbox.addControl(new MapboxLanguage());
-                new mapboxgl.Marker().setLngLat([options['lng'], options['lat']]).addTo(mapbox);
                 this._mapboxArr.push(mapbox);
             });
             this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || (() => {
@@ -249,6 +251,7 @@
                     const element = mapbox.getContainer();
                     const options = window.contentMap[element.id];
                     mapbox.setStyle(window.isDark ? options['dark-style'] : options['light-style']);
+                    mapbox.addControl(new MapboxLanguage());
                 });
             });
             this.switchThemeEventSet.add(this._mapboxOnSwitchTheme);

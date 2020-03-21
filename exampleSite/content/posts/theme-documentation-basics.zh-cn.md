@@ -20,6 +20,14 @@ featuredImagePreview: ""
 toc: true
 autoCollapseToc: false
 math: false
+mapbox:
+    accessToken: ""
+    lightStyle: ""
+    darkStyle: ""
+    navigation: true
+    geolocate: true
+    scale: true
+    fullscreen: true
 lightgallery: true
 linkToMarkdown: true
 share:
@@ -322,6 +330,22 @@ hugo
     copyTex = true
     # KaTeX 插件 mhchem
     mhchem = true
+  # {{< version 0.2.0 new small >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} 配置
+  [params.mapbox]
+    # Mapbox GL JS 的 access token
+    accessToken = ""
+    # 浅色主题的地图样式
+    lightStyle = "mapbox://styles/mapbox/light-v9"
+    # 深色主题的地图样式
+    darkStyle = "mapbox://styles/mapbox/dark-v9"
+    # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol" NavigationControl >}}
+    navigation = true
+    # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol" GeolocateControl >}}
+    geolocate = true
+    # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol" ScaleControl >}}
+    scale = true
+    # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol" FullscreenControl >}}
+    fullscreen = true
   # 文章页面的分享信息设置
   [params.share]
     enable = true
@@ -461,6 +485,9 @@ hugo
     # {{< link "https://echarts.apache.org/" "echarts" >}}@4.6.0
     echartsJS = ''
     echartsMacaronsJS = ''
+    # {{< version 0.2.0 new small >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.8.1
+    mapboxGLCSS = ''
+    mapboxGLJS = ''
     # {{< link "https://github.com/gitalk/gitalk" "gitalk" >}}@1.6.2
     gitalkCSS = ''
     gitalkJS = ''

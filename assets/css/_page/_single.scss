@@ -34,7 +34,7 @@
   }
 
   .featured-image {
-    padding-top: .6rem;
+    margin: .5rem 0;
 
     img {
       display: block;
@@ -114,7 +114,6 @@
     }
 
     p {
-      font-size: 1rem;
       margin: .5rem 0;
     }
 
@@ -142,6 +141,7 @@
     }
 
     ul {
+      margin: .5rem 0;
       padding-left: 2rem;
       list-style-type: disc;
     }
@@ -284,6 +284,10 @@
       .dark-theme & {
         color: $global-font-secondary-color-dark;
       }
+
+      p {
+        margin: .25rem 0;
+      }
     }
 
     @import "../_partial/_single/code";
@@ -291,6 +295,7 @@
     @import "../_partial/_single/admonition";
     @import "../_partial/_single/echarts";
     @import "../_partial/_single/mapbox";
+    @import "../_partial/_single/music";
     @import "../_partial/_single/bilibili";
 
     hr {

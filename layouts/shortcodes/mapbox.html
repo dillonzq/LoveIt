@@ -2,7 +2,8 @@
 
 {{- $lng := cond .IsNamedParams (.Get "lng") (.Get 0) -}}
 {{- $lat := cond .IsNamedParams (.Get "lat") (.Get 1) -}}
-{{- $zoom := cond .IsNamedParams (.Get "zoom") (.Get 2) | default 0 -}}
+{{- $zoom := cond .IsNamedParams (.Get "zoom") (.Get 2) | default 10 -}}
+{{- $marked := cond .IsNamedParams (.Get "marked") (.Get 3) | ne false -}}
 {{- $lightStyle := .Page.Params.mapbox.lightStyle | default .Page.Site.Params.mapbox.lightStyle -}}
 {{- $darkStyle := .Page.Params.mapbox.darkStyle | default .Page.Site.Params.mapbox.darkStyle -}}
 {{- $navigation := ne .Page.Params.mapbox.navigation false | and (ne .Page.Site.Params.mapbox.navigation false) -}}
@@ -22,11 +23,11 @@
     {{- $width = .Get "width" | default $width -}}
     {{- $height = .Get "height" | default $height -}}
 {{- else -}}
-    {{- $lightStyle = .Get 3 | default $lightStyle -}}
-    {{- $darkStyle = .Get 4 | default $darkStyle -}}
+    {{- $lightStyle = .Get 4 | default $lightStyle -}}
+    {{- $darkStyle = .Get 5 | default $darkStyle -}}
 {{- end -}}
 {{- $darkStyle = $darkStyle | default $lightStyle -}}
-{{- $options := dict "lng" $lng "lat" $lat "zoom" $zoom "light-style" $lightStyle "dark-style" $darkStyle "geolocate" $geolocate "navigation" $navigation "scale" $scale "fullscreen" $fullscreen -}}
+{{- $options := dict "lng" $lng "lat" $lat "zoom" $zoom "marked" $marked "light-style" $lightStyle "dark-style" $darkStyle "geolocate" $geolocate "navigation" $navigation "scale" $scale "fullscreen" $fullscreen -}}
 {{- $id := partial "function/id.html" (dict "content" $options "scratch" $scratch) -}}
 <div class="mapbox" id="{{ $id }}" style="width: {{ $width }}; height: {{ $height }};"></div>
 {{- $scratch.Set "mapbox" true -}}
