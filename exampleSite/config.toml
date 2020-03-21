@@ -768,8 +768,8 @@ enableEmoji = true
     # whether to show link to Raw Markdown content of the post
     # 是否在文章页面显示原始 Markdown 文档链接
     linkToMarkdown = true
-  # mathematical formulas (KaTeX https://katex.org/)
-  # 数学公式 (KaTeX https://katex.org/)
+  # KaTeX mathematical formulas config (KaTeX https://katex.org/)
+  # KaTeX 数学公式配置 (KaTeX https://katex.org/)
   [params.math]
     enable = true
     # default block delimiter is $$ ... $$ and \\[ ... \\]
@@ -786,6 +786,30 @@ enableEmoji = true
     # KaTeX extension mhchem
     # KaTeX 插件 mhchem
     mhchem = true
+  # Mapbox GL JS config (Mapbox GL JS https://docs.mapbox.com/mapbox-gl-js)
+  # Mapbox GL JS 配置 (Mapbox GL JS https://docs.mapbox.com/mapbox-gl-js)
+  [params.mapbox]
+    # access token of Mapbox GL JS
+    # Mapbox GL JS 的 access token
+    accessToken = "pk.eyJ1IjoiZGlsbG9uenEiLCJhIjoiY2s2czd2M2x3MDA0NjNmcGxmcjVrZmc2cyJ9.aSjv2BNuZUfARvxRYjSVZQ"
+    # style for the light theme
+    # 浅色主题的地图样式
+    lightStyle = "mapbox://styles/mapbox/light-v9?optimize=true"
+    # style for the dark theme
+    # 深色主题的地图样式
+    darkStyle = "mapbox://styles/mapbox/dark-v9?optimize=true"
+    # whether to add NavigationControl (https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol)
+    # 是否添加 NavigationControl (https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol)
+    navigation = true
+    # whether to add GeolocateControl (https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol)
+    # 是否添加 GeolocateControl (https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol)
+    geolocate = true
+    # whether to add ScaleControl (https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol)
+    # 是否添加 ScaleControl (https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol)
+    scale = true
+    # whether to add FullscreenControl (https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol)
+    # 是否添加 FullscreenControl (https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol)
+    fullscreen = true
   # site verification code for Google/Bing/Yandex/Pinterest/Baidu
   # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
@@ -851,6 +875,9 @@ enableEmoji = true
     # echarts@4.6.0 https://echarts.apache.org/
     echartsJS = ''
     echartsMacaronsJS = ''
+    # mapbox-gl@1.8.1 https://docs.mapbox.com/mapbox-gl-js
+    mapboxGLCSS = ''
+    mapboxGLJS = ''
     # gitalk@1.6.2 https://github.com/gitalk/gitalk
     gitalkCSS = ''
     gitalkJS = ''

@@ -1,0 +1,33 @@
+{{- $scratch := .Page.Scratch.Get "scratch" -}}
+
+{{- $lng := cond .IsNamedParams (.Get "lng") (.Get 0) -}}
+{{- $lat := cond .IsNamedParams (.Get "lat") (.Get 1) -}}
+{{- $zoom := cond .IsNamedParams (.Get "zoom") (.Get 2) | default 10 -}}
+{{- $marked := cond .IsNamedParams (.Get "marked") (.Get 3) | ne false -}}
+{{- $lightStyle := .Page.Params.mapbox.lightStyle | default .Page.Site.Params.mapbox.lightStyle -}}
+{{- $darkStyle := .Page.Params.mapbox.darkStyle | default .Page.Site.Params.mapbox.darkStyle -}}
+{{- $navigation := ne .Page.Params.mapbox.navigation false | and (ne .Page.Site.Params.mapbox.navigation false) -}}
+{{- $geolocate := ne .Page.Params.mapbox.geolocate false | and (ne .Page.Site.Params.mapbox.geolocate false) -}}
+{{- $scale := ne .Page.Params.mapbox.scale false | and (ne .Page.Site.Params.mapbox.scale false) -}}
+{{- $fullscreen := ne .Page.Params.mapbox.fullscreen false | and (ne .Page.Site.Params.mapbox.fullscreen false) -}}
+{{- $width := "100%" -}}
+{{- $height := "20rem" -}}
+
+{{- if .IsNamedParams -}}
+    {{- $lightStyle = .Get "light-style" | default $lightStyle -}}
+    {{- $darkStyle = .Get "dark-style" | default $darkStyle -}}
+    {{- $navigation = .Get "navigation" | ne false | and $navigation -}}
+    {{- $geolocate = .Get "geolocate" | ne false | and $geolocate -}}
+    {{- $scale = .Get "scale" | ne false | and $scale -}}
+    {{- $fullscreen = .Get "fullscreen" | ne false | and $fullscreen -}}
+    {{- $width = .Get "width" | default $width -}}
+    {{- $height = .Get "height" | default $height -}}
+{{- else -}}
+    {{- $lightStyle = .Get 4 | default $lightStyle -}}
+    {{- $darkStyle = .Get 5 | default $darkStyle -}}
+{{- end -}}
+{{- $darkStyle = $darkStyle | default $lightStyle -}}
+{{- $options := dict "lng" $lng "lat" $lat "zoom" $zoom "marked" $marked "light-style" $lightStyle "dark-style" $darkStyle "geolocate" $geolocate "navigation" $navigation "scale" $scale "fullscreen" $fullscreen -}}
+{{- $id := partial "function/id.html" (dict "content" $options "scratch" $scratch) -}}
+<div class="mapbox" id="{{ $id }}" style="width: {{ $width }}; height: {{ $height }};"></div>
+{{- $scratch.Set "mapbox" true -}}

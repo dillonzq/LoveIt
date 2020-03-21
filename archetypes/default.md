@@ -19,6 +19,14 @@ featuredImagePreview: ""
 toc: false
 autoCollapseToc: true
 math: false
+mapbox:
+    accessToken: ""
+    lightStyle: ""
+    darkStyle: ""
+    navigation: true
+    geolocate: true
+    scale: true
+    fullscreen: true
 lightgallery: true
 linkToMarkdown: true
 share:

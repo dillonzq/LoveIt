@@ -20,6 +20,14 @@ featuredImagePreview: ""
 toc: true
 autoCollapseToc: false
 math: false
+mapbox:
+    accessToken: ""
+    lightStyle: ""
+    darkStyle: ""
+    navigation: true
+    geolocate: true
+    scale: true
+    fullscreen: true
 lightgallery: true
 linkToMarkdown: true
 share:
@@ -72,14 +80,14 @@ You can download the [latest release :(far fa-file-archive): .zip file](https://
 Alternatively, clone this repository to the `themes` directory:
 
 ```bash
-git clone -b master https://github.com/dillonzq/LoveIt.git themes/LoveIt
+git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt
 ```
 
 Or, create an empty git repository and make this repository a submodule of your site directory:
 
 ```bash
 git init
-git submodule -b master add https://github.com/dillonzq/LoveIt.git themes/LoveIt
+git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 ```
 
 ### 2.3 Basic Configuration {#basic-configuration}
@@ -325,6 +333,22 @@ Note that some of these parameters are explained in details in other sections of
     copyTex = true
     # KaTeX extension mhchem
     mhchem = true
+  # {{< version 0.2.0 new small >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config
+  [params.mapbox]
+    # access token of Mapbox GL JS
+    accessToken = ""
+    # style for the light theme
+    lightStyle = "mapbox://styles/mapbox/light-v9"
+    # style for the dark theme
+    darkStyle = "mapbox://styles/mapbox/dark-v9"
+    # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol" NavigationControl >}}
+    navigation = true
+    # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol" GeolocateControl >}}
+    geolocate = true
+    # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol" ScaleControl >}}
+    scale = true
+    # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol" FullscreenControl >}}
+    fullscreen = true
   # Social Share Links in post page
   [params.share]
     enable = true
@@ -464,6 +488,9 @@ Note that some of these parameters are explained in details in other sections of
     # {{< link "https://echarts.apache.org/" "echarts" >}}@4.6.0
     echartsJS = ''
     echartsMacaronsJS = ''
+    # {{< version 0.2.0 new small >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.8.1
+    mapboxGLCSS = ''
+    mapboxGLJS = ''
     # {{< link "https://github.com/gitalk/gitalk" "gitalk" >}}@1.6.2
     gitalkCSS = ''
     gitalkJS = ''

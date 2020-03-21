@@ -20,6 +20,14 @@ featuredImagePreview: ""
 toc: true
 autoCollapseToc: true
 math: false
+mapbox:
+    accessToken: ""
+    lightStyle: ""
+    darkStyle: ""
+    navigation: true
+    geolocate: true
+    scale: true
+    fullscreen: true
 lightgallery: true
 linkToMarkdown: true
 share:
@@ -776,5 +784,5 @@ Content for chapter one.
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 
 {{< admonition tip >}}
-**LoveIt** 主题提供了一个包含更多功能的 [图片的 shortcode](../theme-documentation-shortcodes/#image).
+**LoveIt** 主题提供了一个包含更多功能的 [图片的 shortcode](../theme-documentation-extended-shortcodes/#image).
 {{< /admonition >}}

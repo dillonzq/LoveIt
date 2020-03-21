@@ -2,4 +2,4 @@
 
 {{- $id := partial "function/id.html" (dict "content" (trim .Inner "\n") "scratch" $scratch) -}}
 <div class="mermaid" id="{{ $id }}"></div>
-{{- slice $id | $scratch.Add "mermaidArr" -}}
+{{- $scratch.Set "mermaid" true -}}

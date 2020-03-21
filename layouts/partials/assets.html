@@ -150,20 +150,17 @@
 {{- end -}}
 
 {{- /* mermaid */ -}}
-{{- with $scratch.Get "mermaidArr" -}}
+{{- if $scratch.Get "mermaid" -}}
     {{- with $CDN.mermaidJS -}}
         {{- slice . | $scratch.Add "scriptCDN" -}}
     {{- else -}}
         {{- slice "lib/mermaid/mermaid.min.js" | $scratch.Add "scriptLocal" -}}
     {{- end -}}
     {{- slice "lib/mermaid/mermaid.scss" | $scratch.Add "linkLocal" -}}
-    <script>
-        window.mermaidArr = {{ jsonify . | safeJS }};
-    </script>
 {{- end -}}
 
 {{- /* ECharts */ -}}
-{{- with $scratch.Get "echartsArr" -}}
+{{- if $scratch.Get "echarts" -}}
     {{- with $CDN.echartsJS -}}
         {{- slice . | $scratch.Add "scriptCDN" -}}
     {{- else -}}
@@ -174,8 +171,26 @@
     {{- else -}}
         {{- slice "lib/echarts/macarons.js" | $scratch.Add "scriptLocal" -}}
     {{- end -}}
+{{- end -}}
+
+{{- /* Mapbox GL */ -}}
+{{- if $scratch.Get "mapbox" -}}
+    {{- with $CDN.mapboxGLCSS -}}
+        {{- slice . | $scratch.Add "linkCDN" -}}
+    {{- else -}}
+        {{- slice "lib/mapbox-gl/mapbox-gl.min.css" | $scratch.Add "linkLocal" -}}
+    {{- end -}}
+    {{- with $CDN.mapboxGLJS -}}
+        {{- slice . | $scratch.Add "scriptCDN" -}}
+    {{- else -}}
+        {{- slice "lib/mapbox-gl/mapbox-gl.min.js" | $scratch.Add "scriptLocal" -}}
+    {{- end -}}
+    {{- slice "lib/mapbox-gl/mapbox-gl-language.js" | $scratch.Add "scriptLocal" -}}
     <script>
-        window.echartsArr = {{ jsonify . | safeJS }};
+        document.addEventListener('DOMContentLoaded', function () {
+            mapboxgl.accessToken = '{{ .Params.mapbox.accessToken | default .Site.Params.mapbox.accessToken }}';
+            mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.0/mapbox-gl-rtl-text.js');
+        });
     </script>
 {{- end -}}
 

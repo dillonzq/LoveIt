@@ -1,9 +1,9 @@
 ---
-weight: 3
-title: "Theme Documentation - Shortcodes"
+weight: 4
+title: "Theme Documentation - Extended Shortcodes"
 subtitle: ""
-date: 2020-03-04T16:29:41+08:00
-lastmod: 2020-03-04T16:29:41+08:00
+date: 2020-03-03T16:29:41+08:00
+lastmod: 2020-03-03T16:29:41+08:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
@@ -14,12 +14,20 @@ tags: ["shortcodes"]
 categories: ["documentation"]
 hiddenFromHomePage: false
 
-featuredImage: "/images/theme-documentation-shortcodes/featured-image.jpg"
-featuredImagePreview: ""
+featuredImage: "/images/theme-documentation-extended-shortcodes/featured-image.jpg"
+featuredImagePreview: "/images/theme-documentation-extended-shortcodes/featured-image-preview.jpg"
 
 toc: true
 autoCollapseToc: true
 math: false
+mapbox:
+    accessToken: ""
+    lightStyle: ""
+    darkStyle: ""
+    navigation: true
+    geolocate: true
+    scale: true
+    fullscreen: true
 lightgallery: true
 linkToMarkdown: true
 share:
@@ -31,173 +39,7 @@ comment: true
 
 <!--more-->
 
-Hugo uses Markdown for its simple content format. However, there are a lot of things that Markdown doesn’t support well. You could use pure HTML to expand possibilities.
-
-But this happens to be a bad idea. Everyone uses Markdown because it’s pure and simple to read even non-rendered. You should avoid HTML to keep it as simple as possible.
-
-To avoid this limitations, Hugo created [shortcodes](https://gohugo.io/extras/shortcodes/).
-A shortcode is a simple snippet that can generate reasonable HTML code and conforms to Markdown's design philosophy.
-
-## Hugo’s Built-in Shortcodes
-
-Hugo ships with a set of predefined shortcodes that represent very common usage. These shortcodes are provided for author convenience and to keep your markdown content clean.
-
-### `figure` {#figure}
-
-[Documentation of `figure`](https://gohugo.io/content-management/shortcodes/#figure)
-
-Example `figure` input:
-
-```markdown
-{{</* figure src="/images/theme-documentation-shortcodes/lighthouse.jpg" title="Lighthouse (figure)" */>}}
-```
-
-The rendered output looks like this:
-
-{{< figure src="/images/theme-documentation-shortcodes/lighthouse.jpg" title="Lighthouse (figure)" >}}
-
-The HTML looks like this:
-
-```html
-<figure>
-    <img src="/images/theme-documentation-shortcodes/lighthouse.jpg"/>
-    <figcaption>
-        <h4>Lighthouse (figure)</h4>
-    </figcaption>
-</figure>
-```
-
-### `gist`
-
-[Documentation of `gist`](https://gohugo.io/content-management/shortcodes/#gist)
-
-Example `gist` input:
-
-```markdown
-{{</* gist spf13 7896402 */>}}
-```
-
-The rendered output looks like this:
-
-{{< gist spf13 7896402 >}}
-
-The HTML looks like this:
-
-```html
-<script type="application/javascript" src="https://gist.github.com/spf13/7896402.js"></script>
-```
-
-### `highlight`
-
-[Documentation of `highlight`](https://gohugo.io/content-management/shortcodes/#instagram)
-
-Example `highlight` input:
-
-```markdown
-{{</* highlight html */>}}
-<section id="main">
-    <div>
-        <h1 id="title">{{ .Title }}</h1>
-        {{ range .Pages }}
-            {{ .Render "summary"}}
-        {{ end }}
-    </div>
-</section>
-{{</* /highlight */>}}
-```
-
-The rendered output looks like this:
-
-{{< highlight html >}}
-<section id="main">
-    <div>
-        <h1 id="title">{{ .Title }}</h1>
-        {{ range .Pages }}
-            {{ .Render "summary"}}
-        {{ end }}
-    </div>
-</section>
-{{< /highlight >}}
-
-### `instagram`
-
-[Documentation of `instagram`](https://gohugo.io/content-management/shortcodes/#instagram)
-
-Example `instagram` input:
-
-```markdown
-{{</* instagram BWNjjyYFxVx hidecaption */>}}
-```
-
-The rendered output looks like this:
-
-{{< instagram BWNjjyYFxVx hidecaption >}}
-
-### `param`
-
-[Documentation of `param`](https://gohugo.io/content-management/shortcodes/#param)
-
-Example `param` input:
-
-```markdown
-{{</* param description */>}}
-```
-
-The rendered output looks like this:
-
-{{< param description >}}
-
-### `ref` and `relref` {#ref-and-relref}
-
-[Documentation of `ref` and `relref`](https://gohugo.io/content-management/shortcodes/#ref-and-relref)
-
-### `tweet`
-
-[Documentation of `tweet`](https://gohugo.io/content-management/shortcodes/#tweet)
-
-Example `tweet` input:
-
-```markdown
-{{</* tweet 877500564405444608 */>}}
-```
-
-The rendered output looks like this:
-
-{{< tweet 877500564405444608 >}}
-
-### `vimeo`
-
-[Documentation of `vimeo`](https://gohugo.io/content-management/shortcodes/#vimeo)
-
-Example `vimeo` input:
-
-```markdown
-{{</* vimeo 146022717 */>}}
-```
-
-The rendered output looks like this:
-
-{{< vimeo 146022717 >}}
-
-### `youtube`
-
-[Documentation of `youtube`](https://gohugo.io/content-management/shortcodes/#youtube)
-
-Example `youtube` input:
-
-```markdown
-{{</* youtube w7Ft2ymGmfc */>}}
-```
-
-The rendered output looks like this:
-
-{{< youtube w7Ft2ymGmfc >}}
-
-## LoveIt Shortcodes
-
-**LoveIt** provides multiple shortcodes on top of existing ones.
-
-### `style`
+## `style`
 
 `style` is a shortcode to insert custom style in your post.
 
@@ -210,18 +52,18 @@ And the **second** one is the HTML tag around the content you want to change sty
 Example `style` input:
 
 ```markdown
-{{</* style "text-align: right" */>}}
+{{</* style "text-align: right;" */>}}
 This is a right-aligned paragraph.
 {{</* /style */>}}
 ```
 
 The rendered output looks like this:
 
-{{< style "text-align: right" >}}
+{{< style "text-align: right;" >}}
 This is a right-aligned paragraph.
 {{< /style >}}
 
-### `link`
+## `link`
 
 {{< version 0.2.0 >}}
 
@@ -235,7 +77,7 @@ The `link` shortcode has the following named parameters:
 
 * **content** *[optional]* (**second** positional parameter)
 
-    Content of the link, default is the value of **href** parameter.
+    Content of the link, default value is the value of **href** parameter.
 
     *Markdown or HTML format is supported.*
 
@@ -285,11 +127,11 @@ The rendered output looks like this (hover over the link, there should be a tool
 
 {{< link "https://github.com/upstage/" Upstage "Visit Upstage!" >}}
 
-### `image`
+## `image`
 
 {{< version 0.2.0 changed >}}
 
-`image` shortcode is an alternative to [`figure` shortcode](#figure). `image` shortcode can take full advantage of the dependent libraries of [lazysizes](https://github.com/aFarkas/lazysizes) and [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js).
+`image` shortcode is an alternative to [`figure` shortcode](../theme-documentation-built-in-shortcodes/#figure). `image` shortcode can take full advantage of the dependent libraries of [lazysizes](https://github.com/aFarkas/lazysizes) and [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js).
 
 The `image` shortcode has the following named parameters:
 
@@ -299,7 +141,7 @@ The `image` shortcode has the following named parameters:
 
 * **alt** *[optional]* (**second** positional parameter)
 
-    Alternate text for the image if the image cannot be displayed, default is the value of **src** parameter.
+    Alternate text for the image if the image cannot be displayed, default value is the value of **src** parameter.
 
     *Markdown or HTML format is supported.*
 
@@ -319,11 +161,11 @@ The `image` shortcode has the following named parameters:
 
 * **src_s** *[optional]*
 
-    URL of the image thumbnail, used for lightgallery, default is the value of **src** parameter.
+    URL of the image thumbnail, used for lightgallery, default value is the value of **src** parameter.
 
 * **src_l** *[optional]*
 
-    URL of the HD image, used for lightgallery, default is the value of **src** parameter.
+    URL of the HD image, used for lightgallery, default value is the value of **src** parameter.
 
 * **height** *[optional]*
 
@@ -335,7 +177,7 @@ The `image` shortcode has the following named parameters:
 
 * **linked** *[optional]*
 
-    Whether the image needs to be hyperlinked, default is `true`.
+    Whether the image needs to be hyperlinked, default value is `true`.
 
 * **rel** *[optional]*
 
@@ -348,14 +190,14 @@ The `image` shortcode has the following named parameters:
 Example `image` input:
 
 ```markdown
-{{</* image src="/images/theme-documentation-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-shortcodes/lighthouse-large.jpg" */>}}
+{{</* image src="/images/theme-documentation-extended-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-extended-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-extended-shortcodes/lighthouse-large.jpg" */>}}
 ```
 
 The rendered output looks like this:
 
-{{< image src="/images/theme-documentation-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-shortcodes/lighthouse-large.jpg" >}}
+{{< image src="/images/theme-documentation-extended-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-extended-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-extended-shortcodes/lighthouse-large.jpg" >}}
 
-### `admonition`
+## `admonition`
 
 The `admonition` shortcode supports **12** types of banners to help you put notice in your page.
 
@@ -413,15 +255,15 @@ The `admonition` shortcode has the following named parameters:
 
 * **type** *[optional]* (**first** positional parameter)
 
-    Type of the `admonition` banner, default is `note`.
+    Type of the `admonition` banner, default value is `note`.
 
 * **title** *[optional]* (**second** positional parameter)
 
-    Title of the `admonition` banner, default is the value of **type** parameter.
+    Title of the `admonition` banner, default value is the value of **type** parameter.
 
 * **details** *[optional]* (**third** positional parameter)
 
-    Whether the content will be expandable/collapsible, default is `false`.
+    Whether the content will be expandable/collapsible, default value is `false`.
 
 Example `admonition` input:
 
@@ -441,13 +283,13 @@ The rendered output looks like this:
 A **tip** banner
 {{< /admonition >}}
 
-### `mermaid`
+## `mermaid`
 
 [mermaid](https://mermaidjs.github.io/) is a library helping you to generate diagram and flowcharts from text, in a similar manner as Markdown.
 
 Just insert your mermaid code in the `mermaid` shortcode and that’s it.
 
-#### Flowchart {#flowchart}
+### Flowchart {#flowchart}
 
 Example **flowchart** `mermaid` input:
 
@@ -471,7 +313,7 @@ graph LR;
     C -->|Two| E[Result two]
 {{< /mermaid >}}
 
-#### Sequence Diagram {#sequence-diagram}
+### Sequence Diagram {#sequence-diagram}
 
 Example **sequence diagram** `mermaid` input:
 
@@ -507,7 +349,7 @@ sequenceDiagram
     Bob-->John: Jolly good!
 {{< /mermaid >}}
 
-#### GANTT {#gantt}
+### GANTT {#gantt}
 
 Example **GANTT** `mermaid` input:
 
@@ -551,7 +393,7 @@ gantt
     Add to mermaid                      :1d
 {{< /mermaid >}}
 
-#### Class Diagram {#class-diagram}
+### Class Diagram {#class-diagram}
 
 Example **class diagram** `mermaid` input:
 
@@ -593,7 +435,7 @@ classDiagram
     Class08 <--> C2: Cool label
 {{< /mermaid >}}
 
-#### State Diagram {#state-diagram}
+### State Diagram {#state-diagram}
 
 Example **state diagram** `mermaid` input:
 
@@ -621,7 +463,7 @@ stateDiagram
     Crash --> [*]
 {{< /mermaid >}}
 
-#### Git Graph {#git-graph}
+### Git Graph {#git-graph}
 
 Example **git graph** `mermaid` input:
 
@@ -667,7 +509,7 @@ end
     merge newbranch
 {{< /mermaid >}}
 
-#### Pie {#pie}
+### Pie {#pie}
 
 Example **pie** `mermaid` input:
 
@@ -689,7 +531,7 @@ pie
     "Rats" : 15
 {{< /mermaid >}}
 
-### `echarts`
+## `echarts`
 
 [ECharts](https://echarts.apache.org/) is a library helping you to generate interactive data visualization.
 
@@ -1067,13 +909,87 @@ The rendered output looks like this:
 }
 {{< /echarts >}}
 
-### `music`
+## `mapbox`
+
+{{< version 0.2.0 >}}
+
+[Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) is a JavaScript library that uses WebGL to render interactive maps from [vector tiles](https://docs.mapbox.com/help/glossary/vector-tiles/) and [Mapbox styles](https://docs.mapbox.com/mapbox-gl-js/style-spec/).
+
+The `mapbox` shortcode has the following named parameters to use Mapbox GL JS:
+
+* **lng** *[required]* (**first** positional parameter)
+
+    Longitude of the inital centerpoint of the map, measured in degrees.
+
+* **lat** *[required]* (**second** positional parameter)
+
+    Latitude of the inital centerpoint of the map, measured in degrees.
+
+* **zoom** *[optional]* (**third** positional parameter)
+
+    The initial zoom level of the map, default value is `10`.
+
+* **marked** *[optional]* (**fourth** positional parameter)
+
+    Whether to add a marker at the inital centerpoint of the map, default value is `true`.
+
+* **light-style** *[optional]* (**fifth** positional parameter)
+
+    Style for the light theme, default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+
+* **dark-style** *[optional]* (**sixth** positional parameter)
+
+    Style for the dark theme, default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+
+* **navigation** *[optional]*
+
+    Whether to add [NavigationControl](https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol), default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+
+* **geolocate** *[optional]*
+
+    Whether to add [GeolocateControl](https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol), default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+
+* **scale** *[optional]*
+
+    Whether to add [ScaleControl](https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol), default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+
+* **fullscreen** *[optional]*
+
+    Whether to add [FullscreenControl](https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol), default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+
+* **width** *[optional]*
+
+    Width of the map, default value is `100%`.
+
+* **height** *[optional]*
+
+    Height of the map, default value is `20rem`.
+
+Example `mapbox` input:
+
+```markdown
+{{</* mapbox 121.485 31.233 12 */>}}
+Or
+{{</* mapbox lng=121.485 lat=31.233 zoom=12 */>}}
+
+{{</* mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/navigation-preview-day-v4" "mapbox://styles/mapbox/navigation-preview-night-v4" */>}}
+Or
+{{</* mapbox lng=-122.252 lat=37.453 zoom=10 marked=false light-style="mapbox://styles/mapbox/navigation-preview-day-v4" dark-style="mapbox://styles/mapbox/navigation-preview-night-v4" */>}}
+```
+
+The rendered output looks like this:
+
+{{< mapbox 121.485 31.233 12 >}}
+
+{{< mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/navigation-preview-day-v4?optimize=true" "mapbox://styles/mapbox/navigation-preview-night-v4?optimize=true" >}}
+
+## `music`
 
 The `music` shortcode embeds a responsive music player based on [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS).
 
 There are three ways to use it the `music` shortcode.
 
-#### Custom Music URL {#custom-music-url}
+### Custom Music URL {#custom-music-url}
 
 The `music` shortcode has the following named parameters by custom music URL:
 
@@ -1103,7 +1019,7 @@ The rendered output looks like this:
 
 {{< music url="https://rainymood.com/audio1110/0.m4a" name=rainymood artist=rainymood cover="https://rainymood.com/i/badge.jpg" >}}
 
-#### Music Platform URL Automatic Identification {#automatic-identification}
+### Music Platform URL Automatic Identification {#automatic-identification}
 
 The `music` shortcode has one named parameter by music platform URL automatic identification:
 
@@ -1124,7 +1040,7 @@ The rendered output looks like this:
 
 {{< music auto="https://music.163.com/#/playlist?id=60198" >}}
 
-#### Custom Server, Type and ID {#custom-server}
+### Custom Server, Type and ID {#custom-server}
 
 The `music` shortcode has the following named parameters by custom music platform:
 
@@ -1156,33 +1072,33 @@ The rendered output looks like this:
 
 {{< music netease song 1868553 >}}
 
-#### Other Parameters
+### Other Parameters {#other-parameters}
 
 The `music` shortcode has other named parameters applying to the above three ways:
 
 * **theme** *[optional]*
 
-    Main color of the music player, default is `#a9a9b3`.
+    {{< version 0.2.0 changed >}} Main color of the music player, default value is `#448aff`.
 
 * **fixed** *[optional]*
 
-    Whether to enable fixed mode, default is `false`.
+    Whether to enable fixed mode, default value is `false`.
 
 * **mini** *[optional]*
 
-    Whether to enable mini mode, default is `false`.
+    Whether to enable mini mode, default value is `false`.
 
 * **autoplay** *[optional]*
 
-    Whether to autoplay music, default is `false`.
+    Whether to autoplay music, default value is `false`.
 
 * **volume** *[optional]*
 
-    Default volume when the player is first opened, which will be remembered in the browser, default is `0.7`.
+    Default volume when the player is first opened, which will be remembered in the browser, default value is `0.7`.
 
 * **mutex** *[optional]*
 
-    Whether to pause other players when this player starts playing, default is `true`.
+    Whether to pause other players when this player starts playing, default value is `true`.
 
 The `music` shortcode has the following named parameters only applying to the type of music list:
 
@@ -1190,23 +1106,23 @@ The `music` shortcode has the following named parameters only applying to the ty
 
     [`all`, `one`, `none`]
 
-    Loop mode of the music list, default is `none`.
+    Loop mode of the music list, default value is `none`.
 
 * **order** *[optional]*
 
     [`list`, `random`]
 
-    Play order of the music list, default is `list`.
+    Play order of the music list, default value is `list`.
 
 * **list-folded** *[optional]*
 
-    Whether the music list should be folded at first, default is `false`.
+    Whether the music list should be folded at first, default value is `false`.
 
 * **list-max-height** *[optional]*
 
-    Max height of the music list, default is `340px`.
+    Max height of the music list, default value is `340px`.
 
-### `bilibili`
+## `bilibili`
 
 The `bilibili` shortcode embeds a responsive video player for bilibili videos.
 
@@ -1247,13 +1163,13 @@ The rendered output looks like this:
 
 {{< bilibili av=36570401 p=3 >}}
 
-### `typeit`
+## `typeit`
 
 The `typeit` shortcode provides typing animation based on [TypeIt](https://typeitjs.com/).
 
 Just insert your content in the `typeit` shortcode and that’s it.
 
-#### Simple Content {#simple-content}
+### Simple Content {#simple-content}
 
 Simple content is allowed in `Markdown` format and **without** rich block content such as images and more...
 
@@ -1287,7 +1203,7 @@ The rendered output looks like this:
 This is a *paragraph* with **typing animation** based on [TypeIt](https://typeitjs.com/)...
 {{< /typeit >}}
 
-#### Code Content {#code-content}
+### Code Content {#code-content}
 
 Code content is allowed and will be highlighted by named parameter `code` for the type of code language.
 
@@ -1313,7 +1229,7 @@ public class HelloWorld {
 }
 {{< /typeit >}}
 
-#### Group Content {#group-content}
+### Group Content {#group-content}
 
 All typing animations start at the same time by default.
 But sometimes you may want to start a set of `typeit` contents in order.

@@ -29,6 +29,7 @@
             this.oldScrollTop = this.newScrollTop;
             this.scrollEventSet = new Set();
             this.resizeEventSet = new Set();
+            this.switchThemeEventSet = new Set();
         }
 
         initMenuMobile() {
@@ -55,7 +56,7 @@
                     document.body.classList.toggle('dark-theme');
                     window.isDark = !window.isDark;
                     window.localStorage && window.localStorage.setItem('theme', window.isDark ? 'dark' : 'light');
-                    this.initEcharts();
+                    for (let event of this.switchThemeEventSet) event();
                 };
             });
         }
@@ -122,7 +123,7 @@
                 toc.style.maxWidth = `${page.getBoundingClientRect().left - 20}px`;
                 this._tocLinks = this._tocLinks || tocCore.getElementsByTagName('a');
                 this._tocLis = this._tocLis || tocCore.getElementsByTagName('li');
-                this._headerLinks = this._headerLinks || document.getElementsByClassName('headerLink') || [];
+                this._headerLinks = this._headerLinks || document.getElementsByClassName('headerLink');
                 const headerIsFixed = window.desktopHeaderMode !== 'normal';
                 const headerHeight = document.getElementById('header-desktop').offsetHeight;
                 const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
@@ -175,11 +176,11 @@
         }
 
         initMermaid() {
-            if (window.mermaidArr) {
+            const elements = document.getElementsByClassName('mermaid');
+            if (elements.length) {
                 mermaid.initialize({startOnLoad: false, theme: 'null'});
-                this.util.forEach(window.mermaidArr, (id) => {
-                    const element = document.getElementById(id);
-                    mermaid.mermaidAPI.render('svg-' + id, window.contentMap[id], (svgCode) => {
+                this.util.forEach(elements, (element) => {
+                    mermaid.mermaidAPI.render('svg-' + element.id, window.contentMap[element.id], (svgCode) => {
                         element.innerHTML = svgCode;
                     }, element);
                 });
@@ -187,24 +188,73 @@
         }
 
         initEcharts() {
-            if (window.echartsArr) {
+            this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || (() => {
                 this._echartsArr = this._echartsArr || [];
                 for (let i = 0; i < this._echartsArr.length; i++) {
                     this._echartsArr[i].dispose();
                 }
                 this._echartsArr = [];
-                this.util.forEach(window.echartsArr, (id) => {
-                    const chart = echarts.init(document.getElementById(id), window.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
-                    chart.setOption(JSON.parse(window.contentMap[id]));
+                this.util.forEach(document.getElementsByClassName('echarts'), (element) => {
+                    const chart = echarts.init(element, window.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
+                    chart.setOption(JSON.parse(window.contentMap[element.id]));
                     this._echartsArr.push(chart);
                 });
-                this._echartsOnResize = this._echartsOnResize || (() => {
-                    for (let i = 0; i < this._echartsArr.length; i++) {
-                        this._echartsArr[i].resize();
-                    }
+            });
+            this.switchThemeEventSet.add(this._echartsOnSwitchTheme);
+            this._echartsOnSwitchTheme();
+            this._echartsOnResize = this._echartsOnResize || (() => {
+                for (let i = 0; i < this._echartsArr.length; i++) {
+                    this._echartsArr[i].resize();
+                }
+            });
+            this.resizeEventSet.add(this._echartsOnResize);
+        }
+
+        initMapbox() {
+            this._mapboxArr = this._mapboxArr || [];
+            this.util.forEach(document.getElementsByClassName('mapbox'), (element) => {
+                const options = window.contentMap[element.id];
+                const mapbox = new mapboxgl.Map({
+                    container: element,
+                    center: [options['lng'], options['lat']],
+                    zoom: options['zoom'],
+                    minZoom: .2,
+                    style: window.isDark ? options['dark-style'] : options['light-style'],
+                    attributionControl: false,
                 });
-                this.resizeEventSet.add(this._echartsOnResize);
-            }
+                if (options['marked']) {
+                    new mapboxgl.Marker().setLngLat([options['lng'], options['lat']]).addTo(mapbox);
+                }
+                if (options['navigation']) {
+                    mapbox.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+                }
+                if (options['geolocate']) {
+                    mapbox.addControl(new mapboxgl.GeolocateControl({
+                        positionOptions: {
+                            enableHighAccuracy: true,
+                        },
+                        showUserLocation: true,
+                        trackUserLocation: true,
+                    }), 'bottom-right');
+                }
+                if (options['scale']) {
+                    mapbox.addControl(new mapboxgl.ScaleControl());
+                }
+                if (options['fullscreen']) {
+                    mapbox.addControl(new mapboxgl.FullscreenControl());
+                }
+                mapbox.addControl(new MapboxLanguage());
+                this._mapboxArr.push(mapbox);
+            });
+            this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || (() => {
+                this.util.forEach(this._mapboxArr, (mapbox) => {
+                    const element = mapbox.getContainer();
+                    const options = window.contentMap[element.id];
+                    mapbox.setStyle(window.isDark ? options['dark-style'] : options['light-style']);
+                    mapbox.addControl(new MapboxLanguage());
+                });
+            });
+            this.switchThemeEventSet.add(this._mapboxOnSwitchTheme);
         }
 
         initTypeit() {
@@ -248,7 +298,7 @@
                 header.classList.add('animated');
                 header.classList.add('faster');
             });
-            const comments = document.getElementsByClassName('comment') || [];
+            const comments = document.getElementsByClassName('comment');
             if (comments.length) {
                 const button = document.getElementById('comment-button');
                 button.href = `#${comments[0].id}`;
@@ -313,6 +363,7 @@
             this.initHeaderLink();
             this.initMermaid();
             this.initEcharts();
+            this.initMapbox();
             this.initTypeit();
             this.initToc();
             this.initSmoothScroll();

@@ -20,6 +20,14 @@ featuredImagePreview: ""
 toc: true
 autoCollapseToc: false
 math: true
+mapbox:
+    accessToken: ""
+    lightStyle: ""
+    darkStyle: ""
+    navigation: true
+    geolocate: true
+    scale: true
+    fullscreen: true
 lightgallery: true
 linkToMarkdown: true
 share:
@@ -39,7 +47,7 @@ comment: true
 * 保持简单的静态页面存放在 `content` 目录, 例如: `content/about.md`
 * 保持图片之类的媒体资源存放在 `static` 目录, 例如: `static/images/screenshot.png`
 
-## 2 前置参数
+## 2 前置参数 {#front-matter}
 
 **Hugo** 允许你在文章内容前面添加 `yaml`, `toml` 或者 `json` 格式的前置参数.
 
@@ -67,6 +75,14 @@ featuredImagePreview: ""
 toc: false
 autoCollapseToc: true
 math: true
+mapbox:
+    accessToken: ""
+    lightStyle: ""
+    darkStyle: ""
+    navigation: true
+    geolocate: true
+    scale: true
+    fullscreen: true
 lightgallery: true
 linkToMarkdown: true
 share:
@@ -92,6 +108,7 @@ comment: true
 * **toc**: 如果设为 `true`, 这篇文章会显示右侧目录.
 * **autoCollapseToc**: 如果设为 `true`, 文章目录会自动折叠.
 * **math**: 如果设为 `true`, 将自动渲染文章中的数学公式.
+* **mapbox**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.mapbox` 对象相同.
 * **lightgallery**: 如果设为 `true`, 文章中的图片将可以按照画廊形式呈现.
 * **linkToMarkdown**: 如果设为 `true`, 内容的页脚将显示指向原始 Markdown 文件的链接.
 * **share**: 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.share` 对象相同.
@@ -248,14 +265,14 @@ $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 **LoveIt** 主题支持一种 **分数** Markdown 扩展语法:
 
 ```markdown
-[白天]{?/}[夜晚]
+[浅色]{?/}[深色]
 
 [99]{?/}[100]
 ```
 
 呈现的输出效果如下:
 
-[白天]/[夜晚]
+[浅色]/[深色]
 
 [90]/[100]
 

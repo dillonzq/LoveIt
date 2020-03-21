@@ -63,11 +63,13 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 * :(far fa-images): **Images gallery** supported by [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * :(fab fa-font-awesome): Extended markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
 * :(far fa-sticky-note): Extended markdown syntax for **ruby annotation**
+* :(fas fa-percentage): Extended markdown syntax for **fraction**
 * :(fas fa-square-root-alt): **Mathematical formula** supported by [$ \KaTeX $](https://katex.org/)
 * :(fas fa-project-diagram): **Diagrams** shortcode supported by [mermaid](https://github.com/knsv/mermaid)
 * :(fas fa-chart-pie): **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
+* :(fas fa-map-marked-alt): **Mapbox** shortcode supported by [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * :(fas fa-music): **Music player** shortcode supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
-* :(fas fa-tv): **Bilibili player** shortcode
+* :(fas fa-video): **Bilibili player** shortcode
 * :(far fa-bell): Kinds of **admonitions** shortcode
 * :(fas fa-align-left): **Custom style** shortcode
 * :(fas fa-i-cursor): **Animated typing** supported by [TypeIt](https://typeitjs.com/)
@@ -92,6 +94,7 @@ Thanks to the authors of following resources included in the theme:
 * [$ \KaTeX $](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)
 * [ECharts](https://echarts.apache.org/)
+* [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * [APlayer](https://github.com/MoePlayer/APlayer)
 * [MetingJS](https://github.com/metowolf/MetingJS)
 * [Gitalk](https://github.com/gitalk/gitalk)

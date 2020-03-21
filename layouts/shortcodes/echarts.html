@@ -3,4 +3,4 @@
 {{- $content := .Inner | transform.Unmarshal | jsonify -}}
 {{- $id := partial "function/id.html" (dict "content" $content "scratch" $scratch) -}}
 <div class="echarts" id="{{ $id }}"></div>
-{{- slice $id | $scratch.Add "echartsArr" -}}
+{{- $scratch.Set "echarts" true -}}
