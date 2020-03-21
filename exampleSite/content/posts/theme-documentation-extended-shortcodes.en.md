@@ -909,6 +909,16 @@ The rendered output looks like this:
 }
 {{< /echarts >}}
 
+The `echarts` shortcode has also the following named parameters:
+
+* **width** *[optional]* (**first** positional parameter)
+
+    {{< version 0.2.0 >}} Width of the data visualization, default value is `100%`.
+
+* **height** *[optional]* (**second** positional parameter)
+
+    {{< version 0.2.0 >}} Height of the data visualization, default value is `30rem`.
+
 ## `mapbox`
 
 {{< version 0.2.0 >}}
