@@ -27,11 +27,11 @@
         {{- with .Site.Author.name -}}
             "author": {
                 "@type": "Person",
-                "name": "{{ . }}"
+                "name": {{ . | safeHTML }}
             },
         {{- end -}}
         {{- with .Site.Params.description -}}
-            "description": {{ . }},
+            "description": {{ . | safeHTML }},
         {{- end -}}
         {{- with .Site.Params.image -}}
             "image": "{{ .url | absURL }}",
@@ -40,9 +40,9 @@
             "thumbnailUrl": "{{ .url | absURL }}",
         {{- end -}}
         {{- with .Site.Copyright -}}
-            "license": "{{ . }}",
+            "license": "{{ . | safeHTML }}",
         {{- end -}}
-        "name": {{ .Site.Title }}
+        "name": {{ .Site.Title | safeHTML }}
     }
     </script>
 
@@ -52,7 +52,7 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": {{ .Title }},
+        "headline": {{ .Title | safeHTML }},
         "inLanguage": "{{ .Site.LanguageCode }}",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -98,7 +98,7 @@
         {{- with .Params.author | default .Site.Author.name | default (T "author") -}}
             "author": {
                 "@type": "Person",
-                "name": "{{ . }}"
+                "name": {{ . | safeHTML }}
             },
         {{- end -}}
         "description": {{ .Description | safeHTML }}
