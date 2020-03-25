@@ -756,6 +756,11 @@ enableEmoji = true
     yandex = ""
     pinterest = ""
     baidu = ""
+  [params.fathomAnalytics]
+    # siteID = "ABC123"
+    # If you're self hosting use this for your tracker
+    # serverURL = "https://example.com"
+
   # Publisher Info just for SEO
   # 出版者信息，仅用于 SEO
   [params.publisher]
