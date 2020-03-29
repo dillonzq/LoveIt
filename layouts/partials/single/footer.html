@@ -21,6 +21,18 @@
                 {{- end -}}
             </div>
         </div>
+		<div class="related-posts">
+				{{- if ( .Params.RelatedPosts | default true ) -}}
+					</br>
+					<b>{{- printf (T "RelatedPosts") -}}</b>
+					{{ range first 5 ( where ( where .Site.Pages.ByDate.Reverse ".Params.tags" "intersect" .Params.tags ) "Permalink" "!=" .Permalink ) }}
+						<li class="relatedPost">
+							<a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a><br />
+							{{ .Description | markdownify }}
+						</li>
+					{{ end }}
+				{{- end -}}
+		</div>
         <div class="post-info-line">
             <div class="post-info-md">
                 {{- if ne .Site.Params.page.linkToMarkdown false | and (ne .Params.linkToMarkdown false)  -}}
@@ -55,7 +67,6 @@
             <span><a href="javascript:window.history.back();">{{ T "back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{  `/` | relLangURL  }}">{{ T "home" }}</a></span>
         </section>
     </div>
-
     <div class="post-nav">
         {{- if .PrevInSection -}}
             <a href="{{ .PrevInSection.RelPermalink }}" class="prev" rel="prev" title="{{ .PrevInSection.Title }}"><i class="fas fa-angle-left fa-fw"></i>{{ .PrevInSection.Title }}</a>

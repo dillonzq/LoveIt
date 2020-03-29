@@ -138,3 +138,8 @@ other = "Exemple"
 [quote]
 other = "Citation"
 # === shortcodes/admonition.html ===
+
+# === single/footer.html ===
+[RelatedPosts]
+other = "Vous pourriez aussi aimer..."
+# === single/footer.html ===
