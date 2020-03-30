@@ -143,3 +143,8 @@ other = "引用"
 [RelatedPosts]
 other = "您可能还喜欢："
 # === single/footer.html ===
+
+# === Search ===
+[SearchResults]
+other = "搜索结果："
+# === Search ===

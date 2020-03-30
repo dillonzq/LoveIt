@@ -143,3 +143,8 @@ other = "Citation"
 [RelatedPosts]
 other = "Vous pourriez aussi aimer..."
 # === single/footer.html ===
+
+# === Search ===
+[SearchResults]
+other = "Matching Pages"
+# === Search ===
