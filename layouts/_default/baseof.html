@@ -51,7 +51,9 @@
                     {{- block "content" . }}{{ end -}}
                 </div>
             </main>
-            {{- partial "footer.html" . -}}
+            {{- if ne .Site.Params.hideFooter true -}}
+                {{- partial "footer.html" . -}}
+            {{- end -}}
         </div>
 
         {{- /* Dynamic to top button */ -}}
