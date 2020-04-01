@@ -1,3 +1,19 @@
+## 这个版本中的修改
+- [x] 增加了相关文章的显示
+- [ ] 增加了本地全站搜索的功能
+
+## 简单教程
+- 默认每一个文章下会显示5篇相关文章。可以在Front Matter中设置 'RelatedPosts: false' 来关闭
+- 本地搜索还是个半成品，需要手工在config.toml中设置 home = ["HTML", "RSS", **"JSON"**] 来启用
+- 已知问题：
+  - 搜索结果不全
+  - 搜索结果可能重复显示
+  - 不够美观……
+
+
+
+
+
 # LoveIt 主题 | Hugo [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)

@@ -1,3 +1,17 @@
+## Changes in This Mod
+- [x] Add related posts
+- [ ] Add local search
+
+## Tutorials
+- Related posts will show 5 related posts by default. This feature can be turned off by setting 'RelatedPosts: false' in the front matter.
+- Local search is still WIP. You need to set home = ["HTML", "RSS", **"JSON"**] in config.toml for the local search to work
+- Known Issues in Local Search:
+  - Incomplete search results
+  - A post might appear several times in case of hits in different sections
+  - Not pretty
+
+
+
 # LoveIt Theme | Hugo [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
