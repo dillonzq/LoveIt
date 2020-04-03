@@ -5,6 +5,7 @@
             <a href="{{ `/` | relLangURL }}">
                 {{- .Site.Title -}}
             </a>
+			<link rel="manifest" href="/manifest.json">
         </div>
         <div class="menu">
             {{- range .Site.Menus.main -}}
@@ -48,6 +49,7 @@
                 <a href="{{ `/` | relLangURL }}">
                     {{- .Site.Title -}}
                 </a>
+				<link rel="manifest" href="/manifest.json">
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
