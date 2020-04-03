@@ -6,15 +6,21 @@
 - [ ] Add local search
 
   Credit: https://blog.humblepg.com/post/2019/06/hugo-search.html
+  
+- [x] PWA
+  Credit: https://io-oi.me/tech/pwa-via-workbox/
 
 ## Tutorials
 - Related posts will show 5 related posts by default. This feature can be turned off by setting 'RelatedPosts: false' in the front matter.
 - Local search is still WIP. You need to set home = ["HTML", "RSS", **"JSON"**] in config.toml for the local search to work
+- PWA:
+  - For automatic deploy via Netlify, change the build command from "hugo --gc --minify" to "hugo --gc --minify && npm install workbox-build gulp gulp-uglify readable-stream uglify-es --save-dev && ./node_modules/gulp/bin/gulp.js build"
+  - Create gulpfile.js and sw-template.js from https://io-oi.me/tech/pwa-via-workbox/
+  - Commit changes
 - Known Issues in Local Search:
   - Incomplete search results
   - A post might appear several times in case of hits in different sections
   - Not pretty
-
 
 
 # LoveIt Theme | Hugo [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
