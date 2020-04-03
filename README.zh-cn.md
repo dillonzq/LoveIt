@@ -1,6 +1,11 @@
 ## 这个版本中的修改
 - [x] 增加了相关文章的显示
+
+  参考：https://novelist.xyz/tech/related-posts-in-hugo/
+  
 - [ ] 增加了本地全站搜索的功能
+
+  参考：https://blog.humblepg.com/post/2019/06/hugo-search.html
 
 ## 简单教程
 - 默认每一个文章下会显示5篇相关文章。可以在Front Matter中设置 'RelatedPosts: false' 来关闭
