@@ -1,6 +1,8 @@
 ## Changes in This Mod
 - [x] Add related posts
+  Credit: https://novelist.xyz/tech/related-posts-in-hugo/
 - [ ] Add local search
+  Credit: https://blog.humblepg.com/post/2019/06/hugo-search.html
 
 ## Tutorials
 - Related posts will show 5 related posts by default. This feature can be turned off by setting 'RelatedPosts: false' in the front matter.
