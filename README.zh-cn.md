@@ -10,14 +10,39 @@
 - [x] PWA
 
   参考：https://io-oi.me/tech/pwa-via-workbox/
+  
+- [x] Disqus代理
+  Credit: https://github.com/SukkaW/DisqusJS
 
 ## 简单教程
 - 默认每一个文章下会显示5篇相关文章。可以在Front Matter中设置 'RelatedPosts: false' 来关闭
 - 本地搜索还是个半成品，需要手工在config.toml中设置 home = ["HTML", "RSS", **"JSON"**] 来启用
 - PWA
   - 如果是通过Netlify自动部署，需要把build命令从"hugo --gc --minify"改为"hugo --gc --minify && npm install workbox-build gulp gulp-uglify readable-stream uglify-es --save-dev && ./node_modules/gulp/bin/gulp.js build"
+  
   - 根据https://io-oi.me/tech/pwa-via-workbox/的说明，创建并修改gulpfile.js和sw-template.js
+  
   - 提交修改
+  
+- Disqus代理：
+
+  - 按照https://github.com/SukkaW/disqusjs-proxy-example部署服务端
+
+  - 修改config.toml
+
+  - ```toml
+    [params.comment]
+    	enable = true
+    	[params.comment.disqus]
+    		enable = true
+    		proxy = true
+    		shortname = "xxxx"
+    		api = "https://your_api.now.sh/"
+    		apikey = "xxxxx"
+    		admin = "xxxxx"
+    		adminLabel = "xxxx"
+    ```
+  
 - 本地搜索的已知问题：
   - 搜索结果不全
   - 搜索结果可能重复显示

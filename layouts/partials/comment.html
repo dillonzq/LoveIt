@@ -6,8 +6,26 @@
     {{- /* Disqus Comment System */ -}}
     {{- if .Site.Params.comment.disqus.enable -}}
         <div id="disqus_thread"></div>
+		{{- if .Site.Params.comment.disqus.proxy -}}
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+		<script src="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqus.js"></script>
+		<script>
+			var dsqjs = new DisqusJS({
+			shortname: {{ .Site.Params.comment.disqus.shortname }},
+			siteName: {{ .Site.Params.title }},
+			identifier: {{ if .Params.identifier }}{{ trim .Params.identifier "/" }}{{ else }}{{ trim .RelPermalink "/" }}{{end}},
+			url: {{ if .Params.identifier }}"{{ trim .Site.BaseURL "/" }}{{ .Params.identifier }}"{{ else }}{{ .Permalink }}{{end}},
+			title: {{ .Title }},
+			api: {{ .Site.Params.comment.disqus.api }},
+			apikey: {{ .Site.Params.comment.disqus.apikey }},
+			admin: {{ .Site.Params.comment.disqus.admin }},
+			adminLabel: {{ .Site.Params.comment.disqus.adminLabel }}
+		});
+		</script>
+		{{- else -}}
         {{- $script := printf `<script defer src="https://%s.disqus.com/embed.js"></script>` .Site.Params.comment.disqus.shortname -}}
         {{- slice $script | $scratch.Add "scriptCDN" -}}
+		{{- end -}}
         <noscript>
             Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
         </noscript>
