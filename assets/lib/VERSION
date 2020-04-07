@@ -14,3 +14,4 @@ echarts@4.6.0 https://echarts.apache.org/
 gitalk@1.6.2 https://github.com/gitalk/gitalk
 valine@1.3.10 https://valine.js.org/
 iconfont https://www.iconfont.cn/
+docsearch@2.6.3 https://github.com/algolia/docsearch

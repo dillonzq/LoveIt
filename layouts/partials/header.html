@@ -7,6 +7,11 @@
             </a>
         </div>
         <div class="menu">
+            {{- if .Site.Params.algolia.appId -}}
+                <li style="display:inline" class="menu-item">
+                    <input type="search" class="docsearch-input" placeholder="Search" />
+                </li>
+            {{- end -}}
             {{- range .Site.Menus.main -}}
                 <a class="menu-item{{ if $.IsMenuCurrent "main" . | or ($.HasMenuCurrent "main" .) | or (.URL | relLangURL | string | eq $.RelPermalink ) }} active{{ end }}" href="{{ .URL | relLangURL }}"{{ with .Title }} title="{{ . }}"{{ end }} rel="noopener noreffer"{{ if strings.HasPrefix .URL "http" }} target="_blank"{{ end }}>
                     {{- .Pre | safeHTML }}{{ .Name -}}
@@ -59,6 +64,11 @@
                 <a class="menu-item" href="{{ .URL | relLangURL }}" title="{{ .Title }}" rel="noopener noreffer"{{ if strings.HasPrefix .URL "http" }} target="_blank"{{ end }}>
                     {{- .Pre | safeHTML }}{{ .Name -}}
                 </a>
+            {{- end -}}
+            {{- if .Site.Params.algolia.appId -}}
+                <li style="display:inline" class="menu-item">
+                    <input type="search" class="docsearch-input" placeholder="Search" />
+                </li>
             {{- end -}}
             <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
                 <i class="fas fa-adjust fa-fw"></i>
