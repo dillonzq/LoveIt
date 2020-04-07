@@ -1503,7 +1503,7 @@
     {{- $chunked = $chunked | append (delimit (first 10  (after 5000 $page.PlainWords) ) '。' ) -}}
   {{- end -}}
   {{- range $i, $c := $chunked -}}
-    {{- $index = $index | append (dict "objectID" (print $page.File.UniqueID "_" $i) "content" $c "order" $i "title" $page.Title "date" $page.Date "href" $page.Permalink "tags" $page.Params.tags ) -}}
+    {{- $index = $index | append (dict "objectID" (print $page.File.UniqueID "_" $i) "content" $c "order" $i "lvl0" $page.Title "date" $page.Date "url" $page.Permalink "tags" $page.Params.tags ) "lvl1" $page.Params.Categories "lvl2" "摘要" -}}
   {{- end -}}
 {{- end -}}
 {{- $index | jsonify -}}

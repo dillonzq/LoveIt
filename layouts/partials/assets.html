@@ -214,23 +214,6 @@
 {{- /* Theme script */ -}}
 {{- slice "js/theme.min.js" | $scratch.Add "scriptLocal" -}}
 {{- $_ := (resources.Get "js/theme.min.js.map").RelPermalink -}}
-
-
-{{- /* Algolia Search */ -}}
-{{- if .Site.Params.algolia.appId -}}
-    {{- slice "lib/docsearch/docsearch.min.css" | $scratch.Add "linkLocal" -}}
-    {{- slice "lib/docsearch/docsearch.min.js" | $scratch.Add "scriptLocal" -}}
-    <script>
-        docsearch({
-        apiKey: {{ .Site.Params.algolia.searchOnlyKey }},
-        indexName: {{ .Site.Params.algolia.indexName }},
-        appId: {{ .Site.Params.algolia.appId }},
-        inputSelector: '.docsearch-input',
-        debug: false,
-        });
-    </script>
-{{- end -}}
-
 {{- range $scratch.Get "linkCDN" -}}
     {{- safeHTML . -}}
 {{- end -}}
@@ -260,4 +243,19 @@
 {{- /* Google analytics async */ -}}
 {{- if $scratch.Get "production" | and .Site.GoogleAnalytics -}}
     {{- template "_internal/google_analytics_async.html" . -}}
+{{- end -}}
+
+{{- /* Algolia Search */ -}}
+{{- if .Site.Params.algolia.appId -}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+    <script>
+        docsearch({
+        apiKey: {{ .Site.Params.algolia.searchOnlyKey }},
+        indexName: {{ .Site.Params.algolia.indexName }},
+        appId: {{ .Site.Params.algolia.appId }},
+        inputSelector: '.docsearch-input',
+        debug: false,
+        });
+    </script>
 {{- end -}}
