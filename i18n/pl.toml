@@ -1,0 +1,140 @@
+# Translations for Polish
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === Post ===
+[posts]
+other = "Posty"
+# === Post ===
+
+# === Taxonomy ===
+[all]
+other = "Wszystkie %s"
+
+[tag]
+other = "Tag"
+
+[tags]
+other = "Tagi"
+
+[category]
+other = "Kategoria"
+
+[categories]
+other = "Kategorie"
+# === Taxonomy ===
+
+# === Pagination ===
+[More]
+other = "Więcej"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "Wybierz język"
+
+[switchTheme]
+other = "Przełącz schemat"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Napędzany przez %s"
+
+[theme]
+other = "Szablon"
+# === partials/footer.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "Udostępnij na"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "Spis treści"
+
+[publish]
+other = "opublikowano"
+
+[included]
+other = "zawarty w"
+
+[wordCount]
+other = "około {{ .Count }} słów"
+
+[readingTime]
+other = "{{ .Count }} min"
+
+[views]
+other = "wyświetleń"
+
+[author]
+other = "Autor"
+
+[lastMod]
+other = "Artykuł ostatnio zaktualizowany %s"
+
+[license]
+other = "Opublikowano na licencji %s"
+
+[seeMarkdown]
+other = "Zobacz Markdown"
+
+[back]
+other = "Wstecz"
+
+[home]
+other = "Strona główna"
+
+[readmore]
+other = "Więcej >>"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Nie znaleziono strony"
+
+[pageNotFoundText]
+other = "Wybacz, ninja coś namieszał."
+
+[backToHome]
+other = "Powrót na główną"
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Notka"
+
+[abstract]
+other = "Streszczenie"
+
+[info]
+other = "Info"
+
+[tip]
+other = "Wskazówka"
+
+[success]
+other = "Sukces"
+
+[question]
+other = "Pytanie"
+
+[warning]
+other = "Ostrzeżenie"
+
+[failure]
+other = "Błąd"
+
+[danger]
+other = "Niebezpieczeństwo"
+
+[bug]
+other = "Problem"
+
+[example]
+other = "Przykład"
+
+[quote]
+other = "Cytat"
+# === shortcodes/admonition.html ===
