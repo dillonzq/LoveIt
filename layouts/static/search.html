@@ -1,0 +1,70 @@
+{{- define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end -}}
+
+{{- define "content" -}}
+<div class="page archive">
+<div id="search-box">
+	<!-- SearchBox widget will appear here -->
+</div>
+<div id="hits">
+	<!-- Hits widget will appear here -->
+</div>
+<div id="pagination">
+	<!-- Pagination widget will appear here -->
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.7.1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.7.1/dist/instantsearch.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.7.1/dist/instantsearch-theme-algolia.min.css">
+<script>
+const search = instantsearch({
+	apiKey: {{ .Site.Params.algolia.searchOnlyKey }},
+	indexName: {{ .Site.Params.algolia.indexName }},
+	appId: {{ .Site.Params.algolia.appId }},
+	urlSync: true
+});
+
+const hitTemplate = function(hit) {
+	let url = `${hit.url}`;
+	const title = hit._highlightResult.title.value;
+	let content = "" ;
+	if (hit._highlightResult.content){
+		content = hit._highlightResult.content.value;
+	}
+	else{
+		content = hit.summary;
+	}
+	return `
+	<div class="hits">
+		<h2><a class="post-link" href="${url}">${title}</a></h2>
+		<div class="post-snippet">${content}</div>
+	</div>
+	`;
+}
+
+search.addWidget(
+	instantsearch.widgets.searchBox({
+		container: '#search-box',
+		placeholder: '开始搜索',
+	})
+);
+
+search.addWidget(
+	instantsearch.widgets.hits({
+		container: '#hits',
+		templates: {
+			item: hitTemplate
+		}
+	})
+);
+
+search.addWidget(
+	instantsearch.widgets.pagination({
+		container: '#pagination',
+		maxPages: 10,
+	})
+);
+
+search.start();
+</script>
+{{- end -}}

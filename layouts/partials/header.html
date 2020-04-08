@@ -8,8 +8,10 @@
         </div>
         <div class="menu">
             {{- if .Site.Params.algolia.appId -}}
-                <li style="display:inline-block;top:25%" class="menu-item">
-                    <input type="search" class="docsearch-input" placeholder="Search" />
+                <li style="display:inline-block" class="menu-item">
+                    <form action="/search/" role="search">
+                        <input type="text" placeholder="搜索……" type="text" name="q">
+                    </form>
                 </li>
             {{- end -}}
             {{- range .Site.Menus.main -}}
@@ -66,8 +68,10 @@
                 </a>
             {{- end -}}
             {{- if .Site.Params.algolia.appId -}}
-                <li style="display:inline" class="menu-item">
-                    <input type="search" class="docsearch-input" placeholder="Search" />
+                <li style="display:inline-block" class="menu-item">
+                    <form action="/search/" role="search">
+                        <input type="text" placeholder="搜索……" type="text" name="q">
+                    </form>
                 </li>
             {{- end -}}
             <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
