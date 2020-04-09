@@ -8,7 +8,7 @@ other = "Posty"
 
 # === Taxonomy ===
 [all]
-other = "Wszystkie %s"
+other = "Wszystkie "
 
 [tag]
 other = "Tag"
@@ -86,8 +86,8 @@ other = "Wstecz"
 [home]
 other = "Strona główna"
 
-[readmore]
-other = "Więcej >>"
+[readMore]
+other = "Czytaj więcej"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -95,7 +95,7 @@ other = "Więcej >>"
 other = "Nie znaleziono strony"
 
 [pageNotFoundText]
-other = "Wybacz, ninja coś namieszał."
+other = "Wybacz, chyba coś namieszaliśmy."
 
 [backToHome]
 other = "Powrót na główną"
