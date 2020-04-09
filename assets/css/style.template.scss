@@ -14,6 +14,7 @@ $header-normal-mode-mobile: {{ if eq .Site.Params.header.mobileMode "normal" }}t
 @import "_core/normalize";
 @import "_core/base";
 @import "_core/layout";
+@import "_core/pwa";
 
 @import "_page/index";
 
