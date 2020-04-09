@@ -1,6 +1,6 @@
 ---
 title: "搜索结果"
-date: 2017-07-29T19:57:50+08:00
+date: 1970-01-01T00:00:01+08:00
 type: static
 layout: search
 ---

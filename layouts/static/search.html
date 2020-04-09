@@ -1,70 +1,62 @@
 {{- define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end -}}
 
 {{- define "content" -}}
-<div class="page archive">
-<div id="search-box">
-	<!-- SearchBox widget will appear here -->
+<div class="page home">
+<div id="searchbox"></div>
+<div id="powered-by" style="position:absolute; right:0px"></div>
+<div id="hits"></div>
+<div id="pagination" class="pagination"></div>
 </div>
-<div id="hits">
-	<!-- Hits widget will appear here -->
-</div>
-<div id="pagination">
-	<!-- Pagination widget will appear here -->
-</div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.7.1"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.7.1/dist/instantsearch.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.7.1/dist/instantsearch-theme-algolia.min.css">
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
 <script>
-const search = instantsearch({
-	apiKey: {{ .Site.Params.algolia.searchOnlyKey }},
-	indexName: {{ .Site.Params.algolia.indexName }},
-	appId: {{ .Site.Params.algolia.appId }},
-	urlSync: true
-});
+	const search = instantsearch({
+		indexName: {{ .Site.Params.algolia.indexName }},
+		searchClient: algoliasearch(
+			{{ .Site.Params.algolia.appId }},
+			{{ .Site.Params.algolia.searchOnlyKey }},
+		),
+		routing: true,
+	});
+	var searchBox = instantsearch.widgets.searchBox({
+		container: '#searchbox',
+		placeholder: '{{- printf (T "StartSearch") -}}',
+		autofocus: true,
+		searchAsYouType: true,
+		showReset: true,
+		showSubmit: true,
+		showLoadingIndicator: true,
+	});
 
-const hitTemplate = function(hit) {
-	let url = `${hit.url}`;
-	const title = hit._highlightResult.title.value;
-	let content = "" ;
-	if (hit._highlightResult.content){
-		content = hit._highlightResult.content.value;
-	}
-	else{
-		content = hit.summary;
-	}
-	return `
-	<div class="hits">
-		<h2><a class="post-link" href="${url}">${title}</a></h2>
-		<div class="post-snippet">${content}</div>
-	</div>
-	`;
-}
-
-search.addWidget(
-	instantsearch.widgets.searchBox({
-		container: '#search-box',
-		placeholder: '开始搜索',
-	})
-);
-
-search.addWidget(
-	instantsearch.widgets.hits({
+	var hits = instantsearch.widgets.hits({
 		container: '#hits',
+		escapeHTML: false,
 		templates: {
-			item: hitTemplate
-		}
-	})
-);
+			empty: '<div class="content"><p>{{- printf (T "NotFound") -}}{{ safeHTML "{{ query }}" }}</p></div>.',
+			item:  '<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline"><a href="{{ safeHTML "{{ url }}" }}">{{ safeHTML "{{#helpers.highlight}}" }}{ "attribute": "title" }{{ safeHTML "{{/helpers.highlight}}" }}</a></h1><div class="content">...{{ safeHTML "{{{_snippetResult.content.value}}}" }}...</div</article>',
+		},
+	});
 
-search.addWidget(
-	instantsearch.widgets.pagination({
+	const poweredBy = instantsearch.widgets.poweredBy({
+		container: '#powered-by',
+	});
+
+	
+	var configWidget = instantsearch.widgets.configure({
+		attributesToSnippet: ['content:50'],
+	});
+
+	const pagination = instantsearch.widgets.pagination({
 		container: '#pagination',
-		maxPages: 10,
-	})
-);
+		showFirst: true,
+		showPrevious: false,
+		showNext: false,
+		showLast: true,
+		padding: 2,
+	});
 
-search.start();
+	search.addWidgets([searchBox, hits, poweredBy, configWidget, pagination]);
+
+	search.start();
 </script>
 {{- end -}}

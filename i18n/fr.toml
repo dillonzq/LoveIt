@@ -145,6 +145,12 @@ other = "Vous pourriez aussi aimer..."
 # === single/footer.html ===
 
 # === Search ===
-[SearchResults]
-other = "Matching Pages"
+[Search]
+other = "Rechercher"
+
+[StartSearch]
+other = "Lancer la recherche..."
+
+[NotFound]
+other = "Aucun résultat:"
 # === Search ===

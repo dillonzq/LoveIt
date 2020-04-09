@@ -7,17 +7,13 @@
             </a>
         </div>
         <div class="menu">
-            {{- if .Site.Params.algolia.appId -}}
-                <li style="display:inline-block" class="menu-item">
-                    <form action="/search/" role="search">
-                        <input type="text" placeholder="搜索……" type="text" name="q">
-                    </form>
-                </li>
-            {{- end -}}
             {{- range .Site.Menus.main -}}
                 <a class="menu-item{{ if $.IsMenuCurrent "main" . | or ($.HasMenuCurrent "main" .) | or (.URL | relLangURL | string | eq $.RelPermalink ) }} active{{ end }}" href="{{ .URL | relLangURL }}"{{ with .Title }} title="{{ . }}"{{ end }} rel="noopener noreffer"{{ if strings.HasPrefix .URL "http" }} target="_blank"{{ end }}>
                     {{- .Pre | safeHTML }}{{ .Name -}}
                 </a>
+            {{- end -}}
+            {{- if .Site.Params.algolia.appId -}}
+                <span class="menu-item"><a href="/search/">{{- printf (T "Search") -}}</a></span>
             {{- end -}}
             <span class="menu-item">|</span>
             <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
@@ -68,11 +64,7 @@
                 </a>
             {{- end -}}
             {{- if .Site.Params.algolia.appId -}}
-                <li style="display:inline-block" class="menu-item">
-                    <form action="/search/" role="search">
-                        <input type="text" placeholder="搜索……" type="text" name="q">
-                    </form>
-                </li>
+                <span class="menu-item"><a href="/search/">{{- printf (T "Search") -}}</a></span>
             {{- end -}}
             <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
                 <i class="fas fa-adjust fa-fw"></i>
