@@ -12,9 +12,6 @@
                     {{- .Pre | safeHTML }}{{ .Name -}}
                 </a>
             {{- end -}}
-            {{- if .Site.Params.algolia.appId -}}
-                <a class="menu-item{{ if (.URL | relLangURL | string | eq $.RelPermalink ) }} active{{ end }}" href="/search/">{{- printf (T "Search") -}}</a>
-            {{- end -}}
             <span class="menu-item">|</span>
             <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
                 <i class="fas fa-adjust fa-fw"></i>
@@ -62,9 +59,6 @@
                 <a class="menu-item" href="{{ .URL | relLangURL }}" title="{{ .Title }}" rel="noopener noreffer"{{ if strings.HasPrefix .URL "http" }} target="_blank"{{ end }}>
                     {{- .Pre | safeHTML }}{{ .Name -}}
                 </a>
-            {{- end -}}
-            {{- if .Site.Params.algolia.appId -}}
-                <a class="menu-item{{ if (.URL | relLangURL | string | eq $.RelPermalink ) }} active{{ end }}" href="/search/">{{- printf (T "Search") -}}</a>
             {{- end -}}
             <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
                 <i class="fas fa-adjust fa-fw"></i>
