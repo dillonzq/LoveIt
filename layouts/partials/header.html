@@ -13,7 +13,7 @@
                 </a>
             {{- end -}}
             {{- if .Site.Params.algolia.appId -}}
-                <span class="menu-item"><a href="/search/">{{- printf (T "Search") -}}</a></span>
+                <a class="menu-item{{ if (.URL | relLangURL | string | eq $.RelPermalink ) }} active{{ end }}" href="/search/">{{- printf (T "Search") -}}</a>
             {{- end -}}
             <span class="menu-item">|</span>
             <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
@@ -64,7 +64,7 @@
                 </a>
             {{- end -}}
             {{- if .Site.Params.algolia.appId -}}
-                <span class="menu-item"><a href="/search/">{{- printf (T "Search") -}}</a></span>
+                <a class="menu-item{{ if (.URL | relLangURL | string | eq $.RelPermalink ) }} active{{ end }}" href="/search/">{{- printf (T "Search") -}}</a>
             {{- end -}}
             <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
                 <i class="fas fa-adjust fa-fw"></i>

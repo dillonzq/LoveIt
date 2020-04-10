@@ -134,11 +134,11 @@ a[class^='ais-'] {
 .dark-theme .ais-SearchBox-resetIcon,
 .dark-theme .ais-SearchBox-loadingIcon {
 	fill: $global-font-color-dark;}
-em,
+m,
 .ais-Highlight-highlighted,
 .ais-Snippet-highlighted {
 	background-color: $selection-color; }
-.dark-theme em,
+.dark-theme m,
 .dark-theme .ais-Highlight-highlighted,
 .dark-theme .ais-Snippet-highlighted {
 	background-color: $selection-color-dark; }
