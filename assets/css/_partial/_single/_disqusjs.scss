@@ -67,10 +67,9 @@
     overflow: hidden;
     color: $global-font-color;
     margin-bottom: 6px;
-}
-
-#dsqjs .dark-theme .dsqjs-no-comment {
-    color: $global-font-color-dark;
+    .dark-theme & {
+        color: $global-font-color-dark;
+    }
 }
 
 #dsqjs .dsqjs-nav-tab {
@@ -85,10 +84,9 @@
     line-height: 1;
     position: relative;
     transition: all .2s ease-in-out;
-}
-
-#dsqjs .dark-theme .dsqjs-nav-tab {
-    color: $global-font-color-dark;
+    .dark-theme & {
+        color: $global-font-color-dark;
+    }
 }
 
 #dsqjs .dsqjs-nav-tab:last-child {
@@ -97,6 +95,9 @@
 
 #dsqjs .dsqjs-tab-active {
     color: $global-font-color;
+    .dark-theme & {
+    color: $global-font-color-dark;
+    }
 }
 
 #dsqjs .dsqjs-tab-active>span:after {
@@ -141,9 +142,9 @@
 #dsqjs .dsqjs-post-list .dsqjs-post-header .dsqjs-post-author {
     color: $global-font-color;
     font-weight: 700;
-}
-#dsqjs .dsqjs-post-list .dsqjs-post-header .dsqjs-post-author {
-    color: $global-font-color;
+    .dark-theme & {
+        color: $global-font-color-dark;
+    }
 }
 
 #dsqjs .dsqjs-post-list .dsqjs-post-header .dsqjs-admin-badge {
@@ -173,10 +174,9 @@
     word-wrap: break-word;
     overflow: hidden;
     color: $global-font-color
-}
-
-#dsqjs .dsqjs-post-body {
-    color: $global-font-color-dark
+    .dark-theme &{
+        color: $global-font-color-dark
+    }
 }
 
 #dsqjs .dsqjs-post-body code {
