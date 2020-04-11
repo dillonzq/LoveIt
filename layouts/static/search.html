@@ -33,7 +33,7 @@
 		escapeHTML: false,
 		templates: {
 			empty: '<div class="content"><p>{{- printf (T "NotFound") -}}{{ safeHTML "{{ query }}" }}</p></div>.',
-			item:  '<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline"><a href="{{ safeHTML "{{ url }}" }}">{{ safeHTML "{{#helpers.highlight}}" }}{ "attribute": "title" }{{ safeHTML "{{/helpers.highlight}}" }}</a></h1><div class="content">...{{ safeHTML "{{{_snippetResult.content.value}}}" }}...</div</article>',
+			item:  '<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline"><a href="{{ safeHTML "{{ url }}" }}">{{ safeHTML "{{#helpers.highlight}}" }}{ "attribute": "title" }{{ safeHTML "{{/helpers.highlight}}" }}</a></h1><div class="content">...{{ safeHTML "{{{_snippetResult.content.value}}}" }}...<div class="post-footer"><div class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;{{ safeHTML "{{tags}}" }}</div></div></article>',
 		},
 	});
 
@@ -52,7 +52,7 @@
 		showPrevious: false,
 		showNext: false,
 		showLast: true,
-		padding: 2,
+		padding: 1,
 	});
 
 	search.addWidgets([searchBox, hits, poweredBy, configWidget, pagination]);
