@@ -78,7 +78,7 @@
     text-transform: capitalize;
     font-size: 15px;
     padding: 12px 8px;
-    color: #656c7a;
+    color: $global-font-color;
     display: block;
     margin: 0 15px 0 0;
     font-weight: 700;
@@ -87,16 +87,16 @@
     transition: all .2s ease-in-out;
 }
 
+#dsqjs .dark-theme .dsqjs-nav-tab {
+    color: $global-font-color-dark;
+}
+
 #dsqjs .dsqjs-nav-tab:last-child {
     margin: 0;
 }
 
 #dsqjs .dsqjs-tab-active {
     color: $global-font-color;
-}
-
-#dsqjs .dark-theme .dsqjs-tab-active {
-    color: $global-font-color-dark;
 }
 
 #dsqjs .dsqjs-tab-active>span:after {
@@ -139,8 +139,11 @@
 }
 
 #dsqjs .dsqjs-post-list .dsqjs-post-header .dsqjs-post-author {
-    color: #656c7a;
+    color: $global-font-color;
     font-weight: 700;
+}
+#dsqjs .dsqjs-post-list .dsqjs-post-header .dsqjs-post-author {
+    color: $global-font-color;
 }
 
 #dsqjs .dsqjs-post-list .dsqjs-post-header .dsqjs-admin-badge {
