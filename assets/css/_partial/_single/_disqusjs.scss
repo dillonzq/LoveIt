@@ -173,9 +173,9 @@
     line-height: 1.5;
     word-wrap: break-word;
     overflow: hidden;
-    color: $global-font-color
+    color: $global-font-color;
     .dark-theme &{
-        color: $global-font-color-dark
+        color: $global-font-color-dark;
     }
 }
 
