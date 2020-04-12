@@ -7,8 +7,8 @@ other = "Posty"
 # === Post ===
 
 # === Taxonomy ===
-[all]
-other = "Wszystkie "
+[allSome]
+other = "Wszystkie %s"
 
 [tag]
 other = "Tag"
@@ -24,7 +24,7 @@ other = "Kategorie"
 # === Taxonomy ===
 
 # === Pagination ===
-[More]
+[more]
 other = "Więcej"
 # === Pagination ===
 
