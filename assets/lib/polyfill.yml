@@ -1,0 +1,8 @@
+smooth-scroll:
+  - Element.prototype.closest
+  - requestAnimationFrame
+  - CustomEvent
+algoliasearch:
+  - Promise
+  - Object.entries
+  - Object.assign

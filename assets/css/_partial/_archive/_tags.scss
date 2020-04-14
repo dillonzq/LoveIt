@@ -8,25 +8,18 @@
     position: relative;
     margin: 5px 10px;
     overflow-wrap: break-word;
-    -webkit-transition: all ease-out .3s;
-    -moz-transition: all ease-out .3s;
-    -o-transition: all ease-out .3s;
-    transition: all ease-out .3s;
+    @include transition(all ease-out 0.3s);
 
     &:active,
     &:focus,
     &:hover {
-      -webkit-transform: scale(1.2);
-      -moz-transform: scale(1.2);
-      -ms-transform: scale(1.2);
-      -o-transform: scale(1.2);
-      transform: scale(1.2);
+      @include transform(scale(1.2));
     }
 
     sup {
       color: $global-font-secondary-color;
 
-      .dark-theme & {
+      .dark & {
         color: $global-font-secondary-color-dark;
       }
     }

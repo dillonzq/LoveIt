@@ -11,16 +11,16 @@
 }
 
 @media only screen and (max-width: 960px) {
+  #toc-auto {
+    display: none;
+  }
+
+  #toc-static {
+    display: block;
+  }
+
   .page {
     max-width: 80%;
-
-    #toc-auto {
-      display: none;
-    }
-
-    #toc-static {
-      display: block;
-    }
   }
 }
 
@@ -31,6 +31,10 @@
 
   #header-mobile {
     display: block;
+  }
+
+  body.blur {
+    overflow: hidden;
   }
 
   .page {

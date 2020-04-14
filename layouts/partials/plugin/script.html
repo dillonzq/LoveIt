@@ -1,7 +1,21 @@
-{{- $res := .resource -}}
-{{- with .fingerprint -}}
-    {{- $res = $res | resources.Fingerprint . -}}
-    <script src="{{ $res.RelPermalink }}" integrity="{{ $res.Data.Integrity }}"></script>
+{{- if strings.HasPrefix .source "<script" -}}
+    {{- safeHTML .source -}}
 {{- else -}}
-    <script src="{{ $res.RelPermalink }}"></script>
+    {{- $src := .source -}}
+    {{- $integrity := .integrity -}}
+    {{- if strings.HasPrefix $src "http" | not -}}
+        {{- $res := resources.Get $src -}}
+        {{- with .template -}}
+            {{- $res = $res | resources.ExecuteAsTemplate . $.context -}}
+        {{- end -}}
+        {{- if .minify -}}
+            {{- $res = $res | minify -}}
+        {{- end -}}
+        {{- with .fingerprint -}}
+            {{- $res = $res | fingerprint . -}}
+            {{- $integrity = $res.Data.Integrity -}}
+        {{- end -}}
+        {{- $src = $res.RelPermalink -}}
+    {{- end -}}
+    <script type="text/javascript" src="{{ $src }}"{{ if .crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ if .async }} async{{ end }}{{ if .defer }} defer{{ end }}{{ with .attr }} {{ . | safeHTMLAttr }}{{ end }}></script>
 {{- end -}}

@@ -9,7 +9,9 @@
   top: if($header-normal-mode-desktop, 5rem, 10rem);
   left: 10000px;
 
-  .dark-theme & {
+  @include blur;
+
+  .dark & {
     border-left: 1px solid $global-border-color-dark;
   }
 
@@ -39,7 +41,7 @@
         margin-right: .5rem;
         color: $single-link-color;
 
-        .dark-theme & {
+        .dark & {
           color: $single-link-color-dark;
         }
       }
@@ -58,14 +60,14 @@
       font-weight: bold;
       color: $single-link-color;
 
-      .dark-theme & {
+      .dark & {
         color: $single-link-color-dark;
       }
 
       &::before {
         color: $single-link-hover-color;
 
-        .dark-theme & {
+        .dark & {
           color: $single-link-hover-color-dark;
         }
       }
@@ -82,7 +84,7 @@
       list-style: none;
       background: darken($code-background-color, 3%);
 
-      .dark-theme & {
+      .dark & {
         background: darken($code-background-color-dark, 3%);
       }
 
@@ -111,7 +113,7 @@
 
   details[open] {
     i.details {
-      transform: rotate(180deg);
+      @include transform(rotate(180deg));
     }
   }
 
@@ -131,7 +133,7 @@
       }
     }
 
-    .dark-theme & {
+    .dark & {
       background-color: $code-background-color-dark;
     }
   }
@@ -153,7 +155,7 @@
       color: $global-font-secondary-color;
     }
 
-    .dark-theme & {
+    .dark & {
       background: $code-background-color-dark;
 
       rt {

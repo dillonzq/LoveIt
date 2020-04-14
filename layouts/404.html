@@ -10,13 +10,10 @@
             <a href="{{ `/` | relLangURL }}" title="{{ T `backToHome` }}">↩︎</a>
         </p>
     </div>
-    <script>
-        var emojiArray = [
-            '\\(o_o)/', '(o^^)o', '(˚Δ˚)b', '(^-^*)', '(≥o≤)', '(^_^)b', '(·_·)',
-            '(=\'X\'=)', '(>_<)', '(;-;)', '\\(^Д^)/',
-        ];
-        var errorEmoji = emojiArray[Math.floor(Math.random() * emojiArray.length)];
-        var errorEmojiContainer = document.getElementById('error-emoji');
-        errorEmojiContainer.appendChild(document.createTextNode(errorEmoji));
+    <script type="text/javascript">
+        (function() {
+            var emojiArray = ['\\(o_o)/', '(o^^)o', '(˚Δ˚)b', '(^-^*)', '(≥o≤)', '(^_^)b', '(·_·)','(=\'X\'=)', '(>_<)', '(;-;)', '\\(^Д^)/'];
+            document.getElementById('error-emoji').appendChild(document.createTextNode(emojiArray[Math.floor(Math.random() * emojiArray.length)]));
+        })();
     </script>
 {{- end -}}

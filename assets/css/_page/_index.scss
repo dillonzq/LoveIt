@@ -4,6 +4,8 @@
   max-width: 60%;
   margin: 0 auto;
   padding-top: $page-padding-top-desktop;
+
+  @include blur;
 }
 
 @import "_single";

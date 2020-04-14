@@ -93,6 +93,17 @@ enableEmoji = true
       keywords = ["Theme", "Hugo"]
       # site default theme ("light", "dark", "auto")
       defaultTheme = "auto"
+      # Search
+      [languages.en.params.search]
+        enable = true
+        # type of search index ("lunr", "algolia")
+        type = "algolia"
+        # index length of the content
+        contentLength = 5000
+        [languages.en.params.search.algolia]
+          index = "index.en"
+          appID = "PASDMWALPK"
+          searchKey = "b42948e51daaa93df92381c8e2ac0f93"
       # Home Page Info
       [languages.en.params.home]
         # Home Page Profile
@@ -327,6 +338,17 @@ enableEmoji = true
       keywords = ["Theme", "Hugo"]
       # 网站默认主题 ("light", "dark", "auto")
       defaultTheme = "auto"
+      # 搜索
+      [languages.zh-cn.params.search]
+        enable = true
+        # 搜索索引的类型 ("lunr", "algolia")
+        type = "lunr"
+        # 文章内容索引长度
+        contentLength = 5000
+        [languages.zh-cn.params.search.algolia]
+          index = "index.zh-cn"
+          appID = "PASDMWALPK"
+          searchKey = "b42948e51daaa93df92381c8e2ac0f93"
       # 主页信息设置
       [languages.zh-cn.params.home]
         # 主页个人信息
@@ -561,6 +583,17 @@ enableEmoji = true
       keywords = ["Thème", "Hugo"]
       # site default theme ("light", "dark", "auto")
       defaultTheme = "auto"
+      # Search
+      [languages.fr.params.search]
+        enable = true
+        # type of search index ("lunr", "algolia")
+        type = "algolia"
+        # index length of the content
+        contentLength = 5000
+        [languages.fr.params.search.algolia]
+          index = "index.fr"
+          appID = "PASDMWALPK"
+          searchKey = "b42948e51daaa93df92381c8e2ac0f93"
       # Home Page Info
       [languages.fr.params.home]
         # Home Page Profile
@@ -847,6 +880,12 @@ enableEmoji = true
     animateCSS = ''
     # smooth-scroll@16.1.2 https://github.com/cferdinandi/smooth-scroll
     smoothScrollJS = ''
+    # autocomplete.js@0.37.1 https://github.com/algolia/autocomplete.js
+    autocompleteJS = ''
+    # lunr@2.3.8 https://lunrjs.com/
+    lunrJS = ''
+    # algoliasearch@4.1.0 https://github.com/algolia/algoliasearch-client-javascript
+    algoliasearchJS = ''
     # sharer@0.4.0 https://github.com/ellisonleao/sharer.js
     sharerJS = ''
     # lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
@@ -858,7 +897,7 @@ enableEmoji = true
     lightgalleryZoomJS = ''
     # typeit@6.5.1 https://github.com/alexmacarthur/typeit
     typeitJS = ''
-    # katex@0.11.1 https://github.com/KaTeX/KaTeX
+    # katex@0.11.1 https://katex.org/
     katexCSS = ''
     katexJS = ''
     katexAutoRenderJS = ''
@@ -962,7 +1001,7 @@ enableEmoji = true
 # Options to make hugo output files
 # 用于 Hugo 输出文档的设置
 [outputs]
-  home = ["HTML", "RSS"]
+  home = ["HTML", "RSS", "JSON"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]

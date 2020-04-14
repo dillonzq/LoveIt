@@ -33,19 +33,10 @@
     </head>
     <body>
         {{- /* Check theme isDark before body rendering */ -}}
-        <script>
-            if (!window.localStorage || !window.localStorage.getItem('theme')) {
-                {{- $theme := .Site.Params.defaultTheme -}}
-                {{- if eq $theme "auto" -}}
-                    window.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                {{- else -}}
-                    window.isDark = '{{ $theme }}' === 'dark';
-                {{- end -}}
-            } else {
-                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
-            }
-            window.isDark && document.body.classList.add('dark-theme');
-        </script>
+        {{- $theme := .Site.Params.defaultTheme -}}
+        <script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('{{ .Site.Params.defaultTheme }}' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '{{ .Site.Params.defaultTheme }}' === 'dark')) && document.body.classList.add('dark');</script>
+
+        <div id="mask"></div>
 
         {{- /* Body wrapper */ -}}
         <div class="wrapper">
@@ -60,12 +51,12 @@
 
         <div id="fixed-buttons" class="animated faster">
             {{- /* top button */ -}}
-            <a href="#" id="top-button" class="fixed-button" title="{{ T `backToTop` }}">
+            <a href="#" id="back-to-top" class="fixed-button" title="{{ T `backToTop` }}">
                 <i class="fas fa-arrow-up fa-fw"></i>
             </a>
 
             {{- /* comment button */ -}}
-            <a href="#" id="comment-button" class="fixed-button" title="{{ T `viewComments` }}">
+            <a href="#" id="view-comments" class="fixed-button" title="{{ T `viewComments` }}">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
         </div>

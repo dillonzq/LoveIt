@@ -1,126 +1,112 @@
 {{- $scratch := .Scratch.Get "scratch" -}}
+{{- $CDN := $scratch.Get "CDN" -}}
+{{- $fingerprint := $scratch.Get "fingerprint" -}}
 
 {{- if eq hugo.Environment "production" | and (ne .Site.Params.comment.enable false) | and (ne .Params.comment false) -}}
-    {{- $CDN := $scratch.Get "CDN" -}}
-
-    {{- /* Disqus Comment System */ -}}
-    {{- if .Site.Params.comment.disqus.enable -}}
-        <div id="disqus_thread" class="comment"></div>
-        {{- $script := printf `<script defer src="https://%s.disqus.com/embed.js"></script>` .Site.Params.comment.disqus.shortname -}}
-        {{- slice $script | $scratch.Add "scriptCDN" -}}
-        <noscript>
-            Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-    {{- end -}}
-
-    {{- /* Gitalk Comment System */ -}}
-    {{- if .Site.Params.comment.gitalk.enable -}}
-        {{- $gitalk := .Site.Params.comment.gitalk -}}
-        <div id="gitalk" class="comment"></div>
-        {{- with $CDN.gitalkCSS -}}
-            {{- slice . | $scratch.Add "linkCDN" -}}
-        {{- else -}}
-            {{- slice "lib/gitalk/gitalk.css" | $scratch.Add "linkLocal" -}}
+    <div id="comments">
+        {{- /* Disqus Comment System */ -}}
+        {{- if .Site.Params.comment.disqus.enable -}}
+            <div id="disqus_thread" class="comment"></div>
+            {{- $source := printf "https://%s.disqus.com/embed.js" .Site.Params.comment.disqus.shortname -}}
+            {{- dict "source" $source "defer" true "crossorigin" true | slice | $scratch.Add "script" -}}
+            <noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript>
         {{- end -}}
-        {{- with $CDN.gitalkJS -}}
-            {{- slice . | $scratch.Add "scriptCDN" -}}
-        {{- else -}}
-            {{- slice "lib/gitalk/gitalk.min.js" | $scratch.Add "scriptLocal" -}}
+
+        {{- /* Gitalk Comment System */ -}}
+        {{- if .Site.Params.comment.gitalk.enable -}}
+            {{- $gitalk := .Site.Params.comment.gitalk -}}
+            <div id="gitalk" class="comment"></div>
+            {{- with $CDN.gitalkCSS -}}
+                {{- dict "source" . "crossorigin" true | slice | $scratch.Add "stylesheet" -}}
+            {{- else -}}
+                {{- dict "source" "lib/gitalk/gitalk.css" "minify" true "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
+            {{- end -}}
+            {{- with $CDN.gitalkJS -}}
+                {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+            {{- else -}}
+                {{- dict "source" "lib/gitalk/gitalk.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+            {{- end -}}
+            {{- $gitalkConfig := dict "id" .Date "title" .Title "clientID" $gitalk.clientId "clientSecret" $gitalk.clientSecret "repo" $gitalk.repo "owner" $gitalk.owner "admin" (slice $gitalk.owner) -}}
+            {{- $scratch.SetInMap "comment" "gitalk" $gitalkConfig -}}
+            <noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript>
         {{- end -}}
-        <script>
-            document.addEventListener("DOMContentLoaded", function(event) {
-                var gitalk = new Gitalk({
-                    id: '{{ .Date }}',
-                    title: '{{ .Title }}',
-                    clientID: '{{ $gitalk.clientId }}',
-                    clientSecret: '{{ $gitalk.clientSecret }}',
-                    repo: '{{ $gitalk.repo }}',
-                    owner: '{{ $gitalk.owner }}',
-                    admin: ['{{ $gitalk.owner }}'],
-                    body: decodeURI(location.href),
-                });
-                gitalk.render('gitalk');
-            });
-        </script>
-        <noscript>
-            Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by Gitalk.</a>
-        </noscript>
-    {{- end -}}
 
-    {{- /* Valine Comment System */ -}}
-    {{- if .Site.Params.comment.valine.enable -}}
-        {{- $valine := .Site.Params.comment.valine -}}
-        <div id="valine" class="comment"></div>
-        {{- slice "lib/valine/valine.scss" | $scratch.Add "linkLocal" -}}
-        {{- with $CDN.valineJS -}}
-            {{- slice . | $scratch.Add "scriptCDN" -}}
-        {{- else -}}
-            {{- slice "lib/valine/Valine.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- /* Valine Comment System */ -}}
+        {{- if .Site.Params.comment.valine.enable -}}
+            {{- $valine := .Site.Params.comment.valine -}}
+            <div id="valine" class="comment"></div>
+            {{- $options := dict "targetPath" "lib/valine/valine.min.css" -}}
+            {{- dict "source" "lib/valine/valine.scss" "toCSS" $options | slice | $scratch.Add "stylesheet" -}}
+            {{- with $CDN.valineJS -}}
+                {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+            {{- else -}}
+                {{- dict "source" "lib/valine/Valine.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+            {{- end -}}
+            {{- $valineConfig := dict "el" "#valine" "appId" $valine.appId "appKey" $valine.appKey "lang" ($valine.lang | default "en") "notify" $valine.notify "verify" $valine.verify "visitor" $valine.visitor "recordIP" $valine.recordIP -}}
+            {{- with $valine.placeholder -}}
+                {{- $valineConfig = dict "placeholder" . | merge $valineConfig -}}
+            {{- end -}}
+            {{- with $valine.avatar -}}
+                {{- $valineConfig = dict "avatar" . | merge $valineConfig -}}
+            {{- end -}}
+            {{- with $valine.meta -}}
+                {{- $valineConfig = dict "meta" . | merge $valineConfig -}}
+            {{- end -}}
+            {{- with $valine.pageSize -}}
+                {{- $valineConfig = dict "pageSize" . | merge $valineConfig -}}
+            {{- end -}}
+            {{- $scratch.SetInMap "comment" "valine" $valineConfig -}}
+            <noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript>
         {{- end -}}
-        <script>
-            document.addEventListener("DOMContentLoaded", function(event) {
-                new Valine({
-                    el: '#valine',
-                    appId: '{{ $valine.appId }}',
-                    appKey: '{{ $valine.appKey }}',
-                    {{- with $valine.placeholder -}}
-                        placeholder: '{{ . }}',
-                    {{- end -}}
-                    {{- if $valine.notify -}}
-                        notify: true,
-                    {{- end -}}
-                    {{- if $valine.verify -}}
-                        verify: true,
-                    {{- end -}}
-                    {{- with $valine.avatar -}}
-                        avatar: '{{ . }}',
-                    {{- end -}}
-                    {{- with $valine.meta -}}
-                        meta: {{ . | safeJS }},
-                    {{- end -}}
-                    {{- with $valine.pageSize -}}
-                        pageSize: {{ . | safeJS }},
-                    {{- end -}}
-                    lang: '{{ $valine.lang | default "en" }}',
-                    {{- if $valine.visitor -}}
-                        visitor: true,
-                    {{- end -}}
-                    {{- if $valine.recordIP -}}
-                        recordIP: true,
-                    {{- end -}}
-                });
-            });
-        </script>
-        <noscript>
-            Please enable JavaScript to view the <a href="https://valine.js.org/">comments powered by Valine.</a>
-        </noscript>
-    {{- end -}}
 
-    {{- /* Facebook Comment System */ -}}
-    {{- if .Site.Params.comment.facebook.enable -}}
-        {{- $facebook := .Site.Params.comment.facebook -}}
-        <div id="fb-root" class="comment"></div>
-        <div
-            class="fb-comments"
-            data-href="{{ .Site.Params.baseURL }}{{ .Permalink | absURL }}"
-            data-width="{{ $facebook.width }}"
-            data-numposts="{{ $facebook.numPosts }}"
-        ></div>
-        {{- $script := `<script src="https://connect.facebook.net/%s/sdk.js#xfbml=1&version=v5.0&appId=%s&autoLogAppEvents=1" crossorigin="anonymous"></script>` -}}
-        {{- $script = printf $script $facebook.languageCode $facebook.appId -}}
-        {{- slice $script | $scratch.Add "scriptCDN" -}}
-        <noscript>
-            Please enable JavaScript to view the <a href="https://developers.facebook.com/docs/plugins/comments/">comments powered by Facebook.</a>
-        </noscript>
-    {{- end -}}
+        {{- /* Facebook Comment System */ -}}
+        {{- if .Site.Params.comment.facebook.enable -}}
+            {{- $facebook := .Site.Params.comment.facebook -}}
+            <div id="fb-root" class="comment"></div>
+            <div
+                class="fb-comments"
+                data-href="{{ .Site.Params.baseURL }}{{ .Permalink | absURL }}"
+                data-width="{{ $facebook.width }}"
+                data-numposts="{{ $facebook.numPosts }}"
+            ></div>
+            {{- $source := printf "https://connect.facebook.net/%s/sdk.js#xfbml=1&version=v5.0&appId=%s&autoLogAppEvents=1" $facebook.languageCode $facebook.appId -}}
+            {{- dict "source" $source "defer" true "crossorigin" true | slice | $scratch.Add "script" -}}
+            <noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/"></a>Facebook</a>.
+            </noscript>
+        {{- end -}}
 
-    {{- /* Telegram Comments System */ -}}
-    {{- if .Site.Params.comment.telegram.enable -}}
-        {{- $telegram := .Site.Params.comment.telegram -}}
-        <div id="telegram-comments" class="comment"></div>
-        <script async src="https://comments.app/js/widget.js?2" data-comments-app-website="{{ $telegram.siteID }}" data-limit="{{ $telegram.limit | default 5 }}"{{ with $telegram.height }} data-height="{{ . }}"{{ end }}{{ with $telegram.color }} data-color="{{ . }}"{{ end }}{{ if $telegram.colorful }} data-colorful="1"{{ end }}{{ if $telegram.dislikes }} data-dislikes="1"{{ end }}{{ if $telegram.outlined }} data-outlined="1"{{ end }}></script>
-        <noscript>
-            Please enable JavaScript to view the <a href="https://comments.app/">comments powered by Telegram Comments.</a>
-        </noscript>
-    {{- end -}}
+        {{- /* Telegram Comments System */ -}}
+        {{- if .Site.Params.comment.telegram.enable -}}
+            {{- $telegram := .Site.Params.comment.telegram -}}
+            <div id="telegram-comments" class="comment"></div>
+            {{- $attr := printf `data-comments-app-website="%s"` $telegram.siteID -}}
+            {{- $attr = printf `%s data-limit="%s"` $attr ($telegram.limit | default 5) -}}
+            {{- with $telegram.height -}}
+                {{- $attr = printf `%s data-height="%s"` $attr . -}}
+            {{- end -}}
+            {{- with $telegram.color -}}
+                {{- $attr = printf `%s data-color="%s"` $attr . -}}
+            {{- end -}}
+            {{- if $telegram.colorful -}}
+                {{- $attr = printf `%s data-colorful="1"` $attr -}}
+            {{- end -}}
+            {{- if $telegram.dislikes -}}
+                {{- $attr = printf `%s data-dislikes="1"` $attr -}}
+            {{- end -}}
+            {{- if $telegram.outlined -}}
+                {{- $attr = printf `%s data-outlined="1"` $attr -}}
+            {{- end -}}
+            {{- dict "source" "https://comments.app/js/widget.js?2" "defer" true "crossorigin" true "attr" $attr | slice | $scratch.Add "script" -}}
+            <noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://comments.app/">Telegram Comments</a>.
+            </noscript>
+        {{- end -}}
+    </div>
 {{- end -}}
