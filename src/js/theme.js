@@ -231,7 +231,7 @@ class Theme {
                             icon: '',
                             href: 'https://lunrjs.com/',
                         };
-                        return `<div class="search-footer"><a href="${href}" rel="noopener noreffer" target="_blank">${icon} ${searchType}</a></div>`;},
+                        return `<div class="search-footer">Search by <a href="${href}" rel="noopener noreffer" target="_blank">${icon} ${searchType}</a></div>`;},
                 },
             });
             autosearch.on('autocomplete:selected', (event, suggestion, dataset, context) => {

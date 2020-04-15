@@ -41,7 +41,7 @@
     {{- $searchConfig := dict "noResultsFound" (T "noResultsFound") -}}
     {{- if eq .Site.Params.search.type "lunr" -}}
         {{- with .Site.Home.OutputFormats.Get "json" -}}
-            {{- $searchConfig = dict "type" "lunr" "lunrIndexURL" .RelPermalink -}}
+            {{- $searchConfig = dict "type" "lunr" "lunrIndexURL" .RelPermalink | merge $searchConfig -}}
         {{- end -}}
         {{- with $CDN.lunrJS -}}
             {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
@@ -118,7 +118,7 @@
     {{- end -}}
     {{- $typeitConfig := slice -}}
     {{- range $key, $val := . -}}
-        {{- $typeitConfig = $typeitConfig | append $val -}}
+        {{- $typeitConfig = $typeitConfig | append (slice $val) -}}
     {{- end -}}
     {{- $config = dict "typeit" $typeitConfig | merge $config -}}
 {{- end -}}

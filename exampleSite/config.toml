@@ -96,7 +96,7 @@ enableEmoji = true
       # Search
       [languages.en.params.search]
         enable = true
-        # type of search index ("lunr", "algolia")
+        # type of search engine ("lunr", "algolia")
         type = "algolia"
         # index length of the content
         contentLength = 5000
@@ -341,8 +341,8 @@ enableEmoji = true
       # 搜索
       [languages.zh-cn.params.search]
         enable = true
-        # 搜索索引的类型 ("lunr", "algolia")
-        type = "lunr"
+        # 搜索引擎的类型 ("lunr", "algolia")
+        type = "algolia"
         # 文章内容索引长度
         contentLength = 5000
         [languages.zh-cn.params.search.algolia]
@@ -586,7 +586,7 @@ enableEmoji = true
       # Search
       [languages.fr.params.search]
         enable = true
-        # type of search index ("lunr", "algolia")
+        # type of search engine ("lunr", "algolia")
         type = "algolia"
         # index length of the content
         contentLength = 5000
@@ -882,7 +882,7 @@ enableEmoji = true
     smoothScrollJS = ''
     # autocomplete.js@0.37.1 https://github.com/algolia/autocomplete.js
     autocompleteJS = ''
-    # lunr@2.3.8 https://lunrjs.com/
+    # lunr.js@2.3.8 https://lunrjs.com/
     lunrJS = ''
     # algoliasearch@4.1.0 https://github.com/algolia/algoliasearch-client-javascript
     algoliasearchJS = ''
@@ -906,17 +906,17 @@ enableEmoji = true
     katexMhchemJS = ''
     # mermaid@8.4.8 https://github.com/knsv/mermaid
     mermaidJS = ''
-    # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
-    aplayerCSS = ''
-    aplayerJS = ''
-    # meting@2.0.1 https://github.com/metowolf/MetingJS
-    metingJS = ''
     # echarts@4.6.0 https://echarts.apache.org/
     echartsJS = ''
     echartsMacaronsJS = ''
     # mapbox-gl@1.8.1 https://docs.mapbox.com/mapbox-gl-js
     mapboxGLCSS = ''
     mapboxGLJS = ''
+    # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
+    aplayerCSS = ''
+    aplayerJS = ''
+    # meting@2.0.1 https://github.com/metowolf/MetingJS
+    metingJS = ''
     # gitalk@1.6.2 https://github.com/gitalk/gitalk
     gitalkCSS = ''
     gitalkJS = ''

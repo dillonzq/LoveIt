@@ -1,5 +1,5 @@
 {{- $index := slice -}}
-{{- range .Site.RegularPages -}}
+{{- range where .Site.RegularPages ".Params.hiddenfromsearch" "!=" true -}}
     {{- $one := dict "uri" .RelPermalink "title" .Title "description" (.Description | default "") -}}
     {{- $tags := .Params.tags | default slice -}}
     {{- $one = delimit $tags "\n" | dict "tags" | merge $one -}}

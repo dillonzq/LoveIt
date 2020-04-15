@@ -68,6 +68,7 @@ license: ""
 tags: []
 categories: []
 hiddenFromHomePage: false
+hiddenFromSearch: false
 
 featuredImage: ""
 featuredImagePreview: ""
@@ -103,6 +104,7 @@ comment: true
 * **tags**: the tags for the content.
 * **categories**: the categories for the content.
 * **hiddenFromHomePage**: if `true`, the content will not be shown in the home page, but this behaviour is configurabl in the [site configuration](../theme-documentation-basics/#site-configuration).
+* **hiddenFromSearch**: {{< version 0.2.0 >}} if `true`, the content will not be shown in the search results.
 * **featuredImage**: the featured image for the content.
 * **featuredImagePreview**: the featured image for the content preview in the home page.
 * **toc**: if `true`, the content will show the table of the contents.
@@ -113,6 +115,10 @@ comment: true
 * **linkToMarkdown**: if `true`, the footer of the content will show the link to the orignal Markdown file.
 * **share**: the same as `params.share` in the [site configuration](../theme-documentation-basics/#site-configuration).
 * **comment**: if `true`, the comment will be used.
+
+{{< admonition tip >}}
+Not all of the above front matters need to be set in each of your posts. It is necessary only if the front matters and your [site configuration](../theme-documentation-basics/#site-configuration) are inconsistent.
+{{< /admonition >}}
 
 ## 3 Content Summaries
 

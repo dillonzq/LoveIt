@@ -207,6 +207,17 @@ hugo
   # {{< version 0.1.1 new small >}} 哪种哈希函数用来 SRI, 为空时表示不使用 SRI
   # ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
+  # {{< version 0.2.0 new small >}} 搜索
+  [params.search]
+    enable = true
+    # 搜索引擎的类型 ("lunr", "algolia")
+    type = "lunr"
+    # 文章内容索引长度
+    contentLength = 5000
+    [params.search.algolia]
+      index = ""
+      appID = ""
+      searchKey = ""
   # 页面头部导航栏信息
   [params.header]
     # 桌面端导航栏模式 ("fixed", "normal", "auto")
@@ -457,6 +468,12 @@ hugo
     animateCSS = ''
     # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.2
     smoothScrollJS = ''
+    # {{< version 0.2.0 new small >}} {{< link "https://github.com/algolia/autocomplete.js" "autocomplete.js" >}}@0.37.1
+    autocompleteJS = ''
+    # {{< version 0.2.0 new small >}} {{< link "https://lunrjs.com/" "lunr.js" >}}@2.3.8
+    lunrJS = ''
+    # {{< version 0.2.0 new small >}} {{< link "https://github.com/algolia/algoliasearch-client-javascript" "algoliasearch" >}}@4.1.0
+    algoliasearchJS = ''
     # {{< link "https://github.com/ellisonleao/sharer.js" "sharer" >}}@0.4.0
     sharerJS = ''
     # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
@@ -477,17 +494,17 @@ hugo
     katexMhchemJS = ''
     # {{< link "https://github.com/knsv/mermaid" "mermaid" >}}@8.4.8
     mermaidJS = ''
-    # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
-    aplayerCSS = ''
-    aplayerJS = ''
-    # {{< link "https://github.com/metowolf/MetingJS" "meting" >}}@2.0.1
-    metingJS = ''
     # {{< link "https://echarts.apache.org/" "echarts" >}}@4.6.0
     echartsJS = ''
     echartsMacaronsJS = ''
     # {{< version 0.2.0 new small >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.8.1
     mapboxGLCSS = ''
     mapboxGLJS = ''
+    # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
+    aplayerCSS = ''
+    aplayerJS = ''
+    # {{< link "https://github.com/metowolf/MetingJS" "meting" >}}@2.0.1
+    metingJS = ''
     # {{< link "https://github.com/gitalk/gitalk" "gitalk" >}}@1.6.2
     gitalkCSS = ''
     gitalkJS = ''
@@ -560,12 +577,23 @@ hugo
 
 # 用于 Hugo 输出文档的设置
 [outputs]
-  home = ["HTML", "RSS"]
+  # {{< version 0.2.0 changed small >}}
+  home = ["HTML", "RSS", "JSON"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   taxonomyTerm = ["HTML"]
 ```
+
+{{< admonition tip "关于 CDN 配置的技巧" >}}
+在 CDN 的配置中, 完整的 HTML 标签和 URL 都是支持的:
+
+```toml
+smoothScrollJS = '<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js" integrity="sha256-vP+F+14A1ogChQs5Osd5LJl/ci9TbzjiZjjEbcqOXrY=" crossorigin="anonymous"></script>'
+# 或者
+smoothScrollJS = 'https://cdn.jsdelivr.net/npm/smooth-scroll@16/dist/smooth-scroll.min.js'
+```
+{{< /admonition >}}
 
 ![完整配置下的预览](/images/theme-documentation-basics/complete-configuration-preview.zh-cn.png "完整配置下的预览")
 
@@ -736,3 +764,47 @@ defaultContentLanguage = "zh-cn"
 要覆盖默认值, 请在项目的 i18n 目录 `i18n/<languageCode>.toml` 中创建一个新文件，并从 `themes/LoveIt/i18n/en.toml` 中获得提示.
 
 另外, 由于你的翻译可能会帮助到其他人, 请花点时间通过 [创建一个 PR](https://github.com/dillonzq/LoveIt/pulls) 来贡献主题翻译, 谢谢!
+
+## 5 搜索
+
+{{< version 0.2.0 >}}
+
+基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/), **LoveIt** 主支持搜索功能.
+
+### 5.1 输出配置
+
+为了生成搜索功能所需要的 `index.json`, 请在你的 [网站配置](#site-configuration) 中添加 `JSON` 输出文件类型到 `outputs` 部分的 `home` 字段中.
+
+```toml
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+```
+
+### 5.2 搜索配置
+
+基于 Hugo 生成的 `index.json` 文件, 你可以激活搜索功能.
+
+这是你的 [网站配置](#site-configuration) 中的搜索部分:
+
+```toml
+[params.search]
+  enable = true
+  # type of search engine ("lunr", "algolia")
+  type = "lunr"
+  # index length of the content
+  contentLength = 5000
+  [params.search.algolia]
+    index = ""
+    appID = ""
+    searchKey = ""
+```
+
+{{< admonition note "怎样选择搜索引擎的类型?" >}}
+* `lunr`: 简单, 无需同步 `index.json`, 没有 `contentLength` 的限制, 但占用带宽大且性能低 (特别是中文需要一个较大的分词依赖库)
+* `algolia`: 高性能并且占用带宽低, 但需要同步 `index.json` 且有 `contentLength` 的限制
+{{< /admonition >}}
+
+{{< admonition tip "关于 algolia 的使用技巧" >}}
+你需要上传 `index.json` 到 algolia 来激活搜索功能. 你可以使用浏览器来上传 `index.json` 文件但是一个自动化的脚本可能是更好的选择.
+为了兼容 Hugo 的多语言模式, 你需要上传不同语言的 `index.json` 文件到对应的 algolia index, 例如 `zh-cn/index.json` 或 `fr/index.json`...
+{{< /admonition >}}

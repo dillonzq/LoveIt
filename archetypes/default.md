@@ -12,6 +12,7 @@ license: ""
 tags: []
 categories: []
 hiddenFromHomePage: false
+hiddenFromSearch: false
 
 featuredImage: ""
 featuredImagePreview: ""
