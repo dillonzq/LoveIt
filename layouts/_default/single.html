@@ -12,7 +12,7 @@
 
         {{- /* Content */ -}}
         <div class="content" id="content">
-            {{- partial "single/content.html" .Content -}}
+            {{- partial "function/content.html" .Content | safeHTML -}}
         </div>
     </div>
 {{- end -}}

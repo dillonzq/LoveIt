@@ -45,7 +45,7 @@
     {{- /* Summary content */ -}}
     <div class="content">
         {{- with .Summary -}}
-            {{- partial "single/content.html" . -}}
+            {{- partial "function/content.html" . | safeHTML -}}
         {{- else -}}
             {{- .Description | safeHTML -}}
         {{- end -}}

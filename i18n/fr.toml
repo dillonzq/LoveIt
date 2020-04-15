@@ -40,6 +40,21 @@ other = "Plus"
 [selectLanguage]
 other = "Choisir la langue"
 
+[search]
+other = "Chercher"
+
+[searchPlaceholder]
+other = "Rechercher des titres, des contenus..."
+
+[clear]
+other = "Clair"
+
+[cancel]
+other = "Annuler"
+
+[noResultsFound]
+other = "Aucun résultat trouvé"
+
 [switchTheme]
 other = "Changer de Thème"
 # === partials/header.html ===
@@ -51,6 +66,14 @@ other = "Propulsé par %s"
 [theme]
 other = "Thème"
 # === partials/footer.html ===
+
+# === partials/assets.html ===
+[lunrLanguageLib]
+other = "lib/lunr/lunr.fr.js"
+
+[lunrLanguageCode]
+other = "fr"
+# === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]

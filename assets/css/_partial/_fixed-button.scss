@@ -13,7 +13,9 @@
   color: $global-font-secondary-color;
   background: $header-background-color;
   border: 1px solid darken($global-border-color, 10%);
-  border-radius: 2rem;
+  @include border-radius(2rem);
+
+  @include blur;
 
   &:hover, &:active {
     color: $global-font-color;
@@ -24,7 +26,7 @@
     outline: none;
   }
 
-  .dark-theme & {
+  .dark & {
     color: $global-font-secondary-color-dark;
     background: $header-background-color-dark;
     border-color: darken($global-border-color-dark, 10%);
@@ -35,11 +37,11 @@
   }
 }
 
-#top-button {
+#back-to-top {
   display: block;
   bottom: 1.5rem;
 }
 
-#comment-button {
+#view-comments {
   bottom: 4.5rem;
 }

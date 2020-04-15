@@ -32,9 +32,10 @@ Compared to the original LeaveIt theme and the KeepIt theme, the LoveIt theme ha
 * Some beautiful **CSS animations**
 * Easy-to-use and self-expanding **table of contents**
 * More **social links**, **share sites** and **comment system**
-* Extended markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
-* Extended markdown syntax for **ruby annotation**
-* Extended markdown syntax for **fraction**
+* **Search** supported by [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/)
+* Extended Markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
+* Extended Markdown syntax for **ruby annotation**
+* Extended Markdown syntax for **fraction**
 * **Mathematical formula** supported by [KaTeX](https://katex.org/)
 * **Diagram syntax** shortcode supported by [mermaid](https://github.com/knsv/mermaid)
 * **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
@@ -89,11 +90,12 @@ I hope you will LoveIt ❤️!
 
 ### Extended Features
 
+* **Search** supported by [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/)
 * Automatically **highlighting** code
 * **Images gallery** supported by [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
-* Extended markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
-* Extended markdown syntax for **ruby annotation**
-* Extended markdown syntax for **fraction**
+* Extended Markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
+* Extended Markdown syntax for **ruby annotation**
+* Extended Markdown syntax for **fraction**
 * **Mathematical formula** supported by [KaTeX](https://katex.org/)
 * **Diagrams** shortcode supported by [mermaid](https://github.com/knsv/mermaid)
 * **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
@@ -128,9 +130,13 @@ Thanks to the authors of following resources included in the theme:
 * [Font Awesome](https://fontawesome.com/)
 * [Fork Awesome](https://forkaweso.me/Fork-Awesome/)
 * [Animate.css](https://daneden.github.io/animate.css/)
+* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
+* [autocomplete.js](https://github.com/algolia/autocomplete.js)
+* [Lunr.js](https://lunrjs.com/)
+* [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
+* [Sharer.js](https://github.com/ellisonleao/sharer.js)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
 * [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * [TypeIt](https://typeitjs.com/)
 * [KaTeX](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)

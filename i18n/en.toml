@@ -40,6 +40,21 @@ other = "More"
 [selectLanguage]
 other = "Select Language"
 
+[search]
+other = "Search"
+
+[searchPlaceholder]
+other = "Search titles or contents..."
+
+[clear]
+other = "Clear"
+
+[cancel]
+other = "Cancel"
+
+[noResultsFound]
+other = "No results found"
+
 [switchTheme]
 other = "Switch Theme"
 # === partials/header.html ===

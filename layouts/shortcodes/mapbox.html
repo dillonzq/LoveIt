@@ -27,7 +27,7 @@
     {{- $darkStyle = .Get 5 | default $darkStyle -}}
 {{- end -}}
 {{- $darkStyle = $darkStyle | default $lightStyle -}}
-{{- $options := dict "lng" $lng "lat" $lat "zoom" $zoom "marked" $marked "light-style" $lightStyle "dark-style" $darkStyle "geolocate" $geolocate "navigation" $navigation "scale" $scale "fullscreen" $fullscreen -}}
+{{- $options := dict "lng" $lng "lat" $lat "zoom" $zoom "marked" $marked "lightStyle" $lightStyle "darkStyle" $darkStyle "geolocate" $geolocate "navigation" $navigation "scale" $scale "fullscreen" $fullscreen -}}
 {{- $id := partial "function/id.html" (dict "content" $options "scratch" $scratch) -}}
 <div class="mapbox" id="{{ $id }}" style="width: {{ $width }}; height: {{ $height }};"></div>
 {{- $scratch.Set "mapbox" true -}}

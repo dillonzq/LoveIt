@@ -68,7 +68,7 @@ details.admonition {
       right: .5rem;
       color: $global-font-color;
 
-      .dark-theme & {
+      .dark & {
         color: $global-font-color-dark;
       }
     }
@@ -77,6 +77,6 @@ details.admonition {
 
 details.admonition[open] {
   i.details {
-    transform: rotate(180deg);
+    @include transform(rotate(180deg));
   }
 }

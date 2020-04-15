@@ -5,7 +5,7 @@
     color: $global-font-color;
     border-bottom: 1px dashed $global-border-color;
 
-    .dark-theme & {
+    .dark & {
       color: $global-font-color-dark;
       border-bottom: 1px dashed $global-border-color-dark;
     }
@@ -33,10 +33,7 @@
     }
 
     .content {
-      display: -moz-box;
-      display: -webkit-box;
-      -moz-box-orient: vertical;
-      -webkit-box-orient: vertical;
+      @include box(vertical);
       -webkit-line-clamp: 3;
       margin-top: .3rem;
       width: 100%;
@@ -45,7 +42,7 @@
       overflow-wrap: break-word;
       color: $global-font-secondary-color;
 
-      .dark-theme & {
+      .dark & {
         color: $global-font-secondary-color-dark;
       }
 
@@ -76,7 +73,7 @@
           margin-right: .3125rem;
           color: $global-link-color;
 
-          .dark-theme & {
+          .dark & {
             color: $global-link-color-dark;
           }
         }
@@ -93,7 +90,7 @@
       @include link(true, true);
 
       b, strong {
-        .dark-theme & {
+        .dark & {
           color: $global-font-secondary-color-dark;
         }
       }

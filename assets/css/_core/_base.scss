@@ -9,8 +9,8 @@ html {
 
 /* scrollbar, only support webkit */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: .5rem;
+  height: .5rem;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -22,43 +22,25 @@ html {
 }
 
 ::selection {
-  background: $selection-color;
+  background-color: $selection-color;
 
-  .dark-theme & {
-    background: $selection-color-dark;
+  .dark & {
+    background-color: $selection-color-dark;
   }
 }
 
 body {
-  -webkit-font-smoothing: subpixel-antialiased;
   background-color: $global-background-color;
   color: $global-font-color;
   overflow-wrap: break-word;
 
-  &::before {
-    content: "";
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.05;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    -webkit-filter: grayscale(100%);
-    -moz-filter: grayscale(100%);
-    -ms-filter: grayscale(100%);
-    -o-filter: grayscale(100%);
-    filter: grayscale(100%);
-    filter: gray;
-  }
-
-  &.dark-theme {
+  &.dark {
     color: $global-font-color-dark;
     background-color: $global-background-color-dark;
   }
 }
+
+@import "../_partial/mask";
 
 a {
   text-decoration: none;

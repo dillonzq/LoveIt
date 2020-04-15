@@ -40,6 +40,21 @@ other = "更多"
 [selectLanguage]
 other = "选择语言"
 
+[search]
+other = "搜索"
+
+[searchPlaceholder]
+other = "搜索文章标题或内容..."
+
+[clear]
+other = "清空"
+
+[cancel]
+other = "取消"
+
+[noResultsFound]
+other = "没有找到结果"
+
 [switchTheme]
 other = "切换主题"
 # === partials/header.html ===
@@ -51,6 +66,14 @@ other = "由 %s 强力驱动"
 [theme]
 other = "主题"
 # === partials/footer.html ===
+
+# === partials/assets.html ===
+[lunrLanguageLib]
+other = "lib/lunr/lunr.zh.js"
+
+[lunrLanguageCode]
+other = "zh"
+# === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]

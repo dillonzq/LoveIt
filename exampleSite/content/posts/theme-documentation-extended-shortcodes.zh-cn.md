@@ -12,7 +12,6 @@ license: ""
 
 tags: ["shortcodes"]
 categories: ["documentation"]
-hiddenFromHomePage: false
 
 featuredImage: "/images/theme-documentation-extended-shortcodes/featured-image.jpg"
 featuredImagePreview: "/images/theme-documentation-extended-shortcodes/featured-image-preview.jpg"
@@ -20,19 +19,6 @@ featuredImagePreview: "/images/theme-documentation-extended-shortcodes/featured-
 toc: true
 autoCollapseToc: true
 math: false
-mapbox:
-    accessToken: ""
-    lightStyle: ""
-    darkStyle: ""
-    navigation: true
-    geolocate: true
-    scale: true
-    fullscreen: true
-lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 **LoveIt** 主题在 Hugo 内置的 shortcode 的基础上提供多个扩展的 shortcode.

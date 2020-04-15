@@ -1,12 +1,21 @@
-/**Footer**/
-.copyright {
-  font-size: .875rem;
+footer {
+  height: 2rem;
+  width: 100%;
+  text-align: center;
+  line-height: 1.5rem;
+  padding-top: 2rem;
 
-  .copyright-line {
-    width: 100%;
+  .copyright {
+    font-size: .875rem;
 
-    .icp-br {
-      display: none;
+    .copyright-line {
+      width: 100%;
+
+      .icp-br {
+        display: none;
+      }
     }
   }
+
+  @include blur;
 }

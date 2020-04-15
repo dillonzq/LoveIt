@@ -59,11 +59,12 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 
 #### Extended Features
 
+* :(fas fa-search): **Search** supported by [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/)
 * :(fas fa-code): Automatically **highlighting** code
 * :(far fa-images): **Images gallery** supported by [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
-* :(fab fa-font-awesome): Extended markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
-* :(far fa-sticky-note): Extended markdown syntax for **ruby annotation**
-* :(fas fa-percentage): Extended markdown syntax for **fraction**
+* :(fab fa-font-awesome): Extended Markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
+* :(far fa-sticky-note): Extended Markdown syntax for **ruby annotation**
+* :(fas fa-percentage): Extended Markdown syntax for **fraction**
 * :(fas fa-square-root-alt): **Mathematical formula** supported by [$ \KaTeX $](https://katex.org/)
 * :(fas fa-project-diagram): **Diagrams** shortcode supported by [mermaid](https://github.com/knsv/mermaid)
 * :(fas fa-chart-pie): **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
@@ -87,9 +88,13 @@ Thanks to the authors of following resources included in the theme:
 * [Font Awesome](https://fontawesome.com/)
 * [Fork Awesome](https://forkaweso.me/Fork-Awesome/)
 * [Animate.css](https://daneden.github.io/animate.css/)
+* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
+* [autocomplete.js](https://github.com/algolia/autocomplete.js)
+* [Lunr.js](https://lunrjs.com/)
+* [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
+* [Sharer.js](https://github.com/ellisonleao/sharer.js)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
 * [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * [TypeIt](https://typeitjs.com/)
 * [$ \KaTeX $](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)

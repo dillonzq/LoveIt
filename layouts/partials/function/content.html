@@ -10,4 +10,4 @@
 
 {{- $content = partial "function/escape.html" $content -}}
 
-{{- $content | safeHTML -}}
+{{- return $content -}}

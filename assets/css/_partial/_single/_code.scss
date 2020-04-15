@@ -4,7 +4,7 @@ code {
   padding: .2rem .4rem;
   color: $code-color;
 
-  .dark-theme & {
+  .dark & {
     color: $code-color-dark;
   }
 }
@@ -12,7 +12,7 @@ code {
 code, pre, .highlight table, .highlight tr, .highlight td {
   background: $code-background-color;
 
-  .dark-theme & {
+  .dark & {
     background: $code-background-color-dark;
   }
 }
@@ -27,14 +27,14 @@ code, pre, .highlight table, .highlight tr, .highlight td {
 
   &::before {
     display: block;
-    padding: .4rem;
+    padding: .2rem .4rem;
     font-family: $global-font-family;
     font-weight: bold;
     color: $code-info-color;
     background: darken($code-background-color, 3%);
     content: 'Code';
 
-    .dark-theme & {
+    .dark & {
       color: $code-info-color-dark;
       background: darken($code-background-color-dark, 3%);
     }
@@ -56,7 +56,7 @@ code, pre, .highlight table, .highlight tr, .highlight td {
         display: block;
         background-color: darken($code-background-color, 5%);
 
-        .dark-theme & {
+        .dark & {
           background-color: darken($code-background-color-dark, 5%);
         }
       }
@@ -66,7 +66,7 @@ code, pre, .highlight table, .highlight tr, .highlight td {
   .ln, .lnt {
     color: $global-font-secondary-color;
 
-    .dark-theme & {
+    .dark & {
       color: $global-font-secondary-color-dark;
     }
   }
@@ -89,7 +89,7 @@ code, pre, .highlight table, .highlight tr, .highlight td {
     .#{$class} { color: $color; }
   }
 
-  .dark-theme & {
+  .dark & {
     @each $class, $color in $code-highlight-color-map-dark {
       .#{$class} { color: $color; }
     }
@@ -119,12 +119,12 @@ code, pre, .highlight table, .highlight tr, .highlight td {
 
     @include link(false, false);
 
-    .dark-theme & {
+    .dark & {
       background-color: darken($code-background-color-dark, 5%);
     }
   }
 
-  .dark-theme & {
+  .dark & {
     // imported from https://github.com/lonekorean/gist-syntax-themes/blob/master/stylesheets/one-dark.css
     .highlight {
       background: #141414;

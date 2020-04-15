@@ -1,219 +1,241 @@
 {{- $scratch := .Scratch.Get "scratch" -}}
 {{- $CDN := $scratch.Get "CDN" -}}
+{{- $fingerprint := $scratch.Get "fingerprint" -}}
+{{- $config := dict "desktopHeaderMode" .Site.Params.header.desktopMode "mobileHeaderMode" .Site.Params.header.mobileMode -}}
+{{- with $scratch.Get "contentData" -}}
+    {{- $config = dict "content" . | merge $config -}}
+{{- end -}}
+{{- with $scratch.Get "comment" -}}
+    {{- $config = dict "comment" . | merge $config -}}
+{{- end -}}
 
 {{- /* Fork Awesome */ -}}
 {{- if $scratch.Get "forkawesome" -}}
-    {{- slice "lib/forkawesome/fork-awesome.scss" | $scratch.Add "linkLocal" -}}
+    {{- $options := dict "targetPath" "lib/forkawesome/fork-awesome.min.css" -}}
+    {{- dict "source" "lib/forkawesome/fork-awesome.scss" "toCSS" $options "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
 {{- end -}}
 
 {{- /* iconfont */ -}}
 {{- if $scratch.Get "iconfont" -}}
     {{- with $CDN.iconfontCSS -}}
-        {{- slice . | $scratch.Add "linkCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "stylesheet" -}}
     {{- else -}}
-        {{- slice "lib/iconfont/iconfont.css" | $scratch.Add "linkLocal" -}}
+        {{- dict "source" "lib/iconfont/iconfont.css" "minify" true "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
     {{- end -}}
 {{- end -}}
 
 {{- /* Smooth Scroll */ -}}
 {{- with $CDN.smoothScrollJS -}}
-    {{- slice . | $scratch.Add "scriptCDN" -}}
+    {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
 {{- else -}}
-    {{- slice "lib/smooth-scroll/smooth-scroll.polyfills.min.js" | $scratch.Add "scriptLocal" -}}
+    {{- dict "source" "lib/smooth-scroll/smooth-scroll.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
 {{- end -}}
 
-{{- /* Sharer.js */ -}}
-{{- if $scratch.Get "share" -}}
-    {{- with $CDN.sharerJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
+{{- /* Search */ -}}
+{{- if .Site.Params.search.enable -}}
+    {{- with $CDN.autocompleteJS -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
     {{- else -}}
-        {{- slice "lib/sharer/sharer.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- dict "source" "lib/autocomplete/autocomplete.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
     {{- end -}}
+    {{- $searchConfig := dict "noResultsFound" (T "noResultsFound") -}}
+    {{- if eq .Site.Params.search.type "lunr" -}}
+        {{- with .Site.Home.OutputFormats.Get "json" -}}
+            {{- $searchConfig = dict "type" "lunr" "lunrIndexURL" .RelPermalink | merge $searchConfig -}}
+        {{- end -}}
+        {{- with $CDN.lunrJS -}}
+            {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+        {{- else -}}
+            {{- dict "source" "lib/lunr/lunr.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- end -}}
+        {{- if ne .Language.Lang "en" -}}
+            {{- $searchConfig = T "lunrLanguageCode" | dict "lunrLanguageCode" | merge $searchConfig -}}
+            {{- if eq .Language.Lang "zh-cn" -}}
+                {{- $searchConfig = dict "lunrSegmentitURL" (resources.Get "lib/lunr/lunr.segmentit.js").RelPermalink | merge $searchConfig -}}
+            {{- end -}}
+            {{- dict "source" "lib/lunr/lunr.stemmer.support.js" "minify" true "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+            {{- dict "source" (T "lunrLanguageLib") "minify" true "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- end -}}
+    {{- else if eq .Site.Params.search.type "algolia" -}}
+        {{- with $CDN.algoliasearchJS -}}
+            {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+        {{- else -}}
+            {{- dict "source" "lib/algoliasearch/algoliasearch-lite.umd.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- end -}}
+        {{- $searchConfig = dict "type" "algolia" "algoliaIndex" .Site.Params.search.algolia.index "algoliaAppID" .Site.Params.search.algolia.appID "algoliaSearchKey" .Site.Params.search.algolia.searchKey | merge $searchConfig -}}
+    {{- end -}}
+    {{- $config = dict "search" $searchConfig | merge $config -}}
 {{- end -}}
 
 {{- /* lazysizes */ -}}
 {{- with $CDN.lazysizesJS -}}
-    {{- slice . | $scratch.Add "scriptCDN" -}}
+    {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
 {{- else -}}
-    {{- slice "lib/lazysizes/lazysizes.min.js" | $scratch.Add "scriptLocal" -}}
+    {{- dict "source" "lib/lazysizes/lazysizes.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
 {{- end -}}
 
 {{- /* lightgallery.js */ -}}
 {{- if ne .Site.Params.page.lightgallery false | and (ne .Params.lightgallery false) -}}
     {{- with $CDN.lightgalleryCSS -}}
-        {{- slice . | $scratch.Add "linkCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "stylesheet" -}}
     {{- else -}}
-        {{- slice "lib/lightgallery/lightgallery.min.css" | $scratch.Add "linkLocal" -}}
+        {{- dict "source" "lib/lightgallery/lightgallery.min.css" "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
     {{- end -}}
     {{- with $CDN.lightgalleryJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
     {{- else -}}
-        {{- slice "lib/lightgallery/lightgallery.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- dict "source" "lib/lightgallery/lightgallery.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
     {{- end -}}
     {{- with $CDN.lightgalleryThumbnailJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
     {{- else -}}
-        {{- slice "lib/lightgallery/lg-thumbnail.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- dict "source" "lib/lightgallery/lg-thumbnail.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
     {{- end -}}
     {{- with $CDN.lightgalleryZoomJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
     {{- else -}}
-        {{- slice "lib/lightgallery/lg-zoom.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- dict "source" "lib/lightgallery/lg-zoom.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
     {{- end -}}
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            lightGallery(document.getElementById('content'), {
-                selector: '.lightgallery',
-                speed: 400,
-                hideBarsDelay: 2000,
-                thumbnail: true,
-                exThumbImage: 'data-thumbnail',
-                thumbWidth: 80,
-                thumbContHeight: 80,
-                actualSize: false,
-            });
-        });
-    </script>
+    {{- $lightGalleryConfig := dict "selector" ".lightgallery" "speed" 400 "hideBarsDelay" 2000 "thumbnail" true "exThumbImage" "data-thumbnail" "thumbWidth" 80 "thumbContHeight" 80 "actualSize" false -}}
+    {{- $config = dict "lightGallery" $lightGalleryConfig | merge $config -}}
+{{- end -}}
+
+{{- /* Sharer.js */ -}}
+{{- if $scratch.Get "share" -}}
+    {{- with $CDN.sharerJS -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+    {{- else -}}
+        {{- dict "source" "lib/sharer/sharer.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+    {{- end -}}
 {{- end -}}
 
 {{- /* TypeIt */ -}}
 {{- with $scratch.Get "typeitMap" -}}
     {{- with $CDN.typeitJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
     {{- else -}}
-        {{- slice "lib/typeit/typeit.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- dict "source" "lib/typeit/typeit.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
     {{- end -}}
+    {{- $typeitConfig := slice -}}
     {{- range $key, $val := . -}}
-        {{- slice $val | $scratch.Add "typeitArr" -}}
+        {{- $typeitConfig = $typeitConfig | append (slice $val) -}}
     {{- end -}}
-    <script>
-        window.typeitArr = {{ $scratch.Get "typeitArr" | jsonify | safeJS }};
-    </script>
+    {{- $config = dict "typeit" $typeitConfig | merge $config -}}
 {{- end -}}
 
 {{- /* KaTeX */ -}}
 {{- if ne .Site.Params.math.enable false | and .Params.math -}}
     {{- with $CDN.katexCSS -}}
-        {{- slice . | $scratch.Add "linkCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "stylesheet" -}}
     {{- else -}}
-        {{- slice "lib/katex/katex.min.css" | $scratch.Add "linkLocal" -}}
+        {{- dict "source" "lib/katex/katex.min.css" "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
     {{- end -}}
     {{- with $CDN.katexJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
     {{- else -}}
-        {{- slice "lib/katex/katex.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- dict "source" "lib/katex/katex.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
     {{- end -}}
     {{- with $CDN.katexAutoRenderJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
     {{- else -}}
-        {{- slice "lib/katex/auto-render.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- dict "source" "lib/katex/auto-render.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
     {{- end -}}
     {{- $math := .Site.Params.math -}}
     {{- if $math.copyTex -}}
         {{- with $CDN.katexCopyTexCSS -}}
-            {{- slice . | $scratch.Add "linkCDN" -}}
+            {{- dict "source" . "crossorigin" true | slice | $scratch.Add "stylesheet" -}}
         {{- else -}}
-            {{- slice "lib/katex/copy-tex.min.css" | $scratch.Add "linkLocal" -}}
+            {{- dict "source" "lib/katex/copy-tex.min.css" "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
         {{- end -}}
         {{- with $CDN.katexCopyTexJS -}}
-            {{- slice . | $scratch.Add "scriptCDN" -}}
+            {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
         {{- else -}}
-            {{- slice "lib/katex/copy-tex.min.js" | $scratch.Add "scriptLocal" -}}
+            {{- dict "source" "lib/katex/copy-tex.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
         {{- end -}}
     {{- end -}}
     {{- if $math.mhchem -}}
         {{- with $CDN.katexMhchemJS -}}
-            {{- slice . | $scratch.Add "scriptCDN" -}}
+            {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
         {{- else -}}
-            {{- slice "lib/katex/mhchem.min.js" | $scratch.Add "scriptLocal" -}}
+            {{- dict "source" "lib/katex/mhchem.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
         {{- end -}}
     {{- end -}}
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    { left: '$$', right: '$$', display: true },
-                    { left: '\\[', right: '\\]', display: true },
-                    {{- if and $math.blockLeftDelimiter $math.blockRightDelimiter -}}
-                        { left: '{{ $math.blockLeftDelimiter }}', right: '{{ $math.blockRightDelimiter }}', display: true },
-                    {{- end -}}
-                    { left: '$', right: '$', display: false },
-                    { left: '\\(', right: '\\)', display: false },
-                    {{- if and $math.inlineLeftDelimiter $math.inlineRightDelimiter -}}
-                        { left: '{{ $math.inlineLeftDelimiter }}', right: '{{ $math.inlineRightDelimiter }}', display: false },
-                    {{- end -}}
-                ],
-                strict: false,
-            });
-        });
-    </script>
+    {{- $mathConfig := dict "strict" false -}}
+    {{- $delimiters := slice (dict "left" "$$" "right" "$$" "display" true) (dict "left" "\\[" "right" "\\]" "display" true) -}}
+    {{- if and $math.blockLeftDelimiter $math.blockRightDelimiter -}}
+        {{- $delimiters = $delimiters | append (dict "left" $math.blockLeftDelimiter "right" $math.blockRightDelimiter "display" true) -}}
+    {{- end -}}
+    {{- $delimiters = $delimiters | append (dict "left" "$" "right" "$" "display" false) (dict "left" "\\(" "right" "\\)" "display" false) -}}
+    {{- if and $math.inlineLeftDelimiter $math.inlineRightDelimiter -}}
+        {{- $delimiters = $delimiters | append (dict "left" $math.inlineRightDelimiter "right" $math.inlineRightDelimiter "display" false) -}}
+    {{- end -}}
+    {{- $mathConfig = dict "delimiters" $delimiters | merge $mathConfig -}}
+    {{- $config = dict "math" $mathConfig | merge $config -}}
 {{- end -}}
 
 {{- /* mermaid */ -}}
 {{- if $scratch.Get "mermaid" -}}
     {{- with $CDN.mermaidJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
     {{- else -}}
-        {{- slice "lib/mermaid/mermaid.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- dict "source" "lib/mermaid/mermaid.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
     {{- end -}}
-    {{- slice "lib/mermaid/mermaid.scss" | $scratch.Add "linkLocal" -}}
+    {{- $options := dict "targetPath" "lib/mermaid/mermaid.min.css" -}}
+    {{- dict "source" "lib/mermaid/mermaid.scss" "toCSS" $options "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
 {{- end -}}
 
 {{- /* ECharts */ -}}
 {{- if $scratch.Get "echarts" -}}
     {{- with $CDN.echartsJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
     {{- else -}}
-        {{- slice "lib/echarts/echarts.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- dict "source" "lib/echarts/echarts.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
     {{- end -}}
     {{- with $CDN.echartsMacaronsJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
     {{- else -}}
-        {{- slice "lib/echarts/macarons.js" | $scratch.Add "scriptLocal" -}}
+        {{- dict "source" "lib/echarts/macarons.js" "minify" true "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
     {{- end -}}
 {{- end -}}
 
 {{- /* Mapbox GL */ -}}
 {{- if $scratch.Get "mapbox" -}}
     {{- with $CDN.mapboxGLCSS -}}
-        {{- slice . | $scratch.Add "linkCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "stylesheet" -}}
     {{- else -}}
-        {{- slice "lib/mapbox-gl/mapbox-gl.min.css" | $scratch.Add "linkLocal" -}}
+        {{- dict "source" "lib/mapbox-gl/mapbox-gl.min.css" "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
     {{- end -}}
     {{- with $CDN.mapboxGLJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
     {{- else -}}
-        {{- slice "lib/mapbox-gl/mapbox-gl.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- dict "source" "lib/mapbox-gl/mapbox-gl.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
     {{- end -}}
-    {{- slice "lib/mapbox-gl/mapbox-gl-language.js" | $scratch.Add "scriptLocal" -}}
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            mapboxgl.accessToken = '{{ .Params.mapbox.accessToken | default .Site.Params.mapbox.accessToken }}';
-            mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.0/mapbox-gl-rtl-text.js');
-        });
-    </script>
+    {{- dict "source" "lib/mapbox-gl/mapbox-gl-language.js" "minify" true "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+    {{- $mapbox := dict "accessToken" (.Params.mapbox.accessToken | default .Site.Params.mapbox.accessToken) "RTLTextPlugin" "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.0/mapbox-gl-rtl-text.js" -}}
+    {{- $config = dict "mapbox" $mapbox | merge $config -}}
 {{- end -}}
 
 {{- /* Music */ -}}
 {{- if $scratch.Get "music" -}}
     {{- /* APlayer */ -}}
     {{- with $CDN.aplayerCSS -}}
-        {{- slice . | $scratch.Add "linkCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "stylesheet" -}}
     {{- else -}}
-        {{- slice "lib/aplayer/APlayer.min.css" | $scratch.Add "linkLocal" -}}
+        {{- dict "source" "lib/aplayer/APlayer.min.css" "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
     {{- end -}}
-    {{- slice "lib/aplayer/dark.scss" | $scratch.Add "linkLocal" -}}
+    {{- $options := dict "targetPath" "lib/aplayer/dark.min.css" -}}
+    {{- dict "source" "lib/aplayer/dark.scss" "toCSS" $options "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
     {{- with $CDN.aplayerJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
     {{- else -}}
-        {{- slice "lib/aplayer/APlayer.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- dict "source" "lib/aplayer/APlayer.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
     {{- end -}}
 
     {{- /* MetingJS */ -}}
     {{- with $CDN.metingJS -}}
-        {{- slice . | $scratch.Add "scriptCDN" -}}
+        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
     {{- else -}}
-        {{- slice "lib/meting/Meting.min.js" | $scratch.Add "scriptLocal" -}}
+        {{- dict "source" "lib/meting/Meting.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
     {{- end -}}
 {{- end -}}
 
@@ -221,41 +243,20 @@
 {{- if .Params.dev -}}
 {{- end -}}
 
-{{- with $scratch.Get "contentMap" -}}
-    <script>
-        window.contentMap = {{ jsonify . | safeJS }};
-    </script>
-{{- end -}}
-
 {{- /* Theme script */ -}}
-{{- slice "js/theme.min.js" | $scratch.Add "scriptLocal" -}}
+{{- dict "source" "js/theme.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
 {{- $_ := (resources.Get "js/theme.min.js.map").RelPermalink -}}
 
-{{- range $scratch.Get "linkCDN" -}}
-    {{- safeHTML . -}}
-{{- end -}}
-{{- range $scratch.Get "linkLocal" -}}
-    {{- $res := resources.Get . -}}
-    {{- if strings.HasSuffix . ".scss" -}}
-        {{- $options := dict "outputStyle" "compressed" "enableSourceMap" true -}}
-        {{- $res = toCSS $options $res -}}
-    {{- else if not (strings.HasSuffix . ".min.css") -}}
-        {{- $res = minify $res -}}
-    {{- end -}}
-    {{- $stylesheet := dict "resource" $res "fingerprint" ($scratch.Get "fingerprint") -}}
-    {{- partial "plugin/stylesheet.html" $stylesheet -}}
+{{- range $scratch.Get "stylesheet" -}}
+    {{- partial "plugin/stylesheet.html" . -}}
 {{- end -}}
 
-{{- range $scratch.Get "scriptCDN" -}}
-    {{- safeHTML . -}}
-{{- end -}}
-{{- range $scratch.Get "scriptLocal" -}}
-    {{- $res := resources.Get . -}}
-    {{- if not (strings.HasSuffix . ".min.js") -}}
-        {{- $res = minify $res -}}
-    {{- end -}}
-    {{- $script := dict "resource" $res "fingerprint" ($scratch.Get "fingerprint") -}}
-    {{- partial "plugin/script.html" $script -}}
+<script type="text/javascript">
+    window.config = {{ jsonify $config | safeJS }};
+</script>
+
+{{- range $scratch.Get "script" -}}
+    {{- partial "plugin/script.html" . -}}
 {{- end -}}
 
 {{- /* Google analytics async */ -}}

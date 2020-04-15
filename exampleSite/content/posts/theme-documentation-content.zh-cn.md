@@ -1,7 +1,6 @@
 ---
 weight: 2
 title: "主题文档 - 内容"
-subtitle: ""
 date: 2020-03-05T16:30:05+08:00
 lastmod: 2020-03-05T16:30:05+08:00
 draft: false
@@ -12,18 +11,13 @@ license: ""
 
 tags: ["内容", "markdown"]
 categories: ["documentation"]
-hiddenFromHomePage: false
 
 featuredImage: "/images/theme-documentation-content/featured-image.jpg"
-featuredImagePreview: ""
 
 toc: true
 autoCollapseToc: false
 math: true
 mapbox:
-    accessToken: ""
-    lightStyle: ""
-    darkStyle: ""
     navigation: true
     geolocate: true
     scale: true
@@ -68,6 +62,7 @@ license: ""
 tags: []
 categories: []
 hiddenFromHomePage: false
+hiddenFromSearch: false
 
 featuredImage: ""
 featuredImagePreview: ""
@@ -103,6 +98,7 @@ comment: true
 * **tags**: 文章的标签.
 * **categories**: 文章所属的类别.
 * **hiddenFromHomePage**: 如果设为 `true`, 这篇文章将不会显示在主页上, 但是此行为可以在 [网站配置](../theme-documentation-basics/#site-configuration) 中设置的.
+* **hiddenFromSearch**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章将不会显示在搜索结果中.
 * **featuredImage**: 文章的特色图片.
 * **featuredImagePreview**: 用在主页预览的文章特色图片.
 * **toc**: 如果设为 `true`, 这篇文章会显示右侧目录.
@@ -113,6 +109,11 @@ comment: true
 * **linkToMarkdown**: 如果设为 `true`, 内容的页脚将显示指向原始 Markdown 文件的链接.
 * **share**: 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.share` 对象相同.
 * **comment**: 如果设为 `true`, 将启用评论系统.
+
+{{< admonition tip >}}
+不是所有的上述前置参数都必须在你的每篇文章中设置.
+只有在文章的参数和你的 [网站设置](../theme-documentation-basics/#site-configuration) 不一致时才有必要这么做.
+{{< /admonition >}}
 
 ## 3 内容摘要
 
