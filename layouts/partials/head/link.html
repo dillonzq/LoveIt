@@ -22,6 +22,17 @@
     <link rel="feed" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ $.Site.Title }}">
 {{- end -}}
 
+{{- /* normalize.css */ -}}
+{{- $source := $CDN.normalizeCSS | default "lib/normalize/normalize.min.css" -}}
+{{- $stylesheet := dict "source" $source "fingerprint" $fingerprint -}}
+{{- partial "plugin/stylesheet.html" $stylesheet -}}
+
+{{- /* style.min.css */ -}}
+{{- $stylesheet := dict "source" "css/style.template.scss" "fingerprint" $fingerprint -}}
+{{- $options := dict "targetPath" "css/style.min.css" "includePaths" (slice "config/css") -}}
+{{- $stylesheet = dict "template" "style.scss" "context" . "toCSS" $options | merge $stylesheet -}}
+{{- partial "plugin/stylesheet.html" $stylesheet -}}
+
 {{- /* Font Awesome */ -}}
 {{- $source := $CDN.fontawesomeFreeCSS | default "lib/fontawesome-free/all.min.css" -}}
 {{- $stylesheet := dict "source" $source "fingerprint" $fingerprint -}}
@@ -30,10 +41,4 @@
 {{- /* Animate.css */ -}}
 {{- $source := $CDN.animateCSS | default "lib/animate/animate.min.css" -}}
 {{- $stylesheet := dict "source" $source "fingerprint" $fingerprint -}}
-{{- partial "plugin/stylesheet.html" $stylesheet -}}
-
-{{- /* style.min.css */ -}}
-{{- $stylesheet := dict "source" "css/style.template.scss" "fingerprint" $fingerprint -}}
-{{- $options := dict "targetPath" "css/style.min.css" "includePaths" (slice "config/css") -}}
-{{- $stylesheet = dict "template" "style.scss" "context" . "toCSS" $options | merge $stylesheet -}}
 {{- partial "plugin/stylesheet.html" $stylesheet -}}
