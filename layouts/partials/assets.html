@@ -255,6 +255,9 @@
     window.config = {{ jsonify $config | safeJS }};
 </script>
 
+{{- /* Polyfill.io */ -}}
+{{- partial "plugin/script.html" (dict "source" "https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch") -}}
+
 {{- range $scratch.Get "script" -}}
     {{- partial "plugin/script.html" . -}}
 {{- end -}}
