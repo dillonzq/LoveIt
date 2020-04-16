@@ -635,23 +635,29 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 ## 4 多语言和 i18n
 
-**LoveIt** 主题完全兼容 Hugo 的多语言模式.
-
-支持:
-
-* 多种语言的翻译字符串 (**英语**, **中文**和**法语**). **欢迎贡献!**
-* 在浏览器内语言切换
+**LoveIt** 主题完全兼容 Hugo 的多语言模式, 并且支持在网页上切换语言.
 
 ![语言切换](/images/theme-documentation-basics/language-switch.gif "语言切换")
 
-### 4.1 基本配置
+### 4.1 兼容性 {#language-compatibility}
+
+| 语言 | Hugo 代码 | HTML `lang` 属性 | 主题文档 | Lunr.js 支持 |
+|:---- |:----:|:----:|:----:|:----:|
+| 英语 | `en` | `en` | :(far fa-check-square): | :(far fa-check-square): |
+| 简体中文 | `zh-cn` | `zh-CN` | :(far fa-check-square): | :(far fa-check-square): |
+| 法语 | `fr` | `fr` | :(far fa-square): | :(far fa-check-square): |
+| 波兰语 | `pl` | `pl` | :(far fa-square): | :(far fa-square): |
+
+:(far fa-kiss-wink-heart): **请自由地[贡献代码](https://github.com/dillonzq/LoveIt/pulls)!**
+
+### 4.2 基本配置
 
 学习了 [Hugo如何处理多语言网站](https://gohugo.io/content-management/multilingual) 之后, 请在 [站点配置](#site-configuration) 中定义你的网站语言.
 
 例如, 一个支持英语, 中文和法语的网站配置:
 
 ```toml
-# [en, zh-cn, fr, ...] 设置默认的语言
+# [en, zh-cn, fr, pl, ...] 设置默认的语言
 defaultContentLanguage = "zh-cn"
 
 [languages]
@@ -756,12 +762,12 @@ defaultContentLanguage = "zh-cn"
 也可以使用 [文章前置参数](https://gohugo.io/content-management/multilingual/#translate-your-content) 来翻译网址.
 {{< /admonition >}}
 
-### 4.2 修改默认的翻译字符串
+### 4.3 修改默认的翻译字符串
 
 翻译字符串用于在主题中使用的常见默认值.
-目前提供**英语**, **中文**和**法语**翻译, 但你可能自定义其他语言或覆盖默认值.
+目前提供[一些语言](#language-compatibility)的翻译, 但你可能自定义其他语言或覆盖默认值.
 
-要覆盖默认值, 请在项目的 i18n 目录 `i18n/<languageCode>.toml` 中创建一个新文件，并从 `themes/LoveIt/i18n/en.toml` 中获得提示.
+要覆盖默认值, 请在你项目的 i18n 目录 `i18n/<languageCode>.toml` 中创建一个新文件，并从 `themes/LoveIt/i18n/en.toml` 中获得提示.
 
 另外, 由于你的翻译可能会帮助到其他人, 请花点时间通过 [创建一个 PR](https://github.com/dillonzq/LoveIt/pulls) 来贡献主题翻译, 谢谢!
 

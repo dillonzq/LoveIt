@@ -5,9 +5,9 @@
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![CircleCI](https://img.shields.io/circleci/build/github/dillonzq/LoveIt/develop?label=CI&style=flat-square&logo=circleci)](https://app.circleci.com/pipelines/github/dillonzq/LoveIt)
 
-[English README](https://github.com/dillonzq/LoveIt/blob/master/README.md) | 中文说明
+[English README](https://github.com/dillonzq/LoveIt/blob/master/README.md) | 简体中文说明
 
-[LoveIt](https://github.com/dillonzq/LoveIt) 是一个**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
+> [LoveIt](https://github.com/dillonzq/LoveIt) 是一个**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 
 它的原型基于 [LeaveIt 主题](https://github.com/liuzc/LeaveIt/) 和 [KeepIt 主题](https://github.com/liuzc/LeaveIt/)。
 
@@ -111,6 +111,16 @@
     ```bash
     hugo server --source=exampleSite
     ```
+
+## 多语言和国际化
+
+LoveIt 支持下列语言:
+
+* 英语
+* 简体中文
+* 法语
+* 波兰语
+* [贡献一种新的语言](https://github.com/dillonzq/LoveIt/pulls)
 
 ## 问题、想法、 bugs 和 PRs
 
