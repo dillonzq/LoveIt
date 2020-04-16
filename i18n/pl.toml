@@ -1,6 +1,14 @@
 # Translations for Polish
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
+# === baseof ==
+[backToTop]
+other = "Powrót do góry"
+
+[viewComments]
+other = "Zobacz komentarze"
+# === baseof ==
+
 # === Post ===
 [posts]
 other = "Posty"
@@ -32,6 +40,21 @@ other = "Więcej"
 [selectLanguage]
 other = "Wybierz język"
 
+[search]
+other = "Szukaj"
+
+[searchPlaceholder]
+other = "Wyszukaj tytuł lub treść artykułu ..."
+
+[clear]
+other = "Pusty"
+
+[cancel]
+other = "Anuluj"
+
+[noResultsFound]
+other = "Nie znaleziono wyników"
+
 [switchTheme]
 other = "Przełącz schemat"
 # === partials/header.html ===
@@ -43,6 +66,14 @@ other = "Napędzany przez %s"
 [theme]
 other = "Szablon"
 # === partials/footer.html ===
+
+# === partials/assets.html ===
+[lunrLanguageLib]
+other = "lib/lunr/lunr.pl.js"
+
+[lunrLanguageCode]
+other = "pl"
+# === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]
@@ -138,3 +169,14 @@ other = "Przykład"
 [quote]
 other = "Cytat"
 # === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "Dodano"
+
+[changed]
+other = "Zmieniono"
+
+[deleted]
+other = "Usunięte"
+# === shortcodes/version.html ===

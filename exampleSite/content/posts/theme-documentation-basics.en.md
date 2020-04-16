@@ -633,23 +633,29 @@ In `config/css/_custom.scss`, you can add some css style code to customize the s
 
 ## 4 Multilingual and i18n
 
-**LoveIt** theme is fully compatible with Hugo multilingual mode.
-
-It provides:
-
-* Translation strings for default values (**English**, **Chinese** and **French**). **Feel free to contribute!**
-* In-browser language switching
+**LoveIt** theme is fully compatible with Hugo multilingual mode, which provides in-browser language switching.
 
 ![Language Switch](/images/theme-documentation-basics/language-switch.gif "Language Switch")
 
-### 4.1 Basic Configuration
+### 4.1 Compatibility {#language-compatibility}
+
+| Language           | Hugo Code | HTML `lang` Attribute | Theme Docs              | Lunr.js Support         |
+|:------------------ |:---------:|:---------------------:|:-----------------------:|:-----------------------:|
+| English            | `en`      | `en`                  | :(far fa-check-square): | :(far fa-check-square): |
+| Simplified Chinese | `zh-cn`   | `zh-CN`               | :(far fa-check-square): | :(far fa-check-square): |
+| French             | `fr`      | `fr`                  | :(far fa-square):       | :(far fa-check-square): |
+| Polish             | `pl`      | `pl`                  | :(far fa-square):       | :(far fa-square):       |
+
+:(far fa-kiss-wink-heart): **Feel free to [contribute](https://github.com/dillonzq/LoveIt/pulls)!**
+
+### 4.2 Basic Configuration
 
 After learning [how Hugo handle multilingual websites](https://gohugo.io/content-management/multilingual), define your languages in your [site configuration](#site-configuration).
 
 For example with English, Chinese and French website:
 
 ```toml
-# [en, zh-cn, fr, ...] determines default content language
+# [en, zh-cn, fr, pl, ...] determines default content language
 defaultContentLanguage = "en"
 
 [languages]
@@ -754,9 +760,9 @@ Be aware that only translated pages are displayed in menu. It’s not replaced w
 Use [Front Matter parameter](https://gohugo.io/content-management/multilingual/#translate-your-content) to translate urls too.
 {{< /admonition >}}
 
-### 4.2 Overwrite Translation Strings
+### 4.3 Overwrite Translation Strings
 
-Translations strings are used for common default values used in the theme. Translations are available in **English**, **Chinese** and **French**, but you may use another language or want to override default values.
+Translations strings are used for common default values used in the theme. Translations are available in [some languages](#language-compatibility), but you may use another language or want to override default values.
 
 To override these values, create a new file in your local i18n folder `i18n/<languageCode>.toml` and inspire yourself from `themes/LoveIt/i18n/en.toml`.
 

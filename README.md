@@ -5,9 +5,9 @@
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![CircleCI](https://img.shields.io/circleci/build/github/dillonzq/LoveIt/develop?label=CI&style=flat-square&logo=circleci)](https://app.circleci.com/pipelines/github/dillonzq/LoveIt)
 
-English README | [中文说明](https://github.com/dillonzq/LoveIt/blob/master/README.zh-cn.md)
+English README | [简体中文说明](https://github.com/dillonzq/LoveIt/blob/master/README.zh-cn.md)
 
-**LoveIt** is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
+> **LoveIt** is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
 
 It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) and [KeepIt Theme](https://github.com/liuzc/LeaveIt/).
 
@@ -116,6 +116,16 @@ I hope you will LoveIt ❤️!
     ```bash
     hugo server --source=exampleSite
     ```
+
+## Multilingual and i18n
+
+LoveIt supports the following languages:
+
+* English
+* Simplified Chinese
+* French
+* Polish
+* [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
 ## Questions, ideas, bugs, pull requests
 
