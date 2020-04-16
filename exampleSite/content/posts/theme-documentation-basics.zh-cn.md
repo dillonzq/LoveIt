@@ -462,6 +462,8 @@ hugo
     height = 600
   # CSS 和 JS 文件的 CDN 设置
   [params.cdn]
+    # {{< version 0.2.0 new small >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
+    normalizeCSS = ''
     # {{< link "https://fontawesome.com/" "fontawesome-free" >}}@5.12.1
     fontawesomeFreeCSS = ''
     # animate.css@3.7.2 https://github.com/daneden/animate.css
@@ -478,7 +480,7 @@ hugo
     sharerJS = ''
     # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
     lazysizesJS = ''
-    # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery" >}}@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0
+    # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0
     lightgalleryCSS = ''
     lightgalleryJS = ''
     lightgalleryThumbnailJS = ''

@@ -13,7 +13,6 @@ $header-normal-mode-mobile: {{ if eq .Site.Params.header.mobileMode "normal" }}t
 
 @import "_mixin/index";
 
-@import "_core/normalize";
 @import "_core/base";
 @import "_core/layout";
 
