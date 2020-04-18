@@ -1,5 +1,5 @@
 {{- /* lazysizes and lightgallery.js */ -}}
-{{- $loading := resources.Get "svg/loading.svg" | minify -}}
+{{- $loading := resources.Get "svg/loading/normal.svg" | minify -}}
 {{- $small := .src_s | default .src -}}
 {{- $large := .src_l | default .src -}}
 {{- $alt := .alt | default .src -}}
@@ -15,7 +15,7 @@
     </a>
 {{- else -}}
     {{- if not .large -}}
-        {{- $loading = resources.Get "svg/loading.small.svg" | minify -}}
+        {{- $loading = resources.Get "svg/loading/small.svg" | minify -}}
     {{- end -}}
     <img
         class="lazyload"

@@ -40,6 +40,19 @@ other = "更多"
 [selectLanguage]
 other = "选择语言"
 
+[switchTheme]
+other = "切换主题"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "由 %s 强力驱动"
+
+[theme]
+other = "主题"
+# === partials/footer.html ===
+
+# === partials/assets.html ===
 [search]
 other = "搜索"
 
@@ -55,24 +68,14 @@ other = "取消"
 [noResultsFound]
 other = "没有找到结果"
 
-[switchTheme]
-other = "切换主题"
-# === partials/header.html ===
-
-# === partials/footer.html ===
-[poweredBySome]
-other = "由 %s 强力驱动"
-
-[theme]
-other = "主题"
-# === partials/footer.html ===
-
-# === partials/assets.html ===
 [lunrLanguageLib]
 other = "lib/lunr/lunr.zh.js"
 
 [lunrLanguageCode]
 other = "zh"
+
+[copyToClipboard]
+other = "复制到剪贴板"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

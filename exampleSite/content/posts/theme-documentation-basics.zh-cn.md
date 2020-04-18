@@ -142,7 +142,7 @@ theme = "LoveIt"
 以下是创建第一篇文章的方法:
 
 ```bash
-  hugo new posts/first_post.md
+hugo new posts/first_post.md
 ```
 
 通过添加一些示例内容并替换文件开头的标题, 你可以随意编辑文章.
@@ -204,10 +204,10 @@ hugo
   defaultTheme = "auto"
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = ""
-  # {{< version 0.1.1 new small >}} 哪种哈希函数用来 SRI, 为空时表示不使用 SRI
+  # {{< version 0.1.1 >}} 哪种哈希函数用来 SRI, 为空时表示不使用 SRI
   # ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
-  # {{< version 0.2.0 new small >}} 搜索
+  # {{< version 0.2.0 >}} 搜索
   [params.search]
     enable = true
     # 搜索引擎的类型 ("lunr", "algolia")
@@ -247,7 +247,7 @@ hugo
       typeit = true
       # 是否显示社交账号
       social = true
-      # {{< version 0.2.0 new small >}} 免责声明 (支持 HTML 格式)
+      # {{< version 0.2.0 >}} 免责声明 (支持 HTML 格式)
       disclaimer = ""
     # 主页文章列表
     [params.home.posts]
@@ -341,7 +341,7 @@ hugo
     copyTex = true
     # KaTeX 插件 mhchem
     mhchem = true
-  # {{< version 0.2.0 new small >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} 配置
+  # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} 配置
   [params.mapbox]
     # Mapbox GL JS 的 access token
     accessToken = ""
@@ -392,13 +392,13 @@ hugo
     enable = true
     # {{< link "https://disqus.com/" Disqus >}} 评论系统设置
     [params.comment.disqus]
-      # {{< version 0.1.1 new small >}}
+      # {{< version 0.1.1 >}}
       enable = false
       # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
       shortname = ""
     # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} 评论系统设置
     [params.comment.gitalk]
-      # {{< version 0.1.1 new small >}}
+      # {{< version 0.1.1 >}}
       enable = false
       owner = ""
       repo = ""
@@ -425,7 +425,7 @@ hugo
       numPosts = 10
       appId = ""
       languageCode = "zh_CN"
-    # {{< version 0.2.0 new small >}} {{< link "https://comments.app/" "Telegram Comments" >}} 评论系统设置
+    # {{< version 0.2.0 >}} {{< link "https://comments.app/" "Telegram Comments" >}} 评论系统设置
     [params.comment.telegram]
       enable = false
       siteID = ""
@@ -462,7 +462,7 @@ hugo
     height = 600
   # CSS 和 JS 文件的 CDN 设置
   [params.cdn]
-    # {{< version 0.2.0 new small >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
+    # {{< version 0.2.0 >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
     normalizeCSS = ''
     # {{< link "https://fontawesome.com/" "fontawesome-free" >}}@5.12.1
     fontawesomeFreeCSS = ''
@@ -470,14 +470,12 @@ hugo
     animateCSS = ''
     # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.2
     smoothScrollJS = ''
-    # {{< version 0.2.0 new small >}} {{< link "https://github.com/algolia/autocomplete.js" "autocomplete.js" >}}@0.37.1
+    # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/autocomplete.js" "autocomplete.js" >}}@0.37.1
     autocompleteJS = ''
-    # {{< version 0.2.0 new small >}} {{< link "https://lunrjs.com/" "lunr.js" >}}@2.3.8
+    # {{< version 0.2.0 >}} {{< link "https://lunrjs.com/" "lunr.js" >}}@2.3.8
     lunrJS = ''
-    # {{< version 0.2.0 new small >}} {{< link "https://github.com/algolia/algoliasearch-client-javascript" "algoliasearch" >}}@4.1.0
+    # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/algoliasearch-client-javascript" "algoliasearch" >}}@4.1.0
     algoliasearchJS = ''
-    # {{< link "https://github.com/ellisonleao/sharer.js" "sharer" >}}@0.4.0
-    sharerJS = ''
     # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
     lazysizesJS = ''
     # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0
@@ -485,6 +483,10 @@ hugo
     lightgalleryJS = ''
     lightgalleryThumbnailJS = ''
     lightgalleryZoomJS = ''
+    # {{< version 0.2.0 >}} {{< link "https://github.com/zenorocha/clipboard.js" "clipboard.js" >}}@2.0.6
+    clipboardJS = ''
+    # {{< link "https://github.com/ellisonleao/sharer.js" "sharer" >}}@0.4.0
+    sharerJS = ''
     # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@6.5.1
     typeitJS = ''
     # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
@@ -499,7 +501,7 @@ hugo
     # {{< link "https://echarts.apache.org/" "echarts" >}}@4.6.0
     echartsJS = ''
     echartsMacaronsJS = ''
-    # {{< version 0.2.0 new small >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.8.1
+    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.8.1
     mapboxGLCSS = ''
     mapboxGLJS = ''
     # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
@@ -520,7 +522,7 @@ hugo
     codeFences = true
     guessSyntax = true
     lineNos = true
-    lineNumbersInTable = false
+    lineNumbersInTable = true
     # false 是必要的设置
     # ({{< link "https://github.com/dillonzq/LoveIt/issues/158" >}})
     noClasses = false
@@ -579,7 +581,7 @@ hugo
 
 # 用于 Hugo 输出文档的设置
 [outputs]
-  # {{< version 0.2.0 changed small >}}
+  # {{< version 0.2.0 changed >}}
   home = ["HTML", "RSS", "JSON"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]

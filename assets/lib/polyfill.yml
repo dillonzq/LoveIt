@@ -10,3 +10,4 @@ theme:
   - Object.values
   - Promise
   - fetch
+  - Element.prototype.after

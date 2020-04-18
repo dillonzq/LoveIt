@@ -339,17 +339,10 @@
       }
     }
 
-    .version {
-      img {
-        min-height: 1.2rem;
-        vertical-align: sub;
-      }
-
-      &.small {
-        img {
-          min-height: 1rem;
-        }
-      }
+    .version img {
+      min-height: 1.2rem;
+      height: 1.2rem;
+      vertical-align: text-bottom;
     }
   }
 

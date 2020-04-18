@@ -1,7 +1,10 @@
 {{- $version := .Get 0 -}}
 {{- $url := printf "https://github.com/dillonzq/LoveIt/releases/tag/v%s" $version -}}
-{{- $label := .Get 1 | default "new" | T -}}
-{{- $color := cond (.Get 1 | eq "changed") "ff9101" "00b1ff" | cond (.Get 1 | eq "deleted") "ff5252" -}}
-{{- $badge := printf "https://img.shields.io/badge/%s-%s-%s?style=flat-square&labelColor=403c3d&?cacheSeconds=maxAge" $label $version $color -}}
+{{- $type := .Get 1 | default "new" | lower -}}
+{{- $label := T $type -}}
+{{- $color := cond (eq $type "changed") "ff9101" "00b1ff" | cond (eq $type "deleted") "ff5252" -}}
+{{- $path := printf "svg/version/%s-%s.svg" $version $label -}}
+{{- $res := resources.Get "svg/version.template.svg" -}}
+{{- $res = $res | resources.ExecuteAsTemplate $path (dict "version" $version "label" $label "color" $color) | minify -}}
 {{- $alt := printf "LoveIt %s | %s" $label $version -}}
-<span class="version{{ if .Get 2 | eq `small` }} small{{ end }}"><a href="{{ $url }}" rel="noopener noreffer" target="_blank">{{ partial "plugin/image.html" (dict "src" $badge "alt" $alt) }}</a></span>
+<span class="version"><a href="{{ $url }}" rel="noopener noreffer" target="_blank">{{ partial "plugin/image.html" (dict "src" $res.RelPermalink "alt" $alt) }}</a></span>

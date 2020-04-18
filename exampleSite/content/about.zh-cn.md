@@ -56,6 +56,7 @@ lightgallery: true
 
 * :(fas fa-search): 支持基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/) 的**搜索**
 * :(fas fa-code): 支持**代码高亮**
+* :(far fa-copy): 一键**复制代码**到剪贴板
 * :(far fa-images): 支持基于 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 的**图片画廊**
 * :(fab fa-font-awesome): 支持 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
 * :(far fa-sticky-note): 支持**上标注释**的扩展 Markdown 语法
@@ -80,6 +81,7 @@ LoveIt 根据 MIT 许可协议授权。
 
 LoveIt 主题中用到了以下项目，感谢它们的作者：
 
+* [normalize.css](https://github.com/necolas/normalize.css)
 * [Font Awesome](https://fontawesome.com/)
 * [Fork Awesome](https://forkaweso.me/Fork-Awesome/)
 * [Animate.css](https://daneden.github.io/animate.css/)
@@ -87,9 +89,10 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [autocomplete.js](https://github.com/algolia/autocomplete.js)
 * [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
-* [Sharer.js](https://github.com/ellisonleao/sharer.js)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
 * [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
+* [clipboard.js](https://github.com/zenorocha/clipboard.js)
+* [Sharer.js](https://github.com/ellisonleao/sharer.js)
 * [TypeIt](https://typeitjs.com/)
 * [$ \KaTeX $](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)

@@ -40,6 +40,19 @@ other = "More"
 [selectLanguage]
 other = "Select Language"
 
+[switchTheme]
+other = "Switch Theme"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Powered by %s"
+
+[theme]
+other = "Theme"
+# === partials/footer.html ===
+
+# === partials/assets.html ===
 [search]
 other = "Search"
 
@@ -55,17 +68,9 @@ other = "Cancel"
 [noResultsFound]
 other = "No results found"
 
-[switchTheme]
-other = "Switch Theme"
-# === partials/header.html ===
-
-# === partials/footer.html ===
-[poweredBySome]
-other = "Powered by %s"
-
-[theme]
-other = "Theme"
-# === partials/footer.html ===
+[copyToClipboard]
+other = "Copy to clipboard"
+# === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]

@@ -888,8 +888,6 @@ enableEmoji = true
     lunrJS = ''
     # algoliasearch@4.1.0 https://github.com/algolia/algoliasearch-client-javascript
     algoliasearchJS = ''
-    # sharer@0.4.0 https://github.com/ellisonleao/sharer.js
-    sharerJS = ''
     # lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
     lazysizesJS = ''
     # lightgallery.js@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0 https://github.com/sachinchoolur/lightgallery.js
@@ -897,6 +895,10 @@ enableEmoji = true
     lightgalleryJS = ''
     lightgalleryThumbnailJS = ''
     lightgalleryZoomJS = ''
+    # clipboard.js@2.0.6 https://github.com/zenorocha/clipboard.js
+    clipboardJS = ''
+    # sharer@0.4.0 https://github.com/ellisonleao/sharer.js
+    sharerJS = ''
     # typeit@6.5.1 https://github.com/alexmacarthur/typeit
     typeitJS = ''
     # katex@0.11.1 https://katex.org/
@@ -934,7 +936,7 @@ enableEmoji = true
     codeFences = true
     guessSyntax = true
     lineNos = true
-    lineNumbersInTable = false
+    lineNumbersInTable = true
     # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
     # false 是必要的设置 (https://github.com/dillonzq/LoveIt/issues/158)
     noClasses = false

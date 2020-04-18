@@ -100,6 +100,14 @@
     {{- $config = dict "lightGallery" $lightGalleryConfig | merge $config -}}
 {{- end -}}
 
+{{- /* clipboard.js */ -}}
+{{- with $CDN.clipboardJS -}}
+    {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+{{- else -}}
+    {{- dict "source" "lib/clipboard/clipboard.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+{{- end -}}
+{{- $config = T "copyToClipboard" | dict "title" | dict "clipboard" | merge $config -}}
+
 {{- /* Sharer.js */ -}}
 {{- if $scratch.Get "share" -}}
     {{- with $CDN.sharerJS -}}
@@ -256,7 +264,7 @@
 </script>
 
 {{- /* Polyfill.io */ -}}
-{{- partial "plugin/script.html" (dict "source" "https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch") -}}
+{{- partial "plugin/script.html" (dict "source" "https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after") -}}
 
 {{- range $scratch.Get "script" -}}
     {{- partial "plugin/script.html" . -}}

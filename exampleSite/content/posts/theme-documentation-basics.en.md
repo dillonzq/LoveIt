@@ -201,10 +201,10 @@ Note that some of these parameters are explained in details in other sections of
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
   gitRepo = ""
-  # {{< version 0.1.1 new small >}} which hash function used for SRI, when empty, no SRI is used
+  # {{< version 0.1.1 >}} which hash function used for SRI, when empty, no SRI is used
   # ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
-  # {{< version 0.2.0 new small >}} Search
+  # {{< version 0.2.0 >}} Search
   [params.search]
     enable = true
     # type of search engine ("lunr", "algolia")
@@ -244,7 +244,7 @@ Note that some of these parameters are explained in details in other sections of
       typeit = true
       # whether to show social links
       social = true
-      # {{< version 0.2.0 new small >}} disclaimer (HTML format is supported)
+      # {{< version 0.2.0 >}} disclaimer (HTML format is supported)
       disclaimer = ""
     # Home Page Posts
     [params.home.posts]
@@ -339,7 +339,7 @@ Note that some of these parameters are explained in details in other sections of
     copyTex = true
     # KaTeX extension mhchem
     mhchem = true
-  # {{< version 0.2.0 new small >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config
+  # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config
   [params.mapbox]
     # access token of Mapbox GL JS
     accessToken = ""
@@ -390,13 +390,13 @@ Note that some of these parameters are explained in details in other sections of
     enable = true
     # {{< link "https://disqus.com/" Disqus >}} Comment Config
     [params.comment.disqus]
-      # {{< version 0.1.1 new small >}}
+      # {{< version 0.1.1 >}}
       enable = false
       # Disqus shortname to use Disqus in posts
       shortname = ""
     # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} Comment Config
     [params.comment.gitalk]
-      # {{< version 0.1.1 new small >}}
+      # {{< version 0.1.1 >}}
       enable = false
       owner = ""
       repo = ""
@@ -423,7 +423,7 @@ Note that some of these parameters are explained in details in other sections of
       numPosts = 10
       appId = ""
       languageCode = "en_US"
-    # {{< version 0.2.0 new small >}} {{< link "https://comments.app/" "Telegram Comments" >}} Config
+    # {{< version 0.2.0 >}} {{< link "https://comments.app/" "Telegram Comments" >}} Config
     [params.comment.telegram]
       enable = false
       siteID = ""
@@ -460,7 +460,7 @@ Note that some of these parameters are explained in details in other sections of
     height = 600
   # CSS and JS Files CDN
   [params.cdn]
-    # {{< version 0.2.0 new small >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
+    # {{< version 0.2.0 >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
     normalizeCSS = ''
     # {{< link "https://fontawesome.com/" "fontawesome-free" >}}@5.12.1
     fontawesomeFreeCSS = ''
@@ -468,14 +468,12 @@ Note that some of these parameters are explained in details in other sections of
     animateCSS = ''
     # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.2
     smoothScrollJS = ''
-    # {{< version 0.2.0 new small >}} {{< link "https://github.com/algolia/autocomplete.js" "autocomplete.js" >}}@0.37.1
+    # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/autocomplete.js" "autocomplete.js" >}}@0.37.1
     autocompleteJS = ''
-    # {{< version 0.2.0 new small >}} {{< link "https://lunrjs.com/" "lunr.js" >}}@2.3.8
+    # {{< version 0.2.0 >}} {{< link "https://lunrjs.com/" "lunr.js" >}}@2.3.8
     lunrJS = ''
-    # {{< version 0.2.0 new small >}} {{< link "https://github.com/algolia/algoliasearch-client-javascript" "algoliasearch" >}}@4.1.0
+    # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/algoliasearch-client-javascript" "algoliasearch" >}}@4.1.0
     algoliasearchJS = ''
-    # {{< link "https://github.com/ellisonleao/sharer.js" "sharer" >}}@0.4.0
-    sharerJS = ''
     # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
     lazysizesJS = ''
     # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0
@@ -483,6 +481,10 @@ Note that some of these parameters are explained in details in other sections of
     lightgalleryJS = ''
     lightgalleryThumbnailJS = ''
     lightgalleryZoomJS = ''
+    # {{< version 0.2.0 >}} {{< link "https://github.com/zenorocha/clipboard.js" "clipboard.js" >}}@2.0.6
+    clipboardJS = ''
+    # {{< link "https://github.com/ellisonleao/sharer.js" "sharer" >}}@0.4.0
+    sharerJS = ''
     # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@6.5.1
     typeitJS = ''
     # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
@@ -497,7 +499,7 @@ Note that some of these parameters are explained in details in other sections of
     # {{< link "https://echarts.apache.org/" "echarts" >}}@4.6.0
     echartsJS = ''
     echartsMacaronsJS = ''
-    # {{< version 0.2.0 new small >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.8.1
+    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.8.1
     mapboxGLCSS = ''
     mapboxGLJS = ''
     # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
@@ -518,7 +520,7 @@ Note that some of these parameters are explained in details in other sections of
     codeFences = true
     guessSyntax = true
     lineNos = true
-    lineNumbersInTable = false
+    lineNumbersInTable = true
     # false is a necessary configuration
     # ({{< link "https://github.com/dillonzq/LoveIt/issues/158" >}})
     noClasses = false
@@ -577,7 +579,7 @@ Note that some of these parameters are explained in details in other sections of
 
 # Options to make hugo output files
 [outputs]
-  # {{< version 0.2.0 changed small >}}
+  # {{< version 0.2.0 changed >}}
   home = ["HTML", "RSS", "JSON"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]

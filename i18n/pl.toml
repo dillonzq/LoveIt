@@ -40,6 +40,19 @@ other = "Więcej"
 [selectLanguage]
 other = "Wybierz język"
 
+[switchTheme]
+other = "Przełącz schemat"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Napędzany przez %s"
+
+[theme]
+other = "Szablon"
+# === partials/footer.html ===
+
+# === partials/assets.html ===
 [search]
 other = "Szukaj"
 
@@ -55,24 +68,14 @@ other = "Anuluj"
 [noResultsFound]
 other = "Nie znaleziono wyników"
 
-[switchTheme]
-other = "Przełącz schemat"
-# === partials/header.html ===
-
-# === partials/footer.html ===
-[poweredBySome]
-other = "Napędzany przez %s"
-
-[theme]
-other = "Szablon"
-# === partials/footer.html ===
-
-# === partials/assets.html ===
 [lunrLanguageLib]
 other = "lib/lunr/lunr.pl.js"
 
 [lunrLanguageCode]
 other = "pl"
+
+[copyToClipboard]
+other = "Skopiuj do schowka"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
