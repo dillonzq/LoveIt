@@ -33,6 +33,7 @@ body {
   background-color: $global-background-color;
   color: $global-font-color;
   overflow-wrap: break-word;
+  scrollbar-color: auto;
 
   &.dark {
     color: $global-font-color-dark;

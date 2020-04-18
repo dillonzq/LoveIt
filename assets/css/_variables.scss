@@ -82,7 +82,7 @@ $search-background-color-dark: #363636 !default;
 // ========== Single Content ========== //
 // Font size of the TOC
 $toc-title-font-size: 1.2rem !default;
-$toc-content-font-size: 0.9rem !default;
+$toc-content-font-size: 1rem !default;
 
 // Color of the single link
 $single-link-color: #2d96bd !default;
@@ -124,7 +124,7 @@ $code-info-color: #b1b0b0 !default;
 $code-info-color-dark: #b1b0b0 !default;
 
 // Font size of the code
-$code-font-size: 13px !default;
+$code-font-size: .875rem !default;
 
 // Font family of the code
 $code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace !default;

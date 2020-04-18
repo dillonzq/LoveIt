@@ -1,9 +1,7 @@
 class Util {
     forEach(elements, handler) {
         elements = elements || [];
-        for (let i = 0; i < elements.length; i++) {
-            handler(elements[i]);
-        }
+        for (let i = 0; i < elements.length; i++) handler(elements[i]);
     }
 
     getScrollTop() {
@@ -16,6 +14,17 @@ class Util {
 
     isTocStatic() {
         return window.matchMedia('only screen and (max-width: 960px)').matches;
+    }
+
+    animateCSS(element, animation, reserved, callback) {
+        if (!Array.isArray(animation)) animation = [animation];
+        element.classList.add('animated', ...animation);
+        const handler = () => {
+            element.classList.remove('animated', ...animation);
+            element.removeEventListener('animationend', handler);
+            if (typeof callback === 'function') callback();
+        };
+        if (!reserved) element.addEventListener('animationend', handler, false);
     }
 }
 
@@ -268,10 +277,12 @@ class Theme {
 
     initHighlight() {
         this.util.forEach(document.querySelectorAll('.highlight > .chroma'), $chroma => {
-            const $codes = $chroma.querySelectorAll('pre.chroma > code');
-            const $code = $codes[$codes.length - 1];
-            const lang = $code ? $code.className.toLowerCase() : '';
-            $chroma.className += ' ' + lang;
+            const $elements = $chroma.querySelectorAll('pre.chroma > code');
+            if ($elements.length) {
+                $chroma.className += ' ' + $elements[$elements.length - 1].className.toLowerCase();
+                $elements[0].classList.add('lnc');
+                $elements[$elements.length - 1].classList.remove('lnc');
+            }
         });
         this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), $preChroma => {
             const $chroma = document.createElement('div');
@@ -286,6 +297,20 @@ class Theme {
             $tr.appendChild($td);
             $preChroma.parentElement.replaceChild($chroma, $preChroma);
             $td.appendChild($preChroma);
+        });
+        this.util.forEach(document.querySelectorAll('pre > code'), $code => {
+            $code.classList.add('block');
+            if ($code.classList.contains('lnc') || !this.config.clipboard) return;
+            const $button = document.createElement('div');
+            $button.classList.add('copy-button');
+            $button.innerHTML = '<i class="far fa-copy fa-fw"></i>';
+            $button.setAttribute('data-clipboard-text', $code.innerText);
+            $button.title = this.config.clipboard.title;
+            const clipboard = new ClipboardJS($button);
+            clipboard.on('success', e => {
+                this.util.animateCSS($code, 'flash');
+            });
+            $code.after($button);
         });
     }
 
@@ -351,8 +376,8 @@ class Theme {
                     $toc.style.top = `${TOP_SPACING}px`;
                 }
 
-                this.util.forEach($tocLinkElements, link => { link.classList.remove('active'); });
-                this.util.forEach($tocLiElements, link => { link.classList.remove('has-active'); });
+                this.util.forEach($tocLinkElements, $tocLink => { $tocLink.classList.remove('active'); });
+                this.util.forEach($tocLiElements, $tocLi => { $tocLi.classList.remove('has-active'); });
                 const INDEX_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
                 let activeTocIndex = $headerLinkElements.length - 1;
                 for (let i = 0; i < $headerLinkElements.length - 1; i++) {
@@ -386,10 +411,10 @@ class Theme {
         const $mermaidElements = document.getElementsByClassName('mermaid');
         if ($mermaidElements.length) {
             mermaid.initialize({startOnLoad: false, theme: 'null'});
-            this.util.forEach($mermaidElements, element => {
-                mermaid.mermaidAPI.render('svg-' + element.id, this.contentData[element.id], svgCode => {
-                    element.innerHTML = svgCode;
-                }, element);
+            this.util.forEach($mermaidElements, $mermaid => {
+                mermaid.mermaidAPI.render('svg-' + $mermaid.id, this.contentData[$mermaid.id], svgCode => {
+                    $mermaid.innerHTML = svgCode;
+                }, $mermaid);
             });
         }
     }
@@ -401,9 +426,9 @@ class Theme {
                 this._echartsArr[i].dispose();
             }
             this._echartsArr = [];
-            this.util.forEach(document.getElementsByClassName('echarts'), element => {
-                const chart = echarts.init(element, this.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
-                chart.setOption(JSON.parse(this.contentData[element.id]));
+            this.util.forEach(document.getElementsByClassName('echarts'), $echarts => {
+                const chart = echarts.init($echarts, this.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
+                chart.setOption(JSON.parse(this.contentData[$echarts.id]));
                 this._echartsArr.push(chart);
             });
         });
@@ -422,11 +447,10 @@ class Theme {
             mapboxgl.accessToken = this.config.mapbox.accessToken;
             mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
             this._mapboxArr = this._mapboxArr || [];
-            this.util.forEach(document.getElementsByClassName('mapbox'), element => {
-                const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = this.contentData[element.id];
-                const options = this.contentData[element.id];
+            this.util.forEach(document.getElementsByClassName('mapbox'), $mapbox => {
+                const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = this.contentData[$mapbox.id];
                 const mapbox = new mapboxgl.Map({
-                    container: element,
+                    container: $mapbox,
                     center: [lng, lat],
                     zoom: zoom,
                     minZoom: .2,
@@ -459,8 +483,8 @@ class Theme {
             });
             this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || (() => {
                 this.util.forEach(this._mapboxArr, mapbox => {
-                    const element = mapbox.getContainer();
-                    const { lightStyle, darkStyle } = this.contentData[element.id];
+                    const $mapbox = mapbox.getContainer();
+                    const { lightStyle, darkStyle } = this.contentData[$mapbox.id];
                     mapbox.setStyle(this.isDark ? darkStyle : lightStyle);
                     mapbox.addControl(new MapboxLanguage());
                 });
@@ -516,10 +540,6 @@ class Theme {
         const $headers = [];
         if (this.config.desktopHeaderMode === 'auto') $headers.push(document.getElementById('header-desktop'));
         if (this.config.mobileHeaderMode === 'auto') $headers.push(document.getElementById('header-mobile'));
-        this.util.forEach($headers, $header => {
-            $header.classList.add('animated');
-            $header.classList.add('faster');
-        });
         if (document.getElementById('comments')) {
             const $viewComments = document.getElementById('view-comments');
             $viewComments.href = `#comments`;
@@ -530,23 +550,23 @@ class Theme {
         window.addEventListener('scroll', () => {
             this.newScrollTop = this.util.getScrollTop();
             const scroll = this.newScrollTop - this.oldScrollTop;
-            this.util.forEach($headers, header => {
+            this.util.forEach($headers, $header => {
                 if (scroll > MIN_SCROLL) {
-                    header.classList.remove('fadeInDown');
-                    header.classList.add('fadeOutUp');
+                    $header.classList.remove('fadeInDown');
+                    this.util.animateCSS($header, ['fadeOutUp', 'faster'], true);
                 } else if (scroll < - MIN_SCROLL) {
-                    header.classList.remove('fadeOutUp');
-                    header.classList.add('fadeInDown');
+                    $header.classList.remove('fadeOutUp');
+                    this.util.animateCSS($header, ['fadeInDown', 'faster'], true);
                 }
             });
             if (this.newScrollTop > MIN_SCROLL) {
                 if (scroll > MIN_SCROLL) {
                     $fixedButtons.classList.remove('fadeIn');
-                    $fixedButtons.classList.add('fadeOut');
+                    this.util.animateCSS($fixedButtons, ['fadeOut', 'faster'], true);
                 } else if (scroll < - MIN_SCROLL) {
                     $fixedButtons.style.display = 'block';
                     $fixedButtons.classList.remove('fadeOut');
-                    $fixedButtons.classList.add('fadeIn');
+                    this.util.animateCSS($fixedButtons, ['fadeIn', 'faster'], true);
                 }
             } else {
                 $fixedButtons.style.display = 'none';

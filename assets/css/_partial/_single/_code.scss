@@ -1,11 +1,51 @@
 code {
   font-size: $code-font-size;
   font-family: $code-font-family;
-  padding: .2rem .4rem;
   color: $code-color;
+
+  img, .version img {
+    min-height: 1.1 * $code-font-size;
+    height: 1.1 * $code-font-size;
+  }
 
   .dark & {
     color: $code-color-dark;
+  }
+
+  &:not(.block) {
+    padding: .2rem .4rem;
+  }
+}
+
+pre {
+  position: relative;
+  margin: 0;
+  padding: .25rem 0 .25rem .5rem;
+  @include tab-size(4);
+
+  .copy-button {
+    font-size: $code-font-size;
+    line-height: $code-font-size;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .3rem .5rem;
+    color: $code-info-color;
+    background: darken($code-background-color, 3%);
+
+    .dark & {
+      color: $code-info-color-dark;
+      background: darken($code-background-color-dark, 3%);
+    }
+  }
+
+  .copy-button:hover, .copy-button:focus {
+    cursor: pointer;
+    color: $global-link-hover-color;
+
+    .dark & {
+      color: $global-link-hover-color-dark;
+    }
   }
 }
 
@@ -17,17 +57,26 @@ code, pre, .highlight table, .highlight tr, .highlight td {
   }
 }
 
-.highlight > .chroma {
-  margin: .5rem 0;
-
-  code, pre {
+.highlight > .chroma, .gist {
+  table, tr, td {
     margin: 0;
     padding: 0;
+    border: none !important;
+    white-space: nowrap;
+  }
+}
+
+.highlight > .chroma {
+  position: relative;
+  margin: .5rem 0;
+
+  pre {
+    position: unset;
   }
 
   &::before {
     display: block;
-    padding: .2rem .4rem;
+    padding: .3rem .4rem;
     font-family: $global-font-family;
     font-weight: bold;
     color: $code-info-color;
@@ -46,20 +95,25 @@ code, pre, .highlight table, .highlight tr, .highlight td {
     }
   }
 
-  .ln {
-    padding-right: .8rem;
+  .lntd:last-child {
+    width: 100%;
+
+    pre {
+      padding-left: .75rem;
+      @include max-content(min-width);
+    }
   }
 
-  .lntd {
-    &:last-child {
-      .hl {
-        display: block;
-        background-color: darken($code-background-color, 5%);
+  .ln {
+    padding-right: .75rem;
+  }
 
-        .dark & {
-          background-color: darken($code-background-color-dark, 5%);
-        }
-      }
+  .hl {
+    display: block;
+    background-color: darken($code-background-color, 10%);
+
+    .dark & {
+      background-color: darken($code-background-color-dark, 5%);
     }
   }
 
@@ -93,18 +147,6 @@ code, pre, .highlight table, .highlight tr, .highlight td {
     @each $class, $color in $code-highlight-color-map-dark {
       .#{$class} { color: $color; }
     }
-  }
-}
-
-.highlight > .chroma, .gist {
-  table, tr, td {
-    margin: 0;
-    border: none !important;
-    white-space: nowrap;
-  }
-
-  td {
-    padding: .2rem .4rem;
   }
 }
 
