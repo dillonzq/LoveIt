@@ -700,6 +700,9 @@ enableEmoji = true
   # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
   # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
+  # hide the footer ("true",  "false")
+  # 隐藏页脚 ("true",  "false")
+  hideFooter="false"
   # Header info
   # 页面头部导航栏信息
   [params.header]
