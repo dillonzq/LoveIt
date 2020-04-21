@@ -1,6 +1,14 @@
 # Translations for English
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
+# === baseof ==
+[backToTop]
+other = "Back to Top"
+
+[viewComments]
+other = "View Comments"
+# === baseof ==
+
 # === Post ===
 [posts]
 other = "Posts"
@@ -43,6 +51,37 @@ other = "Powered by %s"
 [theme]
 other = "Theme"
 # === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "Your comment ..."
+
+[facebookLanguageCode]
+other = "en_US"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "Search"
+
+[searchPlaceholder]
+other = "Search titles or contents..."
+
+[clear]
+other = "Clear"
+
+[cancel]
+other = "Cancel"
+
+[noResultsFound]
+other = "No results found"
+
+[copyToClipboard]
+other = "Copy to clipboard"
+# === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]
@@ -138,3 +177,14 @@ other = "Example"
 [quote]
 other = "Quote"
 # === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "NEW"
+
+[changed]
+other = "CHANGED"
+
+[deleted]
+other = "DELETED"
+# === shortcodes/version.html ===

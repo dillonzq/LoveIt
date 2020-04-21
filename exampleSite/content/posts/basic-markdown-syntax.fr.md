@@ -7,23 +7,13 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Cet article présente la syntaxe et le format de base de Markdown."
-license: ""
 
 tags: ["markdown"]
 categories: ["markdown"]
-hiddenFromHomePage: false
 
 featuredImage: "/images/basic-markdown-syntax/featured-image.png"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: true
-math: false
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 Cet article propose un exemple de syntaxe Markdown de base qui peut être utilisée dans les fichiers de contenu Hugo.
@@ -647,7 +637,7 @@ The rendered output looks like this:
 
 ## 11 Links
 
-### Basic Link
+### Basic Link {#links}
 
 ```markdown
 <https://assemble.io>
@@ -773,5 +763,5 @@ With a reference later in the document defining the URL location:
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 
 {{< admonition tip >}}
-**LoveIt** theme has [special shortcode for image](../theme-documentation-shortcodes/#image), which provides more features.
+**LoveIt** theme has [special shortcode for image](../theme-documentation-extended-shortcodes/#image), which provides more features.
 {{< /admonition >}}

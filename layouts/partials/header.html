@@ -7,43 +7,59 @@
             </a>
         </div>
         <div class="menu">
-            {{- range .Site.Menus.main -}}
-                <a class="menu-item{{ if $.IsMenuCurrent "main" . | or ($.HasMenuCurrent "main" .) | or (.URL | relLangURL | string | eq $.RelPermalink ) }} active{{ end }}" href="{{ .URL | relLangURL }}"{{ with .Title }} title="{{ . }}"{{ end }} rel="noopener noreffer"{{ if strings.HasPrefix .URL "http" }} target="_blank"{{ end }}>
-                    {{- .Pre | safeHTML }}{{ .Name -}}
-                </a>
-            {{- end -}}
-            <span class="menu-item">|</span>
-            <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
-                <i class="fas fa-adjust fa-fw"></i>
-            </a>
-            {{- if .Site.IsMultiLingual -}}
-                <a href="javascript:void(0);" class="menu-item" title="{{ T "selectLanguage" }}">
-                    {{- .Language.LanguageName -}}
-                    <i class="fas fa-chevron-right fa-fw"></i>
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;">
-                        {{- range .Page.AllTranslations -}}
-                            {{- $translation := . -}}
-                            {{- range $.Site.Languages -}}
-                                {{- if eq $translation.Lang .Lang -}}
-                                    {{- if eq $.Page.Lang .Lang -}}
-                                        <option value="{{ $translation.RelPermalink }}" selected>{{ .LanguageName }}</option>
-                                    {{- else -}}
-                                        <option value="{{ $translation.RelPermalink }}">{{ .LanguageName }}</option>
+            <div class="menu-inner">
+                {{- range .Site.Menus.main -}}
+                    <a class="menu-item{{ if $.IsMenuCurrent "main" . | or ($.HasMenuCurrent "main" .) | or (.URL | relLangURL | string | eq $.RelPermalink ) }} active{{ end }}" href="{{ .URL | relLangURL }}"{{ with .Title }} title="{{ . }}"{{ end }} rel="noopener noreffer"{{ if strings.HasPrefix .URL "http" }} target="_blank"{{ end }}>
+                        {{- .Pre | safeHTML }}{{ .Name -}}
+                    </a>
+                {{- end -}}
+                <span class="menu-item delimiter"></span>
+                {{- if .Site.IsMultiLingual -}}
+                    <a href="javascript:void(0);" class="menu-item language" title="{{ T "selectLanguage" }}">
+                        {{- .Language.LanguageName -}}
+                        <i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;">
+                            {{- range .Page.AllTranslations -}}
+                                {{- $translation := . -}}
+                                {{- range $.Site.Languages -}}
+                                    {{- if eq $translation.Lang .Lang -}}
+                                        {{- if eq $.Page.Lang .Lang -}}
+                                            <option value="{{ $translation.RelPermalink }}" selected>{{ .LanguageName }}</option>
+                                        {{- else -}}
+                                            <option value="{{ $translation.RelPermalink }}">{{ .LanguageName }}</option>
+                                        {{- end -}}
                                     {{- end -}}
                                 {{- end -}}
                             {{- end -}}
-                        {{- end -}}
-                    </select>
+                        </select>
+                    </a>
+                {{- end -}}
+                {{- if .Site.Params.search.enable -}}
+                    <span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="{{ T `search` }}">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="{{ T `clear` }}">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span>
+                {{- end -}}
+                <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
+                    <i class="fas fa-adjust fa-fw"></i>
                 </a>
-            {{- end -}}
+            </div>
         </div>
     </div>
 </header>
 
 {{- /* Mobile header */ -}}
 <header class="mobile" id="header-mobile">
-    <div class="header-wrapper">
-        <div class="header-container">
+    <div class="header-container">
+        <div class="header-wrapper">
             <div class="header-title">
                 <a href="{{ `/` | relLangURL }}">
                     {{- .Site.Title -}}
@@ -54,6 +70,25 @@
             </div>
         </div>
         <div class="menu" id="menu-mobile">
+            {{- if .Site.Params.search.enable -}}
+                <div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="{{ T `search` }}">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="{{ T `clear` }}">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        {{ T `cancel` }}
+                    </a>
+                </div>
+            {{- end -}}
             {{- $currentPage := . -}}
             {{- range .Site.Menus.main -}}
                 <a class="menu-item" href="{{ .URL | relLangURL }}" title="{{ .Title }}" rel="noopener noreffer"{{ if strings.HasPrefix .URL "http" }} target="_blank"{{ end }}>
@@ -86,8 +121,9 @@
         </div>
     </div>
 </header>
-
-<script>
-    window.desktopHeaderMode = {{ .Site.Params.header.desktopMode }};
-    window.mobileHeaderMode = {{ .Site.Params.header.mobileMode }};
-</script>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>

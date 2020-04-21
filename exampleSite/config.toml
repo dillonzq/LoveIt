@@ -1,6 +1,6 @@
 baseURL = "https://example.com"
-# [en, zh-cn, fr, ...] determines default content language
-# [en, zh-cn, fr, ...] 设置默认的语言
+# [en, zh-cn, fr, pl, ...] determines default content language
+# [en, zh-cn, fr, pl, ...] 设置默认的语言
 defaultContentLanguage = "en"
 # theme
 # 主题
@@ -8,6 +8,10 @@ theme = "LoveIt"
 # themes directory
 # 主题目录
 themesDir = "../.."
+
+# website title
+# 网站标题
+title = "LoveIt"
 
 # whether to use robots.txt
 # 是否使用 robots.txt
@@ -24,8 +28,6 @@ enableEmoji = true
     weight = 1
     # language code
     languageCode = "en"
-    # website title
-    title = "LoveIt"
     # language name
     languageName = "English"
     # whether to include Chinese/Japanese/Korean
@@ -36,13 +38,11 @@ enableEmoji = true
     googleAnalytics = ""
     # copyright description used only for seo schema
     copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
-    # date format
-    dateFormatToUse = "2006-01-02"
-    # Menu Info
+    # Menu config
     [languages.en.menu]
       [[languages.en.menu.main]]
         identifier = "posts"
-        # you can add extra information before the name (HTML format is allowed), such as icons
+        # you can add extra information before the name (HTML format is supported), such as icons
         pre = ""
         name = "Posts"
         url = "/posts/"
@@ -84,172 +84,117 @@ enableEmoji = true
         url = "https://github.com/dillonzq/LoveIt"
         title = "GitHub"
         weight = 6
-      [languages.en.params]
-        # site description
-        description = "About LoveIt Theme"
-        # site keywords
-        keywords = ["Theme", "Hugo"]
-        # site default theme ("light", "dark", "auto")
-        defaultTheme = "auto"
-        # Home Page Info
-        [languages.en.params.home]
-          # Home Page Profile
-          [languages.en.params.home.profile]
-            enable = true
-            # Gravatar Email for preferred avatar in home page
-            gravatarEmail = ""
-            # URL of avatar shown in home page
-            avatarURL = "/images/avatar.png"
-            # subtitle shown in home page
-            subtitle = "A Clean, Elegant but Advanced Hugo Theme"
-            # whether to use typeit animation for subtitle
-            typeit = true
-            # whether to show social links
-            social = true
-          # Home Page Posts
-          [languages.en.params.home.posts]
-            enable = true
-            # special amount of posts in each home posts page
-            paginate = 6
-            # default behavior when you don't set "hiddenFromHomePage" in front matter
-            defaultHiddenFromHomePage = false
-        # Social Info in home page
-        [languages.en.params.social]
-          GitHub = "xxxx"
-          Linkedin = "xxxx"
-          Twitter = "xxxx"
-          Instagram = "xxxx"
-          Email = "xxxx@xxxx.com"
-          Facebook = "xxxx"
-          Telegram = "xxxx"
-          # Medium = "xxxx"
-          # Gitlab = "xxxx"
-          Youtubelegacy = "xxxx"
-          # Youtubecustom = "xxxx"
-          # Youtubechannel = "xxxx"
-          # Tumblr ="xxxx"
-          # Quora = "xxxx"
-          # Keybase = "xxxx"
-          # Pinterest = "xxxx"
-          # Reddit = "xxxx"
-          # Codepen = "xxxx"
-          # FreeCodeCamp = "xxxx"
-          # Bitbucket = "xxxx"
-          # Stackoverflow = "xxxx"
-          # Weibo = "xxxx"
-          # Odnoklassniki = "xxxx"
-          # VK = "xxxx"
-          # Flickr = "xxxx"
-          # Xing = "xxxx"
-          # Snapchat = "xxxx"
-          # Soundcloud = "xxxx"
-          # Spotify = "xxxx"
-          # Bandcamp = "xxxx"
-          # Paypal = "xxxx"
-          # Fivehundredpx = "xxxx"
-          # Mix = "xxxx"
-          # Goodreads = "xxxx"
-          # Lastfm = "xxxx"
-          # Foursquare = "xxxx"
-          # Hackernews = "xxxx"
-          # Kickstarter = "xxxx"
-          # Patreon = "xxxx"
-          # Steam = "xxxx"
-          # Twitch = "xxxx"
-          # Strava = "xxxx"
-          # Skype = "xxxx"
-          # Whatsapp = "xxxx"
-          # Zhihu = "xxxx"
-          # Douban = "xxxx"
-          # Angellist = "xxxx"
-          # Slidershare = "xxxx"
-          # Jsfiddle = "xxxx"
-          # Deviantart = "xxxx"
-          # Behance = "xxxx"
-          # Dribble = "xxxx"
-          # Wordpress = "xxxx"
-          # Vine = "xxxx"
-          # Googlescholar = "xxxx"
-          # Researchgate = "xxxx"
-          # Mastodon = "xxxx"
-          # MastodonPrefix = "https://mastodon.technology/"
-          # Thingiverse = "xxxx"
-          # Devto = "xxxx"
-          # Gitea = "xxxx"
-          # XMPP = "xxxx"
-          # Matrix = "xxxx"
-          # Bilibili = "xxxx"
-        # Social Share Links in post page
-        [languages.en.params.share]
+    [languages.en.params]
+      # site description
+      description = "About LoveIt Theme"
+      # site keywords
+      keywords = ["Theme", "Hugo"]
+      # Search config
+      [languages.en.params.search]
+        enable = true
+        # type of search engine ("lunr", "algolia")
+        type = "algolia"
+        # index length of the content
+        contentLength = 5000
+        # placeholder of the search bar
+        placeholder = ""
+        [languages.en.params.search.algolia]
+          index = "index.en"
+          appID = "PASDMWALPK"
+          searchKey = "b42948e51daaa93df92381c8e2ac0f93"
+      # Home page config
+      [languages.en.params.home]
+        # Home page profile
+        [languages.en.params.home.profile]
           enable = true
-          Twitter = true
-          Facebook = true
-          Linkedin = true
-          Whatsapp = true
-          Pinterest = true
-          # Tumblr = true
-          HackerNews = true
-          # Reddit = true
-          # VK = true
-          # Buffer = true
-          # Xing = true
-          # Line = true
-          # Instapaper = true
-          # Pocket = true
-          # Digg = true
-          # Stumbleupon = true
-          # Flipboard = true
-          # Weibo = true
-          # Renren = true
-          # Myspace = true
-          # Blogger = true
-          # Baidu = true
-          # Odnoklassniki = true
-          # Evernote = true
-          # Skype = true
-          # Trello = true
-          # Mix = true
-        # Comment Config
-        [languages.en.params.comment]
+          # Gravatar Email for preferred avatar in home page
+          gravatarEmail = ""
+          # URL of avatar shown in home page
+          avatarURL = "/images/avatar.png"
+          # subtitle shown in home page
+          subtitle = "A Clean, Elegant but Advanced Hugo Theme"
+          # whether to use typeit animation for subtitle
+          typeit = true
+          # whether to show social links
+          social = true
+          # disclaimer (HTML format is supported)
+          disclaimer = ""
+        # Home page posts
+        [languages.en.params.home.posts]
           enable = true
-          # Disqus Comment Config (https://disqus.com/)
-          [languages.en.params.comment.disqus]
-            # Disqus shortname to use Disqus in posts
-            shortname = ""
-          # Gitalk Comment Config (https://github.com/gitalk/gitalk)
-          [languages.en.params.comment.gitalk]
-            owner = ""
-            repo = ""
-            clientId = ""
-            clientSecret = ""
-          # Valine Comment Config (https://github.com/xCss/Valine)
-          [languages.en.params.comment.valine]
-            enable = true
-            appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
-            appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
-            placeholder = "Your comment ..."
-            notify = false
-            verify = true
-            avatar = "mp"
-            meta= ""
-            pageSize = 10
-            lang = "en"
-            visitor = true
-            recordIP = true
-          # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
-          [languages.en.params.comment.facebook]
-            enable = false
-            width = "100%"
-            numPosts = 10
-            appId = ""
-            languageCode = "en_US"
+          # special amount of posts in each home posts page
+          paginate = 6
+      # Social config in home page
+      [languages.en.params.social]
+        GitHub = "xxxx"
+        Linkedin = "xxxx"
+        Twitter = "xxxx"
+        Instagram = "xxxx"
+        Email = "xxxx@xxxx.com"
+        Facebook = "xxxx"
+        Telegram = "xxxx"
+        # Medium = "xxxx"
+        # Gitlab = "xxxx"
+        Youtubelegacy = "xxxx"
+        # Youtubecustom = "xxxx"
+        # Youtubechannel = "xxxx"
+        # Tumblr ="xxxx"
+        # Quora = "xxxx"
+        # Keybase = "xxxx"
+        # Pinterest = "xxxx"
+        # Reddit = "xxxx"
+        # Codepen = "xxxx"
+        # FreeCodeCamp = "xxxx"
+        # Bitbucket = "xxxx"
+        # Stackoverflow = "xxxx"
+        # Weibo = "xxxx"
+        # Odnoklassniki = "xxxx"
+        # VK = "xxxx"
+        # Flickr = "xxxx"
+        # Xing = "xxxx"
+        # Snapchat = "xxxx"
+        # Soundcloud = "xxxx"
+        # Spotify = "xxxx"
+        # Bandcamp = "xxxx"
+        # Paypal = "xxxx"
+        # Fivehundredpx = "xxxx"
+        # Mix = "xxxx"
+        # Goodreads = "xxxx"
+        # Lastfm = "xxxx"
+        # Foursquare = "xxxx"
+        # Hackernews = "xxxx"
+        # Kickstarter = "xxxx"
+        # Patreon = "xxxx"
+        # Steam = "xxxx"
+        # Twitch = "xxxx"
+        # Strava = "xxxx"
+        # Skype = "xxxx"
+        # Whatsapp = "xxxx"
+        # Zhihu = "xxxx"
+        # Douban = "xxxx"
+        # Angellist = "xxxx"
+        # Slidershare = "xxxx"
+        # Jsfiddle = "xxxx"
+        # Deviantart = "xxxx"
+        # Behance = "xxxx"
+        # Dribble = "xxxx"
+        # Wordpress = "xxxx"
+        # Vine = "xxxx"
+        # Googlescholar = "xxxx"
+        # Researchgate = "xxxx"
+        # Mastodon = "xxxx"
+        # MastodonPrefix = "https://mastodon.technology/"
+        # Thingiverse = "xxxx"
+        # Devto = "xxxx"
+        # Gitea = "xxxx"
+        # XMPP = "xxxx"
+        # Matrix = "xxxx"
+        # Bilibili = "xxxx"
 
   [languages.zh-cn]
     weight = 2
     # 网站语言, 仅在这里 CN 大写
     languageCode = "zh-CN"
-    # 网站标题
-    title = "LoveIt"
     # 语言名称
     languageName = "简体中文"
     # 是否包括中日韩文字
@@ -260,9 +205,7 @@ enableEmoji = true
     googleAnalytics = ""
     # 版权描述，仅仅用于 SEO
     copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
-    # 日期格式
-    dateFormatToUse = "2006-01-02"
-    # 菜单信息
+    # 菜单配置
     [languages.zh-cn.menu]
       [[languages.zh-cn.menu.main]]
         identifier = "posts"
@@ -311,8 +254,19 @@ enableEmoji = true
       description = "关于 LoveIt 主题"
       # 网站关键词
       keywords = ["Theme", "Hugo"]
-      # 网站默认主题 ("light", "dark", "auto")
-      defaultTheme = "auto"
+      # 搜索配置
+      [languages.zh-cn.params.search]
+        enable = true
+        # 搜索引擎的类型 ("lunr", "algolia")
+        type = "algolia"
+        # 文章内容索引长度
+        contentLength = 5000
+        # 搜索框的占位提示语
+        placeholder = ""
+        [languages.zh-cn.params.search.algolia]
+          index = "index.zh-cn"
+          appID = "PASDMWALPK"
+          searchKey = "b42948e51daaa93df92381c8e2ac0f93"
       # 主页信息设置
       [languages.zh-cn.params.home]
         # 主页个人信息
@@ -328,13 +282,13 @@ enableEmoji = true
           typeit = true
           # 是否显示社交账号
           social = true
+          # 免责声明 (支持 HTML 格式)
+          disclaimer = ""
         # 主页文章列表
         [languages.zh-cn.params.home.posts]
           enable = true
           # 主页每页显示文章数量
           paginate = 6
-          # 当你没有在文章前面设置 "hiddenFromHomePage" 时的默认行为
-          defaultHiddenFromHomePage = false
       # 主页的社交信息设置
       [languages.zh-cn.params.social]
         GitHub = "xxxx"
@@ -401,77 +355,11 @@ enableEmoji = true
         # XMPP = "xxxx@example.com"
         # Matrix = "xxxx"
         Bilibili = "xxxx"
-      # 文章页面的分享信息设置
-      [languages.zh-cn.params.share]
-        enable = true
-        Twitter = true
-        Facebook = true
-        # Linkedin = true
-        # Whatsapp = true
-        # Pinterest = true
-        # Tumblr = true
-        # HackerNews = true
-        # Reddit = true
-        # VK = true
-        # Buffer = true
-        # Xing = true
-        # Line = true
-        # Instapaper = true
-        # Pocket = true
-        # Digg = true
-        # Stumbleupon = true
-        # Flipboard = true
-        Weibo = true
-        Renren = true
-        # Myspace = true
-        # Blogger = true
-        Baidu = true
-        # Odnoklassniki = true
-        Evernote = true
-        # Skype = true
-        # Trello = true
-        # Mix = true
-      # 评论系统设置
-      [languages.zh-cn.params.comment]
-        enable = true
-        # Disqus 评论系统设置 (https://disqus.com/)
-        [languages.zh-cn.params.comment.disqus]
-          # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
-          shortname = ""
-        # Gitalk 评论系统设置 (https://github.com/gitalk/gitalk)
-        [languages.zh-cn.params.comment.gitalk]
-          owner = ""
-          repo = ""
-          clientId = ""
-          clientSecret = ""
-        # Valine 评论系统设置 (https://github.com/xCss/Valine)
-        [languages.zh-cn.params.comment.valine]
-          enable = true
-          appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
-          appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
-          placeholder = "你的评论 ..."
-          notify = false
-          verify = true
-          avatar = "mp"
-          meta= ""
-          pageSize = 10
-          lang = "zh-cn"
-          visitor = true
-          recordIP = true
-        # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
-        [languages.zh-cn.params.comment.facebook]
-          enable = false
-          width = "100%"
-          numPosts = 10
-          appId = ""
-          languageCode = "zh_CN"
 
   [languages.fr]
     weight = 3
     # language code
     languageCode = "fr"
-    # website title
-    title = "LoveIt"
     # language name
     languageName = "Français"
     # whether to include Chinese/Japanese/Korean
@@ -482,9 +370,7 @@ enableEmoji = true
     googleAnalytics = ""
     # copyright description used only for seo schema
     copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
-    # date format
-    dateFormatToUse = "2006-01-02"
-    # Menu Info
+    # Menu config
     [languages.fr.menu]
       [[languages.fr.menu.main]]
         identifier = "posts"
@@ -528,180 +414,131 @@ enableEmoji = true
         url = "https://github.com/dillonzq/LoveIt"
         title = "GitHub"
         weight = 6
-      [languages.fr.params]
-        # site description
-        description = "À propos du thème LoveIt"
-        # site keywords
-        keywords = ["Thème", "Hugo"]
-        # site default theme ("light", "dark", "auto")
-        defaultTheme = "auto"
-        # Home Page Info
-        [languages.fr.params.home]
-          # Home Page Profile
-          [languages.fr.params.home.profile]
-            enable = true
-            # Gravatar Email for preferred avatar in home page
-            gravatarEmail = ""
-            # URL of avatar shown in home page
-            avatarURL = "/images/avatar.png"
-            # subtitle shown in home page
-            subtitle = "Un thème Hugo simple, élégant et efficace"
-            # whether to use typeit animation for subtitle
-            typeit = true
-            # whether to show social links
-            social = true
-          # Home Page Posts
-          [languages.fr.params.home.posts]
-            enable = true
-            # special amount of posts in each home posts page
-            paginate = 6
-            # default behavior when you don't set "hiddenFromHomePage" in front matter
-            defaultHiddenFromHomePage = false
-        # Social Info in home page
-        [languages.fr.params.social]
-          GitHub = "xxxx"
-          Linkedin = "xxxx"
-          Twitter = "xxxx"
-          Instagram = "xxxx"
-          Email = "xxxx@xxxx.com"
-          Facebook = "xxxx"
-          Telegram = "xxxx"
-          # Medium = "xxxx"
-          # Gitlab = "xxxx"
-          Youtubelegacy = "xxxx"
-          # Youtubecustom = "xxxx"
-          # Youtubechannel = "xxxx"
-          # Tumblr ="xxxx"
-          # Quora = "xxxx"
-          # Keybase = "xxxx"
-          # Pinterest = "xxxx"
-          # Reddit = "xxxx"
-          # Codepen = "xxxx"
-          # FreeCodeCamp = "xxxx"
-          # Bitbucket = "xxxx"
-          # Stackoverflow = "xxxx"
-          # Weibo = "xxxx"
-          # Odnoklassniki = "xxxx"
-          # VK = "xxxx"
-          # Flickr = "xxxx"
-          # Xing = "xxxx"
-          # Snapchat = "xxxx"
-          # Soundcloud = "xxxx"
-          # Spotify = "xxxx"
-          # Bandcamp = "xxxx"
-          # Paypal = "xxxx"
-          # Fivehundredpx = "xxxx"
-          # Mix = "xxxx"
-          # Goodreads = "xxxx"
-          # Lastfm = "xxxx"
-          # Foursquare = "xxxx"
-          # Hackernews = "xxxx"
-          # Kickstarter = "xxxx"
-          # Patreon = "xxxx"
-          # Steam = "xxxx"
-          # Twitch = "xxxx"
-          # Strava = "xxxx"
-          # Skype = "xxxx"
-          # Whatsapp = "xxxx"
-          # Zhihu = "xxxx"
-          # Douban = "xxxx"
-          # Angellist = "xxxx"
-          # Slidershare = "xxxx"
-          # Jsfiddle = "xxxx"
-          # Deviantart = "xxxx"
-          # Behance = "xxxx"
-          # Dribble = "xxxx"
-          # Wordpress = "xxxx"
-          # Vine = "xxxx"
-          # Googlescholar = "xxxx"
-          # Researchgate = "xxxx"
-          # Mastodon = "xxxx"
-          # MastodonPrefix = "https://mastodon.technology/"
-          # Thingiverse = "xxxx"
-          # Devto = "xxxx"
-          # Gitea = "xxxx"
-          # XMPP = "xxxx"
-          # Matrix = "xxxx"
-          # Bilibili = "xxxx"
-        # Social Share Links in post page
-        [languages.fr.params.share]
+    [languages.fr.params]
+      # site description
+      description = "À propos du thème LoveIt"
+      # site keywords
+      keywords = ["Thème", "Hugo"]
+      # Search config
+      [languages.fr.params.search]
+        enable = true
+        # type of search engine ("lunr", "algolia")
+        type = "algolia"
+        # index length of the content
+        contentLength = 5000
+        # placeholder of the search bar
+        placeholder = ""
+        [languages.fr.params.search.algolia]
+          index = "index.fr"
+          appID = "PASDMWALPK"
+          searchKey = "b42948e51daaa93df92381c8e2ac0f93"
+      # Home page config
+      [languages.fr.params.home]
+        # Home page profile
+        [languages.fr.params.home.profile]
           enable = true
-          Twitter = true
-          Facebook = true
-          Linkedin = true
-          Whatsapp = true
-          Pinterest = true
-          # Tumblr = true
-          HackerNews = true
-          # Reddit = true
-          # VK = true
-          # Buffer = true
-          # Xing = true
-          # Line = true
-          # Instapaper = true
-          # Pocket = true
-          # Digg = true
-          # Stumbleupon = true
-          # Flipboard = true
-          # Weibo = true
-          # Renren = true
-          # Myspace = true
-          # Blogger = true
-          # Baidu = true
-          # Odnoklassniki = true
-          # Evernote = true
-          # Skype = true
-          # Trello = true
-          # Mix = true
-        # Comment Config
-        [languages.fr.params.comment]
+          # Gravatar Email for preferred avatar in home page
+          gravatarEmail = ""
+          # URL of avatar shown in home page
+          avatarURL = "/images/avatar.png"
+          # subtitle shown in home page
+          subtitle = "Un thème Hugo simple, élégant et efficace"
+          # whether to use typeit animation for subtitle
+          typeit = true
+          # whether to show social links
+          social = true
+          # disclaimer (HTML format is supported)
+          disclaimer = ""
+        # Home page posts
+        [languages.fr.params.home.posts]
           enable = true
-          # Disqus Comment Config (https://disqus.com/)
-          [languages.fr.params.comment.disqus]
-            enable = false
-            # Disqus shortname to use Disqus in posts
-            shortname = ""
-          # Gitalk Comment Config (https://github.com/gitalk/gitalk)
-          [languages.fr.params.comment.gitalk]
-            enable = false
-            owner = ""
-            repo = ""
-            clientId = ""
-            clientSecret = ""
-          # Valine Comment Config (https://github.com/xCss/Valine)
-          [languages.fr.params.comment.valine]
-            enable = true
-            appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
-            appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
-            placeholder = "Votre commentaire ..."
-            notify = false
-            verify = true
-            avatar = "mp"
-            meta= ""
-            pageSize = 10
-            lang = "en"
-            visitor = true
-            recordIP = true
-          # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
-          [languages.fr.params.comment.facebook]
-            enable = false
-            width = "100%"
-            numPosts = 10
-            appId = ""
-            languageCode = "fr"
+          # special amount of posts in each home posts page
+          paginate = 6
+      # Social config in home page
+      [languages.fr.params.social]
+        GitHub = "xxxx"
+        Linkedin = "xxxx"
+        Twitter = "xxxx"
+        Instagram = "xxxx"
+        Email = "xxxx@xxxx.com"
+        Facebook = "xxxx"
+        Telegram = "xxxx"
+        # Medium = "xxxx"
+        # Gitlab = "xxxx"
+        Youtubelegacy = "xxxx"
+        # Youtubecustom = "xxxx"
+        # Youtubechannel = "xxxx"
+        # Tumblr ="xxxx"
+        # Quora = "xxxx"
+        # Keybase = "xxxx"
+        # Pinterest = "xxxx"
+        # Reddit = "xxxx"
+        # Codepen = "xxxx"
+        # FreeCodeCamp = "xxxx"
+        # Bitbucket = "xxxx"
+        # Stackoverflow = "xxxx"
+        # Weibo = "xxxx"
+        # Odnoklassniki = "xxxx"
+        # VK = "xxxx"
+        # Flickr = "xxxx"
+        # Xing = "xxxx"
+        # Snapchat = "xxxx"
+        # Soundcloud = "xxxx"
+        # Spotify = "xxxx"
+        # Bandcamp = "xxxx"
+        # Paypal = "xxxx"
+        # Fivehundredpx = "xxxx"
+        # Mix = "xxxx"
+        # Goodreads = "xxxx"
+        # Lastfm = "xxxx"
+        # Foursquare = "xxxx"
+        # Hackernews = "xxxx"
+        # Kickstarter = "xxxx"
+        # Patreon = "xxxx"
+        # Steam = "xxxx"
+        # Twitch = "xxxx"
+        # Strava = "xxxx"
+        # Skype = "xxxx"
+        # Whatsapp = "xxxx"
+        # Zhihu = "xxxx"
+        # Douban = "xxxx"
+        # Angellist = "xxxx"
+        # Slidershare = "xxxx"
+        # Jsfiddle = "xxxx"
+        # Deviantart = "xxxx"
+        # Behance = "xxxx"
+        # Dribble = "xxxx"
+        # Wordpress = "xxxx"
+        # Vine = "xxxx"
+        # Googlescholar = "xxxx"
+        # Researchgate = "xxxx"
+        # Mastodon = "xxxx"
+        # MastodonPrefix = "https://mastodon.technology/"
+        # Thingiverse = "xxxx"
+        # Devto = "xxxx"
+        # Gitea = "xxxx"
+        # XMPP = "xxxx"
+        # Matrix = "xxxx"
+        # Bilibili = "xxxx"
 
 [params]
   # LoveIt theme version
   # LoveIt 主题版本
-  version = "0.1.X"
+  version = "0.2.X"
+  # site default theme ("light", "dark", "auto")
+  # 网站默认主题 ("light", "dark", "auto")
+  defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = "https://github.com/dillonzq/LoveIt"
   # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
   # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
-  # Header info
-  # 页面头部导航栏信息
+  # date format
+  # 日期格式
+  dateFormat = "2006-01-02"
+  # Header config
+  # 页面头部导航栏配置
   [params.header]
     # desktop header mode ("fixed", "normal", "auto")
     # 桌面端导航栏模式 ("fixed", "normal", "auto")
@@ -709,45 +546,234 @@ enableEmoji = true
     # mobile header mode ("fixed", "normal", "auto")
     # 移动端导航栏模式 ("fixed", "normal", "auto")
     mobileMode = "auto"
-  # Footer Copyright Info
-  # 页面底部版权信息设置
+  # Footer config
+  # 页面底部信息配置
   [params.footer]
-    # Site creation time
+    enable = true
+    # Custom content (HTML format is supported)
+    # 自定义内容 (支持 HTML 格式)
+    custom = ''
+    # whether to show Hugo and theme info
+    # 是否显示 Hugo 和主题信息
+    hugo = true
+    # whether to show copyright info
+    # 是否显示版权信息
+    copyright = true
+    # whether to show the author
+    # 是否显示作者
+    author = true
+    # site creation time
     # 网站创立年份
     since = 2019
-    # ICP info only in China (HTML format is allowed)
-    # ICP 备案信息，仅在中国使用 (允许使用 HTML 格式)
+    # ICP info only in China (HTML format is supported)
+    # ICP 备案信息，仅在中国使用 (支持 HTML 格式)
     icp = ""
-    # license info (HTML format is allowed)
-    # 许可协议信息 (允许使用 HTML 格式)
+    # license info (HTML format is supported)
+    # 许可协议信息 (支持 HTML 格式)
     license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+  # Section (all posts) page config
+  # Section (所有文章) 页面配置
+  [params.section]
+    # special amount of posts in each section page
+    # section 页面每页显示文章数量
+    paginate = 20
+    # date format (month and day)
+    # 日期格式 (月和日)
+    dateFormat = "01-02"
+  # List (category or tag) page config
+  # List (目录或标签) 页面配置
+  [params.list]
+    # special amount of posts in each list page
+    # list 页面每页显示文章数量
+    paginate = 20
+    # date format (month and day)
+    # 日期格式 (月和日)
+    dateFormat = "01-02"
   # Page config
   # 文章页面配置
   [params.page]
-    # whether to use lightgallery in the page
-    # 是否在文章页面使用 lightgallery
-    lightgallery = true
-    # whether to show link to Raw Markdown content of the post
-    # 是否在文章页面显示原始 Markdown 文档链接
+    # whether to hide a page from home page
+    # 是否在主页隐藏一篇文章
+    hiddenFromHomePage = false
+    # whether to hide a page from search results
+    # 是否在搜索结果中隐藏一篇文章
+    hiddenFromSearch = false
+    # whether to enable lightgallery
+    # 是否使用 lightgallery
+    lightgallery = false
+    # whether to show the copy button of the code block
+    # 是否显示代码块的复制按钮
+    copyCode = true
+    # whether to enable the ruby extended syntax
+    # 是否使用 ruby 扩展语法
+    ruby = true
+    # whether to enable the fraction extended syntax
+    # 是否使用 fraction 扩展语法
+    fraction = true
+    # whether to enable the fontawesome extended syntax
+    # 是否使用 fontawesome 扩展语法
+    fontawesome = true
+    # whether to show link to Raw Markdown content of the content
+    # 是否显示原始 Markdown 文档内容的链接
     linkToMarkdown = true
-  # mathematical formulas (KaTeX https://katex.org/)
-  # 数学公式 (KaTeX https://katex.org/)
-  [params.math]
-    enable = true
-    # default block delimiter is $$ ... $$ and \\[ ... \\]
-    # 默认块定界符是 $$ ... $$ 和 \\[ ... \\]
-    blockLeftDelimiter = ""
-    blockRightDelimiter = ""
-    # default inline delimiter is $ ... $ and \\( ... \\)
-    # 默认内联定界符是 $ ... $ 和 \\( ... \\)
-    inlineLeftDelimiter = ""
-    inlineRightDelimiter = ""
-    # KaTeX extension copy_tex
-    # KaTeX 插件 copy_tex
-    copyTex = true
-    # KaTeX extension mhchem
-    # KaTeX 插件 mhchem
-    mhchem = true
+    # Table of the contents config
+    # 目录配置
+    [params.page.toc]
+      # whether to enable the table of the contents
+      # 是否使用目录
+      enable = true
+      # whether to make the table of the contents automatically collapsed
+      # 是否使目录自动折叠展开
+      auto = true
+    # KaTeX mathematical formulas config (KaTeX https://katex.org/)
+    # KaTeX 数学公式配置 (KaTeX https://katex.org/)
+    [params.page.math]
+      enable = false
+      # default block delimiter is $$ ... $$ and \\[ ... \\]
+      # 默认块定界符是 $$ ... $$ 和 \\[ ... \\]
+      blockLeftDelimiter = ""
+      blockRightDelimiter = ""
+      # default inline delimiter is $ ... $ and \\( ... \\)
+      # 默认内联定界符是 $ ... $ 和 \\( ... \\)
+      inlineLeftDelimiter = ""
+      inlineRightDelimiter = ""
+      # KaTeX extension copy_tex
+      # KaTeX 插件 copy_tex
+      copyTex = true
+      # KaTeX extension mhchem
+      # KaTeX 插件 mhchem
+      mhchem = true
+    # Mapbox GL JS config (Mapbox GL JS https://docs.mapbox.com/mapbox-gl-js)
+    # Mapbox GL JS 配置 (Mapbox GL JS https://docs.mapbox.com/mapbox-gl-js)
+    [params.page.mapbox]
+      # access token of Mapbox GL JS
+      # Mapbox GL JS 的 access token
+      accessToken = "pk.eyJ1IjoiZGlsbG9uenEiLCJhIjoiY2s2czd2M2x3MDA0NjNmcGxmcjVrZmc2cyJ9.aSjv2BNuZUfARvxRYjSVZQ"
+      # style for the light theme
+      # 浅色主题的地图样式
+      lightStyle = "mapbox://styles/mapbox/light-v9?optimize=true"
+      # style for the dark theme
+      # 深色主题的地图样式
+      darkStyle = "mapbox://styles/mapbox/dark-v9?optimize=true"
+      # whether to add NavigationControl (https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol)
+      # 是否添加 NavigationControl (https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol)
+      navigation = true
+      # whether to add GeolocateControl (https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol)
+      # 是否添加 GeolocateControl (https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol)
+      geolocate = true
+      # whether to add ScaleControl (https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol)
+      # 是否添加 ScaleControl (https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol)
+      scale = true
+      # whether to add FullscreenControl (https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol)
+      # 是否添加 FullscreenControl (https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol)
+      fullscreen = true
+    # Social share links in post page
+    # 文章页面的分享信息设置
+    [params.page.share]
+      enable = true
+      Twitter = true
+      Facebook = true
+      # Linkedin = true
+      # Whatsapp = true
+      # Pinterest = true
+      # Tumblr = true
+      # HackerNews = true
+      # Reddit = true
+      # VK = true
+      # Buffer = true
+      # Xing = true
+      # Line = true
+      # Instapaper = true
+      # Pocket = true
+      # Digg = true
+      # Stumbleupon = true
+      # Flipboard = true
+      Weibo = true
+      Renren = true
+      # Myspace = true
+      # Blogger = true
+      Baidu = true
+      # Odnoklassniki = true
+      Evernote = true
+      # Skype = true
+      # Trello = true
+      # Mix = true
+    # Comment config
+    # 评论系统设置
+    [params.page.comment]
+      enable = true
+      # Disqus comment config (https://disqus.com/)
+      # Disqus 评论系统设置 (https://disqus.com/)
+      [params.page.comment.disqus]
+        enable = false
+        # Disqus shortname to use Disqus in posts
+        # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
+        shortname = ""
+      # Gitalk comment config (https://github.com/gitalk/gitalk)
+      # Gitalk 评论系统设置 (https://github.com/gitalk/gitalk)
+      [params.page.comment.gitalk]
+        enable = false
+        owner = ""
+        repo = ""
+        clientId = ""
+        clientSecret = ""
+      # Valine comment config (https://github.com/xCss/Valine)
+      # Valine 评论系统设置 (https://github.com/xCss/Valine)
+      [params.page.comment.valine]
+        enable = true
+        appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
+        appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
+        placeholder = ""
+        notify = false
+        verify = true
+        avatar = "mp"
+        meta= ""
+        pageSize = 10
+        lang = ""
+        visitor = true
+        recordIP = true
+      # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
+      # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
+      [params.page.comment.facebook]
+        enable = false
+        width = "100%"
+        numPosts = 10
+        appId = ""
+        languageCode = ""
+      # Telegram comments config (https://comments.app/)
+      # Telegram Comments 评论系统设置 (https://comments.app/)
+      [params.page.comment.telegram]
+        enable = false
+        siteID = ""
+        limit = 5
+        height = ""
+        color = ""
+        colorful = true
+        dislikes = false
+        outlined = false
+    # SEO config
+    # SEO 配置
+    [params.page.seo]
+      # Publisher info
+      # 出版者信息
+      [params.page.seo.publisher]
+        name = "xxxx"
+        [params.page.seo.publisher.logo]
+          url = "logo.png"
+          width = 127
+          height = 40
+      # Logo info
+      # Logo 信息
+      [params.page.seo.logo]
+        url = "logo.png"
+        width = 127
+        height = 40
+      # Image info
+      # 图片信息
+      [params.page.seo.image]
+        url = "cover.png"
+        width = 800
+        height = 600
   # site verification code for Google/Bing/Yandex/Pinterest/Baidu
   # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
@@ -761,47 +787,37 @@ enableEmoji = true
     # If you're self hosting use this for your tracker
     # serverURL = "https://example.com"
 
-  # Publisher Info just for SEO
-  # 出版者信息，仅用于 SEO
-  [params.publisher]
-    name = "xxxx"
-    [params.publisher.logo]
-      url = "logo.png"
-      width = 127
-      height = 40
-  # Website Log Info just for SEO
-  # 网站 Logo 信息，仅用于 SEO
-  [params.logo]
-    url = "logo.png"
-    width = 127
-    height = 40
-  # Website Image Info just for SEO
-  # 网站图标信息，仅用于 SEO
-  [params.image]
-    url = "cover.png"
-    width = 800
-    height = 600
   # CSS and JS Files CDN
   # CSS 和 JS 文件的 CDN 设置
   [params.cdn]
+    # normalize.css@8.0.1 https://github.com/necolas/normalize.css
+    normalizeCSS = ''
     # fontawesome-free@5.12.1 https://fontawesome.com/
     fontawesomeFreeCSS = ''
     # animate.css@3.7.2 https://github.com/daneden/animate.css
     animateCSS = ''
     # smooth-scroll@16.1.2 https://github.com/cferdinandi/smooth-scroll
     smoothScrollJS = ''
-    # sharer@0.4.0 https://github.com/ellisonleao/sharer.js
-    sharerJS = ''
+    # autocomplete.js@0.37.1 https://github.com/algolia/autocomplete.js
+    autocompleteJS = ''
+    # lunr.js@2.3.8 https://lunrjs.com/
+    lunrJS = ''
+    # algoliasearch@4.1.0 https://github.com/algolia/algoliasearch-client-javascript
+    algoliasearchJS = ''
     # lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
     lazysizesJS = ''
-    # lightgallery@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0 https://github.com/sachinchoolur/lightgallery.js
+    # lightgallery.js@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0 https://github.com/sachinchoolur/lightgallery.js
     lightgalleryCSS = ''
     lightgalleryJS = ''
     lightgalleryThumbnailJS = ''
     lightgalleryZoomJS = ''
+    # clipboard.js@2.0.6 https://github.com/zenorocha/clipboard.js
+    clipboardJS = ''
+    # sharer@0.4.0 https://github.com/ellisonleao/sharer.js
+    sharerJS = ''
     # typeit@6.5.1 https://github.com/alexmacarthur/typeit
     typeitJS = ''
-    # katex@0.11.1 https://github.com/KaTeX/KaTeX
+    # katex@0.11.1 https://katex.org/
     katexCSS = ''
     katexJS = ''
     katexAutoRenderJS = ''
@@ -810,14 +826,17 @@ enableEmoji = true
     katexMhchemJS = ''
     # mermaid@8.4.8 https://github.com/knsv/mermaid
     mermaidJS = ''
+    # echarts@4.6.0 https://echarts.apache.org/
+    echartsJS = ''
+    echartsMacaronsJS = ''
+    # mapbox-gl@1.8.1 https://docs.mapbox.com/mapbox-gl-js
+    mapboxGLCSS = ''
+    mapboxGLJS = ''
     # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
     aplayerCSS = ''
     aplayerJS = ''
     # meting@2.0.1 https://github.com/metowolf/MetingJS
     metingJS = ''
-    # echarts@4.6.0 https://echarts.apache.org/
-    echartsJS = ''
-    echartsMacaronsJS = ''
     # gitalk@1.6.2 https://github.com/gitalk/gitalk
     gitalkCSS = ''
     gitalkJS = ''
@@ -832,12 +851,11 @@ enableEmoji = true
   [markup.highlight]
     codeFences = true
     guessSyntax = true
-    lineNoStart = 1
     lineNos = true
     lineNumbersInTable = true
+    # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
+    # false 是必要的设置 (https://github.com/dillonzq/LoveIt/issues/158)
     noClasses = false
-    style = "monokai"
-    tabWidth = 4
   # Goldmark is from Hugo 0.60 the default library used for Markdown
   # Goldmark 是 Hugo 0.60 以来的默认 Markdown 解析库
   [markup.goldmark]
@@ -859,31 +877,30 @@ enableEmoji = true
     startLevel = 2
     endLevel = 6
 
-# Author Info
-# 作者信息
+# Author config
+# 作者配置
 [author]
   name = "xxxx"
   link = ""
 
-# Sitemap Info
-# 网站地图信息
+# Sitemap config
+# 网站地图配置
 [sitemap]
   changefreq = "weekly"
   filename = "sitemap.xml"
   priority = 0.5
 
-# Permalinks Info (https://gohugo.io/content-management/urls/#permalinks)
-# Permalinks 信息 (https://gohugo.io/content-management/urls/#permalinks)
+# Permalinks config (https://gohugo.io/content-management/urls/#permalinks)
+# Permalinks 配置 (https://gohugo.io/content-management/urls/#permalinks)
 [Permalinks]
   # posts = ":year/:month/:filename"
   posts = ":filename"
 
-# Privacy Info (https://gohugo.io/about/hugo-and-gdpr/)
-# 隐私信息设置 (https://gohugo.io/about/hugo-and-gdpr/)
+# Privacy config (https://gohugo.io/about/hugo-and-gdpr/)
+# 隐私信息配置 (https://gohugo.io/about/hugo-and-gdpr/)
 [privacy]
   [privacy.googleAnalytics]
     anonymizeIP = true
-
   [privacy.youtube]
     privacyEnhanced = true
 
@@ -903,7 +920,7 @@ enableEmoji = true
 # Options to make hugo output files
 # 用于 Hugo 输出文档的设置
 [outputs]
-  home = ["HTML", "RSS"]
+  home = ["HTML", "RSS", "JSON"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]

@@ -1,6 +1,14 @@
 # Translations for Simplified Chinese
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
+# === baseof ==
+[backToTop]
+other = "回到顶部"
+
+[viewComments]
+other = "查看评论"
+# === baseof ==
+
 # === Post ===
 [posts]
 other = "文章"
@@ -43,6 +51,43 @@ other = "由 %s 强力驱动"
 [theme]
 other = "主题"
 # === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "zh-cn"
+
+[valinePlaceholder]
+other = "你的评论 ..."
+
+[facebookLanguageCode]
+other = "zh_CN"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "搜索"
+
+[searchPlaceholder]
+other = "搜索文章标题或内容..."
+
+[clear]
+other = "清空"
+
+[cancel]
+other = "取消"
+
+[noResultsFound]
+other = "没有找到结果"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.zh.js"
+
+[lunrLanguageCode]
+other = "zh"
+
+[copyToClipboard]
+other = "复制到剪贴板"
+# === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]
@@ -138,3 +183,14 @@ other = "示例"
 [quote]
 other = "引用"
 # === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "新增"
+
+[changed]
+other = "更改"
+
+[deleted]
+other = "删除"
+# === shortcodes/version.html ===

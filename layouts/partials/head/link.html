@@ -1,5 +1,5 @@
-{{- $scratch := .Scratch.Get "scratch" -}}
-{{- $CDN := $scratch.Get "CDN" -}}
+{{- $cdn := .Scratch.Get "cdn" | default dict -}}
+{{- $fingerprint := .Scratch.Get "fingerprint" -}}
 
 <link rel="canonical" href="{{ .Permalink }}" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -21,30 +21,23 @@
     <link rel="feed" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ $.Site.Title }}">
 {{- end -}}
 
-{{- /* Font Awesome */ -}}
-{{- with $CDN.fontawesomeFreeCSS -}}
-    {{- . | safeHTML -}}
-{{- else -}}
-    {{- $res := resources.Get "lib/fontawesome-free/all.min.css" -}}
-    {{- $stylesheet := dict "resource" $res "fingerprint" ($scratch.Get "fingerprint") -}}
-    {{- partial "plugin/stylesheet.html" $stylesheet -}}
-{{- end -}}
-
-{{- /* Animate.css */ -}}
-{{- with $CDN.animateCSS -}}
-    {{- . | safeHTML -}}
-{{- else -}}
-    {{- $res := resources.Get "lib/animate/animate.min.css" -}}
-    {{- $stylesheet := dict "resource" $res "fingerprint" ($scratch.Get "fingerprint") -}}
-    {{- partial "plugin/stylesheet.html" $stylesheet -}}
-{{- end -}}
+{{- /* normalize.css */ -}}
+{{- $source := $cdn.normalizeCSS | default "lib/normalize/normalize.min.css" -}}
+{{- $stylesheet := dict "source" $source "fingerprint" $fingerprint -}}
+{{- partial "plugin/stylesheet.html" $stylesheet -}}
 
 {{- /* style.min.css */ -}}
-{{- $res := resources.Get "css/style.template.scss" -}}
-{{- $options := dict "targetPath" "css/style.min.css" -}}
-{{- $options  = dict "includePaths" (slice "config/css") | merge $options -}}
-{{- $options  = dict "outputStyle" "compressed" | merge $options -}}
-{{- $options  = dict "enableSourceMap" true | merge $options -}}
-{{- $res = resources.ExecuteAsTemplate "style.scss" . $res | toCSS $options -}}
-{{- $stylesheet := dict "resource" $res "fingerprint" ($scratch.Get "fingerprint") -}}
+{{- $stylesheet := dict "source" "css/style.template.scss" "fingerprint" $fingerprint -}}
+{{- $options := dict "targetPath" "css/style.min.css" "includePaths" (slice "config/css") -}}
+{{- $stylesheet = dict "template" "style.scss" "context" . "toCSS" $options | merge $stylesheet -}}
+{{- partial "plugin/stylesheet.html" $stylesheet -}}
+
+{{- /* Font Awesome */ -}}
+{{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/all.min.css" -}}
+{{- $stylesheet := dict "source" $source "fingerprint" $fingerprint -}}
+{{- partial "plugin/stylesheet.html" $stylesheet -}}
+
+{{- /* Animate.css */ -}}
+{{- $source := $cdn.animateCSS | default "lib/animate/animate.min.css" -}}
+{{- $stylesheet := dict "source" $source "fingerprint" $fingerprint -}}
 {{- partial "plugin/stylesheet.html" $stylesheet -}}
