@@ -9,7 +9,7 @@
         {{- if $comment.disqus.enable -}}
             <div id="disqus_thread" class="comment"></div>
             {{- $source := printf "https://%s.disqus.com/embed.js" $comment.disqus.shortname -}}
-            {{- dict "source" $source "defer" true "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
+            {{- dict "source" $source "defer" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
             </noscript>
@@ -19,12 +19,12 @@
         {{- if $comment.gitalk.enable -}}
             <div id="gitalk" class="comment"></div>
             {{- with $cdn.gitalkCSS -}}
-                {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
+                {{- dict "source" . | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
             {{- else -}}
                 {{- dict "source" "lib/gitalk/gitalk.css" "minify" true "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
             {{- end -}}
             {{- with $cdn.gitalkJS -}}
-                {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
+                {{- dict "source" . | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
             {{- else -}}
                 {{- dict "source" "lib/gitalk/gitalk.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
             {{- end -}}
@@ -40,7 +40,7 @@
             {{- $options := dict "targetPath" "lib/valine/valine.min.css" -}}
             {{- dict "source" "lib/valine/valine.scss" "toCSS" $options | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
             {{- with $cdn.valineJS -}}
-                {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
+                {{- dict "source" . | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
             {{- else -}}
                 {{- dict "source" "lib/valine/Valine.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
             {{- end -}}
@@ -69,7 +69,7 @@
                 data-numposts="{{ $comment.facebook.numPosts }}"
             ></div>
             {{- $source := printf "https://connect.facebook.net/%s/sdk.js#xfbml=1&version=v5.0&appId=%s&autoLogAppEvents=1" ($comment.facebook.languageCode | default (T "facebookLanguageCode")) $comment.facebook.appId -}}
-            {{- dict "source" $source "defer" true "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
+            {{- dict "source" $source "defer" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/"></a>Facebook</a>.
             </noscript>
@@ -95,7 +95,7 @@
             {{- if $comment.telegram.outlined -}}
                 {{- $attr = printf `%s data-outlined="1"` $attr -}}
             {{- end -}}
-            {{- dict "source" "https://comments.app/js/widget.js?2" "defer" true "crossorigin" true "attr" $attr | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
+            {{- dict "source" "https://comments.app/js/widget.js?2" "defer" true "attr" $attr | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://comments.app/">Telegram Comments</a>.
             </noscript>
