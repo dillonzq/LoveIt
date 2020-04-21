@@ -7,32 +7,22 @@ draft: true
 author: ""
 authorLink: ""
 description: ""
-license: ""
 
 tags: []
 categories: []
+
 hiddenFromHomePage: false
 hiddenFromSearch: false
 
 featuredImage: ""
 featuredImagePreview: ""
 
-toc: false
-autoCollapseToc: true
-math: false
-mapbox:
-    accessToken: ""
-    lightStyle: ""
-    darkStyle: ""
-    navigation: true
-    geolocate: true
-    scale: true
-    fullscreen: true
-lightgallery: true
-linkToMarkdown: true
-share:
+toc:
   enable: true
-comment: true
+math:
+  enable: false
+lightgallery: false
+license: ""
 ---
 
 <!--more-->

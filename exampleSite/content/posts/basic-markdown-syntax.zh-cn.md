@@ -1,38 +1,19 @@
 ---
 weight: 4
 title: "Markdown 基本语法"
-subtitle: ""
 date: 2019-12-01T21:57:40+08:00
 lastmod: 2020-01-01T16:45:40+08:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "这篇文章展示了基本的 Markdown 语法和格式."
-license: ""
 
 tags: ["markdown"]
 categories: ["markdown"]
-hiddenFromHomePage: false
 
 featuredImage: "/images/basic-markdown-syntax/featured-image.png"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: true
-math: false
-mapbox:
-    accessToken: ""
-    lightStyle: ""
-    darkStyle: ""
-    navigation: true
-    geolocate: true
-    scale: true
-    fullscreen: true
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 这篇文章提供了可以在 Hugo 的文章中使用的基本 Markdown 语法示例.

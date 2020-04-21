@@ -1,19 +1,25 @@
-{{- $scratch := newScratch -}}
-{{- .Scratch.Set "scratch" $scratch -}}
-{{- if eq hugo.Environment "production" -}}
-    {{- $scratch.Set "CDN" .Site.Params.cdn -}}
-    {{- $scratch.Set "fingerprint" .Site.Params.fingerprint -}}
-{{- end -}}
-
-{{- $scratch.Set "major-version" "0.2.X" -}}
-{{- $scratch.Set "version" "0.2.0" -}}
+{{- $version := "0.2.X" -}}
 
 {{- /* LoveIt theme version detection */ -}}
 {{- if not .Site.Params.version -}}
     {{- errorf "\n\nYou haven't configured the LoveIt version param correctly yet. See https://hugoloveit.com/theme-documentation-basics/#basic-configuration \n你还没有正确配置 LoveIt 的版本参数 参考 https://hugoloveit.com/zh-cn/theme-documentation-basics/#basic-configuration \n" -}}
-{{- else if ne .Site.Params.version ($scratch.Get "major-version") -}}
-    {{- errorf (printf "\n\n%s -> %s:\nYou have an incompatible update. See https://github.com/dillonzq/LoveIt/releases \n你进行了一次不兼容的更新 参考 https://github.com/dillonzq/LoveIt/releases \n" .Site.Params.version ($scratch.Get "major-version")) -}}
+{{- else if ne .Site.Params.version $version -}}
+    {{- errorf (printf "\n\n%s -> %s:\nYou have an incompatible update. See https://github.com/dillonzq/LoveIt/releases \n你进行了一次不兼容的更新 参考 https://github.com/dillonzq/LoveIt/releases \n" .Site.Params.version $version) -}}
 {{- end -}}
+
+{{- $params := .Params | merge .Site.Params.page -}}
+{{- .Scratch.Set "version" "0.2.0" -}}
+
+{{- if eq hugo.Environment "production" -}}
+    {{- .Scratch.Set "cdn" .Site.Params.cdn -}}
+    {{- .Scratch.Set "fingerprint" .Site.Params.fingerprint -}}
+{{- else -}}
+    {{- $params = dict "comment" nil | merge $params -}}
+{{- end -}}
+
+{{- .Scratch.Set "params" $params -}}
+{{- $this := dict "desktop" .Site.Params.header.desktopMode "mobile" .Site.Params.header.mobileMode | dict "headerMode" | dict "config" -}}
+{{- .Scratch.Set "this" $this -}}
 
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
@@ -25,7 +31,7 @@
         <title>
             {{- block "title" . }}{{ .Site.Title }}{{ end -}}
         </title>
-        <meta name="Description" content="{{ .Params.description | default .Site.Params.description }}">
+        <meta name="Description" content="{{ $params.description | default .Site.Params.description }}">
 
         {{- partial "head/meta.html" . -}}
         {{- partial "head/link.html" . -}}
@@ -33,8 +39,8 @@
     </head>
     <body>
         {{- /* Check theme isDark before body rendering */ -}}
-        {{- $theme := .Site.Params.defaultTheme -}}
-        <script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('{{ .Site.Params.defaultTheme }}' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '{{ .Site.Params.defaultTheme }}' === 'dark')) && document.body.classList.add('dark');</script>
+        {{- $theme := .Site.Params.defaulttheme -}}
+        <script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('{{ $theme }}' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '{{ $theme }}' === 'dark')) && document.body.classList.add('dark');</script>
 
         <div id="mask"></div>
 

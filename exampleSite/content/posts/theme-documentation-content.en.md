@@ -1,38 +1,23 @@
 ---
 weight: 2
 title: "Theme Documentation - Content"
-subtitle: ""
 date: 2020-03-05T15:58:26+08:00
 lastmod: 2020-03-05T15:58:26+08:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Find out how to create and organize your content quickly and intuitively in LoveIt theme."
-license: ""
 
 tags: ["content", "markdown"]
 categories: ["documentation"]
-hiddenFromHomePage: false
 
 featuredImage: "/images/theme-documentation-content/featured-image.jpg"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: false
-math: true
-mapbox:
-    accessToken: ""
-    lightStyle: ""
-    darkStyle: ""
-    navigation: true
-    geolocate: true
-    scale: true
-    fullscreen: true
-lightgallery: true
-linkToMarkdown: true
-share:
+toc:
+  auto: false
+math:
   enable: true
-comment: true
+lightgallery: true
 ---
 
 Find out how to create and organize your content quickly and intuitively in **LoveIt** theme.
@@ -51,7 +36,12 @@ A few suggestions to help you get a good looking site quickly:
 
 **Hugo** allows you to add front matter in `yaml`, `toml` or `json` to your content files.
 
-Here is a default front matter from the default archetype:
+{{< admonition >}}
+**Not all** of the below front matters need to be set in each of your posts.
+It is necessary only if the front matters and the `page` part in your [site configuration](../theme-documentation-basics/#site-configuration) are inconsistent.
+{{< /admonition >}}
+
+Here is a front matter example:
 
 ```yaml
 ---
@@ -67,28 +57,33 @@ license: ""
 
 tags: []
 categories: []
-hiddenFromHomePage: false
-hiddenFromSearch: false
-
 featuredImage: ""
 featuredImagePreview: ""
 
-toc: false
-autoCollapseToc: true
-math: true
-mapbox:
-    accessToken: ""
-    lightStyle: ""
-    darkStyle: ""
-    navigation: true
-    geolocate: true
-    scale: true
-    fullscreen: true
+hiddenFromHomePage: false
+hiddenFromSearch: false
 lightgallery: true
+copyCode: true
+ruby: true
+fraction: true
+fontawesome: true
 linkToMarkdown: true
+
+toc:
+  enable: true
+  auto: true
+math:
+  enable: true
+  # ...
+mapbox:
+  accessToken: ""
+  # ...
 share:
   enable: true
-comment: true
+  # ...
+comment:
+  enable: true
+  # ...
 ---
 ```
 
@@ -101,24 +96,26 @@ comment: true
 * **authorLink**: the link of the author.
 * **description**: the description for the content.
 * **license**: the special lisence for this content.
+
 * **tags**: the tags for the content.
 * **categories**: the categories for the content.
-* **hiddenFromHomePage**: if `true`, the content will not be shown in the home page, but this behaviour is configurabl in the [site configuration](../theme-documentation-basics/#site-configuration).
-* **hiddenFromSearch**: {{< version 0.2.0 >}} if `true`, the content will not be shown in the search results.
 * **featuredImage**: the featured image for the content.
 * **featuredImagePreview**: the featured image for the content preview in the home page.
-* **toc**: if `true`, the content will show the table of the contents.
-* **autoCollapseToc**: if `true`, the table of the contents will be automatically collapsed.
-* **math**: if `true`, the mathematical formula in the content will be automatically rendered.
-* **mapbox**: {{< version 0.2.0 >}} the same as `params.mapbox` in the [site configuration](../theme-documentation-basics/#site-configuration).
-* **lightgallery**: if `true`, images in the content will be shown as the gallery.
-* **linkToMarkdown**: if `true`, the footer of the content will show the link to the orignal Markdown file.
-* **share**: the same as `params.share` in the [site configuration](../theme-documentation-basics/#site-configuration).
-* **comment**: if `true`, the comment will be used.
 
-{{< admonition tip >}}
-Not all of the above front matters need to be set in each of your posts. It is necessary only if the front matters and your [site configuration](../theme-documentation-basics/#site-configuration) are inconsistent.
-{{< /admonition >}}
+* **hiddenFromHomePage**: if `true`, the content will not be shown in the home page.
+* **hiddenFromSearch**: {{< version 0.2.0 >}} if `true`, the content will not be shown in the search results.
+* **copyCode**: {{< version 0.2.0 >}} if `true`, the content will show the copy button of the code block.
+* **lightgallery**: if `true`, images in the content will be shown as the gallery.
+* **ruby**: {{< version 0.2.0 >}} if `true`, the content will enable the [ruby extended syntax](#ruby).
+* **fraction**: {{< version 0.2.0 >}} if `true`, the content will enable the [fraction extended syntax](#fraction).
+* **fontawesome**: {{< version 0.2.0 >}} if `true`, the content will enable the [Font Awesome extended syntax](#fontawesome).
+* **linkToMarkdown**: if `true`, the footer of the content will show the link to the orignal Markdown file.
+
+* **toc**: {{< version 0.2.0 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics/#site-configuration).
+* **math**: {{< version 0.2.0 changed >}} the same as the `params.page.math` part in the [site configuration](../theme-documentation-basics/#site-configuration).
+* **mapbox**: {{< version 0.2.0 >}} the same as the `params.page.mapbox` part in the [site configuration](../theme-documentation-basics/#site-configuration).
+* **share**: the same as the `params.page.share` part in the [site configuration](../theme-documentation-basics/#site-configuration).
+* **comment**: {{< version 0.2.0 changed >}} the same as the `params.page.comment` part in the [site configuration](../theme-documentation-basics/#site-configuration).
 
 ## 3 Content Summaries
 
@@ -252,7 +249,7 @@ $$ \ce{CO2 + C -> 2 CO} $$
 
 $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
-### Ruby Annotation
+### Ruby Annotation {#ruby}
 
 An extended Markdown syntax for **ruby annotation** is supported in **LoveIt** theme:
 
@@ -264,7 +261,7 @@ The rendered output looks like this:
 
 [Hugo]^(An open-source static site generator)
 
-### Fraction
+### Fraction {#fraction}
 
 {{< version 0.2.0 >}}
 
@@ -282,7 +279,7 @@ The rendered output looks like this:
 
 [90]/[100]
 
-### Font Awesome
+### Font Awesome {#fontawesome}
 
 **LoveIt** theme uses [Font Awesome](https://fontawesome.com/) as the icon library.
 You can easily use these icons in your articles.

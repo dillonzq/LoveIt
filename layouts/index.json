@@ -1,11 +1,18 @@
 {{- $index := slice -}}
-{{- range where .Site.RegularPages ".Params.hiddenfromsearch" "!=" true -}}
+{{- $pages := .Site.RegularPages -}}
+{{- if .Site.Params.page.hiddenFromSearch -}}
+    {{- $pages = where $pages "Params.hiddenfromsearch" false -}}
+{{- else -}}
+    {{- $pages = where $pages "Params.hiddenfromsearch" "!=" true -}}
+{{- end -}}
+{{- range $pages -}}
+    {{- $params := .Params | merge $.Site.Params.page -}}
     {{- $one := dict "uri" .RelPermalink "title" .Title "description" (.Description | default "") -}}
-    {{- $tags := .Params.tags | default slice -}}
+    {{- $tags := $params.tags | default slice -}}
     {{- $one = delimit $tags "\n" | dict "tags" | merge $one -}}
-    {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
+    {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormat | default "2006-01-02") -}}
     {{- $one = dict "date" $publish_date | merge $one -}}
-    {{- $content := partial "function/content.html" .Content | plainify -}}
+    {{- $content := dict "content" .Content "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" | plainify -}}
     {{- if gt .Site.Params.search.contentLength 0 -}}
         {{- $content = substr $content 0 .Site.Params.search.contentLength -}}
     {{- end -}}

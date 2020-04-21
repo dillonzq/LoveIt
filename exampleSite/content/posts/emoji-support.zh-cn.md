@@ -1,38 +1,19 @@
 ---
 weight: 5
 title: "Emoji 支持"
-subtitle: ""
 date: 2019-10-01T17:55:28+08:00
 lastmod: 2019-10-01T17:55:28+08:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Hugo 和 LoveIt 中的 Emoji 的用法指南."
-license: ""
 
 tags: ["emoji"]
 categories: ["markdown"]
-hiddenFromHomePage: false
 
 featuredImage: "/images/emoji-support/featured-image.jpg"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: true
-math: false
-mapbox:
-    accessToken: ""
-    lightStyle: ""
-    darkStyle: ""
-    navigation: true
-    geolocate: true
-    scale: true
-    fullscreen: true
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 Emoji 可以通过多种方式在 Hugo 项目中启用.

@@ -52,6 +52,17 @@ other = "由 %s 强力驱动"
 other = "主题"
 # === partials/footer.html ===
 
+# === partials/comment.html ===
+[valineLang]
+other = "zh-cn"
+
+[valinePlaceholder]
+other = "你的评论 ..."
+
+[facebookLanguageCode]
+other = "zh_CN"
+# === partials/comment.html ===
+
 # === partials/assets.html ===
 [search]
 other = "搜索"

@@ -1,38 +1,19 @@
 ---
 weight: 3
 title: "Theme Documentation - Built-in Shortcodes"
-subtitle: ""
 date: 2020-03-04T16:29:41+08:00
 lastmod: 2020-03-04T16:29:41+08:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Hugo provides multiple built-in shortcodes for author convenience and to keep your markdown content clean."
-license: ""
 
 tags: ["shortcodes"]
 categories: ["documentation"]
-hiddenFromHomePage: false
 
 featuredImage: "/images/theme-documentation-built-in-shortcodes/featured-image.png"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: true
-math: false
-mapbox:
-    accessToken: ""
-    lightStyle: ""
-    darkStyle: ""
-    navigation: true
-    geolocate: true
-    scale: true
-    fullscreen: true
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 **Hugo** provides multiple built-in shortcodes for author convenience and to keep your markdown content clean.
@@ -48,7 +29,7 @@ A shortcode is a simple snippet that can generate reasonable HTML code and confo
 
 Hugo ships with a set of predefined shortcodes that represent very common usage. These shortcodes are provided for author convenience and to keep your markdown content clean.
 
-## `figure` {#figure}
+## figure {#figure}
 
 [Documentation of `figure`](https://gohugo.io/content-management/shortcodes/#figure)
 
@@ -73,7 +54,7 @@ The HTML looks like this:
 </figure>
 ```
 
-## `gist`
+## gist
 
 [Documentation of `gist`](https://gohugo.io/content-management/shortcodes/#gist)
 
@@ -93,7 +74,7 @@ The HTML looks like this:
 <script type="application/javascript" src="https://gist.github.com/spf13/7896402.js"></script>
 ```
 
-## `highlight`
+## highlight
 
 [Documentation of `highlight`](https://gohugo.io/content-management/shortcodes/#instagram)
 
@@ -125,7 +106,7 @@ The rendered output looks like this:
 </section>
 {{< /highlight >}}
 
-## `instagram`
+## instagram
 
 [Documentation of `instagram`](https://gohugo.io/content-management/shortcodes/#instagram)
 
@@ -139,7 +120,7 @@ The rendered output looks like this:
 
 {{< instagram BWNjjyYFxVx hidecaption >}}
 
-## `param`
+## param
 
 [Documentation of `param`](https://gohugo.io/content-management/shortcodes/#param)
 
@@ -153,11 +134,11 @@ The rendered output looks like this:
 
 {{< param description >}}
 
-## `ref` and `relref` {#ref-and-relref}
+## ref and relref {#ref-and-relref}
 
 [Documentation of `ref` and `relref`](https://gohugo.io/content-management/shortcodes/#ref-and-relref)
 
-## `tweet`
+## tweet
 
 [Documentation of `tweet`](https://gohugo.io/content-management/shortcodes/#tweet)
 
@@ -171,7 +152,7 @@ The rendered output looks like this:
 
 {{< tweet 877500564405444608 >}}
 
-## `vimeo`
+## vimeo
 
 [Documentation of `vimeo`](https://gohugo.io/content-management/shortcodes/#vimeo)
 
@@ -185,7 +166,7 @@ The rendered output looks like this:
 
 {{< vimeo 146022717 >}}
 
-## `youtube`
+## youtube
 
 [Documentation of `youtube`](https://gohugo.io/content-management/shortcodes/#youtube)
 

@@ -1,38 +1,19 @@
 ---
 weight: 3
 title: "主题文档 - 内置 Shortcodes"
-subtitle: ""
 date: 2020-03-04T16:29:59+08:00
 lastmod: 2020-03-04T16:29:59+08:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Hugo 提供了多个内置的 Shortcodes, 以方便作者保持 Markdown 内容的整洁."
-license: ""
 
 tags: ["shortcodes"]
 categories: ["documentation"]
-hiddenFromHomePage: false
 
 featuredImage: "/images/theme-documentation-built-in-shortcodes/featured-image.png"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: true
-math: false
-mapbox:
-    accessToken: ""
-    lightStyle: ""
-    darkStyle: ""
-    navigation: true
-    geolocate: true
-    scale: true
-    fullscreen: true
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 **Hugo** 提供了多个内置的 Shortcodes, 以方便作者保持 Markdown 内容的整洁.
@@ -49,7 +30,7 @@ shortcode 是一个简单代码段, 可以生成合理的 HTML 代码, 并且符
 Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见的用法.
 提供这些 shortcodes 是为了方便保持你的 Markdown 内容简洁.
 
-## `figure` {#figure}
+## figure {#figure}
 
 [`figure` 的文档](https://gohugo.io/content-management/shortcodes/#figure)
 
@@ -74,7 +55,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 </figure>
 ```
 
-## `gist`
+## gist
 
 [`gist` 的文档](https://gohugo.io/content-management/shortcodes/#gist)
 
@@ -94,7 +75,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 <script type="application/javascript" src="https://gist.github.com/spf13/7896402.js"></script>
 ```
 
-## `highlight`
+## highlight
 
 [`highlight` 的文档](https://gohugo.io/content-management/shortcodes/#instagram)
 
@@ -126,7 +107,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 </section>
 {{< /highlight >}}
 
-## `instagram`
+## instagram
 
 [`instagram` 的文档](https://gohugo.io/content-management/shortcodes/#instagram)
 
@@ -140,7 +121,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 {{< instagram BWNjjyYFxVx hidecaption >}}
 
-## `param`
+## param
 
 [`param` 的文档](https://gohugo.io/content-management/shortcodes/#param)
 
@@ -154,11 +135,11 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 {{< param description >}}
 
-## `ref` 和 `relref` {#ref-and-relref}
+## ref 和 relref {#ref-and-relref}
 
 [`ref` 和 `relref` 的文档](https://gohugo.io/content-management/shortcodes/#ref-and-relref)
 
-## `tweet`
+## tweet
 
 [`tweet` 的文档](https://gohugo.io/content-management/shortcodes/#tweet)
 
@@ -172,7 +153,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 {{< tweet 877500564405444608 >}}
 
-## `vimeo`
+## vimeo
 
 [`vimeo` 的文档](https://gohugo.io/content-management/shortcodes/#vimeo)
 
@@ -186,7 +167,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 {{< vimeo 146022717 >}}
 
-## `youtube`
+## youtube
 
 [`youtube` 的文档](https://gohugo.io/content-management/shortcodes/#youtube)
 

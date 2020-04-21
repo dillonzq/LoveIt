@@ -127,7 +127,7 @@ $code-info-color-dark: #b1b0b0 !default;
 $code-font-size: .875rem !default;
 
 // Font family of the code
-$code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace !default;
+$code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-font-family !default;
 
 // Code type map
 $code-type-map: (

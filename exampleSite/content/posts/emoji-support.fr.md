@@ -1,14 +1,12 @@
 ---
 weight: 5
 title: "Emoji Support"
-subtitle: ""
 date: 2019-10-01T17:55:28+08:00
 lastmod: 2019-10-01T17:55:28+08:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Guide d'utilisation des emoji dans Hugo et LoveIt."
-license: ""
 
 tags: ["emoji"]
 categories: ["markdown"]
@@ -17,22 +15,7 @@ hiddenFromHomePage: false
 featuredImage: "/images/emoji-support/featured-image.jpg"
 featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: true
-math: false
-mapbox:
-    accessToken: ""
-    lightStyle: ""
-    darkStyle: ""
-    navigation: true
-    geolocate: true
-    scale: true
-    fullscreen: true
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 Emoji peut être activé dans un projet Hugo de plusieurs façons.
