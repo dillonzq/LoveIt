@@ -1,5 +1,3 @@
-{{- $scratch := .Page.Scratch.Get "scratch" -}}
-
 {{- $theme := "#448aff" -}}
 {{- if .IsNamedParams -}}
     {{- $theme = .Get "theme" | default $theme -}}
@@ -41,4 +39,4 @@
 {{- else -}}
     <meting-js server="{{ .Get 0 }}" type="{{ .Get 1 }}" id="{{ .Get 2 }}" theme="{{ $theme }}"></meting-js>
 {{- end -}}
-{{- $scratch.Set "music" true -}}
+{{- dict "music" true | merge (.Page.Scratch.Get "this") | .Page.Scratch.Set "this" -}}

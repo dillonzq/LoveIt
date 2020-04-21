@@ -4,8 +4,8 @@ code {
   color: $code-color;
 
   img, .version img {
-    min-height: 1.1 * $code-font-size;
-    height: 1.1 * $code-font-size;
+    min-height: 1.2 * $code-font-size;
+    height: 1.2 * $code-font-size;
   }
 
   .dark & {
@@ -25,7 +25,7 @@ pre {
 
   .copy-button {
     font-size: $code-font-size;
-    line-height: $code-font-size;
+    line-height: 1.4 * $code-font-size;
     position: absolute;
     top: 0;
     right: 0;
@@ -129,7 +129,7 @@ code, pre, .highlight table, .highlight tr, .highlight td {
 .highlight {
   font-family: $code-font-family;
   font-size: $code-font-size;
-  line-height: round($code-font-size * 1.4);
+  line-height: 1.4 * $code-font-size;
   /* Comment */  .c,
   /* CommentHashbang */  .ch,
   /* CommentMultiline */  .cm,

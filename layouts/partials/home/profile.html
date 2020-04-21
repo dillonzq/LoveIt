@@ -1,5 +1,3 @@
-{{- $scratch := .Scratch.Get "scratch" -}}
-
 <div class="home-profile">
     {{- $avatar := .Site.Params.home.profile.avatarURL -}}
     {{- with .Site.Params.home.profile.gravatarEmail -}}
@@ -16,9 +14,9 @@
     {{- with .Site.Params.home.profile.subtitle -}}
         <h2 class="home-subtitle">
             {{- if $.Site.Params.home.profile.typeit -}}
-                {{- $id := partial "function/id.html" (dict "content" . "scratch" $scratch) -}}
+                {{- $id := partial "function/id.html" (dict "content" . "scratch" $.Scratch) -}}
                 <div id="{{ $id }}" class="typeit"></div>
-                {{- $scratch.SetInMap "typeitMap" $id (slice $id) -}}
+                {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
             {{- else -}}
                 {{- . -}}
             {{- end -}}
@@ -26,7 +24,7 @@
     {{- end -}}
 
     {{- if .Site.Params.home.profile.social -}}
-        {{- partial "plugin/social.html" (dict "social" .Site.Params.social "scratch" $scratch) -}}
+        {{- partial "plugin/social.html" (dict "social" .Site.Params.social "scratch" $.Scratch) -}}
     {{- end -}}
 
     {{- with .Site.Params.home.profile.disclaimer -}}

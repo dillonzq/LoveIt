@@ -1,10 +1,9 @@
-{{- $scratch := .Scratch.Get "scratch" -}}
-
+{{- $params := .Params | merge .Site.Params.page -}}
 <article class="single summary" itemscope itemtype="http://schema.org/Article">
     {{- /* Featured image */ -}}
-    {{- with .Params.featuredImage -}}
+    {{- with $params.featuredimage -}}
         <div class="featured-image-preview">
-            {{- $image := $.Params.featuredImagePreview | default . -}}
+            {{- $image := $params.featuredimagepreview | default . -}}
             {{- partial "plugin/image.html" (dict "src" $image "alt" $.Description "large" true) -}}
         </div>
     {{- end -}}
@@ -16,19 +15,19 @@
 
     {{- /* Meta */ -}}
     <div class="post-meta">
-        {{- $author := .Params.author | default .Site.Author.name | default (T "author") -}}
-        {{- $authorLink := .Params.authorLink | default .Site.Author.link | default (relLangURL "/") -}}
+        {{- $author := $params.author | default .Site.Author.name | default (T "author") -}}
+        {{- $authorLink := $params.authorlink | default .Site.Author.link | default (relLangURL "/") -}}
         <span class="post-author">
             {{- $options := dict "class" "author" "href" $authorLink "title" "Author" "rel" "author" "icon" (dict "class" "fas fa-user-circle fa-fw") "content" $author -}}
             {{- partial "plugin/link.html" $options -}}
         </span>
 
-        {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
+        {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormat | default "2006-01-02") -}}
         &nbsp;<span class="post-publish">
             {{ T "publish" }}&nbsp;<time datetime={{ $publish_date }}>{{ $publish_date }}</time>
         </span>
 
-        {{- with .Params.categories -}}
+        {{- with $params.categories -}}
             &nbsp;
             <span class="post-category">
                 {{- T "included" -}}
@@ -45,7 +44,7 @@
     {{- /* Summary content */ -}}
     <div class="content">
         {{- with .Summary -}}
-            {{- partial "function/content.html" . | safeHTML -}}
+            {{- dict "content" . "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
         {{- else -}}
             {{- .Description | safeHTML -}}
         {{- end -}}
@@ -54,7 +53,7 @@
     {{- /* Footer */ -}}
     <div class="post-footer">
         <a href="{{ .RelPermalink }}">{{ T "readMore" }}</a>
-        {{- with .Params.tags -}}
+        {{- with $params.tags -}}
             <div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;
                 {{- range $index, $value := . -}}

@@ -7,26 +7,17 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "了解如何在 LoveIt 主题中快速, 直观地创建和组织内容."
-license: ""
 
 tags: ["内容", "markdown"]
 categories: ["documentation"]
 
 featuredImage: "/images/theme-documentation-content/featured-image.jpg"
 
-toc: true
-autoCollapseToc: false
-math: true
-mapbox:
-    navigation: true
-    geolocate: true
-    scale: true
-    fullscreen: true
-lightgallery: true
-linkToMarkdown: true
-share:
+toc:
+  auto: false
+math:
   enable: true
-comment: true
+lightgallery: true
 ---
 
 了解如何在 **LoveIt** 主题中快速, 直观地创建和组织内容.
@@ -45,7 +36,12 @@ comment: true
 
 **Hugo** 允许你在文章内容前面添加 `yaml`, `toml` 或者 `json` 格式的前置参数.
 
-这是默认文章模板中的默认前置参数:
+{{< admonition >}}
+**不是所有**的上述前置参数都必须在你的每篇文章中设置.
+只有在文章的参数和你的 [网站设置](../theme-documentation-basics/#site-configuration) 中的 `page` 部分不一致时才有必要这么做.
+{{< /admonition >}}
+
+这是一个前置参数例子:
 
 ```yaml
 ---
@@ -61,28 +57,33 @@ license: ""
 
 tags: []
 categories: []
-hiddenFromHomePage: false
-hiddenFromSearch: false
-
 featuredImage: ""
 featuredImagePreview: ""
 
-toc: false
-autoCollapseToc: true
-math: true
-mapbox:
-    accessToken: ""
-    lightStyle: ""
-    darkStyle: ""
-    navigation: true
-    geolocate: true
-    scale: true
-    fullscreen: true
+hiddenFromHomePage: false
+hiddenFromSearch: false
 lightgallery: true
+copyCode: true
+ruby: true
+fraction: true
+fontawesome: true
 linkToMarkdown: true
+
+toc:
+  enable: true
+  auto: true
+math:
+  enable: true
+  # ...
+mapbox:
+  accessToken: ""
+  # ...
 share:
   enable: true
-comment: true
+  # ...
+comment:
+  enable: true
+  # ...
 ---
 ```
 
@@ -95,25 +96,26 @@ comment: true
 * **authorLink**: 文章作者的链接.
 * **description**: 文章内容的描述.
 * **license**: 这篇文章特殊的许可.
+
 * **tags**: 文章的标签.
 * **categories**: 文章所属的类别.
-* **hiddenFromHomePage**: 如果设为 `true`, 这篇文章将不会显示在主页上, 但是此行为可以在 [网站配置](../theme-documentation-basics/#site-configuration) 中设置的.
-* **hiddenFromSearch**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章将不会显示在搜索结果中.
 * **featuredImage**: 文章的特色图片.
 * **featuredImagePreview**: 用在主页预览的文章特色图片.
-* **toc**: 如果设为 `true`, 这篇文章会显示右侧目录.
-* **autoCollapseToc**: 如果设为 `true`, 文章目录会自动折叠.
-* **math**: 如果设为 `true`, 将自动渲染文章中的数学公式.
-* **mapbox**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.mapbox` 对象相同.
-* **lightgallery**: 如果设为 `true`, 文章中的图片将可以按照画廊形式呈现.
-* **linkToMarkdown**: 如果设为 `true`, 内容的页脚将显示指向原始 Markdown 文件的链接.
-* **share**: 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.share` 对象相同.
-* **comment**: 如果设为 `true`, 将启用评论系统.
 
-{{< admonition tip >}}
-不是所有的上述前置参数都必须在你的每篇文章中设置.
-只有在文章的参数和你的 [网站设置](../theme-documentation-basics/#site-configuration) 不一致时才有必要这么做.
-{{< /admonition >}}
+* **hiddenFromHomePage**: 如果设为 `true`, 这篇文章将不会显示在主页上.
+* **hiddenFromSearch**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章将不会显示在搜索结果中.
+* **copyCode**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章会显示代码块的复制按钮.
+* **lightgallery**: 如果设为 `true`, 文章中的图片将可以按照画廊形式呈现.
+* **ruby**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章会使用 [上标注释扩展语法](#ruby).
+* **fraction**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章会使用 [分数扩展语法](#fraction).
+* **fontawesome**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章会使用 [Font Awesome 扩展语法](#fontawesome).
+* **linkToMarkdown**: 如果设为 `true`, 内容的页脚将显示指向原始 Markdown 文件的链接.
+
+* **toc**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.page.toc` 部分相同.
+* **math**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.page.math` 部分相同.
+* **mapbox**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.page.mapbox` 部分相同.
+* **share**: 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.page.share` 部分相同.
+* **comment**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.page.comment` 部分相同.
 
 ## 3 内容摘要
 
@@ -247,7 +249,7 @@ $$ \ce{CO2 + C -> 2 CO} $$
 
 $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
-### 字符注音或者注释
+### 字符注音或者注释 {#ruby}
 
 **LoveIt** 主题支持一种 **字符注音或者注释** Markdown 扩展语法:
 
@@ -259,7 +261,7 @@ $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
 [Hugo]^(一个开源的静态网站生成工具)
 
-### 分数
+### 分数 {#fraction}
 
 {{< version 0.2.0 >}}
 
@@ -277,7 +279,7 @@ $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
 [90]/[100]
 
-### Font Awesome
+### Font Awesome {#fontawesome}
 
 **LoveIt** 主题使用 [Font Awesome](https://fontawesome.com/) 作为图标库.
 你同样可以在文章中轻松使用这些图标.

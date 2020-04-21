@@ -1,66 +1,60 @@
-{{- $scratch := .Scratch.Get "scratch" -}}
-{{- $CDN := $scratch.Get "CDN" -}}
-{{- $fingerprint := $scratch.Get "fingerprint" -}}
-{{- $config := dict "desktopHeaderMode" .Site.Params.header.desktopMode "mobileHeaderMode" .Site.Params.header.mobileMode -}}
-{{- with $scratch.Get "contentData" -}}
-    {{- $config = dict "content" . | merge $config -}}
-{{- end -}}
-{{- with $scratch.Get "comment" -}}
-    {{- $config = dict "comment" . | merge $config -}}
-{{- end -}}
+{{- $params := .Scratch.Get "params" -}}
+{{- $cdn := .Scratch.Get "cdn" | default dict -}}
+{{- $fingerprint := .Scratch.Get "fingerprint" -}}
+{{- $config := (.Scratch.Get "this").config -}}
 
 {{- /* Fork Awesome */ -}}
-{{- if $scratch.Get "forkawesome" -}}
+{{- if (.Scratch.Get "this").forkawesome -}}
     {{- $options := dict "targetPath" "lib/forkawesome/fork-awesome.min.css" -}}
-    {{- dict "source" "lib/forkawesome/fork-awesome.scss" "toCSS" $options "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
+    {{- dict "source" "lib/forkawesome/fork-awesome.scss" "toCSS" $options "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
 {{- end -}}
 
 {{- /* iconfont */ -}}
-{{- if $scratch.Get "iconfont" -}}
-    {{- with $CDN.iconfontCSS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "stylesheet" -}}
+{{- if (.Scratch.Get "this").iconfont -}}
+    {{- with $cdn.iconfontCSS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/iconfont/iconfont.css" "minify" true "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
+        {{- dict "source" "lib/iconfont/iconfont.css" "minify" true "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
     {{- end -}}
 {{- end -}}
 
 {{- /* Smooth Scroll */ -}}
-{{- with $CDN.smoothScrollJS -}}
-    {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+{{- with $cdn.smoothScrollJS -}}
+    {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
 {{- else -}}
-    {{- dict "source" "lib/smooth-scroll/smooth-scroll.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+    {{- dict "source" "lib/smooth-scroll/smooth-scroll.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
 {{- end -}}
 
 {{- /* Search */ -}}
 {{- if .Site.Params.search.enable -}}
-    {{- with $CDN.autocompleteJS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+    {{- with $cdn.autocompleteJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/autocomplete/autocomplete.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- dict "source" "lib/autocomplete/autocomplete.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
     {{- $searchConfig := dict "noResultsFound" (T "noResultsFound") -}}
     {{- if eq .Site.Params.search.type "lunr" -}}
         {{- with .Site.Home.OutputFormats.Get "json" -}}
             {{- $searchConfig = dict "type" "lunr" "lunrIndexURL" .RelPermalink | merge $searchConfig -}}
         {{- end -}}
-        {{- with $CDN.lunrJS -}}
-            {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+        {{- with $cdn.lunrJS -}}
+            {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
         {{- else -}}
-            {{- dict "source" "lib/lunr/lunr.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+            {{- dict "source" "lib/lunr/lunr.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
         {{- end -}}
         {{- if ne .Language.Lang "en" -}}
             {{- $searchConfig = T "lunrLanguageCode" | dict "lunrLanguageCode" | merge $searchConfig -}}
             {{- if eq .Language.Lang "zh-cn" -}}
                 {{- $searchConfig = dict "lunrSegmentitURL" (resources.Get "lib/lunr/lunr.segmentit.js").RelPermalink | merge $searchConfig -}}
             {{- end -}}
-            {{- dict "source" "lib/lunr/lunr.stemmer.support.js" "minify" true "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
-            {{- dict "source" (T "lunrLanguageLib") "minify" true "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+            {{- dict "source" "lib/lunr/lunr.stemmer.support.js" "minify" true "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
+            {{- dict "source" (T "lunrLanguageLib") "minify" true "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
         {{- end -}}
     {{- else if eq .Site.Params.search.type "algolia" -}}
-        {{- with $CDN.algoliasearchJS -}}
-            {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+        {{- with $cdn.algoliasearchJS -}}
+            {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
         {{- else -}}
-            {{- dict "source" "lib/algoliasearch/algoliasearch-lite.umd.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+            {{- dict "source" "lib/algoliasearch/algoliasearch-lite.umd.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
         {{- end -}}
         {{- $searchConfig = dict "type" "algolia" "algoliaIndex" .Site.Params.search.algolia.index "algoliaAppID" .Site.Params.search.algolia.appID "algoliaSearchKey" .Site.Params.search.algolia.searchKey | merge $searchConfig -}}
     {{- end -}}
@@ -68,61 +62,63 @@
 {{- end -}}
 
 {{- /* lazysizes */ -}}
-{{- with $CDN.lazysizesJS -}}
-    {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+{{- with $cdn.lazysizesJS -}}
+    {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
 {{- else -}}
-    {{- dict "source" "lib/lazysizes/lazysizes.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+    {{- dict "source" "lib/lazysizes/lazysizes.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
 {{- end -}}
 
 {{- /* lightgallery.js */ -}}
-{{- if ne .Site.Params.page.lightgallery false | and (ne .Params.lightgallery false) -}}
-    {{- with $CDN.lightgalleryCSS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "stylesheet" -}}
+{{- if $params.lightgallery -}}
+    {{- with $cdn.lightgalleryCSS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/lightgallery/lightgallery.min.css" "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
+        {{- dict "source" "lib/lightgallery/lightgallery.min.css" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
     {{- end -}}
-    {{- with $CDN.lightgalleryJS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+    {{- with $cdn.lightgalleryJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/lightgallery/lightgallery.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- dict "source" "lib/lightgallery/lightgallery.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
-    {{- with $CDN.lightgalleryThumbnailJS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+    {{- with $cdn.lightgalleryThumbnailJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/lightgallery/lg-thumbnail.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- dict "source" "lib/lightgallery/lg-thumbnail.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
-    {{- with $CDN.lightgalleryZoomJS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+    {{- with $cdn.lightgalleryZoomJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/lightgallery/lg-zoom.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- dict "source" "lib/lightgallery/lg-zoom.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
     {{- $lightGalleryConfig := dict "selector" ".lightgallery" "speed" 400 "hideBarsDelay" 2000 "thumbnail" true "exThumbImage" "data-thumbnail" "thumbWidth" 80 "thumbContHeight" 80 "actualSize" false -}}
     {{- $config = dict "lightGallery" $lightGalleryConfig | merge $config -}}
 {{- end -}}
 
 {{- /* clipboard.js */ -}}
-{{- with $CDN.clipboardJS -}}
-    {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
-{{- else -}}
-    {{- dict "source" "lib/clipboard/clipboard.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+{{- if ne $params.copycode false -}}
+    {{- with $cdn.clipboardJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
+    {{- else -}}
+        {{- dict "source" "lib/clipboard/clipboard.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
+    {{- end -}}
+    {{- $config = T "copyToClipboard" | dict "title" | dict "clipboard" | merge $config -}}
 {{- end -}}
-{{- $config = T "copyToClipboard" | dict "title" | dict "clipboard" | merge $config -}}
 
 {{- /* Sharer.js */ -}}
-{{- if $scratch.Get "share" -}}
-    {{- with $CDN.sharerJS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+{{- if $params.share.enable -}}
+    {{- with $cdn.sharerJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/sharer/sharer.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- dict "source" "lib/sharer/sharer.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
 {{- end -}}
 
 {{- /* TypeIt */ -}}
-{{- with $scratch.Get "typeitMap" -}}
-    {{- with $CDN.typeitJS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+{{- with (.Scratch.Get "this").typeitMap -}}
+    {{- with $cdn.typeitJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/typeit/typeit.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- dict "source" "lib/typeit/typeit.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
     {{- $typeitConfig := slice -}}
     {{- range $key, $val := . -}}
@@ -132,40 +128,40 @@
 {{- end -}}
 
 {{- /* KaTeX */ -}}
-{{- if ne .Site.Params.math.enable false | and .Params.math -}}
-    {{- with $CDN.katexCSS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "stylesheet" -}}
+{{- if $params.math.enable -}}
+    {{- with $cdn.katexCSS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/katex/katex.min.css" "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
+        {{- dict "source" "lib/katex/katex.min.css" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
     {{- end -}}
-    {{- with $CDN.katexJS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+    {{- with $cdn.katexJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/katex/katex.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- dict "source" "lib/katex/katex.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
-    {{- with $CDN.katexAutoRenderJS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+    {{- with $cdn.katexAutoRenderJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/katex/auto-render.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- dict "source" "lib/katex/auto-render.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
-    {{- $math := .Site.Params.math -}}
+    {{- $math := $params.math -}}
     {{- if $math.copyTex -}}
-        {{- with $CDN.katexCopyTexCSS -}}
-            {{- dict "source" . "crossorigin" true | slice | $scratch.Add "stylesheet" -}}
+        {{- with $cdn.katexCopyTexCSS -}}
+            {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
         {{- else -}}
-            {{- dict "source" "lib/katex/copy-tex.min.css" "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
+            {{- dict "source" "lib/katex/copy-tex.min.css" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
         {{- end -}}
-        {{- with $CDN.katexCopyTexJS -}}
-            {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+        {{- with $cdn.katexCopyTexJS -}}
+            {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
         {{- else -}}
-            {{- dict "source" "lib/katex/copy-tex.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+            {{- dict "source" "lib/katex/copy-tex.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
         {{- end -}}
     {{- end -}}
     {{- if $math.mhchem -}}
-        {{- with $CDN.katexMhchemJS -}}
-            {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+        {{- with $cdn.katexMhchemJS -}}
+            {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
         {{- else -}}
-            {{- dict "source" "lib/katex/mhchem.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+            {{- dict "source" "lib/katex/mhchem.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
         {{- end -}}
     {{- end -}}
     {{- $mathConfig := dict "strict" false -}}
@@ -182,91 +178,86 @@
 {{- end -}}
 
 {{- /* mermaid */ -}}
-{{- if $scratch.Get "mermaid" -}}
-    {{- with $CDN.mermaidJS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+{{- if (.Scratch.Get "this").mermaid -}}
+    {{- with $cdn.mermaidJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/mermaid/mermaid.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- dict "source" "lib/mermaid/mermaid.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
     {{- $options := dict "targetPath" "lib/mermaid/mermaid.min.css" -}}
-    {{- dict "source" "lib/mermaid/mermaid.scss" "toCSS" $options "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
+    {{- dict "source" "lib/mermaid/mermaid.scss" "toCSS" $options "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
 {{- end -}}
 
 {{- /* ECharts */ -}}
-{{- if $scratch.Get "echarts" -}}
-    {{- with $CDN.echartsJS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+{{- if (.Scratch.Get "this").echarts -}}
+    {{- with $cdn.echartsJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/echarts/echarts.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- dict "source" "lib/echarts/echarts.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
-    {{- with $CDN.echartsMacaronsJS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+    {{- with $cdn.echartsMacaronsJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/echarts/macarons.js" "minify" true "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- dict "source" "lib/echarts/macarons.js" "minify" true "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
 {{- end -}}
 
 {{- /* Mapbox GL */ -}}
-{{- if $scratch.Get "mapbox" -}}
-    {{- with $CDN.mapboxGLCSS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "stylesheet" -}}
+{{- if (.Scratch.Get "this").mapbox -}}
+    {{- with $cdn.mapboxGLCSS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/mapbox-gl/mapbox-gl.min.css" "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
+        {{- dict "source" "lib/mapbox-gl/mapbox-gl.min.css" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
     {{- end -}}
-    {{- with $CDN.mapboxGLJS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+    {{- with $cdn.mapboxGLJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/mapbox-gl/mapbox-gl.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- dict "source" "lib/mapbox-gl/mapbox-gl.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
-    {{- dict "source" "lib/mapbox-gl/mapbox-gl-language.js" "minify" true "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
-    {{- $mapbox := dict "accessToken" (.Params.mapbox.accessToken | default .Site.Params.mapbox.accessToken) "RTLTextPlugin" "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.0/mapbox-gl-rtl-text.js" -}}
-    {{- $config = dict "mapbox" $mapbox | merge $config -}}
+    {{- dict "source" "lib/mapbox-gl/mapbox-gl-language.js" "minify" true "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
+    {{- $config = dict "accessToken" $params.mapbox.accessToken "RTLTextPlugin" "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.0/mapbox-gl-rtl-text.js" | dict "mapbox" | merge $config -}}
 {{- end -}}
 
 {{- /* Music */ -}}
-{{- if $scratch.Get "music" -}}
+{{- if (.Scratch.Get "this").music -}}
     {{- /* APlayer */ -}}
-    {{- with $CDN.aplayerCSS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "stylesheet" -}}
+    {{- with $cdn.aplayerCSS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/aplayer/APlayer.min.css" "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
+        {{- dict "source" "lib/aplayer/APlayer.min.css" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
     {{- end -}}
     {{- $options := dict "targetPath" "lib/aplayer/dark.min.css" -}}
-    {{- dict "source" "lib/aplayer/dark.scss" "toCSS" $options "fingerprint" $fingerprint | slice | $scratch.Add "stylesheet" -}}
-    {{- with $CDN.aplayerJS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+    {{- dict "source" "lib/aplayer/dark.scss" "toCSS" $options "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
+    {{- with $cdn.aplayerJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/aplayer/APlayer.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- dict "source" "lib/aplayer/APlayer.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
 
     {{- /* MetingJS */ -}}
-    {{- with $CDN.metingJS -}}
-        {{- dict "source" . "crossorigin" true | slice | $scratch.Add "script" -}}
+    {{- with $cdn.metingJS -}}
+        {{- dict "source" . "crossorigin" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- else -}}
-        {{- dict "source" "lib/meting/Meting.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+        {{- dict "source" "lib/meting/Meting.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
 {{- end -}}
 
-{{- /* Dev feature */ -}}
-{{- if .Params.dev -}}
-{{- end -}}
-
 {{- /* Theme script */ -}}
-{{- dict "source" "js/theme.min.js" "fingerprint" $fingerprint | slice | $scratch.Add "script" -}}
+{{- dict "source" "js/theme.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
 {{- $_ := (resources.Get "js/theme.min.js.map").RelPermalink -}}
 
-{{- range $scratch.Get "stylesheet" -}}
+{{- range (.Scratch.Get "this").stylesheet -}}
     {{- partial "plugin/stylesheet.html" . -}}
 {{- end -}}
 
 <script type="text/javascript">
-    window.config = {{ jsonify $config | safeJS }};
+    window.config = {{ $config | jsonify | safeJS }};
 </script>
 
 {{- /* Polyfill.io */ -}}
 {{- partial "plugin/script.html" (dict "source" "https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after") -}}
 
-{{- range $scratch.Get "script" -}}
+{{- range (.Scratch.Get "this").script -}}
     {{- partial "plugin/script.html" . -}}
 {{- end -}}
 

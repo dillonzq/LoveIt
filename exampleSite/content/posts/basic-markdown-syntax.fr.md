@@ -1,38 +1,19 @@
 ---
 weight: 4
 title: "Syntaxe de Markdown de Base"
-subtitle: ""
 date: 2019-12-01T21:57:40+08:00
 lastmod: 2020-01-01T16:45:40+08:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Cet article présente la syntaxe et le format de base de Markdown."
-license: ""
 
 tags: ["markdown"]
 categories: ["markdown"]
-hiddenFromHomePage: false
 
 featuredImage: "/images/basic-markdown-syntax/featured-image.png"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: true
-math: false
-mapbox:
-    accessToken: ""
-    lightStyle: ""
-    darkStyle: ""
-    navigation: true
-    geolocate: true
-    scale: true
-    fullscreen: true
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 Cet article propose un exemple de syntaxe Markdown de base qui peut être utilisée dans les fichiers de contenu Hugo.

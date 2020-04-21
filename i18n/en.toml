@@ -52,6 +52,17 @@ other = "Powered by %s"
 other = "Theme"
 # === partials/footer.html ===
 
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "Your comment ..."
+
+[facebookLanguageCode]
+other = "en_US"
+# === partials/comment.html ===
+
 # === partials/assets.html ===
 [search]
 other = "Search"

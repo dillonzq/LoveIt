@@ -52,6 +52,17 @@ other = "Napędzany przez %s"
 other = "Szablon"
 # === partials/footer.html ===
 
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "Twój komentarz ..."
+
+[facebookLanguageCode]
+other = "pl"
+# === partials/comment.html ===
+
 # === partials/assets.html ===
 [search]
 other = "Szukaj"

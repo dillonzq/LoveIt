@@ -1,4 +1,5 @@
-{{- $modify_date := .Lastmod.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
+{{- $params := .Scratch.Get "params" -}}
+{{- $modify_date := .Lastmod.Format (.Site.Params.dateformat | default "2006-01-02") -}}
 <div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -14,16 +15,16 @@
                 </span>
             </div>
             <div class="post-info-license">
-                {{- if .Params.license -}}
+                {{- with $params.license -}}
                     <span>
-                        {{- printf (T "license") .Params.license | safeHTML -}}
+                        {{- printf (T "license") . | safeHTML -}}
                     </span>
                 {{- end -}}
             </div>
         </div>
         <div class="post-info-line">
             <div class="post-info-md">
-                {{- if ne .Site.Params.page.linkToMarkdown false | and (ne .Params.linkToMarkdown false)  -}}
+                {{- if $params.linktomarkdown -}}
                     {{- with .OutputFormats.Get "markdown" -}}
                         <span>
                             <a class="link-to-markdown" href="{{ .RelPermalink }}" target="_blank">
@@ -43,7 +44,7 @@
 
     <div class="post-info-more">
         <section class="post-tags">
-            {{- with .Params.tags -}}
+            {{- with $params.tags -}}
                 <i class="fas fa-tags fa-fw"></i>&nbsp;
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }},&nbsp;{{ end -}}

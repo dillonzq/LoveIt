@@ -1,14 +1,12 @@
 ---
 weight: 4
 title: "主题文档 - 扩展 Shortcodes"
-subtitle: ""
 date: 2020-03-03T16:29:59+08:00
 lastmod: 2020-03-03T16:29:59+08:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "LoveIt 主题在 Hugo 内置的 shortcode 的基础上提供多个扩展的 shortcode."
-license: ""
 
 tags: ["shortcodes"]
 categories: ["documentation"]
@@ -16,16 +14,14 @@ categories: ["documentation"]
 featuredImage: "/images/theme-documentation-extended-shortcodes/featured-image.jpg"
 featuredImagePreview: "/images/theme-documentation-extended-shortcodes/featured-image-preview.jpg"
 
-toc: true
-autoCollapseToc: true
-math: false
+lightgallery: true
 ---
 
 **LoveIt** 主题在 Hugo 内置的 shortcode 的基础上提供多个扩展的 shortcode.
 
 <!--more-->
 
-## `style`
+## style
 
 `style` shortcode 用来在你的文章中插入自定义样式.
 
@@ -49,7 +45,7 @@ This is a right-aligned paragraph.
 This is a right-aligned paragraph.
 {{< /style >}}
 
-## `link`
+## link
 
 {{< version 0.2.0 >}}
 
@@ -114,7 +110,7 @@ This is a right-aligned paragraph.
 
 {{< link "https://github.com/upstage/" Upstage "Visit Upstage!" >}}
 
-## `image`
+## image
 
 {{< version 0.2.0 changed >}}
 
@@ -184,7 +180,7 @@ This is a right-aligned paragraph.
 
 {{< image src="/images/theme-documentation-extended-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-extended-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-extended-shortcodes/lighthouse-large.jpg" >}}
 
-## `admonition`
+## admonition
 
 `admonition` shortcode 支持 **12** 种 帮助你在页面中插入提示的横幅.
 
@@ -270,7 +266,7 @@ This is a right-aligned paragraph.
 一个 **技巧** 横幅
 {{< /admonition >}}
 
-## `mermaid`
+## mermaid
 
 [mermaid](https://mermaidjs.github.io/) 是一个可以帮助你在文章中生成图表和流程图的库, 类似 Markdown 的语法.
 
@@ -518,7 +514,7 @@ pie
     "Rats" : 15
 {{< /mermaid >}}
 
-## `echarts`
+## echarts
 
 [ECharts](https://echarts.apache.org/) 是一个帮助你生成交互式数据可视化的库.
 
@@ -906,7 +902,7 @@ data = [
 
     {{< version 0.2.0 >}} 数据可视化的高度, 默认值是 `30rem`.
 
-## `mapbox`
+## mapbox
 
 {{< version 0.2.0 >}}
 
@@ -980,7 +976,7 @@ data = [
 
 {{< mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/navigation-preview-day-v4?optimize=true" "mapbox://styles/mapbox/navigation-preview-night-v4?optimize=true" >}}
 
-## `music`
+## music
 
 `music` shortcode 基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 提供了一个内嵌的响应式音乐播放器.
 
@@ -1118,7 +1114,7 @@ data = [
 
     音乐列表的最大高度, 默认值是 `340px`.
 
-## `bilibili`
+## bilibili
 
 {{< version 0.2.0 changed >}}
 
@@ -1160,7 +1156,7 @@ https://www.bilibili.com/video/BV1TJ411C7An?p=3
 
 {{< bilibili id=BV1TJ411C7An p=3 >}}
 
-## `typeit`
+## typeit
 
 `typeit` shortcode 基于 [TypeIt](https://typeitjs.com/) 提供了打字动画.
 

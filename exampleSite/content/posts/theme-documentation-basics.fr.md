@@ -1,38 +1,21 @@
 ---
 weight: 1
 title: "Thème Documentation - Concepts de Base"
-subtitle: ""
 date: 2020-03-06T21:40:32+08:00
 lastmod: 2020-03-06T21:40:32+08:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Découvrez en quoi consiste le thème Hugo - LoveIt et les concepts fondamentaux qui le sous-tendent."
-license: ""
 
 tags: ["installation", "configuration"]
 categories: ["documentation"]
-hiddenFromHomePage: false
 
 featuredImage: "/images/theme-documentation-basics/featured-image.jpg"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: false
-math: false
-mapbox:
-    accessToken: ""
-    lightStyle: ""
-    darkStyle: ""
-    navigation: true
-    geolocate: true
-    scale: true
-    fullscreen: true
+toc:
+  auto: false
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 Découvrez en quoi consiste le thème Hugo - **LoveIt** et les concepts fondamentaux qui le sous-tendent.
@@ -55,7 +38,7 @@ Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-ma
 {{< /admonition >}}
 
 {{< admonition note "Why need the Hugo extended version?" >}}
-Since this theme processes SCSS to CSS, Hugo needs to be the **extended** version.
+Since the theme processes SCSS to CSS, Hugo needs to be the **extended** version.
 {{< /admonition >}}
 
 ## 2 Installation
@@ -107,7 +90,7 @@ theme = "LoveIt"
 
 [params]
   # LoveIt theme version
-  version = "0.1.X"
+  version = "0.2.X"
 
 [menu]
   [[menu.main]]
@@ -150,7 +133,7 @@ hugo new posts/first_post.md
 Feel free to edit the post file by adding some sample content and replacing the title value in the beginning of the file.
 
 {{< admonition >}}
-By default all posts and pages are created as a draft. If you want to render these pages, remove the property `draft: true` from the metadata or set the property `draft: false`.
+By default all posts and pages are created as a draft. If you want to render these pages, remove the property `draft: true` from the metadata, set the property `draft: false` or add `-D`/`--buildDrafts` parameter to `hugo` command.
 {{< /admonition >}}
 
 ### 2.5 Launching the Website Locally
@@ -167,6 +150,15 @@ Go to `http://localhost:1313`.
 
 {{< admonition tip >}}
 When you run `hugo serve`, when the contents of the files change, the page automatically refreshes with the changes.
+{{< /admonition >}}
+
+{{< admonition >}}
+Since the theme use `.Scratch` in Hugo to implement some features,
+it is highly recommended that you add `--disableFastRender` parameter to `hugo server` command for the live preview of the page you are editing.
+
+```bash
+hugo serve --disableFastRender
+```
 {{< /admonition >}}
 
 ### 2.6 Build the Website
@@ -196,8 +188,8 @@ Note that some of these parameters are explained in details in other sections of
 
 ```toml
 [params]
-  # LoveIt theme version
-  version = "0.1.X"
+  # {{< version 0.2.0 changed >}} LoveIt theme version
+  version = "0.2.X"
   # site description
   description = "This is My New Hugo Site"
   # site keywords
@@ -209,34 +201,65 @@ Note that some of these parameters are explained in details in other sections of
   # {{< version 0.1.1 >}} which hash function used for SRI, when empty, no SRI is used
   # ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
-  # {{< version 0.2.0 >}} Search
+  # {{< version 0.2.0 >}} date format
+  dateFormat = "2006-01-02"
+
+  # {{< version 0.2.0 >}} Search config
   [params.search]
     enable = true
     # type of search engine ("lunr", "algolia")
     type = "lunr"
     # index length of the content
     contentLength = 5000
+    # placeholder of the search bar
+    placeholder = ""
     [params.search.algolia]
       index = ""
       appID = ""
       searchKey = ""
-  # Header info
+
+  # Header config
   [params.header]
     # desktop header mode ("fixed", "normal", "auto")
     desktopMode = "fixed"
     # mobile header mode ("fixed", "normal", "auto")
     mobileMode = "auto"
-  # Footer Copyright Info
+
+  # Footer config
   [params.footer]
+    enable = true
+    # {{< version 0.2.0 >}} Custom content (HTML format is supported)
+    custom = ''
+    # {{< version 0.2.0 >}} whether to show Hugo and theme info
+    hugo = true
+    # {{< version 0.2.0 >}} whether to show copyright info
+    copyright = true
+    # {{< version 0.2.0 >}} whether to show the author
+    author = true
     # Site creation time
     since = 2019
     # ICP info only in China (HTML format is supported)
     icp = ""
     # license info (HTML format is supported)
     license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
-  # Home Page Info
+
+  # {{< version 0.2.0 >}} Section (all posts) page config
+  [params.section]
+    # special amount of posts in each section page
+    paginate = 20
+    # date format (month and day)
+    dateFormat = "01-02"
+
+  # {{< version 0.2.0 >}} List (category or tag) page config
+  [params.list]
+    # special amount of posts in each list page
+    paginate = 20
+    # date format (month and day)
+    dateFormat = "01-02"
+
+  # Home page config
   [params.home]
-    # Home Page Profile
+    # Home page profile
     [params.home.profile]
       enable = true
       # Gravatar Email for preferred avatar in home page
@@ -251,14 +274,15 @@ Note that some of these parameters are explained in details in other sections of
       social = true
       # {{< version 0.2.0 >}} disclaimer (HTML format is supported)
       disclaimer = ""
-    # Home Page Posts
+    # Home page posts
     [params.home.posts]
       enable = true
       # special amount of posts in each home posts page
       paginate = 6
-      # default behavior when you don't set "hiddenFromHomePage" in front matter
+      # {{< version 0.2.0 deleted >}} default behavior when you don't set "hiddenFromHomePage" in front matter
       defaultHiddenFromHomePage = false
-  # Social Info in home page
+
+  # Social config about the author
   [params.social]
     GitHub = "xxxx"
     Linkedin = "xxxx"
@@ -325,145 +349,166 @@ Note that some of these parameters are explained in details in other sections of
     # Matrix = "xxxx"
     # Bilibili = "xxxx"
 
-  # Page config
+  # {{< version 0.2.0 changed >}} Page config
   [params.page]
-    # whether to use lightgallery in the page
-    lightgallery = true
-    # whether to show link to Raw Markdown content of the post
+    # {{< version 0.2.0 >}} whether to hide a page from home page
+    hiddenFromHomePage = false
+    # {{< version 0.2.0 >}} whether to hide a page from search results
+    hiddenFromSearch = false
+    # whether to enable lightgallery
+    lightgallery = false
+    # {{< version 0.2.0 >}} whether to show the copy button of the code block
+    copyCode = true
+    # {{< version 0.2.0 >}} whether to enable the ruby extended syntax
+    ruby = true
+    # {{< version 0.2.0 >}} whether to enable the fraction extended syntax
+    fraction = true
+    # {{< version 0.2.0 >}} whether to enable the fontawesome extended syntax
+    fontawesome = true
+    # whether to show link to Raw Markdown content of the content
     linkToMarkdown = true
-  # {{< link "https://katex.org/" KaTeX >}} mathematical formulas
-  [params.math]
-    enable = true
-    # default block delimiter is $$ ... $$ and \\[ ... \\]
-    blockLeftDelimiter = ""
-    blockRightDelimiter = ""
-    # default inline delimiter is $ ... $ and \\( ... \\)
-    inlineLeftDelimiter = ""
-    inlineRightDelimiter = ""
-    # KaTeX extension copy_tex
-    copyTex = true
-    # KaTeX extension mhchem
-    mhchem = true
-  # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config
-  [params.mapbox]
-    # access token of Mapbox GL JS
-    accessToken = ""
-    # style for the light theme
-    lightStyle = "mapbox://styles/mapbox/light-v9"
-    # style for the dark theme
-    darkStyle = "mapbox://styles/mapbox/dark-v9"
-    # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol" NavigationControl >}}
-    navigation = true
-    # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol" GeolocateControl >}}
-    geolocate = true
-    # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol" ScaleControl >}}
-    scale = true
-    # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol" FullscreenControl >}}
-    fullscreen = true
-  # Social Share Links in post page
-  [params.share]
-    enable = true
-    Twitter = true
-    Facebook = true
-    Linkedin = true
-    Whatsapp = true
-    Pinterest = true
-    # Tumblr = true
-    HackerNews = true
-    # Reddit = true
-    # VK = true
-    # Buffer = true
-    # Xing = true
-    # Line = true
-    # Instapaper = true
-    # Pocket = true
-    # Digg = true
-    # Stumbleupon = true
-    # Flipboard = true
-    # Weibo = true
-    # Renren = true
-    # Myspace = true
-    # Blogger = true
-    # Baidu = true
-    # Odnoklassniki = true
-    # Evernote = true
-    # Skype = true
-    # Trello = true
-    # Mix = true
-  # Comment Config
-  [params.comment]
-    enable = true
-    # {{< link "https://disqus.com/" Disqus >}} Comment Config
-    [params.comment.disqus]
-      # {{< version 0.1.1 >}}
-      enable = false
-      # Disqus shortname to use Disqus in posts
-      shortname = ""
-    # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} Comment Config
-    [params.comment.gitalk]
-      # {{< version 0.1.1 >}}
-      enable = false
-      owner = ""
-      repo = ""
-      clientId = ""
-      clientSecret = ""
-    # {{< link "https://github.com/xCss/Valine" Valine >}} Comment Config
-    [params.comment.valine]
-      enable = false
-      appId = ""
-      appKey = ""
-      placeholder = "Your comment ..."
-      notify = false
-      verify = true
-      avatar = "mp"
-      meta= ""
-      pageSize = 10
-      lang = "en"
-      visitor = true
-      recordIP = true
-    # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook Comment" >}} Config
-    [params.comment.facebook]
-      enable = false
-      width = "100%"
-      numPosts = 10
-      appId = ""
-      languageCode = "en_US"
-    # {{< version 0.2.0 >}} {{< link "https://comments.app/" "Telegram Comments" >}} Config
-    [params.comment.telegram]
-      enable = false
-      siteID = ""
-      limit = 5
-      height = ""
-      color = ""
-      colorful = true
-      dislikes = false
-      outlined = false
+    # {{< version 0.2.0 >}} Table of the contents config
+    [params.page.toc]
+      # whether to enable the table of the contents
+      enable = true
+      # whether to make the table of the contents automatically collapsed
+      auto = true
+    # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} mathematical formulas
+    [params.page.math]
+      enable = true
+      # default block delimiter is $$ ... $$ and \\[ ... \\]
+      blockLeftDelimiter = ""
+      blockRightDelimiter = ""
+      # default inline delimiter is $ ... $ and \\( ... \\)
+      inlineLeftDelimiter = ""
+      inlineRightDelimiter = ""
+      # KaTeX extension copy_tex
+      copyTex = true
+      # KaTeX extension mhchem
+      mhchem = true
+    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config
+    [params.page.mapbox]
+      # access token of Mapbox GL JS
+      accessToken = ""
+      # style for the light theme
+      lightStyle = "mapbox://styles/mapbox/light-v9"
+      # style for the dark theme
+      darkStyle = "mapbox://styles/mapbox/dark-v9"
+      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol" NavigationControl >}}
+      navigation = true
+      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol" GeolocateControl >}}
+      geolocate = true
+      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol" ScaleControl >}}
+      scale = true
+      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol" FullscreenControl >}}
+      fullscreen = true
+    # {{< version 0.2.0 changed >}} social share links in post page
+    [params.page.share]
+      enable = true
+      Twitter = true
+      Facebook = true
+      Linkedin = true
+      Whatsapp = true
+      Pinterest = true
+      # Tumblr = true
+      HackerNews = true
+      # Reddit = true
+      # VK = true
+      # Buffer = true
+      # Xing = true
+      # Line = true
+      # Instapaper = true
+      # Pocket = true
+      # Digg = true
+      # Stumbleupon = true
+      # Flipboard = true
+      # Weibo = true
+      # Renren = true
+      # Myspace = true
+      # Blogger = true
+      # Baidu = true
+      # Odnoklassniki = true
+      # Evernote = true
+      # Skype = true
+      # Trello = true
+      # Mix = true
+    # {{< version 0.2.0 changed >}} Comment config
+    [params.page.comment]
+      enable = true
+      # {{< link "https://disqus.com/" Disqus >}} comment config
+      [params.page.comment.disqus]
+        # {{< version 0.1.1 >}}
+        enable = false
+        # Disqus shortname to use Disqus in posts
+        shortname = ""
+      # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} comment config
+      [params.page.comment.gitalk]
+        # {{< version 0.1.1 >}}
+        enable = false
+        owner = ""
+        repo = ""
+        clientId = ""
+        clientSecret = ""
+      # {{< link "https://github.com/xCss/Valine" Valine >}} comment config
+      [params.page.comment.valine]
+        enable = false
+        appId = ""
+        appKey = ""
+        placeholder = ""
+        notify = false
+        verify = true
+        avatar = "mp"
+        meta= ""
+        pageSize = 10
+        lang = ""
+        visitor = true
+        recordIP = true
+      # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook comment" >}} config
+      [params.page.comment.facebook]
+        enable = false
+        width = "100%"
+        numPosts = 10
+        appId = ""
+        languageCode = ""
+      # {{< version 0.2.0 >}} {{< link "https://comments.app/" "Telegram comments" >}} config
+      [params.page.comment.telegram]
+        enable = false
+        siteID = ""
+        limit = 5
+        height = ""
+        color = ""
+        colorful = true
+        dislikes = false
+        outlined = false
+    # {{< version 0.2.0 >}} SEO config
+    [params.page.seo]
+      # Publisher info
+      [params.page.seo.publisher]
+        name = "xxxx"
+        [params.page.seo.publisher.logo]
+          url = "logo.png"
+          width = 127
+          height = 40
+      # Logo info
+      [params.page.seo.logo]
+        url = "logo.png"
+        width = 127
+        height = 40
+      # Image info
+      [params.page.seo.image]
+        url = "cover.png"
+        width = 800
+        height = 600
 
-  # site verification code for Google/Bing/Yandex/Pinterest/Baidu
+  # Site verification code config for Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
     google = ""
     bing = ""
     yandex = ""
     pinterest = ""
     baidu = ""
-  # Publisher Info just for SEO
-  [params.publisher]
-    name = "xxxx"
-    [params.publisher.logo]
-      url = "logo.png"
-      width = 127
-      height = 40
-  # Website Log Info just for SEO
-  [params.logo]
-    url = "logo.png"
-    width = 127
-    height = 40
-  # Website Image Info just for SEO
-  [params.image]
-    url = "cover.png"
-    width = 800
-    height = 600
-  # CSS and JS Files CDN
+
+  # CSS and JS Files CDN config
   [params.cdn]
     # {{< version 0.2.0 >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
     normalizeCSS = ''
@@ -518,7 +563,7 @@ Note that some of these parameters are explained in details in other sections of
     # {{< link "https://valine.js.org/" "valine" >}}@1.3.10
     valineJS = ''
 
-# Markup related configuration in Hugo
+# Markup related config in Hugo
 [markup]
   # {{< link "https://gohugo.io/content-management/syntax-highlighting" "Syntax Highlighting" >}}
   [markup.highlight]
@@ -547,27 +592,26 @@ Note that some of these parameters are explained in details in other sections of
     startLevel = 2
     endLevel = 6
 
-# Author Info
+# Author config
 [author]
   name = "xxxx"
   link = ""
 
-# Sitemap Info
+# Sitemap config
 [sitemap]
   changefreq = "weekly"
   filename = "sitemap.xml"
   priority = 0.5
 
-# {{< link "https://gohugo.io/content-management/urls/#permalinks" "Permalinks Info" >}}
+# {{< link "https://gohugo.io/content-management/urls/#permalinks" "Permalinks config" >}}
 [Permalinks]
   # posts = ":year/:month/:filename"
   posts = ":filename"
 
-# {{< link "https://gohugo.io/about/hugo-and-gdpr/" "Privacy Info" >}}
+# {{< link "https://gohugo.io/about/hugo-and-gdpr/" "Privacy config" >}}
 [privacy]
   [privacy.googleAnalytics]
     anonymizeIP = true
-
   [privacy.youtube]
     privacyEnhanced = true
 

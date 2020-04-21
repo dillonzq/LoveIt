@@ -1,10 +1,16 @@
-{{- $content := . -}}
+{{- $content := .content -}}
 
-{{- $content = partial "function/ruby.html" $content -}}
+{{- if .ruby -}}
+    {{- $content = partial "function/ruby.html" $content -}}
+{{- end -}}
 
-{{- $content = partial "function/fraction.html" $content -}}
+{{- if .fraction -}}
+    {{- $content = partial "function/fraction.html" $content -}}
+{{- end -}}
 
-{{- $content = partial "function/fontawesome.html" $content -}}
+{{- if .fontawesome -}}
+    {{- $content = partial "function/fontawesome.html" $content -}}
+{{- end -}}
 
 {{- $content = partial "function/checkbox.html" $content -}}
 

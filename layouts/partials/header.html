@@ -36,7 +36,7 @@
                 {{- end -}}
                 {{- if .Site.Params.search.enable -}}
                     <span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="{{ T `searchPlaceholder` }}" id="search-input-desktop">
+                        <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="{{ T `search` }}">
                             <i class="fas fa-search fa-fw"></i>
                         </a>
@@ -73,7 +73,7 @@
             {{- if .Site.Params.search.enable -}}
                 <div class="search-wrapper">
                     <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="{{ T `searchPlaceholder` }}" id="search-input-mobile">
+                        <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-mobile">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="{{ T `search` }}">
                             <i class="fas fa-search fa-fw"></i>
                         </a>

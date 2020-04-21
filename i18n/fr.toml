@@ -52,6 +52,17 @@ other = "Propulsé par %s"
 other = "Thème"
 # === partials/footer.html ===
 
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "Votre commentaire ..."
+
+[facebookLanguageCode]
+other = "fr"
+# === partials/comment.html ===
+
 # === partials/assets.html ===
 [search]
 other = "Chercher"

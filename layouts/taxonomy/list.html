@@ -12,12 +12,13 @@
             {{- else if eq $taxonomy "tag" -}}
                 <i class="fas fa-tag fa-fw"></i>&nbsp;{{ humanize .Title }}
             {{- else -}}
-                {{- printf "%s - %s" (T $taxonomy | default  (humanize $taxonomy)) .Title -}}
+                {{- printf "%s - %s" (T $taxonomy | default (humanize $taxonomy)) .Title -}}
             {{- end -}}
         </h2>
 
         {{- /* Paginate */ -}}
-        {{- range (.Paginate (.Pages.GroupByDate "2006")).PageGroups -}}
+        {{- $pages := .Pages.GroupByDate "2006" -}}
+        {{- range (.Site.Params.list.paginate | default .Site.Params.paginate | .Paginate $pages).PageGroups -}}
             <h3>{{ .Key }}</h3>
             {{- range .Pages -}}
                 <article class="archive-item">
@@ -25,7 +26,7 @@
                         {{- .Title -}}
                     </a>
                     <span class="archive-item-date">
-                        {{- .Date.Format (.Site.Params.dateFormatToUse | default "01-02") -}}
+                        {{- .Date.Format ($.Site.Params.list.dateFormat | default "01-02") -}}
                     </span>
                 </article>
             {{- end -}}

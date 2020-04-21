@@ -1,6 +1,5 @@
-{{- $scratch := .Scratch.Get "scratch" -}}
-{{- $CDN := $scratch.Get "CDN" -}}
-{{- $fingerprint := $scratch.Get "fingerprint" -}}
+{{- $cdn := .Scratch.Get "cdn" | default dict -}}
+{{- $fingerprint := .Scratch.Get "fingerprint" -}}
 
 <link rel="canonical" href="{{ .Permalink }}" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -23,7 +22,7 @@
 {{- end -}}
 
 {{- /* normalize.css */ -}}
-{{- $source := $CDN.normalizeCSS | default "lib/normalize/normalize.min.css" -}}
+{{- $source := $cdn.normalizeCSS | default "lib/normalize/normalize.min.css" -}}
 {{- $stylesheet := dict "source" $source "fingerprint" $fingerprint -}}
 {{- partial "plugin/stylesheet.html" $stylesheet -}}
 
@@ -34,11 +33,11 @@
 {{- partial "plugin/stylesheet.html" $stylesheet -}}
 
 {{- /* Font Awesome */ -}}
-{{- $source := $CDN.fontawesomeFreeCSS | default "lib/fontawesome-free/all.min.css" -}}
+{{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/all.min.css" -}}
 {{- $stylesheet := dict "source" $source "fingerprint" $fingerprint -}}
 {{- partial "plugin/stylesheet.html" $stylesheet -}}
 
 {{- /* Animate.css */ -}}
-{{- $source := $CDN.animateCSS | default "lib/animate/animate.min.css" -}}
+{{- $source := $cdn.animateCSS | default "lib/animate/animate.min.css" -}}
 {{- $stylesheet := dict "source" $source "fingerprint" $fingerprint -}}
 {{- partial "plugin/stylesheet.html" $stylesheet -}}

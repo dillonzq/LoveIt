@@ -31,7 +31,7 @@ class Util {
 class Theme {
     constructor() {
         this.config = window.config;
-        this.contentData = this.config.content;
+        this.data = this.config.data;
         this.isDark = document.body.classList.contains('dark');
         this.util = new Util();
         this.newScrollTop = this.util.getScrollTop();
@@ -356,7 +356,7 @@ class Theme {
             const $tocLinkElements = $tocCore.getElementsByTagName('a');
             const $tocLiElements = $tocCore.getElementsByTagName('li');
             const $headerLinkElements = document.getElementsByClassName('headerLink');
-            const headerIsFixed = this.config.desktopHeaderMode !== 'normal';
+            const headerIsFixed = this.config.headerMode.desktop !== 'normal';
             const headerHeight = document.getElementById('header-desktop').offsetHeight;
             const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
             const minTocTop = $toc.offsetTop;
@@ -412,7 +412,7 @@ class Theme {
         if ($mermaidElements.length) {
             mermaid.initialize({startOnLoad: false, theme: 'null'});
             this.util.forEach($mermaidElements, $mermaid => {
-                mermaid.mermaidAPI.render('svg-' + $mermaid.id, this.contentData[$mermaid.id], svgCode => {
+                mermaid.mermaidAPI.render('svg-' + $mermaid.id, this.data[$mermaid.id], svgCode => {
                     $mermaid.innerHTML = svgCode;
                 }, $mermaid);
             });
@@ -428,7 +428,7 @@ class Theme {
             this._echartsArr = [];
             this.util.forEach(document.getElementsByClassName('echarts'), $echarts => {
                 const chart = echarts.init($echarts, this.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
-                chart.setOption(JSON.parse(this.contentData[$echarts.id]));
+                chart.setOption(JSON.parse(this.data[$echarts.id]));
                 this._echartsArr.push(chart);
             });
         });
@@ -448,7 +448,7 @@ class Theme {
             mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
             this._mapboxArr = this._mapboxArr || [];
             this.util.forEach(document.getElementsByClassName('mapbox'), $mapbox => {
-                const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = this.contentData[$mapbox.id];
+                const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = this.data[$mapbox.id];
                 const mapbox = new mapboxgl.Map({
                     container: $mapbox,
                     center: [lng, lat],
@@ -484,7 +484,7 @@ class Theme {
             this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || (() => {
                 this.util.forEach(this._mapboxArr, mapbox => {
                     const $mapbox = mapbox.getContainer();
-                    const { lightStyle, darkStyle } = this.contentData[$mapbox.id];
+                    const { lightStyle, darkStyle } = this.data[$mapbox.id];
                     mapbox.setStyle(this.isDark ? darkStyle : lightStyle);
                     mapbox.addControl(new MapboxLanguage());
                 });
@@ -495,26 +495,25 @@ class Theme {
 
     initTypeit() {
         if (this.config.typeit) {
-            const typeitData = this.config.typeit;
-            for (let i = 0; i < typeitData.length; i++) {
-                const group = typeitData[i];
-                ((i) => {
+            this.config.typeit.forEach(group => {
+                const typeone = (i) => {
                     const id = group[i];
                     if (i === group.length - 1) {
                         new TypeIt(`#${id}`, {
-                            strings: this.contentData[id],
+                            strings: this.data[id],
                         }).go();
                         return;
                     }
                     let instance = new TypeIt(`#${id}`, {
-                        strings: this.contentData[id],
+                        strings: this.data[id],
                         afterComplete: () => {
                             instance.destroy();
                             typeone(i + 1);
                         },
                     }).go();
-                })(0);
-            }
+                };
+                typeone(0);
+            });
         }
     }
 
@@ -528,8 +527,8 @@ class Theme {
     }
 
     initSmoothScroll() {
-        if ((!this.util.isMobile() && this.config.desktopHeaderMode === 'normal')
-          || (this.util.isMobile() && this.config.mobileHeaderMode === 'normal')) {
+        if ((!this.util.isMobile() && this.config.headerMode.desktop === 'normal')
+          || (this.util.isMobile() && this.config.headerMode.mobile === 'normal')) {
             new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true});
         } else {
             new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true, header: '#header-desktop'});
@@ -538,8 +537,8 @@ class Theme {
 
     onScroll() {
         const $headers = [];
-        if (this.config.desktopHeaderMode === 'auto') $headers.push(document.getElementById('header-desktop'));
-        if (this.config.mobileHeaderMode === 'auto') $headers.push(document.getElementById('header-mobile'));
+        if (this.config.headerMode.desktop === 'auto') $headers.push(document.getElementById('header-desktop'));
+        if (this.config.headerMode.mobile === 'auto') $headers.push(document.getElementById('header-mobile'));
         if (document.getElementById('comments')) {
             const $viewComments = document.getElementById('view-comments');
             $viewComments.href = `#comments`;
@@ -606,14 +605,14 @@ class Theme {
         this.initHighlight();
         this.initTable();
         this.initHeaderLink();
-        this.initMath();
-        this.initMermaid();
-        this.initEcharts();
-        this.initMapbox();
-        this.initTypeit();
         this.initToc();
         this.initComment();
         this.initSmoothScroll();
+        this.initMath();
+        this.initMermaid();
+        this.initEcharts();
+        this.initTypeit();
+        this.initMapbox();
 
         this.onScroll();
         this.onResize();

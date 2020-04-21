@@ -3,6 +3,6 @@
 {{- /* shuffle md5 as id */ -}}
 {{- $id := delimit (split (md5 now.Unix) "" | shuffle | first 6) "" | printf "id-%s" -}}
 {{- with .scratch -}}
-    {{- .SetInMap "contentData" $id $.content -}}
+    {{- dict $id $.content | dict "data" | dict "config" | merge (.Get "this") | .Set "this" -}}
 {{- end -}}
 {{- return $id -}}
