@@ -63,6 +63,7 @@ I hope you will LoveIt ❤️!
 * Optimized for **performance**: 99/100 on mobile and 100/100 on desktop in [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
 * Optimized SEO performance with a correct **SEO SCHEMA** based on JSON-LD
 * [**Google Analytics**](https://analytics.google.com/analytics) supported
+* [**Fathom Analytics**](https://usefathom.com/) supported
 * Search engine **verification** supported (Google, Bind, Yandex and Baidu)
 * **CDN** for third-party libraries supported
 * Automatically converted images with **Lazy Load** by [lazysizes](https://github.com/aFarkas/lazysizes)

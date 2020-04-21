@@ -782,6 +782,11 @@ enableEmoji = true
     yandex = ""
     pinterest = ""
     baidu = ""
+  [params.fathomAnalytics]
+    # siteID = "ABC123"
+    # If you're self hosting use this for your tracker
+    # serverURL = "https://example.com"
+
   # CSS and JS Files CDN
   # CSS 和 JS 文件的 CDN 设置
   [params.cdn]
