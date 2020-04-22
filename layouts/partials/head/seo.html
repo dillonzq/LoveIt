@@ -29,11 +29,11 @@
         {{- with .Site.Author.name -}}
             "author": {
                 "@type": "Person",
-                "name": "{{ . | safeJS }}"
+                "name": {{ . | safeHTML }}
             },
         {{- end -}}
         {{- with .Site.Params.description -}}
-            "description": "{{ . | safeJS }}",
+            "description": {{ . | safeHTML }},
         {{- end -}}
         {{- with $params.seo.image -}}
             "image": "{{ .url | absURL }}",
@@ -42,9 +42,9 @@
             "thumbnailUrl": "{{ .url | absURL }}",
         {{- end -}}
         {{- with .Site.Copyright -}}
-            "license": "{{ . | safeJS }}",
+            "license": "{{ . | safeHTML }}",
         {{- end -}}
-        "name": "{{ .Site.Title | safeJS }}"
+        "name": {{ .Site.Title | safeHTML }}
     }
     </script>
 
@@ -54,7 +54,7 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "{{ .Title | safeJS }}",
+        "headline": {{ .Title | safeHTML }},
         "inLanguage": "{{ .Site.LanguageCode }}",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -75,20 +75,20 @@
         "wordcount": {{ .WordCount }},
         "url": "{{ .Permalink }}",
         {{- if not .PublishDate.IsZero -}}
-            "datePublished": "{{ .PublishDate.Format "2006-01-02" }}",
+            "datePublished": {{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | safeHTML }},
         {{- else if not .Date.IsZero -}}
-            "datePublished": "{{ .Date.Format "2006-01-02" }}",
+            "datePublished": {{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }},
         {{- end -}}
         {{- with .Lastmod -}}
-            "dateModified": "{{ .Format "2006-01-02" }}",
+            "dateModified": {{ .Format "2006-01-02T15:04:05-07:00" | safeHTML }},
         {{- end -}}
         {{- with .Site.Copyright -}}
-            "license": "{{ . | safeJS }}",
+            "license": {{ . | safeHTML }},
         {{- end -}}
         {{- with $params.seo.publisher -}}
             "publisher": {
                 "@type": "Organization",
-                "name": "{{ .name | safeJS }}",
+                "name": "{{ .name }}",
                 "logo": {
                 "@type": "ImageObject",
                 "url": "{{ .logo.url | absURL }}",
@@ -100,10 +100,10 @@
         {{- with .Params.author | default .Site.Author.name | default (T "author") -}}
             "author": {
                 "@type": "Person",
-                "name": "{{ . | safeJS }}"
+                "name": {{ . | safeHTML }}
             },
         {{- end -}}
-        "description": "{{ .Description | safeJS }}"
+        "description": {{ .Description | safeHTML }}
     }
     </script>
 {{- end -}}
