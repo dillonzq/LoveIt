@@ -247,6 +247,8 @@ hugo
     paginate = 20
     # 日期格式 (月和日)
     dateFormat = "01-02"
+    # RSS 文章数目
+    rss = 10
 
   # {{< version 0.2.0 >}} List (目录或标签) 页面配置
   [params.list]
@@ -254,9 +256,13 @@ hugo
     paginate = 20
     # 日期格式 (月和日)
     dateFormat = "01-02"
+    # RSS 文章数目
+    rss = 10
 
   # 主页配置
   [params.home]
+    # {{< version 0.2.0 >}} RSS 文章数目
+    rss = 10
     # 主页个人信息
     [params.home.profile]
       enable = true
@@ -346,6 +352,7 @@ hugo
     # XMPP = "xxxx"
     # Matrix = "xxxx"
     Bilibili = "xxxx"
+    RSS = true # {{< version 0.2.0 >}}
 
   # {{< version 0.2.0 changed >}} 文章页面配置
   [params.page]
@@ -609,6 +616,7 @@ hugo
 # 作者配置
 [author]
   name = "xxxx"
+  email = ""
   link = ""
 
 # 网站地图配置

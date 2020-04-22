@@ -249,6 +249,8 @@ Note that some of these parameters are explained in details in other sections of
     paginate = 20
     # date format (month and day)
     dateFormat = "01-02"
+    # amount of RSS pages
+    rss = 10
 
   # {{< version 0.2.0 >}} List (category or tag) page config
   [params.list]
@@ -256,9 +258,13 @@ Note that some of these parameters are explained in details in other sections of
     paginate = 20
     # date format (month and day)
     dateFormat = "01-02"
+    # amount of RSS pages
+    rss = 10
 
   # Home page config
   [params.home]
+    # {{< version 0.2.0 >}} amount of RSS pages
+    rss = 10
     # Home page profile
     [params.home.profile]
       enable = true
@@ -348,6 +354,7 @@ Note that some of these parameters are explained in details in other sections of
     # XMPP = "xxxx"
     # Matrix = "xxxx"
     # Bilibili = "xxxx"
+    RSS = true # {{< version 0.2.0 >}}
 
   # {{< version 0.2.0 changed >}} Page config
   [params.page]
@@ -611,6 +618,7 @@ Note that some of these parameters are explained in details in other sections of
 # Author config
 [author]
   name = "xxxx"
+  email = ""
   link = ""
 
 # Sitemap config

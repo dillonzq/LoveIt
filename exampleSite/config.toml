@@ -104,6 +104,8 @@ enableEmoji = true
           searchKey = "b42948e51daaa93df92381c8e2ac0f93"
       # Home page config
       [languages.en.params.home]
+        # amount of RSS pages
+        rss = 10
         # Home page profile
         [languages.en.params.home.profile]
           enable = true
@@ -190,6 +192,7 @@ enableEmoji = true
         # XMPP = "xxxx"
         # Matrix = "xxxx"
         # Bilibili = "xxxx"
+        RSS = true
 
   [languages.zh-cn]
     weight = 2
@@ -269,6 +272,8 @@ enableEmoji = true
           searchKey = "b42948e51daaa93df92381c8e2ac0f93"
       # 主页信息设置
       [languages.zh-cn.params.home]
+        # RSS 文章数目
+        rss = 10
         # 主页个人信息
         [languages.zh-cn.params.home.profile]
           enable = true
@@ -355,6 +360,7 @@ enableEmoji = true
         # XMPP = "xxxx@example.com"
         # Matrix = "xxxx"
         Bilibili = "xxxx"
+        RSS = true
 
   [languages.fr]
     weight = 3
@@ -434,6 +440,8 @@ enableEmoji = true
           searchKey = "b42948e51daaa93df92381c8e2ac0f93"
       # Home page config
       [languages.fr.params.home]
+        # amount of RSS pages
+        rss = 10
         # Home page profile
         [languages.fr.params.home.profile]
           enable = true
@@ -520,6 +528,7 @@ enableEmoji = true
         # XMPP = "xxxx"
         # Matrix = "xxxx"
         # Bilibili = "xxxx"
+        RSS = true
 
 [params]
   # LoveIt theme version
@@ -583,6 +592,9 @@ enableEmoji = true
     # date format (month and day)
     # 日期格式 (月和日)
     dateFormat = "01-02"
+    # amount of RSS pages
+    # RSS 文章数目
+    rss = 10
 
   # List (category or tag) page config
   # List (目录或标签) 页面配置
@@ -593,6 +605,9 @@ enableEmoji = true
     # date format (month and day)
     # 日期格式 (月和日)
     dateFormat = "01-02"
+    # amount of RSS pages
+    # RSS 文章数目
+    rss = 10
 
   # Page config
   # 文章页面配置
@@ -903,6 +918,7 @@ enableEmoji = true
 # 作者配置
 [author]
   name = "xxxx"
+  email = ""
   link = ""
 
 # Sitemap config

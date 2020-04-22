@@ -3,7 +3,7 @@
 {{- else -}}
     {{- $href := .source -}}
     {{- $integrity := .integrity -}}
-    {{- if strings.HasPrefix $href "http" | not -}}
+    {{- if (urls.Parse $href).Host | not -}}
         {{- $res := resources.Get $href -}}
         {{- with .template -}}
             {{- $res = $res | resources.ExecuteAsTemplate . $.context -}}

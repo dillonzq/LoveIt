@@ -34,7 +34,7 @@
         {{- with .Get "list-max-height" }} list-max-height="{{ . }}"{{ end -}}
         ></meting-js>
     {{- end -}}
-{{- else if strings.HasSuffix (.Get 0) "http" -}}
+{{- else if (.Get 0 | urls.Parse).Host -}}
     <meting-js auto="{{ .Get 0 }}" theme="{{ $theme }}"></meting-js>
 {{- else -}}
     <meting-js server="{{ .Get 0 }}" type="{{ .Get 1 }}" id="{{ .Get 2 }}" theme="{{ $theme }}"></meting-js>
