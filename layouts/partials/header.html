@@ -2,14 +2,20 @@
 <header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="{{ `/` | relLangURL }}">
+            <a href="{{ .Site.Home.RelPermalink }}">
                 {{- .Site.Title -}}
             </a>
         </div>
         <div class="menu">
             <div class="menu-inner">
                 {{- range .Site.Menus.main -}}
-                    <a class="menu-item{{ if $.IsMenuCurrent "main" . | or ($.HasMenuCurrent "main" .) | or (.URL | relLangURL | string | eq $.RelPermalink ) }} active{{ end }}" href="{{ .URL | relLangURL }}"{{ with .Title }} title="{{ . }}"{{ end }} rel="noopener noreffer"{{ if strings.HasPrefix .URL "http" }} target="_blank"{{ end }}>
+                    {{- $url := "" -}}
+                    {{- with .Page -}}
+                        {{- $url = .RelPermalink -}}
+                    {{- else -}}
+                        {{- $url = .URL | relLangURL -}}
+                    {{- end -}}
+                    <a class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
                         {{- .Pre | safeHTML }}{{ .Name -}}
                     </a>
                 {{- end -}}
@@ -61,7 +67,7 @@
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="{{ `/` | relLangURL }}">
+                <a href="{{ .Site.Home.RelPermalink }}">
                     {{- .Site.Title -}}
                 </a>
             </div>
@@ -91,7 +97,13 @@
             {{- end -}}
             {{- $currentPage := . -}}
             {{- range .Site.Menus.main -}}
-                <a class="menu-item" href="{{ .URL | relLangURL }}" title="{{ .Title }}" rel="noopener noreffer"{{ if strings.HasPrefix .URL "http" }} target="_blank"{{ end }}>
+                {{- $url := "" -}}
+                {{- with .Page -}}
+                    {{- $url = .RelPermalink -}}
+                {{- else -}}
+                    {{- $url = .URL | relLangURL -}}
+                {{- end -}}
+                <a class="menu-item" href="{{ $url }}" title="{{ .Title }}"{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
                     {{- .Pre | safeHTML }}{{ .Name -}}
                 </a>
             {{- end -}}

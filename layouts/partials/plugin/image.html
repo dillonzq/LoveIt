@@ -2,15 +2,15 @@
 {{- $loading := resources.Get "svg/loading/normal.svg" | minify -}}
 {{- $small := .src_s | default .src -}}
 {{- $large := .src_l | default .src -}}
-{{- $alt := .alt | default .src -}}
+{{- $alt := .alt | default (relURL .src) -}}
 {{- if .linked -}}
-    <a class="lightgallery" href="{{ $large | safeURL }}" title="{{ .title | default $alt }}" data-thumbnail="{{ $small | safeURL }}"{{ with .caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.alt }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .rel }} rel="{{ . }}"{{ end }}>
+    <a class="lightgallery" href="{{ $large | relURL }}" title="{{ .title | default $alt }}" data-thumbnail="{{ $small | relURL }}"{{ with .caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.alt }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .rel }} rel="{{ . }}"{{ end }}>
         <img
             class="lazyload"
-            src="{{ $loading.RelPermalink | safeURL }}"
+            src="{{ $loading.RelPermalink }}"
             data-sizes="auto"
-            data-srcset="{{ $small | safeURL }}, {{ .src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
-            data-src="{{ .src | safeURL }}"
+            data-srcset="{{ $small | relURL }}, {{ .src | relURL }} 1.5x, {{ $large | relURL }} 2x"
+            data-src="{{ .src | relURL }}"
             alt="{{ $alt }}"{{ with .height }} height="{{ . }}"{{ end }}{{ with .width }} width="{{ . }}"{{ end }} />
     </a>
 {{- else -}}
@@ -21,8 +21,8 @@
         class="lazyload"
         src="{{ $loading.RelPermalink | safeURL }}"
         data-sizes="auto"
-        data-srcset="{{ $small | safeURL }}, {{ .src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
-        data-src="{{ .src | safeURL }}"
+        data-srcset="{{ $small | relURL }}, {{ .src | relURL }} 1.5x, {{ $large | relURL }} 2x"
+        data-src="{{ .src | relURL }}"
         alt="{{ $alt }}"
         title="{{ .title | default $alt }}"{{ with .height }} height="{{ . }}"{{ end }}{{ with .width }} width="{{ . }}"{{ end }} />
 {{- end -}}
