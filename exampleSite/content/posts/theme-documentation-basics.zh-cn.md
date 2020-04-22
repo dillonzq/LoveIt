@@ -8,14 +8,14 @@ author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "探索 Hugo - LoveIt 主题的全部内容和背后的核心概念."
 
-tags: ["安装", "配置"]
+tags: ["installation", "configuration"]
 categories: ["documentation"]
-
 featuredImage: "/images/theme-documentation-basics/featured-image.jpg"
+
+lightgallery: true
 
 toc:
   auto: false
-lightgallery: true
 ---
 
 探索 Hugo - **LoveIt** 主题的全部内容和背后的核心概念.

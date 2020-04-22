@@ -10,7 +10,6 @@ description: "Hugo fournit plusieurs shortcodes intégrés pour la commodité de
 
 tags: ["shortcodes"]
 categories: ["documentation"]
-
 featuredImage: "/images/theme-documentation-built-in-shortcodes/featured-image.png"
 
 lightgallery: true

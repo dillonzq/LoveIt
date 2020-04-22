@@ -10,12 +10,12 @@ description: "Discover what the Hugo - LoveIt theme is all about and the core-co
 
 tags: ["installation", "configuration"]
 categories: ["documentation"]
-
 featuredImage: "/images/theme-documentation-basics/featured-image.jpg"
+
+lightgallery: true
 
 toc:
   auto: false
-lightgallery: true
 ---
 
 Discover what the Hugo - **LoveIt** theme is all about and the core-concepts behind it.

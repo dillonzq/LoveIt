@@ -8,16 +8,16 @@ author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Find out how to create and organize your content quickly and intuitively in LoveIt theme."
 
-tags: ["content", "markdown"]
+tags: ["content", "Markdown"]
 categories: ["documentation"]
-
 featuredImage: "/images/theme-documentation-content/featured-image.jpg"
+
+lightgallery: true
 
 toc:
   auto: false
 math:
   enable: true
-lightgallery: true
 ---
 
 Find out how to create and organize your content quickly and intuitively in **LoveIt** theme.

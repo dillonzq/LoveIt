@@ -10,7 +10,6 @@ description: "LoveIt theme provides multiple shortcodes on top of built-in ones 
 
 tags: ["shortcodes"]
 categories: ["documentation"]
-
 featuredImage: "/images/theme-documentation-extended-shortcodes/featured-image.jpg"
 featuredImagePreview: "/images/theme-documentation-extended-shortcodes/featured-image-preview.jpg"
 
