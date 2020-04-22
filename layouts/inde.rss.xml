@@ -1,13 +1,13 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>
-            {{- with .Title }}{{ . }} | {{ end }}{{ .Site.Title -}}
+            {{- .Site.Title -}}
         </title>
         <link>
             {{- .Permalink -}}
         </link>
         <description>
-            {{- with .Title }}{{ . }} | {{ end }}{{ .Site.Title -}}
+            {{- .Site.Params.description | default .Site.Title -}}
         </description>
         <generator>Hugo -- gohugo.io</generator>
         {{- with .Site.LanguageCode -}}
@@ -17,10 +17,10 @@
         {{- end -}}
         {{- with .Site.Author.email -}}
             <managingEditor>
-                {{- . }}{{ with .Site.Author.name }} ({{ . }}){{ end -}}
+                {{- . }}{{ with $.Site.Author.name }} ({{ . }}){{ end -}}
             </managingEditor>
             <webMaster>
-                {{- . }}{{ with .Site.Author.name }} ({{ . }}){{ end -}}
+                {{- . }}{{ with $.Site.Author.name }} ({{ . }}){{ end -}}
             </webMaster>
         {{- end -}}
         {{- with .Site.Copyright -}}
@@ -33,8 +33,8 @@
                 {{- .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" -}}
             </lastBuildDate>
         {{- end -}}
-        <atom:link href="{{.Permalink}}" rel="self" type="application/rss+xml" />
-        {{- range first 15 (where .Data.Pages "Type" "!=" "home") -}}
+        <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
+        {{- range where .Site.RegularPages "Type" "posts" | first (.Site.Params.home.rss | default 10) -}}
             <item>
                 <title>
                     {{- .Title -}}
@@ -45,16 +45,18 @@
                 <pubDate>
                     {{- .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700"  -}}
                 </pubDate>
-                {{- with .Site.Author.email -}}
-                    <author>
-                        {{- . }}{{ with .Site.Author.name }} ({{ . }}){{ end -}}
-                    </author>
-                {{- end -}}
+                <author>
+                    {{- .Params.author | default $.Site.Author.name | default (T "author") -}}
+                </author>
                 <guid>
                     {{- .Permalink -}}
                 </guid>
                 <description>
-                    {{- .Content | html -}}
+                    {{- with .Summary -}}
+                        {{- dict "content" . "ruby" true "fraction" true "fontawesome" true | partial "function/content.html" | plainify -}}
+                    {{- else -}}
+                        {{- .Description | plainify -}}
+                    {{- end -}}
                 </description>
             </item>
         {{- end -}}

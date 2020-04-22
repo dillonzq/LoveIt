@@ -427,6 +427,13 @@
         {{- partial "plugin/link.html" $options -}}
     {{- end -}}
 
+    {{- /* 062: RSS */ -}}
+    {{- if .social.rss -}}
+        {{- $options := dict "href" (relLangURL "/index.xml") "title" "RSS" "newtab" true "rel" "me" -}}
+        {{- $options = dict "icon" (dict "class" "fas fa-rss fa-fw") | merge $options -}}
+        {{- partial "plugin/link.html" $options -}}
+    {{- end -}}
+
     {{- /* Custom */ -}}
     {{- with .social.Custom -}}
         {{- . | safeHTML -}}
