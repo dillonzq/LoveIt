@@ -13,8 +13,8 @@
 {{- if eq hugo.Environment "production" -}}
     {{- .Scratch.Set "cdn" .Site.Params.cdn -}}
     {{- .Scratch.Set "fingerprint" .Site.Params.fingerprint -}}
-{{- else -}}
-    {{- $params = dict "comment" nil | merge $params -}}
+    {{- .Scratch.Set "analytics" .Site.Params.analytics -}}
+    {{- .Scratch.Set "comment" $params.comment -}}
 {{- end -}}
 
 {{- .Scratch.Set "params" $params -}}

@@ -1,8 +1,18 @@
 {{- define "content" -}}
+    {{- $params := .Scratch.Get "params" -}}
     <div class="page home">
         {{- /* Profile */ -}}
         {{- if ne .Site.Params.home.profile.enable false -}}
             {{- partial "home/profile.html" . -}}
+        {{- end -}}
+
+        {{- /* Content */ -}}
+        {{- if .Content -}}
+            <div class="single">
+                <div class="content" id="content">
+                    {{- dict "content" .Content "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+                </div>
+            </div>
         {{- end -}}
 
         {{- /* Posts */ -}}

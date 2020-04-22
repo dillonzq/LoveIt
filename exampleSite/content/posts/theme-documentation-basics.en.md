@@ -503,6 +503,22 @@ Note that some of these parameters are explained in details in other sections of
     pinterest = ""
     baidu = ""
 
+  # {{< version 0.2.0 >}} Analytics config
+  [params.analytics]
+    enable = false
+    # Google Analytics
+    [params.analytics.google]
+      id = ""
+      # whether to anonymize IP
+      anonymizeIP = true
+      # whether to use cookie
+      cookie = false
+    # Fathom Analytics
+    [params.analytics.fathom]
+      id = ""
+      # server url for your tracker if you're self hosting
+      server = ""
+
   # CSS and JS Files CDN config
   [params.cdn]
     # {{< version 0.2.0 >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
@@ -605,8 +621,11 @@ Note that some of these parameters are explained in details in other sections of
 
 # {{< link "https://gohugo.io/about/hugo-and-gdpr/" "Privacy config" >}}
 [privacy]
+  # {{< version 0.2.0 deleted >}} privacy of the Google Analytics (replaced by params.analytics.google)
   [privacy.googleAnalytics]
-    anonymizeIP = true
+    # ...
+  [privacy.twitter]
+    enableDNT = true
   [privacy.youtube]
     privacyEnhanced = true
 

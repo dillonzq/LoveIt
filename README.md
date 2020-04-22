@@ -62,8 +62,8 @@ I hope you will LoveIt ❤️!
 
 * Optimized for **performance**: 99/100 on mobile and 100/100 on desktop in [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
 * Optimized SEO performance with a correct **SEO SCHEMA** based on JSON-LD
-* [**Google Analytics**](https://analytics.google.com/analytics) supported
-* [**Fathom Analytics**](https://usefathom.com/) supported
+* **[Google Analytics](https://analytics.google.com/analytics)** supported
+* **[Fathom Analytics](https://usefathom.com/)** supported
 * Search engine **verification** supported (Google, Bind, Yandex and Baidu)
 * **CDN** for third-party libraries supported
 * Automatically converted images with **Lazy Load** by [lazysizes](https://github.com/aFarkas/lazysizes)
@@ -136,7 +136,7 @@ All feedback is welcome! Head over to the [issue tracker](https://github.com/dil
 
 ## License
 
-LoveIt is licensed under the MIT license. Check the [LICENSE file](https://github.com/dillonzq/LoveIt/blob/master/LICENSE) for details.
+LoveIt is licensed under the **MIT** license. Check the [LICENSE file](https://github.com/dillonzq/LoveIt/blob/master/LICENSE) for details.
 
 Thanks to the authors of following resources included in the theme:
 

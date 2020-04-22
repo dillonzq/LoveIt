@@ -506,6 +506,22 @@ hugo
     pinterest = ""
     baidu = ""
 
+  # {{< version 0.2.0 >}} 网站分析配置
+  [params.analytics]
+    enable = false
+    # Google Analytics
+    [params.analytics.google]
+      id = ""
+      # 是否匿名化用户 IP
+      anonymizeIP = true
+      # 是否使用 cookie
+      cookie = false
+    # Fathom Analytics
+    [params.analytics.fathom]
+      id = ""
+      # 自行托管追踪器时的主机路径
+      server = ""
+
   # CSS 和 JS 文件的 CDN 设置
   [params.cdn]
     # {{< version 0.2.0 >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
@@ -608,8 +624,11 @@ hugo
 
 # {{< link "https://gohugo.io/about/hugo-and-gdpr/" "隐私信息配置" >}}
 [privacy]
+  # {{< version 0.2.0 deleted >}} Google Analytics 相关隐私 (被 params.analytics.google 替代)
   [privacy.googleAnalytics]
-    anonymizeIP = true
+    # ...
+  [privacy.twitter]
+    enableDNT = true
   [privacy.youtube]
     privacyEnhanced = true
 
