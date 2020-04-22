@@ -1,12 +1,12 @@
 {{- define "title" }}
-    {{- T .Section | default .Section | printf (T "allSome") }} | {{ .Site.Title -}}
+    {{- .Title | default (T .Section) | default .Section | printf (T "allSome") }} | {{ .Site.Title -}}
 {{- end -}}
 
 {{- define "content" -}}
     <div class="page archive">
         {{- /* Title */ -}}
         <h2 class="single-title animated pulse faster">
-            {{- T .Section | default .Section | humanize | printf (T "allSome") -}}
+            {{- .Title | default (T .Section) | default .Section | printf (T "allSome") -}}
         </h2>
 
         {{- /* Paginate */ -}}

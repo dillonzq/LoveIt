@@ -8,16 +8,16 @@ author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Découvrez comment créer et organiser votre contenu rapidement et intuitivement dans le thème LoveIt."
 
-tags: ["contenu", "markdown"]
+tags: ["content", "Markdown"]
 categories: ["documentation"]
-
 featuredImage: "/images/theme-documentation-content/featured-image.jpg"
+
+lightgallery: true
 
 toc:
   auto: false
 math:
   enable: true
-lightgallery: true
 ---
 
 Découvrez comment créer et organiser votre contenu rapidement et intuitivement dans le thème **LoveIt**.

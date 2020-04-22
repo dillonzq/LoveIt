@@ -10,7 +10,6 @@ description: "Le th√®me LoveIt fournit plusieurs shortcodes en plus de ceux int√
 
 tags: ["shortcodes"]
 categories: ["documentation"]
-
 featuredImage: "/images/theme-documentation-extended-shortcodes/featured-image.jpg"
 featuredImagePreview: "/images/theme-documentation-extended-shortcodes/featured-image-preview.jpg"
 

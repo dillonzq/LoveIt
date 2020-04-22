@@ -8,9 +8,8 @@ author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "This article shows the basic Markdown syntax and format."
 
-tags: ["markdown"]
-categories: ["markdown"]
-
+tags: ["Markdown"]
+categories: ["Markdown"]
 featuredImage: "/images/basic-markdown-syntax/featured-image.png"
 
 lightgallery: true

@@ -33,8 +33,9 @@
                 {{- T "included" -}}
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }}&nbsp;{{ end -}}
-                    <a href="{{ `/categories/` | relLangURL }}{{ urlize $value }}">
-                        <i class="far fa-folder fa-fw"></i>{{ $value | humanize }}
+                    {{- $category := printf "/categories/%s" $value | $.Site.GetPage -}}
+                    <a href="{{ $category.RelPermalink }}">
+                        <i class="far fa-folder fa-fw"></i>{{ $category.Title }}
                     </a>
                 {{- end -}}
             </span>
@@ -58,7 +59,8 @@
                 <i class="fas fa-tags fa-fw"></i>&nbsp;
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }},&nbsp;{{ end -}}
-                    <a href="{{ `/tags/` | relLangURL }}{{ urlize $value }}">{{ $value }}</a>
+                    {{- $tag := printf "/tags/%s" $value | $.Site.GetPage -}}
+                    <a href="{{ $tag.RelPermalink }}">{{ $tag.Title }}</a>
                 {{- end -}}
             </div>
         {{- end -}}

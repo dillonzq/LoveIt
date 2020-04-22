@@ -10,12 +10,12 @@ description: "Découvrez en quoi consiste le thème Hugo - LoveIt et les concept
 
 tags: ["installation", "configuration"]
 categories: ["documentation"]
-
 featuredImage: "/images/theme-documentation-basics/featured-image.jpg"
+
+lightgallery: true
 
 toc:
   auto: false
-lightgallery: true
 ---
 
 Découvrez en quoi consiste le thème Hugo - **LoveIt** et les concepts fondamentaux qui le sous-tendent.

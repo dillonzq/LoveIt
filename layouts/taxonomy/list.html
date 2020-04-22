@@ -1,5 +1,5 @@
 {{- define "title" -}}
-    {{- .Title }} | {{ T .Data.Singular | default (humanize .Data.Singular) }} | {{ .Site.Title -}}
+    {{- .Title }} | {{ T .Data.Singular | default .Data.Singular }} | {{ .Site.Title -}}
 {{- end -}}
 
 {{- define "content" -}}
@@ -8,11 +8,11 @@
         <h2 class="single-title animated pulse faster">
             {{- $taxonomy := .Data.Singular -}}
             {{- if eq $taxonomy "category" -}}
-                <i class="far fa-folder-open fa-fw"></i>&nbsp;{{ humanize .Title }}
+                <i class="far fa-folder-open fa-fw"></i>&nbsp;{{ .Title }}
             {{- else if eq $taxonomy "tag" -}}
-                <i class="fas fa-tag fa-fw"></i>&nbsp;{{ humanize .Title }}
+                <i class="fas fa-tag fa-fw"></i>&nbsp;{{ .Title }}
             {{- else -}}
-                {{- printf "%s - %s" (T $taxonomy | default (humanize $taxonomy)) .Title -}}
+                {{- printf "%s - %s" (T $taxonomy | default $taxonomy) .Title -}}
             {{- end -}}
         </h2>
 

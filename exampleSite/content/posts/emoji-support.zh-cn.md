@@ -9,8 +9,7 @@ authorLink: "https://dillonzq.com"
 description: "Hugo 和 LoveIt 中的 Emoji 的用法指南."
 
 tags: ["emoji"]
-categories: ["markdown"]
-
+categories: ["Markdown"]
 featuredImage: "/images/emoji-support/featured-image.jpg"
 
 lightgallery: true

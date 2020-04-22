@@ -1,13 +1,13 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>
-            {{- T .Section | default .Section | printf (T "allSome") }} | {{ .Site.Title -}}
+            {{- .Title | default (T .Section) | default .Section | printf (T "allSome") }} | {{ .Site.Title -}}
         </title>
         <link>
             {{- .Permalink -}}
         </link>
         <description>
-            {{- T .Section | default .Section | printf (T "allSome") }} | {{ .Site.Title -}}
+            {{- .Title | default (T .Section) | default .Section | printf (T "allSome") }} | {{ .Site.Title -}}
         </description>
         <generator>Hugo -- gohugo.io</generator>
         {{- with .Site.LanguageCode -}}

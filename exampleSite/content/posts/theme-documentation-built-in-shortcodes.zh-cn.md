@@ -10,7 +10,6 @@ description: "Hugo 提供了多个内置的 Shortcodes, 以方便作者保持 Ma
 
 tags: ["shortcodes"]
 categories: ["documentation"]
-
 featuredImage: "/images/theme-documentation-built-in-shortcodes/featured-image.png"
 
 lightgallery: true
