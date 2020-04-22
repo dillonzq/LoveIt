@@ -261,11 +261,6 @@
     {{- partial "plugin/script.html" . -}}
 {{- end -}}
 
-{{- /* Google analytics async */ -}}
-{{- if eq hugo.Environment "production" | and .Site.GoogleAnalytics -}}
-    {{- template "_internal/google_analytics_async.html" . -}}
-
-    {{ if and .Site.Params.fathomAnalytics .Site.Params.fathomAnalytics.siteID }}
-        {{- partial "plugin/analytics/fathom" . -}}
-    {{ end }}
+{{- with .Scratch.Get "analytics" -}}
+    {{- partial "plugin/analytics.html" . -}}
 {{- end -}}

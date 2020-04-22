@@ -27,6 +27,7 @@ lightgallery: true
 * :(fas fa-rocket): **性能**优化：在 [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights) 中， [99]/[100] 的移动设备得分和 [100]/[100] 的桌面设备得分
 * :(fab fa-searchengin): 使用基于 JSON-LD 格式 的 **SEO SCHEMA** 文件进行 SEO 优化
 * :(fab fa-google): 支持 **[Google Analytics](https://analytics.google.com/analytics)**
+* :(far fa-chart-bar): 支持 **[Fathom Analytics](https://usefathom.com/)**
 * :(fas fa-search): 支持搜索引擎的**网站验证** (Google, Bind, Yandex and Baidu)
 * :(fas fa-tachometer-alt): 支持所有第三方库的 **CDN**
 * :(fas fa-cloud-download-alt): 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为**懒加载**
@@ -76,7 +77,7 @@ lightgallery: true
 
 ### 许可协议
 
-LoveIt 根据 MIT 许可协议授权。
+LoveIt 根据 **MIT** 许可协议授权。
 
 更多信息请查看 [LICENSE 文件](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)。
 

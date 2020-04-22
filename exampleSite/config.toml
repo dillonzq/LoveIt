@@ -537,6 +537,7 @@ enableEmoji = true
   # date format
   # 日期格式
   dateFormat = "2006-01-02"
+
   # Header config
   # 页面头部导航栏配置
   [params.header]
@@ -546,6 +547,7 @@ enableEmoji = true
     # mobile header mode ("fixed", "normal", "auto")
     # 移动端导航栏模式 ("fixed", "normal", "auto")
     mobileMode = "auto"
+
   # Footer config
   # 页面底部信息配置
   [params.footer]
@@ -571,6 +573,7 @@ enableEmoji = true
     # license info (HTML format is supported)
     # 许可协议信息 (支持 HTML 格式)
     license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+
   # Section (all posts) page config
   # Section (所有文章) 页面配置
   [params.section]
@@ -580,6 +583,7 @@ enableEmoji = true
     # date format (month and day)
     # 日期格式 (月和日)
     dateFormat = "01-02"
+
   # List (category or tag) page config
   # List (目录或标签) 页面配置
   [params.list]
@@ -589,6 +593,7 @@ enableEmoji = true
     # date format (month and day)
     # 日期格式 (月和日)
     dateFormat = "01-02"
+
   # Page config
   # 文章页面配置
   [params.page]
@@ -774,7 +779,8 @@ enableEmoji = true
         url = "cover.png"
         width = 800
         height = 600
-  # site verification code for Google/Bing/Yandex/Pinterest/Baidu
+
+  # Site verification code for Google/Bing/Yandex/Pinterest/Baidu
   # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
     google = ""
@@ -782,10 +788,26 @@ enableEmoji = true
     yandex = ""
     pinterest = ""
     baidu = ""
-  [params.fathomAnalytics]
-    # siteID = "ABC123"
-    # If you're self hosting use this for your tracker
-    # serverURL = "https://example.com"
+
+  # Analytics config
+  # 网站分析配置
+  [params.analytics]
+    enable = false
+    # Google Analytics
+    [params.analytics.google]
+      id = ""
+      # whether to anonymize IP
+      # 是否匿名化用户 IP
+      anonymizeIP = true
+      # whether to use cookie
+      # 是否使用 cookie
+      cookie = false
+    # Fathom Analytics
+    [params.analytics.fathom]
+      id = ""
+      # server url for your tracker if you're self hosting
+      # 自行托管追踪器时的主机路径
+      server = ""
 
   # CSS and JS Files CDN
   # CSS 和 JS 文件的 CDN 设置
@@ -899,8 +921,12 @@ enableEmoji = true
 # Privacy config (https://gohugo.io/about/hugo-and-gdpr/)
 # 隐私信息配置 (https://gohugo.io/about/hugo-and-gdpr/)
 [privacy]
+  # privacy of the Google Analytics (replaced by params.analytics.google)
+  # Google Analytics 相关隐私 (被 params.analytics.google 替代)
   [privacy.googleAnalytics]
-    anonymizeIP = true
+    # ...
+  [privacy.twitter]
+    enableDNT = true
   [privacy.youtube]
     privacyEnhanced = true
 
