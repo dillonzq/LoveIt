@@ -24,7 +24,7 @@
         <div class="post-meta">
             <div class="post-meta-line">
                 {{- $author := $params.author | default .Site.Author.name | default (T "author") -}}
-                {{- $authorLink := $params.authorlink | default .Site.Author.link | default (relLangURL "/") -}}
+                {{- $authorLink := $params.authorlink | default .Site.Author.link | default .Site.Home.RelPermalink -}}
                 <span class="post-author">
                     {{- $options := dict "class" "author" "href" $authorLink "title" "Author" "rel" "author" "icon" (dict "class" "fas fa-user-circle fa-fw") "content" $author -}}
                     {{- partial "plugin/link.html" $options -}}
@@ -50,7 +50,7 @@
                 <i class="far fa-clock fa-fw"></i>{{ T "readingTime" .ReadingTime }}&nbsp;
                 {{- $comment := .Scratch.Get "comment" | default dict -}}
                 {{- if $comment.enable | and $comment.valine.enable | and $comment.valine.visitor -}}
-                    <span id="{{ .RelPermalink | relURL }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
+                    <span id="{{ .RelPermalink }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
                         <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;{{ T "views" }}
                     </span>&nbsp;
                 {{- end -}}

@@ -7,7 +7,7 @@
         <h1 id="error-emoji"></h1>
         <p class="error-text">
             {{- T "pageNotFoundText" -}}&nbsp;
-            <a href="{{ `/` | relLangURL }}" title="{{ T `backToHome` }}">↩︎</a>
+            <a href="{{ .Site.Home.RelPermalink }}" title="{{ T `backToHome` }}">↩︎</a>
         </p>
     </div>
     <script type="text/javascript">

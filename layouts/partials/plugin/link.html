@@ -1,5 +1,5 @@
 {{- $rel := "" -}}
-<a href="{{ .href | safeURL }}"{{ with .title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .href "http" }}{{ $rel = "noopener noreffer" }} target="_blank"{{ end }} rel="{{ $rel }}{{ with .rel }} {{ . }}{{ end }}"{{ with .class }} class="{{ . }}"{{ end }}>
+<a href="{{ .href }}"{{ with .title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .href "http" }}{{ $rel = "noopener noreffer" }} target="_blank"{{ end }} rel="{{ $rel }}{{ with .rel }} {{ . }}{{ end }}"{{ with .class }} class="{{ . }}"{{ end }}>
     {{- with .icon -}}
         {{- partial "plugin/icon.html" . -}}
     {{- end -}}
