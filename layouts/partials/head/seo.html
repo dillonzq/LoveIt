@@ -1,3 +1,5 @@
+{{- $params := .Scratch.Get "params" -}}
+
 {{- with .Site.Params.verification.google -}}
     <meta name="google-site-verification" content="{{ . }}" />
 {{- end -}}
@@ -33,10 +35,10 @@
         {{- with .Site.Params.description -}}
             "description": {{ . | safeHTML }},
         {{- end -}}
-        {{- with .Site.Params.image -}}
+        {{- with $params.seo.image -}}
             "image": "{{ .url | absURL }}",
         {{- end -}}
-        {{- with .Site.Params.logo -}}
+        {{- with $params.seo.logo -}}
             "thumbnailUrl": "{{ .url | absURL }}",
         {{- end -}}
         {{- with .Site.Copyright -}}
@@ -58,12 +60,12 @@
             "@type": "WebPage",
             "@id": "{{ .Permalink }}"
         },
-        {{- if ge .Site.Params.image.width 696 -}}
+        {{- if ge $params.seo.image.width 696 -}}
             "image": {
                 "@type": "ImageObject",
-                "url": "{{ .Site.Params.image.url | absURL }}",
-                "width": {{ .Site.Params.image.width }},
-                "height": {{ .Site.Params.image.height }}
+                "url": "{{ $params.seo.image.url | absURL }}",
+                "width": {{ $params.seo.image.width }},
+                "height": {{ $params.seo.image.height }}
             },
         {{- end -}}
         "genre": "{{ .Type }}",
@@ -83,7 +85,7 @@
         {{- with .Site.Copyright -}}
             "license": {{ . | safeHTML }},
         {{- end -}}
-        {{- with .Site.Params.publisher -}}
+        {{- with $params.seo.publisher -}}
             "publisher": {
                 "@type": "Organization",
                 "name": "{{ .name }}",

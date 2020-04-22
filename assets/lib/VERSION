@@ -1,16 +1,22 @@
+normalize.css@8.0.1 https://github.com/necolas/normalize.css
 fontawesome-free@5.12.1 https://fontawesome.com/
 forkawesome@1.1.7 https://forkaweso.me/Fork-Awesome/
 animate.css@3.7.2 https://github.com/daneden/animate.css
 smooth-scroll@16.1.2 https://github.com/cferdinandi/smooth-scroll
-sharer@0.4.0 https://github.com/ellisonleao/sharer.js
+autocomplete.js@0.37.1 https://github.com/algolia/autocomplete.js
+lunr.js@2.3.8 https://lunrjs.com/
+algoliasearch@4.1.0 https://github.com/algolia/algoliasearch-client-javascript
 lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
-lightgallery@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0 https://github.com/sachinchoolur/lightgallery.js
+lightgallery.js@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0 https://github.com/sachinchoolur/lightgallery.js
+clipboard.js@2.0.6 https://github.com/zenorocha/clipboard.js
+sharer@0.4.0 https://github.com/ellisonleao/sharer.js
 typeit@6.5.1 https://github.com/alexmacarthur/typeit
-katex@0.11.1 https://github.com/KaTeX/KaTeX
+katex@0.11.1 https://katex.org/
 mermaid@8.4.8 https://github.com/knsv/mermaid
+echarts@4.6.0 https://echarts.apache.org/
+mapbox-gl@1.8.1 https://github.com/mapbox/mapbox-gl-js
 aplayer@1.10.1 https://github.com/MoePlayer/APlayer
 meting@2.0.1 https://github.com/metowolf/MetingJS
-echarts@4.6.0 https://echarts.apache.org/
 gitalk@1.6.2 https://github.com/gitalk/gitalk
 valine@1.3.10 https://valine.js.org/
 iconfont https://www.iconfont.cn/

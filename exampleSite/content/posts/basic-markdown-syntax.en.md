@@ -7,23 +7,12 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "This article shows the basic Markdown syntax and format."
-license: ""
 
-tags: ["markdown"]
-categories: ["markdown"]
-hiddenFromHomePage: false
-
+tags: ["Markdown"]
+categories: ["Markdown"]
 featuredImage: "/images/basic-markdown-syntax/featured-image.png"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: true
-math: false
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 This article offers a sample of basic Markdown syntax that can be used in Hugo content files.
@@ -640,7 +629,7 @@ The rendered output looks like this:
 | ext    | extension to be used for dest files. |
 {{< /admonition >}}
 
-## 11 Links
+## 11 Links {#links}
 
 ### Basic Link
 
@@ -768,5 +757,5 @@ With a reference later in the document defining the URL location:
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 
 {{< admonition tip >}}
-**LoveIt** theme has [special shortcode for image](../theme-documentation-shortcodes/#image), which provides more features.
+**LoveIt** theme has [special shortcode for image](../theme-documentation-extended-shortcodes/#image), which provides more features.
 {{< /admonition >}}

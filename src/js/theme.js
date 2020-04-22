@@ -1,325 +1,632 @@
-(() => {
-    'use strict';
+class Util {
+    forEach(elements, handler) {
+        elements = elements || [];
+        for (let i = 0; i < elements.length; i++) handler(elements[i]);
+    }
 
-    class Util {
-        forEach(elements, handler) {
-            elements = elements || [];
-            for (let i = 0; i < elements.length; i++) {
-                handler(elements[i]);
+    getScrollTop() {
+        return (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+    }
+
+    isMobile() {
+        return window.matchMedia('only screen and (max-width: 680px)').matches;
+    }
+
+    isTocStatic() {
+        return window.matchMedia('only screen and (max-width: 960px)').matches;
+    }
+
+    animateCSS(element, animation, reserved, callback) {
+        if (!Array.isArray(animation)) animation = [animation];
+        element.classList.add('animated', ...animation);
+        const handler = () => {
+            element.classList.remove('animated', ...animation);
+            element.removeEventListener('animationend', handler);
+            if (typeof callback === 'function') callback();
+        };
+        if (!reserved) element.addEventListener('animationend', handler, false);
+    }
+}
+
+class Theme {
+    constructor() {
+        this.config = window.config;
+        this.data = this.config.data;
+        this.isDark = document.body.classList.contains('dark');
+        this.util = new Util();
+        this.newScrollTop = this.util.getScrollTop();
+        this.oldScrollTop = this.newScrollTop;
+        this.scrollEventSet = new Set();
+        this.resizeEventSet = new Set();
+        this.switchThemeEventSet = new Set();
+        this.clickMaskEventSet = new Set();
+    }
+
+    initMenuMobile() {
+        const $menuToggleMobile = document.getElementById('menu-toggle-mobile');
+        const $menuMobile = document.getElementById('menu-mobile');
+        $menuToggleMobile.addEventListener('click', () => {
+            document.body.classList.toggle('blur');
+            $menuToggleMobile.classList.toggle('active');
+            $menuMobile.classList.toggle('active');
+        }, false);
+        this._menuMobileOnClickMask = this._menuMobileOnClickMask || (() => {
+            $menuToggleMobile.classList.remove('active');
+            $menuMobile.classList.remove('active');
+        });
+        this.clickMaskEventSet.add(this._menuMobileOnClickMask);
+    }
+
+    initSwitchTheme() {
+        this.util.forEach(document.getElementsByClassName('theme-switch'), $themeSwitch => {
+            $themeSwitch.addEventListener('click', () => {
+                document.body.classList.toggle('dark');
+                this.isDark = !this.isDark;
+                window.localStorage && localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
+                for (let event of this.switchThemeEventSet) event();
+            }, false);
+        });
+    }
+
+    initSearch() {
+        const searchConfig = this.config.search;
+        const isMobile = this.util.isMobile();
+        if (!searchConfig || isMobile && this._searchMobileOnce || !isMobile && this._searchDesktopOnce) return;
+        const classSuffix = isMobile ? 'mobile' : 'desktop';
+        const $header = document.getElementById(`header-${classSuffix}`);
+        const $searchInput = document.getElementById(`search-input-${classSuffix}`);
+        const $searchToggle = document.getElementById(`search-toggle-${classSuffix}`);
+        const $searchLoading = document.getElementById(`search-loading-${classSuffix}`);
+        const $searchClear = document.getElementById(`search-clear-${classSuffix}`);
+        if (isMobile) {
+            this._searchMobileOnce = true;
+            $searchInput.addEventListener('focus', () => {
+                document.body.classList.add('blur');
+                $header.classList.add('open');
+            }, false);
+            document.getElementById('search-cancel-mobile').addEventListener('click', () => {
+                $header.classList.remove('open');
+                document.body.classList.remove('blur');
+                document.getElementById('menu-toggle-mobile').classList.remove('active');
+                document.getElementById('menu-mobile').classList.remove('active');
+                $searchLoading.style.display = 'none';
+                $searchClear.style.display = 'none';
+                this._searchMobile && this._searchMobile.autocomplete.setVal('');
+            }, false);
+            $searchClear.addEventListener('click', () => {
+                $searchClear.style.display = 'none';
+                this._searchMobile && this._searchMobile.autocomplete.setVal('');
+            }, false);
+            this._searchMobileOnClickMask = this._searchMobileOnClickMask || (() => {
+                $header.classList.remove('open');
+                $searchLoading.style.display = 'none';
+                $searchClear.style.display = 'none';
+                this._searchMobile && this._searchMobile.autocomplete.setVal('');
+            });
+            this.clickMaskEventSet.add(this._searchMobileOnClickMask);
+        } else {
+            this._searchDesktopOnce = true;
+            $searchToggle.addEventListener('click', () => {
+                document.body.classList.add('blur');
+                $header.classList.add('open');
+                $searchInput.focus();
+            }, false);
+            $searchClear.addEventListener('click', () => {
+                $searchClear.style.display = 'none';
+                this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
+            }, false);
+            this._searchDesktopOnClickMask = this._searchDesktopOnClickMask || (() => {
+                $header.classList.remove('open');
+                $searchLoading.style.display = 'none';
+                $searchClear.style.display = 'none';
+                this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
+            });
+            this.clickMaskEventSet.add(this._searchDesktopOnClickMask);
+        }
+        $searchInput.addEventListener('input', () => {
+            if ($searchInput.value === '') $searchClear.style.display = 'none';
+            else $searchClear.style.display = 'inline';
+        }, false);
+
+        const CONTEXT_LENGTH = 200;
+        const initAutosearch = () => {
+            const autosearch = autocomplete(`#search-input-${classSuffix}`, {
+                hint: false,
+                autoselect: true,
+                dropdownMenuContainer: `#search-dropdown-${classSuffix}`,
+                clearOnSelected: true,
+                cssClasses: { noPrefix: true },
+             // debug: true,
+            }, {
+                name: 'search',
+                source: (query, callback) => {
+                    $searchLoading.style.display = 'inline';
+                    $searchClear.style.display = 'none';
+                    const finish = (results) => {
+                        $searchLoading.style.display = 'none';
+                        $searchClear.style.display = 'inline';
+                        callback(results);
+                    };
+                    if (searchConfig.type === 'lunr') {
+                        const search = () => {
+                            if (lunr.queryHandler) query = lunr.queryHandler(query);
+                            return this._index.search(query).slice(0, 12).map(({ ref, matchData: { metadata } }) => {
+                                const matchData = this._indexData[ref];
+                                let { title, content: context } = matchData;
+                                let position = 0;
+                                Object.values(metadata).forEach(({ description, content }) => {
+                                    if (description) {
+                                        context = matchData.description;
+                                        position = -1;
+                                    } else if (content) {
+                                        const matchPosition = content.position[0][0];
+                                        if (matchPosition < position || position === 0) position = matchPosition;
+                                    }
+                                });
+                                position -= CONTEXT_LENGTH / 5;
+                                if (position > 0) {
+                                    position += context.substr(position, 25).lastIndexOf(' ') + 1;
+                                    context = '...' + context.substr(position, CONTEXT_LENGTH);
+                                } else {
+                                    context = context.substr(0, CONTEXT_LENGTH);
+                                }
+                                Object.keys(metadata).forEach(key => {
+                                    title = title.replace(new RegExp(`(${key})`, 'gi'), '<em>$1</em>');
+                                    context = context.replace(new RegExp(`(${key})`, 'gi'), '<em>$1</em>');
+                                });
+                                return {
+                                    'uri': matchData.uri,
+                                    'title' : title,
+                                    'date' : matchData.date,
+                                    'context' : context,
+                                };
+                            });
+                        }
+                        if (!this._index) {
+                            fetch(searchConfig.lunrIndexURL)
+                                .then(response => response.json())
+                                .then(data => {
+                                    const indexData = {};
+                                    this._index = lunr(function () {
+                                        if (searchConfig.lunrLanguageCode) this.use(lunr[searchConfig.lunrLanguageCode]);
+                                        this.ref('uri');
+                                        this.field('title', { boost: 50 });
+                                        this.field('tags', { boost: 20 });
+                                        this.field('description', { boost: 10 });
+                                        this.field('content', { boost: 5 });
+                                        this.metadataWhitelist = ['position'];
+                                        data.forEach((record) => {
+                                            indexData[record.uri] = record;
+                                            this.add(record);
+                                        });
+                                    });
+                                    this._indexData = indexData;
+                                    finish(search());
+                                }).catch(err => {
+                                    console.error(err);
+                                    finish([]);
+                                });
+                        } else finish(search());
+                    } else if (searchConfig.type === 'algolia') {
+                        $searchLoading.style.display = 'inline';
+                        $searchClear.style.display = 'none';
+                        this._algoliaIndex = this._algoliaIndex || algoliasearch(searchConfig.algoliaAppID, searchConfig.algoliaSearchKey).initIndex(searchConfig.algoliaIndex);
+                        this._algoliaIndex
+                            .search(query, { offset: 0, length: 12, attributesToHighlight: ['title', 'content'] })
+                            .then(({ hits }) => {
+                                finish(hits.map(({ uri, date, _highlightResult: { title, content } }) => ({
+                                    uri: uri,
+                                    title: title.value,
+                                    date: date,
+                                    context: content.value,
+                                })));
+                            })
+                            .catch(err => {
+                                console.error(err);
+                                finish([]);
+                            });
+                    }
+                },
+                templates: {
+                    suggestion: ({ title, date, context }) => `<div><span class="suggestion-title">${title}</span><span class="suggestion-date">${date}</span></div><div class="suggestion-context">${context}</div>`,
+                    empty: ({ query }) => `<div class="search-empty">${searchConfig.noResultsFound}: <span class="search-query">"${query}"</span></div>`,
+                    footer: ({}) => {
+                        const { searchType, icon, href } = searchConfig.type === 'algolia' ? {
+                            searchType: 'algolia',
+                            icon: '<i class="fab fa-algolia fa-fw"></i>',
+                            href: 'https://www.algolia.com/',
+                        } : {
+                            searchType: 'Lunr.js',
+                            icon: '',
+                            href: 'https://lunrjs.com/',
+                        };
+                        return `<div class="search-footer">Search by <a href="${href}" rel="noopener noreffer" target="_blank">${icon} ${searchType}</a></div>`;},
+                },
+            });
+            autosearch.on('autocomplete:selected', (event, suggestion, dataset, context) => {
+                window.location.assign(suggestion.uri);
+            });
+            if (isMobile) this._searchMobile = autosearch;
+            else this._searchDesktop = autosearch;
+        };
+        if (searchConfig.lunrSegmentitURL && !document.getElementById('lunr-segmentit')) {
+            const script = document.createElement('script');
+            script.id = 'lunr-segmentit';
+            script.type = 'text/javascript';
+            script.src = searchConfig.lunrSegmentitURL;
+            script.async = true;
+            if (script.readyState) {
+                script.onreadystatechange = () => {
+                    if (script.readyState == 'loaded' || script.readyState == 'complete'){
+                        script.onreadystatechange = null;
+                        initAutosearch();
+                    }
+                };
+            } else {
+                script.onload = () => {
+                    initAutosearch();
+                };
             }
-        }
+            document.body.appendChild(script);
+        } else initAutosearch();
+    }
 
-        getScrollTop() {
-            return (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
-        }
+    initLightGallery() {
+        if (this.config.lightGallery) lightGallery(document.getElementById('content'), this.config.lightGallery);
+    }
 
-        isMobile() {
-            return window.matchMedia('only screen and (max-width: 680px)').matches;
-        }
+    initHighlight() {
+        this.util.forEach(document.querySelectorAll('.highlight > .chroma'), $chroma => {
+            const $elements = $chroma.querySelectorAll('pre.chroma > code');
+            if ($elements.length) {
+                $chroma.className += ' ' + $elements[$elements.length - 1].className.toLowerCase();
+                $elements[0].classList.add('lnc');
+                $elements[$elements.length - 1].classList.remove('lnc');
+            }
+        });
+        this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), $preChroma => {
+            const $chroma = document.createElement('div');
+            $chroma.className = $preChroma.className;
+            const $table = document.createElement('table');
+            $chroma.appendChild($table);
+            const $tbody = document.createElement('tbody');
+            $table.appendChild($tbody);
+            const $tr = document.createElement('tr');
+            $tbody.appendChild($tr);
+            const $td = document.createElement('td');
+            $tr.appendChild($td);
+            $preChroma.parentElement.replaceChild($chroma, $preChroma);
+            $td.appendChild($preChroma);
+        });
+        this.util.forEach(document.querySelectorAll('pre > code'), $code => {
+            $code.classList.add('block');
+            if ($code.classList.contains('lnc') || !this.config.clipboard) return;
+            const $button = document.createElement('div');
+            $button.classList.add('copy-button');
+            $button.innerHTML = '<i class="far fa-copy fa-fw"></i>';
+            $button.setAttribute('data-clipboard-text', $code.innerText);
+            $button.title = this.config.clipboard.title;
+            const clipboard = new ClipboardJS($button);
+            clipboard.on('success', e => {
+                this.util.animateCSS($code, 'flash');
+            });
+            $code.after($button);
+        });
+    }
 
-        isTocStatic() {
-            return window.matchMedia('only screen and (max-width: 960px)').matches;
+    initTable() {
+        this.util.forEach(document.querySelectorAll('.content table'), $table => {
+            const $wrapper = document.createElement('div');
+            $wrapper.className = 'table-wrapper';
+            $table.parentElement.replaceChild($wrapper, $table);
+            $wrapper.appendChild($table);
+        });
+    }
+
+    initHeaderLink() {
+        for (let num = 1; num <= 6; num++) {
+            this.util.forEach(document.querySelectorAll('.single .content > h' + num), $header => {
+                $header.classList.add('headerLink');
+                $header.innerHTML = `<a href="#${$header.id}" class="header-mark"></a>${$header.innerHTML}`;
+            });
         }
     }
 
-    class Theme {
-        constructor() {
-            this.util = new Util();
-            this.newScrollTop = this.util.getScrollTop();
-            this.oldScrollTop = this.newScrollTop;
-            this.scrollEventSet = new Set();
-            this.resizeEventSet = new Set();
-        }
-
-        initMenuMobile() {
-            const menuToggleMobile = document.getElementById('menu-toggle-mobile');
-            const menuMobile = document.getElementById('menu-mobile');
-            this._menuMobileOnScroll = this._menuMobileOnScroll || (() => {
-                menuToggleMobile.classList.remove('active');
-                menuMobile.classList.remove('active');
-            });
-            if (this.util.isMobile()) {
-                menuToggleMobile.onclick = () => {
-                    menuToggleMobile.classList.toggle('active');
-                    menuMobile.classList.toggle('active');
-                };
-                this.scrollEventSet.add(this._menuMobileOnScroll);
-            } else {
-                this.scrollEventSet.delete(this._menuMobileOnScroll);
+    initToc() {
+        const $tocCore = document.getElementById('TableOfContents');
+        if ($tocCore === null) return;
+        if (this.util.isTocStatic()) {
+            const $tocContentStatic = document.getElementById('toc-content-static');
+            if ($tocCore.parentElement !== $tocContentStatic) {
+                $tocCore.parentElement.removeChild($tocCore);
+                $tocContentStatic.appendChild($tocCore);
             }
-        }
-
-        initSwitchTheme() {
-            this.util.forEach(document.getElementsByClassName('theme-switch'), (button) => {
-                button.onclick = () => {
-                    document.body.classList.toggle('dark-theme');
-                    window.isDark = !window.isDark;
-                    window.localStorage && window.localStorage.setItem('theme', window.isDark ? 'dark' : 'light');
-                    this.initEcharts();
-                };
-            });
-        }
-
-        initHighlight() {
-            this.util.forEach(document.querySelectorAll('.highlight > .chroma'), (block) => {
-                const codes = block.querySelectorAll('pre.chroma > code');
-                const code = codes[codes.length - 1];
-                const lang = code ? code.className.toLowerCase() : '';
-                block.className += ' ' + lang;
-            });
-            this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), (block) => {
-                const chroma = document.createElement('div');
-                chroma.className = block.className;
-                const table = document.createElement('table');
-                chroma.appendChild(table);
-                const tbody = document.createElement('tbody');
-                table.appendChild(tbody);
-                const tr = document.createElement('tr');
-                tbody.appendChild(tr);
-                const td = document.createElement('td');
-                tr.appendChild(td);
-                block.parentElement.replaceChild(chroma, block);
-                td.appendChild(block);
-            });
-        }
-
-        initTable() {
-            this.util.forEach(document.querySelectorAll('.content table'), (table) => {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'table-wrapper';
-                table.parentElement.replaceChild(wrapper, table);
-                wrapper.appendChild(table);
-            });
-        }
-
-        initHeaderLink() {
-            for (let num = 1; num <= 6; num++) {
-                this.util.forEach(document.querySelectorAll('.page.single .content > h' + num), (header) => {
-                    header.classList.add('headerLink');
-                    header.innerHTML = `<a href="#${header.id}" class="header-mark"></a>${header.innerHTML}`;
-                });
+            if (this._tocOnScroll) this.scrollEventSet.delete(this._tocOnScroll);
+        } else {
+            const $tocContentAuto = document.getElementById('toc-content-auto');
+            if ($tocCore.parentElement !== $tocContentAuto) {
+                $tocCore.parentElement.removeChild($tocCore);
+                $tocContentAuto.appendChild($tocCore);
             }
-        }
-
-        initToc() {
-            const tocCore = document.getElementById('TableOfContents');
-            if (tocCore === null) return;
-            if (this.util.isTocStatic()) {
-                const tocContentStatic = document.getElementById('toc-content-static');
-                if (tocCore.parentElement !== tocContentStatic) {
-                    tocCore.parentElement.removeChild(tocCore);
-                    tocContentStatic.appendChild(tocCore);
-                }
-                if (this._tocOnScroll) this.scrollEventSet.delete(this._tocOnScroll);
-            } else {
-                const tocContentAuto = document.getElementById('toc-content-auto');
-                if (tocCore.parentElement !== tocContentAuto) {
-                    tocCore.parentElement.removeChild(tocCore);
-                    tocContentAuto.appendChild(tocCore);
-                }
-                const toc = document.getElementById('toc-auto');
-                const page = document.getElementsByClassName('page')[0];
-                toc.style.maxWidth = `${page.getBoundingClientRect().left - 20}px`;
-                this._tocLinks = this._tocLinks || tocCore.getElementsByTagName('a');
-                this._tocLis = this._tocLis || tocCore.getElementsByTagName('li');
-                this._headerLinks = this._headerLinks || document.getElementsByClassName('headerLink') || [];
-                const headerIsFixed = window.desktopHeaderMode !== 'normal';
-                const headerHeight = document.getElementById('header-desktop').offsetHeight;
-                const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
-                const minTocTop = toc.offsetTop;
-                const minScrollTop = minTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
-                this._tocOnScroll = this._tocOnScroll || (() => {
-                    const footerTop = document.getElementById('post-footer').offsetTop;
-                    const maxTocTop = footerTop - toc.getBoundingClientRect().height;
-                    const maxScrollTop = maxTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
-                    if (this.newScrollTop < minScrollTop) {
-                        toc.style.position = 'absolute';
-                        toc.style.top = `${minTocTop}px`;
-                    } else if (this.newScrollTop > maxScrollTop) {
-                        toc.style.position = 'absolute';
-                        toc.style.top = `${maxTocTop}px`;
-                    } else {
-                        toc.style.position = 'fixed';
-                        toc.style.top = `${TOP_SPACING}px`;
-                    }
-
-                    this.util.forEach(this._tocLinks, (link) => { link.classList.remove('active'); });
-                    this.util.forEach(this._tocLis, (link) => { link.classList.remove('has-active'); });
-                    const INDEX_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
-                    let activeTocIndex = this._headerLinks.length - 1;
-                    for (let i = 0; i < this._headerLinks.length - 1; i++) {
-                        const thisTop = this._headerLinks[i].getBoundingClientRect().top;
-                        const nextTop = this._headerLinks[i + 1].getBoundingClientRect().top;
-                        if ((i == 0 && thisTop > INDEX_SPACING)
-                         || (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)) {
-                            activeTocIndex = i;
-                            break;
-                        }
-                    }
-                    if (activeTocIndex !== -1) {
-                        this._tocLinks[activeTocIndex].classList.add('active');
-                        let parent = this._tocLinks[activeTocIndex].parentElement;
-                        while (parent !== tocCore) {
-                            parent.classList.add('has-active');
-                            parent = parent.parentElement.parentElement;
-                        }
-                    }
-                });
-                this._tocOnScroll();
-                this.scrollEventSet.add(this._tocOnScroll);
-            }
-        }
-
-        initMermaid() {
-            if (window.mermaidArr) {
-                mermaid.initialize({startOnLoad: false, theme: 'null'});
-                this.util.forEach(window.mermaidArr, (id) => {
-                    const element = document.getElementById(id);
-                    mermaid.mermaidAPI.render('svg-' + id, window.contentMap[id], (svgCode) => {
-                        element.innerHTML = svgCode;
-                    }, element);
-                });
-            }
-        }
-
-        initEcharts() {
-            if (window.echartsArr) {
-                this._echartsArr = this._echartsArr || [];
-                for (let i = 0; i < this._echartsArr.length; i++) {
-                    this._echartsArr[i].dispose();
-                }
-                this._echartsArr = [];
-                this.util.forEach(window.echartsArr, (id) => {
-                    const chart = echarts.init(document.getElementById(id), window.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
-                    chart.setOption(JSON.parse(window.contentMap[id]));
-                    this._echartsArr.push(chart);
-                });
-                this._echartsOnResize = this._echartsOnResize || (() => {
-                    for (let i = 0; i < this._echartsArr.length; i++) {
-                        this._echartsArr[i].resize();
-                    }
-                });
-                this.resizeEventSet.add(this._echartsOnResize);
-            }
-        }
-
-        initTypeit() {
-            if (window.typeitArr) {
-                for (let i = 0; i < window.typeitArr.length; i++) {
-                    const group = window.typeitArr[i];
-                    (function typeone(i) {
-                        const id = group[i];
-                        if (i === group.length - 1) {
-                            new TypeIt(`#${id}`, {
-                                strings: window.contentMap[id],
-                            }).go();
-                            return;
-                        }
-                        let instance = new TypeIt(`#${id}`, {
-                            strings: window.contentMap[id],
-                            afterComplete: () => {
-                                instance.destroy();
-                                typeone(i + 1);
-                            },
-                        }).go();
-                    })(0);
-                }
-            }
-        }
-
-        initSmoothScroll() {
-            if ((!this.util.isMobile() && window.desktopHeaderMode === 'normal')
-              || (this.util.isMobile() && window.mobileHeaderMode === 'normal')) {
-                new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true});
-            } else {
-                new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true, header: '#header-desktop'});
-            }
-        }
-
-        onScroll() {
-            const headers = [];
-            if (window.desktopHeaderMode === 'auto') headers.push(document.getElementById('header-desktop'));
-            if (window.mobileHeaderMode === 'auto') headers.push(document.getElementById('header-mobile'));
-            this.util.forEach(headers, (header) => {
-                header.classList.add('animated');
-                header.classList.add('faster');
-            });
-            const toTopButton = document.getElementById('dynamic-to-top');
-            const MIN_SCROLL = 20;
-            window.addEventListener('scroll', () => {
-                this.newScrollTop = this.util.getScrollTop();
-                const scroll = this.newScrollTop - this.oldScrollTop;
-                this.util.forEach(headers, (header) => {
-                    if (scroll > MIN_SCROLL) {
-                        header.classList.remove('fadeInDown');
-                        header.classList.add('fadeOutUp');
-                    } else if (scroll < - MIN_SCROLL) {
-                        header.classList.remove('fadeOutUp');
-                        header.classList.add('fadeInDown');
-                    }
-                });
-                if (this.newScrollTop > 200) {
-                    if (scroll > MIN_SCROLL) {
-                        toTopButton.classList.remove('fadeInUp');
-                        toTopButton.classList.add('fadeOutDown');
-                    } else if (scroll < - MIN_SCROLL) {
-                        toTopButton.style.display = 'block';
-                        toTopButton.classList.remove('fadeOutDown');
-                        toTopButton.classList.add('fadeInUp');
-                    }
+            const $toc = document.getElementById('toc-auto');
+            const $page = document.getElementsByClassName('page')[0];
+            const rect = $page.getBoundingClientRect();
+            $toc.style.left = `${rect.left + rect.width + 20}px`;
+            $toc.style.maxWidth = `${$page.getBoundingClientRect().left - 20}px`;
+            const $tocLinkElements = $tocCore.getElementsByTagName('a');
+            const $tocLiElements = $tocCore.getElementsByTagName('li');
+            const $headerLinkElements = document.getElementsByClassName('headerLink');
+            const headerIsFixed = this.config.headerMode.desktop !== 'normal';
+            const headerHeight = document.getElementById('header-desktop').offsetHeight;
+            const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
+            const minTocTop = $toc.offsetTop;
+            const minScrollTop = minTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
+            this._tocOnScroll = this._tocOnScroll || (() => {
+                const footerTop = document.getElementById('post-footer').offsetTop;
+                const maxTocTop = footerTop - $toc.getBoundingClientRect().height;
+                const maxScrollTop = maxTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
+                if (this.newScrollTop < minScrollTop) {
+                    $toc.style.position = 'absolute';
+                    $toc.style.top = `${minTocTop}px`;
+                } else if (this.newScrollTop > maxScrollTop) {
+                    $toc.style.position = 'absolute';
+                    $toc.style.top = `${maxTocTop}px`;
                 } else {
-                    toTopButton.style.display = 'none';
+                    $toc.style.position = 'fixed';
+                    $toc.style.top = `${TOP_SPACING}px`;
                 }
-                if (!this._scrollTimeout) {
-                    this._scrollTimeout = window.setTimeout(() => {
-                        this._scrollTimeout = null;
-                        for (let event of this.scrollEventSet) event();
-                    }, 10);
+
+                this.util.forEach($tocLinkElements, $tocLink => { $tocLink.classList.remove('active'); });
+                this.util.forEach($tocLiElements, $tocLi => { $tocLi.classList.remove('has-active'); });
+                const INDEX_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
+                let activeTocIndex = $headerLinkElements.length - 1;
+                for (let i = 0; i < $headerLinkElements.length - 1; i++) {
+                    const thisTop = $headerLinkElements[i].getBoundingClientRect().top;
+                    const nextTop = $headerLinkElements[i + 1].getBoundingClientRect().top;
+                    if ((i == 0 && thisTop > INDEX_SPACING)
+                     || (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)) {
+                        activeTocIndex = i;
+                        break;
+                    }
                 }
-                this.oldScrollTop = this.newScrollTop;
-            }, false);
-        }
-
-        onResize() {
-            window.addEventListener('resize', () => {
-                if (!this._resizeTimeout) {
-                    this._resizeTimeout = window.setTimeout(() => {
-                        this._resizeTimeout = null;
-                        for (let event of this.resizeEventSet) event();
-                        this.initMenuMobile();
-                        this.initToc();
-                        this.initSmoothScroll();
-                        this.initMermaid()
-                    }, 100);
+                if (activeTocIndex !== -1) {
+                    $tocLinkElements[activeTocIndex].classList.add('active');
+                    let $parent = $tocLinkElements[activeTocIndex].parentElement;
+                    while ($parent !== $tocCore) {
+                        $parent.classList.add('has-active');
+                        $parent = $parent.parentElement.parentElement;
+                    }
                 }
-            }, false);
-        }
-
-        init() {
-            this.initMenuMobile();
-            this.initSwitchTheme();
-            this.initHighlight();
-            this.initTable();
-            this.initHeaderLink();
-            this.initMermaid();
-            this.initEcharts();
-            this.initTypeit();
-            this.initToc();
-            this.initSmoothScroll();
-
-            this.onScroll();
-            this.onResize();
+            });
+            this._tocOnScroll();
+            this.scrollEventSet.add(this._tocOnScroll);
         }
     }
 
-    const themeInit = () => {
-        const theme = new Theme();
-        theme.init();
-    };
-
-    if (document.readyState !== 'loading') {
-        themeInit();
-    } else {
-        document.addEventListener('DOMContentLoaded', themeInit, false);
+    initMath() {
+        if (this.config.math) renderMathInElement(document.body, this.config.math);
     }
-})();
+
+    initMermaid() {
+        const $mermaidElements = document.getElementsByClassName('mermaid');
+        if ($mermaidElements.length) {
+            mermaid.initialize({startOnLoad: false, theme: 'null'});
+            this.util.forEach($mermaidElements, $mermaid => {
+                mermaid.mermaidAPI.render('svg-' + $mermaid.id, this.data[$mermaid.id], svgCode => {
+                    $mermaid.innerHTML = svgCode;
+                }, $mermaid);
+            });
+        }
+    }
+
+    initEcharts() {
+        this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || (() => {
+            this._echartsArr = this._echartsArr || [];
+            for (let i = 0; i < this._echartsArr.length; i++) {
+                this._echartsArr[i].dispose();
+            }
+            this._echartsArr = [];
+            this.util.forEach(document.getElementsByClassName('echarts'), $echarts => {
+                const chart = echarts.init($echarts, this.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
+                chart.setOption(JSON.parse(this.data[$echarts.id]));
+                this._echartsArr.push(chart);
+            });
+        });
+        this.switchThemeEventSet.add(this._echartsOnSwitchTheme);
+        this._echartsOnSwitchTheme();
+        this._echartsOnResize = this._echartsOnResize || (() => {
+            for (let i = 0; i < this._echartsArr.length; i++) {
+                this._echartsArr[i].resize();
+            }
+        });
+        this.resizeEventSet.add(this._echartsOnResize);
+    }
+
+    initMapbox() {
+        if (this.config.mapbox) {
+            mapboxgl.accessToken = this.config.mapbox.accessToken;
+            mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
+            this._mapboxArr = this._mapboxArr || [];
+            this.util.forEach(document.getElementsByClassName('mapbox'), $mapbox => {
+                const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = this.data[$mapbox.id];
+                const mapbox = new mapboxgl.Map({
+                    container: $mapbox,
+                    center: [lng, lat],
+                    zoom: zoom,
+                    minZoom: .2,
+                    style: this.isDark ? darkStyle : lightStyle,
+                    attributionControl: false,
+                });
+                if (marked) {
+                    new mapboxgl.Marker().setLngLat([lng, lat]).addTo(mapbox);
+                }
+                if (navigation) {
+                    mapbox.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+                }
+                if (geolocate) {
+                    mapbox.addControl(new mapboxgl.GeolocateControl({
+                        positionOptions: {
+                            enableHighAccuracy: true,
+                        },
+                        showUserLocation: true,
+                        trackUserLocation: true,
+                    }), 'bottom-right');
+                }
+                if (scale) {
+                    mapbox.addControl(new mapboxgl.ScaleControl());
+                }
+                if (fullscreen) {
+                    mapbox.addControl(new mapboxgl.FullscreenControl());
+                }
+                mapbox.addControl(new MapboxLanguage());
+                this._mapboxArr.push(mapbox);
+            });
+            this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || (() => {
+                this.util.forEach(this._mapboxArr, mapbox => {
+                    const $mapbox = mapbox.getContainer();
+                    const { lightStyle, darkStyle } = this.data[$mapbox.id];
+                    mapbox.setStyle(this.isDark ? darkStyle : lightStyle);
+                    mapbox.addControl(new MapboxLanguage());
+                });
+            });
+            this.switchThemeEventSet.add(this._mapboxOnSwitchTheme);
+        }
+    }
+
+    initTypeit() {
+        if (this.config.typeit) {
+            this.config.typeit.forEach(group => {
+                const typeone = (i) => {
+                    const id = group[i];
+                    if (i === group.length - 1) {
+                        new TypeIt(`#${id}`, {
+                            strings: this.data[id],
+                        }).go();
+                        return;
+                    }
+                    let instance = new TypeIt(`#${id}`, {
+                        strings: this.data[id],
+                        afterComplete: () => {
+                            instance.destroy();
+                            typeone(i + 1);
+                        },
+                    }).go();
+                };
+                typeone(0);
+            });
+        }
+    }
+
+    initComment() {
+        if (this.config.comment && this.config.comment.gitalk) {
+            this.config.comment.gitalk.body = decodeURI(window.location.href);
+            const gitalk = new Gitalk(this.config.comment.gitalk.body);
+            gitalk.render('gitalk');
+        }
+        if (this.config.comment && this.config.comment.valine) new Valine(this.config.comment.valine);
+    }
+
+    initSmoothScroll() {
+        if ((!this.util.isMobile() && this.config.headerMode.desktop === 'normal')
+          || (this.util.isMobile() && this.config.headerMode.mobile === 'normal')) {
+            new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true});
+        } else {
+            new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true, header: '#header-desktop'});
+        }
+    }
+
+    onScroll() {
+        const $headers = [];
+        if (this.config.headerMode.desktop === 'auto') $headers.push(document.getElementById('header-desktop'));
+        if (this.config.headerMode.mobile === 'auto') $headers.push(document.getElementById('header-mobile'));
+        if (document.getElementById('comments')) {
+            const $viewComments = document.getElementById('view-comments');
+            $viewComments.href = `#comments`;
+            $viewComments.style.display = 'block';
+        }
+        const $fixedButtons = document.getElementById('fixed-buttons');
+        const MIN_SCROLL = 20;
+        window.addEventListener('scroll', () => {
+            this.newScrollTop = this.util.getScrollTop();
+            const scroll = this.newScrollTop - this.oldScrollTop;
+            this.util.forEach($headers, $header => {
+                if (scroll > MIN_SCROLL) {
+                    $header.classList.remove('fadeInDown');
+                    this.util.animateCSS($header, ['fadeOutUp', 'faster'], true);
+                } else if (scroll < - MIN_SCROLL) {
+                    $header.classList.remove('fadeOutUp');
+                    this.util.animateCSS($header, ['fadeInDown', 'faster'], true);
+                }
+            });
+            if (this.newScrollTop > MIN_SCROLL) {
+                if (scroll > MIN_SCROLL) {
+                    $fixedButtons.classList.remove('fadeIn');
+                    this.util.animateCSS($fixedButtons, ['fadeOut', 'faster'], true);
+                } else if (scroll < - MIN_SCROLL) {
+                    $fixedButtons.style.display = 'block';
+                    $fixedButtons.classList.remove('fadeOut');
+                    this.util.animateCSS($fixedButtons, ['fadeIn', 'faster'], true);
+                }
+            } else {
+                $fixedButtons.style.display = 'none';
+            }
+            for (let event of this.scrollEventSet) event();
+            this.oldScrollTop = this.newScrollTop;
+        }, false);
+    }
+
+    onResize() {
+        window.addEventListener('resize', () => {
+            if (!this._resizeTimeout) {
+                this._resizeTimeout = window.setTimeout(() => {
+                    this._resizeTimeout = null;
+                    for (let event of this.resizeEventSet) event();
+                    this.initToc();
+                    this.initSmoothScroll();
+                    this.initMermaid();
+                    this.initSearch();
+                }, 100);
+            }
+        }, false);
+    }
+
+    onClickMask() {
+        document.getElementById('mask').addEventListener('click', () => {
+            for (let event of this.clickMaskEventSet) event();
+            document.body.classList.remove('blur');
+        }, false);
+    }
+
+    init() {
+        this.initMenuMobile();
+        this.initSwitchTheme();
+        this.initSearch();
+        this.initLightGallery();
+        this.initHighlight();
+        this.initTable();
+        this.initHeaderLink();
+        this.initToc();
+        this.initComment();
+        this.initSmoothScroll();
+        this.initMath();
+        this.initMermaid();
+        this.initEcharts();
+        this.initTypeit();
+        this.initMapbox();
+
+        this.onScroll();
+        this.onResize();
+        this.onClickMask();
+    }
+}
+
+const themeInit = () => {
+    const theme = new Theme();
+    theme.init();
+};
+
+if (document.readyState !== 'loading') {
+    themeInit();
+} else {
+    document.addEventListener('DOMContentLoaded', themeInit, false);
+}

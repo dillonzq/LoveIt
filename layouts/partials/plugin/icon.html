@@ -12,14 +12,14 @@
     {{- end -}}
     {{- $classList = $newClassList -}}
     {{- with .scratch -}}
-        {{- .Set "forkawesome" true -}}
+        {{- dict "forkawesome" true | merge (.Get "this") | .Set "this" -}}
     {{- end -}}
 
 {{- /* default is Font Awesome */ -}}
 {{- /* Others */ -}}
 {{- else if ne $type "fa" -}}
     {{- with .scratch -}}
-        {{- .Set "iconfont" true -}}
+        {{- dict "iconfont" true | merge (.Get "this") | .Set "this" -}}
     {{- end -}}
 {{- end -}}
 <i class="{{ delimit $classList ` ` }}"></i>

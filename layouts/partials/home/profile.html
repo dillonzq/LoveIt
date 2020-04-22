@@ -1,5 +1,3 @@
-{{- $scratch := .Scratch.Get "scratch" -}}
-
 <div class="home-profile">
     {{- $avatar := .Site.Params.home.profile.avatarURL -}}
     {{- with .Site.Params.home.profile.gravatarEmail -}}
@@ -7,27 +5,31 @@
     {{- end -}}
     {{- with $avatar -}}
         <div class="home-avatar">
-            <a href="/posts">
-                {{- partial "plugin/image.html" (dict "src_s" . "title" "avatar" "description" (T "home") "scratch" $scratch) -}}
+            <a href="/posts" title="{{ T `home` }}">
+                {{- partial "plugin/image.html" (dict "src" . "alt" (T "home")) -}}
             </a>
         </div>
     {{- end -}}
 
     {{- with .Site.Params.home.profile.subtitle -}}
-        <h2 class="home-description">
+        <h2 class="home-subtitle">
             {{- if $.Site.Params.home.profile.typeit -}}
-                {{- $id := partial "function/id.html" (dict "content" . "scratch" $scratch) -}}
+                {{- $id := partial "function/id.html" (dict "content" . "scratch" $.Scratch) -}}
                 <div id="{{ $id }}" class="typeit"></div>
-                {{- $scratch.SetInMap "typeitMap" $id (slice $id) -}}
+                {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
             {{- else -}}
                 {{- . -}}
             {{- end -}}
         </h2>
     {{- end -}}
 
-    <div class="home-social-links">
-        {{- if .Site.Params.home.profile.social -}}
-            {{- partial "plugin/social.html" . -}}
-        {{- end -}}
-    </div>
+    {{- if .Site.Params.home.profile.social -}}
+        {{- partial "plugin/social.html" (dict "social" .Site.Params.social "scratch" $.Scratch) -}}
+    {{- end -}}
+
+    {{- with .Site.Params.home.profile.disclaimer -}}
+        <h3 class="home-disclaimer">
+            {{- . | safeHTML -}}
+        </h3>
+    {{- end -}}
 </div>

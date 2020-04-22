@@ -1,4 +1,3 @@
-/** pagination **/
 .pagination {
   display: flex;
   flex-direction: row;
@@ -9,14 +8,13 @@
   padding: 1rem 0 0;
 
   a {
-    -webkit-font-smoothing: antialiased;
     font-size: .8rem;
     color: #bfbfbf;
     letter-spacing: .1rem;
     font-weight: 700;
     padding: 5px 5px;
     text-decoration: none;
-    transition: 0.3s;
+    @include transition(0.3s);
   }
 
   li {
@@ -34,7 +32,7 @@
       color: $pagination-link-hover-color;
     }
 
-    .dark-theme &:hover a {
+    .dark &:hover a {
       color: $pagination-link-hover-color-dark;
     }
 
@@ -45,12 +43,12 @@
       width: 0;
       height: 3px;
       background: $pagination-link-hover-color;
-      transition: 0.3s;
+      @include transition(0.3s);
       bottom: 0px;
     }
 
-    .dark-theme &:before,
-    .dark-theme &:after {
+    .dark &:before,
+    .dark &:after {
       background: $pagination-link-hover-color-dark;
     }
 
@@ -80,7 +78,7 @@
         color: $pagination-link-hover-color;
       }
 
-      .dark-theme & a {
+      .dark & a {
         color: $pagination-link-hover-color-dark;
       }
 

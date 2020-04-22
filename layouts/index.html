@@ -1,25 +1,31 @@
 {{- define "content" -}}
+    {{- $params := .Scratch.Get "params" -}}
     <div class="page home">
         {{- /* Profile */ -}}
-        {{- if .Site.Params.home.profile.enable -}}
+        {{- if ne .Site.Params.home.profile.enable false -}}
             {{- partial "home/profile.html" . -}}
+        {{- end -}}
+
+        {{- /* Content */ -}}
+        {{- if .Content -}}
+            <div class="single">
+                <div class="content" id="content">
+                    {{- dict "content" .Content "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+                </div>
+            </div>
         {{- end -}}
 
         {{- /* Posts */ -}}
         {{- if ne .Site.Params.home.posts.enable false -}}
             {{- /* Paginate */ -}}
-            {{- $paginator := where .Site.RegularPages "Type" "posts" -}}
-            {{- if ne .Site.Params.home.posts.mode.defaultHiddenFromHomePage false -}}
-                {{- $paginator = where $paginator "Params.hiddenfromhomepage" "!=" true -}}
+            {{- $pages := where .Site.RegularPages "Type" "posts" -}}
+            {{- if .Site.Params.page.hiddenFromHomePage -}}
+                {{- $pages = where $pages "Params.hiddenfromhomepage" false -}}
             {{- else -}}
-                {{- $paginator = where $paginator "Params.hiddenfromhomepage" false -}}
+                {{- $pages = where $pages "Params.hiddenfromhomepage" "!=" true -}}
             {{- end -}}
-            {{- with .Site.Params.home.posts.paginate -}}
-                {{- $paginator = $.Paginate $paginator . -}}
-            {{- else -}}
-                {{- $paginator = $.Paginate $paginator -}}
-            {{- end -}}
-            {{- range $paginator.Pages -}}
+            {{- $pages = .Site.Params.home.posts.paginate | default .Site.Params.paginate | .Paginate $pages -}}
+            {{- range $pages.Pages -}}
                 {{- .Render "summary" -}}
             {{- end -}}
             {{- partial "paginator.html" . -}}
