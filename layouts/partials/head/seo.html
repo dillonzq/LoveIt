@@ -88,7 +88,7 @@
         {{- with $params.seo.publisher -}}
             "publisher": {
                 "@type": "Organization",
-                "name": "{{ .name }}",
+                "name": {{ .name | safeHTML }},
                 "logo": {
                 "@type": "ImageObject",
                 "url": "{{ .logo.url | absURL }}",

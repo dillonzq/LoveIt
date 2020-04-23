@@ -6,6 +6,13 @@ header {
   .dark & {
     background-color: $header-background-color-dark;
   }
+
+  .logo {
+    min-height: 1.25em;
+    height: 1.25em;
+    vertical-align: text-bottom;
+    padding-right: .25rem;
+  }
 }
 
 .header-wrapper {
@@ -136,7 +143,7 @@ header {
     padding: 0 1.5rem;
 
     .header-title {
-      font-size: $header-title-font-size-desktop;
+      font-size: $header-title-font-size;
     }
 
     .menu {
@@ -203,7 +210,7 @@ header {
       @include transition(margin-top 0.3s ease 0s);
 
       .header-title {
-        font-size: $header-title-font-size-mobile;
+        font-size: $header-title-font-size;
         max-width: 80%;
       }
 

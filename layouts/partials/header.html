@@ -2,8 +2,15 @@
 <header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="{{ .Site.Home.RelPermalink }}">
-                {{- .Site.Title -}}
+            <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
+                {{- with .Site.Params.header.title -}}
+                    {{- with .logo -}}
+                        {{- partial "plugin/image.html" (dict "src" . "alt" $.Site.Title "class" "logo") -}}
+                    {{- end -}}
+                    {{- .pre | safeHTML }}{{ .name }}{{ .post | safeHTML -}}
+                {{- else -}}
+                    {{- .Site.Title -}}
+                {{- end -}}
             </a>
         </div>
         <div class="menu">
@@ -16,7 +23,7 @@
                         {{- $url = .URL | relLangURL -}}
                     {{- end -}}
                     <a class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
-                        {{- .Pre | safeHTML }}{{ .Name -}}
+                        {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
                     </a>
                 {{- end -}}
                 <span class="menu-item delimiter"></span>
@@ -67,8 +74,15 @@
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="{{ .Site.Home.RelPermalink }}">
-                    {{- .Site.Title -}}
+                <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
+                    {{- with .Site.Params.header.title -}}
+                        {{- with .logo -}}
+                            {{- partial "plugin/image.html" (dict "src" . "alt" $.Site.Title "class" "logo") -}}
+                        {{- end -}}
+                        {{- .pre | safeHTML }}{{ .name }}{{ .post | safeHTML -}}
+                    {{- else -}}
+                        {{- .Site.Title -}}
+                    {{- end -}}
                 </a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
@@ -104,7 +118,7 @@
                     {{- $url = .URL | relLangURL -}}
                 {{- end -}}
                 <a class="menu-item" href="{{ $url }}" title="{{ .Title }}"{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
-                    {{- .Pre | safeHTML }}{{ .Name -}}
+                    {{- .Pre | safeHTML }}{{ .Name }}{{ .Post | safeHTML -}}
                 </a>
             {{- end -}}
             <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">

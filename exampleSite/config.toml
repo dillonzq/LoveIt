@@ -44,6 +44,8 @@ enableEmoji = true
         identifier = "posts"
         # you can add extra information before the name (HTML format is supported), such as icons
         pre = ""
+        # you can add extra information after the name (HTML format is supported), such as icons
+        post = ""
         name = "Posts"
         url = "/posts/"
         # title will be shown when you hover on this menu link.
@@ -52,6 +54,7 @@ enableEmoji = true
       [[languages.en.menu.main]]
         identifier = "tags"
         pre = ""
+        post = ""
         name = "Tags"
         url = "/tags/"
         title = ""
@@ -59,6 +62,7 @@ enableEmoji = true
       [[languages.en.menu.main]]
         identifier = "categories"
         pre = ""
+        post = ""
         name = "Categories"
         url = "/categories/"
         title = ""
@@ -66,6 +70,7 @@ enableEmoji = true
       [[languages.en.menu.main]]
         identifier = "documentation"
         pre = ""
+        post = ""
         name = "Docs"
         url = "/categories/documentation/"
         title = ""
@@ -73,6 +78,7 @@ enableEmoji = true
       [[languages.en.menu.main]]
         identifier = "about"
         pre = ""
+        post = ""
         name = "About"
         url = "/about/"
         title = ""
@@ -212,7 +218,10 @@ enableEmoji = true
     [languages.zh-cn.menu]
       [[languages.zh-cn.menu.main]]
         identifier = "posts"
+        # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
         pre = ""
+        # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
+        post = ""
         name = "所有文章"
         url = "/posts/"
         title = ""
@@ -220,6 +229,7 @@ enableEmoji = true
       [[languages.zh-cn.menu.main]]
         identifier = "tags"
         pre = ""
+        post = ""
         name = "标签"
         url = "/tags/"
         title = ""
@@ -227,6 +237,7 @@ enableEmoji = true
       [[languages.zh-cn.menu.main]]
         identifier = "categories"
         pre = ""
+        post = ""
         name = "分类"
         url = "/categories/"
         title = ""
@@ -241,6 +252,7 @@ enableEmoji = true
       [[languages.zh-cn.menu.main]]
         identifier = "about"
         pre = ""
+        post = ""
         name = "关于"
         url = "/about/"
         title = ""
@@ -381,6 +393,7 @@ enableEmoji = true
       [[languages.fr.menu.main]]
         identifier = "posts"
         pre = ""
+        post = ""
         name = "Postes"
         url = "/posts/"
         title = ""
@@ -388,6 +401,7 @@ enableEmoji = true
       [[languages.fr.menu.main]]
         identifier = "tags"
         pre = ""
+        post = ""
         name = "Balises"
         url = "/tags/"
         title = ""
@@ -395,6 +409,7 @@ enableEmoji = true
       [[languages.fr.menu.main]]
         identifier = "categories"
         pre = ""
+        post = ""
         name = "Catégories"
         url = "/categories/"
         title = ""
@@ -402,6 +417,7 @@ enableEmoji = true
       [[languages.fr.menu.main]]
         identifier = "documentation"
         pre = ""
+        post = ""
         name = "Docs"
         url = "/categories/documentation/"
         title = ""
@@ -556,6 +572,21 @@ enableEmoji = true
     # mobile header mode ("fixed", "normal", "auto")
     # 移动端导航栏模式 ("fixed", "normal", "auto")
     mobileMode = "auto"
+    # Header title config
+    # 页面头部导航栏标题配置
+    [params.header.title]
+      # URL of the LOGO
+      # LOGO 的 URL
+      logo = ""
+      # title name
+      # 标题名称
+      name = "LoveIt"
+      # you can add extra information before the name (HTML format is supported), such as icons
+      # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
+      pre = "<i class='far fa-kiss-wink-heart fa-fw'></i> "
+      # you can add extra information after the name (HTML format is supported), such as icons
+      # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
+      post = ""
 
   # Footer config
   # 页面底部信息配置

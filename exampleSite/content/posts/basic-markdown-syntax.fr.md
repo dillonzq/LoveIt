@@ -421,7 +421,7 @@ The rendered output looks like this:
 
 ### Task Lists
 
-Task lists allow you to create a list of items with checkboxes. To create a task list, add dashes (`-`) and brackets with a space (`[ ]`) in front of task list items. To select a checkbox, add an x in between the brackets (`[x]`).
+Task lists allow you to create a list of items with checkboxes. To create a task list, add dashes (`-`) and brackets with a space (`[ ]`) before task list items. To select a checkbox, add an x in between the brackets (`[x]`).
 
 ```markdown
 - [x] Write the press release

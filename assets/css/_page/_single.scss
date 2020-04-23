@@ -205,7 +205,8 @@
 
     img {
       max-width: 100%;
-      min-height: 1.2rem;
+      min-height: 1.25em;
+      vertical-align: text-bottom;
     }
 
     figure {
@@ -339,10 +340,8 @@
       }
     }
 
-    .version img {
-      min-height: 1.2rem;
-      height: 1.2rem;
-      vertical-align: text-bottom;
+    .version {
+      height: 1.25em;
     }
   }
 
