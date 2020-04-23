@@ -19,7 +19,7 @@
         {{- /* Paginate */ -}}
         {{- $pages := .Pages.GroupByDate "2006" -}}
         {{- range (.Site.Params.list.paginate | default .Site.Params.paginate | .Paginate $pages).PageGroups -}}
-            <h3>{{ .Key }}</h3>
+            <h3 class="group-title">{{ .Key }}</h3>
             {{- range .Pages -}}
                 <article class="archive-item">
                     <a href="{{ .RelPermalink }}" class="archive-item-link">
