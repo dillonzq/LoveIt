@@ -1,0 +1,140 @@
+# Tradução para português do Brasil
+
+# === Post ===
+[posts]
+other = "Posts"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "Todos %s"
+
+[tag]
+other = "Tag"
+
+[tags]
+other = "Tags"
+
+[category]
+other = "Categoria"
+
+[categories]
+other = "Categorias"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "Mais"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "Selecione o idioma"
+
+[switchTheme]
+other = "Trocar tema"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Movido a %s"
+
+[theme]
+other = "Tema"
+# === partials/footer.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "Compartilhe em"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "Conteúdos"
+
+[publish]
+other = "publicado em"
+
+[included]
+other = "incluido em"
+
+[wordCount]
+other = "{{ .Count }} palavras"
+
+[readingTime]
+other = "{{ .Count }} min"
+
+[views]
+other = "visualizações"
+
+[author]
+other = "Autor"
+
+[lastMod]
+other = "O artigo foi atualizado em %s"
+
+[license]
+other = "Publicado sobre a licença %s"
+
+[seeMarkdown]
+other = "Leia em Markdown"
+
+[back]
+other = "Voltar"
+
+[home]
+other = "Home"
+
+[readMore]
+other = "Leia mais"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Página não encontrada"
+
+[pageNotFoundText]
+other = "A página que você procura não existe. Desculpe"
+
+[backToHome]
+other = "Voltar para a Home"
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Nota"
+
+[abstract]
+other = "Abstrato"
+
+[info]
+other = "Info"
+
+[tip]
+other = "Dica"
+
+[success]
+other = "Sucesso"
+
+[question]
+other = "Pergunta"
+
+[warning]
+other = "Aviso"
+
+[failure]
+other = "Falha"
+
+[danger]
+other = "Perigo"
+
+[bug]
+other = "Bug"
+
+[example]
+other = "Exemplo"
+
+[quote]
+other = "Citação"
+# === shortcodes/admonition.html ===
+
