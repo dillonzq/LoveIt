@@ -77,6 +77,7 @@
 * 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
 * 支持 **[Valine](https://valine.js.org/)** 评论系统
 * 支持 **[Facebook](https://developers.facebook.com/docs/plugins/comments/) 评论**系统
+* 支持 **[Commento](https://commento.io/) 评论系统
 
 ### 扩展功能
 

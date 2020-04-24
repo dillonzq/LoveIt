@@ -243,6 +243,9 @@ enableEmoji = true
             numPosts = 10
             appId = ""
             languageCode = "en_US"
+          # commento.io Comment Config (https://commento.io/)
+          [languages.en.params.comment.commento]
+            enable = true
 
   [languages.zh-cn]
     weight = 2
@@ -465,6 +468,9 @@ enableEmoji = true
           numPosts = 10
           appId = ""
           languageCode = "zh_CN"
+        # commento.io Comment Config (https://commento.io/)
+        [languages.en.params.comment.commento]
+          enable = true
 
   [languages.fr]
     weight = 3
@@ -689,6 +695,9 @@ enableEmoji = true
             numPosts = 10
             appId = ""
             languageCode = "fr"
+          # commento.io Comment Config (https://commento.io/)
+          [languages.en.params.comment.commento]
+            enable = true
 
 [params]
   # LoveIt theme version

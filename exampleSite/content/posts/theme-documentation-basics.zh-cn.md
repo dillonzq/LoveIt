@@ -383,6 +383,9 @@ hugo
       numPosts = 10
       appId = ""
       languageCode = "en_US"
+    # commento.io 评论系统设置 (https://commento.io/)
+    [params.comment.commento]
+      enable = true
 
   # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]

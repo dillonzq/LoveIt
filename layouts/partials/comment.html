@@ -113,4 +113,10 @@
             Please enable JavaScript to view the <a href="https://developers.facebook.com/docs/plugins/comments/">comments powered by Facebook.</a>
         </noscript>
     {{- end -}}
+
+    {{- /* Commento.io Comment System */ -}}
+    {{- if .Site.Params.comment.commento.enable -}}
+      <script defer src="https://cdn.commento.io/js/commento.js"></script>
+      <div id="commento"></div>
+    {{- end -}}
 {{- end -}}

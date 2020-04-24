@@ -381,6 +381,9 @@ Note that some of these parameters are explained in details in other sections of
       numPosts = 10
       appId = ""
       languageCode = "en_US"
+    # commento.io Comment Config (https://commento.io/)
+    [params.comment.commento]
+      enable = true
 
   # site verification code for Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
