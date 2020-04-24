@@ -56,7 +56,7 @@ John Gruber, the author of Markdown, puts it like this:
 Without further delay, let us go over the main elements of Markdown and what the resulting HTML looks like!
 
 {{< admonition tip >}}
-:(far fa-bookmark): Bookmark this page for easy future reference!
+:(far fa-bookmark fa-fw): Bookmark this page for easy future reference!
 {{< /admonition >}}
 
 ## 1 Headings

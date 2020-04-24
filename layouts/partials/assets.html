@@ -53,7 +53,7 @@
 {{- end -}}
 
 {{- /* clipboard.js */ -}}
-{{- if ne $params.copycode false -}}
+{{- if not $params.code | or (ne $params.code false) -}}
     {{- $source := $cdn.clipboardJS | default "lib/clipboard/clipboard.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- $config = T "copyToClipboard" | dict "title" | dict "clipboard" | merge $config -}}

@@ -26,7 +26,7 @@ Discover what the Hugo - **LoveIt** theme is all about and the core-concepts beh
 
 Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only dependency of this theme.
 
-Just install latest version of [:(far fa-file-archive): Hugo extended (> 0.62.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
+Just install latest version of [:(far fa-file-archive fa-fw): Hugo extended (> 0.62.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
 
 {{< admonition note "Why not support earlier versions of Hugo?" >}}
 Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup/#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/), this theme only supports Hugo versions above **0.62.0**.
@@ -53,7 +53,7 @@ cd my_website
 
 The **LoveIt** theme’s repository is: [https://github.com/dillonzq/LoveIt](https://github.com/dillonzq/LoveIt).
 
-You can download the [latest release :(far fa-file-archive): .zip file](https://github.com/dillonzq/LoveIt/releases) of the theme and extract it in the `themes` directory.
+You can download the [latest release :(far fa-file-archive fa-fw): .zip file](https://github.com/dillonzq/LoveIt/releases) of the theme and extract it in the `themes` directory.
 
 Alternatively, clone this repository to the `themes` directory:
 
@@ -362,8 +362,6 @@ Note that some of these parameters are explained in details in other sections of
     hiddenFromSearch = false
     # whether to enable lightgallery
     lightgallery = false
-    # {{< version 0.2.0 >}} whether to show the copy button of the code block
-    copyCode = true
     # {{< version 0.2.0 >}} whether to enable the ruby extended syntax
     ruby = true
     # {{< version 0.2.0 >}} whether to enable the fraction extended syntax
@@ -391,6 +389,10 @@ Note that some of these parameters are explained in details in other sections of
       copyTex = true
       # KaTeX extension mhchem
       mhchem = true
+    # {{< version 0.2.0 >}} Code config
+    [params.page.code]
+      # whether to show the copy button of the code block
+      copy = true
     # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config
     [params.page.mapbox]
       # access token of Mapbox GL JS
@@ -485,7 +487,7 @@ Note that some of these parameters are explained in details in other sections of
         outlined = false
       # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} comment config
       [params.page.comment.commento]
-        enable = true
+        enable = false
     # {{< version 0.2.0 >}} SEO config
     [params.page.seo]
       # Publisher info
@@ -754,12 +756,12 @@ In `config/css/_custom.scss`, you can add some css style code to customize the s
 
 | Language           | Hugo Code | HTML `lang` Attribute | Theme Docs              | Lunr.js Support         |
 |:------------------ |:---------:|:---------------------:|:-----------------------:|:-----------------------:|
-| English            | `en`      | `en`                  | :(far fa-check-square): | :(far fa-check-square): |
-| Simplified Chinese | `zh-cn`   | `zh-CN`               | :(far fa-check-square): | :(far fa-check-square): |
-| French             | `fr`      | `fr`                  | :(far fa-square):       | :(far fa-check-square): |
-| Polish             | `pl`      | `pl`                  | :(far fa-square):       | :(far fa-square):       |
+| English            | `en`      | `en`                  | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
+| Simplified Chinese | `zh-cn`   | `zh-CN`               | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
+| French             | `fr`      | `fr`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| Polish             | `pl`      | `pl`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
 
-:(far fa-kiss-wink-heart): **Feel free to [contribute](https://github.com/dillonzq/LoveIt/pulls)!**
+:(far fa-kiss-wink-heart fa-fw): **Feel free to [contribute](https://github.com/dillonzq/LoveIt/pulls)!**
 
 ### 4.2 Basic Configuration
 

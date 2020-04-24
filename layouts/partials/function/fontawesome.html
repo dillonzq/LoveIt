@@ -10,5 +10,5 @@
 {{- $content = replaceRE $REin $REout . -}}
 
 {{- $REin = `:\(([\w- ]+?)\):` -}}
-{{- $REout = `<i class="$1 fa-fw"></i>` -}}
+{{- $REout = `<i class="$1"></i>` -}}
 {{- return replaceRE $REin $REout $content -}}

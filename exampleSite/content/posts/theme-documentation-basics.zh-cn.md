@@ -26,7 +26,7 @@ toc:
 
 由于 Hugo 提供的便利性, [Hugo](https://gohugo.io/) 本身是这个主题唯一的依赖.
 
-直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive): Hugo extended (> 0.62.0)](https://gohugo.io/getting-started/installing/).
+直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive fa-fw): Hugo extended (> 0.62.0)](https://gohugo.io/getting-started/installing/).
 
 {{< admonition note "为什么不支持早期版本的 Hugo?" >}}
 由于 [Markdown 渲染钩子函数](https://gohugo.io/getting-started/configuration-markup/#markdown-render-hooks) 在 [Hugo 圣诞节版本](https://gohugo.io/news/0.62.0-relnotes/) 中被引入, 本主题只支持高于 **0.62.0** 的 Hugo 版本.
@@ -53,7 +53,7 @@ cd my_website
 
 **LoveIt** 主题的仓库是: [https://github.com/dillonzq/LoveIt](https://github.com/dillonzq/LoveIt).
 
-你可以下载主题的 [最新版本 :(far fa-file-archive): .zip 文件](https://github.com/dillonzq/LoveIt/releases) 并且解压放到 `themes` 目录.
+你可以下载主题的 [最新版本 :(far fa-file-archive fa-fw): .zip 文件](https://github.com/dillonzq/LoveIt/releases) 并且解压放到 `themes` 目录.
 
 另外, 也可以直接把这个主题克隆到 `themes` 目录:
 
@@ -365,8 +365,6 @@ hugo
     hiddenFromSearch = false
     # 是否在文章页面使用 lightgallery
     lightgallery = true
-    # {{< version 0.2.0 >}} 是否显示代码块的复制按钮
-    copyCode = true
     # {{< version 0.2.0 >}} 是否使用 ruby 扩展语法
     ruby = true
     # {{< version 0.2.0 >}} 是否使用 fraction 扩展语法
@@ -381,6 +379,10 @@ hugo
       enable = true
       # 是否使目录自动折叠展开
       auto = true
+    # {{< version 0.2.0 >}} 代码配置
+    [params.page.code]
+      # 是否显示代码块的复制按钮
+      copy = true
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} 数学公式
     [params.page.math]
       enable = true
@@ -488,7 +490,7 @@ hugo
         outlined = false
       # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} 评论系统设置
       [params.page.comment.commento]
-        enable = true
+        enable = false
     # {{< version 0.2.0 >}} SEO config
     [params.page.seo]
       # 出版者信息
@@ -757,12 +759,12 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 | 语言 | Hugo 代码 | HTML `lang` 属性 | 主题文档 | Lunr.js 支持 |
 |:---- |:----:|:----:|:----:|:----:|
-| 英语 | `en` | `en` | :(far fa-check-square): | :(far fa-check-square): |
-| 简体中文 | `zh-cn` | `zh-CN` | :(far fa-check-square): | :(far fa-check-square): |
-| 法语 | `fr` | `fr` | :(far fa-square): | :(far fa-check-square): |
-| 波兰语 | `pl` | `pl` | :(far fa-square): | :(far fa-square): |
+| 英语 | `en` | `en` | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
+| 简体中文 | `zh-cn` | `zh-CN` | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
+| 法语 | `fr` | `fr` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 波兰语 | `pl` | `pl` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
 
-:(far fa-kiss-wink-heart): **请自由地[贡献代码](https://github.com/dillonzq/LoveIt/pulls)!**
+:(far fa-kiss-wink-heart fa-fw): **请自由地[贡献代码](https://github.com/dillonzq/LoveIt/pulls)!**
 
 ### 4.2 基本配置
 
