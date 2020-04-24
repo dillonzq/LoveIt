@@ -18,16 +18,10 @@
         {{- /* Gitalk Comment System */ -}}
         {{- if $comment.gitalk.enable -}}
             <div id="gitalk" class="comment"></div>
-            {{- with $cdn.gitalkCSS -}}
-                {{- dict "source" . | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
-            {{- else -}}
-                {{- dict "source" "lib/gitalk/gitalk.css" "minify" true "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
-            {{- end -}}
-            {{- with $cdn.gitalkJS -}}
-                {{- dict "source" . | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
-            {{- else -}}
-                {{- dict "source" "lib/gitalk/gitalk.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
-            {{- end -}}
+            {{- $source := $cdn.gitalkCSS | default "lib/gitalk/gitalk.css" -}}
+            {{- dict "source" $source "minify" true "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
+            {{- $source := $cdn.gitalkJS | default "lib/gitalk/gitalk.min.js" -}}
+            {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
             {{- $commentConfig = dict "id" .Date "title" .Title "clientID" $comment.gitalk.clientId "clientSecret" $comment.gitalk.clientSecret "repo" $comment.gitalk.repo "owner" $comment.gitalk.owner "admin" (slice $comment.gitalk.owner) | dict "gitalk" | merge $commentConfig -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
@@ -37,14 +31,9 @@
         {{- /* Valine Comment System */ -}}
         {{- if $comment.valine.enable -}}
             <div id="valine" class="comment"></div>
-            {{- $options := dict "targetPath" "lib/valine/valine.min.css" -}}
-            {{- dict "source" "lib/valine/valine.scss" "toCSS" $options | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
-            {{- with $cdn.valineJS -}}
-                {{- dict "source" . | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
-            {{- else -}}
-                {{- dict "source" "lib/valine/Valine.min.js" "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
-            {{- end -}}
-            {{- $commentConfig = dict "el" "#valine" "appId" $comment.valine.appId "appKey" $comment.valine.appKey "lang" ($comment.valine.lang | default (T "valineLang")) "notify" $comment.valine.notify "verify" $comment.valine.verify "visitor" $comment.valine.visitor "recordIP" $comment.valine.recordIP "placeholder" ($comment.valine.placeholder | default (T "valinePlaceholder")) | dict "valine" | merge $commentConfig -}}
+            {{- $source := $cdn.valineJS | default "lib/valine/Valine.min.js" -}}
+            {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
+            {{- $commentConfig = dict "el" "#valine" "appId" $comment.valine.appId "appKey" $comment.valine.appKey "lang" ($comment.valine.lang | default (T "valineLang")) "visitor" $comment.valine.visitor "recordIP" $comment.valine.recordIP "placeholder" ($comment.valine.placeholder | default (T "valinePlaceholder")) | dict "valine" | merge $commentConfig -}}
             {{- with $comment.valine.avatar -}}
                 {{- $commentConfig = dict "avatar" . | dict "valine" | merge $commentConfig -}}
             {{- end -}}
