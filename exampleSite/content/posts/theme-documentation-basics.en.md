@@ -293,7 +293,6 @@ Note that some of these parameters are explained in details in other sections of
     Linkedin = ""
     Twitter = "xxxx"
     Instagram = "xxxx"
-    Email = "xxxx@xxxx.com"
     Facebook = "xxxx"
     Telegram = "xxxx"
     Medium = ""
@@ -301,7 +300,7 @@ Note that some of these parameters are explained in details in other sections of
     Youtubelegacy = ""
     Youtubecustom = ""
     Youtubechannel = ""
-    Tumblr =""
+    Tumblr = ""
     Quora = ""
     Keybase = ""
     Pinterest = ""
@@ -345,16 +344,15 @@ Note that some of these parameters are explained in details in other sections of
     Vine = ""
     Googlescholar = ""
     Researchgate = ""
+    Mastodon = ""
     Thingiverse = ""
     Devto = ""
     Gitea = ""
     XMPP = ""
     Matrix = ""
     Bilibili = ""
+    Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
-    [params.social.Mastodon] # {{< version 0.2.0 changed >}}
-      id = "@xxxx"
-      prefix = "https://mastodon.technology/"
 
   # {{< version 0.2.0 changed >}} Page config
   [params.page]

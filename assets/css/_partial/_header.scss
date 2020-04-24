@@ -2,6 +2,7 @@ header {
   width: 100%;
   z-index: 150;
   background-color: $header-background-color;
+  @include box-shadow(0px 1px 4px rgba(0, 0, 0, .1));
 
   .dark & {
     background-color: $header-background-color-dark;

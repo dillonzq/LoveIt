@@ -296,7 +296,6 @@ hugo
     Linkedin = ""
     Twitter = "xxxx"
     Instagram = "xxxx"
-    Email = "xxxx@xxxx.com"
     Facebook = "xxxx"
     Telegram = "xxxx"
     Medium = ""
@@ -304,7 +303,7 @@ hugo
     Youtubelegacy = ""
     Youtubecustom = ""
     Youtubechannel = ""
-    Tumblr =""
+    Tumblr = ""
     Quora = ""
     Keybase = ""
     Pinterest = ""
@@ -348,16 +347,15 @@ hugo
     Vine = ""
     Googlescholar = ""
     Researchgate = ""
+    Mastodon = ""
     Thingiverse = ""
     Devto = ""
     Gitea = ""
     XMPP = ""
     Matrix = ""
     Bilibili = ""
+    Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
-    [params.social.Mastodon] # {{< version 0.2.0 changed >}}
-      id = "@xxxx"
-      prefix = "https://mastodon.technology/"
 
   # {{< version 0.2.0 changed >}} 文章页面配置
   [params.page]

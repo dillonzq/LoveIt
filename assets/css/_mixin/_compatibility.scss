@@ -4,9 +4,9 @@
   border-radius: $value;
 }
 
-@mixin box-shadow($value) {
-  -webkit-box-shadow: $value;
-  box-shadow: $value;
+@mixin box-shadow($values...) {
+  -webkit-box-shadow: $values;
+  box-shadow: $values;
 }
 
 @mixin transition($values...) {

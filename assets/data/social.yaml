@@ -350,144 +350,160 @@ zhihu:
   icon:
     simpleicons: zhihu
 
-# 045: Angellist
-angellist:
+# 045: 豆瓣
+douban:
   weight: 45
+  prefix: https://www.douban.com/people/
+  title: 豆瓣
+  icon:
+    simpleicons: douban
+
+# 046: Angellist
+angellist:
+  weight: 46
   prefix: https://angel.co/
   title: Angellist
   icon:
     class: fab fa-angellist fa-fw
 
-# 046: SlideShare
+# 047: SlideShare
 slideshare:
-  weight: 46
+  weight: 47
   prefix: https://slideshare.com/
   title: SlideShare
   icon:
     class: fab fa-slideshare fa-fw
 
-# 047: JSFiddle
+# 048: JSFiddle
 jsfiddle:
-  weight: 47
+  weight: 48
   prefix: https://jsfiddle.com/
   title: JSFiddle
   icon:
     class: fab fa-jsfiddle fa-fw
 
-# 048: DeviantArt
+# 049: DeviantArt
 deviantart:
-  weight: 48
+  weight: 49
   template: https://%s.deviantart.com/
   title: DeviantArt
   icon:
     class: fab fa-deviantart fa-fw
 
-# 049: Behance
+# 050: Behance
 behance:
-  weight: 49
+  weight: 50
   prefix: https://behance.net/
   title: Behance
   icon:
     class: fab fa-behance fa-fw
 
-# 050: Dribbble
+# 051: Dribbble
 dribbble:
-  weight: 50
+  weight: 51
   prefix: https://dribbble.com/
   title: Dribbble
   icon:
     class: fab fa-dribbble fa-fw
 
-# 051: WordPress
+# 052: WordPress
 wordpress:
-  weight: 51
+  weight: 52
   template: https://%s.wordpress.com/
   title: WordPress
   icon:
     class: fab fa-wordpress fa-fw
 
-# 052: Vine
+# 053: Vine
 vine:
-  weight: 52
+  weight: 53
   prefix: https://vine.co/
   title: Vine
   icon:
     class: fab fa-vine fa-fw
 
-# 053: Google Scholar
+# 054: Google Scholar
 googlescholar:
-  weight: 53
+  weight: 54
   template: https://scholar.google.com/citations?%s
   title: Google Scholar
   icon:
     simpleicons: googlescholar
 
-# 054: ResearchGate
+# 055: ResearchGate
 researchgate:
-  weight: 54
+  weight: 55
   prefix: https://www.researchgate.net/profile/
   title: ResearchGate
   icon:
     class: fab fa-researchgate fa-fw
 
-# 055: Mastodon
+# 056: Mastodon
 mastodon:
-  weight: 55
+  weight: 56
   prefix: https://mastodon.social/
   title: Mastodon
   icon:
     class: fab fa-mastodon fa-fw
 
-# 056: Dev.To
+# 057: Thingiverse
+thingiverse:
+  weight: 57
+  prefix: https://www.thingiverse.com/
+  title: Thingiverse
+  icon:
+    src: svg/icons/thingiverse.svg
+
+# 058: Dev.To
 devto:
-  weight: 56
+  weight: 58
   prefix: https://dev.to/
   title: Dev.To
   icon:
     class: fab fa-dev fa-fw
 
-# 057: Gitea
+# 059: Gitea
 gitea:
-  weight: 57
+  weight: 59
   title: Gitea
   icon:
     simpleicons: gitea
 
-# 058: XMPP
+# 060: XMPP
 xmpp:
-  weight: 58
+  weight: 60
   template: xmpp:%s
   title: XMPP
   icon:
     simpleicons: xmpp
 
-# 059: Matrix
+# 061: Matrix
 matrix:
-  weight: 59
+  weight: 61
   prefix: https://matrix.to/#/
   title: Matrix
   icon:
     simpleicons: matrix
 
-# 060: bilibili
+# 062: bilibili
 bilibili:
-  weight: 60
+  weight: 62
   prefix: https://space.bilibili.com/
   title: bilibili
   icon:
     src: svg/icons/bilibili.svg
 
-# 061: Email
+# 063: Email
 email:
-  weight: 61
+  weight: 63
   template: mailto:%s
   title: Email
   icon:
     class: far fa-envelope fa-fw
 
-# 062: RSS
+# 064: RSS
 rss:
-  weight: 62
+  weight: 64
   url: /index.xml
   title: RSS
   newtab: true
