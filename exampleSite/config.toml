@@ -469,7 +469,7 @@ enableEmoji = true
           appId = ""
           languageCode = "zh_CN"
         # commento.io Comment Config (https://commento.io/)
-        [languages.en.params.comment.commento]
+        [languages.zh-cn.params.comment.commento]
           enable = true
 
   [languages.fr]
@@ -696,7 +696,7 @@ enableEmoji = true
             appId = ""
             languageCode = "fr"
           # commento.io Comment Config (https://commento.io/)
-          [languages.en.params.comment.commento]
+          [languages.fr.params.comment.commento]
             enable = true
 
 [params]
