@@ -488,6 +488,9 @@ hugo
         colorful = true
         dislikes = false
         outlined = false
+      # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} 评论系统设置
+      [params.page.comment.commento]
+        enable = true
     # {{< version 0.2.0 >}} SEO config
     [params.page.seo]
       # 出版者信息

@@ -791,7 +791,7 @@ enableEmoji = true
         appId = ""
         languageCode = ""
       # Telegram comments config (https://comments.app/)
-      # Telegram Comments 评论系统设置 (https://comments.app/)
+      # Telegram comments 评论系统设置 (https://comments.app/)
       [params.page.comment.telegram]
         enable = false
         siteID = ""
@@ -801,6 +801,10 @@ enableEmoji = true
         colorful = true
         dislikes = false
         outlined = false
+      # Commento comments config (https://commento.io/)
+      # Commento comments 评论系统设置 (https://commento.io/)
+      [params.page.comment.commento]
+        enable = true
     # SEO config
     # SEO 配置
     [params.page.seo]

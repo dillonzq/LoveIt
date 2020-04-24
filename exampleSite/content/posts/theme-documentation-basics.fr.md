@@ -490,6 +490,9 @@ Note that some of these parameters are explained in details in other sections of
         colorful = true
         dislikes = false
         outlined = false
+      # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} comment config
+      [params.page.comment.commento]
+        enable = true
     # {{< version 0.2.0 >}} SEO config
     [params.page.seo]
       # Publisher info
