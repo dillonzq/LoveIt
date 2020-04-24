@@ -1,6 +1,6 @@
 normalize.css@8.0.1 https://github.com/necolas/normalize.css
 fontawesome-free@5.12.1 https://fontawesome.com/
-forkawesome@1.1.7 https://forkaweso.me/Fork-Awesome/
+simple-icons@2.9.0 https://github.com/simple-icons/simple-icons
 animate.css@3.7.2 https://github.com/daneden/animate.css
 smooth-scroll@16.1.2 https://github.com/cferdinandi/smooth-scroll
 autocomplete.js@0.37.1 https://github.com/algolia/autocomplete.js
@@ -19,4 +19,3 @@ aplayer@1.10.1 https://github.com/MoePlayer/APlayer
 meting@2.0.1 https://github.com/metowolf/MetingJS
 gitalk@1.6.2 https://github.com/gitalk/gitalk
 valine@1.3.10 https://valine.js.org/
-iconfont https://www.iconfont.cn/

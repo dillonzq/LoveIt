@@ -24,7 +24,28 @@
     {{- end -}}
 
     {{- if .Site.Params.home.profile.social -}}
-        {{- partial "plugin/social.html" (dict "social" .Site.Params.social "scratch" $.Scratch) -}}
+        <div class="social-links">
+            {{- $socialMap := resources.Get "data/social.yaml" | transform.Unmarshal -}}
+            {{- $socialArr := slice -}}
+            {{- range $key, $value := .Site.Params.social -}}
+                {{- $social := $key | lower | index $socialMap | default dict -}}
+                {{- if $value -}}
+                    {{- if reflect.IsMap $value -}}
+                        {{- $social = $value | merge $social -}}
+                    {{- else if ne $value true -}}
+                        {{- $social = dict "id" $value | merge $social -}}
+                    {{- end -}}
+                    {{- if $social.icon.simpleicons -}}
+                        {{- $prefix := ($.Scratch.Get "cdn" | default dict).simpleIconsPrefix -}}
+                        {{- $social = dict "prefix" $prefix | dict "icon" | merge $social -}}
+                    {{- end -}}
+                    {{- $socialArr = $socialArr | append $social -}}
+                {{- end -}}
+            {{- end -}}
+            {{- range sort $socialArr "weight" -}}
+                {{- partial "plugin/social.html" . -}}
+            {{- end -}}
+        </div>
     {{- end -}}
 
     {{- with .Site.Params.home.profile.disclaimer -}}

@@ -42,6 +42,22 @@ class Theme {
         this.clickMaskEventSet = new Set();
     }
 
+    initIcon() {
+        this.util.forEach(document.querySelectorAll('[data-svg-src]'), $icon => {
+            fetch($icon.getAttribute('data-svg-src'))
+                .then(response => response.text())
+                .then(svg => {
+                    const $temp = document.createElement('div');
+                    $temp.insertAdjacentHTML('afterbegin', svg);
+                    const $svg = $temp.firstChild;
+                    $svg.setAttribute('data-svg-src', $icon.getAttribute('data-svg-src'));
+                    $svg.classList.add('icon');
+                    $icon.parentElement.replaceChild($svg, $icon);
+                })
+                .catch(console.error.bind(console));
+        });
+    }
+
     initMenuMobile() {
         const $menuToggleMobile = document.getElementById('menu-toggle-mobile');
         const $menuMobile = document.getElementById('menu-mobile');
@@ -303,7 +319,7 @@ class Theme {
             if ($code.classList.contains('lnc') || !this.config.clipboard) return;
             const $button = document.createElement('div');
             $button.classList.add('copy-button');
-            $button.innerHTML = '<i class="far fa-copy fa-fw"></i>';
+            $button.insertAdjacentHTML('afterbegin', '<i class="far fa-copy fa-fw"></i>');
             $button.setAttribute('data-clipboard-text', $code.innerText);
             $button.title = this.config.clipboard.title;
             const clipboard = new ClipboardJS($button);
@@ -327,7 +343,7 @@ class Theme {
         for (let num = 1; num <= 6; num++) {
             this.util.forEach(document.querySelectorAll('.single .content > h' + num), $header => {
                 $header.classList.add('headerLink');
-                $header.innerHTML = `<a href="#${$header.id}" class="header-mark"></a>${$header.innerHTML}`;
+                $header.insertAdjacentHTML('afterbegin', `<a href="#${$header.id}" class="header-mark"></a>`);
             });
         }
     }
@@ -413,7 +429,7 @@ class Theme {
             mermaid.initialize({startOnLoad: false, theme: 'null'});
             this.util.forEach($mermaidElements, $mermaid => {
                 mermaid.mermaidAPI.render('svg-' + $mermaid.id, this.data[$mermaid.id], svgCode => {
-                    $mermaid.innerHTML = svgCode;
+                    $mermaid.insertAdjacentHTML('afterbegin', svgCode);
                 }, $mermaid);
             });
         }
@@ -598,6 +614,7 @@ class Theme {
     }
 
     init() {
+        this.initIcon();
         this.initMenuMobile();
         this.initSwitchTheme();
         this.initSearch();

@@ -1,4 +1,4 @@
-{{- $mapbox := (.Page.Scratch.Get "params").page.mapbox | default dict -}}
+{{- $mapbox := (.Page.Scratch.Get "params").mapbox | default dict -}}
 
 {{- $lng := cond .IsNamedParams (.Get "lng") (.Get 0) -}}
 {{- $lat := cond .IsNamedParams (.Get "lat") (.Get 1) -}}
