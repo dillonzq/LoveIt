@@ -1,3 +1,0 @@
-.dark .v *,.dark .v .vwrap .vheader .vinput,.dark .v .vlist .vcard .vh,.dark .v .vlist .vcard .vquote{border-color:#4a4b50}.dark .v blockquote{border-left:.25rem solid #00bfa5}.dark .v *,.dark .v .vwrap input,.dark .v .vwrap input::placeholder,.dark .v .veditor,.dark .v .veditor::placeholder,.dark .v a,.dark .v a:hover{color:#a9a9b3}.dark .v .vbtn{color:#a9a9b3;background:#222325;border-color:#292a2d}.dark .v .vbtn:hover{color:#55bde2;border-color:#55bde2}.dark .v .vlist .vcard .vhead .vsys{background:#20252b}.dark .v code,.dark .v pre{background:#272C34}.dark .v .vmark .vinput{color:#222325}.v blockquote{border-left:.25rem solid #00bfa5}.v code,.v pre{text-align:left}
-
-/*# sourceMappingURL=valine.min.css.map */

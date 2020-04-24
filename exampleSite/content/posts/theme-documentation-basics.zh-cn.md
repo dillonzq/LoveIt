@@ -463,8 +463,6 @@ hugo
         appId = ""
         appKey = ""
         placeholder = "Your comment ..."
-        notify = false
-        verify = true
         avatar = "mp"
         meta= ""
         pageSize = 10
@@ -539,20 +537,20 @@ hugo
   [params.cdn]
     # {{< version 0.2.0 >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
     normalizeCSS = ''
-    # {{< link "https://fontawesome.com/" "fontawesome-free" >}}@5.12.1
+    # {{< link "https://fontawesome.com/" "fontawesome-free" >}}@5.13.0
     fontawesomeFreeCSS = ''
     # {{< version 0.2.0 >}} {{< link "https://github.com/simple-icons/simple-icons" "simple-icons" >}}@2.9.0
     # ('https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/')
     simpleIconsPrefix = 'https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/'
     # animate.css@3.7.2 https://github.com/daneden/animate.css
     animateCSS = ''
-    # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.2
+    # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.3
     smoothScrollJS = ''
     # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/autocomplete.js" "autocomplete.js" >}}@0.37.1
     autocompleteJS = ''
     # {{< version 0.2.0 >}} {{< link "https://lunrjs.com/" "lunr.js" >}}@2.3.8
     lunrJS = ''
-    # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/algoliasearch-client-javascript" "algoliasearch" >}}@4.1.0
+    # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/algoliasearch-client-javascript" "algoliasearch" >}}@4.2.0
     algoliasearchJS = ''
     # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
     lazysizesJS = ''
@@ -563,9 +561,9 @@ hugo
     lightgalleryZoomJS = ''
     # {{< version 0.2.0 >}} {{< link "https://github.com/zenorocha/clipboard.js" "clipboard.js" >}}@2.0.6
     clipboardJS = ''
-    # {{< link "https://github.com/ellisonleao/sharer.js" "sharer" >}}@0.4.0
+    # {{< link "https://github.com/ellisonleao/sharer.js" "sharer.js" >}}@0.4.0
     sharerJS = ''
-    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@6.5.1
+    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@7.0.3
     typeitJS = ''
     # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
     katexCSS = ''
@@ -574,12 +572,12 @@ hugo
     katexCopyTexCSS = ''
     katexCopyTexJS = ''
     katexMhchemJS = ''
-    # {{< link "https://github.com/knsv/mermaid" "mermaid" >}}@8.4.8
+    # {{< link "https://github.com/knsv/mermaid" "mermaid" >}}@8.5.0
     mermaidJS = ''
-    # {{< link "https://echarts.apache.org/" "echarts" >}}@4.6.0
+    # {{< link "https://echarts.apache.org/" "echarts" >}}@4.7.0
     echartsJS = ''
     echartsMacaronsJS = ''
-    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.8.1
+    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.9.1
     mapboxGLCSS = ''
     mapboxGLJS = ''
     # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
@@ -590,7 +588,7 @@ hugo
     # {{< link "https://github.com/gitalk/gitalk" "gitalk" >}}@1.6.2
     gitalkCSS = ''
     gitalkJS = ''
-    # {{< link "https://valine.js.org/" "valine" >}}@1.3.10
+    # {{< link "https://valine.js.org/" "valine" >}}@1.4.9
     valineJS = ''
 
 # Hugo 解析文档的配置

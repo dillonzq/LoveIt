@@ -14,6 +14,9 @@ featuredImage: "/images/theme-documentation-extended-shortcodes/featured-image.j
 featuredImagePreview: "/images/theme-documentation-extended-shortcodes/featured-image-preview.jpg"
 
 lightgallery: true
+mapbox:
+  lightStyle: mapbox://styles/mapbox/light-zh-v1?optimize=true
+  darkStyle: mapbox://styles/mapbox/dark-zh-v1?optimize=true
 ---
 
 **LoveIt** 主题在 Hugo 内置的 shortcode 的基础上提供多个扩展的 shortcode.
@@ -964,16 +967,16 @@ data = [
 或者
 {{</* mapbox lng=121.485 lat=31.233 zoom=12 */>}}
 
-{{</* mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/navigation-preview-day-v4" "mapbox://styles/mapbox/navigation-preview-night-v4" */>}}
+{{</* mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/streets-zh-v1" */>}}
 或者
-{{</* mapbox lng=-122.252 lat=37.453 zoom=10 marked=false light-style="mapbox://styles/mapbox/navigation-preview-day-v4" dark-style="mapbox://styles/mapbox/navigation-preview-night-v4" */>}}
+{{</* mapbox lng=-122.252 lat=37.453 zoom=10 marked=false light-style="mapbox://styles/mapbox/streets-zh-v1" */>}}
 ```
 
 呈现的输出效果如下:
 
 {{< mapbox 121.485 31.233 12 >}}
 
-{{< mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/navigation-preview-day-v4?optimize=true" "mapbox://styles/mapbox/navigation-preview-night-v4?optimize=true" >}}
+{{< mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/streets-zh-v1?optimize=true" >}}
 
 ## music
 
