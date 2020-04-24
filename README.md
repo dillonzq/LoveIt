@@ -88,8 +88,8 @@ I hope you will LoveIt ❤️!
 * **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
 * **Valine** comment system supported by [Valine](https://valine.js.org/)
 * **Facebook comments** system supported by [Facebook](https://developers.facebook.com/docs/plugins/comments/)
-* **Telegram Comments** system supported by [Telegram Comments](https://comments.app/)
-* **Commento comments** system supported by [Commento](https://commento.io/)
+* **Telegram comments** system supported by [Telegram Comments](https://comments.app/)
+* **Commento** comments system supported by [Commento](https://commento.io/)
 
 ### Extended Features
 

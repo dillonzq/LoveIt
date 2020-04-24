@@ -235,46 +235,15 @@
     }
 
     blockquote {
-      font-size: 1rem;
       display: block;
-      border-width: 1px 0;
-      border-style: solid;
-      border-color: $global-border-color;
-      padding: 1.5em 1.2em 0.5em 1.2em;
-      margin: 0 0 2em 0;
-      position: relative;
-
-      &::before {
-        content: '\201C';
-        position: absolute;
-        top: 0em;
-        left: 50%;
-        @include transform(translate(-50%, -50%));
-        width: 3rem;
-        height: 2rem;
-        font: 6em/1.08em 'PT Sans', sans-serif;
-        color: $single-link-color;
-        text-align: center;
-
-        .dark & {
-          color: $single-link-color-dark;
-        }
-      }
-
-      &::after {
-        content: '#blockquote' attr(cite);
-        display: block;
-        text-align: right;
-        font-size: 0.875em;
-        color: $single-link-color;
-
-        .dark & {
-          color: $single-link-color-dark;
-        }
-      }
+      border-left: .5rem solid $blockquote-color;
+      background-color: rgba($blockquote-color, .2);
+      padding: .25rem .75rem;
+      margin: 1rem 0;
 
       .dark & {
-        border-color: $global-border-color-dark;
+        border-left-color: $blockquote-color-dark;
+        background-color: rgba($blockquote-color-dark, .2);
       }
     }
 

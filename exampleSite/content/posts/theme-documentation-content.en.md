@@ -63,7 +63,6 @@ featuredImagePreview: ""
 hiddenFromHomePage: false
 hiddenFromSearch: false
 lightgallery: true
-copyCode: true
 ruby: true
 fraction: true
 fontawesome: true
@@ -72,6 +71,9 @@ linkToMarkdown: true
 toc:
   enable: true
   auto: true
+code:
+  copy: true
+  # ...
 math:
   enable: true
   # ...
@@ -104,7 +106,6 @@ comment:
 
 * **hiddenFromHomePage**: if `true`, the content will not be shown in the home page.
 * **hiddenFromSearch**: {{< version 0.2.0 >}} if `true`, the content will not be shown in the search results.
-* **copyCode**: {{< version 0.2.0 >}} if `true`, the content will show the copy button of the code block.
 * **lightgallery**: if `true`, images in the content will be shown as the gallery.
 * **ruby**: {{< version 0.2.0 >}} if `true`, the content will enable the [ruby extended syntax](#ruby).
 * **fraction**: {{< version 0.2.0 >}} if `true`, the content will enable the [fraction extended syntax](#fraction).
@@ -112,6 +113,7 @@ comment:
 * **linkToMarkdown**: if `true`, the footer of the content will show the link to the orignal Markdown file.
 
 * **toc**: {{< version 0.2.0 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics/#site-configuration).
+* **code**: {{< version 0.2.0 >}} the same as the `params.page.code` part in the [site configuration](../theme-documentation-basics/#site-configuration).
 * **math**: {{< version 0.2.0 changed >}} the same as the `params.page.math` part in the [site configuration](../theme-documentation-basics/#site-configuration).
 * **mapbox**: {{< version 0.2.0 >}} the same as the `params.page.mapbox` part in the [site configuration](../theme-documentation-basics/#site-configuration).
 * **share**: the same as the `params.page.share` part in the [site configuration](../theme-documentation-basics/#site-configuration).
@@ -287,14 +289,14 @@ You can easily use these icons in your articles.
 Get the `class` of icons you wanted from the [Font Awesome website](https://fontawesome.com/icons?d=gallery).
 
 ```markdown
-Gone camping! {?:}(fas fa-campground): Be back soon.
+Gone camping! {?:}(fas fa-campground fa-fw): Be back soon.
 
 That is so funny! {?:}(far fa-grin-tears):
 ```
 
 The rendered output looks like this:
 
-Gone camping! :(fas fa-campground): Be back soon.
+Gone camping! :(fas fa-campground fa-fw): Be back soon.
 
 That is so funny! :(far fa-grin-tears):
 

@@ -651,9 +651,6 @@ enableEmoji = true
     # whether to enable lightgallery
     # 是否使用 lightgallery
     lightgallery = false
-    # whether to show the copy button of the code block
-    # 是否显示代码块的复制按钮
-    copyCode = true
     # whether to enable the ruby extended syntax
     # 是否使用 ruby 扩展语法
     ruby = true
@@ -675,6 +672,12 @@ enableEmoji = true
       # whether to make the table of the contents automatically collapsed
       # 是否使目录自动折叠展开
       auto = true
+    # Code config
+    # 代码配置
+    [params.page.code]
+      # whether to show the copy button of the code block
+      # 是否显示代码块的复制按钮
+      copy = true
     # KaTeX mathematical formulas config (KaTeX https://katex.org/)
     # KaTeX 数学公式配置 (KaTeX https://katex.org/)
     [params.page.math]
@@ -802,7 +805,7 @@ enableEmoji = true
       # Commento comments config (https://commento.io/)
       # Commento comments 评论系统设置 (https://commento.io/)
       [params.page.comment.commento]
-        enable = true
+        enable = false
     # SEO config
     # SEO 配置
     [params.page.seo]
