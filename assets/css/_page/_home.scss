@@ -35,11 +35,11 @@
         }
 
         .social-links {
-          padding: .4rem 0;
+          padding: .4rem .2rem;
+          font-size: 1.6rem;
 
-          a, i {
-            font-size: 1.6rem;
-            line-height: 2rem;
+          a * {
+            vertical-align: text-bottom;
           }
 
           img {

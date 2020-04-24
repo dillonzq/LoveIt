@@ -36,7 +36,7 @@
                         {{- T "included" -}}
                         {{- range $index, $value := . -}}
                             {{- if gt $index 0 }}&nbsp;{{ end -}}
-                            {{- $category := printf "/categories/%s" $value | $.Site.GetPage -}}
+                            {{- $category := $value | anchorize | printf "/categories/%s" | $.Site.GetPage -}}
                             <a href="{{ $category.RelPermalink }}">
                                 <i class="far fa-folder fa-fw"></i>{{ $category.Title }}
                             </a>

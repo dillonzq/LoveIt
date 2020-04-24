@@ -3,21 +3,6 @@
 {{- $fingerprint := .Scratch.Get "fingerprint" -}}
 {{- $config := (.Scratch.Get "this").config -}}
 
-{{- /* Fork Awesome */ -}}
-{{- if (.Scratch.Get "this").forkawesome -}}
-    {{- $options := dict "targetPath" "lib/forkawesome/fork-awesome.min.css" -}}
-    {{- dict "source" "lib/forkawesome/fork-awesome.scss" "toCSS" $options "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
-{{- end -}}
-
-{{- /* iconfont */ -}}
-{{- if (.Scratch.Get "this").iconfont -}}
-    {{- with $cdn.iconfontCSS -}}
-        {{- dict "source" . | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
-    {{- else -}}
-        {{- dict "source" "lib/iconfont/iconfont.css" "minify" true "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
-    {{- end -}}
-{{- end -}}
-
 {{- /* Smooth Scroll */ -}}
 {{- with $cdn.smoothScrollJS -}}
     {{- dict "source" . | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}

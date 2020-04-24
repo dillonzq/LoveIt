@@ -82,7 +82,7 @@ I hope you will LoveIt ❤️!
 
 * **Gravatar** supported by [Gravatar](https://gravatar.com)
 * Local **Avatar** supported
-* Up to **62** social links supported
+* Up to **64** social links supported
 * Up to **28** share sites supported
 * **Disqus** comment system supported by [Disqus](https://disqus.com)
 * **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
@@ -142,7 +142,7 @@ Thanks to the authors of following resources included in the theme:
 
 * [normalize.css](https://github.com/necolas/normalize.css)
 * [Font Awesome](https://fontawesome.com/)
-* [Fork Awesome](https://forkaweso.me/Fork-Awesome/)
+* [Simple Icons](https://github.com/simple-icons/simple-icons)
 * [Animate.css](https://daneden.github.io/animate.css/)
 * [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * [autocomplete.js](https://github.com/algolia/autocomplete.js)

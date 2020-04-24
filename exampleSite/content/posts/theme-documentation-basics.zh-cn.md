@@ -293,69 +293,68 @@ hugo
   # 作者的社交信息设置
   [params.social]
     GitHub = "xxxx"
-    # Linkedin = "xxxx"
-    # Twitter = "xxxx"
-    # Instagram = "xxxx"
+    Linkedin = ""
+    Twitter = "xxxx"
+    Instagram = "xxxx"
+    Facebook = "xxxx"
+    Telegram = "xxxx"
+    Medium = ""
+    Gitlab = ""
+    Youtubelegacy = ""
+    Youtubecustom = ""
+    Youtubechannel = ""
+    Tumblr = ""
+    Quora = ""
+    Keybase = ""
+    Pinterest = ""
+    Reddit = ""
+    Codepen = ""
+    FreeCodeCamp = ""
+    Bitbucket = ""
+    Stackoverflow = ""
+    Weibo = ""
+    Odnoklassniki = ""
+    VK = ""
+    Flickr = ""
+    Xing = ""
+    Snapchat = ""
+    Soundcloud = ""
+    Spotify = ""
+    Bandcamp = ""
+    Paypal = ""
+    Fivehundredpx = ""
+    Mix = ""
+    Goodreads = ""
+    Lastfm = ""
+    Foursquare = ""
+    Hackernews = ""
+    Kickstarter = ""
+    Patreon = ""
+    Steam = ""
+    Twitch = ""
+    Strava = ""
+    Skype = ""
+    Whatsapp = ""
+    Zhihu = ""
+    Douban = ""
+    Angellist = ""
+    Slidershare = ""
+    Jsfiddle = ""
+    Deviantart = ""
+    Behance = ""
+    Dribbble = ""
+    Wordpress = ""
+    Vine = ""
+    Googlescholar = ""
+    Researchgate = ""
+    Mastodon = ""
+    Thingiverse = ""
+    Devto = ""
+    Gitea = ""
+    XMPP = ""
+    Matrix = ""
+    Bilibili = ""
     Email = "xxxx@xxxx.com"
-    # Facebook = "xxxx"
-    # Telegram = "xxxx"
-    # Medium = "xxxx"
-    # Gitlab = "xxxx"
-    # Youtubelegacy = "xxxx"
-    # Youtubecustom = "xxxx"
-    # Youtubechannel = "xxxx"
-    # Tumblr ="xxxx"
-    # Quora = "xxxx"
-    # Keybase = "xxxx"
-    # Pinterest = "xxxx"
-    # Reddit = "xxxx"
-    # Codepen = "xxxx"
-    # FreeCodeCamp = "xxxx"
-    # Bitbucket = "xxxx"
-    # Stackoverflow = "xxxx"
-    Weibo = "xxxx"
-    # Odnoklassniki = "xxxx"
-    # VK = "xxxx"
-    # Flickr = "xxxx"
-    # Xing = "xxxx"
-    # Snapchat = "xxxx"
-    # Soundcloud = "xxxx"
-    # Spotify = "xxxx"
-    # Bandcamp = "xxxx"
-    # Paypal = "xxxx"
-    # Fivehundredpx = "xxxx"
-    # Mix = "xxxx"
-    # Goodreads = "xxxx"
-    # Lastfm = "xxxx"
-    # Foursquare = "xxxx"
-    # Hackernews = "xxxx"
-    # Kickstarter = "xxxx"
-    # Patreon = "xxxx"
-    # Steam = "xxxx"
-    # Twitch = "xxxx"
-    # Strava = "xxxx"
-    # Skype = "xxxx"
-    # Whatsapp = "xxxx"
-    Zhihu = "xxxx"
-    Douban = "xxxx"
-    # Angellist = "xxxx"
-    # Slidershare = "xxxx"
-    # Jsfiddle = "xxxx"
-    # Deviantart = "xxxx"
-    # Behance = "xxxx"
-    # Dribble = "xxxx"
-    # Wordpress = "xxxx"
-    # Vine = "xxxx"
-    # Googlescholar = "xxxx"
-    # Researchgate = "xxxx"
-    # Mastodon = "xxxx"
-    # MastodonPrefix = "https://mastodon.technology/"
-    # Thingiverse = "xxxx"
-    # Devto = "xxxx"
-    # Gitea = "xxxx"
-    # XMPP = "xxxx"
-    # Matrix = "xxxx"
-    Bilibili = "xxxx"
     RSS = true # {{< version 0.2.0 >}}
 
   # {{< version 0.2.0 changed >}} 文章页面配置
@@ -388,7 +387,7 @@ hugo
       # 默认块定界符是 $$ ... $$ 和 \\[ ... \\]
       blockLeftDelimiter = ""
       blockRightDelimiter = ""
-      # 默认内联定界符是 $ ... $ 和 \\( ... \\)
+      # 默认行内定界符是 $ ... $ 和 \\( ... \\)
       inlineLeftDelimiter = ""
       inlineRightDelimiter = ""
       # KaTeX 插件 copy_tex
@@ -539,6 +538,9 @@ hugo
     normalizeCSS = ''
     # {{< link "https://fontawesome.com/" "fontawesome-free" >}}@5.12.1
     fontawesomeFreeCSS = ''
+    # {{< version 0.2.0 >}} {{< link "https://github.com/simple-icons/simple-icons" "simple-icons" >}}@2.9.0
+    # ('https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/')
+    simpleIconsPrefix = 'https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/'
     # animate.css@3.7.2 https://github.com/daneden/animate.css
     animateCSS = ''
     # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.2
@@ -673,6 +675,37 @@ smoothScrollJS = '<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3
 # 或者
 smoothScrollJS = 'https://cdn.jsdelivr.net/npm/smooth-scroll@16/dist/smooth-scroll.min.js'
 ```
+{{< /admonition >}}
+
+{{< admonition tip "关于社交链接配置的技巧" >}}
+{{< version 0.2.0 >}}
+
+你可以直接配置你的社交 ID 来生成一个默认社交链接和图标:
+
+```toml
+[params.social]
+  Mastodon = "@xxxx"
+```
+
+生成的社交链接是 `https://mastodon.technology/@xxxx`.
+
+或者你可以通过一个字典来设置更多的选项:
+
+```toml
+[params.social]
+  [params.social.Mastodon]
+    # 排列图标时的权重 (权重越大, 图标的位置越靠后)
+    weight = 0
+    # 你的社交 ID
+    id = "@xxxx"
+    # 你的社交链接的前缀
+    prefix = "https://mastodon.social/"
+    # 当鼠标停留在图标上时的提示内容
+    title = "Mastodon"
+```
+
+所有支持的社交链接的默认配置位于 `themes/LoveIt/assets/data/social.yaml`.
+你可以参考它来配置你的社交链接.
 {{< /admonition >}}
 
 ![完整配置下的预览](/images/theme-documentation-basics/complete-configuration-preview.zh-cn.png "完整配置下的预览")
