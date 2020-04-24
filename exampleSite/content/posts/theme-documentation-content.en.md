@@ -7,23 +7,17 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Find out how to create and organize your content quickly and intuitively in LoveIt theme."
-license: ""
 
-tags: ["content", "markdown"]
+tags: ["content", "Markdown"]
 categories: ["documentation"]
-hiddenFromHomePage: false
-
 featuredImage: "/images/theme-documentation-content/featured-image.jpg"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: false
-math: true
 lightgallery: true
-linkToMarkdown: true
-share:
+
+toc:
+  auto: false
+math:
   enable: true
-comment: true
 ---
 
 Find out how to create and organize your content quickly and intuitively in **LoveIt** theme.
@@ -38,15 +32,21 @@ A few suggestions to help you get a good looking site quickly:
 * Keep static pages in the `content` directory, for example: `content/about.md`
 * Keep media like images in the `static` directory, for example: `static/images/screenshot.png`
 
-## 2 Front Matter
+## 2 Front Matter {#front-matter}
 
 **Hugo** allows you to add front matter in `yaml`, `toml` or `json` to your content files.
 
-Here is a default front matter from the default archetype:
+{{< admonition >}}
+**Not all** of the below front matters need to be set in each of your posts.
+It is necessary only if the front matters and the `page` part in your [site configuration](../theme-documentation-basics/#site-configuration) are inconsistent.
+{{< /admonition >}}
+
+Here is a front matter example:
 
 ```yaml
 ---
 title: "My First Post"
+subtitle: ""
 date: 2020-03-04T15:58:26+08:00
 lastmod: 2020-03-04T15:58:26+08:00
 draft: true
@@ -57,23 +57,38 @@ license: ""
 
 tags: []
 categories: []
-hiddenFromHomePage: false
-
 featuredImage: ""
 featuredImagePreview: ""
 
-toc: false
-autoCollapseToc: true
-math: true
+hiddenFromHomePage: false
+hiddenFromSearch: false
 lightgallery: true
+copyCode: true
+ruby: true
+fraction: true
+fontawesome: true
 linkToMarkdown: true
+
+toc:
+  enable: true
+  auto: true
+math:
+  enable: true
+  # ...
+mapbox:
+  accessToken: ""
+  # ...
 share:
   enable: true
-comment: true
+  # ...
+comment:
+  enable: true
+  # ...
 ---
 ```
 
 * **title**: the title for the content.
+* **subtitle**: {{< version 0.2.0 >}} the subtitle for the content.
 * **date**: the datetime assigned to this page, which is usually fetched from the `date` field in front matter, but this behaviour is configurabl in the [site configuration](../theme-documentation-basics/#site-configuration).
 * **lastmod**: the datetime at which the content was last modified.
 * **draft**: if `true`, the content will not be rendered unless the `--buildDrafts`/`-D` flag is passed to the `hugo` command.
@@ -81,18 +96,26 @@ comment: true
 * **authorLink**: the link of the author.
 * **description**: the description for the content.
 * **license**: the special lisence for this content.
+
 * **tags**: the tags for the content.
 * **categories**: the categories for the content.
-* **hiddenFromHomePage**: if `true`, the content will not be shown in the home page, but this behaviour is configurabl in the [site configuration](../theme-documentation-basics/#site-configuration).
 * **featuredImage**: the featured image for the content.
 * **featuredImagePreview**: the featured image for the content preview in the home page.
-* **toc**: if `true`, the content will show the table of the contents.
-* **autoCollapseToc**: if `true`, the table of the contents will be automatically collapsed.
-* **math**: if `true`, the mathematical formula in the content will be automatically rendered.
+
+* **hiddenFromHomePage**: if `true`, the content will not be shown in the home page.
+* **hiddenFromSearch**: {{< version 0.2.0 >}} if `true`, the content will not be shown in the search results.
+* **copyCode**: {{< version 0.2.0 >}} if `true`, the content will show the copy button of the code block.
 * **lightgallery**: if `true`, images in the content will be shown as the gallery.
+* **ruby**: {{< version 0.2.0 >}} if `true`, the content will enable the [ruby extended syntax](#ruby).
+* **fraction**: {{< version 0.2.0 >}} if `true`, the content will enable the [fraction extended syntax](#fraction).
+* **fontawesome**: {{< version 0.2.0 >}} if `true`, the content will enable the [Font Awesome extended syntax](#fontawesome).
 * **linkToMarkdown**: if `true`, the footer of the content will show the link to the orignal Markdown file.
-* **share**: the same as `params.share` in the [site configuration](../theme-documentation-basics/#site-configuration).
-* **comment**: if `true`, the comment will be used.
+
+* **toc**: {{< version 0.2.0 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics/#site-configuration).
+* **math**: {{< version 0.2.0 changed >}} the same as the `params.page.math` part in the [site configuration](../theme-documentation-basics/#site-configuration).
+* **mapbox**: {{< version 0.2.0 >}} the same as the `params.page.mapbox` part in the [site configuration](../theme-documentation-basics/#site-configuration).
+* **share**: the same as the `params.page.share` part in the [site configuration](../theme-documentation-basics/#site-configuration).
+* **comment**: {{< version 0.2.0 changed >}} the same as the `params.page.comment` part in the [site configuration](../theme-documentation-basics/#site-configuration).
 
 ## 3 Content Summaries
 
@@ -226,7 +249,7 @@ $$ \ce{CO2 + C -> 2 CO} $$
 
 $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
-### Ruby Annotation
+### Ruby Annotation {#ruby}
 
 An extended Markdown syntax for **ruby annotation** is supported in **LoveIt** theme:
 
@@ -238,7 +261,25 @@ The rendered output looks like this:
 
 [Hugo]^(An open-source static site generator)
 
-### Font Awesome
+### Fraction {#fraction}
+
+{{< version 0.2.0 >}}
+
+An extended Markdown syntax for **fraction** is supported in **LoveIt** theme:
+
+```markdown
+[Light]{?/}[Dark]
+
+[99]{?/}[100]
+```
+
+The rendered output looks like this:
+
+[Light]/[Dark]
+
+[90]/[100]
+
+### Font Awesome {#fontawesome}
 
 **LoveIt** theme uses [Font Awesome](https://fontawesome.com/) as the icon library.
 You can easily use these icons in your articles.

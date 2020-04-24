@@ -7,23 +7,12 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "这篇文章展示了基本的 Markdown 语法和格式."
-license: ""
 
-tags: ["markdown"]
-categories: ["markdown"]
-hiddenFromHomePage: false
-
+tags: ["Markdown"]
+categories: ["Markdown"]
 featuredImage: "/images/basic-markdown-syntax/featured-image.png"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: true
-math: false
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 这篇文章提供了可以在 Hugo 的文章中使用的基本 Markdown 语法示例.
@@ -642,7 +631,7 @@ grunt.initConfig({
 | ext    | extension to be used for dest files. |
 {{< /admonition >}}
 
-## 11 链接
+## 11 链接 {#links}
 
 ### 基本链接
 
@@ -775,5 +764,5 @@ Content for chapter one.
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 
 {{< admonition tip >}}
-**LoveIt** 主题提供了一个包含更多功能的 [图片的 shortcode](../theme-documentation-shortcodes/#image).
+**LoveIt** 主题提供了一个包含更多功能的 [图片的 shortcode](../theme-documentation-extended-shortcodes/#image).
 {{< /admonition >}}

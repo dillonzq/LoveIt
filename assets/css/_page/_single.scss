@@ -1,9 +1,18 @@
-/** Single **/
+@import "../_partial/_single/toc";
+
 .single {
   .single-title {
-    margin: 0.8rem 0;
+    margin: 1rem 0 .5rem;
     font-size: 1.6rem;
     line-height: 140%;
+  }
+
+  .single-subtitle {
+    margin: .4rem 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+    font-style: italic;
+    line-height: 100%;
   }
 
   .post-meta {
@@ -14,25 +23,11 @@
       display: inline-block;
     }
 
-    .dark-theme & {
+    .dark & {
       color: $global-font-secondary-color-dark;
     }
 
-    a {
-      color: $single-link-color;
-
-      .dark-theme & {
-        color: $global-link-color-dark;
-      }
-
-      &:hover {
-        color: $single-link-hover-color;
-
-        .dark-theme & {
-          color: $global-link-hover-color-dark;
-        }
-      }
-    }
+    @include link(false, true);
 
     .author {
       font-size: 1.05rem;
@@ -40,20 +35,50 @@
   }
 
   .featured-image {
-    padding-top: .6rem;
+    margin: .5rem 0;
 
     img {
       display: block;
-      max-width: 100%;
+      width: 100%;
       height: auto;
       margin: 0 auto;
       overflow: hidden;
     }
   }
 
-  @import "../_partial/_single/toc";
-
   .content {
+    > h2 {
+      font-size: 1.5rem;
+
+      & code {
+        font-size: 1.25rem;
+      }
+    }
+
+    > h3 {
+      font-size: 1.375rem;
+
+      & code {
+        font-size: 1.125rem;
+      }
+    }
+
+    > h4 {
+      font-size: 1.25rem;
+
+      & code {
+        font-size: 1rem;
+      }
+    }
+
+    > h5 {
+      font-size: 1.125rem;
+    }
+
+    > h6 {
+      font-size: 1rem;
+    }
+
     h2,
     h3,
     h4,
@@ -62,57 +87,60 @@
       font-weight: bold;
       margin: 1.2rem 0;
 
-      .dark-theme & {
+      .dark & {
         font-weight: bolder;
       }
+    }
 
-      & > .header-mark::before {
+    > h2,
+    > h3,
+    > h4,
+    > h5,
+    > h6 {
+      > .header-mark::before {
         content: "|";
         margin-right: .3125rem;
         color: $single-link-color;
 
-        .dark-theme & {
+        .dark & {
           color: $single-link-color-dark;
         }
       }
     }
 
-    h2 > .header-mark::before {
+    > h2 > .header-mark::before {
       content: "#";
     }
 
     p {
-      font-size: 1rem;
       margin: .5rem 0;
     }
 
     b, strong {
       font-weight: bold;
 
-      .dark-theme & {
+      .dark & {
         color: #ddd;
       }
     }
 
+    @include link(false, false);
+
     a {
       word-break: break-all;
       word-break: break-word;
-      color: $single-link-color;
 
-      .dark-theme &, .dark-theme & b, .dark-theme & strong {
+      .dark & b, .dark & strong {
         color: $single-link-color-dark;
       }
     }
 
-    a:hover {
-      color: $single-link-hover-color;
-
-      .dark-theme &, .dark-theme & b, .dark-theme & strong {
-        color: $single-link-hover-color-dark;
-      }
+    .dark a:hover b, .dark a:hover strong {
+      color: $single-link-hover-color-dark;
     }
 
     ul {
+      margin: .5rem 0;
       padding-left: 2rem;
       list-style-type: disc;
     }
@@ -124,7 +152,7 @@
         color: $global-font-secondary-color;
       }
 
-      .dark-theme & {
+      .dark & {
         background: $code-background-color-dark;
 
         rt {
@@ -139,7 +167,7 @@
       &::-webkit-scrollbar {
         background-color: $table-background-color;
 
-        .dark-theme & {
+        .dark & {
           background-color: $table-background-color-dark;
         }
       }
@@ -152,14 +180,14 @@
         background: $table-background-color;
         border-collapse: collapse;
 
-        .dark-theme & {
+        .dark & {
           background: $table-background-color-dark;
         }
 
         thead {
           background: $table-thead-color;
 
-          .dark-theme & {
+          .dark & {
             background-color: $table-thead-color-dark;
           }
         }
@@ -168,7 +196,7 @@
           padding: .3rem 1rem;
           border: 1px double $global-border-color;
 
-          .dark-theme & {
+          .dark & {
             border: 1px double $global-border-color-dark;
           }
         }
@@ -177,7 +205,8 @@
 
     img {
       max-width: 100%;
-      min-height: 1.2rem;
+      min-height: 1.25em;
+      vertical-align: text-bottom;
     }
 
     figure {
@@ -220,14 +249,14 @@
         position: absolute;
         top: 0em;
         left: 50%;
-        transform: translate(-50%, -50%);
+        @include transform(translate(-50%, -50%));
         width: 3rem;
         height: 2rem;
         font: 6em/1.08em 'PT Sans', sans-serif;
         color: $single-link-color;
         text-align: center;
 
-        .dark-theme & {
+        .dark & {
           color: $single-link-color-dark;
         }
       }
@@ -239,12 +268,12 @@
         font-size: 0.875em;
         color: $single-link-color;
 
-        .dark-theme & {
+        .dark & {
           color: $single-link-color-dark;
         }
       }
 
-      .dark-theme & {
+      .dark & {
         border-color: $global-border-color-dark;
       }
     }
@@ -252,8 +281,12 @@
     .footnotes {
       color: $global-font-secondary-color;
 
-      .dark-theme & {
+      .dark & {
         color: $global-font-secondary-color-dark;
+      }
+
+      p {
+        margin: .25rem 0;
       }
     }
 
@@ -261,6 +294,8 @@
     @import "../_partial/_single/instagram";
     @import "../_partial/_single/admonition";
     @import "../_partial/_single/echarts";
+    @import "../_partial/_single/mapbox";
+    @import "../_partial/_single/music";
     @import "../_partial/_single/bilibili";
 
     hr {
@@ -269,7 +304,7 @@
       border-top: 1px dashed $global-border-color;
       border-bottom: none;
 
-      .dark-theme & {
+      .dark & {
         border-top: 1px dashed $global-border-color-dark;
       }
     }
@@ -280,19 +315,17 @@
       background-color: $global-background-color;
       border: 1px solid $global-border-color;
       border-bottom-color: $global-border-color;
-      border-radius: 3px;
-      -webkit-box-shadow: inset 0 -1px 0 $global-border-color;
-      box-shadow: inset 0 -1px 0 $global-border-color;
+      @include border-radius(3px);
+      @include box-shadow(inset 0 -1px 0 $global-border-color);
       font-size: .8rem;
       font-family: $code-font-family;
       color: $code-color;
 
-      .dark-theme & {
+      .dark & {
         background-color: $global-background-color-dark;
         border: 1px solid $global-border-color-dark;
         border-bottom-color: $global-border-color-dark;
-        -webkit-box-shadow: inset 0 -1px 0 $global-border-color-dark;
-        box-shadow: inset 0 -1px 0 $global-border-color-dark;
+        @include box-shadow(inset 0 -1px 0 $global-border-color-dark);
         color: $code-color-dark;
       }
     }
@@ -305,6 +338,10 @@
         font-weight: bold;
         word-break: break-all;
       }
+    }
+
+    .version {
+      height: 1.25em;
     }
   }
 

@@ -1,0 +1,19 @@
+{{- $content := .content -}}
+
+{{- if .ruby -}}
+    {{- $content = partial "function/ruby.html" $content -}}
+{{- end -}}
+
+{{- if .fraction -}}
+    {{- $content = partial "function/fraction.html" $content -}}
+{{- end -}}
+
+{{- if .fontawesome -}}
+    {{- $content = partial "function/fontawesome.html" $content -}}
+{{- end -}}
+
+{{- $content = partial "function/checkbox.html" $content -}}
+
+{{- $content = partial "function/escape.html" $content -}}
+
+{{- return $content -}}

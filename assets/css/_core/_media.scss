@@ -1,50 +1,26 @@
-@media only screen and (max-width: 1800px) {
-  .page {
-    max-width: 780px;
-
-    #toc-auto {
-      margin-left: 800px;
-    }
-  }
-}
-
 @media only screen and (max-width: 1440px) {
   .page {
-    max-width: 680px;
-
-    #toc-auto {
-      margin-left: 700px;
-    }
+    max-width: 56%;
   }
 }
 
 @media only screen and (max-width: 1200px) {
   .page {
-    max-width: 560px;
-
-    #toc-auto {
-      margin-left: 580px;
-    }
+    max-width: 52%;
   }
 }
 
 @media only screen and (max-width: 960px) {
-  #header-desktop {
-    .header-wrapper {
-      padding: 0 1rem;
-    }
+  #toc-auto {
+    display: none;
+  }
+
+  #toc-static {
+    display: block;
   }
 
   .page {
     max-width: 80%;
-
-    #toc-auto {
-      display: none;
-    }
-
-    #toc-static {
-      display: block;
-    }
   }
 }
 
@@ -55,6 +31,10 @@
 
   #header-mobile {
     display: block;
+  }
+
+  body.blur {
+    overflow: hidden;
   }
 
   .page {

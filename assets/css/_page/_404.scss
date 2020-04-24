@@ -1,6 +1,6 @@
 #content-404 {
   font-size: 1.8rem;
   line-height: 3rem;
-  transform: translateY(30vh);
+  @include transform(translateY(30vh));
   text-align: center;
 }

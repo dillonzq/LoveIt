@@ -1,6 +1,14 @@
 # Translations for French
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
+# === baseof ==
+[backToTop]
+other = "Retour en Haut"
+
+[viewComments]
+other = "Afficher les Commentaires"
+# === baseof ==
+
 # === Post ===
 [posts]
 other = "Posts"
@@ -43,6 +51,43 @@ other = "Propulsé par %s"
 [theme]
 other = "Thème"
 # === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "Votre commentaire ..."
+
+[facebookLanguageCode]
+other = "fr"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "Chercher"
+
+[searchPlaceholder]
+other = "Rechercher des titres, des contenus..."
+
+[clear]
+other = "Clair"
+
+[cancel]
+other = "Annuler"
+
+[noResultsFound]
+other = "Aucun résultat trouvé"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.fr.js"
+
+[lunrLanguageCode]
+other = "fr"
+
+[copyToClipboard]
+other = "Copier dans le presse-papiers"
+# === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]
@@ -138,3 +183,14 @@ other = "Exemple"
 [quote]
 other = "Citation"
 # === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "NOUVEAU"
+
+[changed]
+other = "CHANGE"
+
+[deleted]
+other = "EFFACE"
+# === shortcodes/version.html ===

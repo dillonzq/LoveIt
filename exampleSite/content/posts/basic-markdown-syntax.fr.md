@@ -7,23 +7,12 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Cet article présente la syntaxe et le format de base de Markdown."
-license: ""
 
-tags: ["markdown"]
-categories: ["markdown"]
-hiddenFromHomePage: false
-
+tags: ["Markdown"]
+categories: ["Markdown"]
 featuredImage: "/images/basic-markdown-syntax/featured-image.png"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: true
-math: false
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 Cet article propose un exemple de syntaxe Markdown de base qui peut être utilisée dans les fichiers de contenu Hugo.
@@ -432,7 +421,7 @@ The rendered output looks like this:
 
 ### Task Lists
 
-Task lists allow you to create a list of items with checkboxes. To create a task list, add dashes (`-`) and brackets with a space (`[ ]`) in front of task list items. To select a checkbox, add an x in between the brackets (`[x]`).
+Task lists allow you to create a list of items with checkboxes. To create a task list, add dashes (`-`) and brackets with a space (`[ ]`) before task list items. To select a checkbox, add an x in between the brackets (`[x]`).
 
 ```markdown
 - [x] Write the press release
@@ -647,7 +636,7 @@ The rendered output looks like this:
 
 ## 11 Links
 
-### Basic Link
+### Basic Link {#links}
 
 ```markdown
 <https://assemble.io>
@@ -773,5 +762,5 @@ With a reference later in the document defining the URL location:
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 
 {{< admonition tip >}}
-**LoveIt** theme has [special shortcode for image](../theme-documentation-shortcodes/#image), which provides more features.
+**LoveIt** theme has [special shortcode for image](../theme-documentation-extended-shortcodes/#image), which provides more features.
 {{< /admonition >}}

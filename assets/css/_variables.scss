@@ -4,7 +4,7 @@
 
 // ========== Global ========== //
 // Font and Line Height
-$global-font-family: -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft Yahei UI, Segoe UI, Helvetica, Arial, sans-serif, Segoe UI Emoji !default;
+$global-font-family: system, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif !default;
 $global-font-size: 16px;
 $global-font-weight: 400;
 $global-line-height: 1.5rem;
@@ -30,7 +30,7 @@ $global-link-hover-color: #2d96bd !default;
 $global-link-hover-color-dark: #fff !default;
 
 // Color of the border
-$global-border-color: #dcdcdc !default;
+$global-border-color: #cacaca !default;
 $global-border-color-dark: #4a4b50 !default;
 // ========== Global ========== //
 
@@ -44,36 +44,43 @@ $scrollbar-hover-color: #a9a9b3 !default;
 
 // ========== Selection ========== //
 // Color of the selected text
-$selection-color: rgba(38, 139, 211, 0.2) !default;
-$selection-color-dark: rgba(38, 139, 211, 0.3) !default;
+$selection-color: rgba(53, 166, 247, 0.25) !default;
+$selection-color-dark: rgba(50, 112, 194, 0.4) !default;
 // ========== Selection ========== //
 
 // ========== Header ========== //
 // Height of the header
-$header-height-desktop: 3.5rem !default;
-$header-height-mobile: 3.5rem !default;
+$header-height: 3.5rem !default;
 
 // Color of the header background
 $header-background-color: #f8f8f8 !default;
 $header-background-color-dark: #252627 !default;
+
+// Font style of the header title
+$header-title-font-family: $global-font-family !default;
+$header-title-font-size: 1.5rem !default;
 
 // Position of the header
 $header-position-desktop: if($header-normal-mode-desktop, static, fixed) !default;
 $header-position-mobile: if($header-normal-mode-mobile, static, fixed) !default;
 
 // Top of the page padding
-$page-padding-top-desktop: if($header-normal-mode-desktop, 0, $header-height-desktop) !default;
-$page-padding-top-mobile: if($header-normal-mode-mobile, 0, $header-height-mobile) !default;
+$page-padding-top-desktop: if($header-normal-mode-desktop, 0, $header-height) !default;
+$page-padding-top-mobile: if($header-normal-mode-mobile, 0, $header-height) !default;
 
 // Color of the hover header item
 $header-hover-color: #161209 !default;
 $header-hover-color-dark: #fff !default;
+
+// Color of the search background
+$search-background-color: #e9e9e9 !default;
+$search-background-color-dark: #363636 !default;
 // ========== Header ========== //
 
 // ========== Single Content ========== //
 // Font size of the TOC
 $toc-title-font-size: 1.2rem !default;
-$toc-content-font-size: 0.9rem !default;
+$toc-content-font-size: 1rem !default;
 
 // Color of the single link
 $single-link-color: #2d96bd !default;
@@ -115,10 +122,10 @@ $code-info-color: #b1b0b0 !default;
 $code-info-color-dark: #b1b0b0 !default;
 
 // Font size of the code
-$code-font-size: 13px !default;
+$code-font-size: .875rem !default;
 
 // Font family of the code
-$code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace !default;
+$code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-font-family !default;
 
 // Code type map
 $code-type-map: (
