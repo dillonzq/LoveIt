@@ -287,19 +287,20 @@ class Theme {
         } else initAutosearch();
     }
 
+    initDetails() {
+        this.util.forEach(document.getElementsByClassName('details'), $details => {
+            const $summary = $details.getElementsByClassName('details-summary')[0];
+            $summary.addEventListener('click', () => {
+                $details.classList.toggle('open');
+            }, false);
+        });
+    }
+
     initLightGallery() {
         if (this.config.lightGallery) lightGallery(document.getElementById('content'), this.config.lightGallery);
     }
 
     initHighlight() {
-        this.util.forEach(document.querySelectorAll('.highlight > .chroma'), $chroma => {
-            const $elements = $chroma.querySelectorAll('pre.chroma > code');
-            if ($elements.length) {
-                $chroma.className += ' ' + $elements[$elements.length - 1].className.toLowerCase();
-                $elements[0].classList.add('lnc');
-                $elements[$elements.length - 1].classList.remove('lnc');
-            }
-        });
         this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), $preChroma => {
             const $chroma = document.createElement('div');
             $chroma.className = $preChroma.className;
@@ -314,19 +315,42 @@ class Theme {
             $preChroma.parentElement.replaceChild($chroma, $preChroma);
             $td.appendChild($preChroma);
         });
-        this.util.forEach(document.querySelectorAll('pre > code'), $code => {
-            $code.classList.add('block');
-            if ($code.classList.contains('lnc') || !this.config.clipboard) return;
-            const $button = document.createElement('div');
-            $button.classList.add('copy-button');
-            $button.insertAdjacentHTML('afterbegin', '<i class="far fa-copy fa-fw"></i>');
-            $button.setAttribute('data-clipboard-text', $code.innerText);
-            $button.title = this.config.clipboard.title;
-            const clipboard = new ClipboardJS($button);
-            clipboard.on('success', e => {
-                this.util.animateCSS($code, 'flash');
-            });
-            $code.after($button);
+        this.util.forEach(document.querySelectorAll('.highlight > .chroma'), $chroma => {
+            const $codeElements = $chroma.querySelectorAll('pre.chroma > code');
+            if ($codeElements.length) {
+                const $code = $codeElements[$codeElements.length - 1];
+                const $header = document.createElement('div');
+                $header.className = 'code-header ' + $code.className.toLowerCase();
+                const $title = document.createElement('span');
+                $title.classList.add('code-title');
+                $title.insertAdjacentHTML('afterbegin', '<i class="arrow fas fa-chevron-right fa-fw"></i>');
+                $title.addEventListener('click', () => {
+                    $chroma.classList.toggle('open');
+                }, false);
+                $header.appendChild($title);
+                const $ellipses = document.createElement('span');
+                $ellipses.insertAdjacentHTML('afterbegin', '<i class="fas fa-ellipsis-h fa-fw"></i>');
+                $ellipses.classList.add('ellipses');
+                $ellipses.addEventListener('click', () => {
+                    $chroma.classList.add('open');
+                }, false);
+                $header.appendChild($ellipses);
+                const $copy = document.createElement('span');
+                $copy.insertAdjacentHTML('afterbegin', '<i class="far fa-copy fa-fw"></i>');
+                $copy.classList.add('copy');
+                const code = $code.innerText;
+                if (this.config.code.maxShownLines < 0 || code.split('\n').length < this.config.code.maxShownLines + 2) $chroma.classList.add('open');
+                if (this.config.code.copyTitle) {
+                    $copy.setAttribute('data-clipboard-text', code);
+                    $copy.title = this.config.code.copyTitle;
+                    const clipboard = new ClipboardJS($copy);
+                    clipboard.on('success', e => {
+                        this.util.animateCSS($code, 'flash');
+                    });
+                    $header.appendChild($copy);
+                }
+                $chroma.insertBefore($header, $chroma.firstChild);
+            }
         });
     }
 
@@ -618,6 +642,7 @@ class Theme {
         this.initMenuMobile();
         this.initSwitchTheme();
         this.initSearch();
+        this.initDetails();
         this.initLightGallery();
         this.initHighlight();
         this.initTable();

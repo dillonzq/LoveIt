@@ -1,12 +1,12 @@
 @media only screen and (max-width: 1440px) {
   .page {
-    max-width: 56%;
+    width: 56%;
   }
 }
 
 @media only screen and (max-width: 1200px) {
   .page {
-    max-width: 52%;
+    width: 52%;
   }
 }
 
@@ -20,7 +20,7 @@
   }
 
   .page {
-    max-width: 80%;
+    width: 80%;
   }
 }
 
@@ -38,7 +38,7 @@
   }
 
   .page {
-    max-width: 100%;
+    width: 100%;
     padding-top: $page-padding-top-mobile;
 
     .categories-card {

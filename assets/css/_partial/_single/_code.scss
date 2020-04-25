@@ -1,51 +1,27 @@
 code {
+  display:inline-block;
   font-size: $code-font-size;
   font-family: $code-font-family;
   color: $code-color;
-
-  img {
-    min-height: 1.25em;
-    max-height: 1.25em;
-  }
+  padding: 0 .4rem;
 
   .dark & {
     color: $code-color-dark;
   }
-
-  &:not(.block) {
-    padding: .2rem .4rem;
-  }
 }
 
 pre {
-  position: relative;
   margin: 0;
   padding: .25rem 0 .25rem .5rem;
   @include tab-size(4);
 
-  .copy-button {
-    font-size: $code-font-size;
-    line-height: 1.4em;
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: .3rem .5rem;
-    color: $code-info-color;
-    background: darken($code-background-color, 3%);
-
-    .dark & {
-      color: $code-info-color-dark;
-      background: darken($code-background-color-dark, 3%);
-    }
+  code {
+    padding: 0;
   }
 
-  .copy-button:hover, .copy-button:focus {
-    cursor: pointer;
-    color: $global-link-hover-color;
-
-    .dark & {
-      color: $global-link-hover-color-dark;
-    }
+  img {
+    min-height: 1.25em;
+    max-height: 1.25em;
   }
 }
 
@@ -57,41 +33,62 @@ code, pre, .highlight table, .highlight tr, .highlight td {
   }
 }
 
-.highlight > .chroma, .gist {
-  table, tr, td {
-    margin: 0;
-    padding: 0;
-    border: none !important;
-    white-space: nowrap;
+.highlight, .gist {
+  font-family: $code-font-family;
+  font-size: $code-font-size;
+
+  .table-wrapper {
+    > table,
+    > table thead,
+    > table tr,
+    > table td {
+      margin: 0;
+      padding: 0;
+      border: none !important;
+      white-space: nowrap;
+    }
   }
 }
 
 .highlight > .chroma {
   position: relative;
+  line-height: 1.4em;
   margin: .5rem 0;
 
-  pre {
-    position: unset;
-  }
-
-  &::before {
-    display: block;
-    padding: .3rem .4rem;
+  .code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
     font-family: $global-font-family;
     font-weight: bold;
     color: $code-info-color;
-    background: darken($code-background-color, 3%);
-    content: 'Code';
+    background: darken($code-background-color, 8%);
 
     .dark & {
       color: $code-info-color-dark;
-      background: darken($code-background-color-dark, 3%);
+      background: darken($code-background-color-dark, 6%);
     }
-  }
 
-  @each $type, $text in $code-type-map {
-    &.#{$type}::before {
-      content: $text;
+    &:hover {
+      cursor: pointer;
+    }
+
+    .code-title {
+      width: 100%;
+      padding: .4rem;
+    }
+
+    .code-title::after {
+      padding-left: .2rem;
+      content: 'Code';
+    }
+
+    @each $type, $text in $code-type-map {
+      &.#{$type} .code-title::after {
+        content: $text;
+      }
     }
   }
 
@@ -124,12 +121,62 @@ code, pre, .highlight table, .highlight tr, .highlight td {
       color: $global-font-secondary-color-dark;
     }
   }
-}
 
-.highlight {
-  font-family: $code-font-family;
-  font-size: $code-font-size;
-  line-height: 1.4em;
+  .arrow {
+    @include transition(transform 0.2s ease);
+  }
+
+  .ellipses {
+    padding: .4rem;
+  }
+
+  .copy {
+    display: none;
+    padding: .4rem;
+
+    &:hover {
+      cursor: pointer;
+      color: $global-link-hover-color;
+
+      .dark & {
+        color: $global-link-hover-color-dark;
+      }
+    }
+  }
+
+  .table-wrapper {
+    max-height: 0;
+    overflow-y: hidden;
+    @include transition(max-height 0.8s cubic-bezier(0, 1, 0, 1) -0.1s);
+  }
+
+  &.open {
+    .code-header {
+      background: darken($code-background-color, 3%);
+
+      .dark & {
+        background: darken($code-background-color-dark, 3%);
+      }
+    }
+
+    .table-wrapper {
+      max-height: $MAX_LENGTH;
+      @include transition(max-height 0.8s cubic-bezier(0.5, 0, 1, 0) 0s);
+    }
+
+    .arrow {
+      @include transform(rotate(90deg));
+    }
+
+    .ellipses {
+      display: none;
+    }
+
+    .copy {
+      display: inline;
+    }
+  }
+
   /* Comment */  .c,
   /* CommentHashbang */  .ch,
   /* CommentMultiline */  .cm,
