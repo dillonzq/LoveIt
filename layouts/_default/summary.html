@@ -1,11 +1,10 @@
-{{- $scratch := .Scratch.Get "scratch" -}}
-
+{{- $params := .Params | merge .Site.Params.page -}}
 <article class="single summary" itemscope itemtype="http://schema.org/Article">
     {{- /* Featured image */ -}}
-    {{- with .Params.featuredImage -}}
+    {{- with $params.featuredimage -}}
         <div class="featured-image-preview">
-            {{- $image := $.Params.featuredImagePreview | default . -}}
-            {{- partial "plugin/image.html" (dict "src" $image "description" $.Description "scratch" $scratch) -}}
+            {{- $image := $params.featuredimagepreview | default . -}}
+            {{- partial "plugin/image.html" (dict "src" $image "alt" $.Description "large" true) -}}
         </div>
     {{- end -}}
 
@@ -16,26 +15,27 @@
 
     {{- /* Meta */ -}}
     <div class="post-meta">
-        {{- $author := .Params.author | default .Site.Author.name | default (T "author") -}}
-        {{- $authorLink := .Params.authorLink | default .Site.Author.link | default (relLangURL "/") -}}
+        {{- $author := $params.author | default .Site.Author.name | default (T "author") -}}
+        {{- $authorLink := $params.authorlink | default .Site.Author.link | default .Site.Home.RelPermalink -}}
         <span class="post-author">
-            {{- $link := dict "class" "author" "href" $authorLink "title" "Author" "rel" "author" "icon" (dict "class" "fas fa-user-circle fa-fw") "content" $author -}}
-            {{- partial "plugin/link.html" $link -}}
+            {{- $options := dict "class" "author" "href" $authorLink "title" "Author" "rel" "author" "icon" (dict "class" "fas fa-user-circle fa-fw") "content" $author -}}
+            {{- partial "plugin/link.html" $options -}}
         </span>
 
-        {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
+        {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormat | default "2006-01-02") -}}
         &nbsp;<span class="post-publish">
             {{ T "publish" }}&nbsp;<time datetime={{ $publish_date }}>{{ $publish_date }}</time>
         </span>
 
-        {{- with .Params.categories -}}
+        {{- with $params.categories -}}
             &nbsp;
             <span class="post-category">
                 {{- T "included" -}}
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }}&nbsp;{{ end -}}
-                    <a href="{{ `/categories/` | relLangURL }}{{ urlize $value }}">
-                        <i class="far fa-folder fa-fw"></i>{{ $value | humanize }}
+                    {{- $category := $value | anchorize | printf "/categories/%s" | $.Site.GetPage -}}
+                    <a href="{{ $category.RelPermalink }}">
+                        <i class="far fa-folder fa-fw"></i>{{ $category.Title }}
                     </a>
                 {{- end -}}
             </span>
@@ -45,7 +45,7 @@
     {{- /* Summary content */ -}}
     <div class="content">
         {{- with .Summary -}}
-            {{- partial "single/content.html" . -}}
+            {{- dict "content" . "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
         {{- else -}}
             {{- .Description | safeHTML -}}
         {{- end -}}
@@ -54,12 +54,13 @@
     {{- /* Footer */ -}}
     <div class="post-footer">
         <a href="{{ .RelPermalink }}">{{ T "readMore" }}</a>
-        {{- with .Params.tags -}}
+        {{- with $params.tags -}}
             <div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }},&nbsp;{{ end -}}
-                    <a href="{{ `/tags/` | relLangURL }}{{ urlize $value }}">{{ $value }}</a>
+                    {{- $tag := $value | anchorize | printf "/tags/%s" | $.Site.GetPage -}}
+                    <a href="{{ $tag.RelPermalink }}">{{ $tag.Title }}</a>
                 {{- end -}}
             </div>
         {{- end -}}

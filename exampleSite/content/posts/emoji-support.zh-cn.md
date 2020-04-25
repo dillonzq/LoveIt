@@ -7,30 +7,19 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Hugo 和 LoveIt 中的 Emoji 的用法指南."
-license: ""
 
 tags: ["emoji"]
-categories: ["markdown"]
-hiddenFromHomePage: false
-
+categories: ["Markdown"]
 featuredImage: "/images/emoji-support/featured-image.jpg"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: true
-math: false
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 Emoji 可以通过多种方式在 Hugo 项目中启用.
 
 <!--more-->
 
-[`emojify`](https://gohugo.io/functions/emojify/) 方法可以直接在模板中调用, 或者使用 [内联 Shortcodes](https://gohugo.io/templates/shortcode-templates/#inline-shortcodes).
+[`emojify`](https://gohugo.io/functions/emojify/) 方法可以直接在模板中调用, 或者使用 [行内 Shortcodes](https://gohugo.io/templates/shortcode-templates/#inline-shortcodes).
 
 要全局使用 emoji, 需要在你的网站 [配置](https://gohugo.io/getting-started/configuration/) 中设置 `enableEmoji` 为 `true`,
 然后你就可以直接在文章中输入 emoji 的代码.
