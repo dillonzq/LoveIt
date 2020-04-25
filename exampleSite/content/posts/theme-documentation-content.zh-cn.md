@@ -37,7 +37,7 @@ math:
 **Hugo** 允许你在文章内容前面添加 `yaml`, `toml` 或者 `json` 格式的前置参数.
 
 {{< admonition >}}
-**不是所有**的上述前置参数都必须在你的每篇文章中设置.
+**不是所有**的以下前置参数都必须在你的每篇文章中设置.
 只有在文章的参数和你的 [网站设置](../theme-documentation-basics/#site-configuration) 中的 `page` 部分不一致时才有必要这么做.
 {{< /admonition >}}
 

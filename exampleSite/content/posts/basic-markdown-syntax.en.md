@@ -46,7 +46,7 @@ John Gruber, the author of Markdown, puts it like this:
 > While Markdown’s syntax has been influenced by several existing text-to-HTML filters,
 > the single biggest source of inspiration for Markdown’s syntax is the format of plain text email.
 >
-> -- _John Gruber_
+> {{< style "text-align: right;" >}}-- _John Gruber_{{< /style >}}
 
 Without further delay, let us go over the main elements of Markdown and what the resulting HTML looks like!
 

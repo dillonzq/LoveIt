@@ -28,7 +28,7 @@ The `style` shortcode has two positional parameters.
 
 The **first** one is the custom style content.
 
-And the **second** one is the HTML tag around the content you want to change style, and whose default value is `p`.
+And the **second** one is the HTML tag around the content you want to change style, and whose default value is `div`.
 
 Example `style` input:
 

@@ -383,6 +383,8 @@ hugo
     [params.page.code]
       # 是否显示代码块的复制按钮
       copy = true
+      # 默认展开显示的代码行数
+      maxShownLines = 10
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} 数学公式
     [params.page.math]
       enable = true

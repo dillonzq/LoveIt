@@ -122,7 +122,7 @@ $code-color-dark: #E5BF78 !default;
 $code-background-color: #f5f5f5 !default;
 $code-background-color-dark: #272C34 !default;
 
-$code-info-color: #b1b0b0 !default;
+$code-info-color: #acabab !default;
 $code-info-color-dark: #b1b0b0 !default;
 
 // Font size of the code
@@ -370,3 +370,5 @@ $admonition-background-color-map: (
   'quote': hsla(0,0%,62%,.1),
 ) !default;
 // ========== Admonition ========== //
+
+$MAX_LENGTH: 9999px;
