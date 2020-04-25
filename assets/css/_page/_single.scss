@@ -4,6 +4,7 @@
   .single-title {
     margin: 1rem 0 .5rem;
     font-size: 1.6rem;
+    font-weight: bold;
     line-height: 140%;
   }
 
@@ -35,7 +36,7 @@
   }
 
   .featured-image {
-    margin: .5rem 0;
+    margin: .5rem 0 1rem 0;
 
     img {
       display: block;
@@ -194,10 +195,10 @@
 
         th, td {
           padding: .3rem 1rem;
-          border: 1px double $global-border-color;
+          border: 1px solid darken($table-thead-color, 2%);
 
           .dark & {
-            border: 1px double $global-border-color-dark;
+            border-color: darken($table-thead-color-dark, 2%);
           }
         }
       }

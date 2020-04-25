@@ -1,38 +1,16 @@
-#toc-auto {
-  display: block;
-  position: absolute;
-  width: 1000px;
-  padding: 0 .8rem;
-  border-left: 1px solid $global-border-color;
-  overflow-wrap: break-word;
-  box-sizing: border-box;
-  top: if($header-normal-mode-desktop, 5rem, 10rem);
-  left: 10000px;
-
-  @include blur;
-
-  .dark & {
-    border-left: 1px solid $global-border-color-dark;
-  }
-
+.toc {
   .toc-title {
-    font-weight: 400;
-    margin: .8rem 0;
+    font-size: $toc-title-font-size;
+    font-weight: bold;
     text-transform: uppercase;
   }
 
   .toc-content {
-    &.always-active ul {
-      display: block;
-    }
-
-    >nav>ul {
-      margin: .625rem 0;
-    }
+    font-size: $toc-content-font-size;
 
     ul {
       text-indent: -0.85rem;
-      padding-left: .625rem;
+      padding-left: .8rem;
       list-style: none;
 
       a::before {
@@ -47,7 +25,60 @@
       }
 
       ul {
-        padding-left: 1.25rem;
+        padding-left: 1.5rem;
+      }
+    }
+  }
+
+  ruby {
+    background: $code-background-color;
+
+    rt {
+      color: $global-font-secondary-color;
+    }
+
+    .dark & {
+      background: $code-background-color-dark;
+
+      rt {
+        color: $global-font-secondary-color-dark;
+      }
+    }
+  }
+}
+
+#toc-auto {
+  display: block;
+  position: absolute;
+  width: $MAX_LENGTH;
+  padding: 0 .8rem;
+  border-left: 4px solid $global-border-color;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  top: if($header-normal-mode-desktop, 5rem, 10rem);
+  left: $MAX_LENGTH;
+
+  @include blur;
+
+  .dark & {
+    border-left: 1px solid $global-border-color-dark;
+  }
+
+  .toc-title {
+    margin: .8rem 0;
+  }
+
+  .toc-content {
+    &.always-active ul {
+      display: block;
+    }
+
+    > nav > ul {
+      margin: .625rem 0;
+    }
+
+    ul {
+      ul {
         display: none;
       }
 
@@ -79,41 +110,23 @@
   display: none;
   margin: .8rem 0;
 
-  details {
-    summary {
-      list-style: none;
-      background: darken($code-background-color, 3%);
+  .toc-title {
+    display: flex;
+    justify-content: space-between;
+    line-height: 2em;
+    padding: 0 .75rem;
+    background: darken($code-background-color, 3%);
+
+    .dark & {
+      background: darken($code-background-color-dark, 3%);
+    }
+
+    &:hover {
+      background: darken($code-background-color, 6%);
 
       .dark & {
-        background: darken($code-background-color-dark, 3%);
+        background: darken($code-background-color-dark, 5%);
       }
-
-      .toc-title {
-        display: block;
-        display: flex;
-        justify-content: space-between;
-        font-weight: bold;
-        line-height: 2em;
-        padding: 0 .625rem;
-
-        i.details {
-          line-height: 2em;
-        }
-
-        &:hover {
-          cursor: pointer;
-        }
-      }
-
-      &::-webkit-details-marker {
-        display: none;
-      }
-    }
-  }
-
-  details[open] {
-    i.details {
-      @include transform(rotate(180deg));
     }
   }
 
@@ -122,45 +135,11 @@
 
     > nav > ul {
       margin: 0;
-      padding: .4rem .8rem;
-    }
-
-    ul {
-      list-style: none;
-
-      ul {
-        padding-left: 1.25rem;
-      }
+      padding: .4rem 1rem .4rem 1.8rem;
     }
 
     .dark & {
       background-color: $code-background-color-dark;
-    }
-  }
-}
-
-.toc {
-  .toc-title {
-    font-size: $toc-title-font-size;
-  }
-
-  .toc-content {
-    font-size: $toc-content-font-size;
-  }
-
-  ruby {
-    background: $code-background-color;
-
-    rt {
-      color: $global-font-secondary-color;
-    }
-
-    .dark & {
-      background: $code-background-color-dark;
-
-      rt {
-        color: $global-font-secondary-color-dark;
-      }
     }
   }
 }

@@ -52,11 +52,14 @@
     {{- $config = dict "lightGallery" $lightGalleryConfig | merge $config -}}
 {{- end -}}
 
+{{- $code := $params.code | default dict -}}
+{{- $config = cond (ne $code.maxShownLines nil) $code.maxShownLines 10 | dict "maxShownLines" | dict "code" | merge $config -}}
+
 {{- /* clipboard.js */ -}}
-{{- if not $params.code | or (ne $params.code false) -}}
+{{- if ne $code.copy false -}}
     {{- $source := $cdn.clipboardJS | default "lib/clipboard/clipboard.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
-    {{- $config = T "copyToClipboard" | dict "title" | dict "clipboard" | merge $config -}}
+    {{- $config = T "copyToClipboard" | dict "copyTitle" | dict "code" | merge $config -}}
 {{- end -}}
 
 {{- /* Sharer.js */ -}}

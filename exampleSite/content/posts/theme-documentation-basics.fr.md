@@ -398,6 +398,8 @@ Note that some of these parameters are explained in details in other sections of
     [params.page.code]
       # whether to show the copy button of the code block
       copy = true
+      # the maximum number of lines of displayed code by default
+      maxShownLines = 10
     # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config
     [params.page.mapbox]
       # access token of Mapbox GL JS

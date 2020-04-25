@@ -12,7 +12,6 @@
   padding: .6rem .6rem;
   color: $global-font-secondary-color;
   background: $header-background-color;
-  border: 1px solid darken($global-border-color, 10%);
   @include border-radius(2rem);
 
   @include blur;
@@ -29,7 +28,6 @@
   .dark & {
     color: $global-font-secondary-color-dark;
     background: $header-background-color-dark;
-    border-color: darken($global-border-color-dark, 10%);
 
     &:hover, &:active {
       color: $global-font-color-dark;
