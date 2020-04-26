@@ -42,7 +42,7 @@ class Theme {
         this.clickMaskEventSet = new Set();
     }
 
-    initIcon() {
+    initSVGIcon() {
         this.util.forEach(document.querySelectorAll('[data-svg-src]'), $icon => {
             fetch($icon.getAttribute('data-svg-src'))
                 .then(response => response.text())
@@ -56,6 +56,10 @@ class Theme {
                 })
                 .catch(console.error.bind(console));
         });
+    }
+
+    initTwemoji() {
+        if (this.config.twemoji) twemoji.parse(document.body);
     }
 
     initMenuMobile() {
@@ -638,7 +642,8 @@ class Theme {
     }
 
     init() {
-        this.initIcon();
+        this.initSVGIcon();
+        this.initTwemoji();
         this.initMenuMobile();
         this.initSwitchTheme();
         this.initSearch();

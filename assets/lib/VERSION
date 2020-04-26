@@ -7,6 +7,7 @@ autocomplete.js@0.37.1 https://github.com/algolia/autocomplete.js
 lunr.js@2.3.8 https://lunrjs.com/
 algoliasearch@4.2.0 https://github.com/algolia/algoliasearch-client-javascript
 lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
+twemoji@12.1.5 https://github.com/twitter/twemoji
 lightgallery.js@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0 https://github.com/sachinchoolur/lightgallery.js
 clipboard.js@2.0.6 https://github.com/zenorocha/clipboard.js
 sharer.js@0.4.0 https://github.com/ellisonleao/sharer.js

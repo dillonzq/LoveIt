@@ -67,6 +67,7 @@ featuredImagePreview: ""
 
 hiddenFromHomePage: false
 hiddenFromSearch: false
+twemoji: false
 lightgallery: true
 ruby: true
 fraction: true
@@ -111,6 +112,7 @@ comment:
 
 * **hiddenFromHomePage**: if `true`, the content will not be shown in the home page.
 * **hiddenFromSearch**: {{< version 0.2.0 >}} if `true`, the content will not be shown in the search results.
+* **twemoji**: {{< version 0.2.0 >}} if `true`, the content will enable the twemoji.
 * **lightgallery**: if `true`, images in the content will be shown as the gallery.
 * **ruby**: {{< version 0.2.0 >}} if `true`, the content will enable the [ruby extended syntax](#ruby).
 * **fraction**: {{< version 0.2.0 >}} if `true`, the content will enable the [fraction extended syntax](#fraction).
