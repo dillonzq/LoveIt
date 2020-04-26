@@ -2,7 +2,7 @@
 {{- $id := partial "function/id.html" (dict "content" $content) -}}
 {{- $tag := .Get 1 | default "div" -}}
 {{- $style := .Get 0 | printf "#%s{%s}" $id -}}
-{{- $res := resources.FromString (printf "css/%s.scss" $id) $style -}}
-{{- $res = $res | toCSS (dict "targetPath" (printf "css/%s.css" $id) "outputStyle" "compressed") -}}
+{{- $res := resources.FromString "css/shortcode/style.scss" $style -}}
+{{- $res = $res | toCSS (dict "targetPath" "css/shortcode/style.css" "outputStyle" "compressed") -}}
 {{- printf `<%s id="%s">%s</%s>` $tag $id $content $tag | safeHTML -}}
 <style>{{ $res.Content | safeCSS }}</style>
