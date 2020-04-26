@@ -3,8 +3,10 @@
     {{- /* Featured image */ -}}
     {{- with $params.featuredimage -}}
         <div class="featured-image-preview">
-            {{- $image := $params.featuredimagepreview | default . -}}
-            {{- partial "plugin/image.html" (dict "src" $image "alt" $.Description "large" true) -}}
+            <a href="{{ $.RelPermalink }}">
+                {{- $image := $params.featuredimagepreview | default . -}}
+                {{- partial "plugin/image.html" (dict "src" $image "alt" $.Description "large" true) -}}
+            </a>
         </div>
     {{- end -}}
 
