@@ -208,6 +208,21 @@ Note that some of these parameters are explained in details in other sections of
   # {{< version 0.2.0 >}} date format
   dateFormat = "2006-01-02"
 
+  # {{< version 0.2.0 >}} App icon config
+  [params.app]
+    # optional site title override for the app when added to an iOS home screen or Android launcher
+    title = "LoveIt App"
+    # whether to omit favicon resource links
+    noFavicon = true
+    # modern SVG favicon to use in place of older style .png and .ico files
+    svgFavicon = 'favicon.svg'
+    # Android browser color theming
+    themeColor = "#ffffff"
+    # Safari mask icon color
+    iconColor = "#5bbad5"
+    # Windows v8-10 tile color
+    tileColor = "#da532c"
+
   # {{< version 0.2.0 >}} Search config
   [params.search]
     enable = true
