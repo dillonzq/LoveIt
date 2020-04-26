@@ -7,23 +7,12 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Guide to emoji usage in Hugo and LoveIt."
-license: ""
 
 tags: ["emoji"]
-categories: ["markdown"]
-hiddenFromHomePage: false
-
+categories: ["Markdown"]
 featuredImage: "/images/emoji-support/featured-image.jpg"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: true
-math: false
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 Emoji can be enabled in a Hugo project in a number of ways.
@@ -50,7 +39,7 @@ That is so funny! :joy:
 
 ## Emoji Cheat Sheet
 
-The emoji cheat sheet is a useful reference for emoji shorthand codes.
+The following cheat sheet is a useful reference for emoji shorthand codes.
 
 ### Smileys & Emotion
 
@@ -1293,23 +1282,8 @@ The emoji cheat sheet is a useful reference for emoji shorthand codes.
 | <span class="emoji">:south_africa:</span> | `south_africa` | <span class="emoji">:zambia:</span> | `zambia` |
 | <span class="emoji">:zimbabwe:</span> | `zimbabwe` | | |
 
-### GitHub Custom Emoji
-
-| icon | code | icon | code |
-| :-: | - | :-: | - |
-| <span class="emoji">:atom:</span> | `atom` | <span class="emoji">:basecamp:</span> | `basecamp` |
-| <span class="emoji">:basecampy:</span> | `basecampy` | <span class="emoji">:bowtie:</span> | `bowtie` |
-| <span class="emoji">:electron:</span> | `electron` | <span class="emoji">:feelsgood:</span> | `feelsgood` |
-| <span class="emoji">:finnadie:</span> | `finnadie` | <span class="emoji">:goberserk:</span> | `goberserk` |
-| <span class="emoji">:godmode:</span> | `godmode` | <span class="emoji">:hurtrealbad:</span> | `hurtrealbad` |
-| <span class="emoji">:neckbeard:</span> | `neckbeard` | <span class="emoji">:octocat:</span> | `octocat` |
-| <span class="emoji">:rage1:</span> | `rage1` | <span class="emoji">:rage2:</span> | `rage2` |
-| <span class="emoji">:rage3:</span> | `rage3` | <span class="emoji">:rage4:</span> | `rage4` |
-| <span class="emoji">:shipit:</span> | `shipit` <br /> `squirrel` | <span class="emoji">:suspect:</span> | `suspect` |
-| <span class="emoji">:trollface:</span> | `trollface` | | |
-
 <style>
   .emoji {
-    font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
+    font-family: Twitter Color Emoji, Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
   }
 </style>

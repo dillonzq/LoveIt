@@ -1,0 +1,194 @@
+# Translations for Polish
+# Tłumaczenie na język polski
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ==
+[backToTop]
+other = "Powrót do góry"
+
+[viewComments]
+other = "Zobacz komentarze"
+# === baseof ==
+
+# === Post ===
+[posts]
+other = "Posty"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "Wszystkie %s"
+
+[tag]
+other = "Tag"
+
+[tags]
+other = "Tagi"
+
+[category]
+other = "Kategoria"
+
+[categories]
+other = "Kategorie"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "Więcej"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "Wybierz język"
+
+[switchTheme]
+other = "Przełącz schemat"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Napędzany przez %s"
+
+[theme]
+other = "Szablon"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "Twój komentarz ..."
+
+[facebookLanguageCode]
+other = "pl"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "Szukaj"
+
+[searchPlaceholder]
+other = "Wyszukaj tytuł lub treść artykułu ..."
+
+[clear]
+other = "Pusty"
+
+[cancel]
+other = "Anuluj"
+
+[noResultsFound]
+other = "Nie znaleziono wyników"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.pl.js"
+
+[lunrLanguageCode]
+other = "pl"
+
+[copyToClipboard]
+other = "Skopiuj do schowka"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "Udostępnij na"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "Spis treści"
+
+[publish]
+other = "opublikowano"
+
+[included]
+other = "zawarty w"
+
+[wordCount]
+other = "około {{ .Count }} słów"
+
+[readingTime]
+other = "{{ .Count }} min"
+
+[views]
+other = "wyświetleń"
+
+[author]
+other = "Autor"
+
+[lastMod]
+other = "Artykuł ostatnio zaktualizowany %s"
+
+[license]
+other = "Opublikowano na licencji %s"
+
+[seeMarkdown]
+other = "Zobacz Markdown"
+
+[back]
+other = "Wstecz"
+
+[home]
+other = "Strona główna"
+
+[readMore]
+other = "Czytaj więcej"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Nie znaleziono strony"
+
+[pageNotFoundText]
+other = "Wybacz, chyba coś namieszaliśmy."
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Notka"
+
+[abstract]
+other = "Streszczenie"
+
+[info]
+other = "Info"
+
+[tip]
+other = "Wskazówka"
+
+[success]
+other = "Sukces"
+
+[question]
+other = "Pytanie"
+
+[warning]
+other = "Ostrzeżenie"
+
+[failure]
+other = "Błąd"
+
+[danger]
+other = "Niebezpieczeństwo"
+
+[bug]
+other = "Problem"
+
+[example]
+other = "Przykład"
+
+[quote]
+other = "Cytat"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "Dodano"
+
+[changed]
+other = "Zmieniono"
+
+[deleted]
+other = "Usunięte"
+# === shortcodes/version.html ===

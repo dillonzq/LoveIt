@@ -7,30 +7,19 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Hugo 和 LoveIt 中的 Emoji 的用法指南."
-license: ""
 
 tags: ["emoji"]
-categories: ["markdown"]
-hiddenFromHomePage: false
-
+categories: ["Markdown"]
 featuredImage: "/images/emoji-support/featured-image.jpg"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: true
-math: false
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 Emoji 可以通过多种方式在 Hugo 项目中启用.
 
 <!--more-->
 
-[`emojify`](https://gohugo.io/functions/emojify/) 方法可以直接在模板中调用, 或者使用 [内联 Shortcodes](https://gohugo.io/templates/shortcode-templates/#inline-shortcodes).
+[`emojify`](https://gohugo.io/functions/emojify/) 方法可以直接在模板中调用, 或者使用 [行内 Shortcodes](https://gohugo.io/templates/shortcode-templates/#inline-shortcodes).
 
 要全局使用 emoji, 需要在你的网站 [配置](https://gohugo.io/getting-started/configuration/) 中设置 `enableEmoji` 为 `true`,
 然后你就可以直接在文章中输入 emoji 的代码.
@@ -51,7 +40,7 @@ Emoji 可以通过多种方式在 Hugo 项目中启用.
 
 ## Emoji 符号清单
 
-Emoji 符号清单是 emoji 代码的非常有用的参考.
+以下清单是 emoji 代码的非常有用的参考.
 
 ### 表情与情感
 
@@ -1294,23 +1283,8 @@ Emoji 符号清单是 emoji 代码的非常有用的参考.
 | <span class="emoji">:south_africa:</span> | `south_africa` | <span class="emoji">:zambia:</span> | `zambia` |
 | <span class="emoji">:zimbabwe:</span> | `zimbabwe` | | |
 
-### GitHub 自定义 Emoji
-
-| 图标 | 代码 | 图标 | 代码 |
-| :-: | - | :-: | - |
-| <span class="emoji">:atom:</span> | `atom` | <span class="emoji">:basecamp:</span> | `basecamp` |
-| <span class="emoji">:basecampy:</span> | `basecampy` | <span class="emoji">:bowtie:</span> | `bowtie` |
-| <span class="emoji">:electron:</span> | `electron` | <span class="emoji">:feelsgood:</span> | `feelsgood` |
-| <span class="emoji">:finnadie:</span> | `finnadie` | <span class="emoji">:goberserk:</span> | `goberserk` |
-| <span class="emoji">:godmode:</span> | `godmode` | <span class="emoji">:hurtrealbad:</span> | `hurtrealbad` |
-| <span class="emoji">:neckbeard:</span> | `neckbeard` | <span class="emoji">:octocat:</span> | `octocat` |
-| <span class="emoji">:rage1:</span> | `rage1` | <span class="emoji">:rage2:</span> | `rage2` |
-| <span class="emoji">:rage3:</span> | `rage3` | <span class="emoji">:rage4:</span> | `rage4` |
-| <span class="emoji">:shipit:</span> | `shipit` <br /> `squirrel` | <span class="emoji">:suspect:</span> | `suspect` |
-| <span class="emoji">:trollface:</span> | `trollface` | | |
-
 <style>
   .emoji {
-    font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
+    font-family: Twitter Color Emoji, Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
   }
 </style>

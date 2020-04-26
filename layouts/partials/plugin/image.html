@@ -1,30 +1,28 @@
 {{- /* lazysizes and lightgallery.js */ -}}
+{{- $loading := resources.Get "svg/loading/normal.svg" | minify -}}
 {{- $small := .src_s | default .src -}}
 {{- $large := .src_l | default .src -}}
-{{- $loading := resources.Get "svg/loading.svg" | minify -}}
-{{- if not .src | and .src_s -}}
-    {{- $loading = resources.Get "svg/loading.small.svg" | minify -}}
-{{- end -}}
-{{- if .lightgallery -}}
-    <a class="lightgallery" href="{{ $large | safeURL }}" title="{{ .description }}" data-thumbnail="{{ $small | safeURL }}"{{ if .title }} data-sub-html="<h2>{{ .title }}</h2><p>{{ .description }}</p>"{{ end }}>
+{{- $alt := .alt | default (relURL .src) -}}
+{{- if .linked -}}
+    <a class="lightgallery" href="{{ $large | relURL }}" title="{{ .title | default $alt }}" data-thumbnail="{{ $small | relURL }}"{{ with .caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.alt }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .rel }} rel="{{ . }}"{{ end }}>
         <img
-            class="lazyload"
-            src="{{ $loading.RelPermalink | safeURL }}"
+            class="lazyload{{ with .class }} {{ . }}{{ end }}"
+            src="{{ $loading.RelPermalink }}"
             data-sizes="auto"
-            data-srcset="{{ $small | safeURL }}, {{ .src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
-            data-src="{{ .src | safeURL }}"
-            alt="{{ .title | default .description }}" />
+            data-srcset="{{ $small | relURL }}, {{ .src | relURL }} 1.5x, {{ $large | relURL }} 2x"
+            data-src="{{ .src | relURL }}"
+            alt="{{ $alt }}"{{ with .height }} height="{{ . }}"{{ end }}{{ with .width }} width="{{ . }}"{{ end }} />
     </a>
-    {{- with .scratch -}}
-        {{- .Set "lightgallery" true -}}
-    {{- end -}}
 {{- else -}}
+    {{- if not .large -}}
+        {{- $loading = resources.Get "svg/loading/small.svg" | minify -}}
+    {{- end -}}
     <img
-        class="lazyload"
-        src="{{ $loading.RelPermalink | safeURL }}"
+        class="lazyload{{ with .class }} {{ . }}{{ end }}"
+        src="{{ $loading.RelPermalink }}"
         data-sizes="auto"
-        data-srcset="{{ $small | safeURL }}, {{ .src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
-        data-src="{{ .src | safeURL }}"
-        alt="{{ .title | default .description }}"
-        title="{{ .description }}" />
+        data-srcset="{{ $small | relURL }}, {{ .src | relURL }} 1.5x, {{ $large | relURL }} 2x"
+        data-src="{{ .src | relURL }}"
+        alt="{{ $alt }}"
+        title="{{ .title | default $alt }}"{{ with .height }} height="{{ . }}"{{ end }}{{ with .width }} width="{{ . }}"{{ end }} />
 {{- end -}}

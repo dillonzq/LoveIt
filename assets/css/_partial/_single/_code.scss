@@ -1,84 +1,183 @@
 code {
+  display:inline-block;
   font-size: $code-font-size;
   font-family: $code-font-family;
-  padding: .2rem .4rem;
   color: $code-color;
+  padding: 0 .4rem;
 
-  .dark-theme & {
+  .dark & {
     color: $code-color-dark;
+  }
+}
+
+pre {
+  margin: 0;
+  padding: .25rem 0 .25rem .5rem;
+  @include tab-size(4);
+
+  code {
+    padding: 0;
+  }
+
+  img {
+    min-height: 1.25em;
+    max-height: 1.25em;
+    vertical-align: text-bottom;
   }
 }
 
 code, pre, .highlight table, .highlight tr, .highlight td {
   background: $code-background-color;
 
-  .dark-theme & {
+  .dark & {
     background: $code-background-color-dark;
   }
 }
 
-.highlight > .chroma {
-  margin: 1rem 0;
+.highlight, .gist {
+  font-family: $code-font-family;
+  font-size: $code-font-size;
 
-  code, pre {
-    margin: 0;
-    padding: 0;
-  }
-
-  &::before {
-    display: block;
-    padding: .4rem;
-    font-family: $global-font-family;
-    font-weight: bold;
-    color: $code-info-color;
-    background: darken($code-background-color, 3%);
-    content: 'Code';
-
-    .dark-theme & {
-      color: $code-info-color-dark;
-      background: darken($code-background-color-dark, 3%);
-    }
-  }
-
-  @each $type, $text in $code-type-map {
-    &.#{$type}::before {
-      content: $text;
-    }
-  }
-
-  .lntd {
-    &:first-child {
-      width: 1.2rem;
-
-      /* LineNumbersTable */
-      .lnt {
-        color: $code-info-color;
-      }
-
-      /* LineHighlight */
-      .hl {
-        font-weight: bolder;
-      }
-    }
-
-    &:last-child {
-      /* LineHighlight */
-      .hl {
-        display: block;
-        background-color: darken($code-background-color, 5%);
-
-        .dark-theme & {
-          background-color: darken($code-background-color-dark, 5%);
-        }
-      }
+  .table-wrapper {
+    > table,
+    > table thead,
+    > table tr,
+    > table td {
+      margin: 0;
+      padding: 0;
+      border: none !important;
+      white-space: nowrap;
     }
   }
 }
 
-.highlight {
-  font-family: $code-font-family;
-  font-size: $code-font-size;
-  line-height: round($code-font-size * 1.4);
+.highlight > .chroma {
+  position: relative;
+  line-height: 1.4em;
+  margin: .5rem 0;
+
+  .code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    font-family: $global-font-family;
+    font-weight: bold;
+    color: $code-info-color;
+    background: darken($code-background-color, 8%);
+
+    .dark & {
+      color: $code-info-color-dark;
+      background: darken($code-background-color-dark, 6%);
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .code-title {
+      width: 100%;
+      padding: .4rem;
+    }
+
+    .code-title::after {
+      padding-left: .2rem;
+      content: 'Code';
+    }
+
+    @each $type, $text in $code-type-map {
+      &.#{$type} .code-title::after {
+        content: $text;
+      }
+    }
+  }
+
+  .lntd:last-child {
+    width: 100%;
+
+    pre {
+      padding-left: .75rem;
+      @include max-content(min-width);
+    }
+  }
+
+  .ln {
+    padding-right: .75rem;
+  }
+
+  .hl {
+    display: block;
+    background-color: darken($code-background-color, 10%);
+
+    .dark & {
+      background-color: darken($code-background-color-dark, 5%);
+    }
+  }
+
+  .ln, .lnt {
+    color: $global-font-secondary-color;
+
+    .dark & {
+      color: $global-font-secondary-color-dark;
+    }
+  }
+
+  .arrow {
+    @include transition(transform 0.2s ease);
+  }
+
+  .ellipses {
+    padding: .4rem;
+  }
+
+  .copy {
+    display: none;
+    padding: .4rem;
+
+    &:hover {
+      cursor: pointer;
+      color: $global-link-hover-color;
+
+      .dark & {
+        color: $global-link-hover-color-dark;
+      }
+    }
+  }
+
+  .table-wrapper {
+    max-height: 0;
+    overflow-y: hidden;
+    @include transition(max-height 0.8s cubic-bezier(0, 1, 0, 1) -0.1s);
+  }
+
+  &.open {
+    .code-header {
+      background: darken($code-background-color, 3%);
+
+      .dark & {
+        background: darken($code-background-color-dark, 3%);
+      }
+    }
+
+    .table-wrapper {
+      max-height: $MAX_LENGTH;
+      @include transition(max-height 0.8s cubic-bezier(0.5, 0, 1, 0) 0s);
+    }
+
+    .arrow {
+      @include transform(rotate(90deg));
+    }
+
+    .ellipses {
+      display: none;
+    }
+
+    .copy {
+      display: inline;
+    }
+  }
+
   /* Comment */  .c,
   /* CommentHashbang */  .ch,
   /* CommentMultiline */  .cm,
@@ -92,21 +191,10 @@ code, pre, .highlight table, .highlight tr, .highlight td {
     .#{$class} { color: $color; }
   }
 
-  .dark-theme & {
+  .dark & {
     @each $class, $color in $code-highlight-color-map-dark {
       .#{$class} { color: $color; }
     }
-  }
-}
-
-.highlight > .chroma, .gist {
-  table, tr, td {
-    margin: 0;
-    border: none !important;
-  }
-
-  td {
-    padding: .2rem .4rem;
   }
 }
 
@@ -119,28 +207,14 @@ code, pre, .highlight table, .highlight tr, .highlight td {
     padding: .4rem .8rem;
     background-color: darken($code-background-color, 5%);
 
-    a {
-      color: $single-link-color;
+    @include link(false, false);
 
-      .dark-theme & {
-        color: $single-link-color-dark;
-      }
-    }
-
-    a:hover {
-      color: $single-link-hover-color;
-
-      .dark-theme &:hover {
-        color: $single-link-hover-color-dark;
-      }
-    }
-
-    .dark-theme & {
+    .dark & {
       background-color: darken($code-background-color-dark, 5%);
     }
   }
 
-  .dark-theme & {
+  .dark & {
     // imported from https://github.com/lonekorean/gist-syntax-themes/blob/master/stylesheets/one-dark.css
     .highlight {
       background: #141414;
