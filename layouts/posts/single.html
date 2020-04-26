@@ -66,17 +66,14 @@
         {{- end -}}
 
         {{- /* Static TOC */ -}}
-        {{- if $params.toc.enable -}}
+        {{- if ne $params.toc.enable false -}}
             <div class="details toc" id="toc-static">
                 <div class="details-summary toc-title">
                     <span>{{ T "contents" }}</span>
                     <span><i class="details-icon fas fa-angle-down"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static">
-                    {{- $toc := .TableOfContents -}}
-                    {{- $toc = partial "function/fontawesome.html" $toc -}}
-                    {{- $toc = partial "function/ruby.html" $toc -}}
-                    {{- $toc | safeHTML -}}
+                    {{- dict "content" .TableOfContents "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
                 </div>
             </div>
         {{- end -}}

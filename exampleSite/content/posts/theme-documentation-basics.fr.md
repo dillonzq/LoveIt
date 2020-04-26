@@ -547,7 +547,7 @@ Note that some of these parameters are explained in details in other sections of
     fontawesomeFreeCSS = ''
     # {{< version 0.2.0 >}} {{< link "https://github.com/simple-icons/simple-icons" "simple-icons" >}}@2.9.0
     # ('https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/')
-    simpleIconsPrefix = 'https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/'
+    simpleIconsPrefix = ''
     # animate.css@3.7.2 https://github.com/daneden/animate.css
     animateCSS = ''
     # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.3
@@ -761,12 +761,13 @@ In `config/css/_custom.scss`, you can add some css style code to customize the s
 
 ### 4.1 Compatibility {#language-compatibility}
 
-| Language           | Hugo Code | HTML `lang` Attribute | Theme Docs              | Lunr.js Support         |
-|:------------------ |:---------:|:---------------------:|:-----------------------:|:-----------------------:|
-| English            | `en`      | `en`                  | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
-| Simplified Chinese | `zh-cn`   | `zh-CN`               | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
-| French             | `fr`      | `fr`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Polish             | `pl`      | `pl`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
+| Language             | Hugo Code | HTML `lang` Attribute | Theme Docs                    | Lunr.js Support               |
+|:-------------------- |:---------:|:---------------------:|:-----------------------------:|:-----------------------------:|
+| English              | `en`      | `en`                  | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
+| Simplified Chinese   | `zh-cn`   | `zh-CN`               | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
+| French               | `fr`      | `fr`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| Polish               | `pl`      | `pl`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
+| Brazilian Portuguese | `pt-br`   | `pt-BR`               | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 
 :(far fa-kiss-wink-heart fa-fw): **Feel free to [contribute](https://github.com/dillonzq/LoveIt/pulls)!**
 

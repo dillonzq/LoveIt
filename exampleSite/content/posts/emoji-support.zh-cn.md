@@ -40,7 +40,7 @@ Emoji 可以通过多种方式在 Hugo 项目中启用.
 
 ## Emoji 符号清单
 
-Emoji 符号清单是 emoji 代码的非常有用的参考.
+以下清单是 emoji 代码的非常有用的参考.
 
 ### 表情与情感
 
@@ -1283,23 +1283,8 @@ Emoji 符号清单是 emoji 代码的非常有用的参考.
 | <span class="emoji">:south_africa:</span> | `south_africa` | <span class="emoji">:zambia:</span> | `zambia` |
 | <span class="emoji">:zimbabwe:</span> | `zimbabwe` | | |
 
-### GitHub 自定义 Emoji
-
-| 图标 | 代码 | 图标 | 代码 |
-| :-: | - | :-: | - |
-| <span class="emoji">:atom:</span> | `atom` | <span class="emoji">:basecamp:</span> | `basecamp` |
-| <span class="emoji">:basecampy:</span> | `basecampy` | <span class="emoji">:bowtie:</span> | `bowtie` |
-| <span class="emoji">:electron:</span> | `electron` | <span class="emoji">:feelsgood:</span> | `feelsgood` |
-| <span class="emoji">:finnadie:</span> | `finnadie` | <span class="emoji">:goberserk:</span> | `goberserk` |
-| <span class="emoji">:godmode:</span> | `godmode` | <span class="emoji">:hurtrealbad:</span> | `hurtrealbad` |
-| <span class="emoji">:neckbeard:</span> | `neckbeard` | <span class="emoji">:octocat:</span> | `octocat` |
-| <span class="emoji">:rage1:</span> | `rage1` | <span class="emoji">:rage2:</span> | `rage2` |
-| <span class="emoji">:rage3:</span> | `rage3` | <span class="emoji">:rage4:</span> | `rage4` |
-| <span class="emoji">:shipit:</span> | `shipit` <br /> `squirrel` | <span class="emoji">:suspect:</span> | `suspect` |
-| <span class="emoji">:trollface:</span> | `trollface` | | |
-
 <style>
   .emoji {
-    font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
+    font-family: Twitter Color Emoji, Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
   }
 </style>

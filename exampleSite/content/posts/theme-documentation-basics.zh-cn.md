@@ -545,7 +545,7 @@ hugo
     fontawesomeFreeCSS = ''
     # {{< version 0.2.0 >}} {{< link "https://github.com/simple-icons/simple-icons" "simple-icons" >}}@2.9.0
     # ('https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/')
-    simpleIconsPrefix = 'https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/'
+    simpleIconsPrefix = ''
     # animate.css@3.7.2 https://github.com/daneden/animate.css
     animateCSS = ''
     # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.3
@@ -765,6 +765,7 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 | 简体中文 | `zh-cn` | `zh-CN` | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
 | 法语 | `fr` | `fr` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 波兰语 | `pl` | `pl` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
+| 巴西葡萄牙语 | `pt-br` | `pt-BR` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 
 :(far fa-kiss-wink-heart fa-fw): **请自由地[贡献代码](https://github.com/dillonzq/LoveIt/pulls)!**
 

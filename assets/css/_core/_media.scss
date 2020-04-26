@@ -2,11 +2,27 @@
   .page {
     width: 56%;
   }
+
+  #header-desktop .header-wrapper {
+    padding: 0 8vw;
+  }
+
+  .search-dropdown.desktop {
+    right: 8vw;
+  }
 }
 
 @media only screen and (max-width: 1200px) {
   .page {
     width: 52%;
+  }
+
+  #header-desktop .header-wrapper {
+    padding: 0 4vw;
+  }
+
+  .search-dropdown.desktop {
+    right: 4vw;
   }
 }
 
