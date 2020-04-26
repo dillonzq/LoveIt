@@ -690,6 +690,9 @@ enableEmoji = true
     # whether to hide a page from search results
     # 是否在搜索结果中隐藏一篇文章
     hiddenFromSearch = false
+    # whether to enable twemoji
+    # 是否使用 twemoji
+    twemoji = false
     # whether to enable lightgallery
     # 是否使用 lightgallery
     lightgallery = false
@@ -926,6 +929,8 @@ enableEmoji = true
     algoliasearchJS = ''
     # lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
     lazysizesJS = ''
+    # twemoji@12.1.5 https://github.com/twitter/twemoji
+    twemojiJS = ''
     # lightgallery.js@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0 https://github.com/sachinchoolur/lightgallery.js
     lightgalleryCSS = ''
     lightgalleryJS = ''

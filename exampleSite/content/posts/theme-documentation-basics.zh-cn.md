@@ -378,7 +378,9 @@ hugo
     hiddenFromHomePage = false
     # {{< version 0.2.0 >}} 是否在搜索结果中隐藏一篇文章
     hiddenFromSearch = false
-    # 是否在文章页面使用 lightgallery
+    # {{< version 0.2.0 >}} 是否使用 twemoji
+    twemoji = false
+    # 是否使用 lightgallery
     lightgallery = true
     # {{< version 0.2.0 >}} 是否使用 ruby 扩展语法
     ruby = true
@@ -573,6 +575,8 @@ hugo
     algoliasearchJS = ''
     # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
     lazysizesJS = ''
+    # {{< version 0.2.0 >}} {{< link "https://github.com/twitter/twemoji" "twemoji" >}}@12.1.5
+    twemojiJS = ''
     # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0
     lightgalleryCSS = ''
     lightgalleryJS = ''

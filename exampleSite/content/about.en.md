@@ -61,6 +61,7 @@ It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) a
 #### Extended Features
 
 * :(fas fa-search fa-fw): **Search** supported by [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/)
+* :(far fa-grin-tongue-wink fa-fw): **Twemoji** supported
 * :(fas fa-code fa-fw): Automatically **highlighting** code
 * :(far fa-copy fa-fw): **Copy code** to clipboard with one click
 * :(far fa-images fa-fw): **Images gallery** supported by [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
@@ -96,6 +97,7 @@ Thanks to the authors of following resources included in the theme:
 * [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
+* [Twemoji](https://github.com/twitter/twemoji)
 * [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * [clipboard.js](https://github.com/zenorocha/clipboard.js)
 * [Sharer.js](https://github.com/ellisonleao/sharer.js)

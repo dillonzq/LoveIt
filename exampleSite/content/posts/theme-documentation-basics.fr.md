@@ -380,6 +380,8 @@ Note that some of these parameters are explained in details in other sections of
     hiddenFromHomePage = false
     # {{< version 0.2.0 >}} whether to hide a page from search results
     hiddenFromSearch = false
+    # {{< version 0.2.0 >}} whether to enable twemoji
+    twemoji = false
     # whether to enable lightgallery
     lightgallery = false
     # {{< version 0.2.0 >}} whether to enable the ruby extended syntax
@@ -575,6 +577,8 @@ Note that some of these parameters are explained in details in other sections of
     algoliasearchJS = ''
     # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
     lazysizesJS = ''
+    # {{< version 0.2.0 >}} {{< link "https://github.com/twitter/twemoji" "twemoji" >}}@12.1.5
+    twemojiJS = ''
     # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0
     lightgalleryCSS = ''
     lightgalleryJS = ''

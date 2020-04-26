@@ -89,6 +89,7 @@
 ### 扩展功能
 
 * 支持基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/) 的**搜索**
+* 支持 **Twemoji**
 * 支持**代码高亮**
 * 一键**复制代码**到剪贴板
 * 支持基于 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 的**图片画廊**
@@ -146,6 +147,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
+* [Twemoji](https://github.com/twitter/twemoji)
 * [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * [clipboard.js](https://github.com/zenorocha/clipboard.js)
 * [Sharer.js](https://github.com/ellisonleao/sharer.js)
