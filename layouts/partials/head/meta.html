@@ -1,5 +1,11 @@
 {{- template "_internal/opengraph.html" . -}}
 {{- template "_internal/twitter_cards.html" . -}}
 
-<meta name="theme-color" content="#ffffff">
-<meta name="msapplication-TileColor" content="#da532c">
+<meta name="application-name" content="{{ $.Site.Params.app.title | default $.Site.Title }}">
+<meta name="apple-mobile-web-app-title" content="{{ $.Site.Params.app.title | default $.Site.Title }}">
+{{- with $.Site.Params.app.themeColor -}}
+    <meta name="theme-color" content="{{ . }}">
+{{- end -}}
+{{- with $.Site.Params.app.tileColor -}}
+    <meta name="msapplication-TileColor" content="{{ . }}">
+{{- end -}}

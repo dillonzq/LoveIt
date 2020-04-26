@@ -84,133 +84,147 @@ enableEmoji = true
         url = "https://github.com/dillonzq/LoveIt"
         title = "GitHub"
         weight = 6
-      [languages.en.params]
-        # site description
-        description = "About LoveIt Theme"
-        # site keywords
-        keywords = ["Theme", "Hugo"]
-        # site default theme ("light", "dark", "auto")
-        defaultTheme = "auto"
-        # Home Page Info
-        [languages.en.params.home]
-          # Home Page Profile
-          [languages.en.params.home.profile]
-            enable = true
-            # Gravatar Email for preferred avatar in home page
-            gravatarEmail = ""
-            # URL of avatar shown in home page
-            avatarURL = "/images/avatar.png"
-            # subtitle shown in home page
-            subtitle = "A Clean, Elegant but Advanced Hugo Theme"
-            # whether to use typeit animation for subtitle
-            typeit = true
-            # whether to show social links
-            social = true
-          # Home Page Posts
-          [languages.en.params.home.posts]
-            enable = true
-            # special amount of posts in each home posts page
-            paginate = 6
-            # default behavior when you don't set "hiddenFromHomePage" in front matter
-            defaultHiddenFromHomePage = false
-        # Social Info in home page
-        [languages.en.params.social]
-          GitHub = "xxxx"
-          Linkedin = "xxxx"
-          Twitter = "xxxx"
-          Instagram = "xxxx"
-          Email = "xxxx@xxxx.com"
-          Facebook = "xxxx"
-          Telegram = "xxxx"
-          # Medium = "xxxx"
-          # Gitlab = "xxxx"
-          Youtubelegacy = "xxxx"
-          # Youtubecustom = "xxxx"
-          # Youtubechannel = "xxxx"
-          # Tumblr ="xxxx"
-          # Quora = "xxxx"
-          # Keybase = "xxxx"
-          # Pinterest = "xxxx"
-          # Reddit = "xxxx"
-          # Codepen = "xxxx"
-          # FreeCodeCamp = "xxxx"
-          # Bitbucket = "xxxx"
-          # Stackoverflow = "xxxx"
-          # Weibo = "xxxx"
-          # Odnoklassniki = "xxxx"
-          # VK = "xxxx"
-          # Flickr = "xxxx"
-          # Xing = "xxxx"
-          # Snapchat = "xxxx"
-          # Soundcloud = "xxxx"
-          # Spotify = "xxxx"
-          # Bandcamp = "xxxx"
-          # Paypal = "xxxx"
-          # Fivehundredpx = "xxxx"
-          # Mix = "xxxx"
-          # Goodreads = "xxxx"
-          # Lastfm = "xxxx"
-          # Foursquare = "xxxx"
-          # Hackernews = "xxxx"
-          # Kickstarter = "xxxx"
-          # Patreon = "xxxx"
-          # Steam = "xxxx"
-          # Twitch = "xxxx"
-          # Strava = "xxxx"
-          # Skype = "xxxx"
-          # Whatsapp = "xxxx"
-          # Zhihu = "xxxx"
-          # Douban = "xxxx"
-          # Angellist = "xxxx"
-          # Slidershare = "xxxx"
-          # Jsfiddle = "xxxx"
-          # Deviantart = "xxxx"
-          # Behance = "xxxx"
-          # Dribble = "xxxx"
-          # Wordpress = "xxxx"
-          # Vine = "xxxx"
-          # Googlescholar = "xxxx"
-          # Researchgate = "xxxx"
-          # Mastodon = "xxxx"
-          # MastodonPrefix = "https://mastodon.technology/"
-          # Thingiverse = "xxxx"
-          # Devto = "xxxx"
-          # Gitea = "xxxx"
-          # XMPP = "xxxx"
-          # Matrix = "xxxx"
-          # Bilibili = "xxxx"
-        # Social Share Links in post page
-        [languages.en.params.share]
+    [languages.en.params]
+      # site description
+      description = "About LoveIt Theme"
+      # site keywords
+      keywords = ["Theme", "Hugo"]
+      # site default theme ("light", "dark", "auto")
+      defaultTheme = "auto"
+      # App icon theming
+      [languages.en.params.app]
+        # Optional site title override for the app when added to an iOS home screen or Android launcher
+        title = "LoveIt App"
+        # Whether to omit favicon resource links
+        # noFavicon = true
+        # Modern SVG favicon to use in place of older style .png and .ico files
+        # svgFavicon = 'favicon.svg'
+        # Android browser color theming
+        themeColor = "#ffffff"
+        # Safari mask icon color
+        iconColor = "#5bbad5"
+        # Windows v8-10 tile color
+        tileColor = "#da532c"
+      # Home Page Info
+      [languages.en.params.home]
+        # Home Page Profile
+        [languages.en.params.home.profile]
           enable = true
-          Twitter = true
-          Facebook = true
-          Linkedin = true
-          Whatsapp = true
-          Pinterest = true
-          # Tumblr = true
-          HackerNews = true
-          # Reddit = true
-          # VK = true
-          # Buffer = true
-          # Xing = true
-          # Line = true
-          # Instapaper = true
-          # Pocket = true
-          # Digg = true
-          # Stumbleupon = true
-          # Flipboard = true
-          # Weibo = true
-          # Renren = true
-          # Myspace = true
-          # Blogger = true
-          # Baidu = true
-          # Odnoklassniki = true
-          # Evernote = true
-          # Skype = true
-          # Trello = true
-          # Mix = true
-        # Comment Config
-        [languages.en.params.comment]
+          # Gravatar Email for preferred avatar in home page
+          gravatarEmail = ""
+          # URL of avatar shown in home page
+          avatarURL = "/images/avatar.png"
+          # subtitle shown in home page
+          subtitle = "A Clean, Elegant but Advanced Hugo Theme"
+          # whether to use typeit animation for subtitle
+          typeit = true
+          # whether to show social links
+          social = true
+        # Home Page Posts
+        [languages.en.params.home.posts]
+          enable = true
+          # special amount of posts in each home posts page
+          paginate = 6
+          # default behavior when you don't set "hiddenFromHomePage" in front matter
+          defaultHiddenFromHomePage = false
+      # Social Info in home page
+      [languages.en.params.social]
+        GitHub = "xxxx"
+        Linkedin = "xxxx"
+        Twitter = "xxxx"
+        Instagram = "xxxx"
+        Email = "xxxx@xxxx.com"
+        Facebook = "xxxx"
+        Telegram = "xxxx"
+        # Medium = "xxxx"
+        # Gitlab = "xxxx"
+        Youtubelegacy = "xxxx"
+        # Youtubecustom = "xxxx"
+        # Youtubechannel = "xxxx"
+        # Tumblr ="xxxx"
+        # Quora = "xxxx"
+        # Keybase = "xxxx"
+        # Pinterest = "xxxx"
+        # Reddit = "xxxx"
+        # Codepen = "xxxx"
+        # FreeCodeCamp = "xxxx"
+        # Bitbucket = "xxxx"
+        # Stackoverflow = "xxxx"
+        # Weibo = "xxxx"
+        # Odnoklassniki = "xxxx"
+        # VK = "xxxx"
+        # Flickr = "xxxx"
+        # Xing = "xxxx"
+        # Snapchat = "xxxx"
+        # Soundcloud = "xxxx"
+        # Spotify = "xxxx"
+        # Bandcamp = "xxxx"
+        # Paypal = "xxxx"
+        # Fivehundredpx = "xxxx"
+        # Mix = "xxxx"
+        # Goodreads = "xxxx"
+        # Lastfm = "xxxx"
+        # Foursquare = "xxxx"
+        # Hackernews = "xxxx"
+        # Kickstarter = "xxxx"
+        # Patreon = "xxxx"
+        # Steam = "xxxx"
+        # Twitch = "xxxx"
+        # Strava = "xxxx"
+        # Skype = "xxxx"
+        # Whatsapp = "xxxx"
+        # Zhihu = "xxxx"
+        # Douban = "xxxx"
+        # Angellist = "xxxx"
+        # Slidershare = "xxxx"
+        # Jsfiddle = "xxxx"
+        # Deviantart = "xxxx"
+        # Behance = "xxxx"
+        # Dribble = "xxxx"
+        # Wordpress = "xxxx"
+        # Vine = "xxxx"
+        # Googlescholar = "xxxx"
+        # Researchgate = "xxxx"
+        # Mastodon = "xxxx"
+        # MastodonPrefix = "https://mastodon.technology/"
+        # Thingiverse = "xxxx"
+        # Devto = "xxxx"
+        # Gitea = "xxxx"
+        # XMPP = "xxxx"
+        # Matrix = "xxxx"
+        # Bilibili = "xxxx"
+      # Social Share Links in post page
+      [languages.en.params.share]
+        enable = true
+        Twitter = true
+        Facebook = true
+        Linkedin = true
+        Whatsapp = true
+        Pinterest = true
+        # Tumblr = true
+        HackerNews = true
+        # Reddit = true
+        # VK = true
+        # Buffer = true
+        # Xing = true
+        # Line = true
+        # Instapaper = true
+        # Pocket = true
+        # Digg = true
+        # Stumbleupon = true
+        # Flipboard = true
+        # Weibo = true
+        # Renren = true
+        # Myspace = true
+        # Blogger = true
+        # Baidu = true
+        # Odnoklassniki = true
+        # Evernote = true
+        # Skype = true
+        # Trello = true
+        # Mix = true
+      # Comment Config
+      [languages.en.params.comment]
           enable = true
           # Disqus Comment Config (https://disqus.com/)
           [languages.en.params.comment.disqus]
@@ -313,6 +327,13 @@ enableEmoji = true
       keywords = ["Theme", "Hugo"]
       # 网站默认主题 ("light", "dark", "auto")
       defaultTheme = "auto"
+      [languages.zh-cn.params.app]
+        # title = "LoveIt App"
+        # noFavicon = true
+        # svgFavicon = 'favicon.svg'
+        themeColor = "#ffffff"
+        iconColor = "#5bbad5"
+        tileColor = "#da532c"
       # 主页信息设置
       [languages.zh-cn.params.home]
         # 主页个人信息
@@ -528,167 +549,174 @@ enableEmoji = true
         url = "https://github.com/dillonzq/LoveIt"
         title = "GitHub"
         weight = 6
-      [languages.fr.params]
-        # site description
-        description = "À propos du thème LoveIt"
-        # site keywords
-        keywords = ["Thème", "Hugo"]
-        # site default theme ("light", "dark", "auto")
-        defaultTheme = "auto"
-        # Home Page Info
-        [languages.fr.params.home]
-          # Home Page Profile
-          [languages.fr.params.home.profile]
-            enable = true
-            # Gravatar Email for preferred avatar in home page
-            gravatarEmail = ""
-            # URL of avatar shown in home page
-            avatarURL = "/images/avatar.png"
-            # subtitle shown in home page
-            subtitle = "Un thème Hugo simple, élégant et efficace"
-            # whether to use typeit animation for subtitle
-            typeit = true
-            # whether to show social links
-            social = true
-          # Home Page Posts
-          [languages.fr.params.home.posts]
-            enable = true
-            # special amount of posts in each home posts page
-            paginate = 6
-            # default behavior when you don't set "hiddenFromHomePage" in front matter
-            defaultHiddenFromHomePage = false
-        # Social Info in home page
-        [languages.fr.params.social]
-          GitHub = "xxxx"
-          Linkedin = "xxxx"
-          Twitter = "xxxx"
-          Instagram = "xxxx"
-          Email = "xxxx@xxxx.com"
-          Facebook = "xxxx"
-          Telegram = "xxxx"
-          # Medium = "xxxx"
-          # Gitlab = "xxxx"
-          Youtubelegacy = "xxxx"
-          # Youtubecustom = "xxxx"
-          # Youtubechannel = "xxxx"
-          # Tumblr ="xxxx"
-          # Quora = "xxxx"
-          # Keybase = "xxxx"
-          # Pinterest = "xxxx"
-          # Reddit = "xxxx"
-          # Codepen = "xxxx"
-          # FreeCodeCamp = "xxxx"
-          # Bitbucket = "xxxx"
-          # Stackoverflow = "xxxx"
-          # Weibo = "xxxx"
-          # Odnoklassniki = "xxxx"
-          # VK = "xxxx"
-          # Flickr = "xxxx"
-          # Xing = "xxxx"
-          # Snapchat = "xxxx"
-          # Soundcloud = "xxxx"
-          # Spotify = "xxxx"
-          # Bandcamp = "xxxx"
-          # Paypal = "xxxx"
-          # Fivehundredpx = "xxxx"
-          # Mix = "xxxx"
-          # Goodreads = "xxxx"
-          # Lastfm = "xxxx"
-          # Foursquare = "xxxx"
-          # Hackernews = "xxxx"
-          # Kickstarter = "xxxx"
-          # Patreon = "xxxx"
-          # Steam = "xxxx"
-          # Twitch = "xxxx"
-          # Strava = "xxxx"
-          # Skype = "xxxx"
-          # Whatsapp = "xxxx"
-          # Zhihu = "xxxx"
-          # Douban = "xxxx"
-          # Angellist = "xxxx"
-          # Slidershare = "xxxx"
-          # Jsfiddle = "xxxx"
-          # Deviantart = "xxxx"
-          # Behance = "xxxx"
-          # Dribble = "xxxx"
-          # Wordpress = "xxxx"
-          # Vine = "xxxx"
-          # Googlescholar = "xxxx"
-          # Researchgate = "xxxx"
-          # Mastodon = "xxxx"
-          # MastodonPrefix = "https://mastodon.technology/"
-          # Thingiverse = "xxxx"
-          # Devto = "xxxx"
-          # Gitea = "xxxx"
-          # XMPP = "xxxx"
-          # Matrix = "xxxx"
-          # Bilibili = "xxxx"
-        # Social Share Links in post page
-        [languages.fr.params.share]
+    [languages.fr.params]
+      # site description
+      description = "À propos du thème LoveIt"
+      # site keywords
+      keywords = ["Thème", "Hugo"]
+      # site default theme ("light", "dark", "auto")
+      defaultTheme = "auto"
+      [languages.fr.params.app]
+        # title = "LoveIt App"
+        # noFavicon = true
+        # svgFavicon = 'favicon.svg'
+        themeColor = "#ffffff"
+        iconColor = "#5bbad5"
+        tileColor = "#da532c"
+      # Home Page Info
+      [languages.fr.params.home]
+        # Home Page Profile
+        [languages.fr.params.home.profile]
           enable = true
-          Twitter = true
-          Facebook = true
-          Linkedin = true
-          Whatsapp = true
-          Pinterest = true
-          # Tumblr = true
-          HackerNews = true
-          # Reddit = true
-          # VK = true
-          # Buffer = true
-          # Xing = true
-          # Line = true
-          # Instapaper = true
-          # Pocket = true
-          # Digg = true
-          # Stumbleupon = true
-          # Flipboard = true
-          # Weibo = true
-          # Renren = true
-          # Myspace = true
-          # Blogger = true
-          # Baidu = true
-          # Odnoklassniki = true
-          # Evernote = true
-          # Skype = true
-          # Trello = true
-          # Mix = true
-        # Comment Config
-        [languages.fr.params.comment]
+          # Gravatar Email for preferred avatar in home page
+          gravatarEmail = ""
+          # URL of avatar shown in home page
+          avatarURL = "/images/avatar.png"
+          # subtitle shown in home page
+          subtitle = "Un thème Hugo simple, élégant et efficace"
+          # whether to use typeit animation for subtitle
+          typeit = true
+          # whether to show social links
+          social = true
+        # Home Page Posts
+        [languages.fr.params.home.posts]
           enable = true
-          # Disqus Comment Config (https://disqus.com/)
-          [languages.fr.params.comment.disqus]
-            enable = false
-            # Disqus shortname to use Disqus in posts
-            shortname = ""
-          # Gitalk Comment Config (https://github.com/gitalk/gitalk)
-          [languages.fr.params.comment.gitalk]
-            enable = false
-            owner = ""
-            repo = ""
-            clientId = ""
-            clientSecret = ""
-          # Valine Comment Config (https://github.com/xCss/Valine)
-          [languages.fr.params.comment.valine]
-            enable = true
-            appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
-            appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
-            placeholder = "Votre commentaire ..."
-            notify = false
-            verify = true
-            avatar = "mp"
-            meta= ""
-            pageSize = 10
-            lang = "en"
-            visitor = true
-            recordIP = true
-          # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
-          [languages.fr.params.comment.facebook]
-            enable = false
-            width = "100%"
-            numPosts = 10
-            appId = ""
-            languageCode = "fr"
+          # special amount of posts in each home posts page
+          paginate = 6
+          # default behavior when you don't set "hiddenFromHomePage" in front matter
+          defaultHiddenFromHomePage = false
+      # Social Info in home page
+      [languages.fr.params.social]
+        GitHub = "xxxx"
+        Linkedin = "xxxx"
+        Twitter = "xxxx"
+        Instagram = "xxxx"
+        Email = "xxxx@xxxx.com"
+        Facebook = "xxxx"
+        Telegram = "xxxx"
+        # Medium = "xxxx"
+        # Gitlab = "xxxx"
+        Youtubelegacy = "xxxx"
+        # Youtubecustom = "xxxx"
+        # Youtubechannel = "xxxx"
+        # Tumblr ="xxxx"
+        # Quora = "xxxx"
+        # Keybase = "xxxx"
+        # Pinterest = "xxxx"
+        # Reddit = "xxxx"
+        # Codepen = "xxxx"
+        # FreeCodeCamp = "xxxx"
+        # Bitbucket = "xxxx"
+        # Stackoverflow = "xxxx"
+        # Weibo = "xxxx"
+        # Odnoklassniki = "xxxx"
+        # VK = "xxxx"
+        # Flickr = "xxxx"
+        # Xing = "xxxx"
+        # Snapchat = "xxxx"
+        # Soundcloud = "xxxx"
+        # Spotify = "xxxx"
+        # Bandcamp = "xxxx"
+        # Paypal = "xxxx"
+        # Fivehundredpx = "xxxx"
+        # Mix = "xxxx"
+        # Goodreads = "xxxx"
+        # Lastfm = "xxxx"
+        # Foursquare = "xxxx"
+        # Hackernews = "xxxx"
+        # Kickstarter = "xxxx"
+        # Patreon = "xxxx"
+        # Steam = "xxxx"
+        # Twitch = "xxxx"
+        # Strava = "xxxx"
+        # Skype = "xxxx"
+        # Whatsapp = "xxxx"
+        # Zhihu = "xxxx"
+        # Douban = "xxxx"
+        # Angellist = "xxxx"
+        # Slidershare = "xxxx"
+        # Jsfiddle = "xxxx"
+        # Deviantart = "xxxx"
+        # Behance = "xxxx"
+        # Dribble = "xxxx"
+        # Wordpress = "xxxx"
+        # Vine = "xxxx"
+        # Googlescholar = "xxxx"
+        # Researchgate = "xxxx"
+        # Mastodon = "xxxx"
+        # MastodonPrefix = "https://mastodon.technology/"
+        # Thingiverse = "xxxx"
+        # Devto = "xxxx"
+        # Gitea = "xxxx"
+        # XMPP = "xxxx"
+        # Matrix = "xxxx"
+        # Bilibili = "xxxx"
+      # Social Share Links in post page
+      [languages.fr.params.share]
+        enable = true
+        Twitter = true
+        Facebook = true
+        Linkedin = true
+        Whatsapp = true
+        Pinterest = true
+        # Tumblr = true
+        HackerNews = true
+        # Reddit = true
+        # VK = true
+        # Buffer = true
+        # Xing = true
+        # Line = true
+        # Instapaper = true
+        # Pocket = true
+        # Digg = true
+        # Stumbleupon = true
+        # Flipboard = true
+        # Weibo = true
+        # Renren = true
+        # Myspace = true
+        # Blogger = true
+        # Baidu = true
+        # Odnoklassniki = true
+        # Evernote = true
+        # Skype = true
+        # Trello = true
+        # Mix = true
+      # Comment Config
+      [languages.fr.params.comment]
+        enable = true
+        # Disqus Comment Config (https://disqus.com/)
+        [languages.fr.params.comment.disqus]
+          enable = false
+          # Disqus shortname to use Disqus in posts
+          shortname = ""
+        # Gitalk Comment Config (https://github.com/gitalk/gitalk)
+        [languages.fr.params.comment.gitalk]
+          enable = false
+          owner = ""
+          repo = ""
+          clientId = ""
+          clientSecret = ""
+        # Valine Comment Config (https://github.com/xCss/Valine)
+        [languages.fr.params.comment.valine]
+          enable = true
+          appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
+          appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
+          placeholder = "Votre commentaire ..."
+          notify = false
+          verify = true
+          avatar = "mp"
+          meta= ""
+          pageSize = 10
+          lang = "en"
+          visitor = true
+          recordIP = true
+        # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
+        [languages.fr.params.comment.facebook]
+          enable = false
+          width = "100%"
+          numPosts = 10
+          appId = ""
+          languageCode = "fr"
 
 [params]
   # LoveIt theme version
@@ -699,7 +727,21 @@ enableEmoji = true
   gitRepo = "https://github.com/dillonzq/LoveIt"
   # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
   # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI ("sha256", "sha384", "sha512", "md5")
-  fingerprint = ""
+  fingerprint = ""  
+  # App icon theming
+  [params.app]
+    # Optional site title override for the app when added to an iOS home screen or Android launcher
+    # title = "LoveIt App"
+    # Whether to omit favicon resource links
+    # noFavicon = true
+    # Modern SVG favicon to use in place of older style .png and .ico files
+    # svgFavicon = 'favicon.svg'
+    # Android browser color theming
+    themeColor = "#ffffff"
+    # Safari mask icon color
+    iconColor = "#5bbad5"
+    # Windows v8-10 tile color
+    tileColor = "#da532c"
   # Header info
   # 页面头部导航栏信息
   [params.header]
