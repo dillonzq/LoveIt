@@ -1,36 +1,50 @@
-<footer class="footer">
-    <div class="copyright">
-        {{- /* Hugo and LoveIt */ -}}
-        <div class="copyright-line">
-            {{- printf (T "poweredBySome") `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>` | safeHTML }} | {{ T "theme" }} - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer"><i class="far fa-heart fa-fw"></i> LoveIt</a>
+{{- if ne .Site.Params.footer.enable false -}}
+    <footer class="footer">
+        <div class="footer-container">
+            {{- /* Custom Content */ -}}
+            {{- with .Site.Params.footer.custom -}}
+                <div class="footer-line">
+                    {{- safeHTML . -}}
+                </div>
+            {{- end -}}
+
+            {{- /* Hugo and LoveIt */ -}}
+            {{- if ne .Site.Params.footer.hugo false -}}
+                <div class="footer-line">
+                    {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo %s">Hugo</a>` hugo.Version -}}
+                    {{- printf (T "poweredBySome") $hugo | safeHTML }} | {{ T "theme" }} - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt {{ .Scratch.Get `version` }}"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div>
+            {{- end -}}
+
+            <div class="footer-line">
+                {{- /* Copyright year */ -}}
+                {{- if ne .Site.Params.footer.copyright false -}}
+                    <i class="far fa-copyright fa-fw"></i>
+                    {{- with .Site.Params.footer.since -}}
+                        <span itemprop="copyrightYear">
+                            {{- if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year -}}
+                        </span>
+                    {{- else -}}
+                        <span itemprop="copyrightYear">{{ now.Year }}</span>
+                    {{- end -}}
+                {{- end -}}
+
+                {{- /* Author */ -}}
+                {{- if ne .Site.Params.footer.author false -}}
+                    <span class="author" itemprop="copyrightHolder">&nbsp;<a href="{{ $.Site.Author.link | default .Site.Home.RelPermalink }}" target="_blank">{{ .Site.Author.name }}</a></span>
+                {{- end -}}
+
+                {{- /* License */ -}}
+                {{- with .Site.Params.footer.license -}}
+                    &nbsp;|&nbsp;<span class="license">{{ . | safeHTML }}</span>
+                {{- end -}}
+
+                {{- /* ICP */ -}}
+                {{- with .Site.Params.footer.icp -}}
+                    <span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp">{{ . | safeHTML }}</span>
+                {{- end -}}
+            </div>
         </div>
-
-        <div class="copyright-line">
-            {{- /* Copyright year */ -}}
-            <i class="far fa-copyright fa-fw"></i>
-            {{- with .Site.Params.footer.since -}}
-                <span itemprop="copyrightYear">
-                    {{- if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year -}}
-                </span>
-            {{- else -}}
-                <span itemprop="copyrightYear">{{ now.Year }}</span>
-            {{- end -}}
-
-            {{- /* Author */ -}}
-            {{- with .Site.Author.name -}}
-                <span class="author" itemprop="copyrightHolder">&nbsp;<a href="{{ $.Site.Author.link | default (relLangURL `/`) }}" target="_blank">{{ . }}</a></span>
-            {{- end -}}
-
-            {{- /* License */ -}}
-            {{- with .Site.Params.footer.license -}}
-                &nbsp;|&nbsp;<span class="license">{{ . | safeHTML }}</span>
-            {{- end -}}
-
-            {{- /* ICP */ -}}
-            {{- with .Site.Params.footer.icp -}}
-                <span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
-                <span class="icp">{{ . | safeHTML }}</span>
-            {{- end -}}
-        </div>
-    </div>
-</footer>
+    </footer>
+{{- end -}}

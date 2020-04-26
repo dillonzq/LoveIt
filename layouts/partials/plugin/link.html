@@ -1,4 +1,5 @@
-<a href="{{ .href | safeURL }}"{{ with .title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .href "http" }} target="_blank"{{ end }} rel="noopener noreffer{{ with .rel }} {{ . }}{{ end }}"{{ with .class }} class="{{ . }}"{{ end }}>
+{{- $rel := "" -}}
+<a href="{{ .href | safeURL }}"{{ with .title }} title="{{ . }}"{{ end }}{{ if (urls.Parse .href).Host | or .newtab }}{{ $rel = "noopener noreffer" }} target="_blank"{{ end }} rel="{{ $rel }}{{ with .rel }} {{ . }}{{ end }}"{{ with .class }} class="{{ . }}"{{ end }}>
     {{- with .icon -}}
         {{- partial "plugin/icon.html" . -}}
     {{- end -}}

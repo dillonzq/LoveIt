@@ -1,0 +1,11 @@
+{{- $options := cond .IsNamedParams (.Get "href") (.Get 0) | dict "href" -}}
+{{- if .IsNamedParams -}}
+    {{- $options = dict "content" (.Get "content") | merge $options -}}
+    {{- $options = dict "title" (.Get "title") | merge $options -}}
+    {{- $options = dict "class" (.Get "class") | merge $options -}}
+    {{- $options = dict "rel" (.Get "rel") | merge $options -}}
+{{- else -}}
+    {{- $options = dict "content" (.Get 1 | default (.Get 0)) | merge $options -}}
+    {{- $options = dict "title" (.Get 2) | merge $options -}}
+{{- end -}}
+{{- partial "plugin/link.html" $options -}}

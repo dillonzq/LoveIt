@@ -1,7 +1,11 @@
 .archive {
   .single-title {
     text-align: right;
-    padding-bottom: 2rem;
+  }
+
+  .group-title {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   @import "../_partial/_archive/terms";

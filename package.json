@@ -1,21 +1,32 @@
 {
   "name": "loveit-src",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "LoveIt theme source file",
-  "main": "index.js",
+  "private": true,
   "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
     "babel-preset-minify": "^0.5.1",
-    "minimist": ">=1.2.3",
-    "husky": "^4.2.3"
+    "babelify": "^10.0.0",
+    "browserify": "^16.5.0",
+    "core-js": "^3.6.4",
+    "husky": "^4.2.3",
+    "minimist": "^1.2.5",
+    "segmentit": "^2.0.3"
   },
   "scripts": {
-    "build": "npx babel src --out-file assets/js/theme.min.js --source-maps && hugo -v --source=exampleSite --themesDir=../.. -D --gc",
-    "start": "npm run build && hugo server --source=exampleSite --themesDir=../.. --disableFastRender",
+    "preinstall": "npx npm-force-resolutions",
+    "babel": "npx babel src/js --out-file assets/js/theme.min.js --source-maps",
+    "build": "npm run babel && hugo -v --source=exampleSite --themesDir ../.. -D --gc",
+    "build-lunr-segmentit": "browserify src/lib/lunr.segmentit.js -o assets/lib/lunr/lunr.segmentit.js -t babelify --presets @babel/preset-env --presets minify",
+    "start": "npm run babel && hugo server --source=exampleSite --themesDir ../.. --disableFastRender",
+    "check": "htmlproofer exampleSite/public --check-html --allow-hash-href --empty-alt-ignore --disable-external",
     "copy": "rm -rf resources && cp -rf exampleSite/resources resources"
+  },
+  "resolutions": {
+    "minimist": "^1.2.5"
   },
   "husky": {
     "hooks": {
