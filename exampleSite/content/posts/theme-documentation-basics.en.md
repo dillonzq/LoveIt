@@ -206,12 +206,12 @@ Note that some of these parameters are explained in details in other sections of
   # {{< version 0.2.0 >}} App icon config
   [params.app]
     # optional site title override for the app when added to an iOS home screen or Android launcher
-    title = "LoveIt App"
+    title = "LoveIt"
     # whether to omit favicon resource links
-    noFavicon = true
+    noFavicon = false
     # modern SVG favicon to use in place of older style .png and .ico files
-    svgFavicon = 'favicon.svg'
-    # Android browser color theming
+    svgFavicon = ""
+    # Android browser theme color
     themeColor = "#ffffff"
     # Safari mask icon color
     iconColor = "#5bbad5"

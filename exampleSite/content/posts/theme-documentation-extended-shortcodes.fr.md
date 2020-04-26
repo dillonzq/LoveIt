@@ -27,26 +27,30 @@ Welcome to take the time to propose a translation by [making a PR](https://githu
 
 ## style
 
+{{< version 0.2.0 changed >}}
+
 `style` is a shortcode to insert custom style in your post.
 
 The `style` shortcode has two positional parameters.
 
-The **first** one is the custom style content.
+The **first** one is the custom style content,
+which supports nesting syntax in [SASS](https://sass-lang.com/documentation/style-rules/declarations#nesting)
+and `&` referring to this parent HTML element.
 
-And the **second** one is the HTML tag around the content you want to change style, and whose default value is `div`.
+And the **second** one is the tag name of the HTML element wrapping the content you want to change style, and whose default value is `div`.
 
 Example `style` input:
 
 ```markdown
-{{</* style "text-align: right;" */>}}
-This is a right-aligned paragraph.
+{{</* style "text-align:right; strong{color:#00b1ff;}" */>}}
+This is a **right-aligned** paragraph.
 {{</* /style */>}}
 ```
 
 The rendered output looks like this:
 
-{{< style "text-align: right;" >}}
-This is a right-aligned paragraph.
+{{< style "text-align:right; strong{color:#00b1ff;}" >}}
+This is a **right-aligned** paragraph.
 {{< /style >}}
 
 ## link
