@@ -19,7 +19,7 @@
     {{- end -}}
     <img
         class="lazyload{{ with .class }} {{ . }}{{ end }}"
-        src="{{ $loading.RelPermalink | safeURL }}"
+        src="{{ $loading.RelPermalink }}"
         data-sizes="auto"
         data-srcset="{{ $small | relURL }}, {{ .src | relURL }} 1.5x, {{ $large | relURL }} 2x"
         data-src="{{ .src | relURL }}"

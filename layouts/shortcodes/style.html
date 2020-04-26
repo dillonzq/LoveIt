@@ -1,3 +1,4 @@
 {{- $content := .Inner | .Page.RenderString -}}
+{{- $id := partial "function/id.html" (dict "content" $content) -}}
 {{- $tag := .Get 1 | default "div" -}}
-{{- printf `<%s style="%s">%s</%s>` $tag ($.Get 0) $content $tag | safeHTML -}}
+{{- printf `<%s id="%s">%s</%s><style>#%s{%s}</style>` $tag $id $content $tag $id ($.Get 0) | safeHTML -}}

@@ -28,7 +28,8 @@
 
 {{- /* style.min.css */ -}}
 {{- $stylesheet := dict "source" "css/style.template.scss" "fingerprint" $fingerprint -}}
-{{- $options := dict "targetPath" "css/style.min.css" "includePaths" (slice "config/css") -}}
+{{- $targetPath := cond .Site.IsMultiLingual (printf "css/style.%s.min.css" .Language.Lang) "css/style.min.css" -}}
+{{- $options := dict "targetPath" $targetPath "includePaths" (slice "config/css") -}}
 {{- $stylesheet = dict "template" "style.scss" "context" . "toCSS" $options | merge $stylesheet -}}
 {{- partial "plugin/stylesheet.html" $stylesheet -}}
 

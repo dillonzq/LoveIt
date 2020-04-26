@@ -11,7 +11,12 @@
 
         {{- /* Paginate */ -}}
         {{- $pages := .Pages.GroupByDate "2006" -}}
-        {{- range (.Site.Params.section.paginate | default .Site.Params.paginate | .Paginate $pages).PageGroups -}}
+        {{- with .Site.Params.section.paginate | default .Site.Params.paginate -}}
+            {{- $pages = $.Paginate $pages . -}}
+        {{- else -}}
+            {{- $pages = .Paginate $pages -}}
+        {{- end -}}
+        {{- range $pages.PageGroups -}}
             <h3 class="group-title">{{ .Key }}</h3>
             {{- range .Pages -}}
                 <article class="archive-item">

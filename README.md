@@ -129,6 +129,7 @@ LoveIt supports the following languages:
 * Simplified Chinese
 * French
 * Polish
+* Brazilian Portuguese
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
 ## Questions, ideas, bugs, pull requests

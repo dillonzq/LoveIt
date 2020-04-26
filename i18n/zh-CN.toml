@@ -1,4 +1,5 @@
 # Translations for Simplified Chinese
+# 简体中文的翻译
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === baseof ==
@@ -141,9 +142,6 @@ other = "页面没找到"
 
 [pageNotFoundText]
 other = "抱歉，您要查找的页面不存在。"
-
-[backToHome]
-other = "回到主页"
 # === 404.html ===
 
 # === shortcodes/admonition.html ===

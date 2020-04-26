@@ -128,7 +128,7 @@ comment:
 
 **LoveIt** theme uses the summary of the content to display abstract information in the home page. Hugo can generate summaries of your content.
 
-![Summary Preview](/images/theme-documentation-content/summary.jpg "Summary Preview")
+![Summary Preview](/images/theme-documentation-content/summary.png "Summary Preview")
 
 ### Automatic Summary Splitting
 

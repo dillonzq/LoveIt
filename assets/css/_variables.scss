@@ -4,7 +4,7 @@
 
 // ========== Global ========== //
 // Font and Line Height
-$global-font-family: system, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif !default;
+$global-font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif !default;
 $global-font-size: 16px;
 $global-font-weight: 400;
 $global-line-height: 1.5rem;
@@ -58,7 +58,7 @@ $header-background-color-dark: #252627 !default;
 
 // Font style of the header title
 $header-title-font-family: $global-font-family !default;
-$header-title-font-size: 1.5rem !default;
+$header-title-font-size: 1.25rem !default;
 
 // Position of the header
 $header-position-desktop: if($header-normal-mode-desktop, static, fixed) !default;

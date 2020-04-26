@@ -124,6 +124,7 @@ LoveIt 支持下列语言:
 * 简体中文
 * 法语
 * 波兰语
+* 巴西葡萄牙语
 * [贡献一种新的语言](https://github.com/dillonzq/LoveIt/pulls)
 
 ## 问题、想法、 bugs 和 PRs

@@ -3,7 +3,8 @@
 {{- $type := .Get 1 | default "new" | lower -}}
 {{- $label := T $type -}}
 {{- $color := cond (eq $type "changed") "ff9101" "00b1ff" | cond (eq $type "deleted") "ff5252" -}}
-{{- $path := printf "svg/version/%s-%s.svg" $version $label -}}
+{{- $pathTemplate := cond .Site.IsMultiLingual (printf "svg/version/%%s-%%s.%s.svg" .Page.Language.Lang) "svg/version/%s-%s.svg" -}}
+{{- $path := printf $pathTemplate $version $type -}}
 {{- $res := resources.Get "svg/version.template.svg" -}}
 {{- $res = $res | resources.ExecuteAsTemplate $path (dict "version" $version "label" $label "color" $color) | minify -}}
 {{- $alt := printf "LoveIt %s | %s" $label $version -}}

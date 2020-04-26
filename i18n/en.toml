@@ -135,9 +135,6 @@ other = "Page not found"
 
 [pageNotFoundText]
 other = "The page you're looking for doesn't exist. Sorry."
-
-[backToHome]
-other = "Back to Home"
 # === 404.html ===
 
 # === shortcodes/admonition.html ===
