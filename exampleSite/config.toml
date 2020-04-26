@@ -225,38 +225,38 @@ enableEmoji = true
           # Mix = true
         # Comment Config
         [languages.en.params.comment]
+          enable = true
+          # Disqus Comment Config (https://disqus.com/)
+          [languages.en.params.comment.disqus]
+            # Disqus shortname to use Disqus in posts
+            shortname = ""
+          # Gitalk Comment Config (https://github.com/gitalk/gitalk)
+          [languages.en.params.comment.gitalk]
+            owner = ""
+            repo = ""
+            clientId = ""
+            clientSecret = ""
+          # Valine Comment Config (https://github.com/xCss/Valine)
+          [languages.en.params.comment.valine]
             enable = true
-            # Disqus Comment Config (https://disqus.com/)
-            [languages.en.params.comment.disqus]
-              # Disqus shortname to use Disqus in posts
-              shortname = ""
-            # Gitalk Comment Config (https://github.com/gitalk/gitalk)
-            [languages.en.params.comment.gitalk]
-              owner = ""
-              repo = ""
-              clientId = ""
-              clientSecret = ""
-            # Valine Comment Config (https://github.com/xCss/Valine)
-            [languages.en.params.comment.valine]
-              enable = true
-              appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
-              appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
-              placeholder = "Your comment ..."
-              notify = false
-              verify = true
-              avatar = "mp"
-              meta= ""
-              pageSize = 10
-              lang = "en"
-              visitor = true
-              recordIP = true
-            # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
-            [languages.en.params.comment.facebook]
-              enable = false
-              width = "100%"
-              numPosts = 10
-              appId = ""
-              languageCode = "en_US"
+            appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
+            appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
+            placeholder = "Your comment ..."
+            notify = false
+            verify = true
+            avatar = "mp"
+            meta= ""
+            pageSize = 10
+            lang = "en"
+            visitor = true
+            recordIP = true
+          # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
+          [languages.en.params.comment.facebook]
+            enable = false
+            width = "100%"
+            numPosts = 10
+            appId = ""
+            languageCode = "en_US"
 
   [languages.zh-cn]
     weight = 2
