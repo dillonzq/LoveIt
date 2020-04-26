@@ -191,6 +191,20 @@ Note that some of these parameters are explained in details in other sections of
   # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
   # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
+  # App icon theming
+  [params.app]
+    # Optional site title override when added to an iOS home screen or Android launcher
+    title = "My New App"
+    # Whether to omit favicon resource links
+    noFavicon = false
+    # Modern SVG favicon to use in place of older style .png and .ico files
+    svgFavicon = 'favicon.svg'
+    # Android browser color theming
+    themeColor = "#ffffff"
+    # Safari mask icon color
+    iconColor = "#5bbad5"
+    # Windows v8-10 tile color
+    tileColor = "#da532c"
   # Header info
   [params.header]
     # desktop header mode ("fixed", "normal", "auto")

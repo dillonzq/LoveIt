@@ -194,6 +194,13 @@ hugo
   # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
   # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
+  [params.app]
+    title = "My New App"
+    noFavicon = false
+    svgFavicon = 'favicon.svg'
+    themeColor = "#ffffff"
+    iconColor = "#5bbad5"
+    tileColor = "#da532c"
   # 页面头部导航栏信息
   [params.header]
     # 桌面端导航栏模式 ("fixed", "normal", "auto")
