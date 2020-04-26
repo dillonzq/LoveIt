@@ -206,19 +206,19 @@ hugo
   # {{< version 0.2.0 >}} 日期格式
   dateFormat = "2006-01-02"
 
-  # {{< version 0.2.0 >}} App icon config
+  # {{< version 0.2.0 >}} 应用图标配置
   [params.app]
-    # optional site title override for the app when added to an iOS home screen or Android launcher
-    title = "LoveIt App"
-    # whether to omit favicon resource links
-    noFavicon = true
-    # modern SVG favicon to use in place of older style .png and .ico files
-    svgFavicon = 'favicon.svg'
-    # Android browser color theming
+    # 当添加到 iOS 主屏幕或者 Android 启动器时的标题, 覆盖默认标题
+    title = "LoveIt"
+    # 是否隐藏网站图标资源链接
+    noFavicon = false
+    # 更现代的 SVG 网站图标, 可替代旧的 .png 和 .ico 文件
+    svgFavicon = ""
+    # Android 浏览器主题色
     themeColor = "#ffffff"
-    # Safari mask icon color
+    # Safari 图标颜色
     iconColor = "#5bbad5"
-    # Windows v8-10 tile color
+    # Windows v8-10磁贴颜色
     tileColor = "#da532c"
 
   # {{< version 0.2.0 >}} 搜索配置

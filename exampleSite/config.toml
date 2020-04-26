@@ -98,12 +98,12 @@ enableEmoji = true
       # App icon config
       [languages.en.params.app]
         # optional site title override for the app when added to an iOS home screen or Android launcher
-        title = "LoveIt App"
+        title = "LoveIt"
         # whether to omit favicon resource links
-        noFavicon = true
+        noFavicon = false
         # modern SVG favicon to use in place of older style .png and .ico files
-        svgFavicon = 'favicon.svg'
-        # Android browser color theming
+        svgFavicon = ""
+        # Android browser theme color
         themeColor = "#ffffff"
         # Safari mask icon color
         iconColor = "#5bbad5"
@@ -284,19 +284,19 @@ enableEmoji = true
       description = "关于 LoveIt 主题"
       # 网站关键词
       keywords = ["Theme", "Hugo"]
-      # App icon config
+      # 应用图标配置
       [languages.zh-cn.params.app]
-        # optional site title override for the app when added to an iOS home screen or Android launcher
-        title = "LoveIt App"
-        # whether to omit favicon resource links
-        noFavicon = true
-        # modern SVG favicon to use in place of older style .png and .ico files
-        svgFavicon = 'favicon.svg'
-        # Android browser color theming
+        # 当添加到 iOS 主屏幕或者 Android 启动器时的标题, 覆盖默认标题
+        title = "LoveIt"
+        # 是否隐藏网站图标资源链接
+        noFavicon = false
+        # 更现代的 SVG 网站图标, 可替代旧的 .png 和 .ico 文件
+        svgFavicon = ""
+        # Android 浏览器主题色
         themeColor = "#ffffff"
-        # Safari mask icon color
+        # Safari 图标颜色
         iconColor = "#5bbad5"
-        # Windows v8-10 tile color
+        # Windows v8-10 磁贴颜色
         tileColor = "#da532c"
       # 搜索配置
       [languages.zh-cn.params.search]
@@ -472,12 +472,12 @@ enableEmoji = true
       # App icon config
       [languages.fr.params.app]
         # optional site title override for the app when added to an iOS home screen or Android launcher
-        title = "LoveIt App"
+        title = "LoveIt"
         # whether to omit favicon resource links
-        noFavicon = true
+        noFavicon = false
         # modern SVG favicon to use in place of older style .png and .ico files
-        svgFavicon = 'favicon.svg'
-        # Android browser color theming
+        svgFavicon = ""
+        # Android browser theme color
         themeColor = "#ffffff"
         # Safari mask icon color
         iconColor = "#5bbad5"
