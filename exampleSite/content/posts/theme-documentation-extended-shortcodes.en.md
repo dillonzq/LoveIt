@@ -52,7 +52,7 @@ This is a **right-aligned** paragraph.
 
 {{< version 0.2.0 >}}
 
-`link` shortcode is an alternative to [Markdown link syntax](../basic-markdown-syntax/#links). `link` shortcode can provide some other features and can be used in code blocks.
+`link` shortcode is an alternative to [Markdown link syntax](../basic-markdown-syntax#links). `link` shortcode can provide some other features and can be used in code blocks.
 
 The `link` shortcode has the following named parameters:
 
@@ -116,7 +116,7 @@ The rendered output looks like this (hover over the link, there should be a tool
 
 {{< version 0.2.0 changed >}}
 
-`image` shortcode is an alternative to [`figure` shortcode](../theme-documentation-built-in-shortcodes/#figure). `image` shortcode can take full advantage of the dependent libraries of [lazysizes](https://github.com/aFarkas/lazysizes) and [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js).
+`image` shortcode is an alternative to [`figure` shortcode](../theme-documentation-built-in-shortcodes#figure). `image` shortcode can take full advantage of the dependent libraries of [lazysizes](https://github.com/aFarkas/lazysizes) and [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js).
 
 The `image` shortcode has the following named parameters:
 
@@ -246,25 +246,25 @@ The `admonition` shortcode has the following named parameters:
 
     Title of the `admonition` banner, default value is the value of **type** parameter.
 
-* **details** *[optional]* (**third** positional parameter)
+* **open** *[optional]* (**third** positional parameter) {{< version 0.2.0 changed >}}
 
-    Whether the content will be expandable/collapsible, default value is `false`.
+    Whether the content will be expandable by default, default value is `true`.
 
 Example `admonition` input:
 
 ```markdown
-{{</* admonition type=tip title="This is a tip" details=true */>}}
+{{</* admonition type=tip title="This is a tip" open=false */>}}
 A **tip** banner
 {{</* /admonition */>}}
 Or
-{{</* admonition tip "This is a tip" true */>}}
+{{</* admonition tip "This is a tip" false */>}}
 A **tip** banner
 {{</* /admonition */>}}
 ```
 
 The rendered output looks like this:
 
-{{< admonition tip "This is a tip" true >}}
+{{< admonition tip "This is a tip" false >}}
 A **tip** banner
 {{< /admonition >}}
 
@@ -930,27 +930,27 @@ The `mapbox` shortcode has the following named parameters to use Mapbox GL JS:
 
 * **light-style** *[optional]* (**fifth** positional parameter)
 
-    Style for the light theme, default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+    Style for the light theme, default value is the value set in the [front matter](../theme-documentation-content#front-matter) or the [site configuration](../theme-documentation-basics#site-configuration).
 
 * **dark-style** *[optional]* (**sixth** positional parameter)
 
-    Style for the dark theme, default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+    Style for the dark theme, default value is the value set in the [front matter](../theme-documentation-content#front-matter) or the [site configuration](../theme-documentation-basics#site-configuration).
 
 * **navigation** *[optional]*
 
-    Whether to add [NavigationControl](https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol), default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+    Whether to add [NavigationControl](https://docs.mapbox.com/mapbox-gl-js/api#navigationcontrol), default value is the value set in the [front matter](../theme-documentation-content#front-matter) or the [site configuration](../theme-documentation-basics#site-configuration).
 
 * **geolocate** *[optional]*
 
-    Whether to add [GeolocateControl](https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol), default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+    Whether to add [GeolocateControl](https://docs.mapbox.com/mapbox-gl-js/api#geolocatecontrol), default value is the value set in the [front matter](../theme-documentation-content#front-matter) or the [site configuration](../theme-documentation-basics#site-configuration).
 
 * **scale** *[optional]*
 
-    Whether to add [ScaleControl](https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol), default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+    Whether to add [ScaleControl](https://docs.mapbox.com/mapbox-gl-js/api#scalecontrol), default value is the value set in the [front matter](../theme-documentation-content#front-matter) or the [site configuration](../theme-documentation-basics#site-configuration).
 
 * **fullscreen** *[optional]*
 
-    Whether to add [FullscreenControl](https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol), default value is the value set in the [front matter](../theme-documentation-content/#front-matter) or the [site configuration](../theme-documentation-basics/#site-configuration).
+    Whether to add [FullscreenControl](https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol), default value is the value set in the [front matter](../theme-documentation-content#front-matter) or the [site configuration](../theme-documentation-basics#site-configuration).
 
 * **width** *[optional]*
 

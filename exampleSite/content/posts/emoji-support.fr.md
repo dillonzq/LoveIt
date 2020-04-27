@@ -25,9 +25,9 @@ Sorry, this article has not been completely translated into **French**.
 Welcome to take the time to propose a translation by [making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
 {{< /admonition >}}
 
-The [`emojify`](https://gohugo.io/functions/emojify/) function can be called directly in templates or [Inline Shortcodes](https://gohugo.io/templates/shortcode-templates/#inline-shortcodes).
+The [`emojify`](https://gohugo.io/functions/emojify/) function can be called directly in templates or [Inline Shortcodes](https://gohugo.io/templates/shortcode-templates#inline-shortcodes).
 
-To enable emoji globally, set `enableEmoji` to `true` in your site’s [configuration](https://gohugo.io/getting-started/configuration/) and then you can type emoji shorthand codes directly in content files.
+To enable emoji globally, set `enableEmoji` to `true` in your [site configuration](https://gohugo.io/getting-started/configuration/) and then you can type emoji shorthand codes directly in content files.
 
 These begin and end with a **colon** and include the **code** of an emoji:
 
@@ -42,6 +42,12 @@ The rendered output looks like this:
 Gone camping! :tent: Be back soon.
 
 That is so funny! :joy:
+
+{{< admonition tip "Enable Twemoji" >}}
+This page enables `twemoji` to make emoji look beautiful everywhere.
+
+Set `twemoji` to `true` in your [front matter](../theme-documentation-content#front-matter) or in the `params.page` part of the [site configuration](https://gohugo.io/getting-started/configuration/) to use :(far fa-grin-tongue-wink fa-fw): Twemoji.
+{{< /admonition >}}
 
 ## Emoji Cheat Sheet
 

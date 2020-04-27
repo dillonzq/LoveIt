@@ -31,7 +31,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 ## figure {#figure}
 
-[`figure` 的文档](https://gohugo.io/content-management/shortcodes/#figure)
+[`figure` 的文档](https://gohugo.io/content-management/shortcodes#figure)
 
 一个 `figure` 示例:
 
@@ -56,7 +56,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 ## gist
 
-[`gist` 的文档](https://gohugo.io/content-management/shortcodes/#gist)
+[`gist` 的文档](https://gohugo.io/content-management/shortcodes#gist)
 
 一个 `gist` 示例:
 
@@ -76,7 +76,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 ## highlight
 
-[`highlight` 的文档](https://gohugo.io/content-management/shortcodes/#instagram)
+[`highlight` 的文档](https://gohugo.io/content-management/shortcodes#instagram)
 
 一个 `highlight` 示例:
 
@@ -108,7 +108,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 ## instagram
 
-[`instagram` 的文档](https://gohugo.io/content-management/shortcodes/#instagram)
+[`instagram` 的文档](https://gohugo.io/content-management/shortcodes#instagram)
 
 一个 `instagram` 示例:
 
@@ -122,7 +122,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 ## param
 
-[`param` 的文档](https://gohugo.io/content-management/shortcodes/#param)
+[`param` 的文档](https://gohugo.io/content-management/shortcodes#param)
 
 一个 `param` 示例:
 
@@ -136,11 +136,11 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 ## ref 和 relref {#ref-and-relref}
 
-[`ref` 和 `relref` 的文档](https://gohugo.io/content-management/shortcodes/#ref-and-relref)
+[`ref` 和 `relref` 的文档](https://gohugo.io/content-management/shortcodes#ref-and-relref)
 
 ## tweet
 
-[`tweet` 的文档](https://gohugo.io/content-management/shortcodes/#tweet)
+[`tweet` 的文档](https://gohugo.io/content-management/shortcodes#tweet)
 
 一个 `tweet` 示例:
 
@@ -154,7 +154,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 ## vimeo
 
-[`vimeo` 的文档](https://gohugo.io/content-management/shortcodes/#vimeo)
+[`vimeo` 的文档](https://gohugo.io/content-management/shortcodes#vimeo)
 
 一个 `vimeo` 示例:
 
@@ -168,7 +168,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 ## youtube
 
-[`youtube` 的文档](https://gohugo.io/content-management/shortcodes/#youtube)
+[`youtube` 的文档](https://gohugo.io/content-management/shortcodes#youtube)
 
 一个 `youtube` 示例:
 

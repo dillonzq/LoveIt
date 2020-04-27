@@ -54,7 +54,7 @@ This is a **right-aligned** paragraph.
 
 {{< version 0.2.0 >}}
 
-`link` shortcode 是 [Markdown 链接语法](../basic-markdown-syntax/#links) 的替代.
+`link` shortcode 是 [Markdown 链接语法](../basic-markdown-syntax#links) 的替代.
 `link` shortcode 可以提供一些其它的功能并且可以在代码块中使用.
 
 `link` shortcode 有以下命名参数:
@@ -119,7 +119,7 @@ This is a **right-aligned** paragraph.
 
 {{< version 0.2.0 changed >}}
 
-`image` shortcode 是 [`figure` shortcode](../theme-documentation-built-in-shortcodes/#figure) 的替代. `image` shortcode 可以充分利用 [lazysizes](https://github.com/aFarkas/lazysizes) 和 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 两个依赖库.
+`image` shortcode 是 [`figure` shortcode](../theme-documentation-built-in-shortcodes#figure) 的替代. `image` shortcode 可以充分利用 [lazysizes](https://github.com/aFarkas/lazysizes) 和 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 两个依赖库.
 
 `image` shortcode 有以下命名参数:
 
@@ -249,25 +249,25 @@ This is a **right-aligned** paragraph.
 
     `admonition` 横幅的标题, 默认值是 **type** 参数的值.
 
-* **details** *[可选]* (**第三个**位置参数)
+* **open** *[可选]* (**第三个**位置参数) {{< version 0.2.0 changed >}}
 
-    横幅内容是否可展开/可折叠, 默认值是 `false`.
+    横幅内容是否默认展开, 默认值是 `true`.
 
 一个 `admonition` 示例:
 
 ```markdown
-{{</* admonition type=tip title="This is a tip" details=true */>}}
+{{</* admonition type=tip title="This is a tip" open=false */>}}
 一个 **技巧** 横幅
 {{</* /admonition */>}}
 或者
-{{</* admonition tip "This is a tip" true */>}}
+{{</* admonition tip "This is a tip" false */>}}
 一个 **技巧** 横幅
 {{</* /admonition */>}}
 ```
 
 呈现的输出效果如下:
 
-{{< admonition tip "This is a tip" true >}}
+{{< admonition tip "This is a tip" false >}}
 一个 **技巧** 横幅
 {{< /admonition >}}
 
@@ -933,27 +933,27 @@ data = [
 
 * **light-style** *[可选]* (**第五个**位置参数)
 
-    浅色主题的地图样式, 默认值是[前置参数](../theme-documentation-content/#front-matter)或者[网站配置](../theme-documentation-basics/#site-configuration)中设置的值.
+    浅色主题的地图样式, 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
 
 * **dark-style** *[可选]* (**第六个**位置参数)
 
-    深色主题的地图样式, 默认值是[前置参数](../theme-documentation-content/#front-matter)或者[网站配置](../theme-documentation-basics/#site-configuration)中设置的值.
+    深色主题的地图样式, 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
 
 * **navigation** *[可选]*
 
-    是否添加 [NavigationControl](https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol), 默认值是[前置参数](../theme-documentation-content/#front-matter)或者[网站配置](../theme-documentation-basics/#site-configuration)中设置的值.
+    是否添加 [NavigationControl](https://docs.mapbox.com/mapbox-gl-js/api#navigationcontrol), 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
 
 * **geolocate** *[可选]*
 
-    是否添加 [GeolocateControl](https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol), 默认值是[前置参数](../theme-documentation-content/#front-matter)或者[网站配置](../theme-documentation-basics/#site-configuration)中设置的值.
+    是否添加 [GeolocateControl](https://docs.mapbox.com/mapbox-gl-js/api#geolocatecontrol), 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
 
 * **scale** *[可选]*
 
-    是否添加 [ScaleControl](https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol), 默认值是[前置参数](../theme-documentation-content/#front-matter)或者[网站配置](../theme-documentation-basics/#site-configuration)中设置的值.
+    是否添加 [ScaleControl](https://docs.mapbox.com/mapbox-gl-js/api#scalecontrol), 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
 
 * **fullscreen** *[可选]*
 
-   是否添加 [FullscreenControl](https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol), 默认值是[前置参数](../theme-documentation-content/#front-matter)或者[网站配置](../theme-documentation-basics/#site-configuration)中设置的值.
+   是否添加 [FullscreenControl](https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol), 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
 
 * **width** *[可选]*
 

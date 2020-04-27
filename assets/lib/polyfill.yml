@@ -6,6 +6,14 @@ algoliasearch:
   - Promise
   - Object.entries
   - Object.assign
+TypeIt:
+  - Array.prototype.fill
+  - Array.prototype.find
+  - Array.from
+  - IntersectionObserver
+  - Math.sign
+  - Object.assign
+  - Promise
 theme:
   - Object.values
   - Promise

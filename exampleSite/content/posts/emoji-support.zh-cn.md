@@ -20,9 +20,9 @@ Emoji 可以通过多种方式在 Hugo 项目中启用.
 
 <!--more-->
 
-[`emojify`](https://gohugo.io/functions/emojify/) 方法可以直接在模板中调用, 或者使用 [行内 Shortcodes](https://gohugo.io/templates/shortcode-templates/#inline-shortcodes).
+[`emojify`](https://gohugo.io/functions/emojify/) 方法可以直接在模板中调用, 或者使用[行内 Shortcodes](https://gohugo.io/templates/shortcode-templates#inline-shortcodes).
 
-要全局使用 emoji, 需要在你的网站 [配置](https://gohugo.io/getting-started/configuration/) 中设置 `enableEmoji` 为 `true`,
+要全局使用 emoji, 需要在你的[网站配置](https://gohugo.io/getting-started/configuration/)中设置 `enableEmoji` 为 `true`,
 然后你就可以直接在文章中输入 emoji 的代码.
 
 它们以**冒号**开头和结尾，并且包含 emoji 的 **代码**:
@@ -38,6 +38,12 @@ Emoji 可以通过多种方式在 Hugo 项目中启用.
 去露营啦! :tent: 很快就回来.
 
 真开心! :joy:
+
+{{< admonition tip "使用 Twemoji" >}}
+这个页面使用了 `twemoji` 来使 emoji 具有一致的美观性.
+
+请在文章的[前置参数](../theme-documentation-content#front-matter) 或 [网站配置](../theme-documentation-basics#site-configuration) 的 `params.page` 部分中将 `twemoji` 设置为 `true` 来使用 :(far fa-grin-tongue-wink fa-fw): Twemoji.
+{{< /admonition >}}
 
 ## Emoji 符号清单
 

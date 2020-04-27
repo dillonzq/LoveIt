@@ -56,7 +56,7 @@
           padding: .4rem;
           color: $global-font-secondary-color;
 
-          .dark & {
+          [theme=dark] & {
             color: $global-font-secondary-color-dark;
           }
         }

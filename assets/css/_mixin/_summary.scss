@@ -5,7 +5,7 @@
     color: $global-font-color;
     border-bottom: 1px dashed $global-border-color;
 
-    .dark & {
+    [theme=dark] & {
       color: $global-font-color-dark;
       border-bottom: 1px dashed $global-border-color-dark;
     }
@@ -47,7 +47,7 @@
       overflow-wrap: break-word;
       color: $global-font-secondary-color;
 
-      .dark & {
+      [theme=dark] & {
         color: $global-font-secondary-color-dark;
       }
 
@@ -78,7 +78,7 @@
           margin-right: .3125rem;
           color: $global-link-color;
 
-          .dark & {
+          [theme=dark] & {
             color: $global-link-color-dark;
           }
         }
@@ -95,7 +95,7 @@
       @include link(true, true);
 
       b, strong {
-        .dark & {
+        [theme=dark] & {
           color: $global-font-secondary-color-dark;
         }
       }

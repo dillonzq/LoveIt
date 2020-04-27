@@ -31,6 +31,8 @@
         {{- /* Valine Comment System */ -}}
         {{- if $comment.valine.enable -}}
             <div id="valine" class="comment"></div>
+            {{- $options := dict "targetPath" "lib/valine/valine.min.css" -}}
+            {{- dict "source" "lib/valine/valine.scss" "toCSS" $options | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
             {{- $source := $cdn.valineJS | default "lib/valine/Valine.min.js" -}}
             {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
             {{- $commentConfig = dict "el" "#valine" "appId" $comment.valine.appId "appKey" $comment.valine.appKey "lang" ($comment.valine.lang | default (T "valineLang")) "visitor" $comment.valine.visitor "recordIP" $comment.valine.recordIP "placeholder" ($comment.valine.placeholder | default (T "valinePlaceholder")) | dict "valine" | merge $commentConfig -}}

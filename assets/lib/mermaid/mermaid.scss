@@ -9,7 +9,7 @@
 
   @import "themes/neutral/index";
 
-  .dark & {
+  [theme=dark] & {
     @import "themes/dark/index";
   }
 }

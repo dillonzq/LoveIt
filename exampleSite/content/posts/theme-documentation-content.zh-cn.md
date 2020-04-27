@@ -38,7 +38,7 @@ math:
 
 {{< admonition >}}
 **不是所有**的以下前置参数都必须在你的每篇文章中设置.
-只有在文章的参数和你的 [网站设置](../theme-documentation-basics/#site-configuration) 中的 `page` 部分不一致时才有必要这么做.
+只有在文章的参数和你的 [网站设置](../theme-documentation-basics#site-configuration) 中的 `page` 部分不一致时才有必要这么做.
 {{< /admonition >}}
 
 这是一个前置参数例子:
@@ -92,7 +92,7 @@ comment:
 
 * **title**: 文章标题.
 * **subtitle**: {{< version 0.2.0 >}} 文章副标题.
-* **date**: 这篇文章创建的日期时间. 它通常是从文章的前置参数中的 `date` 字段获取的, 但是也可以在 [网站配置](../theme-documentation-basics/#site-configuration) 中设置.
+* **date**: 这篇文章创建的日期时间. 它通常是从文章的前置参数中的 `date` 字段获取的, 但是也可以在 [网站配置](../theme-documentation-basics#site-configuration) 中设置.
 * **lastmod**: 上次修改内容的日期时间.
 * **draft**: 如果设为 `true`, 除非 `hugo` 命令使用了 `--buildDrafts`/`-D` 参数, 这篇文章不会被渲染.
 * **author**: 文章作者.
@@ -114,12 +114,12 @@ comment:
 * **fontawesome**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章会使用 [Font Awesome 扩展语法](#fontawesome).
 * **linkToMarkdown**: 如果设为 `true`, 内容的页脚将显示指向原始 Markdown 文件的链接.
 
-* **toc**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.page.toc` 部分相同.
-* **code**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.page.code` 部分相同.
-* **math**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.page.math` 部分相同.
-* **mapbox**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.page.mapbox` 部分相同.
-* **share**: 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.page.share` 部分相同.
-* **comment**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `params.page.comment` 部分相同.
+* **toc**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.toc` 部分相同.
+* **code**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.code` 部分相同.
+* **math**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.math` 部分相同.
+* **mapbox**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.mapbox` 部分相同.
+* **share**: 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.share` 部分相同.
+* **comment**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.comment` 部分相同.
 
 ## 3 内容摘要
 
@@ -131,9 +131,9 @@ comment:
 
 默认情况下, Hugo 自动将内容的前 70 个单词作为摘要.
 
-你可以通过在 [网站配置](../theme-documentation-basics/#site-configuration) 中设置 `summaryLength` 来自定义摘要长度.
+你可以通过在 [网站配置](../theme-documentation-basics#site-configuration) 中设置 `summaryLength` 来自定义摘要长度.
 
-如果您要使用 [CJK]^(中文/日语/韩语) 语言创建内容, 并且想使用 Hugo 的自动摘要拆分功能，请在 [网站配置](../theme-documentation-basics/#site-configuration) 中将 `hasCJKLanguage` 设置为 `true`.
+如果您要使用 [CJK]^(中文/日语/韩语) 语言创建内容, 并且想使用 Hugo 的自动摘要拆分功能，请在 [网站配置](../theme-documentation-basics#site-configuration) 中将 `hasCJKLanguage` 设置为 `true`.
 
 ### 手动摘要拆分
 
@@ -184,7 +184,7 @@ comment:
 
 **LoveIt** 基于 [$ \KaTeX $](https://katex.org/) 提供数学公式的支持.
 
-在你的 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `[params.math]` 下面设置属性 `enable = true`,
+在你的 [网站配置](../theme-documentation-basics#site-configuration) 中的 `[params.math]` 下面设置属性 `enable = true`,
 并在文章的前置参数中设置属性 `math: true`来启用数学公式的自动渲染.
 
 {{< admonition tip >}}
@@ -220,7 +220,7 @@ $ c = \pm\sqrt{a^2 + b^2} $ 和 \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^
 $ c = \pm\sqrt{a^2 + b^2} $ 和 \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\)
 
 {{< admonition tip >}}
-你可以在 [网站配置](../theme-documentation-basics/#site-configuration) 中自定义公式块和行内公式的分割符.
+你可以在 [网站配置](../theme-documentation-basics#site-configuration) 中自定义公式块和行内公式的分割符.
 {{< /admonition >}}
 
 #### Copy-tex
@@ -229,7 +229,7 @@ $ c = \pm\sqrt{a^2 + b^2} $ 和 \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^
 
 通过这个扩展, 在选择并复制 $ \KaTeX $ 渲染的公式时, 会将其 $ \LaTeX $ 源代码复制到剪贴板.
 
-在你的 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `[params.math]` 下面设置属性 `copyTex = true` 来启用 Copy-tex.
+在你的 [网站配置](../theme-documentation-basics#site-configuration) 中的 `[params.math]` 下面设置属性 `copyTex = true` 来启用 Copy-tex.
 
 选择并复制上一节中渲染的公式, 可以发现复制的内容为 LaTeX 源代码.
 
@@ -239,7 +239,7 @@ $ c = \pm\sqrt{a^2 + b^2} $ 和 \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^
 
 通过这个扩展, 你可以在文章中轻松编写漂亮的化学方程式.
 
-在你的 [网站配置](../theme-documentation-basics/#site-configuration) 中的 `[params.math]` 下面设置属性 `mhchem = true` 来启用 mhchem.
+在你的 [网站配置](../theme-documentation-basics#site-configuration) 中的 `[params.math]` 下面设置属性 `mhchem = true` 来启用 mhchem.
 
 ```markdown
 $$ \ce{CO2 + C -> 2 CO} $$

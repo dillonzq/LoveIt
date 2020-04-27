@@ -24,7 +24,7 @@ html {
 ::selection {
   background-color: $selection-color;
 
-  .dark & {
+  [theme=dark] & {
     background-color: $selection-color-dark;
   }
 }
@@ -35,7 +35,7 @@ body {
   overflow-wrap: break-word;
   scrollbar-color: auto;
 
-  &.dark {
+  &[theme=dark] {
     color: $global-font-color-dark;
     background-color: $global-background-color-dark;
   }

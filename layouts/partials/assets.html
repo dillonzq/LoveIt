@@ -122,7 +122,7 @@
 {{- if (.Scratch.Get "this").mermaid -}}
     {{- $source := $cdn.mermaidJS | default "lib/mermaid/mermaid.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
-    {{- $options := dict "targetPath" "lib/mermaid/mermaid.min.css" -}}
+    {{- $options := dict "targetPath" "lib/mermaid/mermaid.min.css" "enableSourceMap" true -}}
     {{- dict "source" "lib/mermaid/mermaid.scss" "toCSS" $options "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
 {{- end -}}
 
@@ -149,7 +149,7 @@
     {{- /* APlayer */ -}}
     {{- $source := $cdn.aplayerCSS | default "lib/aplayer/APlayer.min.css" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
-    {{- $options := dict "targetPath" "lib/aplayer/dark.min.css" -}}
+    {{- $options := dict "targetPath" "lib/aplayer/dark.min.css" "enableSourceMap" true -}}
     {{- dict "source" "lib/aplayer/dark.scss" "toCSS" $options "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
     {{- $source := $cdn.aplayerJS | default "lib/aplayer/APlayer.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
@@ -172,7 +172,7 @@
 </script>
 
 {{- /* Polyfill.io */ -}}
-{{- partial "plugin/script.html" (dict "source" "https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after") -}}
+{{- partial "plugin/script.html" (dict "source" "https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign") -}}
 
 {{- range (.Scratch.Get "this").script -}}
     {{- partial "plugin/script.html" . -}}

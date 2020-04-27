@@ -32,7 +32,7 @@
       color: $pagination-link-hover-color;
     }
 
-    .dark &:hover a {
+    [theme=dark] &:hover a {
       color: $pagination-link-hover-color-dark;
     }
 
@@ -47,8 +47,8 @@
       bottom: 0px;
     }
 
-    .dark &:before,
-    .dark &:after {
+    [theme=dark] &:before,
+    [theme=dark] &:after {
       background: $pagination-link-hover-color-dark;
     }
 
@@ -78,7 +78,7 @@
         color: $pagination-link-hover-color;
       }
 
-      .dark & a {
+      [theme=dark] & a {
         color: $pagination-link-hover-color-dark;
       }
 

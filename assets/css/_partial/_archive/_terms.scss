@@ -58,7 +58,7 @@
     background-color: transparent;
   }
 
-  .dark & {
+  [theme=dark] & {
     color: $global-link-color-dark;
 
     &:hover {
@@ -72,7 +72,7 @@
   text-align: right;
   color: $global-font-secondary-color;
 
-  .dark & {
+  [theme=dark] & {
     color: $global-font-secondary-color-dark;
   }
 }

@@ -9,7 +9,7 @@
             {{- $res = $res | resources.ExecuteAsTemplate . $.context -}}
         {{- end -}}
         {{- with .toCSS -}}
-            {{- $options := . | merge (dict "outputStyle" "compressed" "enableSourceMap" true) -}}
+            {{- $options := . | merge (dict "outputStyle" "compressed") -}}
             {{- $res = $res | toCSS $options -}}
         {{- end -}}
         {{- if .minify -}}
