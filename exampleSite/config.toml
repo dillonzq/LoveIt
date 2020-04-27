@@ -831,6 +831,9 @@ enableEmoji = true
         lang = ""
         visitor = true
         recordIP = true
+        highlight = true
+        enableQQ = false
+        serverURLs = ""
       # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
       # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]

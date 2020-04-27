@@ -488,6 +488,9 @@ hugo
         lang = "en"
         visitor = true
         recordIP = true
+        highlight = true
+        enableQQ = false
+        serverURLs = ""
       # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook 评论系统" >}}设置
       [params.page.comment.facebook]
         enable = false

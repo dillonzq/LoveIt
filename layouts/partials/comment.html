@@ -1,6 +1,6 @@
 {{- $cdn := .Scratch.Get "cdn" | default dict -}}
 {{- $fingerprint := .Scratch.Get "fingerprint" -}}
-{{- $comment := .Scratch.Get "comment" | default dict -}}
+{{- $comment := .Scratch.Get "comment" | default (dict "disqus" dict "gitalk" dict "valine" dict "facebook" dict "telegram" dict "commento" dict) -}}
 {{- $commentConfig := dict -}}
 
 {{- if $comment.enable -}}
@@ -17,12 +17,13 @@
 
         {{- /* Gitalk Comment System */ -}}
         {{- if $comment.gitalk.enable -}}
+            {{- $gitalk := $comment.gitalk -}}
             <div id="gitalk" class="comment"></div>
             {{- $source := $cdn.gitalkCSS | default "lib/gitalk/gitalk.css" -}}
             {{- dict "source" $source "minify" true "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
             {{- $source := $cdn.gitalkJS | default "lib/gitalk/gitalk.min.js" -}}
             {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
-            {{- $commentConfig = dict "id" .Date "title" .Title "clientID" $comment.gitalk.clientId "clientSecret" $comment.gitalk.clientSecret "repo" $comment.gitalk.repo "owner" $comment.gitalk.owner "admin" (slice $comment.gitalk.owner) | dict "gitalk" | merge $commentConfig -}}
+            {{- $commentConfig = dict "id" .Date "title" .Title "clientID" $gitalk.clientId "clientSecret" $gitalk.clientSecret "repo" $gitalk.repo "owner" $gitalk.owner "admin" (slice $gitalk.owner) | dict "gitalk" | merge $commentConfig -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript>
@@ -30,20 +31,24 @@
 
         {{- /* Valine Comment System */ -}}
         {{- if $comment.valine.enable -}}
+            {{- $valine := $comment.valine -}}
             <div id="valine" class="comment"></div>
             {{- $options := dict "targetPath" "lib/valine/valine.min.css" -}}
             {{- dict "source" "lib/valine/valine.scss" "toCSS" $options | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
             {{- $source := $cdn.valineJS | default "lib/valine/Valine.min.js" -}}
             {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
-            {{- $commentConfig = dict "el" "#valine" "appId" $comment.valine.appId "appKey" $comment.valine.appKey "lang" ($comment.valine.lang | default (T "valineLang")) "visitor" $comment.valine.visitor "recordIP" $comment.valine.recordIP "placeholder" ($comment.valine.placeholder | default (T "valinePlaceholder")) | dict "valine" | merge $commentConfig -}}
-            {{- with $comment.valine.avatar -}}
+            {{- $commentConfig = dict "el" "#valine" "appId" $valine.appId "appKey" $valine.appKey "lang" ($valine.lang | default (T "valineLang")) "visitor" $valine.visitor "recordIP" $valine.recordIP "placeholder" ($valine.placeholder | default (T "valinePlaceholder")) "highlight" (ne $valine.highlight false) "enableQQ" $valine.enableQQ | dict "valine" | merge $commentConfig -}}
+            {{- with $valine.avatar -}}
                 {{- $commentConfig = dict "avatar" . | dict "valine" | merge $commentConfig -}}
             {{- end -}}
-            {{- with $comment.valine.meta -}}
+            {{- with $valine.meta -}}
                 {{- $commentConfig = dict "meta" . | dict "valine" | merge $commentConfig -}}
             {{- end -}}
-            {{- with $comment.valine.pageSize -}}
+            {{- with $valine.pageSize -}}
                 {{- $commentConfig = dict "pageSize" . | dict "valine" | merge $commentConfig -}}
+            {{- end -}}
+            {{- with $valine.serverURLs -}}
+                {{- $commentConfig = dict "serverURLs" . | dict "valine" | merge $commentConfig -}}
             {{- end -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
@@ -52,14 +57,15 @@
 
         {{- /* Facebook Comment System */ -}}
         {{- if $comment.facebook.enable -}}
+            {{- $facebook := $comment.facebook -}}
             <div id="fb-root" class="comment"></div>
             <div
                 class="fb-comments"
                 data-href="{{ .Permalink }}"
-                data-width="{{ $comment.facebook.width }}"
-                data-numposts="{{ $comment.facebook.numPosts }}"
+                data-width="{{ $facebook.width }}"
+                data-numposts="{{ $facebook.numPosts }}"
             ></div>
-            {{- $source := printf "https://connect.facebook.net/%s/sdk.js#xfbml=1&version=v5.0&appId=%s&autoLogAppEvents=1" ($comment.facebook.languageCode | default (T "facebookLanguageCode")) $comment.facebook.appId -}}
+            {{- $source := printf "https://connect.facebook.net/%s/sdk.js#xfbml=1&version=v5.0&appId=%s&autoLogAppEvents=1" ($facebook.languageCode | default (T "facebookLanguageCode")) $facebook.appId -}}
             {{- dict "source" $source "defer" true | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/"></a>Facebook</a>.
@@ -68,22 +74,23 @@
 
         {{- /* Telegram Comments System */ -}}
         {{- if $comment.telegram.enable -}}
+            {{- $telegram := $comment.telegram -}}
             <div id="telegram-comments" class="comment"></div>
-            {{- $attr := printf `data-comments-app-website="%s"` $comment.telegram.siteID -}}
-            {{- $attr = printf `%s data-limit="%s"` $attr ($comment.telegram.limit | default 5) -}}
-            {{- with $comment.telegram.height -}}
+            {{- $attr := printf `data-comments-app-website="%s"` $telegram.siteID -}}
+            {{- $attr = printf `%s data-limit="%s"` $attr ($telegram.limit | default 5) -}}
+            {{- with $telegram.height -}}
                 {{- $attr = printf `%s data-height="%s"` $attr . -}}
             {{- end -}}
-            {{- with $comment.telegram.color -}}
+            {{- with $telegram.color -}}
                 {{- $attr = printf `%s data-color="%s"` $attr . -}}
             {{- end -}}
-            {{- if $comment.telegram.colorful -}}
+            {{- if $telegram.colorful -}}
                 {{- $attr = printf `%s data-colorful="1"` $attr -}}
             {{- end -}}
-            {{- if $comment.telegram.dislikes -}}
+            {{- if $telegram.dislikes -}}
                 {{- $attr = printf `%s data-dislikes="1"` $attr -}}
             {{- end -}}
-            {{- if $comment.telegram.outlined -}}
+            {{- if $telegram.outlined -}}
                 {{- $attr = printf `%s data-outlined="1"` $attr -}}
             {{- end -}}
             {{- dict "source" "https://comments.app/js/widget.js?2" "defer" true "attr" $attr | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
