@@ -7,11 +7,12 @@
             <div class="post-info-mod">
                 <span>
                     {{- printf (T "lastMod") $modify_date -}}
-                    {{- with .GitInfo -}}
-                        {{- $gitHash := .Hash -}}
-                        &nbsp;<a class="git-hash" {{ with $.Site.Params.gitRepo }}href="{{ printf `%s/commit/%s` . $gitHash }}" target="_blank"{{ else }}href="javascript:void(0);"{{ end }} title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ $gitHash }}: {{ .Subject }}">
-                            <i class="fas fa-hashtag fa-fw"></i>{{- .AbbreviatedHash -}}
-                        </a>
+                    {{- if .Site.Params.gitRepo -}}
+                        {{- with .GitInfo -}}
+                            &nbsp;<a class="git-hash" href="{{ printf `%s/commit/%s` $.Site.Params.gitRepo .Hash }}" target="_blank" title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ .Hash }}: {{ .Subject }}">
+                                <i class="fas fa-hashtag fa-fw"></i>{{- .AbbreviatedHash -}}
+                            </a>
+                        {{- end -}}
                     {{- end -}}
                 </span>
             </div>
