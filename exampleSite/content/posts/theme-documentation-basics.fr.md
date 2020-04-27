@@ -490,6 +490,9 @@ Please open the code block below to view the complete sample configuration :(far
         lang = ""
         visitor = true
         recordIP = true
+        highlight = true
+        enableQQ = false
+        serverURLs = ""
       # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook comment" >}} config
       [params.page.comment.facebook]
         enable = false
