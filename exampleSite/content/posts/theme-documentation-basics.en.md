@@ -29,7 +29,7 @@ Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only depende
 Just install latest version of [:(far fa-file-archive fa-fw): Hugo extended (> 0.62.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
 
 {{< admonition note "Why not support earlier versions of Hugo?" >}}
-Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup/#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/), this theme only supports Hugo versions above **0.62.0**.
+Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/), this theme only supports Hugo versions above **0.62.0**.
 {{< /admonition >}}
 
 {{< admonition note "Why need the Hugo extended version?" >}}
@@ -181,9 +181,7 @@ Alternatively, you can use [AWS Amplify](https://gohugo.io/hosting-and-deploymen
 
 In addition to [Hugo global configuration](https://gohugo.io/overview/configuration/) and [menu configuration](#basic-configuration), **LoveIt** lets you define the following parameters in your site configuration (here is a `config.toml`, whose values are default).
 
-{{< admonition >}}
-Note that some of these parameters are explained in details in other sections of this documentation.
-{{< /admonition >}}
+Please open the code block below to view the complete sample configuration :(far fa-hand-point-down fa-fw)::
 
 ```toml
 [params]
@@ -420,44 +418,44 @@ Note that some of these parameters are explained in details in other sections of
       lightStyle = "mapbox://styles/mapbox/light-v9"
       # style for the dark theme
       darkStyle = "mapbox://styles/mapbox/dark-v9"
-      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol" NavigationControl >}}
+      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#navigationcontrol" NavigationControl >}}
       navigation = true
-      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol" GeolocateControl >}}
+      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#geolocatecontrol" GeolocateControl >}}
       geolocate = true
-      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol" ScaleControl >}}
+      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#scalecontrol" ScaleControl >}}
       scale = true
-      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol" FullscreenControl >}}
+      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol" FullscreenControl >}}
       fullscreen = true
     # {{< version 0.2.0 changed >}} social share links in post page
     [params.page.share]
       enable = true
       Twitter = true
       Facebook = true
-      Linkedin = true
+      Linkedin = false
       Whatsapp = true
-      Pinterest = true
-      # Tumblr = true
-      HackerNews = true
-      # Reddit = true
-      # VK = true
-      # Buffer = true
-      # Xing = true
-      # Line = true
-      # Instapaper = true
-      # Pocket = true
-      # Digg = true
-      # Stumbleupon = true
-      # Flipboard = true
-      # Weibo = true
-      # Renren = true
-      # Myspace = true
-      # Blogger = true
-      # Baidu = true
-      # Odnoklassniki = true
-      # Evernote = true
-      # Skype = true
-      # Trello = true
-      # Mix = true
+      Pinterest = false
+      Tumblr = false
+      HackerNews = false
+      Reddit = false
+      VK = false
+      Buffer = false
+      Xing = false
+      Line = true
+      Instapaper = false
+      Pocket = false
+      Digg = false
+      Stumbleupon = false
+      Flipboard = false
+      Weibo = true
+      Renren = false
+      Myspace = true
+      Blogger = true
+      Baidu = false
+      Odnoklassniki = false
+      Evernote = true
+      Skype = false
+      Trello = false
+      Mix = false
     # {{< version 0.2.0 changed >}} Comment config
     [params.page.comment]
       enable = true
@@ -652,7 +650,7 @@ Note that some of these parameters are explained in details in other sections of
   filename = "sitemap.xml"
   priority = 0.5
 
-# {{< link "https://gohugo.io/content-management/urls/#permalinks" "Permalinks config" >}}
+# {{< link "https://gohugo.io/content-management/urls#permalinks" "Permalinks config" >}}
 [Permalinks]
   # posts = ":year/:month/:filename"
   posts = ":filename"
@@ -687,6 +685,19 @@ Note that some of these parameters are explained in details in other sections of
   taxonomy = ["HTML", "RSS"]
   taxonomyTerm = ["HTML"]
 ```
+
+{{< admonition >}}
+Note that some of these parameters are explained in details in other sections of this documentation.
+{{< /admonition >}}
+
+{{< admonition note "Hugo environments" >}}
+Default environments are `development` with `hugo serve` and `production` with `hugo`.
+
+Due to limitations in the local `development` environment,
+the **comment system**, **CDN** and **fingerprint** will not be enabled in the `development` environment.
+
+You could enable these features with `hugo serve -e production`.
+{{< /admonition >}}
 
 {{< admonition tip "Tips about CDN Configuration" >}}
 Full HTML tags or URLs are supported for CDN configuration:
@@ -903,7 +914,7 @@ Be aware that only translated pages are displayed in menu. It’s not replaced w
 {{< /admonition >}}
 
 {{< admonition tip >}}
-Use [Front Matter parameter](https://gohugo.io/content-management/multilingual/#translate-your-content) to translate urls too.
+Use [Front Matter parameter](https://gohugo.io/content-management/multilingual#translate-your-content) to translate urls too.
 {{< /admonition >}}
 
 ### 4.3 Overwrite Translation Strings
@@ -949,6 +960,8 @@ Here is the search configuration in your [site configuration](#site-configuratio
 ```
 
 {{< admonition note "How to choose the type of search engine?" >}}
+The following is a comparison of two search engines:
+
 * `lunr`: simple, no need to synchronize `index.json`, no limit for `contentLength`,
   but high bandwidth and low performance (Especially for Chinese which needs a large segmentit library)
 * `algolia`: high performance and low bandwidth, but need to synchronize `index.json` and limit for `contentLength`

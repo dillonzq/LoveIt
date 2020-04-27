@@ -24,7 +24,7 @@
       display: inline-block;
     }
 
-    .dark & {
+    [theme=dark] & {
       color: $global-font-secondary-color-dark;
     }
 
@@ -88,7 +88,7 @@
       font-weight: bold;
       margin: 1.2rem 0;
 
-      .dark & {
+      [theme=dark] & {
         font-weight: bolder;
       }
     }
@@ -103,7 +103,7 @@
         margin-right: .3125rem;
         color: $single-link-color;
 
-        .dark & {
+        [theme=dark] & {
           color: $single-link-color-dark;
         }
       }
@@ -120,7 +120,7 @@
     b, strong {
       font-weight: bold;
 
-      .dark & {
+      [theme=dark] & {
         color: #ddd;
       }
     }
@@ -131,18 +131,21 @@
       word-break: break-all;
       word-break: break-word;
 
-      .dark & b, .dark & strong {
+      [theme=dark] & b, [theme=dark] & strong {
         color: $single-link-color-dark;
       }
     }
 
-    .dark a:hover b, .dark a:hover strong {
+    [theme=dark] a:hover b, [theme=dark] a:hover strong {
       color: $single-link-hover-color-dark;
     }
 
-    ul {
+    ul, ol {
       margin: .5rem 0;
-      padding-left: 2rem;
+      padding-left: 2.5rem;
+    }
+
+    ul {
       list-style-type: disc;
     }
 
@@ -153,7 +156,7 @@
         color: $global-font-secondary-color;
       }
 
-      .dark & {
+      [theme=dark] & {
         background: $code-background-color-dark;
 
         rt {
@@ -168,7 +171,7 @@
       &::-webkit-scrollbar {
         background-color: $table-background-color;
 
-        .dark & {
+        [theme=dark] & {
           background-color: $table-background-color-dark;
         }
       }
@@ -181,14 +184,14 @@
         background: $table-background-color;
         border-collapse: collapse;
 
-        .dark & {
+        [theme=dark] & {
           background: $table-background-color-dark;
         }
 
         thead {
           background: $table-thead-color;
 
-          .dark & {
+          [theme=dark] & {
             background-color: $table-thead-color-dark;
           }
         }
@@ -197,7 +200,7 @@
           padding: .3rem 1rem;
           border: 1px solid darken($table-thead-color, 2%);
 
-          .dark & {
+          [theme=dark] & {
             border-color: darken($table-thead-color-dark, 2%);
           }
         }
@@ -241,7 +244,7 @@
       padding: .25rem .75rem;
       margin: 1rem 0;
 
-      .dark & {
+      [theme=dark] & {
         border-left-color: $blockquote-color-dark;
         background-color: rgba($blockquote-color-dark, .2);
       }
@@ -250,7 +253,7 @@
     .footnotes {
       color: $global-font-secondary-color;
 
-      .dark & {
+      [theme=dark] & {
         color: $global-font-secondary-color-dark;
       }
 
@@ -273,7 +276,7 @@
       border-top: 1px dashed $global-border-color;
       border-bottom: none;
 
-      .dark & {
+      [theme=dark] & {
         border-top: 1px dashed $global-border-color-dark;
       }
     }
@@ -290,7 +293,7 @@
       font-family: $code-font-family;
       color: $code-color;
 
-      .dark & {
+      [theme=dark] & {
         background-color: $global-background-color-dark;
         border: 1px solid $global-border-color-dark;
         border-bottom-color: $global-border-color-dark;
@@ -311,6 +314,7 @@
 
     .version {
       height: 1.25em;
+      vertical-align: text-bottom;
     }
   }
 

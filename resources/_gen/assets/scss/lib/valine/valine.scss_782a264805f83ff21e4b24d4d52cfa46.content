@@ -1,0 +1,1 @@
+.v[data-class=v] .vwrap,.v[data-class=v] .vwrap .vheader .vinput,.v[data-class=v] .vcards .vcard .vh{border-color:#f0f0f0}[theme=dark] .v[data-class=v] .vwrap,[theme=dark] .v[data-class=v] .vwrap .vheader .vinput,[theme=dark] .v[data-class=v] .vcards .vcard .vh{border-color:#363636}

@@ -17,9 +17,9 @@ math:
 [![GitHub forks](https://img.shields.io/github/forks/dillonzq/LoveIt?style=social)](https://github.com/dillonzq/LoveIt/fork)
 {{< /style >}}
 
-[:(far fa-kiss-wink-heart fa-fw): LoveIt](https://github.com/dillonzq/LoveIt) is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/) developed by [Dillon](https://dillonzq.com).
-
-It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) and [KeepIt Theme](https://github.com/liuzc/LeaveIt/).
+> [:(far fa-kiss-wink-heart fa-fw): LoveIt](https://github.com/dillonzq/LoveIt) is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/) developed by [Dillon](https://dillonzq.com).
+>
+> It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt) and [KeepIt Theme](https://github.com/liuzc/LeaveIt).
 
 ![Hugo Theme LoveIt](/images/Apple-Devices-Preview.png "Hugo Theme LoveIt")
 

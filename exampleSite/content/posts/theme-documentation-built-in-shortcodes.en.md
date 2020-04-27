@@ -30,7 +30,7 @@ Hugo ships with a set of predefined shortcodes that represent very common usage.
 
 ## figure {#figure}
 
-[Documentation of `figure`](https://gohugo.io/content-management/shortcodes/#figure)
+[Documentation of `figure`](https://gohugo.io/content-management/shortcodes#figure)
 
 Example `figure` input:
 
@@ -55,7 +55,7 @@ The HTML looks like this:
 
 ## gist
 
-[Documentation of `gist`](https://gohugo.io/content-management/shortcodes/#gist)
+[Documentation of `gist`](https://gohugo.io/content-management/shortcodes#gist)
 
 Example `gist` input:
 
@@ -75,7 +75,7 @@ The HTML looks like this:
 
 ## highlight
 
-[Documentation of `highlight`](https://gohugo.io/content-management/shortcodes/#instagram)
+[Documentation of `highlight`](https://gohugo.io/content-management/shortcodes#instagram)
 
 Example `highlight` input:
 
@@ -107,7 +107,7 @@ The rendered output looks like this:
 
 ## instagram
 
-[Documentation of `instagram`](https://gohugo.io/content-management/shortcodes/#instagram)
+[Documentation of `instagram`](https://gohugo.io/content-management/shortcodes#instagram)
 
 Example `instagram` input:
 
@@ -121,7 +121,7 @@ The rendered output looks like this:
 
 ## param
 
-[Documentation of `param`](https://gohugo.io/content-management/shortcodes/#param)
+[Documentation of `param`](https://gohugo.io/content-management/shortcodes#param)
 
 Example `param` input:
 
@@ -135,11 +135,11 @@ The rendered output looks like this:
 
 ## ref and relref {#ref-and-relref}
 
-[Documentation of `ref` and `relref`](https://gohugo.io/content-management/shortcodes/#ref-and-relref)
+[Documentation of `ref` and `relref`](https://gohugo.io/content-management/shortcodes#ref-and-relref)
 
 ## tweet
 
-[Documentation of `tweet`](https://gohugo.io/content-management/shortcodes/#tweet)
+[Documentation of `tweet`](https://gohugo.io/content-management/shortcodes#tweet)
 
 Example `tweet` input:
 
@@ -153,7 +153,7 @@ The rendered output looks like this:
 
 ## vimeo
 
-[Documentation of `vimeo`](https://gohugo.io/content-management/shortcodes/#vimeo)
+[Documentation of `vimeo`](https://gohugo.io/content-management/shortcodes#vimeo)
 
 Example `vimeo` input:
 
@@ -167,7 +167,7 @@ The rendered output looks like this:
 
 ## youtube
 
-[Documentation of `youtube`](https://gohugo.io/content-management/shortcodes/#youtube)
+[Documentation of `youtube`](https://gohugo.io/content-management/shortcodes#youtube)
 
 Example `youtube` input:
 

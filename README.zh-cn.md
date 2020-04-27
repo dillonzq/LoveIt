@@ -9,7 +9,7 @@
 
 > [LoveIt](https://github.com/dillonzq/LoveIt) 是一个**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 
-它的原型基于 [LeaveIt 主题](https://github.com/liuzc/LeaveIt/) 和 [KeepIt 主题](https://github.com/liuzc/LeaveIt/)。
+它的原型基于 [LeaveIt 主题](https://github.com/liuzc/LeaveIt) 和 [KeepIt 主题](https://github.com/liuzc/LeaveIt)。
 
 由于三个主题外观的相似性，如果你对于它们的不同之处有疑问，请阅读 [为什么选择 LoveIt](#为什么选择-LoveIt)，以便你能选择最适合你的一个。
 

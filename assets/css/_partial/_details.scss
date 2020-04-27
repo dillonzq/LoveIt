@@ -9,7 +9,7 @@
     color: $global-font-secondary-color;
     @include transition(transform 0.2s ease);
 
-    .dark & {
+    [theme=dark] & {
       color: $global-font-secondary-color-dark;
     }
   }
@@ -17,17 +17,17 @@
   .details-content {
     max-height: 0;
     overflow-y: hidden;
-    @include transition(max-height 0.8s cubic-bezier(0, 1, 0, 1) -0.1s);
+    @include details-transition-open;
   }
 
   &.open {
     i.details-icon {
-      @include transform(rotate(180deg));
+      @include transform(rotate(90deg));
     }
 
     .details-content {
       max-height: $MAX_LENGTH;
-      @include transition(max-height 0.8s cubic-bezier(0.5, 0, 1, 0) 0s);
+      @include details-transition-close;
     }
   }
 }

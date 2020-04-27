@@ -38,7 +38,7 @@ A few suggestions to help you get a good looking site quickly:
 
 {{< admonition >}}
 **Not all** of the below front matters need to be set in each of your posts.
-It is necessary only if the front matters and the `page` part in your [site configuration](../theme-documentation-basics/#site-configuration) are inconsistent.
+It is necessary only if the front matters and the `page` part in your [site configuration](../theme-documentation-basics#site-configuration) are inconsistent.
 {{< /admonition >}}
 
 Here is a front matter example:
@@ -92,7 +92,7 @@ comment:
 
 * **title**: the title for the content.
 * **subtitle**: {{< version 0.2.0 >}} the subtitle for the content.
-* **date**: the datetime assigned to this page, which is usually fetched from the `date` field in front matter, but this behaviour is configurabl in the [site configuration](../theme-documentation-basics/#site-configuration).
+* **date**: the datetime assigned to this page, which is usually fetched from the `date` field in front matter, but this behaviour is configurabl in the [site configuration](../theme-documentation-basics#site-configuration).
 * **lastmod**: the datetime at which the content was last modified.
 * **draft**: if `true`, the content will not be rendered unless the `--buildDrafts`/`-D` flag is passed to the `hugo` command.
 * **author**: the author for the content.
@@ -114,12 +114,12 @@ comment:
 * **fontawesome**: {{< version 0.2.0 >}} if `true`, the content will enable the [Font Awesome extended syntax](#fontawesome).
 * **linkToMarkdown**: if `true`, the footer of the content will show the link to the orignal Markdown file.
 
-* **toc**: {{< version 0.2.0 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics/#site-configuration).
-* **code**: {{< version 0.2.0 >}} the same as the `params.page.code` part in the [site configuration](../theme-documentation-basics/#site-configuration).
-* **math**: {{< version 0.2.0 changed >}} the same as the `params.page.math` part in the [site configuration](../theme-documentation-basics/#site-configuration).
-* **mapbox**: {{< version 0.2.0 >}} the same as the `params.page.mapbox` part in the [site configuration](../theme-documentation-basics/#site-configuration).
-* **share**: the same as the `params.page.share` part in the [site configuration](../theme-documentation-basics/#site-configuration).
-* **comment**: {{< version 0.2.0 changed >}} the same as the `params.page.comment` part in the [site configuration](../theme-documentation-basics/#site-configuration).
+* **toc**: {{< version 0.2.0 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **code**: {{< version 0.2.0 >}} the same as the `params.page.code` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **math**: {{< version 0.2.0 changed >}} the same as the `params.page.math` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **mapbox**: {{< version 0.2.0 >}} the same as the `params.page.mapbox` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **share**: the same as the `params.page.share` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **comment**: {{< version 0.2.0 changed >}} the same as the `params.page.comment` part in the [site configuration](../theme-documentation-basics#site-configuration).
 
 ## 3 Content Summaries
 
@@ -131,9 +131,9 @@ comment:
 
 By default, Hugo automatically takes the first 70 words of your content as its summary.
 
-You may customize the summary length by setting `summaryLength` in the [site configuration](../theme-documentation-basics/#site-configuration).
+You may customize the summary length by setting `summaryLength` in the [site configuration](../theme-documentation-basics#site-configuration).
 
-If you are creating content in a [CJK]^(Chinese/Japanese/Korean) language and want to use Hugo’s automatic summary splitting, set `hasCJKLanguage` to `true` in your [site configuration](../theme-documentation-basics/#site-configuration).
+If you are creating content in a [CJK]^(Chinese/Japanese/Korean) language and want to use Hugo’s automatic summary splitting, set `hasCJKLanguage` to `true` in your [site configuration](../theme-documentation-basics#site-configuration).
 
 ### Manual Summary Splitting
 
@@ -184,7 +184,7 @@ This part is shown in the [emoji support page](../emoji-support/).
 
 **LoveIt** theme supports mathematical formulas based on [$ \KaTeX $](https://katex.org/).
 
-Set the property `enable = true` under `[params.math]` in your [site configuration](../theme-documentation-basics/#site-configuration)
+Set the property `enable = true` under `[params.math]` in your [site configuration](../theme-documentation-basics#site-configuration)
 and the property `math: true` of the article front matter to enable the automatic rendering of mathematical formulas.
 
 {{< admonition tip >}}
@@ -220,7 +220,7 @@ The rendered output looks like this:
 $ c = \pm\sqrt{a^2 + b^2} $ and \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\)
 
 {{< admonition tip >}}
-You can add more block and inline delimiters in your [site configuration](../theme-documentation-basics/#site-configuration).
+You can add more block and inline delimiters in your [site configuration](../theme-documentation-basics#site-configuration).
 {{< /admonition >}}
 
 #### Copy-tex
@@ -229,7 +229,7 @@ You can add more block and inline delimiters in your [site configuration](../the
 
 By the extension, when selecting and copying $ \KaTeX $ rendered elements, copies their $ \LaTeX $ source to the clipboard.
 
-Set the property `copyTex = true` under `[params.math]` in your [site configuration](../theme-documentation-basics/#site-configuration) to enable Copy-tex.
+Set the property `copyTex = true` under `[params.math]` in your [site configuration](../theme-documentation-basics#site-configuration) to enable Copy-tex.
 
 Select and copy the formula rendered in the previous section, and you can find that the copied content is the LaTeX source code.
 
@@ -239,7 +239,7 @@ Select and copy the formula rendered in the previous section, and you can find t
 
 By the extension, you can write beautiful chemical equations easily in the article.
 
-Set the property `mhchem = true` under `[params.math]` in your [site configuration](../theme-documentation-basics/#site-configuration) to enable mhchem.
+Set the property `mhchem = true` under `[params.math]` in your [site configuration](../theme-documentation-basics#site-configuration) to enable mhchem.
 
 ```markdown
 $$ \ce{CO2 + C -> 2 CO} $$
