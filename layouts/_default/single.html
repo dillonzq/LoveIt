@@ -1,15 +1,21 @@
 {{- define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end -}}
 
 {{- define "content" -}}
+    {{- $params := .Scratch.Get "params" -}}
     <div class="page single special">
         {{- /* Title */ -}}
         <h1 class="single-title animated pulse faster">
             {{- .Title -}}
         </h1>
 
+        {{- /* Subtitle */ -}}
+        {{- with $params.subtitle -}}
+            <h2 class="single-subtitle">{{ . }}</h2>
+        {{- end -}}
+
         {{- /* Content */ -}}
         <div class="content" id="content">
-            {{- partial "single/content.html" .Content -}}
+            {{- dict "content" .Content "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
         </div>
     </div>
 {{- end -}}

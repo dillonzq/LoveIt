@@ -1,36 +1,26 @@
 .tag-cloud-tags {
   margin: 10px 0;
 
+  @include link(true, true);
+
   a {
     display: inline-block;
     position: relative;
     margin: 5px 10px;
     overflow-wrap: break-word;
-    -webkit-transition: all ease-out .3s;
-    -moz-transition: all ease-out .3s;
-    -o-transition: all ease-out .3s;
-    transition: all ease-out .3s;
+    @include transition(all ease-out 0.3s);
 
     &:active,
     &:focus,
     &:hover {
-      color: $global-link-hover-color;
-      -webkit-transform: scale(1.2);
-      -moz-transform: scale(1.2);
-      -ms-transform: scale(1.2);
-      -o-transform: scale(1.2);
-      transform: scale(1.2);
-
-      .dark-theme & {
-        color: $global-link-hover-color-dark;
-      }
+      @include transform(scale(1.2));
     }
 
-    small {
+    sup {
       color: $global-font-secondary-color;
 
-      .dark-theme & {
-        color: $global-link-hover-color-dark;
+      .dark & {
+        color: $global-font-secondary-color-dark;
       }
     }
   }

@@ -1,3 +1,8 @@
 {{- $content := .Inner | .Page.RenderString -}}
+{{- $id := partial "function/id.html" (dict "content" $content) -}}
 {{- $tag := .Get 1 | default "div" -}}
-{{- printf `<%s style="%s">%s</%s>` $tag ($.Get 0) $content $tag | safeHTML -}}
+{{- $style := .Get 0 | printf "#%s{%s}" $id -}}
+{{- $res := resources.FromString "css/shortcode/style.scss" $style -}}
+{{- $res = $res | toCSS (dict "targetPath" "css/shortcode/style.css" "outputStyle" "compressed") -}}
+{{- printf `<%s id="%s">%s</%s>` $tag $id $content $tag | safeHTML -}}
+<style>{{ $res.Content | safeCSS }}</style>

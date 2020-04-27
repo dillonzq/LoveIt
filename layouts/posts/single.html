@@ -1,41 +1,57 @@
 {{- define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end -}}
 
 {{- define "content" -}}
-    {{- $scratch := .Scratch.Get "scratch" -}}
+    {{- $params := .Scratch.Get "params" -}}
+
+    {{- /* Auto TOC */ -}}
+    {{- if ne $params.toc.enable false -}}
+        <div class="toc" id="toc-auto">
+            <h2 class="toc-title">{{ T "contents" }}</h2>
+            <div class="toc-content{{ if eq $params.toc.auto false }} always-active{{ end }}" id="toc-content-auto"></div>
+        </div>
+    {{- end -}}
+
     <article class="page single">
         {{- /* Title */ -}}
         <h1 class="single-title animated flipInX">{{ .Title }}</h1>
 
+        {{- /* Subtitle */ -}}
+        {{- with $params.subtitle -}}
+            <h2 class="single-subtitle">{{ . }}</h2>
+        {{- end -}}
+
         {{- /* Meta */ -}}
         <div class="post-meta">
             <div class="post-meta-line">
-                {{- $author := .Params.author | default .Site.Author.name | default (T "author") -}}
-                {{- $authorLink := .Params.authorLink | default .Site.Author.link | default (relLangURL "/") -}}
+                {{- $author := $params.author | default .Site.Author.name | default (T "author") -}}
+                {{- $authorLink := $params.authorlink | default .Site.Author.link | default .Site.Home.RelPermalink -}}
                 <span class="post-author">
-                    {{- $link := dict "class" "author" "href" $authorLink "title" "Author" "rel" "author" "icon" (dict "class" "fas fa-user-circle fa-fw") "content" $author -}}
-                    {{- partial "plugin/link.html" $link -}}
+                    {{- $options := dict "class" "author" "href" $authorLink "title" "Author" "rel" "author" "icon" (dict "class" "fas fa-user-circle fa-fw") "content" $author -}}
+                    {{- partial "plugin/link.html" $options -}}
                 </span>
 
-                {{- with .Params.categories -}}
+                {{- with $params.categories -}}
                     &nbsp;
                     <span class="post-category">
                         {{- T "included" -}}
                         {{- range $index, $value := . -}}
                             {{- if gt $index 0 }}&nbsp;{{ end -}}
-                            <a href="{{ `/categories/` | relLangURL }}{{ urlize $value }}">
-                                <i class="far fa-folder fa-fw"></i>{{ $value | humanize }}
+                            {{- $category := $value | anchorize | printf "/categories/%s" | $.Site.GetPage -}}
+                            <a href="{{ $category.RelPermalink }}">
+                                <i class="far fa-folder fa-fw"></i>{{ $category.Title }}
                             </a>
                         {{- end -}}
                     </span>
                 {{- end -}}
             </div>
             <div class="post-meta-line">
-                {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormatToUse | default "2006-01-02") -}}
+                {{- $publish_date := .PublishDate.Format (.Site.Params.dateformat | default "2006-01-02") -}}
                 <i class="far fa-calendar-alt fa-fw"></i><time datetime={{ $publish_date }}>{{ $publish_date }}</time>&nbsp;
                 <i class="fas fa-pencil-alt fa-fw"></i>{{ T "wordCount" .WordCount }}&nbsp;
                 <i class="far fa-clock fa-fw"></i>{{ T "readingTime" .ReadingTime }}&nbsp;
-                {{- if $scratch.Get "production" | and .Site.Params.comment.valine.enable | and .Site.Params.comment.valine.visitor -}}
-                    <span id="{{ .RelPermalink | relURL }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
+                {{- $comment := .Scratch.Get "comment" | default dict -}}
+                {{- if $comment.enable | and $comment.valine.enable | and $comment.valine.visitor -}}
+                    <span id="{{ .RelPermalink }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
                         <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;{{ T "views" }}
                     </span>&nbsp;
                 {{- end -}}
@@ -43,50 +59,34 @@
         </div>
 
         {{- /* Featured image */ -}}
-        {{- with .Params.featuredImage -}}
+        {{- with $params.featuredimage -}}
             <div class="featured-image">
-                {{- partial "plugin/image.html" (dict "src" . "description" $.Description "scratch" $scratch) -}}
+                {{- partial "plugin/image.html" (dict "src" . "alt" $.Description "large" true) -}}
             </div>
         {{- end -}}
 
-        {{- /* TOC */ -}}
-        {{- if or .Params.toc (and .Site.Params.toc (ne .Params.toc false)) -}}
-            <div class="toc" id="toc-auto">
-                <h2 class="toc-title">{{ T "contents" }}</h2>
-                {{- $globalAutoCollapseToc := .Site.Params.autoCollapseToc | default true }}
-                <div class="toc-content{{ if not (and $globalAutoCollapseToc (ne .Params.autoCollapseToc false)) }} always-active{{ end }}" id="toc-content-auto"></div>
-            </div>
-            <div class="toc" id="toc-static">
-                <details>
-                    <summary>
-                        <div class="toc-title">
-                            <span>{{ T "contents" }}</span>
-                            <span><i class="details icon fas fa-angle-down"></i></span>
-                        </div>
-                    </summary>
-                    <div class="toc-content" id="toc-content-static">
-                        {{- $toc := .TableOfContents -}}
-                        {{- $toc = partial "function/fontawesome.html" $toc -}}
-                        {{- $toc = partial "function/ruby.html" $toc -}}
-                        {{- $toc | safeHTML -}}
-                    </div>
-                </details>
+        {{- /* Static TOC */ -}}
+        {{- if ne $params.toc.enable false -}}
+            <div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>{{ T "contents" }}</span>
+                    <span><i class="details-icon fas fa-angle-down"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static">
+                    {{- dict "content" .TableOfContents "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+                </div>
             </div>
         {{- end -}}
 
         {{- /* Content */ -}}
         <div class="content" id="content">
-            {{- partial "single/content.html" .Content -}}
+            {{- dict "content" .Content "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
         </div>
 
         {{- /* Footer */ -}}
         {{- partial "single/footer.html" . -}}
 
         {{- /* Comment */ -}}
-        <div class="comment">
-            {{- if ( .Params.comment | default true ) -}}
-                {{- partial "comment.html" . -}}
-            {{- end -}}
-        </div>
+        {{- partial "comment.html" . -}}
     </article>
 {{- end -}}
