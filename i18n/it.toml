@@ -1,0 +1,140 @@
+# Translations for Italian
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === Post ===
+[posts]
+other = "Articoli"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "Tutti %s"
+
+[tag]
+other = "Etichetta"
+
+[tags]
+other = "Etichette"
+
+[category]
+other = "Categoria"
+
+[categories]
+other = "Categorie"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "Più"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "Scegliere la lingua"
+
+[switchTheme]
+other = "Cambiare il tema"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Realizzato da %s"
+
+[theme]
+other = "Tema"
+# === partials/footer.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "Condividi su"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "Contenuti"
+
+[publish]
+other = "pubblicato su"
+
+[included]
+other = "incluso in"
+
+[wordCount]
+other = "circa {{ .Count }} parole"
+
+[readingTime]
+other = "{{ .Count }} min"
+
+[views]
+other = "visualizzazioni"
+
+[author]
+other = "Autore"
+
+[lastMod]
+other = "L'articolo è stato modificato il %s"
+
+[license]
+other = "Pubblicato sotto la licenza %s"
+
+[seeMarkdown]
+other = "Leggi Markdown"
+
+[back]
+other = "Indietro"
+
+[home]
+other = "Home"
+
+[readMore]
+other = "Leggi di più"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Pagina non trovata"
+
+[pageNotFoundText]
+other = "Mi spiace, la pagina cercata non esiste."
+
+[backToHome]
+other = "Ritorna alla Home"
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Note"
+
+[abstract]
+other = "Sommario"
+
+[info]
+other = "Info"
+
+[tip]
+other = "Suggerimenti"
+
+[success]
+other = "Successo"
+
+[question]
+other = "Domande"
+
+[warning]
+other = "Avvertimento"
+
+[failure]
+other = "Fallimento"
+
+[danger]
+other = "Pericolo"
+
+[bug]
+other = "Bug"
+
+[example]
+other = "Esempio"
+
+[quote]
+other = "Citazione"
+# === shortcodes/admonition.html ===
