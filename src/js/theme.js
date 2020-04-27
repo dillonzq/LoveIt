@@ -52,6 +52,8 @@ class Theme {
                     const $svg = $temp.firstChild;
                     $svg.setAttribute('data-svg-src', $icon.getAttribute('data-svg-src'));
                     $svg.classList.add('icon');
+                    const $titleElements = $svg.getElementsByTagName('title');
+                    if ($titleElements.length) $svg.removeChild($titleElements[0]);
                     $icon.parentElement.replaceChild($svg, $icon);
                 })
                 .catch(console.error.bind(console));
