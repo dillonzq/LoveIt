@@ -7,7 +7,7 @@
     display: inline-block;
     position: relative;
     margin: 5px 10px;
-    overflow-wrap: break-word;
+    @include overflow-wrap(break-word);
     @include transition(all ease-out 0.3s);
 
     &:active,

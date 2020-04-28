@@ -85,3 +85,8 @@
   -moz-appearance: $value;
   -webkit-appearance: $value;
 }
+
+@mixin overflow-wrap($value) {
+  word-wrap: $value;
+  overflow-wrap: $value;
+}

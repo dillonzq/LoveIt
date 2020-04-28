@@ -53,7 +53,7 @@
   width: $MAX_LENGTH;
   padding: 0 .8rem;
   border-left: 4px solid $global-border-color;
-  overflow-wrap: break-word;
+  @include overflow-wrap(break-word);
   box-sizing: border-box;
   top: if($header-normal-mode-desktop, 5rem, 10rem);
   left: $MAX_LENGTH;
