@@ -11,7 +11,7 @@
     {{- $one = delimit $tags "\n" | dict "tags" | merge $one -}}
     {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormat | default "2006-01-02") -}}
     {{- $one = dict "date" $publish_date | merge $one -}}
-    {{- $content := .RawContent -}}
+    {{- $content := .RawContent | htmlEscape -}}
     {{- if gt .Site.Params.search.contentLength 0 -}}
         {{- $content = substr $content 0 .Site.Params.search.contentLength -}}
     {{- end -}}
