@@ -7,7 +7,7 @@ assignees: dillonzq
 
 ---
 
-###  Describe the feature you want 描述你的功能需求
+### Describe the feature you want 描述你的功能需求
 
 - Feature 1
   I want this feature to solve ...

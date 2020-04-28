@@ -24,17 +24,17 @@ If applicable, add screenshots to help explain your problem.
 
 ### Build Environment 构建环境
 
- - OS: [e.g. Windows 10, macOS, Ubuntu]
- - Theme version/commit [e.g. 0.2.0, 2ccba79]
- - Hugo version [e.g. 0.69.0]
+- OS: [e.g. Windows 10, macOS, Ubuntu]
+- Theme version/commit [e.g. 0.2.0, 2ccba79]
+- Hugo version [e.g. 0.69.0]
 
 Please use Hugo **extended** version.
 请使用 Hugo **extended** 版本.
 
 ### Preview Environment 预览环境
 
- - OS: [e.g. Windows 10, macOS, Ubuntu, iOS, Android]
- - Browser [e.g. Chrome, Safari, Firefox]
+- OS: [e.g. Windows 10, macOS, Ubuntu, iOS, Android]
+- Browser [e.g. Chrome, Safari, Firefox]
 
 ### Additional Information 补充信息
 
