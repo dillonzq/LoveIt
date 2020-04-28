@@ -6,16 +6,25 @@
     {{- $pages = where $pages "Params.hiddenfromsearch" "!=" true -}}
 {{- end -}}
 {{- range $pages -}}
-    {{- $one := dict "objectID" .RelPermalink "uri" .RelPermalink "title" .Title "description" (.Description | default "") -}}
-    {{- $tags := .Params.tags | default slice -}}
-    {{- $one = delimit $tags "\n" | dict "tags" | merge $one -}}
-    {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormat | default "2006-01-02") -}}
-    {{- $one = dict "date" $publish_date | merge $one -}}
-    {{- $content := .RawContent | htmlEscape -}}
-    {{- if gt .Site.Params.search.contentLength 0 -}}
-        {{- $content = substr $content 0 .Site.Params.search.contentLength -}}
+    {{- $uri := .RelPermalink -}}
+    {{- $meta := dict "uri" $uri "title" .Title "tags" .Params.tags "categories" .Params.categories -}}
+    {{- $meta = .PublishDate.Format ($.Site.Params.dateFormat | default "2006-01-02") | dict "date" | merge $meta -}}
+    {{- with .Description -}}
+        {{- $index = $index | append (dict "content" . "objectID" $uri | merge $meta) -}}
     {{- end -}}
-    {{- $one = dict "content" $content | merge $one -}}
-    {{- $index = $index | append $one -}}
+    {{- $params := .Params | merge $.Site.Params.page -}}
+    {{- $content := dict "content" .Content "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" -}}
+    {{- range $i, $chunked := split $content "<h2 id=" -}}
+        {{- if gt $i 0 -}}
+            {{- $chunked = printf "<h2 id=%s" $chunked -}}
+        {{- end -}}
+        {{- $chunked = $chunked | plainify | htmlUnescape | replaceRE `[\n ]+` ` ` -}}
+        {{- if gt $.Site.Params.search.contentLength 0 -}}
+            {{- $chunked = substr $chunked 0 $.Site.Params.search.contentLength -}}
+        {{- end -}}
+        {{- $one := printf "%s:%d" $uri $i | dict "content" $chunked "objectID" | merge $meta -}}
+        {{- $index = $index | append $one -}}
+    {{- end -}}
 {{- end -}}
+
 {{- $index | jsonify | safeJS -}}

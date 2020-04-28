@@ -167,6 +167,10 @@
     {{- partial "plugin/stylesheet.html" . -}}
 {{- end -}}
 
+{{- with (.Scratch.Get "this").styleArr -}}
+    <style>{{ delimit . "" | safeCSS }}</style>
+{{- end -}}
+
 <script type="text/javascript">
     window.config = {{ $config | jsonify | safeJS }};
 </script>
