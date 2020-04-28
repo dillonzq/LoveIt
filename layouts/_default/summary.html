@@ -29,7 +29,7 @@
             {{ T "publish" }}&nbsp;<time datetime={{ $publish_date }}>{{ $publish_date }}</time>
         </span>
 
-        {{- with $params.categories -}}
+        {{- with .Params.categories -}}
             &nbsp;
             <span class="post-category">
                 {{- T "included" -}}
@@ -56,7 +56,7 @@
     {{- /* Footer */ -}}
     <div class="post-footer">
         <a href="{{ .RelPermalink }}">{{ T "readMore" }}</a>
-        {{- with $params.tags -}}
+        {{- with .Params.tags -}}
             <div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;
                 {{- range $index, $value := . -}}

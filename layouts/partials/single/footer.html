@@ -46,7 +46,7 @@
 
     <div class="post-info-more">
         <section class="post-tags">
-            {{- with $params.tags -}}
+            {{- with .Params.tags -}}
                 <i class="fas fa-tags fa-fw"></i>&nbsp;
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }},&nbsp;{{ end -}}
