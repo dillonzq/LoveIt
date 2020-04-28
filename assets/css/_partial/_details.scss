@@ -1,0 +1,33 @@
+.details {
+  .details-summary {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  i.details-icon {
+    color: $global-font-secondary-color;
+    @include transition(transform 0.2s ease);
+
+    [theme=dark] & {
+      color: $global-font-secondary-color-dark;
+    }
+  }
+
+  .details-content {
+    max-height: 0;
+    overflow-y: hidden;
+    @include details-transition-open;
+  }
+
+  &.open {
+    i.details-icon {
+      @include transform(rotate(90deg));
+    }
+
+    .details-content {
+      max-height: $MAX_LENGTH;
+      @include details-transition-close;
+    }
+  }
+}

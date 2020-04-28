@@ -1,0 +1,7 @@
+@mixin details-transition-open {
+  @include transition(max-height 0.8s cubic-bezier(0, 1, 0, 1) -0.1s);
+}
+
+@mixin details-transition-close {
+  @include transition(max-height 0.8s cubic-bezier(0.5, 0, 1, 0) 0s);
+}

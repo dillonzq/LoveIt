@@ -4,7 +4,7 @@
 
 // ========== Global ========== //
 // Font and Line Height
-$global-font-family: -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft Yahei UI, Segoe UI, Helvetica, Arial, sans-serif, Segoe UI Emoji !default;
+$global-font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif !default;
 $global-font-size: 16px;
 $global-font-weight: 400;
 $global-line-height: 1.5rem;
@@ -30,8 +30,8 @@ $global-link-hover-color: #2d96bd !default;
 $global-link-hover-color-dark: #fff !default;
 
 // Color of the border
-$global-border-color: #dcdcdc !default;
-$global-border-color-dark: #4a4b50 !default;
+$global-border-color: #f0f0f0 !default;
+$global-border-color-dark: #363636 !default;
 // ========== Global ========== //
 
 // ========== Scrollbar ========== //
@@ -44,36 +44,43 @@ $scrollbar-hover-color: #a9a9b3 !default;
 
 // ========== Selection ========== //
 // Color of the selected text
-$selection-color: rgba(38, 139, 211, 0.2) !default;
-$selection-color-dark: rgba(38, 139, 211, 0.3) !default;
+$selection-color: rgba(53, 166, 247, 0.25) !default;
+$selection-color-dark: rgba(50, 112, 194, 0.4) !default;
 // ========== Selection ========== //
 
 // ========== Header ========== //
 // Height of the header
-$header-height-desktop: 3.5rem !default;
-$header-height-mobile: 3.5rem !default;
+$header-height: 3.5rem !default;
 
 // Color of the header background
 $header-background-color: #f8f8f8 !default;
 $header-background-color-dark: #252627 !default;
+
+// Font style of the header title
+$header-title-font-family: $global-font-family !default;
+$header-title-font-size: 1.25rem !default;
 
 // Position of the header
 $header-position-desktop: if($header-normal-mode-desktop, static, fixed) !default;
 $header-position-mobile: if($header-normal-mode-mobile, static, fixed) !default;
 
 // Top of the page padding
-$page-padding-top-desktop: if($header-normal-mode-desktop, 0, $header-height-desktop) !default;
-$page-padding-top-mobile: if($header-normal-mode-mobile, 0, $header-height-mobile) !default;
+$page-padding-top-desktop: if($header-normal-mode-desktop, 0, $header-height) !default;
+$page-padding-top-mobile: if($header-normal-mode-mobile, 0, $header-height) !default;
 
 // Color of the hover header item
 $header-hover-color: #161209 !default;
 $header-hover-color-dark: #fff !default;
+
+// Color of the search background
+$search-background-color: #e9e9e9 !default;
+$search-background-color-dark: #363636 !default;
 // ========== Header ========== //
 
 // ========== Single Content ========== //
 // Font size of the TOC
 $toc-title-font-size: 1.2rem !default;
-$toc-content-font-size: 0.9rem !default;
+$toc-content-font-size: 1rem !default;
 
 // Color of the single link
 $single-link-color: #2d96bd !default;
@@ -90,6 +97,10 @@ $table-background-color-dark: #272c34 !default;
 // Color of the table thead
 $table-thead-color: #ededed !default;
 $table-thead-color-dark: #20252b !default;
+
+// Color of the blockquote
+$blockquote-color: #6bd6fd !default;
+$blockquote-color-dark: #59c5ec !default;
 // ========== Single Content ========== //
 
 // ========== Pagination ========== //
@@ -111,14 +122,14 @@ $code-color-dark: #E5BF78 !default;
 $code-background-color: #f5f5f5 !default;
 $code-background-color-dark: #272C34 !default;
 
-$code-info-color: #b1b0b0 !default;
+$code-info-color: #9c9c9c !default;
 $code-info-color-dark: #b1b0b0 !default;
 
 // Font size of the code
-$code-font-size: 13px !default;
+$code-font-size: .875rem !default;
 
 // Font family of the code
-$code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace !default;
+$code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-font-family !default;
 
 // Code type map
 $code-type-map: (
@@ -345,17 +356,19 @@ $admonition-color-map: (
 
 // Color map of the admonition background
 $admonition-background-color-map: (
-  'note': rgba(68,138,255,.1),
-  'abstract': rgba(0,176,255,.1),
-  'info': rgba(0,184,212,.1),
-  'tip': rgba(0,191,165,.1),
-  'success': rgba(0,200,83,.1),
-  'question': rgba(100,221,23,.1),
-  'warning': rgba(255,145,0,.1),
-  'failure': rgba(255,82,82,.1),
-  'danger': rgba(255,23,68,.1),
-  'bug': rgba(245,0,87,.1),
-  'example': rgba(101,31,255,.1),
-  'quote': hsla(0,0%,62%,.1),
+  'note': rgba(68, 138, 255, 0.1),
+  'abstract': rgba(0, 176, 255, 0.1),
+  'info': rgba(0, 184, 212, 0.1),
+  'tip': rgba(0, 191, 165, 0.1),
+  'success': rgba(0, 200, 83, 0.1),
+  'question': rgba(100, 221, 23, 0.1),
+  'warning': rgba(255, 145, 0, 0.1),
+  'failure': rgba(255, 82, 82, 0.1),
+  'danger': rgba(255, 23, 68, 0.1),
+  'bug': rgba(245, 0, 87, 0.1),
+  'example': rgba(101, 31, 255, 0.1),
+  'quote': rgba(159, 159, 159, 0.1),
 ) !default;
 // ========== Admonition ========== //
+
+$MAX_LENGTH: 9999px;

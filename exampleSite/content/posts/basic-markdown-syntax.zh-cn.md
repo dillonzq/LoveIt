@@ -7,23 +7,12 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "这篇文章展示了基本的 Markdown 语法和格式."
-license: ""
 
-tags: ["markdown"]
-categories: ["markdown"]
-hiddenFromHomePage: false
-
+tags: ["Markdown"]
+categories: ["Markdown"]
 featuredImage: "/images/basic-markdown-syntax/featured-image.png"
-featuredImagePreview: ""
 
-toc: true
-autoCollapseToc: true
-math: false
 lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 这篇文章提供了可以在 Hugo 的文章中使用的基本 Markdown 语法示例.
@@ -33,7 +22,7 @@ comment: true
 {{< admonition >}}
 这篇文章借鉴了一篇很棒的[来自 Grav 的文章](http://learn.getgrav.org/content/markdown).
 
-如果你想了解 **Loveit** 主题的扩展 Markdown 语法, 请阅读[扩展 Markdown 语法页面](../theme-documentation-content/#extended-markdown-syntax).
+如果你想了解 **Loveit** 主题的扩展 Markdown 语法, 请阅读[扩展 Markdown 语法页面](../theme-documentation-content#extended-markdown-syntax).
 {{< /admonition >}}
 
 事实上, 编写 Web 内容很麻烦. [WYSIWYG]^(所见即所得) 编辑器帮助减轻了这一任务. 但通常会导致代码太糟, 或更糟糕的是, 网页也会很丑.
@@ -57,12 +46,12 @@ John Gruber, Markdown 的作者如是说:
 > 虽然 Markdown 的语法受到几种现有的文本到 HTML 转换工具的影响,
 > 但 Markdown 语法的最大灵感来源是纯文本电子邮件的格式.
 >
-> -- _John Gruber_
+> {{< style "text-align: right;" >}}-- _John Gruber_{{< /style >}}
 
 话不多说, 我们来回顾一下 Markdown 的主要语法以及生成的 HTML 样式!
 
 {{< admonition tip >}}
-:(far fa-bookmark): 将此页保存为书签，以备将来参考!
+:(far fa-bookmark fa-fw): 将此页保存为书签，以备将来参考!
 {{< /admonition >}}
 
 ## 1 标题
@@ -404,13 +393,13 @@ odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac 
 
 ```markdown
 1. Lorem ipsum dolor sit amet
-2. Consectetur adipiscing elit
-3. Integer molestie lorem at massa
-4. Facilisis in pretium nisl aliquet
-5. Nulla volutpat aliquam velit
-6. Faucibus porta lacus fringilla vel
-7. Aenean sit amet erat nunc
-8. Eget porttitor lorem
+1. Consectetur adipiscing elit
+1. Integer molestie lorem at massa
+1. Facilisis in pretium nisl aliquet
+1. Nulla volutpat aliquam velit
+1. Faucibus porta lacus fringilla vel
+1. Aenean sit amet erat nunc
+1. Eget porttitor lorem
 ```
 
 呈现的输出效果如下:
@@ -642,7 +631,7 @@ grunt.initConfig({
 | ext    | extension to be used for dest files. |
 {{< /admonition >}}
 
-## 11 链接
+## 11 链接 {#links}
 
 ### 基本链接
 
@@ -775,5 +764,5 @@ Content for chapter one.
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 
 {{< admonition tip >}}
-**LoveIt** 主题提供了一个包含更多功能的 [图片的 shortcode](../theme-documentation-shortcodes/#image).
+**LoveIt** 主题提供了一个包含更多功能的 [图片的 shortcode](../theme-documentation-extended-shortcodes#image).
 {{< /admonition >}}

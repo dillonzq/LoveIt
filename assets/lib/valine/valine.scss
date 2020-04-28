@@ -1,36 +1,14 @@
-.dark-theme {
-  // copied from https://github.com/xCss/Valine/issues/221
-  .v *,
-  .v .vwrap input,
-  .v .vwrap input::placeholder,
-  .v .veditor,
-  .v .veditor::placeholder,
-  .v a,
-  .v a:hover {
-    color: hsla(0,0%,100%,.75);
-    opacity: 1;
-  }
-  .v .vbtn {
-    color: hsla(0,0%,100%,.75);
-    background: #333;
-    border: none;
-  }
-  .v .vbtn:hover {
-    color: #3090e4;
-    border-color: #3090e4;
-  }
-  .v .vlist .vcard .vhead .vsys {
-    background: #333;
-  }
-  .v code, .v pre {
-    background: #272C34;
-  }
+$border-color: #f0f0f0;
+$border-color-dark: #363636;
 
-  .v .vmark .vinput {
-    color: #0e0f10;
-  }
-}
+.v[data-class=v] {
+  .vwrap,
+  .vwrap .vheader .vinput,
+  .vcards .vcard .vh {
+    border-color: $border-color;
 
-.v code, .v pre {
-  text-align: left;
+    [theme=dark] & {
+      border-color: $border-color-dark;
+    }
+  }
 }

@@ -1,0 +1,4 @@
+{{- $this := .scratch.Get "this" -}}
+{{- $stylesheet := $this.stylesheet | default slice -}}
+{{- $stylesheet = $stylesheet | append (slice .data) -}}
+{{- .scratch.SetInMap "this" "stylesheet" $stylesheet -}}

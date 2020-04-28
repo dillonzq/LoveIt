@@ -1,66 +1,63 @@
-/** Home **/
-@import "../_partial/_home/summary";
-
 @mixin page-home($profile, $posts) {
   .home {
     @if $profile {
       .home-profile {
-        -webkit-transform: translateY(if($posts, 0, 16vh));
-        -moz-transform: translateY(if($posts, 0, 16vh));
-        -ms-transform: translateY(if($posts, 0, 16vh));
-        -o-transform: translateY(if($posts, 0, 16vh));
-        transform: translateY(if($posts, 0, 16vh));
-        padding: if($posts, 2rem, 0) 0;
+        @include transform(translateY(if($posts, 0, 16vh)));
+        padding: if($posts, 2rem, 0) 0 .5rem;
         text-align: center;
 
         .home-avatar {
           padding: 0.6rem;
 
           img {
+            display: inline-block;
             width: if($posts, 6rem, 8rem);
             height: auto;
-            display: inline-block;
-            -webkit-border-radius: 100%;
-            border-radius: 100%;
-            -webkit-box-shadow: 0 0 0 0.3618em rgba(0, 0, 0, 0.05);
-            box-shadow: 0 0 0 0.3618em rgba(0, 0, 0, 0.05);
             margin: 0 auto;
-            -webkit-transition: all ease 0.4s;
-            -moz-transition: all ease 0.4s;
-            -o-transition: all ease 0.4s;
-            transition: all ease 0.4s;
+            @include border-radius(100%);
+            @include box-shadow(0 0 0 .3618em rgba(0, 0, 0, .05));
+            @include transition(all 0.4s ease);
             cursor: pointer;
 
             &:hover {
               position: relative;
-              -webkit-transform: translateY(-0.75rem);
-              -moz-transform: translateY(-0.75rem);
-              -ms-transform: translateY(-0.75rem);
-              -o-transform: translateY(-0.75rem);
-              transform: translateY(-0.75rem);
+              @include transform(translateY(-.75rem));
               cursor: pointer;
             }
           }
         }
 
-        .home-description {
+        .home-subtitle {
           font-size: 1rem;
           font-weight: normal;
           margin: 0;
           padding: .4rem;
         }
 
-        .home-social-links {
-          padding: .6rem 0;
+        .social-links {
+          padding: .4rem .2rem;
+          font-size: 1.6rem;
 
-          a, i {
-            font-size: 1.6rem;
-            line-height: 2rem;
+          a * {
+            vertical-align: text-bottom;
           }
 
           img {
             height: 1.4rem;
             padding: 0 .25rem;
+          }
+        }
+
+        .home-disclaimer {
+          font-size: 1rem;
+          line-height: 1.4rem;
+          font-weight: normal;
+          margin: 0;
+          padding: .4rem;
+          color: $global-font-secondary-color;
+
+          [theme=dark] & {
+            color: $global-font-secondary-color-dark;
           }
         }
       }

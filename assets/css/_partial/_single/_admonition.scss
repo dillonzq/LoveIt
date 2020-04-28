@@ -1,29 +1,39 @@
 .admonition {
   position: relative;
-  margin: .9765em 0;
+  margin: 1rem 0;
   padding: 0 .75rem;
   background-color: map-get($admonition-background-color-map, 'note');
   border-left: .25rem solid map-get($admonition-color-map, 'note');
   overflow: auto;
 
   .admonition-title {
+    font-weight: bold;
     margin: 0 -0.75rem;
-    padding: .2rem .75rem .2rem 1.8rem;
-    border-bottom: .05rem solid map-get($admonition-background-color-map, 'note');
+    padding: .25rem 1.8rem;
+    border-bottom: 1px solid map-get($admonition-background-color-map, 'note');
+    background-color: opacify(map-get($admonition-background-color-map, 'note'), 0.15);
+  }
+
+  &.open .admonition-title {
     background-color: map-get($admonition-background-color-map, 'note');
   }
 
   .admonition-content {
-    margin: .5rem 0;
+    padding: .5rem 0;
   }
 
   i.icon {
     font-size: 0.85rem;
     color: map-get($admonition-color-map, 'note');
-    cursor: auto;
     position: absolute;
-    left: .6rem;
     top: .6rem;
+    left: .4rem;
+  }
+
+  i.details-icon {
+    position: absolute;
+    top: .6rem;
+    right: .3rem;
   }
 
   @each $type, $color in $admonition-color-map {
@@ -42,6 +52,10 @@
 
       .admonition-title {
         border-bottom-color: $color;
+        background-color: opacify($color, 0.15);
+      }
+
+      &.open .admonition-title {
         background-color: $color;
       }
     }
@@ -49,34 +63,5 @@
 
   &:last-child {
     margin-bottom: .75rem;
-  }
-}
-
-details.admonition {
-  summary {
-    display: block;
-    outline: none;
-    cursor: pointer;
-
-    &::-webkit-details-marker {
-      display: none;
-    }
-
-    i.details {
-      position: absolute;
-      top: .5rem;
-      right: .5rem;
-      color: $global-font-color;
-
-      .dark-theme & {
-        color: $global-font-color-dark;
-      }
-    }
-  }
-}
-
-details.admonition[open] {
-  i.details {
-    transform: rotate(180deg);
   }
 }
