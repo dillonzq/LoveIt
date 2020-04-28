@@ -39,4 +39,4 @@
 {{- else -}}
     <meting-js server="{{ .Get 0 }}" type="{{ .Get 1 }}" id="{{ .Get 2 }}" theme="{{ $theme }}"></meting-js>
 {{- end -}}
-{{- dict "music" true | merge (.Page.Scratch.Get "this") | .Page.Scratch.Set "this" -}}
+{{- .Page.Scratch.SetInMap "this" "music" true -}}

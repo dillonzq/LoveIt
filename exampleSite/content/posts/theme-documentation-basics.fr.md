@@ -226,10 +226,14 @@ Please open the code block below to view the complete sample configuration :(far
     enable = true
     # type of search engine ("lunr", "algolia")
     type = "lunr"
-    # index length of the content
+    # max index length of the chunked content
     contentLength = 5000
     # placeholder of the search bar
     placeholder = ""
+    # {{< version 0.2.1 >}} max number of results length
+    maxResultLength = 10
+    # {{< version 0.2.1 >}} HTML tag name of the highlight part in results
+    highlightTag = "em"
     [params.search.algolia]
       index = ""
       appID = ""
@@ -960,25 +964,35 @@ Here is the search configuration in your [site configuration](#site-configuratio
   enable = true
   # type of search engine ("lunr", "algolia")
   type = "lunr"
-  # index length of the content
+  # max index length of the chunked content
   contentLength = 5000
+  # placeholder of the search bar
+  placeholder = ""
+  # {{< version 0.2.1 >}} max number of results length
+  maxResultLength = 10
+  # {{< version 0.2.1 >}} HTML tag name of the highlight part in results
+  highlightTag = "em"
   [params.search.algolia]
     index = ""
     appID = ""
     searchKey = ""
 ```
 
-{{< admonition note "How to choose the type of search engine?" >}}
+{{< admonition note "How to choose search engine?" >}}
 The following is a comparison of two search engines:
 
 * `lunr`: simple, no need to synchronize `index.json`, no limit for `contentLength`,
   but high bandwidth and low performance (Especially for Chinese which needs a large segmentit library)
 * `algolia`: high performance and low bandwidth, but need to synchronize `index.json` and limit for `contentLength`
+
+{{< version 0.2.1 >}} The content of the post is separated by `h2` HTML tag to improve query performance and basically implement full-text search.
+`contentLength` is used to limit the max index length of the part starting with `h2` HTML tag.
 {{< /admonition >}}
 
 {{< admonition tip "Tips about algolia" >}}
 You need to upload `index.json` files to algolia to activate searching.
-You could upload the `index.json` files by browsers but a script may be a better choice.
+You could upload the `index.json` files by browsers but a CLI tool may be better.
+[Algolia Atomic](https://github.com/chrisdmacrae/atomic-algolia) is a good choice.
 To be compatible with Hugo multilingual mode,
 you need to upload different `index.json` for each language to the different index of algolia, such as `zh-cn/index.json` or `fr/index.json`...
 {{< /admonition >}}

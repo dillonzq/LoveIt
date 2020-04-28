@@ -93,6 +93,8 @@ class Theme {
 
     initSearch() {
         const searchConfig = this.config.search;
+        if (!searchConfig.maxResultLength) searchConfig.maxResultLength = 10;
+        if (!searchConfig.highlightTag) searchConfig.highlightTag = 'em';
         const isMobile = this.util.isMobile();
         if (!searchConfig || isMobile && this._searchMobileOnce || !isMobile && this._searchDesktopOnce) return;
         const classSuffix = isMobile ? 'mobile' : 'desktop';
@@ -173,15 +175,14 @@ class Theme {
                     if (searchConfig.type === 'lunr') {
                         const search = () => {
                             if (lunr.queryHandler) query = lunr.queryHandler(query);
-                            return this._index.search(query).slice(0, 12).map(({ ref, matchData: { metadata } }) => {
+                            const results = {};
+                            this._index.search(query).forEach(({ ref, matchData: { metadata } }) => {
                                 const matchData = this._indexData[ref];
-                                let { title, content: context } = matchData;
+                                let { uri, title, content: context } = matchData;
+                                if (results[uri]) return;
                                 let position = 0;
-                                Object.values(metadata).forEach(({ description, content }) => {
-                                    if (description) {
-                                        context = matchData.description;
-                                        position = -1;
-                                    } else if (content) {
+                                Object.values(metadata).forEach(({ content }) => {
+                                    if (content) {
                                         const matchPosition = content.position[0][0];
                                         if (matchPosition < position || position === 0) position = matchPosition;
                                     }
@@ -194,16 +195,17 @@ class Theme {
                                     context = context.substr(0, CONTEXT_LENGTH);
                                 }
                                 Object.keys(metadata).forEach(key => {
-                                    title = title.replace(new RegExp(`(${key})`, 'gi'), '<em>$1</em>');
-                                    context = context.replace(new RegExp(`(${key})`, 'gi'), '<em>$1</em>');
+                                    title = title.replace(new RegExp(`(${key})`, 'gi'), `<${searchConfig.highlightTag}>$1</${searchConfig.highlightTag}>`);
+                                    context = context.replace(new RegExp(`(${key})`, 'gi'), `<${searchConfig.highlightTag}>$1</${searchConfig.highlightTag}>`);
                                 });
-                                return {
-                                    'uri': matchData.uri,
+                                results[uri] = {
+                                    'uri': uri,
                                     'title' : title,
                                     'date' : matchData.date,
                                     'context' : context,
                                 };
                             });
+                            return Object.values(results).slice(0, searchConfig.maxResultLength);
                         }
                         if (!this._index) {
                             fetch(searchConfig.lunrIndexURL)
@@ -212,14 +214,14 @@ class Theme {
                                     const indexData = {};
                                     this._index = lunr(function () {
                                         if (searchConfig.lunrLanguageCode) this.use(lunr[searchConfig.lunrLanguageCode]);
-                                        this.ref('uri');
+                                        this.ref('objectID');
                                         this.field('title', { boost: 50 });
                                         this.field('tags', { boost: 20 });
-                                        this.field('description', { boost: 10 });
-                                        this.field('content', { boost: 5 });
+                                        this.field('categories', { boost: 20 });
+                                        this.field('content', { boost: 10 });
                                         this.metadataWhitelist = ['position'];
                                         data.forEach((record) => {
-                                            indexData[record.uri] = record;
+                                            indexData[record.objectID] = record;
                                             this.add(record);
                                         });
                                     });
@@ -231,18 +233,28 @@ class Theme {
                                 });
                         } else finish(search());
                     } else if (searchConfig.type === 'algolia') {
-                        $searchLoading.style.display = 'inline';
-                        $searchClear.style.display = 'none';
                         this._algoliaIndex = this._algoliaIndex || algoliasearch(searchConfig.algoliaAppID, searchConfig.algoliaSearchKey).initIndex(searchConfig.algoliaIndex);
                         this._algoliaIndex
-                            .search(query, { offset: 0, length: 12, attributesToHighlight: ['title', 'content'] })
+                            .search(query, {
+                                offset: 0,
+                                length: searchConfig.maxResultLength * 3,
+                                attributesToHighlight: ['title'],
+                                attributesToSnippet: ['content:30'],
+                                highlightPreTag: `<${searchConfig.highlightTag}>`,
+                                highlightPostTag: `</${searchConfig.highlightTag}>`,
+                            })
                             .then(({ hits }) => {
-                                finish(hits.map(({ uri, date, _highlightResult: { title, content } }) => ({
-                                    uri: uri,
-                                    title: title.value,
-                                    date: date,
-                                    context: content.value,
-                                })));
+                                const results = {};
+                                hits.forEach(({ uri, date, _highlightResult: { title }, _snippetResult: { content } }) => {
+                                    if (results[uri]) return;
+                                    results[uri] = {
+                                        uri: uri,
+                                        title: title.value,
+                                        date: date,
+                                        context: content.value,
+                                    };
+                                });
+                                finish(Object.values(results));
                             })
                             .catch(err => {
                                 console.error(err);

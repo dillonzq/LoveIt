@@ -108,14 +108,13 @@
 * 支持基于 [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) 的**滚动动画**
 * ...
 
-## 文档
+## [文档](https://hugoloveit.com/zh-cn/categories/documentation/)
 
-* [文档页面](https://hugoloveit.com/zh-cn/categories/documentation/)
-* 在本地构建文档:
+在本地构建文档:
 
-    ```bash
-    hugo server --source=exampleSite
-    ```
+```bash
+hugo server --source=exampleSite
+```
 
 ## 多语言和国际化
 
@@ -128,6 +127,10 @@ LoveIt 支持下列语言:
 * 巴西葡萄牙语
 * 意大利语
 * [贡献一种新的语言](https://github.com/dillonzq/LoveIt/pulls)
+
+[语言兼容性](https://hugoloveit.com/zh-cn/theme-documentation-basics/#language-compatibility)
+
+## [路线图](https://github.com/dillonzq/LoveIt/projects/1)
 
 ## 问题、想法、 bugs 和 PRs
 
