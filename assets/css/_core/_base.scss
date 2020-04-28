@@ -32,7 +32,7 @@ html {
 body {
   background-color: $global-background-color;
   color: $global-font-color;
-  overflow-wrap: break-word;
+  @include overflow-wrap(break-word);
   scrollbar-color: auto;
 
   &[theme=dark] {

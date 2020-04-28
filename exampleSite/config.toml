@@ -114,10 +114,14 @@ enableEmoji = true
         enable = true
         # type of search engine ("lunr", "algolia")
         type = "algolia"
-        # index length of the content
+        # max index length of the chunked content
         contentLength = 5000
         # placeholder of the search bar
         placeholder = ""
+        # max number of results length
+        maxResultLength = 10
+        # HTML tag name of the highlight part in results
+        highlightTag = "em"
         [languages.en.params.search.algolia]
           index = "index.en"
           appID = "PASDMWALPK"
@@ -303,10 +307,14 @@ enableEmoji = true
         enable = true
         # 搜索引擎的类型 ("lunr", "algolia")
         type = "algolia"
-        # 文章内容索引长度
+        # 文章内容最长索引长度
         contentLength = 5000
         # 搜索框的占位提示语
         placeholder = ""
+        # 最大结果数目
+        maxResultLength = 10
+        # 搜索结果中高亮部分的 HTML 标签
+        highlightTag = "em"
         [languages.zh-cn.params.search.algolia]
           index = "index.zh-cn"
           appID = "PASDMWALPK"
@@ -488,10 +496,14 @@ enableEmoji = true
         enable = true
         # type of search engine ("lunr", "algolia")
         type = "algolia"
-        # index length of the content
+        # max index length of the chunked content
         contentLength = 5000
         # placeholder of the search bar
         placeholder = ""
+        # max number of results length
+        maxResultLength = 10
+        # HTML tag name of the highlight part in results
+        highlightTag = "em"
         [languages.fr.params.search.algolia]
           index = "index.fr"
           appID = "PASDMWALPK"

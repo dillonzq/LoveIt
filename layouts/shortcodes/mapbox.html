@@ -30,4 +30,4 @@
 {{- $options := dict "lng" $lng "lat" $lat "zoom" $zoom "marked" $marked "lightStyle" $lightStyle "darkStyle" $darkStyle "geolocate" $geolocate "navigation" $navigation "scale" $scale "fullscreen" $fullscreen -}}
 {{- $id := partial "function/id.html" (dict "content" $options "scratch" .Page.Scratch) -}}
 <div class="mapbox" id="{{ $id }}" style="width: {{ $width }}; height: {{ $height }};"></div>
-{{- dict "mapbox" true | merge (.Page.Scratch.Get "this") | .Page.Scratch.Set "this" -}}
+{{- .Page.Scratch.SetInMap "this" "mapbox" true -}}

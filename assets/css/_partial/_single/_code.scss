@@ -1,9 +1,11 @@
 code {
   display:inline-block;
+  max-width: 100%;
+  padding: 0 .4rem;
+  @include overflow-wrap(break-word);
   font-size: $code-font-size;
   font-family: $code-font-family;
   color: $code-color;
-  padding: 0 .4rem;
 
   [theme=dark] & {
     color: $code-color-dark;
@@ -21,7 +23,7 @@ pre {
 
   img {
     min-height: 1em;
-    max-height: 1.25em;
+    max-height: 1.2em;
     vertical-align: text-bottom;
   }
 }
