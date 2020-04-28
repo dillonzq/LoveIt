@@ -113,14 +113,13 @@ I hope you will LoveIt ❤️!
 * **Dynamic scroll** supported by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * ...
 
-## Documentation
+## [Documentation](https://hugoloveit.com/categories/documentation/)
 
-* [Documentation Page](https://hugoloveit.com/categories/documentation/)
-* Build Documentation Locally:
+Build Documentation Locally:
 
-    ```bash
-    hugo server --source=exampleSite
-    ```
+```bash
+hugo server --source=exampleSite
+```
 
 ## Multilingual and i18n
 
@@ -133,6 +132,10 @@ LoveIt supports the following languages:
 * Brazilian Portuguese
 * Italian
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
+
+[Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)
+
+## [Roadmap](https://github.com/dillonzq/LoveIt/projects/1)
 
 ## Questions, ideas, bugs, pull requests
 

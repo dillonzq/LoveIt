@@ -1,8 +1,10 @@
 {{- $content := .Inner | .Page.RenderString -}}
 {{- $id := partial "function/id.html" (dict "content" $content) -}}
 {{- $tag := .Get 1 | default "div" -}}
+{{- printf `<%s id="%s">%s</%s>` $tag $id $content $tag | safeHTML -}}
+
 {{- $style := .Get 0 | printf "#%s{%s}" $id -}}
 {{- $res := resources.FromString (printf "temp/%s.scss" $id) $style -}}
 {{- $res = $res | toCSS (dict "targetPath" (printf "temp/%s.css" $id)) -}}
-{{- printf `<%s id="%s">%s</%s>` $tag $id $content $tag | safeHTML -}}
-<style>{{ $res.Content | safeCSS }}</style>
+{{- $styleArr := (.Page.Scratch.Get "this").styleArr | default slice -}}
+{{- $styleArr | append $res.Content | .Page.Scratch.SetInMap "this" "styleArr" -}}

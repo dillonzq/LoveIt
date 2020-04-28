@@ -224,10 +224,14 @@ hugo
     enable = true
     # 搜索引擎的类型 ("lunr", "algolia")
     type = "lunr"
-    # 文章内容索引长度
+    # 文章内容最长索引长度
     contentLength = 5000
     # 搜索框的占位提示语
     placeholder = ""
+    # 最大结果数目
+    maxResultLength = 10
+    # 搜索结果中高亮部分的 HTML 标签
+    highlightTag = "em"
     [params.search.algolia]
       index = ""
       appID = ""
@@ -938,7 +942,7 @@ defaultContentLanguage = "zh-cn"
 
 {{< version 0.2.0 >}}
 
-基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/), **LoveIt** 主支持搜索功能.
+基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/), **LoveIt** 主题支持搜索功能.
 
 ### 5.1 输出配置
 
@@ -958,24 +962,34 @@ defaultContentLanguage = "zh-cn"
 ```toml
 [params.search]
   enable = true
-  # type of search engine ("lunr", "algolia")
+  # 搜索引擎的类型 ("lunr", "algolia")
   type = "lunr"
-  # index length of the content
+  # 文章内容最长索引长度
   contentLength = 5000
+  # 搜索框的占位提示语
+  placeholder = ""
+  # 最大结果数目
+  maxResultLength = 10
+  # 搜索结果中高亮部分的 HTML 标签
+  highlightTag = "em"
   [params.search.algolia]
     index = ""
     appID = ""
     searchKey = ""
 ```
 
-{{< admonition note "怎样选择搜索引擎的类型?" >}}
+{{< admonition note "怎样选择搜索引擎?" >}}
 以下是两种搜索引擎的对比:
 
 * `lunr`: 简单, 无需同步 `index.json`, 没有 `contentLength` 的限制, 但占用带宽大且性能低 (特别是中文需要一个较大的分词依赖库)
 * `algolia`: 高性能并且占用带宽低, 但需要同步 `index.json` 且有 `contentLength` 的限制
+
+{{< version 0.2.1 >}} 文章内容被 `h2` HTML 标签切分来提供查询效果并且基本实现全文搜索.
+`contentLength` 用来限制 `h2` HTML 标签开头的内容部分的最大长度.
 {{< /admonition >}}
 
 {{< admonition tip "关于 algolia 的使用技巧" >}}
-你需要上传 `index.json` 到 algolia 来激活搜索功能. 你可以使用浏览器来上传 `index.json` 文件但是一个自动化的脚本可能是更好的选择.
+你需要上传 `index.json` 到 algolia 来激活搜索功能. 你可以使用浏览器来上传 `index.json` 文件但是一个自动化的脚本可能效果更好.
+[Algolia Atomic](https://github.com/chrisdmacrae/atomic-algolia) 是一个不错的选择.
 为了兼容 Hugo 的多语言模式, 你需要上传不同语言的 `index.json` 文件到对应的 algolia index, 例如 `zh-cn/index.json` 或 `fr/index.json`...
 {{< /admonition >}}

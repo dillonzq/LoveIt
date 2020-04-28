@@ -22,9 +22,10 @@
 {{- $content = trim $content "\n" -}}
 {{- $id := partial "function/id.html" (dict "content" $content "scratch" .Page.Scratch) -}}
 {{- $key := .Get "group" | string | default $id -}}
-{{- $group := index ((.Page.Scratch.Get "this").typeitMap | default dict) $key -}}
+{{- $typeitMap := (.Page.Scratch.Get "this").typeitMap | default dict -}}
+{{- $group := index $typeitMap $key -}}
 {{- $group = $group | default slice | append $id -}}
-{{- dict $key $group | dict "typeitMap" | merge (.Page.Scratch.Get "this") | .Page.Scratch.Set "this" -}}
+{{- dict $key $group | merge $typeitMap | .Page.Scratch.SetInMap "this" "typeitMap" -}}
 
 <div class="typeit">
     {{- printf `<%s id="%s" class="%s"></%s>` $tag $id (delimit $classList " ") $tag | safeHTML -}}
