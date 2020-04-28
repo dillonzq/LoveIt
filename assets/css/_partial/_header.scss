@@ -384,7 +384,7 @@ header {
           -webkit-line-clamp: 2;
           overflow: hidden;
           text-overflow: ellipsis;
-          overflow-wrap: break-word;
+          @include overflow-wrap(break-word);
           color: $global-font-secondary-color;
 
           [theme=dark] & {
