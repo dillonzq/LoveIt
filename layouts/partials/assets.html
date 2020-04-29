@@ -57,6 +57,8 @@
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- $lightGalleryConfig := dict "selector" ".lightgallery" "speed" 400 "hideBarsDelay" 2000 "thumbnail" true "exThumbImage" "data-thumbnail" "thumbWidth" 80 "thumbContHeight" 80 "actualSize" false -}}
     {{- $config = dict "lightGallery" $lightGalleryConfig | merge $config -}}
+    {{- $styleArr := (.Scratch.Get "this").styleArr | default slice -}}
+    {{- $styleArr | append ".lg-toolbar .lg-icon::after { color: #999; }" | .Scratch.SetInMap "this" "styleArr" -}}
 {{- end -}}
 
 {{- $code := $params.code | default dict -}}
