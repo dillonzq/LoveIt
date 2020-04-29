@@ -22,7 +22,7 @@ Emoji peut être activé dans un projet Hugo de plusieurs façons.
 
 {{< admonition warning >}}
 Sorry, this article has not been completely translated into **French**.
-Welcome to take the time to propose a translation by [making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
+Welcome to take the time to propose a translation by [:(fas fa-code-branch fa-fw): making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
 {{< /admonition >}}
 
 The [`emojify`](https://gohugo.io/functions/emojify/) function can be called directly in templates or [Inline Shortcodes](https://gohugo.io/templates/shortcode-templates#inline-shortcodes).

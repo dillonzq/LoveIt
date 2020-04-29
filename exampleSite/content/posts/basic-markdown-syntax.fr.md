@@ -21,7 +21,7 @@ Cet article propose un exemple de syntaxe Markdown de base qui peut être utilis
 
 {{< admonition warning >}}
 Sorry, this article has not been completely translated into **French**.
-Welcome to take the time to propose a translation by [making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
+Welcome to take the time to propose a translation by [:(fas fa-code-branch fa-fw): making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
 {{< /admonition >}}
 
 {{< admonition >}}

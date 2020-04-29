@@ -8,10 +8,17 @@ header {
   }
 
   .logo {
-    min-height: 1.25em;
-    height: 1.25em;
+    min-height: 1.5em;
+    height: 1.5em;
     vertical-align: text-bottom;
+  }
+
+  .logo, .header-title-pre {
     padding-right: .25rem;
+  }
+
+  .header-title-post {
+    padding-left: .25rem;
   }
 }
 
