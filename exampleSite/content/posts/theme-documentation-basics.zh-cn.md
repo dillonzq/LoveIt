@@ -807,6 +807,8 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 ### 4.1 兼容性 {#language-compatibility}
 
+{{< version 0.2.0 changed >}}
+
 | 语言 | Hugo 代码 | HTML `lang` 属性 | 主题文档 | Lunr.js 支持 |
 |:---- |:----:|:----:|:----:|:----:|
 | 英语 | `en` | `en` | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
@@ -815,8 +817,6 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 | 波兰语 | `pl` | `pl` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
 | 巴西葡萄牙语 | `pt-br` | `pt-BR` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 意大利语 | `it` | `it` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-
-:(far fa-kiss-wink-heart fa-fw): **请自由地[贡献代码](https://github.com/dillonzq/LoveIt/pulls)!**
 
 ### 4.2 基本配置
 
@@ -946,7 +946,7 @@ defaultContentLanguage = "zh-cn"
 
 要覆盖默认值, 请在你项目的 i18n 目录 `i18n/<languageCode>.toml` 中创建一个新文件，并从 `themes/LoveIt/i18n/en.toml` 中获得提示.
 
-另外, 由于你的翻译可能会帮助到其他人, 请花点时间通过 [创建一个 PR](https://github.com/dillonzq/LoveIt/pulls) 来贡献主题翻译, 谢谢!
+另外, 由于你的翻译可能会帮助到其他人, 请花点时间通过 [:(fas fa-code-branch fa-fw): 创建一个 PR](https://github.com/dillonzq/LoveIt/pulls) 来贡献主题翻译, 谢谢!
 
 ## 5 搜索
 

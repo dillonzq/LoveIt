@@ -803,6 +803,8 @@ In `config/css/_custom.scss`, you can add some css style code to customize the s
 
 ### 4.1 Compatibility {#language-compatibility}
 
+{{< version 0.2.0 changed >}}
+
 | Language             | Hugo Code | HTML `lang` Attribute | Theme Docs                    | Lunr.js Support               |
 |:-------------------- |:---------:|:---------------------:|:-----------------------------:|:-----------------------------:|
 | English              | `en`      | `en`                  | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
@@ -811,8 +813,6 @@ In `config/css/_custom.scss`, you can add some css style code to customize the s
 | Polish               | `pl`      | `pl`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
 | Brazilian Portuguese | `pt-br`   | `pt-BR`               | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Italian              | `it`      | `it`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-
-:(far fa-kiss-wink-heart fa-fw): **Feel free to [contribute](https://github.com/dillonzq/LoveIt/pulls)!**
 
 ### 4.2 Basic Configuration
 
@@ -941,7 +941,7 @@ Translations strings are used for common default values used in the theme. Trans
 
 To override these values, create a new file in your local i18n folder `i18n/<languageCode>.toml` and inspire yourself from `themes/LoveIt/i18n/en.toml`.
 
-By the way, as these translations could be used by other people, please take the time to propose a translation by [making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
+By the way, as these translations could be used by other people, please take the time to propose a translation by [:(fas fa-code-branch fa-fw): :(fas fa-code-branch fa-fw): making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
 
 ## 5 Search
 

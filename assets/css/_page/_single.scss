@@ -129,7 +129,6 @@
 
     a {
       @include overflow-wrap(break-word);
-      @include line-break(anywhere);
 
       [theme=dark] & b, [theme=dark] & strong {
         color: $single-link-color-dark;
