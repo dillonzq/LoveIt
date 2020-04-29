@@ -929,62 +929,62 @@ enableEmoji = true
   # CSS 和 JS 文件的 CDN 设置
   [params.cdn]
     # normalize.css@8.0.1 https://github.com/necolas/normalize.css
-    normalizeCSS = ''
+    normalizeCSS = ""
     # fontawesome-free@5.13.0 https://fontawesome.com/
-    fontawesomeFreeCSS = ''
+    fontawesomeFreeCSS = ""
     # simple-icons@2.9.0 https://github.com/simple-icons/simple-icons
-    # ('https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/')
-    simpleIconsPrefix = ''
+    # ("https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/")
+    simpleIconsPrefix = ""
     # animate.css@3.7.2 https://github.com/daneden/animate.css
-    animateCSS = ''
+    animateCSS = ""
     # smooth-scroll@16.1.3 https://github.com/cferdinandi/smooth-scroll
-    smoothScrollJS = ''
+    smoothScrollJS = ""
     # autocomplete.js@0.37.1 https://github.com/algolia/autocomplete.js
-    autocompleteJS = ''
+    autocompleteJS = ""
     # lunr.js@2.3.8 https://lunrjs.com/
-    lunrJS = ''
+    lunrJS = ""
     # algoliasearch@4.2.0 https://github.com/algolia/algoliasearch-client-javascript
-    algoliasearchJS = ''
+    algoliasearchJS = ""
     # lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
-    lazysizesJS = ''
+    lazysizesJS = ""
     # twemoji@12.1.5 https://github.com/twitter/twemoji
-    twemojiJS = ''
+    twemojiJS = ""
     # lightgallery.js@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0 https://github.com/sachinchoolur/lightgallery.js
-    lightgalleryCSS = ''
-    lightgalleryJS = ''
-    lightgalleryThumbnailJS = ''
-    lightgalleryZoomJS = ''
+    lightgalleryCSS = ""
+    lightgalleryJS = ""
+    lightgalleryThumbnailJS = ""
+    lightgalleryZoomJS = ""
     # clipboard.js@2.0.6 https://github.com/zenorocha/clipboard.js
-    clipboardJS = ''
+    clipboardJS = ""
     # sharer.js@0.4.0 https://github.com/ellisonleao/sharer.js
-    sharerJS = ''
+    sharerJS = ""
     # typeit@7.0.3 https://github.com/alexmacarthur/typeit
-    typeitJS = ''
+    typeitJS = ""
     # katex@0.11.1 https://katex.org/
-    katexCSS = ''
-    katexJS = ''
-    katexAutoRenderJS = ''
-    katexCopyTexCSS = ''
-    katexCopyTexJS = ''
-    katexMhchemJS = ''
+    katexCSS = ""
+    katexJS = ""
+    katexAutoRenderJS = ""
+    katexCopyTexCSS = ""
+    katexCopyTexJS = ""
+    katexMhchemJS = ""
     # mermaid@8.5.0 https://github.com/knsv/mermaid
-    mermaidJS = ''
+    mermaidJS = ""
     # echarts@4.7.0 https://echarts.apache.org/
-    echartsJS = ''
-    echartsMacaronsJS = ''
+    echartsJS = ""
+    echartsMacaronsJS = ""
     # mapbox-gl@1.9.1 https://docs.mapbox.com/mapbox-gl-js
-    mapboxGLCSS = ''
-    mapboxGLJS = ''
+    mapboxGLCSS = ""
+    mapboxGLJS = ""
     # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
-    aplayerCSS = ''
-    aplayerJS = ''
+    aplayerCSS = ""
+    aplayerJS = ""
     # meting@2.0.1 https://github.com/metowolf/MetingJS
-    metingJS = ''
+    metingJS = ""
     # gitalk@1.6.2 https://github.com/gitalk/gitalk
-    gitalkCSS = ''
-    gitalkJS = ''
+    gitalkCSS = ""
+    gitalkJS = ""
     # valine@1.4.9 https://valine.js.org/
-    valineJS = ''
+    valineJS = ""
 
 # Markup related configuration in Hugo
 # Hugo 解析文档的配置
