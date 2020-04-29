@@ -72,29 +72,17 @@
       h5,
       h6 {
         line-height: 2;
-
-        &::before {
-          content: "|";
-          margin-right: .3125rem;
-          color: $global-link-color;
-
-          [theme=dark] & {
-            color: $global-link-color-dark;
-          }
-        }
       }
 
       h2 {
         font-size: 1.2rem;
-
-        &::before {
-          content: "#";
-        }
       }
 
-      @include link(true, true);
+      @include link(false, true);
 
       b, strong {
+        color: $global-font-secondary-color;
+
         [theme=dark] & {
           color: $global-font-secondary-color-dark;
         }

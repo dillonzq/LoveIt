@@ -90,3 +90,9 @@
   word-wrap: $value;
   overflow-wrap: $value;
 }
+
+@mixin line-break($value) {
+  -webkit-line-break: $value;
+  -ms-line-break: $value;
+  line-break: $value;
+}

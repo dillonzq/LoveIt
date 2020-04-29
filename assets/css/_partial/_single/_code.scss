@@ -3,6 +3,7 @@ code {
   max-width: 100%;
   padding: 0 .4rem;
   @include overflow-wrap(break-word);
+  @include line-break(anywhere);
   font-size: $code-font-size;
   font-family: $code-font-family;
   color: $code-color;
