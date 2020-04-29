@@ -383,7 +383,7 @@ hugo
     # {{< version 0.2.0 >}} 是否使用 twemoji
     twemoji = false
     # 是否使用 lightgallery
-    lightgallery = true
+    lightgallery = false
     # {{< version 0.2.0 >}} 是否使用 ruby 扩展语法
     ruby = true
     # {{< version 0.2.0 >}} 是否使用 fraction 扩展语法
