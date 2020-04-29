@@ -86,6 +86,7 @@ enableEmoji = true
       [[languages.en.menu.main]]
         identifier = "github"
         pre = "<i class='fab fa-github fa-fw'></i>"
+        post = ""
         name = ""
         url = "https://github.com/dillonzq/LoveIt"
         title = "GitHub"
@@ -279,6 +280,7 @@ enableEmoji = true
       [[languages.zh-cn.menu.main]]
         identifier = "github"
         pre = "<i class='fab fa-github fa-fw'></i>"
+        post = ""
         name = ""
         url = "https://github.com/dillonzq/LoveIt"
         title = "GitHub"
@@ -468,6 +470,7 @@ enableEmoji = true
       [[languages.fr.menu.main]]
         identifier = "github"
         pre = "<i class='fab fa-github fa-fw'></i>"
+        post = ""
         name = ""
         url = "https://github.com/dillonzq/LoveIt"
         title = "GitHub"
@@ -636,7 +639,7 @@ enableEmoji = true
       name = "LoveIt"
       # you can add extra information before the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
-      pre = "<i class='far fa-kiss-wink-heart fa-fw'></i> "
+      pre = "<i class='far fa-kiss-wink-heart fa-fw'></i>"
       # you can add extra information after the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
       post = ""
