@@ -594,7 +594,9 @@ Please open the code block below to view the complete sample configuration :(far
     lazysizesJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/twitter/twemoji" "twemoji" >}}@12.1.5
     twemojiJS = ""
-    # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0
+    # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3
+    # {{< link "https://github.com/sachinchoolur/lg-thumbnail.js" "lg-thumbnail.js" >}}@1.1.0
+    # {{< link "https://github.com/sachinchoolur/lg-zoom.js" "lg-zoom.js" >}}@1.1.0
     lightgalleryCSS = ""
     lightgalleryJS = ""
     lightgalleryThumbnailJS = ""
