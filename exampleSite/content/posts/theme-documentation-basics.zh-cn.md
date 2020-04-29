@@ -617,7 +617,7 @@ hugo
     # {{< link "https://echarts.apache.org/" "echarts" >}}@4.7.0
     echartsJS = ""
     echartsMacaronsJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.9.1
+    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.10.0
     mapboxGLCSS = ""
     mapboxGLJS = ""
     # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
@@ -628,7 +628,7 @@ hugo
     # {{< link "https://github.com/gitalk/gitalk" "gitalk" >}}@1.6.2
     gitalkCSS = ""
     gitalkJS = ""
-    # {{< link "https://valine.js.org/" "valine" >}}@1.4.9
+    # {{< link "https://valine.js.org/" "valine" >}}@1.4.14
     valineJS = ""
 
 # Hugo 解析文档的配置

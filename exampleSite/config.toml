@@ -974,7 +974,7 @@ enableEmoji = true
     # echarts@4.7.0 https://echarts.apache.org/
     echartsJS = ""
     echartsMacaronsJS = ""
-    # mapbox-gl@1.9.1 https://docs.mapbox.com/mapbox-gl-js
+    # mapbox-gl@1.10.0 https://docs.mapbox.com/mapbox-gl-js
     mapboxGLCSS = ""
     mapboxGLJS = ""
     # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
@@ -985,7 +985,7 @@ enableEmoji = true
     # gitalk@1.6.2 https://github.com/gitalk/gitalk
     gitalkCSS = ""
     gitalkJS = ""
-    # valine@1.4.9 https://valine.js.org/
+    # valine@1.4.14 https://valine.js.org/
     valineJS = ""
 
 # Markup related configuration in Hugo

@@ -17,8 +17,8 @@ typeit@7.0.3 https://github.com/alexmacarthur/typeit
 katex@0.11.1 https://katex.org/
 mermaid@8.5.0 https://github.com/knsv/mermaid
 echarts@4.7.0 https://echarts.apache.org/
-mapbox-gl@1.9.1 https://github.com/mapbox/mapbox-gl-js
+mapbox-gl@1.10.0 https://github.com/mapbox/mapbox-gl-js
 aplayer@1.10.1 https://github.com/MoePlayer/APlayer
 meting@2.0.1 https://github.com/metowolf/MetingJS
 gitalk@1.6.2 https://github.com/gitalk/gitalk
-valine@1.4.9 https://valine.js.org/
+valine@1.4.14 https://valine.js.org/
