@@ -13,7 +13,7 @@
       padding-left: .8rem;
       list-style: none;
 
-      a::before {
+      a:first-child::before {
         content: "|";
         font-weight: bolder;
         margin-right: .5rem;
