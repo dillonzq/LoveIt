@@ -18,7 +18,7 @@
         {{- if gt $i 0 -}}
             {{- $chunked = printf "<h2 id=%s" $chunked -}}
         {{- end -}}
-        {{- $chunked = $chunked | plainify | htmlUnescape | replaceRE `[\n ]+` ` ` -}}
+        {{- $chunked = $chunked | plainify | htmlUnescape | replace "\n" " " | replace "\t" " " | replaceRE " +" " " -}}
         {{- if gt $.Site.Params.search.contentLength 0 -}}
             {{- $chunked = substr $chunked 0 $.Site.Params.search.contentLength -}}
         {{- end -}}
