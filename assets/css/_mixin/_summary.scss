@@ -58,6 +58,7 @@
       h6,
       p {
         font-size: 1rem;
+        line-height: 1.5;
         display: inline;
 
         &::after {
@@ -66,16 +67,8 @@
         }
       }
 
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        line-height: 2;
-      }
-
       h2 {
-        font-size: 1.2rem;
+        font-size: 1.125rem;
       }
 
       @include link(false, true);
