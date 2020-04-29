@@ -594,7 +594,7 @@ hugo
     twemojiJS = ""
     # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3
     # {{< link "https://github.com/sachinchoolur/lg-thumbnail.js" "lg-thumbnail.js" >}}@1.1.0
-    # {{< link "https://github.com/sachinchoolur/lg-zoom.js" "lg-zoom.js" >}}@1.1.0
+    # {{< link "https://github.com/sachinchoolur/lg-zoom.js" "lg-zoom.js" >}}@1.0.1
     lightgalleryCSS = ""
     lightgalleryJS = ""
     lightgalleryThumbnailJS = ""
