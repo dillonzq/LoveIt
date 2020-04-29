@@ -572,62 +572,64 @@ hugo
   # CSS 和 JS 文件的 CDN 设置
   [params.cdn]
     # {{< version 0.2.0 >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
-    normalizeCSS = ''
+    normalizeCSS = ""
     # {{< link "https://fontawesome.com/" "fontawesome-free" >}}@5.13.0
-    fontawesomeFreeCSS = ''
+    fontawesomeFreeCSS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/simple-icons/simple-icons" "simple-icons" >}}@2.9.0
-    # ('https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/')
-    simpleIconsPrefix = ''
+    # ("https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/")
+    simpleIconsPrefix = ""
     # animate.css@3.7.2 https://github.com/daneden/animate.css
-    animateCSS = ''
+    animateCSS = ""
     # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.3
-    smoothScrollJS = ''
+    smoothScrollJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/autocomplete.js" "autocomplete.js" >}}@0.37.1
-    autocompleteJS = ''
+    autocompleteJS = ""
     # {{< version 0.2.0 >}} {{< link "https://lunrjs.com/" "lunr.js" >}}@2.3.8
-    lunrJS = ''
+    lunrJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/algoliasearch-client-javascript" "algoliasearch" >}}@4.2.0
-    algoliasearchJS = ''
+    algoliasearchJS = ""
     # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
-    lazysizesJS = ''
+    lazysizesJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/twitter/twemoji" "twemoji" >}}@12.1.5
-    twemojiJS = ''
-    # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0
-    lightgalleryCSS = ''
-    lightgalleryJS = ''
-    lightgalleryThumbnailJS = ''
-    lightgalleryZoomJS = ''
+    twemojiJS = ""
+    # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3
+    # {{< link "https://github.com/sachinchoolur/lg-thumbnail.js" "lg-thumbnail.js" >}}@1.1.0
+    # {{< link "https://github.com/sachinchoolur/lg-zoom.js" "lg-zoom.js" >}}@1.1.0
+    lightgalleryCSS = ""
+    lightgalleryJS = ""
+    lightgalleryThumbnailJS = ""
+    lightgalleryZoomJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/zenorocha/clipboard.js" "clipboard.js" >}}@2.0.6
-    clipboardJS = ''
+    clipboardJS = ""
     # {{< link "https://github.com/ellisonleao/sharer.js" "sharer.js" >}}@0.4.0
-    sharerJS = ''
+    sharerJS = ""
     # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@7.0.3
-    typeitJS = ''
+    typeitJS = ""
     # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
-    katexCSS = ''
-    katexJS = ''
-    katexAutoRenderJS = ''
-    katexCopyTexCSS = ''
-    katexCopyTexJS = ''
-    katexMhchemJS = ''
+    katexCSS = ""
+    katexJS = ""
+    katexAutoRenderJS = ""
+    katexCopyTexCSS = ""
+    katexCopyTexJS = ""
+    katexMhchemJS = ""
     # {{< link "https://github.com/knsv/mermaid" "mermaid" >}}@8.5.0
-    mermaidJS = ''
+    mermaidJS = ""
     # {{< link "https://echarts.apache.org/" "echarts" >}}@4.7.0
-    echartsJS = ''
-    echartsMacaronsJS = ''
+    echartsJS = ""
+    echartsMacaronsJS = ""
     # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.9.1
-    mapboxGLCSS = ''
-    mapboxGLJS = ''
+    mapboxGLCSS = ""
+    mapboxGLJS = ""
     # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
-    aplayerCSS = ''
-    aplayerJS = ''
+    aplayerCSS = ""
+    aplayerJS = ""
     # {{< link "https://github.com/metowolf/MetingJS" "meting" >}}@2.0.1
-    metingJS = ''
+    metingJS = ""
     # {{< link "https://github.com/gitalk/gitalk" "gitalk" >}}@1.6.2
-    gitalkCSS = ''
-    gitalkJS = ''
+    gitalkCSS = ""
+    gitalkJS = ""
     # {{< link "https://valine.js.org/" "valine" >}}@1.4.9
-    valineJS = ''
+    valineJS = ""
 
 # Hugo 解析文档的配置
 [markup]
