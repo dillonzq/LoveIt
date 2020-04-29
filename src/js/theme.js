@@ -237,7 +237,7 @@ class Theme {
                         this._algoliaIndex
                             .search(query, {
                                 offset: 0,
-                                length: searchConfig.maxResultLength * 3,
+                                length: searchConfig.maxResultLength * 10,
                                 attributesToHighlight: ['title'],
                                 attributesToSnippet: ['content:30'],
                                 highlightPreTag: `<${searchConfig.highlightTag}>`,

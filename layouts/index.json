@@ -14,16 +14,23 @@
     {{- end -}}
     {{- $params := .Params | merge $.Site.Params.page -}}
     {{- $content := dict "content" .Content "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" -}}
-    {{- range $i, $chunked := split $content "<h2 id=" -}}
+    {{- range $i, $contenti := split $content "<h2 id=" -}}
         {{- if gt $i 0 -}}
-            {{- $chunked = printf "<h2 id=%s" $chunked -}}
+            {{- $contenti = printf "<h2 id=%s" $contenti -}}
         {{- end -}}
-        {{- $chunked = $chunked | plainify | htmlUnescape | replace "\n" " " | replace "\t" " " | replaceRE " +" " " -}}
-        {{- if gt $.Site.Params.search.contentLength 0 -}}
-            {{- $chunked = substr $chunked 0 $.Site.Params.search.contentLength -}}
+        {{- range $j, $contentj := split $contenti "<h3 id=" -}}
+            {{- if gt $j 0 -}}
+                {{- $contentj = printf "<h3 id=%s" $contentj -}}
+            {{- end -}}
+            {{- $contentj = $contentj | plainify | htmlUnescape | replaceRE `[\n\t ]+` " " -}}
+            {{- if gt $.Site.Params.search.contentLength 0 -}}
+                {{- $contentj = substr $contentj 0 $.Site.Params.search.contentLength -}}
+            {{- end -}}
+            {{- if $contentj | and (ne $contentj " ") -}}
+                {{- $one := printf "%s:%d:%d" $uri $i $j | dict "content" $contentj "objectID" | merge $meta -}}
+                {{- $index = $index | append $one -}}
+            {{- end -}}
         {{- end -}}
-        {{- $one := printf "%s:%d" $uri $i | dict "content" $chunked "objectID" | merge $meta -}}
-        {{- $index = $index | append $one -}}
     {{- end -}}
 {{- end -}}
 

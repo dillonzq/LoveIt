@@ -222,7 +222,7 @@ Please open the code block below to view the complete sample configuration :(far
     # type of search engine ("lunr", "algolia")
     type = "lunr"
     # max index length of the chunked content
-    contentLength = 5000
+    contentLength = 4000
     # placeholder of the search bar
     placeholder = ""
     # {{< version 0.2.1 >}} max number of results length
@@ -972,7 +972,7 @@ Here is the search configuration in your [site configuration](#site-configuratio
   # type of search engine ("lunr", "algolia")
   type = "lunr"
   # max index length of the chunked content
-  contentLength = 5000
+  contentLength = 4000
   # placeholder of the search bar
   placeholder = ""
   # {{< version 0.2.1 >}} max number of results length
@@ -992,8 +992,8 @@ The following is a comparison of two search engines:
   but high bandwidth and low performance (Especially for Chinese which needs a large segmentit library)
 * `algolia`: high performance and low bandwidth, but need to synchronize `index.json` and limit for `contentLength`
 
-{{< version 0.2.1 >}} The content of the post is separated by `h2` HTML tag to improve query performance and basically implement full-text search.
-`contentLength` is used to limit the max index length of the part starting with `h2` HTML tag.
+{{< version 0.2.3 >}} The content of the post is separated by `h2` and `h3` HTML tag to improve query performance and basically implement full-text search.
+`contentLength` is used to limit the max index length of the part starting with `h2` and `h3` HTML tag.
 {{< /admonition >}}
 
 {{< admonition tip "Tips about algolia" >}}
