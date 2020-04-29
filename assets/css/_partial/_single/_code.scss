@@ -54,135 +54,138 @@ code, pre, .highlight table, .highlight tr, .highlight td {
   }
 }
 
-.highlight > .chroma {
-  position: relative;
+.highlight {
   line-height: 1.4em;
   margin: .5rem 0;
 
-  .code-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    width: 100%;
-    font-family: $global-font-family;
-    font-weight: bold;
-    color: $code-info-color;
-    background: darken($code-background-color, 8%);
+  > .chroma {
+    position: relative;
 
-    [theme=dark] & {
-      color: $code-info-color-dark;
-      background: darken($code-background-color-dark, 6%);
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    .code-title {
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
       width: 100%;
+      font-family: $global-font-family;
+      font-weight: bold;
+      color: $code-info-color;
+      background: darken($code-background-color, 8%);
+
+      [theme=dark] & {
+        color: $code-info-color-dark;
+        background: darken($code-background-color-dark, 6%);
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      .code-title {
+        width: 100%;
+        padding: .4rem;
+      }
+
+      .code-title::after {
+        padding-left: .2rem;
+        content: 'Code';
+      }
+
+      @each $type, $text in $code-type-map {
+        &.#{$type} .code-title::after {
+          content: $text;
+        }
+      }
+    }
+
+    .lntd:first-child {
+      min-width: 1.6rem;
+      text-align: right;
+    }
+
+    .lntd:last-child {
+      width: 100%;
+
+      pre {
+        @include max-content(min-width);
+      }
+    }
+
+    .ln {
+      padding-right: .75rem;
+    }
+
+    .hl {
+      display: block;
+      background-color: darken($code-background-color, 10%);
+
+      [theme=dark] & {
+        background-color: darken($code-background-color-dark, 5%);
+      }
+    }
+
+    .ln, .lnt {
+      color: $global-font-secondary-color;
+
+      [theme=dark] & {
+        color: $global-font-secondary-color-dark;
+      }
+    }
+
+    .arrow {
+      padding: 0 .2rem;
+      @include transition(transform 0.2s ease);
+    }
+
+    .ellipses {
       padding: .4rem;
     }
 
-    .code-title::after {
-      padding-left: .2rem;
-      content: 'Code';
-    }
+    .copy {
+      display: none;
+      padding: .4rem;
 
-    @each $type, $text in $code-type-map {
-      &.#{$type} .code-title::after {
-        content: $text;
-      }
-    }
-  }
+      &:hover {
+        cursor: pointer;
+        color: $global-link-hover-color;
 
-  .lntd:first-child {
-    min-width: 1.6rem;
-    text-align: right;
-  }
-
-  .lntd:last-child {
-    width: 100%;
-
-    pre {
-      @include max-content(min-width);
-    }
-  }
-
-  .ln {
-    padding-right: .75rem;
-  }
-
-  .hl {
-    display: block;
-    background-color: darken($code-background-color, 10%);
-
-    [theme=dark] & {
-      background-color: darken($code-background-color-dark, 5%);
-    }
-  }
-
-  .ln, .lnt {
-    color: $global-font-secondary-color;
-
-    [theme=dark] & {
-      color: $global-font-secondary-color-dark;
-    }
-  }
-
-  .arrow {
-    padding: 0 .2rem;
-    @include transition(transform 0.2s ease);
-  }
-
-  .ellipses {
-    padding: .4rem;
-  }
-
-  .copy {
-    display: none;
-    padding: .4rem;
-
-    &:hover {
-      cursor: pointer;
-      color: $global-link-hover-color;
-
-      [theme=dark] & {
-        color: $global-link-hover-color-dark;
-      }
-    }
-  }
-
-  .table-wrapper {
-    max-height: 0;
-    overflow-y: hidden;
-    @include details-transition-open;
-  }
-
-  &.open {
-    .code-header {
-      background: darken($code-background-color, 3%);
-
-      [theme=dark] & {
-        background: darken($code-background-color-dark, 3%);
+        [theme=dark] & {
+          color: $global-link-hover-color-dark;
+        }
       }
     }
 
     .table-wrapper {
-      max-height: $MAX_LENGTH;
-      @include details-transition-close;
+      max-height: 0;
+      overflow-y: hidden;
+      @include details-transition-open;
     }
 
-    .arrow {
-      @include transform(rotate(90deg));
-    }
+    &.open {
+      .code-header {
+        background: darken($code-background-color, 3%);
 
-    .ellipses {
-      display: none;
-    }
+        [theme=dark] & {
+          background: darken($code-background-color-dark, 3%);
+        }
+      }
 
-    .copy {
-      display: inline;
+      .table-wrapper {
+        max-height: $MAX_LENGTH;
+        @include details-transition-close;
+      }
+
+      .arrow {
+        @include transform(rotate(90deg));
+      }
+
+      .ellipses {
+        display: none;
+      }
+
+      .copy {
+        display: inline;
+      }
     }
   }
 
