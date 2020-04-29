@@ -161,7 +161,7 @@ class Theme {
                 dropdownMenuContainer: `#search-dropdown-${classSuffix}`,
                 clearOnSelected: true,
                 cssClasses: { noPrefix: true },
-             // debug: true,
+                debug: true,
             }, {
                 name: 'search',
                 source: (query, callback) => {
