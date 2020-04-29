@@ -485,11 +485,11 @@ hugo
         enable = false
         appId = ""
         appKey = ""
-        placeholder = "Your comment ..."
+        placeholder = ""
         avatar = "mp"
         meta= ""
         pageSize = 10
-        lang = "en"
+        lang = ""
         visitor = true
         recordIP = true
         highlight = true
