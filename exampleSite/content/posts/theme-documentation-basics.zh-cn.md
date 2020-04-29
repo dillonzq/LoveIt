@@ -225,7 +225,7 @@ hugo
     # 搜索引擎的类型 ("lunr", "algolia")
     type = "lunr"
     # 文章内容最长索引长度
-    contentLength = 5000
+    contentLength = 4000
     # 搜索框的占位提示语
     placeholder = ""
     # 最大结果数目
@@ -977,7 +977,7 @@ defaultContentLanguage = "zh-cn"
   # 搜索引擎的类型 ("lunr", "algolia")
   type = "lunr"
   # 文章内容最长索引长度
-  contentLength = 5000
+  contentLength = 4000
   # 搜索框的占位提示语
   placeholder = ""
   # 最大结果数目
@@ -996,8 +996,8 @@ defaultContentLanguage = "zh-cn"
 * `lunr`: 简单, 无需同步 `index.json`, 没有 `contentLength` 的限制, 但占用带宽大且性能低 (特别是中文需要一个较大的分词依赖库)
 * `algolia`: 高性能并且占用带宽低, 但需要同步 `index.json` 且有 `contentLength` 的限制
 
-{{< version 0.2.1 >}} 文章内容被 `h2` HTML 标签切分来提供查询效果并且基本实现全文搜索.
-`contentLength` 用来限制 `h2` HTML 标签开头的内容部分的最大长度.
+{{< version 0.2.3 >}} 文章内容被 `h2` 和 `h3` HTML 标签切分来提供查询效果并且基本实现全文搜索.
+`contentLength` 用来限制 `h2` 和 `h3` HTML 标签开头的内容部分的最大长度.
 {{< /admonition >}}
 
 {{< admonition tip "关于 algolia 的使用技巧" >}}

@@ -116,7 +116,7 @@ enableEmoji = true
         # type of search engine ("lunr", "algolia")
         type = "algolia"
         # max index length of the chunked content
-        contentLength = 5000
+        contentLength = 4000
         # placeholder of the search bar
         placeholder = ""
         # max number of results length
@@ -310,7 +310,7 @@ enableEmoji = true
         # 搜索引擎的类型 ("lunr", "algolia")
         type = "algolia"
         # 文章内容最长索引长度
-        contentLength = 5000
+        contentLength = 4000
         # 搜索框的占位提示语
         placeholder = ""
         # 最大结果数目
@@ -500,7 +500,7 @@ enableEmoji = true
         # type of search engine ("lunr", "algolia")
         type = "algolia"
         # max index length of the chunked content
-        contentLength = 5000
+        contentLength = 4000
         # placeholder of the search bar
         placeholder = ""
         # max number of results length
