@@ -42,13 +42,16 @@ body {
 }
 
 @import "../_partial/mask";
-
-a {
-  text-decoration: none;
-}
-
 @include link(true, true);
 
 @import "../_partial/icon";
 @import "../_partial/details";
 @import "../_partial/fixed-button";
+
+a {
+  text-decoration: none;
+}
+
+.lg-toolbar .lg-icon::after {
+  color: #999;
+}
