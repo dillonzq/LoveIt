@@ -44,13 +44,11 @@ This page enables `twemoji` to make emoji look beautiful everywhere.
 Set `twemoji` to `true` in your [front matter](../theme-documentation-content#front-matter) or in the `params.page` part of the [site configuration](https://gohugo.io/getting-started/configuration/) to use :(far fa-grin-tongue-wink fa-fw): Twemoji.
 {{< /admonition >}}
 
-## Emoji Cheat Sheet
+The following **cheat sheet** is a useful reference for emoji shorthand codes.
 
-The following cheat sheet is a useful reference for emoji shorthand codes.
+## Smileys & Emotion
 
-### Smileys & Emotion
-
-#### Face Smiling
+### Face Smiling
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -62,7 +60,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :wink: | `wink` | :blush: | `blush` |
 | :innocent: | `innocent` | | |
 
-#### Face Affection
+### Face Affection
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -70,7 +68,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :kissing: | `kissing` | :relaxed: | `relaxed` |
 | :kissing_closed_eyes: | `kissing_closed_eyes` | :kissing_smiling_eyes: | `kissing_smiling_eyes` |
 
-#### Face Tongue
+### Face Tongue
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -78,13 +76,13 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :stuck_out_tongue_winking_eye: | `stuck_out_tongue_winking_eye` | :stuck_out_tongue_closed_eyes: | `stuck_out_tongue_closed_eyes` |
 | :money_mouth_face: | `money_mouth_face` | | |
 
-#### Face Hand
+### Face Hand
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :hugs: | `hugs` | :thinking: | `thinking` |
 
-#### Face Neutral Skeptical
+### Face Neutral Skeptical
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -94,7 +92,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :roll_eyes: | `roll_eyes` | :grimacing: | `grimacing` |
 | :lying_face: | `lying_face` | | |
 
-#### Face Sleepy
+### Face Sleepy
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -102,7 +100,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :sleepy: | `sleepy` | :drooling_face: | `drooling_face` |
 | :sleeping: | `sleeping` | | |
 
-#### Face Unwell
+### Face Unwell
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -110,19 +108,19 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :face_with_head_bandage: | `face_with_head_bandage` | :nauseated_face: | `nauseated_face` |
 | :sneezing_face: | `sneezing_face` | :dizzy_face: | `dizzy_face` |
 
-#### Face Hat
+### Face Hat
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :cowboy_hat_face: | `cowboy_hat_face` | | |
 
-#### Face Glasses
+### Face Glasses
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :sunglasses: | `sunglasses` | :nerd_face: | `nerd_face` |
 
-#### Face Concerned
+### Face Concerned
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -138,7 +136,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :disappointed: | `disappointed` | :sweat: | `sweat` |
 | :weary: | `weary` | :tired_face: | `tired_face` |
 
-#### Face Negative
+### Face Negative
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -147,7 +145,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :imp: | `imp` | :skull: | `skull` |
 | :skull_and_crossbones: | `skull_and_crossbones` | | |
 
-#### Face Costume
+### Face Costume
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -156,7 +154,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :ghost: | `ghost` | :alien: | `alien` |
 | :space_invader: | `space_invader` | :robot: | `robot` |
 
-#### Cat Face
+### Cat Face
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -166,14 +164,14 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :scream_cat: | `scream_cat` | :crying_cat_face: | `crying_cat_face` |
 | :pouting_cat: | `pouting_cat` | | |
 
-#### Monkey Face
+### Monkey Face
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :see_no_evil: | `see_no_evil` | :hear_no_evil: | `hear_no_evil` |
 | :speak_no_evil: | `speak_no_evil` | | |
 
-#### Emotion
+### Emotion
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -194,9 +192,9 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :right_anger_bubble: | `right_anger_bubble` | :thought_balloon: | `thought_balloon` |
 | :zzz: | `zzz` | | |
 
-### People & Body
+## People & Body
 
-#### Hand Fingers Open
+### Hand Fingers Open
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -204,7 +202,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :raised_hand_with_fingers_splayed: | `raised_hand_with_fingers_splayed` | :hand: | `hand` <br /> `raised_hand` |
 | :vulcan_salute: | `vulcan_salute` | | |
 
-#### Hand Fingers Partial
+### Hand Fingers Partial
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -212,7 +210,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :crossed_fingers: | `crossed_fingers` | :metal: | `metal` |
 | :call_me_hand: | `call_me_hand` | | |
 
-#### Hand Single Finger
+### Hand Single Finger
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -220,7 +218,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :point_up_2: | `point_up_2` | :fu: | `fu` <br /> `middle_finger` |
 | :point_down: | `point_down` | :point_up: | `point_up` |
 
-#### Hand Fingers Closed
+### Hand Fingers Closed
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -228,7 +226,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :fist: | `fist` <br /> `fist_raised` | :facepunch: | `facepunch` <br /> `fist_oncoming` <br /> `punch` |
 | :fist_left: | `fist_left` | :fist_right: | `fist_right` |
 
-#### Hands
+### Hands
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -236,14 +234,14 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :open_hands: | `open_hands` | :handshake: | `handshake` |
 | :pray: | `pray` | | |
 
-#### Hand Prop
+### Hand Prop
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :writing_hand: | `writing_hand` | :nail_care: | `nail_care` |
 | :selfie: | `selfie` | | |
 
-#### Body Parts
+### Body Parts
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -252,7 +250,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :eye: | `eye` | :tongue: | `tongue` |
 | :lips: | `lips` | | |
 
-#### Person
+### Person
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -262,7 +260,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :blonde_woman: | `blonde_woman` | :older_man: | `older_man` |
 | :older_woman: | `older_woman` | | |
 
-#### Person Gesture
+### Person Gesture
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -276,7 +274,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :man_facepalming: | `man_facepalming` | :woman_facepalming: | `woman_facepalming` |
 | :man_shrugging: | `man_shrugging` | :woman_shrugging: | `woman_shrugging` |
 
-#### Person Role
+### Person Role
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -305,14 +303,14 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :man_with_gua_pi_mao: | `man_with_gua_pi_mao` | :man_in_tuxedo: | `man_in_tuxedo` |
 | :bride_with_veil: | `bride_with_veil` | :pregnant_woman: | `pregnant_woman` |
 
-#### Person Fantasy
+### Person Fantasy
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :angel: | `angel` | :santa: | `santa` |
 | :mrs_claus: | `mrs_claus` | | |
 
-#### Person Activity
+### Person Activity
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -324,7 +322,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :business_suit_levitating: | `business_suit_levitating` | :dancers: | `dancers` <br /> `dancing_women` |
 | :dancing_men: | `dancing_men` | | |
 
-#### Person Sport
+### Person Sport
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -344,13 +342,13 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :man_playing_handball: | `man_playing_handball` | :woman_playing_handball: | `woman_playing_handball` |
 | :man_juggling: | `man_juggling` | :woman_juggling: | `woman_juggling` |
 
-#### Person Resting
+### Person Resting
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :bath: | `bath` | :sleeping_bed: | `sleeping_bed` |
 
-#### Family
+### Family
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -372,16 +370,16 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :family_woman_boy_boy: | `family_woman_boy_boy` | :family_woman_girl: | `family_woman_girl` |
 | :family_woman_girl_boy: | `family_woman_girl_boy` | :family_woman_girl_girl: | `family_woman_girl_girl` |
 
-#### Person Symbol
+### Person Symbol
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :speaking_head: | `speaking_head` | :bust_in_silhouette: | `bust_in_silhouette` |
 | :busts_in_silhouette: | `busts_in_silhouette` | :footprints: | `footprints` |
 
-### Animals & Nature
+## Animals & Nature
 
-#### Animal Mammal
+### Animal Mammal
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -409,7 +407,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :koala: | `koala` | :panda_face: | `panda_face` |
 | :feet: | `feet` <br /> `paw_prints` | | |
 
-#### Animal Bird
+### Animal Bird
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -420,13 +418,13 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :dove: | `dove` | :eagle: | `eagle` |
 | :duck: | `duck` | :owl: | `owl` |
 
-#### Animal Amphibian
+### Animal Amphibian
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :frog: | `frog` |
 
-#### Animal Reptile
+### Animal Reptile
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -434,7 +432,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :lizard: | `lizard` | :snake: | `snake` |
 | :dragon_face: | `dragon_face` | :dragon: | `dragon` |
 
-#### Animal Marine
+### Animal Marine
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -444,7 +442,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :shark: | `shark` | :octopus: | `octopus` |
 | :shell: | `shell` | | |
 
-#### Animal Bug
+### Animal Bug
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -454,7 +452,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :spider: | `spider` | :spider_web: | `spider_web` |
 | :scorpion: | `scorpion` | | |
 
-#### Plant Flower
+### Plant Flower
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -464,7 +462,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :hibiscus: | `hibiscus` | :sunflower: | `sunflower` |
 | :blossom: | `blossom` | :tulip: | `tulip` |
 
-#### Plant Other
+### Plant Other
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -475,9 +473,9 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :four_leaf_clover: | `four_leaf_clover` | :maple_leaf: | `maple_leaf` |
 | :fallen_leaf: | `fallen_leaf` | :leaves: | `leaves` |
 
-### Food & Drink
+## Food & Drink
 
-#### Food Fruit
+### Food Fruit
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -490,7 +488,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :strawberry: | `strawberry` | :kiwi_fruit: | `kiwi_fruit` |
 | :tomato: | `tomato` | | |
 
-#### Food Vegetable
+### Food Vegetable
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -500,7 +498,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :cucumber: | `cucumber` | :mushroom: | `mushroom` |
 | :peanuts: | `peanuts` | :chestnut: | `chestnut` |
 
-#### Food Prepared
+### Food Prepared
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -516,7 +514,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :stew: | `stew` | :green_salad: | `green_salad` |
 | :popcorn: | `popcorn` | | |
 
-#### Food Asian
+### Food Asian
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -528,14 +526,14 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :fried_shrimp: | `fried_shrimp` | :fish_cake: | `fish_cake` |
 | :dango: | `dango` | | |
 
-#### Food Marine
+### Food Marine
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :crab: | `crab` | :shrimp: | `shrimp` |
 | :squid: | `squid` | | |
 
-#### Food Sweet
+### Food Sweet
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -546,7 +544,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :candy: | `candy` | :lollipop: | `lollipop` |
 | :custard: | `custard` | :honey_pot: | `honey_pot` |
 
-#### Drink
+### Drink
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -558,7 +556,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :beers: | `beers` | :clinking_glasses: | `clinking_glasses` |
 | :tumbler_glass: | `tumbler_glass` | | |
 
-#### Dishware
+### Dishware
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -566,9 +564,9 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :spoon: | `spoon` | :hocho: | `hocho` <br /> `knife` |
 | :amphora: | `amphora` | | |
 
-### Travel & Places
+## Travel & Places
 
-#### Place Map
+### Place Map
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -576,7 +574,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :earth_asia: | `earth_asia` | :globe_with_meridians: | `globe_with_meridians` |
 | :world_map: | `world_map` | :japan: | `japan` |
 
-#### Place Geographic
+### Place Geographic
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -586,7 +584,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :desert: | `desert` | :desert_island: | `desert_island` |
 | :national_park: | `national_park` | | |
 
-#### Place Building
+### Place Building
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -603,7 +601,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :wedding: | `wedding` | :tokyo_tower: | `tokyo_tower` |
 | :statue_of_liberty: | `statue_of_liberty` | | |
 
-#### Place Religious
+### Place Religious
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -611,7 +609,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :synagogue: | `synagogue` | :shinto_shrine: | `shinto_shrine` |
 | :kaaba: | `kaaba` | | |
 
-#### Place Other
+### Place Other
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -624,7 +622,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :ferris_wheel: | `ferris_wheel` | :roller_coaster: | `roller_coaster` |
 | :barber: | `barber` | :circus_tent: | `circus_tent` |
 
-#### Transport Ground
+### Transport Ground
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -651,7 +649,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :vertical_traffic_light: | `vertical_traffic_light` | :stop_sign: | `stop_sign` |
 | :construction: | `construction` | | |
 
-#### Transport Water
+### Transport Water
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -660,7 +658,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :passenger_ship: | `passenger_ship` | :ferry: | `ferry` |
 | :motor_boat: | `motor_boat` | :ship: | `ship` |
 
-#### Transport Air
+### Transport Air
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -671,13 +669,13 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :aerial_tramway: | `aerial_tramway` | :artificial_satellite: | `artificial_satellite` |
 | :rocket: | `rocket` | | |
 
-#### Hotel
+### Hotel
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :bellhop_bell: | `bellhop_bell` |
 
-#### Time
+### Time
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -698,7 +696,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :clock1030: | `clock1030` | :clock11: | `clock11` |
 | :clock1130: | `clock1130` | | |
 
-#### Sky & Weather
+### Sky & Weather
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -726,9 +724,9 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :comet: | `comet` | :fire: | `fire` |
 | :droplet: | `droplet` | :ocean: | `ocean` |
 
-### Activities
+## Activities
 
-#### Event
+### Event
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -743,7 +741,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :reminder_ribbon: | `reminder_ribbon` | :tickets: | `tickets` |
 | :ticket: | `ticket` | | |
 
-#### Award Medal
+### Award Medal
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -751,7 +749,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :medal_sports: | `medal_sports` | :1st_place_medal: | `1st_place_medal` |
 | :2nd_place_medal: | `2nd_place_medal` | :3rd_place_medal: | `3rd_place_medal` |
 
-#### Sport
+### Sport
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -767,7 +765,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :fishing_pole_and_fish: | `fishing_pole_and_fish` | :running_shirt_with_sash: | `running_shirt_with_sash` |
 | :ski: | `ski` | | |
 
-#### Game
+### Game
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -779,16 +777,16 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :clubs: | `clubs` | :black_joker: | `black_joker` |
 | :mahjong: | `mahjong` | :flower_playing_cards: | `flower_playing_cards` |
 
-#### Arts & Crafts
+### Arts & Crafts
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :performing_arts: | `performing_arts` | :framed_picture: | `framed_picture` |
 | :art: | `art` | | |
 
-### Objects
+## Objects
 
-#### Clothing
+### Clothing
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -807,7 +805,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :prayer_beads: | `prayer_beads` | :lipstick: | `lipstick` |
 | :ring: | `ring` | :gem: | `gem` |
 
-#### Sound
+### Sound
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -817,7 +815,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :postal_horn: | `postal_horn` | :bell: | `bell` |
 | :no_bell: | `no_bell` | | |
 
-#### Music
+### Music
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -827,7 +825,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :microphone: | `microphone` | :headphones: | `headphones` |
 | :radio: | `radio` | | |
 
-#### Musical Instrument
+### Musical Instrument
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -835,7 +833,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :musical_keyboard: | `musical_keyboard` | :trumpet: | `trumpet` |
 | :violin: | `violin` | :drum: | `drum` |
 
-#### Phone
+### Phone
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -843,7 +841,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :phone: | `phone` <br /> `telephone` | :telephone_receiver: | `telephone_receiver` |
 | :pager: | `pager` | :fax: | `fax` |
 
-#### Computer
+### Computer
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -854,7 +852,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :minidisc: | `minidisc` | :floppy_disk: | `floppy_disk` |
 | :cd: | `cd` | :dvd: | `dvd` |
 
-#### Light & Video
+### Light & Video
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -867,7 +865,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :bulb: | `bulb` | :flashlight: | `flashlight` |
 | :izakaya_lantern: | `izakaya_lantern` <br /> `lantern` | | |
 
-#### Book Paper
+### Book Paper
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -881,7 +879,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :bookmark_tabs: | `bookmark_tabs` | :bookmark: | `bookmark` |
 | :label: | `label` | | |
 
-#### Money
+### Money
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -890,7 +888,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :pound: | `pound` | :money_with_wings: | `money_with_wings` |
 | :credit_card: | `credit_card` | :chart: | `chart` |
 
-#### Mail
+### Mail
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -902,7 +900,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :mailbox_with_no_mail: | `mailbox_with_no_mail` | :postbox: | `postbox` |
 | :ballot_box: | `ballot_box` | | |
 
-#### Writing
+### Writing
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -911,7 +909,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :paintbrush: | `paintbrush` | :crayon: | `crayon` |
 | :memo: | `memo` <br /> `pencil` | | |
 
-#### Office
+### Office
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -928,7 +926,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :card_file_box: | `card_file_box` | :file_cabinet: | `file_cabinet` |
 | :wastebasket: | `wastebasket` | | |
 
-#### Lock
+### Lock
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -936,7 +934,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :lock_with_ink_pen: | `lock_with_ink_pen` | :closed_lock_with_key: | `closed_lock_with_key` |
 | :key: | `key` | :old_key: | `old_key` |
 
-#### Tool
+### Tool
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -949,20 +947,20 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :clamp: | `clamp` | :balance_scale: | `balance_scale` |
 | :link: | `link` | :chains: | `chains` |
 
-#### Science
+### Science
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :alembic: | `alembic` | :microscope: | `microscope` |
 | :telescope: | `telescope` | :satellite: | `satellite` |
 
-#### Medical
+### Medical
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :syringe: | `syringe` | :pill: | `pill` |
 
-#### Household
+### Household
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -971,16 +969,16 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :shower: | `shower` | :bathtub: | `bathtub` |
 | :shopping_cart: | `shopping_cart` | | |
 
-#### Other Object
+### Other Object
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :smoking: | `smoking` | :coffin: | `coffin` |
 | :funeral_urn: | `funeral_urn` | :moyai: | `moyai` |
 
-### Symbols
+## Symbols
 
-#### Transport Sign
+### Transport Sign
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -992,7 +990,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :customs: | `customs` | :baggage_claim: | `baggage_claim` |
 | :left_luggage: | `left_luggage` | | |
 
-#### Warning
+### Warning
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -1004,7 +1002,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :underage: | `underage` | :radioactive: | `radioactive` |
 | :biohazard: | `biohazard` | | |
 
-#### Arrow
+### Arrow
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -1020,7 +1018,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :on: | `on` | :soon: | `soon` |
 | :top: | `top` | | |
 
-#### Religion
+### Religion
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -1031,7 +1029,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :star_and_crescent: | `star_and_crescent` | :peace_symbol: | `peace_symbol` |
 | :menorah: | `menorah` | :six_pointed_star: | `six_pointed_star` |
 
-#### Zodiac
+### Zodiac
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -1043,7 +1041,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :aquarius: | `aquarius` | :pisces: | `pisces` |
 | :ophiuchus: | `ophiuchus` | | |
 
-#### Av Symbol
+### Av Symbol
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -1060,14 +1058,14 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :signal_strength: | `signal_strength` | :vibration_mode: | `vibration_mode` |
 | :mobile_phone_off: | `mobile_phone_off` | | |
 
-#### Math
+### Math
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :heavy_multiplication_x: | `heavy_multiplication_x` | :heavy_plus_sign: | `heavy_plus_sign` |
 | :heavy_minus_sign: | `heavy_minus_sign` | :heavy_division_sign: | `heavy_division_sign` |
 
-#### Punctuation
+### Punctuation
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -1076,13 +1074,13 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :grey_exclamation: | `grey_exclamation` | :exclamation: | `exclamation` <br /> `heavy_exclamation_mark` |
 | :wavy_dash: | `wavy_dash` | | |
 
-#### Currency
+### Currency
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
 | :currency_exchange: | `currency_exchange` | :heavy_dollar_sign: | `heavy_dollar_sign` |
 
-#### Keycap
+### Keycap
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -1094,7 +1092,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :eight: | `eight` | :nine: | `nine` |
 | :keycap_ten: | `keycap_ten` | | |
 
-#### Alphabet
+### Alphabet
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -1119,7 +1117,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :secret: | `secret` | :u55b6: | `u55b6` |
 | :u6e80: | `u6e80` | | |
 
-#### Geometric
+### Geometric
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -1135,7 +1133,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :diamond_shape_with_a_dot_inside: | `diamond_shape_with_a_dot_inside` | :radio_button: | `radio_button` |
 | :white_square_button: | `white_square_button` | :black_square_button: | `black_square_button` |
 
-#### Other Symbol
+### Other Symbol
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -1150,9 +1148,9 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :sparkle: | `sparkle` | :copyright: | `copyright` |
 | :registered: | `registered` | :tm: | `tm` |
 
-### Flags
+## Flags
 
-#### Common Flags
+### Common Flags
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
@@ -1160,7 +1158,7 @@ The following cheat sheet is a useful reference for emoji shorthand codes.
 | :crossed_flags: | `crossed_flags` | :black_flag: | `black_flag` |
 | :white_flag: | `white_flag` | :rainbow_flag: | `rainbow_flag` |
 
-#### Country and Region Flags
+### Country and Region Flags
 
 | icon | code | icon | code |
 | :-: | - | :-: | - |
