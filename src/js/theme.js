@@ -238,7 +238,7 @@ class Theme {
                         this._algoliaIndex
                             .search(query, {
                                 offset: 0,
-                                length: searchConfig.maxResultLength * 10,
+                                length: searchConfig.maxResultLength * 5,
                                 attributesToHighlight: ['title'],
                                 attributesToSnippet: ['content:30'],
                                 highlightPreTag: `<${searchConfig.highlightTag}>`,
@@ -637,7 +637,6 @@ class Theme {
                     this._resizeTimeout = null;
                     for (let event of this.resizeEventSet) event();
                     this.initToc();
-                    this.initSmoothScroll();
                     this.initMermaid();
                     this.initSearch();
                 }, 100);
