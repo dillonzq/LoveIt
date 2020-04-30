@@ -590,6 +590,8 @@ hugo
     algoliasearchJS = ""
     # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
     lazysizesJS = ""
+    # {{< version 0.2.3 >}} {{< link "https://github.com/fregante/object-fit-images" "object-fit-images" >}}@3.2.4
+    objectFitImagesJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/twitter/twemoji" "twemoji" >}}@12.1.5
     twemojiJS = ""
     # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3
@@ -603,7 +605,7 @@ hugo
     clipboardJS = ""
     # {{< link "https://github.com/ellisonleao/sharer.js" "sharer.js" >}}@0.4.0
     sharerJS = ""
-    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@7.0.3
+    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@6.5.1
     typeitJS = ""
     # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
     katexCSS = ""

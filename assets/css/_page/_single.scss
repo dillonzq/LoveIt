@@ -234,7 +234,7 @@
     }
 
     .lazyloading {
-      object-fit: none;
+      @include object-fit(none);
     }
 
     blockquote {
