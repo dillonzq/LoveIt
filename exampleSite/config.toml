@@ -947,6 +947,8 @@ enableEmoji = true
     algoliasearchJS = ""
     # lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
     lazysizesJS = ""
+    # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
+    objectFitImagesJS = ""
     # twemoji@12.1.5 https://github.com/twitter/twemoji
     twemojiJS = ""
     # lightgallery.js@1.1.3 https://github.com/sachinchoolur/lightgallery.js
@@ -960,7 +962,7 @@ enableEmoji = true
     clipboardJS = ""
     # sharer.js@0.4.0 https://github.com/ellisonleao/sharer.js
     sharerJS = ""
-    # typeit@7.0.3 https://github.com/alexmacarthur/typeit
+    # typeit@6.5.1 https://github.com/alexmacarthur/typeit
     typeitJS = ""
     # katex@0.11.1 https://katex.org/
     katexCSS = ""
