@@ -25,7 +25,7 @@ Sorry, this article has not been completely translated into **French**.
 Welcome to take the time to propose a translation by [:(fas fa-code-branch fa-fw): making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
 {{< /admonition >}}
 
-## style
+## 1 style
 
 {{< version 0.2.0 changed >}}
 
@@ -53,7 +53,7 @@ The rendered output looks like this:
 This is a **right-aligned** paragraph.
 {{< /style >}}
 
-## link
+## 2 link
 
 {{< version 0.2.0 >}}
 
@@ -117,7 +117,7 @@ The rendered output looks like this (hover over the link, there should be a tool
 
 {{< link "https://github.com/upstage/" Upstage "Visit Upstage!" >}}
 
-## image
+## 3 image {#image}
 
 {{< version 0.2.0 changed >}}
 
@@ -187,7 +187,7 @@ The rendered output looks like this:
 
 {{< image src="/images/theme-documentation-extended-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-extended-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-extended-shortcodes/lighthouse-large.jpg" >}}
 
-## admonition
+## 4 admonition
 
 The `admonition` shortcode supports **12** types of banners to help you put notice in your page.
 
@@ -273,13 +273,13 @@ The rendered output looks like this:
 A **tip** banner
 {{< /admonition >}}
 
-## mermaid
+## 5 mermaid
 
 [mermaid](https://mermaidjs.github.io/) is a library helping you to generate diagram and flowcharts from text, in a similar manner as Markdown.
 
 Just insert your mermaid code in the `mermaid` shortcode and that’s it.
 
-### Flowchart {#flowchart}
+### 5.1 Flowchart {#flowchart}
 
 Example **flowchart** `mermaid` input:
 
@@ -303,7 +303,7 @@ graph LR;
     C -->|Two| E[Result two]
 {{< /mermaid >}}
 
-### Sequence Diagram {#sequence-diagram}
+### 5.2 Sequence Diagram {#sequence-diagram}
 
 Example **sequence diagram** `mermaid` input:
 
@@ -339,7 +339,7 @@ sequenceDiagram
     Bob-->John: Jolly good!
 {{< /mermaid >}}
 
-### GANTT {#gantt}
+### 5.3 GANTT {#gantt}
 
 Example **GANTT** `mermaid` input:
 
@@ -383,7 +383,7 @@ gantt
     Add to mermaid                      :1d
 {{< /mermaid >}}
 
-### Class Diagram {#class-diagram}
+### 5.4 Class Diagram {#class-diagram}
 
 Example **class diagram** `mermaid` input:
 
@@ -425,7 +425,7 @@ classDiagram
     Class08 <--> C2: Cool label
 {{< /mermaid >}}
 
-### State Diagram {#state-diagram}
+### 5.5 State Diagram {#state-diagram}
 
 Example **state diagram** `mermaid` input:
 
@@ -453,7 +453,7 @@ stateDiagram
     Crash --> [*]
 {{< /mermaid >}}
 
-### Git Graph {#git-graph}
+### 5.6 Git Graph {#git-graph}
 
 Example **git graph** `mermaid` input:
 
@@ -499,7 +499,7 @@ end
     merge newbranch
 {{< /mermaid >}}
 
-### Pie {#pie}
+### 5.7 Pie {#pie}
 
 Example **pie** `mermaid` input:
 
@@ -521,7 +521,7 @@ pie
     "Rats" : 15
 {{< /mermaid >}}
 
-## echarts
+## 6 echarts
 
 [ECharts](https://echarts.apache.org/) is a library helping you to generate interactive data visualization.
 
@@ -909,7 +909,7 @@ The `echarts` shortcode has also the following named parameters:
 
     {{< version 0.2.0 >}} Height of the data visualization, default value is `30rem`.
 
-## mapbox
+## 7 mapbox
 
 {{< version 0.2.0 >}}
 
@@ -965,13 +965,21 @@ The `mapbox` shortcode has the following named parameters to use Mapbox GL JS:
 
     Height of the map, default value is `20rem`.
 
-Example `mapbox` input:
+Example simple `mapbox` input:
 
 ```markdown
 {{</* mapbox 121.485 31.233 12 */>}}
 Or
 {{</* mapbox lng=121.485 lat=31.233 zoom=12 */>}}
+```
 
+The rendered output looks like this:
+
+{{< mapbox 121.485 31.233 12 >}}
+
+Example `mapbox` input with the custom style:
+
+```markdown
 {{</* mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/navigation-preview-day-v4" "mapbox://styles/mapbox/navigation-preview-night-v4" */>}}
 Or
 {{</* mapbox lng=-122.252 lat=37.453 zoom=10 marked=false light-style="mapbox://styles/mapbox/navigation-preview-day-v4" dark-style="mapbox://styles/mapbox/navigation-preview-night-v4" */>}}
@@ -979,17 +987,15 @@ Or
 
 The rendered output looks like this:
 
-{{< mapbox 121.485 31.233 12 >}}
-
 {{< mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/navigation-preview-day-v4?optimize=true" "mapbox://styles/mapbox/navigation-preview-night-v4?optimize=true" >}}
 
-## music
+## 8 music
 
 The `music` shortcode embeds a responsive music player based on [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS).
 
 There are three ways to use it the `music` shortcode.
 
-### Custom Music URL {#custom-music-url}
+### 8.1 Custom Music URL {#custom-music-url}
 
 The `music` shortcode has the following named parameters by custom music URL:
 
@@ -1012,14 +1018,14 @@ The `music` shortcode has the following named parameters by custom music URL:
 Example `music` input by custom music URL:
 
 ```markdown
-{{</* music url="https://rainymood.com/audio1110/0.m4a" name=rainymood artist=rainymood cover="https://rainymood.com/i/badge.jpg" */>}}
+{{</* music url="/music/Wavelength.mp3" name=Wavelength artist=oldmanyoung cover="/images/theme-documentation-extended-shortcodes/Wavelength.jpg" */>}}
 ```
 
 The rendered output looks like this:
 
-{{< music url="https://rainymood.com/audio1110/0.m4a" name=rainymood artist=rainymood cover="https://rainymood.com/i/badge.jpg" >}}
+{{< music url="/music/Wavelength.mp3" name=Wavelength artist=oldmanyoung cover="/images/theme-documentation-extended-shortcodes/Wavelength.jpg" >}}
 
-### Music Platform URL Automatic Identification {#automatic-identification}
+### 8.2 Music Platform URL Automatic Identification {#automatic-identification}
 
 The `music` shortcode has one named parameter by music platform URL automatic identification:
 
@@ -1040,7 +1046,7 @@ The rendered output looks like this:
 
 {{< music auto="https://music.163.com/#/playlist?id=60198" >}}
 
-### Custom Server, Type and ID {#custom-server}
+### 8.3 Custom Server, Type and ID {#custom-server}
 
 The `music` shortcode has the following named parameters by custom music platform:
 
@@ -1072,7 +1078,7 @@ The rendered output looks like this:
 
 {{< music netease song 1868553 >}}
 
-### Other Parameters {#other-parameters}
+### 8.4 Other Parameters {#other-parameters}
 
 The `music` shortcode has other named parameters applying to the above three ways:
 
@@ -1122,7 +1128,7 @@ The `music` shortcode has the following named parameters only applying to the ty
 
     Max height of the music list, default value is `340px`.
 
-## bilibili
+## 9 bilibili
 
 {{< version 0.2.0 changed >}}
 
@@ -1165,13 +1171,13 @@ The rendered output looks like this:
 
 {{< bilibili id=BV1TJ411C7An p=3 >}}
 
-## typeit
+## 10 typeit
 
 The `typeit` shortcode provides typing animation based on [TypeIt](https://typeitjs.com/).
 
 Just insert your content in the `typeit` shortcode and that’s it.
 
-### Simple Content {#simple-content}
+### 10.1 Simple Content {#simple-content}
 
 Simple content is allowed in `Markdown` format and **without** rich block content such as images and more...
 
@@ -1205,7 +1211,7 @@ The rendered output looks like this:
 This is a *paragraph* with **typing animation** based on [TypeIt](https://typeitjs.com/)...
 {{< /typeit >}}
 
-### Code Content {#code-content}
+### 10.2 Code Content {#code-content}
 
 Code content is allowed and will be highlighted by named parameter `code` for the type of code language.
 
@@ -1231,7 +1237,7 @@ public class HelloWorld {
 }
 {{< /typeit >}}
 
-### Group Content {#group-content}
+### 10.3 Group Content {#group-content}
 
 All typing animations start at the same time by default.
 But sometimes you may want to start a set of `typeit` contents in order.

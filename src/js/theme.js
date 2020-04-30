@@ -40,6 +40,7 @@ class Theme {
         this.resizeEventSet = new Set();
         this.switchThemeEventSet = new Set();
         this.clickMaskEventSet = new Set();
+        if (objectFitImages) objectFitImages();
     }
 
     initSVGIcon() {
@@ -56,7 +57,7 @@ class Theme {
                     if ($titleElements.length) $svg.removeChild($titleElements[0]);
                     $icon.parentElement.replaceChild($svg, $icon);
                 })
-                .catch(console.error.bind(console));
+                .catch(err => { console.error(err); });
         });
     }
 
@@ -237,7 +238,7 @@ class Theme {
                         this._algoliaIndex
                             .search(query, {
                                 offset: 0,
-                                length: searchConfig.maxResultLength * 3,
+                                length: searchConfig.maxResultLength * 5,
                                 attributesToHighlight: ['title'],
                                 attributesToSnippet: ['content:30'],
                                 highlightPreTag: `<${searchConfig.highlightTag}>`,
@@ -586,12 +587,7 @@ class Theme {
     }
 
     initSmoothScroll() {
-        if ((!this.util.isMobile() && this.config.headerMode.desktop === 'normal')
-          || (this.util.isMobile() && this.config.headerMode.mobile === 'normal')) {
-            new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true});
-        } else {
-            new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true, header: '#header-desktop'});
-        }
+        if (SmoothScroll) new SmoothScroll('[href^="#"]', { speed: 300, speedAsDuration: true, header: '#header-desktop' });
     }
 
     onScroll() {
@@ -641,7 +637,6 @@ class Theme {
                     this._resizeTimeout = null;
                     for (let event of this.resizeEventSet) event();
                     this.initToc();
-                    this.initSmoothScroll();
                     this.initMermaid();
                     this.initSearch();
                 }, 100);

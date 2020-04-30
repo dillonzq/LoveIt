@@ -41,13 +41,14 @@ body {
   }
 }
 
-@import "../_partial/mask";
+@include ms;
 @include link(true, true);
 
+@import "../_partial/mask";
 @import "../_partial/icon";
 @import "../_partial/details";
 @import "../_partial/fixed-button";
 
-a {
-  text-decoration: none;
+img {
+  @include object-fit(contain);
 }

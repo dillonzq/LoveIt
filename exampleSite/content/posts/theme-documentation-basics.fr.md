@@ -227,7 +227,7 @@ Please open the code block below to view the complete sample configuration :(far
     # type of search engine ("lunr", "algolia")
     type = "lunr"
     # max index length of the chunked content
-    contentLength = 5000
+    contentLength = 4000
     # placeholder of the search bar
     placeholder = ""
     # {{< version 0.2.1 >}} max number of results length
@@ -592,6 +592,8 @@ Please open the code block below to view the complete sample configuration :(far
     algoliasearchJS = ""
     # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
     lazysizesJS = ""
+    # {{< version 0.2.3 >}} {{< link "https://github.com/fregante/object-fit-images" "object-fit-images" >}}@3.2.4
+    objectFitImagesJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/twitter/twemoji" "twemoji" >}}@12.1.5
     twemojiJS = ""
     # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3
@@ -605,7 +607,7 @@ Please open the code block below to view the complete sample configuration :(far
     clipboardJS = ""
     # {{< link "https://github.com/ellisonleao/sharer.js" "sharer.js" >}}@0.4.0
     sharerJS = ""
-    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@7.0.3
+    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@6.5.1
     typeitJS = ""
     # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
     katexCSS = ""
@@ -619,7 +621,7 @@ Please open the code block below to view the complete sample configuration :(far
     # {{< link "https://echarts.apache.org/" "echarts" >}}@4.7.0
     echartsJS = ""
     echartsMacaronsJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.9.1
+    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.10.0
     mapboxGLCSS = ""
     mapboxGLJS = ""
     # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
@@ -630,7 +632,7 @@ Please open the code block below to view the complete sample configuration :(far
     # {{< link "https://github.com/gitalk/gitalk" "gitalk" >}}@1.6.2
     gitalkCSS = ""
     gitalkJS = ""
-    # {{< link "https://valine.js.org/" "valine" >}}@1.4.9
+    # {{< link "https://valine.js.org/" "valine" >}}@1.4.14
     valineJS = ""
 
 # Markup related config in Hugo
@@ -977,7 +979,7 @@ Here is the search configuration in your [site configuration](#site-configuratio
   # type of search engine ("lunr", "algolia")
   type = "lunr"
   # max index length of the chunked content
-  contentLength = 5000
+  contentLength = 4000
   # placeholder of the search bar
   placeholder = ""
   # {{< version 0.2.1 >}} max number of results length
@@ -997,8 +999,8 @@ The following is a comparison of two search engines:
   but high bandwidth and low performance (Especially for Chinese which needs a large segmentit library)
 * `algolia`: high performance and low bandwidth, but need to synchronize `index.json` and limit for `contentLength`
 
-{{< version 0.2.1 >}} The content of the post is separated by `h2` HTML tag to improve query performance and basically implement full-text search.
-`contentLength` is used to limit the max index length of the part starting with `h2` HTML tag.
+{{< version 0.2.3 >}} The content of the post is separated by `h2` and `h3` HTML tag to improve query performance and basically implement full-text search.
+`contentLength` is used to limit the max index length of the part starting with `h2` and `h3` HTML tag.
 {{< /admonition >}}
 
 {{< admonition tip "Tips about algolia" >}}

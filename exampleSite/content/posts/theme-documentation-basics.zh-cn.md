@@ -225,7 +225,7 @@ hugo
     # 搜索引擎的类型 ("lunr", "algolia")
     type = "lunr"
     # 文章内容最长索引长度
-    contentLength = 5000
+    contentLength = 4000
     # 搜索框的占位提示语
     placeholder = ""
     # 最大结果数目
@@ -590,6 +590,8 @@ hugo
     algoliasearchJS = ""
     # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
     lazysizesJS = ""
+    # {{< version 0.2.3 >}} {{< link "https://github.com/fregante/object-fit-images" "object-fit-images" >}}@3.2.4
+    objectFitImagesJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/twitter/twemoji" "twemoji" >}}@12.1.5
     twemojiJS = ""
     # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3
@@ -603,7 +605,7 @@ hugo
     clipboardJS = ""
     # {{< link "https://github.com/ellisonleao/sharer.js" "sharer.js" >}}@0.4.0
     sharerJS = ""
-    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@7.0.3
+    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@6.5.1
     typeitJS = ""
     # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
     katexCSS = ""
@@ -617,7 +619,7 @@ hugo
     # {{< link "https://echarts.apache.org/" "echarts" >}}@4.7.0
     echartsJS = ""
     echartsMacaronsJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.9.1
+    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.10.0
     mapboxGLCSS = ""
     mapboxGLJS = ""
     # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
@@ -628,7 +630,7 @@ hugo
     # {{< link "https://github.com/gitalk/gitalk" "gitalk" >}}@1.6.2
     gitalkCSS = ""
     gitalkJS = ""
-    # {{< link "https://valine.js.org/" "valine" >}}@1.4.9
+    # {{< link "https://valine.js.org/" "valine" >}}@1.4.14
     valineJS = ""
 
 # Hugo 解析文档的配置
@@ -977,7 +979,7 @@ defaultContentLanguage = "zh-cn"
   # 搜索引擎的类型 ("lunr", "algolia")
   type = "lunr"
   # 文章内容最长索引长度
-  contentLength = 5000
+  contentLength = 4000
   # 搜索框的占位提示语
   placeholder = ""
   # 最大结果数目
@@ -996,8 +998,8 @@ defaultContentLanguage = "zh-cn"
 * `lunr`: 简单, 无需同步 `index.json`, 没有 `contentLength` 的限制, 但占用带宽大且性能低 (特别是中文需要一个较大的分词依赖库)
 * `algolia`: 高性能并且占用带宽低, 但需要同步 `index.json` 且有 `contentLength` 的限制
 
-{{< version 0.2.1 >}} 文章内容被 `h2` HTML 标签切分来提供查询效果并且基本实现全文搜索.
-`contentLength` 用来限制 `h2` HTML 标签开头的内容部分的最大长度.
+{{< version 0.2.3 >}} 文章内容被 `h2` 和 `h3` HTML 标签切分来提供查询效果并且基本实现全文搜索.
+`contentLength` 用来限制 `h2` 和 `h3` HTML 标签开头的内容部分的最大长度.
 {{< /admonition >}}
 
 {{< admonition tip "关于 algolia 的使用技巧" >}}

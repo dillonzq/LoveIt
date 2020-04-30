@@ -1,5 +1,7 @@
 @mixin link($light, $dark) {
   a, a::before, a::after {
+    text-decoration: none;
+
     color: if($light, $global-link-color, $single-link-color);
 
     [theme=dark] & {

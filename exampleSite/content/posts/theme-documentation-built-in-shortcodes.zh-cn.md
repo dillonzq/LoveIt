@@ -29,7 +29,7 @@ shortcode 是一个简单代码段, 可以生成合理的 HTML 代码, 并且符
 Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见的用法.
 提供这些 shortcodes 是为了方便保持你的 Markdown 内容简洁.
 
-## figure {#figure}
+## 1 figure {#figure}
 
 [`figure` 的文档](https://gohugo.io/content-management/shortcodes#figure)
 
@@ -54,7 +54,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 </figure>
 ```
 
-## gist
+## 2 gist
 
 [`gist` 的文档](https://gohugo.io/content-management/shortcodes#gist)
 
@@ -74,7 +74,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 <script type="application/javascript" src="https://gist.github.com/spf13/7896402.js"></script>
 ```
 
-## highlight
+## 3 highlight
 
 [`highlight` 的文档](https://gohugo.io/content-management/shortcodes#instagram)
 
@@ -106,7 +106,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 </section>
 {{< /highlight >}}
 
-## instagram
+## 4 instagram
 
 [`instagram` 的文档](https://gohugo.io/content-management/shortcodes#instagram)
 
@@ -120,7 +120,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 {{< instagram BWNjjyYFxVx hidecaption >}}
 
-## param
+## 5 param
 
 [`param` 的文档](https://gohugo.io/content-management/shortcodes#param)
 
@@ -134,11 +134,11 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 {{< param description >}}
 
-## ref 和 relref {#ref-and-relref}
+## 6 ref 和 relref {#ref-and-relref}
 
 [`ref` 和 `relref` 的文档](https://gohugo.io/content-management/shortcodes#ref-and-relref)
 
-## tweet
+## 7 tweet
 
 [`tweet` 的文档](https://gohugo.io/content-management/shortcodes#tweet)
 
@@ -152,7 +152,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 {{< tweet 877500564405444608 >}}
 
-## vimeo
+## 8 vimeo
 
 [`vimeo` 的文档](https://gohugo.io/content-management/shortcodes#vimeo)
 
@@ -166,7 +166,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 {{< vimeo 146022717 >}}
 
-## youtube
+## 9 youtube
 
 [`youtube` 的文档](https://gohugo.io/content-management/shortcodes#youtube)
 
