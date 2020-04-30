@@ -115,7 +115,7 @@ This is a **right-aligned** paragraph.
 
 {{< link "https://github.com/upstage/" Upstage "Visit Upstage!" >}}
 
-## 3 image
+## 3 image {#image}
 
 {{< version 0.2.0 changed >}}
 

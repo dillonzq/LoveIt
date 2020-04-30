@@ -112,7 +112,7 @@ The rendered output looks like this (hover over the link, there should be a tool
 
 {{< link "https://github.com/upstage/" Upstage "Visit Upstage!" >}}
 
-## 3 image
+## 3 image {#image}
 
 {{< version 0.2.0 changed >}}
 
