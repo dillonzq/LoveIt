@@ -95,6 +95,7 @@ class Theme {
     initSearch() {
         const searchConfig = this.config.search;
         if (!searchConfig.maxResultLength) searchConfig.maxResultLength = 10;
+        if (!searchConfig.snippetLength) searchConfig.snippetLength = 50;
         if (!searchConfig.highlightTag) searchConfig.highlightTag = 'em';
         const isMobile = this.util.isMobile();
         if (!searchConfig || isMobile && this._searchMobileOnce || !isMobile && this._searchDesktopOnce) return;
@@ -154,7 +155,6 @@ class Theme {
             else $searchClear.style.display = 'inline';
         }, false);
 
-        const CONTEXT_LENGTH = 200;
         const initAutosearch = () => {
             const autosearch = autocomplete(`#search-input-${classSuffix}`, {
                 hint: false,
@@ -188,12 +188,12 @@ class Theme {
                                         if (matchPosition < position || position === 0) position = matchPosition;
                                     }
                                 });
-                                position -= CONTEXT_LENGTH / 5;
+                                position -= searchConfig.snippetLength / 5;
                                 if (position > 0) {
-                                    position += context.substr(position, 25).lastIndexOf(' ') + 1;
-                                    context = '...' + context.substr(position, CONTEXT_LENGTH);
+                                    position += context.substr(position, 20).lastIndexOf(' ') + 1;
+                                    context = '...' + context.substr(position, searchConfig.snippetLength);
                                 } else {
-                                    context = context.substr(0, CONTEXT_LENGTH);
+                                    context = context.substr(0, searchConfig.snippetLength);
                                 }
                                 Object.keys(metadata).forEach(key => {
                                     title = title.replace(new RegExp(`(${key})`, 'gi'), `<${searchConfig.highlightTag}>$1</${searchConfig.highlightTag}>`);
@@ -238,16 +238,16 @@ class Theme {
                         this._algoliaIndex
                             .search(query, {
                                 offset: 0,
-                                length: searchConfig.maxResultLength * 5,
+                                length: searchConfig.maxResultLength * 8,
                                 attributesToHighlight: ['title'],
-                                attributesToSnippet: ['content:30'],
+                                attributesToSnippet: [`content:${searchConfig.snippetLength}`],
                                 highlightPreTag: `<${searchConfig.highlightTag}>`,
                                 highlightPostTag: `</${searchConfig.highlightTag}>`,
                             })
                             .then(({ hits }) => {
                                 const results = {};
                                 hits.forEach(({ uri, date, _highlightResult: { title }, _snippetResult: { content } }) => {
-                                    if (results[uri]) return;
+                                    if (results[uri] && results[uri].context.length > content.value) return;
                                     results[uri] = {
                                         uri: uri,
                                         title: title.value,
@@ -255,7 +255,7 @@ class Theme {
                                         context: content.value,
                                     };
                                 });
-                                finish(Object.values(results));
+                                finish(Object.values(results).slice(0, searchConfig.maxResultLength));
                             })
                             .catch(err => {
                                 console.error(err);
