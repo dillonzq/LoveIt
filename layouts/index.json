@@ -13,7 +13,10 @@
         {{- $index = $index | append (dict "content" . "objectID" $uri | merge $meta) -}}
     {{- end -}}
     {{- $params := .Params | merge $.Site.Params.page -}}
+    {{/* Extended Markdown syntax */}}
     {{- $content := dict "content" .Content "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" -}}
+    {{/* Remove line number for code */}}
+    {{- $content = $content | replaceRE `<span class="lnt?"> *\d*\n?</span>` "" -}}
     {{- range $i, $contenti := split $content "<h2 id=" -}}
         {{- if gt $i 0 -}}
             {{- $contenti = printf "<h2 id=%s" $contenti -}}
@@ -22,6 +25,7 @@
             {{- if gt $j 0 -}}
                 {{- $contentj = printf "<h3 id=%s" $contentj -}}
             {{- end -}}
+            {{/* Plainify, unescape and remove (\n, \t) */}}
             {{- $contentj = $contentj | plainify | htmlUnescape | replaceRE `[\n\t ]+` " " -}}
             {{- if gt $.Site.Params.search.contentLength 0 -}}
                 {{- $contentj = substr $contentj 0 $.Site.Params.search.contentLength -}}
