@@ -121,6 +121,8 @@ enableEmoji = true
         placeholder = ""
         # max number of results length
         maxResultLength = 10
+        # snippet length of the result
+        snippetLength = 30
         # HTML tag name of the highlight part in results
         highlightTag = "em"
         [languages.en.params.search.algolia]
@@ -315,6 +317,8 @@ enableEmoji = true
         placeholder = ""
         # 最大结果数目
         maxResultLength = 10
+        # 结果内容片段长度
+        snippetLength = 50
         # 搜索结果中高亮部分的 HTML 标签
         highlightTag = "em"
         [languages.zh-cn.params.search.algolia]
@@ -505,6 +509,8 @@ enableEmoji = true
         placeholder = ""
         # max number of results length
         maxResultLength = 10
+        # snippet length of the result
+        snippetLength = 30
         # HTML tag name of the highlight part in results
         highlightTag = "em"
         [languages.fr.params.search.algolia]
