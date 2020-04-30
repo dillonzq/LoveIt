@@ -227,6 +227,8 @@ Please open the code block below to view the complete sample configuration :(far
     placeholder = ""
     # {{< version 0.2.1 >}} max number of results length
     maxResultLength = 10
+    # {{< version 0.2.3 >}} snippet length of the result
+    snippetLength = 30
     # {{< version 0.2.1 >}} HTML tag name of the highlight part in results
     highlightTag = "em"
     [params.search.algolia]
@@ -979,6 +981,8 @@ Here is the search configuration in your [site configuration](#site-configuratio
   placeholder = ""
   # {{< version 0.2.1 >}} max number of results length
   maxResultLength = 10
+  # {{< version 0.2.3 >}} snippet length of the result
+  snippetLength = 30
   # {{< version 0.2.1 >}} HTML tag name of the highlight part in results
   highlightTag = "em"
   [params.search.algolia]

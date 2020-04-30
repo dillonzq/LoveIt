@@ -228,9 +228,11 @@ hugo
     contentLength = 4000
     # 搜索框的占位提示语
     placeholder = ""
-    # 最大结果数目
+    # {{< version 0.2.1 >}} 最大结果数目
     maxResultLength = 10
-    # 搜索结果中高亮部分的 HTML 标签
+    # {{< version 0.2.3 >}} 结果内容片段长度
+    snippetLength = 50
+    # {{< version 0.2.1 >}} 搜索结果中高亮部分的 HTML 标签
     highlightTag = "em"
     [params.search.algolia]
       index = ""
@@ -982,9 +984,11 @@ defaultContentLanguage = "zh-cn"
   contentLength = 4000
   # 搜索框的占位提示语
   placeholder = ""
-  # 最大结果数目
+  # {{< version 0.2.1 >}} 最大结果数目
   maxResultLength = 10
-  # 搜索结果中高亮部分的 HTML 标签
+  # {{< version 0.2.3 >}} 结果内容片段长度
+  snippetLength = 50
+  # {{< version 0.2.1 >}} 搜索结果中高亮部分的 HTML 标签
   highlightTag = "em"
   [params.search.algolia]
     index = ""
