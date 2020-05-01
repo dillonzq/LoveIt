@@ -413,6 +413,7 @@ class Theme {
             const rect = $page.getBoundingClientRect();
             $toc.style.left = `${rect.left + rect.width + 20}px`;
             $toc.style.maxWidth = `${$page.getBoundingClientRect().left - 20}px`;
+            $toc.style.visibility = 'visible';
             const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
             const $tocLiElements = $tocCore.getElementsByTagName('li');
             const $headerLinkElements = document.getElementsByClassName('headerLink');

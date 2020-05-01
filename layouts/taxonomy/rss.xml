@@ -35,30 +35,7 @@
         {{- end -}}
         <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
         {{- range .Pages | first (.Site.Params.list.rss | default 10) -}}
-            <item>
-                <title>
-                    {{- .Title -}}
-                </title>
-                <link>
-                    {{- .Permalink -}}
-                </link>
-                <pubDate>
-                    {{- .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700"  -}}
-                </pubDate>
-                <author>
-                    {{- .Params.author | default $.Site.Author.name | default (T "author") -}}
-                </author>
-                <guid>
-                    {{- .Permalink -}}
-                </guid>
-                <description>
-                    {{- with .Summary -}}
-                        {{- dict "content" . "ruby" true "fraction" true "fontawesome" true | partial "function/content.html" | plainify -}}
-                    {{- else -}}
-                        {{- .Description | plainify -}}
-                    {{- end -}}
-                </description>
-            </item>
+            {{- dict "page" . "site" .Site | partial "rss/item.html" -}}
         {{- end -}}
     </channel>
 </rss>

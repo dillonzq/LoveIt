@@ -5,7 +5,7 @@
         <div class="featured-image-preview">
             <a href="{{ $.RelPermalink }}">
                 {{- $image := $params.featuredimagepreview | default . -}}
-                {{- partial "plugin/image.html" (dict "src" $image "alt" $.Description "large" true) -}}
+                {{- dict "src" $image "alt" $.Description "large" true | partial "plugin/image.html" -}}
             </a>
         </div>
     {{- end -}}

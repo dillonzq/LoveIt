@@ -61,7 +61,7 @@
         {{- /* Featured image */ -}}
         {{- with $params.featuredimage -}}
             <div class="featured-image">
-                {{- partial "plugin/image.html" (dict "src" . "alt" $.Description "large" true) -}}
+                {{- dict "src" . "alt" $.Description "large" true | partial "plugin/image.html" -}}
             </div>
         {{- end -}}
 
