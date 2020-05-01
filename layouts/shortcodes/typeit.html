@@ -20,7 +20,7 @@
 
 {{- /* trim the newline */ -}}
 {{- $content = trim $content "\n" -}}
-{{- $id := partial "function/id.html" (dict "content" $content "scratch" .Page.Scratch) -}}
+{{- $id := dict "content" $content "scratch" .Page.Scratch | partial "function/id.html" -}}
 {{- $key := .Get "group" | string | default $id -}}
 {{- $typeitMap := (.Page.Scratch.Get "this").typeitMap | default dict -}}
 {{- $group := index $typeitMap $key -}}

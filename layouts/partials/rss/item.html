@@ -1,0 +1,36 @@
+{{- $params := .page.Params | merge .site.Params.page | merge (dict "author" .site.Author.name) -}}
+<item>
+    <title>
+        {{- .page.Title -}}
+    </title>
+    <link>
+        {{- .page.Permalink -}}
+    </link>
+    <pubDate>
+        {{- .page.Date.Format "Mon, 02 Jan 2006 15:04:05 -0700"  -}}
+    </pubDate>
+    <author>
+        {{- .params.author | default (T "author") -}}
+    </author>
+    <guid>
+        {{- .page.Permalink -}}
+    </guid>
+    <description>
+        {{- "<![CDATA[" | safeHTML -}}
+        {{- with $params.featuredimage -}}
+            <div class="featured-image">
+                <img src="{{ . | relURL }}" referrerpolicy="no-referrer">
+            </div>
+        {{- end -}}
+        {{- $content := .page.Description -}}
+        {{- if $params.rssFullText -}}
+            {{- $content = dict "content" .page.Content "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" -}}
+        {{- else -}}
+            {{- with .page.Summary -}}
+                {{- $content = dict "content" . "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" -}}
+            {{- end -}}
+        {{- end -}}
+        {{- $content | replaceRE `<figure[^>]*>.*</figure>` "" | replaceRE `<img[^>]*( /)?>` "" | safeHTML -}}
+        {{- "]]>" | safeHTML -}}
+    </description>
+</item>

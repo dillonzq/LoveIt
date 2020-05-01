@@ -1,5 +1,5 @@
 {{- $content := .Inner | .Page.RenderString -}}
-{{- $id := partial "function/id.html" (dict "content" $content) -}}
+{{- $id := dict "content" $content | partial "function/id.html" -}}
 {{- $tag := .Get 1 | default "div" -}}
 {{- printf `<%s id="%s">%s</%s>` $tag $id $content $tag | safeHTML -}}
 

@@ -8,9 +8,9 @@
         <img
             class="lazyload{{ with .class }} {{ . }}{{ end }}"
             src="{{ $loading.RelPermalink }}"
-            data-sizes="auto"
-            data-srcset="{{ $small | relURL }}, {{ .src | relURL }} 1.5x, {{ $large | relURL }} 2x"
             data-src="{{ .src | relURL }}"
+            data-srcset="{{ $small | relURL }}, {{ .src | relURL }} 1.5x, {{ $large | relURL }} 2x"
+            data-sizes="auto"
             alt="{{ $alt }}"{{ with .height }} height="{{ . }}"{{ end }}{{ with .width }} width="{{ . }}"{{ end }} />
     </a>
 {{- else -}}
@@ -20,9 +20,9 @@
     <img
         class="lazyload{{ with .class }} {{ . }}{{ end }}"
         src="{{ $loading.RelPermalink }}"
-        data-sizes="auto"
-        data-srcset="{{ $small | relURL }}, {{ .src | relURL }} 1.5x, {{ $large | relURL }} 2x"
         data-src="{{ .src | relURL }}"
+        data-srcset="{{ $small | relURL }}, {{ .src | relURL }} 1.5x, {{ $large | relURL }} 2x"
+        data-sizes="auto"
         alt="{{ $alt }}"
         title="{{ .title | default $alt }}"{{ with .height }} height="{{ . }}"{{ end }}{{ with .width }} width="{{ . }}"{{ end }} />
 {{- end -}}

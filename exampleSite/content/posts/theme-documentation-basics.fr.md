@@ -236,6 +236,8 @@ Please open the code block below to view the complete sample configuration :(far
     snippetLength = 30
     # {{< version 0.2.1 >}} HTML tag name of the highlight part in results
     highlightTag = "em"
+    # {{< version 0.2.4 >}} whether to use the absolute URL based on the baseURL in search index
+    absoluteURL = false
     [params.search.algolia]
       index = ""
       appID = ""
@@ -406,6 +408,8 @@ Please open the code block below to view the complete sample configuration :(far
     fontawesome = true
     # whether to show link to Raw Markdown content of the content
     linkToMarkdown = true
+    # {{< version 0.2.4 >}} whether to show the full text content in RSS
+    rssFullText = false
     # {{< version 0.2.0 >}} Table of the contents config
     [params.page.toc]
       # whether to enable the table of the contents
@@ -990,6 +994,8 @@ Here is the search configuration in your [site configuration](#site-configuratio
   snippetLength = 30
   # {{< version 0.2.1 >}} HTML tag name of the highlight part in results
   highlightTag = "em"
+  # {{< version 0.2.4 >}} whether to use the absolute URL based on the baseURL in search index
+  absoluteURL = false
   [params.search.algolia]
     index = ""
     appID = ""
