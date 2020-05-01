@@ -1,5 +1,5 @@
 {{- define "title" -}}
-    {{- .Title | default (T .Data.Plural) | default .Data.Plural }} | {{ .Site.Title -}}
+    {{- .Params.Title | default (T .Data.Plural) | default .Data.Plural | printf (T "allSome") }} - {{ .Site.Title -}}
 {{- end -}}
 
 {{- define "content" -}}
@@ -10,7 +10,7 @@
     <div class="page archive">
         {{- /* Title */ -}}
         <h2 class="single-title animated pulse faster">
-            {{- T "all" }}{{ T $taxonomies | default $taxonomies -}}
+            {{- .Params.Title | default (T $taxonomies) | default $taxonomies | printf (T "allSome") -}}
         </h2>
 
         {{- /* Categories Page */ -}}
