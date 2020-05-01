@@ -404,6 +404,8 @@ hugo
     fontawesome = true
     # 是否在文章页面显示原始 Markdown 文档链接
     linkToMarkdown = true
+    # {{< version 0.2.4 >}} 是否在 RSS 中显示全文内容
+    rssFullText = false
     # {{< version 0.2.0 >}} 目录配置
     [params.page.toc]
       # 是否使用目录

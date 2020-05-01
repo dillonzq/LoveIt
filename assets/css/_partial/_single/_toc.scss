@@ -56,7 +56,8 @@
   @include overflow-wrap(break-word);
   box-sizing: border-box;
   top: if($header-normal-mode-desktop, 5rem, 10rem);
-  left: $MAX_LENGTH;
+  left: 0;
+  visibility: hidden;
 
   @include blur;
 

@@ -406,6 +406,8 @@ Please open the code block below to view the complete sample configuration :(far
     fontawesome = true
     # whether to show link to Raw Markdown content of the content
     linkToMarkdown = true
+    # {{< version 0.2.4 >}} whether to show the full text content in RSS
+    rssFullText = false
     # {{< version 0.2.0 >}} Table of the contents config
     [params.page.toc]
       # whether to enable the table of the contents
