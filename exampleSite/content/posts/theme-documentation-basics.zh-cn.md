@@ -234,6 +234,8 @@ hugo
     snippetLength = 50
     # {{< version 0.2.1 >}} 搜索结果中高亮部分的 HTML 标签
     highlightTag = "em"
+    # {{< version 0.2.4 >}} 是否在搜索索引中使用基于 baseURL 的绝对路径
+    absoluteURL = false
     [params.search.algolia]
       index = ""
       appID = ""
@@ -992,6 +994,8 @@ defaultContentLanguage = "zh-cn"
   snippetLength = 50
   # {{< version 0.2.1 >}} 搜索结果中高亮部分的 HTML 标签
   highlightTag = "em"
+  # {{< version 0.2.4 >}} 是否在搜索索引中使用基于 baseURL 的绝对路径
+  absoluteURL = false
   [params.search.algolia]
     index = ""
     appID = ""

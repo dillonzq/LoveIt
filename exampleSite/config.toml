@@ -125,6 +125,8 @@ enableEmoji = true
         snippetLength = 30
         # HTML tag name of the highlight part in results
         highlightTag = "em"
+        # whether to use the absolute URL based on the baseURL in search index
+        absoluteURL = false
         [languages.en.params.search.algolia]
           index = "index.en"
           appID = "PASDMWALPK"
@@ -321,6 +323,8 @@ enableEmoji = true
         snippetLength = 50
         # 搜索结果中高亮部分的 HTML 标签
         highlightTag = "em"
+        # 是否在搜索索引中使用基于 baseURL 的绝对路径
+        absoluteURL = false
         [languages.zh-cn.params.search.algolia]
           index = "index.zh-cn"
           appID = "PASDMWALPK"
@@ -513,6 +517,8 @@ enableEmoji = true
         snippetLength = 30
         # HTML tag name of the highlight part in results
         highlightTag = "em"
+        # whether to use the absolute URL based on the baseURL in search index
+        absoluteURL = false
         [languages.fr.params.search.algolia]
           index = "index.fr"
           appID = "PASDMWALPK"
