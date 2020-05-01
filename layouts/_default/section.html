@@ -1,5 +1,5 @@
 {{- define "title" }}
-    {{- .Params.Title | default (T .Section) | default .Section | printf (T "allSome") }} | {{ .Site.Title -}}
+    {{- .Params.Title | default (T .Section) | default .Section | printf (T "allSome") }} - {{ .Site.Title -}}
 {{- end -}}
 
 {{- define "content" -}}
