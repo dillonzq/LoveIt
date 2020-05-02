@@ -1,0 +1,187 @@
+# Translations for Spanish
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ==
+[backToTop]
+other = "Volver arriba"
+
+[viewComments]
+other = "Ver comentarios"
+# === baseof ==
+
+# === Post ===
+[posts]
+other = "Artículos"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "Todo %s"
+
+[tag]
+other = "Etiqueta"
+
+[tags]
+other = "Etiquetas"
+
+[category]
+other = "Categoría"
+
+[categories]
+other = "Categorías"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "Más"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "Selecciona el lenguage"
+
+[switchTheme]
+other = "Cambia el tema"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Provisto por %s"
+
+[theme]
+other = "Tema"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "es"
+
+[valinePlaceholder]
+other = "Tu comentario ..."
+
+[facebookLanguageCode]
+other = "es_MX"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "Buscar"
+
+[searchPlaceholder]
+other = "Busca títulos o contenido..."
+
+[clear]
+other = "Limpiar"
+
+[cancel]
+other = "Cancelar"
+
+[noResultsFound]
+other = "No se encontraron resultados"
+
+[copyToClipboard]
+other = "Copiar al portapapeles"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "Compartir en"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "Contenido"
+
+[publish]
+other = "publicado el"
+
+[included]
+other = "incluido en"
+
+[wordCount]
+other = "unas {{ .Count }} palabras"
+
+[readingTime]
+other = "{{ .Count }} min"
+
+[views]
+other = "vistas"
+
+[author]
+other = "Autor"
+
+[lastMod]
+other = "El artículo fue actualizado el %s"
+
+[license]
+other = "Publicado bajo la licencia %s"
+
+[seeMarkdown]
+other = "Leer Markdown"
+
+[back]
+other = "Regresar"
+
+[home]
+other = "Inicio"
+
+[readMore]
+other = "Leer más"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Página no encontrada"
+
+[pageNotFoundText]
+other = "La página que estás buscando no existe. Lo siento."
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Nota"
+
+[abstract]
+other = "Resumen"
+
+[info]
+other = "Información"
+
+[tip]
+other = "Consejo"
+
+[success]
+other = "Éxito"
+
+[question]
+other = "Pregunta"
+
+[warning]
+other = "Advertencia"
+
+[failure]
+other = "Fallo"
+
+[danger]
+other = "Peligro"
+
+[bug]
+other = "Error"
+
+[example]
+other = "Ejemplo"
+
+[quote]
+other = "Cita"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "NUEVO"
+
+[changed]
+other = "MODIFICADO"
+
+[deleted]
+other = "ELIMINADO"
+# === shortcodes/version.html ===
