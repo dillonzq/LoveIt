@@ -11,6 +11,12 @@
         </div>
     {{- end -}}
 
+    {{- with .Site.Params.home.profile.title -}}
+        <h1 class="home-title">
+            {{- . -}}
+        </h1>
+    {{- end -}}
+
     {{- with .Site.Params.home.profile.subtitle -}}
         <h2 class="home-subtitle">
             {{- if $.Site.Params.home.profile.typeit -}}
