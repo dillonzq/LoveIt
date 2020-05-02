@@ -257,8 +257,6 @@ hugo
       pre = ""
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
       post = ""
-      # 是否为副标题显示打字机动画
-      typeit = false
 
   # 页面底部信息配置
   [params.footer]

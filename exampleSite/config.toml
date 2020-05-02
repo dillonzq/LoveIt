@@ -660,9 +660,6 @@ enableEmoji = true
       # you can add extra information after the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
       post = ""
-      # whether to use typeit animation for title name
-      # 是否为副标题显示打字机动画
-      typeit = false
 
   # Footer config
   # 页面底部信息配置
