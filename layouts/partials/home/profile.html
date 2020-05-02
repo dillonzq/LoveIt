@@ -3,11 +3,21 @@
     {{- with .Site.Params.home.profile.gravatarEmail -}}
         {{- $avatar = md5 . | printf "https://www.gravatar.com/avatar/%s?s=240&d=mp" -}}
     {{- end -}}
-    {{- with $avatar -}}
+    {{- if $avatar -}}
         <div class="home-avatar">
-            <a href="/posts" title="{{ T `home` }}">
-                {{- dict "src" . "alt" (T "home") | partial "plugin/image.html" -}}
-            </a>
+            {{- $firstMenu := "" -}}
+            {{- if .Site.Menus.main -}}
+                {{- range first 1 $.Site.Menus.main -}}
+                    {{- $firstMenu = . -}}
+                {{- end -}}
+            {{- end -}}
+            {{- with $firstMenu -}}
+                <a href="{{- .URL -}}" title="{{- .Name -}}">
+                    {{- dict "src" $avatar "alt" .Name | partial "plugin/image.html" -}}
+                </a>
+            {{- else -}}
+                {{- dict "src" $avatar "alt" " " | partial "plugin/image.html" -}}
+            {{- end -}}
         </div>
     {{- end -}}
 

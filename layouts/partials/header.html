@@ -32,7 +32,9 @@
                         {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
                     </a>
                 {{- end -}}
-                <span class="menu-item delimiter"></span>
+                {{- if .Site.Menus.main -}}
+                    <span class="menu-item delimiter"></span>
+                {{- end -}}
                 {{- if .Site.IsMultiLingual -}}
                     <a href="javascript:void(0);" class="menu-item language" title="{{ T "selectLanguage" }}">
                         {{- .Language.LanguageName -}}
