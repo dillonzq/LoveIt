@@ -94,17 +94,19 @@ class Theme {
 
     initSearch() {
         const searchConfig = this.config.search;
+        const isMobile = this.util.isMobile();
+        if (!searchConfig || isMobile && this._searchMobileOnce || !isMobile && this._searchDesktopOnce) return;
+
         if (!searchConfig.maxResultLength) searchConfig.maxResultLength = 10;
         if (!searchConfig.snippetLength) searchConfig.snippetLength = 50;
         if (!searchConfig.highlightTag) searchConfig.highlightTag = 'em';
-        const isMobile = this.util.isMobile();
-        if (!searchConfig || isMobile && this._searchMobileOnce || !isMobile && this._searchDesktopOnce) return;
-        const classSuffix = isMobile ? 'mobile' : 'desktop';
-        const $header = document.getElementById(`header-${classSuffix}`);
-        const $searchInput = document.getElementById(`search-input-${classSuffix}`);
-        const $searchToggle = document.getElementById(`search-toggle-${classSuffix}`);
-        const $searchLoading = document.getElementById(`search-loading-${classSuffix}`);
-        const $searchClear = document.getElementById(`search-clear-${classSuffix}`);
+
+        const suffix = isMobile ? 'mobile' : 'desktop';
+        const $header = document.getElementById(`header-${suffix}`);
+        const $searchInput = document.getElementById(`search-input-${suffix}`);
+        const $searchToggle = document.getElementById(`search-toggle-${suffix}`);
+        const $searchLoading = document.getElementById(`search-loading-${suffix}`);
+        const $searchClear = document.getElementById(`search-clear-${suffix}`);
         if (isMobile) {
             this._searchMobileOnce = true;
             $searchInput.addEventListener('focus', () => {
@@ -156,10 +158,10 @@ class Theme {
         }, false);
 
         const initAutosearch = () => {
-            const autosearch = autocomplete(`#search-input-${classSuffix}`, {
+            const autosearch = autocomplete(`#search-input-${suffix}`, {
                 hint: false,
                 autoselect: true,
-                dropdownMenuContainer: `#search-dropdown-${classSuffix}`,
+                dropdownMenuContainer: `#search-dropdown-${suffix}`,
                 clearOnSelected: true,
                 cssClasses: { noPrefix: true },
                 debug: true,
