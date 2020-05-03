@@ -254,6 +254,8 @@ Please open the code block below to view the complete sample configuration :(far
       pre = ""
       # you can add extra information after the name (HTML format is supported), such as icons
       post = ""
+      # whether to use typeit animation for title name
+      typeit = false
 
   # Footer config
   [params.footer]
