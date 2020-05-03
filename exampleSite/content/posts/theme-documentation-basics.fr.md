@@ -259,7 +259,7 @@ Please open the code block below to view the complete sample configuration :(far
       pre = ""
       # you can add extra information after the name (HTML format is supported), such as icons
       post = ""
-      # whether to use typeit animation for title name
+      # {{< version 0.2.5 >}} whether to use typeit animation for title name
       typeit = false
 
   # Footer config
@@ -322,7 +322,8 @@ Please open the code block below to view the complete sample configuration :(far
       enable = true
       # special amount of posts in each home posts page
       paginate = 6
-      # {{< version 0.2.0 deleted >}} default behavior when you don't set "hiddenFromHomePage" in front matter
+      # {{< version 0.2.0 deleted >}} replaced with hiddenFromHomePage in params.page
+      # default behavior when you don't set "hiddenFromHomePage" in front matter
       defaultHiddenFromHomePage = false
 
   # Social config about the author
@@ -615,7 +616,7 @@ Please open the code block below to view the complete sample configuration :(far
     clipboardJS = ""
     # {{< link "https://github.com/ellisonleao/sharer.js" "sharer.js" >}}@0.4.0
     sharerJS = ""
-    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@6.5.1
+    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@7.0.4
     typeitJS = ""
     # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
     katexCSS = ""

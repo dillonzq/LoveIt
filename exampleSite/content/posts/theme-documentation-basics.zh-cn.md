@@ -257,7 +257,7 @@ hugo
       pre = ""
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
       post = ""
-      # 是否为副标题显示打字机动画
+      # {{< version 0.2.5 >}} 是否为标题显示打字机动画
       typeit = false
 
   # 页面底部信息配置
@@ -320,7 +320,8 @@ hugo
       enable = true
       # 主页每页显示文章数量
       paginate = 6
-      # {{< version 0.2.0 deleted >}} 当你没有在文章前置参数中设置 "hiddenFromHomePage" 时的默认行为
+      # {{< version 0.2.0 deleted >}} 被 params.page 中的 hiddenFromHomePage 替代
+      # 当你没有在文章前置参数中设置 "hiddenFromHomePage" 时的默认行为
       defaultHiddenFromHomePage = false
 
   # 作者的社交信息设置
@@ -613,7 +614,7 @@ hugo
     clipboardJS = ""
     # {{< link "https://github.com/ellisonleao/sharer.js" "sharer.js" >}}@0.4.0
     sharerJS = ""
-    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@6.5.1
+    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@7.0.4
     typeitJS = ""
     # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
     katexCSS = ""
@@ -1010,7 +1011,7 @@ defaultContentLanguage = "zh-cn"
 * `lunr`: 简单, 无需同步 `index.json`, 没有 `contentLength` 的限制, 但占用带宽大且性能低 (特别是中文需要一个较大的分词依赖库)
 * `algolia`: 高性能并且占用带宽低, 但需要同步 `index.json` 且有 `contentLength` 的限制
 
-{{< version 0.2.3 >}} 文章内容被 `h2` 和 `h3` HTML 标签切分来提供查询效果并且基本实现全文搜索.
+{{< version 0.2.3 >}} 文章内容被 `h2` 和 `h3` HTML 标签切分来提高查询效果并且基本实现全文搜索.
 `contentLength` 用来限制 `h2` 和 `h3` HTML 标签开头的内容部分的最大长度.
 {{< /admonition >}}
 

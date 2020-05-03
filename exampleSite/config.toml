@@ -656,7 +656,7 @@ enableEmoji = true
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
       post = ""
       # whether to use typeit animation for title name
-      # 是否为副标题显示打字机动画
+      # 是否为标题显示打字机动画
       typeit = false
 
   # Footer config
@@ -980,7 +980,7 @@ enableEmoji = true
     clipboardJS = ""
     # sharer.js@0.4.0 https://github.com/ellisonleao/sharer.js
     sharerJS = ""
-    # typeit@6.5.1 https://github.com/alexmacarthur/typeit
+    # typeit@7.0.4 https://github.com/alexmacarthur/typeit
     typeitJS = ""
     # katex@0.11.1 https://katex.org/
     katexCSS = ""

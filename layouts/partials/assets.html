@@ -182,7 +182,7 @@
 </script>
 
 {{- /* Polyfill.io */ -}}
-{{- dict "source" "https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign" | partial "plugin/script.html" -}}
+{{- dict "source" "https://polyfill.io/v3/polyfill.min.js?features=html5shiv%2CElement.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign" | partial "plugin/script.html" -}}
 
 {{- range (.Scratch.Get "this").script -}}
     {{- partial "plugin/script.html" . -}}
