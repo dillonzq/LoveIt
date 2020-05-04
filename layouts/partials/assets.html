@@ -8,30 +8,30 @@
 {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
 
 {{- /* Search */ -}}
-{{- if .Site.Params.search.enable -}}
+{{- if .Site.Params.search | and .Site.Params.search.enable -}}
+    {{- $search := .Site.Params.search -}}
     {{- $source := $cdn.autocompleteJS | default "lib/autocomplete/autocomplete.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
-    {{- $searchConfig := dict "noResultsFound" (T "noResultsFound") -}}
-    {{- if eq .Site.Params.search.type "lunr" -}}
+    {{- $config = dict "maxResultLength" $search.maxResultLength "snippetLength" $search.snippetLength "highlightTag" $search.highlightTag "noResultsFound" (T "noResultsFound") | dict "search" | merge $config -}}
+    {{- if eq $search.type "lunr" -}}
         {{- with .Site.Home.OutputFormats.Get "json" -}}
-            {{- $searchConfig = dict "type" "lunr" "lunrIndexURL" .RelPermalink | merge $searchConfig -}}
+            {{- $config = dict "type" "lunr" "lunrIndexURL" .RelPermalink | dict "search" | merge $config -}}
         {{- end -}}
         {{- $source := $cdn.lunrJS | default "lib/lunr/lunr.min.js" -}}
         {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
         {{- if ne .Language.Lang "en" -}}
-            {{- $searchConfig = T "lunrLanguageCode" | dict "lunrLanguageCode" | merge $searchConfig -}}
+            {{- $config = T "lunrLanguageCode" | dict "lunrLanguageCode" | dict "search" | merge $config -}}
             {{- if eq .Language.Lang "zh-cn" -}}
-                {{- $searchConfig = dict "lunrSegmentitURL" (resources.Get "lib/lunr/lunr.segmentit.js").RelPermalink | merge $searchConfig -}}
+                {{- $config = dict "lunrSegmentitURL" (resources.Get "lib/lunr/lunr.segmentit.js").RelPermalink | dict "search" | merge $config -}}
             {{- end -}}
             {{- dict "source" "lib/lunr/lunr.stemmer.support.js" "minify" true "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
             {{- dict "source" (T "lunrLanguageLib") "minify" true "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
         {{- end -}}
-    {{- else if eq .Site.Params.search.type "algolia" -}}
+    {{- else if eq $search.type "algolia" -}}
         {{- $source := $cdn.algoliasearchJS | default "lib/algoliasearch/algoliasearch-lite.umd.min.js" -}}
         {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
-        {{- $searchConfig = dict "type" "algolia" "algoliaIndex" .Site.Params.search.algolia.index "algoliaAppID" .Site.Params.search.algolia.appID "algoliaSearchKey" .Site.Params.search.algolia.searchKey | merge $searchConfig -}}
+        {{- $config = dict "type" "algolia" "algoliaIndex" $search.algolia.index "algoliaAppID" $search.algolia.appID "algoliaSearchKey" $search.algolia.searchKey | dict "search" | merge $config -}}
     {{- end -}}
-    {{- $config = dict "search" $searchConfig | merge $config -}}
 {{- end -}}
 
 {{- /* lazysizes */ -}}
@@ -59,8 +59,7 @@
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- $source := $cdn.lightgalleryZoomJS | default "lib/lightgallery/lg-zoom.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
-    {{- $lightGalleryConfig := dict "selector" ".lightgallery" "speed" 400 "hideBarsDelay" 2000 "thumbnail" true "exThumbImage" "data-thumbnail" "thumbWidth" 80 "thumbContHeight" 80 "actualSize" false -}}
-    {{- $config = dict "lightGallery" $lightGalleryConfig | merge $config -}}
+    {{- $config = dict "selector" ".lightgallery" "speed" 400 "hideBarsDelay" 2000 "thumbnail" true "exThumbImage" "data-thumbnail" "thumbWidth" 80 "thumbContHeight" 80 "actualSize" false | dict "lightGallery" | merge $config -}}
     {{- $styleArr := (.Scratch.Get "this").styleArr | default slice -}}
     {{- $styleArr | append ".lg-toolbar .lg-icon::after { color: #999; }" | .Scratch.SetInMap "this" "styleArr" -}}
 {{- end -}}
@@ -83,24 +82,21 @@
 
 {{- /* TypeIt */ -}}
 {{- with (.Scratch.Get "this").typeitMap -}}
+    {{- $typeit := $.Site.Params.typeit -}}
     {{- $source := $cdn.typeitJS | default "lib/typeit/typeit.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
-    {{- $typeitConfig := slice -}}
-    {{- range $key, $val := . -}}
-        {{- $typeitConfig = $typeitConfig | append (slice $val) -}}
-    {{- end -}}
-    {{- $config = dict "typeit" $typeitConfig | merge $config -}}
+    {{- $config = dict "speed" $typeit.speed "cursorSpeed" $typeit.cursorSpeed "cursorChar" $typeit.cursorChar "duration" $typeit.duration "data" . | dict "typeit" | merge $config -}}
 {{- end -}}
 
 {{- /* KaTeX */ -}}
 {{- if $params.math.enable -}}
+    {{- $math := $params.math -}}
     {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
     {{- $source := $cdn.katexJS | default "lib/katex/katex.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- $source := $cdn.katexAutoRenderJS | default "lib/katex/auto-render.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
-    {{- $math := $params.math -}}
     {{- if $math.copyTex -}}
         {{- $source := $cdn.katexCopyTexCSS | default "lib/katex/copy-tex.min.css" -}}
         {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
@@ -111,7 +107,6 @@
         {{- $source := $cdn.katexMhchemJS | default "lib/katex/mhchem.min.js" -}}
         {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
-    {{- $mathConfig := dict "strict" false -}}
     {{- $delimiters := slice (dict "left" "$$" "right" "$$" "display" true) (dict "left" "\\[" "right" "\\]" "display" true) -}}
     {{- if and $math.blockLeftDelimiter $math.blockRightDelimiter -}}
         {{- $delimiters = $delimiters | append (dict "left" $math.blockLeftDelimiter "right" $math.blockRightDelimiter "display" true) -}}
@@ -120,8 +115,7 @@
     {{- if and $math.inlineLeftDelimiter $math.inlineRightDelimiter -}}
         {{- $delimiters = $delimiters | append (dict "left" $math.inlineRightDelimiter "right" $math.inlineRightDelimiter "display" false) -}}
     {{- end -}}
-    {{- $mathConfig = dict "delimiters" $delimiters | merge $mathConfig -}}
-    {{- $config = dict "math" $mathConfig | merge $config -}}
+    {{- $config = dict "strict" false "delimiters" $delimiters | dict "math" | merge $config -}}
 {{- end -}}
 
 {{- /* mermaid */ -}}
