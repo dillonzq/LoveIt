@@ -24,6 +24,10 @@ lightgallery: true
 
 {{< version 0.2.0 changed >}}
 
+{{< admonition >}}
+Hugo **extended** version is necessary for `style` shortcode.
+{{< /admonition >}}
+
 `style` is a shortcode to insert custom style in your post.
 
 The `style` shortcode has two positional parameters.

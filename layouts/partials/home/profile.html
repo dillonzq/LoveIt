@@ -1,19 +1,35 @@
+{{- $profile := .Site.Params.home.profile -}}
 <div class="home-profile">
-    {{- $avatar := .Site.Params.home.profile.avatarURL -}}
-    {{- with .Site.Params.home.profile.gravatarEmail -}}
+    {{- $avatar := $profile.avatarURL -}}
+    {{- with $profile.gravatarEmail -}}
         {{- $avatar = md5 . | printf "https://www.gravatar.com/avatar/%s?s=240&d=mp" -}}
     {{- end -}}
-    {{- with $avatar -}}
+    {{- if $avatar -}}
         <div class="home-avatar">
-            <a href="/posts" title="{{ T `home` }}">
-                {{- dict "src" . "alt" (T "home") | partial "plugin/image.html" -}}
-            </a>
+            {{- $menus := $.Site.Menus.main | default slice -}}
+            {{- with index $menus 0 -}}
+                {{- $url := .URL | relLangURL -}}
+                {{- with .Page -}}
+                    {{- $url = .RelPermalink -}}
+                {{- end -}}
+                <a href="{{ $url }}"{{ with .Title | default .Name }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
+                    {{- dict "src" $avatar "alt" .Name | partial "plugin/image.html" -}}
+                </a>
+            {{- else -}}
+                {{- dict "src" $avatar | partial "plugin/image.html" -}}
+            {{- end -}}
         </div>
     {{- end -}}
 
-    {{- with .Site.Params.home.profile.subtitle -}}
+    {{- with $profile.title -}}
+        <h1 class="home-title">
+            {{- . -}}
+        </h1>
+    {{- end -}}
+
+    {{- with $profile.subtitle -}}
         <h2 class="home-subtitle">
-            {{- if $.Site.Params.home.profile.typeit -}}
+            {{- if $profile.typeit -}}
                 {{- $id := dict "content" . "scratch" $.Scratch | partial "function/id.html" -}}
                 <div id="{{ $id }}" class="typeit"></div>
                 {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
@@ -23,7 +39,7 @@
         </h2>
     {{- end -}}
 
-    {{- if .Site.Params.home.profile.social -}}
+    {{- if $profile.social -}}
         <div class="social-links">
             {{- $socialMap := resources.Get "data/social.yaml" | transform.Unmarshal -}}
             {{- $socialArr := slice -}}
@@ -48,7 +64,7 @@
         </div>
     {{- end -}}
 
-    {{- with .Site.Params.home.profile.disclaimer -}}
+    {{- with $profile.disclaimer -}}
         <h3 class="home-disclaimer">
             {{- . | safeHTML -}}
         </h3>
