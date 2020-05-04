@@ -10,7 +10,13 @@
                     {{- with .pre -}}
                         <span class="header-title-pre">{{ . | safeHTML }}</span>
                     {{- end -}}
-                    {{- .name -}}
+                    {{- if .typeit -}}
+                        {{- $id := dict "content" .name "scratch" $.Scratch | partial "function/id.html" -}}
+                        <span id="{{ $id }}" class="typeit"></span>
+                        {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
+                    {{- else -}}
+                        {{- .name -}}
+                    {{- end -}}
                     {{- with .post -}}
                         <span class="header-title-post">{{ . | safeHTML }}</span>
                     {{- end -}}
@@ -32,7 +38,9 @@
                         {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
                     </a>
                 {{- end -}}
-                <span class="menu-item delimiter"></span>
+                {{- if .Site.Menus.main -}}
+                    <span class="menu-item delimiter"></span>
+                {{- end -}}
                 {{- if .Site.IsMultiLingual -}}
                     <a href="javascript:void(0);" class="menu-item language" title="{{ T "selectLanguage" }}">
                         {{- .Language.LanguageName -}}
@@ -88,7 +96,13 @@
                         {{- with .pre -}}
                             <span class="header-title-pre">{{ . | safeHTML }}</span>
                         {{- end -}}
-                        {{- .name -}}
+                        {{- if .typeit -}}
+                            {{- $id := dict "content" .name "scratch" $.Scratch | partial "function/id.html" -}}
+                            <span id="{{ $id }}" class="typeit"></span>
+                            {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
+                        {{- else -}}
+                            {{- .name -}}
+                        {{- end -}}
                         {{- with .post -}}
                             <span class="header-title-post">{{ . | safeHTML }}</span>
                         {{- end -}}

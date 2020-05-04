@@ -27,6 +27,10 @@ mapbox:
 
 {{< version 0.2.0 changed >}}
 
+{{< admonition >}}
+Hugo **extended** 版本对于 `style` shortcode 是必需的.
+{{< /admonition >}}
+
 `style` shortcode 用来在你的文章中插入自定义样式.
 
 `style` shortcode 有两个位置参数.
