@@ -85,6 +85,7 @@
 * 支持 **[Facebook](https://developers.facebook.com/docs/plugins/comments/) 评论**系统
 * 支持 **[Telegram comments](https://comments.app/) 评论**系统
 * 支持 **[Commento](https://commento.io/)** 评论系统
+* 支持 **[Utterances](https://utteranc.es/)** 评论系统
 
 ### 扩展功能
 
