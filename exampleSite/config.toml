@@ -342,6 +342,7 @@ enableEmoji = true
           gravatarEmail = ""
           # 主页显示头像的 URL
           avatarURL = "/images/avatar.png"
+          # 主页显示的网站标题
           title = ""
           # 主页显示的网站副标题
           subtitle = "一个简洁、优雅且高效的 Hugo 主题"
