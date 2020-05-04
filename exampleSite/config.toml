@@ -892,10 +892,20 @@ enableEmoji = true
         colorful = true
         dislikes = false
         outlined = false
-      # Commento comments config (https://commento.io/)
-      # Commento comments 评论系统设置 (https://commento.io/)
+      # Commento comment config (https://commento.io/)
+      # Commento comment 评论系统设置 (https://commento.io/)
       [params.page.comment.commento]
         enable = false
+      # Utterances comment config (https://utteranc.es/)
+      # Utterances comment 评论系统设置 (https://utteranc.es/)
+      [params.page.comment.utterances]
+        enable = false
+        # owner/repo
+        repo = ""
+        issueTerm = "pathname"
+        label = ""
+        lightTheme = "github-light"
+        darkTheme = "github-dark"
     # SEO config
     # SEO 配置
     [params.page.seo]

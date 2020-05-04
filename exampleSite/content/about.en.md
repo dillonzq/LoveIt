@@ -56,7 +56,8 @@ math:
 * :(far fa-comment-alt fa-fw): **Valine** comment system supported by [Valine](https://valine.js.org/)
 * :(far fa-comments fa-fw): **Facebook comments** system supported by [Facebook](https://developers.facebook.com/docs/plugins/comments/)
 * :(fas fa-comment fa-fw): **Telegram comments** system supported by [Comments](https://comments.app/)
-* :(fas fa-comment-dots fa-fw): **Commento** comments system supported by [Commento](https://commento.io/)
+* :(fas fa-comment-dots fa-fw): **Commento** comment system supported by [Commento](https://commento.io/)
+* :(fas fa-comment-alt fa-fw): **Utterances** comment system supported by [Utterances](https://utteranc.es/)
 
 #### Extended Features
 

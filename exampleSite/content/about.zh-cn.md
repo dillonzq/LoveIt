@@ -57,6 +57,7 @@ math:
 * :(far fa-comments fa-fw): 支持 **[Facebook](https://developers.facebook.com/docs/plugins/comments/) 评论**系统
 * :(fas fa-comment fa-fw): 支持 **[Telegram comments](https://comments.app/) 评论**系统
 * :(fas fa-comment-dots fa-fw): 支持 **[Commento](https://commento.io/)** 评论系统
+* :(far fa-comment-alt fa-fw): 支持 **[Utterances](https://utteranc.es/)** 评论系统
 
 #### 扩展功能
 

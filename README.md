@@ -89,7 +89,8 @@ I hope you will LoveIt ❤️!
 * **Valine** comment system supported by [Valine](https://valine.js.org/)
 * **Facebook comments** system supported by [Facebook](https://developers.facebook.com/docs/plugins/comments/)
 * **Telegram comments** system supported by [Telegram Comments](https://comments.app/)
-* **Commento** comments system supported by [Commento](https://commento.io/)
+* **Commento** comment system supported by [Commento](https://commento.io/)
+* **Utterances** comment system supported by [Utterances](https://utteranc.es/)
 
 ### Extended Features
 

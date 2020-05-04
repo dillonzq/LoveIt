@@ -540,6 +540,15 @@ hugo
       # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} 评论系统设置
       [params.page.comment.commento]
         enable = false
+      # {{< version 0.2.5 >}} {{< link "https://utteranc.es/" "Utterances" >}} 评论系统设置
+      [params.page.comment.utterances]
+        enable = false
+        # owner/repo
+        repo = ""
+        issueTerm = "pathname"
+        label = ""
+        lightTheme = "github-light"
+        darkTheme = "github-dark"
     # {{< version 0.2.0 >}} SEO config
     [params.page.seo]
       # 出版者信息
