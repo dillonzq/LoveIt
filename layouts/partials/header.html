@@ -15,7 +15,7 @@
                         <span id="{{ $id }}" class="typeit"></span>
                         {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
                     {{- else -}}
-                    {{- .name -}}
+                        {{- .name -}}
                     {{- end -}}
                     {{- with .post -}}
                         <span class="header-title-post">{{ . | safeHTML }}</span>
@@ -99,7 +99,7 @@
                             <span id="{{ $id }}" class="typeit"></span>
                             {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
                         {{- else -}}
-                        {{- .name -}}
+                            {{- .name -}}
                         {{- end -}}
                         {{- with .post -}}
                             <span class="header-title-post">{{ . | safeHTML }}</span>

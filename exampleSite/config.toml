@@ -656,7 +656,7 @@ enableEmoji = true
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
       post = ""
       # whether to use typeit animation for title name
-      # 是否为副标题显示打字机动画
+      # 是否为标题显示打字机动画
       typeit = false
 
   # Footer config
@@ -914,6 +914,22 @@ enableEmoji = true
         width = 800
         height = 600
 
+  # TypeIt config
+  # TypeIt 配置
+  [params.typeit]
+    # typing speed between each step (measured in milliseconds)
+    # 每一步的打字速度 (单位是毫秒)
+    speed = 100
+    # blinking speed of the cursor (measured in milliseconds)
+    # 光标的闪烁速度 (单位是毫秒)
+    cursorSpeed = 1000
+    # character used for the cursor (HTML format is supported)
+    # 光标的字符 (支持 HTML 格式)
+    cursorChar = "|"
+    # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
+    # 打字结束之后光标的持续时间 (单位是毫秒, "-1" 代表无限大)
+    duration = -1
+
   # Site verification code for Google/Bing/Yandex/Pinterest/Baidu
   # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
@@ -980,7 +996,7 @@ enableEmoji = true
     clipboardJS = ""
     # sharer.js@0.4.0 https://github.com/ellisonleao/sharer.js
     sharerJS = ""
-    # typeit@6.5.1 https://github.com/alexmacarthur/typeit
+    # typeit@7.0.4 https://github.com/alexmacarthur/typeit
     typeitJS = ""
     # katex@0.11.1 https://katex.org/
     katexCSS = ""
