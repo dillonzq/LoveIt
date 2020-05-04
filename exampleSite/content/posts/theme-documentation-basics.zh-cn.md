@@ -311,6 +311,8 @@ hugo
       gravatarEmail = ""
       # 主页显示头像的 URL
       avatarURL = "/images/avatar.png"
+      # {{< version 0.2.5 >}} 主页显示的网站标题
+      title = ""
       # 主页显示的网站副标题
       subtitle = "这是我的全新 Hugo 网站"
       # 是否为副标题显示打字机动画

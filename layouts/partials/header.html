@@ -28,11 +28,9 @@
         <div class="menu">
             <div class="menu-inner">
                 {{- range .Site.Menus.main -}}
-                    {{- $url := "" -}}
+                    {{- $url := .URL | relLangURL -}}
                     {{- with .Page -}}
                         {{- $url = .RelPermalink -}}
-                    {{- else -}}
-                        {{- $url = .URL | relLangURL -}}
                     {{- end -}}
                     <a class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
                         {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
@@ -137,11 +135,9 @@
             {{- end -}}
             {{- $currentPage := . -}}
             {{- range .Site.Menus.main -}}
-                {{- $url := "" -}}
+                {{- $url := .URL | relLangURL -}}
                 {{- with .Page -}}
                     {{- $url = .RelPermalink -}}
-                {{- else -}}
-                    {{- $url = .URL | relLangURL -}}
                 {{- end -}}
                 <a class="menu-item" href="{{ $url }}" title="{{ .Title }}"{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
                     {{- .Pre | safeHTML }}{{ .Name }}{{ .Post | safeHTML -}}

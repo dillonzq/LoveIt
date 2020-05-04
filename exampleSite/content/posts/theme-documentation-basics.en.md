@@ -304,6 +304,8 @@ Please open the code block below to view the complete sample configuration :(far
       gravatarEmail = ""
       # URL of avatar shown in home page
       avatarURL = "/images/avatar.png"
+      # {{< version 0.2.5 >}} title shown in home page
+      title = ""
       # subtitle shown in home page
       subtitle = "This is My New Hugo Site"
       # whether to use typeit animation for subtitle

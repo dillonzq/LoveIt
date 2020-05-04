@@ -142,6 +142,8 @@ enableEmoji = true
           gravatarEmail = ""
           # URL of avatar shown in home page
           avatarURL = "/images/avatar.png"
+          # title shown in home page
+          title = ""
           # subtitle shown in home page
           subtitle = "A Clean, Elegant but Advanced Hugo Theme"
           # whether to use typeit animation for subtitle
@@ -340,6 +342,8 @@ enableEmoji = true
           gravatarEmail = ""
           # 主页显示头像的 URL
           avatarURL = "/images/avatar.png"
+          # 主页显示的网站标题
+          title = ""
           # 主页显示的网站副标题
           subtitle = "一个简洁、优雅且高效的 Hugo 主题"
           # 是否为副标题显示打字机动画
@@ -534,6 +538,8 @@ enableEmoji = true
           gravatarEmail = ""
           # URL of avatar shown in home page
           avatarURL = "/images/avatar.png"
+          # title shown in home page
+          title = ""
           # subtitle shown in home page
           subtitle = "Un thème Hugo simple, élégant et efficace"
           # whether to use typeit animation for subtitle
