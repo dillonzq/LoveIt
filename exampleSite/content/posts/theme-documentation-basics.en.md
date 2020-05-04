@@ -26,14 +26,14 @@ Discover what the Hugo - **LoveIt** theme is all about and the core-concepts beh
 
 Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only dependency of this theme.
 
-Just install latest version of [:(far fa-file-archive fa-fw): Hugo extended (> 0.62.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
+Just install latest version of [:(far fa-file-archive fa-fw): Hugo (> 0.62.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
 
 {{< admonition note "Why not support earlier versions of Hugo?" >}}
 Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/), this theme only supports Hugo versions above **0.62.0**.
 {{< /admonition >}}
 
-{{< admonition note "Why need the Hugo extended version?" >}}
-Since the theme processes SCSS to CSS, Hugo needs to be the **extended** version.
+{{< admonition tip "Hugo extended version is recommended" >}}
+Since some features of this theme need to processes :(fab fa-sass fa-fw): SCSS to :(fab fa-css3 fa-fw): CSS, it is recommended to use Hugo **extended** version for better experience.
 {{< /admonition >}}
 
 ## 2 Installation
@@ -254,6 +254,8 @@ Please open the code block below to view the complete sample configuration :(far
       pre = ""
       # you can add extra information after the name (HTML format is supported), such as icons
       post = ""
+      # {{< version 0.2.5 >}} whether to use typeit animation for title name
+      typeit = false
 
   # Footer config
   [params.footer]
@@ -315,7 +317,8 @@ Please open the code block below to view the complete sample configuration :(far
       enable = true
       # special amount of posts in each home posts page
       paginate = 6
-      # {{< version 0.2.0 deleted >}} default behavior when you don't set "hiddenFromHomePage" in front matter
+      # {{< version 0.2.0 deleted >}} replaced with hiddenFromHomePage in params.page
+      # default behavior when you don't set "hiddenFromHomePage" in front matter
       defaultHiddenFromHomePage = false
 
   # Social config about the author
@@ -548,6 +551,17 @@ Please open the code block below to view the complete sample configuration :(far
         width = 800
         height = 600
 
+  # {{< version 0.2.5 >}} TypeIt config
+  [params.typeit]
+    # typing speed between each step (measured in milliseconds)
+    speed = 100
+    # blinking speed of the cursor (measured in milliseconds)
+    cursorSpeed = 1000
+    # character used for the cursor (HTML format is supported)
+    cursorChar = "|"
+    # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
+    duration = -1
+
   # Site verification code config for Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
     google = ""
@@ -608,7 +622,7 @@ Please open the code block below to view the complete sample configuration :(far
     clipboardJS = ""
     # {{< link "https://github.com/ellisonleao/sharer.js" "sharer.js" >}}@0.4.0
     sharerJS = ""
-    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@6.5.1
+    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@7.0.4
     typeitJS = ""
     # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
     katexCSS = ""
