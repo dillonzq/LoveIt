@@ -1,187 +1,187 @@
-# Translations for English
+# Translations for Serbian  
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === baseof ==
 [backToTop]
-other = "Back to Top"
+other = "Назад на Врх"
 
 [viewComments]
-other = "View Comments"
+other = "Погледај Коментаре"
 # === baseof ==
 
 # === Post ===
 [posts]
-other = "Posts"
+other = "Постови"
 # === Post ===
 
 # === Taxonomy ===
 [allSome]
-other = "All %s"
+other = "Све %s"
 
 [tag]
-other = "Tag"
+other = "Таг"
 
 [tags]
-other = "Tags"
+other = "Тагови"
 
 [category]
-other = "Category"
+other = "Категорија"
 
 [categories]
-other = "Categories"
+other = "Категорије"
 # === Taxonomy ===
 
 # === Pagination ===
 [more]
-other = "More"
+other = "Више"
 # === Pagination ===
 
 # === partials/header.html ===
 [selectLanguage]
-other = "Select Language"
+other = "Изабери Језик"
 
 [switchTheme]
-other = "Switch Theme"
+other = "Промени Тему"
 # === partials/header.html ===
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Powered by %s"
+other = "Покреће %s"
 
 [theme]
-other = "Theme"
+other = "Тема"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
 [valineLang]
-other = "en"
+other = "sr"
 
 [valinePlaceholder]
-other = "Your comment ..."
+other = "Ваш коментар ..."
 
 [facebookLanguageCode]
-other = "en_US"
+other = "sr_RS"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
 [search]
-other = "Search"
+other = "Претрага"
 
 [searchPlaceholder]
-other = "Search titles or contents..."
+other = "Претражи наслове или садржај..."
 
 [clear]
-other = "Clear"
+other = "Очисти"
 
 [cancel]
-other = "Cancel"
+other = "Поништи"
 
 [noResultsFound]
-other = "No results found"
+other = "Без резултата"
 
 [copyToClipboard]
-other = "Copy to clipboard"
+other = "Копирај на радну таблу"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]
-other = "Share on"
+other = "Подели на"
 # === partials/plugin/share.html ===
 
 # === posts/single.html ===
 [contents]
-other = "Contents"
+other = "Садржаји"
 
 [publish]
-other = "published on"
+other = "објављено"
 
 [included]
-other = "included in"
+other = "укључено"
 
 [wordCount]
-other = "about {{ .Count }} words"
+other = "око {{ .Count }} речи"
 
 [readingTime]
-other = "{{ .Count }} min"
+other = "{{ .Count }} мин"
 
 [views]
-other = "views"
+other = "прегледа"
 
 [author]
-other = "Author"
+other = "Аутор"
 
 [lastMod]
-other = "The article was updated on %s"
+other = "Чланак је обновљен %s"
 
 [license]
-other = "Published under the %s license"
+other = "Објављено под условима %s лиценце"
 
 [seeMarkdown]
-other = "Read Markdown"
+other = "Читај Markdown"
 
 [back]
-other = "Back"
+other = "Назад"
 
 [home]
-other = "Home"
+other = "Почетна"
 
 [readMore]
-other = "Read More"
+other = "Прочитај више"
 # === posts/single.html ===
 
 # === 404.html ===
 [pageNotFound]
-other = "Page not found"
+other = "Страница није пронађена"
 
 [pageNotFoundText]
-other = "The page you're looking for doesn't exist. Sorry."
+other = "Страница коју тражите не постоји. Жао нам је."
 # === 404.html ===
 
 # === shortcodes/admonition.html ===
 [note]
-other = "Note"
+other = "Напомена"
 
 [abstract]
-other = "Abstract"
+other = "Сажетак"
 
 [info]
-other = "Info"
+other = "Инфо"
 
 [tip]
-other = "Tip"
+other = "Савет"
 
 [success]
-other = "Success"
+other = "Успех"
 
 [question]
-other = "Question"
+other = "Питање"
 
 [warning]
-other = "Warning"
+other = "Упозорење"
 
 [failure]
-other = "Failure"
+other = "Неуспех"
 
 [danger]
-other = "Danger"
+other = "Опасност"
 
 [bug]
-other = "Bug"
+other = "Грешка"
 
 [example]
-other = "Example"
+other = "Пример"
 
 [quote]
-other = "Quote"
+other = "Цитат"
 # === shortcodes/admonition.html ===
 
 # === shortcodes/version.html ===
 [new]
-other = "NEW"
+other = "НОВО"
 
 [changed]
-other = "CHANGED"
+other = "ПРОМЕЊЕНО"
 
 [deleted]
-other = "DELETED"
+other = "ОБРИСАНО"
 # === shortcodes/version.html ===
