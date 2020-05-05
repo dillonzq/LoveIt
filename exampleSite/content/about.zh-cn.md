@@ -19,7 +19,7 @@ math:
 
 > [:(far fa-kiss-wink-heart fa-fw): LoveIt](https://github.com/dillonzq/LoveIt) 是一个由 [Dillon](https://dillonzq.com) 开发的**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 >
-> 它的原型基于 [LeaveIt 主题](https://github.com/liuzc/LeaveIt) 和 [KeepIt 主题](https://github.com/liuzc/LeaveIt)。
+> 它的原型基于 [LeaveIt 主题](https://github.com/liuzc/LeaveIt) 和 [KeepIt 主题](https://github.com/Fastbyte01/KeepIt)。
 
 ![Hugo 主题 LoveIt](/images/Apple-Devices-Preview.png "Hugo 主题 LoveIt")
 
@@ -57,6 +57,7 @@ math:
 * :(far fa-comments fa-fw): 支持 **[Facebook](https://developers.facebook.com/docs/plugins/comments/) 评论**系统
 * :(fas fa-comment fa-fw): 支持 **[Telegram comments](https://comments.app/) 评论**系统
 * :(fas fa-comment-dots fa-fw): 支持 **[Commento](https://commento.io/)** 评论系统
+* :(far fa-comment-alt fa-fw): 支持 **[Utterances](https://utteranc.es/)** 评论系统
 
 #### 扩展功能
 

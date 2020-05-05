@@ -142,6 +142,8 @@ enableEmoji = true
           gravatarEmail = ""
           # URL of avatar shown in home page
           avatarURL = "/images/avatar.png"
+          # title shown in home page
+          title = ""
           # subtitle shown in home page
           subtitle = "A Clean, Elegant but Advanced Hugo Theme"
           # whether to use typeit animation for subtitle
@@ -340,6 +342,8 @@ enableEmoji = true
           gravatarEmail = ""
           # 主页显示头像的 URL
           avatarURL = "/images/avatar.png"
+          # 主页显示的网站标题
+          title = ""
           # 主页显示的网站副标题
           subtitle = "一个简洁、优雅且高效的 Hugo 主题"
           # 是否为副标题显示打字机动画
@@ -534,6 +538,8 @@ enableEmoji = true
           gravatarEmail = ""
           # URL of avatar shown in home page
           avatarURL = "/images/avatar.png"
+          # title shown in home page
+          title = ""
           # subtitle shown in home page
           subtitle = "Un thème Hugo simple, élégant et efficace"
           # whether to use typeit animation for subtitle
@@ -655,6 +661,9 @@ enableEmoji = true
       # you can add extra information after the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
       post = ""
+      # whether to use typeit animation for title name
+      # 是否为标题显示打字机动画
+      typeit = false
 
   # Footer config
   # 页面底部信息配置
@@ -883,10 +892,20 @@ enableEmoji = true
         colorful = true
         dislikes = false
         outlined = false
-      # Commento comments config (https://commento.io/)
-      # Commento comments 评论系统设置 (https://commento.io/)
+      # Commento comment config (https://commento.io/)
+      # Commento comment 评论系统设置 (https://commento.io/)
       [params.page.comment.commento]
         enable = false
+      # Utterances comment config (https://utteranc.es/)
+      # Utterances comment 评论系统设置 (https://utteranc.es/)
+      [params.page.comment.utterances]
+        enable = false
+        # owner/repo
+        repo = ""
+        issueTerm = "pathname"
+        label = ""
+        lightTheme = "github-light"
+        darkTheme = "github-dark"
     # SEO config
     # SEO 配置
     [params.page.seo]
@@ -910,6 +929,22 @@ enableEmoji = true
         url = "cover.png"
         width = 800
         height = 600
+
+  # TypeIt config
+  # TypeIt 配置
+  [params.typeit]
+    # typing speed between each step (measured in milliseconds)
+    # 每一步的打字速度 (单位是毫秒)
+    speed = 100
+    # blinking speed of the cursor (measured in milliseconds)
+    # 光标的闪烁速度 (单位是毫秒)
+    cursorSpeed = 1000
+    # character used for the cursor (HTML format is supported)
+    # 光标的字符 (支持 HTML 格式)
+    cursorChar = "|"
+    # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
+    # 打字结束之后光标的持续时间 (单位是毫秒, "-1" 代表无限大)
+    duration = -1
 
   # Site verification code for Google/Bing/Yandex/Pinterest/Baidu
   # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
@@ -977,7 +1012,7 @@ enableEmoji = true
     clipboardJS = ""
     # sharer.js@0.4.0 https://github.com/ellisonleao/sharer.js
     sharerJS = ""
-    # typeit@6.5.1 https://github.com/alexmacarthur/typeit
+    # typeit@7.0.4 https://github.com/alexmacarthur/typeit
     typeitJS = ""
     # katex@0.11.1 https://katex.org/
     katexCSS = ""

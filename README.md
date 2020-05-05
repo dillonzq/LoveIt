@@ -9,7 +9,7 @@ English README | [简体中文说明](https://github.com/dillonzq/LoveIt/blob/ma
 
 > **LoveIt** is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
 
-It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt) and [KeepIt Theme](https://github.com/liuzc/LeaveIt).
+It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt) and [KeepIt Theme](https://github.com/Fastbyte01/KeepIt).
 
 Since the three themes have a similar look, if you have questions about their differences,
 read [Why choose LoveIt](#why-choose-loveit) so that you can choose the one that works best for you.
@@ -89,7 +89,8 @@ I hope you will LoveIt ❤️!
 * **Valine** comment system supported by [Valine](https://valine.js.org/)
 * **Facebook comments** system supported by [Facebook](https://developers.facebook.com/docs/plugins/comments/)
 * **Telegram comments** system supported by [Telegram Comments](https://comments.app/)
-* **Commento** comments system supported by [Commento](https://commento.io/)
+* **Commento** comment system supported by [Commento](https://commento.io/)
+* **Utterances** comment system supported by [Utterances](https://utteranc.es/)
 
 ### Extended Features
 
@@ -131,6 +132,7 @@ LoveIt supports the following languages:
 * Polish
 * Brazilian Portuguese
 * Italian
+* Spanish
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
 [Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)

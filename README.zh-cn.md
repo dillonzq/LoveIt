@@ -9,7 +9,7 @@
 
 > [LoveIt](https://github.com/dillonzq/LoveIt) 是一个**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 
-它的原型基于 [LeaveIt 主题](https://github.com/liuzc/LeaveIt) 和 [KeepIt 主题](https://github.com/liuzc/LeaveIt)。
+它的原型基于 [LeaveIt 主题](https://github.com/liuzc/LeaveIt) 和 [KeepIt 主题](https://github.com/Fastbyte01/KeepIt)。
 
 由于三个主题外观的相似性，如果你对于它们的不同之处有疑问，请阅读 [为什么选择 LoveIt](#为什么选择-LoveIt)，以便你能选择最适合你的一个。
 
@@ -85,6 +85,7 @@
 * 支持 **[Facebook](https://developers.facebook.com/docs/plugins/comments/) 评论**系统
 * 支持 **[Telegram comments](https://comments.app/) 评论**系统
 * 支持 **[Commento](https://commento.io/)** 评论系统
+* 支持 **[Utterances](https://utteranc.es/)** 评论系统
 
 ### 扩展功能
 
@@ -126,6 +127,7 @@ LoveIt 支持下列语言:
 * 波兰语
 * 巴西葡萄牙语
 * 意大利语
+* 西班牙语
 * [贡献一种新的语言](https://github.com/dillonzq/LoveIt/pulls)
 
 [语言兼容性](https://hugoloveit.com/zh-cn/theme-documentation-basics/#language-compatibility)

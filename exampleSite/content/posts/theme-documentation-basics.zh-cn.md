@@ -26,7 +26,7 @@ toc:
 
 由于 Hugo 提供的便利性, [Hugo](https://gohugo.io/) 本身是这个主题唯一的依赖.
 
-直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive fa-fw): Hugo extended (> 0.62.0)](https://gohugo.io/getting-started/installing/).
+直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive fa-fw): Hugo (> 0.62.0)](https://gohugo.io/getting-started/installing/).
 
 {{< admonition note "为什么不支持早期版本的 Hugo?" >}}
 由于 [Markdown 渲染钩子函数](https://gohugo.io/getting-started/configuration-markup#markdown-render-hooks) 在 [Hugo 圣诞节版本](https://gohugo.io/news/0.62.0-relnotes/) 中被引入, 本主题只支持高于 **0.62.0** 的 Hugo 版本.
@@ -34,6 +34,10 @@ toc:
 
 {{< admonition note "为什么需要 Hugo extended 版本?" >}}
 由于本主题需要转换 SCSS 文件为 CSS 文件, Hugo **extended** 版本是必要的.
+{{< /admonition >}}
+
+{{< admonition tip "推荐使用 Hugo extended 版本" >}}
+由于这个主题的一些特性需要将 :(fab fa-sass fa-fw): SCSS 转换为 :(fab fa-css3 fa-fw): CSS, 推荐使用 Hugo **extended** 版本来获得更好的使用体验.
 {{< /admonition >}}
 
 ## 2 安装
@@ -257,6 +261,8 @@ hugo
       pre = ""
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
       post = ""
+      # {{< version 0.2.5 >}} 是否为标题显示打字机动画
+      typeit = false
 
   # 页面底部信息配置
   [params.footer]
@@ -305,6 +311,8 @@ hugo
       gravatarEmail = ""
       # 主页显示头像的 URL
       avatarURL = "/images/avatar.png"
+      # {{< version 0.2.5 >}} 主页显示的网站标题
+      title = ""
       # 主页显示的网站副标题
       subtitle = "这是我的全新 Hugo 网站"
       # 是否为副标题显示打字机动画
@@ -318,7 +326,8 @@ hugo
       enable = true
       # 主页每页显示文章数量
       paginate = 6
-      # {{< version 0.2.0 deleted >}} 当你没有在文章前置参数中设置 "hiddenFromHomePage" 时的默认行为
+      # {{< version 0.2.0 deleted >}} 被 params.page 中的 hiddenFromHomePage 替代
+      # 当你没有在文章前置参数中设置 "hiddenFromHomePage" 时的默认行为
       defaultHiddenFromHomePage = false
 
   # 作者的社交信息设置
@@ -531,6 +540,15 @@ hugo
       # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} 评论系统设置
       [params.page.comment.commento]
         enable = false
+      # {{< version 0.2.5 >}} {{< link "https://utteranc.es/" "Utterances" >}} 评论系统设置
+      [params.page.comment.utterances]
+        enable = false
+        # owner/repo
+        repo = ""
+        issueTerm = "pathname"
+        label = ""
+        lightTheme = "github-light"
+        darkTheme = "github-dark"
     # {{< version 0.2.0 >}} SEO config
     [params.page.seo]
       # 出版者信息
@@ -550,6 +568,17 @@ hugo
         url = "cover.png"
         width = 800
         height = 600
+
+  # {{< version 0.2.5 >}} TypeIt 配置
+  [params.typeit]
+    # 每一步的打字速度 (单位是毫秒)
+    speed = 100
+    # 光标的闪烁速度 (单位是毫秒)
+    cursorSpeed = 1000
+    # 光标的字符 (支持 HTML 格式)
+    cursorChar = "|"
+    # 打字结束之后光标的持续时间 (单位是毫秒, "-1" 代表无限大)
+    duration = -1
 
   # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
@@ -611,7 +640,7 @@ hugo
     clipboardJS = ""
     # {{< link "https://github.com/ellisonleao/sharer.js" "sharer.js" >}}@0.4.0
     sharerJS = ""
-    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@6.5.1
+    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@7.0.4
     typeitJS = ""
     # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
     katexCSS = ""
@@ -827,6 +856,7 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 | 波兰语 | `pl` | `pl` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
 | 巴西葡萄牙语 | `pt-br` | `pt-BR` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 意大利语 | `it` | `it` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 西班牙语 | `es` | `es` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 
 ### 4.2 基本配置
 
@@ -1008,7 +1038,7 @@ defaultContentLanguage = "zh-cn"
 * `lunr`: 简单, 无需同步 `index.json`, 没有 `contentLength` 的限制, 但占用带宽大且性能低 (特别是中文需要一个较大的分词依赖库)
 * `algolia`: 高性能并且占用带宽低, 但需要同步 `index.json` 且有 `contentLength` 的限制
 
-{{< version 0.2.3 >}} 文章内容被 `h2` 和 `h3` HTML 标签切分来提供查询效果并且基本实现全文搜索.
+{{< version 0.2.3 >}} 文章内容被 `h2` 和 `h3` HTML 标签切分来提高查询效果并且基本实现全文搜索.
 `contentLength` 用来限制 `h2` 和 `h3` HTML 标签开头的内容部分的最大长度.
 {{< /admonition >}}
 
