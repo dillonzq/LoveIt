@@ -12,7 +12,6 @@ tags: ["emoji"]
 categories: ["Markdown"]
 featuredImage: "/images/emoji-support/featured-image.jpg"
 
-twemoji: true
 lightgallery: true
 ---
 
@@ -38,12 +37,6 @@ Emoji 可以通过多种方式在 Hugo 项目中启用.
 去露营啦! :tent: 很快就回来.
 
 真开心! :joy:
-
-{{< admonition tip "使用 Twemoji" >}}
-这个页面使用了 `twemoji` 来使 emoji 具有一致的美观性.
-
-请在文章的[前置参数](../theme-documentation-content#front-matter) 或 [网站配置](../theme-documentation-basics#site-configuration) 的 `params.page` 部分中将 `twemoji` 设置为 `true` 来使用 :(far fa-grin-tongue-wink fa-fw): Twemoji.
-{{< /admonition >}}
 
 以下**符号清单**是 emoji 代码的非常有用的参考.
 
