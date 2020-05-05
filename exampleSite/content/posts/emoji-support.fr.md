@@ -12,7 +12,6 @@ tags: ["emoji"]
 categories: ["Markdown"]
 featuredImage: "/images/emoji-support/featured-image.jpg"
 
-twemoji: true
 lightgallery: true
 ---
 
@@ -42,12 +41,6 @@ The rendered output looks like this:
 Gone camping! :tent: Be back soon.
 
 That is so funny! :joy:
-
-{{< admonition tip "Enable Twemoji" >}}
-This page enables `twemoji` to make emoji look beautiful everywhere.
-
-Set `twemoji` to `true` in your [front matter](../theme-documentation-content#front-matter) or in the `params.page` part of the [site configuration](https://gohugo.io/getting-started/configuration/) to use :(far fa-grin-tongue-wink fa-fw): Twemoji.
-{{< /admonition >}}
 
 The following **cheat sheet** is a useful reference for emoji shorthand codes.
 

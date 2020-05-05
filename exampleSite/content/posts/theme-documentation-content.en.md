@@ -211,7 +211,7 @@ $$ c = \pm\sqrt{a^2 + b^2} $$
 
 #### Inline Formula
 
-The default block delimiters are `$`/`$` and `\\(`/`\\)`:
+The default inline delimiters are `$`/`$` and `\\(`/`\\)`:
 
 ```markdown
 $ c = \pm\sqrt{a^2 + b^2} $ and \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\)
