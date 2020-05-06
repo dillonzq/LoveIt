@@ -41,7 +41,7 @@
 
     {{- if $profile.social -}}
         <div class="social-links">
-            {{- $socialMap := resources.Get "data/social.yaml" | transform.Unmarshal -}}
+            {{- $socialMap := resources.Get "data/social.yml" | transform.Unmarshal -}}
             {{- $socialArr := slice -}}
             {{- range $key, $value := .Site.Params.social -}}
                 {{- $social := $key | lower | index $socialMap | default dict -}}

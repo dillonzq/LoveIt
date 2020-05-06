@@ -80,9 +80,6 @@ other = "Anuluj"
 [noResultsFound]
 other = "Nie znaleziono wyników"
 
-[lunrLanguageLib]
-other = "lib/lunr/lunr.pl.js"
-
 [lunrLanguageCode]
 other = "pl"
 

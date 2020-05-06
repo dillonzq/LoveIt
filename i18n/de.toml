@@ -1,56 +1,56 @@
-# Translations for French
-# Traductions pour le français
+# Translations for German
+# Übersetzung auf Deutsch
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === baseof ==
 [backToTop]
-other = "Retour en Haut"
+other = "nach oben"
 
 [viewComments]
-other = "Afficher les Commentaires"
+other = "Kommentare anzeigen"
 # === baseof ==
 
 # === Post ===
 [posts]
-other = "Posts"
+other = "Artikel"
 # === Post ===
 
 # === Taxonomy ===
 [allSome]
-other = "Tous %s"
+other = "Alle %s"
 
 [tag]
-other = "Balise"
+other = "Tag"
 
 [tags]
-other = "Balises"
+other = "Tags"
 
 [category]
-other = "Catégorie"
+other = "Kategorie"
 
 [categories]
-other = "Catégories"
+other = "Kategorien"
 # === Taxonomy ===
 
 # === Pagination ===
 [more]
-other = "Plus"
+other = "Mehr"
 # === Pagination ===
 
 # === partials/header.html ===
 [selectLanguage]
-other = "Choisir la langue"
+other = "Sprache wählen"
 
 [switchTheme]
-other = "Changer de Thème"
+other = "Thema wechseln"
 # === partials/header.html ===
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Propulsé par %s"
+other = "Ermöglicht durch %s"
 
 [theme]
-other = "Thème"
+other = "Thema"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -58,137 +58,139 @@ other = "Thème"
 other = "en"
 
 [valinePlaceholder]
-other = "Votre commentaire ..."
+other = "Ihr Kommentar ..."
 
 [facebookLanguageCode]
-other = "fr"
+other = "de_DE"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
 [search]
-other = "Chercher"
+other = "Suche"
 
 [searchPlaceholder]
-other = "Rechercher des titres, des contenus..."
+other = "Suche nach Titel und Inhalt..."
 
 [clear]
-other = "Clair"
+other = "Leeren"
 
 [cancel]
-other = "Annuler"
+other = "Abbrechen"
 
 [noResultsFound]
-other = "Aucun résultat trouvé"
+other = "Keine Ergebnisse gefunden"
 
 [lunrLanguageCode]
-other = "fr"
+other = "de"
 
 [lunrLanguageLib]
-other = "lib/lunr/lunr.fr.js"
+other = "lib/lunr/lunr.de.js"
 
 [copyToClipboard]
-other = "Copier dans le presse-papiers"
+other = "In Zwischenablage kopieren"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]
-other = "Partager sur"
+other = "Teilen auf"
 # === partials/plugin/share.html ===
 
 # === posts/single.html ===
 [contents]
-other = "Contenu"
+other = "Inhalt"
 
 [publish]
-other = "publié le"
+other = "veröffentlicht auf"
 
 [included]
-other = "inclus dans"
+other = "enthalten in"
 
 [wordCount]
-other = "environ {{ .Count }} mots"
+one = "Ein Wort"
+other = "{{ .Count }} Wörter"
 
 [readingTime]
-other = "{{ .Count }} min"
+one = "Eine Minute"
+other = "{{ .Count }} Minuten"
 
 [views]
-other = "vues"
+other = "Aufrufe"
 
 [author]
-other = "Auteur"
+other = "Autor"
 
 [lastMod]
-other = "Dernière mise à jour le %s"
+other = "Aktualisiert am %s"
 
 [license]
-other = "Publié sous licence %s"
+other = "Veröffentlicht unter der %s Lizenz"
 
 [seeMarkdown]
-other = "Lire Markdown"
+other = "Markdown anzeigen"
 
 [back]
-other = "Retour"
+other = "Zurück"
 
 [home]
-other = "Accueil"
+other = "Startseite"
 
 [readMore]
-other = "En savoir plus"
+other = "Mehr lesen"
 # === posts/single.html ===
 
 # === 404.html ===
 [pageNotFound]
-other = "Page non trouvée"
+other = "Seite nicht gefunden"
 
 [pageNotFoundText]
-other = "Désolé, la page recherchée n'existe pas."
+other = "Leider konnte die von Ihnen angeforderte Seite nicht aufgerufen werden."
 # === 404.html ===
 
 # === shortcodes/admonition.html ===
 [note]
-other = "Remarque"
+other = "Notiz"
 
 [abstract]
-other = "Abstrait"
+other = "Ausblick"
 
 [info]
 other = "Info"
 
 [tip]
-other = "Astuces"
+other = "Tip"
 
 [success]
-other = "Succès"
+other = "Erfolg"
 
 [question]
-other = "Question"
+other = "Frage"
 
 [warning]
-other = "Avertissement"
+other = "Warnung"
 
 [failure]
-other = "Échec"
+other = "Fehler"
 
 [danger]
-other = "Danger"
+other = "Gefahr"
 
 [bug]
 other = "Bug"
 
 [example]
-other = "Exemple"
+other = "Beispiel"
 
 [quote]
-other = "Citation"
+other = "Zitat"
 # === shortcodes/admonition.html ===
 
 # === shortcodes/version.html ===
 [new]
-other = "NOUVEAU"
+other = "NEU"
 
 [changed]
-other = "CHANGE"
+other = "GEÄNDERT"
 
 [deleted]
-other = "EFFACE"
+other = "GELÖSCHT"
 # === shortcodes/version.html ===
