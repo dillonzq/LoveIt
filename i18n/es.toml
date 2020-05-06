@@ -80,11 +80,11 @@ other = "Cancelar"
 [noResultsFound]
 other = "No se encontraron resultados"
 
-[lunrLanguageLib]
-other = "lib/lunr/lunr.es.js"
-
 [lunrLanguageCode]
 other = "es"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.es.js"
 
 [copyToClipboard]
 other = "Copiar al portapapeles"

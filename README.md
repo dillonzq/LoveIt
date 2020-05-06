@@ -133,8 +133,8 @@ LoveIt supports the following languages:
 * Brazilian Portuguese
 * Italian
 * Spanish
-* Serbian
 * German
+* Serbian
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
 [Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)

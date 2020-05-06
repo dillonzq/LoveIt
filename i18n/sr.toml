@@ -1,4 +1,4 @@
-# Translations for Serbian 
+# Translations for Serbian
 # Превод на Српски
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
@@ -79,6 +79,9 @@ other = "Поништи"
 
 [noResultsFound]
 other = "Без резултата"
+
+[lunrLanguageCode]
+other = "sr"
 
 [copyToClipboard]
 other = "Копирај на радну таблу"
