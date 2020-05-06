@@ -1,4 +1,4 @@
-{{- $content := .Inner -}}
+{{- $content := trim .Inner "\n" -}}
 {{- $classList := .Get "class" | slice -}}
 {{- $tag := .Get "tag" | default "div" -}}
 
@@ -19,7 +19,6 @@
 {{- end -}}
 
 {{- /* trim the newline */ -}}
-{{- $content = trim $content "\n" -}}
 {{- $id := dict "content" $content "scratch" .Page.Scratch | partial "function/id.html" -}}
 {{- $key := .Get "group" | string | default $id -}}
 {{- $typeitMap := (.Page.Scratch.Get "this").typeitMap | default dict -}}
