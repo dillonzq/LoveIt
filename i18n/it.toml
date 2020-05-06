@@ -80,11 +80,11 @@ other = "Annulla"
 [noResultsFound]
 other = "Nessun risultato trovato"
 
-[lunrLanguageLib]
-other = "lib/lunr/lunr.it.js"
-
 [lunrLanguageCode]
 other = "it"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.it.js"
 
 [copyToClipboard]
 other = "Copia negli appunti"
