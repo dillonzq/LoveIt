@@ -873,6 +873,13 @@ enableEmoji = true
         highlight = true
         enableQQ = false
         serverURLs = ""
+        # emoji config file name, default is "google.yml"
+        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
+        # located in "assets/data/emoji/" directory, where you can put your config file
+        # emoji 配置文件名称, 默认是 "facebook.yml"
+        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
+        # 位于 "assets/data/emoji/" 目录, 你可以在此存放你自己的配置文件
+        emoji = ""
       # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
       # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]

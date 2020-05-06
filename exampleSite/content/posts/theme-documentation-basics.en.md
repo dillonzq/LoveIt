@@ -513,6 +513,10 @@ Please open the code block below to view the complete sample configuration :(far
         highlight = true
         enableQQ = false
         serverURLs = ""
+        # {{< version 0.2.6 >}} emoji config file name, default is "facebook.yml"
+        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
+        # located in "assets/data/emoji/" directory, where you can put your config file
+        emoji = ""
       # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook comment" >}} config
       [params.page.comment.facebook]
         enable = false
