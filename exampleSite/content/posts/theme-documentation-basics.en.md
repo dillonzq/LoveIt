@@ -842,7 +842,7 @@ In `config/css/_custom.scss`, you can add some css style code to customize the s
 
 ### 4.1 Compatibility {#language-compatibility}
 
-{{< version 0.2.0 changed >}}
+{{< version 0.2.6 changed >}}
 
 | Language             | Hugo Code | HTML `lang` Attribute | Theme Docs                    | Lunr.js Support               |
 |:-------------------- |:---------:|:---------------------:|:-----------------------------:|:-----------------------------:|
