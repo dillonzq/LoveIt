@@ -1,4 +1,4 @@
-# Translations for English
+# Translations for German
 # Übersetzung auf Deutsch
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
@@ -79,6 +79,12 @@ other = "Abbrechen"
 
 [noResultsFound]
 other = "Keine Ergebnisse gefunden"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.de.js"
+
+[lunrLanguageCode]
+other = "de"
 
 [copyToClipboard]
 other = "In Zwischenablage kopieren"

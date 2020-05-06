@@ -128,7 +128,7 @@ LoveIt 支持下列语言:
 * 巴西葡萄牙语
 * 意大利语
 * 西班牙语
-* 德文
+* 德语
 * [贡献一种新的语言](https://github.com/dillonzq/LoveIt/pulls)
 
 [语言兼容性](https://hugoloveit.com/zh-cn/theme-documentation-basics/#language-compatibility)
