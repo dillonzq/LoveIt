@@ -850,7 +850,7 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 ### 4.1 兼容性 {#language-compatibility}
 
-{{< version 0.2.0 changed >}}
+{{< version 0.2.6 changed >}}
 
 | 语言 | Hugo 代码 | HTML `lang` 属性 | 主题文档 | Lunr.js 支持 |
 |:---- |:----:|:----:|:----:|:----:|
