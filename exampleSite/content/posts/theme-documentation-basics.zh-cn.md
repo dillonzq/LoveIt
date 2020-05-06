@@ -520,6 +520,10 @@ hugo
         highlight = true
         enableQQ = false
         serverURLs = ""
+        # {{< version 0.2.6 >}} emoji 配置文件名称, 默认是 "facebook.yml"
+        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
+        # 位于 "assets/data/emoji/" 目录, 你可以在此存放你自己的配置文件
+        emoji = ""
       # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook 评论系统" >}}设置
       [params.page.comment.facebook]
         enable = false

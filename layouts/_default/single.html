@@ -17,5 +17,8 @@
         <div class="content" id="content">
             {{- dict "content" .Content "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
         </div>
+
+        {{- /* Comment */ -}}
+        {{- partial "comment.html" . -}}
     </div>
 {{- end -}}
