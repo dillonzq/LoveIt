@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Guide d'utilisation des emoji dans Hugo et LoveIt."
+images: ["/images/emoji-support/featured-image.jpg"]
 
 tags: ["emoji"]
 categories: ["Markdown"]

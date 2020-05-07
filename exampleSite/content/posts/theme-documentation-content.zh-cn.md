@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "了解如何在 LoveIt 主题中快速, 直观地创建和组织内容."
+images: ["/images/theme-documentation-content/featured-image.jpg"]
 
 tags: ["content", "Markdown"]
 categories: ["documentation"]
@@ -54,6 +55,7 @@ author: ""
 authorLink: ""
 description: ""
 license: ""
+images: []
 
 tags: []
 categories: []
@@ -100,6 +102,7 @@ comment:
 * **authorLink**: 文章作者的链接.
 * **description**: 文章内容的描述.
 * **license**: 这篇文章特殊的许可.
+* **images**: 页面图片, 用于 Open Graph 和 Twitter Cards.
 
 * **tags**: 文章的标签.
 * **categories**: 文章所属的类别.

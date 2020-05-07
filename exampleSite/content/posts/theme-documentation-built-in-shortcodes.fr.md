@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Hugo fournit plusieurs shortcodes intégrés pour la commodité de l'auteur et pour garder votre contenu de démarque propre."
+images: ["/images/theme-documentation-built-in-shortcodes/featured-image.png"]
 
 tags: ["shortcodes"]
 categories: ["documentation"]
