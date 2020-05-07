@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Le thème LoveIt fournit plusieurs shortcodes en plus de ceux intégrés dans Hugo."
+images: ["/images/theme-documentation-extended-shortcodes/featured-image-preview.jpg"]
 
 tags: ["shortcodes"]
 categories: ["documentation"]

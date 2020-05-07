@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Découvrez comment créer et organiser votre contenu rapidement et intuitivement dans le thème LoveIt."
+images: ["/images/theme-documentation-content/featured-image.jpg"]
 
 tags: ["content", "Markdown"]
 categories: ["documentation"]
@@ -59,6 +60,7 @@ author: ""
 authorLink: ""
 description: ""
 license: ""
+images: []
 
 tags: []
 categories: []
@@ -105,6 +107,7 @@ comment:
 * **authorLink**: the link of the author.
 * **description**: the description for the content.
 * **license**: the special lisence for this content.
+* **images**: page images for Open Graph and Twitter Cards.
 
 * **tags**: the tags for the content.
 * **categories**: the categories for the content.

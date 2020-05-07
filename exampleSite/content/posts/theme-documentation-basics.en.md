@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Discover what the Hugo - LoveIt theme is all about and the core-concepts behind it."
+images: ["/images/theme-documentation-basics/featured-image.jpg"]
 
 tags: ["installation", "configuration"]
 categories: ["documentation"]
@@ -200,6 +201,8 @@ Please open the code block below to view the complete sample configuration :(far
   fingerprint = ""
   # {{< version 0.2.0 >}} date format
   dateFormat = "2006-01-02"
+  # website images for Open Graph and Twitter Cards
+  images = ["/logo.png"]
 
   # {{< version 0.2.0 >}} App icon config
   [params.app]
