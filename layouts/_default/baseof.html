@@ -9,7 +9,7 @@
     {{- end -}}
 {{- end -}}
 
-{{- $params := .Params | merge .Site.Params.page -}}
+{{- $params := .Site.Params | merge .Site.Params.page -}}
 {{- .Scratch.Set "version" "0.2.6" -}}
 
 {{- if eq hugo.Environment "production" -}}
