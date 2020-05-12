@@ -848,7 +848,7 @@ In `config/css/_custom.scss`, you can add some css style code to customize the s
 
 ### 4.1 Compatibility {#language-compatibility}
 
-{{< version 0.2.6 changed >}}
+{{< version 0.2.7 changed >}}
 
 | Language             | Hugo Code | HTML `lang` Attribute | Theme Docs                    | Lunr.js Support               |
 |:-------------------- |:---------:|:---------------------:|:-----------------------------:|:-----------------------------:|
@@ -861,6 +861,8 @@ In `config/css/_custom.scss`, you can add some css style code to customize the s
 | Spanish              | `es`      | `es`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | German               | `de`      | `de`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Serbian              | `sr`      | `sr`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
+| Russian              | `ru`      | `ru`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| Romanian             | `ro`      | `ro`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 
 ### 4.2 Basic Configuration
 

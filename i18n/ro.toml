@@ -1,4 +1,5 @@
 # Translations for Romanian
+# Traduceri pentru limba română
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === baseof ==
@@ -54,7 +55,7 @@ other = "Temă"
 
 # === partials/comment.html ===
 [valineLang]
-other = "ro"
+other = "en"
 
 [valinePlaceholder]
 other = "Comentariul dvs ..."
@@ -81,6 +82,9 @@ other = "Nici un rezultat gasit"
 
 [lunrLanguageCode]
 other = "ro"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.ro.js"
 
 [copyToClipboard]
 other = "Copiați în clipboard"
