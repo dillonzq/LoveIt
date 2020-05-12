@@ -825,6 +825,10 @@ Add a logo image (127x40) and a cover image (800x600) in the `static` directory.
 
 ### 3.4 Style Customization
 
+{{< admonition >}}
+Hugo **extended** version is necessary for the style customization.
+{{< /admonition >}}
+
 **LoveIt** theme has been built to be as configurable as possible by defining custom `.scss` style files.
 
 The directory including the custom `.scss` style files is `config/css` relative to **your project root directory**.

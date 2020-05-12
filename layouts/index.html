@@ -1,8 +1,11 @@
 {{- define "content" -}}
     {{- $params := .Scratch.Get "params" -}}
-    <div class="page home">
+    {{- $profile := .Site.Params.home.profile -}}
+    {{- $posts := .Site.Params.home.posts -}}
+
+    <div class="page home"{{ if ne $posts.enable false }} posts{{ end }}>
         {{- /* Profile */ -}}
-        {{- if ne .Site.Params.home.profile.enable false -}}
+        {{- if ne $profile.enable false -}}
             {{- partial "home/profile.html" . -}}
         {{- end -}}
 
@@ -16,7 +19,7 @@
         {{- end -}}
 
         {{- /* Posts */ -}}
-        {{- if ne .Site.Params.home.posts.enable false | and .Site.RegularPages -}}
+        {{- if ne $posts.enable false | and .Site.RegularPages -}}
             {{- /* Paginate */ -}}
             {{- $pages := where .Site.RegularPages "Type" "posts" -}}
             {{- if .Site.Params.page.hiddenFromHomePage -}}
@@ -24,7 +27,7 @@
             {{- else -}}
                 {{- $pages = where $pages "Params.hiddenfromhomepage" "!=" true -}}
             {{- end -}}
-            {{- with .Site.Params.home.posts.paginate | default .Site.Params.paginate -}}
+            {{- with $posts.paginate | default .Site.Params.paginate -}}
                 {{- $pages = $.Paginate $pages . -}}
             {{- else -}}
                 {{- $pages = .Paginate $pages -}}
