@@ -2,18 +2,16 @@
     {{- /* Google Analytics */ -}}
     {{- with .google.id -}}
         <script type="text/javascript">
-            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-            ga('create', '{{ . }}', {{- if $.google.cookie }}'auto'{{ else }}{ 'storage': 'none' }{{ end }});
-            {{- if $.google.anonymizeIP }}ga('set', 'anonymizeIp', true);{{ end -}}
-            ga('send', 'pageview');
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', '{{ . }}'{{ if $.google.anonymizeIP }}, { 'anonymize_ip': true }{{ end }});
         </script>
-        {{- dict "source" "https://www.google-analytics.com/analytics.js" "async" true | partial "plugin/script.html" -}}
+        {{- printf "https://www.googletagmanager.com/gtag/js?id=%s" . | dict "async" true "source" | partial "plugin/script.html" -}}
     {{- end -}}
 
     {{- /* Fathom Analytics */ -}}
     {{- with .fathom.id -}}
         <script type="text/javascript">
-            window.fathom=window.fathom||function(){(fathom.q=fathom.q||[]).push(arguments)};
+            window.fathom=window.fathom||function(){(fathom.q=fathom.q||[]).push(arguments);};
             fathom('set', 'siteId', '{{ . }}');
             fathom('trackPageview');
         </script>

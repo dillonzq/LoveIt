@@ -1,3 +1,4 @@
+{{- .Scratch.Set "version" "0.2.7" -}}
 {{- $version := "0.2.X" -}}
 
 {{- /* LoveIt theme version detection */ -}}
@@ -10,7 +11,6 @@
 {{- end -}}
 
 {{- $params := .Params | merge .Site.Params.page -}}
-{{- .Scratch.Set "version" "0.2.6" -}}
 
 {{- if eq hugo.Environment "production" -}}
     {{- .Scratch.Set "cdn" .Site.Params.cdn -}}

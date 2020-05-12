@@ -599,8 +599,6 @@ hugo
       id = ""
       # 是否匿名化用户 IP
       anonymizeIP = true
-      # 是否使用 cookie
-      cookie = false
     # Fathom Analytics
     [params.analytics.fathom]
       id = ""
