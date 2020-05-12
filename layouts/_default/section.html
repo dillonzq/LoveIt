@@ -10,25 +10,27 @@
         </h2>
 
         {{- /* Paginate */ -}}
-        {{- $pages := .Pages.GroupByDate "2006" -}}
-        {{- with .Site.Params.section.paginate | default .Site.Params.paginate -}}
-            {{- $pages = $.Paginate $pages . -}}
-        {{- else -}}
-            {{- $pages = .Paginate $pages -}}
-        {{- end -}}
-        {{- range $pages.PageGroups -}}
-            <h3 class="group-title">{{ .Key }}</h3>
-            {{- range .Pages -}}
-                <article class="archive-item">
-                    <a href="{{ .RelPermalink }}" class="archive-item-link">
-                        {{- .Title -}}
-                    </a>
-                    <span class="archive-item-date">
-                        {{- .Date.Format ($.Site.Params.section.dateFormat | default "01-02") -}}
-                    </span>
-                </article>
+        {{- if .Pages -}}
+            {{- $pages := .Pages.GroupByDate "2006" -}}
+            {{- with .Site.Params.section.paginate | default .Site.Params.paginate -}}
+                {{- $pages = $.Paginate $pages . -}}
+            {{- else -}}
+                {{- $pages = .Paginate $pages -}}
             {{- end -}}
+            {{- range $pages.PageGroups -}}
+                <h3 class="group-title">{{ .Key }}</h3>
+                {{- range .Pages -}}
+                    <article class="archive-item">
+                        <a href="{{ .RelPermalink }}" class="archive-item-link">
+                            {{- .Title -}}
+                        </a>
+                        <span class="archive-item-date">
+                            {{- .Date.Format ($.Site.Params.section.dateFormat | default "01-02") -}}
+                        </span>
+                    </article>
+                {{- end -}}
+            {{- end -}}
+            {{- partial "paginator.html" . -}}
         {{- end -}}
-        {{- partial "paginator.html" . -}}
     </div>
 {{- end -}}

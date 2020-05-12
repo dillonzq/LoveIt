@@ -16,7 +16,7 @@
         {{- end -}}
 
         {{- /* Posts */ -}}
-        {{- if ne .Site.Params.home.posts.enable false -}}
+        {{- if ne .Site.Params.home.posts.enable false | and .Site.RegularPages -}}
             {{- /* Paginate */ -}}
             {{- $pages := where .Site.RegularPages "Type" "posts" -}}
             {{- if .Site.Params.page.hiddenFromHomePage -}}
