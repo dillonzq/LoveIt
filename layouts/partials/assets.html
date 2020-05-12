@@ -89,8 +89,13 @@
 {{- end -}}
 
 {{- /* KaTeX */ -}}
-{{- if $params.math.enable -}}
-    {{- $math := $params.math -}}
+{{- $math := $params.math -}}
+{{- if eq $math true -}}
+    {{- $math = .Site.Params.page.math | default dict -}}
+{{- else if eq $math false -}}
+    {{- $math = dict "enable" false -}}
+{{- end -}}
+{{- if $math.enable -}}
     {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
     {{- $source := $cdn.katexJS | default "lib/katex/katex.min.js" -}}
