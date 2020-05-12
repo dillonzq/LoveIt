@@ -824,6 +824,10 @@ smoothScrollJS = 'https://cdn.jsdelivr.net/npm/smooth-scroll@16/dist/smooth-scro
 
 ### 3.4 自定义样式
 
+{{< admonition >}}
+Hugo **extended** 版本对于自定义样式是必需的.
+{{< /admonition >}}
+
 通过定义自定义 `.scss` 样式文件, **LoveIt** 主题支持可配置的样式.
 
 包含自定义 `.scss` 样式文件的目录相对于 **你的项目根目录** 的路径为 `config/css`.

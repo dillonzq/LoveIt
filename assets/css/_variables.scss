@@ -60,14 +60,6 @@ $header-background-color-dark: #252627 !default;
 $header-title-font-family: $global-font-family !default;
 $header-title-font-size: 1.5rem !default;
 
-// Position of the header
-$header-position-desktop: if($header-normal-mode-desktop, static, fixed) !default;
-$header-position-mobile: if($header-normal-mode-mobile, static, fixed) !default;
-
-// Top of the page padding
-$page-padding-top-desktop: if($header-normal-mode-desktop, 0, $header-height) !default;
-$page-padding-top-mobile: if($header-normal-mode-mobile, 0, $header-height) !default;
-
 // Color of the hover header item
 $header-hover-color: #161209 !default;
 $header-hover-color-dark: #fff !default;

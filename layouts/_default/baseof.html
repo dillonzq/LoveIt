@@ -27,9 +27,7 @@
 {{- end -}}
 
 {{- .Scratch.Set "params" $params -}}
-
-{{- $this := dict "desktop" .Site.Params.header.desktopMode "mobile" .Site.Params.header.mobileMode | dict "headerMode" | dict "config" -}}
-{{- .Scratch.Set "this" $this -}}
+{{- .Scratch.Set "this" dict -}}
 
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
@@ -47,7 +45,7 @@
         {{- partial "head/link.html" . -}}
         {{- partial "head/seo.html" . -}}
     </head>
-    <body>
+    <body header-desktop="{{ .Site.Params.header.desktopMode }}" header-mobile="{{ .Site.Params.header.mobileMode }}">
         {{- /* Check theme isDark before body rendering */ -}}
         {{- $theme := .Site.Params.defaulttheme -}}
         <script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('{{ $theme }}' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '{{ $theme }}' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
