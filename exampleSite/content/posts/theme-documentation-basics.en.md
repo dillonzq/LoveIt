@@ -596,8 +596,6 @@ Please open the code block below to view the complete sample configuration :(far
       id = ""
       # whether to anonymize IP
       anonymizeIP = true
-      # whether to use cookie
-      cookie = false
     # Fathom Analytics
     [params.analytics.fathom]
       id = ""
