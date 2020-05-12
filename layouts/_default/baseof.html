@@ -17,11 +17,17 @@
     {{- .Scratch.Set "fingerprint" .Site.Params.fingerprint -}}
     {{- .Scratch.Set "analytics" .Site.Params.analytics -}}
     {{- .Scratch.Set "comment" $params.comment -}}
+    {{- if eq .Params.comment true -}}
+        {{- .Scratch.Set "comment" .Site.Params.comment -}}
+    {{- else if eq .Params.comment false -}}
+        {{- .Scratch.Set "comment" dict -}}
+    {{- end -}}
 {{- else if eq .Site .Sites.First -}}
     {{- warnf "\n\nCurrent environment is \"development\". The \"comment system\", \"CDN\" and \"fingerprint\" will be disabled.\n当前运行环境是 \"development\". \"评论系统\", \"CDN\" 和 \"fingerprint\" 不会启用.\n" -}}
 {{- end -}}
 
 {{- .Scratch.Set "params" $params -}}
+
 {{- $this := dict "desktop" .Site.Params.header.desktopMode "mobile" .Site.Params.header.mobileMode | dict "headerMode" | dict "config" -}}
 {{- .Scratch.Set "this" $this -}}
 
