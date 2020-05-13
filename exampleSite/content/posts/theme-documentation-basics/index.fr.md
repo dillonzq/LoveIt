@@ -312,7 +312,7 @@ Please open the code block below to view the complete sample configuration :(far
       gravatarEmail = ""
       # URL of avatar shown in home page
       avatarURL = "/images/avatar.png"
-      # {{< version 0.2.5 >}} title shown in home page
+      # {{< version 0.2.7 changed >}} title shown in home page (HTML format is supported)
       title = ""
       # subtitle shown in home page
       subtitle = "This is My New Hugo Site"
