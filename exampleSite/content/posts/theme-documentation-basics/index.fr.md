@@ -521,9 +521,11 @@ Please open the code block below to view the complete sample configuration :(far
         highlight = true
         enableQQ = false
         serverURLs = ""
-        # {{< version 0.2.6 >}} emoji config file name, default is "facebook.yml"
+        # {{< version 0.2.6 >}} emoji data file name, default is "google.yml"
         # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
-        # located in "assets/data/emoji/" directory, where you can put your config file
+        # located in "themes/LoveIt/assets/data/emoji/" directory
+        # you can store your own data files in the same path under your project:
+        # "assets/data/emoji/"
         emoji = ""
       # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook comment" >}} config
       [params.page.comment.facebook]
@@ -607,69 +609,14 @@ Please open the code block below to view the complete sample configuration :(far
       # server url for your tracker if you're self hosting
       server = ""
 
-  # CSS and JS Files CDN config
+  # {{< version 0.2.7 changed >}} CDN config for third-party library files
   [params.cdn]
-    # {{< version 0.2.0 >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
-    normalizeCSS = ""
-    # {{< link "https://fontawesome.com/" "fontawesome-free" >}}@5.13.0
-    fontawesomeFreeCSS = ""
-    # {{< version 0.2.0 >}} {{< link "https://github.com/simple-icons/simple-icons" "simple-icons" >}}@2.9.0
-    # ("https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/")
-    simpleIconsPrefix = ""
-    # animate.css@3.7.2 https://github.com/daneden/animate.css
-    animateCSS = ""
-    # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.3
-    smoothScrollJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/autocomplete.js" "autocomplete.js" >}}@0.37.1
-    autocompleteJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://lunrjs.com/" "lunr.js" >}}@2.3.8
-    lunrJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/algoliasearch-client-javascript" "algoliasearch" >}}@4.2.0
-    algoliasearchJS = ""
-    # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
-    lazysizesJS = ""
-    # {{< version 0.2.3 >}} {{< link "https://github.com/fregante/object-fit-images" "object-fit-images" >}}@3.2.4
-    objectFitImagesJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://github.com/twitter/twemoji" "twemoji" >}}@12.1.5
-    twemojiJS = ""
-    # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3
-    # {{< link "https://github.com/sachinchoolur/lg-thumbnail.js" "lg-thumbnail.js" >}}@1.1.0
-    # {{< link "https://github.com/sachinchoolur/lg-zoom.js" "lg-zoom.js" >}}@1.0.1
-    lightgalleryCSS = ""
-    lightgalleryJS = ""
-    lightgalleryThumbnailJS = ""
-    lightgalleryZoomJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://github.com/zenorocha/clipboard.js" "clipboard.js" >}}@2.0.6
-    clipboardJS = ""
-    # {{< link "https://github.com/ellisonleao/sharer.js" "sharer.js" >}}@0.4.0
-    sharerJS = ""
-    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@7.0.4
-    typeitJS = ""
-    # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
-    katexCSS = ""
-    katexJS = ""
-    katexAutoRenderJS = ""
-    katexCopyTexCSS = ""
-    katexCopyTexJS = ""
-    katexMhchemJS = ""
-    # {{< link "https://github.com/knsv/mermaid" "mermaid" >}}@8.5.0
-    mermaidJS = ""
-    # {{< link "https://echarts.apache.org/" "echarts" >}}@4.7.0
-    echartsJS = ""
-    echartsMacaronsJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.10.0
-    mapboxGLCSS = ""
-    mapboxGLJS = ""
-    # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
-    aplayerCSS = ""
-    aplayerJS = ""
-    # {{< link "https://github.com/metowolf/MetingJS" "meting" >}}@2.0.1
-    metingJS = ""
-    # {{< link "https://github.com/gitalk/gitalk" "gitalk" >}}@1.6.2
-    gitalkCSS = ""
-    gitalkJS = ""
-    # {{< link "https://valine.js.org/" "valine" >}}@1.4.14
-    valineJS = ""
+    # CDN data file name, disabled by default
+    # ("jsdelivr.yml")
+    # located in "themes/LoveIt/assets/data/cdn/" directory
+    # you can store your own data files in the same path under your project:
+    # "assets/data/cdn/"
+    data = ""
 
 # Markup related config in Hugo
 [markup]
@@ -762,13 +709,17 @@ You could enable these features with `hugo serve -e production`.
 {{< /admonition >}}
 
 {{< admonition tip "Tips about CDN Configuration" >}}
-Full HTML tags or URLs are supported for CDN configuration:
+{{< version 0.2.7 changed >}}
 
 ```toml
-smoothScrollJS = '<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js" integrity="sha256-vP+F+14A1ogChQs5Osd5LJl/ci9TbzjiZjjEbcqOXrY=" crossorigin="anonymous"></script>'
-# Or
-smoothScrollJS = 'https://cdn.jsdelivr.net/npm/smooth-scroll@16/dist/smooth-scroll.min.js'
-```
+[params.cdn]
+  # CDN data file name, disabled by default
+  # ("jsdelivr.yml")
+  data = ""
+````
+
+The default CDN data file is located in `themes/LoveIt/assets/data/cdn/` directory.
+You can store your own data file in the same path under your project: `assets/data/cdn/`.
 {{< /admonition >}}
 
 {{< admonition tip "Tips about social Configuration" >}}
@@ -798,7 +749,7 @@ Or You can set more options through a dict:
     title = "Mastodon"
 ```
 
-The default configuration of all supported social links is located in `themes/LoveIt/assets/data/social.yaml`,
+The default data of all supported social links is located in `themes/LoveIt/assets/data/social.yaml`,
 which is you can refer to.
 {{< /admonition >}}
 
@@ -863,6 +814,7 @@ In `config/css/_custom.scss`, you can add some css style code to customize the s
 | Brazilian Portuguese | `pt-br`   | `pt-BR`               | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Italian              | `it`      | `it`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Spanish              | `es`      | `es`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| German               | `de`      | `de`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | German               | `de`      | `de`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Serbian              | `sr`      | `sr`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
 | Russian              | `ru`      | `ru`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
