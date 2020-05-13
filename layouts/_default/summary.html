@@ -1,11 +1,10 @@
 {{- $params := .Params | merge .Site.Params.page -}}
 <article class="single summary" itemscope itemtype="http://schema.org/Article">
     {{- /* Featured image */ -}}
-    {{- with $params.featuredimage -}}
+    {{- with $params.featuredimagepreview | default $params.featuredimage -}}
         <div class="featured-image-preview">
             <a href="{{ $.RelPermalink }}">
-                {{- $image := $params.featuredimagepreview | default . -}}
-                {{- dict "src" $image "alt" $.Description "large" true | partial "plugin/image.html" -}}
+                {{- dict "src" . "alt" $.Description "large" true | partial "plugin/image.html" -}}
             </a>
         </div>
     {{- end -}}

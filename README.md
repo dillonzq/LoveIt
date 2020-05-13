@@ -112,6 +112,7 @@ I hope you will LoveIt ❤️!
 * **Custom style** shortcode
 * **Animated typing** supported by [TypeIt](https://typeitjs.com/)
 * **Dynamic scroll** supported by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
+* **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
 * ...
 
 ## [Documentation](https://hugoloveit.com/categories/documentation/)
@@ -135,6 +136,8 @@ LoveIt supports the following languages:
 * Spanish
 * German
 * Serbian
+* Russian
+* Romanian
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
 [Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)
@@ -174,6 +177,7 @@ Thanks to the authors of following resources included in the theme:
 * [MetingJS](https://github.com/metowolf/MetingJS)
 * [Gitalk](https://github.com/gitalk/gitalk)
 * [Valine](https://valine.js.org/)
+* [cookieconsent](https://github.com/osano/cookieconsent)
 
 ## Author
 

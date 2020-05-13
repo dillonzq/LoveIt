@@ -142,7 +142,7 @@ enableEmoji = true
           gravatarEmail = ""
           # URL of avatar shown in home page
           avatarURL = "/images/avatar.png"
-          # title shown in home page
+          # title shown in home page (HTML format is supported)
           title = ""
           # subtitle shown in home page
           subtitle = "A Clean, Elegant but Advanced Hugo Theme"
@@ -342,7 +342,7 @@ enableEmoji = true
           gravatarEmail = ""
           # 主页显示头像的 URL
           avatarURL = "/images/avatar.png"
-          # 主页显示的网站标题
+          # 主页显示的网站标题 (支持 HTML 格式)
           title = ""
           # 主页显示的网站副标题
           subtitle = "一个简洁、优雅且高效的 Hugo 主题"
@@ -538,7 +538,7 @@ enableEmoji = true
           gravatarEmail = ""
           # URL of avatar shown in home page
           avatarURL = "/images/avatar.png"
-          # title shown in home page
+          # title shown in home page (HTML format is supported)
           title = ""
           # subtitle shown in home page
           subtitle = "Un thème Hugo simple, élégant et efficace"
@@ -876,12 +876,16 @@ enableEmoji = true
         highlight = true
         enableQQ = false
         serverURLs = ""
-        # emoji config file name, default is "google.yml"
+        # emoji data file name, default is "google.yml"
         # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
-        # located in "assets/data/emoji/" directory, where you can put your config file
-        # emoji 配置文件名称, 默认是 "facebook.yml"
+        # located in "themes/LoveIt/assets/data/emoji/" directory
+        # you can store your own data files in the same path under your project:
+        # "assets/data/emoji/"
+        # emoji 数据文件名称, 默认是 "google.yml"
         # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
-        # 位于 "assets/data/emoji/" 目录, 你可以在此存放你自己的配置文件
+        # 位于 "themes/LoveIt/assets/data/emoji/" 目录
+        # 可以在你的项目下相同路径存放你自己的数据文件:
+        # "assets/data/emoji/"
         emoji = ""
       # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
       # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
@@ -916,6 +920,19 @@ enableEmoji = true
         label = ""
         lightTheme = "github-light"
         darkTheme = "github-dark"
+    # Third-party library config
+    # 第三方库配置
+    [params.page.library]
+      [params.page.library.css]
+        # someCSS = "some.css"
+        # located in "assets/" 位于 "assets/"
+        # Or 或者
+        # someCSS = "https://cdn.example.com/some.css"
+      [params.page.library.js]
+        # someJavascript = "some.js"
+        # located in "assets/" 位于 "assets/"
+        # Or 或者
+        # someJavascript = "https://cdn.example.com/some.js"
     # SEO config
     # SEO 配置
     [params.page.seo]
@@ -975,9 +992,6 @@ enableEmoji = true
       # whether to anonymize IP
       # 是否匿名化用户 IP
       anonymizeIP = true
-      # whether to use cookie
-      # 是否使用 cookie
-      cookie = false
     # Fathom Analytics
     [params.analytics.fathom]
       id = ""
@@ -985,70 +999,31 @@ enableEmoji = true
       # 自行托管追踪器时的主机路径
       server = ""
 
-  # CSS and JS Files CDN
-  # CSS 和 JS 文件的 CDN 设置
+  # Cookie consent config
+  # Cookie 许可配置
+  [params.cookieconsent]
+    enable = false
+    # text strings used for Cookie consent banner
+    # 用于 Cookie 许可横幅的文本字符串
+    [params.cookieconsent.content]
+      message = ""
+      dismiss = ""
+      link = ""
+
+  # CDN config for third-party library files
+  # 第三方库文件的 CDN 设置
   [params.cdn]
-    # normalize.css@8.0.1 https://github.com/necolas/normalize.css
-    normalizeCSS = ""
-    # fontawesome-free@5.13.0 https://fontawesome.com/
-    fontawesomeFreeCSS = ""
-    # simple-icons@2.9.0 https://github.com/simple-icons/simple-icons
-    # ("https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/")
-    simpleIconsPrefix = ""
-    # animate.css@3.7.2 https://github.com/daneden/animate.css
-    animateCSS = ""
-    # smooth-scroll@16.1.3 https://github.com/cferdinandi/smooth-scroll
-    smoothScrollJS = ""
-    # autocomplete.js@0.37.1 https://github.com/algolia/autocomplete.js
-    autocompleteJS = ""
-    # lunr.js@2.3.8 https://lunrjs.com/
-    lunrJS = ""
-    # algoliasearch@4.2.0 https://github.com/algolia/algoliasearch-client-javascript
-    algoliasearchJS = ""
-    # lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
-    lazysizesJS = ""
-    # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
-    objectFitImagesJS = ""
-    # twemoji@12.1.5 https://github.com/twitter/twemoji
-    twemojiJS = ""
-    # lightgallery.js@1.1.3 https://github.com/sachinchoolur/lightgallery.js
-    # lg-thumbnail.js@1.1.0 https://github.com/sachinchoolur/lg-thumbnail.js
-    # lg-zoom.js@1.0.1 https://github.com/sachinchoolur/lg-zoom.js
-    lightgalleryCSS = ""
-    lightgalleryJS = ""
-    lightgalleryThumbnailJS = ""
-    lightgalleryZoomJS = ""
-    # clipboard.js@2.0.6 https://github.com/zenorocha/clipboard.js
-    clipboardJS = ""
-    # sharer.js@0.4.0 https://github.com/ellisonleao/sharer.js
-    sharerJS = ""
-    # typeit@7.0.4 https://github.com/alexmacarthur/typeit
-    typeitJS = ""
-    # katex@0.11.1 https://katex.org/
-    katexCSS = ""
-    katexJS = ""
-    katexAutoRenderJS = ""
-    katexCopyTexCSS = ""
-    katexCopyTexJS = ""
-    katexMhchemJS = ""
-    # mermaid@8.5.0 https://github.com/knsv/mermaid
-    mermaidJS = ""
-    # echarts@4.7.0 https://echarts.apache.org/
-    echartsJS = ""
-    echartsMacaronsJS = ""
-    # mapbox-gl@1.10.0 https://docs.mapbox.com/mapbox-gl-js
-    mapboxGLCSS = ""
-    mapboxGLJS = ""
-    # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
-    aplayerCSS = ""
-    aplayerJS = ""
-    # meting@2.0.1 https://github.com/metowolf/MetingJS
-    metingJS = ""
-    # gitalk@1.6.2 https://github.com/gitalk/gitalk
-    gitalkCSS = ""
-    gitalkJS = ""
-    # valine@1.4.14 https://valine.js.org/
-    valineJS = ""
+    # CDN data file name, disabled by default
+    # ("jsdelivr.yml")
+    # located in "themes/LoveIt/assets/data/cdn/" directory
+    # you can store your own data files in the same path under your project:
+    # "assets/data/cdn/"
+    # CDN 数据文件名称, 默认不启用
+    # ("jsdelivr.yml")
+    # 位于 "themes/LoveIt/assets/data/cdn/" 目录
+    # 可以在你的项目下相同路径存放你自己的数据文件:
+    # "assets/data/cdn/"
+    data = "jsdelivr.yml"
 
 # Markup related configuration in Hugo
 # Hugo 解析文档的配置
