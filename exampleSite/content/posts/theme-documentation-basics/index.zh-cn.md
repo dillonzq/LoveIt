@@ -519,9 +519,11 @@ hugo
         highlight = true
         enableQQ = false
         serverURLs = ""
-        # {{< version 0.2.6 >}} emoji 配置文件名称, 默认是 "facebook.yml"
+        # {{< version 0.2.6 >}} emoji 数据文件名称, 默认是 "google.yml"
         # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
-        # 位于 "assets/data/emoji/" 目录, 你可以在此存放你自己的配置文件
+        # 位于 "themes/LoveIt/assets/data/emoji/" 目录
+        # 可以在你的项目下相同路径存放你自己的数据文件:
+        # "assets/data/emoji/"
         emoji = ""
       # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook 评论系统" >}}设置
       [params.page.comment.facebook]
@@ -605,69 +607,14 @@ hugo
       # 自行托管追踪器时的主机路径
       server = ""
 
-  # CSS 和 JS 文件的 CDN 设置
+  # {{< version 0.2.7 changed >}} 第三方库文件的 CDN 设置
   [params.cdn]
-    # {{< version 0.2.0 >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
-    normalizeCSS = ""
-    # {{< link "https://fontawesome.com/" "fontawesome-free" >}}@5.13.0
-    fontawesomeFreeCSS = ""
-    # {{< version 0.2.0 >}} {{< link "https://github.com/simple-icons/simple-icons" "simple-icons" >}}@2.9.0
-    # ("https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/")
-    simpleIconsPrefix = ""
-    # animate.css@3.7.2 https://github.com/daneden/animate.css
-    animateCSS = ""
-    # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.3
-    smoothScrollJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/autocomplete.js" "autocomplete.js" >}}@0.37.1
-    autocompleteJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://lunrjs.com/" "lunr.js" >}}@2.3.8
-    lunrJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/algoliasearch-client-javascript" "algoliasearch" >}}@4.2.0
-    algoliasearchJS = ""
-    # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
-    lazysizesJS = ""
-    # {{< version 0.2.3 >}} {{< link "https://github.com/fregante/object-fit-images" "object-fit-images" >}}@3.2.4
-    objectFitImagesJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://github.com/twitter/twemoji" "twemoji" >}}@12.1.5
-    twemojiJS = ""
-    # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3
-    # {{< link "https://github.com/sachinchoolur/lg-thumbnail.js" "lg-thumbnail.js" >}}@1.1.0
-    # {{< link "https://github.com/sachinchoolur/lg-zoom.js" "lg-zoom.js" >}}@1.0.1
-    lightgalleryCSS = ""
-    lightgalleryJS = ""
-    lightgalleryThumbnailJS = ""
-    lightgalleryZoomJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://github.com/zenorocha/clipboard.js" "clipboard.js" >}}@2.0.6
-    clipboardJS = ""
-    # {{< link "https://github.com/ellisonleao/sharer.js" "sharer.js" >}}@0.4.0
-    sharerJS = ""
-    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@7.0.4
-    typeitJS = ""
-    # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
-    katexCSS = ""
-    katexJS = ""
-    katexAutoRenderJS = ""
-    katexCopyTexCSS = ""
-    katexCopyTexJS = ""
-    katexMhchemJS = ""
-    # {{< link "https://github.com/knsv/mermaid" "mermaid" >}}@8.5.0
-    mermaidJS = ""
-    # {{< link "https://echarts.apache.org/" "echarts" >}}@4.7.0
-    echartsJS = ""
-    echartsMacaronsJS = ""
-    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.10.0
-    mapboxGLCSS = ""
-    mapboxGLJS = ""
-    # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
-    aplayerCSS = ""
-    aplayerJS = ""
-    # {{< link "https://github.com/metowolf/MetingJS" "meting" >}}@2.0.1
-    metingJS = ""
-    # {{< link "https://github.com/gitalk/gitalk" "gitalk" >}}@1.6.2
-    gitalkCSS = ""
-    gitalkJS = ""
-    # {{< link "https://valine.js.org/" "valine" >}}@1.4.14
-    valineJS = ""
+    # CDN 数据文件名称, 默认不启用
+    # ("jsdelivr.yml")
+    # 位于 "themes/LoveIt/assets/data/cdn/" 目录
+    # 可以在你的项目下相同路径存放你自己的数据文件:
+    # "assets/data/cdn/"
+    data = ""
 
 # Hugo 解析文档的配置
 [markup]
@@ -761,13 +708,17 @@ hugo
 {{< /admonition >}}
 
 {{< admonition tip "关于 CDN 配置的技巧" >}}
-在 CDN 的配置中, 完整的 HTML 标签和 URL 都是支持的:
+{{< version 0.2.7 changed >}}
 
 ```toml
-smoothScrollJS = '<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js" integrity="sha256-vP+F+14A1ogChQs5Osd5LJl/ci9TbzjiZjjEbcqOXrY=" crossorigin="anonymous"></script>'
-# 或者
-smoothScrollJS = 'https://cdn.jsdelivr.net/npm/smooth-scroll@16/dist/smooth-scroll.min.js'
-```
+[params.cdn]
+  # CDN 数据文件名称, 默认不启用
+  # ("jsdelivr.yml")
+  data = ""
+````
+
+默认的 CDN 数据文件位于 `themes/LoveIt/assets/data/cdn/` 目录.
+可以在你的项目下相同路径存放你自己的数据文件: `assets/data/cdn/`.
 {{< /admonition >}}
 
 {{< admonition tip "关于社交链接配置的技巧" >}}
@@ -797,7 +748,7 @@ smoothScrollJS = 'https://cdn.jsdelivr.net/npm/smooth-scroll@16/dist/smooth-scro
     title = "Mastodon"
 ```
 
-所有支持的社交链接的默认配置位于 `themes/LoveIt/assets/data/social.yaml`.
+所有支持的社交链接的默认数据位于 `themes/LoveIt/assets/data/social.yaml`.
 你可以参考它来配置你的社交链接.
 {{< /admonition >}}
 
