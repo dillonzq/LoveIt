@@ -1,6 +1,6 @@
 normalize.css@8.0.1 https://github.com/necolas/normalize.css
 fontawesome-free@5.13.0 https://fontawesome.com/
-simple-icons@2.9.0 https://github.com/simple-icons/simple-icons
+simple-icons@2.12.0 https://github.com/simple-icons/simple-icons
 animate.css@3.7.2 https://github.com/daneden/animate.css
 smooth-scroll@16.1.3 https://github.com/cferdinandi/smooth-scroll
 autocomplete.js@0.37.1 https://github.com/algolia/autocomplete.js
@@ -8,7 +8,7 @@ lunr.js@2.3.8 https://lunrjs.com/
 algoliasearch@4.2.0 https://github.com/algolia/algoliasearch-client-javascript
 lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
 object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
-twemoji@12.1.5 https://github.com/twitter/twemoji
+twemoji@13.0.0 https://github.com/twitter/twemoji
 lightgallery.js@1.1.3 https://github.com/sachinchoolur/lightgallery.js
 lg-thumbnail.js@1.1.0 https://github.com/sachinchoolur/lg-thumbnail.js
 lg-zoom.js@1.0.1 https://github.com/sachinchoolur/lg-zoom.js

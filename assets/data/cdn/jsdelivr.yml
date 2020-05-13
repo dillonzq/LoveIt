@@ -1,7 +1,7 @@
 prefix:
   libFiles: https://cdn.jsdelivr.net/npm/
-  # simple-icons@2.9.0 https://github.com/simple-icons/simple-icons
-  simpleIcons: https://cdn.jsdelivr.net/npm/simple-icons@2.9.0/icons/
+  # simple-icons@2.12.0 https://github.com/simple-icons/simple-icons
+  simpleIcons: https://cdn.jsdelivr.net/npm/simple-icons@2.12.0/icons/
 libFiles:
   # normalize.css@8.0.1 https://github.com/necolas/normalize.css
   normalizeCSS: normalize.css@8.0.1/normalize.min.css
@@ -21,8 +21,8 @@ libFiles:
   lazysizesJS: lazysizes@5.2.0/lazysizes.min.js
   # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
   objectFitImagesJS: object-fit-images@3.2.4/dist/ofi.min.js
-  # twemoji@12.1.5 https://github.com/twitter/twemoji
-  twemojiJS: twemoji@12.1.5/dist/twemoji.min.js
+  # twemoji@13.0.0 https://github.com/twitter/twemoji
+  twemojiJS: twemoji@13.0.0/dist/twemoji.min.js
   # lightgallery.js@1.1.3 https://github.com/sachinchoolur/lightgallery.js
   # lg-thumbnail.js@1.1.0 https://github.com/sachinchoolur/lg-thumbnail.js
   # lg-zoom.js@1.0.1 https://github.com/sachinchoolur/lg-zoom.js
