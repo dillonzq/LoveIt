@@ -176,6 +176,14 @@
     {{- $config = $cookieconsentConfig | dict "cookieconsent" | merge $config -}}
 {{- end -}}
 
+{{- range $params.library.css -}}
+    {{- dict "source" . "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
+{{- end -}}
+
+{{- range $params.library.js -}}
+    {{- dict "source" . "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
+{{- end -}}
+
 {{- /* Theme script */ -}}
 {{- dict "source" "js/theme.min.js" "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
 {{- $_ := (resources.Get "js/theme.min.js.map").RelPermalink -}}

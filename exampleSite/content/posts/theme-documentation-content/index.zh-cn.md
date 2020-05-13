@@ -90,6 +90,17 @@ share:
 comment:
   enable: true
   # ...
+library:
+  css:
+    # someCSS = "some.css"
+    # 位于 "assets/"
+    # 或者
+    # someCSS = "https://cdn.example.com/some.css"
+  js:
+    # someJS = "some.js"
+    # 位于 "assets/"
+    # 或者
+    # someJS = "https://cdn.example.com/some.js"
 ---
 ```
 
@@ -125,6 +136,7 @@ comment:
 * **mapbox**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.mapbox` 部分相同.
 * **share**: 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.share` 部分相同.
 * **comment**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.comment` 部分相同.
+* **library**: {{< version 0.2.7 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.library` 部分相同.
 
 ## 3 内容摘要
 
