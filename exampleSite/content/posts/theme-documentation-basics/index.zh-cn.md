@@ -554,6 +554,18 @@ hugo
         label = ""
         lightTheme = "github-light"
         darkTheme = "github-dark"
+    # {{< version 0.2.7 >}} 第三方库配置
+    [params.page.library]
+      [params.page.library.css]
+        # someCSS = "some.css"
+        # 位于 "assets/"
+        # 或者
+        # someCSS = "https://cdn.example.com/some.css"
+      [params.page.library.js]
+        # someJavascript = "some.js"
+        # 位于 "assets/"
+        # 或者
+        # someJavascript = "https://cdn.example.com/some.js"
     # {{< version 0.2.0 >}} SEO config
     [params.page.seo]
       # 出版者信息
