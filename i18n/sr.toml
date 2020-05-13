@@ -85,6 +85,15 @@ other = "sr"
 
 [copyToClipboard]
 other = "Копирај на радну таблу"
+
+[cookieconsentMessage]
+other = "Ова веб локација користи Cookies да би побољшала ваше искуство."
+
+[cookieconsentDismiss]
+other = "Договорити се"
+
+[cookieconsentLink]
+other = "Сазнајте више"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

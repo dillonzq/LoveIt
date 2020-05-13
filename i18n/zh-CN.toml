@@ -91,6 +91,15 @@ other = "lib/lunr/lunr.segmentit.js"
 
 [copyToClipboard]
 other = "复制到剪贴板"
+
+[cookieconsentMessage]
+other = "本网站使用 Cookies 来改善您的浏览体验."
+
+[cookieconsentDismiss]
+other = "同意"
+
+[cookieconsentLink]
+other = "了解更多"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

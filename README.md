@@ -112,6 +112,7 @@ I hope you will LoveIt ❤️!
 * **Custom style** shortcode
 * **Animated typing** supported by [TypeIt](https://typeitjs.com/)
 * **Dynamic scroll** supported by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
+* **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
 * ...
 
 ## [Documentation](https://hugoloveit.com/categories/documentation/)
@@ -176,6 +177,7 @@ Thanks to the authors of following resources included in the theme:
 * [MetingJS](https://github.com/metowolf/MetingJS)
 * [Gitalk](https://github.com/gitalk/gitalk)
 * [Valine](https://valine.js.org/)
+* [cookieconsent](https://github.com/osano/cookieconsent)
 
 ## Author
 

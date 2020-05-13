@@ -131,6 +131,15 @@ other = "Strona główna"
 
 [readMore]
 other = "Czytaj więcej"
+
+[cookieconsentMessage]
+other = "Ta strona korzysta z plików Cookies, aby poprawić komfort użytkowania."
+
+[cookieconsentDismiss]
+other = "Zgodzić się"
+
+[cookieconsentLink]
+other = "Ucz się więcej"
 # === posts/single.html ===
 
 # === 404.html ===

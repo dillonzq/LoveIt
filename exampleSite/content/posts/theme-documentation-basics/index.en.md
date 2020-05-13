@@ -604,6 +604,15 @@ Please open the code block below to view the complete sample configuration :(far
       # server url for your tracker if you're self hosting
       server = ""
 
+  # {{< version 0.2.7 >}} Cookie consent config
+  [params.cookieconsent]
+    enable = true
+    # text strings used for Cookie consent banner
+    [params.cookieconsent.content]
+      message = ""
+      dismiss = ""
+      link = ""
+
   # {{< version 0.2.7 changed >}} CDN config for third-party library files
   [params.cdn]
     # CDN data file name, disabled by default

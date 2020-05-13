@@ -88,6 +88,15 @@ other = "lib/lunr/lunr.ro.js"
 
 [copyToClipboard]
 other = "Copiați în clipboard"
+
+[cookieconsentMessage]
+other = "Acest site web utilizează Cookies pentru a vă îmbunătăți experiența."
+
+[cookieconsentDismiss]
+other = "De acord"
+
+[cookieconsentLink]
+other = "Aflați mai multe"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
