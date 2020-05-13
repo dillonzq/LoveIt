@@ -626,6 +626,10 @@ class Theme {
         if (SmoothScroll) new SmoothScroll('[href^="#"]', { speed: 300, speedAsDuration: true, header: '#header-desktop' });
     }
 
+    initCookieconsent() {
+        if (this.config.cookieconsent) cookieconsent.initialise(this.config.cookieconsent);
+    }
+
     onScroll() {
         const $headers = [];
         if (document.body.getAttribute('header-desktop') === 'auto') $headers.push(document.getElementById('header-desktop'));
@@ -706,6 +710,7 @@ class Theme {
         this.initEcharts();
         this.initTypeit();
         this.initMapbox();
+        this.initCookieconsent();
 
         this.onScroll();
         this.onResize();

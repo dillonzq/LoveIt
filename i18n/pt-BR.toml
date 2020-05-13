@@ -88,6 +88,15 @@ other = "lib/lunr/lunr.pt.js"
 
 [copyToClipboard]
 other = "Copiar para a área de transferência"
+
+[cookieconsentMessage]
+other = "Este site usa Cookies para melhorar sua experiência."
+
+[cookieconsentDismiss]
+other = "Aceita"
+
+[cookieconsentLink]
+other = "Saber mais"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

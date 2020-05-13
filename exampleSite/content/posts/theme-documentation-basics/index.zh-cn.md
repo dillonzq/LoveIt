@@ -607,6 +607,15 @@ hugo
       # 自行托管追踪器时的主机路径
       server = ""
 
+  # {{< version 0.2.7 >}} Cookie 许可配置
+  [params.cookieconsent]
+    enable = true
+    # 用于 Cookie 许可横幅的文本字符串
+    [params.cookieconsent.content]
+      message = ""
+      dismiss = ""
+      link = ""
+
   # {{< version 0.2.7 changed >}} 第三方库文件的 CDN 设置
   [params.cdn]
     # CDN 数据文件名称, 默认不启用

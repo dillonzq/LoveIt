@@ -88,6 +88,15 @@ other = "lib/lunr/lunr.ru.js"
 
 [copyToClipboard]
 other = "Копировать в буфер обмена"
+
+[cookieconsentMessage]
+other = "Этот сайт использует Cookies для улучшения вашего опыта."
+
+[cookieconsentDismiss]
+other = "Согласен"
+
+[cookieconsentLink]
+other = "Учить больше"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
