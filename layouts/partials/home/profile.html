@@ -40,7 +40,7 @@
     {{- end -}}
 
     {{- if $profile.social -}}
-        <div class="social-links">
+        <div class="links">
             {{- $socialMap := resources.Get "data/social.yml" | transform.Unmarshal -}}
             {{- $socialArr := slice -}}
             {{- range $key, $value := .Site.Params.social -}}
