@@ -310,7 +310,7 @@ hugo
       gravatarEmail = ""
       # 主页显示头像的 URL
       avatarURL = "/images/avatar.png"
-      # {{< version 0.2.5 >}} 主页显示的网站标题
+      # {{< version 0.2.7 changed >}} 主页显示的网站标题 (支持 HTML 格式)
       title = ""
       # 主页显示的网站副标题
       subtitle = "这是我的全新 Hugo 网站"

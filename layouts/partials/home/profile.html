@@ -23,7 +23,7 @@
 
     {{- with $profile.title -}}
         <h1 class="home-title">
-            {{- . -}}
+            {{- . | safeHTML -}}
         </h1>
     {{- end -}}
 
