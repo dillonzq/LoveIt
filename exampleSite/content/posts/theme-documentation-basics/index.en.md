@@ -634,6 +634,13 @@ Please open the code block below to view the complete sample configuration :(far
     # "assets/data/cdn/"
     data = ""
 
+  # {{< version 0.2.8 >}} Compatibility config
+  [params.compatibility]
+    # whether to use Polyfill.io to be compatible with older browsers
+    polyfill = false
+    # whether to use object-fit-images to be compatible with older browsers
+    objectFit = false
+
 # Markup related config in Hugo
 [markup]
   # {{< link "https://gohugo.io/content-management/syntax-highlighting" "Syntax Highlighting" >}}

@@ -1025,6 +1025,16 @@ enableEmoji = true
     # "assets/data/cdn/"
     data = "jsdelivr.yml"
 
+  # Compatibility config
+  # 兼容性设置
+  [params.compatibility]
+    # whether to use Polyfill.io to be compatible with older browsers
+    # 是否使用 Polyfill.io 来兼容旧式浏览器
+    polyfill = false
+    # whether to use object-fit-images to be compatible with older browsers
+    # 是否使用 object-fit-images 来兼容旧式浏览器
+    objectFit = false
+
 # Markup related configuration in Hugo
 # Hugo 解析文档的配置
 [markup]
