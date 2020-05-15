@@ -34,7 +34,7 @@ Hugo **extended** version is necessary for `style` shortcode.
 The `style` shortcode has two positional parameters.
 
 The **first** one is the custom style content,
-which supports nesting syntax in [SASS](https://sass-lang.com/documentation/style-rules/declarations#nesting)
+which supports nesting syntax in [:(fab fa-sass fa-fw): SASS](https://sass-lang.com/documentation/style-rules/declarations#nesting)
 and `&` referring to this parent HTML element.
 
 And the **second** one is the tag name of the HTML element wrapping the content you want to change style, and whose default value is `div`.
@@ -1265,3 +1265,27 @@ The rendered output looks like this:
 {{< typeit group=paragraph >}}
 **Then** this paragraph begins
 {{< /typeit >}}
+
+## 11 script
+
+{{< version 0.2.8 >}}
+
+`script` is a shortcode to insert custom **:(fab fa-js fa-fw): Javascript** in your post.
+
+{{< admonition >}}
+The script content can be guaranteed to be executed in order after all third-party libraries are loaded. So you are free to use third-party libraries.
+{{< /admonition >}}
+
+Example `script` input:
+
+```markdown
+{{</* script */>}}
+console.log('Hello LoveIt!');
+{{</* /script */>}}
+```
+
+You can see the output in the console of the developer tool.
+
+{{< script >}}
+console.log('Hello LoveIt!');
+{{< /script >}}

@@ -1,4 +1,8 @@
-{{- if strings.HasPrefix .source "<link" -}}
+{{- if .content -}}
+    <style>
+        {{- .content | safeCSS -}}
+    </style>
+{{- else if strings.HasPrefix .source "<link" -}}
     {{- safeHTML .source -}}
 {{- else -}}
     {{- $href := .source -}}
