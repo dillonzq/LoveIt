@@ -35,9 +35,9 @@
 {{- partial "plugin/style.html" $style -}}
 
 {{- /* style.min.css */ -}}
-{{- $style := dict "source" "css/style.template.scss" "fingerprint" $fingerprint -}}
-{{- $options := dict "targetPath" "css/style.min.css" "includePaths" (slice "config/css") "enableSourceMap" true -}}
-{{- $style = dict "template" "style.scss" "context" . "toCSS" $options | merge $style -}}
+{{- $style := dict "source" "css/style.scss" "fingerprint" $fingerprint -}}
+{{- $options := dict "targetPath" "css/style.min.css" "enableSourceMap" true -}}
+{{- $style = dict "context" . "toCSS" $options | merge $style -}}
 {{- partial "plugin/style.html" $style -}}
 
 {{- /* Font Awesome */ -}}
