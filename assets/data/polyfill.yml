@@ -1,3 +1,9 @@
+theme:
+  - html5shiv
+  - Object.values
+  - Promise
+  - fetch
+  - Element.prototype.after
 smooth-scroll:
   - Element.prototype.closest
   - requestAnimationFrame
@@ -14,8 +20,3 @@ TypeIt:
   - Math.sign
   - Object.assign
   - Promise
-theme:
-  - Object.values
-  - Promise
-  - fetch
-  - Element.prototype.after

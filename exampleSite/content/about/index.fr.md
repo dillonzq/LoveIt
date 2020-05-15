@@ -82,6 +82,7 @@ Welcome to take the time to propose a translation by [:(fas fa-code-branch fa-fw
 * :(fas fa-video fa-fw): **Bilibili player** shortcode
 * :(far fa-bell fa-fw): Kinds of **admonitions** shortcode
 * :(fas fa-align-left fa-fw): **Custom style** shortcode
+* :(fab fa-js-square fa-fw): **Custom script** shortcode
 * :(fas fa-i-cursor fa-fw): **Animated typing** supported by [TypeIt](https://typeitjs.com/)
 * :(fas fa-arrow-down fa-fw): **Dynamic scroll** supported by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * :(fas fa-cookie-bite fa-fw): **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)

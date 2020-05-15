@@ -1,11 +1,11 @@
 {{- $content := .Inner | .Page.RenderString -}}
-{{- $id := dict "content" $content "scratch" .Page.Scratch | partial "function/id.html" -}}
+{{- $id := dict "scratch" .Page.Scratch | partial "function/id.html" -}}
 {{- $tag := .Get 1 | default "div" -}}
 {{- printf `<%s id="%s">%s</%s>` $tag $id $content $tag | safeHTML -}}
 
 {{- $style := .Get 0 | printf "#%s{%s}" $id -}}
 {{- $path := printf "style/%s/%s" (md5 .Page.RelPermalink) $id -}}
 {{- $res := resources.FromString (printf "%s.scss" $path) $style -}}
-{{- $res = $res | toCSS (dict "targetPath" (printf "%s.css" $path)) -}}
+{{- $res = $res | toCSS (dict "targetPath" (printf "%s.css" $path) "outputStyle" "compressed") -}}
 {{- $styleArr := (.Page.Scratch.Get "this").styleArr | default slice -}}
 {{- $styleArr | append $res.Content | .Page.Scratch.SetInMap "this" "styleArr" -}}

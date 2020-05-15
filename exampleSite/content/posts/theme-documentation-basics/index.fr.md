@@ -121,6 +121,13 @@ theme = "LoveIt"
     url = "/categories/"
     title = ""
     weight = 3
+
+# Markup related configuration in Hugo
+[markup]
+  # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+    # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
+    noClasses = false
 ```
 
 {{< admonition >}}
@@ -639,6 +646,13 @@ Please open the code block below to view the complete sample configuration :(far
     # "assets/data/cdn/"
     data = ""
 
+  # {{< version 0.2.8 >}} Compatibility config
+  [params.compatibility]
+    # whether to use Polyfill.io to be compatible with older browsers
+    polyfill = false
+    # whether to use object-fit-images to be compatible with older browsers
+    objectFit = false
+
 # Markup related config in Hugo
 [markup]
   # {{< link "https://gohugo.io/content-management/syntax-highlighting" "Syntax Highlighting" >}}
@@ -797,15 +811,17 @@ Add a logo image (127x40) and a cover image (800x600) in the `static` directory.
 
 ### 3.4 Style Customization
 
+{{< version 0.2.8 changed >}}
+
 {{< admonition >}}
 Hugo **extended** version is necessary for the style customization.
 {{< /admonition >}}
 
 **LoveIt** theme has been built to be as configurable as possible by defining custom `.scss` style files.
 
-The directory including the custom `.scss` style files is `config/css` relative to **your project root directory**.
+The directory including the custom `.scss` style files is `assets/css` relative to **your project root directory**.
 
-In `config/css/_override.scss`, you can override the variables in `themes/LoveIt/assets/css/_variables.scss` to customize the style.
+In `assets/css/_override.scss`, you can override the variables in `themes/LoveIt/assets/css/_variables.scss` to customize the style.
 
 Here is a example:
 
@@ -814,7 +830,7 @@ Here is a example:
 $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospace;
 ```
 
-In `config/css/_custom.scss`, you can add some css style code to customize the style.
+In `assets/css/_custom.scss`, you can add some css style code to customize the style.
 
 ## 4 Multilingual and i18n
 

@@ -110,6 +110,7 @@ I hope you will LoveIt ❤️!
 * **Bilibili player** shortcode
 * Kinds of **admonitions** shortcode
 * **Custom style** shortcode
+* **Custom script** shortcode
 * **Animated typing** supported by [TypeIt](https://typeitjs.com/)
 * **Dynamic scroll** supported by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)

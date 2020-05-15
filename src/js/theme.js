@@ -40,7 +40,7 @@ class Theme {
         this.resizeEventSet = new Set();
         this.switchThemeEventSet = new Set();
         this.clickMaskEventSet = new Set();
-        if (objectFitImages) objectFitImages();
+        if (window.objectFitImages) objectFitImages();
     }
 
     initSVGIcon() {

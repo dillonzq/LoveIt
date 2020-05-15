@@ -1,10 +1,7 @@
 @charset "utf-8";
 
 @import "_variables";
-
-{{- if fileExists "config/css/_override.scss" -}}
-  @import "_override";
-{{- end -}}
+@import "_override";
 
 @import "_mixin/index";
 
@@ -19,6 +16,4 @@
 
 @import "_core/media";
 
-{{- if fileExists "config/css/_custom.scss" -}}
-  @import "_custom";
-{{- end -}}
+@import "_custom";

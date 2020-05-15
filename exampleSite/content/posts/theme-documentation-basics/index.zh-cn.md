@@ -119,6 +119,13 @@ theme = "LoveIt"
     url = "/categories/"
     title = ""
     weight = 3
+
+# Hugo 解析文档的配置
+[markup]
+  # 语法高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+    # false 是必要的设置 (https://github.com/dillonzq/LoveIt/issues/158)
+    noClasses = false
 ```
 
 {{< admonition >}}
@@ -637,6 +644,13 @@ hugo
     # "assets/data/cdn/"
     data = ""
 
+  # {{< version 0.2.8 >}} 兼容性设置
+  [params.compatibility]
+    # 是否使用 Polyfill.io 来兼容旧式浏览器
+    polyfill = false
+    # 是否使用 object-fit-images 来兼容旧式浏览器
+    objectFit = false
+
 # Hugo 解析文档的配置
 [markup]
   # {{< link "https://gohugo.io/content-management/syntax-highlighting" "语法高亮设置" >}}
@@ -796,15 +810,17 @@ hugo
 
 ### 3.4 自定义样式
 
+{{< version 0.2.8 changed >}}
+
 {{< admonition >}}
 Hugo **extended** 版本对于自定义样式是必需的.
 {{< /admonition >}}
 
 通过定义自定义 `.scss` 样式文件, **LoveIt** 主题支持可配置的样式.
 
-包含自定义 `.scss` 样式文件的目录相对于 **你的项目根目录** 的路径为 `config/css`.
+包含自定义 `.scss` 样式文件的目录相对于 **你的项目根目录** 的路径为 `assets/css`.
 
-在 `config/css/_override.scss` 中, 你可以覆盖 `themes/LoveIt/assets/css/_variables.scss` 中的变量以自定义样式.
+在 `assets/css/_override.scss` 中, 你可以覆盖 `themes/LoveIt/assets/css/_variables.scss` 中的变量以自定义样式.
 
 这是一个例子:
 
@@ -813,7 +829,7 @@ Hugo **extended** 版本对于自定义样式是必需的.
 $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospace;
 ```
 
-在 `config/css/_custom.scss` 中, 你可以添加一些 CSS 样式代码以自定义样式.
+在 `assets/css/_custom.scss` 中, 你可以添加一些 CSS 样式代码以自定义样式.
 
 ## 4 多语言和 i18n
 

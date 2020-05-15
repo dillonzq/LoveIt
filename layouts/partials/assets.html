@@ -38,10 +38,6 @@
 {{- $source := $cdn.lazysizesJS | default "lib/lazysizes/lazysizes.min.js" -}}
 {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
 
-{{- /* object-fit-images */ -}}
-{{- $source := $cdn.objectFitImagesJS | default "lib/object-fit-images/ofi.min.js" -}}
-{{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
-
 {{- /* twemoji */ -}}
 {{- if $params.twemoji -}}
     {{- $source := $cdn.twemojiJS | default "lib/twemoji/twemoji.min.js" -}}
@@ -52,7 +48,7 @@
 {{- /* lightgallery.js */ -}}
 {{- if $params.lightgallery -}}
     {{- $source := $cdn.lightgalleryCSS | default "lib/lightgallery/lightgallery.min.css" -}}
-    {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/stylesheet.html" -}}
+    {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/style.html" -}}
     {{- $source := $cdn.lightgalleryJS | default "lib/lightgallery/lightgallery.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
     {{- $source := $cdn.lightgalleryThumbnailJS | default "lib/lightgallery/lg-thumbnail.min.js" -}}
@@ -97,14 +93,14 @@
 {{- end -}}
 {{- if $math.enable -}}
     {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
-    {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/stylesheet.html" -}}
+    {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/style.html" -}}
     {{- $source := $cdn.katexJS | default "lib/katex/katex.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
     {{- $source := $cdn.katexAutoRenderJS | default "lib/katex/auto-render.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
     {{- if $math.copyTex -}}
         {{- $source := $cdn.katexCopyTexCSS | default "lib/katex/copy-tex.min.css" -}}
-        {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/stylesheet.html" -}}
+        {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/style.html" -}}
         {{- $source := $cdn.katexCopyTexJS | default "lib/katex/copy-tex.min.js" -}}
         {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
     {{- end -}}
@@ -128,7 +124,7 @@
     {{- $source := $cdn.mermaidJS | default "lib/mermaid/mermaid.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
     {{- $options := dict "targetPath" "lib/mermaid/mermaid.min.css" "enableSourceMap" true -}}
-    {{- dict "source" "lib/mermaid/mermaid.scss" "toCSS" $options "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/stylesheet.html" -}}
+    {{- dict "source" "lib/mermaid/mermaid.scss" "toCSS" $options "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/style.html" -}}
 {{- end -}}
 
 {{- /* ECharts */ -}}
@@ -142,7 +138,7 @@
 {{- /* Mapbox GL */ -}}
 {{- if (.Scratch.Get "this").mapbox -}}
     {{- $source := $cdn.mapboxGLCSS | default "lib/mapbox-gl/mapbox-gl.min.css" -}}
-    {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/stylesheet.html" -}}
+    {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/style.html" -}}
     {{- $source := $cdn.mapboxGLJS | default "lib/mapbox-gl/mapbox-gl.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
     {{- dict "source" "lib/mapbox-gl/mapbox-gl-language.js" "minify" true "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
@@ -153,9 +149,9 @@
 {{- if (.Scratch.Get "this").music -}}
     {{- /* APlayer */ -}}
     {{- $source := $cdn.aplayerCSS | default "lib/aplayer/APlayer.min.css" -}}
-    {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/stylesheet.html" -}}
+    {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/style.html" -}}
     {{- $options := dict "targetPath" "lib/aplayer/dark.min.css" "enableSourceMap" true -}}
-    {{- dict "source" "lib/aplayer/dark.scss" "toCSS" $options "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/stylesheet.html" -}}
+    {{- dict "source" "lib/aplayer/dark.scss" "toCSS" $options "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/style.html" -}}
     {{- $source := $cdn.aplayerJS | default "lib/aplayer/APlayer.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
 
@@ -167,7 +163,7 @@
 {{- /* Cookie Consent */ -}}
 {{- if .Site.Params.cookieconsent | and .Site.Params.cookieconsent.enable -}}
     {{- $source := $cdn.cookieconsentCSS | default "lib/cookieconsent/cookieconsent.min.css" -}}
-    {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/stylesheet.html" -}}
+    {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/style.html" -}}
     {{- $source := $cdn.cookieconsentJS | default "lib/cookieconsent/cookieconsent.min.js" -}}
     {{- dict "source" $source "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
     {{- $cookieconsentConfig := dict "popup" (dict "background" "#1aa3ff") "button" (dict "background" "#f0f0f0") | dict "theme" "edgeless" "palette" -}}
@@ -177,31 +173,31 @@
 {{- end -}}
 
 {{- range $params.library.css -}}
-    {{- dict "source" . "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/stylesheet.html" -}}
+    {{- dict "source" . "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/style.html" -}}
 {{- end -}}
 
 {{- range $params.library.js -}}
     {{- dict "source" . "fingerprint" $fingerprint | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
 {{- end -}}
 
+{{- with (.Scratch.Get "this").styleArr -}}
+    {{- delimit . "" | dict "content" | dict "scratch" $.Scratch "data" | partial "scratch/style.html" -}}
+{{- end -}}
+
+{{- /* Config script */ -}}
+{{- $config | jsonify | printf "window.config=%s;" | dict "content" | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
+
 {{- /* Theme script */ -}}
 {{- dict "source" "js/theme.min.js" "fingerprint" $fingerprint | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
 {{- $_ := (resources.Get "js/theme.min.js.map").RelPermalink -}}
 
-{{- range (.Scratch.Get "this").stylesheet -}}
-    {{- partial "plugin/stylesheet.html" . -}}
+{{- with (.Scratch.Get "this").scriptArr -}}
+    {{- delimit . "\n" | dict "content" | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
 {{- end -}}
 
-{{- with (.Scratch.Get "this").styleArr -}}
-    <style>{{ delimit . "" | safeCSS }}</style>
+{{- range (.Scratch.Get "this").style -}}
+    {{- partial "plugin/style.html" . -}}
 {{- end -}}
-
-<script type="text/javascript">
-    window.config = {{ $config | jsonify | safeJS }};
-</script>
-
-{{- /* Polyfill.io */ -}}
-{{- dict "source" "https://polyfill.io/v3/polyfill.min.js?features=html5shiv%2CElement.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign" | partial "plugin/script.html" -}}
 
 {{- range (.Scratch.Get "this").script -}}
     {{- partial "plugin/script.html" . -}}
