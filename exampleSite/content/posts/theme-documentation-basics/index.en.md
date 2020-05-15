@@ -116,6 +116,13 @@ theme = "LoveIt"
     url = "/categories/"
     title = ""
     weight = 3
+
+# Markup related configuration in Hugo
+[markup]
+  # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+    # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
+    noClasses = false
 ```
 
 {{< admonition >}}

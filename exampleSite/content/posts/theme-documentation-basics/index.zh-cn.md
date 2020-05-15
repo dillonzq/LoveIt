@@ -119,6 +119,13 @@ theme = "LoveIt"
     url = "/categories/"
     title = ""
     weight = 3
+
+# Hugo 解析文档的配置
+[markup]
+  # 语法高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+    # false 是必要的设置 (https://github.com/dillonzq/LoveIt/issues/158)
+    noClasses = false
 ```
 
 {{< admonition >}}
