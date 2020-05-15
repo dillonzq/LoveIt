@@ -195,7 +195,7 @@
     {{- delimit . "\n" | dict "content" | dict "scratch" $.Scratch "data" | partial "scratch/script.html" -}}
 {{- end -}}
 
-{{- range (.Scratch.Get "this").script -}}
+{{- range (.Scratch.Get "this").style -}}
     {{- partial "plugin/style.html" . -}}
 {{- end -}}
 
