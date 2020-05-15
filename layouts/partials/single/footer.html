@@ -6,7 +6,7 @@
         <div class="post-info-line">
             <div class="post-info-mod">
                 <span>
-                    {{- printf (T "lastMod") $modify_date -}}
+                    {{- $modify_date | string | printf (T "lastMod" | string) -}}
                     {{- if .Site.Params.gitRepo -}}
                         {{- with .GitInfo -}}
                             &nbsp;<a class="git-hash" href="{{ printf `%s/commit/%s` $.Site.Params.gitRepo .Hash }}" target="_blank" title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ .Hash }}: {{ .Subject }}">
@@ -17,9 +17,9 @@
                 </span>
             </div>
             <div class="post-info-license">
-                {{- with $params.license -}}
+                {{- with $params.license | string -}}
                     <span>
-                        {{- printf (T "license") . | safeHTML -}}
+                        {{- printf (T "license" | string) . | safeHTML -}}
                     </span>
                 {{- end -}}
             </div>
