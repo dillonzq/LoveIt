@@ -1,4 +1,8 @@
-{{- if strings.HasPrefix .source "<script" -}}
+{{- if .content -}}
+    <script type="text/javascript">
+        {{- .content | safeJS -}}
+    </script>
+{{- else if strings.HasPrefix .source "<script" -}}
     {{- safeHTML .source -}}
 {{- else -}}
     {{- $src := .source -}}

@@ -36,7 +36,7 @@ Hugo **extended** 版本对于 `style` shortcode 是必需的.
 
 `style` shortcode 有两个位置参数.
 
-第一个参数是自定义样式的内容. 它支持 [SASS](https://sass-lang.com/documentation/style-rules/declarations#nesting) 中的嵌套语法,
+第一个参数是自定义样式的内容. 它支持 [:(fab fa-sass fa-fw): SASS](https://sass-lang.com/documentation/style-rules/declarations#nesting) 中的嵌套语法,
 并且 `&` 指代这个父元素.
 
 第二个参数是包裹你要更改样式的内容的 HTML 标签, 默认值是 `div`.
@@ -1266,3 +1266,28 @@ public class HelloWorld {
 {{< typeit group=paragraph >}}
 **然后**, 这个段落开始
 {{< /typeit >}}
+
+## 11 script
+
+{{< version 0.2.8 >}}
+
+`script` shortcode 用来在你的文章中插入 **:(fab fa-js fa-fw): Javascript** 脚本.
+
+{{< admonition >}}
+脚本内容可以保证在所有的第三方库加载之后按顺序执行.
+所以你可以自由地使用第三方库.
+{{< /admonition >}}
+
+一个 `script` 示例:
+
+```markdown
+{{</* script */>}}
+console.log('Hello LoveIt!');
+{{</* /script */>}}
+```
+
+你可以在开发者工具的控制台中看到输出.
+
+{{< script >}}
+console.log('Hello LoveIt!');
+{{< /script >}}
