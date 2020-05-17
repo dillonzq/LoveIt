@@ -34,7 +34,7 @@
                 {{- T "included" -}}
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }}&nbsp;{{ end -}}
-                    {{- $category := $value | anchorize | printf "/categories/%s" | $.Site.GetPage -}}
+                    {{- $category := $value | urlize | printf "/categories/%s" | $.Site.GetPage -}}
                     <a href="{{ $category.RelPermalink }}">
                         <i class="far fa-folder fa-fw"></i>{{ $category.Title }}
                     </a>
@@ -60,7 +60,7 @@
                 <i class="fas fa-tags fa-fw"></i>&nbsp;
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }},&nbsp;{{ end -}}
-                    {{- $tag := $value | anchorize | printf "/tags/%s" | $.Site.GetPage -}}
+                    {{- $tag := $value | urlize | printf "/tags/%s" | $.Site.GetPage -}}
                     <a href="{{ $tag.RelPermalink }}">{{ $tag.Title }}</a>
                 {{- end -}}
             </div>
