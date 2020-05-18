@@ -397,7 +397,7 @@ class Theme {
     initToc() {
         const $tocCore = document.getElementById('TableOfContents');
         if ($tocCore === null) return;
-        if (this.util.isTocStatic()) {
+        if (document.getElementById('toc-static').getAttribute('kept') || this.util.isTocStatic()) {
             const $tocContentStatic = document.getElementById('toc-content-static');
             if ($tocCore.parentElement !== $tocContentStatic) {
                 $tocCore.parentElement.removeChild($tocCore);
@@ -640,29 +640,34 @@ class Theme {
             $viewComments.style.display = 'block';
         }
         const $fixedButtons = document.getElementById('fixed-buttons');
-        const MIN_SCROLL = 20;
+        const ACCURACY = 20, MINIMUM = 100;
         window.addEventListener('scroll', () => {
             this.newScrollTop = this.util.getScrollTop();
             const scroll = this.newScrollTop - this.oldScrollTop;
+            const isMobile = this.util.isMobile();
             this.util.forEach($headers, $header => {
-                if (scroll > MIN_SCROLL) {
+                if (scroll > ACCURACY) {
                     $header.classList.remove('fadeInDown');
                     this.util.animateCSS($header, ['fadeOutUp', 'faster'], true);
-                } else if (scroll < - MIN_SCROLL) {
+                } else if (scroll < - ACCURACY) {
                     $header.classList.remove('fadeOutUp');
                     this.util.animateCSS($header, ['fadeInDown', 'faster'], true);
                 }
             });
-            if (this.newScrollTop > MIN_SCROLL) {
-                if (scroll > MIN_SCROLL) {
+            if (this.newScrollTop > MINIMUM) {
+                if (isMobile && scroll > ACCURACY) {
                     $fixedButtons.classList.remove('fadeIn');
                     this.util.animateCSS($fixedButtons, ['fadeOut', 'faster'], true);
-                } else if (scroll < - MIN_SCROLL) {
+                } else if (!isMobile || scroll < - ACCURACY) {
                     $fixedButtons.style.display = 'block';
                     $fixedButtons.classList.remove('fadeOut');
                     this.util.animateCSS($fixedButtons, ['fadeIn', 'faster'], true);
                 }
             } else {
+                if (!isMobile) {
+                    $fixedButtons.classList.remove('fadeIn');
+                    this.util.animateCSS($fixedButtons, ['fadeOut', 'faster'], true);
+                }
                 $fixedButtons.style.display = 'none';
             }
             for (let event of this.scrollEventSet) event();

@@ -115,6 +115,10 @@
   display: none;
   margin: .8rem 0;
 
+  &[kept=true] {
+    display: block;
+  }
+
   .toc-title {
     display: flex;
     justify-content: space-between;

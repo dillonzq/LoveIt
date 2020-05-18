@@ -72,7 +72,7 @@
 
         {{- /* Static TOC */ -}}
         {{- if ne $toc.enable false -}}
-            <div class="details toc" id="toc-static">
+            <div class="details toc" id="toc-static"  kept="{{ if $toc.keepStatic }}true{{ end }}">
                 <div class="details-summary toc-title">
                     <span>{{ T "contents" }}</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>

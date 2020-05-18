@@ -427,7 +427,9 @@ hugo
     [params.page.toc]
       # 是否使用目录
       enable = true
-      # 是否使目录自动折叠展开
+      # {{< version 0.2.9 >}} 是否保持使用文章前面的静态目录
+      keepStatic = true
+      # 是否使侧边目录自动折叠展开
       auto = true
     # {{< version 0.2.0 >}} 代码配置
     [params.page.code]
