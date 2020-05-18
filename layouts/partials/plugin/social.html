@@ -2,9 +2,9 @@
 {{- with .url -}}
     {{- $href = . | relLangURL -}}
 {{- else -}}
-    {{- $template := .template | default "%s" -}}
+    {{- $template := .template | default "%v" -}}
     {{- with .prefix -}}
-        {{- $template = . | strings.TrimSuffix "/" | printf "%s/%%s" -}}
+        {{- $template = . | strings.TrimSuffix "/" | printf "%v/%%v" -}}
     {{- end -}}
     {{- $href = printf (string $template) .id -}}
 {{- end -}}

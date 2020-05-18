@@ -23,22 +23,20 @@
             {{- partial "plugin/link.html" $options -}}
         </span>
 
-        {{- $publish_date := .PublishDate.Format (.Site.Params.dateFormat | default "2006-01-02") -}}
-        &nbsp;<span class="post-publish">
-            {{ T "publish" }}&nbsp;<time datetime={{ $publish_date }}>{{ $publish_date }}</time>
-        </span>
+        {{- with .Site.Params.dateFormat | default "2006-01-02" | .PublishDate.Format -}}
+            &nbsp;<span class="post-publish">
+                {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "publishedOnDate" | safeHTML -}}
+            </span>
+        {{- end -}}
 
-        {{- with .Params.categories -}}
-            &nbsp;
-            <span class="post-category">
-                {{- T "included" -}}
-                {{- range $index, $value := . -}}
-                    {{- if gt $index 0 }}&nbsp;{{ end -}}
-                    {{- $category := $value | anchorize | printf "/categories/%s" | $.Site.GetPage -}}
-                    <a href="{{ $category.RelPermalink }}">
-                        <i class="far fa-folder fa-fw"></i>{{ $category.Title }}
-                    </a>
-                {{- end -}}
+        {{- $categories := slice -}}
+        {{- range .Params.categories -}}
+            {{- $category := partialCached "function/path.html" . . | printf "/categories/%v" | $.Site.GetPage -}}
+            {{- $categories = $categories | append (printf `<a href="%v"><i class="far fa-folder fa-fw"></i>%v</a>` $category.RelPermalink $category.Title) -}}
+        {{- end -}}
+        {{- with delimit $categories "&nbsp;" -}}
+            &nbsp;<span class="post-category">
+                {{- dict "Categories" . | T "includedInCategories" | safeHTML -}}
             </span>
         {{- end -}}
     </div>
@@ -60,7 +58,7 @@
                 <i class="fas fa-tags fa-fw"></i>&nbsp;
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }},&nbsp;{{ end -}}
-                    {{- $tag := $value | anchorize | printf "/tags/%s" | $.Site.GetPage -}}
+                    {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}
                     <a href="{{ $tag.RelPermalink }}">{{ $tag.Title }}</a>
                 {{- end -}}
             </div>

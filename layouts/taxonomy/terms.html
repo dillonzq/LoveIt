@@ -1,5 +1,5 @@
 {{- define "title" -}}
-    {{- .Params.Title | default (T .Data.Plural) | default .Data.Plural | printf (T "allSome") }} - {{ .Site.Title -}}
+    {{- .Params.Title | default (T .Data.Plural) | default .Data.Plural | dict "Some" | T "allSome" }} - {{ .Site.Title -}}
 {{- end -}}
 
 {{- define "content" -}}
@@ -10,7 +10,7 @@
     <div class="page archive">
         {{- /* Title */ -}}
         <h2 class="single-title animated pulse faster">
-            {{- .Params.Title | default (T $taxonomies) | default $taxonomies | printf (T "allSome") -}}
+            {{- .Params.Title | default (T $taxonomies) | default $taxonomies | dict "Some" | T "allSome" -}}
         </h2>
 
         {{- /* Categories Page */ -}}
@@ -19,7 +19,7 @@
                 {{- range $terms -}}
                     {{- $term := .Term -}}
                     {{- $pages := .Pages -}}
-                    {{- with $.Site.GetPage "taxonomy" (printf "%s/%s" $type $term) -}}
+                    {{- with $.Site.GetPage "taxonomy" (printf "%v/%v" $type $term) -}}
                     <div class="card-item">
                         <div class="card-item-wrapper">
                             <h3 class="card-item-title">

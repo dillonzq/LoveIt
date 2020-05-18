@@ -17,7 +17,7 @@ other = "Постови"
 
 # === Taxonomy ===
 [allSome]
-other = "Све %s"
+other = "Све {{ .Some }}"
 
 [tag]
 other = "Таг"
@@ -47,10 +47,7 @@ other = "Промени Тему"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Покреће %s"
-
-[theme]
-other = "Тема"
+other = "Покреће {{ .Hugo }} | Тема - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -105,17 +102,19 @@ other = "Подели на"
 [contents]
 other = "Садржаји"
 
-[publish]
-other = "објављено"
+[publishedOnDate]
+other = "објављено {{ .Date }}"
 
-[included]
-other = "укључено"
+[includedInCategories]
+other = "укључено {{ .Categories }}"
 
 [wordCount]
-other = "око {{ .Count }} речи"
+one = "Једна реч"
+other = "{{ .Count }} речи"
 
 [readingTime]
-other = "{{ .Count }} мин"
+one = "Један минут"
+other = "{{ .Count }} минута"
 
 [views]
 other = "прегледа"
@@ -123,13 +122,10 @@ other = "прегледа"
 [author]
 other = "Аутор"
 
-[lastMod]
-other = "Чланак је обновљен %s"
+[updatedOnDate]
+other = "Ажурирано {{ .Date }}"
 
-[license]
-other = "Објављено под условима %s лиценце"
-
-[seeMarkdown]
+[readMarkdown]
 other = "Читај Markdown"
 
 [back]
