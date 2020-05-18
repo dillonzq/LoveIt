@@ -51,7 +51,7 @@
                 <i class="fas fa-tags fa-fw"></i>&nbsp;
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }},&nbsp;{{ end -}}
-                    {{- $tag := $value | urlize | printf "/tags/%v" | $.Site.GetPage -}}
+                    {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}
                     <a href="{{ $tag.RelPermalink }}">{{ $tag.Title }}</a>
                 {{- end -}}
             {{- end -}}
