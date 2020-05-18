@@ -429,7 +429,9 @@ Please open the code block below to view the complete sample configuration :(far
     [params.page.toc]
       # whether to enable the table of the contents
       enable = true
-      # whether to make the table of the contents automatically collapsed
+      # {{< version 0.2.9 >}} whether to keep the static table of the contents in front of the post
+      keepStatic = true
+      # whether to make the table of the contents in the sidebar automatically collapsed
       auto = true
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} mathematical formulas
     [params.page.math]
