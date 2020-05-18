@@ -17,7 +17,7 @@ other = "Статьи"
 
 # === Taxonomy ===
 [allSome]
-other = "Все %s"
+other = "Все {{ .Some }}"
 
 [tag]
 other = "Тэг"
@@ -47,10 +47,7 @@ other = "Сменить Тему"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Сделано %s"
-
-[theme]
-other = "Тема"
+other = "Сделано {{ .Hugo }} | Тема - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -108,17 +105,19 @@ other = "Поделиться в"
 [contents]
 other = "Содержание"
 
-[publish]
-other = "Опубликовано"
+[publishedOnDate]
+other = "Опубликовано {{ .Date }}"
 
-[included]
-other = "включен в"
+[includedInCategories]
+other = "включен в {{ .Categories }}"
 
 [wordCount]
-other = "около {{ .Count }} слов"
+one = "Одно слово"
+other = "{{ .Count }} слов"
 
 [readingTime]
-other = "{{ .Count }} мин"
+one = "Одна минута"
+other = "{{ .Count }} минут"
 
 [views]
 other = "просмотров"
@@ -126,13 +125,10 @@ other = "просмотров"
 [author]
 other = "Автор"
 
-[lastMod]
-other = "Статья была обновлена %s"
+[updatedOnDate]
+other = "Oбновлена {{ .Date }}"
 
-[license]
-other = "Опубликовано под лицензии %s"
-
-[seeMarkdown]
+[readMarkdown]
 other = "Читать Markdown"
 
 [back]

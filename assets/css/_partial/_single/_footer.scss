@@ -31,6 +31,8 @@
         [theme=dark] & {
           color: $global-font-secondary-color-dark;
         }
+
+        @include link(false, false);
       }
 
       .post-info-md {
