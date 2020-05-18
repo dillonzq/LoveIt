@@ -39,7 +39,7 @@
 
                 {{- $categories := slice -}}
                 {{- range .Params.categories -}}
-                    {{- $category := . | anchorize | printf "/categories/%v" | $.Site.GetPage -}}
+                    {{- $category := partialCached "function/path.html" . . | printf "/categories/%v" | $.Site.GetPage -}}
                     {{- $categories = $categories | append (printf `<a href="%v"><i class="far fa-folder fa-fw"></i>%v</a>` $category.RelPermalink $category.Title) -}}
                 {{- end -}}
                 {{- with delimit $categories "&nbsp;" -}}
