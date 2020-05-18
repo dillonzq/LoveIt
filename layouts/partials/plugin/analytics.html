@@ -5,7 +5,7 @@
             window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
             gtag('config', '{{ . }}'{{ if $.google.anonymizeIP }}, { 'anonymize_ip': true }{{ end }});
         </script>
-        {{- printf "https://www.googletagmanager.com/gtag/js?id=%s" . | dict "async" true "source" | partial "plugin/script.html" -}}
+        {{- printf "https://www.googletagmanager.com/gtag/js?id=%v" . | dict "async" true "source" | partial "plugin/script.html" -}}
     {{- end -}}
 
     {{- /* Fathom Analytics */ -}}
@@ -15,6 +15,6 @@
             fathom('set', 'siteId', '{{ . }}');
             fathom('trackPageview');
         </script>
-        {{- dict "source" ($.fathom.server | default "cdn.usefathom.com" | printf "https://%s/tracker.js") "async" true "attr" "id=fathom-script" | partial "plugin/script.html" -}}
+        {{- dict "source" ($.fathom.server | default "cdn.usefathom.com" | printf "https://%v/tracker.js") "async" true "attr" "id=fathom-script" | partial "plugin/script.html" -}}
     {{- end -}}
 {{- end -}}

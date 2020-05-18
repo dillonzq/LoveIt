@@ -12,7 +12,7 @@
             {{- else if eq $taxonomy "tag" -}}
                 <i class="fas fa-tag fa-fw"></i>&nbsp;{{ .Title }}
             {{- else -}}
-                {{- printf "%s - %s" (T $taxonomy | default $taxonomy) .Title -}}
+                {{- printf "%v - %v" (T $taxonomy | default $taxonomy) .Title -}}
             {{- end -}}
         </h2>
 
@@ -32,7 +32,7 @@
                             {{- .Title -}}
                         </a>
                         <span class="archive-item-date">
-                            {{- .Date.Format ($.Site.Params.list.dateFormat | default "01-02") -}}
+                            {{- $.Site.Params.list.dateFormat | default "01-02" | .Date.Format -}}
                         </span>
                     </article>
                 {{- end -}}

@@ -89,7 +89,7 @@ youtubechannel:
 # 012: Tumblr
 tumblr:
   weight: 12
-  template: https://%s.tumblr.com/
+  template: https://%v.tumblr.com/
   title: Tumblr
   icon:
     class: fab fa-tumblr fa-fw
@@ -225,7 +225,7 @@ spotify:
 # 029: Bandcamp
 bandcamp:
   weight: 29
-  template: https://%s.bandcamp.com/
+  template: https://%v.bandcamp.com/
   title: Bandcamp
   icon:
     class: fab fa-bandcamp fa-fw
@@ -281,7 +281,7 @@ foursquare:
 # 036: Hacker News
 hackernews:
   weight: 36
-  template: https://news.ycombinator.com/user?id=%s
+  template: https://news.ycombinator.com/user?id=%v
   title: Hacker News
   icon:
     class: fab fa-hacker-news fa-fw
@@ -385,7 +385,7 @@ jsfiddle:
 # 049: DeviantArt
 deviantart:
   weight: 49
-  template: https://%s.deviantart.com/
+  template: https://%v.deviantart.com/
   title: DeviantArt
   icon:
     class: fab fa-deviantart fa-fw
@@ -409,7 +409,7 @@ dribbble:
 # 052: WordPress
 wordpress:
   weight: 52
-  template: https://%s.wordpress.com/
+  template: https://%v.wordpress.com/
   title: WordPress
   icon:
     class: fab fa-wordpress fa-fw
@@ -425,7 +425,7 @@ vine:
 # 054: Google Scholar
 googlescholar:
   weight: 54
-  template: https://scholar.google.com/citations?%s
+  template: https://scholar.google.com/citations?%v
   title: Google Scholar
   icon:
     simpleicons: googlescholar
@@ -472,7 +472,7 @@ gitea:
 # 060: XMPP
 xmpp:
   weight: 60
-  template: xmpp:%s
+  template: xmpp:%v
   title: XMPP
   icon:
     simpleicons: xmpp
@@ -496,7 +496,7 @@ bilibili:
 # 063: Email
 email:
   weight: 63
-  template: mailto:%s
+  template: mailto:%v
   title: Email
   icon:
     class: far fa-envelope fa-fw

@@ -9,7 +9,7 @@
         {{- $disqus := $comment.disqus | default dict -}}
         {{- if $disqus.enable -}}
             <div id="disqus_thread" class="comment"></div>
-            {{- $source := printf "https://%s.disqus.com/embed.js" $disqus.shortname -}}
+            {{- $source := printf "https://%v.disqus.com/embed.js" $disqus.shortname -}}
             {{- dict "source" $source "defer" true | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
@@ -51,7 +51,7 @@
             {{- with $valine.serverURLs -}}
                 {{- $commentConfig = dict "serverURLs" . | dict "valine" | merge $commentConfig -}}
             {{- end -}}
-            {{- $commentConfig = $valine.emoji | default "google.yml" | printf "data/emoji/%s" | resources.Get | transform.Unmarshal | dict "valine" | merge $commentConfig -}}
+            {{- $commentConfig = $valine.emoji | default "google.yml" | printf "data/emoji/%v" | resources.Get | transform.Unmarshal | dict "valine" | merge $commentConfig -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript>
@@ -67,7 +67,7 @@
                 data-width="{{ $facebook.width }}"
                 data-numposts="{{ $facebook.numPosts }}"
             ></div>
-            {{- $source := printf "https://connect.facebook.net/%s/sdk.js#xfbml=1&version=v5.0&appId=%s&autoLogAppEvents=1" ($facebook.languageCode | default (T "facebookLanguageCode")) $facebook.appId -}}
+            {{- $source := printf "https://connect.facebook.net/%v/sdk.js#xfbml=1&version=v5.0&appId=%v&autoLogAppEvents=1" ($facebook.languageCode | default (T "facebookLanguageCode")) $facebook.appId -}}
             {{- dict "source" $source "defer" true | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/"></a>Facebook</a>.
@@ -78,22 +78,22 @@
         {{- $telegram := $comment.telegram | default dict -}}
         {{- if $telegram.enable -}}
             <div id="telegram-comments" class="comment"></div>
-            {{- $attr := printf `data-comments-app-website="%s"` $telegram.siteID -}}
-            {{- $attr = printf `%s data-limit="%s"` $attr ($telegram.limit | default 5) -}}
+            {{- $attr := printf `data-comments-app-website="%v"` $telegram.siteID -}}
+            {{- $attr = printf `%v data-limit="%v"` $attr ($telegram.limit | default 5) -}}
             {{- with $telegram.height -}}
-                {{- $attr = printf `%s data-height="%s"` $attr . -}}
+                {{- $attr = printf `%v data-height="%v"` $attr . -}}
             {{- end -}}
             {{- with $telegram.color -}}
-                {{- $attr = printf `%s data-color="%s"` $attr . -}}
+                {{- $attr = printf `%v data-color="%v"` $attr . -}}
             {{- end -}}
             {{- if $telegram.colorful -}}
-                {{- $attr = printf `%s data-colorful="1"` $attr -}}
+                {{- $attr = printf `%v data-colorful="1"` $attr -}}
             {{- end -}}
             {{- if $telegram.dislikes -}}
-                {{- $attr = printf `%s data-dislikes="1"` $attr -}}
+                {{- $attr = printf `%v data-dislikes="1"` $attr -}}
             {{- end -}}
             {{- if $telegram.outlined -}}
-                {{- $attr = printf `%s data-outlined="1"` $attr -}}
+                {{- $attr = printf `%v data-outlined="1"` $attr -}}
             {{- end -}}
             {{- dict "source" "https://comments.app/js/widget.js?2" "defer" true "attr" $attr | dict "scratch" .Scratch "data" | partial "scratch/script.html" -}}
             <noscript>

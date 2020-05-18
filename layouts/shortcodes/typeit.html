@@ -27,5 +27,5 @@
 {{- dict $key $group | merge $typeitMap | .Page.Scratch.SetInMap "this" "typeitMap" -}}
 
 <div class="typeit">
-    {{- printf `<%s id="%s" class="%s"></%s>` $tag $id (delimit $classList " ") $tag | safeHTML -}}
+    {{- printf `<%v id="%v" class="%v"></%v>` $tag $id (delimit $classList " ") $tag | safeHTML -}}
 </div>
