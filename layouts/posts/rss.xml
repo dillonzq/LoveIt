@@ -35,7 +35,7 @@
         {{- end -}}
         <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
         {{- range .Pages | first (.Site.Params.section.rss | default 10) -}}
-            {{- dict "page" . "site" .Site | partial "rss/item.html" -}}
+            {{- dict "Page" . "Site" .Site | partial "rss/item.html" -}}
         {{- end -}}
     </channel>
 </rss>

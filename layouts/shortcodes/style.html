@@ -1,5 +1,5 @@
 {{- $content := .Inner | .Page.RenderString -}}
-{{- $id := dict "scratch" .Page.Scratch | partial "function/id.html" -}}
+{{- $id := dict "Scratch" .Page.Scratch | partial "function/id.html" -}}
 {{- $tag := .Get 1 | default "div" -}}
 {{- printf `<%v id="%v">%v</%v>` $tag $id $content $tag | safeHTML -}}
 

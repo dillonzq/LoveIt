@@ -19,7 +19,7 @@
 {{- end -}}
 
 {{- /* trim the newline */ -}}
-{{- $id := dict "content" $content "scratch" .Page.Scratch | partial "function/id.html" -}}
+{{- $id := dict "Content" $content "Scratch" .Page.Scratch | partial "function/id.html" -}}
 {{- $key := .Get "group" | string | default $id -}}
 {{- $typeitMap := (.Page.Scratch.Get "this").typeitMap | default dict -}}
 {{- $group := index $typeitMap $key -}}

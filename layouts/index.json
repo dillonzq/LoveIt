@@ -18,7 +18,7 @@
         {{- end -}}
         {{- $params := .Params | merge $.Site.Params.page -}}
         {{/* Extended Markdown syntax */}}
-        {{- $content := dict "content" .Content "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" -}}
+        {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" -}}
         {{/* Remove line number for code */}}
         {{- $content = $content | replaceRE `<span class="lnt?"> *\d*\n?</span>` "" -}}
         {{- range $i, $contenti := split $content "<h2 id=" -}}
