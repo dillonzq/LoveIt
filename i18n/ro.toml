@@ -17,7 +17,7 @@ other = "Articole"
 
 # === Taxonomy ===
 [allSome]
-other = "Toate %s"
+other = "Toate {{ .Some }}"
 
 [tag]
 other = "Etichetă"
@@ -47,10 +47,7 @@ other = "Schimbare Temă"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Realizat de către %s"
-
-[theme]
-other = "Temă"
+other = "Realizat de către {{ .Hugo }} | Temă - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -108,17 +105,19 @@ other = "Distribuie pe"
 [contents]
 other = "Cuprins"
 
-[publish]
-other = "publicat la"
+[publishedOnDate]
+other = "publicat la {{ .Date }}"
 
-[included]
-other = "inclus în"
+[includedInCategories]
+other = "inclus în {{ .Categories }}"
 
 [wordCount]
-other = "aproximativ {{ .Count }} cuvinte"
+one = "Un cuvânt"
+other = "{{ .Count }} cuvinte"
 
 [readingTime]
-other = "{{ .Count }} min"
+one = "Un minut"
+other = "{{ .Count }} minute"
 
 [views]
 other = "vizualizări"
@@ -126,13 +125,10 @@ other = "vizualizări"
 [author]
 other = "Autor"
 
-[lastMod]
-other = "Articolul a fost actualizat la %s"
+[updatedOnDate]
+other = "Actualizat la {{ .Date }}"
 
-[license]
-other = "Publicat sub licența %s"
-
-[seeMarkdown]
+[readMarkdown]
 other = "Citire Markdown"
 
 [back]

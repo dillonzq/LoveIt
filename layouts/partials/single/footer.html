@@ -1,17 +1,18 @@
 {{- $params := .Scratch.Get "params" -}}
-{{- $modify_date := .Lastmod.Format (.Site.Params.dateformat | default "2006-01-02") -}}
 
 <div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
                 <span>
-                    {{- $modify_date | string | printf (T "lastMod" | string) -}}
-                    {{- if .Site.Params.gitRepo -}}
-                        {{- with .GitInfo -}}
-                            &nbsp;<a class="git-hash" href="{{ printf `%s/commit/%s` $.Site.Params.gitRepo .Hash }}" target="_blank" title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ .Hash }}: {{ .Subject }}">
-                                <i class="fas fa-hashtag fa-fw"></i>{{- .AbbreviatedHash -}}
-                            </a>
+                    {{- with .Site.Params.dateformat | default "2006-01-02" | .Lastmod.Format -}}
+                        {{- dict "Date" . | T "updatedOnDate" -}}
+                        {{- if $.Site.Params.gitRepo -}}
+                            {{- with $.GitInfo -}}
+                                &nbsp;<a class="git-hash" href="{{ printf `%v/commit/%v` $.Site.Params.gitRepo .Hash }}" target="_blank" title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ .Hash }}: {{ .Subject }}">
+                                    <i class="fas fa-hashtag fa-fw"></i>{{- .AbbreviatedHash -}}
+                                </a>
+                            {{- end -}}
                         {{- end -}}
                     {{- end -}}
                 </span>
@@ -19,7 +20,7 @@
             <div class="post-info-license">
                 {{- with $params.license | string -}}
                     <span>
-                        {{- printf (T "license" | string) . | safeHTML -}}
+                        {{- . | safeHTML -}}
                     </span>
                 {{- end -}}
             </div>
@@ -30,7 +31,7 @@
                     {{- with .OutputFormats.Get "markdown" -}}
                         <span>
                             <a class="link-to-markdown" href="{{ .RelPermalink }}" target="_blank">
-                                {{- T "seeMarkdown" -}}
+                                {{- T "readMarkdown" -}}
                             </a>
                         </span>
                     {{- end -}}
@@ -50,7 +51,7 @@
                 <i class="fas fa-tags fa-fw"></i>&nbsp;
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }},&nbsp;{{ end -}}
-                    {{- $tag := $value | urlize | printf "/tags/%s" | $.Site.GetPage -}}
+                    {{- $tag := $value | urlize | printf "/tags/%v" | $.Site.GetPage -}}
                     <a href="{{ $tag.RelPermalink }}">{{ $tag.Title }}</a>
                 {{- end -}}
             {{- end -}}
