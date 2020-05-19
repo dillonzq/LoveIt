@@ -115,10 +115,10 @@ other = "发布于 {{ .Date }}"
 other = "收录于 {{ .Categories }}"
 
 [wordCount]
-other = "{{ .Count }} 字"
+other = "约 {{ .Count }} 字"
 
 [readingTime]
-other = "{{ .Count }} 分钟"
+other = "预计阅读 {{ .Count }} 分钟"
 
 [views]
 other = "次阅读"
