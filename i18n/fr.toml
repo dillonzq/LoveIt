@@ -17,7 +17,7 @@ other = "Posts"
 
 # === Taxonomy ===
 [allSome]
-other = "Tous %s"
+other = "Tous {{ .Some }}"
 
 [tag]
 other = "Balise"
@@ -47,10 +47,7 @@ other = "Changer de Thème"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Propulsé par %s"
-
-[theme]
-other = "Thème"
+other = "Propulsé par {{ .Hugo }} | Thème - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -108,17 +105,19 @@ other = "Partager sur"
 [contents]
 other = "Contenu"
 
-[publish]
-other = "publié le"
+[publishedOnDate]
+other = "publié le {{ .Date }}"
 
-[included]
-other = "inclus dans"
+[includedInCategories]
+other = "inclus dans {{ .Categories }}"
 
 [wordCount]
-other = "environ {{ .Count }} mots"
+one = "Un mot"
+other = "{{ .Count }} mots"
 
 [readingTime]
-other = "{{ .Count }} min"
+one = "Une minute"
+other = "{{ .Count }} minutes"
 
 [views]
 other = "vues"
@@ -126,13 +125,10 @@ other = "vues"
 [author]
 other = "Auteur"
 
-[lastMod]
-other = "Dernière mise à jour le %s"
+[updatedOnDate]
+other = "Mis à jour le {{ .Date }}"
 
-[license]
-other = "Publié sous licence %s"
-
-[seeMarkdown]
+[readMarkdown]
 other = "Lire Markdown"
 
 [back]

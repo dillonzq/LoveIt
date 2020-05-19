@@ -17,7 +17,7 @@ other = "文章"
 
 # === Taxonomy ===
 [allSome]
-other = "所有%s"
+other = "所有{{ .Some }}"
 
 [tag]
 other = "标签"
@@ -47,10 +47,7 @@ other = "切换主题"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "由 %s 强力驱动"
-
-[theme]
-other = "主题"
+other = "由 {{ .Hugo }} 强力驱动 | 主题 - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -111,11 +108,11 @@ other = "分享到"
 [contents]
 other = "目录"
 
-[publish]
-other = "发布于"
+[publishedOnDate]
+other = "发布于 {{ .Date }}"
 
-[included]
-other = "收录于"
+[includedInCategories]
+other = "收录于 {{ .Categories }}"
 
 [wordCount]
 other = "约 {{ .Count }} 字"
@@ -129,13 +126,10 @@ other = "次阅读"
 [author]
 other = "作者"
 
-[lastMod]
-other = "本文于 %s 更新"
+[updatedOnDate]
+other = "更新于 {{ .Date }}"
 
-[license]
-other = "采用 %s 协议发布"
-
-[seeMarkdown]
+[readMarkdown]
 other = "阅读原始文档"
 
 [back]

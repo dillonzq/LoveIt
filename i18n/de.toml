@@ -17,7 +17,7 @@ other = "Artikel"
 
 # === Taxonomy ===
 [allSome]
-other = "Alle %s"
+other = "Alle {{ .Some }}"
 
 [tag]
 other = "Tag"
@@ -47,10 +47,7 @@ other = "Thema wechseln"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Ermöglicht durch %s"
-
-[theme]
-other = "Thema"
+other = "Ermöglicht durch {{ .Hugo }} | Thema - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -108,33 +105,30 @@ other = "Teilen auf"
 [contents]
 other = "Inhalt"
 
-[publish]
-other = "veröffentlicht auf"
+[publishedOnDate]
+other = "veröffentlicht auf {{ .Date }}"
 
-[included]
-other = "enthalten in"
+[includedInCategories]
+other = "enthalten in {{ .Categories }}"
 
 [wordCount]
-one = "Ein Wort"
-other = "{{ .Count }} Wörter"
+one = "Ein wort"
+other = "{{ .Count }} wörter"
 
 [readingTime]
-one = "Eine Minute"
-other = "{{ .Count }} Minuten"
+one = "Eine minute"
+other = "{{ .Count }} minuten"
 
 [views]
-other = "Aufrufe"
+other = "aufrufe"
 
 [author]
 other = "Autor"
 
-[lastMod]
-other = "Aktualisiert am %s"
+[updatedOnDate]
+other = "Aktualisiert am {{ .Date }}"
 
-[license]
-other = "Veröffentlicht unter der %s Lizenz"
-
-[seeMarkdown]
+[readMarkdown]
 other = "Markdown anzeigen"
 
 [back]

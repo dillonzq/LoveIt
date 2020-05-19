@@ -11,7 +11,7 @@
                         <span class="header-title-pre">{{ . | safeHTML }}</span>
                     {{- end -}}
                     {{- if .typeit -}}
-                        {{- $id := dict "content" .name "scratch" $.Scratch | partial "function/id.html" -}}
+                        {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
                         <span id="{{ $id }}" class="typeit"></span>
                         {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
                     {{- else -}}
@@ -95,7 +95,7 @@
                             <span class="header-title-pre">{{ . | safeHTML }}</span>
                         {{- end -}}
                         {{- if .typeit -}}
-                            {{- $id := dict "content" .name "scratch" $.Scratch | partial "function/id.html" -}}
+                            {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
                             <span id="{{ $id }}" class="typeit"></span>
                             {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
                         {{- else -}}

@@ -8,7 +8,7 @@
             {{- $prefix = . -}}
         {{- end -}}
         {{- $prefix = $prefix | strings.TrimSuffix "/" -}}
-        {{- $src = printf "%s/%s.svg" $prefix . -}}
+        {{- $src = printf "%v/%v.svg" $prefix . -}}
     {{- end -}}
     {{- if (urls.Parse $src).Host | not -}}
         {{- $src = (resources.Get $src | minify).RelPermalink -}}

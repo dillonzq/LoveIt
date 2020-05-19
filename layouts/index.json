@@ -12,22 +12,22 @@
             {{- $uri = .Permalink -}}
         {{- end -}}
         {{- $meta := dict "uri" $uri "title" .Title "tags" .Params.tags "categories" .Params.categories -}}
-        {{- $meta = .PublishDate.Format ($.Site.Params.dateFormat | default "2006-01-02") | dict "date" | merge $meta -}}
+        {{- $meta = $.Site.Params.dateFormat | default "2006-01-02" | .PublishDate.Format | dict "date" | merge $meta -}}
         {{- with .Description -}}
             {{- $index = $index | append (dict "content" . "objectID" $uri | merge $meta) -}}
         {{- end -}}
         {{- $params := .Params | merge $.Site.Params.page -}}
         {{/* Extended Markdown syntax */}}
-        {{- $content := dict "content" .Content "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" -}}
+        {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" -}}
         {{/* Remove line number for code */}}
         {{- $content = $content | replaceRE `<span class="lnt?"> *\d*\n?</span>` "" -}}
         {{- range $i, $contenti := split $content "<h2 id=" -}}
             {{- if gt $i 0 -}}
-                {{- $contenti = printf "<h2 id=%s" $contenti -}}
+                {{- $contenti = printf "<h2 id=%v" $contenti -}}
             {{- end -}}
             {{- range $j, $contentj := split $contenti "<h3 id=" -}}
                 {{- if gt $j 0 -}}
-                    {{- $contentj = printf "<h3 id=%s" $contentj -}}
+                    {{- $contentj = printf "<h3 id=%v" $contentj -}}
                 {{- end -}}
                 {{/* Plainify, unescape and remove (\n, \t) */}}
                 {{- $contentj = $contentj | plainify | htmlUnescape | replaceRE `[\n\t ]+` " " -}}
@@ -35,7 +35,7 @@
                     {{- $contentj = substr $contentj 0 $.Site.Params.search.contentLength -}}
                 {{- end -}}
                 {{- if $contentj | and (ne $contentj " ") -}}
-                    {{- $one := printf "%s:%d:%d" $uri $i $j | dict "content" $contentj "objectID" | merge $meta -}}
+                    {{- $one := printf "%v:%v:%v" $uri $i $j | dict "content" $contentj "objectID" | merge $meta -}}
                     {{- $index = $index | append $one -}}
                 {{- end -}}
             {{- end -}}

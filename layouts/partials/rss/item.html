@@ -1,19 +1,19 @@
-{{- $params := .page.Params | merge .site.Params.page | merge (dict "author" .site.Author.name) -}}
+{{- $params := .Page.Params | merge .Site.Params.Page | merge (dict "author" .Site.Author.name) -}}
 <item>
     <title>
-        {{- .page.Title -}}
+        {{- .Page.Title -}}
     </title>
     <link>
-        {{- .page.Permalink -}}
+        {{- .Page.Permalink -}}
     </link>
     <pubDate>
-        {{- .page.Date.Format "Mon, 02 Jan 2006 15:04:05 -0700"  -}}
+        {{- .Page.Date.Format "Mon, 02 Jan 2006 15:04:05 -0700"  -}}
     </pubDate>
     <author>
         {{- .params.author | default (T "author") -}}
     </author>
     <guid>
-        {{- .page.Permalink -}}
+        {{- .Page.Permalink -}}
     </guid>
     <description>
         {{- "<![CDATA[" | safeHTML -}}
@@ -22,12 +22,12 @@
                 <img src="{{ . | relURL }}" referrerpolicy="no-referrer">
             </div>
         {{- end -}}
-        {{- $content := .page.Description -}}
+        {{- $content := .Page.Description -}}
         {{- if $params.rssFullText -}}
-            {{- $content = dict "content" .page.Content "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" -}}
+            {{- $content = dict "Content" .Page.Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" -}}
         {{- else -}}
-            {{- with .page.Summary -}}
-                {{- $content = dict "content" . "ruby" $params.ruby "fraction" $params.fraction "fontawesome" $params.fontawesome | partial "function/content.html" -}}
+            {{- with .Page.Summary -}}
+                {{- $content = dict "Content" . "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" -}}
             {{- end -}}
         {{- end -}}
         {{- $content | replaceRE `<figure[^>]*>.*</figure>` "" | replaceRE `<img[^>]*( /)?>` "" | safeHTML -}}

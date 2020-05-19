@@ -135,7 +135,7 @@ library:
 * **linkToMarkdown**: if `true`, the footer of the content will be shown the link to the orignal Markdown file.
 * **rssFullText**: {{< version 0.2.4 >}} if `true`, the full text content will be shown in RSS.
 
-* **toc**: {{< version 0.2.0 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **toc**: {{< version 0.2.9 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **code**: {{< version 0.2.0 >}} the same as the `params.page.code` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **math**: {{< version 0.2.0 changed >}} the same as the `params.page.math` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **mapbox**: {{< version 0.2.0 >}} the same as the `params.page.mapbox` part in the [site configuration](../theme-documentation-basics#site-configuration).

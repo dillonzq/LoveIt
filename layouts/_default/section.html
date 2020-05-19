@@ -1,12 +1,12 @@
 {{- define "title" }}
-    {{- .Params.Title | default (T .Section) | default .Section | printf (T "allSome") }} - {{ .Site.Title -}}
+    {{- .Params.Title | default (T .Section) | default .Section | dict "Some" | T "allSome" }} - {{ .Site.Title -}}
 {{- end -}}
 
 {{- define "content" -}}
     <div class="page archive">
         {{- /* Title */ -}}
         <h2 class="single-title animated pulse faster">
-            {{- .Params.Title | default (T .Section) | default .Section | printf (T "allSome") -}}
+            {{- .Params.Title | default (T .Section) | default .Section | dict "Some" | T "allSome" -}}
         </h2>
 
         {{- /* Paginate */ -}}
@@ -25,7 +25,7 @@
                             {{- .Title -}}
                         </a>
                         <span class="archive-item-date">
-                            {{- .Date.Format ($.Site.Params.section.dateFormat | default "01-02") -}}
+                            {{- $.Site.Params.section.dateFormat | default "01-02" | .Date.Format -}}
                         </span>
                     </article>
                 {{- end -}}

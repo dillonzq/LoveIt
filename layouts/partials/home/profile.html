@@ -2,7 +2,7 @@
 <div class="home-profile">
     {{- $avatar := $profile.avatarURL -}}
     {{- with $profile.gravatarEmail -}}
-        {{- $avatar = md5 . | printf "https://www.gravatar.com/avatar/%s?s=240&d=mp" -}}
+        {{- $avatar = md5 . | printf "https://www.gravatar.com/avatar/%v?s=240&d=mp" -}}
     {{- end -}}
     {{- if $avatar -}}
         <div class="home-avatar">
@@ -30,7 +30,7 @@
     {{- with $profile.subtitle -}}
         <h2 class="home-subtitle">
             {{- if $profile.typeit -}}
-                {{- $id := dict "content" . "scratch" $.Scratch | partial "function/id.html" -}}
+                {{- $id := dict "Content" . "Scratch" $.Scratch | partial "function/id.html" -}}
                 <div id="{{ $id }}" class="typeit"></div>
                 {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
             {{- else -}}
