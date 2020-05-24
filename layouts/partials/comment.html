@@ -23,7 +23,7 @@
 		</script>
 		{{- else -}}
         {{- $script := printf `<script defer src="https://%s.disqus.com/embed.js"></script>` .Site.Params.comment.disqus.shortname -}}
-        {{- slice $script | $scratch.Add "scriptCDN" -}}
+        {{- dict "source" $source "defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 		{{- end -}}
         <noscript>
             Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
