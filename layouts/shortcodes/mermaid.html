@@ -1,5 +1,3 @@
-{{- $scratch := .Page.Scratch.Get "scratch" -}}
-
-{{- $id := partial "function/id.html" (dict "content" (trim .Inner "\n") "scratch" $scratch) -}}
+{{- $id := dict "Content" (trim .Inner "\n") "Scratch" .Page.Scratch | partial "function/id.html" -}}
 <div class="mermaid" id="{{ $id }}"></div>
-{{- slice $id | $scratch.Add "mermaidArr" -}}
+{{- .Page.Scratch.SetInMap "this" "mermaid" true -}}

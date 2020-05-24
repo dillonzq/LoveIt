@@ -1,9 +1,19 @@
-/** Single **/
+@import "../_partial/_single/toc";
+
 .single {
   .single-title {
-    margin: 0.8rem 0;
+    margin: 1rem 0 .5rem;
     font-size: 1.6rem;
+    font-weight: bold;
     line-height: 140%;
+  }
+
+  .single-subtitle {
+    margin: .4rem 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+    font-style: italic;
+    line-height: 100%;
   }
 
   .post-meta {
@@ -14,25 +24,11 @@
       display: inline-block;
     }
 
-    .dark-theme & {
+    [theme=dark] & {
       color: $global-font-secondary-color-dark;
     }
 
-    a {
-      color: $single-link-color;
-
-      .dark-theme & {
-        color: $global-link-color-dark;
-      }
-
-      &:hover {
-        color: $single-link-hover-color;
-
-        .dark-theme & {
-          color: $global-link-hover-color-dark;
-        }
-      }
-    }
+    @include link(false, true);
 
     .author {
       font-size: 1.05rem;
@@ -40,20 +36,50 @@
   }
 
   .featured-image {
-    padding-top: .6rem;
+    margin: .5rem 0 1rem 0;
 
     img {
       display: block;
-      max-width: 100%;
+      width: 100%;
       height: auto;
       margin: 0 auto;
       overflow: hidden;
     }
   }
 
-  @import "../_partial/_single/toc";
-
   .content {
+    > h2 {
+      font-size: 1.5rem;
+
+      & code {
+        font-size: 1.25rem;
+      }
+    }
+
+    > h3 {
+      font-size: 1.375rem;
+
+      & code {
+        font-size: 1.125rem;
+      }
+    }
+
+    > h4 {
+      font-size: 1.25rem;
+
+      & code {
+        font-size: 1rem;
+      }
+    }
+
+    > h5 {
+      font-size: 1.125rem;
+    }
+
+    > h6 {
+      font-size: 1rem;
+    }
+
     h2,
     h3,
     h4,
@@ -62,58 +88,63 @@
       font-weight: bold;
       margin: 1.2rem 0;
 
-      .dark-theme & {
+      [theme=dark] & {
         font-weight: bolder;
       }
+    }
 
-      & > .header-mark::before {
+    > h2,
+    > h3,
+    > h4,
+    > h5,
+    > h6 {
+      > .header-mark::before {
         content: "|";
         margin-right: .3125rem;
         color: $single-link-color;
 
-        .dark-theme & {
+        [theme=dark] & {
           color: $single-link-color-dark;
         }
       }
     }
 
-    h2 > .header-mark::before {
+    > h2 > .header-mark::before {
       content: "#";
     }
 
     p {
-      font-size: 1rem;
       margin: .5rem 0;
     }
 
     b, strong {
       font-weight: bold;
 
-      .dark-theme & {
+      [theme=dark] & {
         color: #ddd;
       }
     }
 
-    a {
-      word-break: break-all;
-      word-break: break-word;
-      color: $single-link-color;
+    @include link(false, false);
 
-      .dark-theme &, .dark-theme & b, .dark-theme & strong {
+    a {
+      @include overflow-wrap(break-word);
+
+      [theme=dark] & b, [theme=dark] & strong {
         color: $single-link-color-dark;
       }
     }
 
-    a:hover {
-      color: $single-link-hover-color;
+    [theme=dark] a:hover b, [theme=dark] a:hover strong {
+      color: $single-link-hover-color-dark;
+    }
 
-      .dark-theme &, .dark-theme & b, .dark-theme & strong {
-        color: $single-link-hover-color-dark;
-      }
+    ul, ol {
+      margin: .5rem 0;
+      padding-left: 2.5rem;
     }
 
     ul {
-      padding-left: 2rem;
       list-style-type: disc;
     }
 
@@ -124,7 +155,7 @@
         color: $global-font-secondary-color;
       }
 
-      .dark-theme & {
+      [theme=dark] & {
         background: $code-background-color-dark;
 
         rt {
@@ -139,7 +170,7 @@
       &::-webkit-scrollbar {
         background-color: $table-background-color;
 
-        .dark-theme & {
+        [theme=dark] & {
           background-color: $table-background-color-dark;
         }
       }
@@ -152,24 +183,24 @@
         background: $table-background-color;
         border-collapse: collapse;
 
-        .dark-theme & {
+        [theme=dark] & {
           background: $table-background-color-dark;
         }
 
         thead {
           background: $table-thead-color;
 
-          .dark-theme & {
+          [theme=dark] & {
             background-color: $table-thead-color-dark;
           }
         }
 
         th, td {
           padding: .3rem 1rem;
-          border: 1px double $global-border-color;
+          border: 1px solid darken($table-thead-color, 2%);
 
-          .dark-theme & {
-            border: 1px double $global-border-color-dark;
+          [theme=dark] & {
+            border-color: darken($table-thead-color-dark, 2%);
           }
         }
       }
@@ -177,10 +208,11 @@
 
     img {
       max-width: 100%;
-      min-height: 1.2rem;
+      min-height: 1em;
     }
 
     figure {
+      margin: .5rem;
       text-align: center;
 
       .image-caption:not(:empty) {
@@ -202,58 +234,31 @@
     }
 
     .lazyloading {
-      object-fit: none;
+      @include object-fit(none);
     }
 
     blockquote {
-      font-size: 1rem;
       display: block;
-      border-width: 1px 0;
-      border-style: solid;
-      border-color: $global-border-color;
-      padding: 1.5em 1.2em 0.5em 1.2em;
-      margin: 0 0 2em 0;
-      position: relative;
+      border-left: .5rem solid $blockquote-color;
+      background-color: rgba($blockquote-color, .2);
+      padding: .25rem .75rem;
+      margin: 1rem 0;
 
-      &::before {
-        content: '\201C';
-        position: absolute;
-        top: 0em;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 3rem;
-        height: 2rem;
-        font: 6em/1.08em 'PT Sans', sans-serif;
-        color: $single-link-color;
-        text-align: center;
-
-        .dark-theme & {
-          color: $single-link-color-dark;
-        }
-      }
-
-      &::after {
-        content: '#blockquote' attr(cite);
-        display: block;
-        text-align: right;
-        font-size: 0.875em;
-        color: $single-link-color;
-
-        .dark-theme & {
-          color: $single-link-color-dark;
-        }
-      }
-
-      .dark-theme & {
-        border-color: $global-border-color-dark;
+      [theme=dark] & {
+        border-left-color: $blockquote-color-dark;
+        background-color: rgba($blockquote-color-dark, .2);
       }
     }
 
     .footnotes {
       color: $global-font-secondary-color;
 
-      .dark-theme & {
+      [theme=dark] & {
         color: $global-font-secondary-color-dark;
+      }
+
+      p {
+        margin: .25rem 0;
       }
     }
 
@@ -261,6 +266,8 @@
     @import "../_partial/_single/instagram";
     @import "../_partial/_single/admonition";
     @import "../_partial/_single/echarts";
+    @import "../_partial/_single/mapbox";
+    @import "../_partial/_single/music";
     @import "../_partial/_single/bilibili";
 
     hr {
@@ -269,7 +276,7 @@
       border-top: 1px dashed $global-border-color;
       border-bottom: none;
 
-      .dark-theme & {
+      [theme=dark] & {
         border-top: 1px dashed $global-border-color-dark;
       }
     }
@@ -280,19 +287,17 @@
       background-color: $global-background-color;
       border: 1px solid $global-border-color;
       border-bottom-color: $global-border-color;
-      border-radius: 3px;
-      -webkit-box-shadow: inset 0 -1px 0 $global-border-color;
-      box-shadow: inset 0 -1px 0 $global-border-color;
+      @include border-radius(3px);
+      @include box-shadow(inset 0 -1px 0 $global-border-color);
       font-size: .8rem;
       font-family: $code-font-family;
       color: $code-color;
 
-      .dark-theme & {
+      [theme=dark] & {
         background-color: $global-background-color-dark;
         border: 1px solid $global-border-color-dark;
         border-bottom-color: $global-border-color-dark;
-        -webkit-box-shadow: inset 0 -1px 0 $global-border-color-dark;
-        box-shadow: inset 0 -1px 0 $global-border-color-dark;
+        @include box-shadow(inset 0 -1px 0 $global-border-color-dark);
         color: $code-color-dark;
       }
     }
@@ -305,6 +310,11 @@
         font-weight: bold;
         word-break: break-all;
       }
+    }
+
+    .version {
+      height: 1.25em;
+      vertical-align: text-bottom;
     }
   }
 

@@ -1,36 +1,69 @@
-.dark-theme {
-  // copied from https://github.com/xCss/Valine/issues/221
-  .v *,
-  .v .vwrap input,
-  .v .vwrap input::placeholder,
-  .v .veditor,
-  .v .veditor::placeholder,
-  .v a,
-  .v a:hover {
-    color: hsla(0,0%,100%,.75);
-    opacity: 1;
-  }
-  .v .vbtn {
-    color: hsla(0,0%,100%,.75);
-    background: #333;
-    border: none;
-  }
-  .v .vbtn:hover {
-    color: #3090e4;
-    border-color: #3090e4;
-  }
-  .v .vlist .vcard .vhead .vsys {
-    background: #333;
-  }
-  .v code, .v pre {
-    background: #272C34;
-  }
+// ========== Global ========== //
+// Color of the border
+$border-color: #f0f0f0;
+$border-color-dark: #363636;
 
-  .v .vmark .vinput {
-    color: #0e0f10;
-  }
+// ========== Code ========== //
+// Color of the code
+$code-color: #E74C3C !default;
+$code-color-dark: #E5BF78 !default;
+
+// Color of the code background
+$code-background-color: #f5f5f5 !default;
+$code-background-color-dark: #272C34 !default;
+
+@mixin overflow-wrap($value) {
+  word-wrap: $value;
+  overflow-wrap: $value;
 }
 
-.v code, .v pre {
-  text-align: left;
+@mixin line-break($value) {
+  -webkit-line-break: $value;
+  -ms-line-break: $value;
+  line-break: $value;
+}
+
+@mixin tab-size($value) {
+  -moz-tab-size: $value;
+  -o-tab-size: $value;
+  tab-size: $value;
+}
+
+.v[data-class=v] {
+  .vcards .vcard .vcontent.expand {
+    &::before, &::after {
+      z-index: 50;
+    }
+  }
+
+  .vwrap,
+  .vwrap .vheader .vinput,
+  .vcards .vcard .vh,
+  .vcards .vcard .vquote,
+  blockquote {
+    border-color: $border-color;
+
+    [theme=dark] & {
+      border-color: $border-color-dark;
+    }
+  }
+
+  code, pre, pre code {
+    font-size: 90%;
+    @include overflow-wrap(break-word);
+    @include line-break(anywhere);
+    @include tab-size(4);
+    color: $code-color;
+    background: $code-background-color;
+
+    [theme=dark] & {
+      color: $code-color-dark;
+      background: $code-background-color-dark;
+    }
+  }
+
+  .emoji, .vemoji {
+    max-width: 1.5em;
+    vertical-align: text-bottom;
+  }
 }

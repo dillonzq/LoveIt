@@ -1,8 +1,8 @@
-{{- $scratch := .Page.Scratch.Get "scratch" -}}
-
+{{- $theme := "#448aff" -}}
 {{- if .IsNamedParams -}}
+    {{- $theme = .Get "theme" | default $theme -}}
     {{- if .Get "url" -}}
-        <meting-js url="{{ .Get `url` }}" name="{{ .Get `name` }}" artist="{{ .Get `artist` }}" cover="{{ .Get `cover` }}" theme="{{ .Get `theme` | default `#a9a9b3` }}"
+        <meting-js url="{{ .Get `url` }}" name="{{ .Get `name` }}" artist="{{ .Get `artist` }}" cover="{{ .Get `cover` }}" theme="{{ $theme }}"
         {{- with .Get "fixed" }} fixed="{{ . }}"{{ end -}}
         {{- with .Get "mini" }} mini="{{ . }}"{{ end -}}
         {{- with .Get "autoplay" }} autoplay="{{ . }}"{{ end -}}
@@ -10,7 +10,7 @@
         {{- with .Get "mutex" }} mutex="{{ . }}"{{ end -}}
         ></meting-js>
     {{- else if .Get "auto" -}}
-        <meting-js auto="{{ .Get `auto` }}" theme="{{ .Get `theme` | default `#a9a9b3` }}"
+        <meting-js auto="{{ .Get `auto` }}" theme="{{ $theme }}"
         {{- with .Get "fixed" }} fixed="{{ . }}"{{ end -}}
         {{- with .Get "mini" }} mini="{{ . }}"{{ end -}}
         {{- with .Get "autoplay" }} autoplay="{{ . }}"{{ end -}}
@@ -22,7 +22,7 @@
         {{- with .Get "list-max-height" }} list-max-height="{{ . }}"{{ end -}}
         ></meting-js>
     {{- else -}}
-        <meting-js server="{{ .Get `server` }}" type="{{ .Get `type` }}" id="{{ .Get `id` }}" theme="{{ .Get `theme` | default `#a9a9b3` }}"
+        <meting-js server="{{ .Get `server` }}" type="{{ .Get `type` }}" id="{{ .Get `id` }}" theme="{{ $theme }}"
         {{- with .Get "fixed" }} fixed="{{ . }}"{{ end -}}
         {{- with .Get "mini" }} mini="{{ . }}"{{ end -}}
         {{- with .Get "autoplay" }} autoplay="{{ . }}"{{ end -}}
@@ -34,9 +34,9 @@
         {{- with .Get "list-max-height" }} list-max-height="{{ . }}"{{ end -}}
         ></meting-js>
     {{- end -}}
-{{- else if strings.HasSuffix (.Get 0) "http" -}}
-    <meting-js auto="{{ .Get 0 }}" theme="#a9a9b3"></meting-js>
+{{- else if (.Get 0 | urls.Parse).Host -}}
+    <meting-js auto="{{ .Get 0 }}" theme="{{ $theme }}"></meting-js>
 {{- else -}}
-    <meting-js server="{{ .Get 0 }}" type="{{ .Get 1 }}" id="{{ .Get 2 }}" theme="#a9a9b3"></meting-js>
+    <meting-js server="{{ .Get 0 }}" type="{{ .Get 1 }}" id="{{ .Get 2 }}" theme="{{ $theme }}"></meting-js>
 {{- end -}}
-{{- $scratch.Set "music" true -}}
+{{- .Page.Scratch.SetInMap "this" "music" true -}}

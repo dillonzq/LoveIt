@@ -1,6 +1,4 @@
-{{- $scratch := .Page.Scratch.Get "scratch" -}}
-
-{{- $content := .Inner -}}
+{{- $content := trim .Inner "\n" -}}
 {{- $classList := .Get "class" | slice -}}
 {{- $tag := .Get "tag" | default "div" -}}
 
@@ -21,13 +19,13 @@
 {{- end -}}
 
 {{- /* trim the newline */ -}}
-{{- $content = trim $content "\n" -}}
-{{- $id := partial "function/id.html" (dict "content" $content "scratch" $scratch) -}}
-{{- $key := .Get "group" | default $id -}}
-{{- $group := index ($scratch.Get "typeitMap" | default dict) $key -}}
+{{- $id := dict "Content" $content "Scratch" .Page.Scratch | partial "function/id.html" -}}
+{{- $key := .Get "group" | string | default $id -}}
+{{- $typeitMap := (.Page.Scratch.Get "this").typeitMap | default dict -}}
+{{- $group := index $typeitMap $key -}}
 {{- $group = $group | default slice | append $id -}}
-{{- $scratch.SetInMap "typeitMap" $key $group -}}
+{{- dict $key $group | merge $typeitMap | .Page.Scratch.SetInMap "this" "typeitMap" -}}
 
 <div class="typeit">
-    {{- printf `<%s id="%s" class="%s"></%s>` $tag $id (delimit $classList " ") $tag | safeHTML -}}
+    {{- printf `<%v id="%v" class="%v"></%v>` $tag $id (delimit $classList " ") $tag | safeHTML -}}
 </div>

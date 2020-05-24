@@ -1,0 +1,199 @@
+# Translations for Romanian
+# Traduceri pentru limba română
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ==
+[backToTop]
+other = "Înapoi Sus"
+
+[viewComments]
+other = "Vizualizare Comentarii"
+# === baseof ==
+
+# === Post ===
+[posts]
+other = "Articole"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "Toate {{ .Some }}"
+
+[tag]
+other = "Etichetă"
+
+[tags]
+other = "Etichete"
+
+[category]
+other = "Categorie"
+
+[categories]
+other = "Categorii"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "Mai mult"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "Selectare Limbă"
+
+[switchTheme]
+other = "Schimbare Temă"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Realizat de către {{ .Hugo }} | Temă - {{ .Theme }}"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "Comentariul dvs ..."
+
+[facebookLanguageCode]
+other = "ro_RO"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "Căutare"
+
+[searchPlaceholder]
+other = "Căutarea titlului sau conținutului articolului ..."
+
+[clear]
+other = "Golire"
+
+[cancel]
+other = "Anulare"
+
+[noResultsFound]
+other = "Nici un rezultat gasit"
+
+[lunrLanguageCode]
+other = "ro"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.ro.js"
+
+[copyToClipboard]
+other = "Copiați în clipboard"
+
+[cookieconsentMessage]
+other = "Acest site web utilizează Cookies pentru a vă îmbunătăți experiența."
+
+[cookieconsentDismiss]
+other = "De acord"
+
+[cookieconsentLink]
+other = "Aflați mai multe"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "Distribuie pe"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "Cuprins"
+
+[publishedOnDate]
+other = "publicat la {{ .Date }}"
+
+[includedInCategories]
+other = "inclus în {{ .Categories }}"
+
+[wordCount]
+one = "Un cuvânt"
+other = "{{ .Count }} cuvinte"
+
+[readingTime]
+one = "Un minut"
+other = "{{ .Count }} minute"
+
+[views]
+other = "vizualizări"
+
+[author]
+other = "Autor"
+
+[updatedOnDate]
+other = "Actualizat la {{ .Date }}"
+
+[readMarkdown]
+other = "Citire Markdown"
+
+[back]
+other = "Înapoi"
+
+[home]
+other = "Acasă"
+
+[readMore]
+other = "Citește mai mult"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Pagina nu a fost găsită"
+
+[pageNotFoundText]
+other = "Pagina pe care o căutați nu există. Ne cerem scuze."
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Notă"
+
+[abstract]
+other = "Rezumat"
+
+[info]
+other = "Info"
+
+[tip]
+other = "Sfat"
+
+[success]
+other = "Succes"
+
+[question]
+other = "Întrebare"
+
+[warning]
+other = "Avertizare"
+
+[failure]
+other = "Eșec"
+
+[danger]
+other = "Pericol"
+
+[bug]
+other = "Bug"
+
+[example]
+other = "Exemplu"
+
+[quote]
+other = "Citat"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "NOU"
+
+[changed]
+other = "SCHIMBAT"
+
+[deleted]
+other = "ȘTERS"
+# === shortcodes/version.html ===

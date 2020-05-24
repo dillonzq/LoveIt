@@ -1,5 +1,5 @@
 {{- define "title" -}}
-    {{- .Title | default (T .Data.Plural) | default (humanize .Data.Plural) }} | {{ .Site.Title -}}
+    {{- .Params.Title | default (T .Data.Plural) | default .Data.Plural | dict "Some" | T "allSome" }} - {{ .Site.Title -}}
 {{- end -}}
 
 {{- define "content" -}}
@@ -10,7 +10,7 @@
     <div class="page archive">
         {{- /* Title */ -}}
         <h2 class="single-title animated pulse faster">
-            {{- T "all" | humanize}}{{ T $taxonomies | default $taxonomies | humanize -}}
+            {{- .Params.Title | default (T $taxonomies) | default $taxonomies | dict "Some" | T "allSome" -}}
         </h2>
 
         {{- /* Categories Page */ -}}
@@ -19,12 +19,12 @@
                 {{- range $terms -}}
                     {{- $term := .Term -}}
                     {{- $pages := .Pages -}}
-                    {{- with $.Site.GetPage "taxonomy" (printf "%s/%s" $type $term) -}}
+                    {{- with $.Site.GetPage "taxonomy" (printf "%v/%v" $type $term) -}}
                     <div class="card-item">
                         <div class="card-item-wrapper">
                             <h3 class="card-item-title">
                                 <a href="{{ .RelPermalink }}">
-                                    <i class="far fa-folder fa-fw"></i>&nbsp;{{ $term | humanize}}
+                                    <i class="far fa-folder fa-fw"></i>&nbsp;{{ .Page.Title }}
                                 </a>
                             </h3>
                             {{- range first 5 $pages -}}
@@ -49,7 +49,7 @@
         {{- else if eq $taxonomies "tags" -}}
             <div class="tag-cloud-tags">
                 {{- range $.Site.Taxonomies.tags.ByCount -}}
-                    <a href="{{ .Page.RelPermalink }}"> {{ .Page.Title }} <small>({{ .Count }})</small></a>
+                    <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <sup>{{ .Count }}</sup></a>
                 {{- end -}}
             </div>
         {{- end -}}

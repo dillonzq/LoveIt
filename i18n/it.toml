@@ -1,0 +1,199 @@
+# Translations for Italian
+# Traduzioni per l'italiano
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ==
+[backToTop]
+other = "Torna all'inizio"
+
+[viewComments]
+other = "Vedi commenti"
+# === baseof ==
+
+# === Post ===
+[posts]
+other = "Articoli"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "Tutti {{ .Some }}"
+
+[tag]
+other = "Etichetta"
+
+[tags]
+other = "Etichette"
+
+[category]
+other = "Categoria"
+
+[categories]
+other = "Categorie"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "Più"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "Scegliere la lingua"
+
+[switchTheme]
+other = "Cambiare il tema"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Realizzato da {{ .Hugo }} | Tema - {{ .Theme }}"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "Il tuo commento ..."
+
+[facebookLanguageCode]
+other = "it"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "Cerca"
+
+[searchPlaceholder]
+other = "Cerca il titolo o il contenuto dell'articolo ..."
+
+[clear]
+other = "Chiaro"
+
+[cancel]
+other = "Annulla"
+
+[noResultsFound]
+other = "Nessun risultato trovato"
+
+[lunrLanguageCode]
+other = "it"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.it.js"
+
+[copyToClipboard]
+other = "Copia negli appunti"
+
+[cookieconsentMessage]
+other = "Questo sito Web utilizza i Cookies per migliorare la tua esperienza."
+
+[cookieconsentDismiss]
+other = "Essere d'accordo"
+
+[cookieconsentLink]
+other = "Per saperne di più"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "Condividi su"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "Contenuti"
+
+[publishedOnDate]
+other = "pubblicato su {{ .Date }}"
+
+[includedInCategories]
+other = "incluso in {{ .Categories }}"
+
+[wordCount]
+one = "Una parola"
+other = "{{ .Count }} parole"
+
+[readingTime]
+one = "Un minuto"
+other = "{{ .Count }} minuti"
+
+[views]
+other = "visualizzazioni"
+
+[author]
+other = "Autore"
+
+[updatedOnDate]
+other = "Aggiornato il {{ .Date }}"
+
+[readMarkdown]
+other = "Leggi Markdown"
+
+[back]
+other = "Indietro"
+
+[home]
+other = "Home"
+
+[readMore]
+other = "Leggi di più"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Pagina non trovata"
+
+[pageNotFoundText]
+other = "Mi spiace, la pagina cercata non esiste."
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Note"
+
+[abstract]
+other = "Sommario"
+
+[info]
+other = "Info"
+
+[tip]
+other = "Suggerimenti"
+
+[success]
+other = "Successo"
+
+[question]
+other = "Domande"
+
+[warning]
+other = "Avvertimento"
+
+[failure]
+other = "Fallimento"
+
+[danger]
+other = "Pericolo"
+
+[bug]
+other = "Bug"
+
+[example]
+other = "Esempio"
+
+[quote]
+other = "Citazione"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "NUOVO"
+
+[changed]
+other = "CAMBIATO"
+
+[deleted]
+other = "CANCELLATO"
+# === shortcodes/version.html ===

@@ -1,5 +1,14 @@
 {{- /* Font Awesome */ -}}
 {{- /* :(far fa-circle): -> <i class="far fa-circle fa-fw"></i> */ -}}
-{{- $REin := `:\(([\w- ]+?)\):` -}}
-{{- $REout := `<i class="$1 fa-fw"></i>` -}}
-{{- return replaceRE $REin $REout . -}}
+
+{{- $REin := ` (:\([\w- ]+?\):)` -}}
+{{- $REout := `&nbsp;$1` -}}
+{{- $content := replaceRE $REin $REout . -}}
+
+{{- $REin = `(:\([\w- ]+?\):) ` -}}
+{{- $REout = `$1&nbsp;` -}}
+{{- $content = replaceRE $REin $REout . -}}
+
+{{- $REin = `:\(([\w- ]+?)\):` -}}
+{{- $REout = `<i class="$1"></i>` -}}
+{{- return replaceRE $REin $REout $content -}}

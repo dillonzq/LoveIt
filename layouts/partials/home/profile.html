@@ -1,33 +1,72 @@
-{{- $scratch := .Scratch.Get "scratch" -}}
-
+{{- $profile := .Site.Params.home.profile -}}
 <div class="home-profile">
-    {{- $avatar := .Site.Params.home.profile.avatarURL -}}
-    {{- with .Site.Params.home.profile.gravatarEmail -}}
-        {{- $avatar = md5 . | printf "https://www.gravatar.com/avatar/%s?s=240&d=mp" -}}
+    {{- $avatar := $profile.avatarURL -}}
+    {{- with $profile.gravatarEmail -}}
+        {{- $avatar = md5 . | printf "https://www.gravatar.com/avatar/%v?s=240&d=mp" -}}
     {{- end -}}
-    {{- with $avatar -}}
+    {{- if $avatar -}}
         <div class="home-avatar">
-            <a href="/posts">
-                {{- partial "plugin/image.html" (dict "src_s" . "title" "avatar" "description" (T "home") "scratch" $scratch) -}}
-            </a>
+            {{- $menus := $.Site.Menus.main | default slice -}}
+            {{- with index $menus 0 -}}
+                {{- $url := .URL | relLangURL -}}
+                {{- with .Page -}}
+                    {{- $url = .RelPermalink -}}
+                {{- end -}}
+                <a href="{{ $url }}"{{ with .Title | default .Name }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
+                    {{- dict "src" $avatar "alt" .Name | partial "plugin/image.html" -}}
+                </a>
+            {{- else -}}
+                {{- dict "src" $avatar | partial "plugin/image.html" -}}
+            {{- end -}}
         </div>
     {{- end -}}
 
-    {{- with .Site.Params.home.profile.subtitle -}}
-        <h2 class="home-description">
-            {{- if $.Site.Params.home.profile.typeit -}}
-                {{- $id := partial "function/id.html" (dict "content" . "scratch" $scratch) -}}
+    {{- with $profile.title -}}
+        <h1 class="home-title">
+            {{- . | safeHTML -}}
+        </h1>
+    {{- end -}}
+
+    {{- with $profile.subtitle -}}
+        <h2 class="home-subtitle">
+            {{- if $profile.typeit -}}
+                {{- $id := dict "Content" . "Scratch" $.Scratch | partial "function/id.html" -}}
                 <div id="{{ $id }}" class="typeit"></div>
-                {{- $scratch.SetInMap "typeitMap" $id (slice $id) -}}
+                {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
             {{- else -}}
                 {{- . -}}
             {{- end -}}
         </h2>
     {{- end -}}
 
-    <div class="home-social-links">
-        {{- if .Site.Params.home.profile.social -}}
-            {{- partial "plugin/social.html" . -}}
-        {{- end -}}
-    </div>
+    {{- if $profile.social -}}
+        <div class="links">
+            {{- $socialMap := resources.Get "data/social.yml" | transform.Unmarshal -}}
+            {{- $socialArr := slice -}}
+            {{- range $key, $value := .Site.Params.social -}}
+                {{- $social := $key | lower | index $socialMap | default dict -}}
+                {{- if $value -}}
+                    {{- if reflect.IsMap $value -}}
+                        {{- $social = $value | merge $social -}}
+                    {{- else if ne $value true -}}
+                        {{- $social = dict "id" $value | merge $social -}}
+                    {{- end -}}
+                    {{- if $social.icon.simpleicons -}}
+                        {{- $prefix := ($.Scratch.Get "cdn" | default dict).simpleIconsPrefix -}}
+                        {{- $social = dict "prefix" $prefix | dict "icon" | merge $social -}}
+                    {{- end -}}
+                    {{- $socialArr = $socialArr | append $social -}}
+                {{- end -}}
+            {{- end -}}
+            {{- range sort $socialArr "weight" -}}
+                {{- partial "plugin/social.html" . -}}
+            {{- end -}}
+        </div>
+    {{- end -}}
+
+    {{- with $profile.disclaimer -}}
+        <h3 class="home-disclaimer">
+            {{- . | safeHTML -}}
+        </h3>
+    {{- end -}}
 </div>

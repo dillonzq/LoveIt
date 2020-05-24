@@ -1,5 +1,14 @@
 # Translations for Simplified Chinese
+# 简体中文的翻译
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ==
+[backToTop]
+other = "回到顶部"
+
+[viewComments]
+other = "查看评论"
+# === baseof ==
 
 # === Post ===
 [posts]
@@ -8,7 +17,7 @@ other = "文章"
 
 # === Taxonomy ===
 [allSome]
-other = "所有%s"
+other = "所有{{ .Some }}"
 
 [tag]
 other = "标签"
@@ -38,11 +47,57 @@ other = "切换主题"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "由 %s 强力驱动"
-
-[theme]
-other = "主题"
+other = "由 {{ .Hugo }} 强力驱动 | 主题 - {{ .Theme }}"
 # === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "zh-cn"
+
+[valinePlaceholder]
+other = "你的评论 ..."
+
+[facebookLanguageCode]
+other = "zh_CN"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "搜索"
+
+[searchPlaceholder]
+other = "搜索文章标题或内容..."
+
+[clear]
+other = "清空"
+
+[cancel]
+other = "取消"
+
+[noResultsFound]
+other = "没有找到结果"
+
+[lunrLanguageCode]
+other = "zh"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.zh.js"
+
+[lunrSegmentitLib]
+other = "lib/lunr/lunr.segmentit.js"
+
+[copyToClipboard]
+other = "复制到剪贴板"
+
+[cookieconsentMessage]
+other = "本网站使用 Cookies 来改善您的浏览体验."
+
+[cookieconsentDismiss]
+other = "同意"
+
+[cookieconsentLink]
+other = "了解更多"
+# === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]
@@ -53,11 +108,11 @@ other = "分享到"
 [contents]
 other = "目录"
 
-[publish]
-other = "发布于"
+[publishedOnDate]
+other = "发布于 {{ .Date }}"
 
-[included]
-other = "收录于"
+[includedInCategories]
+other = "收录于 {{ .Categories }}"
 
 [wordCount]
 other = "约 {{ .Count }} 字"
@@ -71,13 +126,10 @@ other = "次阅读"
 [author]
 other = "作者"
 
-[lastMod]
-other = "本文于 %s 更新"
+[updatedOnDate]
+other = "更新于 {{ .Date }}"
 
-[license]
-other = "采用 %s 协议发布"
-
-[seeMarkdown]
+[readMarkdown]
 other = "阅读原始文档"
 
 [back]
@@ -96,9 +148,6 @@ other = "页面没找到"
 
 [pageNotFoundText]
 other = "抱歉，您要查找的页面不存在。"
-
-[backToHome]
-other = "回到主页"
 # === 404.html ===
 
 # === shortcodes/admonition.html ===
@@ -154,3 +203,14 @@ other = "开始搜索..."
 [NotFound]
 other = "对不起，没有找到以下关键词："
 # === Search ===
+
+# === shortcodes/version.html ===
+[new]
+other = "新增"
+
+[changed]
+other = "更改"
+
+[deleted]
+other = "删除"
+# === shortcodes/version.html ===

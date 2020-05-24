@@ -1,15 +1,4 @@
-{{- /* LoveIt theme version detection */ -}}
-{{- if ne .Site.Params.version "0.1.X" -}}
-  {{- errorf "\n\nThere are two possible situations that led to this error:\n  1. You haven't copied the config.toml yet. See https://github.com/dillonzq/LoveIt#installation \n  2. You have an incompatible update. See https://github.com//dillonzq/LoveIt/blob/master/CHANGELOG.md \n\n有两种可能的情况会导致这个错误发生:\n  1. 你还没有复制 config.toml 参考 https://github.com/dillonzq/LoveIt#installation \n  2. 你进行了一次不兼容的更新 参考 https://github.com//dillonzq/LoveIt/blob/master/CHANGELOG.md \n" -}}
-{{- end -}}
-
-{{- $scratch := newScratch -}}
-{{- .Scratch.Set "scratch" $scratch -}}
-{{- if eq hugo.Environment "production" -}}
-    {{- $scratch.Set "production" true -}}
-    {{- $scratch.Set "CDN" .Site.Params.cdn -}}
-    {{- $scratch.Set "fingerprint" .Site.Params.fingerprint -}}
-{{- end -}}
+{{- partial "init.html" . -}}
 
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
@@ -21,27 +10,17 @@
         <title>
             {{- block "title" . }}{{ .Site.Title }}{{ end -}}
         </title>
-        <meta name="Description" content="{{ .Params.description | default .Site.Params.description }}">
 
         {{- partial "head/meta.html" . -}}
         {{- partial "head/link.html" . -}}
         {{- partial "head/seo.html" . -}}
     </head>
-    <body>
+    <body header-desktop="{{ .Site.Params.header.desktopMode }}" header-mobile="{{ .Site.Params.header.mobileMode }}">
         {{- /* Check theme isDark before body rendering */ -}}
-        <script>
-            if (!window.localStorage || !window.localStorage.getItem('theme')) {
-                {{- $theme := .Site.Params.defaultTheme -}}
-                {{- if eq $theme "auto" -}}
-                    window.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                {{- else -}}
-                    window.isDark = '{{ $theme }}' === 'dark';
-                {{- end -}}
-            } else {
-                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
-            }
-            window.isDark && document.body.classList.add('dark-theme');
-        </script>
+        {{- $theme := .Site.Params.defaulttheme -}}
+        <script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('{{ $theme }}' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '{{ $theme }}' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div>
 
         {{- /* Body wrapper */ -}}
         <div class="wrapper">
@@ -54,10 +33,17 @@
             {{- partial "footer.html" . -}}
         </div>
 
-        {{- /* Dynamic to top button */ -}}
-        <a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
-            <i class="fas fa-chevron-up fa-fw"></i>
-        </a>
+        <div id="fixed-buttons">
+            {{- /* top button */ -}}
+            <a href="#" id="back-to-top" class="fixed-button" title="{{ T `backToTop` }}">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a>
+
+            {{- /* comment button */ -}}
+            <a href="#" id="view-comments" class="fixed-button" title="{{ T `viewComments` }}">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div>
 
         {{- /* Load JavaScript scripts and CSS */ -}}
         {{- partial "assets.html" . -}}

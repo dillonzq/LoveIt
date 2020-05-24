@@ -1,15 +1,16 @@
 html {
   font-family: $global-font-family;
-  font-size: $global-font-size;
   font-weight: $global-font-weight;
+  font-display: swap;
+  font-size: $global-font-size;
   line-height: $global-line-height;
   width:100%;
 }
 
 /* scrollbar, only support webkit */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: .5rem;
+  height: .5rem;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -21,38 +22,20 @@ html {
 }
 
 ::selection {
-  background: $selection-color;
+  background-color: $selection-color;
 
-  .dark-theme & {
-    background: $selection-color-dark;
+  [theme=dark] & {
+    background-color: $selection-color-dark;
   }
 }
 
 body {
   background-color: $global-background-color;
   color: $global-font-color;
-  overflow-wrap: break-word;
+  @include overflow-wrap(break-word);
+  scrollbar-color: auto;
 
-  &::before {
-    content: "";
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.05;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    -webkit-filter: grayscale(100%);
-    -moz-filter: grayscale(100%);
-    -ms-filter: grayscale(100%);
-    -o-filter: grayscale(100%);
-    filter: grayscale(100%);
-    filter: gray;
-  }
-
-  &.dark-theme {
+  &[theme=dark] {
     color: $global-font-color-dark;
     background-color: $global-background-color-dark;
   }
@@ -81,21 +64,15 @@ body {
   }
 }
 
-a {
-  color: $global-link-color;
-  text-decoration: none;
+@include ms;
+@include link(true, true);
 
-  &:hover {
-    color: $global-link-hover-color;
-  }
+@import "../_partial/mask";
+@import "../_partial/icon";
+@import "../_partial/details";
+@import "../_partial/fixed-button";
+@import "../_partial/cookieconsent";
 
-  .dark-theme & {
-    color: $global-link-color-dark;
-
-    &:hover {
-      color: $global-link-hover-color-dark;
-    }
-  }
+img {
+  @include object-fit(contain);
 }
-
-@import "../_partial/dynamic-to-top";

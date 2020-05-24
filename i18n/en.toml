@@ -1,6 +1,14 @@
 # Translations for English
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
+# === baseof ==
+[backToTop]
+other = "Back to Top"
+
+[viewComments]
+other = "View Comments"
+# === baseof ==
+
 # === Post ===
 [posts]
 other = "Posts"
@@ -8,7 +16,7 @@ other = "Posts"
 
 # === Taxonomy ===
 [allSome]
-other = "All %s"
+other = "All {{ .Some }}"
 
 [tag]
 other = "Tag"
@@ -38,11 +46,51 @@ other = "Switch Theme"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Powered by %s"
-
-[theme]
-other = "Theme"
+other = "Powered by {{ .Hugo }} | Theme - {{ .Theme }}"
 # === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "Your comment ..."
+
+[facebookLanguageCode]
+other = "en_US"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "Search"
+
+[searchPlaceholder]
+other = "Search titles or contents..."
+
+[clear]
+other = "Clear"
+
+[cancel]
+other = "Cancel"
+
+[noResultsFound]
+other = "No results found"
+
+[lunrLanguageCode]
+other = "en"
+
+[copyToClipboard]
+other = "Copy to clipboard"
+
+[cookieconsentMessage]
+other = "This website uses Cookies to improve your experience."
+
+[cookieconsentDismiss]
+other = "Got it!"
+
+[cookieconsentLink]
+other = "Learn more"
+# === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]
@@ -53,17 +101,19 @@ other = "Share on"
 [contents]
 other = "Contents"
 
-[publish]
-other = "published on"
+[publishedOnDate]
+other = "published on {{ .Date }}"
 
-[included]
-other = "included in"
+[includedInCategories]
+other = "included in {{ .Categories }}"
 
 [wordCount]
-other = "about {{ .Count }} words"
+one = "One word"
+other = "{{ .Count }} words"
 
 [readingTime]
-other = "{{ .Count }} min"
+one = "One minute"
+other = "{{ .Count }} minutes"
 
 [views]
 other = "views"
@@ -71,13 +121,10 @@ other = "views"
 [author]
 other = "Author"
 
-[lastMod]
-other = "The article was updated on %s"
+[updatedOnDate]
+other = "Updated on {{ .Date }}"
 
-[license]
-other = "Published under the %s license"
-
-[seeMarkdown]
+[readMarkdown]
 other = "Read Markdown"
 
 [back]
@@ -96,9 +143,6 @@ other = "Page not found"
 
 [pageNotFoundText]
 other = "The page you're looking for doesn't exist. Sorry."
-
-[backToHome]
-other = "Back to Home"
 # === 404.html ===
 
 # === shortcodes/admonition.html ===
@@ -154,3 +198,14 @@ other = "Start Search..."
 [NotFound]
 other = "Sorry, no results found for:"
 # === Search ===
+
+# === shortcodes/version.html ===
+[new]
+other = "NEW"
+
+[changed]
+other = "CHANGED"
+
+[deleted]
+other = "DELETED"
+# === shortcodes/version.html ===
