@@ -7,11 +7,12 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Hugo provides multiple built-in shortcodes for author convenience and to keep your markdown content clean."
-images: ["/images/theme-documentation-built-in-shortcodes/featured-image.png"]
+resources:
+- name: "featured-image"
+  src: "featured-image.png"
 
 tags: ["shortcodes"]
 categories: ["documentation"]
-featuredImage: "/images/theme-documentation-built-in-shortcodes/featured-image.png"
 
 lightgallery: true
 ---
@@ -36,18 +37,18 @@ Hugo ships with a set of predefined shortcodes that represent very common usage.
 Example `figure` input:
 
 ```markdown
-{{</* figure src="/images/theme-documentation-built-in-shortcodes/lighthouse.jpg" title="Lighthouse (figure)" */>}}
+{{</* figure src="/images/lighthouse.jpg" title="Lighthouse (figure)" */>}}
 ```
 
 The rendered output looks like this:
 
-{{< figure src="/images/theme-documentation-built-in-shortcodes/lighthouse.jpg" title="Lighthouse (figure)" >}}
+{{< figure src="/images/lighthouse.jpg" title="Lighthouse (figure)" >}}
 
 The HTML looks like this:
 
 ```html
 <figure>
-    <img src="/images/theme-documentation-built-in-shortcodes/lighthouse.jpg"/>
+    <img src="/images/lighthouse.jpg"/>
     <figcaption>
         <h4>Lighthouse (figure)</h4>
     </figcaption>

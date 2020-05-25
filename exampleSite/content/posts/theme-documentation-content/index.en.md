@@ -7,11 +7,12 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Find out how to create and organize your content quickly and intuitively in LoveIt theme."
-images: ["/images/theme-documentation-content/featured-image.jpg"]
+resources:
+- name: "featured-image"
+  src: "featured-image.jpg"
 
 tags: ["content", "Markdown"]
 categories: ["documentation"]
-featuredImage: "/images/theme-documentation-content/featured-image.jpg"
 
 lightgallery: true
 
@@ -142,7 +143,7 @@ library:
 
 **LoveIt** theme uses the summary of the content to display abstract information in the home page. Hugo can generate summaries of your content.
 
-![Summary Preview](/images/theme-documentation-content/summary.png "Summary Preview")
+![Summary Preview](summary.png "Summary Preview")
 
 ### Automatic Summary Splitting
 

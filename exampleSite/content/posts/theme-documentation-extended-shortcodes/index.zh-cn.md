@@ -7,12 +7,14 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "LoveIt 主题在 Hugo 内置的 shortcode 的基础上提供多个扩展的 shortcode."
-images: ["/images/theme-documentation-extended-shortcodes/featured-image-preview.jpg"]
+resources:
+- name: "featured-image-preview"
+  src: "featured-image-preview.jpg"
+- name: "featured-image"
+  src: "featured-image.jpg"
 
 tags: ["shortcodes"]
 categories: ["documentation"]
-featuredImage: "/images/theme-documentation-extended-shortcodes/featured-image.jpg"
-featuredImagePreview: "/images/theme-documentation-extended-shortcodes/featured-image-preview.jpg"
 
 lightgallery: true
 mapbox:
@@ -176,19 +178,15 @@ This is a **right-aligned** paragraph.
 
     HTML `a` 标签 的 `rel` 补充属性, 仅在 **linked** 属性设置成 `true` 时有效.
 
-* **large** *[可选]*
-
-    图片是否是大尺寸的, 用来加载动画, 仅在 **linked** 属性设置成 `false` 时有效.
-
 一个 `image` 示例:
 
 ```markdown
-{{</* image src="/images/theme-documentation-extended-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-extended-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-extended-shortcodes/lighthouse-large.jpg" */>}}
+{{</* image src="/images/lighthouse.jpg" caption="Lighthouse (`image`)" src_s="/images/lighthouse-small.jpg" src_l="/images/lighthouse-large.jpg" */>}}
 ```
 
 呈现的输出效果如下:
 
-{{< image src="/images/theme-documentation-extended-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-extended-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-extended-shortcodes/lighthouse-large.jpg" >}}
+{{< image src="/images/lighthouse.jpg" caption="Lighthouse (`image`)" src_s="/images/lighthouse-small.jpg" src_l="/images/lighthouse-large.jpg" >}}
 
 ## 4 admonition
 
@@ -1021,12 +1019,12 @@ data = [
 一个使用自定义音乐 URL 的 `music` 示例:
 
 ```markdown
-{{</* music url="/music/Wavelength.mp3" name=Wavelength artist=oldmanyoung cover="/images/theme-documentation-extended-shortcodes/Wavelength.jpg" */>}}
+{{</* music url="/music/Wavelength.mp3" name=Wavelength artist=oldmanyoung cover="/images/Wavelength.jpg" */>}}
 ```
 
 呈现的输出效果如下:
 
-{{< music url="/music/Wavelength.mp3" name=Wavelength artist=oldmanyoung cover="/images/theme-documentation-extended-shortcodes/Wavelength.jpg" >}}
+{{< music url="/music/Wavelength.mp3" name=Wavelength artist=oldmanyoung cover="/images/Wavelength.jpg" >}}
 
 ### 8.2 音乐平台 URL 的自动识别 {#automatic-identification}
 

@@ -21,7 +21,7 @@ math:
 >
 > 它的原型基于 [LeaveIt 主题](https://github.com/liuzc/LeaveIt) 和 [KeepIt 主题](https://github.com/Fastbyte01/KeepIt)。
 
-![Hugo 主题 LoveIt](/images/Apple-Devices-Preview.png "Hugo 主题 LoveIt")
+![Hugo 主题 LoveIt](Apple-Devices-Preview.png "Hugo 主题 LoveIt")
 
 ### 特性
 

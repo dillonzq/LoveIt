@@ -1,28 +1,46 @@
 {{- /* lazysizes and lightgallery.js */ -}}
-{{- $loading := resources.Get "svg/loading/normal.svg" | minify -}}
-{{- $small := .src_s | default .src -}}
-{{- $large := .src_l | default .src -}}
-{{- $alt := .alt | default (relURL .src) -}}
-{{- if .linked -}}
-    <a class="lightgallery" href="{{ $large | relURL }}" title="{{ .title | default $alt }}" data-thumbnail="{{ $small | relURL }}"{{ with .caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.alt }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .rel }} rel="{{ . }}"{{ end }}>
+{{- $src := .Src -}}
+{{- with .Resources.GetMatch $src -}}
+    {{- $src = .RelPermalink -}}
+{{- end -}}
+
+{{- $small := .SrcSmall -}}
+{{- if $small -}}
+    {{- with .Resources.GetMatch $small -}}
+        {{- $small = .RelPermalink -}}
+    {{- end -}}
+{{- else -}}
+    {{- $small = $src -}}
+{{- end -}}
+
+{{- $large := .SrcLarge -}}
+{{- if $large -}}
+    {{- with .Resources.GetMatch $large -}}
+        {{- $large = .RelPermalink -}}
+    {{- end -}}
+{{- else -}}
+    {{- $large = $src -}}
+{{- end -}}
+
+{{- $alt := .Alt | default $src -}}
+{{- $loading := resources.Get "svg/loading.svg" | minify -}}
+{{- if .Linked -}}
+    <a class="lightgallery" href="{{ $large | safeURL }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $small | safeURL }}"{{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
         <img
-            class="lazyload{{ with .class }} {{ . }}{{ end }}"
+            class="lazyload{{ with .Class }} {{ . }}{{ end }}"
             src="{{ $loading.RelPermalink }}"
-            data-src="{{ .src | relURL }}"
-            data-srcset="{{ $small | relURL }}, {{ .src | relURL }} 1.5x, {{ $large | relURL }} 2x"
+            data-src="{{ .Src | safeURL }}"
+            data-srcset="{{ $small | safeURL }}, {{ .Src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
             data-sizes="auto"
-            alt="{{ $alt }}"{{ with .height }} height="{{ . }}"{{ end }}{{ with .width }} width="{{ . }}"{{ end }} />
+            alt="{{ $alt }}"{{ with .Height }} height="{{ . }}"{{ end }}{{ with .Width }} width="{{ . }}"{{ end }} />
     </a>
 {{- else -}}
-    {{- if not .large -}}
-        {{- $loading = resources.Get "svg/loading/small.svg" | minify -}}
-    {{- end -}}
     <img
-        class="lazyload{{ with .class }} {{ . }}{{ end }}"
+        class="lazyload{{ with .Class }} {{ . }}{{ end }}"
         src="{{ $loading.RelPermalink }}"
-        data-src="{{ .src | relURL }}"
-        data-srcset="{{ $small | relURL }}, {{ .src | relURL }} 1.5x, {{ $large | relURL }} 2x"
+        data-src="{{ .Src | safeURL }}"
+        data-srcset="{{ $small | safeURL }}, {{ .Src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
         data-sizes="auto"
         alt="{{ $alt }}"
-        title="{{ .title | default $alt }}"{{ with .height }} height="{{ . }}"{{ end }}{{ with .width }} width="{{ . }}"{{ end }} />
+        title="{{ .Title | default $alt }}"{{ with .Height }} height="{{ . }}"{{ end }}{{ with .Width }} width="{{ . }}"{{ end }} />
 {{- end -}}
