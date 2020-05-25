@@ -1,25 +1,17 @@
 {{- /* lazysizes and lightgallery.js */ -}}
 {{- $src := .Src -}}
-{{- with .Resources.GetMatch $src -}}
+{{- with dict "Path" .Src "Resources" .Resources | partial "function/resource.html" -}}
     {{- $src = .RelPermalink -}}
 {{- end -}}
 
-{{- $small := .SrcSmall -}}
-{{- if $small -}}
-    {{- with .Resources.GetMatch $small -}}
-        {{- $small = .RelPermalink -}}
-    {{- end -}}
-{{- else -}}
-    {{- $small = $src -}}
+{{- $small := .SrcSmall | default $src -}}
+{{- with dict "Path" .SrcSmall "Resources" .Resources | partial "function/resource.html" -}}
+    {{- $small = .RelPermalink -}}
 {{- end -}}
 
-{{- $large := .SrcLarge -}}
-{{- if $large -}}
-    {{- with .Resources.GetMatch $large -}}
-        {{- $large = .RelPermalink -}}
-    {{- end -}}
-{{- else -}}
-    {{- $large = $src -}}
+{{- $large := .SrcLarge | default $src -}}
+{{- with dict "Path" .SrcLarge "Resources" .Resources | partial "function/resource.html" -}}
+    {{- $large = .RelPermalink -}}
 {{- end -}}
 
 {{- $alt := .Alt | default $src -}}

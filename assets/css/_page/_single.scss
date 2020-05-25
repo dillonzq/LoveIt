@@ -325,3 +325,7 @@
   @import "../_partial/_single/footer";
   @import "../_partial/_single/comment";
 }
+
+.lg-toolbar .lg-icon::after {
+  color: #999;
+}

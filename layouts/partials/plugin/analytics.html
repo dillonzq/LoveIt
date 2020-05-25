@@ -1,20 +1,22 @@
-{{- if .enable -}}
+{{- $analytics := .Scratch.Get "analytics" | default dict -}}
+
+{{- if $analytics.enable -}}
     {{- /* Google Analytics */ -}}
-    {{- with .google.id -}}
+    {{- with $analytics.google.id -}}
         <script type="text/javascript">
             window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
-            gtag('config', '{{ . }}'{{ if $.google.anonymizeIP }}, { 'anonymize_ip': true }{{ end }});
+            gtag('config', '{{ . }}'{{ if $analytics.google.anonymizeIP }}, { 'anonymize_ip': true }{{ end }});
         </script>
-        {{- printf "https://www.googletagmanager.com/gtag/js?id=%v" . | dict "async" true "source" | partial "plugin/script.html" -}}
+        {{- printf "https://www.googletagmanager.com/gtag/js?id=%v" . | dict "Async" true "Source" | partial "plugin/script.html" -}}
     {{- end -}}
 
     {{- /* Fathom Analytics */ -}}
-    {{- with .fathom.id -}}
+    {{- with $analytics.fathom.id -}}
         <script type="text/javascript">
             window.fathom=window.fathom||function(){(fathom.q=fathom.q||[]).push(arguments);};
             fathom('set', 'siteId', '{{ . }}');
             fathom('trackPageview');
         </script>
-        {{- dict "source" ($.fathom.server | default "cdn.usefathom.com" | printf "https://%v/tracker.js") "async" true "attr" "id=fathom-script" | partial "plugin/script.html" -}}
+        {{- dict "Source" ($analytics.fathom.server | default "cdn.usefathom.com" | printf "https://%v/tracker.js") "Async" true "Attr" "id=fathom-script" | partial "plugin/script.html" -}}
     {{- end -}}
 {{- end -}}
