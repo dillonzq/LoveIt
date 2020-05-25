@@ -1,14 +1,3 @@
-## 这个版本中的修改
-- [x] 增加了相关文章的显示
-- [x] 增加了本地全站搜索的功能
-- [x] PWA
-- [x] Disqus代理
-
-## 使用方法
-
-[参见这里](https://www.dreamsafari.info/2020/04/hugo-loveit-mod/)
-
-
 # LoveIt 主题 | Hugo [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)

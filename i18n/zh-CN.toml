@@ -188,22 +188,6 @@ other = "示例"
 other = "引用"
 # === shortcodes/admonition.html ===
 
-# === single/footer.html ===
-[RelatedPosts]
-other = "您可能还喜欢："
-# === single/footer.html ===
-
-# === Search ===
-[Search]
-other = "搜索"
-
-[StartSearch]
-other = "开始搜索..."
-
-[NotFound]
-other = "对不起，没有找到以下关键词："
-# === Search ===
-
 # === shortcodes/version.html ===
 [new]
 other = "新增"

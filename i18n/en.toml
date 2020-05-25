@@ -183,22 +183,6 @@ other = "Example"
 other = "Quote"
 # === shortcodes/admonition.html ===
 
-# === single/footer.html ===
-[RelatedPosts]
-other = "You might also like..."
-# === single/footer.html ===
-
-# === Search ===
-[Search]
-other = "Search"
-
-[StartSearch]
-other = "Start Search..."
-
-[NotFound]
-other = "Sorry, no results found for:"
-# === Search ===
-
 # === shortcodes/version.html ===
 [new]
 other = "NEW"

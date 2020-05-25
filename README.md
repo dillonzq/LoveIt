@@ -1,22 +1,3 @@
-## Changes in This Mod
-- [x] Add related posts
-
-  Credit: https://novelist.xyz/tech/related-posts-in-hugo/
-  
-- [x] Add Algolia Search
-
-  Credit: https://www.bennet.org/blog/site-search-jamstack-hugo-algolia/
-  
-- [x] PWA
-  Credit: https://io-oi.me/tech/pwa-via-workbox/
-  
-- [x] Disqus Proxy
-  Credit: https://github.com/SukkaW/DisqusJS
-
-## Tutorials
-
-Refer to https://www.dreamsafari.info/2020/04/hugo-loveit-mod/
-
 # LoveIt Theme | Hugo [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)

@@ -187,22 +187,6 @@ other = "Exemple"
 other = "Citation"
 # === shortcodes/admonition.html ===
 
-# === single/footer.html ===
-[RelatedPosts]
-other = "Vous pourriez aussi aimer..."
-# === single/footer.html ===
-
-# === Search ===
-[Search]
-other = "Rechercher"
-
-[StartSearch]
-other = "Lancer la recherche..."
-
-[NotFound]
-other = "Aucun résultat:"
-# === Search ===
-
 # === shortcodes/version.html ===
 [new]
 other = "NOUVEAU"
