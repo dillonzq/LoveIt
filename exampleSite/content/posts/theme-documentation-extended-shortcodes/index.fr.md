@@ -8,10 +8,10 @@ author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Le thème LoveIt fournit plusieurs shortcodes en plus de ceux intégrés dans Hugo."
 resources:
-- name: "featured-image-preview"
-  src: "featured-image-preview.jpg"
 - name: "featured-image"
   src: "featured-image.jpg"
+- name: "featured-image-preview"
+  src: "featured-image-preview.jpg"
 
 tags: ["shortcodes"]
 categories: ["documentation"]
@@ -65,6 +65,8 @@ This is a **right-aligned** paragraph.
 {{< version 0.2.0 >}}
 
 `link` shortcode is an alternative to [Markdown link syntax](../basic-markdown-syntax#links). `link` shortcode can provide some other features and can be used in code blocks.
+
+{{< version 0.2.10 >}} The complete usage of [local resource references](../theme-documentation-content#contents-organization) is supported.
 
 The `link` shortcode has the following named parameters:
 
@@ -129,6 +131,8 @@ The rendered output looks like this (hover over the link, there should be a tool
 {{< version 0.2.0 changed >}}
 
 `image` shortcode is an alternative to [`figure` shortcode](../theme-documentation-built-in-shortcodes#figure). `image` shortcode can take full advantage of the dependent libraries of [lazysizes](https://github.com/aFarkas/lazysizes) and [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js).
+
+{{< version 0.2.10 >}} The complete usage of [local resource references](../theme-documentation-content#contents-organization) is supported.
 
 The `image` shortcode has the following named parameters:
 
@@ -999,6 +1003,8 @@ The `music` shortcode embeds a responsive music player based on [APlayer](https:
 There are three ways to use it the `music` shortcode.
 
 ### 8.1 Custom Music URL {#custom-music-url}
+
+{{< version 0.2.10 >}} The complete usage of [local resource references](../theme-documentation-content#contents-organization) is supported.
 
 The `music` shortcode has the following named parameters by custom music URL:
 
