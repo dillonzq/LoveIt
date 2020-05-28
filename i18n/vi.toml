@@ -1,0 +1,198 @@
+# Translations for Vietnamese
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ==
+[backToTop]
+other = "Lên trên"
+
+[viewComments]
+other = "Xem bình luận"
+# === baseof ==
+
+# === Post ===
+[posts]
+other = "Bài viết"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "Tất cả {{ .Some }}"
+
+[tag]
+other = "Nhãn"
+
+[tags]
+other = "Nhãn"
+
+[category]
+other = "Danh mục"
+
+[categories]
+other = "Danh mục"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "Thêm"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "Chọn Ngôn ngữ"
+
+[switchTheme]
+other = "Đổi chủ đề"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Cung cấp bởi {{ .Hugo }} | Chủ đề - {{ .Theme }}"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "Bình luận của bạn ..."
+
+[facebookLanguageCode]
+other = "vi"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "Tìm kiếm"
+
+[searchPlaceholder]
+other = "Tìm tiêu đề hoặc nội dung..."
+
+[clear]
+other = "Xoá"
+
+[cancel]
+other = "Huỷ"
+
+[noResultsFound]
+other = "Không tìm thấy"
+
+[lunrLanguageCode]
+other = "vi"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.vi.js"
+
+[copyToClipboard]
+other = "Sao chép vào bộ nhớ tạm"
+
+[cookieconsentMessage]
+other = "Trang web này sử dụng Cookies để cải thiện trải nghiệm của bạn."
+
+[cookieconsentDismiss]
+other = "Đã hiểu!"
+
+[cookieconsentLink]
+other = "Tìm hiểu thêm"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "Chia sẻ trên"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "Nội dung"
+
+[publishedOnDate]
+other = "đăng ngày {{ .Date }}"
+
+[includedInCategories]
+other = "trong {{ .Categories }}"
+
+[wordCount]
+one = "One word"
+other = "{{ .Count }} từ"
+
+[readingTime]
+one = "One minute"
+other = "{{ .Count }} phút"
+
+[views]
+other = "lượt xem"
+
+[author]
+other = "Tác giả"
+
+[updatedOnDate]
+other = "Cập nhật ngày {{ .Date }}"
+
+[readMarkdown]
+other = "Đọc với định dạng Markdown"
+
+[back]
+other = "Quay lại"
+
+[home]
+other = "Trang chủ"
+
+[readMore]
+other = "Đọc thêm"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Không tìm thấy trang"
+
+[pageNotFoundText]
+other = "Trang bạn đang tìm kiếm không tồn tại. Xin lỗi."
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Ghi chú"
+
+[abstract]
+other = "Tóm tắt"
+
+[info]
+other = "Thông tin"
+
+[tip]
+other = "Mẹo"
+
+[success]
+other = "Thành công"
+
+[question]
+other = "Câu hỏi"
+
+[warning]
+other = "Cảnh báo"
+
+[failure]
+other = "Thất bại"
+
+[danger]
+other = "Nguy hiểm"
+
+[bug]
+other = "Lỗi"
+
+[example]
+other = "Ví dụ"
+
+[quote]
+other = "Trích dẫn"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "MỚI"
+
+[changed]
+other = "THAY ĐỔI"
+
+[deleted]
+other = "XOÁ"
+# === shortcodes/version.html ===
