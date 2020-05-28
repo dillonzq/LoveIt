@@ -17,11 +17,17 @@
                     {{- . -}}
                 </changefreq>
             {{- end -}}
+
             {{- if ge .Sitemap.Priority 0.0 -}}
-                <priority>
-                    {{- .Sitemap.Priority -}}
-                </priority>
-            {{- end -}}
+                {{ $weeks := div (sub now.Unix .Lastmod.Unix) 604800 }}
+                {{ $priority := sub 1 (div $weeks 10.0 ) }}
+                {{ if ge .Sitemap.Priority $priority  }}
+                    <priority>{{- .Sitemap.Priority -}}</priority>
+                {{ else }}    
+                    <priority>{{- $priority -}}</priority>
+                {{ end }}
+            {{ end }}
+           
             {{- if .IsTranslated -}}
                 {{- range .Translations -}}
                     <xhtml:link
