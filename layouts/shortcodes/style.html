@@ -4,8 +4,5 @@
 {{- printf `<%v id="%v">%v</%v>` $tag $id $content $tag | safeHTML -}}
 
 {{- $style := .Get 0 | printf "#%v{%v}" $id -}}
-{{- $path := printf "style/%v/%v" (md5 .Page.RelPermalink) $id -}}
-{{- $res := resources.FromString (printf "%v.scss" $path) $style -}}
-{{- $res = $res | toCSS (dict "targetPath" (printf "%v.css" $path) "outputStyle" "compressed") -}}
 {{- $styleArr := (.Page.Scratch.Get "this").styleArr | default slice -}}
-{{- $styleArr | append $res.Content | .Page.Scratch.SetInMap "this" "styleArr" -}}
+{{- $styleArr | append $style | .Page.Scratch.SetInMap "this" "styleArr" -}}

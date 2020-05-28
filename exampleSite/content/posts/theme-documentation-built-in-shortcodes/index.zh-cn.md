@@ -7,11 +7,12 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Hugo 提供了多个内置的 Shortcodes, 以方便作者保持 Markdown 内容的整洁."
-images: ["/images/theme-documentation-built-in-shortcodes/featured-image.png"]
+resources:
+- name: "featured-image"
+  src: "featured-image.png"
 
 tags: ["shortcodes"]
 categories: ["documentation"]
-featuredImage: "/images/theme-documentation-built-in-shortcodes/featured-image.png"
 
 lightgallery: true
 ---
@@ -37,18 +38,18 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 一个 `figure` 示例:
 
 ```markdown
-{{</* figure src="/images/theme-documentation-built-in-shortcodes/lighthouse.jpg" title="Lighthouse (figure)" */>}}
+{{</* figure src="/images/lighthouse.jpg" title="Lighthouse (figure)" */>}}
 ```
 
 呈现的输出效果如下:
 
-{{< figure src="/images/theme-documentation-built-in-shortcodes/lighthouse.jpg" title="Lighthouse (figure)" >}}
+{{< figure src="/images/lighthouse.jpg" title="Lighthouse (figure)" >}}
 
 输出的 HTML 看起来像这样:
 
 ```html
 <figure>
-    <img src="/images/theme-documentation-built-in-shortcodes/lighthouse.jpg"/>
+    <img src="/images/lighthouse.jpg"/>
     <figcaption>
         <h4>Lighthouse (figure)</h4>
     </figcaption>

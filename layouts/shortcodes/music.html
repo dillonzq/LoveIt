@@ -2,7 +2,15 @@
 {{- if .IsNamedParams -}}
     {{- $theme = .Get "theme" | default $theme -}}
     {{- if .Get "url" -}}
-        <meting-js url="{{ .Get `url` }}" name="{{ .Get `name` }}" artist="{{ .Get `artist` }}" cover="{{ .Get `cover` }}" theme="{{ $theme }}"
+        {{- $url := .Get "url" -}}
+        {{- with dict "Path" $url "Resources" .Page.Resources | partial "function/resource.html" -}}
+            {{- $url = .RelPermalink -}}
+        {{- end -}}
+        {{- $cover := .Get "cover" -}}
+        {{- with dict "Path" $cover "Resources" .Page.Resources | partial "function/resource.html" -}}
+            {{- $cover = .RelPermalink -}}
+        {{- end -}}
+        <meting-js url="{{ $url }}" name="{{ .Get `name` }}" artist="{{ .Get `artist` }}" cover="{{ $cover }}" theme="{{ $theme }}"
         {{- with .Get "fixed" }} fixed="{{ . }}"{{ end -}}
         {{- with .Get "mini" }} mini="{{ . }}"{{ end -}}
         {{- with .Get "autoplay" }} autoplay="{{ . }}"{{ end -}}

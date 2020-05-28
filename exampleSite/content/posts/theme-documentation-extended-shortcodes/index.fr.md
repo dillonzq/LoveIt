@@ -7,12 +7,14 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Le thème LoveIt fournit plusieurs shortcodes en plus de ceux intégrés dans Hugo."
-images: ["/images/theme-documentation-extended-shortcodes/featured-image-preview.jpg"]
+resources:
+- name: "featured-image"
+  src: "featured-image.jpg"
+- name: "featured-image-preview"
+  src: "featured-image-preview.jpg"
 
 tags: ["shortcodes"]
 categories: ["documentation"]
-featuredImage: "/images/theme-documentation-extended-shortcodes/featured-image.jpg"
-featuredImagePreview: "/images/theme-documentation-extended-shortcodes/featured-image-preview.jpg"
 
 lightgallery: true
 ---
@@ -63,6 +65,8 @@ This is a **right-aligned** paragraph.
 {{< version 0.2.0 >}}
 
 `link` shortcode is an alternative to [Markdown link syntax](../basic-markdown-syntax#links). `link` shortcode can provide some other features and can be used in code blocks.
+
+{{< version 0.2.10 >}} The complete usage of [local resource references](../theme-documentation-content#contents-organization) is supported.
 
 The `link` shortcode has the following named parameters:
 
@@ -128,6 +132,8 @@ The rendered output looks like this (hover over the link, there should be a tool
 
 `image` shortcode is an alternative to [`figure` shortcode](../theme-documentation-built-in-shortcodes#figure). `image` shortcode can take full advantage of the dependent libraries of [lazysizes](https://github.com/aFarkas/lazysizes) and [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js).
 
+{{< version 0.2.10 >}} The complete usage of [local resource references](../theme-documentation-content#contents-organization) is supported.
+
 The `image` shortcode has the following named parameters:
 
 * **src** *[required]* (**first** positional parameter)
@@ -178,19 +184,15 @@ The `image` shortcode has the following named parameters:
 
     Additional `rel` attributes of the HTML `a` tag, if **linked** parameter is set to `true`.
 
-* **large** *[optional]*
-
-    Whether the image is large used for loading animation, if **linked** parameter is set to `false`.
-
 Example `image` input:
 
 ```markdown
-{{</* image src="/images/theme-documentation-extended-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-extended-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-extended-shortcodes/lighthouse-large.jpg" */>}}
+{{</* image src="/images/lighthouse.jpg" caption="Lighthouse (`image`)" src_s="/images/lighthouse-small.jpg" src_l="/images/lighthouse-large.jpg" */>}}
 ```
 
 The rendered output looks like this:
 
-{{< image src="/images/theme-documentation-extended-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-extended-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-extended-shortcodes/lighthouse-large.jpg" >}}
+{{< image src="/images/lighthouse.jpg" caption="Lighthouse (`image`)" src_s="/images/lighthouse-small.jpg" src_l="/images/lighthouse-large.jpg" >}}
 
 ## 4 admonition
 
@@ -1002,6 +1004,8 @@ There are three ways to use it the `music` shortcode.
 
 ### 8.1 Custom Music URL {#custom-music-url}
 
+{{< version 0.2.10 >}} The complete usage of [local resource references](../theme-documentation-content#contents-organization) is supported.
+
 The `music` shortcode has the following named parameters by custom music URL:
 
 * **server** *[required]*
@@ -1023,12 +1027,12 @@ The `music` shortcode has the following named parameters by custom music URL:
 Example `music` input by custom music URL:
 
 ```markdown
-{{</* music url="/music/Wavelength.mp3" name=Wavelength artist=oldmanyoung cover="/images/theme-documentation-extended-shortcodes/Wavelength.jpg" */>}}
+{{</* music url="/music/Wavelength.mp3" name=Wavelength artist=oldmanyoung cover="/images/Wavelength.jpg" */>}}
 ```
 
 The rendered output looks like this:
 
-{{< music url="/music/Wavelength.mp3" name=Wavelength artist=oldmanyoung cover="/images/theme-documentation-extended-shortcodes/Wavelength.jpg" >}}
+{{< music url="/music/Wavelength.mp3" name=Wavelength artist=oldmanyoung cover="/images/Wavelength.jpg" >}}
 
 ### 8.2 Music Platform URL Automatic Identification {#automatic-identification}
 

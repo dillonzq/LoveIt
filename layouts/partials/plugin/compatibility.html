@@ -11,12 +11,12 @@
         {{- end -}}
     {{- end -}}
     {{- with $features | uniq -}}
-        {{- delimit . "%2C" | printf "https://polyfill.io/v3/polyfill.min.js?features=%v" | dict "source" | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
+        {{- delimit . "%2C" | printf "https://polyfill.io/v3/polyfill.min.js?features=%v" | dict "Source" | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
     {{- end -}}
 {{- end -}}
 
 {{- /* object-fit-images */ -}}
 {{- if $compatibility.objectFit -}}
     {{- $source := $cdn.objectFitImagesJS | default "lib/object-fit-images/ofi.min.js" -}}
-    {{- dict "source" $source "fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}

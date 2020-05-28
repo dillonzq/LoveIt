@@ -5,9 +5,9 @@
 {{- $color := cond (eq $type "changed") "ff9101" "00b1ff" | cond (eq $type "deleted") "ff5252" -}}
 {{- $pathTemplate := cond .Site.IsMultiLingual (printf "svg/version/%%v-%%v.%v.svg" .Page.Language.Lang) "svg/version/%v-%v.svg" -}}
 {{- $path := printf $pathTemplate $version $type -}}
-{{- $res := resources.Get "svg/version.template.svg" -}}
-{{- $res = $res | resources.ExecuteAsTemplate $path (dict "version" $version "label" $label "color" $color) | minify -}}
+{{- $resource := resources.Get "svg/version.template.svg" -}}
+{{- $resource = $resource | resources.ExecuteAsTemplate $path (dict "version" $version "label" $label "color" $color) | minify -}}
 {{- $alt := printf "LoveIt %v | %v" $label $version -}}
 <a href="{{ $url }}" rel="noopener noreffer" target="_blank">
-    {{- dict "src" $res.RelPermalink "alt" $alt "class" "version" | partial "plugin/image.html" -}}
+    {{- dict "Src" $resource.RelPermalink "Alt" $alt "Class" "version" | partial "plugin/image.html" -}}
 </a>

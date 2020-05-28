@@ -1,25 +1,25 @@
-{{- if .content -}}
+{{- if .Content -}}
     <script type="text/javascript">
-        {{- .content | safeJS -}}
+        {{- .Content | safeJS -}}
     </script>
-{{- else if strings.HasPrefix .source "<script" -}}
-    {{- safeHTML .source -}}
+{{- else if strings.HasPrefix .Source "<script" -}}
+    {{- safeHTML .Source -}}
 {{- else -}}
-    {{- $src := .source -}}
-    {{- $integrity := .integrity -}}
+    {{- $src := .Source -}}
+    {{- $integrity := .Integrity -}}
     {{- if (urls.Parse $src).Host | not -}}
-        {{- $res := resources.Get $src -}}
-        {{- with .template -}}
-            {{- $res = $res | resources.ExecuteAsTemplate . $.context -}}
+        {{- $resource := resources.Get $src -}}
+        {{- with .Template -}}
+            {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
         {{- end -}}
-        {{- if .minify -}}
-            {{- $res = $res | minify -}}
+        {{- if .Minify -}}
+            {{- $resource = $resource | minify -}}
         {{- end -}}
-        {{- with .fingerprint -}}
-            {{- $res = $res | fingerprint . -}}
-            {{- $integrity = $res.Data.Integrity -}}
+        {{- with .Fingerprint -}}
+            {{- $resource = $resource | fingerprint . -}}
+            {{- $integrity = $resource.Data.Integrity -}}
         {{- end -}}
-        {{- $src = $res.RelPermalink -}}
+        {{- $src = $resource.RelPermalink -}}
     {{- end -}}
-    <script type="text/javascript" src="{{ $src }}"{{ if .crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ if .async }} async{{ end }}{{ if .defer }} defer{{ end }}{{ with .attr }} {{ . | safeHTMLAttr }}{{ end }}></script>
+    <script type="text/javascript" src="{{ $src }}"{{ if .Crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ if .Async }} async{{ end }}{{ if .Defer }} defer{{ end }}{{ with .Attr }} {{ . | safeHTMLAttr }}{{ end }}></script>
 {{- end -}}
