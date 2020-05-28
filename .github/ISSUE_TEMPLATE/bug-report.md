@@ -3,7 +3,6 @@ name: Bug Report 错误报告
 about: Create a bug report 创建一个错误报告
 title: "[BUG] Some problem..."
 labels: bug
-assignees: dillonzq
 
 ---
 
@@ -28,8 +27,8 @@ If applicable, add screenshots to help explain your problem.
 - Theme version/commit [e.g. 0.2.0, 2ccba79]
 - Hugo version [e.g. 0.69.0]
 
-Please use Hugo **extended** version.
-请使用 Hugo **extended** 版本.
+Please try to use Hugo **extended** version before opening the issue.
+请在创建 issue 之前尝试使用 Hugo **extended** 版本.
 
 ### Preview Environment 预览环境
 
