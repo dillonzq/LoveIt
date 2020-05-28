@@ -47,11 +47,34 @@
                 {{- $social := $key | lower | index $socialMap | default dict -}}
                 {{- if $value -}}
                     {{- if reflect.IsMap $value -}}
-                        {{- $social = $value | merge $social -}}
+                        {{- with $value.weight -}}
+                            {{- $social = dict "Weight" . | merge $social -}}
+                        {{- end -}}
+                        {{- with $value.prefix -}}
+                            {{- $social = dict "Prefix" . | merge $social -}}
+                        {{- end -}}
+                        {{- with $value.template -}}
+                            {{- $social = dict "Template" . | merge $social -}}
+                        {{- end -}}
+                        {{- with $value.id -}}
+                            {{- $social = dict "Id" . | merge $social -}}
+                        {{- end -}}
+                        {{- with $value.url -}}
+                            {{- $social = dict "Url" . | merge $social -}}
+                        {{- end -}}
+                        {{- with $value.title -}}
+                            {{- $social = dict "Title" . | merge $social -}}
+                        {{- end -}}
+                        {{- with $value.newtab -}}
+                            {{- $social = dict "Newtab" . | merge $social -}}
+                        {{- end -}}
+                        {{- with $value.icon -}}
+                            {{- $social = dict "Icon" . | merge $social -}}
+                        {{- end -}}
                     {{- else if ne $value true -}}
                         {{- $social = dict "Id" $value | merge $social -}}
                     {{- end -}}
-                    {{- if $social.icon.simpleicons -}}
+                    {{- if $social.Icon.Simpleicons -}}
                         {{- $prefix := ($.Scratch.Get "cdn" | default dict).simpleIconsPrefix -}}
                         {{- $social = dict "Prefix" $prefix | dict "Icon" | merge $social -}}
                     {{- end -}}
