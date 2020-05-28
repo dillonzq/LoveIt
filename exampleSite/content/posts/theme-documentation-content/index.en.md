@@ -7,11 +7,12 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Find out how to create and organize your content quickly and intuitively in LoveIt theme."
-images: ["/images/theme-documentation-content/featured-image.jpg"]
+resources:
+- name: "featured-image"
+  src: "featured-image.jpg"
 
 tags: ["content", "Markdown"]
 categories: ["documentation"]
-featuredImage: "/images/theme-documentation-content/featured-image.jpg"
 
 lightgallery: true
 
@@ -25,13 +26,35 @@ Find out how to create and organize your content quickly and intuitively in **Lo
 
 <!--more-->
 
-## 1 Contents Organization
+## 1 Contents Organization {#contents-organization}
 
 A few suggestions to help you get a good looking site quickly:
 
 * Keep post pages in the `content/posts` directory, for example: `content/posts/my-first-post.md`
-* Keep static pages in the `content` directory, for example: `content/about.md`
-* Keep media like images in the `static` directory, for example: `static/images/screenshot.png`
+* Keep other pages in the `content` directory, for example: `content/about.md`
+* Local resources organization
+
+{{< admonition note "Local Resource Reference" >}}
+{{< version 0.2.10 >}}
+
+There are three ways to reference local resources such as **images** and **music**:
+
+1. Using [page resources](https://gohugo.io/content-management/page-resources/) in [page bundles](https://gohugo.io/content-management/page-bundles/).
+   You can reference page resources by the value for `Resources.GetMatch` or the filepath of the resource relative to the page directory directly.
+2. Store resources in the **assets** directory, which is `/assets` by default.
+   The filepath of the resource to reference in the post is relative to the assets directory.
+3. Store resources in the **static** directory, which is `/static` by default.
+   The filepath of the resource to reference in the post is relative to the static directory.
+
+The **priority** of references is also in the above order.
+
+There are many places in the theme where the above local resource references can be used,
+such as **links**, **images**, `image` shortcode, `music` shortcode and some params in the **front matter**.
+
+Images in page resources or assets directory [processing](https://gohugo.io/content-management/image-processing/)
+will be supported in the future.
+It's really cool! :(far fa-grin-squint fa-fw):
+{{< /admonition >}}
 
 ## 2 Front Matter {#front-matter}
 
@@ -138,11 +161,28 @@ library:
 * **comment**: {{< version 0.2.0 changed >}} the same as the `params.page.comment` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **library**: {{< version 0.2.7 >}} the same as the `params.page.library` part in the [site configuration](../theme-documentation-basics#site-configuration).
 
+{{< admonition tip >}}
+{{< version 0.2.10 >}}
+
+**featuredImage** and **featuredImagePreview** support the complete usage of [local resource references](#contents-organization).
+
+If the page resource with `name: featured-image` or `name: featured-image-preview` is set in the front matter,
+it is not necessary to set the parameter `featuredImage` or `featuredImagePreview`:
+
+```yaml
+resources:
+- name: featured-image
+  src: featured-image.jpg
+- name: featured-image-preview
+  src: featured-image-preview.jpg
+```
+{{< /admonition >}}
+
 ## 3 Content Summaries
 
 **LoveIt** theme uses the summary of the content to display abstract information in the home page. Hugo can generate summaries of your content.
 
-![Summary Preview](/images/theme-documentation-content/summary.png "Summary Preview")
+![Summary Preview](summary.png "Summary Preview")
 
 ### Automatic Summary Splitting
 

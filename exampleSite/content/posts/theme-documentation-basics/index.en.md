@@ -7,11 +7,12 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Discover what the Hugo - LoveIt theme is all about and the core-concepts behind it."
-images: ["/images/theme-documentation-basics/featured-image.jpg"]
+resources:
+- name: "featured-image"
+  src: "featured-image.jpg"
 
 tags: ["installation", "configuration"]
 categories: ["documentation"]
-featuredImage: "/images/theme-documentation-basics/featured-image.jpg"
 
 lightgallery: true
 
@@ -153,7 +154,7 @@ hugo serve
 
 Go to `http://localhost:1313`.
 
-![Basic configuration preview](/images/theme-documentation-basics/basic-configuration-preview.png "Basic configuration preview")
+![Basic configuration preview](basic-configuration-preview.png "Basic configuration preview")
 
 {{< admonition tip >}}
 When you run `hugo serve`, when the contents of the files change, the page automatically refreshes with the changes.
@@ -785,7 +786,7 @@ The default data of all supported social links is located in `themes/LoveIt/asse
 which is you can refer to.
 {{< /admonition >}}
 
-![Complete configuration preview](/images/theme-documentation-basics/complete-configuration-preview.png "Complete configuration preview")
+![Complete configuration preview](complete-configuration-preview.png "Complete configuration preview")
 
 ### 3.2 Favicons, Browserconfig, Manifest
 
@@ -833,7 +834,7 @@ In `assets/css/_custom.scss`, you can add some css style code to customize the s
 
 **LoveIt** theme is fully compatible with Hugo multilingual mode, which provides in-browser language switching.
 
-![Language Switch](/images/theme-documentation-basics/language-switch.gif "Language Switch")
+![Language Switch](language-switch.gif "Language Switch")
 
 ### 4.1 Compatibility {#language-compatibility}
 
