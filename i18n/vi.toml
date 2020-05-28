@@ -79,6 +79,9 @@ other = "Không tìm thấy"
 [lunrLanguageCode]
 other = "vi"
 
+[lunrLanguageLib]
+other = "lib/lunr/lunr.vi.js"
+
 [copyToClipboard]
 other = "Sao chép vào bộ nhớ tạm"
 
