@@ -936,29 +936,17 @@ enableEmoji = true
         # located in "assets/" 位于 "assets/"
         # Or 或者
         # someJavascript = "https://cdn.example.com/some.js"
-    # SEO config
-    # SEO 配置
+    # Page SEO config
+    # 页面 SEO 配置
     [params.page.seo]
+      # image URL
+      # 图片 URL
+      images = []
       # Publisher info
       # 出版者信息
       [params.page.seo.publisher]
         name = "xxxx"
-        [params.page.seo.publisher.logo]
-          url = "logo.png"
-          width = 127
-          height = 40
-      # Logo info
-      # Logo 信息
-      [params.page.seo.logo]
-        url = "logo.png"
-        width = 127
-        height = 40
-      # Image info
-      # 图片信息
-      [params.page.seo.image]
-        url = "cover.png"
-        width = 800
-        height = 600
+        logoUrl = "/images/avatar.png"
 
   # TypeIt config
   # TypeIt 配置
@@ -984,6 +972,16 @@ enableEmoji = true
     yandex = ""
     pinterest = ""
     baidu = ""
+
+  # Site SEO config
+  # 网站 SEO 配置
+  [params.seo]
+    # image URL
+    # 图片 URL
+    image = "/images/Apple-Devices-Preview.png"
+    # thumbnail URL
+    # 缩略图 URL
+    thumbnailUrl = "/images/screenshot.png"
 
   # Analytics config
   # 网站分析配置

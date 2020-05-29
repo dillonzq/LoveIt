@@ -578,25 +578,14 @@ Please open the code block below to view the complete sample configuration :(far
         # located in "assets/"
         # Or
         # someJavascript = "https://cdn.example.com/some.js"
-    # {{< version 0.2.0 >}} SEO config
+    # {{< version 0.2.10 changed >}} Page SEO config
     [params.page.seo]
+      # image URL
+      images = []
       # Publisher info
       [params.page.seo.publisher]
-        name = "xxxx"
-        [params.page.seo.publisher.logo]
-          url = "logo.png"
-          width = 127
-          height = 40
-      # Logo info
-      [params.page.seo.logo]
-        url = "logo.png"
-        width = 127
-        height = 40
-      # Image info
-      [params.page.seo.image]
-        url = "cover.png"
-        width = 800
-        height = 600
+        name = ""
+        logoUrl = ""
 
   # {{< version 0.2.5 >}} TypeIt config
   [params.typeit]
@@ -616,6 +605,13 @@ Please open the code block below to view the complete sample configuration :(far
     yandex = ""
     pinterest = ""
     baidu = ""
+
+  # {{< version 0.2.10 >}} Site SEO config
+  [params.seo]
+    # image URL
+    image = ""
+    # thumbnail URL
+    thumbnailUrl = ""
 
   # {{< version 0.2.0 >}} Analytics config
   [params.analytics]
@@ -808,11 +804,7 @@ into `/static`. They’re easily created via [https://realfavicongenerator.net/]
 
 Customize `browserconfig.xml` and `site.webmanifest` to set theme-color and background-color.
 
-### 3.3 Add Logo and Cover for SEO
-
-Add a logo image (127x40) and a cover image (800x600) in the `static` directory.
-
-### 3.4 Style Customization
+### 3.3 Style Customization
 
 {{< version 0.2.8 changed >}}
 

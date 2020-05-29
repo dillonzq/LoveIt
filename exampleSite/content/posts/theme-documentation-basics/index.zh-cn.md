@@ -576,25 +576,14 @@ hugo
         # 位于 "assets/"
         # 或者
         # someJavascript = "https://cdn.example.com/some.js"
-    # {{< version 0.2.0 >}} SEO config
+    # {{< version 0.2.10 changed >}} 页面 SEO 配置
     [params.page.seo]
+      # 图片 URL
+      images = []
       # 出版者信息
       [params.page.seo.publisher]
-        name = "xxxx"
-        [params.page.seo.publisher.logo]
-          url = "logo.png"
-          width = 127
-          height = 40
-      # Logo 信息
-      [params.page.seo.logo]
-        url = "logo.png"
-        width = 127
-        height = 40
-      # 图片信息
-      [params.page.seo.image]
-        url = "cover.png"
-        width = 800
-        height = 600
+        name = ""
+        logoUrl = ""
 
   # {{< version 0.2.5 >}} TypeIt 配置
   [params.typeit]
@@ -614,6 +603,13 @@ hugo
     yandex = ""
     pinterest = ""
     baidu = ""
+
+  # {{< version 0.2.10 >}} 网站 SEO 配置
+  [params.seo]
+    # 图片 URL
+    image = ""
+    # 缩略图 URL
+    thumbnailUrl = ""
 
   # {{< version 0.2.0 >}} 网站分析配置
   [params.analytics]
@@ -807,11 +803,7 @@ hugo
 
 可以自定义 `browserconfig.xml` 和 `site.webmanifest` 文件来设置 theme-color 和 background-color.
 
-### 3.3 增加网站 logo 和封面用于 SEO 优化
-
-在 `static` 目录增加一个 logo 图片 (127x40) 和一个封面图片 (800x600).
-
-### 3.4 自定义样式
+### 3.3 自定义样式
 
 {{< version 0.2.8 changed >}}
 
