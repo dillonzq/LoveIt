@@ -1,0 +1,31 @@
+{{- if strings.HasPrefix .Source "<link" -}}
+    {{- safeHTML .Source -}}
+{{- else -}}
+    {{- $href := .Source -}}
+    {{- $integrity := .Integrity -}}
+    {{- $resource := 0 -}}
+    {{- if $href | and (not (urls.Parse $href).Host) -}}
+        {{- $resource = resources.Get $href -}}
+    {{- end -}}
+    {{- with .Content -}}
+        {{- $resource = resources.FromString $.Path . -}}
+    {{- end -}}
+    {{- if $resource -}}
+        {{- with .Template -}}
+            {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
+        {{- end -}}
+        {{- with .ToCSS -}}
+            {{- $options := . | merge (dict "outputStyle" "compressed") -}}
+            {{- $resource = $resource | toCSS $options -}}
+        {{- end -}}
+        {{- if .Minify -}}
+            {{- $resource = $resource | minify -}}
+        {{- end -}}
+        {{- with .Fingerprint -}}
+            {{- $resource = $resource | fingerprint . -}}
+            {{- $integrity = $resource.Data.Integrity -}}
+        {{- end -}}
+        {{- $href = $resource.RelPermalink -}}
+    {{- end -}}
+    <link rel="stylesheet" href="{{ $href }}"{{ if .Crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ with .Attr }} {{ . | safeHTMLAttr }}{{ end }}>
+{{- end -}}

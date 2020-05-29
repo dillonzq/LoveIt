@@ -1,0 +1,41 @@
+{{- .Scratch.Set "version" "0.2.10" -}}
+
+{{- /* LoveIt theme version detection */ -}}
+{{- $VERSION := "0.2.X" -}}
+{{- if eq .Site .Sites.First -}}
+    {{- if not .Site.Params.version -}}
+        {{- errorf "Configuration Error 配置文件错误\n\nYou haven't configured the LoveIt version param correctly yet. See https://hugoloveit.com/theme-documentation-basics/#basic-configuration\n你还没有正确配置 LoveIt 的版本参数. 参考 https://hugoloveit.com/zh-cn/theme-documentation-basics/#basic-configuration\n" -}}
+    {{- else if ne .Site.Params.version $VERSION -}}
+        {{- errorf (printf "Compatibility Error 兼容性错误\n\n%v -> %v:\nYou have an incompatible update. See https://github.com/dillonzq/LoveIt/releases\n你进行了一次不兼容的更新. 参考 https://github.com/dillonzq/LoveIt/releases\n" .Site.Params.version $VERSION) -}}
+    {{- end -}}
+{{- end -}}
+
+{{- $params := .Params | merge .Site.Params.page -}}
+
+{{- if eq hugo.Environment "production" -}}
+    {{- $cdn := .Site.Params.cdn -}}
+    {{- with $cdn.data -}}
+        {{- $cdnData := printf "data/cdn/%v" . | resources.Get | transform.Unmarshal -}}
+        {{- $cdn = dict "simpleIconsPrefix" $cdnData.prefix.simpleIcons -}}
+        {{- $prefix := $cdnData.prefix.libFiles | default "" -}}
+        {{- range $key, $value := $cdnData.libFiles -}}
+            {{- $cdn = printf "%v%v" $prefix $value | dict $key | merge $cdn -}}
+        {{- end -}}
+    {{- end -}}
+    {{- .Scratch.Set "cdn" $cdn -}}
+    {{- .Scratch.Set "fingerprint" .Site.Params.fingerprint -}}
+    {{- .Scratch.Set "analytics" .Site.Params.analytics -}}
+    {{- .Scratch.Set "comment" $params.comment -}}
+    {{- if eq .Params.comment true -}}
+        {{- .Scratch.Set "comment" .Site.Params.comment -}}
+    {{- else if eq .Params.comment false -}}
+        {{- .Scratch.Set "comment" dict -}}
+    {{- end -}}
+{{- else if eq .Site .Sites.First -}}
+    {{- warnf "\n\nCurrent environment is \"development\". The \"comment system\", \"CDN\" and \"fingerprint\" will be disabled.\n当前运行环境是 \"development\". \"评论系统\", \"CDN\" 和 \"fingerprint\" 不会启用.\n" -}}
+{{- end -}}
+
+{{- .Scratch.Set "params" $params -}}
+{{- .Scratch.Set "this" dict -}}
+
+{{- partial "plugin/compatibility.html" . -}}

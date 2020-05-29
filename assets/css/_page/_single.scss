@@ -40,10 +40,14 @@
 
     img {
       display: block;
-      width: 100%;
+      max-width: 100%;
       height: auto;
       margin: 0 auto;
       overflow: hidden;
+    }
+
+    img.lazyloaded {
+      width: 100%;
     }
   }
 
@@ -212,6 +216,7 @@
     }
 
     figure {
+      margin: .5rem;
       text-align: center;
 
       .image-caption:not(:empty) {
@@ -233,7 +238,7 @@
     }
 
     .lazyloading {
-      object-fit: none;
+      @include object-fit(none);
     }
 
     blockquote {
@@ -319,4 +324,8 @@
 
   @import "../_partial/_single/footer";
   @import "../_partial/_single/comment";
+}
+
+.lg-toolbar .lg-icon::after {
+  color: #999;
 }

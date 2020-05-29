@@ -9,7 +9,7 @@ English README | [简体中文说明](https://github.com/dillonzq/LoveIt/blob/ma
 
 > **LoveIt** is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
 
-It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt) and [KeepIt Theme](https://github.com/liuzc/LeaveIt).
+It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt) and [KeepIt Theme](https://github.com/Fastbyte01/KeepIt).
 
 Since the three themes have a similar look, if you have questions about their differences,
 read [Why choose LoveIt](#why-choose-loveit) so that you can choose the one that works best for you.
@@ -89,7 +89,8 @@ I hope you will LoveIt ❤️!
 * **Valine** comment system supported by [Valine](https://valine.js.org/)
 * **Facebook comments** system supported by [Facebook](https://developers.facebook.com/docs/plugins/comments/)
 * **Telegram comments** system supported by [Telegram Comments](https://comments.app/)
-* **Commento** comments system supported by [Commento](https://commento.io/)
+* **Commento** comment system supported by [Commento](https://commento.io/)
+* **Utterances** comment system supported by [Utterances](https://utteranc.es/)
 
 ### Extended Features
 
@@ -109,8 +110,10 @@ I hope you will LoveIt ❤️!
 * **Bilibili player** shortcode
 * Kinds of **admonitions** shortcode
 * **Custom style** shortcode
+* **Custom script** shortcode
 * **Animated typing** supported by [TypeIt](https://typeitjs.com/)
 * **Dynamic scroll** supported by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
+* **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
 * ...
 
 ## [Documentation](https://hugoloveit.com/categories/documentation/)
@@ -131,6 +134,12 @@ LoveIt supports the following languages:
 * Polish
 * Brazilian Portuguese
 * Italian
+* Spanish
+* German
+* Serbian
+* Russian
+* Romanian
+* Vietnamese
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
 [Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)
@@ -156,6 +165,7 @@ Thanks to the authors of following resources included in the theme:
 * [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
+* [object-fit-images](https://github.com/fregante/object-fit-images)
 * [Twemoji](https://github.com/twitter/twemoji)
 * [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * [clipboard.js](https://github.com/zenorocha/clipboard.js)
@@ -169,7 +179,18 @@ Thanks to the authors of following resources included in the theme:
 * [MetingJS](https://github.com/metowolf/MetingJS)
 * [Gitalk](https://github.com/gitalk/gitalk)
 * [Valine](https://valine.js.org/)
+* [cookieconsent](https://github.com/osano/cookieconsent)
 
 ## Author
 
 [Dillon](https://dillonzq.com)
+
+## Sponsor
+
+If you enjoy the theme, please consider buying me a coffee ☕️.
+
+* [PayPal](https://paypal.me/dillonzq)
+* [Alipay](https://github.com/dillonzq/LoveIt/raw/master/images/Alipay.jpg)
+* [Wechat](https://github.com/dillonzq/LoveIt/raw/master/images/Wechat.jpg)
+
+Thanks! ❤️

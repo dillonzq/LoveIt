@@ -17,7 +17,7 @@ other = "Posty"
 
 # === Taxonomy ===
 [allSome]
-other = "Wszystkie %s"
+other = "Wszystkie {{ .Some }}"
 
 [tag]
 other = "Tag"
@@ -47,10 +47,7 @@ other = "Przełącz schemat"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Napędzany przez %s"
-
-[theme]
-other = "Szablon"
+other = "Napędzany przez {{ .Hugo }} | Szablon - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -80,9 +77,6 @@ other = "Anuluj"
 [noResultsFound]
 other = "Nie znaleziono wyników"
 
-[lunrLanguageLib]
-other = "lib/lunr/lunr.pl.js"
-
 [lunrLanguageCode]
 other = "pl"
 
@@ -99,17 +93,19 @@ other = "Udostępnij na"
 [contents]
 other = "Spis treści"
 
-[publish]
-other = "opublikowano"
+[publishedOnDate]
+other = "opublikowano {{ .Date }}"
 
-[included]
-other = "zawarty w"
+[includedInCategories]
+other = "zawarty w {{ .Categories }}"
 
 [wordCount]
-other = "około {{ .Count }} słów"
+one = "Jedno słowo"
+other = "{{ .Count }} słów"
 
 [readingTime]
-other = "{{ .Count }} min"
+one = "Jedna minuta"
+other = "{{ .Count }} minuty"
 
 [views]
 other = "wyświetleń"
@@ -117,13 +113,10 @@ other = "wyświetleń"
 [author]
 other = "Autor"
 
-[lastMod]
-other = "Artykuł ostatnio zaktualizowany %s"
+[updatedOnDate]
+other = "Zaktualizowano {{ .Date }}"
 
-[license]
-other = "Opublikowano na licencji %s"
-
-[seeMarkdown]
+[readMarkdown]
 other = "Zobacz Markdown"
 
 [back]
@@ -134,6 +127,15 @@ other = "Strona główna"
 
 [readMore]
 other = "Czytaj więcej"
+
+[cookieconsentMessage]
+other = "Ta strona korzysta z plików Cookies, aby poprawić komfort użytkowania."
+
+[cookieconsentDismiss]
+other = "Zgodzić się"
+
+[cookieconsentLink]
+other = "Ucz się więcej"
 # === posts/single.html ===
 
 # === 404.html ===

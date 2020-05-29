@@ -1,8 +1,8 @@
 {{- /* ID */ -}}
-{{- /* Content -> unique ID */ -}}
-{{- /* shuffle md5 as id */ -}}
-{{- $id := delimit (split (md5 now.Unix) "" | shuffle | first 6) "" | printf "id-%s" -}}
-{{- with .scratch -}}
-    {{- dict $id $.content | dict "data" | dict "config" | merge (.Get "this") | .Set "this" -}}
+{{- $count := (.Scratch.Get "this").count | default 1 -}}
+{{- $id := printf "id-%d" $count -}}
+{{- $count | add 1 | .Scratch.SetInMap "this" "count" -}}
+{{- with .Content -}}
+    {{- dict $id . | dict "data" | dict "config" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
 {{- end -}}
 {{- return $id -}}

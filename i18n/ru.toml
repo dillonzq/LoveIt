@@ -1,0 +1,199 @@
+# Translations for Russian
+# Переводы на русский
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ==
+[backToTop]
+other = "Наверх"
+
+[viewComments]
+other = "Посмотреть комментарии"
+# === baseof ==
+
+# === Post ===
+[posts]
+other = "Статьи"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "Все {{ .Some }}"
+
+[tag]
+other = "Тэг"
+
+[tags]
+other = "Тэги"
+
+[category]
+other = "Категория"
+
+[categories]
+other = "Категории"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "Больше"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "Выбор Языка"
+
+[switchTheme]
+other = "Сменить Тему"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Сделано {{ .Hugo }} | Тема - {{ .Theme }}"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "Ваш комментарий ..."
+
+[facebookLanguageCode]
+other = "ru_RU"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "Поиск"
+
+[searchPlaceholder]
+other = "Поиск заголовков или содержимого ..."
+
+[clear]
+other = "Очистить"
+
+[cancel]
+other = "Отменить"
+
+[noResultsFound]
+other = "Результатов не найдено"
+
+[lunrLanguageCode]
+other = "ru"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.ru.js"
+
+[copyToClipboard]
+other = "Копировать в буфер обмена"
+
+[cookieconsentMessage]
+other = "Этот сайт использует Cookies для улучшения вашего опыта."
+
+[cookieconsentDismiss]
+other = "Согласен"
+
+[cookieconsentLink]
+other = "Учить больше"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "Поделиться в"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "Содержание"
+
+[publishedOnDate]
+other = "Опубликовано {{ .Date }}"
+
+[includedInCategories]
+other = "включен в {{ .Categories }}"
+
+[wordCount]
+one = "Одно слово"
+other = "{{ .Count }} слов"
+
+[readingTime]
+one = "Одна минута"
+other = "{{ .Count }} минут"
+
+[views]
+other = "просмотров"
+
+[author]
+other = "Автор"
+
+[updatedOnDate]
+other = "Oбновлена {{ .Date }}"
+
+[readMarkdown]
+other = "Читать Markdown"
+
+[back]
+other = "Назад"
+
+[home]
+other = "Домой"
+
+[readMore]
+other = "Читать больше"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Страница не найдена"
+
+[pageNotFoundText]
+other = "Страница, которую вы ищете, не существует. Приносим извинения."
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Замечание"
+
+[abstract]
+other = "Краткое описание"
+
+[info]
+other = "Инфо"
+
+[tip]
+other = "Совет"
+
+[success]
+other = "Удачто"
+
+[question]
+other = "Вопрос"
+
+[warning]
+other = "Предупреждение"
+
+[failure]
+other = "Отказ"
+
+[danger]
+other = "Опасность"
+
+[bug]
+other = "Ошибка"
+
+[example]
+other = "Пример"
+
+[quote]
+other = "Цитата"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "НОВЫЙ"
+
+[changed]
+other = "ИЗМЕНЕН"
+
+[deleted]
+other = "УДАЛЕН"
+# === shortcodes/version.html ===

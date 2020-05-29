@@ -1,29 +1,4 @@
-{{- $version := "0.2.X" -}}
-
-{{- /* LoveIt theme version detection */ -}}
-{{- if eq .Site .Sites.First -}}
-    {{- if not .Site.Params.version -}}
-        {{- errorf "Configuration Error 配置文件错误\n\nYou haven't configured the LoveIt version param correctly yet. See https://hugoloveit.com/theme-documentation-basics/#basic-configuration\n你还没有正确配置 LoveIt 的版本参数. 参考 https://hugoloveit.com/zh-cn/theme-documentation-basics/#basic-configuration\n" -}}
-    {{- else if ne .Site.Params.version $version -}}
-        {{- errorf (printf "Compatibility Error 兼容性错误\n\n%s -> %s:\nYou have an incompatible update. See https://github.com/dillonzq/LoveIt/releases\n你进行了一次不兼容的更新. 参考 https://github.com/dillonzq/LoveIt/releases\n" .Site.Params.version $version) -}}
-    {{- end -}}
-{{- end -}}
-
-{{- $params := .Params | merge .Site.Params.page -}}
-{{- .Scratch.Set "version" "0.2.0" -}}
-
-{{- if eq hugo.Environment "production" -}}
-    {{- .Scratch.Set "cdn" .Site.Params.cdn -}}
-    {{- .Scratch.Set "fingerprint" .Site.Params.fingerprint -}}
-    {{- .Scratch.Set "analytics" .Site.Params.analytics -}}
-    {{- .Scratch.Set "comment" $params.comment -}}
-{{- else if eq .Site .Sites.First -}}
-    {{- warnf "\n\nCurrent environment is \"development\". The \"comment system\", \"CDN\" and \"fingerprint\" will be disabled.\n当前运行环境是 \"development\". \"评论系统\", \"CDN\" 和 \"fingerprint\" 不会启用.\n" -}}
-{{- end -}}
-
-{{- .Scratch.Set "params" $params -}}
-{{- $this := dict "desktop" .Site.Params.header.desktopMode "mobile" .Site.Params.header.mobileMode | dict "headerMode" | dict "config" -}}
-{{- .Scratch.Set "this" $this -}}
+{{- partial "init.html" . -}}
 
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
@@ -35,13 +10,12 @@
         <title>
             {{- block "title" . }}{{ .Site.Title }}{{ end -}}
         </title>
-        <meta name="Description" content="{{ $params.description | default .Site.Params.description }}">
 
         {{- partial "head/meta.html" . -}}
         {{- partial "head/link.html" . -}}
         {{- partial "head/seo.html" . -}}
     </head>
-    <body>
+    <body header-desktop="{{ .Site.Params.header.desktopMode }}" header-mobile="{{ .Site.Params.header.mobileMode }}">
         {{- /* Check theme isDark before body rendering */ -}}
         {{- $theme := .Site.Params.defaulttheme -}}
         <script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('{{ $theme }}' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '{{ $theme }}' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>

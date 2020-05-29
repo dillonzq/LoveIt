@@ -1,14 +1,10 @@
-{{- with .class -}}
+{{- with .Class -}}
     <i class="{{ . }}"></i>
 {{- else -}}
-    {{- $src := .src -}}
-    {{- with .simpleicons -}}
-        {{- $prefix := "lib/simple-icons/icons" -}}
-        {{- with $.prefix -}}
-            {{- $prefix = . -}}
-        {{- end -}}
-        {{- $prefix = $prefix | strings.TrimSuffix "/" -}}
-        {{- $src = printf "%s/%s.svg" $prefix . -}}
+    {{- $src := .Src -}}
+    {{- with .Simpleicons -}}
+        {{- $prefix := $.Prefix | default "lib/simple-icons/icons" | strings.TrimSuffix "/" -}}
+        {{- $src = printf "%v/%v.svg" $prefix . -}}
     {{- end -}}
     {{- if (urls.Parse $src).Host | not -}}
         {{- $src = (resources.Get $src | minify).RelPermalink -}}

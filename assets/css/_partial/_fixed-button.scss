@@ -13,6 +13,7 @@
   color: $global-font-secondary-color;
   background: $header-background-color;
   @include border-radius(2rem);
+  @include transition(color 0.4s ease);
 
   @include blur;
 

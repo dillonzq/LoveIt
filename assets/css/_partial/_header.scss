@@ -2,16 +2,28 @@ header {
   width: 100%;
   z-index: 150;
   background-color: $header-background-color;
+  @include transition(box-shadow 0.3s ease);
 
   [theme=dark] & {
     background-color: $header-background-color-dark;
   }
 
   .logo {
-    min-height: 1.25em;
-    height: 1.25em;
+    min-height: 1.5em;
+    height: 1.5em;
     vertical-align: text-bottom;
+  }
+
+  .logo, .header-title-pre {
     padding-right: .25rem;
+  }
+
+  .header-title-post {
+    padding-left: .25rem;
+  }
+
+  &:hover {
+    @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, .1));
   }
 }
 
@@ -26,7 +38,7 @@ header {
 .header-title {
   font-family: $header-title-font-family;
   font-weight: bold;
-  margin: 0 .5rem;
+  margin-right: .5rem;
   min-width: 10%;
   overflow: hidden;
   white-space: nowrap;
@@ -135,9 +147,13 @@ header {
 
 #header-desktop {
   display: block;
-  position: $header-position-desktop;
+  position: fixed;
   height: $header-height;
   line-height: $header-height;
+
+  [header-desktop=normal] & {
+    position: static;
+  }
 
   .header-wrapper {
     padding: 0 2rem 0 10vh;
@@ -196,9 +212,13 @@ header {
 
 #header-mobile {
   display: none;
-  position: $header-position-mobile;
+  position: fixed;
   height: $header-height;
   line-height: $header-height;
+
+  [header-mobile=normal] & {
+    position: static;
+  }
 
   .header-container {
     padding: 0;

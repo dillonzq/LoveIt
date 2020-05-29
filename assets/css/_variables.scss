@@ -2,6 +2,8 @@
 // Variables
 // ==============================
 
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap');
+
 // ========== Global ========== //
 // Font and Line Height
 $global-font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif !default;
@@ -57,16 +59,8 @@ $header-background-color: #f8f8f8 !default;
 $header-background-color-dark: #252627 !default;
 
 // Font style of the header title
-$header-title-font-family: $global-font-family !default;
-$header-title-font-size: 1.25rem !default;
-
-// Position of the header
-$header-position-desktop: if($header-normal-mode-desktop, static, fixed) !default;
-$header-position-mobile: if($header-normal-mode-mobile, static, fixed) !default;
-
-// Top of the page padding
-$page-padding-top-desktop: if($header-normal-mode-desktop, 0, $header-height) !default;
-$page-padding-top-mobile: if($header-normal-mode-mobile, 0, $header-height) !default;
+$header-title-font-family: Nunito, $global-font-family !default;
+$header-title-font-size: 1.5rem !default;
 
 // Color of the hover header item
 $header-hover-color: #161209 !default;
@@ -371,4 +365,4 @@ $admonition-background-color-map: (
 ) !default;
 // ========== Admonition ========== //
 
-$MAX_LENGTH: 9999px;
+$MAX_LENGTH: 12000px;

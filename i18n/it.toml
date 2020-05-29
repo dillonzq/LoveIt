@@ -17,7 +17,7 @@ other = "Articoli"
 
 # === Taxonomy ===
 [allSome]
-other = "Tutti %s"
+other = "Tutti {{ .Some }}"
 
 [tag]
 other = "Etichetta"
@@ -47,10 +47,7 @@ other = "Cambiare il tema"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Realizzato da %s"
-
-[theme]
-other = "Tema"
+other = "Realizzato da {{ .Hugo }} | Tema - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -80,14 +77,23 @@ other = "Annulla"
 [noResultsFound]
 other = "Nessun risultato trovato"
 
-[lunrLanguageLib]
-other = "lib/lunr/lunr.it.js"
-
 [lunrLanguageCode]
 other = "it"
 
+[lunrLanguageLib]
+other = "lib/lunr/lunr.it.js"
+
 [copyToClipboard]
 other = "Copia negli appunti"
+
+[cookieconsentMessage]
+other = "Questo sito Web utilizza i Cookies per migliorare la tua esperienza."
+
+[cookieconsentDismiss]
+other = "Essere d'accordo"
+
+[cookieconsentLink]
+other = "Per saperne di più"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
@@ -99,17 +105,19 @@ other = "Condividi su"
 [contents]
 other = "Contenuti"
 
-[publish]
-other = "pubblicato su"
+[publishedOnDate]
+other = "pubblicato su {{ .Date }}"
 
-[included]
-other = "incluso in"
+[includedInCategories]
+other = "incluso in {{ .Categories }}"
 
 [wordCount]
-other = "circa {{ .Count }} parole"
+one = "Una parola"
+other = "{{ .Count }} parole"
 
 [readingTime]
-other = "{{ .Count }} min"
+one = "Un minuto"
+other = "{{ .Count }} minuti"
 
 [views]
 other = "visualizzazioni"
@@ -117,13 +125,10 @@ other = "visualizzazioni"
 [author]
 other = "Autore"
 
-[lastMod]
-other = "L'articolo è stato modificato il %s"
+[updatedOnDate]
+other = "Aggiornato il {{ .Date }}"
 
-[license]
-other = "Pubblicato sotto la licenza %s"
-
-[seeMarkdown]
+[readMarkdown]
 other = "Leggi Markdown"
 
 [back]

@@ -31,22 +31,21 @@
 
 {{- /* normalize.css */ -}}
 {{- $source := $cdn.normalizeCSS | default "lib/normalize/normalize.min.css" -}}
-{{- $stylesheet := dict "source" $source "fingerprint" $fingerprint -}}
-{{- partial "plugin/stylesheet.html" $stylesheet -}}
+{{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
+{{- partial "plugin/style.html" $style -}}
 
 {{- /* style.min.css */ -}}
-{{- $stylesheet := dict "source" "css/style.template.scss" "fingerprint" $fingerprint -}}
-{{- $targetPath := cond .Site.IsMultiLingual (printf "css/style.%s.min.css" .Language.Lang) "css/style.min.css" -}}
-{{- $options := dict "targetPath" $targetPath "includePaths" (slice "config/css") "enableSourceMap" true -}}
-{{- $stylesheet = dict "template" "style.scss" "context" . "toCSS" $options | merge $stylesheet -}}
-{{- partial "plugin/stylesheet.html" $stylesheet -}}
+{{- $style := dict "Source" "css/style.scss" "Fingerprint" $fingerprint -}}
+{{- $options := dict "targetPath" "css/style.min.css" "enableSourceMap" true -}}
+{{- $style = dict "Context" . "ToCSS" $options | merge $style -}}
+{{- partial "plugin/style.html" $style -}}
 
 {{- /* Font Awesome */ -}}
 {{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/all.min.css" -}}
-{{- $stylesheet := dict "source" $source "fingerprint" $fingerprint -}}
-{{- partial "plugin/stylesheet.html" $stylesheet -}}
+{{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
+{{- partial "plugin/style.html" $style -}}
 
 {{- /* Animate.css */ -}}
 {{- $source := $cdn.animateCSS | default "lib/animate/animate.min.css" -}}
-{{- $stylesheet := dict "source" $source "fingerprint" $fingerprint -}}
-{{- partial "plugin/stylesheet.html" $stylesheet -}}
+{{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
+{{- partial "plugin/style.html" $style -}}

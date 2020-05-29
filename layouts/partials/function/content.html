@@ -1,14 +1,14 @@
-{{- $content := .content -}}
+{{- $content := .Content -}}
 
-{{- if .ruby -}}
+{{- if .Ruby -}}
     {{- $content = partial "function/ruby.html" $content -}}
 {{- end -}}
 
-{{- if .fraction -}}
+{{- if .Fraction -}}
     {{- $content = partial "function/fraction.html" $content -}}
 {{- end -}}
 
-{{- if .fontawesome -}}
+{{- if .Fontawesome -}}
     {{- $content = partial "function/fontawesome.html" $content -}}
 {{- end -}}
 

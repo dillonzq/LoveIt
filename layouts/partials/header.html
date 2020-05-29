@@ -5,9 +5,21 @@
             <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
                 {{- with .Site.Params.header.title -}}
                     {{- with .logo -}}
-                        {{- partial "plugin/image.html" (dict "src" . "alt" $.Site.Title "class" "logo") -}}
+                        {{- dict "Src" . "Class" "logo" | partial "plugin/image.html" -}}
                     {{- end -}}
-                    {{- .pre | safeHTML }}{{ .name }}{{ .post | safeHTML -}}
+                    {{- with .pre -}}
+                        <span class="header-title-pre">{{ . | safeHTML }}</span>
+                    {{- end -}}
+                    {{- if .typeit -}}
+                        {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
+                        <span id="{{ $id }}" class="typeit"></span>
+                        {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
+                    {{- else -}}
+                        {{- .name -}}
+                    {{- end -}}
+                    {{- with .post -}}
+                        <span class="header-title-post">{{ . | safeHTML }}</span>
+                    {{- end -}}
                 {{- else -}}
                     {{- .Site.Title -}}
                 {{- end -}}
@@ -16,32 +28,35 @@
         <div class="menu">
             <div class="menu-inner">
                 {{- range .Site.Menus.main -}}
-                    {{- $url := "" -}}
+                    {{- $url := .URL | relLangURL -}}
                     {{- with .Page -}}
                         {{- $url = .RelPermalink -}}
-                    {{- else -}}
-                        {{- $url = .URL | relLangURL -}}
                     {{- end -}}
                     <a class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
                         {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
                     </a>
                 {{- end -}}
-                <span class="menu-item delimiter"></span>
+                {{- if .Site.Menus.main -}}
+                    <span class="menu-item delimiter"></span>
+                {{- end -}}
                 {{- if .Site.IsMultiLingual -}}
                     <a href="javascript:void(0);" class="menu-item language" title="{{ T "selectLanguage" }}">
                         {{- .Language.LanguageName -}}
                         <i class="fas fa-chevron-right fa-fw"></i>
                         <select class="language-select" id="language-select-desktop" onchange="location = this.value;">
-                            {{- range .Page.AllTranslations -}}
-                                {{- $translation := . -}}
-                                {{- range $.Site.Languages -}}
-                                    {{- if eq $translation.Lang .Lang -}}
-                                        {{- if eq $.Page.Lang .Lang -}}
-                                            <option value="{{ $translation.RelPermalink }}" selected>{{ .LanguageName }}</option>
-                                        {{- else -}}
-                                            <option value="{{ $translation.RelPermalink }}">{{ .LanguageName }}</option>
-                                        {{- end -}}
-                                    {{- end -}}
+                            {{- if eq .Kind "404" -}}
+                                {{- /* https://github.com/dillonzq/LoveIt/issues/378 */ -}}
+                                {{- range .Sites -}}
+                                    {{- $link := printf "%v/404.html" .LanguagePrefix -}}
+                                    <option value="{{ $link }}"{{ if eq . $.Site }} selected{{ end }}>
+                                        {{- .Language.LanguageName -}}
+                                    </option>
+                                {{- end -}}
+                            {{- else -}}
+                                {{- range .AllTranslations -}}
+                                    <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected{{ end }}>
+                                        {{- .Language.LanguageName -}}
+                                    </option>
                                 {{- end -}}
                             {{- end -}}
                         </select>
@@ -77,9 +92,21 @@
                 <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
                     {{- with .Site.Params.header.title -}}
                         {{- with .logo -}}
-                            {{- partial "plugin/image.html" (dict "src" . "alt" $.Site.Title "class" "logo") -}}
+                            {{- dict "Src" . "Class" "logo" | partial "plugin/image.html" -}}
                         {{- end -}}
-                        {{- .pre | safeHTML }}{{ .name }}{{ .post | safeHTML -}}
+                        {{- with .pre -}}
+                            <span class="header-title-pre">{{ . | safeHTML }}</span>
+                        {{- end -}}
+                        {{- if .typeit -}}
+                            {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
+                            <span id="{{ $id }}" class="typeit"></span>
+                            {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
+                        {{- else -}}
+                            {{- .name -}}
+                        {{- end -}}
+                        {{- with .post -}}
+                            <span class="header-title-post">{{ . | safeHTML }}</span>
+                        {{- end -}}
                     {{- else -}}
                         {{- .Site.Title -}}
                     {{- end -}}
@@ -111,11 +138,9 @@
             {{- end -}}
             {{- $currentPage := . -}}
             {{- range .Site.Menus.main -}}
-                {{- $url := "" -}}
+                {{- $url := .URL | relLangURL -}}
                 {{- with .Page -}}
                     {{- $url = .RelPermalink -}}
-                {{- else -}}
-                    {{- $url = .URL | relLangURL -}}
                 {{- end -}}
                 <a class="menu-item" href="{{ $url }}" title="{{ .Title }}"{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
                     {{- .Pre | safeHTML }}{{ .Name }}{{ .Post | safeHTML -}}
@@ -129,16 +154,19 @@
                     {{- .Language.LanguageName -}}
                     <i class="fas fa-chevron-right fa-fw"></i>
                     <select class="language-select" onchange="location = this.value;">
-                        {{- range .Page.AllTranslations -}}
-                            {{- $translation := . -}}
-                            {{- range $.Site.Languages -}}
-                                {{- if eq $translation.Lang .Lang -}}
-                                    {{- if eq $.Page.Lang .Lang -}}
-                                        <option value="{{ $translation.RelPermalink }}" selected>{{ .LanguageName }}</option>
-                                    {{- else -}}
-                                        <option value="{{ $translation.RelPermalink }}">{{ .LanguageName }}</option>
-                                    {{- end -}}
-                                {{- end -}}
+                        {{- if eq .Kind "404" -}}
+                            {{- /* https://github.com/dillonzq/LoveIt/issues/378 */ -}}
+                            {{- range .Sites -}}
+                                {{- $link := printf "%v/404.html" .LanguagePrefix -}}
+                                <option value="{{ $link }}"{{ if eq . $.Site }} selected{{ end }}>
+                                    {{- .Language.LanguageName -}}
+                                </option>
+                            {{- end -}}
+                        {{- else -}}
+                            {{- range .AllTranslations -}}
+                                <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected{{ end }}>
+                                    {{- .Language.LanguageName -}}
+                                </option>
                             {{- end -}}
                         {{- end -}}
                     </select>

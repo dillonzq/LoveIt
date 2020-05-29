@@ -1,11 +1,13 @@
 {{- $version := .Get 0 -}}
-{{- $url := printf "https://github.com/dillonzq/LoveIt/releases/tag/v%s" $version -}}
+{{- $url := printf "https://github.com/dillonzq/LoveIt/releases/tag/v%v" $version -}}
 {{- $type := .Get 1 | default "new" | lower -}}
 {{- $label := T $type -}}
 {{- $color := cond (eq $type "changed") "ff9101" "00b1ff" | cond (eq $type "deleted") "ff5252" -}}
-{{- $pathTemplate := cond .Site.IsMultiLingual (printf "svg/version/%%s-%%s.%s.svg" .Page.Language.Lang) "svg/version/%s-%s.svg" -}}
+{{- $pathTemplate := cond .Site.IsMultiLingual (printf "svg/version/%%v-%%v.%v.svg" .Page.Language.Lang) "svg/version/%v-%v.svg" -}}
 {{- $path := printf $pathTemplate $version $type -}}
-{{- $res := resources.Get "svg/version.template.svg" -}}
-{{- $res = $res | resources.ExecuteAsTemplate $path (dict "version" $version "label" $label "color" $color) | minify -}}
-{{- $alt := printf "LoveIt %s | %s" $label $version -}}
-<a href="{{ $url }}" rel="noopener noreffer" target="_blank">{{ partial "plugin/image.html" (dict "src" $res.RelPermalink "alt" $alt "class" "version") }}</a>
+{{- $resource := resources.Get "svg/version.template.svg" -}}
+{{- $resource = $resource | resources.ExecuteAsTemplate $path (dict "version" $version "label" $label "color" $color) | minify -}}
+{{- $alt := printf "LoveIt %v | %v" $label $version -}}
+<a href="{{ $url }}" rel="noopener noreffer" target="_blank">
+    {{- dict "Src" $resource.RelPermalink "Alt" $alt "Class" "version" | partial "plugin/image.html" -}}
+</a>

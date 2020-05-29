@@ -33,32 +33,11 @@
                 {{- .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" -}}
             </lastBuildDate>
         {{- end -}}
-        <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
+        {{ with .OutputFormats.Get "RSS" }}
+            {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+        {{ end }}
         {{- range where .Site.RegularPages "Type" "posts" | first (.Site.Params.home.rss | default 10) -}}
-            <item>
-                <title>
-                    {{- .Title -}}
-                </title>
-                <link>
-                    {{- .Permalink -}}
-                </link>
-                <pubDate>
-                    {{- .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700"  -}}
-                </pubDate>
-                <author>
-                    {{- .Params.author | default $.Site.Author.name | default (T "author") -}}
-                </author>
-                <guid>
-                    {{- .Permalink -}}
-                </guid>
-                <description>
-                    {{- with .Summary -}}
-                        {{- dict "content" . "ruby" true "fraction" true "fontawesome" true | partial "function/content.html" | plainify -}}
-                    {{- else -}}
-                        {{- .Description | plainify -}}
-                    {{- end -}}
-                </description>
-            </item>
+            {{- dict "Page" . "Site" .Site | partial "rss/item.html" -}}
         {{- end -}}
     </channel>
 </rss>
