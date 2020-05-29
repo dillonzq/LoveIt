@@ -697,29 +697,36 @@ class Theme {
     }
 
     init() {
-        this.initSVGIcon();
-        this.initTwemoji();
-        this.initMenuMobile();
-        this.initSwitchTheme();
-        this.initSearch();
-        this.initDetails();
-        this.initLightGallery();
-        this.initHighlight();
-        this.initTable();
-        this.initHeaderLink();
-        this.initToc();
-        this.initComment();
-        this.initSmoothScroll();
-        this.initMath();
-        this.initMermaid();
-        this.initEcharts();
-        this.initTypeit();
-        this.initMapbox();
-        this.initCookieconsent();
+        try {
+            this.initSVGIcon();
+            this.initTwemoji();
+            this.initMenuMobile();
+            this.initSwitchTheme();
+            this.initSearch();
+            this.initDetails();
+            this.initLightGallery();
+            this.initHighlight();
+            this.initTable();
+            this.initHeaderLink();
+            this.initSmoothScroll();
+            this.initMath();
+            this.initMermaid();
+            this.initEcharts();
+            this.initTypeit();
+            this.initMapbox();
+            this.initCookieconsent();
+        } catch (err) {
+            console.error(err);
+        }
 
-        this.onScroll();
-        this.onResize();
-        this.onClickMask();
+        window.setTimeout(() => {
+            this.initToc();
+            this.initComment();
+
+            this.onScroll();
+            this.onResize();
+            this.onClickMask();
+        }, 100);
     }
 }
 

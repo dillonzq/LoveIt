@@ -35,11 +35,25 @@
         {{- with .Site.Params.description -}}
             "description": {{ . | safeHTML }},
         {{- end -}}
-        {{- with $params.seo.image -}}
-            "image": "{{ .url | absURL }}",
+        {{- $image := .Site.Params.seo.image -}}
+        {{- with dict "Path" $image "Resources" .Resources | partial "function/resource.html" -}}
+            "image": {
+                "@type": "ImageObject",
+                "url": "{{ .Permalink }}",
+                "width": {{ .Width }},
+                "height": {{ .Height }}
+            },
+        {{- else -}}
+            {{- with $image -}}
+                "image": "{{ . | absURL }}",
+            {{- end -}}
         {{- end -}}
-        {{- with $params.seo.logo -}}
-            "thumbnailUrl": "{{ .url | absURL }}",
+        {{- with .Site.Params.seo.thumbnailUrl -}}
+            {{- with dict "Path" . "Resources" $.Resources | partial "function/resource.html" -}}
+                "thumbnailUrl": "{{ .Permalink }}",
+            {{- else -}}
+                "thumbnailUrl": "{{ . | absURL }}",
+            {{- end -}}
         {{- end -}}
         {{- with .Site.Copyright -}}
             "license": "{{ . | safeHTML }}",
@@ -60,13 +74,36 @@
             "@type": "WebPage",
             "@id": "{{ .Permalink }}"
         },
-        {{- if ge $params.seo.image.width 696 -}}
-            "image": {
-                "@type": "ImageObject",
-                "url": "{{ $params.seo.image.url | absURL }}",
-                "width": {{ $params.seo.image.width }},
-                "height": {{ $params.seo.image.height }}
-            },
+        {{- $images := $params.seo.images | default slice -}}
+        {{- if not $images -}}
+            {{- with .Resources.GetMatch "featured-image-preview" -}}
+                {{- $images = slice "featured-image-preview" -}}
+            {{- end -}}
+            {{- with .Resources.GetMatch "featured-image" -}}
+                {{- $images = slice "featured-image" -}}
+            {{- end -}}
+        {{- end -}}
+        {{- with .Site.Params.seo.image -}}
+            {{- $images = $images | default (slice .) -}}
+        {{- end -}}
+        {{- with $images -}}
+            "image": [
+                {{- range $index, $value := . -}}
+                    {{- if gt $index 0 }},{{ end -}}
+                    {{- with dict "Path" $value "Resources" $.Resources | partial "function/resource.html" -}}
+                        {
+                            "@type": "ImageObject",
+                            "url": "{{ .Permalink }}",
+                            "width": {{ .Width }},
+                            "height": {{ .Height }}
+                        }
+                    {{- else -}}
+                        {{- with $value -}}
+                            "{{ . | absURL }}"
+                        {{- end -}}
+                    {{- end -}}
+                {{- end -}}
+            ],
         {{- end -}}
         "genre": "{{ .Type }}",
         {{- with .Params.tags -}}
@@ -85,18 +122,25 @@
         {{- with .Site.Copyright -}}
             "license": {{ . | safeHTML }},
         {{- end -}}
-        {{- with $params.seo.publisher -}}
-            "publisher": {
-                "@type": "Organization",
-                "name": {{ .name | safeHTML }},
-                "logo": {
-                "@type": "ImageObject",
-                "url": "{{ .logo.url | absURL }}",
-                "width": {{ .logo.width }},
-                "height": {{ .logo.height }}
+        {{- $publisher := .Params.author | default .Site.Author.name | default (T "author") | dict "name" -}}
+        {{- $publisher = $params.seo.publisher | default dict | merge $publisher -}}
+        "publisher": {
+            "@type": "Organization",
+            "name": {{ $publisher.name | safeHTML }}
+            {{- $logo := $publisher.logoUrl -}}
+            {{- with dict "Path" $logo "Resources" .Resources | partial "function/resource.html" -}}
+                ,"logo": {
+                    "@type": "ImageObject",
+                    "url": "{{ .Permalink }}",
+                    "width": {{ .Width }},
+                    "height": {{ .Height }}
                 }
-            },
-        {{- end -}}
+            {{- else -}}
+                {{- with $logo -}}
+                    ,"logo": "{{ . | absURL }}"
+                {{- end -}}
+            {{- end -}}
+        },
         {{- with .Params.author | default .Site.Author.name | default (T "author") -}}
             "author": {
                 "@type": "Person",
