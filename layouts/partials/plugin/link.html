@@ -1,9 +1,9 @@
 {{- $rel := "" -}}
-<a href="{{ .href | safeURL }}"{{ with .title }} title="{{ . }}"{{ end }}{{ if (urls.Parse .href).Host | or .newtab }}{{ $rel = "noopener noreffer" }} target="_blank"{{ end }} rel="{{ $rel }}{{ with .rel }} {{ . }}{{ end }}"{{ with .class }} class="{{ . }}"{{ end }}>
-    {{- with .icon -}}
+<a href="{{ .Destination | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse .Destination).Host | or .Newtab }}{{ $rel = "noopener noreffer" }} target="_blank"{{ end }} rel="{{ $rel }}{{ with .Rel }} {{ . }}{{ end }}"{{ with .Class }} class="{{ . }}"{{ end }}>
+    {{- with .Icon -}}
         {{- partial "plugin/icon.html" . -}}
     {{- end -}}
-    {{- with .content -}}
+    {{- with .Content -}}
         {{- . | safeHTML -}}
     {{- end -}}
 </a>

@@ -139,6 +139,7 @@ LoveIt supports the following languages:
 * Serbian
 * Russian
 * Romanian
+* Vietnamese
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
 [Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)
@@ -183,3 +184,13 @@ Thanks to the authors of following resources included in the theme:
 ## Author
 
 [Dillon](https://dillonzq.com)
+
+## Sponsor
+
+If you enjoy the theme, please consider buying me a coffee ☕️.
+
+* [PayPal](https://paypal.me/dillonzq)
+* [Alipay](https://github.com/dillonzq/LoveIt/raw/master/images/Alipay.jpg)
+* [Wechat](https://github.com/dillonzq/LoveIt/raw/master/images/Wechat.jpg)
+
+Thanks! ❤️

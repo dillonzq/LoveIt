@@ -2,8 +2,6 @@
 // Variables
 // ==============================
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap');
-
 // ========== Global ========== //
 // Font and Line Height
 $global-font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif !default;
@@ -59,7 +57,7 @@ $header-background-color: #f8f8f8 !default;
 $header-background-color-dark: #252627 !default;
 
 // Font style of the header title
-$header-title-font-family: Nunito, $global-font-family !default;
+$header-title-font-family: $global-font-family !default;
 $header-title-font-size: 1.5rem !default;
 
 // Color of the hover header item
