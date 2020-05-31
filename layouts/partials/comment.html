@@ -27,7 +27,7 @@
             {{- else -}}
             {{- $source := printf "https://%v.disqus.com/embed.js" $disqus.shortname -}}
             {{- dict "Source" $source "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-            {{ - end -}}
+            {{- end -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
             </noscript>
