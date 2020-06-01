@@ -16,7 +16,7 @@ other = "Posts"
 
 # === Taxonomy ===
 [allSome]
-other = "All {{ .Some }}"
+other = "అన్ని {{ .Some }}"
 
 [tag]
 other = "Tag"
@@ -63,10 +63,10 @@ other = "te_IN"
 
 # === partials/assets.html ===
 [search]
-other = "Search"
+other = "శోధించు"
 
 [searchPlaceholder]
-other = "Search titles or contents..."
+other = "శోధన శీర్షికలు మరియు విషయాలు..."
 
 [clear]
 other = "Clear"
@@ -118,10 +118,10 @@ one = "One minute"
 other = "{{ .Count }} minutes"
 
 [views]
-other = "views"
+other = "వీక్షణలు"
 
 [author]
-other = "Author"
+other = "రచయత"
 
 [updatedOnDate]
 other = "Updated on {{ .Date }}"
@@ -149,49 +149,49 @@ other = "The page you're looking for doesn't exist. Sorry."
 
 # === shortcodes/admonition.html ===
 [note]
-other = "Note"
+other = "గమనిక"
 
 [abstract]
-other = "Abstract"
+other = "సారంశం"
 
 [info]
-other = "Info"
+other = "సమాచారం"
 
 [tip]
-other = "Tip"
+other = "సూచన"
 
 [success]
-other = "Success"
+other = "విజయం"
 
 [question]
-other = "Question"
+other = "ప్రశ్న"
 
 [warning]
-other = "Warning"
+other = "హెచ్చరిక"
 
 [failure]
-other = "Failure"
+other = "అపజయం"
 
 [danger]
-other = "Danger"
+other = "అపాయం"
 
 [bug]
-other = "Bug"
+other = "తప్పిదం"
 
 [example]
-other = "Example"
+other = "ఉదాహరణ"
 
 [quote]
-other = "Quote"
+other = "సంగుహణ"
 # === shortcodes/admonition.html ===
 
 # === shortcodes/version.html ===
 [new]
-other = "NEW"
+other = "కొత్త"
 
 [changed]
-other = "CHANGED"
+other = "మార్చబడింది"
 
 [deleted]
-other = "DELETED"
+other = "తొలగించిన"
 # === shortcodes/version.html ===
