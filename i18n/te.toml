@@ -11,7 +11,7 @@ other = "వ్యాఖ్యలను వీక్షించండి"
 
 # === Post ===
 [posts]
-other = "Posts"
+other = "శీర్షికలు"
 # === Post ===
 
 # === Taxonomy ===
@@ -19,10 +19,10 @@ other = "Posts"
 other = "అన్ని {{ .Some }}"
 
 [tag]
-other = "Tag"
+other = "ఉపస్థితి"
 
 [tags]
-other = "Tags"
+other = "హష్ టాగ్స్"
 
 [category]
 other = "విభాగం"
@@ -96,7 +96,7 @@ other = "మరింత తెలుసుకోండి"
 
 # === partials/plugin/share.html ===
 [shareOn]
-other = "Share on"
+other = "షేర్ ఆన్"
 # === partials/plugin/share.html ===
 
 # === posts/single.html ===
