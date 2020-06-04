@@ -222,6 +222,7 @@ enableEmoji = true
         Bilibili = ""
         Email = "xxxx@xxxx.com"
         RSS = true
+        Discord = ""
         [languages.en.params.social.Mastodon]
           id = "@xxxx"
           prefix = "https://mastodon.technology/"
