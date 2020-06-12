@@ -2,7 +2,7 @@
 weight: 4
 title: "Theme Documentation - Extended Shortcodes"
 date: 2020-03-03T16:29:41+08:00
-lastmod: 2020-03-03T16:29:41+08:00
+lastmod: 2020-06-12T09:32:15+03:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
@@ -1293,3 +1293,41 @@ You can see the output in the console of the developer tool.
 {{< script >}}
 console.log('Hello LoveIt!');
 {{< /script >}}
+
+## 12 person
+
+`person` is a shortcode to insert a link to a personal webpage marked up as [h-card](http://microformats.org/wiki/h-card).
+
+The `person` shortcode takes the following parameters (all of these are optional, but it makes no sense to omit the first two):
+
+* **url** (**first** positional parameter)
+
+    URL of the personal page.
+
+* **name** (**second** positional parameter)
+
+    Name of the person.
+
+* **text** (**third** positional parameter)
+
+    Text to display as hover tooltip of the link.
+
+* **picture** (**fourth** positional parameter)
+
+    A picture to use as person's avatar.
+
+Example `person` input:
+
+```markdown
+{{</* person url="https://evgenykuznetsov.org" name="Evgeny Kuznetsov" text="author of this shortcode" picture="https://evgenykuznetsov.org/img/avatar.jpg" */>}}
+```
+
+This renders as {{< person url="https://evgenykuznetsov.org" name="Evgeny Kuznetsov" text="author of this shortcode" picture="https://evgenykuznetsov.org/img/avatar.jpg" >}}.
+
+Without an explicitly given picture, a generic icon is used. This input:
+
+```markdown
+{{</* person "https://dillonzq.com/" Dillon "author of the LoveIt theme" */>}}
+```
+
+renders as {{< person "https://dillonzq.com/" Dillon "author of the LoveIt theme" >}}.

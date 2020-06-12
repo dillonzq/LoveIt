@@ -52,6 +52,16 @@
   }
 
   .content {
+    .person-mention.h-card {
+      display: inline-block;
+      img {
+        vertical-align: -12%;
+        max-height: 1.1em;
+        margin-right: 0ex;
+        border-radius: 50%;
+      }
+    }
+    
     > h2 {
       font-size: 1.5rem;
 
