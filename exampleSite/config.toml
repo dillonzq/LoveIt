@@ -34,8 +34,6 @@ enableEmoji = true
     hasCJKLanguage = false
     # default amount of posts in each pages
     paginate = 12
-    # [UA-XXXXXXXX-X] google analytics code
-    googleAnalytics = ""
     # copyright description used only for seo schema
     copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
     # Menu config
@@ -236,8 +234,6 @@ enableEmoji = true
     hasCJKLanguage = true
     # 默认每页列表显示的文章数目
     paginate = 12
-    # [UA-XXXXXXXX-X] 谷歌分析代号
-    googleAnalytics = ""
     # 版权描述，仅仅用于 SEO
     copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
     # 菜单配置
@@ -434,8 +430,6 @@ enableEmoji = true
     hasCJKLanguage = false
     # default amount of posts in each pages
     paginate = 12
-    # [UA-XXXXXXXX-X] google analytics code
-    googleAnalytics = ""
     # copyright description used only for seo schema
     copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
     # Menu config
@@ -989,7 +983,12 @@ enableEmoji = true
     enable = false
     # Google Analytics
     [params.analytics.google]
+      # [UA-XXXXXXXX-X] google analytics code
+      # [UA-XXXXXXXX-X] 谷歌分析代号
       id = ""
+      # whether to use gtag linked
+      # 是否使用gtag链接
+      gtag = false
       # whether to anonymize IP
       # 是否匿名化用户 IP
       anonymizeIP = true
