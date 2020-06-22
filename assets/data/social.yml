@@ -4,7 +4,9 @@ github:
   Prefix: https://github.com/
   Title: GitHub
   Icon:
-    Simpleicons: github
+    Class: fab fa-github fa-fw
+
+
 
 # 002: LinkedIn
 linkedin:
@@ -12,7 +14,7 @@ linkedin:
   Prefix: https://linkedin.com/in/
   Title: LinkedIn
   Icon:
-    Simpleicons: linkedin
+    Class: fab fa-linkedin fa-fw
 
 # 003: Twitter
 twitter:
@@ -495,35 +497,35 @@ bilibili:
 
 # 063: Email
 email:
-  Weight: -3
+  Weight: -4
   Template: mailto:%v
   Title: Email
   Icon:
-    Class: far fa-envelope fa-fw
+    Class: fa fa-envelope fa-fw
 
 # 064: Phone
 phone:
-  Weight: -2
+  Weight: -3
   Template: tel:%v
   Title: Phone
   Icon:
-    Class: fa fa-phone
+    Class: fa fa-phone fa-fw
 
 # 065: PGP
 pgp:
-  Weight: -1
+  Weight: -2
   Prefix: https://pgp.key-server.io/
   Title: Pgp
   Icon:
-    Class: fa fa-lock
+    Class: fa fa-lock fa-fw
 
 # 066: Location
 location:
-  Weight: 66
+  Weight: -1
   Prefix: "https://www.openstreetmap.org/#map=12/"
   Title: Location
   Icon:
-    Class: fa fa-map-marker
+    Class: fas fa-map-marker-alt fa-fw
 
 # 066: RSS
 rss:
