@@ -497,7 +497,7 @@ bilibili:
 
 # 063: Email
 email:
-  Weight: -4
+  Weight: 63
   Template: mailto:%v
   Title: Email
   Icon:
@@ -505,7 +505,7 @@ email:
 
 # 064: Phone
 phone:
-  Weight: -3
+  Weight: 64
   Template: tel:%v
   Title: Phone
   Icon:
@@ -513,7 +513,7 @@ phone:
 
 # 065: PGP
 pgp:
-  Weight: -2
+  Weight: 65
   Prefix: https://pgp.key-server.io/
   Title: PGP
   Rel: pgpkey
@@ -522,7 +522,7 @@ pgp:
 
 # 066: Location
 location:
-  Weight: -1
+  Weight: 66
   Prefix: "https://www.openstreetmap.org/#map=12/"
   Title: Location
   Icon:
