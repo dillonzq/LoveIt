@@ -420,7 +420,6 @@ enableEmoji = true
         Vine = ""
         Googlescholar = ""
         Researchgate = ""
-        Mastodon = ""
         Thingiverse = ""
         Devto = "xxxx"
         Gitea = ""
@@ -429,14 +428,9 @@ enableEmoji = true
         Bilibili = "xxxx"
         Email = "xxxx@xxxx.com"
         Phone = "555-555-555"
+        PGP = "0xAAAAAAAAAAAAAAAA"
         Location = "39.9047/116.3480"
         RSS = true
-        [languages.en.params.social.Mastodon]
-          id = "@xxxx"
-          prefix = "https://mastodon.technology/"
-        [languages.en.params.social.pgp]
-          id = "0xAAAAAAAAAAAAAAAA"
-          prefix = "https://example.com/keys/"
 
   [languages.fr]
     weight = 3
@@ -633,14 +627,10 @@ enableEmoji = true
         Bilibili = ""
         Email = "xxxx@xxxx.com"
         Phone = "555-555-555"
+        PGP = "0xAAAAAAAAAAAAAAAA"
         Location = "39.9047/116.3480"
         RSS = true
-        [languages.en.params.social.Mastodon]
-          id = "@xxxx"
-          prefix = "https://mastodon.technology/"
-        [languages.en.params.social.pgp]
-          id = "0xAAAAAAAAAAAAAAAA"
-          prefix = "https://example.com/keys/"
+
 
 [params]
   # LoveIt theme version
