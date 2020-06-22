@@ -515,7 +515,8 @@ phone:
 pgp:
   Weight: -2
   Prefix: https://pgp.key-server.io/
-  Title: Pgp
+  Title: PGP
+  Rel: pgpkey
   Icon:
     Class: fa fa-lock fa-fw
 
