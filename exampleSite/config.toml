@@ -221,11 +221,14 @@ enableEmoji = true
         Matrix = ""
         Bilibili = ""
         Email = "xxxx@xxxx.com"
+        Phone = "555-555-555"
+        PGP = "/mykey.asc" # for the key that is saved as /static/mykey.asc
+        Location = "39.9047/116.3480"
         RSS = true
         [languages.en.params.social.Mastodon]
           id = "@xxxx"
           prefix = "https://mastodon.technology/"
-
+  
   [languages.zh-cn]
     weight = 2
     # 网站语言, 仅在这里 CN 大写
@@ -414,7 +417,6 @@ enableEmoji = true
         Vine = ""
         Googlescholar = ""
         Researchgate = ""
-        Mastodon = ""
         Thingiverse = ""
         Devto = "xxxx"
         Gitea = ""
@@ -422,6 +424,9 @@ enableEmoji = true
         Matrix = ""
         Bilibili = "xxxx"
         Email = "xxxx@xxxx.com"
+        Phone = "555-555-555"
+        PGP = "https://pgp.key-server.io/0xDEADBEEF"
+        Location = "39.9047/116.3480"
         RSS = true
 
   [languages.fr]
@@ -618,7 +623,11 @@ enableEmoji = true
         Matrix = ""
         Bilibili = ""
         Email = "xxxx@xxxx.com"
+        Phone = "555-555-555"
+        PGP = "https://pgp.key-server.io/0xDEADBEEF"
+        Location = "39.9047/116.3480"
         RSS = true
+
 
 [params]
   # LoveIt theme version
