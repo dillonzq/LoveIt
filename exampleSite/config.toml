@@ -222,7 +222,7 @@ enableEmoji = true
         Bilibili = ""
         Email = "xxxx@xxxx.com"
         Phone = "555-555-555"
-        PGP = "/0xDEADBEEF"
+        PGP = "/mykey.asc" # for the key that is saved as /static/mykey.asc
         Location = "39.9047/116.3480"
         RSS = true
         [languages.en.params.social.Mastodon]
