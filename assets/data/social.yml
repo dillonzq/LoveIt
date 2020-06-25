@@ -514,11 +514,10 @@ phone:
 # 065: PGP
 pgp:
   Weight: 65
-  Prefix: https://pgp.key-server.io/
   Title: PGP
   Rel: pgpkey
   Icon:
-    Class: fa fa-lock fa-fw
+    Class: fa fa-key fa-fw
 
 # 066: Location
 location:

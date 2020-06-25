@@ -222,16 +222,13 @@ enableEmoji = true
         Bilibili = ""
         Email = "xxxx@xxxx.com"
         Phone = "555-555-555"
+        PGP = "/0xDEADBEEF"
         Location = "39.9047/116.3480"
         RSS = true
         [languages.en.params.social.Mastodon]
           id = "@xxxx"
           prefix = "https://mastodon.technology/"
-        [languages.en.params.social.pgp]
-          id = "0xAAAAAAAAAAAAAAAA"
-          # Point to any keyserver or your site
-          prefix = "https://example.com/keys/"
-
+  
   [languages.zh-cn]
     weight = 2
     # 网站语言, 仅在这里 CN 大写
@@ -428,7 +425,7 @@ enableEmoji = true
         Bilibili = "xxxx"
         Email = "xxxx@xxxx.com"
         Phone = "555-555-555"
-        PGP = "0xAAAAAAAAAAAAAAAA"
+        PGP = "https://pgp.key-server.io/0xDEADBEEF"
         Location = "39.9047/116.3480"
         RSS = true
 
@@ -627,7 +624,7 @@ enableEmoji = true
         Bilibili = ""
         Email = "xxxx@xxxx.com"
         Phone = "555-555-555"
-        PGP = "0xAAAAAAAAAAAAAAAA"
+        PGP = "https://pgp.key-server.io/0xDEADBEEF"
         Location = "39.9047/116.3480"
         RSS = true
 
