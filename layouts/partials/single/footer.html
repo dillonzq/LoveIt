@@ -17,13 +17,13 @@
                     {{- end -}}
                 </span>
             </div>
+            {{- with $params.license | string -}}
             <div class="post-info-license">
-                {{- with $params.license | string -}}
-                    <span>
-                        {{- . | safeHTML -}}
-                    </span>
-                {{- end -}}
+                <span>
+                    {{- . | safeHTML -}}
+                </span>
             </div>
+            {{- end -}}
         </div>
         <div class="post-info-line">
             <div class="post-info-md">
