@@ -860,6 +860,7 @@ enableEmoji = true
       [params.page.comment.gitalk]
         enable = false
         owner = ""
+        admin = [""]
         repo = ""
         clientId = ""
         clientSecret = ""
