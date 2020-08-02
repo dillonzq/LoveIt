@@ -508,6 +508,8 @@ Please open the code block below to view the complete sample configuration :(far
         # {{< version 0.1.1 >}}
         enable = false
         owner = ""
+        # {{< version 0.2.11 >}}
+        admin = [""]
         repo = ""
         clientId = ""
         clientSecret = ""

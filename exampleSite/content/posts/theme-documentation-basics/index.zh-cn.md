@@ -511,6 +511,8 @@ hugo
         # {{< version 0.1.1 >}}
         enable = false
         owner = ""
+        # {{< version 0.2.11 >}}
+        admin = [""]
         repo = ""
         clientId = ""
         clientSecret = ""
