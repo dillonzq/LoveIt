@@ -54,15 +54,15 @@ other = "Ditenagai oleh {{ .Hugo }} | Tema - {{ .Theme }}"
 other = "en"
 
 [valinePlaceholder]
-other = "Komentarmu ..."
+other = "Komentar Anda ..."
 
 [facebookLanguageCode]
-other = "id"
+other = "id_ID"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
 [search]
-other = "Pencarian"
+other = "Cari"
 
 [searchPlaceholder]
 other = "Cari judul atau konten ..."
@@ -125,7 +125,7 @@ other = "Penulis"
 other = "Diperbarui pada {{ .Date }}"
 
 [readMarkdown]
-other = "Lihat versi Markdown"
+other = "Baca Markdown"
 
 [back]
 other = "Kembali"
