@@ -46,7 +46,7 @@ other = "Ganti Tema"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Ditenagai oleh {{ .Hugo }} | Tema - {{ .Theme }}"
+other = "Dipersembahkan oleh {{ .Hugo }} | Tema - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
