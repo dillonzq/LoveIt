@@ -222,6 +222,7 @@ enableEmoji = true
         Bilibili = ""
         Email = "xxxx@xxxx.com"
         RSS = true
+        Kaggle = ""
         [languages.en.params.social.Mastodon]
           id = "@xxxx"
           prefix = "https://mastodon.technology/"
@@ -423,6 +424,7 @@ enableEmoji = true
         Bilibili = "xxxx"
         Email = "xxxx@xxxx.com"
         RSS = true
+        Kaggle = ""
 
   [languages.fr]
     weight = 3
@@ -619,6 +621,7 @@ enableEmoji = true
         Bilibili = ""
         Email = "xxxx@xxxx.com"
         RSS = true
+        Kaggle = ""
 
 [params]
   # LoveIt theme version
