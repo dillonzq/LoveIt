@@ -7,11 +7,12 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "探索 Hugo - LoveIt 主题的全部内容和背后的核心概念."
-images: ["/images/theme-documentation-basics/featured-image.jpg"]
+resources:
+- name: "featured-image"
+  src: "featured-image.jpg"
 
 tags: ["installation", "configuration"]
 categories: ["documentation"]
-featuredImage: "/images/theme-documentation-basics/featured-image.jpg"
 
 lightgallery: true
 
@@ -156,7 +157,7 @@ hugo serve
 
 去查看 `http://localhost:1313`.
 
-![基本配置下的预览](/images/theme-documentation-basics/basic-configuration-preview.zh-cn.png "基本配置下的预览")
+![基本配置下的预览](basic-configuration-preview.zh-cn.png "基本配置下的预览")
 
 {{< admonition tip >}}
 当你运行 `hugo serve` 时, 当文件内容更改时, 页面会随着更改自动刷新.
@@ -575,25 +576,14 @@ hugo
         # 位于 "assets/"
         # 或者
         # someJavascript = "https://cdn.example.com/some.js"
-    # {{< version 0.2.0 >}} SEO config
+    # {{< version 0.2.10 changed >}} 页面 SEO 配置
     [params.page.seo]
+      # 图片 URL
+      images = []
       # 出版者信息
       [params.page.seo.publisher]
-        name = "xxxx"
-        [params.page.seo.publisher.logo]
-          url = "logo.png"
-          width = 127
-          height = 40
-      # Logo 信息
-      [params.page.seo.logo]
-        url = "logo.png"
-        width = 127
-        height = 40
-      # 图片信息
-      [params.page.seo.image]
-        url = "cover.png"
-        width = 800
-        height = 600
+        name = ""
+        logoUrl = ""
 
   # {{< version 0.2.5 >}} TypeIt 配置
   [params.typeit]
@@ -613,6 +603,13 @@ hugo
     yandex = ""
     pinterest = ""
     baidu = ""
+
+  # {{< version 0.2.10 >}} 网站 SEO 配置
+  [params.seo]
+    # 图片 URL
+    image = ""
+    # 缩略图 URL
+    thumbnailUrl = ""
 
   # {{< version 0.2.0 >}} 网站分析配置
   [params.analytics]
@@ -789,7 +786,7 @@ hugo
 你可以参考它来配置你的社交链接.
 {{< /admonition >}}
 
-![完整配置下的预览](/images/theme-documentation-basics/complete-configuration-preview.zh-cn.png "完整配置下的预览")
+![完整配置下的预览](complete-configuration-preview.zh-cn.png "完整配置下的预览")
 
 ### 3.2 网站图标, 浏览器配置, 网站清单
 
@@ -806,11 +803,7 @@ hugo
 
 可以自定义 `browserconfig.xml` 和 `site.webmanifest` 文件来设置 theme-color 和 background-color.
 
-### 3.3 增加网站 logo 和封面用于 SEO 优化
-
-在 `static` 目录增加一个 logo 图片 (127x40) 和一个封面图片 (800x600).
-
-### 3.4 自定义样式
+### 3.3 自定义样式
 
 {{< version 0.2.8 changed >}}
 
@@ -837,11 +830,11 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 **LoveIt** 主题完全兼容 Hugo 的多语言模式, 并且支持在网页上切换语言.
 
-![语言切换](/images/theme-documentation-basics/language-switch.gif "语言切换")
+![语言切换](language-switch.gif "语言切换")
 
 ### 4.1 兼容性 {#language-compatibility}
 
-{{< version 0.2.7 changed >}}
+{{< version 0.2.10 changed >}}
 
 | 语言 | Hugo 代码 | HTML `lang` 属性 | 主题文档 | Lunr.js 支持 |
 |:---- |:----:|:----:|:----:|:----:|
@@ -856,6 +849,7 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 | 塞尔维亚语 | `pl` | `pl` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
 | 俄语 | `ru` | `ru` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 罗马尼亚语 | `ro` | `ro` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 越南语 | `vi` | `vi` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 
 ### 4.2 基本配置
 

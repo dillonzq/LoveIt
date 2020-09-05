@@ -7,11 +7,12 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "了解如何在 LoveIt 主题中快速, 直观地创建和组织内容."
-images: ["/images/theme-documentation-content/featured-image.jpg"]
+resources:
+- name: "featured-image"
+  src: "featured-image.jpg"
 
 tags: ["content", "Markdown"]
 categories: ["documentation"]
-featuredImage: "/images/theme-documentation-content/featured-image.jpg"
 
 lightgallery: true
 
@@ -25,13 +26,34 @@ math:
 
 <!--more-->
 
-## 1 内容组织
+## 1 内容组织 {#contents-organization}
 
 以下是一些方便你清晰管理和生成文章的目录结构建议:
 
 * 保持博客文章存放在 `content/posts` 目录, 例如: `content/posts/我的第一篇文章.md`
 * 保持简单的静态页面存放在 `content` 目录, 例如: `content/about.md`
-* 保持图片之类的媒体资源存放在 `static` 目录, 例如: `static/images/screenshot.png`
+* 本地资源组织
+
+{{< admonition note "本地资源引用" >}}
+{{< version 0.2.10 >}}
+
+有三种方法来引用**图片**和**音乐**等本地资源:
+
+1. 使用[页面包](https://gohugo.io/content-management/page-bundles/)中的[页面资源](https://gohugo.io/content-management/page-resources/).
+   你可以使用适用于 `Resources.GetMatch` 的值或者直接使用相对于当前页面目录的文件路径来引用页面资源.
+2. 将本地资源放在 **assets** 目录中, 默认路径是 `/assets`.
+   引用资源的文件路径是相对于 assets 目录的.
+3. 将本地资源放在 **static** 目录中, 默认路径是 `/static`.
+   引用资源的文件路径是相对于 static 目录的.
+
+引用的**优先级**符合以上的顺序.
+
+在这个主题中的很多地方可以使用上面的本地资源引用,
+例如 **链接**, **图片**, `image` shortcode, `music` shortcode 和**前置参数**中的部分参数.
+
+页面资源或者 **assets** 目录中的[图片处理](https://gohugo.io/content-management/image-processing/)会在未来的版本中得到支持.
+非常酷的功能! :(far fa-grin-squint fa-fw):
+{{< /admonition >}}
 
 ## 2 前置参数 {#front-matter}
 
@@ -101,6 +123,9 @@ library:
     # 位于 "assets/"
     # 或者
     # someJS = "https://cdn.example.com/some.js"
+seo:
+  images: []
+  # ...
 ---
 ```
 
@@ -137,12 +162,30 @@ library:
 * **share**: 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.share` 部分相同.
 * **comment**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.comment` 部分相同.
 * **library**: {{< version 0.2.7 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.library` 部分相同.
+* **seo**: {{< version 0.2.10 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.seo` 部分相同.
+
+{{< admonition tip >}}
+{{< version 0.2.10 >}}
+
+**featuredImage** 和 **featuredImagePreview** 支持[本地资源引用](#contents-organization)的完整用法.
+
+如果带有在前置参数中设置了 `name: featured-image` 或 `name: featured-image-preview` 属性的页面资源,
+没有必要在设置 `featuredImage` 或 `featuredImagePreview`:
+
+```yaml
+resources:
+- name: featured-image
+  src: featured-image.jpg
+- name: featured-image-preview
+  src: featured-image-preview.jpg
+```
+{{< /admonition >}}
 
 ## 3 内容摘要
 
 **LoveIt** 主题使用内容摘要在主页中显示大致文章信息。Hugo 支持生成文章的摘要.
 
-![文章摘要预览](/images/theme-documentation-content/summary.zh-cn.png "文章摘要预览")
+![文章摘要预览](summary.zh-cn.png "文章摘要预览")
 
 ### 自动摘要拆分
 

@@ -13,10 +13,10 @@
                     {{- $url = .RelPermalink -}}
                 {{- end -}}
                 <a href="{{ $url }}"{{ with .Title | default .Name }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
-                    {{- dict "src" $avatar "alt" .Name | partial "plugin/image.html" -}}
+                    {{- dict "Src" $avatar | partial "plugin/image.html" -}}
                 </a>
             {{- else -}}
-                {{- dict "src" $avatar | partial "plugin/image.html" -}}
+                {{- dict "Src" $avatar | partial "plugin/image.html" -}}
             {{- end -}}
         </div>
     {{- end -}}
@@ -47,18 +47,41 @@
                 {{- $social := $key | lower | index $socialMap | default dict -}}
                 {{- if $value -}}
                     {{- if reflect.IsMap $value -}}
-                        {{- $social = $value | merge $social -}}
+                        {{- with $value.weight -}}
+                            {{- $social = dict "Weight" . | merge $social -}}
+                        {{- end -}}
+                        {{- with $value.prefix -}}
+                            {{- $social = dict "Prefix" . | merge $social -}}
+                        {{- end -}}
+                        {{- with $value.template -}}
+                            {{- $social = dict "Template" . | merge $social -}}
+                        {{- end -}}
+                        {{- with $value.id -}}
+                            {{- $social = dict "Id" . | merge $social -}}
+                        {{- end -}}
+                        {{- with $value.url -}}
+                            {{- $social = dict "Url" . | merge $social -}}
+                        {{- end -}}
+                        {{- with $value.title -}}
+                            {{- $social = dict "Title" . | merge $social -}}
+                        {{- end -}}
+                        {{- with $value.newtab -}}
+                            {{- $social = dict "Newtab" . | merge $social -}}
+                        {{- end -}}
+                        {{- with $value.icon -}}
+                            {{- $social = dict "Icon" . | merge $social -}}
+                        {{- end -}}
                     {{- else if ne $value true -}}
-                        {{- $social = dict "id" $value | merge $social -}}
+                        {{- $social = dict "Id" $value | merge $social -}}
                     {{- end -}}
-                    {{- if $social.icon.simpleicons -}}
+                    {{- if $social.Icon.Simpleicons -}}
                         {{- $prefix := ($.Scratch.Get "cdn" | default dict).simpleIconsPrefix -}}
-                        {{- $social = dict "prefix" $prefix | dict "icon" | merge $social -}}
+                        {{- $social = dict "Prefix" $prefix | dict "Icon" | merge $social -}}
                     {{- end -}}
                     {{- $socialArr = $socialArr | append $social -}}
                 {{- end -}}
             {{- end -}}
-            {{- range sort $socialArr "weight" -}}
+            {{- range sort $socialArr "Weight" -}}
                 {{- partial "plugin/social.html" . -}}
             {{- end -}}
         </div>

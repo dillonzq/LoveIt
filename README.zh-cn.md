@@ -134,6 +134,7 @@ LoveIt 支持下列语言:
 * 塞尔维亚语
 * 俄语
 * 罗马尼亚语
+* 越南语
 * [贡献一种新的语言](https://github.com/dillonzq/LoveIt/pulls)
 
 [语言兼容性](https://hugoloveit.com/zh-cn/theme-documentation-basics/#language-compatibility)
@@ -178,3 +179,13 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 ## 作者
 
 [Dillon](https://dillonzq.com)
+
+## 赞助支持
+
+如果你喜爱这个主题, 请考虑给我买杯咖啡 ☕️.
+
+* [PayPal](https://paypal.me/dillonzq)
+* [支付宝](https://github.com/dillonzq/LoveIt/raw/master/images/Alipay.jpg)
+* [微信支付](https://github.com/dillonzq/LoveIt/raw/master/images/Wechat.jpg)
+
+谢谢! ❤️

@@ -7,11 +7,12 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Découvrez en quoi consiste le thème Hugo - LoveIt et les concepts fondamentaux qui le sous-tendent."
-images: ["/images/theme-documentation-basics/featured-image.jpg"]
+resources:
+- name: "featured-image"
+  src: "featured-image.jpg"
 
 tags: ["installation", "configuration"]
 categories: ["documentation"]
-featuredImage: "/images/theme-documentation-basics/featured-image.jpg"
 
 lightgallery: true
 
@@ -158,7 +159,7 @@ hugo serve
 
 Go to `http://localhost:1313`.
 
-![Basic configuration preview](/images/theme-documentation-basics/basic-configuration-preview.png "Basic configuration preview")
+![Basic configuration preview](basic-configuration-preview.png "Basic configuration preview")
 
 {{< admonition tip >}}
 When you run `hugo serve`, when the contents of the files change, the page automatically refreshes with the changes.
@@ -577,25 +578,14 @@ Please open the code block below to view the complete sample configuration :(far
         # located in "assets/"
         # Or
         # someJavascript = "https://cdn.example.com/some.js"
-    # {{< version 0.2.0 >}} SEO config
+    # {{< version 0.2.10 changed >}} Page SEO config
     [params.page.seo]
+      # image URL
+      images = []
       # Publisher info
       [params.page.seo.publisher]
-        name = "xxxx"
-        [params.page.seo.publisher.logo]
-          url = "logo.png"
-          width = 127
-          height = 40
-      # Logo info
-      [params.page.seo.logo]
-        url = "logo.png"
-        width = 127
-        height = 40
-      # Image info
-      [params.page.seo.image]
-        url = "cover.png"
-        width = 800
-        height = 600
+        name = ""
+        logoUrl = ""
 
   # {{< version 0.2.5 >}} TypeIt config
   [params.typeit]
@@ -615,6 +605,13 @@ Please open the code block below to view the complete sample configuration :(far
     yandex = ""
     pinterest = ""
     baidu = ""
+
+  # {{< version 0.2.10 >}} Site SEO config
+  [params.seo]
+    # image URL
+    image = ""
+    # thumbnail URL
+    thumbnailUrl = ""
 
   # {{< version 0.2.0 >}} Analytics config
   [params.analytics]
@@ -790,7 +787,7 @@ The default data of all supported social links is located in `themes/LoveIt/asse
 which is you can refer to.
 {{< /admonition >}}
 
-![Complete configuration preview](/images/theme-documentation-basics/complete-configuration-preview.png "Complete configuration preview")
+![Complete configuration preview](complete-configuration-preview.png "Complete configuration preview")
 
 ### 3.2 Favicons, Browserconfig, Manifest
 
@@ -807,11 +804,7 @@ into `/static`. They’re easily created via [https://realfavicongenerator.net/]
 
 Customize `browserconfig.xml` and `site.webmanifest` to set theme-color and background-color.
 
-### 3.3 Add Logo and Cover for SEO
-
-Add a logo image (127x40) and a cover image (800x600) in the `static` directory.
-
-### 3.4 Style Customization
+### 3.3 Style Customization
 
 {{< version 0.2.8 changed >}}
 
@@ -838,11 +831,11 @@ In `assets/css/_custom.scss`, you can add some css style code to customize the s
 
 **LoveIt** theme is fully compatible with Hugo multilingual mode, which provides in-browser language switching.
 
-![Language Switch](/images/theme-documentation-basics/language-switch.gif "Language Switch")
+![Language Switch](language-switch.gif "Language Switch")
 
 ### 4.1 Compatibility {#language-compatibility}
 
-{{< version 0.2.7 changed >}}
+{{< version 0.2.10 changed >}}
 
 | Language             | Hugo Code | HTML `lang` Attribute | Theme Docs                    | Lunr.js Support               |
 |:-------------------- |:---------:|:---------------------:|:-----------------------------:|:-----------------------------:|
@@ -858,6 +851,7 @@ In `assets/css/_custom.scss`, you can add some css style code to customize the s
 | Serbian              | `sr`      | `sr`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
 | Russian              | `ru`      | `ru`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Romanian             | `ro`      | `ro`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| Vietnamese           | `vi`      | `vi`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 
 ### 4.2 Basic Configuration
 

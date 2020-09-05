@@ -1,20 +1,21 @@
-{{- $options := cond .IsNamedParams (.Get "src") (.Get 0) | dict "src" -}}
-{{- $options = cond .IsNamedParams (.Get "alt") (.Get 1) | .Page.RenderString | dict "alt" | merge $options -}}
+{{- $options := cond .IsNamedParams (.Get "src") (.Get 0) | dict "Src" -}}
+{{- $options = cond .IsNamedParams (.Get "alt") (.Get 1) | .Page.RenderString | dict "Alt" | merge $options -}}
 {{- $caption := cond .IsNamedParams (.Get "caption") (.Get 2) | .Page.RenderString -}}
-{{- $options = dict "caption" $caption | merge $options -}}
+{{- $options = dict "Caption" $caption | merge $options -}}
 
 {{- if .IsNamedParams -}}
-    {{- $options = dict "title" (.Get "title") | merge $options -}}
-    {{- $options = dict "src_s" (.Get "src_s") | merge $options -}}
-    {{- $options = dict "src_l" (.Get "src_l") | merge $options -}}
-    {{- $options = dict "height" (.Get "height") | merge $options -}}
-    {{- $options = dict "width" (.Get "width") | merge $options -}}
-    {{- $options = dict "large" (.Get "large") | merge $options -}}
-    {{- $options = .Get "linked" | ne false | dict "linked" | merge $options -}}
-    {{- $options = dict "rel" (.Get "rel") | merge $options -}}
+    {{- $options = dict "Title" (.Get "title") | merge $options -}}
+    {{- $options = dict "SrcSmall" (.Get "src_s") | merge $options -}}
+    {{- $options = dict "SrcLarge" (.Get "src_l") | merge $options -}}
+    {{- $options = dict "Height" (.Get "height") | merge $options -}}
+    {{- $options = dict "Width" (.Get "width") | merge $options -}}
+    {{- $options = .Get "linked" | ne false | dict "Linked" | merge $options -}}
+    {{- $options = dict "Rel" (.Get "rel") | merge $options -}}
 {{- else -}}
-    {{- $options = cond $caption true false | dict "linked" | merge $options -}}
+    {{- $options = cond $caption true false | dict "Linked" | merge $options -}}
 {{- end -}}
+
+{{- $options = dict "Resources" .Page.Resources | merge $options -}}
 
 {{- with $caption -}}
     <figure{{ with cond $.IsNamedParams ($.Get "class") "" }} class="{{ . }}"{{ end }}>

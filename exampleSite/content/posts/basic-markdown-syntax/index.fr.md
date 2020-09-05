@@ -7,11 +7,12 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Cet article présente la syntaxe et le format de base de Markdown."
-images: ["/images/basic-markdown-syntax/featured-image.png"]
+resources:
+- name: "featured-image"
+  src: "featured-image.png"
 
 tags: ["Markdown", "HTML"]
 categories: ["Markdown"]
-featuredImage: "/images/basic-markdown-syntax/featured-image.png"
 
 lightgallery: true
 ---
