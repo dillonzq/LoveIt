@@ -626,6 +626,9 @@ Please open the code block below to view the complete sample configuration :(far
       id = ""
       # server url for your tracker if you're self hosting
       server = ""
+    # Plausible Analytics
+    [params.analytics.plausible]
+      domain = ""
 
   # {{< version 0.2.7 >}} Cookie consent config
   [params.cookieconsent]
