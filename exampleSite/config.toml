@@ -144,7 +144,7 @@ enableEmoji = true
           avatarURL = "/images/avatar.png"
           # title shown in home page (HTML format is supported)
           title = ""
-          # subtitle shown in home page
+          # subtitle shown in home page (HTML format is supported)
           subtitle = "A Clean, Elegant but Advanced Hugo Theme"
           # whether to use typeit animation for subtitle
           typeit = true
@@ -344,7 +344,7 @@ enableEmoji = true
           avatarURL = "/images/avatar.png"
           # 主页显示的网站标题 (支持 HTML 格式)
           title = ""
-          # 主页显示的网站副标题
+          # 主页显示的网站副标题 (支持 HTML 格式)
           subtitle = "一个简洁、优雅且高效的 Hugo 主题"
           # 是否为副标题显示打字机动画
           typeit = true
@@ -540,7 +540,7 @@ enableEmoji = true
           avatarURL = "/images/avatar.png"
           # title shown in home page (HTML format is supported)
           title = ""
-          # subtitle shown in home page
+          # subtitle shown in home page (HTML format is supported)
           subtitle = "Un thème Hugo simple, élégant et efficace"
           # whether to use typeit animation for subtitle
           typeit = true
