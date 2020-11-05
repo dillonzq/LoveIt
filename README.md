@@ -109,7 +109,7 @@ I hope you will LoveIt ❤️!
 * **Music player** shortcode supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
 * **Bilibili player** shortcode
 * Kinds of **admonitions** shortcode
-* **Custom style** shortcode
+* **Custom style** shortcode (A 'Hide extension' must be installed for operation.)
 * **Custom script** shortcode
 * **Animated typing** supported by [TypeIt](https://typeitjs.com/)
 * **Dynamic scroll** supported by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
