@@ -151,7 +151,7 @@ header {
   height: $header-height;
   line-height: $header-height;
 
-  [header-desktop=normal] & {
+  [data-header-desktop=normal] & {
     position: static;
   }
 
@@ -216,7 +216,7 @@ header {
   height: $header-height;
   line-height: $header-height;
 
-  [header-mobile=normal] & {
+  [data-header-mobile=normal] & {
     position: static;
   }
 
