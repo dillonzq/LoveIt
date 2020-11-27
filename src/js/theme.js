@@ -397,7 +397,7 @@ class Theme {
     initToc() {
         const $tocCore = document.getElementById('TableOfContents');
         if ($tocCore === null) return;
-        if (document.getElementById('toc-static').getAttribute('kept') || this.util.isTocStatic()) {
+        if (document.getElementById('toc-static').getAttribute('data-kept') || this.util.isTocStatic()) {
             const $tocContentStatic = document.getElementById('toc-content-static');
             if ($tocCore.parentElement !== $tocContentStatic) {
                 $tocCore.parentElement.removeChild($tocCore);
