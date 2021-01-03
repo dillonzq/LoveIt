@@ -139,6 +139,7 @@ LoveIt supports the following languages:
 * Serbian
 * Russian
 * Romanian
+* Turkish
 * Vietnamese
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
