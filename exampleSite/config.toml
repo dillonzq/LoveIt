@@ -23,6 +23,9 @@ enableGitInfo = true
 # 是否使用 emoji 代码
 enableEmoji = true
 
+# ignore external errors on builg
+ignoreErrors = ["error-remote-getjson"]
+
 [languages]
   [languages.en]
     weight = 1
