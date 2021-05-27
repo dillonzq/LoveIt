@@ -85,8 +85,7 @@
             useMaxWidth: false,
             htmlLabels: true
         },
-        theme: "dark",
-        fill: "#FFFFFF"
+        theme: "dark"
     };
     mermaid.initialize(mermaidConfig);
 </script>
@@ -95,6 +94,9 @@
     .mermaid svg {
         display: block;
         margin: auto;
+    }
+    .mermaid {
+        background: white;
     }
 </style>
 {{ end }}
