@@ -1,0 +1,10 @@
+{
+    "picgo.picBed.qiniu.accessKey": "hUehyA0ZxBEIkpP6tfvU5dV6a3q4clWEC9IQsh1W",
+    "picgo.picBed.qiniu.area": "z2",
+    "picgo.picBed.qiniu.secretKey": "WPCmPMmoCx3CgjDEw6jxwNAIT0fjJjq_7SitxUtL",
+    "picgo.picBed.qiniu.bucket": "kuul",
+    "picgo.picBed.qiniu.url": "https://qn.kuul.cn",
+    "picgo.picBed.qiniu.path": "PICGO-MAC/",
+    "picgo.picBed.current": "qiniu",
+    "picgo.picBed.qiniu.options": "?imgslim"
+}
