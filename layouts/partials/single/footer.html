@@ -62,11 +62,25 @@
     </div>
 
     <div class="post-nav">
-        {{- if .PrevInSection -}}
-            <a href="{{ .PrevInSection.RelPermalink }}" class="prev" rel="prev" title="{{ .PrevInSection.Title }}"><i class="fas fa-angle-left fa-fw"></i>{{ .PrevInSection.Title }}</a>
+        {{- if or ($params.next) ($params.prev) -}}
+            {{- with $next := $params.next -}}
+            {{- with $t := $.Site.GetPage $next -}}
+            <a href="{{ $t.RelPermalink }}" class="next" rel="next" title="{{ $t.Title }}">{{ $t.Title }}<i class="fas fa-angle-right fa-fw"></i></a>
+            {{- end -}}
+            {{- end -}}
+            {{- with $prev := $params.prev -}}
+            {{- with $t := $.Site.GetPage $prev -}}
+            <a href="{{ $t.RelPermalink }}" class="prev" rel="prev" title="{{ $t.Title }}"><i class="fas fa-angle-left fa-fw"></i>{{ $t.Title }}</a>
+            {{- end -}}
+            {{- end -}}
+        {{- else -}}
+            {{- if .PrevInSection -}}
+                <a href="{{ .PrevInSection.RelPermalink }}" class="prev" rel="prev" title="{{ .PrevInSection.Title }}"><i class="fas fa-angle-left fa-fw"></i>{{ .PrevInSection.Title }}</a>
+            {{- end -}}
+            {{ if .NextInSection }}
+                <a href="{{ .NextInSection.RelPermalink }}" class="next" rel="next" title="{{ .NextInSection.Title }}">{{ .NextInSection.Title }}<i class="fas fa-angle-right fa-fw"></i></a>
+            {{- end -}}
         {{- end -}}
-        {{ if .NextInSection }}
-            <a href="{{ .NextInSection.RelPermalink }}" class="next" rel="next" title="{{ .NextInSection.Title }}">{{ .NextInSection.Title }}<i class="fas fa-angle-right fa-fw"></i></a>
-        {{- end -}}
+        
     </div>
 </div>
