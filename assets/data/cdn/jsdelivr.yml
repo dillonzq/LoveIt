@@ -56,9 +56,9 @@ libFiles:
   aplayerJS: aplayer@1.10.1/dist/APlayer.min.js
   # meting@2.0.1 https://github.com/metowolf/MetingJS
   metingJS: meting@2.0.1/dist/Meting.min.js
-  # gitalk@1.6.2 https://github.com/gitalk/gitalk
-  gitalkCSS: gitalk@1.6.2/dist/gitalk.min.css
-  gitalkJS: gitalk@1.6.2/dist/gitalk.min.js
+  # gitalk@1.7.2 https://github.com/gitalk/gitalk
+  gitalkCSS: gitalk@1.7.2/dist/gitalk.min.css
+  gitalkJS: gitalk@1.7.2/dist/gitalk.min.js
   # valine@1.4.14 https://valine.js.org/
   valineJS: valine@1.4.14/dist/Valine.min.js
   # cookieconsent@3.1.1 https://github.com/osano/cookieconsent
