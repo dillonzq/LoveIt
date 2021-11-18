@@ -9,7 +9,7 @@
                         {{- dict "Date" . | T "updatedOnDate" -}}
                         {{- if $.Site.Params.gitRepo -}}
                             {{- with $.GitInfo -}}
-                                &nbsp;<a class="git-hash" href="{{ printf `%v/commit/%v` $.Site.Params.gitRepo .Hash }}" target="_blank" title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ .Hash }}: {{ .Subject }}">
+                                &nbsp;<a class="git-hash" href="{{ printf `%v/commit/%v` $.Site.Params.gitRepo .Hash }}" target="_blank" title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ .Hash }}: {{ .Subject }}" rel="noopener noreferrer">
                                     <i class="fas fa-hashtag fa-fw"></i>{{- .AbbreviatedHash -}}
                                 </a>
                             {{- end -}}
@@ -30,7 +30,7 @@
                 {{- if $params.linktomarkdown -}}
                     {{- with .OutputFormats.Get "markdown" -}}
                         <span>
-                            <a class="link-to-markdown" href="{{ .RelPermalink }}" target="_blank">
+                            <a class="link-to-markdown" href="{{ .RelPermalink }}" target="_blank" rel="noopener noreferrer">
                                 {{- T "readMarkdown" -}}
                             </a>
                         </span>
