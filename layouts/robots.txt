@@ -62,7 +62,7 @@ User-agent: ZoominfoBot
 Disallow: /
 
 # Allow twitter
-User-agent:Twitterbot
+User-agent: Twitterbot
 Disallow:
 
 Sitemap: {{ "/sitemap.xml" | absLangURL }}
