@@ -1,3 +1,7 @@
+# Allow twitter
+User-agent: Twitterbot
+Disallow:
+
 User-agent: *
 
 Disallow: /images/
@@ -61,8 +65,5 @@ Disallow: /
 User-agent: ZoominfoBot
 Disallow: /
 
-# Allow twitter
-User-agent: Twitterbot
-Disallow:
 
 Sitemap: {{ "/sitemap.xml" | absLangURL }}
