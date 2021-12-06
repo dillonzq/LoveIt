@@ -999,6 +999,8 @@ enableEmoji = true
       # server url for your tracker if you're self hosting
       # 自行托管追踪器时的主机路径
       server = ""
+    [params.analytics.yandexMetrika]
+      id = ""
 
   # Cookie consent config
   # Cookie 许可配置
