@@ -143,12 +143,12 @@ For more information please have a look at GitHub issue [#7879](https://github.c
 一个 `tweet` 示例:
 
 ```markdown
-{{</* tweet user=GoHugoIO id=917359331535966209 */>}}
+{{</* tweet 917359331535966209 */>}}
 ```
 
 呈现的输出效果如下:
 
-{{< tweet user=GoHugoIO id=917359331535966209 >}}
+{{< tweet 917359331535966209 >}}
 
 ## 8 vimeo
 
