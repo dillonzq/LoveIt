@@ -112,15 +112,11 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 [`instagram` 的文档](https://gohugo.io/content-management/shortcodes#instagram)
 
-一个 `instagram` 示例:
-
-```markdown
-{{</* instagram BWNjjyYFxVx hidecaption */>}}
-```
-
-呈现的输出效果如下:
-
-{{< instagram BWNjjyYFxVx hidecaption >}}
+{{< admonition question "Instagram’s API was deprecated since October 24th, 2020" >}}
+The instagram-shortcode refers an endpoint of Instagram’s API, that’s deprecated since October 24th, 2020.
+Thus, no images can be fetched from this API endpoint, resulting in an error when the instagram-shortcode is used.
+For more information please have a look at GitHub issue [#7879](https://github.com/gohugoio/hugo/issues/7879).
+{{< /admonition >}}
 
 ## 5 param
 
@@ -147,12 +143,12 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 一个 `tweet` 示例:
 
 ```markdown
-{{</* tweet 877500564405444608 */>}}
+{{</* tweet user=GoHugoIO id=917359331535966209 */>}}
 ```
 
 呈现的输出效果如下:
 
-{{< tweet 877500564405444608 >}}
+{{< tweet user=GoHugoIO id=917359331535966209 >}}
 
 ## 8 vimeo
 
