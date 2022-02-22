@@ -47,7 +47,7 @@ other = "Canvia Tema"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Amb la tecnologia de {{ .Hugo }} | Tema - {{ .Theme }}"
+other = "Impulsat per {{ .Hugo }} | Tema - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
