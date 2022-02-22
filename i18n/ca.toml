@@ -1,0 +1,195 @@
+# Translations for English
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ==
+[backToTop]
+other = "Back to Top"
+
+[viewComments]
+other = "View Comments"
+# === baseof ==
+
+# === Post ===
+[posts]
+other = "Posts"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "All {{ .Some }}"
+
+[tag]
+other = "Tag"
+
+[tags]
+other = "Tags"
+
+[category]
+other = "Category"
+
+[categories]
+other = "Categories"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "More"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "Select Language"
+
+[switchTheme]
+other = "Switch Theme"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Powered by {{ .Hugo }} | Theme - {{ .Theme }}"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "Your comment ..."
+
+[facebookLanguageCode]
+other = "en_US"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "Search"
+
+[searchPlaceholder]
+other = "Search titles or contents..."
+
+[clear]
+other = "Clear"
+
+[cancel]
+other = "Cancel"
+
+[noResultsFound]
+other = "No results found"
+
+[lunrLanguageCode]
+other = "en"
+
+[copyToClipboard]
+other = "Copy to clipboard"
+
+[cookieconsentMessage]
+other = "This website uses Cookies to improve your experience."
+
+[cookieconsentDismiss]
+other = "Got it!"
+
+[cookieconsentLink]
+other = "Learn more"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "Share on"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "Contents"
+
+[publishedOnDate]
+other = "published on {{ .Date }}"
+
+[includedInCategories]
+other = "included in {{ .Categories }}"
+
+[wordCount]
+one = "One word"
+other = "{{ .Count }} words"
+
+[readingTime]
+one = "One minute"
+other = "{{ .Count }} minutes"
+
+[views]
+other = "views"
+
+[author]
+other = "Author"
+
+[updatedOnDate]
+other = "Updated on {{ .Date }}"
+
+[readMarkdown]
+other = "Read Markdown"
+
+[back]
+other = "Back"
+
+[home]
+other = "Home"
+
+[readMore]
+other = "Read More"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Page not found"
+
+[pageNotFoundText]
+other = "The page you're looking for doesn't exist. Sorry."
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Note"
+
+[abstract]
+other = "Abstract"
+
+[info]
+other = "Info"
+
+[tip]
+other = "Tip"
+
+[success]
+other = "Success"
+
+[question]
+other = "Question"
+
+[warning]
+other = "Warning"
+
+[failure]
+other = "Failure"
+
+[danger]
+other = "Danger"
+
+[bug]
+other = "Bug"
+
+[example]
+other = "Example"
+
+[quote]
+other = "Quote"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "NEW"
+
+[changed]
+other = "CHANGED"
+
+[deleted]
+other = "DELETED"
+# === shortcodes/version.html ===
