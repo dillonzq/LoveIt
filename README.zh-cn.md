@@ -135,6 +135,7 @@ LoveIt 支持下列语言:
 * 俄语
 * 罗马尼亚语
 * 越南语
+* 加泰罗尼亚语
 * [贡献一种新的语言](https://github.com/dillonzq/LoveIt/pulls)
 
 [语言兼容性](https://hugoloveit.com/zh-cn/theme-documentation-basics/#language-compatibility)
