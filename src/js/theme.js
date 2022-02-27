@@ -387,7 +387,7 @@ class Theme {
 
     initHeaderLink() {
         for (let num = 1; num <= 6; num++) {
-            this.util.forEach(document.querySelectorAll('.single .content > h' + num), $header => {
+            this.util.forEach(document.querySelectorAll('.single .content h' + num), $header => {
                 $header.classList.add('headerLink');
                 $header.insertAdjacentHTML('afterbegin', `<a href="#${$header.id}" class="header-mark"></a>`);
             });
