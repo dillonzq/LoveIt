@@ -63,10 +63,10 @@
 
     <div class="post-nav">
         {{- if .PrevInSection -}}
-            <a href="{{ .PrevInSection.RelPermalink }}" class="prev" rel="prev" title="{{ .PrevInSection.Title }}"><i class="fas fa-angle-left fa-fw"></i>{{ .PrevInSection.Title }}</a>
+            <a href="{{ .PrevInSection.RelPermalink }}" class="prev" rel="prev" title="{{ .PrevInSection.Title | emojify }}"><i class="fas fa-angle-left fa-fw"></i>{{ .PrevInSection.Title | emojify }}</a>
         {{- end -}}
         {{ if .NextInSection }}
-            <a href="{{ .NextInSection.RelPermalink }}" class="next" rel="next" title="{{ .NextInSection.Title }}">{{ .NextInSection.Title }}<i class="fas fa-angle-right fa-fw"></i></a>
+            <a href="{{ .NextInSection.RelPermalink }}" class="next" rel="next" title="{{ .NextInSection.Title | emojify }}">{{ .NextInSection.Title | emojify}}<i class="fas fa-angle-right fa-fw"></i></a>
         {{- end -}}
     </div>
 </div>

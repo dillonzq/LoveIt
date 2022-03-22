@@ -19,7 +19,7 @@
 
     {{- /* Title */ -}}
     <h1 class="single-title" itemprop="name headline">
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <a href="{{ .RelPermalink }}">{{ .Title | emojify }}</a>
     </h1>
 
     {{- /* Meta */ -}}

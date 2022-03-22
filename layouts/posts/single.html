@@ -20,7 +20,7 @@
 
     <article class="page single">
         {{- /* Title */ -}}
-        <h1 class="single-title animated flipInX">{{ .Title }}</h1>
+        <h1 class="single-title animated flipInX">{{ .Title | emojify }}</h1>
 
         {{- /* Subtitle */ -}}
         {{- with $params.subtitle -}}
