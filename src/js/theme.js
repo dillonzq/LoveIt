@@ -322,6 +322,58 @@ class Theme {
         if (this.config.lightGallery) lightGallery(document.getElementById('content'), this.config.lightGallery);
     }
 
+    prepareAdocSyntaxStructure() {
+        this.util.forEach(
+            document.querySelectorAll('pre.highlight > code '),
+            block => {
+                const highlightDiv = document.createElement("div")
+                highlightDiv.className = "highlight"
+                const chromaDiv = document.createElement("div")
+                chromaDiv.className = "chroma"
+                const table = document.createElement("table")
+                table.className = "lntable"
+                const tr = document.createElement("tr")
+                highlightDiv.appendChild(chromaDiv)
+                chromaDiv.appendChild(table)
+                table.appendChild(tr)
+
+                const code = block.innerText
+                const lineNumbers = document.createElement("code")
+                const lines = code.split("\n").length
+                  const range = (start, end) => {
+                    return Array(end - start + 1)
+                      .fill(0)
+                      .map((_, i) => i+start)
+                  }
+                range(1, lines)
+                  .map(number => {
+                    const lineNumber = document.createElement("span")
+                    lineNumber.className = "lnt"
+                    lineNumber.innerText = number + "\n"
+                    return lineNumber
+                  })
+                  .forEach(lineNumber => lineNumbers.appendChild(lineNumber))
+                const lineNumberTd = document.createElement("td")
+                lineNumberTd.className = "lntd"
+                const lineNumberPre = document.createElement("pre")
+                lineNumberPre.className = "chroma"
+                lineNumberTd.appendChild(lineNumberPre)
+                lineNumberPre.appendChild(lineNumbers)
+                tr.appendChild(lineNumberTd)
+
+                const codeTd = document.createElement("td")
+                codeTd.className = "lntd"
+                const codePre = block.parentElement
+
+                codePre.parentElement.appendChild(highlightDiv)
+
+                codeTd.appendChild(codePre)
+                codePre.className = "chroma " + codePre.className
+                tr.appendChild(codeTd)
+            })
+    }
+
+
     initHighlight() {
         this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), $preChroma => {
             const $chroma = document.createElement('div');
@@ -337,6 +389,7 @@ class Theme {
             $preChroma.parentElement.replaceChild($chroma, $preChroma);
             $td.appendChild($preChroma);
         });
+        this.prepareAdocSyntaxStructure();
         this.util.forEach(document.querySelectorAll('.highlight > .chroma'), $chroma => {
             const $codeElements = $chroma.querySelectorAll('pre.chroma > code');
             if ($codeElements.length) {
