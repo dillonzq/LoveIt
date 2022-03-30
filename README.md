@@ -12,6 +12,6 @@ This theme enhanced for the adoc. So if you are writing with adoc, you need choo
 
 ## The Enhancements
 
--[x] TOC support for adoc
--[x] Copy code to clipboard for adoc
--[ ] Syntax highlight for adoc
+- [x] TOC support for adoc
+- [x] Copy code to clipboard for adoc
+- [ ] Syntax highlight for adoc
