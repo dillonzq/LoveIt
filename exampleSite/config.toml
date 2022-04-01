@@ -4,14 +4,14 @@ baseURL = "https://example.com"
 defaultContentLanguage = "en"
 # theme
 # 主题
-theme = "LoveIt"
+theme = "LoveItAgain"
 # themes directory
 # 主题目录
 themesDir = "../.."
 
 # website title
 # 网站标题
-title = "LoveIt"
+title = "LoveItAgain"
 
 # whether to use robots.txt
 # 是否使用 robots.txt
