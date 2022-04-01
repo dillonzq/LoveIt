@@ -185,6 +185,34 @@
     {{- dict "Content" $content "Path" (printf "%v.scss" $path) "ToCSS" $options | dict "Scratch" $.Scratch "Data" | partial "scratch/style.html" -}}
 {{- end -}}
 
+{{/*  highlight syntax in adoc  */}}
+{{ with .Page.File }}
+    {{ if eq .Ext "adoc" }}
+        {{ $source := $cdn.highlightCSS | default "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.0/build/styles/atom-one-dark.min.css" }}
+        {{ dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/style.html" }}
+        {{ $source := $cdn.highlightJS | default "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.0/build/highlight.min.js" }}
+        {{ dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" }}
+        {{ $dataLang := ($.GetPage .Path).Content | findRE "data-lang=\"([A-Za-z0-9#-_]+)\"" }}
+        {{ $languages := apply $dataLang "replaceRE" "data-lang=\"([A-Za-z0-9#-_]+)\"" "$1" "." | uniq }}
+        {{ $languageDict := apply $languages "dict" "Value" "." }}
+        {{ $commonLanguages := slice "bash" "c" "csharp" "cpp" "css" "diff" "go" "xml" "json" "java" "javascript" "kotlin" "less" "lua" "makefile" "markdown" "objectivec" "php" "php-template" "perl" "plaintext" "python" "python-repl" "r" "ruby" "rust" "scss" "sql" "shell" "swift" "ini" "typescript" "vbnet" "yaml" }}
+        {{ warnf "languages" }}
+        {{ warnf "%#v" $languageDict }}
+        {{ range where $languages "" "not in" $commonLanguages }}
+            {{ warnf . }}
+        {{ end }}
+        {{ range where $languageDict "Value" "not in" $commonLanguages }}
+            {{ $lowercase := .Value | lower}}
+            {{ $source := print "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.0/build/languages/" $lowercase ".min.js" }}
+            {{ warnf "source"}}
+            {{ warnf "%#v" $source }}
+            {{ dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" }}
+        {{ end }}
+        {{ dict "Source" "js/highlight.min.js" "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" }}
+        {{- $_ := (resources.Get "js/highlight.min.js.map").RelPermalink -}}
+    {{ end }}
+{{ end }}
+
 {{- /* Config script */ -}}
 {{- $config | jsonify | printf "window.config=%s;" | dict "Content" | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 
