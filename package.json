@@ -18,7 +18,7 @@
   },
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
-    "babel": "npx babel src/js --out-file assets/js/theme.min.js --source-maps",
+    "babel": "npx babel src/js --out-dir assets/js --source-maps --out-file-extension .min.js",
     "build": "npm run babel && hugo -v --source=exampleSite --themesDir ../.. --gc",
     "build-lunr-segmentit": "browserify src/lib/lunr.segmentit.js -o assets/lib/lunr/lunr.segmentit.js -t babelify --presets @babel/preset-env --presets minify",
     "start": "npm run babel && hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender",
@@ -34,18 +34,5 @@
       "pre-commit": "npm run build && npm run copy && git add resources assets/js"
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dillonzq/LoveIt.git"
-  },
-  "keywords": [
-    "hugo",
-    "theme"
-  ],
-  "author": "Dillon",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dillonzq/LoveIt/issues"
-  },
-  "homepage": "https://github.com/dillonzq/LoveIt#readme"
+  "license": "MIT"
 }
