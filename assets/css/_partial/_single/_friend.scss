@@ -1,0 +1,127 @@
+#article-container {
+ word-wrap: break-word;
+ overflow-wrap: break-word
+}
+
+#article-container a {
+ color: #49b1f5
+}
+
+#article-container a:hover {
+ text-decoration: underline
+}
+
+#article-container img {
+ margin: 0 auto .8rem
+}
+
+.flink#article-container .friend-list-div > .friend-div a .friend-info,
+.flink#article-container .friend-list-div > .friend-div a .friend-name {
+ overflow: hidden;
+ -o-text-overflow: ellipsis;
+ text-overflow: ellipsis;
+ white-space: nowrap
+}
+
+.flink#article-container .friend-list-div {
+ overflow: auto;
+ padding: 10px 10px 0;
+ text-align: center;
+}
+.flink#article-container .friend-list-div > .friend-div {
+ position: relative;
+ float: left;
+ overflow: hidden;
+ margin: 15px 7px;
+ width: calc(100% / 3 - 15px);
+ height: 90px;
+ border-radius: 8px;
+ line-height: 17px;
+ -webkit-transform: translateZ(0)
+}
+
+@media screen and (max-width: 1100px) {
+ .flink#article-container .friend-list-div > .friend-div {
+  width: calc(50% - 15px) !important
+ }
+
+@media screen and (max-width: 600px) {
+ .flink#article-container .friend-list-div > .friend-div {
+  width: calc(100% - 15px) !important
+ }
+}
+}
+
+.flink#article-container .friend-list-div > .friend-div:hover {
+ background: rgba(87, 142, 224, 0.15);
+}
+
+.flink#article-container .friend-list-div > .friend-div:hover img {
+ -webkit-transform: rotate(360deg);
+ -moz-transform: rotate(360deg);
+ -o-transform: rotate(360deg);
+ -ms-transform: rotate(360deg);
+ transform: rotate(360deg)
+}
+
+.flink#article-container .friend-list-div > .friend-div:before {
+ position: absolute;
+ top: 0;
+ right: 0;
+ bottom: 0;
+ left: 0;
+ z-index: -1;
+ background: var(--text-bg-hover);
+ content: '';
+ -webkit-transition: -webkit-transform .3s ease-out;
+ -moz-transition: -moz-transform .3s ease-out;
+ -o-transition: -o-transform .3s ease-out;
+ -ms-transition: -ms-transform .3s ease-out;
+ transition: transform .3s ease-out;
+ -webkit-transform: scale(0);
+ -moz-transform: scale(0);
+ -o-transform: scale(0);
+ -ms-transform: scale(0);
+ transform: scale(0)
+}
+.flink#article-container .friend-list-div > .friend-div:hover:before,
+.flink#article-container .friend-list-div > .friend-div:focus:before,
+.flink#article-container .friend-list-div > .friend-div:active:before {
+ -webkit-transform: scale(1);
+ -moz-transform: scale(1);
+ -o-transform: scale(1);
+ -ms-transform: scale(1);
+ transform: scale(1)
+}
+.flink#article-container .friend-list-div > .friend-div a {
+ color: var(--font-color);
+ text-decoration: none
+}
+
+.flink#article-container .friend-list-div > .friend-div a img{
+ float: left;
+ margin: 15px 10px;
+ width: 60px;
+ height: 60px;
+ border-radius: 35px;
+ -webkit-transition: all .3s;
+ -moz-transition: all .3s;
+ -o-transition: all .3s;
+ -ms-transition: all .3s;
+ transition: all .3s
+}
+
+.flink#article-container .friend-list-div > .friend-div a .friend-name {
+ display: block;
+ padding: 16px 10px 0 0;
+ height: 40px;
+ font-weight: 700;
+ font-size: 20px
+}
+
+.flink#article-container .friend-list-div > .friend-div a .friend-info {
+ display: block;
+ padding: 1px 10px 1px 0;
+ height: 50px;
+ font-size: 13px
+}
