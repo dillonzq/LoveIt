@@ -233,3 +233,48 @@
 {{- end -}}
 
 {{- partial "plugin/analytics.html" . -}}
+
+{{ with .Page.File }}
+    {{ if eq .Ext "adoc" }}
+        <script>
+            let headerToLi = (header) => {
+                let link = document.createElement('a')
+                link.innerText = header.innerText
+                link.setAttribute('href', '#'+header.id)
+                let item = document.createElement('li')
+                item.appendChild(link)
+                return item
+            }
+            let headerToLiWithChild = (header, childList) => {
+                let li = headerToLi(header)
+                let ul = document.createElement('ul')
+                if (childList.length != 0) {
+                    li.appendChild(ul)
+                    childList.forEach(child => {
+                        ul.appendChild(child)
+                    })
+                }
+                return li
+            }
+            let toc = document.createElement('ul')
+            Array.from(document.getElementById('content').getElementsByTagName('h2'))
+                .map(h2 => {
+                    return headerToLiWithChild(
+                        h2,
+                        Array.from(h2.parentElement.getElementsByTagName('h3'))
+                            .map(h3 => {
+                                return headerToLiWithChild(
+                                    h3,
+                                    Array.from(h3.parentElement.getElementsByTagName('h4'))
+                                        .map(h4 => (headerToLi(h4)))
+                                )
+                            })
+                    )
+                })
+                .forEach(
+                    (li) => (toc.appendChild(li))
+                )
+            document.getElementById('TableOfContents').appendChild(toc)
+        </script>
+    {{ end }}
+{{ end }}
