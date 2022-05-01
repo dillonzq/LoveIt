@@ -196,16 +196,12 @@
         {{ $languages := apply $dataLang "replaceRE" "data-lang=\"([A-Za-z0-9#-_]+)\"" "$1" "." | uniq }}
         {{ $languageDict := apply $languages "dict" "Value" "." }}
         {{ $commonLanguages := slice "bash" "c" "csharp" "cpp" "css" "diff" "go" "xml" "json" "java" "javascript" "kotlin" "less" "lua" "makefile" "markdown" "objectivec" "php" "php-template" "perl" "plaintext" "python" "python-repl" "r" "ruby" "rust" "scss" "sql" "shell" "swift" "ini" "typescript" "vbnet" "yaml" }}
-        {{ warnf "languages" }}
-        {{ warnf "%#v" $languageDict }}
         {{ range where $languages "" "not in" $commonLanguages }}
             {{ warnf . }}
         {{ end }}
         {{ range where $languageDict "Value" "not in" $commonLanguages }}
             {{ $lowercase := .Value | lower}}
             {{ $source := print "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.0/build/languages/" $lowercase ".min.js" }}
-            {{ warnf "source"}}
-            {{ warnf "%#v" $source }}
             {{ dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" }}
         {{ end }}
         {{ dict "Source" "js/highlight.min.js" "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" }}
