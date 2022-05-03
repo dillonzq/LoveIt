@@ -13,8 +13,9 @@
     "browserify": "^16.5.0",
     "core-js": "^3.6.4",
     "husky": "^4.2.3",
-    "minimist": "^1.2.5",
-    "segmentit": "^2.0.3"
+    "minimist": "^1.2.6",
+    "segmentit": "^2.0.3",
+    "lodash": "^4.17.21"
   },
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
@@ -25,9 +26,6 @@
     "start-production": "npm run babel && hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender -e production",
     "check": "htmlproofer exampleSite/public --check-html --allow-hash-href --empty-alt-ignore --disable-external",
     "copy": "rm -rf resources && cp -rf exampleSite/resources resources"
-  },
-  "resolutions": {
-    "minimist": "^1.2.5"
   },
   "husky": {
     "hooks": {
