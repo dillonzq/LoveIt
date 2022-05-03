@@ -1038,6 +1038,6 @@ defaultContentLanguage = "zh-cn"
 
 {{< admonition tip "关于 algolia 的使用技巧" >}}
 你需要上传 `index.json` 到 algolia 来激活搜索功能. 你可以使用浏览器来上传 `index.json` 文件但是一个自动化的脚本可能效果更好.
-[Algolia Atomic](https://github.com/chrisdmacrae/atomic-algolia) 是一个不错的选择.
+官方提供的 [Algolia CLI](https://github.com/algolia/algolia-cli) 是一个不错的选择.
 为了兼容 Hugo 的多语言模式, 你需要上传不同语言的 `index.json` 文件到对应的 algolia index, 例如 `zh-cn/index.json` 或 `fr/index.json`...
 {{< /admonition >}}
