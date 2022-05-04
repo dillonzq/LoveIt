@@ -106,13 +106,21 @@
         {{- $source := $cdn.katexMhchemJS | default "lib/katex/mhchem.min.js" -}}
         {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- end -}}
-    {{- $delimiters := slice (dict "left" "$$" "right" "$$" "display" true) (dict "left" "\\[" "right" "\\]" "display" true) -}}
-    {{- if and $math.blockLeftDelimiter $math.blockRightDelimiter -}}
-        {{- $delimiters = $delimiters | append (dict "left" $math.blockLeftDelimiter "right" $math.blockRightDelimiter "display" true) -}}
-    {{- end -}}
-    {{- $delimiters = $delimiters | append (dict "left" "$" "right" "$" "display" false) (dict "left" "\\(" "right" "\\)" "display" false) -}}
+    {{- $delimiters := slice (dict "left" "$" "right" "$" "display" false) (dict "left" "\\(" "right" "\\)" "display" false) -}}
     {{- if and $math.inlineLeftDelimiter $math.inlineRightDelimiter -}}
         {{- $delimiters = $delimiters | append (dict "left" $math.inlineRightDelimiter "right" $math.inlineRightDelimiter "display" false) -}}
+    {{- end -}}
+    {{- $delimiters = $delimiters | append (dict "left" "$$" "right" "$$" "display" true) (dict "left" "\\[" "right" "\\]" "display" true) -}}
+    {{- $delimiters = $delimiters | append (dict "left" "\\begin{equation}" "right" "\\end{equation}" "display" true) -}}
+    {{- $delimiters = $delimiters | append (dict "left" "\\begin{equation*}" "right" "\\end{equation*}" "display" true) -}}
+    {{- $delimiters = $delimiters | append (dict "left" "\\begin{align}" "right" "\\end{align}" "display" true) -}}
+    {{- $delimiters = $delimiters | append (dict "left" "\\begin{align*}" "right" "\\end{align*}" "display" true) -}}
+    {{- $delimiters = $delimiters | append (dict "left" "\\begin{alignat}" "right" "\\end{alignat}" "display" true) -}}
+    {{- $delimiters = $delimiters | append (dict "left" "\\begin{alignat*}" "right" "\\end{alignat*}" "display" true) -}}
+    {{- $delimiters = $delimiters | append (dict "left" "\\begin{gather}" "right" "\\end{gather}" "display" true) -}}
+    {{- $delimiters = $delimiters | append (dict "left" "\\begin{CD}" "right" "\\end{CD}" "display" true) -}}
+    {{- if and $math.blockLeftDelimiter $math.blockRightDelimiter -}}
+        {{- $delimiters = $delimiters | append (dict "left" $math.blockLeftDelimiter "right" $math.blockRightDelimiter "display" true) -}}
     {{- end -}}
     {{- $config = dict "strict" false "delimiters" $delimiters | dict "math" | merge $config -}}
 {{- end -}}

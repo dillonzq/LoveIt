@@ -69,7 +69,7 @@ math:
 * :(fab fa-font-awesome fa-fw): Extended Markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
 * :(far fa-sticky-note fa-fw): Extended Markdown syntax for **ruby annotation**
 * :(fas fa-percentage fa-fw): Extended Markdown syntax for **fraction**
-* :(fas fa-square-root-alt fa-fw): **Mathematical formula** supported by [$ \KaTeX $](https://katex.org/)
+* :(fas fa-square-root-alt fa-fw): **Mathematical formula** supported by [$\KaTeX$](https://katex.org/)
 * :(fas fa-project-diagram fa-fw): **Diagrams** shortcode supported by [mermaid](https://github.com/knsv/mermaid)
 * :(fas fa-chart-pie fa-fw): **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
 * :(fas fa-map-marked-alt fa-fw): **Mapbox** shortcode supported by [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
@@ -106,7 +106,7 @@ Thanks to the authors of following resources included in the theme:
 * [clipboard.js](https://github.com/zenorocha/clipboard.js)
 * [Sharer.js](https://github.com/ellisonleao/sharer.js)
 * [TypeIt](https://typeitjs.com/)
-* [$ \KaTeX $](https://katex.org/)
+* [$\KaTeX$](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)
 * [ECharts](https://echarts.apache.org/)
 * [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)

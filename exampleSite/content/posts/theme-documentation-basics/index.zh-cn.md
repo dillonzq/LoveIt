@@ -441,12 +441,12 @@ hugo
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} 数学公式
     [params.page.math]
       enable = true
-      # 默认块定界符是 $$ ... $$ 和 \\[ ... \\]
-      blockLeftDelimiter = ""
-      blockRightDelimiter = ""
-      # 默认行内定界符是 $ ... $ 和 \\( ... \\)
+      # 默认行内定界符是 $ ... $ 和 \( ... \)
       inlineLeftDelimiter = ""
       inlineRightDelimiter = ""
+      # 默认块定界符是 $$ ... $$, \[ ... \],  \begin{equation} ... \end{equation} 和一些其它的函数
+      blockLeftDelimiter = ""
+      blockRightDelimiter = ""
       # KaTeX 插件 copy_tex
       copyTex = true
       # KaTeX 插件 mhchem

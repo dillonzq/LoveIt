@@ -69,7 +69,7 @@ math:
 * :(fab fa-font-awesome fa-fw): 支持 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
 * :(far fa-sticky-note fa-fw): 支持**上标注释**的扩展 Markdown 语法
 * :(fas fa-percentage fa-fw): 支持**分数**的扩展 Markdown 语法
-* :(fas fa-square-root-alt fa-fw): 支持基于 [$ \KaTeX $](https://katex.org/) 的**数学公式**
+* :(fas fa-square-root-alt fa-fw): 支持基于 [$\KaTeX$](https://katex.org/) 的**数学公式**
 * :(fas fa-project-diagram fa-fw): 支持基于 [mermaid](https://github.com/knsv/mermaid) 的**图表** shortcode
 * :(fas fa-chart-pie fa-fw): 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化** shortcode
 * :(fas fa-map-marked-alt fa-fw): 支持基于 [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) 的 **Mapbox** shortcode
@@ -106,7 +106,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [clipboard.js](https://github.com/zenorocha/clipboard.js)
 * [Sharer.js](https://github.com/ellisonleao/sharer.js)
 * [TypeIt](https://typeitjs.com/)
-* [$ \KaTeX $](https://katex.org/)
+* [$\KaTeX$](https://katex.org/)
 * [mermaid](https://github.com/knsv/mermaid)
 * [ECharts](https://echarts.apache.org/)
 * [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
