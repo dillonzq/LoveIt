@@ -37,7 +37,7 @@ code, pre, .highlight table, .highlight tr, .highlight td {
   }
 }
 
-.highlight, .gist {
+.highlight {
   font-family: $code-font-family;
   font-size: $code-font-size;
 
@@ -49,6 +49,10 @@ code, pre, .highlight table, .highlight tr, .highlight td {
       margin: 0;
       padding: 0;
       border: none !important;
+
+      span.c {
+        white-space: nowrap;
+      }
     }
   }
 }
@@ -209,6 +213,20 @@ code, pre, .highlight table, .highlight tr, .highlight td {
 }
 
 .gist {
+  font-family: $code-font-family;
+  font-size: $code-font-size;
+
+  .table-wrapper {
+    > table,
+    > table thead,
+    > table tr,
+    > table td {
+      margin: 0;
+      padding: 0;
+      border: none !important;
+    }
+  }
+
   .gist-file, .gist-data, .gist-meta {
     border: none;
   }
