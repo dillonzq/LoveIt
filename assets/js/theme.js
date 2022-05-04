@@ -839,7 +839,8 @@ var Theme = /*#__PURE__*/function () {
       if (SmoothScroll) new SmoothScroll('[href^="#"]', {
         speed: 300,
         speedAsDuration: true,
-        header: '#header-desktop'
+        header: '#header-desktop',
+        offset: 10
       });
     }
   }, {

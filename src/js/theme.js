@@ -623,7 +623,12 @@ class Theme {
     }
 
     initSmoothScroll() {
-        if (SmoothScroll) new SmoothScroll('[href^="#"]', { speed: 300, speedAsDuration: true, header: '#header-desktop' });
+        if (SmoothScroll) new SmoothScroll('[href^="#"]', {
+            speed: 300,
+            speedAsDuration: true,
+            header: '#header-desktop',
+            offset: 10,
+        });
     }
 
     initCookieconsent() {
