@@ -37,6 +37,8 @@
 {{- /* lazysizes */ -}}
 {{- $source := $cdn.lazysizesJS | default "lib/lazysizes/lazysizes.min.js" -}}
 {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+{{- $source := $cdn.lazysizesParentFitJS | default "lib/lazysizes/ls.parent-fit.min.js" -}}
+{{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 
 {{- /* twemoji */ -}}
 {{- if $params.twemoji -}}

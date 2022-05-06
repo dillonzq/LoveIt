@@ -6,7 +6,7 @@ smooth-scroll@16.1.3 https://github.com/cferdinandi/smooth-scroll
 autocomplete@0.38.1 https://github.com/algolia/autocomplete
 lunr.js@2.3.9 https://lunrjs.com/
 algoliasearch@4.2.0 https://github.com/algolia/algoliasearch-client-javascript
-lazysizes@5.2.2 https://github.com/aFarkas/lazysizes
+lazysizes@5.3.1 https://github.com/aFarkas/lazysizes
 object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
 twemoji@13.0.0 https://github.com/twitter/twemoji
 lightgallery.js@1.2.0 https://github.com/sachinchoolur/lightgallery.js

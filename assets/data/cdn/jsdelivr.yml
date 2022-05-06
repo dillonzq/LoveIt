@@ -17,8 +17,9 @@ libFiles:
   lunrJS: lunr@2.3.9/lunr.min.js
   # algoliasearch@4.2.0 https://github.com/algolia/algoliasearch-client-javascript
   algoliasearchJS: algoliasearch@4.2.0/dist/algoliasearch-lite.umd.min.js
-  # lazysizes@5.2.2 https://github.com/aFarkas/lazysizes
-  lazysizesJS: lazysizes@5.2.2/lazysizes.min.js
+  # lazysizes@5.3.1 https://github.com/aFarkas/lazysizes
+  lazysizesJS: lazysizes@5.3.1/lazysizes.min.js
+  lazysizesParentFitJS: lazysizes@5.3.1/plugins/parent-fit/ls.parent-fit.min.js
   # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
   objectFitImagesJS: object-fit-images@3.2.4/dist/ofi.min.js
   # twemoji@13.0.0 https://github.com/twitter/twemoji
