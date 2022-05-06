@@ -150,6 +150,8 @@ LoveIt 支持下列语言:
 
 LoveIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)。
 
+## 特别感谢
+
 LoveIt 主题中用到了以下项目，感谢它们的作者：
 
 * [normalize.css](https://github.com/necolas/normalize.css)
@@ -190,3 +192,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [微信支付](https://github.com/dillonzq/LoveIt/raw/master/images/Wechat.jpg)
 
 谢谢! ❤️
+
+## Star 数目趋势
+
+[![Stargazers over time](https://starchart.cc/dillonzq/LoveIt.svg)](https://starchart.cc/dillonzq/LoveIt)
