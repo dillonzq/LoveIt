@@ -1,1 +1,2 @@
-{{- .Inner | safeHTML -}}
+{{- $id := dict "Content" .Inner "Scratch" .Page.Scratch | partial "function/id.html" -}}
+<data id="{{ $id }}" data-raw></data>

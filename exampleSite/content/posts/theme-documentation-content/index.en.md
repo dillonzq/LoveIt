@@ -267,6 +267,31 @@ therefore, additional escape character expressions are required for these places
 * `\[` -> `\\[`
 * `\]` -> `\\]`
 * `\\` -> `\\\\`
+
+**LoveIt** theme supports `raw` shortcode to avoid these escape characters,
+which helps you write raw mathematical formula content.
+
+Example `raw` input:
+
+```markdown
+Inline Formula: {{</* raw */>}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{</* /raw */>}}
+
+Block Formula:
+
+{{</* raw */>}}
+\[ a=b+c \\ d+e=f \]
+{{</* /raw */>}}
+```
+
+The rendered output looks like this:
+
+Inline Formula: {{< raw >}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{< /raw >}}
+
+Block Formula:
+
+{{< raw>}}
+\[ a=b+c \\ d+e=f \]
+{{< /raw >}}
 {{< /admonition >}}
 
 #### Inline Formula

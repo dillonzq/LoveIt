@@ -94,6 +94,15 @@ var Theme = /*#__PURE__*/function () {
   }
 
   _createClass(Theme, [{
+    key: "initRaw",
+    value: function initRaw() {
+      var _this = this;
+
+      this.util.forEach(document.querySelectorAll('[data-raw]'), function ($raw) {
+        $raw.innerHTML = _this.data[$raw.id];
+      });
+    }
+  }, {
     key: "initSVGIcon",
     value: function initSVGIcon() {
       this.util.forEach(document.querySelectorAll('[data-svg-src]'), function ($icon) {
@@ -139,15 +148,15 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "initSwitchTheme",
     value: function initSwitchTheme() {
-      var _this = this;
+      var _this2 = this;
 
       this.util.forEach(document.getElementsByClassName('theme-switch'), function ($themeSwitch) {
         $themeSwitch.addEventListener('click', function () {
           if (document.body.getAttribute('theme') === 'dark') document.body.setAttribute('theme', 'light');else document.body.setAttribute('theme', 'dark');
-          _this.isDark = !_this.isDark;
-          window.localStorage && localStorage.setItem('theme', _this.isDark ? 'dark' : 'light');
+          _this2.isDark = !_this2.isDark;
+          window.localStorage && localStorage.setItem('theme', _this2.isDark ? 'dark' : 'light');
 
-          var _iterator = _createForOfIteratorHelper(_this.switchThemeEventSet),
+          var _iterator = _createForOfIteratorHelper(_this2.switchThemeEventSet),
               _step;
 
           try {
@@ -166,7 +175,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "initSearch",
     value: function initSearch() {
-      var _this2 = this;
+      var _this3 = this;
 
       var searchConfig = this.config.search;
       var isMobile = this.util.isMobile();
@@ -194,18 +203,18 @@ var Theme = /*#__PURE__*/function () {
           document.getElementById('menu-mobile').classList.remove('active');
           $searchLoading.style.display = 'none';
           $searchClear.style.display = 'none';
-          _this2._searchMobile && _this2._searchMobile.autocomplete.setVal('');
+          _this3._searchMobile && _this3._searchMobile.autocomplete.setVal('');
         }, false);
         $searchClear.addEventListener('click', function () {
           $searchClear.style.display = 'none';
-          _this2._searchMobile && _this2._searchMobile.autocomplete.setVal('');
+          _this3._searchMobile && _this3._searchMobile.autocomplete.setVal('');
         }, false);
 
         this._searchMobileOnClickMask = this._searchMobileOnClickMask || function () {
           $header.classList.remove('open');
           $searchLoading.style.display = 'none';
           $searchClear.style.display = 'none';
-          _this2._searchMobile && _this2._searchMobile.autocomplete.setVal('');
+          _this3._searchMobile && _this3._searchMobile.autocomplete.setVal('');
         };
 
         this.clickMaskEventSet.add(this._searchMobileOnClickMask);
@@ -218,14 +227,14 @@ var Theme = /*#__PURE__*/function () {
         }, false);
         $searchClear.addEventListener('click', function () {
           $searchClear.style.display = 'none';
-          _this2._searchDesktop && _this2._searchDesktop.autocomplete.setVal('');
+          _this3._searchDesktop && _this3._searchDesktop.autocomplete.setVal('');
         }, false);
 
         this._searchDesktopOnClickMask = this._searchDesktopOnClickMask || function () {
           $header.classList.remove('open');
           $searchLoading.style.display = 'none';
           $searchClear.style.display = 'none';
-          _this2._searchDesktop && _this2._searchDesktop.autocomplete.setVal('');
+          _this3._searchDesktop && _this3._searchDesktop.autocomplete.setVal('');
         };
 
         this.clickMaskEventSet.add(this._searchDesktopOnClickMask);
@@ -262,10 +271,10 @@ var Theme = /*#__PURE__*/function () {
                 if (lunr.queryHandler) query = lunr.queryHandler(query);
                 var results = {};
 
-                _this2._index.search(query).forEach(function (_ref) {
+                _this3._index.search(query).forEach(function (_ref) {
                   var ref = _ref.ref,
                       metadata = _ref.matchData.metadata;
-                  var matchData = _this2._indexData[ref];
+                  var matchData = _this3._indexData[ref];
                   var uri = matchData.uri,
                       title = matchData.title,
                       context = matchData.content;
@@ -303,13 +312,13 @@ var Theme = /*#__PURE__*/function () {
                 return Object.values(results).slice(0, maxResultLength);
               };
 
-              if (!_this2._index) {
+              if (!_this3._index) {
                 fetch(searchConfig.lunrIndexURL).then(function (response) {
                   return response.json();
                 }).then(function (data) {
                   var indexData = {};
-                  _this2._index = lunr(function () {
-                    var _this3 = this;
+                  _this3._index = lunr(function () {
+                    var _this4 = this;
 
                     if (searchConfig.lunrLanguageCode) this.use(lunr[searchConfig.lunrLanguageCode]);
                     this.ref('objectID');
@@ -329,10 +338,10 @@ var Theme = /*#__PURE__*/function () {
                     data.forEach(function (record) {
                       indexData[record.objectID] = record;
 
-                      _this3.add(record);
+                      _this4.add(record);
                     });
                   });
-                  _this2._indexData = indexData;
+                  _this3._indexData = indexData;
                   finish(search());
                 }).catch(function (err) {
                   console.error(err);
@@ -340,9 +349,9 @@ var Theme = /*#__PURE__*/function () {
                 });
               } else finish(search());
             } else if (searchConfig.type === 'algolia') {
-              _this2._algoliaIndex = _this2._algoliaIndex || algoliasearch(searchConfig.algoliaAppID, searchConfig.algoliaSearchKey).initIndex(searchConfig.algoliaIndex);
+              _this3._algoliaIndex = _this3._algoliaIndex || algoliasearch(searchConfig.algoliaAppID, searchConfig.algoliaSearchKey).initIndex(searchConfig.algoliaIndex);
 
-              _this2._algoliaIndex.search(query, {
+              _this3._algoliaIndex.search(query, {
                 offset: 0,
                 length: maxResultLength * 8,
                 attributesToHighlight: ['title'],
@@ -406,7 +415,7 @@ var Theme = /*#__PURE__*/function () {
         autosearch.on('autocomplete:selected', function (_event, suggestion, _dataset, _context) {
           window.location.assign(suggestion.uri);
         });
-        if (isMobile) _this2._searchMobile = autosearch;else _this2._searchDesktop = autosearch;
+        if (isMobile) _this3._searchMobile = autosearch;else _this3._searchDesktop = autosearch;
       };
 
       if (searchConfig.lunrSegmentitURL && !document.getElementById('lunr-segmentit')) {
@@ -450,7 +459,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "initHighlight",
     value: function initHighlight() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), function ($preChroma) {
         var $chroma = document.createElement('div');
@@ -491,14 +500,14 @@ var Theme = /*#__PURE__*/function () {
           $copy.insertAdjacentHTML('afterbegin', '<i class="far fa-copy fa-fw"></i>');
           $copy.classList.add('copy');
           var code = $code.innerText;
-          if (_this4.config.code.maxShownLines < 0 || code.split('\n').length < _this4.config.code.maxShownLines + 2) $chroma.classList.add('open');
+          if (_this5.config.code.maxShownLines < 0 || code.split('\n').length < _this5.config.code.maxShownLines + 2) $chroma.classList.add('open');
 
-          if (_this4.config.code.copyTitle) {
+          if (_this5.config.code.copyTitle) {
             $copy.setAttribute('data-clipboard-text', code);
-            $copy.title = _this4.config.code.copyTitle;
+            $copy.title = _this5.config.code.copyTitle;
             var clipboard = new ClipboardJS($copy);
             clipboard.on('success', function (_e) {
-              _this4.util.animateCSS($code, 'flash');
+              _this5.util.animateCSS($code, 'flash');
             });
             $header.appendChild($copy);
           }
@@ -530,7 +539,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "initToc",
     value: function initToc() {
-      var _this5 = this;
+      var _this6 = this;
 
       var $tocCore = document.getElementById('TableOfContents');
       if ($tocCore === null) return;
@@ -572,10 +581,10 @@ var Theme = /*#__PURE__*/function () {
           var maxTocTop = footerTop - $toc.getBoundingClientRect().height;
           var maxScrollTop = maxTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
 
-          if (_this5.newScrollTop < minScrollTop) {
+          if (_this6.newScrollTop < minScrollTop) {
             $toc.style.position = 'absolute';
             $toc.style.top = "".concat(minTocTop, "px");
-          } else if (_this5.newScrollTop > maxScrollTop) {
+          } else if (_this6.newScrollTop > maxScrollTop) {
             $toc.style.position = 'absolute';
             $toc.style.top = "".concat(maxTocTop, "px");
           } else {
@@ -583,11 +592,11 @@ var Theme = /*#__PURE__*/function () {
             $toc.style.top = "".concat(TOP_SPACING, "px");
           }
 
-          _this5.util.forEach($tocLinkElements, function ($tocLink) {
+          _this6.util.forEach($tocLinkElements, function ($tocLink) {
             $tocLink.classList.remove('active');
           });
 
-          _this5.util.forEach($tocLiElements, function ($tocLi) {
+          _this6.util.forEach($tocLiElements, function ($tocLi) {
             $tocLi.classList.remove('has-active');
           });
 
@@ -628,7 +637,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "initMermaid",
     value: function initMermaid() {
-      var _this6 = this;
+      var _this7 = this;
 
       var $mermaidElements = document.getElementsByClassName('mermaid');
 
@@ -638,7 +647,7 @@ var Theme = /*#__PURE__*/function () {
           theme: 'null'
         });
         this.util.forEach($mermaidElements, function ($mermaid) {
-          mermaid.mermaidAPI.render('svg-' + $mermaid.id, _this6.data[$mermaid.id], function (svgCode) {
+          mermaid.mermaidAPI.render('svg-' + $mermaid.id, _this7.data[$mermaid.id], function (svgCode) {
             $mermaid.insertAdjacentHTML('afterbegin', svgCode);
           }, $mermaid);
         });
@@ -647,24 +656,24 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "initEcharts",
     value: function initEcharts() {
-      var _this7 = this;
+      var _this8 = this;
 
       this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || function () {
-        _this7._echartsArr = _this7._echartsArr || [];
+        _this8._echartsArr = _this8._echartsArr || [];
 
-        for (var i = 0; i < _this7._echartsArr.length; i++) {
-          _this7._echartsArr[i].dispose();
+        for (var i = 0; i < _this8._echartsArr.length; i++) {
+          _this8._echartsArr[i].dispose();
         }
 
-        _this7._echartsArr = [];
+        _this8._echartsArr = [];
 
-        _this7.util.forEach(document.getElementsByClassName('echarts'), function ($echarts) {
-          var chart = echarts.init($echarts, _this7.isDark ? 'dark' : 'macarons', {
+        _this8.util.forEach(document.getElementsByClassName('echarts'), function ($echarts) {
+          var chart = echarts.init($echarts, _this8.isDark ? 'dark' : 'macarons', {
             renderer: 'svg'
           });
-          chart.setOption(JSON.parse(_this7.data[$echarts.id]));
+          chart.setOption(JSON.parse(_this8.data[$echarts.id]));
 
-          _this7._echartsArr.push(chart);
+          _this8._echartsArr.push(chart);
         });
       };
 
@@ -673,8 +682,8 @@ var Theme = /*#__PURE__*/function () {
       this._echartsOnSwitchTheme();
 
       this._echartsOnResize = this._echartsOnResize || function () {
-        for (var i = 0; i < _this7._echartsArr.length; i++) {
-          _this7._echartsArr[i].resize();
+        for (var i = 0; i < _this8._echartsArr.length; i++) {
+          _this8._echartsArr[i].resize();
         }
       };
 
@@ -683,30 +692,30 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "initMapbox",
     value: function initMapbox() {
-      var _this8 = this;
+      var _this9 = this;
 
       if (this.config.mapbox) {
         mapboxgl.accessToken = this.config.mapbox.accessToken;
         mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
         this._mapboxArr = this._mapboxArr || [];
         this.util.forEach(document.getElementsByClassName('mapbox'), function ($mapbox) {
-          var _this8$data$$mapbox$i = _this8.data[$mapbox.id],
-              lng = _this8$data$$mapbox$i.lng,
-              lat = _this8$data$$mapbox$i.lat,
-              zoom = _this8$data$$mapbox$i.zoom,
-              lightStyle = _this8$data$$mapbox$i.lightStyle,
-              darkStyle = _this8$data$$mapbox$i.darkStyle,
-              marked = _this8$data$$mapbox$i.marked,
-              navigation = _this8$data$$mapbox$i.navigation,
-              geolocate = _this8$data$$mapbox$i.geolocate,
-              scale = _this8$data$$mapbox$i.scale,
-              fullscreen = _this8$data$$mapbox$i.fullscreen;
+          var _this9$data$$mapbox$i = _this9.data[$mapbox.id],
+              lng = _this9$data$$mapbox$i.lng,
+              lat = _this9$data$$mapbox$i.lat,
+              zoom = _this9$data$$mapbox$i.zoom,
+              lightStyle = _this9$data$$mapbox$i.lightStyle,
+              darkStyle = _this9$data$$mapbox$i.darkStyle,
+              marked = _this9$data$$mapbox$i.marked,
+              navigation = _this9$data$$mapbox$i.navigation,
+              geolocate = _this9$data$$mapbox$i.geolocate,
+              scale = _this9$data$$mapbox$i.scale,
+              fullscreen = _this9$data$$mapbox$i.fullscreen;
           var mapbox = new mapboxgl.Map({
             container: $mapbox,
             center: [lng, lat],
             zoom: zoom,
             minZoom: .2,
-            style: _this8.isDark ? darkStyle : lightStyle,
+            style: _this9.isDark ? darkStyle : lightStyle,
             attributionControl: false
           });
 
@@ -738,16 +747,16 @@ var Theme = /*#__PURE__*/function () {
 
           mapbox.addControl(new MapboxLanguage());
 
-          _this8._mapboxArr.push(mapbox);
+          _this9._mapboxArr.push(mapbox);
         });
 
         this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || function () {
-          _this8.util.forEach(_this8._mapboxArr, function (mapbox) {
+          _this9.util.forEach(_this9._mapboxArr, function (mapbox) {
             var $mapbox = mapbox.getContainer();
-            var _this8$data$$mapbox$i2 = _this8.data[$mapbox.id],
-                lightStyle = _this8$data$$mapbox$i2.lightStyle,
-                darkStyle = _this8$data$$mapbox$i2.darkStyle;
-            mapbox.setStyle(_this8.isDark ? darkStyle : lightStyle);
+            var _this9$data$$mapbox$i2 = _this9.data[$mapbox.id],
+                lightStyle = _this9$data$$mapbox$i2.lightStyle,
+                darkStyle = _this9$data$$mapbox$i2.darkStyle;
+            mapbox.setStyle(_this9.isDark ? darkStyle : lightStyle);
             mapbox.addControl(new MapboxLanguage());
           });
         };
@@ -758,7 +767,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "initTypeit",
     value: function initTypeit() {
-      var _this9 = this;
+      var _this10 = this;
 
       if (this.config.typeit) {
         var typeitConfig = this.config.typeit;
@@ -769,7 +778,7 @@ var Theme = /*#__PURE__*/function () {
           var typeone = function typeone(i) {
             var id = group[i];
             var instance = new TypeIt("#".concat(id), {
-              strings: _this9.data[id],
+              strings: _this10.data[id],
               speed: speed,
               lifeLike: true,
               cursorSpeed: cursorSpeed,
@@ -796,7 +805,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "initComment",
     value: function initComment() {
-      var _this10 = this;
+      var _this11 = this;
 
       if (this.config.comment) {
         if (this.config.comment.gitalk) {
@@ -823,7 +832,7 @@ var Theme = /*#__PURE__*/function () {
           this._utterancesOnSwitchTheme = this._utterancesOnSwitchTheme || function () {
             var message = {
               type: 'set-theme',
-              theme: _this10.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme
+              theme: _this11.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme
             };
             var iframe = document.querySelector('.utterances-frame');
             iframe.contentWindow.postMessage(message, 'https://utteranc.es');
@@ -851,7 +860,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "onScroll",
     value: function onScroll() {
-      var _this11 = this;
+      var _this12 = this;
 
       var $headers = [];
       if (document.body.getAttribute('data-header-desktop') === 'auto') $headers.push(document.getElementById('header-desktop'));
@@ -867,45 +876,45 @@ var Theme = /*#__PURE__*/function () {
       var ACCURACY = 20,
           MINIMUM = 100;
       window.addEventListener('scroll', function () {
-        _this11.newScrollTop = _this11.util.getScrollTop();
-        var scroll = _this11.newScrollTop - _this11.oldScrollTop;
+        _this12.newScrollTop = _this12.util.getScrollTop();
+        var scroll = _this12.newScrollTop - _this12.oldScrollTop;
 
-        var isMobile = _this11.util.isMobile();
+        var isMobile = _this12.util.isMobile();
 
-        _this11.util.forEach($headers, function ($header) {
+        _this12.util.forEach($headers, function ($header) {
           if (scroll > ACCURACY) {
             $header.classList.remove('fadeInDown');
 
-            _this11.util.animateCSS($header, ['fadeOutUp', 'faster'], true);
+            _this12.util.animateCSS($header, ['fadeOutUp', 'faster'], true);
           } else if (scroll < -ACCURACY) {
             $header.classList.remove('fadeOutUp');
 
-            _this11.util.animateCSS($header, ['fadeInDown', 'faster'], true);
+            _this12.util.animateCSS($header, ['fadeInDown', 'faster'], true);
           }
         });
 
-        if (_this11.newScrollTop > MINIMUM) {
+        if (_this12.newScrollTop > MINIMUM) {
           if (isMobile && scroll > ACCURACY) {
             $fixedButtons.classList.remove('fadeIn');
 
-            _this11.util.animateCSS($fixedButtons, ['fadeOut', 'faster'], true);
+            _this12.util.animateCSS($fixedButtons, ['fadeOut', 'faster'], true);
           } else if (!isMobile || scroll < -ACCURACY) {
             $fixedButtons.style.display = 'block';
             $fixedButtons.classList.remove('fadeOut');
 
-            _this11.util.animateCSS($fixedButtons, ['fadeIn', 'faster'], true);
+            _this12.util.animateCSS($fixedButtons, ['fadeIn', 'faster'], true);
           }
         } else {
           if (!isMobile) {
             $fixedButtons.classList.remove('fadeIn');
 
-            _this11.util.animateCSS($fixedButtons, ['fadeOut', 'faster'], true);
+            _this12.util.animateCSS($fixedButtons, ['fadeOut', 'faster'], true);
           }
 
           $fixedButtons.style.display = 'none';
         }
 
-        var _iterator2 = _createForOfIteratorHelper(_this11.scrollEventSet),
+        var _iterator2 = _createForOfIteratorHelper(_this12.scrollEventSet),
             _step2;
 
         try {
@@ -919,20 +928,20 @@ var Theme = /*#__PURE__*/function () {
           _iterator2.f();
         }
 
-        _this11.oldScrollTop = _this11.newScrollTop;
+        _this12.oldScrollTop = _this12.newScrollTop;
       }, false);
     }
   }, {
     key: "onResize",
     value: function onResize() {
-      var _this12 = this;
+      var _this13 = this;
 
       window.addEventListener('resize', function () {
-        if (!_this12._resizeTimeout) {
-          _this12._resizeTimeout = window.setTimeout(function () {
-            _this12._resizeTimeout = null;
+        if (!_this13._resizeTimeout) {
+          _this13._resizeTimeout = window.setTimeout(function () {
+            _this13._resizeTimeout = null;
 
-            var _iterator3 = _createForOfIteratorHelper(_this12.resizeEventSet),
+            var _iterator3 = _createForOfIteratorHelper(_this13.resizeEventSet),
                 _step3;
 
             try {
@@ -946,11 +955,11 @@ var Theme = /*#__PURE__*/function () {
               _iterator3.f();
             }
 
-            _this12.initToc();
+            _this13.initToc();
 
-            _this12.initMermaid();
+            _this13.initMermaid();
 
-            _this12.initSearch();
+            _this13.initSearch();
           }, 100);
         }
       }, false);
@@ -958,10 +967,10 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "onClickMask",
     value: function onClickMask() {
-      var _this13 = this;
+      var _this14 = this;
 
       document.getElementById('mask').addEventListener('click', function () {
-        var _iterator4 = _createForOfIteratorHelper(_this13.clickMaskEventSet),
+        var _iterator4 = _createForOfIteratorHelper(_this14.clickMaskEventSet),
             _step4;
 
         try {
@@ -981,9 +990,10 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "init",
     value: function init() {
-      var _this14 = this;
+      var _this15 = this;
 
       try {
+        this.initRaw();
         this.initSVGIcon();
         this.initTwemoji();
         this.initMenuMobile();
@@ -1006,15 +1016,15 @@ var Theme = /*#__PURE__*/function () {
       }
 
       window.setTimeout(function () {
-        _this14.initToc();
+        _this15.initToc();
 
-        _this14.initComment();
+        _this15.initComment();
 
-        _this14.onScroll();
+        _this15.onScroll();
 
-        _this14.onResize();
+        _this15.onResize();
 
-        _this14.onClickMask();
+        _this15.onClickMask();
       }, 100);
     }
   }]);

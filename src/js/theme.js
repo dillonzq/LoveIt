@@ -43,6 +43,12 @@ class Theme {
         if (window.objectFitImages) objectFitImages();
     }
 
+    initRaw() {
+        this.util.forEach(document.querySelectorAll('[data-raw]'), $raw => {
+            $raw.innerHTML = this.data[$raw.id];
+        });
+    }
+
     initSVGIcon() {
         this.util.forEach(document.querySelectorAll('[data-svg-src]'), $icon => {
             fetch($icon.getAttribute('data-svg-src'))
@@ -703,6 +709,7 @@ class Theme {
 
     init() {
         try {
+            this.initRaw();
             this.initSVGIcon();
             this.initTwemoji();
             this.initMenuMobile();
