@@ -43,7 +43,7 @@
 
   -webkit-box-orient: $orient;
   -moz-box-orient: $orient;
-  box-orient: $orient;
+  // box-orient: $orient;
 }
 
 @mixin placeholder($color) {
