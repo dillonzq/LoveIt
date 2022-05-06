@@ -58,12 +58,12 @@ var Util = /*#__PURE__*/function () {
 
       if (!Array.isArray(animation)) animation = [animation];
 
-      (_element$classList = element.classList).add.apply(_element$classList, ['animated'].concat(_toConsumableArray(animation)));
+      (_element$classList = element.classList).add.apply(_element$classList, ['animate__animated'].concat(_toConsumableArray(animation)));
 
       var handler = function handler() {
         var _element$classList2;
 
-        (_element$classList2 = element.classList).remove.apply(_element$classList2, ['animated'].concat(_toConsumableArray(animation)));
+        (_element$classList2 = element.classList).remove.apply(_element$classList2, ['animate__animated'].concat(_toConsumableArray(animation)));
 
         element.removeEventListener('animationend', handler);
         if (typeof callback === 'function') callback();
@@ -507,7 +507,7 @@ var Theme = /*#__PURE__*/function () {
             $copy.title = _this5.config.code.copyTitle;
             var clipboard = new ClipboardJS($copy);
             clipboard.on('success', function (_e) {
-              _this5.util.animateCSS($code, 'flash');
+              _this5.util.animateCSS($code, 'animate__flash');
             });
             $header.appendChild($copy);
           }
@@ -883,32 +883,32 @@ var Theme = /*#__PURE__*/function () {
 
         _this12.util.forEach($headers, function ($header) {
           if (scroll > ACCURACY) {
-            $header.classList.remove('fadeInDown');
+            $header.classList.remove('animate__fadeInDown');
 
-            _this12.util.animateCSS($header, ['fadeOutUp', 'faster'], true);
+            _this12.util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
           } else if (scroll < -ACCURACY) {
-            $header.classList.remove('fadeOutUp');
+            $header.classList.remove('animate__fadeOutUp');
 
-            _this12.util.animateCSS($header, ['fadeInDown', 'faster'], true);
+            _this12.util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
           }
         });
 
         if (_this12.newScrollTop > MINIMUM) {
           if (isMobile && scroll > ACCURACY) {
-            $fixedButtons.classList.remove('fadeIn');
+            $fixedButtons.classList.remove('animate__fadeIn');
 
-            _this12.util.animateCSS($fixedButtons, ['fadeOut', 'faster'], true);
+            _this12.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
           } else if (!isMobile || scroll < -ACCURACY) {
             $fixedButtons.style.display = 'block';
-            $fixedButtons.classList.remove('fadeOut');
+            $fixedButtons.classList.remove('animate__fadeOut');
 
-            _this12.util.animateCSS($fixedButtons, ['fadeIn', 'faster'], true);
+            _this12.util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
           }
         } else {
           if (!isMobile) {
-            $fixedButtons.classList.remove('fadeIn');
+            $fixedButtons.classList.remove('animate__fadeIn');
 
-            _this12.util.animateCSS($fixedButtons, ['fadeOut', 'faster'], true);
+            _this12.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
           }
 
           $fixedButtons.style.display = 'none';
