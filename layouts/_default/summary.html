@@ -40,7 +40,7 @@
         {{- $categories := slice -}}
         {{- range .Params.categories -}}
             {{- $category := partialCached "function/path.html" . . | printf "/categories/%v" | $.Site.GetPage -}}
-            {{- $categories = $categories | append (printf `<a href="%v"><i class="far fa-folder fa-fw"></i>%v</a>` $category.RelPermalink $category.Title) -}}
+            {{- $categories = $categories | append (printf `<a href="%v"><i class="far fa-folder fa-fw" aria-hidden="true"></i>%v</a>` $category.RelPermalink $category.Title) -}}
         {{- end -}}
         {{- with delimit $categories "&nbsp;" -}}
             &nbsp;<span class="post-category">
@@ -63,7 +63,7 @@
         <a href="{{ .RelPermalink }}">{{ T "readMore" }}</a>
         {{- with .Params.tags -}}
             <div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }},&nbsp;{{ end -}}
                     {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}

@@ -397,7 +397,7 @@ var Theme = /*#__PURE__*/function () {
 
               var _ref8 = searchConfig.type === 'algolia' ? {
                 searchType: 'algolia',
-                icon: '<i class="fab fa-algolia fa-fw"></i>',
+                icon: '<i class="fab fa-algolia fa-fw" aria-hidden="true"></i>',
                 href: 'https://www.algolia.com/'
               } : {
                 searchType: 'Lunr.js',
@@ -484,20 +484,20 @@ var Theme = /*#__PURE__*/function () {
           $header.className = 'code-header ' + $code.className.toLowerCase();
           var $title = document.createElement('span');
           $title.classList.add('code-title');
-          $title.insertAdjacentHTML('afterbegin', '<i class="arrow fas fa-chevron-right fa-fw"></i>');
+          $title.insertAdjacentHTML('afterbegin', '<i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i>');
           $title.addEventListener('click', function () {
             $chroma.classList.toggle('open');
           }, false);
           $header.appendChild($title);
           var $ellipses = document.createElement('span');
-          $ellipses.insertAdjacentHTML('afterbegin', '<i class="fas fa-ellipsis-h fa-fw"></i>');
+          $ellipses.insertAdjacentHTML('afterbegin', '<i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i>');
           $ellipses.classList.add('ellipses');
           $ellipses.addEventListener('click', function () {
             $chroma.classList.add('open');
           }, false);
           $header.appendChild($ellipses);
           var $copy = document.createElement('span');
-          $copy.insertAdjacentHTML('afterbegin', '<i class="far fa-copy fa-fw"></i>');
+          $copy.insertAdjacentHTML('afterbegin', '<i class="far fa-copy fa-fw" aria-hidden="true"></i>');
           $copy.classList.add('copy');
           var code = $code.innerText;
           if (_this5.config.code.maxShownLines < 0 || code.split('\n').length < _this5.config.code.maxShownLines + 2) $chroma.classList.add('open');

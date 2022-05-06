@@ -8,9 +8,9 @@
         <h2 class="single-title animated pulse faster">
             {{- $taxonomy := .Data.Singular -}}
             {{- if eq $taxonomy "category" -}}
-                <i class="far fa-folder-open fa-fw"></i>&nbsp;{{ .Title }}
+                <i class="far fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;{{ .Title }}
             {{- else if eq $taxonomy "tag" -}}
-                <i class="fas fa-tag fa-fw"></i>&nbsp;{{ .Title }}
+                <i class="fas fa-tag fa-fw" aria-hidden="true"></i>&nbsp;{{ .Title }}
             {{- else -}}
                 {{- printf "%v - %v" (T $taxonomy | default $taxonomy) .Title -}}
             {{- end -}}
