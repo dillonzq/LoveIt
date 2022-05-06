@@ -11,8 +11,8 @@ libFiles:
   animateCSS: animate.css@4.1.1/animate.min.css
   # smooth-scroll@16.1.3 https://github.com/cferdinandi/smooth-scroll
   smoothScrollJS: smooth-scroll@16.1.3/dist/smooth-scroll.min.js
-  # autocomplete.js@0.37.1 https://github.com/algolia/autocomplete.js
-  autocompleteJS: autocomplete.js@0.37.1/dist/autocomplete.min.js
+  # autocomplete.js@0.38.1 https://github.com/algolia/autocomplete.js
+  autocompleteJS: autocomplete.js@0.38.1/dist/autocomplete.min.js
   # lunr.js@2.3.8 https://lunrjs.com/
   lunrJS: lunr@2.3.8/lunr.min.js
   # algoliasearch@4.2.0 https://github.com/algolia/algoliasearch-client-javascript
