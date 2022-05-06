@@ -89,6 +89,8 @@ LoveIt is licensed under the **MIT** license.
 
 Check the [LICENSE file](https://github.com/dillonzq/LoveIt/blob/master/LICENSE) for details.
 
+### Special Thanks
+
 Thanks to the authors of following resources included in the theme:
 
 * [normalize.css](https://github.com/necolas/normalize.css)
