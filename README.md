@@ -155,6 +155,8 @@ All feedback is welcome! Head over to the [issue tracker](https://github.com/dil
 
 LoveIt is licensed under the **MIT** license. Check the [LICENSE file](https://github.com/dillonzq/LoveIt/blob/master/LICENSE) for details.
 
+## Special Thanks
+
 Thanks to the authors of following resources included in the theme:
 
 * [normalize.css](https://github.com/necolas/normalize.css)
@@ -195,3 +197,7 @@ If you enjoy the theme, please consider buying me a coffee ☕️.
 * [Wechat](https://github.com/dillonzq/LoveIt/raw/master/images/Wechat.jpg)
 
 Thanks! ❤️
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/dillonzq/LoveIt.svg)](https://starchart.cc/dillonzq/LoveIt)
