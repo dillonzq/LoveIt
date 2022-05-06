@@ -195,4 +195,4 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 
 ## Star 数目趋势
 
-[![Stargazers over time](https://starchart.cc/dillonzq/LoveIt.svg)](https://starchart.cc/dillonzq/LoveIt)
+[![Star 数目趋势](https://starchart.cc/dillonzq/LoveIt.svg)](https://starchart.cc/dillonzq/LoveIt)
