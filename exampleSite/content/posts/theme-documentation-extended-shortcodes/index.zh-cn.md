@@ -17,6 +17,9 @@ tags: ["shortcodes"]
 categories: ["documentation"]
 
 lightgallery: true
+
+math:
+  enable: true
 mapbox:
   lightStyle: mapbox://styles/mapbox/light-zh-v1?optimize=true
   darkStyle: mapbox://styles/mapbox/dark-zh-v1?optimize=true
@@ -1295,3 +1298,33 @@ console.log('Hello LoveIt!');
 {{< script >}}
 console.log('Hello LoveIt!');
 {{< /script >}}
+
+## 12 raw
+
+`raw` shortcode 用来在你的文章中插入原始 **:(fab fa-html5 fa-fw): HTML** 内容.
+
+一个 `raw` 示例:
+
+```markdown
+行内公式: {{</* raw */>}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{</* /raw */>}}
+
+公式块:
+
+{{</* raw */>}}
+\[ a=b+c \\ d+e=f \]
+{{</* /raw */>}}
+
+原始的带有 Markdown 语法的内容: {{</* raw */>}}**Hello**{{</* /raw */>}}
+```
+
+呈现的输出效果如下:
+
+行内公式: {{< raw >}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{< /raw >}}
+
+公式块:
+
+{{< raw>}}
+\[ a=b+c \\ d+e=f \]
+{{< /raw >}}
+
+原始的带有 Markdown 语法的内容: {{< raw >}}**Hello**{{< /raw >}}

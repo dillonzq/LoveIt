@@ -17,6 +17,9 @@ tags: ["shortcodes"]
 categories: ["documentation"]
 
 lightgallery: true
+
+math:
+  enable: true
 ---
 
 **LoveIt** theme provides multiple shortcodes on top of built-in ones in Hugo.
@@ -1293,3 +1296,34 @@ You can see the output in the console of the developer tool.
 {{< script >}}
 console.log('Hello LoveIt!');
 {{< /script >}}
+
+## 12 raw
+
+`raw` is a shortcode to insert raw **:(fab fa-html5 fa-fw): HTML** content in your post.
+This is useful when you want to include some Markdown content to **avoid being rendered or escaped** by Hugo.
+
+Example `raw` input:
+
+```markdown
+Inline Formula: {{</* raw */>}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{</* /raw */>}}
+
+Block Formula:
+
+{{</* raw */>}}
+\[ a=b+c \\ d+e=f \]
+{{</* /raw */>}}
+
+Raw content using Markdown syntax: {{</* raw */>}}**Hello**{{</* /raw */>}}
+```
+
+The rendered output looks like this:
+
+Inline Formula: {{< raw >}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{< /raw >}}
+
+Block Formula:
+
+{{< raw>}}
+\[ a=b+c \\ d+e=f \]
+{{< /raw >}}
+
+Raw content using Markdown syntax: {{< raw >}}**Hello**{{< /raw >}}
