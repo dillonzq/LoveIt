@@ -11,7 +11,7 @@
     "babelify": "^10.0.0",
     "browserify": "^16.5.2",
     "core-js": "^3.22.4",
-    "husky": "^4.3.8",
+    "husky": "^7.0.0",
     "segmentit": "^2.0.3"
   },
   "scripts": {
@@ -22,12 +22,8 @@
     "start": "npm run babel && hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender",
     "start-production": "npm run babel && hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender -e production",
     "check": "htmlproofer exampleSite/public --check-html --allow-hash-href --empty-alt-ignore --disable-external",
-    "copy": "rm -rf resources && cp -rf exampleSite/resources resources"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run build && npm run copy && git add resources assets/js"
-    }
+    "copy": "rm -rf resources && cp -rf exampleSite/resources resources",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
