@@ -165,6 +165,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [lazysizes](https://github.com/aFarkas/lazysizes)
 * [object-fit-images](https://github.com/fregante/object-fit-images)
 * [Twemoji](https://github.com/twitter/twemoji)
+* [emoji-data](https://github.com/iamcal/emoji-data)
 * [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * [clipboard.js](https://github.com/zenorocha/clipboard.js)
 * [Sharer.js](https://github.com/ellisonleao/sharer.js)

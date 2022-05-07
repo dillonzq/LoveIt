@@ -22,8 +22,8 @@ libFiles:
   lazysizesParentFitJS: lazysizes@5.3.1/plugins/parent-fit/ls.parent-fit.min.js
   # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
   objectFitImagesJS: object-fit-images@3.2.4/dist/ofi.min.js
-  # twemoji@13.0.0 https://github.com/twitter/twemoji
-  twemojiJS: twemoji@13.0.0/dist/twemoji.min.js
+  # twemoji@14.0.2 https://github.com/twitter/twemoji
+  twemojiJS: twemoji@14.0.2/dist/twemoji.min.js
   # lightgallery.js@1.2.0 https://github.com/sachinchoolur/lightgallery.js
   # lg-thumbnail.js@1.2.0 https://github.com/sachinchoolur/lg-thumbnail.js
   # lg-zoom.js@1.2.0 https://github.com/sachinchoolur/lg-zoom.js

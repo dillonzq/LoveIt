@@ -1,4 +1,4 @@
-emojiCDN: 'https://cdn.jsdelivr.net/npm/emoji-datasource-facebook@5.0.1/img/facebook/64/'
+emojiCDN: 'https://cdn.jsdelivr.net/npm/emoji-datasource-facebook@14.0.0/img/facebook/64/'
 emojiMaps:
   '100': 1f4af.png
   grinning: 1f600.png
