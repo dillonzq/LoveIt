@@ -639,19 +639,27 @@ var Theme = /*#__PURE__*/function () {
     value: function initMermaid() {
       var _this7 = this;
 
-      var $mermaidElements = document.getElementsByClassName('mermaid');
+      this._mermaidOnSwitchTheme = this._mermaidOnSwitchTheme || function () {
+        var $mermaidElements = document.getElementsByClassName('mermaid');
 
-      if ($mermaidElements.length) {
-        mermaid.initialize({
-          startOnLoad: false,
-          theme: 'null'
-        });
-        this.util.forEach($mermaidElements, function ($mermaid) {
-          mermaid.mermaidAPI.render('svg-' + $mermaid.id, _this7.data[$mermaid.id], function (svgCode) {
-            $mermaid.insertAdjacentHTML('afterbegin', svgCode);
-          }, $mermaid);
-        });
-      }
+        if ($mermaidElements.length) {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: _this7.isDark ? 'dark' : 'neutral',
+            securityLevel: 'loose'
+          });
+
+          _this7.util.forEach($mermaidElements, function ($mermaid) {
+            mermaid.render('svg-' + $mermaid.id, _this7.data[$mermaid.id], function (svgCode) {
+              $mermaid.innerHTML = svgCode;
+            }, $mermaid);
+          });
+        }
+      };
+
+      this.switchThemeEventSet.add(this._mermaidOnSwitchTheme);
+
+      this._mermaidOnSwitchTheme();
     }
   }, {
     key: "initEcharts",
@@ -918,9 +926,15 @@ var Theme = /*#__PURE__*/function () {
             _step2;
 
         try {
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var _loop = function _loop() {
             var event = _step2.value;
-            event();
+            window.setTimeout(function () {
+              event();
+            }, 100);
+          };
+
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            _loop();
           }
         } catch (err) {
           _iterator2.e(err);
@@ -928,6 +942,7 @@ var Theme = /*#__PURE__*/function () {
           _iterator2.f();
         }
 
+        ;
         _this12.oldScrollTop = _this12.newScrollTop;
       }, false);
     }

@@ -464,44 +464,34 @@ Example **git graph** `mermaid` input:
 
 ```markdown
 {{</* mermaid */>}}
-gitGraph:
-options
-{
-    "nodeSpacing": 100,
-    "nodeRadius": 10
-}
-end
-    commit
-    branch newbranch
-    checkout newbranch
+gitGraph
     commit
     commit
-    checkout master
+    branch develop
+    checkout develop
     commit
     commit
-    merge newbranch
+    checkout main
+    merge develop
+    commit
+    commit
 {{</* /mermaid */>}}
 ```
 
 The rendered output looks like this:
 
 {{< mermaid >}}
-gitGraph:
-options
-{
-    "nodeSpacing": 100,
-    "nodeRadius": 10
-}
-end
-    commit
-    branch newbranch
-    checkout newbranch
+gitGraph
     commit
     commit
-    checkout master
+    branch develop
+    checkout develop
     commit
     commit
-    merge newbranch
+    checkout main
+    merge develop
+    commit
+    commit
 {{< /mermaid >}}
 
 ### 5.7 Pie {#pie}

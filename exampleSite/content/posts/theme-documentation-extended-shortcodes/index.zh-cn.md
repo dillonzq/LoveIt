@@ -467,44 +467,34 @@ stateDiagram
 
 ```markdown
 {{</* mermaid */>}}
-gitGraph:
-options
-{
-    "nodeSpacing": 100,
-    "nodeRadius": 10
-}
-end
-    commit
-    branch newbranch
-    checkout newbranch
+gitGraph
     commit
     commit
-    checkout master
+    branch develop
+    checkout develop
     commit
     commit
-    merge newbranch
+    checkout main
+    merge develop
+    commit
+    commit
 {{</* /mermaid */>}}
 ```
 
 呈现的输出效果如下:
 
 {{< mermaid >}}
-gitGraph:
-options
-{
-    "nodeSpacing": 100,
-    "nodeRadius": 10
-}
-end
-    commit
-    branch newbranch
-    checkout newbranch
+gitGraph
     commit
     commit
-    checkout master
+    branch develop
+    checkout develop
     commit
     commit
-    merge newbranch
+    checkout main
+    merge develop
+    commit
+    commit
 {{< /mermaid >}}
 
 ### 5.7 饼图 {#pie}
