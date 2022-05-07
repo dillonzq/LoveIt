@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Guide to emoji usage in Hugo and LoveIt."
+images: ["featured-image.png"]
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"

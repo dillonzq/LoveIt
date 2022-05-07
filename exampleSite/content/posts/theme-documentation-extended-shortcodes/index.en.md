@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "LoveIt theme provides multiple shortcodes on top of built-in ones in Hugo."
+images: ["featured-image.png"]
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"

@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Hugo 提供了多个内置的 Shortcodes, 以方便作者保持 Markdown 内容的整洁."
+images: ["featured-image.png"]
 resources:
 - name: "featured-image"
   src: "featured-image.png"

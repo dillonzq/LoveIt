@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "探索 Hugo - LoveIt 主题的全部内容和背后的核心概念."
+images: ["featured-image.png"]
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
@@ -197,12 +198,6 @@ hugo
 
 ```toml
 [params]
-  # {{< version 0.2.0 changed >}} LoveIt 主题版本
-  version = "0.2.X"
-  # 网站描述
-  description = "这是我的全新 Hugo 网站"
-  # 网站关键词
-  keywords = ["Theme", "Hugo"]
   # 网站默认主题样式 ("light", "dark", "auto")
   defaultTheme = "auto"
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
@@ -212,45 +207,12 @@ hugo
   fingerprint = ""
   # {{< version 0.2.0 >}} 日期格式
   dateFormat = "2006-01-02"
+  # 网站标题, 用于 Open Graph 和 Twitter Cards
+  title = "我的网站"
+  # 网站描述, 用于 RSS, SEO, Open Graph 和 Twitter Cards
+  description = "这是我的全新 Hugo 网站"
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = ["/logo.png"]
-
-  # {{< version 0.2.0 >}} 应用图标配置
-  [params.app]
-    # 当添加到 iOS 主屏幕或者 Android 启动器时的标题, 覆盖默认标题
-    title = "LoveIt"
-    # 是否隐藏网站图标资源链接
-    noFavicon = false
-    # 更现代的 SVG 网站图标, 可替代旧的 .png 和 .ico 文件
-    svgFavicon = ""
-    # Android 浏览器主题色
-    themeColor = "#ffffff"
-    # Safari 图标颜色
-    iconColor = "#5bbad5"
-    # Windows v8-10磁贴颜色
-    tileColor = "#da532c"
-
-  # {{< version 0.2.0 >}} 搜索配置
-  [params.search]
-    enable = true
-    # 搜索引擎的类型 ("lunr", "algolia")
-    type = "lunr"
-    # 文章内容最长索引长度
-    contentLength = 4000
-    # 搜索框的占位提示语
-    placeholder = ""
-    # {{< version 0.2.1 >}} 最大结果数目
-    maxResultLength = 10
-    # {{< version 0.2.3 >}} 结果内容片段长度
-    snippetLength = 50
-    # {{< version 0.2.1 >}} 搜索结果中高亮部分的 HTML 标签
-    highlightTag = "em"
-    # {{< version 0.2.4 >}} 是否在搜索索引中使用基于 baseURL 的绝对路径
-    absoluteURL = false
-    [params.search.algolia]
-      index = ""
-      appID = ""
-      searchKey = ""
 
   # 页面头部导航栏配置
   [params.header]
@@ -306,6 +268,43 @@ hugo
     dateFormat = "01-02"
     # RSS 文章数目
     rss = 10
+
+  # {{< version 0.2.0 >}} 应用图标配置
+  [params.app]
+    # 当添加到 iOS 主屏幕或者 Android 启动器时的标题, 覆盖默认标题
+    title = "我的网站"
+    # 是否隐藏网站图标资源链接
+    noFavicon = false
+    # 更现代的 SVG 网站图标, 可替代旧的 .png 和 .ico 文件
+    svgFavicon = ""
+    # Android 浏览器主题色
+    themeColor = "#ffffff"
+    # Safari 图标颜色
+    iconColor = "#5bbad5"
+    # Windows v8-10磁贴颜色
+    tileColor = "#da532c"
+
+  # {{< version 0.2.0 >}} 搜索配置
+  [params.search]
+    enable = true
+    # 搜索引擎的类型 ("lunr", "algolia")
+    type = "lunr"
+    # 文章内容最长索引长度
+    contentLength = 4000
+    # 搜索框的占位提示语
+    placeholder = ""
+    # {{< version 0.2.1 >}} 最大结果数目
+    maxResultLength = 10
+    # {{< version 0.2.3 >}} 结果内容片段长度
+    snippetLength = 50
+    # {{< version 0.2.1 >}} 搜索结果中高亮部分的 HTML 标签
+    highlightTag = "em"
+    # {{< version 0.2.4 >}} 是否在搜索索引中使用基于 baseURL 的绝对路径
+    absoluteURL = false
+    [params.search.algolia]
+      index = ""
+      appID = ""
+      searchKey = ""
 
   # 主页配置
   [params.home]
@@ -404,7 +403,7 @@ hugo
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
 
-  # {{< version 0.2.0 changed >}} 文章页面配置
+  # {{< version 0.2.0 changed >}} 文章页面全局配置
   [params.page]
     # {{< version 0.2.0 >}} 是否在主页隐藏一篇文章
     hiddenFromHomePage = false
@@ -499,7 +498,7 @@ hugo
       Mix = false
     # {{< version 0.2.0 changed >}} 评论系统设置
     [params.page.comment]
-      enable = true
+      enable = false
       # {{< link "https://disqus.com/" Disqus >}} 评论系统设置
       [params.page.comment.disqus]
         # {{< version 0.1.1 >}}

@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "了解如何在 LoveIt 主题中快速, 直观地创建和组织内容."
+images: ["featured-image.png"]
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"

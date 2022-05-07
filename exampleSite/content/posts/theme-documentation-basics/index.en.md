@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Discover what the Hugo - LoveIt theme is all about and the core-concepts behind it."
+images: ["featured-image.png"]
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
@@ -84,10 +85,6 @@ title = "My New Hugo Site"
 
 # Change the default theme to be use when building the site with Hugo
 theme = "LoveIt"
-
-[params]
-  # LoveIt theme version
-  version = "0.2.X"
 
 [menu]
   [[menu.main]]
@@ -194,12 +191,6 @@ Please open the code block below to view the complete sample configuration :(far
 
 ```toml
 [params]
-  # {{< version 0.2.0 changed >}} LoveIt theme version
-  version = "0.2.X"
-  # site description
-  description = "This is My New Hugo Site"
-  # site keywords
-  keywords = ["Theme", "Hugo"]
   # site default theme ("light", "dark", "auto")
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
@@ -209,45 +200,12 @@ Please open the code block below to view the complete sample configuration :(far
   fingerprint = ""
   # {{< version 0.2.0 >}} date format
   dateFormat = "2006-01-02"
+  # website title for Open Graph and Twitter Cards
+  title = "My cool site"
+  # website description for RSS, SEO, Open Graph and Twitter Cards
+  description = "This is my cool site"
   # website images for Open Graph and Twitter Cards
   images = ["/logo.png"]
-
-  # {{< version 0.2.0 >}} App icon config
-  [params.app]
-    # optional site title override for the app when added to an iOS home screen or Android launcher
-    title = "LoveIt"
-    # whether to omit favicon resource links
-    noFavicon = false
-    # modern SVG favicon to use in place of older style .png and .ico files
-    svgFavicon = ""
-    # Android browser theme color
-    themeColor = "#ffffff"
-    # Safari mask icon color
-    iconColor = "#5bbad5"
-    # Windows v8-10 tile color
-    tileColor = "#da532c"
-
-  # {{< version 0.2.0 >}} Search config
-  [params.search]
-    enable = true
-    # type of search engine ("lunr", "algolia")
-    type = "lunr"
-    # max index length of the chunked content
-    contentLength = 4000
-    # placeholder of the search bar
-    placeholder = ""
-    # {{< version 0.2.1 >}} max number of results length
-    maxResultLength = 10
-    # {{< version 0.2.3 >}} snippet length of the result
-    snippetLength = 30
-    # {{< version 0.2.1 >}} HTML tag name of the highlight part in results
-    highlightTag = "em"
-    # {{< version 0.2.4 >}} whether to use the absolute URL based on the baseURL in search index
-    absoluteURL = false
-    [params.search.algolia]
-      index = ""
-      appID = ""
-      searchKey = ""
 
   # Header config
   [params.header]
@@ -303,6 +261,43 @@ Please open the code block below to view the complete sample configuration :(far
     dateFormat = "01-02"
     # amount of RSS pages
     rss = 10
+
+  # {{< version 0.2.0 >}} App icon config
+  [params.app]
+    # optional site title override for the app when added to an iOS home screen or Android launcher
+    title = "My cool site"
+    # whether to omit favicon resource links
+    noFavicon = false
+    # modern SVG favicon to use in place of older style .png and .ico files
+    svgFavicon = ""
+    # Android browser theme color
+    themeColor = "#ffffff"
+    # Safari mask icon color
+    iconColor = "#5bbad5"
+    # Windows v8-10 tile color
+    tileColor = "#da532c"
+
+  # {{< version 0.2.0 >}} Search config
+  [params.search]
+    enable = true
+    # type of search engine ("lunr", "algolia")
+    type = "lunr"
+    # max index length of the chunked content
+    contentLength = 4000
+    # placeholder of the search bar
+    placeholder = ""
+    # {{< version 0.2.1 >}} max number of results length
+    maxResultLength = 10
+    # {{< version 0.2.3 >}} snippet length of the result
+    snippetLength = 30
+    # {{< version 0.2.1 >}} HTML tag name of the highlight part in results
+    highlightTag = "em"
+    # {{< version 0.2.4 >}} whether to use the absolute URL based on the baseURL in search index
+    absoluteURL = false
+    [params.search.algolia]
+      index = ""
+      appID = ""
+      searchKey = ""
 
   # Home page config
   [params.home]
@@ -401,7 +396,7 @@ Please open the code block below to view the complete sample configuration :(far
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
 
-  # {{< version 0.2.0 changed >}} Page config
+  # {{< version 0.2.0 changed >}} Page global config
   [params.page]
     # {{< version 0.2.0 >}} whether to hide a page from home page
     hiddenFromHomePage = false
@@ -496,7 +491,7 @@ Please open the code block below to view the complete sample configuration :(far
       Mix = false
     # {{< version 0.2.0 changed >}} Comment config
     [params.page.comment]
-      enable = true
+      enable = false
       # {{< link "https://disqus.com/" Disqus >}} comment config
       [params.page.comment.disqus]
         # {{< version 0.1.1 >}}
