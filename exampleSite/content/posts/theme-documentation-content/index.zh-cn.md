@@ -7,7 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "了解如何在 LoveIt 主题中快速, 直观地创建和组织内容."
-images: ["featured-image.png"]
+images: ["featured-image.jpg"]
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
@@ -267,7 +267,7 @@ resources:
 * `\]` -> `\\]`
 * `\\` -> `\\\\`
 
-**LoveIt** 主题支持 `raw` shortcode 以避免这些转义字符,
+**LoveIt** 主题支持 [`raw` shortcode](../theme-documentation-extended-shortcodes#12-raw) 以避免这些转义字符,
 它可以帮助您编写原始数学公式内容.
 
 一个 `raw` 示例:

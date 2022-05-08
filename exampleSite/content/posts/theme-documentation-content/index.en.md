@@ -7,7 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Find out how to create and organize your content quickly and intuitively in LoveIt theme."
-images: ["featured-image.png"]
+images: ["featured-image.jpg"]
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
@@ -269,7 +269,7 @@ therefore, additional escape character expressions are required for these places
 * `\]` -> `\\]`
 * `\\` -> `\\\\`
 
-**LoveIt** theme supports `raw` shortcode to avoid these escape characters,
+**LoveIt** theme supports [`raw` shortcode](../theme-documentation-extended-shortcodes#12-raw) to avoid these escape characters,
 which helps you write raw mathematical formula content.
 
 Example `raw` input:
