@@ -500,7 +500,7 @@ class Theme {
             }
             this._echartsArr = [];
             this.util.forEach(document.getElementsByClassName('echarts'), $echarts => {
-                const chart = echarts.init($echarts, this.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
+                const chart = echarts.init($echarts, this.isDark ? 'chalk' : 'macarons', {renderer: 'svg'});
                 chart.setOption(JSON.parse(this.data[$echarts.id]));
                 this._echartsArr.push(chart);
             });

@@ -676,7 +676,7 @@ var Theme = /*#__PURE__*/function () {
         _this8._echartsArr = [];
 
         _this8.util.forEach(document.getElementsByClassName('echarts'), function ($echarts) {
-          var chart = echarts.init($echarts, _this8.isDark ? 'dark' : 'macarons', {
+          var chart = echarts.init($echarts, _this8.isDark ? 'chalk' : 'macarons', {
             renderer: 'svg'
           });
           chart.setOption(JSON.parse(_this8.data[$echarts.id]));
