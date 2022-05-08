@@ -21,9 +21,6 @@ lightgallery: true
 
 math:
   enable: true
-mapbox:
-  lightStyle: mapbox://styles/mapbox/light-zh-v1?optimize=true
-  darkStyle: mapbox://styles/mapbox/dark-zh-v1?optimize=true
 ---
 
 **LoveIt** 主题在 Hugo 内置的 shortcode 的基础上提供多个扩展的 shortcode.

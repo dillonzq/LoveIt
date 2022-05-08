@@ -448,9 +448,9 @@ Please open the code block below to view the complete sample configuration :(far
       # access token of Mapbox GL JS
       accessToken = ""
       # style for the light theme
-      lightStyle = "mapbox://styles/mapbox/light-v9"
+      lightStyle = "mapbox://styles/mapbox/light-v10?optimize=true"
       # style for the dark theme
-      darkStyle = "mapbox://styles/mapbox/dark-v9"
+      darkStyle = "mapbox://styles/mapbox/dark-v10?optimize=true"
       # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#navigationcontrol" NavigationControl >}}
       navigation = true
       # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#geolocatecontrol" GeolocateControl >}}

@@ -19,6 +19,9 @@ hiddenFromHomePage: true
 
 toc:
   enable: false
+mapbox:
+  lightStyle: mapbox://styles/mapbox/light-zh-v1?optimize=true
+  darkStyle: mapbox://styles/mapbox/dark-zh-v1?optimize=true
 ---
 
 {{< version 0.2.0 >}}
@@ -94,9 +97,9 @@ toc:
 一个带有自定义样式的 `mapbox` 示例:
 
 ```markdown
-{{</* mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/streets-zh-v1" */>}}
+{{</* mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/streets-zh-v1?optimize=true" */>}}
 或者
-{{</* mapbox lng=-122.252 lat=37.453 zoom=10 marked=false light-style="mapbox://styles/mapbox/streets-zh-v1" */>}}
+{{</* mapbox lng=-122.252 lat=37.453 zoom=10 marked=false light-style="mapbox://styles/mapbox/streets-zh-v1?optimize=true" */>}}
 ```
 
 呈现的输出效果如下:
