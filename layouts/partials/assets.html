@@ -136,8 +136,9 @@
 {{- if (.Scratch.Get "this").echarts -}}
     {{- $source := $cdn.echartsJS | default "lib/echarts/echarts.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-    {{- dict "Source" "lib/echarts/theme/macarons.js" "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-    {{- dict "Source" "lib/echarts/theme/chalk.js" "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+    {{- $lightTheme := resources.Get "lib/echarts/theme/light.yml" | transform.Unmarshal -}}
+    {{- $darkTheme := resources.Get "lib/echarts/theme/dark.yml" | transform.Unmarshal -}}
+    {{- $config = dict "lightTheme" $lightTheme "darkTheme" $darkTheme | dict "echarts" | merge $config -}}
 {{- end -}}
 
 {{- /* Mapbox GL */ -}}

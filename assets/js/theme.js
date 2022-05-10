@@ -666,36 +666,41 @@ var Theme = /*#__PURE__*/function () {
     value: function initEcharts() {
       var _this8 = this;
 
-      this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || function () {
-        _this8._echartsArr = _this8._echartsArr || [];
+      if (this.config.echarts) {
+        echarts.registerTheme('light', this.config.echarts.lightTheme);
+        echarts.registerTheme('dark', this.config.echarts.darkTheme);
 
-        for (var i = 0; i < _this8._echartsArr.length; i++) {
-          _this8._echartsArr[i].dispose();
-        }
+        this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || function () {
+          _this8._echartsArr = _this8._echartsArr || [];
 
-        _this8._echartsArr = [];
+          for (var i = 0; i < _this8._echartsArr.length; i++) {
+            _this8._echartsArr[i].dispose();
+          }
 
-        _this8.util.forEach(document.getElementsByClassName('echarts'), function ($echarts) {
-          var chart = echarts.init($echarts, _this8.isDark ? 'chalk' : 'macarons', {
-            renderer: 'svg'
+          _this8._echartsArr = [];
+
+          _this8.util.forEach(document.getElementsByClassName('echarts'), function ($echarts) {
+            var chart = echarts.init($echarts, _this8.isDark ? 'dark' : 'light', {
+              renderer: 'svg'
+            });
+            chart.setOption(JSON.parse(_this8.data[$echarts.id]));
+
+            _this8._echartsArr.push(chart);
           });
-          chart.setOption(JSON.parse(_this8.data[$echarts.id]));
+        };
 
-          _this8._echartsArr.push(chart);
-        });
-      };
+        this.switchThemeEventSet.add(this._echartsOnSwitchTheme);
 
-      this.switchThemeEventSet.add(this._echartsOnSwitchTheme);
+        this._echartsOnSwitchTheme();
 
-      this._echartsOnSwitchTheme();
+        this._echartsOnResize = this._echartsOnResize || function () {
+          for (var i = 0; i < _this8._echartsArr.length; i++) {
+            _this8._echartsArr[i].resize();
+          }
+        };
 
-      this._echartsOnResize = this._echartsOnResize || function () {
-        for (var i = 0; i < _this8._echartsArr.length; i++) {
-          _this8._echartsArr[i].resize();
-        }
-      };
-
-      this.resizeEventSet.add(this._echartsOnResize);
+        this.resizeEventSet.add(this._echartsOnResize);
+      }
     }
   }, {
     key: "initMapbox",
