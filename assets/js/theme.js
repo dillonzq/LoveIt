@@ -931,15 +931,9 @@ var Theme = /*#__PURE__*/function () {
             _step2;
 
         try {
-          var _loop = function _loop() {
-            var event = _step2.value;
-            window.setTimeout(function () {
-              event();
-            }, 100);
-          };
-
           for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-            _loop();
+            var event = _step2.value;
+            event();
           }
         } catch (err) {
           _iterator2.e(err);
@@ -947,7 +941,6 @@ var Theme = /*#__PURE__*/function () {
           _iterator2.f();
         }
 
-        ;
         _this12.oldScrollTop = _this12.newScrollTop;
       }, false);
     }

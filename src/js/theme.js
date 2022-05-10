@@ -689,9 +689,7 @@ class Theme {
                 }
                 $fixedButtons.style.display = 'none';
             }
-            for (let event of this.scrollEventSet) window.setTimeout(() => {
-                event();
-            }, 100);;
+            for (let event of this.scrollEventSet) event();
             this.oldScrollTop = this.newScrollTop;
         }, false);
     }
