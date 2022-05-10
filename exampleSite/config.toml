@@ -1,7 +1,5 @@
 baseURL = "https://example.com"
-# determines default content language [en, zh-cn, fr, pl, ...]
-# 设置默认的语言 [en, zh-cn, fr, pl, ...]
-defaultContentLanguage = "en"
+
 # theme
 # 主题
 theme = "LoveIt"
@@ -13,20 +11,27 @@ themesDir = "../.."
 # 网站标题
 title = "LoveIt"
 
-# language code [en, zh-CN, fr, pl, ...]
-# 网站语言, 仅在这里 CN 大写 [en, zh-CN, fr, pl, ...]
+# determines default content language ["en", "zh-cn", "fr", "pl", ...]
+# 设置默认的语言 ["en", "zh-cn", "fr", "pl", ...]
+defaultContentLanguage = "en"
+# language code ["en", "zh-CN", "fr", "pl", ...]
+# 网站语言, 仅在这里 CN 大写 ["en", "zh-CN", "fr", "pl", ...]
 languageCode = "en"
-# language name [English, 简体中文, Français, Polski, ...]
-# 语言名称 [English, 简体中文, Français, Polski, ...]
+# language name ["English", "简体中文", "Français", "Polski", ...]
+# 语言名称 ["English", "简体中文", "Français", "Polski", ...]
 languageName = "English"
 # whether to include Chinese/Japanese/Korean
 # 是否包括中日韩文字
 hasCJKLanguage = false
+
 # default amount of posts in each pages
+# 默认每页列表显示的文章数目
 paginate = 12
-# [UA-XXXXXXXX-X] google analytics code
+# google analytics code [UA-XXXXXXXX-X]
+# 谷歌分析代号 [UA-XXXXXXXX-X]
 googleAnalytics = ""
 # copyright description used only for seo schema
+# 版权描述，仅仅用于 SEO
 copyright = ""
 
 # whether to use robots.txt
@@ -81,14 +86,16 @@ enableEmoji = true
     title = ""
 
 [params]
-  # site default theme ("auto", "light", "dark")
-  # 网站默认主题 ("auto", "light", "dark")
+  # site default theme ["auto", "light", "dark"]
+  # 网站默认主题 ["auto", "light", "dark"]
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = "https://github.com/dillonzq/LoveIt"
-  # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
-  # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI ("sha256", "sha384", "sha512", "md5")
+  # which hash function used for SRI, when empty, no SRI is used
+  # ["sha256", "sha384", "sha512", "md5"]
+  # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI
+  # ["sha256", "sha384", "sha512", "md5"]
   fingerprint = ""
   # date format
   # 日期格式
@@ -106,11 +113,11 @@ enableEmoji = true
   # Header config
   # 页面头部导航栏配置
   [params.header]
-    # desktop header mode ("fixed", "normal", "auto")
-    # 桌面端导航栏模式 ("fixed", "normal", "auto")
+    # desktop header mode ["fixed", "normal", "auto"]
+    # 桌面端导航栏模式 ["fixed", "normal", "auto"]
     desktopMode = "fixed"
-    # mobile header mode ("fixed", "normal", "auto")
-    # 移动端导航栏模式 ("fixed", "normal", "auto")
+    # mobile header mode ["fixed", "normal", "auto"]
+    # 移动端导航栏模式 ["fixed", "normal", "auto"]
     mobileMode = "auto"
     # Header title config
     # 页面头部导航栏标题配置
@@ -209,8 +216,8 @@ enableEmoji = true
   # 搜索配置
   [params.search]
     enable = true
-    # type of search engine ("lunr", "algolia")
-    # 搜索引擎的类型 ("lunr", "algolia")
+    # type of search engine ["lunr", "algolia"]
+    # 搜索引擎的类型 ["lunr", "algolia"]
     type = "algolia"
     # max index length of the chunked content
     # 文章内容最长索引长度
@@ -497,12 +504,12 @@ enableEmoji = true
         enableQQ = false
         serverURLs = "https://leancloud.hugoloveit.com"
         # emoji data file name, default is "google.yml"
-        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
+        # ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
         # located in "themes/LoveIt/assets/data/emoji/" directory
         # you can store your own data files in the same path under your project:
         # "assets/data/emoji/"
         # emoji 数据文件名称, 默认是 "google.yml"
-        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
+        # ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
         # 位于 "themes/LoveIt/assets/data/emoji/" 目录
         # 可以在你的项目下相同路径存放你自己的数据文件:
         # "assets/data/emoji/"
@@ -632,12 +639,12 @@ enableEmoji = true
   # 第三方库文件的 CDN 设置
   [params.cdn]
     # CDN data file name, disabled by default
-    # ("jsdelivr.yml")
+    # ["jsdelivr.yml"]
     # located in "themes/LoveIt/assets/data/cdn/" directory
     # you can store your own data files in the same path under your project:
     # "assets/data/cdn/"
     # CDN 数据文件名称, 默认不启用
-    # ("jsdelivr.yml")
+    # ["jsdelivr.yml"]
     # 位于 "themes/LoveIt/assets/data/cdn/" 目录
     # 可以在你的项目下相同路径存放你自己的数据文件:
     # "assets/data/cdn/"
@@ -734,6 +741,8 @@ enableEmoji = true
   taxonomy = ["HTML", "RSS"]
   taxonomyTerm = ["HTML"]
 
+# Multilingual
+# 多语言
 [languages]
   [languages.en]
     weight = 1
@@ -815,7 +824,6 @@ enableEmoji = true
           typeit = true
           social = true
           disclaimer = ""
-      # Social config in home page
       [languages.en.params.social]
         GitHub = "xxxx"
         Twitter = "xxxx"

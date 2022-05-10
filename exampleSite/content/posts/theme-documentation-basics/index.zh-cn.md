@@ -77,24 +77,30 @@ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 
 ```toml
 baseURL = "http://example.org/"
-# [en, zh-cn, fr, ...] 设置默认的语言
-defaultContentLanguage = "zh-cn"
-# 网站语言, 仅在这里 CN 大写
-languageCode = "zh-CN"
-# 是否包括中日韩文字
-hasCJKLanguage = true
-# 网站标题
-title = "我的全新 Hugo 网站"
 
 # 更改使用 Hugo 构建网站时使用的默认主题
 theme = "LoveIt"
 
-[params]
-  # LoveIt 主题版本
-  version = "0.2.X"
+# 网站标题
+title = "我的全新 Hugo 网站"
 
+# 网站语言, 仅在这里 CN 大写 ["en", "zh-CN", "fr", "pl", ...]
+languageCode = "zh-CN"
+# 语言名称 ["English", "简体中文", "Français", "Polski", ...]
+languageName = "简体中文"
+# 是否包括中日韩文字
+hasCJKLanguage = true
+
+# 作者配置
+[author]
+  name = "xxxx"
+  email = ""
+  link = ""
+
+# 菜单配置
 [menu]
   [[menu.main]]
+    weight = 1
     identifier = "posts"
     # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
     pre = ""
@@ -104,23 +110,22 @@ theme = "LoveIt"
     url = "/posts/"
     # 当你将鼠标悬停在此菜单链接上时, 将显示的标题
     title = ""
-    weight = 1
   [[menu.main]]
+    weight = 2
     identifier = "tags"
     pre = ""
     post = ""
     name = "标签"
     url = "/tags/"
     title = ""
-    weight = 2
   [[menu.main]]
+    weight = 3
     identifier = "categories"
     pre = ""
     post = ""
     name = "分类"
     url = "/categories/"
     title = ""
-    weight = 3
 
 # Hugo 解析文档的配置
 [markup]
@@ -198,12 +203,12 @@ hugo
 
 ```toml
 [params]
-  # 网站默认主题样式 ("light", "dark", "auto")
+  # 网站默认主题样式 ["auto", "light", "dark"]
   defaultTheme = "auto"
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = ""
   # {{< version 0.1.1 >}} 哪种哈希函数用来 SRI, 为空时表示不使用 SRI
-  # ("sha256", "sha384", "sha512", "md5")
+  # ["sha256", "sha384", "sha512", "md5"]
   fingerprint = ""
   # {{< version 0.2.0 >}} 日期格式
   dateFormat = "2006-01-02"
@@ -216,9 +221,9 @@ hugo
 
   # 页面头部导航栏配置
   [params.header]
-    # 桌面端导航栏模式 ("fixed", "normal", "auto")
+    # 桌面端导航栏模式 ["fixed", "normal", "auto"]
     desktopMode = "fixed"
-    # 移动端导航栏模式 ("fixed", "normal", "auto")
+    # 移动端导航栏模式 ["fixed", "normal", "auto"]
     mobileMode = "auto"
     # {{< version 0.2.0 >}} 页面头部导航栏标题配置
     [params.header.title]
@@ -287,7 +292,7 @@ hugo
   # {{< version 0.2.0 >}} 搜索配置
   [params.search]
     enable = true
-    # 搜索引擎的类型 ("lunr", "algolia")
+    # 搜索引擎的类型 ["lunr", "algolia"]
     type = "lunr"
     # 文章内容最长索引长度
     contentLength = 4000
@@ -525,7 +530,7 @@ hugo
         enableQQ = false
         serverURLs = ""
         # {{< version 0.2.6 >}} emoji 数据文件名称, 默认是 "google.yml"
-        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
+        # ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
         # 位于 "themes/LoveIt/assets/data/emoji/" 目录
         # 可以在你的项目下相同路径存放你自己的数据文件:
         # "assets/data/emoji/"
@@ -632,7 +637,7 @@ hugo
   # {{< version 0.2.7 changed >}} 第三方库文件的 CDN 设置
   [params.cdn]
     # CDN 数据文件名称, 默认不启用
-    # ("jsdelivr.yml")
+    # ["jsdelivr.yml"]
     # 位于 "themes/LoveIt/assets/data/cdn/" 目录
     # 可以在你的项目下相同路径存放你自己的数据文件:
     # "assets/data/cdn/"
@@ -673,12 +678,6 @@ hugo
   [markup.tableOfContents]
     startLevel = 2
     endLevel = 6
-
-# 作者配置
-[author]
-  name = "xxxx"
-  email = ""
-  link = ""
 
 # 网站地图配置
 [sitemap]
@@ -742,7 +741,7 @@ hugo
 ```toml
 [params.cdn]
   # CDN 数据文件名称, 默认不启用
-  # ("jsdelivr.yml")
+  # ["jsdelivr.yml"]
   data = ""
 ````
 
@@ -854,7 +853,7 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 例如, 一个支持英语, 中文和法语的网站配置:
 
 ```toml
-# [en, zh-cn, fr, pl, ...] 设置默认的语言
+# 设置默认的语言 ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "zh-cn"
 
 [languages]
@@ -864,62 +863,60 @@ defaultContentLanguage = "zh-cn"
     languageCode = "en"
     languageName = "English"
     [[languages.en.menu.main]]
+      weight = 1
       identifier = "posts"
       pre = ""
       post = ""
       name = "Posts"
       url = "/posts/"
       title = ""
-      weight = 1
     [[languages.en.menu.main]]
+      weight = 2
       identifier = "tags"
       pre = ""
       post = ""
       name = "Tags"
       url = "/tags/"
       title = ""
-      weight = 2
     [[languages.en.menu.main]]
+      weight = 3
       identifier = "categories"
       pre = ""
       post = ""
       name = "Categories"
       url = "/categories/"
       title = ""
-      weight = 3
 
   [languages.zh-cn]
     weight = 2
     title = "我的全新 Hugo 网站"
-    # 网站语言, 仅在这里 CN 大写
     languageCode = "zh-CN"
     languageName = "简体中文"
-    # 是否包括中日韩文字
     hasCJKLanguage = true
     [[languages.zh-cn.menu.main]]
+      weight = 1
       identifier = "posts"
       pre = ""
       post = ""
       name = "文章"
       url = "/posts/"
       title = ""
-      weight = 1
     [[languages.zh-cn.menu.main]]
+      weight = 2
       identifier = "tags"
       pre = ""
       post = ""
       name = "标签"
       url = "/tags/"
       title = ""
-      weight = 2
     [[languages.zh-cn.menu.main]]
+      weight = 3
       identifier = "categories"
       pre = ""
       post = ""
       name = "分类"
       url = "/categories/"
       title = ""
-      weight = 3
 
   [languages.fr]
     weight = 3
@@ -927,29 +924,29 @@ defaultContentLanguage = "zh-cn"
     languageCode = "fr"
     languageName = "Français"
     [[languages.fr.menu.main]]
+      weight = 1
       identifier = "posts"
       pre = ""
       post = ""
       name = "Postes"
       url = "/posts/"
       title = ""
-      weight = 1
     [[languages.fr.menu.main]]
+      weight = 2
       identifier = "tags"
       pre = ""
       post = ""
       name = "Balises"
       url = "/tags/"
       title = ""
-      weight = 2
     [[languages.fr.menu.main]]
+      weight = 3
       identifier = "categories"
       pre = ""
       post = ""
       name = "Catégories"
       url = "/categories/"
       title = ""
-      weight = 3
 ```
 
 然后, 对于每个新页面, 将语言代码附加到文件名中.
@@ -1001,7 +998,7 @@ defaultContentLanguage = "zh-cn"
 ```toml
 [params.search]
   enable = true
-  # 搜索引擎的类型 ("lunr", "algolia")
+  # 搜索引擎的类型 ["lunr", "algolia"]
   type = "lunr"
   # 文章内容最长索引长度
   contentLength = 4000

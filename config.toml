@@ -4,14 +4,16 @@
     min = "0.62.0"
 
 [params]
-  # site default theme ("auto", "light", "dark")
-  # 网站默认主题 ("auto", "light", "dark")
+  # site default theme ["auto", "light", "dark"]
+  # 网站默认主题 ["auto", "light", "dark"]
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = ""
-  # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
-  # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI ("sha256", "sha384", "sha512", "md5")
+  # which hash function used for SRI, when empty, no SRI is used
+  # ["sha256", "sha384", "sha512", "md5"]
+  # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI
+  # ["sha256", "sha384", "sha512", "md5"]
   fingerprint = ""
   # date format
   # 日期格式
@@ -29,11 +31,11 @@
   # Header config
   # 页面头部导航栏配置
   [params.header]
-    # desktop header mode ("fixed", "normal", "auto")
-    # 桌面端导航栏模式 ("fixed", "normal", "auto")
+    # desktop header mode ["fixed", "normal", "auto"]
+    # 桌面端导航栏模式 ["fixed", "normal", "auto"]
     desktopMode = "fixed"
-    # mobile header mode ("fixed", "normal", "auto")
-    # 移动端导航栏模式 ("fixed", "normal", "auto")
+    # mobile header mode ["fixed", "normal", "auto"]
+    # 移动端导航栏模式 ["fixed", "normal", "auto"]
     mobileMode = "auto"
     # Header title config
     # 页面头部导航栏标题配置
@@ -132,8 +134,8 @@
   # 搜索配置
   [params.search]
     enable = false
-    # type of search engine ("lunr", "algolia")
-    # 搜索引擎的类型 ("lunr", "algolia")
+    # type of search engine ["lunr", "algolia"]
+    # 搜索引擎的类型 ["lunr", "algolia"]
     type = "lunr"
     # max index length of the chunked content
     # 文章内容最长索引长度
@@ -420,12 +422,12 @@
         enableQQ = false
         serverURLs = ""
         # emoji data file name, default is "google.yml"
-        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
+        # ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
         # located in "themes/LoveIt/assets/data/emoji/" directory
         # you can store your own data files in the same path under your project:
         # "assets/data/emoji/"
         # emoji 数据文件名称, 默认是 "google.yml"
-        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
+        # ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
         # 位于 "themes/LoveIt/assets/data/emoji/" 目录
         # 可以在你的项目下相同路径存放你自己的数据文件:
         # "assets/data/emoji/"
@@ -555,12 +557,12 @@
   # 第三方库文件的 CDN 设置
   [params.cdn]
     # CDN data file name, disabled by default
-    # ("jsdelivr.yml")
+    # ["jsdelivr.yml"]
     # located in "themes/LoveIt/assets/data/cdn/" directory
     # you can store your own data files in the same path under your project:
     # "assets/data/cdn/"
     # CDN 数据文件名称, 默认不启用
-    # ("jsdelivr.yml")
+    # ["jsdelivr.yml"]
     # 位于 "themes/LoveIt/assets/data/cdn/" 目录
     # 可以在你的项目下相同路径存放你自己的数据文件:
     # "assets/data/cdn/"
