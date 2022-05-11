@@ -31,14 +31,14 @@ math:
 * :(fab fa-searchengin fa-fw): Optimized SEO performance with a correct **SEO SCHEMA** based on JSON-LD
 * :(fab fa-google fa-fw): **[Google Analytics](https://analytics.google.com/analytics)** supported
 * :(far fa-chart-bar fa-fw): **[Fathom Analytics](https://usefathom.com/)** supported
-* :(fas fa-search fa-fw): Search engine **verification** supported (Google, Bind, Yandex and Baidu)
+* :(fas fa-sitemap fa-fw): Search engine **verification** supported (Google, Bind, Yandex and Baidu)
 * :(fas fa-tachometer-alt fa-fw): **CDN** for third-party libraries supported
 * :(fas fa-cloud-download-alt fa-fw): Automatically converted images with **Lazy Load** by [lazysizes](https://github.com/aFarkas/lazysizes)
 
 #### Appearance and Layout
 
-* [:(fas fa-desktop):]/[:(fas fa-mobile):] **Responsive** layout
-* [:(fas fa-sun):]/[:(fas fa-moon):] **[Light]/[Dark]** mode
+* :(fas fa-mobile-screen fa-fw): **[Desktop]/[Mobile] responsive** layout
+* :(fas fa-circle-half-stroke fa-rotate-180 fa-fw): **[Light]/[Dark]** mode
 * :(fas fa-layer-group fa-fw): Globally consistent **design language**
 * :(fas fa-ellipsis-h fa-fw): **Pagination** supported
 * :(far fa-list-alt fa-fw): Easy-to-use and self-expanding **table of contents**
@@ -67,19 +67,19 @@ math:
 * :(far fa-copy fa-fw): **Copy code** to clipboard with one click
 * :(far fa-images fa-fw): **Images gallery** supported by [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * :(fab fa-font-awesome fa-fw): Extended Markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
-* :(far fa-sticky-note fa-fw): Extended Markdown syntax for **ruby annotation**
+* :(fas fa-superscript fa-fw): Extended Markdown syntax for **ruby annotation**
 * :(fas fa-percentage fa-fw): Extended Markdown syntax for **fraction**
 * :(fas fa-square-root-alt fa-fw): **Mathematical formula** supported by [$\KaTeX$](https://katex.org/)
 * :(fas fa-project-diagram fa-fw): **Diagrams** shortcode supported by [mermaid](https://github.com/mermaid-js/mermaid)
 * :(fas fa-chart-pie fa-fw): **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
 * :(fas fa-map-marked-alt fa-fw): **Mapbox** shortcode supported by [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * :(fas fa-music fa-fw): **Music player** shortcode supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
-* :(fas fa-video fa-fw): **Bilibili player** shortcode
-* :(far fa-bell fa-fw): Kinds of **admonitions** shortcode
-* :(fas fa-align-left fa-fw): **Custom style** shortcode
+* :(fab fa-bilibili fa-fw): **Bilibili player** shortcode
+* :(fas fa-note-sticky fa-fw): Kinds of **admonitions** shortcode
+* :(fab fa-css3 fa-fw): **Custom style** shortcode
 * :(fab fa-js-square fa-fw): **Custom script** shortcode
 * :(fas fa-i-cursor fa-fw): **Animated typing** supported by [TypeIt](https://typeitjs.com/)
-* :(fas fa-arrow-down fa-fw): **Dynamic scroll** supported by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
+* :(fas fa-arrows-up-down fa-fw): **Dynamic scroll** supported by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * :(fas fa-cookie-bite fa-fw): **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
 * ...
 

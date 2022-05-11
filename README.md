@@ -71,7 +71,7 @@ I hope you will LoveIt ❤️!
 
 ### Appearance and Layout
 
-* **Responsive** layout
+* **Desktop/Mobile Responsive** layout
 * **Light/Dark** mode
 * Globally consistent **design language**
 * **Pagination** supported

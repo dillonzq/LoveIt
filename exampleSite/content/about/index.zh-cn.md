@@ -31,14 +31,14 @@ math:
 * :(fab fa-searchengin fa-fw): 使用基于 JSON-LD 格式 的 **SEO SCHEMA** 文件进行 SEO 优化
 * :(fab fa-google fa-fw): 支持 **[Google Analytics](https://analytics.google.com/analytics)**
 * :(far fa-chart-bar fa-fw): 支持 **[Fathom Analytics](https://usefathom.com/)**
-* :(fas fa-search fa-fw): 支持搜索引擎的**网站验证** (Google, Bind, Yandex and Baidu)
+* :(fas fa-sitemap fa-fw): 支持搜索引擎的**网站验证** (Google, Bind, Yandex and Baidu)
 * :(fas fa-tachometer-alt fa-fw): 支持所有第三方库的 **CDN**
 * :(fas fa-cloud-download-alt fa-fw): 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为**懒加载**
 
 #### 外观和布局
 
-* [:(fas fa-desktop):]/[:(fas fa-mobile):] **响应式**布局
-* [:(fas fa-sun):]/[:(fas fa-moon):] **[浅色]/[深色]** 主题模式
+* :(fas fa-mobile-screen fa-fw): **[桌面端]/[移动端] 响应式**布局
+* :(fas fa-circle-half-stroke fa-rotate-180 fa-fw): **[浅色]/[深色]** 主题模式
 * :(fas fa-layer-group fa-fw): 全局一致的**设计语言**
 * :(fas fa-ellipsis-h fa-fw): 支持**分页**
 * :(far fa-list-alt fa-fw): 易用和自动展开的**文章目录**
@@ -67,19 +67,19 @@ math:
 * :(far fa-copy fa-fw): 一键**复制代码**到剪贴板
 * :(far fa-images fa-fw): 支持基于 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 的**图片画廊**
 * :(fab fa-font-awesome fa-fw): 支持 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
-* :(far fa-sticky-note fa-fw): 支持**上标注释**的扩展 Markdown 语法
+* :(fas fa-superscript fa-fw): 支持**上标注释**的扩展 Markdown 语法
 * :(fas fa-percentage fa-fw): 支持**分数**的扩展 Markdown 语法
 * :(fas fa-square-root-alt fa-fw): 支持基于 [$\KaTeX$](https://katex.org/) 的**数学公式**
 * :(fas fa-project-diagram fa-fw): 支持基于 [mermaid](https://github.com/mermaid-js/mermaid) 的**图表** shortcode
 * :(fas fa-chart-pie fa-fw): 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化** shortcode
 * :(fas fa-map-marked-alt fa-fw): 支持基于 [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) 的 **Mapbox** shortcode
 * :(fas fa-music fa-fw): 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的**音乐播放器** shortcode
-* :(fas fa-video fa-fw): 支持 **Bilibili 视频** shortcode
-* :(far fa-bell fa-fw): 支持多种**注释**的 shortcode
-* :(fas fa-align-left fa-fw): 支持**自定义样式**的 shortcode
+* :(fab fa-bilibili fa-fw): 支持 **Bilibili 视频** shortcode
+* :(fas fa-note-sticky fa-fw): 支持多种**注释**的 shortcode
+* :(fab fa-css3 fa-fw): 支持**自定义样式**的 shortcode
 * :(fab fa-js-square fa-fw): 支持**自定义脚本**的 shortcode
 * :(fas fa-i-cursor fa-fw): 支持基于 [TypeIt](https://typeitjs.com/) 的**打字动画** shortcode
-* :(fas fa-arrow-down fa-fw): 支持基于 [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) 的**滚动动画**
+* :(fas fa-arrows-up-down fa-fw): 支持基于 [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) 的**滚动动画**
 * :(fas fa-cookie-bite fa-fw): 支持基于 [cookieconsent](https://github.com/osano/cookieconsent) 的 **Cookie 许可横幅**
 * ...
 
