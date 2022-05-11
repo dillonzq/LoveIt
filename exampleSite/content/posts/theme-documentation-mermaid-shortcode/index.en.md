@@ -26,7 +26,7 @@ The `mermaid` shortcode supports diagrams in Hugo with [Mermaid](https://mermaid
 
 Just insert your mermaid code in the `mermaid` shortcode and that’s it.
 
-## 1 Flowchart {#flowchart}
+## Flowchart {#flowchart}
 
 Example **flowchart** `mermaid` input:
 
@@ -50,7 +50,7 @@ graph LR;
     C -->|Two| E[Result two]
 {{< /mermaid >}}
 
-## 2 Sequence Diagram {#sequence-diagram}
+## Sequence Diagram {#sequence-diagram}
 
 Example **sequence diagram** `mermaid` input:
 
@@ -86,27 +86,22 @@ sequenceDiagram
     Bob-->John: Jolly good!
 {{< /mermaid >}}
 
-## 3 GANTT {#gantt}
+## Gantt {#gantt}
 
-Example **GANTT** `mermaid` input:
+Example **Gantt** `mermaid` input:
 
 ```markdown
 {{</* mermaid */>}}
 gantt
-    dateFormat  YYYY-MM-DD
-    title Adding GANTT diagram functionality to mermaid
-    section A section
-    Completed task            :done,    des1, 2014-01-06,2014-01-08
-    Active task               :active,  des2, 2014-01-09, 3d
-    Future task               :         des3, after des2, 5d
-    Future task2               :         des4, after des3, 5d
-    section Critical tasks
-    Completed task in the critical line :crit, done, 2014-01-06,24h
-    Implement parser and jison          :crit, done, after des1, 2d
-    Create tests for parser             :crit, active, 3d
-    Future task in critical line        :crit, 5d
-    Create tests for renderer           :2d
-    Add to mermaid                      :1d
+dateFormat  YYYY-MM-DD
+title Adding GANTT diagram to mermaid
+excludes weekdays 2014-01-10
+
+section A section
+Completed task            :done,    des1, 2014-01-06,2014-01-08
+Active task               :active,  des2, 2014-01-09, 3d
+Future task               :         des3, after des2, 5d
+Future task2              :         des4, after des3, 5d
 {{</* /mermaid */>}}
 ```
 
@@ -114,42 +109,44 @@ The rendered output looks like this:
 
 {{< mermaid >}}
 gantt
-    dateFormat  YYYY-MM-DD
-    title Adding GANTT diagram functionality to mermaid
-    section A section
-    Completed task            :done,    des1, 2014-01-06,2014-01-08
-    Active task               :active,  des2, 2014-01-09, 3d
-    Future task               :         des3, after des2, 5d
-    Future task2               :         des4, after des3, 5d
-    section Critical tasks
-    Completed task in the critical line :crit, done, 2014-01-06,24h
-    Implement parser and jison          :crit, done, after des1, 2d
-    Create tests for parser             :crit, active, 3d
-    Future task in critical line        :crit, 5d
-    Create tests for renderer           :2d
-    Add to mermaid                      :1d
+dateFormat  YYYY-MM-DD
+title Adding GANTT diagram to mermaid
+excludes weekdays 2014-01-10
+
+section A section
+Completed task            :done,    des1, 2014-01-06,2014-01-08
+Active task               :active,  des2, 2014-01-09, 3d
+Future task               :         des3, after des2, 5d
+Future task2              :         des4, after des3, 5d
 {{< /mermaid >}}
 
-## 4 Class Diagram {#class-diagram}
+## Class Diagram {#class-diagram}
 
 Example **class diagram** `mermaid` input:
 
 ```markdown
 {{</* mermaid */>}}
 classDiagram
-    Class01 <|-- AveryLongClass : Cool
-    Class03 *-- Class04
-    Class05 o-- Class06
-    Class07 .. Class08
-    Class09 --> C2 : Where am i?
-    Class09 --* C3
-    Class09 --|> Class07
-    Class07 : equals()
-    Class07 : Object[] elementData
-    Class01 : size()
-    Class01 : int chimp
-    Class01 : int gorilla
-    Class08 <--> C2: Cool label
+    Animal <|-- Duck
+    Animal <|-- Fish
+    Animal <|-- Zebra
+    Animal : +int age
+    Animal : +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck{
+        +String beakColor
+        +swim()
+        +quack()
+    }
+    class Fish{
+        -int sizeInFeet
+        -canEat()
+    }
+    class Zebra{
+        +bool is_wild
+        +run()
+    }
 {{</* /mermaid */>}}
 ```
 
@@ -157,28 +154,35 @@ The rendered output looks like this:
 
 {{< mermaid >}}
 classDiagram
-    Class01 <|-- AveryLongClass : Cool
-    Class03 *-- Class04
-    Class05 o-- Class06
-    Class07 .. Class08
-    Class09 --> C2 : Where am i?
-    Class09 --* C3
-    Class09 --|> Class07
-    Class07 : equals()
-    Class07 : Object[] elementData
-    Class01 : size()
-    Class01 : int chimp
-    Class01 : int gorilla
-    Class08 <--> C2: Cool label
+    Animal <|-- Duck
+    Animal <|-- Fish
+    Animal <|-- Zebra
+    Animal : +int age
+    Animal : +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck{
+        +String beakColor
+        +swim()
+        +quack()
+    }
+    class Fish{
+        -int sizeInFeet
+        -canEat()
+    }
+    class Zebra{
+        +bool is_wild
+        +run()
+    }
 {{< /mermaid >}}
 
-## 5 State Diagram {#state-diagram}
+## State Diagram {#state-diagram}
 
 Example **state diagram** `mermaid` input:
 
 ```markdown
 {{</* mermaid */>}}
-stateDiagram
+stateDiagram-v2
     [*] --> Still
     Still --> [*]
     Still --> Moving
@@ -191,7 +195,7 @@ stateDiagram
 The rendered output looks like this:
 
 {{< mermaid >}}
-stateDiagram
+stateDiagram-v2
     [*] --> Still
     Still --> [*]
     Still --> Moving
@@ -200,7 +204,7 @@ stateDiagram
     Crash --> [*]
 {{< /mermaid >}}
 
-## 6 Git Graph {#git-graph}
+## Git Graph {#git-graph}
 
 Example **git graph** `mermaid` input:
 
@@ -236,9 +240,63 @@ gitGraph
     commit
 {{< /mermaid >}}
 
-## 7 Pie {#pie}
+## Entity Relationship Diagram {#entity-relationship-diagram}
 
-Example **pie** `mermaid` input:
+Example **entity-relationship diagram** `mermaid` input:
+
+```markdown
+{{</* mermaid */>}}
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE-ITEM : contains
+    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
+{{</* /mermaid */>}}
+```
+
+The rendered output looks like this:
+
+{{< mermaid >}}
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE-ITEM : contains
+    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
+{{< /mermaid >}}
+
+## User Journey {#user-journey}
+
+Example **user journey** `mermaid` input:
+
+```markdown
+{{</* mermaid */>}}
+journey
+    title My working day
+    section Go to work
+      Make tea: 5: Me
+      Go upstairs: 3: Me
+      Do work: 1: Me, Cat
+    section Go home
+      Go downstairs: 5: Me
+      Sit down: 5: Me
+{{</* /mermaid */>}}
+```
+
+The rendered output looks like this:
+
+{{< mermaid >}}
+journey
+    title My working day
+    section Go to work
+      Make tea: 5: Me
+      Go upstairs: 3: Me
+      Do work: 1: Me, Cat
+    section Go home
+      Go downstairs: 5: Me
+      Sit down: 5: Me
+{{< /mermaid >}}
+
+## Pie Chart {#pie-chart}
+
+Example **pie chart** `mermaid` input:
 
 ```markdown
 {{</* mermaid */>}}
@@ -256,4 +314,46 @@ pie
     "Dogs" : 386
     "Cats" : 85
     "Rats" : 15
+{{< /mermaid >}}
+
+## Requirement Diagram {#requirement-diagram}
+
+Example **requirement diagram** `mermaid` input:
+
+```markdown
+{{</* mermaid */>}}
+requirementDiagram
+
+requirement test_req {
+id: 1
+text: the test text.
+risk: high
+verifymethod: test
+}
+
+element test_entity {
+type: simulation
+}
+
+test_entity - satisfies -> test_req
+{{</* /mermaid */>}}
+```
+
+The rendered output looks like this:
+
+{{< mermaid >}}
+requirementDiagram
+
+requirement test_req {
+id: 1
+text: the test text.
+risk: high
+verifymethod: test
+}
+
+element test_entity {
+type: simulation
+}
+
+test_entity - satisfies -> test_req
 {{< /mermaid >}}
