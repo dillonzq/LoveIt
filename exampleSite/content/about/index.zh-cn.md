@@ -65,7 +65,7 @@ math:
 * :(far fa-grin-tongue-wink fa-fw): 支持 **Twemoji**
 * :(fas fa-code fa-fw): 支持**代码高亮**
 * :(far fa-copy fa-fw): 一键**复制代码**到剪贴板
-* :(far fa-images fa-fw): 支持基于 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 的**图片画廊**
+* :(far fa-images fa-fw): 支持基于 [lightGallery](https://github.com/sachinchoolur/lightgallery) 的**图片画廊**
 * :(fab fa-font-awesome fa-fw): 支持 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
 * :(fas fa-superscript fa-fw): 支持**上标注释**的扩展 Markdown 语法
 * :(fas fa-percentage fa-fw): 支持**分数**的扩展 Markdown 语法
@@ -103,7 +103,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [object-fit-images](https://github.com/fregante/object-fit-images)
 * [Twemoji](https://github.com/twitter/twemoji)
 * [emoji-data](https://github.com/iamcal/emoji-data)
-* [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
+* [lightGallery](https://github.com/sachinchoolur/lightgallery)
 * [clipboard.js](https://github.com/zenorocha/clipboard.js)
 * [Sharer.js](https://github.com/ellisonleao/sharer.js)
 * [TypeIt](https://typeitjs.com/)

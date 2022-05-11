@@ -9,9 +9,7 @@ lazysizes@5.3.1 https://github.com/aFarkas/lazysizes
 object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
 twemoji@14.0.2 https://github.com/twitter/twemoji
 emoji-data@14.0.0 https://github.com/iamcal/emoji-data
-lightgallery.js@1.2.0 https://github.com/sachinchoolur/lightgallery.js
-lg-thumbnail.js@1.2.0 https://github.com/sachinchoolur/lg-thumbnail.js
-lg-zoom.js@1.2.0 https://github.com/sachinchoolur/lg-zoom.js
+lightgallery@2.4.0 https://github.com/sachinchoolur/lightgallery
 clipboard.js@2.0.11 https://github.com/zenorocha/clipboard.js
 sharer.js@0.4.0 https://github.com/ellisonleao/sharer.js
 typeit@8.5.4 https://github.com/alexmacarthur/typeit
