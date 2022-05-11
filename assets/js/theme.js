@@ -856,16 +856,6 @@ var Theme = /*#__PURE__*/function () {
       }
     }
   }, {
-    key: "initSmoothScroll",
-    value: function initSmoothScroll() {
-      if (SmoothScroll) new SmoothScroll('[href^="#"]', {
-        speed: 300,
-        speedAsDuration: true,
-        header: '#header-desktop',
-        offset: 10
-      });
-    }
-  }, {
     key: "initCookieconsent",
     value: function initCookieconsent() {
       if (this.config.cookieconsent) cookieconsent.initialise(this.config.cookieconsent);
@@ -1017,7 +1007,6 @@ var Theme = /*#__PURE__*/function () {
         this.initHighlight();
         this.initTable();
         this.initHeaderLink();
-        this.initSmoothScroll();
         this.initMath();
         this.initMermaid();
         this.initEcharts();

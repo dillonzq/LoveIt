@@ -40,6 +40,8 @@ code, pre, .highlight table, .highlight tr, .highlight td {
 .highlight {
   font-family: $code-font-family;
   font-size: $code-font-size;
+  line-height: 1.4em;
+  margin: .5rem 0;
 
   .table-wrapper {
     > table,
@@ -55,11 +57,6 @@ code, pre, .highlight table, .highlight tr, .highlight td {
       }
     }
   }
-}
-
-.highlight {
-  line-height: 1.4em;
-  margin: .5rem 0;
 
   > .chroma {
     position: relative;

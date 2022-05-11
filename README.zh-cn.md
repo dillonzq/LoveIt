@@ -108,7 +108,6 @@
 * 支持**自定义样式**的 shortcode
 * 支持**自定义脚本**的 shortcode
 * 支持基于 [TypeIt](https://typeitjs.com/) 的**打字动画** shortcode
-* 支持基于 [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) 的**滚动动画**
 * 支持基于 [cookieconsent](https://github.com/osano/cookieconsent) 的 **Cookie 许可横幅**
 * ...
 
@@ -159,7 +158,6 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [Font Awesome](https://fontawesome.com/)
 * [Simple Icons](https://github.com/simple-icons/simple-icons)
 * [Animate.css](https://daneden.github.io/animate.css/)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * [autocomplete](https://github.com/algolia/autocomplete)
 * [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)

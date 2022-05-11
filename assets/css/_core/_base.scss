@@ -5,6 +5,12 @@ html {
   font-size: $global-font-size;
   line-height: $global-line-height;
   width:100%;
+
+  scroll-behavior: smooth;
+
+  main [id] {
+    scroll-margin-top: $header-height + .5rem;
+  }
 }
 
 /* scrollbar, only support webkit */
