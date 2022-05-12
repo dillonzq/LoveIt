@@ -230,14 +230,19 @@
 
       img {
         display: block;
+        width: 100%;
         height: auto;
         margin: 0 auto;
         overflow: hidden;
       }
     }
 
-    .lazyloading {
-      @include object-fit(none);
+    .lazyload, .lazyloading {
+      @include object-fit(scale-down);
+    }
+
+    .lazyloaded {
+      @include object-fit(fill);
     }
 
     blockquote {
