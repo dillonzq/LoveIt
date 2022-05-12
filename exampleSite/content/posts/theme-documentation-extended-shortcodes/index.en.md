@@ -345,6 +345,8 @@ console.log('Hello LoveIt!');
 
 ## 12 raw
 
+{{< version 0.2.11 >}}
+
 `raw` is a shortcode to insert raw **:(fab fa-html5 fa-fw): HTML** content in your post.
 This is useful when you want to include some Markdown content to **avoid being rendered or escaped** by Hugo.
 

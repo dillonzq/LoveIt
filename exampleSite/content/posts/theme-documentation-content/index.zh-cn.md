@@ -244,6 +244,8 @@ resources:
 
 ### 数学公式
 
+{{< version 0.2.11 changed >}}
+
 **LoveIt** 基于 [$\KaTeX$](https://katex.org/) 提供数学公式的支持.
 
 在你的 [网站配置](../theme-documentation-basics#site-configuration) 中的 `[params.math]` 下面设置属性 `enable = true`,

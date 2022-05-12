@@ -18,6 +18,8 @@ categories: ["documentation"]
 hiddenFromHomePage: true
 ---
 
+{{< version 0.2.11 changed >}}
+
 `mermaid` shortcode 使用 [Mermaid](https://mermaidjs.github.io/) 库提供绘制图表和流程图的功能.
 
 <!--more-->

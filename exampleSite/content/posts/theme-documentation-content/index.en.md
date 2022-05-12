@@ -245,6 +245,8 @@ This part is shown in the [emoji support page](../emoji-support/).
 
 ### Mathematical Formula
 
+{{< version 0.2.11 changed >}}
+
 **LoveIt** theme supports mathematical formulas based on [$\KaTeX$](https://katex.org/).
 
 Set the property `enable = true` under `[params.math]` in your [site configuration](../theme-documentation-basics#site-configuration)

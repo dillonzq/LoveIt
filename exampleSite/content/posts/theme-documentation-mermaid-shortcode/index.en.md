@@ -18,6 +18,8 @@ categories: ["documentation"]
 hiddenFromHomePage: true
 ---
 
+{{< version 0.2.11 changed >}}
+
 The `mermaid` shortcode supports diagrams in Hugo with [Mermaid](https://mermaidjs.github.io/) library.
 
 <!--more-->

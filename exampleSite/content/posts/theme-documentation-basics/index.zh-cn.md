@@ -445,10 +445,10 @@ hugo
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} 数学公式
     [params.page.math]
       enable = true
-      # 默认行内定界符是 $ ... $ 和 \( ... \)
+      # {{< version 0.2.11 changed >}} 默认行内定界符是 $ ... $ 和 \( ... \)
       inlineLeftDelimiter = ""
       inlineRightDelimiter = ""
-      # 默认块定界符是 $$ ... $$, \[ ... \],  \begin{equation} ... \end{equation} 和一些其它的函数
+      # {{< version 0.2.11 changed >}} 默认块定界符是 $$ ... $$, \[ ... \],  \begin{equation} ... \end{equation} 和一些其它的函数
       blockLeftDelimiter = ""
       blockRightDelimiter = ""
       # KaTeX 插件 copy_tex

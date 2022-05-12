@@ -346,6 +346,8 @@ console.log('Hello LoveIt!');
 
 ## 12 raw
 
+{{< version 0.2.11 >}}
+
 `raw` shortcode 用来在你的文章中插入原始 **:(fab fa-html5 fa-fw): HTML** 内容.
 
 一个 `raw` 示例:

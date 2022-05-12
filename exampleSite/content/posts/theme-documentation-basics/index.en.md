@@ -437,10 +437,10 @@ Please open the code block below to view the complete sample configuration :(far
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} mathematical formulas
     [params.page.math]
       enable = true
-      # default inline delimiter is $ ... $ and \( ... \)
+      # {{< version 0.2.11 changed >}} default inline delimiter is $ ... $ and \( ... \)
       inlineLeftDelimiter = ""
       inlineRightDelimiter = ""
-      # default block delimiter is $$ ... $$, \[ ... \], \begin{equation} ... \end{equation} and some other functions
+      # {{< version 0.2.11 changed >}} default block delimiter is $$ ... $$, \[ ... \], \begin{equation} ... \end{equation} and some other functions
       blockLeftDelimiter = ""
       blockRightDelimiter = ""
       # KaTeX extension copy_tex
