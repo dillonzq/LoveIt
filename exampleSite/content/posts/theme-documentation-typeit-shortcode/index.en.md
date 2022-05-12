@@ -7,7 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "The typeit shortcode provides typing animation based on TypeIt library."
-images: ["featured-image.png"]
+images: []
 resources:
 - name: "featured-image"
   src: "featured-image.png"

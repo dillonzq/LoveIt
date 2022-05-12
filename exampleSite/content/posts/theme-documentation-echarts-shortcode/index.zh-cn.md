@@ -7,7 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "echarts shortcode 使用 ECharts 库提供数据可视化的功能."
-images: ["featured-image.jpg"]
+images: []
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"

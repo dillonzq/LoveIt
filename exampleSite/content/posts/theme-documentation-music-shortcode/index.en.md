@@ -7,7 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "The music shortcode embeds a responsive music player based on APlayer and MetingJS library."
-images: ["featured-image.png"]
+images: []
 resources:
 - name: "featured-image"
   src: "featured-image.png"
