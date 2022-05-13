@@ -3,8 +3,6 @@ prefix:
   # simple-icons@6.20.0 https://github.com/simple-icons/simple-icons
   simpleIcons: https://cdn.jsdelivr.net/npm/simple-icons@6.20.0/icons/
 libFiles:
-  # normalize.css@8.0.1 https://github.com/necolas/normalize.css
-  normalizeCSS: normalize.css@8.0.1/normalize.min.css
   # fontawesome-free@6.1.1 https://fontawesome.com/
   fontawesomeFreeCSS: '@fortawesome/fontawesome-free@6.1.1/css/all.min.css'
   # animate.css@4.1.1 https://github.com/daneden/animate.css
