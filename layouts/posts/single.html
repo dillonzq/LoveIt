@@ -34,7 +34,7 @@
                 {{- $authorLink := $params.authorlink | default .Site.Author.link | default .Site.Home.RelPermalink -}}
                 <span class="post-author">
                     {{- $options := dict "Class" "author" "Destination" $authorLink "Title" "Author" "Rel" "author" "Icon" (dict "Class" "fas fa-user-circle fa-fw") "Content" $author -}}
-                    {{- partial "plugin/link.html" $options -}}
+                    {{- partial "plugin/a.html" $options -}}
                 </span>
 
                 {{- $categories := slice -}}
@@ -70,7 +70,7 @@
         {{- end -}}
         {{- with $image -}}
             <div class="featured-image">
-                {{- dict "Src" . "Title" $.Description "Resources" $.Resources | partial "plugin/image.html" -}}
+                {{- dict "Src" . "Title" $.Description "Resources" $.Resources | partial "plugin/img.html" -}}
             </div>
         {{- end -}}
 

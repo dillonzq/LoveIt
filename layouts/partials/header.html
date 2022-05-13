@@ -5,7 +5,7 @@
             <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
                 {{- with .Site.Params.header.title -}}
                     {{- with .logo -}}
-                        {{- dict "Src" . "Class" "logo" | partial "plugin/image.html" -}}
+                        {{- dict "Src" . "Class" "logo" | partial "plugin/img.html" -}}
                     {{- end -}}
                     {{- with .pre -}}
                         <span class="header-title-pre">{{ . | safeHTML }}</span>
@@ -92,7 +92,7 @@
                 <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
                     {{- with .Site.Params.header.title -}}
                         {{- with .logo -}}
-                            {{- dict "Src" . "Class" "logo" | partial "plugin/image.html" -}}
+                            {{- dict "Src" . "Class" "logo" | partial "plugin/img.html" -}}
                         {{- end -}}
                         {{- with .pre -}}
                             <span class="header-title-pre">{{ . | safeHTML }}</span>

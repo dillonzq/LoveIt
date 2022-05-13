@@ -13,10 +13,10 @@
                     {{- $url = .RelPermalink -}}
                 {{- end -}}
                 <a href="{{ $url }}"{{ with .Title | default .Name }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
-                    {{- dict "Src" $avatar | partial "plugin/image.html" -}}
+                    {{- dict "Src" $avatar | partial "plugin/img.html" -}}
                 </a>
             {{- else -}}
-                {{- dict "Src" $avatar | partial "plugin/image.html" -}}
+                {{- dict "Src" $avatar | partial "plugin/img.html" -}}
             {{- end -}}
         </div>
     {{- end -}}
