@@ -51,7 +51,7 @@
             {{- with $valine.serverURLs -}}
                 {{- $commentConfig = dict "serverURLs" . | dict "valine" | merge $commentConfig -}}
             {{- end -}}
-            {{- $commentConfig = $valine.emoji | default "google.yml" | printf "data/emoji/%v" | resources.Get | transform.Unmarshal | dict "valine" | merge $commentConfig -}}
+            {{- $commentConfig = $valine.emoji | default "google.yml" | printf "lib/valine/emoji/%v" | resources.Get | transform.Unmarshal | dict "valine" | merge $commentConfig -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript>
