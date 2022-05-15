@@ -237,14 +237,6 @@
       }
     }
 
-    .lazyload, .lazyloading {
-      @include object-fit(scale-down);
-    }
-
-    .lazyloaded {
-      @include object-fit(fill);
-    }
-
     blockquote {
       display: block;
       border-left: .5rem solid $blockquote-color;
@@ -330,10 +322,10 @@
     white-space: pre-wrap;
   }
 
-  --ti-cursor-font-family: $global-font-family;
-  --ti-cursor-font-size: $global-font-size;
-  --ti-cursor-font-weight: $global-font-weight;
-  --ti-cursor-line-height: $global-line-height;
+  --ti-cursor-font-family: var(--global-font-family);
+  --ti-cursor-font-size: var(--global-font-size);
+  --ti-cursor-font-weight: var(--global-font-weight);
+  --ti-cursor-line-height: var(--global-line-height);
   --ti-cursor-color: $global-font-secondary-color;
   --ti-cursor-margin-left: 0;
 

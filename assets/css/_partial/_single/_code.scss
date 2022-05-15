@@ -67,7 +67,7 @@ code, pre, .highlight table, .highlight tr, .highlight td {
       align-items: center;
       box-sizing: border-box;
       width: 100%;
-      font-family: $global-font-family;
+      font-family: var(--global-font-family);
       font-weight: bold;
       color: $code-info-color;
       background: darken($code-background-color, 8%);

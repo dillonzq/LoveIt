@@ -100,11 +100,10 @@
         height: 100%;
         left: 0;
         top: 0;
-        @include object-fit(none);
-      }
 
-      img.lazyloaded {
-        @include object-fit(cover);
+        &.lazyloaded {
+          @include object-fit(cover);
+        }
       }
 
       &:hover {

@@ -97,12 +97,6 @@
   line-break: $value;
 }
 
-@mixin ms {
-  input::-ms-clear {
-    display: none;
-  }
-}
-
 @mixin object-fit($value) {
   -o-object-fit: $value;
   object-fit: $value;
