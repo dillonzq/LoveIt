@@ -4,8 +4,8 @@ code {
   padding: 0 .4rem;
   @include overflow-wrap(break-word);
   @include line-break(anywhere);
-  font-size: $code-font-size;
-  font-family: $code-font-family;
+  font-size: var(--code-font-size);
+  font-family: var(--code-font-family);
   color: $code-color;
 
   [theme=dark] & {
@@ -38,8 +38,8 @@ code, pre, .highlight table, .highlight tr, .highlight td {
 }
 
 .highlight {
-  font-family: $code-font-family;
-  font-size: $code-font-size;
+  font-family: var(--code-font-family);
+  font-size: var(--code-font-size);
   line-height: 1.4em;
   margin: .5rem 0;
 
@@ -210,8 +210,8 @@ code, pre, .highlight table, .highlight tr, .highlight td {
 }
 
 .gist {
-  font-family: $code-font-family;
-  font-size: $code-font-size;
+  font-family: var(--code-font-family);
+  font-size: var(--code-font-size);
 
   .table-wrapper {
     > table,

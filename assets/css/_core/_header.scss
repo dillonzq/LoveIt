@@ -36,7 +36,7 @@ header {
 }
 
 .header-title {
-  font-family: $header-title-font-family;
+  font-family: var(--header-title-font-family);
   font-weight: bold;
   margin-right: .5rem;
   min-width: 10%;
@@ -148,8 +148,8 @@ header {
 #header-desktop {
   display: block;
   position: fixed;
-  height: $header-height;
-  line-height: $header-height;
+  height: var(--header-height);
+  line-height: var(--header-height);
 
   [data-header-desktop=normal] & {
     position: static;
@@ -159,7 +159,7 @@ header {
     padding: 0 2rem 0 10vh;
 
     .header-title {
-      font-size: $header-title-font-size;
+      font-size: var(--header-title-font-size);
     }
 
     .menu {
@@ -213,8 +213,8 @@ header {
 #header-mobile {
   display: none;
   position: fixed;
-  height: $header-height;
-  line-height: $header-height;
+  height: var(--header-height);
+  line-height: var(--header-height);
 
   [data-header-mobile=normal] & {
     position: static;
@@ -230,7 +230,7 @@ header {
       @include transition(margin-top 0.3s ease);
 
       .header-title {
-        font-size: $header-title-font-size;
+        font-size: var(--header-title-font-size);
         max-width: 80%;
       }
 
@@ -289,7 +289,7 @@ header {
         justify-content: space-between;
         align-items: center;
         box-sizing: border-box;
-        padding: ($header-height - 2.5rem) / 2 1rem;
+        padding: calc((var(--header-height) - 2.5rem) / 2) 1rem;
         line-height: 2.5rem;
       }
 
@@ -328,7 +328,7 @@ header {
 
   &.open {
     .header-wrapper {
-      margin-top: -$header-height;
+      margin-top: -var(--header-height);
     }
 
     .menu {
@@ -349,7 +349,7 @@ header {
 .search-dropdown {
   position: fixed;
   z-index: 200;
-  top: $header-height;
+  top: var(--header-height);
   @include box-shadow(0 .125rem .25rem rgba(0, 0, 0, .1));
 
   &.desktop {
@@ -372,7 +372,7 @@ header {
 
     .suggestions {
       overflow-y: auto;
-      max-height: calc(100vh - #{$header-height});
+      max-height: calc(100vh - var(--header-height));
 
       .suggestion {
         padding: .75rem 1rem;

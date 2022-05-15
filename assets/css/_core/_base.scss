@@ -9,7 +9,7 @@ html {
   scroll-behavior: smooth;
 
   main [id] {
-    scroll-margin-top: $header-height + .5rem;
+    scroll-margin-top: calc(var(--header-height) + .5rem);
   }
 }
 

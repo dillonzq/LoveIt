@@ -4,7 +4,7 @@
 
 // ========== Global ========== //
 // Font and Line Height
-$global-font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif !default;
+$global-font-family: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei UI", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $global-font-size: 16px;
 $global-font-weight: 400;
 $global-line-height: 1.5rem;
@@ -52,13 +52,13 @@ $selection-color-dark: rgba(50, 112, 194, 0.4) !default;
 // Height of the header
 $header-height: 3.5rem !default;
 
+// Font family and size of the header title
+$header-title-font-family: $global-font-family !default;
+$header-title-font-size: 1.5rem !default;
+
 // Color of the header background
 $header-background-color: #f8f8f8 !default;
 $header-background-color-dark: #252627 !default;
-
-// Font style of the header title
-$header-title-font-family: $global-font-family !default;
-$header-title-font-size: 1.5rem !default;
 
 // Color of the hover header item
 $header-hover-color: #161209 !default;
@@ -106,6 +106,10 @@ $pagination-link-hover-color-dark: #fff !default;
 // ========== Pagination ========== //
 
 // ========== Code ========== //
+// Font family and size of the code
+$code-font-family: "Source Code Pro", Menlo, Consolas, Monaco, monospace, $global-font-family !default;
+$code-font-size: .875rem !default;
+
 // Color of the code
 $code-color: #E74C3C !default;
 $code-color-dark: #E5BF78 !default;
@@ -116,12 +120,6 @@ $code-background-color-dark: #272C34 !default;
 
 $code-info-color: #9c9c9c !default;
 $code-info-color-dark: #b1b0b0 !default;
-
-// Font size of the code
-$code-font-size: .875rem !default;
-
-// Font family of the code
-$code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-font-family !default;
 
 // Code type map
 $code-type-map: (

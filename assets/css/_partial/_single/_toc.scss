@@ -1,12 +1,12 @@
 .toc {
   .toc-title {
-    font-size: $toc-title-font-size;
+    font-size: var(--toc-title-font-size);
     font-weight: bold;
     text-transform: uppercase;
   }
 
   .toc-content {
-    font-size: $toc-content-font-size;
+    font-size: var(--toc-content-font-size);
 
     ul {
       text-indent: -0.85rem;
