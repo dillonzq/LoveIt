@@ -100,5 +100,5 @@
 @mixin object-fit($value) {
   -o-object-fit: $value;
   object-fit: $value;
-  font-family: 'object-fit: #{$value};';
+  font-family: "object-fit: #{$value};";
 }
