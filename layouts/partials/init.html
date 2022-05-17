@@ -1,14 +1,4 @@
-{{- .Scratch.Set "version" "0.2.10" -}}
-
-{{- /* LoveIt theme version detection */ -}}
-{{- $VERSION := "0.2.X" -}}
-{{- if eq .Site .Sites.First -}}
-    {{- if not .Site.Params.version -}}
-        {{- errorf "Configuration Error 配置文件错误\n\nYou haven't configured the LoveIt version param correctly yet. See https://hugoloveit.com/theme-documentation-basics/#basic-configuration\n你还没有正确配置 LoveIt 的版本参数. 参考 https://hugoloveit.com/zh-cn/theme-documentation-basics/#basic-configuration\n" -}}
-    {{- else if ne .Site.Params.version $VERSION -}}
-        {{- errorf (printf "Compatibility Error 兼容性错误\n\n%v -> %v:\nYou have an incompatible update. See https://github.com/dillonzq/LoveIt/releases\n你进行了一次不兼容的更新. 参考 https://github.com/dillonzq/LoveIt/releases\n" .Site.Params.version $VERSION) -}}
-    {{- end -}}
-{{- end -}}
+{{- .Scratch.Set "version" "0.2.11" -}}
 
 {{- $params := .Params | merge .Site.Params.page -}}
 
