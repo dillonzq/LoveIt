@@ -843,6 +843,7 @@ In `assets/css/_custom.scss`, you can add some css style code to customize the s
 | Russian              | `ru`      | `ru`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Romanian             | `ro`      | `ro`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Vietnamese           | `vi`      | `vi`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| Arabic               | `ar`      | `ar`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 
 ### 4.2 Basic Configuration
 
