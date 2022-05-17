@@ -3,7 +3,8 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.62.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
-[![CircleCI](https://img.shields.io/circleci/build/github/dillonzq/LoveIt/develop?label=CI&style=flat-square&logo=circleci)](https://app.circleci.com/pipelines/github/dillonzq/LoveIt)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dillonzq_LoveIt&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dillonzq_LoveIt)
+[![CircleCI](https://circleci.com/gh/dillonzq/LoveIt/tree/master.svg?style=svg)](https://circleci.com/gh/dillonzq/LoveIt/tree/master)
 
 English README | [简体中文说明](https://github.com/dillonzq/LoveIt/blob/master/README.zh-cn.md)
 
@@ -38,7 +39,7 @@ Compared to the original LeaveIt theme and the KeepIt theme, the LoveIt theme ha
 * Extended Markdown syntax for **ruby annotation**
 * Extended Markdown syntax for **fraction**
 * **Mathematical formula** supported by [KaTeX](https://katex.org/)
-* **Diagram syntax** shortcode supported by [mermaid](https://github.com/knsv/mermaid)
+* **Diagram syntax** shortcode supported by [mermaid](https://github.com/mermaid-js/mermaid)
 * **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
 * **Mapbox** shortcode supported by [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * Embedded **music player** supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
@@ -70,7 +71,7 @@ I hope you will LoveIt ❤️!
 
 ### Appearance and Layout
 
-* **Responsive** layout
+* **Desktop/Mobile Responsive** layout
 * **Light/Dark** mode
 * Globally consistent **design language**
 * **Pagination** supported
@@ -83,7 +84,7 @@ I hope you will LoveIt ❤️!
 * **Gravatar** supported by [Gravatar](https://gravatar.com)
 * Local **Avatar** supported
 * Up to **64** social links supported
-* Up to **28** share sites supported
+* Up to **24** share sites supported
 * **Disqus** comment system supported by [Disqus](https://disqus.com)
 * **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
 * **Valine** comment system supported by [Valine](https://valine.js.org/)
@@ -98,12 +99,12 @@ I hope you will LoveIt ❤️!
 * **Twemoji** supported
 * Automatically **highlighting** code
 * **Copy code** to clipboard with one click
-* **Images gallery** supported by [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
+* **Images gallery** supported by [lightGallery](https://github.com/sachinchoolur/lightgallery)
 * Extended Markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
 * Extended Markdown syntax for **ruby annotation**
 * Extended Markdown syntax for **fraction**
 * **Mathematical formula** supported by [KaTeX](https://katex.org/)
-* **Diagrams** shortcode supported by [mermaid](https://github.com/knsv/mermaid)
+* **Diagrams** shortcode supported by [mermaid](https://github.com/mermaid-js/mermaid)
 * **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
 * **Mapbox** shortcode supported by [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * **Music player** shortcode supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
@@ -112,7 +113,6 @@ I hope you will LoveIt ❤️!
 * **Custom style** shortcode
 * **Custom script** shortcode
 * **Animated typing** supported by [TypeIt](https://typeitjs.com/)
-* **Dynamic scroll** supported by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
 * ...
 
@@ -130,6 +130,7 @@ LoveIt supports the following languages:
 
 * English
 * Simplified Chinese
+* Traditional Chinese
 * French
 * Polish
 * Brazilian Portuguese
@@ -154,25 +155,27 @@ All feedback is welcome! Head over to the [issue tracker](https://github.com/dil
 
 LoveIt is licensed under the **MIT** license. Check the [LICENSE file](https://github.com/dillonzq/LoveIt/blob/master/LICENSE) for details.
 
+## Special Thanks
+
 Thanks to the authors of following resources included in the theme:
 
 * [normalize.css](https://github.com/necolas/normalize.css)
 * [Font Awesome](https://fontawesome.com/)
 * [Simple Icons](https://github.com/simple-icons/simple-icons)
 * [Animate.css](https://daneden.github.io/animate.css/)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [autocomplete.js](https://github.com/algolia/autocomplete.js)
+* [autocomplete](https://github.com/algolia/autocomplete)
 * [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
 * [object-fit-images](https://github.com/fregante/object-fit-images)
 * [Twemoji](https://github.com/twitter/twemoji)
-* [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
+* [emoji-data](https://github.com/iamcal/emoji-data)
+* [lightGallery](https://github.com/sachinchoolur/lightgallery)
 * [clipboard.js](https://github.com/zenorocha/clipboard.js)
 * [Sharer.js](https://github.com/ellisonleao/sharer.js)
 * [TypeIt](https://typeitjs.com/)
 * [KaTeX](https://katex.org/)
-* [mermaid](https://github.com/knsv/mermaid)
+* [mermaid](https://github.com/mermaid-js/mermaid)
 * [ECharts](https://echarts.apache.org/)
 * [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * [APlayer](https://github.com/MoePlayer/APlayer)
@@ -194,3 +197,7 @@ If you enjoy the theme, please consider buying me a coffee ☕️.
 * [Wechat](https://github.com/dillonzq/LoveIt/raw/master/images/Wechat.jpg)
 
 Thanks! ❤️
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/dillonzq/LoveIt.svg)](https://starchart.cc/dillonzq/LoveIt)

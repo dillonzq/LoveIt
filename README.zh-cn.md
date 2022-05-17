@@ -3,7 +3,8 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.62.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
-[![CircleCI](https://img.shields.io/circleci/build/github/dillonzq/LoveIt/develop?label=CI&style=flat-square&logo=circleci)](https://app.circleci.com/pipelines/github/dillonzq/LoveIt)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dillonzq_LoveIt&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dillonzq_LoveIt)
+[![CircleCI](https://circleci.com/gh/dillonzq/LoveIt/tree/master.svg?style=svg)](https://circleci.com/gh/dillonzq/LoveIt/tree/master)
 
 [English README](https://github.com/dillonzq/LoveIt/blob/master/README.md) | 简体中文说明
 
@@ -37,7 +38,7 @@
 * 支持**上标注释**的扩展 Markdown 语法
 * 支持**分数**的扩展 Markdown 语法
 * 支持基于 [KaTeX](https://katex.org/) 的**数学公式**
-* 支持基于 [mermaid](https://github.com/knsv/mermaid) 的**图表**生成功能
+* 支持基于 [mermaid](https://github.com/mermaid-js/mermaid) 的**图表**生成功能
 * 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化**生成功能
 * 支持基于 [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) 的 **Mapbox** 地图显示功能
 * 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的内嵌**音乐播放器**
@@ -65,7 +66,7 @@
 
 ### 外观和布局
 
-* **响应式**布局
+* **桌面端/移动端 响应式**布局
 * **浅色/深色** 主题模式
 * 全局一致的**设计语言**
 * 支持**分页**
@@ -78,7 +79,7 @@
 * 支持 **[Gravatar](https://gravatar.com)** 头像
 * 支持本地**头像**
 * 支持多达 **64** 种社交链接
-* 支持多达 **28** 种网站分享
+* 支持多达 **24** 种网站分享
 * 支持 **[Disqus](https://disqus.com)** 评论系统
 * 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
 * 支持 **[Valine](https://valine.js.org/)** 评论系统
@@ -93,12 +94,12 @@
 * 支持 **Twemoji**
 * 支持**代码高亮**
 * 一键**复制代码**到剪贴板
-* 支持基于 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 的**图片画廊**
+* 支持基于 [lightGallery](https://github.com/sachinchoolur/lightgallery) 的**图片画廊**
 * 支持 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
 * 支持**上标注释**的扩展 Markdown 语法
 * 支持**分数**的扩展 Markdown 语法
 * 支持基于 [KaTeX](https://katex.org/) 的**数学公式**
-* 支持基于 [mermaid](https://github.com/knsv/mermaid) 的**图表** shortcode
+* 支持基于 [mermaid](https://github.com/mermaid-js/mermaid) 的**图表** shortcode
 * 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化** shortcode
 * 支持基于 [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) 的 **Mapbox** shortcode
 * 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的**音乐播放器** shortcode
@@ -107,7 +108,6 @@
 * 支持**自定义样式**的 shortcode
 * 支持**自定义脚本**的 shortcode
 * 支持基于 [TypeIt](https://typeitjs.com/) 的**打字动画** shortcode
-* 支持基于 [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) 的**滚动动画**
 * 支持基于 [cookieconsent](https://github.com/osano/cookieconsent) 的 **Cookie 许可横幅**
 * ...
 
@@ -125,6 +125,7 @@ LoveIt 支持下列语言:
 
 * 英语
 * 简体中文
+* 繁体中文
 * 法语
 * 波兰语
 * 巴西葡萄牙语
@@ -149,25 +150,27 @@ LoveIt 支持下列语言:
 
 LoveIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)。
 
+## 特别感谢
+
 LoveIt 主题中用到了以下项目，感谢它们的作者：
 
 * [normalize.css](https://github.com/necolas/normalize.css)
 * [Font Awesome](https://fontawesome.com/)
 * [Simple Icons](https://github.com/simple-icons/simple-icons)
 * [Animate.css](https://daneden.github.io/animate.css/)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [autocomplete.js](https://github.com/algolia/autocomplete.js)
+* [autocomplete](https://github.com/algolia/autocomplete)
 * [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
 * [object-fit-images](https://github.com/fregante/object-fit-images)
 * [Twemoji](https://github.com/twitter/twemoji)
-* [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
+* [emoji-data](https://github.com/iamcal/emoji-data)
+* [lightGallery](https://github.com/sachinchoolur/lightgallery)
 * [clipboard.js](https://github.com/zenorocha/clipboard.js)
 * [Sharer.js](https://github.com/ellisonleao/sharer.js)
 * [TypeIt](https://typeitjs.com/)
 * [KaTeX](https://katex.org/)
-* [mermaid](https://github.com/knsv/mermaid)
+* [mermaid](https://github.com/mermaid-js/mermaid)
 * [ECharts](https://echarts.apache.org/)
 * [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * [APlayer](https://github.com/MoePlayer/APlayer)
@@ -189,3 +192,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [微信支付](https://github.com/dillonzq/LoveIt/raw/master/images/Wechat.jpg)
 
 谢谢! ❤️
+
+## Star 数目趋势
+
+[![Star 数目趋势](https://starchart.cc/dillonzq/LoveIt.svg)](https://starchart.cc/dillonzq/LoveIt)

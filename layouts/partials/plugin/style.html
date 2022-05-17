@@ -27,5 +27,20 @@
         {{- end -}}
         {{- $href = $resource.RelPermalink -}}
     {{- end -}}
-    <link rel="stylesheet" href="{{ $href }}"{{ if .Crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ with .Attr }} {{ . | safeHTMLAttr }}{{ end }}>
+    {{- $attrs := printf `href="%v"` $href -}}
+    {{- if .Crossorigin -}}
+        {{- $attrs = ` crossorigin="anonymous"` | add $attrs -}}
+    {{- end -}}
+    {{- with $integrity -}}
+        {{- $attrs = printf ` integrity="%v"` . | add $attrs -}}
+    {{- end -}}
+    {{- with .Attr -}}
+        {{- $attrs = add " " . | add $attrs -}}
+    {{- end -}}
+    {{- if .Preload -}}
+        <link rel="preload" {{ $attrs | safeHTMLAttr }} as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" {{ $attrs | safeHTMLAttr }}></noscript>
+    {{- else -}}
+        <link rel="stylesheet" {{ $attrs | safeHTMLAttr }}>
+    {{- end -}}
 {{- end -}}
