@@ -17,7 +17,7 @@ other = "Posts"
 
 # === Taxonomy ===
 [allSome]
-other = "Todos {{ .Some }}"
+other = "{{ .Some }}"
 
 [tag]
 other = "Tag"
@@ -47,7 +47,7 @@ other = "Trocar tema"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Movido a {{ .Hugo }} | Tema - {{ .Theme }}"
+other = "Possibilitado por {{ .Hugo }} | Tema - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -197,4 +197,3 @@ other = "ALTERADO"
 [deleted]
 other = "EXCLUÍDO"
 # === shortcodes/version.html ===
-

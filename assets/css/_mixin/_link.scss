@@ -2,19 +2,35 @@
   a, a::before, a::after {
     text-decoration: none;
 
-    color: if($light, $global-link-color, $single-link-color);
+    @if $light {
+      color: $global-link-color;
+    } @else {
+      color: $single-link-color;
+    }
 
     [theme=dark] & {
-      color: if($dark, $global-link-color-dark, $single-link-color-dark);
+      @if $dark {
+        color: $global-link-color-dark;
+      } @else {
+        color: $single-link-color-dark;
+      }
     }
   }
 
   a:active,
   a:hover {
-    color: if($light, $global-link-hover-color, $single-link-hover-color);
+    @if $light {
+      color: $global-link-hover-color;
+    } @else {
+      color: $single-link-hover-color;
+    }
 
     [theme=dark] & {
-      color: if($dark, $global-link-hover-color-dark, $single-link-hover-color-dark);
+      @if $dark {
+        color: $global-link-hover-color-dark;
+      } @else {
+        color: $single-link-hover-color-dark;
+      }
     }
   }
 }
