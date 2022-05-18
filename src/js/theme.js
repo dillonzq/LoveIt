@@ -645,6 +645,42 @@ class Theme {
                 });
                 this.switchThemeEventSet.add(this._utterancesOnSwitchTheme);
             }
+
+            if (this.config.comment.giscus) {
+                const giscusConfig = this.config.comment.giscus;
+                const giscusScript = document.createElement('script');
+                let dataTheme = this.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme
+                giscusScript.src = 'https://giscus.app/client.js';
+                giscusScript.type = 'text/javascript';
+                giscusScript.setAttribute('data-repo', giscusConfig.repo);
+                giscusScript.setAttribute('data-repo-id', giscusConfig.repo_id);
+                giscusScript.setAttribute('data-category', giscusConfig.category);
+                giscusScript.setAttribute('data-category-id', giscusConfig.category_id);
+                giscusScript.setAttribute('data-mapping', giscusConfig.mapping);
+                giscusScript.setAttribute('data-reactions-enabled', giscusConfig.reactions_enabled);
+                giscusScript.setAttribute('data-emit-metadata', giscusConfig.emit_metadata);
+                giscusScript.setAttribute('data-input-position', giscusConfig.input_position);
+                giscusScript.setAttribute('data-lang', giscusConfig.lang);
+                if (giscusConfig.label) giscusScript.setAttribute('label', giscusConfig.label);
+                giscusScript.setAttribute('data-theme', dataTheme);
+                giscusScript.crossOrigin = 'anonymous';
+                giscusScript.async = true;
+                document.getElementById('giscus').appendChild(giscusScript);
+                this._giscusOnSwitchTheme = this._giscusOnSwitchTheme || (() => {
+                    dataTheme = this.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme
+                    const message = {
+                        setConfig: {
+                            // theme: 'https://giscus.app/themes/custom_example.css',
+                            theme: dataTheme,
+                            reactionsEnabled: false,
+                        }
+                    };
+                    const iframe = document.querySelector('iframe.giscus-frame');
+                    if (!iframe) return;
+                    iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+                });
+                this.switchThemeEventSet.add(this._giscusOnSwitchTheme);
+            }
         }
     }
 

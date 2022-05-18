@@ -468,6 +468,25 @@
         label = ""
         lightTheme = "github-light"
         darkTheme = "github-dark"
+      [params.page.comment.giscus]
+        # To enable giscus, the github discussions based comment section,
+        # Follow the steps described to enable giscus and get the values
+        # needed to populate the below information.
+        # https://www.joelnitta.com/posts/2021-11-24_using-giscus/
+        enable = false
+        category = "Announcements" # Announcements, Comments
+        lang = "en" # 保持 en, 只需要控制每篇文章的 url 不一样即可
+        repo = "" # Entering repo will enable giscus
+        repo_id = "" # query by GraphQL API, https://docs.github.com/en/graphql/overview/explorer
+        category_id = "" # query by GraphQL API, https://docs.github.com/en/graphql/overview/explorer
+        mapping = "pathname"
+        reactions_enabled = "0"
+        emit_metadata = "0"
+        input_position = "top"
+        lightTheme = "light" # github theme
+        darkTheme = "dark" # github theme
+        crossorigin = "anonymous"
+        label = "Comment" # Label applied to issue by utteranc.es bot
     # Third-party library config
     # 第三方库配置
     [params.page.library]
