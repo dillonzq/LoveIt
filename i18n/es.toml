@@ -17,7 +17,7 @@ other = "Artículos"
 
 # === Taxonomy ===
 [allSome]
-other = "Todo {{ .Some }}"
+other = "Todos los {{ .Some }}"
 
 [tag]
 other = "Etiqueta"
@@ -47,7 +47,7 @@ other = "Cambia el tema"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Provisto por {{ .Hugo }} | Tema - {{ .Theme }}"
+other = "Con la tecnología de {{ .Hugo }} | Tema - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
