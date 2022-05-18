@@ -22,6 +22,6 @@
 
     {{- /* Plausible Analytics */ -}}
     {{- with $analytics.plausible.dataDomain -}}
-        <script async defer data-domain="{{ . }}" src="https://plausible.io/js/plausible.js"></script>
+        {{- dict "Source" "https://plausible.io/js/plausible.js" "Async" true "Defer" true "Attr" ($analytics.plausible.dataDomain | printf `data-domain="%v"`) | partial "plugin/script.html" -}}
     {{- end -}}
 {{- end -}}
