@@ -106,91 +106,63 @@
         </a>
     {{- end -}}
 
-    {{- /* 016: Digg */ -}}
-    {{- if $share.Digg -}}
-        <a href="javascript:void(0);" title="{{ T `shareOn` }} Digg" data-sharer="digg" data-url="{{ .Permalink }}">
-            {{- dict "Class" "fab fa-digg fa-fw" | partial "plugin/icon.html" -}}
-        </a>
-    {{- end -}}
-
-    {{- /* 017: StumbleUpon */ -}}
-    {{- if $share.Stumbleupon -}}
-        <a href="javascript:void(0);" title="{{ T `shareOn` }} StumbleUpon" data-sharer="stumbleupon" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
-            {{- dict "Class" "fab fa-stumbleupon fa-fw" | partial "plugin/icon.html" -}}
-        </a>
-    {{- end -}}
-
-    {{- /* 018: Flipboard */ -}}
+    {{- /* 016: Flipboard */ -}}
     {{- if $share.Flipboard -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} Flipboard" data-sharer="flipboard" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
             {{- dict "Class" "fab fa-flipboard fa-fw" | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 
-    {{- /* 019: 微博 */ -}}
+    {{- /* 017: 微博 */ -}}
     {{- if $share.Weibo -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} 微博" data-sharer="weibo" data-url="{{ .Permalink }}" data-title="{{ .Title }}"{{ with .Params.featuredImage }} data-image="{{ . }}"{{ end }}{{ with .Site.Params.Social.Weibo }} data-ralateuid="{{ . }}"{{ end }}>
             {{- dict "Class" "fab fa-weibo fa-fw" | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 
-    {{- /* 020: 人人 */ -}}
-    {{- if $share.Renren -}}
-        <a href="javascript:void(0);" title="{{ T `shareOn` }} 人人" data-sharer="renren" data-url="{{ .Permalink }}">
-            {{- dict "Class" "fab fa-renren fa-fw" | partial "plugin/icon.html" -}}
-        </a>
-    {{- end -}}
-
-    {{- /* 021: Myspace */ -}}
-    {{- if $share.Myspace -}}
-        <a href="javascript:void(0);" title="{{ T `shareOn` }} Myspace" data-sharer="myspace" data-url="{{ .Permalink }}" data-title="{{ .Title }}" data-description="{{ .Description }}">
-            {{- dict "Simpleicons" "myspace" "Prefix" (.Scratch.Get "cdn" | default dict).simpleIconsPrefix | partial "plugin/icon.html" -}}
-        </a>
-    {{- end -}}
-
-    {{- /* 022: Blogger */ -}}
+    {{- /* 018: Blogger */ -}}
     {{- if $share.Blogger -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} Blogger" data-sharer="blogger" data-url="{{ .Permalink }}" data-title="{{ .Title }}" data-description="{{ .Description }}">
             {{- dict "Class" "fab fa-blogger fa-fw" | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 
-    {{- /* 023: 百度 */ -}}
+    {{- /* 019: 百度 */ -}}
     {{- if $share.Baidu -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} 百度" data-sharer="baidu" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
             {{- dict "Simpleicons" "baidu" "Prefix" (.Scratch.Get "cdn" | default dict).simpleIconsPrefix | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 
-    {{- /* 024: OK.RU */ -}}
+    {{- /* 020: OK.RU */ -}}
     {{- if $share.Odnoklassniki -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} OK.RU" data-sharer="okru" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
             {{- dict "Class" "fab fa-odnoklassniki fa-fw" | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 
-    {{- /* 025: Evernote */ -}}
+    {{- /* 021: Evernote */ -}}
     {{- if $share.Evernote -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} Evernote" data-sharer="evernote" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
             {{- dict "Class" "fab fa-evernote fa-fw" | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 
-    {{- /* 026: Skype */ -}}
+    {{- /* 022: Skype */ -}}
     {{- if $share.Skype -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} Skype" data-sharer="skype" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
             {{- dict "Class" "fab fa-skype fa-fw" | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 
-    {{- /* 027: Trello */ -}}
+    {{- /* 023: Trello */ -}}
     {{- if $share.Trello -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} Trello" data-sharer="trello" data-url="{{ .Permalink }}" data-title="{{ .Title }}" data-description="{{ .Description }}">
             {{- dict "Class" "fab fa-trello fa-fw" | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 
-    {{- /* 028: Mix */ -}}
+    {{- /* 024: Mix */ -}}
     {{- if $share.Mix -}}
         <a href="//mix.com/add?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="{{ T `shareOn` }} Mix">
             {{- dict "Class" "fab fa-mix fa-fw" | partial "plugin/icon.html" -}}

@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "探索 Hugo - LoveIt 主题的全部内容和背后的核心概念."
+images: []
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
@@ -76,24 +77,30 @@ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 
 ```toml
 baseURL = "http://example.org/"
-# [en, zh-cn, fr, ...] 设置默认的语言
-defaultContentLanguage = "zh-cn"
-# 网站语言, 仅在这里 CN 大写
-languageCode = "zh-CN"
-# 是否包括中日韩文字
-hasCJKLanguage = true
-# 网站标题
-title = "我的全新 Hugo 网站"
 
 # 更改使用 Hugo 构建网站时使用的默认主题
 theme = "LoveIt"
 
-[params]
-  # LoveIt 主题版本
-  version = "0.2.X"
+# 网站标题
+title = "我的全新 Hugo 网站"
 
+# 网站语言, 仅在这里 CN 大写 ["en", "zh-CN", "fr", "pl", ...]
+languageCode = "zh-CN"
+# 语言名称 ["English", "简体中文", "Français", "Polski", ...]
+languageName = "简体中文"
+# 是否包括中日韩文字
+hasCJKLanguage = true
+
+# 作者配置
+[author]
+  name = "xxxx"
+  email = ""
+  link = ""
+
+# 菜单配置
 [menu]
   [[menu.main]]
+    weight = 1
     identifier = "posts"
     # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
     pre = ""
@@ -103,23 +110,22 @@ theme = "LoveIt"
     url = "/posts/"
     # 当你将鼠标悬停在此菜单链接上时, 将显示的标题
     title = ""
-    weight = 1
   [[menu.main]]
+    weight = 2
     identifier = "tags"
     pre = ""
     post = ""
     name = "标签"
     url = "/tags/"
     title = ""
-    weight = 2
   [[menu.main]]
+    weight = 3
     identifier = "categories"
     pre = ""
     post = ""
     name = "分类"
     url = "/categories/"
     title = ""
-    weight = 3
 
 # Hugo 解析文档的配置
 [markup]
@@ -197,66 +203,27 @@ hugo
 
 ```toml
 [params]
-  # {{< version 0.2.0 changed >}} LoveIt 主题版本
-  version = "0.2.X"
-  # 网站描述
-  description = "这是我的全新 Hugo 网站"
-  # 网站关键词
-  keywords = ["Theme", "Hugo"]
-  # 网站默认主题样式 ("light", "dark", "auto")
+  # 网站默认主题样式 ["auto", "light", "dark"]
   defaultTheme = "auto"
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
   gitRepo = ""
   # {{< version 0.1.1 >}} 哪种哈希函数用来 SRI, 为空时表示不使用 SRI
-  # ("sha256", "sha384", "sha512", "md5")
+  # ["sha256", "sha384", "sha512", "md5"]
   fingerprint = ""
   # {{< version 0.2.0 >}} 日期格式
   dateFormat = "2006-01-02"
+  # 网站标题, 用于 Open Graph 和 Twitter Cards
+  title = "我的网站"
+  # 网站描述, 用于 RSS, SEO, Open Graph 和 Twitter Cards
+  description = "这是我的全新 Hugo 网站"
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = ["/logo.png"]
 
-  # {{< version 0.2.0 >}} 应用图标配置
-  [params.app]
-    # 当添加到 iOS 主屏幕或者 Android 启动器时的标题, 覆盖默认标题
-    title = "LoveIt"
-    # 是否隐藏网站图标资源链接
-    noFavicon = false
-    # 更现代的 SVG 网站图标, 可替代旧的 .png 和 .ico 文件
-    svgFavicon = ""
-    # Android 浏览器主题色
-    themeColor = "#ffffff"
-    # Safari 图标颜色
-    iconColor = "#5bbad5"
-    # Windows v8-10磁贴颜色
-    tileColor = "#da532c"
-
-  # {{< version 0.2.0 >}} 搜索配置
-  [params.search]
-    enable = true
-    # 搜索引擎的类型 ("lunr", "algolia")
-    type = "lunr"
-    # 文章内容最长索引长度
-    contentLength = 4000
-    # 搜索框的占位提示语
-    placeholder = ""
-    # {{< version 0.2.1 >}} 最大结果数目
-    maxResultLength = 10
-    # {{< version 0.2.3 >}} 结果内容片段长度
-    snippetLength = 50
-    # {{< version 0.2.1 >}} 搜索结果中高亮部分的 HTML 标签
-    highlightTag = "em"
-    # {{< version 0.2.4 >}} 是否在搜索索引中使用基于 baseURL 的绝对路径
-    absoluteURL = false
-    [params.search.algolia]
-      index = ""
-      appID = ""
-      searchKey = ""
-
   # 页面头部导航栏配置
   [params.header]
-    # 桌面端导航栏模式 ("fixed", "normal", "auto")
+    # 桌面端导航栏模式 ["fixed", "normal", "auto"]
     desktopMode = "fixed"
-    # 移动端导航栏模式 ("fixed", "normal", "auto")
+    # 移动端导航栏模式 ["fixed", "normal", "auto"]
     mobileMode = "auto"
     # {{< version 0.2.0 >}} 页面头部导航栏标题配置
     [params.header.title]
@@ -306,6 +273,43 @@ hugo
     dateFormat = "01-02"
     # RSS 文章数目
     rss = 10
+
+  # {{< version 0.2.0 >}} 应用图标配置
+  [params.app]
+    # 当添加到 iOS 主屏幕或者 Android 启动器时的标题, 覆盖默认标题
+    title = "我的网站"
+    # 是否隐藏网站图标资源链接
+    noFavicon = false
+    # 更现代的 SVG 网站图标, 可替代旧的 .png 和 .ico 文件
+    svgFavicon = ""
+    # Android 浏览器主题色
+    themeColor = "#ffffff"
+    # Safari 图标颜色
+    iconColor = "#5bbad5"
+    # Windows v8-10磁贴颜色
+    tileColor = "#da532c"
+
+  # {{< version 0.2.0 >}} 搜索配置
+  [params.search]
+    enable = true
+    # 搜索引擎的类型 ["lunr", "algolia"]
+    type = "lunr"
+    # 文章内容最长索引长度
+    contentLength = 4000
+    # 搜索框的占位提示语
+    placeholder = ""
+    # {{< version 0.2.1 >}} 最大结果数目
+    maxResultLength = 10
+    # {{< version 0.2.3 >}} 结果内容片段长度
+    snippetLength = 50
+    # {{< version 0.2.1 >}} 搜索结果中高亮部分的 HTML 标签
+    highlightTag = "em"
+    # {{< version 0.2.4 >}} 是否在搜索索引中使用基于 baseURL 的绝对路径
+    absoluteURL = false
+    [params.search.algolia]
+      index = ""
+      appID = ""
+      searchKey = ""
 
   # 主页配置
   [params.home]
@@ -404,7 +408,7 @@ hugo
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
 
-  # {{< version 0.2.0 changed >}} 文章页面配置
+  # {{< version 0.2.0 changed >}} 文章页面全局配置
   [params.page]
     # {{< version 0.2.0 >}} 是否在主页隐藏一篇文章
     hiddenFromHomePage = false
@@ -437,16 +441,16 @@ hugo
       # 是否显示代码块的复制按钮
       copy = true
       # 默认展开显示的代码行数
-      maxShownLines = 10
+      maxShownLines = 50
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} 数学公式
     [params.page.math]
       enable = true
-      # 默认块定界符是 $$ ... $$ 和 \\[ ... \\]
-      blockLeftDelimiter = ""
-      blockRightDelimiter = ""
-      # 默认行内定界符是 $ ... $ 和 \\( ... \\)
+      # {{< version 0.2.11 changed >}} 默认行内定界符是 $ ... $ 和 \( ... \)
       inlineLeftDelimiter = ""
       inlineRightDelimiter = ""
+      # {{< version 0.2.11 changed >}} 默认块定界符是 $$ ... $$, \[ ... \],  \begin{equation} ... \end{equation} 和一些其它的函数
+      blockLeftDelimiter = ""
+      blockRightDelimiter = ""
       # KaTeX 插件 copy_tex
       copyTex = true
       # KaTeX 插件 mhchem
@@ -456,9 +460,9 @@ hugo
       # Mapbox GL JS 的 access token
       accessToken = ""
       # 浅色主题的地图样式
-      lightStyle = "mapbox://styles/mapbox/light-v9"
+      lightStyle = "mapbox://styles/mapbox/light-v10?optimize=true"
       # 深色主题的地图样式
-      darkStyle = "mapbox://styles/mapbox/dark-v9"
+      darkStyle = "mapbox://styles/mapbox/dark-v10?optimize=true"
       # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api#navigationcontrol" NavigationControl >}}
       navigation = true
       # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api#geolocatecontrol" GeolocateControl >}}
@@ -473,10 +477,10 @@ hugo
       Twitter = true
       Facebook = true
       Linkedin = false
-      Whatsapp = true
+      Whatsapp = false
       Pinterest = false
       Tumblr = false
-      HackerNews = false
+      HackerNews = true
       Reddit = false
       VK = false
       Buffer = false
@@ -484,22 +488,18 @@ hugo
       Line = true
       Instapaper = false
       Pocket = false
-      Digg = false
-      Stumbleupon = false
       Flipboard = false
       Weibo = true
-      Renren = false
-      Myspace = true
-      Blogger = true
+      Blogger = false
       Baidu = false
       Odnoklassniki = false
-      Evernote = true
+      Evernote = false
       Skype = false
       Trello = false
       Mix = false
     # {{< version 0.2.0 changed >}} 评论系统设置
     [params.page.comment]
-      enable = true
+      enable = false
       # {{< link "https://disqus.com/" Disqus >}} 评论系统设置
       [params.page.comment.disqus]
         # {{< version 0.1.1 >}}
@@ -530,10 +530,10 @@ hugo
         enableQQ = false
         serverURLs = ""
         # {{< version 0.2.6 >}} emoji 数据文件名称, 默认是 "google.yml"
-        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
-        # 位于 "themes/LoveIt/assets/data/emoji/" 目录
+        # ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
+        # 位于 "themes/LoveIt/assets/lib/valine/emoji/" 目录
         # 可以在你的项目下相同路径存放你自己的数据文件:
-        # "assets/data/emoji/"
+        # "assets/lib/valine/emoji/"
         emoji = ""
       # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook 评论系统" >}}设置
       [params.page.comment.facebook]
@@ -637,7 +637,7 @@ hugo
   # {{< version 0.2.7 changed >}} 第三方库文件的 CDN 设置
   [params.cdn]
     # CDN 数据文件名称, 默认不启用
-    # ("jsdelivr.yml")
+    # ["jsdelivr.yml"]
     # 位于 "themes/LoveIt/assets/data/cdn/" 目录
     # 可以在你的项目下相同路径存放你自己的数据文件:
     # "assets/data/cdn/"
@@ -678,12 +678,6 @@ hugo
   [markup.tableOfContents]
     startLevel = 2
     endLevel = 6
-
-# 作者配置
-[author]
-  name = "xxxx"
-  email = ""
-  link = ""
 
 # 网站地图配置
 [sitemap]
@@ -747,7 +741,7 @@ hugo
 ```toml
 [params.cdn]
   # CDN 数据文件名称, 默认不启用
-  # ("jsdelivr.yml")
+  # ["jsdelivr.yml"]
   data = ""
 ````
 
@@ -840,6 +834,7 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 |:---- |:----:|:----:|:----:|:----:|
 | 英语 | `en` | `en` | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
 | 简体中文 | `zh-cn` | `zh-CN` | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
+| 繁體中文 | `zh-tw` | `zh-TW` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 法语 | `fr` | `fr` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 波兰语 | `pl` | `pl` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
 | 巴西葡萄牙语 | `pt-br` | `pt-BR` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
@@ -850,6 +845,9 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 | 俄语 | `ru` | `ru` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 罗马尼亚语 | `ro` | `ro` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 越南语 | `vi` | `vi` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 阿拉伯语 | `ar` | `ar` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 加泰罗尼亚语 | `ca` | `ca` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
+| 泰语 | `th` | `th` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 
 ### 4.2 基本配置
 
@@ -858,7 +856,7 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 例如, 一个支持英语, 中文和法语的网站配置:
 
 ```toml
-# [en, zh-cn, fr, pl, ...] 设置默认的语言
+# 设置默认的语言 ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "zh-cn"
 
 [languages]
@@ -868,62 +866,60 @@ defaultContentLanguage = "zh-cn"
     languageCode = "en"
     languageName = "English"
     [[languages.en.menu.main]]
+      weight = 1
       identifier = "posts"
       pre = ""
       post = ""
       name = "Posts"
       url = "/posts/"
       title = ""
-      weight = 1
     [[languages.en.menu.main]]
+      weight = 2
       identifier = "tags"
       pre = ""
       post = ""
       name = "Tags"
       url = "/tags/"
       title = ""
-      weight = 2
     [[languages.en.menu.main]]
+      weight = 3
       identifier = "categories"
       pre = ""
       post = ""
       name = "Categories"
       url = "/categories/"
       title = ""
-      weight = 3
 
   [languages.zh-cn]
     weight = 2
     title = "我的全新 Hugo 网站"
-    # 网站语言, 仅在这里 CN 大写
     languageCode = "zh-CN"
     languageName = "简体中文"
-    # 是否包括中日韩文字
     hasCJKLanguage = true
     [[languages.zh-cn.menu.main]]
+      weight = 1
       identifier = "posts"
       pre = ""
       post = ""
       name = "文章"
       url = "/posts/"
       title = ""
-      weight = 1
     [[languages.zh-cn.menu.main]]
+      weight = 2
       identifier = "tags"
       pre = ""
       post = ""
       name = "标签"
       url = "/tags/"
       title = ""
-      weight = 2
     [[languages.zh-cn.menu.main]]
+      weight = 3
       identifier = "categories"
       pre = ""
       post = ""
       name = "分类"
       url = "/categories/"
       title = ""
-      weight = 3
 
   [languages.fr]
     weight = 3
@@ -931,29 +927,29 @@ defaultContentLanguage = "zh-cn"
     languageCode = "fr"
     languageName = "Français"
     [[languages.fr.menu.main]]
+      weight = 1
       identifier = "posts"
       pre = ""
       post = ""
       name = "Postes"
       url = "/posts/"
       title = ""
-      weight = 1
     [[languages.fr.menu.main]]
+      weight = 2
       identifier = "tags"
       pre = ""
       post = ""
       name = "Balises"
       url = "/tags/"
       title = ""
-      weight = 2
     [[languages.fr.menu.main]]
+      weight = 3
       identifier = "categories"
       pre = ""
       post = ""
       name = "Catégories"
       url = "/categories/"
       title = ""
-      weight = 3
 ```
 
 然后, 对于每个新页面, 将语言代码附加到文件名中.
@@ -1005,7 +1001,7 @@ defaultContentLanguage = "zh-cn"
 ```toml
 [params.search]
   enable = true
-  # 搜索引擎的类型 ("lunr", "algolia")
+  # 搜索引擎的类型 ["lunr", "algolia"]
   type = "lunr"
   # 文章内容最长索引长度
   contentLength = 4000
@@ -1037,6 +1033,6 @@ defaultContentLanguage = "zh-cn"
 
 {{< admonition tip "关于 algolia 的使用技巧" >}}
 你需要上传 `index.json` 到 algolia 来激活搜索功能. 你可以使用浏览器来上传 `index.json` 文件但是一个自动化的脚本可能效果更好.
-[Algolia Atomic](https://github.com/chrisdmacrae/atomic-algolia) 是一个不错的选择.
+官方提供的 [Algolia CLI](https://github.com/algolia/algolia-cli) 是一个不错的选择.
 为了兼容 Hugo 的多语言模式, 你需要上传不同语言的 `index.json` 文件到对应的 algolia index, 例如 `zh-cn/index.json` 或 `fr/index.json`...
 {{< /admonition >}}

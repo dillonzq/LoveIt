@@ -1,0 +1,9 @@
+img {
+  &.lazyload, &.lazyloading {
+    @include object-fit(scale-down);
+  }
+
+  &.lazyloaded {
+    @include object-fit(contain);
+  }
+}

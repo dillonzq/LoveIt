@@ -18,7 +18,7 @@
     {{- $type := .Get "type" | default "note" -}}
     <div class="details admonition {{ $type }}{{ if .Get `open` | ne false }} open{{ end }}">
         <div class="details-summary admonition-title">
-            <i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}"></i>{{ .Get "title" | default (T $type) }}<i class="details-icon {{ $iconDetails }}"></i>
+            <i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}" aria-hidden="true"></i>{{ .Get "title" | default (T $type) }}<i class="details-icon {{ $iconDetails }}" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content">
@@ -30,7 +30,7 @@
     {{- $type := .Get 0 | default "note" -}}
     <div class="details admonition {{ $type }}{{ if .Get 2 | ne false }} open{{ end }}">
         <div class="details-summary admonition-title">
-            <i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}"></i>{{ .Get 1 | default (T $type) }}<i class="details-icon {{ $iconDetails }}"></i>
+            <i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}" aria-hidden="true"></i>{{ .Get 1 | default (T $type) }}<i class="details-icon {{ $iconDetails }}" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content">
