@@ -33,6 +33,7 @@ math:
 * :(fab fa-searchengin fa-fw): Optimized SEO performance with a correct **SEO SCHEMA** based on JSON-LD
 * :(fab fa-google fa-fw): **[Google Analytics](https://analytics.google.com/analytics)** supported
 * :(far fa-chart-bar fa-fw): **[Fathom Analytics](https://usefathom.com/)** supported
+* :(far fa-chart-column fa-fw): **[Plausible Analytics](https://plausible.io/)** supported
 * :(fas fa-sitemap fa-fw): Search engine **verification** supported (Google, Bind, Yandex and Baidu)
 * :(fas fa-tachometer-alt fa-fw): **CDN** for third-party libraries supported
 * :(fas fa-cloud-download-alt fa-fw): Automatically converted images with **Lazy Load** by [lazysizes](https://github.com/aFarkas/lazysizes)

@@ -623,6 +623,9 @@ enableEmoji = true
       # server url for your tracker if you're self hosting
       # 自行托管追踪器时的主机路径
       server = ""
+    # Plausible Analytics
+    [params.analytics.plausible]
+      dataDomain = ""
 
   # Cookie consent config
   # Cookie 许可配置
