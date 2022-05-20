@@ -52,11 +52,11 @@
   .page {
     width: 100%;
 
-    [header-mobile] & {
-      padding-top: $header-height;
+    [data-header-mobile] & {
+      padding-top: var(--header-height);
     }
 
-    [header-mobile=normal] & {
+    [data-header-mobile=normal] & {
       padding-top: 0;
     }
 

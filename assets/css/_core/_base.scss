@@ -1,10 +1,16 @@
 html {
-  font-family: $global-font-family;
-  font-weight: $global-font-weight;
+  font-family: var(--global-font-family);
+  font-weight: var(--global-font-weight);
   font-display: swap;
-  font-size: $global-font-size;
-  line-height: $global-line-height;
+  font-size: var(--global-font-size);
+  line-height: var(--global-line-height);
   width:100%;
+
+  scroll-behavior: smooth;
+
+  main [id] {
+    scroll-margin-top: calc(var(--header-height) + .5rem);
+  }
 }
 
 /* scrollbar, only support webkit */
@@ -41,15 +47,11 @@ body {
   }
 }
 
-@include ms;
 @include link(true, true);
 
 @import "../_partial/mask";
+@import "../_partial/img";
 @import "../_partial/icon";
 @import "../_partial/details";
 @import "../_partial/fixed-button";
 @import "../_partial/cookieconsent";
-
-img {
-  @include object-fit(contain);
-}

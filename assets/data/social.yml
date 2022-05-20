@@ -156,7 +156,7 @@ stackoverflow:
   Prefix: https://stackoverflow.com/users/
   Title: Stack Overflow
   Icon:
-    Class: fab fa-codepen fa-fw
+    Class: fab fa-stack-overflow fa-fw
 
 # 021: 微博
 weibo:
@@ -452,7 +452,7 @@ thingiverse:
   Prefix: https://www.thingiverse.com/
   Title: Thingiverse
   Icon:
-    Src: svg/icons/thingiverse.svg
+    Simpleicons: thingiverse
 
 # 058: Dev.To
 devto:
@@ -491,7 +491,7 @@ bilibili:
   Prefix: https://space.bilibili.com/
   Title: bilibili
   Icon:
-    Src: svg/icons/bilibili.svg
+    Simpleicons: bilibili
 
 # 063: Email
 email:
