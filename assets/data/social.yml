@@ -493,27 +493,35 @@ bilibili:
   Icon:
     Simpleicons: bilibili
 
-# 063: Email
-email:
+# 063: Discord User Profile
+discord:
   Weight: 63
+  Prefix: discordapp.com/users/
+  Title: Discord
+  Icon:
+    Class: fab fa-discord fa-fw
+
+# 064: Discord Server Invite Link
+discordInvite:
+  Weight: 64
+  Prefix: https://discord.gg/
+  Title: Discord
+  Icon:
+    Class: fab fa-discord fa-fw
+
+# Email
+email:
+  Weight: 99
   Template: mailto:%v
   Title: Email
   Icon:
     Class: far fa-envelope fa-fw
 
-# 064: RSS
+# RSS
 rss:
-  Weight: 64
+  Weight: 100
   Url: /index.xml
   Title: RSS
   Newtab: true
   Icon:
     Class: fas fa-rss fa-fw
-
-# 065: Discord
-discord:
-  Weight: 65
-  Prefix: https://discord.gg/
-  Title: Discord
-  Icon:
-    Class: fab fa-discord fa-fw
