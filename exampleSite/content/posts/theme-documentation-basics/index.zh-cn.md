@@ -405,6 +405,8 @@ hugo
     XMPP = ""
     Matrix = ""
     Bilibili = ""
+    Discord = ""
+    DiscordInvite = ""
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
 

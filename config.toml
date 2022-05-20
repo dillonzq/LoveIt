@@ -263,6 +263,8 @@
     XMPP = ""
     Matrix = ""
     Bilibili = ""
+    Discord = ""
+    DiscordInvite = ""
     Email = ""
     RSS = ""
 

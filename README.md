@@ -84,7 +84,7 @@ I hope you will LoveIt ❤️!
 
 * **Gravatar** supported by [Gravatar](https://gravatar.com)
 * Local **Avatar** supported
-* Up to **64** social links supported
+* Up to **66** social links supported
 * Up to **24** share sites supported
 * **Disqus** comment system supported by [Disqus](https://disqus.com)
 * **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
