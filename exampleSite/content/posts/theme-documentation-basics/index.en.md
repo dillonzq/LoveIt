@@ -322,7 +322,7 @@ Please open the code block below to view the complete sample configuration :(far
       avatarURL = "/images/avatar.png"
       # {{< version 0.2.7 changed >}} title shown in home page (HTML format is supported)
       title = ""
-      # subtitle shown in home page
+      # subtitle shown in home page (HTML format is supported)
       subtitle = "This is My New Hugo Site"
       # whether to use typeit animation for subtitle
       typeit = true

@@ -324,7 +324,7 @@ hugo
       avatarURL = "/images/avatar.png"
       # {{< version 0.2.7 changed >}} 主页显示的网站标题 (支持 HTML 格式)
       title = ""
-      # 主页显示的网站副标题
+      # 主页显示的网站副标题 (允许 HTML 格式)
       subtitle = "这是我的全新 Hugo 网站"
       # 是否为副标题显示打字机动画
       typeit = true
