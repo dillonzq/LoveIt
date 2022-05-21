@@ -146,6 +146,7 @@ LoveIt supports the following languages:
 * Catalan
 * Thai
 * Telugu
+* Indonesian
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
 [Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)
