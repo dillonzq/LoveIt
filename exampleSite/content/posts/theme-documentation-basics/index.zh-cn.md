@@ -853,6 +853,7 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 | 阿拉伯语 | `ar` | `ar` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 加泰罗尼亚语 | `ca` | `ca` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
 | 泰语 | `th` | `th` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 泰卢固语 | `te` | `te` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
 
 ### 4.2 基本配置
 
