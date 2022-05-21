@@ -156,7 +156,7 @@ stackoverflow:
   Prefix: https://stackoverflow.com/users/
   Title: Stack Overflow
   Icon:
-    Class: fab fa-codepen fa-fw
+    Class: fab fa-stack-overflow fa-fw
 
 # 021: 微博
 weibo:
@@ -452,7 +452,7 @@ thingiverse:
   Prefix: https://www.thingiverse.com/
   Title: Thingiverse
   Icon:
-    Src: svg/icons/thingiverse.svg
+    Simpleicons: thingiverse
 
 # 058: Dev.To
 devto:
@@ -491,19 +491,35 @@ bilibili:
   Prefix: https://space.bilibili.com/
   Title: bilibili
   Icon:
-    Src: svg/icons/bilibili.svg
+    Simpleicons: bilibili
 
-# 063: Email
-email:
+# 063: Discord User Profile
+discord:
   Weight: 63
+  Prefix: discordapp.com/users/
+  Title: Discord
+  Icon:
+    Class: fab fa-discord fa-fw
+
+# 064: Discord Server Invite Link
+discordInvite:
+  Weight: 64
+  Prefix: https://discord.gg/
+  Title: Discord
+  Icon:
+    Class: fab fa-discord fa-fw
+
+# Email
+email:
+  Weight: 99
   Template: mailto:%v
   Title: Email
   Icon:
     Class: far fa-envelope fa-fw
 
-# 064: RSS
+# RSS
 rss:
-  Weight: 64
+  Weight: 100
   Url: /index.xml
   Title: RSS
   Newtab: true

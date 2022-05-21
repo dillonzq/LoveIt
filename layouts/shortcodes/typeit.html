@@ -1,18 +1,21 @@
 {{- $content := trim .Inner "\n" -}}
-{{- $classList := .Get "class" | slice -}}
+{{- $classList := slice -}}
+{{- with .Get "class" -}}
+    {{- $classList = $classList | append . -}}
+{{- end -}}
 {{- $tag := .Get "tag" | default "div" -}}
 
-{{- with .Get "code" -}}
+{{- if .Get "code" -}}
     {{- /* highlight code content without line number */ -}}
-    {{- $content = highlight $content . "linenos=false" -}}
+    {{- $content = highlight $content (.Get "code") "lineNos=false, noClasses=false" -}}
     {{- /* delete outer label */ -}}
-    {{- $content = replaceRE `<div class="highlight"><pre class="chroma"><code[^<>]*>(?s)(.*)</code></pre></div>` "$1" $content -}}
-    {{- /* parsing markdown links */ -}}
-    {{- $content = replaceRE `(<span[^<>]*>)([^<>]*)\[([^<>]+)\]\(([^<>]+)\)([^<>]*)(</span>)` "$1$2$6<a href=$4>$3</a>$1$5$6" $content -}}
-    {{- /* replace " " to "&nbsp;" and replace "\n" to "<br />" */ -}}
-    {{- $content = replaceRE ` ` "&nbsp;" $content | replaceRE `(<\w+)&nbsp;` "$1 " | replaceRE `\n` "<br />" -}}
-    {{- /* fix "<br />" location error which is a bug of Typeit HTML parser */ -}}
-    {{- $content = replaceRE `<br /></span>` "</span><br />" $content -}}
+    {{- $content = replaceRE `.*<code[^<>]*>(?s)(.*)</code>.*` "$1" $content -}}
+    {{- if .Get "code-link" -}}
+        {{- /* parsing code links */ -}}
+        {{- $content = replaceRE `(<span[^<>]*>)([^<>]*)\[([^<>]+)\]\(([^<>]+)\)([^<>]*)(</span>)` "$1$2$6<a href=\"$4\">$3</a>$1$5$6" $content -}}
+    {{- end -}}
+    {{- /* split multiline string */ -}}
+    {{- $content = split $content "\n" -}}
     {{- $classList = $classList | append "highlight" -}}
 {{- else -}}
     {{- $content = $content | .Page.RenderString -}}
@@ -26,6 +29,11 @@
 {{- $group = $group | default slice | append $id -}}
 {{- dict $key $group | merge $typeitMap | .Page.Scratch.SetInMap "this" "typeitMap" -}}
 
+{{- $attrs := printf `id="%v"` $id -}}
+{{- with $classList -}}
+    {{- $attrs = delimit $classList " " | printf `%v class="%v"` $attrs -}}
+{{- end -}}
+
 <div class="typeit">
-    {{- printf `<%v id="%v" class="%v"></%v>` $tag $id (delimit $classList " ") $tag | safeHTML -}}
+    {{- printf `<%v %v></%v>` $tag $attrs $tag | safeHTML -}}
 </div>

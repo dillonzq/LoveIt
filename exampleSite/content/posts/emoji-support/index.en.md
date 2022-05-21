@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "Guide to emoji usage in Hugo and LoveIt."
+images: []
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
@@ -14,6 +15,7 @@ resources:
 tags: ["emoji"]
 categories: ["Markdown"]
 
+twemoji: false
 lightgallery: true
 ---
 
