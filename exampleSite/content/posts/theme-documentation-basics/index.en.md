@@ -405,6 +405,7 @@ Please open the code block below to view the complete sample configuration :(far
     Bilibili = ""
     Discord = ""
     DiscordInvite = ""
+    Lichess = ""
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
 
