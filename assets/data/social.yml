@@ -509,6 +509,14 @@ discordInvite:
   Icon:
     Class: fab fa-discord fa-fw
 
+# 065: Lichess user profile
+lichess:
+  Weight: 65
+  Prefix: https://lichess.org/@/
+  Title: Lichess
+  Icon:
+    Simpleicons: lichess
+
 # Email
 email:
   Weight: 99
