@@ -29,23 +29,18 @@
     <link rel="feed" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ $.Site.Title }}">
 {{- end -}}
 
-{{- /* normalize.css */ -}}
-{{- $source := $cdn.normalizeCSS | default "lib/normalize/normalize.min.css" -}}
-{{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
-{{- partial "plugin/style.html" $style -}}
-
 {{- /* style.min.css */ -}}
-{{- $style := dict "Source" "css/style.scss" "Fingerprint" $fingerprint -}}
-{{- $options := dict "targetPath" "css/style.min.css" "enableSourceMap" true -}}
-{{- $style = dict "Context" . "ToCSS" $options | merge $style -}}
-{{- partial "plugin/style.html" $style -}}
+{{- $options := dict "Source" "css/style.scss" "Fingerprint" $fingerprint -}}
+{{- $toCSS := dict "targetPath" "css/style.min.css" "enableSourceMap" true -}}
+{{- $options = dict "Context" . "ToCSS" $toCSS | merge $options -}}
+{{- partial "plugin/style.html" $options -}}
 
 {{- /* Font Awesome */ -}}
 {{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/all.min.css" -}}
-{{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
-{{- partial "plugin/style.html" $style -}}
+{{- $options := dict "Source" $source "Fingerprint" $fingerprint "Preload" true -}}
+{{- partial "plugin/style.html" $options -}}
 
 {{- /* Animate.css */ -}}
 {{- $source := $cdn.animateCSS | default "lib/animate/animate.min.css" -}}
-{{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
-{{- partial "plugin/style.html" $style -}}
+{{- $options := dict "Source" $source "Fingerprint" $fingerprint "Preload" true -}}
+{{- partial "plugin/style.html" $options -}}
