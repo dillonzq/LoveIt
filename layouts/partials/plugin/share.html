@@ -32,7 +32,7 @@
     {{- /* 005: Viber */ -}}
     {{- if $share.Viber -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} Viber" data-sharer="viber" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
-            {{- dict "Class" "fab fa-viber fa-fw" | partial "plugin/icon.html" -}}
+            {{- dict "Simpleicons" "viber" "Prefix" (.Scratch.Get "cdn" | default dict).simpleIconsPrefix | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 
@@ -74,7 +74,7 @@
     {{- /* 011: Buffer */ -}}
     {{- if $share.Buffer -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} Buffer" data-sharer="buffer" data-url="{{ .Permalink }}" data-title="{{ .Title }}"{{ with .Site.Params.Social.Twitter }} data-via="{{ . }}"{{ end }}{{ with .Params.featuredImage }} data-picture="{{ . }}"{{ end }}>
-            {{- dict "Class" "fab fa-buffer fa-fw" | partial "plugin/icon.html" -}}
+            {{- dict "Simpleicons" "buffer" "Prefix" (.Scratch.Get "cdn" | default dict).simpleIconsPrefix | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 
@@ -109,7 +109,7 @@
     {{- /* 016: Flipboard */ -}}
     {{- if $share.Flipboard -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} Flipboard" data-sharer="flipboard" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
-            {{- dict "Class" "fab fa-flipboard fa-fw" | partial "plugin/icon.html" -}}
+            {{- dict "Simpleicons" "flipboard" "Prefix" (.Scratch.Get "cdn" | default dict).simpleIconsPrefix | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 
@@ -123,7 +123,7 @@
     {{- /* 018: Blogger */ -}}
     {{- if $share.Blogger -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} Blogger" data-sharer="blogger" data-url="{{ .Permalink }}" data-title="{{ .Title }}" data-description="{{ .Description }}">
-            {{- dict "Class" "fab fa-blogger fa-fw" | partial "plugin/icon.html" -}}
+            {{- dict "Simpleicons" "blogger" "Prefix" (.Scratch.Get "cdn" | default dict).simpleIconsPrefix | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 
@@ -144,7 +144,7 @@
     {{- /* 021: Evernote */ -}}
     {{- if $share.Evernote -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} Evernote" data-sharer="evernote" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
-            {{- dict "Class" "fab fa-evernote fa-fw" | partial "plugin/icon.html" -}}
+            {{- dict "Simpleicons" "evernote" "Prefix" (.Scratch.Get "cdn" | default dict).simpleIconsPrefix | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 
@@ -165,7 +165,7 @@
     {{- /* 024: Mix */ -}}
     {{- if $share.Mix -}}
         <a href="//mix.com/add?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="{{ T `shareOn` }} Mix">
-            {{- dict "Class" "fab fa-mix fa-fw" | partial "plugin/icon.html" -}}
+            {{- dict "Simpleicons" "mix" "Prefix" (.Scratch.Get "cdn" | default dict).simpleIconsPrefix | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 {{- end -}}

@@ -57,3 +57,6 @@ libFiles:
   # cookieconsent@3.1.1 https://github.com/osano/cookieconsent
   cookieconsentCSS: cookieconsent@3.1.1/build/cookieconsent.min.css
   cookieconsentJS: cookieconsent@3.1.1/build/cookieconsent.min.js
+  # forkawesome@1.2.0 https://forkaweso.me/Fork-Awesome/
+  forkawesomeCSS: fork-awesome@1.2.0/css/fork-awesome.min.css
+  forkawesomeCompatCSS: fork-awesome@1.2.0/css/v5-compat.min.css

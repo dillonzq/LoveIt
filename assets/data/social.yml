@@ -44,7 +44,7 @@ telegram:
   Prefix: https://t.me/
   Title: Telegram
   Icon:
-    Class: fab fa-telegram-plane fa-fw
+    Class: fab fa-telegram fa-fw
 
 # 007: Medium
 medium:
@@ -68,7 +68,7 @@ youtubelegacy:
   Prefix: https://www.youtube.com/user/
   Title: YouTube
   Icon:
-    Class: fab fa-youtube fa-fw
+    Class: fab fa-youtube-play fa-fw
 
 # 010: YouTube Custom
 youtubecustom:
@@ -76,7 +76,7 @@ youtubecustom:
   Prefix: https://www.youtube.com/c/
   Title: YouTube
   Icon:
-    Class: fab fa-youtube fa-fw
+    Class: fab fa-youtube-play fa-fw
 
 # 011: YouTube Channel
 youtubechannel:
@@ -84,7 +84,7 @@ youtubechannel:
   Prefix: https://www.youtube.com/channel/
   Title: YouTube
   Icon:
-    Class: fab fa-youtube fa-fw
+    Class: fab fa-youtube-play fa-fw
 
 # 012: Tumblr
 tumblr:
@@ -252,7 +252,7 @@ mix:
   Prefix: https://mix.com/
   Title: Mix
   Icon:
-    Class: fab fa-mix fa-fw
+    Simpleicons: mix
 
 # 033: Goodreads
 goodreads:
@@ -460,14 +460,14 @@ devto:
   Prefix: https://dev.to/
   Title: Dev.To
   Icon:
-    Class: fab fa-dev fa-fw
+    Class: fab fa-dev-to fa-fw
 
 # 059: Gitea
 gitea:
   Weight: 59
   Title: Gitea
   Icon:
-    Simpleicons: gitea
+    Class: fab fa-gitea fa-fw
 
 # 060: XMPP
 xmpp:
@@ -475,7 +475,7 @@ xmpp:
   Template: xmpp:%v
   Title: XMPP
   Icon:
-    Simpleicons: xmpp
+    Class: fab fa-xmpp fa-fw
 
 # 061: Matrix
 matrix:
@@ -483,7 +483,7 @@ matrix:
   Prefix: https://matrix.to/#/
   Title: Matrix
   Icon:
-    Simpleicons: matrix
+    Class: fab fa-matrix-org fa-fw
 
 # 062: bilibili
 bilibili:
