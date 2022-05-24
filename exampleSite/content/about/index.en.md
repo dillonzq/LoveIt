@@ -33,6 +33,7 @@ math:
 * :(fab fa-searchengin fa-fw): Optimized SEO performance with a correct **SEO SCHEMA** based on JSON-LD
 * :(fab fa-google fa-fw): **[Google Analytics](https://analytics.google.com/analytics)** supported
 * :(far fa-chart-bar fa-fw): **[Fathom Analytics](https://usefathom.com/)** supported
+* :(far fa-chart-column fa-fw): **[Plausible Analytics](https://plausible.io/)** supported
 * :(fas fa-sitemap fa-fw): Search engine **verification** supported (Google, Bind, Yandex and Baidu)
 * :(fas fa-tachometer-alt fa-fw): **CDN** for third-party libraries supported
 * :(fas fa-cloud-download-alt fa-fw): Automatically converted images with **Lazy Load** by [lazysizes](https://github.com/aFarkas/lazysizes)
@@ -51,7 +52,7 @@ math:
 
 * :(far fa-user fa-fw): **Gravatar** supported by [Gravatar](https://gravatar.com)
 * :(fas fa-user-circle fa-fw): Local **Avatar** supported
-* :(far fa-id-card fa-fw): Up to **64** social links supported
+* :(far fa-id-card fa-fw): Up to **67** social links supported
 * :(fas fa-share-square fa-fw): Up to **24** share sites supported
 * :(far fa-comment fa-fw): **Disqus** comment system supported by [Disqus](https://disqus.com)
 * :(far fa-comment-dots fa-fw): **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)

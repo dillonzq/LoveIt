@@ -1,53 +1,53 @@
-# Translations for Spanish
-# Traducciones para español
+# Translations for Indonesian
+# Terjemahan untuk Bahasa Indonesia
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === baseof ==
 [backToTop]
-other = "Volver arriba"
+other = "Kembali ke Atas"
 
 [viewComments]
-other = "Ver comentarios"
+other = "Lihat Komentar"
 # === baseof ==
 
 # === Post ===
 [posts]
-other = "Artículos"
+other = "Pos"
 # === Post ===
 
 # === Taxonomy ===
 [allSome]
-other = "Todos los {{ .Some }}"
+other = "Semua {{ .Some }}"
 
 [tag]
-other = "Etiqueta"
+other = "Label"
 
 [tags]
-other = "Etiquetas"
+other = "Label"
 
 [category]
-other = "Categoría"
+other = "Kategori"
 
 [categories]
-other = "Categorías"
+other = "Kategori"
 # === Taxonomy ===
 
 # === Pagination ===
 [more]
-other = "Más"
+other = "Lainnya"
 # === Pagination ===
 
 # === partials/header.html ===
 [selectLanguage]
-other = "Selecciona el lenguage"
+other = "Pilih Bahasa"
 
 [switchTheme]
-other = "Cambia el tema"
+other = "Ganti Tema"
 # === partials/header.html ===
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Con la tecnología de {{ .Hugo }} | Tema - {{ .Theme }}"
+other = "Dipersembahkan oleh {{ .Hugo }} | Tema - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -55,145 +55,142 @@ other = "Con la tecnología de {{ .Hugo }} | Tema - {{ .Theme }}"
 other = "en"
 
 [valinePlaceholder]
-other = "Tu comentario ..."
+other = "Komentar Anda ..."
 
 [facebookLanguageCode]
-other = "es_MX"
+other = "id_ID"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
 [search]
-other = "Buscar"
+other = "Cari"
 
 [searchPlaceholder]
-other = "Busca títulos o contenido..."
+other = "Cari judul atau konten ..."
 
 [clear]
-other = "Limpiar"
+other = "Bersihkan"
 
 [cancel]
-other = "Cancelar"
+other = "Batal"
 
 [noResultsFound]
-other = "No se encontraron resultados"
+other = "Hasil tidak ditemukan"
 
 [lunrLanguageCode]
-other = "es"
-
-[lunrLanguageLib]
-other = "lib/lunr/lunr.es.js"
+other = "en"
 
 [copyToClipboard]
-other = "Copiar al portapapeles"
+other = "Salin ke papan klip"
 
 [cookieconsentMessage]
-other = "Este sitio web utiliza Cookies para mejorar su experiencia."
+other = "Situs ini menggunakan Cookies untuk meningkatkan pengalaman Anda."
 
 [cookieconsentDismiss]
-other = "De acuerdo"
+other = "Mengerti!"
 
 [cookieconsentLink]
-other = "Aprende más"
+other = "Pelajari lebih lanjut"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]
-other = "Compartir en"
+other = "Bagikan ke"
 # === partials/plugin/share.html ===
 
 # === posts/single.html ===
 [contents]
-other = "Contenido"
+other = "Daftar Isi"
 
 [publishedOnDate]
-other = "publicado el {{ .Date }}"
+other = "diterbitkan pada {{ .Date }}"
 
 [includedInCategories]
-other = "incluido en {{ .Categories }}"
+other = "di {{ .Categories }}"
 
 [wordCount]
-one = "Una palabra"
-other = "{{ .Count }} palabras"
+one = "Satu kata"
+other = "{{ .Count }} kata"
 
 [readingTime]
-one = "Un minuto"
-other = "{{ .Count }} minutos"
+one = "Satu menit"
+other = "{{ .Count }} menit"
 
 [views]
-other = "vistas"
+other = "dilihat"
 
 [author]
-other = "Autor"
+other = "Penulis"
 
 [updatedOnDate]
-other = "Actualizado el {{ .Date }}"
+other = "Diperbarui pada {{ .Date }}"
 
 [readMarkdown]
-other = "Leer Markdown"
+other = "Baca Markdown"
 
 [back]
-other = "Regresar"
+other = "Kembali"
 
 [home]
-other = "Inicio"
+other = "Beranda"
 
 [readMore]
-other = "Leer más"
+other = "Baca Selengkapnya"
 # === posts/single.html ===
 
 # === 404.html ===
 [pageNotFound]
-other = "Página no encontrada"
+other = "Halaman tidak ditemukan"
 
 [pageNotFoundText]
-other = "La página que estás buscando no existe. Lo siento."
+other = "Maaf, halaman yang Anda cari tidak ada."
 # === 404.html ===
 
 # === shortcodes/admonition.html ===
 [note]
-other = "Nota"
+other = "Catatan"
 
 [abstract]
-other = "Resumen"
+other = "Abstrak"
 
 [info]
-other = "Información"
+other = "Info"
 
 [tip]
-other = "Consejo"
+other = "Kiat"
 
 [success]
-other = "Éxito"
+other = "Sukses"
 
 [question]
-other = "Pregunta"
+other = "Pertanyaan"
 
 [warning]
-other = "Advertencia"
+other = "Peringatan"
 
 [failure]
-other = "Fallo"
+other = "Kegagalan"
 
 [danger]
-other = "Peligro"
+other = "Bahaya"
 
 [bug]
-other = "Error"
+other = "Bug"
 
 [example]
-other = "Ejemplo"
+other = "Contoh"
 
 [quote]
-other = "Cita"
+other = "Kutipan"
 # === shortcodes/admonition.html ===
 
 # === shortcodes/version.html ===
 [new]
-other = "NUEVO"
+other = "BARU"
 
 [changed]
-other = "MODIFICADO"
+other = "BERUBAH"
 
 [deleted]
-other = "ELIMINADO"
+other = "DIHAPUS"
 # === shortcodes/version.html ===

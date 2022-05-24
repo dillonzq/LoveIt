@@ -1,64 +1,64 @@
-# Translations for Spanish
-# Traducciones para español
+# Translations for Catalan
+# Traducció al Català
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === baseof ==
 [backToTop]
-other = "Volver arriba"
+other = "Torna a L'inici"
 
 [viewComments]
-other = "Ver comentarios"
+other = "Visualitza Comentaris"
 # === baseof ==
 
 # === Post ===
 [posts]
-other = "Artículos"
+other = "Publicacions"
 # === Post ===
 
 # === Taxonomy ===
 [allSome]
-other = "Todos los {{ .Some }}"
+other = "Tot {{ .Some }}"
 
 [tag]
 other = "Etiqueta"
 
 [tags]
-other = "Etiquetas"
+other = "Etiquetes"
 
 [category]
-other = "Categoría"
+other = "Categoria"
 
 [categories]
-other = "Categorías"
+other = "Categories"
 # === Taxonomy ===
 
 # === Pagination ===
 [more]
-other = "Más"
+other = "Més"
 # === Pagination ===
 
 # === partials/header.html ===
 [selectLanguage]
-other = "Selecciona el lenguage"
+other = "Escolliu L'idioma"
 
 [switchTheme]
-other = "Cambia el tema"
+other = "Canvia Tema"
 # === partials/header.html ===
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Con la tecnología de {{ .Hugo }} | Tema - {{ .Theme }}"
+other = "Impulsat per {{ .Hugo }} | Tema - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
 [valineLang]
-other = "en"
+other = "ca"
 
 [valinePlaceholder]
-other = "Tu comentario ..."
+other = "El teu comentari ..."
 
 [facebookLanguageCode]
-other = "es_MX"
+other = "ca_ES"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
@@ -66,87 +66,84 @@ other = "es_MX"
 other = "Buscar"
 
 [searchPlaceholder]
-other = "Busca títulos o contenido..."
+other = "Buscar títols o continguts..."
 
 [clear]
-other = "Limpiar"
+other = "Esborra"
 
 [cancel]
-other = "Cancelar"
+other = "Cancel·lar"
 
 [noResultsFound]
-other = "No se encontraron resultados"
+other = "Sense resultats"
 
 [lunrLanguageCode]
-other = "es"
-
-[lunrLanguageLib]
-other = "lib/lunr/lunr.es.js"
+other = "ca"
 
 [copyToClipboard]
-other = "Copiar al portapapeles"
+other = "Copiar al portapapers"
 
 [cookieconsentMessage]
-other = "Este sitio web utiliza Cookies para mejorar su experiencia."
+other = "Aquest lloc web utilitza cookies per millorar la teva experiència."
 
 [cookieconsentDismiss]
-other = "De acuerdo"
+other = "Entenc!"
 
 [cookieconsentLink]
-other = "Aprende más"
+other = "Més informació"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]
-other = "Compartir en"
+other = "Comparteix a"
 # === partials/plugin/share.html ===
 
 # === posts/single.html ===
 [contents]
-other = "Contenido"
+other = "Continguts"
 
 [publishedOnDate]
-other = "publicado el {{ .Date }}"
+other = "publicat el {{ .Date }}"
 
 [includedInCategories]
-other = "incluido en {{ .Categories }}"
+other = "inclòs en {{ .Categories }}"
 
 [wordCount]
-one = "Una palabra"
-other = "{{ .Count }} palabras"
+one = "Una paraula"
+other = "{{ .Count }} paraules"
 
 [readingTime]
-one = "Un minuto"
-other = "{{ .Count }} minutos"
+one = "Un minut"
+other = "{{ .Count }} minuts"
 
 [views]
-other = "vistas"
+other = "vistes"
 
 [author]
 other = "Autor"
 
 [updatedOnDate]
-other = "Actualizado el {{ .Date }}"
+other = "Actualitzat el {{ .Date }}"
 
 [readMarkdown]
-other = "Leer Markdown"
+other = "Llegeix Markdown"
 
 [back]
-other = "Regresar"
+other = "Tornar"
 
 [home]
-other = "Inicio"
+other = "Inici"
 
 [readMore]
-other = "Leer más"
+other = "Llegeix Més"
 # === posts/single.html ===
 
 # === 404.html ===
 [pageNotFound]
-other = "Página no encontrada"
+other = "Pàgina no trobada"
 
 [pageNotFoundText]
-other = "La página que estás buscando no existe. Lo siento."
+other = "La pàgina que estàs buscant no existeix. Ho sento."
 # === 404.html ===
 
 # === shortcodes/admonition.html ===
@@ -154,46 +151,46 @@ other = "La página que estás buscando no existe. Lo siento."
 other = "Nota"
 
 [abstract]
-other = "Resumen"
+other = "Resum"
 
 [info]
-other = "Información"
+other = "Informació"
 
 [tip]
-other = "Consejo"
+other = "Consell"
 
 [success]
-other = "Éxito"
+other = "Èxit"
 
 [question]
 other = "Pregunta"
 
 [warning]
-other = "Advertencia"
+other = "Advertència"
 
 [failure]
-other = "Fallo"
+other = "Fracàs"
 
 [danger]
-other = "Peligro"
+other = "Perill"
 
 [bug]
-other = "Error"
+other = "Microbi"
 
 [example]
-other = "Ejemplo"
+other = "Exemple"
 
 [quote]
-other = "Cita"
+other = "Citar"
 # === shortcodes/admonition.html ===
 
 # === shortcodes/version.html ===
 [new]
-other = "NUEVO"
+other = "NOVA"
 
 [changed]
-other = "MODIFICADO"
+other = "CANVIAT"
 
 [deleted]
-other = "ELIMINADO"
+other = "SUPRIMIT"
 # === shortcodes/version.html ===

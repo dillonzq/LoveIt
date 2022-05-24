@@ -65,6 +65,7 @@ I hope you will LoveIt ❤️!
 * Optimized SEO performance with a correct **SEO SCHEMA** based on JSON-LD
 * **[Google Analytics](https://analytics.google.com/analytics)** supported
 * **[Fathom Analytics](https://usefathom.com/)** supported
+* **[Plausible Analytics](https://plausible.io/)** supported
 * Search engine **verification** supported (Google, Bind, Yandex and Baidu)
 * **CDN** for third-party libraries supported
 * Automatically converted images with **Lazy Load** by [lazysizes](https://github.com/aFarkas/lazysizes)
@@ -83,7 +84,7 @@ I hope you will LoveIt ❤️!
 
 * **Gravatar** supported by [Gravatar](https://gravatar.com)
 * Local **Avatar** supported
-* Up to **64** social links supported
+* Up to **67** social links supported
 * Up to **24** share sites supported
 * **Disqus** comment system supported by [Disqus](https://disqus.com)
 * **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
@@ -141,6 +142,11 @@ LoveIt supports the following languages:
 * Russian
 * Romanian
 * Vietnamese
+* Arabic
+* Catalan
+* Thai
+* Telugu
+* Indonesian
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
 [Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)

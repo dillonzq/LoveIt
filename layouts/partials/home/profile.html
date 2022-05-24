@@ -34,7 +34,7 @@
                 <div id="{{ $id }}" class="typeit"></div>
                 {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
             {{- else -}}
-                {{- . -}}
+                {{- . | safeHTML -}}
             {{- end -}}
         </div>
     {{- end -}}

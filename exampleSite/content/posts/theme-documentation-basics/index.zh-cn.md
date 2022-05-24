@@ -324,7 +324,7 @@ hugo
       avatarURL = "/images/avatar.png"
       # {{< version 0.2.7 changed >}} 主页显示的网站标题 (支持 HTML 格式)
       title = ""
-      # 主页显示的网站副标题
+      # 主页显示的网站副标题 (允许 HTML 格式)
       subtitle = "这是我的全新 Hugo 网站"
       # 是否为副标题显示打字机动画
       typeit = true
@@ -405,6 +405,9 @@ hugo
     XMPP = ""
     Matrix = ""
     Bilibili = ""
+    Discord = ""
+    DiscordInvite = ""
+    Lichess = ""
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
 
@@ -624,6 +627,9 @@ hugo
       id = ""
       # 自行托管追踪器时的主机路径
       server = ""
+    # Plausible Analytics
+    [params.analytics.plausible]
+      dataDomain = ""
 
   # {{< version 0.2.7 >}} Cookie 许可配置
   [params.cookieconsent]
@@ -845,6 +851,11 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 | 俄语 | `ru` | `ru` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 罗马尼亚语 | `ro` | `ro` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 越南语 | `vi` | `vi` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 阿拉伯语 | `ar` | `ar` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 加泰罗尼亚语 | `ca` | `ca` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
+| 泰语 | `th` | `th` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
+| 泰卢固语 | `te` | `te` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
+| 印尼语 | `id` | `id` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
 
 ### 4.2 基本配置
 

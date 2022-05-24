@@ -322,7 +322,7 @@ Please open the code block below to view the complete sample configuration :(far
       avatarURL = "/images/avatar.png"
       # {{< version 0.2.7 changed >}} title shown in home page (HTML format is supported)
       title = ""
-      # subtitle shown in home page
+      # subtitle shown in home page (HTML format is supported)
       subtitle = "This is My New Hugo Site"
       # whether to use typeit animation for subtitle
       typeit = true
@@ -403,6 +403,9 @@ Please open the code block below to view the complete sample configuration :(far
     XMPP = ""
     Matrix = ""
     Bilibili = ""
+    Discord = ""
+    DiscordInvite = ""
+    Lichess = ""
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
 
@@ -622,6 +625,9 @@ Please open the code block below to view the complete sample configuration :(far
       id = ""
       # server url for your tracker if you're self hosting
       server = ""
+    # Plausible Analytics
+    [params.analytics.plausible]
+      dataDomain = ""
 
   # {{< version 0.2.7 >}} Cookie consent config
   [params.cookieconsent]
@@ -843,6 +849,11 @@ In `assets/css/_custom.scss`, you can add some css style code to customize the s
 | Russian              | `ru`      | `ru`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Romanian             | `ro`      | `ro`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Vietnamese           | `vi`      | `vi`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| Arabic               | `ar`      | `ar`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| Catalan              | `ca`      | `ca`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
+| Thai                 | `th`      | `th`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| Telugu               | `te`      | `te`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
+| Indonesian           | `id`      | `id`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
 
 ### 4.2 Basic Configuration
 

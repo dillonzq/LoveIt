@@ -261,8 +261,8 @@ enableEmoji = true
       # title shown in home page (HTML format is supported)
       # 主页显示的网站标题 (支持 HTML 格式)
       title = ""
-      # subtitle shown in home page
-      # 主页显示的网站副标题
+      # subtitle shown in home page (HTML format is supported)
+      # 主页显示的网站副标题 (允许 HTML 格式)
       subtitle = "A Clean, Elegant but Advanced Hugo Theme"
       # whether to use typeit animation for subtitle
       # 是否为副标题显示打字机动画
@@ -345,6 +345,9 @@ enableEmoji = true
     XMPP = ""
     Matrix = ""
     Bilibili = ""
+    Discord = ""
+    DiscordInvite = ""
+    Lichess = ""
     Email = ""
     RSS = ""
 
@@ -623,6 +626,9 @@ enableEmoji = true
       # server url for your tracker if you're self hosting
       # 自行托管追踪器时的主机路径
       server = ""
+    # Plausible Analytics
+    [params.analytics.plausible]
+      dataDomain = ""
 
   # Cookie consent config
   # Cookie 许可配置

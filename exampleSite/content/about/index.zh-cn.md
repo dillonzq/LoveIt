@@ -33,6 +33,7 @@ math:
 * :(fab fa-searchengin fa-fw): 使用基于 JSON-LD 格式 的 **SEO SCHEMA** 文件进行 SEO 优化
 * :(fab fa-google fa-fw): 支持 **[Google Analytics](https://analytics.google.com/analytics)**
 * :(far fa-chart-bar fa-fw): 支持 **[Fathom Analytics](https://usefathom.com/)**
+* :(far fa-chart-column fa-fw): 支持 **[Plausible Analytics](https://plausible.io/)**
 * :(fas fa-sitemap fa-fw): 支持搜索引擎的**网站验证** (Google, Bind, Yandex and Baidu)
 * :(fas fa-tachometer-alt fa-fw): 支持所有第三方库的 **CDN**
 * :(fas fa-cloud-download-alt fa-fw): 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为**懒加载**
@@ -51,7 +52,7 @@ math:
 
 * :(far fa-user fa-fw): 支持 **[Gravatar](https://gravatar.com)** 头像
 * :(fas fa-user-circle fa-fw): 支持本地**头像**
-* :(far fa-id-card fa-fw): 支持多达 **64** 种社交链接
+* :(far fa-id-card fa-fw): 支持多达 **67** 种社交链接
 * :(fas fa-share-square fa-fw): 支持多达 **24** 种网站分享
 * :(far fa-comment fa-fw): 支持 **[Disqus](https://disqus.com)** 评论系统
 * :(far fa-comment-dots fa-fw): 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统

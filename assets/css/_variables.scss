@@ -2,9 +2,15 @@
 // Variables
 // ==============================
 
+@font-face {
+  font-family: Emoji;
+  src: local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol"), local("Noto Color Emoji");
+  unicode-range: U+1F000-1F644, U+203C-3299;
+}
+
 // ========== Global ========== //
 // Font and Line Height
-$global-font-family: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei UI", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$global-font-family: system-ui, -apple-system, Segoe UI, Roboto, Emoji, Helvetica, Arial, sans-serif !default;
 $global-font-size: 16px !default;
 $global-font-weight: 400 !default;
 $global-line-height: 1.5rem !default;
@@ -107,7 +113,7 @@ $pagination-link-hover-color-dark: #fff !default;
 
 // ========== Code ========== //
 // Font family and size of the code
-$code-font-family: "Source Code Pro", Menlo, Consolas, Monaco, monospace, $global-font-family !default;
+$code-font-family: "Source Code Pro", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 $code-font-size: .875rem !default;
 
 // Color of the code
