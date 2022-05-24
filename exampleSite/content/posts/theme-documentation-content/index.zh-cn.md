@@ -7,6 +7,7 @@ draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
 description: "了解如何在 LoveIt 主题中快速, 直观地创建和组织内容."
+images: []
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
@@ -81,6 +82,7 @@ images: []
 
 tags: []
 categories: []
+
 featuredImage: ""
 featuredImagePreview: ""
 
@@ -99,12 +101,11 @@ toc:
   auto: true
 code:
   copy: true
-  # ...
+  maxShownLines: 50
 math:
-  enable: true
+  enable: false
   # ...
 mapbox:
-  accessToken: ""
   # ...
 share:
   enable: true
@@ -142,6 +143,7 @@ seo:
 
 * **tags**: 文章的标签.
 * **categories**: 文章所属的类别.
+
 * **featuredImage**: 文章的特色图片.
 * **featuredImagePreview**: 用在主页预览的文章特色图片.
 
@@ -242,60 +244,176 @@ resources:
 
 ### 数学公式
 
-**LoveIt** 基于 [$ \KaTeX $](https://katex.org/) 提供数学公式的支持.
+{{< version 0.2.11 changed >}}
+
+**LoveIt** 基于 [$\KaTeX$](https://katex.org/) 提供数学公式的支持.
 
 在你的 [网站配置](../theme-documentation-basics#site-configuration) 中的 `[params.math]` 下面设置属性 `enable = true`,
 并在文章的前置参数中设置属性 `math: true`来启用数学公式的自动渲染.
+**$\KaTeX$** 根据 **特定的分隔符** 来自动渲染公式.
 
 {{< admonition tip >}}
-有一份 [$ \KaTeX $ 中支持的 $ \TeX $ 函数](https://katex.org/docs/supported.html) 清单.
+有一份 [$\KaTeX$ 中支持的 $\TeX$ 函数](https://katex.org/docs/supported.html) 清单.
 {{< /admonition >}}
 
-#### 公式块
+{{< admonition >}}
+由于 Hugo 在渲染 Markdown 文档时会根据 `_`/`*`/`>>` 之类的语法生成 HTML 文档,
+并且有些转义字符形式的文本内容 (如 `\(`/`\)`/`\[`/`\]`/`\\`) 会自动进行转义处理,
+因此需要对这些地方进行额外的转义字符表达来实现自动渲染:
 
-默认的公式块分割符是 `$$`/`$$` 和 `\\[`/`\\]`:
+* `_` -> `\_`
+* `*` -> `\*`
+* `>>` -> `\>>`
+* `\(` -> `\\(`
+* `\)` -> `\\)`
+* `\[` -> `\\[`
+* `\]` -> `\\]`
+* `\\` -> `\\\\`
+
+**LoveIt** 主题支持 [`raw` shortcode](../theme-documentation-extended-shortcodes#12-raw) 以避免这些转义字符,
+它可以帮助您编写原始数学公式内容.
+
+一个 `raw` 示例:
 
 ```markdown
-$$ c = \pm\sqrt{a^2 + b^2} $$
+行内公式: {{</* raw */>}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{</* /raw */>}}
 
-\\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]
+公式块:
+
+{{</* raw */>}}
+\[ a=b+c \\ d+e=f \]
+{{</* /raw */>}}
 ```
 
 呈现的输出效果如下:
 
-$$ c = \pm\sqrt{a^2 + b^2} $$
+行内公式: {{< raw >}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{< /raw >}}
 
-\\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]
+公式块:
+
+{{< raw>}}
+\[ a=b+c \\ d+e=f \]
+{{< /raw >}}
+{{< /admonition >}}
 
 #### 行内公式
 
-默认的行内公式分割符是  `$`/`$` 和 `\\(`/`\\)`:
+默认的行内公式分割符有:
 
-```markdown
-$ c = \pm\sqrt{a^2 + b^2} $ 和 \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\)
+* `$ ... $`
+* `\( ... \)` (转义的: `\\( ... \\)`)
+
+例如:
+
+```tex
+$c = \pm\sqrt{a^2 + b^2}$ 和 \\(f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi\\)
 ```
 
 呈现的输出效果如下:
 
-$ c = \pm\sqrt{a^2 + b^2} $ 和 \\( f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\)
+$c = \pm\sqrt{a^2 + b^2}$ 和 \\(f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi\\)
+
+#### 公式块
+
+默认的公式块分割符有:
+
+* `$$ ... $$`
+* `\[ ... \]` (转义的: `\\[ ... \\]`)
+* `\begin{equation} ... \end{equation}` (不编号的: `\begin{equation*} ... \end{equation*}`)
+* `\begin{align} ... \end{align}` (不编号的: `\begin{align*} ... \end{align*}`)
+* `\begin{alignat} ... \end{alignat}` (不编号的: `\begin{alignat*} ... \end{alignat*}`)
+* `\begin{gather} ... \end{gather}` (不编号的: `\begin{gather*} ... \end{gather*}`)
+* `\begin{CD} ... \end{CD}`
+
+例如:
+
+```tex
+$$ c = \pm\sqrt{a^2 + b^2} $$
+
+\\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]
+
+\begin{equation*}
+  \rho \frac{\mathrm{D} \mathbf{v}}{\mathrm{D} t}=\nabla \cdot \mathbb{P}+\rho \mathbf{f}
+\end{equation*}
+
+\begin{equation}
+  \mathbf{E}=\sum_{i} \mathbf{E}\_{i}=\mathbf{E}\_{1}+\mathbf{E}\_{2}+\mathbf{E}_{3}+\cdots
+\end{equation}
+
+\begin{align}
+  a&=b+c \\\\
+  d+e&=f
+\end{align}
+
+\begin{alignat}{2}
+   10&x+&3&y = 2 \\\\
+   3&x+&13&y = 4
+\end{alignat}
+
+\begin{gather}
+   a=b \\\\
+   e=b+c
+\end{gather}
+
+\begin{CD}
+   A @>a\>> B \\\\
+@VbVV @AAcA \\\\
+   C @= D
+\end{CD}
+```
+
+呈现的输出效果如下:
+
+$$ c = \pm\sqrt{a^2 + b^2} $$
+
+\\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]
+
+\begin{equation*}
+  \rho \frac{\mathrm{D} \mathbf{v}}{\mathrm{D} t}=\nabla \cdot \mathbb{P}+\rho \mathbf{f}
+\end{equation*}
+
+\begin{equation}
+  \mathbf{E}=\sum_{i} \mathbf{E}\_{i}=\mathbf{E}\_{1}+\mathbf{E}\_{2}+\mathbf{E}_{3}+\cdots
+\end{equation}
+
+\begin{align}
+  a&=b+c \\\\
+  d+e&=f
+\end{align}
+
+\begin{alignat}{2}
+   10&x+&3&y = 2 \\\\
+   3&x+&13&y = 4
+\end{alignat}
+
+\begin{gather}
+   a=b \\\\
+   e=b+c
+\end{gather}
+
+\begin{CD}
+   A @>a\>> B \\\\
+@VbVV @AAcA \\\\
+   C @= D
+\end{CD}
 
 {{< admonition tip >}}
-你可以在 [网站配置](../theme-documentation-basics#site-configuration) 中自定义公式块和行内公式的分割符.
+你可以在 [网站配置](../theme-documentation-basics#site-configuration) 中自定义行内公式和公式块的分割符.
 {{< /admonition >}}
 
 #### Copy-tex
 
-**[Copy-tex](https://github.com/Khan/KaTeX/tree/master/contrib/copy-tex)** 是一个 **$ \KaTeX $** 的插件.
+**[Copy-tex](https://github.com/Khan/KaTeX/tree/master/contrib/copy-tex)** 是一个 **$\KaTeX$** 的插件.
 
-通过这个扩展, 在选择并复制 $ \KaTeX $ 渲染的公式时, 会将其 $ \LaTeX $ 源代码复制到剪贴板.
+通过这个扩展, 在选择并复制 $\KaTeX$ 渲染的公式时, 会将其 $\LaTeX$ 源代码复制到剪贴板.
 
 在你的 [网站配置](../theme-documentation-basics#site-configuration) 中的 `[params.math]` 下面设置属性 `copyTex = true` 来启用 Copy-tex.
 
-选择并复制上一节中渲染的公式, 可以发现复制的内容为 LaTeX 源代码.
+选择并复制上一节中渲染的公式, 可以发现复制的内容为 $\LaTeX$ 源代码.
 
 #### mhchem
 
-**[mhchem](https://github.com/Khan/KaTeX/tree/master/contrib/mhchem)** 是一个 **$ \KaTeX $** 的插件.
+**[mhchem](https://github.com/Khan/KaTeX/tree/master/contrib/mhchem)** 是一个 **$\KaTeX$** 的插件.
 
 通过这个扩展, 你可以在文章中轻松编写漂亮的化学方程式.
 

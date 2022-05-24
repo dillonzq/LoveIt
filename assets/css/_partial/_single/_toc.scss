@@ -1,12 +1,12 @@
 .toc {
   .toc-title {
-    font-size: $toc-title-font-size;
+    font-size: var(--toc-title-font-size);
     font-weight: bold;
     text-transform: uppercase;
   }
 
   .toc-content {
-    font-size: $toc-content-font-size;
+    font-size: var(--toc-content-font-size);
 
     ul {
       text-indent: -0.85rem;
@@ -50,7 +50,7 @@
 #toc-auto {
   display: block;
   position: absolute;
-  width: $MAX_LENGTH;
+  width: 10000px;
   max-width: 0;
   padding: 0 .8rem;
   border-left: 4px solid $global-border-color;
@@ -60,7 +60,7 @@
   left: 0;
   visibility: hidden;
 
-  [header-desktop=normal] & {
+  [data-header-desktop=normal] & {
     top: 5rem;
   }
 
@@ -116,7 +116,7 @@
   display: none;
   margin: .8rem 0;
 
-  &[kept=true] {
+  &[data-kept=true] {
     display: block;
   }
 

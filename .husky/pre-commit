@@ -1,0 +1,4 @@
+#!/bin/zsh
+. "$(dirname "$0")/_/husky.sh"
+
+npm run build && npm run copy && git add resources assets/js

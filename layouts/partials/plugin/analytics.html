@@ -19,4 +19,9 @@
         </script>
         {{- dict "Source" ($analytics.fathom.server | default "cdn.usefathom.com" | printf "https://%v/tracker.js") "Async" true "Attr" "id=fathom-script" | partial "plugin/script.html" -}}
     {{- end -}}
+
+    {{- /* Plausible Analytics */ -}}
+    {{- with $analytics.plausible.dataDomain -}}
+        {{- dict "Source" "https://plausible.io/js/plausible.js" "Async" true "Defer" true "Attr" ($analytics.plausible.dataDomain | printf `data-domain="%v"`) | partial "plugin/script.html" -}}
+    {{- end -}}
 {{- end -}}
