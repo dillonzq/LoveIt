@@ -524,6 +524,7 @@ Please open the code block below to view the complete sample configuration :(far
         avatar = "mp"
         meta= ""
         pageSize = 10
+        # automatically adapt the current theme i18n configuration when empty
         lang = ""
         visitor = true
         recordIP = true
@@ -542,6 +543,7 @@ Please open the code block below to view the complete sample configuration :(far
         width = "100%"
         numPosts = 10
         appId = ""
+        # automatically adapt the current theme i18n configuration when empty
         languageCode = ""
       # {{< version 0.2.0 >}} {{< link "https://comments.app/" "Telegram comments" >}} config
       [params.page.comment.telegram]
@@ -556,7 +558,7 @@ Please open the code block below to view the complete sample configuration :(far
       # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} comment config
       [params.page.comment.commento]
         enable = false
-      # {{< version 0.2.5 >}} {{< link "https://utteranc.es/" "Utterances" >}} comment config
+      # {{< version 0.2.5 >}} {{< link "https://utteranc.es/" "utterances" >}} comment config
       [params.page.comment.utterances]
         enable = false
         # owner/repo
@@ -565,6 +567,23 @@ Please open the code block below to view the complete sample configuration :(far
         label = ""
         lightTheme = "github-light"
         darkTheme = "github-dark"
+      # giscus comment config (https://giscus.app/)
+      [params.page.comment.giscus]
+        # You can refer to the official documentation of giscus to use the following configuration.
+        enable = false
+        repo = ""
+        repoId = ""
+        category = "Announcements"
+        categoryId = ""
+        # automatically adapt the current theme i18n configuration when empty
+        lang = ""
+        mapping = "pathname"
+        reactionsEnabled = "1"
+        emitMetadata = "0"
+        inputPosition = "bottom"
+        lazyLoading = false
+        lightTheme = "light"
+        darkTheme = "dark"
     # {{< version 0.2.7 >}} Third-party library config
     [params.page.library]
       [params.page.library.css]

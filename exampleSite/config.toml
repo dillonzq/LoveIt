@@ -544,8 +544,8 @@ enableEmoji = true
       # Commento comment 评论系统设置 (https://commento.io/)
       [params.page.comment.commento]
         enable = false
-      # Utterances comment config (https://utteranc.es/)
-      # Utterances comment 评论系统设置 (https://utteranc.es/)
+      # utterances comment config (https://utteranc.es/)
+      # utterances comment 评论系统设置 (https://utteranc.es/)
       [params.page.comment.utterances]
         enable = false
         # owner/repo
