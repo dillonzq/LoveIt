@@ -49,3 +49,8 @@
 {{- $source := $cdn.forkawesomeCompatCSS | default "lib/forkawesome/v5-compat.min.css" -}}
 {{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
 {{- partial "plugin/style.html" $style -}}
+
+{{- /* Fork Awesome V5 Compat */ -}}
+{{- $source := $cdn.forkawesomeCompatCSS | default "lib/forkawesome/v5-compat.min.css" -}}
+{{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
+{{- partial "plugin/style.html" $style -}}

@@ -60,3 +60,6 @@ libFiles:
   # forkawesome@1.2.0 https://forkaweso.me/Fork-Awesome/
   forkawesomeCSS: fork-awesome@1.2.0/css/fork-awesome.min.css
   forkawesomeCompatCSS: fork-awesome@1.2.0/css/v5-compat.min.css
+  # forkawesome@1.2.0 https://forkaweso.me/Fork-Awesome/
+  forkawesomeCSS: fork-awesome@1.2.0/css/fork-awesome.min.css
+  forkawesomeCompatCSS: fork-awesome@1.2.0/css/v5-compat.min.css

@@ -68,7 +68,7 @@ youtubelegacy:
   Prefix: https://www.youtube.com/user/
   Title: YouTube
   Icon:
-    Class: fab fa-youtube-play fa-fw
+    Class: fab fa-youtube-play-play fa-fw
 
 # 010: YouTube Custom
 youtubecustom:
@@ -76,7 +76,7 @@ youtubecustom:
   Prefix: https://www.youtube.com/c/
   Title: YouTube
   Icon:
-    Class: fab fa-youtube-play fa-fw
+    Class: fab fa-youtube-play-play fa-fw
 
 # 011: YouTube Channel
 youtubechannel:
@@ -84,7 +84,7 @@ youtubechannel:
   Prefix: https://www.youtube.com/channel/
   Title: YouTube
   Icon:
-    Class: fab fa-youtube-play fa-fw
+    Class: fab fa-youtube-play-play fa-fw
 
 # 012: Tumblr
 tumblr:
