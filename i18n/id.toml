@@ -59,6 +59,9 @@ other = "Komentar Anda ..."
 
 [facebookLanguageCode]
 other = "id_ID"
+
+[giscusLang]
+other = "id"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

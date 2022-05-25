@@ -59,6 +59,9 @@ other = "Comentariul dvs ..."
 
 [facebookLanguageCode]
 other = "ro_RO"
+
+[giscusLang]
+other = "ro"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

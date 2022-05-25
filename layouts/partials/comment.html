@@ -126,25 +126,25 @@
             </noscript>
         {{- end -}}
 
-        {{- /* Giscus Comment System */ -}}
+        {{- /* giscus Comment System */ -}}
         {{- $giscus := $comment.giscus | default dict -}}
         {{- if $giscus.enable -}}
             <div id="giscus" class="comment"></div>
-            {{- $commentConfig = $giscus.lang | default "en" | dict "lang" | dict "giscus" | merge $commentConfig -}}
             {{- $commentConfig = dict "repo" $giscus.repo | dict "giscus" | merge $commentConfig -}}
-            {{- $commentConfig = dict "repo_id" $giscus.repo_id | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = dict "repoId" $giscus.repoId | dict "giscus" | merge $commentConfig -}}
             {{- $commentConfig = dict "category" $giscus.category | dict "giscus" | merge $commentConfig -}}
-            {{- $commentConfig = dict "category_id" $giscus.category_id | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = dict "categoryId" $giscus.categoryId | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.lang | default (T "valineLang") | dict "lang" | dict "giscus" | merge $commentConfig -}}
             {{- $commentConfig = $giscus.mapping | default "pathname" | dict "mapping" | dict "giscus" | merge $commentConfig -}}
-            {{- $commentConfig = $giscus.reactions_enabled | default "1" | dict "reactions_enabled" | dict "giscus" | merge $commentConfig -}}
-            {{- $commentConfig = $giscus.emit_metadata | default "0" | dict "emit_metadata" | dict "giscus" | merge $commentConfig -}}
-            {{- $commentConfig = $giscus.input_position | default "bottom" | dict "input_position" | dict "giscus" | merge $commentConfig -}}
-            {{- $commentConfig = $giscus.crossorigin | default "anonymous" | dict "crossorigin" | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.reactionsEnabled | default "1" | dict "reactionsEnabled" | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.emitMetadata | default "0" | dict "emitMetadata" | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.inputPosition | default "bottom" | dict "inputPosition" | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.lazyLoading | default false | dict "lazyLoading" | dict "giscus" | merge $commentConfig -}}
             {{- $commentConfig = $giscus.lightTheme | default "github-light" | dict "lightTheme" | dict "giscus" | merge $commentConfig -}}
             {{- $commentConfig = $giscus.darkTheme | default "github-dark" | dict "darkTheme" | dict "giscus" | merge $commentConfig -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://giscus.app">Giscus</a>.
-            </noscript> 
+            </noscript>
         {{- end -}}
     </div>
 {{- end -}}

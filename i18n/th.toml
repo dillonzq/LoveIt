@@ -52,13 +52,16 @@ other = "เว็บนี้สร้างโดย {{ .Hugo }} | ธีม -
 
 # === partials/comment.html ===
 [valineLang]
-other = "th"
+other = "en"
 
 [valinePlaceholder]
 other = "ความคิดเห็นของคุณ ..."
 
 [facebookLanguageCode]
 other = "th_TH"
+
+[giscusLang]
+other = "en"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

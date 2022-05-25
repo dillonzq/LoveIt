@@ -52,7 +52,7 @@ other = "由 {{ .Hugo }} 強力驅動 | 主題 - {{ .Theme }}"
 
 # === partials/comment.html ===
 [valineLang]
-other = "zh-tw"
+other = "zh-TW"
 
 [valinePlaceholder]
 other = "你的評論 ..."

@@ -649,29 +649,26 @@ class Theme {
             if (this.config.comment.giscus) {
                 const giscusConfig = this.config.comment.giscus;
                 const giscusScript = document.createElement('script');
-                let dataTheme = this.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme
                 giscusScript.src = 'https://giscus.app/client.js';
                 giscusScript.type = 'text/javascript';
                 giscusScript.setAttribute('data-repo', giscusConfig.repo);
-                giscusScript.setAttribute('data-repo-id', giscusConfig.repo_id);
+                giscusScript.setAttribute('data-repo-id', giscusConfig.repoId);
                 giscusScript.setAttribute('data-category', giscusConfig.category);
-                giscusScript.setAttribute('data-category-id', giscusConfig.category_id);
-                giscusScript.setAttribute('data-mapping', giscusConfig.mapping);
-                giscusScript.setAttribute('data-reactions-enabled', giscusConfig.reactions_enabled);
-                giscusScript.setAttribute('data-emit-metadata', giscusConfig.emit_metadata);
-                giscusScript.setAttribute('data-input-position', giscusConfig.input_position);
+                giscusScript.setAttribute('data-category-id', giscusConfig.categoryId);
                 giscusScript.setAttribute('data-lang', giscusConfig.lang);
-                if (giscusConfig.label) giscusScript.setAttribute('label', giscusConfig.label);
-                giscusScript.setAttribute('data-theme', dataTheme);
+                giscusScript.setAttribute('data-mapping', giscusConfig.mapping);
+                giscusScript.setAttribute('data-reactions-enabled', giscusConfig.reactionsEnabled);
+                giscusScript.setAttribute('data-emit-metadata', giscusConfig.emitMetadata);
+                giscusScript.setAttribute('data-input-position', giscusConfig.inputPosition);
+                if (giscusConfig.lazyLoading) giscusScript.setAttribute('data-loading', 'lazy');
+                giscusScript.setAttribute('data-theme', this.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme);
                 giscusScript.crossOrigin = 'anonymous';
                 giscusScript.async = true;
                 document.getElementById('giscus').appendChild(giscusScript);
                 this._giscusOnSwitchTheme = this._giscusOnSwitchTheme || (() => {
-                    dataTheme = this.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme
                     const message = {
                         setConfig: {
-                            // theme: 'https://giscus.app/themes/custom_example.css',
-                            theme: dataTheme,
+                            theme: this.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme,
                             reactionsEnabled: false,
                         }
                     };
