@@ -90,16 +90,16 @@
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
     {{- $source := $cdn.katexJS | default "lib/katex/katex.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-    {{- $source := $cdn.katexAutoRenderJS | default "lib/katex/auto-render.min.js" -}}
+    {{- $source := $cdn.katexAutoRenderJS | default "lib/katex/contrib/auto-render.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- if $math.copyTex -}}
-        {{- $source := $cdn.katexCopyTexCSS | default "lib/katex/copy-tex.min.css" -}}
+        {{- $source := $cdn.katexCopyTexCSS | default "lib/katex/contrib/copy-tex.min.css" -}}
         {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
-        {{- $source := $cdn.katexCopyTexJS | default "lib/katex/copy-tex.min.js" -}}
+        {{- $source := $cdn.katexCopyTexJS | default "lib/katex/contrib/copy-tex.min.js" -}}
         {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- end -}}
     {{- if $math.mhchem -}}
-        {{- $source := $cdn.katexMhchemJS | default "lib/katex/mhchem.min.js" -}}
+        {{- $source := $cdn.katexMhchemJS | default "lib/katex/contrib/mhchem.min.js" -}}
         {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- end -}}
     {{- $delimiters := slice (dict "left" "$$" "right" "$$" "display" true) (dict "left" "\\[" "right" "\\]" "display" true) -}}
