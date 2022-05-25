@@ -526,6 +526,7 @@ hugo
         avatar = "mp"
         meta= ""
         pageSize = 10
+        # 为空时自动适配当前主题 i18n 配置
         lang = ""
         visitor = true
         recordIP = true
@@ -544,6 +545,7 @@ hugo
         width = "100%"
         numPosts = 10
         appId = ""
+        # 为空时自动适配当前主题 i18n 配置
         languageCode = "zh_CN"
       # {{< version 0.2.0 >}} {{< link "https://comments.app/" "Telegram Comments" >}} 评论系统设置
       [params.page.comment.telegram]
@@ -558,7 +560,7 @@ hugo
       # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} 评论系统设置
       [params.page.comment.commento]
         enable = false
-      # {{< version 0.2.5 >}} {{< link "https://utteranc.es/" "Utterances" >}} 评论系统设置
+      # {{< version 0.2.5 >}} {{< link "https://utteranc.es/" "utterances" >}} 评论系统设置
       [params.page.comment.utterances]
         enable = false
         # owner/repo
@@ -567,6 +569,23 @@ hugo
         label = ""
         lightTheme = "github-light"
         darkTheme = "github-dark"
+      # giscus comment 评论系统设置 (https://giscus.app/zh-CN)
+      [params.page.comment.giscus]
+        # 你可以参考官方文档来使用下列配置
+        enable = false
+        repo = ""
+        repoId = ""
+        category = "Announcements"
+        categoryId = ""
+        # 为空时自动适配当前主题 i18n 配置
+        lang = ""
+        mapping = "pathname"
+        reactionsEnabled = "1"
+        emitMetadata = "0"
+        inputPosition = "bottom"
+        lazyLoading = false
+        lightTheme = "light"
+        darkTheme = "dark"
     # {{< version 0.2.7 >}} 第三方库配置
     [params.page.library]
       [params.page.library.css]

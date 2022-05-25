@@ -33,7 +33,7 @@ math:
 * :(fab fa-searchengin fa-fw): 使用基于 JSON-LD 格式 的 **SEO SCHEMA** 文件进行 SEO 优化
 * :(fab fa-google fa-fw): 支持 **[Google Analytics](https://analytics.google.com/analytics)**
 * :(far fa-chart-bar fa-fw): 支持 **[Fathom Analytics](https://usefathom.com/)**
-* :(far fa-chart-column fa-fw): 支持 **[Plausible Analytics](https://plausible.io/)**
+* :(fas fa-chart-column fa-fw): 支持 **[Plausible Analytics](https://plausible.io/)**
 * :(fas fa-sitemap fa-fw): 支持搜索引擎的**网站验证** (Google, Bind, Yandex and Baidu)
 * :(fas fa-tachometer-alt fa-fw): 支持所有第三方库的 **CDN**
 * :(fas fa-cloud-download-alt fa-fw): 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为**懒加载**
@@ -57,10 +57,11 @@ math:
 * :(far fa-comment fa-fw): 支持 **[Disqus](https://disqus.com)** 评论系统
 * :(far fa-comment-dots fa-fw): 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
 * :(far fa-comment-alt fa-fw): 支持 **[Valine](https://valine.js.org/)** 评论系统
-* :(far fa-comments fa-fw): 支持 **[Facebook](https://developers.facebook.com/docs/plugins/comments/) 评论**系统
-* :(fas fa-comment fa-fw): 支持 **[Telegram comments](https://comments.app/) 评论**系统
+* :(far fa-comments fa-fw): 支持 **[Facebook comments](https://developers.facebook.com/docs/plugins/comments/)** 评论系统
+* :(fas fa-comment fa-fw): 支持 **[Telegram comments](https://comments.app/)** 评论系统
 * :(fas fa-comment-dots fa-fw): 支持 **[Commento](https://commento.io/)** 评论系统
-* :(far fa-comment-alt fa-fw): 支持 **[Utterances](https://utteranc.es/)** 评论系统
+* :(far fa-comment-alt fa-fw): 支持 **[utterances](https://utteranc.es/)** 评论系统
+* :(fas fa-comments fa-fw): 支持 **[giscus](https://giscus.app/)** 评论系统
 
 #### 扩展功能
 

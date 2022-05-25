@@ -52,13 +52,16 @@ other = "Impulsat per {{ .Hugo }} | Tema - {{ .Theme }}"
 
 # === partials/comment.html ===
 [valineLang]
-other = "ca"
+other = "en"
 
 [valinePlaceholder]
 other = "El teu comentari ..."
 
 [facebookLanguageCode]
 other = "ca_ES"
+
+[giscusLang]
+other = "en"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

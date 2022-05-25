@@ -59,6 +59,9 @@ other = "O seu comentário ..."
 
 [facebookLanguageCode]
 other = "pt_BR"
+
+[giscusLang]
+other = "en"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

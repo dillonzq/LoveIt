@@ -418,6 +418,8 @@
         avatar = "mp"
         meta= ""
         pageSize = 10
+        # automatically adapt the current theme i18n configuration when empty
+        # 为空时自动适配当前主题 i18n 配置
         lang = ""
         visitor = true
         recordIP = true
@@ -442,6 +444,8 @@
         width = "100%"
         numPosts = 10
         appId = ""
+        # automatically adapt the current theme i18n configuration when empty
+        # 为空时自动适配当前主题 i18n 配置
         languageCode = ""
       # Telegram comments config (https://comments.app/)
       # Telegram comments 评论系统设置 (https://comments.app/)
@@ -458,8 +462,8 @@
       # Commento comment 评论系统设置 (https://commento.io/)
       [params.page.comment.commento]
         enable = false
-      # Utterances comment config (https://utteranc.es/)
-      # Utterances comment 评论系统设置 (https://utteranc.es/)
+      # utterances comment config (https://utteranc.es/)
+      # utterances comment 评论系统设置 (https://utteranc.es/)
       [params.page.comment.utterances]
         enable = false
         # owner/repo
@@ -468,6 +472,26 @@
         label = ""
         lightTheme = "github-light"
         darkTheme = "github-dark"
+      # giscus comment config (https://giscus.app/)
+      # giscus comment 评论系统设置 (https://giscus.app/zh-CN)
+      [params.page.comment.giscus]
+        # You can refer to the official documentation of giscus to use the following configuration.
+        # 你可以参考官方文档来使用下列配置
+        enable = false
+        repo = ""
+        repoId = ""
+        category = "Announcements"
+        categoryId = ""
+        # automatically adapt the current theme i18n configuration when empty
+        # 为空时自动适配当前主题 i18n 配置
+        lang = ""
+        mapping = "pathname"
+        reactionsEnabled = "1"
+        emitMetadata = "0"
+        inputPosition = "bottom"
+        lazyLoading = false
+        lightTheme = "light"
+        darkTheme = "dark"
     # Third-party library config
     # 第三方库配置
     [params.page.library]

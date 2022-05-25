@@ -84,10 +84,11 @@
 * 支持 **[Disqus](https://disqus.com)** 评论系统
 * 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
 * 支持 **[Valine](https://valine.js.org/)** 评论系统
-* 支持 **[Facebook](https://developers.facebook.com/docs/plugins/comments/) 评论**系统
-* 支持 **[Telegram comments](https://comments.app/) 评论**系统
+* 支持 **[Facebook comments](https://developers.facebook.com/docs/plugins/comments/)** 评论系统
+* 支持 **[Telegram comments](https://comments.app/)** 评论系统
 * 支持 **[Commento](https://commento.io/)** 评论系统
-* 支持 **[Utterances](https://utteranc.es/)** 评论系统
+* 支持 **[utterances](https://utteranc.es/)** 评论系统
+* 支持 **[giscus](https://giscus.app/)** 评论系统
 
 ### 扩展功能
 

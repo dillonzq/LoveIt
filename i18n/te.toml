@@ -52,13 +52,16 @@ other = "{{ .Hugo }} ద్వారా ఆధారితం | నేపథ్�
 # === partials/comment.html ===
 [valineLang]
 # not supported
-other = "te"
+other = "en"
 
 [valinePlaceholder]
 other = "మీ వాఖ్యనం ..."
 
 [facebookLanguageCode]
 other = "te_IN"
+
+[giscusLang]
+other = "en"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
