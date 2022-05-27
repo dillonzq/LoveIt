@@ -441,7 +441,6 @@ researchgate:
 # 056: Mastodon
 mastodon:
   Weight: 56
-  Prefix: https://mastodon.social/
   Title: Mastodon
   Icon:
     Class: fab fa-mastodon fa-fw
@@ -519,11 +518,18 @@ lichess:
     
 # 066: ORCID
 orcid:
-  Weight: 63
+  Weight: 66
   Prefix: https://orcid.org/
   Title: ORCID
   Icon:
     Class: fab fa-orcid fa-fw
+    
+# 067: Pleroma
+pleroma:
+  Weight: 67
+  Title: Pleroma
+  Icon:
+    Simpleicons: pleroma
     
 # Email
 email:
