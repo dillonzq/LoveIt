@@ -516,7 +516,15 @@ lichess:
   Title: Lichess
   Icon:
     Simpleicons: lichess
-
+    
+# 066: ORCID
+orcid:
+  Weight: 63
+  Prefix: https://orcid.org/
+  Title: ORCID
+  Icon:
+    Class: fab fa-orcid fa-fw
+    
 # Email
 email:
   Weight: 99
