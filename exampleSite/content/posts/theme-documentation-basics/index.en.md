@@ -455,6 +455,8 @@ languageName = "English"
     Discord = ""
     DiscordInvite = ""
     Lichess = ""
+    ORCID = ""
+    Pleroma = ""
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
 

@@ -515,7 +515,7 @@ lichess:
   Title: Lichess
   Icon:
     Simpleicons: lichess
-    
+
 # 066: ORCID
 orcid:
   Weight: 66
@@ -523,14 +523,14 @@ orcid:
   Title: ORCID
   Icon:
     Class: fab fa-orcid fa-fw
-    
+
 # 067: Pleroma
 pleroma:
   Weight: 67
   Title: Pleroma
   Icon:
     Simpleicons: pleroma
-    
+
 # Email
 email:
   Weight: 99
