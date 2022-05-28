@@ -348,6 +348,8 @@ enableEmoji = true
     Discord = ""
     DiscordInvite = ""
     Lichess = ""
+    ORCID = ""
+    Pleroma = ""
     Email = ""
     RSS = ""
 
