@@ -12,14 +12,14 @@
     {{- with $image -}}
         <div class="featured-image-preview">
             <a href="{{ $.RelPermalink }}">
-                {{- dict "Src" . "Title" $.Description "Resources" $.Resources | partial "plugin/image.html" -}}
+                {{- dict "Src" . "Title" $.Description "Resources" $.Resources | partial "plugin/img.html" -}}
             </a>
         </div>
     {{- end -}}
 
     {{- /* Title */ -}}
     <h1 class="single-title" itemprop="name headline">
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <a href="{{ .RelPermalink }}">{{ .Title | emojify }}</a>
     </h1>
 
     {{- /* Meta */ -}}
@@ -28,7 +28,7 @@
         {{- $authorLink := $params.authorlink | default .Site.Author.link | default .Site.Home.RelPermalink -}}
         <span class="post-author">
             {{- $options := dict "Class" "author" "Destination" $authorLink "Title" "Author" "Rel" "author" "Icon" (dict "Class" "fas fa-user-circle fa-fw") "Content" $author -}}
-            {{- partial "plugin/link.html" $options -}}
+            {{- partial "plugin/a.html" $options -}}
         </span>
 
         {{- with .Site.Params.dateFormat | default "2006-01-02" | .PublishDate.Format -}}
@@ -40,7 +40,7 @@
         {{- $categories := slice -}}
         {{- range .Params.categories -}}
             {{- $category := partialCached "function/path.html" . . | printf "/categories/%v" | $.Site.GetPage -}}
-            {{- $categories = $categories | append (printf `<a href="%v"><i class="far fa-folder fa-fw"></i>%v</a>` $category.RelPermalink $category.Title) -}}
+            {{- $categories = $categories | append (printf `<a href="%v"><i class="far fa-folder fa-fw" aria-hidden="true"></i>%v</a>` $category.RelPermalink $category.Title) -}}
         {{- end -}}
         {{- with delimit $categories "&nbsp;" -}}
             &nbsp;<span class="post-category">
@@ -63,7 +63,7 @@
         <a href="{{ .RelPermalink }}">{{ T "readMore" }}</a>
         {{- with .Params.tags -}}
             <div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }},&nbsp;{{ end -}}
                     {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}

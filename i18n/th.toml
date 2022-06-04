@@ -1,0 +1,202 @@
+# Translations for Thai
+# คำแปลภาษาไทย
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ==
+[backToTop]
+other = "กลับไปด้านบนสุด"
+
+[viewComments]
+other = "ดูความคิดเห็น"
+# === baseof ==
+
+# === Post ===
+[posts]
+other = "โพสต์"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "ทั้งหมด {{ .Some }}"
+
+[tag]
+other = "แท็ก"
+
+[tags]
+other = "แท็ก"
+
+[category]
+other = "หมวดหมู่"
+
+[categories]
+other = "หมวดหมู่"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "เพิ่มเติม"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "เลือกภาษา"
+
+[switchTheme]
+other = "เปลี่ยนธีม"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "เว็บนี้สร้างโดย {{ .Hugo }} | ธีม - {{ .Theme }}"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "ความคิดเห็นของคุณ ..."
+
+[facebookLanguageCode]
+other = "th_TH"
+
+[giscusLang]
+other = "en"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "ค้นหา"
+
+[searchPlaceholder]
+other = "ค้นหาด้วย 'หัวข้อ' หรือ 'เนื้อหา'..."
+
+[clear]
+other = "ล้าง"
+
+[cancel]
+other = "ยกเลิก"
+
+[noResultsFound]
+other = "ไม่พบเนื้อหา"
+
+[lunrLanguageCode]
+other = "th"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.th.js"
+
+[copyToClipboard]
+other = "คัดลอกไปยังคลิปบอร์ด"
+
+[cookieconsentMessage]
+other = "เว็บไซต์นี้มีการใช้คุกกี้เพื่อปรับปรุงประสิทธิภาพการแสดงผล."
+
+[cookieconsentDismiss]
+other = "เข้าใจแล้ว!"
+
+[cookieconsentLink]
+other = "เรียนรู้เพิ่มเติม"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "แชร์ไปยัง"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "เนื้อหา"
+
+[publishedOnDate]
+other = "เผยแพร่เมื่อวันที่ {{ .Date }}"
+
+[includedInCategories]
+other = "เนื้อหานี้อยู่ในกลุ่ม {{ .Categories }}"
+
+[wordCount]
+one = "1 คำ"
+other = "{{ .Count }} คำ"
+
+[readingTime]
+one = "1 นาที"
+other = "{{ .Count }} นาที"
+
+[views]
+other = "ครั้ง"
+
+[author]
+other = "ผู้เขียน"
+
+[updatedOnDate]
+other = "ปรับปรุงล่าสุดเมื่อ {{ .Date }}"
+
+[readMarkdown]
+other = "ดูโค้ด Markdown ของหน้านี้"
+
+[back]
+other = "กลับ"
+
+[home]
+other = "หน้าหลัก"
+
+[readMore]
+other = "อ่านเพิ่มเติม"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "ไม่พบหน้าที่ค้นหา"
+
+[pageNotFoundText]
+other = "เสียใจด้วย! เราไม่พบหน้าที่คุณพยายามค้นหา."
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "โน๊ต"
+
+[abstract]
+other = "บทคัดย่อ"
+
+[info]
+other = "ข้อมูล"
+
+[tip]
+other = "ทิป"
+
+[success]
+other = "สำเร็จ"
+
+[question]
+other = "คำถาม"
+
+[warning]
+other = "คำเตือน"
+
+[failure]
+other = "ล้มเหลว"
+
+[danger]
+other = "อันตราย"
+
+[bug]
+other = "บั๊ก"
+
+[example]
+other = "ตัวอย่าง"
+
+[quote]
+other = "อ้างถึง"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "ใหม่"
+
+[changed]
+other = "เปลี่ยนแปลง"
+
+[deleted]
+other = "ลบ"
+# === shortcodes/version.html ===

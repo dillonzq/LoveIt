@@ -2,17 +2,16 @@
 
 .single {
   .single-title {
-    margin: 1rem 0 .5rem;
+    margin: 2rem 0 .5rem;
     font-size: 1.6rem;
     font-weight: bold;
     line-height: 140%;
   }
 
   .single-subtitle {
-    margin: .4rem 0;
+    margin: .5rem 0;
     font-size: 1.2rem;
     font-weight: normal;
-    font-style: italic;
     line-height: 100%;
   }
 
@@ -231,14 +230,11 @@
 
       img {
         display: block;
+        width: 100%;
         height: auto;
         margin: 0 auto;
         overflow: hidden;
       }
-    }
-
-    .lazyloading {
-      @include object-fit(none);
     }
 
     blockquote {
@@ -294,7 +290,7 @@
       @include border-radius(3px);
       @include box-shadow(inset 0 -1px 0 $global-border-color);
       font-size: .8rem;
-      font-family: $code-font-family;
+      font-family: var(--code-font-family);
       color: $code-color;
 
       [theme=dark] & {
@@ -306,16 +302,6 @@
       }
     }
 
-    .typeit {
-      .code {
-        padding: .375rem;
-        font-size: .875rem;
-        font-family: $code-font-family;
-        font-weight: bold;
-        word-break: break-all;
-      }
-    }
-
     .version {
       height: 1.25em;
       vertical-align: text-bottom;
@@ -324,6 +310,28 @@
 
   @import "../_partial/_single/footer";
   @import "../_partial/_single/comment";
+}
+
+.typeit {
+  .highlight {
+    padding: .375rem;
+    font-size: .875rem;
+    font-family: var(--code-font-family);
+    font-weight: bold;
+    word-break: break-all;
+    white-space: pre-wrap;
+  }
+
+  --ti-cursor-font-family: var(--global-font-family);
+  --ti-cursor-font-size: var(--global-font-size);
+  --ti-cursor-font-weight: var(--global-font-weight);
+  --ti-cursor-line-height: var(--global-line-height);
+  --ti-cursor-color: $global-font-secondary-color;
+  --ti-cursor-margin-left: 0;
+
+  [theme=dark] & {
+    --ti-cursor-color: $global-font-secondary-color-dark;
+  }
 }
 
 .lg-toolbar .lg-icon::after {

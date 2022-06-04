@@ -4,8 +4,8 @@ code {
   padding: 0 .4rem;
   @include overflow-wrap(break-word);
   @include line-break(anywhere);
-  font-size: $code-font-size;
-  font-family: $code-font-family;
+  font-size: var(--code-font-size);
+  font-family: var(--code-font-family);
   color: $code-color;
 
   [theme=dark] & {
@@ -30,16 +30,18 @@ pre {
 }
 
 code, pre, .highlight table, .highlight tr, .highlight td {
-  background: $code-background-color;
+  background: $code-background-color !important;
 
   [theme=dark] & {
-    background: $code-background-color-dark;
+    background: $code-background-color-dark !important;
   }
 }
 
-.highlight, .gist {
-  font-family: $code-font-family;
-  font-size: $code-font-size;
+.highlight {
+  font-family: var(--code-font-family);
+  font-size: var(--code-font-size);
+  line-height: 1.4em;
+  margin: .5rem 0;
 
   .table-wrapper {
     > table,
@@ -49,14 +51,12 @@ code, pre, .highlight table, .highlight tr, .highlight td {
       margin: 0;
       padding: 0;
       border: none !important;
-      white-space: nowrap;
+
+      span.c {
+        white-space: nowrap;
+      }
     }
   }
-}
-
-.highlight {
-  line-height: 1.4em;
-  margin: .5rem 0;
 
   > .chroma {
     position: relative;
@@ -67,7 +67,7 @@ code, pre, .highlight table, .highlight tr, .highlight td {
       align-items: center;
       box-sizing: border-box;
       width: 100%;
-      font-family: $global-font-family;
+      font-family: var(--global-font-family);
       font-weight: bold;
       color: $code-info-color;
       background: darken($code-background-color, 8%);
@@ -88,10 +88,10 @@ code, pre, .highlight table, .highlight tr, .highlight td {
 
       .code-title::after {
         padding-left: .2rem;
-        content: 'Code';
+        content: "Code";
       }
 
-      @each $type, $text in $code-type-map {
+      @each $type, $text in $code-type-list {
         &.#{$type} .code-title::after {
           content: $text;
         }
@@ -171,7 +171,7 @@ code, pre, .highlight table, .highlight tr, .highlight td {
       }
 
       .table-wrapper {
-        max-height: $MAX_LENGTH;
+        max-height: 10000px;
         @include details-transition-close;
       }
 
@@ -210,6 +210,20 @@ code, pre, .highlight table, .highlight tr, .highlight td {
 }
 
 .gist {
+  font-family: var(--code-font-family);
+  font-size: var(--code-font-size);
+
+  .table-wrapper {
+    > table,
+    > table thead,
+    > table tr,
+    > table td {
+      margin: 0;
+      padding: 0;
+      border: none !important;
+    }
+  }
+
   .gist-file, .gist-data, .gist-meta {
     border: none;
   }

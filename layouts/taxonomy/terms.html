@@ -9,7 +9,7 @@
 
     <div class="page archive">
         {{- /* Title */ -}}
-        <h2 class="single-title animated pulse faster">
+        <h2 class="single-title animate__animated animate__pulse animate__faster">
             {{- .Params.Title | default (T $taxonomies) | default $taxonomies | dict "Some" | T "allSome" -}}
         </h2>
 
@@ -24,13 +24,13 @@
                         <div class="card-item-wrapper">
                             <h3 class="card-item-title">
                                 <a href="{{ .RelPermalink }}">
-                                    <i class="far fa-folder fa-fw"></i>&nbsp;{{ .Page.Title }}
+                                    <i class="far fa-folder fa-fw" aria-hidden="true"></i>&nbsp;{{ .Page.Title }}
                                 </a>
                             </h3>
                             {{- range first 5 $pages -}}
                                 <article class="archive-item">
                                     <a href="{{ .RelPermalink }}" class="archive-item-link">
-                                        {{- .Title -}}
+                                        {{- .Title | emojify -}}
                                     </a>
                                 </article>
                             {{- end -}}

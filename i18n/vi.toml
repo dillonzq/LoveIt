@@ -58,6 +58,9 @@ other = "Bình luận của bạn ..."
 
 [facebookLanguageCode]
 other = "vi"
+
+[giscusLang]
+other = "vi"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
