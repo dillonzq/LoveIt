@@ -61,6 +61,7 @@
 * 支持 **[Google Analytics](https://analytics.google.com/analytics)**
 * 支持 **[Fathom Analytics](https://usefathom.com/)**
 * 支持 **[Plausible Analytics](https://plausible.io/)**
+* 支持 **[Yandex Metrica](https://metrica.yandex.com/)**
 * 支持搜索引擎的**网站验证** (Google, Bind, Yandex and Baidu)
 * 支持所有第三方库的 **CDN**
 * 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为**懒加载**
