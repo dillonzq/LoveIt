@@ -698,6 +698,9 @@ languageName = "English"
     # Plausible Analytics
     [params.analytics.plausible]
       dataDomain = ""
+    # Yandex Metrica
+    [params.analytics.yandexMetrica]
+      id = ""
 
   # {{< version 0.2.7 >}} Cookie consent config
   [params.cookieconsent]

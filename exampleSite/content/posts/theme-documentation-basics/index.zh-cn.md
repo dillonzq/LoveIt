@@ -702,6 +702,9 @@ hasCJKLanguage = true
     # Plausible Analytics
     [params.analytics.plausible]
       dataDomain = ""
+    # Yandex Metrica
+    [params.analytics.yandexMetrica]
+      id = ""
 
   # {{< version 0.2.7 >}} Cookie 许可配置
   [params.cookieconsent]

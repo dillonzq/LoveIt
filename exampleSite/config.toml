@@ -655,6 +655,9 @@ enableEmoji = true
     # Plausible Analytics
     [params.analytics.plausible]
       dataDomain = ""
+    # Yandex Metrica
+    [params.analytics.yandexMetrica]
+      id = ""
 
   # Cookie consent config
   # Cookie 许可配置
