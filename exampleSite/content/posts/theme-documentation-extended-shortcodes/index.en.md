@@ -2,7 +2,7 @@
 weight: 4
 title: "Theme Documentation - Extended Shortcodes"
 date: 2020-03-03T16:29:41+08:00
-lastmod: 2020-03-03T16:29:41+08:00
+lastmod: 2020-06-12T10:10:13+03:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
@@ -374,4 +374,51 @@ Block Formula:
 \[ a=b+c \\ d+e=f \]
 {{< /raw >}}
 
+{{< script >}}
+console.log('Hello LoveIt!');
+{{< /script >}}
+
+This renders as {{< person "https://dillonzq.com/" Dillon "author of the LoveIt theme" >}}.
 Raw content using Markdown syntax: {{< raw >}}**Hello**{{< /raw >}}
+
+## 13 person
+
+`person` is a shortcode to insert a link to a personal webpage marked up as [h-card](http://microformats.org/wiki/h-card).
+
+The `person` shortcode has the following named parameters:
+
+* **url** *[required]* (**first** positional parameter)
+
+    URL of the personal page.
+
+* **name** *[required]* (**second** positional parameter)
+
+    Name of the person.
+
+* **text** *[optional]* (**third** positional parameter)
+
+    Text to display as hover tooltip of the link.
+
+* **picture** *[optional]* (**fourth** positional parameter)
+
+    A picture to use as person's avatar.
+
+* **nick** *[optional]*
+
+    Nickame of the person.
+
+Example `person` input:
+
+```markdown
+{{</* person url="https://evgenykuznetsov.org" name="Evgeny Kuznetsov" nick="nekr0z" text="author of this shortcode" picture="https://evgenykuznetsov.org/img/avatar.jpg" */>}}
+```
+
+This renders as {{< person url="https://evgenykuznetsov.org" name="Evgeny Kuznetsov" nick="nekr0z" text="author of this shortcode" picture="https://evgenykuznetsov.org/img/avatar.jpg" >}}.
+
+Without an explicitly given picture, a generic icon is used. This input:
+
+```markdown
+{{</* person "https://dillonzq.com/" Dillon "author of the LoveIt theme" */>}}
+```
+
+This renders as {{< person "https://dillonzq.com/" Dillon "author of the LoveIt theme" >}}.

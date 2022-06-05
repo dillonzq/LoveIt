@@ -1,0 +1,9 @@
+{{- $url := cond .IsNamedParams (.Get "url") (.Get 0) -}}
+{{- $name := cond .IsNamedParams (.Get "name") (.Get 1) -}}
+{{- $text := cond .IsNamedParams (.Get "text") (.Get 2) -}}
+{{- $pic := cond .IsNamedParams (.Get "picture") (.Get 3) -}}
+{{- $options := dict "Class" "person-mention" "Name" $name "URL" $url "Text" $text "Image" $pic -}}
+{{- if .IsNamedParams -}}
+{{- $options = dict "Nickname" (.Get "nick") | merge $options -}}
+{{- end -}}
+{{- partial "plugin/h-card" $options -}}

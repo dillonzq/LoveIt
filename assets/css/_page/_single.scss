@@ -306,6 +306,16 @@
       height: 1.25em;
       vertical-align: text-bottom;
     }
+
+    .person-mention.h-card {
+      display: inline-block;
+      img {
+        vertical-align: -12%;
+        max-height: 1.1em;
+        margin-right: 0ex;
+        border-radius: 50%;
+      }
+    }
   }
 
   @import "../_partial/_single/footer";
