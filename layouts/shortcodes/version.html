@@ -9,5 +9,5 @@
 {{- $resource = $resource | resources.ExecuteAsTemplate $path (dict "version" $version "label" $label "color" $color) | minify -}}
 {{- $alt := printf "LoveIt %v | %v" $label $version -}}
 <a href="{{ $url }}" rel="noopener noreffer" target="_blank">
-    {{- dict "Src" $resource.RelPermalink "Alt" $alt "Class" "version" | partial "plugin/image.html" -}}
+    {{- dict "Src" $resource.RelPermalink "Alt" $alt "Class" "version" | partial "plugin/img.html" -}}
 </a>

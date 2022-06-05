@@ -156,7 +156,7 @@ stackoverflow:
   Prefix: https://stackoverflow.com/users/
   Title: Stack Overflow
   Icon:
-    Class: fab fa-codepen fa-fw
+    Class: fab fa-stack-overflow fa-fw
 
 # 021: 微博
 weibo:
@@ -441,7 +441,6 @@ researchgate:
 # 056: Mastodon
 mastodon:
   Weight: 56
-  Prefix: https://mastodon.social/
   Title: Mastodon
   Icon:
     Class: fab fa-mastodon fa-fw
@@ -452,7 +451,7 @@ thingiverse:
   Prefix: https://www.thingiverse.com/
   Title: Thingiverse
   Icon:
-    Src: svg/icons/thingiverse.svg
+    Simpleicons: thingiverse
 
 # 058: Dev.To
 devto:
@@ -491,19 +490,58 @@ bilibili:
   Prefix: https://space.bilibili.com/
   Title: bilibili
   Icon:
-    Src: svg/icons/bilibili.svg
+    Simpleicons: bilibili
 
-# 063: Email
-email:
+# 063: Discord User Profile
+discord:
   Weight: 63
+  Prefix: discordapp.com/users/
+  Title: Discord
+  Icon:
+    Class: fab fa-discord fa-fw
+
+# 064: Discord Server Invite Link
+discordInvite:
+  Weight: 64
+  Prefix: https://discord.gg/
+  Title: Discord
+  Icon:
+    Class: fab fa-discord fa-fw
+
+# 065: Lichess user profile
+lichess:
+  Weight: 65
+  Prefix: https://lichess.org/@/
+  Title: Lichess
+  Icon:
+    Simpleicons: lichess
+
+# 066: ORCID
+orcid:
+  Weight: 66
+  Prefix: https://orcid.org/
+  Title: ORCID
+  Icon:
+    Class: fab fa-orcid fa-fw
+
+# 067: Pleroma
+pleroma:
+  Weight: 67
+  Title: Pleroma
+  Icon:
+    Simpleicons: pleroma
+
+# Email
+email:
+  Weight: 99
   Template: mailto:%v
   Title: Email
   Icon:
     Class: far fa-envelope fa-fw
 
-# 064: RSS
+# RSS
 rss:
-  Weight: 64
+  Weight: 100
   Url: /index.xml
   Title: RSS
   Newtab: true

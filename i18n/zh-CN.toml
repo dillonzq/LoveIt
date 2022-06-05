@@ -52,13 +52,16 @@ other = "由 {{ .Hugo }} 强力驱动 | 主题 - {{ .Theme }}"
 
 # === partials/comment.html ===
 [valineLang]
-other = "zh-cn"
+other = "zh-CN"
 
 [valinePlaceholder]
 other = "你的评论 ..."
 
 [facebookLanguageCode]
 other = "zh_CN"
+
+[giscusLang]
+other = "zh-CN"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

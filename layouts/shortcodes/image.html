@@ -19,11 +19,11 @@
 
 {{- with $caption -}}
     <figure{{ with cond $.IsNamedParams ($.Get "class") "" }} class="{{ . }}"{{ end }}>
-        {{- partial "plugin/image.html" $options -}}
+        {{- partial "plugin/img.html" $options -}}
         <figcaption class="image-caption">
             {{- . | safeHTML -}}
         </figcaption>
     </figure>
 {{- else -}}
-    {{- partial "plugin/image.html" $options -}}
+    {{- partial "plugin/img.html" $options -}}
 {{- end -}}

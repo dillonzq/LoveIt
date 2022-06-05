@@ -10,20 +10,20 @@
                         {{- if $.Site.Params.gitRepo -}}
                             {{- with $.GitInfo -}}
                                 &nbsp;<a class="git-hash" href="{{ printf `%v/commit/%v` $.Site.Params.gitRepo .Hash }}" target="_blank" title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ .Hash }}: {{ .Subject }}">
-                                    <i class="fas fa-hashtag fa-fw"></i>{{- .AbbreviatedHash -}}
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>{{- .AbbreviatedHash -}}
                                 </a>
                             {{- end -}}
                         {{- end -}}
                     {{- end -}}
                 </span>
             </div>
+            {{- with $params.license | string -}}
             <div class="post-info-license">
-                {{- with $params.license | string -}}
-                    <span>
-                        {{- . | safeHTML -}}
-                    </span>
-                {{- end -}}
+                <span>
+                    {{- . | safeHTML -}}
+                </span>
             </div>
+            {{- end -}}
         </div>
         <div class="post-info-line">
             <div class="post-info-md">
@@ -48,7 +48,7 @@
     <div class="post-info-more">
         <section class="post-tags">
             {{- with .Params.tags -}}
-                <i class="fas fa-tags fa-fw"></i>&nbsp;
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }},&nbsp;{{ end -}}
                     {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}
@@ -62,11 +62,24 @@
     </div>
 
     <div class="post-nav">
-        {{- if .PrevInSection -}}
-            <a href="{{ .PrevInSection.RelPermalink }}" class="prev" rel="prev" title="{{ .PrevInSection.Title }}"><i class="fas fa-angle-left fa-fw"></i>{{ .PrevInSection.Title }}</a>
+        {{- $prevPage := false -}}
+        {{- $nextPage := false -}}
+        {{- if or (.Params.prev) (.Params.next) -}}
+            {{- with .Params.prev -}}
+                {{- $prevPage = $.Site.GetPage . -}}
+            {{- end -}}
+            {{- with .Params.next -}}
+                {{- $nextPage = $.Site.GetPage . -}}
+            {{- end -}}
+        {{- else -}}
+            {{- $prevPage = .PrevInSection -}}
+            {{- $nextPage = .NextInSection -}}
         {{- end -}}
-        {{ if .NextInSection }}
-            <a href="{{ .NextInSection.RelPermalink }}" class="next" rel="next" title="{{ .NextInSection.Title }}">{{ .NextInSection.Title }}<i class="fas fa-angle-right fa-fw"></i></a>
+        {{- with $prevPage -}}
+            <a href="{{ .RelPermalink }}" class="prev" rel="prev" title="{{ .Title }}"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>{{ .Title | emojify }}</a>
+        {{- end -}}
+        {{ with $nextPage }}
+            <a href="{{ .RelPermalink }}" class="next" rel="next" title="{{ .Title }}">{{ .Title | emojify }}<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a>
         {{- end -}}
     </div>
 </div>

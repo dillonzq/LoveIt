@@ -51,7 +51,7 @@
             {{- with $valine.serverURLs -}}
                 {{- $commentConfig = dict "serverURLs" . | dict "valine" | merge $commentConfig -}}
             {{- end -}}
-            {{- $commentConfig = $valine.emoji | default "google.yml" | printf "data/emoji/%v" | resources.Get | transform.Unmarshal | dict "valine" | merge $commentConfig -}}
+            {{- $commentConfig = $valine.emoji | default "google.yml" | printf "lib/valine/emoji/%v" | resources.Get | transform.Unmarshal | dict "valine" | merge $commentConfig -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript>
@@ -77,51 +77,73 @@
         {{- /* Telegram Comments System */ -}}
         {{- $telegram := $comment.telegram | default dict -}}
         {{- if $telegram.enable -}}
-            <div id="telegram-comments" class="comment"></div>
-            {{- $attr := printf `data-comments-app-website="%v"` $telegram.siteID -}}
-            {{- $attr = printf `%v data-limit="%v"` $attr ($telegram.limit | default 5) -}}
-            {{- with $telegram.height -}}
-                {{- $attr = printf `%v data-height="%v"` $attr . -}}
-            {{- end -}}
-            {{- with $telegram.color -}}
-                {{- $attr = printf `%v data-color="%v"` $attr . -}}
-            {{- end -}}
-            {{- if $telegram.colorful -}}
-                {{- $attr = printf `%v data-colorful="1"` $attr -}}
-            {{- end -}}
-            {{- if $telegram.dislikes -}}
-                {{- $attr = printf `%v data-dislikes="1"` $attr -}}
-            {{- end -}}
-            {{- if $telegram.outlined -}}
-                {{- $attr = printf `%v data-outlined="1"` $attr -}}
-            {{- end -}}
-            {{- dict "Source" "https://comments.app/js/widget.js?2" "Defer" true "Attr" $attr | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-            <noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://comments.app/">Telegram Comments</a>.
-            </noscript>
+            <div id="telegram-comments" class="comment">
+                {{- $attr := printf `data-comments-app-website="%v"` $telegram.siteID -}}
+                {{- $attr = printf `%v data-limit="%v"` $attr ($telegram.limit | default 5) -}}
+                {{- with $telegram.height -}}
+                    {{- $attr = printf `%v data-height="%v"` $attr . -}}
+                {{- end -}}
+                {{- with $telegram.color -}}
+                    {{- $attr = printf `%v data-color="%v"` $attr . -}}
+                {{- end -}}
+                {{- if $telegram.colorful -}}
+                    {{- $attr = printf `%v data-colorful="1"` $attr -}}
+                {{- end -}}
+                {{- if $telegram.dislikes -}}
+                    {{- $attr = printf `%v data-dislikes="1"` $attr -}}
+                {{- end -}}
+                {{- if $telegram.outlined -}}
+                    {{- $attr = printf `%v data-outlined="1"` $attr -}}
+                {{- end -}}
+                {{- dict "Source" "https://comments.app/js/widget.js?3" "Defer" true "Attr" $attr | partial "plugin/script.html" -}}
+                <noscript>
+                    Please enable JavaScript to view the comments powered by <a href="https://comments.app/">Telegram Comments</a>.
+                </noscript>
+            </div>
         {{- end -}}
 
         {{- /* Commento Comment System */ -}}
         {{- $commento := $comment.commento | default dict -}}
         {{- if $commento.enable -}}
-            <div id="commento"></div>
+            <div id="commento" class="comment"></div>
             {{- dict "Source" "https://cdn.commento.io/js/commento.js" "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://commento.io/">Commento</a>.
             </noscript>
         {{- end -}}
 
-        {{- /* Utterances Comment System */ -}}
+        {{- /* utterances Comment System */ -}}
         {{- $utterances := $comment.utterances | default dict -}}
         {{- if $utterances.enable -}}
-            <div id="utterances"></div>
+            <div id="utterances" class="comment"></div>
             {{- $commentConfig = dict "repo" $utterances.repo | dict "utterances" | merge $commentConfig -}}
             {{- $commentConfig = $utterances.issueTerm | default "pathname" | dict "issueTerm" | dict "utterances" | merge $commentConfig -}}
             {{- $commentConfig = dict "label" $utterances.label | dict "utterances" | merge $commentConfig -}}
             {{- $commentConfig = $utterances.lightTheme | default "github-light" | dict "lightTheme" | dict "utterances" | merge $commentConfig -}}
             {{- $commentConfig = $utterances.darkTheme | default "github-dark" | dict "darkTheme" | dict "utterances" | merge $commentConfig -}}
             <noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript>
+        {{- end -}}
+
+        {{- /* giscus Comment System */ -}}
+        {{- $giscus := $comment.giscus | default dict -}}
+        {{- if $giscus.enable -}}
+            <div id="giscus" class="comment"></div>
+            {{- $commentConfig = dict "repo" $giscus.repo | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = dict "repoId" $giscus.repoId | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = dict "category" $giscus.category | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = dict "categoryId" $giscus.categoryId | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.lang | default (T "valineLang") | dict "lang" | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.mapping | default "pathname" | dict "mapping" | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.reactionsEnabled | default "1" | dict "reactionsEnabled" | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.emitMetadata | default "0" | dict "emitMetadata" | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.inputPosition | default "bottom" | dict "inputPosition" | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.lazyLoading | default false | dict "lazyLoading" | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.lightTheme | default "github-light" | dict "lightTheme" | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.darkTheme | default "github-dark" | dict "darkTheme" | dict "giscus" | merge $commentConfig -}}
+            <noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://giscus.app">Giscus</a>.
             </noscript>
         {{- end -}}
     </div>
