@@ -385,27 +385,27 @@ Raw content using Markdown syntax: {{< raw >}}**Hello**{{< /raw >}}
 
 `person` is a shortcode to insert a link to a personal webpage marked up as [h-card](http://microformats.org/wiki/h-card).
 
-The `person` shortcode takes the following parameters (all of these are optional, but it makes sense to have at least **url** and **name** and/or **nick**):
+The `person` shortcode has the following named parameters:
 
-* **url** (**first** positional parameter)
+* **url** *[required]* (**first** positional parameter)
 
     URL of the personal page.
 
-* **name** (**second** positional parameter)
+* **name** *[required]* (**second** positional parameter)
 
     Name of the person.
 
-* **nick**
-
-    Nickame of the person.
-
-* **text** (**third** positional parameter)
+* **text** *[optional]* (**third** positional parameter)
 
     Text to display as hover tooltip of the link.
 
-* **picture** (**fourth** positional parameter)
+* **picture** *[optional]* (**fourth** positional parameter)
 
     A picture to use as person's avatar.
+
+* **nick** *[optional]*
+
+    Nickame of the person.
 
 Example `person` input:
 
@@ -420,3 +420,5 @@ Without an explicitly given picture, a generic icon is used. This input:
 ```markdown
 {{</* person "https://dillonzq.com/" Dillon "author of the LoveIt theme" */>}}
 ```
+
+This renders as {{< person "https://dillonzq.com/" Dillon "author of the LoveIt theme" >}}.

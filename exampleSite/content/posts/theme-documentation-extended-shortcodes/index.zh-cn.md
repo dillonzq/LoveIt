@@ -2,7 +2,7 @@
 weight: 4
 title: "主题文档 - 扩展 Shortcodes"
 date: 2020-03-03T16:29:59+08:00
-lastmod: 2020-03-03T16:29:59+08:00
+lastmod: 2020-06-12T10:10:13+03:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
@@ -249,7 +249,7 @@ This is a **right-aligned** paragraph.
 
 `admonition` shortcode 有以下命名参数:
 
-* **type** *[必需]* (**第一个**位置参数)
+* **type** *[可选]* (**第一个**位置参数)
 
     `admonition` 横幅的类型, 默认值是 `note`.
 
@@ -375,3 +375,45 @@ console.log('Hello LoveIt!');
 {{< /raw >}}
 
 原始的带有 Markdown 语法的内容: {{< raw >}}**Hello**{{< /raw >}}
+
+## 13 person
+
+`person` shortcode 用来在你的文章中以 [h-card](http://microformats.org/wiki/h-card) 的格式插入个人网站链接.
+
+`person` shortcode 有以下命名参数:
+
+* **url** *[必需]* (**第一个**位置参数)
+
+    URL of the personal page.
+
+* **name** *[必需]* (**第二个**位置参数)
+
+    Name of the person.
+
+* **text** *[可选]* (**第三个**位置参数)
+
+    Text to display as hover tooltip of the link.
+
+* **picture** *[可选]* (**第四个**位置参数)
+
+    A picture to use as person's avatar.
+
+* **nick** *[可选]*
+
+    Nickame of the person.
+
+一个 `person` 示例:
+
+```markdown
+{{</* person url="https://evgenykuznetsov.org" name="Evgeny Kuznetsov" nick="nekr0z" text="author of this shortcode" picture="https://evgenykuznetsov.org/img/avatar.jpg" */>}}
+```
+
+呈现的输出效果为 {{< person url="https://evgenykuznetsov.org" name="Evgeny Kuznetsov" nick="nekr0z" text="author of this shortcode" picture="https://evgenykuznetsov.org/img/avatar.jpg" >}}.
+
+一个使用通用图标的 `person` 示例:
+
+```markdown
+{{</* person "https://dillonzq.com/" Dillon "author of the LoveIt theme" */>}}
+```
+
+呈现的输出效果为 {{< person "https://dillonzq.com/" Dillon "author of the LoveIt theme" >}}.
