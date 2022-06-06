@@ -117,6 +117,7 @@ I hope you will LoveIt ❤️!
 * **Custom script** shortcode
 * **Animated typing** supported by [TypeIt](https://typeitjs.com/)
 * **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
+* **Person** shortcode
 * ...
 
 ## [Documentation](https://hugoloveit.com/categories/documentation/)
