@@ -150,6 +150,7 @@ LoveIt supports the following languages:
 * Thai
 * Telugu
 * Indonesian
+* Turkish
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
 [Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)
