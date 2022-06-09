@@ -457,6 +457,7 @@ languageName = "English"
     Lichess = ""
     ORCID = ""
     Pleroma = ""
+    Kaggle = ""
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
 

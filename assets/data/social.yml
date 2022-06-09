@@ -531,6 +531,14 @@ pleroma:
   Icon:
     Simpleicons: pleroma
 
+# 068: Kaggle
+kaggle:
+  Weight: 68
+  Prefix: https://kaggle.com/
+  Title: Kaggle
+  Icon:
+    Class: fab fa-kaggle fa-fw
+
 # Email
 email:
   Weight: 99
