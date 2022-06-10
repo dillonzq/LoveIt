@@ -8,4 +8,8 @@
     {{- end -}}
     {{- $destination = printf (string $template) .Id -}}
 {{- end -}}
-{{- dict "Destination" $destination "Rel" "me" | merge . | partial "plugin/a.html" -}}
+{{- $rel := "me" -}}
+{{- with .Rel -}}
+    {{- $rel = printf "%v %v" $rel . -}}
+{{- end -}}
+{{- dict "Destination" $destination "Rel" $rel | merge . | partial "plugin/a.html" -}}

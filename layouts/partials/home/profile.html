@@ -71,6 +71,9 @@
                         {{- with $value.icon -}}
                             {{- $social = dict "Icon" . | merge $social -}}
                         {{- end -}}
+                        {{- with $value.rel -}}
+                            {{- $social = dict "Rel" . | merge $social -}}
+                        {{- end -}}
                     {{- else if ne $value true -}}
                         {{- $social = dict "Id" $value | merge $social -}}
                     {{- end -}}
