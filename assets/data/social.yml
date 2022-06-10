@@ -4,7 +4,7 @@ github:
   Prefix: https://github.com/
   Title: GitHub
   Icon:
-    Class: fab fa-github-alt fa-fw
+    Class: fab fa-github fa-fw
 
 # 002: LinkedIn
 linkedin:
