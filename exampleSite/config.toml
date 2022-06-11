@@ -867,6 +867,7 @@ enableEmoji = true
         Facebook = "xxxx"
         Telegram = "xxxx"
         Youtubelegacy = "xxxx"
+        Phone = "555-555-555"
         Email = "xxxx@xxxx.com"
         RSS = true
         [languages.en.params.social.Mastodon]
@@ -961,4 +962,5 @@ enableEmoji = true
         Devto = "xxxx"
         Bilibili = "xxxx"
         Email = "xxxx@xxxx.com"
+        Phone = "555-555-555"
         RSS = true

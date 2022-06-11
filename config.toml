@@ -270,6 +270,7 @@
     Pleroma = ""
     Kaggle = ""
     Email = ""
+    Phone = ""
     RSS = ""
 
   # Page global config

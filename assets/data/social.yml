@@ -539,6 +539,14 @@ kaggle:
   Icon:
     Class: fab fa-kaggle fa-fw
 
+# Phone
+phone:
+  Weight: 98
+  Template: tel:%v
+  Title: Phone
+  Icon:
+    Class: fas fa-phone fa-fw
+
 # Email
 email:
   Weight: 99
