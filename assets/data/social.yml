@@ -495,7 +495,7 @@ bilibili:
 # 063: Discord User Profile
 discord:
   Weight: 63
-  Prefix: discordapp.com/users/
+  Prefix: https://discordapp.com/users/
   Title: Discord
   Icon:
     Class: fab fa-discord fa-fw
