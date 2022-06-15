@@ -26,8 +26,8 @@ libFiles:
   clipboardJS: clipboard.js/2.0.11/clipboard.min.js
   # sharer.js@0.5.1 https://github.com/ellisonleao/sharer.js
   sharerJS: sharer.js/0.5.1/sharer.min.js
-  # typeit@8.5.4 https://github.com/alexmacarthur/typeit
-  typeitJS: typeit/8.5.4/index.umd.js
+  # typeit@8.6.0 https://github.com/alexmacarthur/typeit
+  typeitJS: typeit/8.6.0/index.umd.js
   # katex@0.16.0 https://katex.org/
   katexCSS: KaTeX/0.16.0/katex.min.css
   katexJS: KaTeX/0.16.0/katex.min.js
