@@ -4,7 +4,7 @@ prefix:
   simpleIcons: https://cdnjs.cloudflare.com/ajax/libs/simple-icons/7.0.0/
 libFiles:
   # fontawesome-free@6.1.1 https://fontawesome.com/
-  fontawesomeFreeCSS: font-awesome/6.1.1/all.min.css
+  fontawesomeFreeCSS: font-awesome/6.1.1/css/all.min.css
   # animate.css@4.1.1 https://github.com/daneden/animate.css
   animateCSS: animate.css/4.1.1/animate.min.css
   # autocomplete.js@0.38.1 https://github.com/algolia/autocomplete.js
