@@ -38,8 +38,8 @@ libFiles:
   katexMhchemJS: katex@0.16.0/dist/contrib/mhchem.min.js
   # mermaid@9.1.1https://github.com/mermaid-js/mermaid
   mermaidJS: mermaid@9.1.1/dist/mermaid.min.js
-  # echarts@5.3.2 https://echarts.apache.org/
-  echartsJS: echarts@5.3.2/dist/echarts.min.js
+  # echarts@5.3.3 https://echarts.apache.org/
+  echartsJS: echarts@5.3.3/dist/echarts.min.js
   # mapbox-gl@2.8.2 https://docs.mapbox.com/mapbox-gl-js
   mapboxGLCSS: mapbox-gl@2.8.2/dist/mapbox-gl.min.css
   mapboxGLJS: mapbox-gl@2.8.2/dist/mapbox-gl.min.js
