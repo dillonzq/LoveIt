@@ -351,6 +351,8 @@ enableEmoji = true
     ORCID = ""
     Pleroma = ""
     Kaggle = ""
+    MediaWiki= ""
+    Plume = ""
     Email = ""
     RSS = ""
 
@@ -961,6 +963,7 @@ enableEmoji = true
         Douban = "xxxx"
         Devto = "xxxx"
         Bilibili = "xxxx"
+        Plume = "aa"
         Email = "xxxx@xxxx.com"
         Phone = "555-555-555"
         RSS = true
