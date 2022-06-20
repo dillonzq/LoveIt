@@ -36,8 +36,8 @@ libFiles:
   katexAutoRenderJS: katex@0.16.0/dist/contrib/auto-render.min.js
   katexCopyTexJS: katex@0.16.0/dist/contrib/copy-tex.min.js
   katexMhchemJS: katex@0.16.0/dist/contrib/mhchem.min.js
-  # mermaid@9.1.1https://github.com/mermaid-js/mermaid
-  mermaidJS: mermaid@9.1.1/dist/mermaid.min.js
+  # mermaid@9.1.2https://github.com/mermaid-js/mermaid
+  mermaidJS: mermaid@9.1.2/dist/mermaid.min.js
   # echarts@5.3.3 https://echarts.apache.org/
   echartsJS: echarts@5.3.3/dist/echarts.min.js
   # mapbox-gl@2.8.2 https://docs.mapbox.com/mapbox-gl-js
