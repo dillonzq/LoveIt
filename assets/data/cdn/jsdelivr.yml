@@ -19,11 +19,11 @@ libFiles:
   objectFitImagesJS: object-fit-images@3.2.4/dist/ofi.min.js
   # twemoji@14.0.2 https://github.com/twitter/twemoji
   twemojiJS: twemoji@14.0.2/dist/twemoji.min.js
-  # lightgallery@2.4.0 https://github.com/sachinchoolur/lightgallery
-  lightgalleryCSS: lightgallery@2.4.0/css/lightgallery-bundle.min.css
-  lightgalleryJS: lightgallery@2.4.0/lightgallery.min.js
-  lightgalleryThumbnailJS: lightgallery@2.4.0/plugins/thumbnail/lg-thumbnail.min.js
-  lightgalleryZoomJS: lightgallery@2.4.0/plugins/zoom/lg-zoom.min.js
+  # lightgallery@2.5.0 https://github.com/sachinchoolur/lightgallery
+  lightgalleryCSS: lightgallery@2.5.0/css/lightgallery-bundle.min.css
+  lightgalleryJS: lightgallery@2.5.0/lightgallery.min.js
+  lightgalleryThumbnailJS: lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js
+  lightgalleryZoomJS: lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js
   # clipboard.js@2.0.11 https://github.com/zenorocha/clipboard.js
   clipboardJS: clipboard@2.0.11/dist/clipboard.min.js
   # sharer.js@0.5.1 https://github.com/ellisonleao/sharer.js

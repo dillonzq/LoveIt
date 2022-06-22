@@ -17,11 +17,11 @@ libFiles:
   lazysizesJS: lazysizes/5.3.2/lazysizes.min.js
   # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
   objectFitImagesJS: object-fit-images/3.2.4/ofi.min.js
-  # lightgallery@2.4.0 https://github.com/sachinchoolur/lightgallery
-  lightgalleryCSS: lightgallery/2.4.0/css/lightgallery-bundle.min.css
-  lightgalleryJS: lightgallery/2.4.0/lightgallery.min.js
-  lightgalleryThumbnailJS: lightgallery/2.4.0/plugins/thumbnail/lg-thumbnail.min.js
-  lightgalleryZoomJS: lightgallery/2.4.0/plugins/zoom/lg-zoom.min.js
+  # lightgallery@2.5.0 https://github.com/sachinchoolur/lightgallery
+  lightgalleryCSS: lightgallery/2.5.0/css/lightgallery-bundle.min.css
+  lightgalleryJS: lightgallery/2.5.0/lightgallery.min.js
+  lightgalleryThumbnailJS: lightgallery/2.5.0/plugins/thumbnail/lg-thumbnail.min.js
+  lightgalleryZoomJS: lightgallery/2.5.0/plugins/zoom/lg-zoom.min.js
   # clipboard.js@2.0.11 https://github.com/zenorocha/clipboard.js
   clipboardJS: clipboard.js/2.0.11/clipboard.min.js
   # sharer.js@0.5.1 https://github.com/ellisonleao/sharer.js
