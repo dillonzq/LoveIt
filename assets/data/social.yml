@@ -553,6 +553,20 @@ plume:
   Icon:
     Src: svg/icons/plume.svg
 
+# 071: HackTheBox
+hackthebox:
+  Weight: 71
+  Title: HackTheBox
+  Icon:
+    Simpleicons: hackthebox
+
+# 072: Root-Me
+root-me:
+  Weight: 72
+  Title: Root-Me
+  Icon:
+    Simpleicons: root-me
+
 # Phone
 phone:
   Weight: 98
