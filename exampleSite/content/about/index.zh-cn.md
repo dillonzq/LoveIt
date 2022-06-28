@@ -25,9 +25,9 @@ math:
 
 ![Hugo 主题 LoveIt](/images/Apple-Devices-Preview.png "Hugo 主题 LoveIt")
 
-### 特性
+## 特性
 
-#### 性能和 SEO
+### 性能和 SEO
 
 * :(fas fa-rocket fa-fw): **性能**优化：在 [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights) 中， [99]/[100] 的移动设备得分和 [100]/[100] 的桌面设备得分
 * :(fab fa-searchengin fa-fw): 使用基于 JSON-LD 格式 的 **SEO SCHEMA** 文件进行 SEO 优化
@@ -39,7 +39,7 @@ math:
 * :(fas fa-tachometer-alt fa-fw): 支持所有第三方库的 **CDN**
 * :(fas fa-cloud-download-alt fa-fw): 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为**懒加载**
 
-#### 外观和布局
+### 外观和布局
 
 * :(fas fa-mobile-screen fa-fw): **[桌面端]/[移动端] 响应式**布局
 * :(fas fa-circle-half-stroke fa-rotate-180 fa-fw): **[浅色]/[深色]** 主题模式
@@ -64,7 +64,7 @@ math:
 * :(far fa-comment-alt fa-fw): 支持 **[utterances](https://utteranc.es/)** 评论系统
 * :(fas fa-comments fa-fw): 支持 **[giscus](https://giscus.app/)** 评论系统
 
-#### 扩展功能
+### 扩展功能
 
 * :(fas fa-search fa-fw): 支持基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/) 的**搜索**
 * :(far fa-grin-tongue-wink fa-fw): 支持 **Twemoji**
@@ -88,13 +88,13 @@ math:
 * :(far fa-user-circle fa-fw): 支持**人物标签**的 shortcode
 * ...
 
-### 许可协议
+## 许可协议
 
 LoveIt 根据 **MIT** 许可协议授权。
 
 更多信息请查看 [LICENSE 文件](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)。
 
-### 特别感谢
+## 特别感谢
 
 LoveIt 主题中用到了以下项目，感谢它们的作者：
 
