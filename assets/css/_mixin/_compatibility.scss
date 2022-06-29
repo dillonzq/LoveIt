@@ -18,7 +18,6 @@
 
 @mixin transform($value) {
   -webkit-transform: $value;
-  -moz-transform: $value;
   -ms-transform: $value;
   -o-transform: $value;
   transform: $value;
@@ -26,8 +25,6 @@
 
 @mixin filter($value) {
   -webkit-filter: $value;
-  -moz-filter: $value;
-  -ms-filter: $value;
   filter: $value;
 }
 
@@ -82,8 +79,8 @@
 }
 
 @mixin appearance($value) {
-  -moz-appearance: $value;
   -webkit-appearance: $value;
+  -moz-appearance: $value;
 }
 
 @mixin overflow-wrap($value) {
