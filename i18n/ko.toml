@@ -1,0 +1,199 @@
+# Translations for Korean
+# 한국어 번역
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ==
+[backToTop]
+other = "맨 위로"
+
+[viewComments]
+other = "댓글 보기"
+# === baseof ==
+
+# === Post ===
+[posts]
+other = "글"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "모든 {{ .Some }}"
+
+[tag]
+other = "태그"
+
+[tags]
+other = "태그"
+
+[category]
+other = "카테고리"
+
+[categories]
+other = "카테고리"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "더 보기"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "언어 변경"
+
+[switchTheme]
+other = "테마 변경"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "{{ .Hugo }}로 제작된 사이트 | 테마 - {{ .Theme }}"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "댓글 입력..."
+
+[facebookLanguageCode]
+other = "ko-KR"
+
+[giscusLang]
+other = "ko"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "검색"
+
+[searchPlaceholder]
+other = "제목이나 내용을 입력..."
+
+[clear]
+other = "지우기"
+
+[cancel]
+other = "취소"
+
+[noResultsFound]
+other = "검색 결과 없음"
+
+[lunrLanguageCode]
+other = "en"
+
+[copyToClipboard]
+other = "복사하기"
+
+[cookieconsentMessage]
+other = "본 웹사이트는 웹 환경 개선을 위해 쿠키를 사용합니다."
+
+[cookieconsentDismiss]
+other = "알겠습니다"
+
+[cookieconsentLink]
+other = "더 보기"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "공유하기"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "목차"
+
+[publishedOnDate]
+other = "작성: {{ .Date }}"
+
+[includedInCategories]
+other = "분류: {{ .Categories }}"
+
+[wordCount]
+one = "한 단어"
+other = "{{ .Count }} 단어"
+
+[readingTime]
+one = "읽는데 약 1분"
+other = "읽는데 약 {{ .Count }}분"
+
+[views]
+other = "조회"
+
+[author]
+other = "저자"
+
+[updatedOnDate]
+other = "수정: {{ .Date }}"
+
+[readMarkdown]
+other = "마크다운 읽기"
+
+[back]
+other = "뒤로"
+
+[home]
+other = "홈"
+
+[readMore]
+other = "더 읽기"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Page not found"
+
+[pageNotFoundText]
+other = "해당 페이지를 찾을 수 없습니다."
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "노트"
+
+[abstract]
+other = "요약"
+
+[info]
+other = "정보"
+
+[tip]
+other = "팁"
+
+[success]
+other = "성공"
+
+[question]
+other = "질문"
+
+[warning]
+other = "경고"
+
+[failure]
+other = "실패"
+
+[danger]
+other = "위험"
+
+[bug]
+other = "버그"
+
+[example]
+other = "예시"
+
+[quote]
+other = "인용"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "신규"
+
+[changed]
+other = "변경"
+
+[deleted]
+other = "삭제"
+# === shortcodes/version.html ===
