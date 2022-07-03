@@ -217,6 +217,23 @@ languageName = "简体中文"
 # 是否包括中日韩文字
 hasCJKLanguage = true
 
+# 默认每页列表显示的文章数目
+paginate = 12
+# 谷歌分析代号 [UA-XXXXXXXX-X]
+googleAnalytics = ""
+# 版权描述，仅仅用于 SEO
+copyright = ""
+
+# 是否使用 robots.txt
+enableRobotsTXT = true
+# 是否使用 git 信息
+enableGitInfo = true
+# 是否使用 emoji 代码
+enableEmoji = true
+
+# 忽略一些构建错误
+ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
+
 # 作者配置
 [author]
   name = "xxxx"

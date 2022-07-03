@@ -1,5 +1,3 @@
-# theme.toml template for a Hugo theme
-
 name = "LoveIt"
 license = "MIT"
 licenselink = "https://github.com/dillonzq/LoveIt/blob/master/LICENSE"
