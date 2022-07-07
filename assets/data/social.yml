@@ -557,6 +557,7 @@ plume:
 hackthebox:
   Weight: 71
   Title: Hack The Box
+  Prefix: https://app.hackthebox.com/profile/
   Icon:
     Simpleicons: hackthebox
 
@@ -564,6 +565,7 @@ hackthebox:
 rootme:
   Weight: 72
   Title: Root-Me
+  Prefix: https://www.root-me.org/
   Icon:
     Src: svg/icons/rootme.svg
 
