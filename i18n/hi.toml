@@ -1,0 +1,199 @@
+# Translations for Hindi
+# हिंदी में अनुवाद
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ==
+[backToTop]
+other = "वापस शीर्ष पर"
+
+[viewComments]
+other = "टिप्पणियाँ देखें"
+# === baseof ==
+
+# === Post ===
+[posts]
+other = "पदों"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "सभी {{ .Some }}"
+
+[tag]
+other = "उपनाम"
+
+[tags]
+other = "टैग"
+
+[category]
+other = "श्रेणी"
+
+[categories]
+other = "श्रेणियाँ"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "अधिक"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "भाषा चुने"
+
+[switchTheme]
+other = "थीम स्विच करें"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "संचालित द्वारा {{ .Hugo }} | थीम - {{ .Theme }}"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "आपकी टिप्पणी ..."
+
+[facebookLanguageCode]
+other = "hi_IN"
+
+[giscusLang]
+other = "en"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "खोज"
+
+[searchPlaceholder]
+other = "शीर्षक या सामग्री खोजें..."
+
+[clear]
+other = "साफ़"
+
+[cancel]
+other = "रद्द करना"
+
+[noResultsFound]
+other = "कोई परिणाम नहीं मिला"
+
+[lunrLanguageCode]
+other = "hi"
+
+[copyToClipboard]
+other = "क्लिपबोर्ड पर कॉपी करें"
+
+[cookieconsentMessage]
+other = "यह वेबसाइट आपके अनुभव को बेहतर बनाने के लिए कुकीज़ का उपयोग करती है।"
+
+[cookieconsentDismiss]
+other = "समझ गया!"
+
+[cookieconsentLink]
+other = "और अधिक जानें"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "पर साझा करें"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "अंतर्वस्तु"
+
+[publishedOnDate]
+other = "पर प्रकाशित {{ .Date }}"
+
+[includedInCategories]
+other = "सम्मिलित {{ .Categories }}"
+
+[wordCount]
+one = "एक शब्द"
+other = "{{ .Count }} शब्द"
+
+[readingTime]
+one = "एक मिनट"
+other = "{{ .Count }} मिनट"
+
+[views]
+other = "दर्शकों"
+
+[author]
+other = "रचयिता"
+
+[updatedOnDate]
+other = "संशोधित किया गया {{ .Date }}"
+
+[readMarkdown]
+other = "मार्कडाउन पढ़ें"
+
+[back]
+other = "पीछे"
+
+[home]
+other = "घर"
+
+[readMore]
+other = "अधिक पढ़ें"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "पृष्ठ नहीं मिला"
+
+[pageNotFoundText]
+other = "आप जिस पेज की तलाश कर रहे हैं वह मौजूद नहीं है। माफ़ करना।"
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "लेख"
+
+[abstract]
+other = "सार"
+
+[info]
+other = "जानकारी"
+
+[tip]
+other = "टिप्पणी"
+
+[success]
+other = "सफलता"
+
+[question]
+other = "प्रश्न"
+
+[warning]
+other = "चेतावनी"
+
+[failure]
+other = "असफलता"
+
+[danger]
+other = "खतरा"
+
+[bug]
+other = "प्रोग्राम में त्रुटि"
+
+[example]
+other = "उदाहरण"
+
+[quote]
+other = "उद्धरण"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "नया"
+
+[changed]
+other = "बदला हुआ"
+
+[deleted]
+other = "हटाए गए"
+# === shortcodes/version.html ===
