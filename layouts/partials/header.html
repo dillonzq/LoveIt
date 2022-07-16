@@ -39,29 +39,7 @@
                 {{- if .Site.Menus.main -}}
                     <span class="menu-item delimiter"></span>
                 {{- end -}}
-                {{- if .Site.IsMultiLingual -}}
-                    <a href="javascript:void(0);" class="menu-item language" title="{{ T "selectLanguage" }}">
-                        {{- .Language.LanguageName -}}
-                        <i class="fas fa-chevron-right fa-fw" aria-hidden="true"></i>
-                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;">
-                            {{- if eq .Kind "404" -}}
-                                {{- /* https://github.com/dillonzq/LoveIt/issues/378 */ -}}
-                                {{- range .Sites -}}
-                                    {{- $link := printf "%v/404.html" .LanguagePrefix -}}
-                                    <option value="{{ $link }}"{{ if eq . $.Site }} selected{{ end }}>
-                                        {{- .Language.LanguageName -}}
-                                    </option>
-                                {{- end -}}
-                            {{- else -}}
-                                {{- range .AllTranslations -}}
-                                    <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected{{ end }}>
-                                        {{- .Language.LanguageName -}}
-                                    </option>
-                                {{- end -}}
-                            {{- end -}}
-                        </select>
-                    </a>
-                {{- end -}}
+
                 {{- if .Site.Params.search.enable -}}
                     <span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-desktop">
@@ -79,6 +57,28 @@
                 <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
                 </a>
+                {{- if .Site.IsMultiLingual -}}
+                <a href="javascript:void(0);" class="menu-item language" title="{{ T "selectLanguage" }}">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;">
+                        {{- if eq .Kind "404" -}}
+                            {{- /* https://github.com/dillonzq/LoveIt/issues/378 */ -}}
+                            {{- range .Sites -}}
+                                {{- $link := printf "%v/404.html" .LanguagePrefix -}}
+                                <option value="{{ $link }}"{{ if eq . $.Site }} selected{{ end }}>
+                                    {{- .Language.LanguageName -}}
+                                </option>
+                            {{- end -}}
+                        {{- else -}}
+                            {{- range .AllTranslations -}}
+                                <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected{{ end }}>
+                                    {{- .Language.LanguageName -}}
+                                </option>
+                            {{- end -}}
+                        {{- end -}}
+                    </select>
+                </a>
+            {{- end -}}
             </div>
         </div>
     </div>
@@ -150,9 +150,9 @@
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a>
             {{- if .Site.IsMultiLingual -}}
+            
                 <a href="javascript:void(0);" class="menu-item" title="{{ T "selectLanguage" }}">
-                    {{- .Language.LanguageName -}}
-                    <i class="fas fa-chevron-right fa-fw" aria-hidden="true"></i>
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
                     <select class="language-select" onchange="location = this.value;">
                         {{- if eq .Kind "404" -}}
                             {{- /* https://github.com/dillonzq/LoveIt/issues/378 */ -}}
