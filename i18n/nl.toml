@@ -77,7 +77,7 @@ other = "Wissen"
 other = "Annuleren"
 
 [noResultsFound]
-other = "Geen resultaten gevonden."
+other = "Geen resultaten gevonden"
 
 [lunrLanguageCode]
 other = "nl"
