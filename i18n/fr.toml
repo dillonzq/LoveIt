@@ -4,10 +4,10 @@
 
 # === baseof ==
 [backToTop]
-other = "Retour en Haut"
+other = "Retour en haut"
 
 [viewComments]
-other = "Afficher les Commentaires"
+other = "Afficher les commentaires"
 # === baseof ==
 
 # === Post ===
@@ -17,7 +17,7 @@ other = "Posts"
 
 # === Taxonomy ===
 [allSome]
-other = "Tous {{ .Some }}"
+other = "Tous les {{ .Some }}"
 
 [tag]
 other = "Balise"
@@ -34,7 +34,7 @@ other = "Catégories"
 
 # === Pagination ===
 [more]
-other = "Plus"
+other = "Voir plus"
 # === Pagination ===
 
 # === partials/header.html ===
@@ -42,7 +42,7 @@ other = "Plus"
 other = "Choisir la langue"
 
 [switchTheme]
-other = "Changer de Thème"
+other = "Changer de thème"
 # === partials/header.html ===
 
 # === partials/footer.html ===
@@ -72,7 +72,7 @@ other = "Chercher"
 other = "Rechercher des titres, des contenus..."
 
 [clear]
-other = "Clair"
+other = "Effacer"
 
 [cancel]
 other = "Annuler"
@@ -93,10 +93,10 @@ other = "Copier dans le presse-papiers"
 other = "Ce site Web utilise des Cookies pour améliorer votre expérience."
 
 [cookieconsentDismiss]
-other = "Se mettre d'accord"
+other = "J'accepte"
 
 [cookieconsentLink]
-other = "Apprendre encore plus"
+other = "En savoir plus"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
@@ -132,7 +132,7 @@ other = "Auteur"
 other = "Mis à jour le {{ .Date }}"
 
 [readMarkdown]
-other = "Lire Markdown"
+other = "Lire en Markdown"
 
 [back]
 other = "Retour"
@@ -157,7 +157,7 @@ other = "Désolé, la page recherchée n'existe pas."
 other = "Remarque"
 
 [abstract]
-other = "Abstrait"
+other = "Résumé"
 
 [info]
 other = "Info"
@@ -195,8 +195,8 @@ other = "Citation"
 other = "NOUVEAU"
 
 [changed]
-other = "CHANGE"
+other = "CHANGÉ"
 
 [deleted]
-other = "EFFACE"
+other = "EFFACÉ"
 # === shortcodes/version.html ===
