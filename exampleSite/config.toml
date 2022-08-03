@@ -486,6 +486,14 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # 评论系统设置
     [params.page.comment]
       enable = true
+      # changyan comment config (https://changyan.kuaizhan.com/)
+      # changyan 评论系统设置 (https://changyan.kuaizhan.com/)
+      [params.page.comment.changyan]
+        enable = true
+        # Disqus shortname to use Disqus in posts
+        # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
+        appid = ""
+        conf = ""
       # Disqus comment config (https://disqus.com/)
       # Disqus 评论系统设置 (https://disqus.com/)
       [params.page.comment.disqus]
