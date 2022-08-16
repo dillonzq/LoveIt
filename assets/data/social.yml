@@ -569,6 +569,14 @@ rootme:
   Icon:
     Src: svg/icons/rootme.svg
 
+# 073: Xbox
+xbox:
+  Weight: 73
+  Title: Xbox
+  Prefix: https://live.xbox.com/Profile?Gamertag=
+  Icon:
+    Class: fa-brands fa-xbox fa-fw
+
 # Phone
 phone:
   Weight: 98
