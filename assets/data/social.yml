@@ -577,6 +577,14 @@ xbox:
   Icon:
     Class: fa-brands fa-xbox fa-fw
 
+# 074: Playstation
+playstation:
+  Weight: 74
+  Title: Playstation
+  Prefix: https://psnprofiles.com/
+  Icon:
+    Class: fab fa-playstation fa-fw
+
 # Phone
 phone:
   Weight: 98
