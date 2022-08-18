@@ -585,6 +585,14 @@ playstation:
   Icon:
     Class: fab fa-playstation fa-fw
 
+# 075: Letterboxd
+letterboxd:
+  Weight: 75
+  Title: Letterboxd
+  Prefix: https://letterboxd.com/
+  Icon:
+    Simpleicons: letterboxd
+
 # Phone
 phone:
   Weight: 98
