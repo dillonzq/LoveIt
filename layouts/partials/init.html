@@ -15,6 +15,7 @@
     {{- .Scratch.Set "cdn" $cdn -}}
     {{- .Scratch.Set "fingerprint" .Site.Params.fingerprint -}}
     {{- .Scratch.Set "analytics" .Site.Params.analytics -}}
+    {{- .Scratch.Set "ad" .Site.Params.ad -}}
     {{- .Scratch.Set "comment" $params.comment -}}
     {{- if eq .Params.comment true -}}
         {{- .Scratch.Set "comment" .Site.Params.comment -}}
