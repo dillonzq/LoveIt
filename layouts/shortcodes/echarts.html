@@ -3,5 +3,4 @@
 {{- $width := cond .IsNamedParams (.Get "width") (.Get 0) | default "100%" -}}
 {{- $height := cond .IsNamedParams (.Get "height") (.Get 1) | default "30rem" -}}
 <div class="echarts" id="{{ $id }}" style="width: {{ $width }}; height: {{ $height }};"></div>
-{{- end -}}
 {{- .Page.Scratch.SetInMap "assets" "echarts" true -}}
