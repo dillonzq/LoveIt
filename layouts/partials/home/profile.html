@@ -32,7 +32,7 @@
             {{- if $profile.typeit -}}
                 {{- $id := dict "Content" . "Scratch" $.Scratch | partial "function/id.html" -}}
                 <div id="{{ $id }}" class="typeit"></div>
-                {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
+                {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "assets") | $.Scratch.Set "assets" -}}
             {{- else -}}
                 {{- . | safeHTML -}}
             {{- end -}}

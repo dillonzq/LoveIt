@@ -1,7 +1,7 @@
 {{- $params := .Scratch.Get "params" -}}
 {{- $cdn := .Scratch.Get "cdn" | default dict -}}
 {{- $fingerprint := .Scratch.Get "fingerprint" -}}
-{{- $config := (.Scratch.Get "this").config -}}
+{{- $config := (.Scratch.Get "assets").config -}}
 
 {{- /* Search */ -}}
 {{- if .Site.Params.search | and .Site.Params.search.enable -}}
@@ -71,7 +71,7 @@
 {{- end -}}
 
 {{- /* TypeIt */ -}}
-{{- with (.Scratch.Get "this").typeitMap -}}
+{{- with (.Scratch.Get "assets").typeitMap -}}
     {{- $typeit := $.Site.Params.typeit -}}
     {{- $source := $cdn.typeitJS | default "lib/typeit/index.umd.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
@@ -120,14 +120,14 @@
 {{- end -}}
 
 {{- /* mermaid */ -}}
-{{- if (.Scratch.Get "this").mermaid -}}
+{{- if (.Scratch.Get "assets").mermaid -}}
     {{- $source := $cdn.mermaidJS | default "lib/mermaid/mermaid.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- $_ := (resources.Get "lib/mermaid/mermaid.min.js.map").RelPermalink -}}
 {{- end -}}
 
 {{- /* ECharts */ -}}
-{{- if (.Scratch.Get "this").echarts -}}
+{{- if (.Scratch.Get "assets").echarts -}}
     {{- $source := $cdn.echartsJS | default "lib/echarts/echarts.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- $lightTheme := resources.Get "lib/echarts/theme/light.yml" | transform.Unmarshal -}}
@@ -136,7 +136,7 @@
 {{- end -}}
 
 {{- /* Mapbox GL */ -}}
-{{- if (.Scratch.Get "this").mapbox -}}
+{{- if (.Scratch.Get "assets").mapbox -}}
     {{- $source := $cdn.mapboxGLCSS | default "lib/mapbox-gl/mapbox-gl.min.css" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
     {{- $source := $cdn.mapboxGLJS | default "lib/mapbox-gl/mapbox-gl.min.js" -}}
@@ -146,7 +146,7 @@
 {{- end -}}
 
 {{- /* Music */ -}}
-{{- if (.Scratch.Get "this").music -}}
+{{- if (.Scratch.Get "assets").music -}}
     {{- /* APlayer */ -}}
     {{- $source := $cdn.aplayerCSS | default "lib/aplayer/APlayer.min.css" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
@@ -180,7 +180,7 @@
     {{- dict "Source" . "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 
-{{- with (.Scratch.Get "this").styleArr -}}
+{{- with (.Scratch.Get "assets").styleArr -}}
     {{- $content := delimit . "" -}}
     {{- $path := substr (md5 $content) 0 6 | printf "css/%v" -}}
     {{- $options := printf "%v.min.css" $path | dict "targetPath" -}}
@@ -193,15 +193,15 @@
 {{- /* Theme script */ -}}
 {{- dict "Source" "js/theme.js" "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 
-{{- with (.Scratch.Get "this").scriptArr -}}
+{{- with (.Scratch.Get "assets").scriptArr -}}
     {{- delimit . "\n" | dict "Content" | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 
-{{- range (.Scratch.Get "this").style -}}
+{{- range (.Scratch.Get "assets").style -}}
     {{- partial "plugin/style.html" . -}}
 {{- end -}}
 
-{{- range (.Scratch.Get "this").script -}}
+{{- range (.Scratch.Get "assets").script -}}
     {{- partial "plugin/script.html" . -}}
 {{- end -}}
 

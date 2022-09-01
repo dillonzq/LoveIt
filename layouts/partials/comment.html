@@ -149,4 +149,4 @@
     </div>
 {{- end -}}
 
-{{- dict "comment" $commentConfig | dict "config" | merge (.Scratch.Get "this") | .Scratch.Set "this" -}}
+{{- dict "comment" $commentConfig | dict "config" | merge (.Scratch.Get "assets") | .Scratch.Set "assets" -}}

@@ -5,4 +5,4 @@
 
 {{- $style := .Get 0 | printf "#%v{%v}" $id -}}
 {{- $styleArr := (.Page.Scratch.Get "this").styleArr | default slice -}}
-{{- $styleArr | append $style | .Page.Scratch.SetInMap "this" "styleArr" -}}
+{{- $styleArr | append $style | .Page.Scratch.SetInMap "assets" "styleArr" -}}

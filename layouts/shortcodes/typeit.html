@@ -27,7 +27,7 @@
 {{- $typeitMap := (.Page.Scratch.Get "this").typeitMap | default dict -}}
 {{- $group := index $typeitMap $key -}}
 {{- $group = $group | default slice | append $id -}}
-{{- dict $key $group | merge $typeitMap | .Page.Scratch.SetInMap "this" "typeitMap" -}}
+{{- dict $key $group | merge $typeitMap | .Page.Scratch.SetInMap "assets" "typeitMap" -}}
 
 {{- $attrs := printf `id="%v"` $id -}}
 {{- with $classList -}}

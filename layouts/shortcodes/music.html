@@ -47,4 +47,4 @@
 {{- else -}}
     <meting-js server="{{ .Get 0 }}" type="{{ .Get 1 }}" id="{{ .Get 2 }}" theme="{{ $theme }}"></meting-js>
 {{- end -}}
-{{- .Page.Scratch.SetInMap "this" "music" true -}}
+{{- .Page.Scratch.SetInMap "assets" "music" true -}}
