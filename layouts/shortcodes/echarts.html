@@ -1,6 +1,22 @@
-{{- $content := .Inner | transform.Unmarshal | jsonify -}}
-{{- $id := dict "Content" $content "Scratch" .Page.Scratch | partial "function/id.html" -}}
 {{- $width := cond .IsNamedParams (.Get "width") (.Get 0) | default "100%" -}}
 {{- $height := cond .IsNamedParams (.Get "height") (.Get 1) | default "30rem" -}}
-<div class="echarts" id="{{ $id }}" style="width: {{ $width }}; height: {{ $height }};"></div>
+{{- if (.Get "file") -}}
+    {{- $chart_filename := (.Get "file") -}}
+    {{- $scratch := newScratch -}}
+    {{- $scratch.Set "absolute_filename" "" -}}
+    {{- with .Get "file" -}}
+        {{- $chart_name := index (split (path.Base $chart_filename) ".") 0 -}}
+        {{- $chart_absolute_filename := add "/" $chart_filename -}}
+        {{- $scratch.Set "absolute_filename" $chart_absolute_filename -}}
+        {{- $id := add "echart_" $chart_name -}}
+        {{- $scratch.Set "divid" $id -}}
+    {{- end -}}
+    {{ $id := $scratch.Get "divid" }}
+    {{ $chart_absolute_filename := $scratch.Get "absolute_filename" }}
+    <div class="echarts" data-filename="{{- $chart_absolute_filename -}}" id="{{ $id }}" style="width: {{ $width }}; height: {{ $height }};"></div>
+{{- else -}}
+    {{- $content := .Inner | transform.Unmarshal | jsonify -}}
+    {{- $id := dict "Content" $content "Scratch" .Page.Scratch | partial "function/id.html" -}}
+    <div class="echarts" id="{{ $id }}" style="width: {{ $width }}; height: {{ $height }};"></div>
+{{- end -}}
 {{- .Page.Scratch.SetInMap "this" "echarts" true -}}
