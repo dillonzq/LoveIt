@@ -569,6 +569,14 @@ rootme:
   Icon:
     Src: svg/icons/rootme.svg
 
+# 073: TryHackMe
+tryhackme:
+  Weight: 73
+  Title: TryHackMe
+  Prefix: https://tryhackme.com/p/
+  Icon:
+    Simpleicons: Tryhackme
+
 # Phone
 phone:
   Weight: 98

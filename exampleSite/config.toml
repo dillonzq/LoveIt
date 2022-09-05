@@ -358,7 +358,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     MediaWiki= ""
     Plume = ""
     HackTheBox = ""
-    RootMe= ""
+    RootMe = ""
+    TryHackMe = ""
     Email = ""
     RSS = ""
 
