@@ -8,6 +8,8 @@
     {{- $height = $height | default .Height -}}
 {{- end -}}
 
+{{- $responsive := ne (or .SrcSmall .SrcLarge) nil -}}
+
 {{- $small := .SrcSmall | default $src -}}
 {{- with dict "Path" .SrcSmall "Resources" .Resources | partial "function/resource.html" -}}
     {{- $small = .RelPermalink -}}
@@ -21,24 +23,38 @@
 {{- $alt := .Alt | default $src -}}
 {{- $loading := resources.Get "svg/loading.svg" | minify -}}
 {{- if .Linked -}}
-    <a class="lightgallery" href="{{ $large | safeURL }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $small | safeURL }}"{{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
+    <a
+        class="lightgallery" 
+        href="{{ $large | safeURL }}" 
+        title="{{ .Title | default $alt }}" 
+        data-thumbnail="{{ $small | safeURL }}"
+        {{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}
+        {{ with .Rel }} rel="{{ . }}"{{ end }}>
         <img
-            class="lazyload{{ with .Class }} {{ . }}{{ end }}"
+            class="{{ if $responsive }}lazyload{{ end }}{{ with .Class }} {{ . }}{{ end }}"
+            {{ if $responsive }}
             src="{{ $loading.RelPermalink }}"
             data-src="{{ $src | safeURL }}"
             data-srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
             data-sizes="auto"
+            {{ else }}
+            src="{{ $src | safeURL }}"
+            {{ end }}
             alt="{{ $alt }}"
             {{- with $width }} width="{{ . }}"{{ end }}
             {{- with $height }} height="{{ . }}"{{ end }} />
     </a>
 {{- else -}}
     <img
-        class="lazyload{{ with .Class }} {{ . }}{{ end }}"
+        class="{{ if $responsive }}lazyload{{ end }}{{ with .Class }} {{ . }}{{ end }}"
+        {{ if $responsive }}
         src="{{ $loading.RelPermalink }}"
         data-src="{{ $src | safeURL }}"
         data-srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
         data-sizes="auto"
+        {{ else }}
+        src="{{ $src | safeURL }}"
+        {{ end }}
         alt="{{ $alt }}"
         title="{{ .Title | default $alt }}"
         {{- with $width }} width="{{ . }}"{{ end }}
