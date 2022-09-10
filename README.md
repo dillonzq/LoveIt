@@ -95,6 +95,7 @@ I hope you will LoveIt ❤️!
 * **Commento** comment system supported by [Commento](https://commento.io/)
 * **utterances** comment system supported by [utterances](https://utteranc.es/)
 * **giscus** comment system supported by [giscus](https://giscus.app/)
+* **Remark42** comment system supported by [Remark42](https://remark42.com/)
 
 ### Extended Features
 
