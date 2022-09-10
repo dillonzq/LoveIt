@@ -902,6 +902,17 @@ var Theme = /*#__PURE__*/function () {
 
           this.switchThemeEventSet.add(this._giscusOnSwitchTheme);
         }
+
+        if (this.config.comment.remark42) {
+          this._remark42OnSwitchTheme = function () {
+            if (_this11.isDark) {
+              window.REMARK42.changeTheme('dark');
+            } else {
+              window.REMARK42.changeTheme('light');
+            }
+          }
+          this.switchThemeEventSet.add(this._remark42OnSwitchTheme);
+        }
       }
     }
   }, {

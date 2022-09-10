@@ -146,6 +146,28 @@
                 Please enable JavaScript to view the comments powered by <a href="https://giscus.app">Giscus</a>.
             </noscript>
         {{- end -}}
+
+        {{- /* Remark42 Comment System */ -}}
+        {{- $remark42 := $comment.remark42 | default dict -}}
+        {{- if $remark42.enable -}}
+
+        <script>
+            var remark_config = {
+                host: '{{ $remark42.host }}',
+                site_id: '{{ $remark42.siteId }}',
+                theme: document.body.getAttribute('theme') === 'dark' ? 'dark' : 'light',
+            }
+        </script>
+
+        <div id="remark42"></div>
+
+        {{- $source := printf "%v/web/embed.js" $remark42.host -}}
+        {{- dict "Source" $source "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+
+        <noscript>
+            Please enable JavaScript to view the comments powered by <a href="https://remark42.com">Remark42</a>.
+        </noscript>
+        {{- end -}}
     </div>
 {{- end -}}
 

@@ -500,6 +500,10 @@
         lazyLoading = false
         lightTheme = "light"
         darkTheme = "dark"
+      [params.page.comment.remark42]
+        enable = false
+        host="https://demo.remark42.com"
+        siteId="remark"
     # Third-party library config
     # 第三方库配置
     [params.page.library]
