@@ -49,7 +49,7 @@ telegram:
 # 007: Medium
 medium:
   Weight: 7
-  Prefix: https://medium.com/
+  Prefix: https://medium.com/@
   Title: Medium
   Icon:
     Class: fab fa-medium fa-fw
