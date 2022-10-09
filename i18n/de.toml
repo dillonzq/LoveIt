@@ -69,7 +69,7 @@ other = "de"
 other = "Suche"
 
 [searchPlaceholder]
-other = "Suche nach Titel und Inhalt..."
+other = "Suche nach Titel und Inhalt ..."
 
 [clear]
 other = "Leeren"
@@ -109,10 +109,10 @@ other = "Teilen auf"
 other = "Inhalt"
 
 [publishedOnDate]
-other = "veröffentlicht an {{ .Date }}"
+other = "Veröffentlicht am {{ .Date }}"
 
 [includedInCategories]
-other = "enthalten in {{ .Categories }}"
+other = "Enthalten in {{ .Categories }}"
 
 [wordCount]
 one = "Ein Wort"
