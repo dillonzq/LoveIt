@@ -66,6 +66,7 @@ I hope you will LoveIt ❤️!
 * **[Google Analytics](https://analytics.google.com/analytics)** supported
 * **[Fathom Analytics](https://usefathom.com/)** supported
 * **[Plausible Analytics](https://plausible.io/)** supported
+* **[Umami Analytics](https://umami.is/)** supported
 * **[Yandex Metrica](https://metrica.yandex.com/)** supported
 * Search engine **verification** supported (Google, Bind, Yandex and Baidu)
 * **CDN** for third-party libraries supported
