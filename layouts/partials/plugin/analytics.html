@@ -25,6 +25,11 @@
         {{- dict "Source" "https://plausible.io/js/plausible.js" "Async" true "Defer" true "Attr" ($analytics.plausible.dataDomain | printf `data-domain="%v"`) | partial "plugin/script.html" -}}
     {{- end -}}
 
+    {{- /* Umami Analytics */ -}}
+    {{- with $analytics.umami.src -}}
+        {{- dict "Source" $analytics.umami.src "Async" true "Defer" true "Attr" ($analytics.umami.dataWebsiteId | printf `data-website-id="%v"`) | partial "plugin/script.html" -}}
+    {{- end -}}
+
     {{- /* Yandex Metrica */ -}}
     {{- with $analytics.yandexMetrica.id -}}
         <script type="text/javascript" >
@@ -40,4 +45,5 @@
         </script>
         <noscript><div><img src="https://mc.yandex.ru/watch/{{ . }}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     {{- end -}}
+
 {{- end -}}
