@@ -485,15 +485,15 @@
       [params.page.comment.giscus]
         # You can refer to the official documentation of giscus to use the following configuration.
         # 你可以参考官方文档来使用下列配置
-        enable = false
-        repo = ""
-        repoId = ""
-        category = "Announcements"
-        categoryId = ""
+        enable = true
+        repo = "peiel/blog"
+        repoId = "R_kgDOGnH_Ug"
+        category = "Comments"
+        categoryId = "DIC_kwDOGnH_Us4CSLqo"
         # automatically adapt the current theme i18n configuration when empty
         # 为空时自动适配当前主题 i18n 配置
         lang = ""
-        mapping = "pathname"
+        mapping = "og:title"
         reactionsEnabled = "1"
         emitMetadata = "0"
         inputPosition = "bottom"
