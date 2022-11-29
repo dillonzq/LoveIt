@@ -54,7 +54,7 @@ other = "Aangedreven door {{ .Hugo }} | Thema - {{ .Theme }}"
 other = "nl"
 
 [valinePlaceholder]
-other = "Jou opmerking ..."
+other = "Jouw opmerking"
 
 [facebookLanguageCode]
 other = "nl_nl"
@@ -68,7 +68,7 @@ other = "nl"
 other = "Zoeken"
 
 [searchPlaceholder]
-other = "Zoek naar titels of andere content..."
+other = "Zoek naar titels of andere inhoud..."
 
 [clear]
 other = "Wissen"
@@ -122,7 +122,7 @@ other = "{{ .Count }} minuten"
 other = "Aantal keer bekeken"
 
 [author]
-other = "Schrijver"
+other = "Auteur"
 
 [updatedOnDate]
 other = "Aangepast op {{ .Date }}"
