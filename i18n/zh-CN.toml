@@ -189,7 +189,29 @@ other = "示例"
 
 [quote]
 other = "引用"
-# === shortcodes/admonition.html ===
+
+[lock]
+other = "已锁定"
+
+# === shortcodes/spoiler.html ===
+
+[SensitiveContent]
+other = "敏感内容警告"
+
+[ReadCaution]
+other = "以下文本可能包含敏感内容，请谨慎阅读"
+
+# === shortcodes/spoiler.html ===
+
+# === shortcodes/locked.html ===
+
+[LockedContent]
+other = "内容已被保护"
+
+[AuthRequired]
+other = "该文章被验证系统保护，请通过验证后再查看"
+
+# === shortcodes/spoiler.html ===
 
 # === shortcodes/version.html ===
 [new]

@@ -1,4 +1,15 @@
-<span class="spoiler" >{{.Inner}}</span>
+<div class="details admonition warning open">
+  <div class="details-summary admonition-title">
+      <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>{{T "SensitiveContent"}}<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+  </div>
+  <div class="details-content">
+      <div class="admonition-content">
+          {{T "ReadCaution"}}
+          <br>
+          <span class="spoiler" >{{.Inner}}</span>
+      </div>
+  </div>
+</div>
 <style>
     .spoiler { 
       color: black; 
