@@ -184,7 +184,31 @@ other = "Example"
 
 [quote]
 other = "Quote"
+
+[lock]
+other = "Locked"
+
 # === shortcodes/admonition.html ===
+
+# === shortcodes/spoiler.html ===
+
+[SensitiveContent]
+other = "Sensitive Content Alert"
+
+[ReadCaution]
+other = "This text may contain sensitive content, please read with caution"
+
+# === shortcodes/spoiler.html ===
+
+# === shortcodes/locked.html ===
+
+[LockedContent]
+other = "Protected Content"
+
+[AuthRequired]
+other = "This post is protected by authentication system, please view after verification"
+
+# === shortcodes/spoiler.html ===
 
 # === shortcodes/version.html ===
 [new]
