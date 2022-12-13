@@ -17,8 +17,14 @@ function verifyAuth() {
     r = r.toLowerCase();
     if (r != "http://auth.pitrick.link/")
     {
-      alert('授权验证失败，无法显示内容，点击确定返回上一页面');
-      history.back();
+      alert('授权验证失败，无法显示内容，点击确定尝试验证');
+      var url = window.location.href;
+      console.log(typeof(url));
+      var splited_url = url.split('/');
+      console.log(splited_url);
+      var redirect = 'http://auth.pitrick.link/redirect/' + splited_url[splited_url.length-2];
+      alert(redirect);
+      window.location.href = redirect;
     }
     else
     {
