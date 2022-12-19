@@ -593,3 +593,11 @@ rss:
   Newtab: true
   Icon:
     Class: fas fa-rss fa-fw
+ 
+# TikTok
+tiktok:
+  Weight: 101
+  Url: https://www.tiktok.com/
+  Title: TikTok
+  Icon:
+    Simpleicons: tiktok
