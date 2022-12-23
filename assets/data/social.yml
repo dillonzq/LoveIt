@@ -569,6 +569,14 @@ rootme:
   Icon:
     Src: svg/icons/rootme.svg
 
+# 073: Codeberg
+codeberg:
+  Weight: 73
+  Title: Codeberg
+  Prefix: https://codeberg.org/
+  Icon:
+    Simpleicons: codeberg
+
 # Phone
 phone:
   Weight: 98
