@@ -52,3 +52,5 @@ libFiles:
   # cookieconsent@3.1.1 https://github.com/osano/cookieconsent
   cookieconsentCSS: cookieconsent/3.1.1/cookieconsent.min.css
   cookieconsentJS: cookieconsent/3.1.1/cookieconsent.min.js
+  # busuanzi@2.3 http://ibruce.info/2015/04/04/busuanzi
+  busuanziJS: busuanzi/2.3.0/bsz.pure.mini.js

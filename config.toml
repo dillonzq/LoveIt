@@ -307,6 +307,9 @@
     # whether to show the full text content in RSS
     # 是否在 RSS 中显示全文内容
     rssFullText = false
+    # whether to show page views count
+    # 是否开启阅读量计数
+    viewsCount = true
     # Table of the contents config
     # 目录配置
     [params.page.toc]
@@ -429,7 +432,6 @@
         # automatically adapt the current theme i18n configuration when empty
         # 为空时自动适配当前主题 i18n 配置
         lang = ""
-        visitor = true
         recordIP = true
         highlight = true
         enableQQ = false

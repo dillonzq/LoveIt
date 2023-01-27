@@ -172,6 +172,12 @@
     {{- $config = $cookieconsentConfig | dict "cookieconsent" | merge $config -}}
 {{- end -}}
 
+{{- /* busuanzi */ -}}
+{{- if .Site.Params.page.viewsCount -}}
+    {{- $source := $cdn.busuanziJS | default "lib/busuanzi/bsz.pure.mini.js" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+{{- end -}}
+
 {{- range $params.library.css -}}
     {{- dict "Source" . "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/style.html" -}}
 {{- end -}}
