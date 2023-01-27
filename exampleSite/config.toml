@@ -392,6 +392,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # whether to show the full text content in RSS
     # 是否在 RSS 中显示全文内容
     rssFullText = false
+    # whether to show page views count
+    # 是否开启阅读量计数
+    viewsCount = true
     # Table of the contents config
     # 目录配置
     [params.page.toc]
