@@ -206,10 +206,16 @@ other = "以下文本可能包含敏感内容，请谨慎阅读"
 # === shortcodes/locked.html ===
 
 [LockedContent]
-other = "内容已被保护"
+other = "内容已被锁定"
 
 [AuthRequired]
 other = "该文章被验证系统保护，请通过验证后再查看"
+
+[UnlockedContent]
+other = "内容已解锁"
+
+[AuthPassed]
+other = "验证系统授权成功，文章内容已经解锁"
 
 # === shortcodes/spoiler.html ===
 

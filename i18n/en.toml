@@ -208,6 +208,12 @@ other = "Protected Content"
 [AuthRequired]
 other = "This post is protected by authentication system, please view after verification"
 
+[UnlockedContent]
+other = "Unlocked Content"
+
+[AuthPassed]
+other = "Authorized successfully, the content is now unlocked"
+
 # === shortcodes/spoiler.html ===
 
 # === shortcodes/version.html ===
