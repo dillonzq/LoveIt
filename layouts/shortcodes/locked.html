@@ -15,7 +15,7 @@ verifyAuth();
 function verifyAuth() {
     var r = document.referrer;
     r = r.toLowerCase();
-    if(window.location.host != "127.0.0.1" || window.location.host != "localhost")
+    if(window.location.host == "127.0.0.1" || window.location.host == "localhost:1313")
     {
       alert('以本地模式运行，跳过授权验证...');
       changeAdmon();
