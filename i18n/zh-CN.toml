@@ -201,6 +201,9 @@ other = "敏感内容警告"
 [ReadCaution]
 other = "以下文本可能包含敏感内容，请谨慎阅读"
 
+[HoverRead]
+other = "↑↑↑将鼠标悬浮在上方以显示隐藏内容↑↑↑"
+
 # === shortcodes/spoiler.html ===
 
 # === shortcodes/locked.html ===

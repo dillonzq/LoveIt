@@ -4,18 +4,19 @@
   </div>
   <div class="details-content">
       <div class="admonition-content">
-          {{T "ReadCaution"}}
+          <b>{{T "ReadCaution"}}</b>
           <br>
           <span class="spoiler" >{{.Inner}}</span>
+          <br>
+          <i><u>{{T "HoverRead"}}</u></i>
       </div>
   </div>
 </div>
 <style>
     .spoiler { 
-      color: black; 
-      background-color:black;
+      opacity: 0;
     }
     .spoiler:hover{
-      color: white;
+      opacity: 1;
     }
     </style>
