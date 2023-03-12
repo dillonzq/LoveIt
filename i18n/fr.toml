@@ -17,7 +17,7 @@ other = "Posts"
 
 # === Taxonomy ===
 [allSome]
-other = "Tous {{ .Some }}"
+other = "Toutes les {{ .Some }}"
 
 [tag]
 other = "Balise"
