@@ -577,6 +577,14 @@ buymeacoffee:
   Icon:
     Simpleicons: buymeacoffee
 
+# 074: LeetCode
+leetcode:
+  Weight: 74
+  Title: LeetCode
+  Prefix: https://leetcode.com/
+  Icon:
+    Simpleicons: leetcode
+
 # Phone
 phone:
   Weight: 98
