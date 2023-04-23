@@ -569,7 +569,7 @@ rootme:
   Icon:
     Src: svg/icons/rootme.svg
 
-# 073: Buy me a coffee
+# 073: Buy Me A Coffee
 buymeacoffee:
   Weight: 73
   Title: BuyMeACoffee
