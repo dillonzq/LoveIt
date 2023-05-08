@@ -585,6 +585,14 @@ leetcode:
   Icon:
     Simpleicons: leetcode
 
+# 075: Ko-fi
+ko-fi:
+  Weight: 75
+  Title: Ko-fi
+  Prefix: https://ko-fi.com/
+  Icon:
+    Simpleicons: kofi
+
 # Phone
 phone:
   Weight: 98
