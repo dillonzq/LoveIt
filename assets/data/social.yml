@@ -569,6 +569,30 @@ rootme:
   Icon:
     Src: svg/icons/rootme.svg
 
+# 073: Buy Me A Coffee
+buymeacoffee:
+  Weight: 73
+  Title: BuyMeACoffee
+  Prefix: https://www.buymeacoffee.com/
+  Icon:
+    Simpleicons: buymeacoffee
+
+# 074: LeetCode
+leetcode:
+  Weight: 74
+  Title: LeetCode
+  Prefix: https://leetcode.com/
+  Icon:
+    Simpleicons: leetcode
+
+# 075: Ko-fi
+ko-fi:
+  Weight: 75
+  Title: Ko-fi
+  Prefix: https://ko-fi.com/
+  Icon:
+    Simpleicons: kofi
+
 # Phone
 phone:
   Weight: 98
