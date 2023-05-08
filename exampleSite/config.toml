@@ -361,6 +361,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     RootMe= ""
     BuyMeACoffee = ""
     LeetCode = ""
+    Ko-fi = ""
     Email = ""
     RSS = ""
 
