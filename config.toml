@@ -194,10 +194,10 @@ defaultContentLanguage = "es"
   # Social config in home page
   # 主页的社交信息设置
   [params.social]
-    GitHub = ""
-    Linkedin = ""
-    Twitter = ""
-    Instagram = ""
+    GitHub = "JoelJacquez"
+    Linkedin = "jacquez"
+    Twitter = "cryptt3r"
+    # Instagram = "joeljacquez"
     Facebook = ""
     Telegram = ""
     Medium = ""
