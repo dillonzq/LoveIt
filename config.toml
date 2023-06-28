@@ -559,7 +559,7 @@ defaultContentLanguage = "es"
     enable = false
     # Google Analytics
     [params.analytics.google]
-      id = ""
+      id = "G-5ZLPQWZ62P"
       # whether to anonymize IP
       # 是否匿名化用户 IP
       anonymizeIP = true
