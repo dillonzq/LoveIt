@@ -22,6 +22,20 @@ enableRobotsTXT = true
   name = "Joel Jacquez"
   link = "https://jacquez.xyz"
 
+[menu]
+  [[menu.main]]
+    weight = 1
+    identifier = "posts"
+    # you can add extra information before the name (HTML format is supported), such as icons
+    pre = ""
+    # you can add extra information after the name (HTML format is supported), such as icons
+    post = ""
+    name = "Posts"
+    url = "/posts/"
+    # title will be shown when you hover on this menu link
+    # 当您将鼠标悬停在此菜单链接上时, 将显示标题
+    title = ""
+
 [params]
   # site default theme ["auto", "light", "dark"]
   defaultTheme = "auto"
