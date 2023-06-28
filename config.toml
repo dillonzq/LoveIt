@@ -7,7 +7,7 @@ languageCode = "es"
 # language name ["English", "简体中文", "Français", "Polski", ...]
 languageName = "Español"
 # google analytics code [UA-XXXXXXXX-X]
-# googleAnalytics = "G-5ZLPQWZ62P"
+googleAnalytics = "G-5ZLPQWZ62P"
 # whether to use robots.txt
 enableRobotsTXT = true
 [module]
@@ -424,7 +424,7 @@ enableRobotsTXT = true
 
     # Comment config
     [params.page.comment]
-      enable = false
+      enable = true
       # Disqus comment config (https://disqus.com/)
       [params.page.comment.disqus]
         enable = true
