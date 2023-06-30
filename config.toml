@@ -157,7 +157,7 @@ enableRobotsTXT = true
   # Search config
   # 搜索配置
   [params.search]
-    enable = false
+    enable = true
     # type of search engine ["lunr", "algolia"]
     # 搜索引擎的类型 ["lunr", "algolia"]
     type = "lunr"
@@ -640,6 +640,10 @@ enableRobotsTXT = true
     # whether to use object-fit-images to be compatible with older browsers
     # 是否使用 object-fit-images 来兼容旧式浏览器
     objectFit = false
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML", "JSON"]
 
 
 [markup]
