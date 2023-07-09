@@ -2,3 +2,26 @@
 // Custom style
 // 自定义样式
 // ==============================
+
+.home {
+  .summary {
+    .single-title {
+      font-size: 1.5rem;
+      line-height: 140%;
+      margin: 1.4rem 0;
+    }
+  }
+}
+
+.single {
+  .single-title {
+    margin: 1rem 0 .5rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 140%;
+  }
+  .content p {
+    margin: 1.2rem 0;
+  }
+}
+
