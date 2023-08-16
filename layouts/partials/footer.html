@@ -45,13 +45,13 @@
                     <span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
                     <span class="icp">{{ . | safeHTML }}</span>
                 {{- end -}}
-
-                {{- if ne .Site.Params.footer.mastodonRelme false -}}
+            </div>
+            
+            {{- if ne .Site.Params.footer.mastodonRelme false -}}
                 <div class="footer-line">
                     <a rel="me" href="{{ $.Site.Params.Social.mastodon  }}"></a>
                 </div>
             {{- end -}}
-            </div>
         </div>
     </footer>
 {{- end -}}
