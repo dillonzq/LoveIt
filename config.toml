@@ -81,6 +81,8 @@
     # license info (HTML format is supported)
     # 许可协议信息 (支持 HTML 格式)
     license= ""
+    # Inject invible Mastodon rel="me" link 
+    mastodonRelme = false
 
   # Section (all posts) page config
   # Section (所有文章) 页面配置
