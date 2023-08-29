@@ -67,3 +67,22 @@ $code-background-color-dark: #272C34 !default;
     vertical-align: text-bottom;
   }
 }
+
+// fix valine.js inside css will be override pulse animate for page title
+@keyframes pulse {
+    0% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1)
+    }
+
+    50% {
+        -webkit-transform: scale3d(1.05, 1.05, 1.05);
+        transform: scale3d(1.05, 1.05, 1.05)
+    }
+
+    to {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1)
+    }
+}
+
