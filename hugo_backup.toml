@@ -85,13 +85,13 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 # Section (all posts) page config
 [params.section]
     paginate = 20
-    dateFormat = "01-02"
+    dateFormat = "2006-01-02"
     rss = 10
 
 # List (category or tag) page config
 [params.list]
     paginate = 20
-    dateFormat = "01-02"
+    dateFormat = "2006-01-02"
     rss = 10      
 
 # App icon config

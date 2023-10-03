@@ -10,7 +10,7 @@ resources:
 - name: "featured-image"
   src: "featured-image.png"
 
-tags: ["langchain"]
+tags: ["llms"]
 
 lightgallery: true
 
