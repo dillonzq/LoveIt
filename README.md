@@ -1,4 +1,4 @@
-# 🛠 Development Environment Setup for Philico P-Tech Blog
+# 🛠 Development Environment Setup for the Philico P-Tech Blog
 
 Streamline your development process for the Philico P-Tech blog using Visual Studio Code by following this guide.
 
