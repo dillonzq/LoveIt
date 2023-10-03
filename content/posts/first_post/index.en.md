@@ -10,7 +10,7 @@ resources:
 - name: "featured-image"
   src: "featured-image.png"
 
-tags: ["installation", "configuration"]
+tags: ["langchain"]
 
 lightgallery: true
 
