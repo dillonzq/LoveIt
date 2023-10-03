@@ -1,6 +1,6 @@
 ## 🛠 Development Environment Setup for the Philico P-Tech Blog
 
-![Blog Preview](blog_preview.png)
+
 
 Streamline your development process for the Philico P-Tech blog using Visual Studio Code by following this guide.
 
@@ -29,6 +29,8 @@ Streamline your development process for the Philico P-Tech blog using Visual Stu
 
   3. Post execution, the blog will be available for viewing in your preferred browser.
 
+     ![Blog Preview](blog_preview.png)
+     
 ### 📌 Notes
 
 - **Framework**: The Philico P-Tech blog has been developed using HUGO, a renowned open-source static site generator. To delve deeper into HUGO's capabilities, head over to [gohugo.io](https://gohugo.io).

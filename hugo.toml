@@ -99,7 +99,7 @@ enableEmoji = true
     [params.header.title]
       logo = ""
       name = "Philico P-Tech blog"
-      pre = "💻"
+      pre = ""
       typeit = false  
 
    
