@@ -1,8 +1,8 @@
-# 🛠 Development Environment Setup for the Philico P-Tech Blog
+## 🛠 Development Environment Setup for the Philico P-Tech Blog
 
 Streamline your development process for the Philico P-Tech blog using Visual Studio Code by following this guide.
 
-## 1. Initialize the Workspace
+### 1. Initialize the Workspace
 
 - **Download & Install**: Begin by downloading and installing [Visual Studio Code](https://code.visualstudio.com/).
 
@@ -15,7 +15,7 @@ Streamline your development process for the Philico P-Tech blog using Visual Stu
   4. Upon successful cloning, you can access the repository directly within Visual Studio Code.
      ![View Repository Files](README_images/vscode_files.png)
 
-## 2. Activate the Local Server
+### 2. Activate the Local Server
 
   1. Use the terminal to navigate to the repository's location.
 
@@ -27,7 +27,7 @@ Streamline your development process for the Philico P-Tech blog using Visual Stu
 
   3. Post execution, the blog will be available for viewing in your preferred browser.
 
-## 📌 Notes
+### 📌 Notes
 
 - **Framework**: The Philico P-Tech blog has been developed using HUGO, a renowned open-source static site generator. To delve deeper into HUGO's capabilities, head over to [gohugo.io](https://gohugo.io).
 
