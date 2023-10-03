@@ -11,7 +11,7 @@ Follow these steps to set up your development environment for the Philico P-Tech
    - Enter the URL of the [P-Tech Blog GitHub Repository](https://github.com/philico-tech/ptech-blog.git) and choose a destination folder for the files.
    - Once the repository has been cloned, you can open the folder in Visual Studio Code.
 
-
+     ![Alt text](README_images/vscode_files.png)
 
 
 2. **Starting the Local Server**:
