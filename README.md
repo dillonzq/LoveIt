@@ -9,11 +9,11 @@ Streamline your development process for the Philico P-Tech blog using Visual Stu
 - **Clone the Repository**: 
   1. Launch Visual Studio Code.
   2. Opt for "Clone Repository" from the welcome screen or select it from the "Source Control" tab.
-    ![Clone the Repository](README_images/clone_repo.png)
+    ![Clone the Repository](clone_repo.png)
 
   3. Input the URL for the [P-Tech Blog GitHub Repository](https://github.com/philico-tech/ptech-blog.git) and designate a suitable location on your system.
   4. Upon successful cloning, you can access the repository directly within Visual Studio Code.
-     ![View Repository Files](README_images/vscode_files.png)
+     ![View Repository Files](vscode_files.png)
 
 ### 2. Activate the Local Server
 
