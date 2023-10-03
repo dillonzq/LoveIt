@@ -39,10 +39,4 @@ Follow these steps to set up the draft version of the Philico P-Tech Blog on you
      ![Blog](Readme_Images/blog.png)
 
 
-
 Enjoy developing with the Philico P-Tech Blog!
-=======
-# Quickstart Backup That Works
-Type "hugo server" in the terminal to start the server.
-
-This is new content from VS Code
