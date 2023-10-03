@@ -20,5 +20,4 @@ Follow these steps to set up your development environment for the Philico P-Tech
      ```
      hugo server
      ```
-   - This will start a local web server, so you will be able to view** the blog in your browser.
-
+   - This will start a local web server, so you will be able to view the blog in your browser.

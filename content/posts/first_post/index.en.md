@@ -11,7 +11,6 @@ resources:
   src: "featured-image.png"
 
 tags: ["installation", "configuration"]
-categories: ["documentation"]
 
 lightgallery: true
 

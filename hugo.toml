@@ -46,13 +46,6 @@ enableEmoji = true
         name = "Tags"
         url = "/tags/"
         title = "Tags"
-      [[languages.en.menu.main]]
-        weight = 3
-        identifier = "categories"
-        pre = "<i class='fa fa-folder'></i> "
-        name = "Categories"
-        url = "/categories/"
-        title = "Categories"
     [languages.en.params]
       [languages.en.params.search]
         enable = true
@@ -71,16 +64,12 @@ enableEmoji = true
         rss = 10
         [languages.en.params.home.profile]
           enable = true
-          avatarURL = "/images/PhilicoLogo_1.png"
-          title = "Philico P-Tech blog"
-          subtitle = "Welcome to the Philico P-Tech blog"
+          avatarURL = ""
+          title = ""
+          subtitle = ""
           typeit = true
-          social = true
+          social = false
           disclaimer = ""
-      [languages.en.params.social]
-        GitHub = "philico-tech"
-        Linkedin = "company/philico/"    
-        Email = "p-tech-group@philico.com"
 
 
 # Menu config
@@ -101,13 +90,6 @@ enableEmoji = true
     name = "Tags"
     url = "/tags/"
     title = "Tags"
-  [[menu.main]]
-    weight = 3
-    identifier = "categories"
-    pre = "<i class='fa fa-folder'></i> "
-    name = "Categories"
-    url = "/categories/"
-    title = "Categories"
 
 
  # Header config
