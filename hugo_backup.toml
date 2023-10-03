@@ -1,0 +1,547 @@
+baseURL = 'https://example.org/'
+languageCode = 'en'
+title = 'My New Hugo Site'
+theme = 'LoveIt'
+
+# determines default content language ["en", "zh-cn", "fr", "pl", ...]
+defaultContentLanguage = "en"
+
+# language name ["English", "简体中文", "Français", "Polski", ...]
+languageName = "English"
+# whether to include Chinese/Japanese/Korean
+hasCJKLanguage = false
+
+# default amount of posts in each pages
+paginate = 12
+# google analytics code [UA-XXXXXXXX-X]
+googleAnalytics = ""
+# copyright description used only for seo schema
+copyright = ""
+
+# whether to use robots.txt
+enableRobotsTXT = true
+# whether to use emoji code
+enableEmoji = true
+
+# ignore some build errors
+ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
+
+# Author config
+[author]
+  name = "xxxx"
+  email = ""
+  link = ""
+
+# Menu config
+[menu]
+  [[menu.main]]
+    weight = 1
+    identifier = "posts"
+    pre = ""
+    post = ""
+    name = "Posts"
+    url = "/posts/"
+    title = ""
+  [[menu.main]]
+    weight = 2
+    identifier = "tags"
+    pre = ""
+    post = ""
+    name = "Tags"
+    url = "/tags/"
+    title = ""
+  [[menu.main]]
+    weight = 3
+    identifier = "categories"
+    pre = ""
+    post = ""
+    name = "Categories"
+    url = "/categories/"
+    title = ""
+
+ [params]
+  defaultTheme = "auto"
+  gitRepo = "https://github.com/dillonzq/LoveIt"
+  fingerprint = ""
+  dateFormat = "2006-01-02"
+  title = "LoveIt"
+  description = "Hugo theme - LoveIt"
+  images = ["/logo.png"]
+
+  # Header config
+  [params.header]
+    desktopMode = "fixed"
+    mobileMode = "auto"
+    [params.header.title]
+      logo = ""
+      name = "LoveIt"
+      pre = "<i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i>"
+      post = ""
+      typeit = false  
+
+ # Footer config
+[params.footer]
+    enable = true
+    custom = ""
+    hugo = true
+    copyright = true
+    author = true
+    since = 2019
+    icp = ""
+    license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+
+# Section (all posts) page config
+[params.section]
+    paginate = 20
+    dateFormat = "01-02"
+    rss = 10
+
+# List (category or tag) page config
+[params.list]
+    paginate = 20
+    dateFormat = "01-02"
+    rss = 10      
+
+# App icon config
+[params.app]
+    title = "LoveIt"
+    noFavicon = false
+    svgFavicon = ""
+    themeColor = "#ffffff"
+    iconColor = "#5bbad5"
+    tileColor = "#da532c"
+
+# Search config
+[params.search]
+    enable = true
+    type = "algolia"
+    contentLength = 4000
+    placeholder = ""
+    maxResultLength = 10
+    snippetLength = 30
+    highlightTag = "em"
+    absoluteURL = false
+    [params.search.algolia]
+      index = ""
+      appID = ""
+      searchKey = ""   
+
+
+ # Home page config
+[params.home]
+    rss = 10
+    [params.home.profile]
+      enable = true
+      gravatarEmail = ""
+      avatarURL = "/images/avatar.png"
+      title = ""
+      subtitle = "A Clean, Elegant but Advanced Hugo Theme"
+      typeit = true
+      social = true
+      disclaimer = ""
+    [params.home.posts]
+      enable = true
+      paginate = 6      
+
+# Social config in home page
+[params.social]
+    GitHub = ""
+    Linkedin = ""
+    Twitter = ""
+    Instagram = ""
+    Facebook = ""
+    Telegram = ""
+    Medium = ""
+    Gitlab = ""
+    Youtubelegacy = ""
+    Youtubecustom = ""
+    Youtubechannel = ""
+    Tumblr = ""
+    Quora = ""
+    Keybase = ""
+    Pinterest = ""
+    Reddit = ""
+    Codepen = ""
+    FreeCodeCamp = ""
+    Bitbucket = ""
+    Stackoverflow = ""
+    Weibo = ""
+    Odnoklassniki = ""
+    VK = ""
+    Flickr = ""
+    Xing = ""
+    Snapchat = ""
+    Soundcloud = ""
+    Spotify = ""
+    Bandcamp = ""
+    Paypal = ""
+    Fivehundredpx = ""
+    Mix = ""
+    Goodreads = ""
+    Lastfm = ""
+    Foursquare = ""
+    Hackernews = ""
+    Kickstarter = ""
+    Patreon = ""
+    Steam = ""
+    Twitch = ""
+    Strava = ""
+    Skype = ""
+    Whatsapp = ""
+    Zhihu = ""
+    Douban = ""
+    Angellist = ""
+    Slidershare = ""
+    Jsfiddle = ""
+    Deviantart = ""
+    Behance = ""
+    Dribbble = ""
+    Wordpress = ""
+    Vine = ""
+    Googlescholar = ""
+    Researchgate = ""
+    Mastodon = ""
+    Thingiverse = ""
+    Devto = ""
+    Gitea = ""
+    XMPP = ""
+    Matrix = ""
+    Bilibili = ""
+    Discord = ""
+    DiscordInvite = ""
+    Lichess = ""
+    ORCID = ""
+    Pleroma = ""
+    Kaggle = ""
+    MediaWiki= ""
+    Plume = ""
+    HackTheBox = ""
+    RootMe= ""
+    Email = ""
+    RSS = ""
+
+# Page global config
+[params.page]
+    hiddenFromHomePage = false
+    hiddenFromSearch = false
+    twemoji = false
+    lightgallery = false
+    ruby = true
+    fraction = true
+    fontawesome = true
+    linkToMarkdown = true
+    rssFullText = false
+    [params.page.toc]
+      enable = true
+      keepStatic = false
+      auto = true
+    [params.page.code]
+      copy = true
+      maxShownLines = 50
+    [params.page.math]
+      enable = false
+      inlineLeftDelimiter = ""
+      inlineRightDelimiter = ""
+      blockLeftDelimiter = ""
+      blockRightDelimiter = ""
+      copyTex = true
+      mhchem = true
+    [params.page.mapbox]
+      accessToken = "pk.eyJ1IjoiZGlsbG9uenEiLCJhIjoiY2s2czd2M2x3MDA0NjNmcGxmcjVrZmc2cyJ9.aSjv2BNuZUfARvxRYjSVZQ"
+      lightStyle = "mapbox://styles/mapbox/light-v10?optimize=true"
+      darkStyle = "mapbox://styles/mapbox/dark-v10?optimize=true"
+      navigation = true
+      geolocate = true
+      scale = true
+      fullscreen = true
+    [params.page.share]
+      enable = true
+      Twitter = true
+      Facebook = true
+      Linkedin = false
+      Whatsapp = false
+      Pinterest = false
+      Tumblr = false
+      HackerNews = true
+      Reddit = false
+      VK = false
+      Buffer = false
+      Xing = false
+      Line = true
+      Instapaper = false
+      Pocket = false
+      Flipboard = false
+      Weibo = true
+      Blogger = false
+      Baidu = false
+      Odnoklassniki = false
+      Evernote = false
+      Skype = false
+      Trello = false
+      Mix = false
+    [params.page.comment]
+      enable = true
+      [params.page.comment.disqus]
+        enable = false
+        shortname = ""
+      [params.page.comment.gitalk]
+        enable = false
+        owner = ""
+        repo = ""
+        clientId = ""
+        clientSecret = ""
+      [params.page.comment.valine]
+        enable = true
+        appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
+        appKey = "WBmoGyJtbqUswvfLh6L8iEBr"
+        placeholder = ""
+        avatar = "mp"
+        meta= ""
+        pageSize = 10
+        lang = ""
+        visitor = true
+        recordIP = true
+        highlight = true
+        enableQQ = false
+        serverURLs = "https://leancloud.hugoloveit.com"
+        emoji = ""
+      [params.page.comment.facebook]
+        enable = false
+        width = "100%"
+        numPosts = 10
+        appId = ""
+        languageCode = ""
+      [params.page.comment.telegram]
+        enable = false
+        siteID = ""
+        limit = 5
+        height = ""
+        color = ""
+        colorful = true
+        dislikes = false
+        outlined = false
+      [params.page.comment.commento]
+        enable = false
+      [params.page.comment.utterances]
+        enable = false
+        repo = ""
+        issueTerm = "pathname"
+        label = ""
+        lightTheme = "github-light"
+        darkTheme = "github-dark"
+      [params.page.comment.giscus]
+        enable = false
+        repo = ""
+        repoId = ""
+        category = "Announcements"
+        categoryId = ""
+        lang = ""
+        mapping = "pathname"
+        reactionsEnabled = "1"
+        emitMetadata = "0"
+        inputPosition = "bottom"
+        lazyLoading = false
+        lightTheme = "light"
+        darkTheme = "dark"
+    [params.page.library]
+      [params.page.library.css]
+      [params.page.library.js]
+    [params.page.seo]
+      images = []
+      [params.page.seo.publisher]
+        name = "xxxx"
+        logoUrl = "/images/avatar.png"
+
+# TypeIt config
+[params.typeit]
+    speed = 100
+    cursorSpeed = 1000
+    cursorChar = "|"
+    duration = -1
+
+# Site verification code for Google/Bing/Yandex/Pinterest/Baidu
+[params.verification]
+    google = ""
+    bing = ""
+    yandex = ""
+    pinterest = ""
+    baidu = ""
+
+[params.seo]
+    image = "/images/Apple-Devices-Preview.png"
+    thumbnailUrl = "/images/screenshot.png"
+
+  [params.analytics]
+    enable = false
+    [params.analytics.google]
+      id = ""
+      anonymizeIP = true
+    [params.analytics.fathom]
+      id = ""
+      server = ""
+    [params.analytics.plausible]
+      dataDomain = ""
+    [params.analytics.yandexMetrica]
+      id = ""
+
+  [params.cookieconsent]
+    enable = false
+    [params.cookieconsent.content]
+      message = ""
+      dismiss = ""
+      link = ""
+
+  [params.cdn]
+    data = "jsdelivr.yml"
+
+  [params.compatibility]
+    polyfill = false
+    objectFit = false
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      strikethrough = true
+      table = true
+      taskList = true
+      typographer = true
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
+
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[Permalinks]
+  posts = ":filename"
+
+[privacy]
+  [privacy.googleAnalytics]
+  [privacy.twitter]
+    enableDNT = true
+  [privacy.youtube]
+    privacyEnhanced = true
+
+[mediaTypes]
+  [mediaTypes."text/plain"]
+    suffixes = ["md"]
+
+[outputFormats.MarkDown]
+  mediaType = "text/plain"
+  isPlainText = true
+  isHTML = false
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML", "MarkDown"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  taxonomyTerm = ["HTML"]
+
+[languages]
+  [languages.en]
+    weight = 1
+    languageCode = "en"
+    languageName = "English"
+    hasCJKLanguage = false
+    copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        weight = 1
+        identifier = "posts"
+        pre = ""
+        post = ""
+        name = "Posts"
+        url = "/posts/"
+        title = ""
+      [[languages.en.menu.main]]
+        weight = 2
+        identifier = "tags"
+        pre = ""
+        post = ""
+        name = "Tags"
+        url = "/tags/"
+        title = ""
+      [[languages.en.menu.main]]
+        weight = 3
+        identifier = "categories"
+        pre = ""
+        post = ""
+        name = "Categories"
+        url = "/categories/"
+        title = ""
+      [[languages.en.menu.main]]
+        weight = 4
+        identifier = "documentation"
+        pre = ""
+        post = ""
+        name = "Docs"
+        url = "/categories/documentation/"
+        title = ""
+      [[languages.en.menu.main]]
+        weight = 5
+        identifier = "about"
+        pre = ""
+        post = ""
+        name = "About"
+        url = "/about/"
+        title = ""
+      [[languages.en.menu.main]]
+        weight = 6
+        identifier = "github"
+        pre = "<i class='fab fa-github fa-fw' aria-hidden='true'></i>"
+        post = ""
+        name = ""
+        url = "https://github.com/dillonzq/LoveIt"
+        title = "GitHub"
+    [languages.en.params]
+      [languages.en.params.search]
+        enable = true
+        type = "algolia"
+        contentLength = 4000
+        placeholder = ""
+        maxResultLength = 10
+        snippetLength = 30
+        highlightTag = "em"
+        absoluteURL = false
+        [languages.en.params.search.algolia]
+          index = "index.en"
+          appID = "PASDMWALPK"
+          searchKey = "b42948e51daaa93df92381c8e2ac0f93"
+      [languages.en.params.home]
+        rss = 10
+        [languages.en.params.home.profile]
+          enable = true
+          gravatarEmail = ""
+          avatarURL = "/images/avatar.png"
+          title = ""
+          subtitle = "A Clean, Elegant but Advanced Hugo Theme"
+          typeit = true
+          social = true
+          disclaimer = ""
+      [languages.en.params.social]
+        GitHub = "xxxx"
+        Twitter = "xxxx"
+        Instagram = "xxxx"
+        Facebook = "xxxx"
+        Telegram = "xxxx"
+        Youtubelegacy = "xxxx"
+        Phone = "555-555-555"
+        Email = "xxxx@xxxx.com"
+        RSS = true
+        [languages.en.params.social.Mastodon]
+          id = "@xxxx"
+          prefix = "https://mastodon.technology/"

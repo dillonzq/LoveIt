@@ -1,0 +1,247 @@
+baseURL = "http://example.org/"
+
+
+# Change the default theme to be use when building the site with Hugo
+theme = "LoveIt"
+
+
+# website title
+title = "P-Tech blog"
+
+# Language config
+languageCode = "en"
+languageName = "English"
+
+
+# Author config
+[author]
+  name = "Philico P-Tech"
+  email = "p-tech-group@philico.com"
+  link = "https://philico.ch"
+
+
+# whether to use robots.txt
+enableRobotsTXT = false
+# whether to use emoji code
+enableEmoji = true 
+
+[languages]
+  [languages.en]
+    weight = 1
+    languageCode = "en"
+    languageName = "English"
+    hasCJKLanguage = false
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        weight = 1
+        identifier = "posts"
+        pre = "<i class='fa fa-pencil'></i> "
+        name = "Posts"
+        url = "/posts/"
+        title = "Posts"
+      [[languages.en.menu.main]]
+        weight = 2
+        identifier = "tags"
+        pre = "<i class='fa fa-tags'></i> "
+        name = "Tags"
+        url = "/tags/"
+        title = "Tags"
+      [[languages.en.menu.main]]
+        weight = 3
+        identifier = "categories"
+        pre = "<i class='fa fa-folder'></i> "
+        name = "Categories"
+        url = "/categories/"
+        title = "Categories"
+    [languages.en.params]
+      [languages.en.params.search]
+        enable = true
+        type = "algolia"
+        contentLength = 4000
+        placeholder = ""
+        maxResultLength = 10
+        snippetLength = 30
+        highlightTag = "em"
+        absoluteURL = false
+        [languages.en.params.search.algolia]
+          index = "index.en"
+          appID = "PASDMWALPK"
+          searchKey = "b42948e51daaa93df92381c8e2ac0f93"
+      [languages.en.params.home]
+        rss = 10
+        [languages.en.params.home.profile]
+          enable = true
+          avatarURL = "/images/PhilicoLogo_1.png"
+          title = "Philico P-Tech blog"
+          subtitle = "Welcome to the Philico P-Tech blog"
+          typeit = true
+          social = true
+          disclaimer = ""
+      [languages.en.params.social]
+        GitHub = "philico-tech"
+        Linkedin = "company/philico/"    
+        Email = "p-tech-group@philico.com"
+
+
+# Menu config
+[menu]
+  [[menu.main]]
+    weight = 1
+    identifier = "posts"
+    # extra information before the name (HTML format is supported), such as icons
+    pre = "<i class='fa fa-pencil'></i> "
+    name = "Posts"
+    url = "/posts/"
+    # title will be shown when you hover on this menu link
+    title = "Posts"
+  [[menu.main]]
+    weight = 2
+    identifier = "tags"
+    pre = "<i class='fa fa-tags'></i> "
+    name = "Tags"
+    url = "/tags/"
+    title = "Tags"
+  [[menu.main]]
+    weight = 3
+    identifier = "categories"
+    pre = "<i class='fa fa-folder'></i> "
+    name = "Categories"
+    url = "/categories/"
+    title = "Categories"
+
+
+ # Header config
+  [params.header]
+    desktopMode = "fixed"
+    mobileMode = "auto"
+    [params.header.title]
+      logo = ""
+      name = "Philico P-Tech blog"
+      pre = "💻"
+      typeit = false  
+
+   
+# Page global config
+[params.page]
+    hiddenFromHomePage = false
+    hiddenFromSearch = false
+    twemoji = false
+    lightgallery = false
+    ruby = true
+    fraction = true
+    fontawesome = true
+    linkToMarkdown = true
+    rssFullText = false
+    [params.page.toc]
+      enable = true
+      keepStatic = false
+      auto = true
+    [params.page.code]
+      copy = true
+      maxShownLines = 50
+    [params.page.share]
+      enable = true
+      Twitter = true
+      Facebook = true
+      Linkedin = true
+      Whatsapp = true
+      Pinterest = false
+      Tumblr = false
+      HackerNews = false
+      Reddit = false
+      VK = false
+      Buffer = false
+      Xing = false
+      Line = false
+      Instapaper = false
+      Pocket = false
+      Flipboard = false
+      Weibo = false
+      Blogger = false
+      Baidu = false
+      Odnoklassniki = false
+      Evernote = false
+      Skype = true
+      Trello = false
+      Mix = false
+    [params.page.library]
+      [params.page.library.css]
+      [params.page.library.js]
+
+# TypeIt config
+[params.typeit]
+    speed = 100
+    cursorSpeed = 1000
+    cursorChar = "|"
+    duration = -1      
+
+[params.cookieconsent]
+    enable = false
+    [params.cookieconsent.content]
+      message = ""
+      dismiss = ""
+      link = ""
+
+
+# Markup related configuration in Hugo
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      strikethrough = true
+      table = true
+      taskList = true
+      typographer = true
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6 
+
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5         
+
+
+[Permalinks]
+  posts = ":filename"
+
+
+[privacy]
+  [privacy.googleAnalytics]
+  [privacy.twitter]
+    enableDNT = true
+  [privacy.youtube]
+    privacyEnhanced = true
+
+
+[mediaTypes]
+  [mediaTypes."text/plain"]
+    suffixes = ["md"]
+
+
+[outputFormats.MarkDown]
+  mediaType = "text/plain"
+  isPlainText = true
+  isHTML = false  
+
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML", "MarkDown"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  taxonomyTerm = ["HTML"]
+
+
+
+
