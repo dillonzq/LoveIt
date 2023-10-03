@@ -6,7 +6,7 @@ theme = "LoveIt"
 
 
 # website title
-title = "P-Tech blog"
+title = "P-Tech Blog"
 
 # Language config
 languageCode = "en"
@@ -15,7 +15,7 @@ languageName = "English"
 
 # Author config
 [author]
-  name = "Philico P-Tech"
+  name = "P-Tech Blog"
   email = "p-tech-group@philico.com"
   link = "https://philico.ch"
 
@@ -97,8 +97,8 @@ enableEmoji = true
     desktopMode = "fixed"
     mobileMode = "auto"
     [params.header.title]
-      logo = ""
-      name = "Philico P-Tech blog"
+      logo = "/images/PhilicoLogo_1.png"
+      name = "P-Tech Blog"
       pre = ""
       typeit = false  
 

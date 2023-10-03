@@ -6,9 +6,6 @@ draft: false
 author: "Marc Cubells"
 description: "Discover what Google Apps Scripts is all about and the core-concepts behind it"
 images: []
-resources:
-- name: "featured-image"
-  src: "featured-image.png"
 
 tags: ["development"]
 
