@@ -1,0 +1,324 @@
+[github]
+weight = 1
+format = "https://github.com/%v"
+icon = "fab fa-github"
+
+[linkedin]
+weight = 2
+format = "https://linkedin.com/in/%v"
+icon = "fab fa-linkedin"
+
+[twitter]
+weight = 3
+format = "https://twitter.com/%v"
+icon = "fab fa-twitter"
+
+[instagram]
+weight = 4
+format = "https://www.instagram.com/%v"
+icon = "fab fa-instagram"
+
+[facebook]
+weight = 5
+format = "https://facebook.com/%v"
+icon = "fab fa-facebook"
+
+[telegram]
+weight = 6
+format = "https://t.me/%v"
+icon = "fab fa-telegram-plane"
+
+[medium]
+weight = 7
+format = "https://medium.com/%v"
+icon = "fab fa-medium"
+
+[gitlab]
+weight = 8
+format = "https://gitlab.com/%v"
+icon = "fab fa-gitlab"
+
+[youtubelegacy]
+weight = 9
+format = "https://www.youtube.com/user/%v"
+icon = "fab fa-youtube"
+
+[youtubecustom]
+weight = 10
+format = "https://www.youtube.com/c/%v"
+icon = "fab fa-youtube"
+
+[youtubechannel]
+weight = 11
+format = "https://www.youtube.com/channel/%v"
+icon = "fab fa-youtube"
+
+[tumblr]
+weight = 12
+format = "https://%v.tumblr.com/"
+icon = "fab fa-tumblr"
+
+[quora]
+weight = 13
+format = "https://www.quora.com/profile/%v"
+icon = "fab fa-quora"
+
+[keybase]
+weight = 14
+format = "https://keybase.io/%v"
+icon = "fab fa-keybase"
+
+[pinterest]
+weight = 15
+format = "https://www.pinterest.com/%v"
+icon = "fab fa-pinterest"
+
+[reddit]
+weight = 16
+format = "https://www.reddit.com/user/%v"
+icon = "fab fa-reddit"
+
+[codepen]
+weight = 17
+format = "https://codepen.io/%v"
+icon = "fab fa-codepen"
+
+[freecodecamp]
+weight = 18
+format = "https://freecodecamp.org/%v"
+icon = "fab fa-free-code-camp"
+
+[bitbucket]
+weight = 19
+format = "https://bitbucket.org/%v"
+icon = "fab fa-bitbucket"
+
+[stackoverflow]
+weight = 20
+format = "https://stackoverflow.com/users/%v"
+icon = "fab fa-stack-overflow"
+
+[weibo]
+weight = 21
+format = "https://weibo.com/%v"
+icon = "fab fa-weibo"
+
+[odnoklassniki]
+weight = 22
+format = "https://ok.ru/%v"
+icon = "fab fa-odnoklassniki"
+
+[vk]
+weight = 23
+format = "https://vk.com/%v"
+icon = "fab fa-vk"
+
+[flickr]
+weight = 24
+format = "https://www.flickr.com/photos/%v"
+icon = "fab fa-flickr"
+
+[xing]
+weight = 25
+format = "https://www.xing.com/profile/%v"
+icon = "fab fa-xing"
+
+[snapchat]
+weight = 26
+format = "https://www.snapchat.com/add/%v"
+icon = "fab fa-snapchat"
+
+[soundcloud]
+weight = 27
+format = "https://soundcloud.com/%v"
+icon = "fab fa-soundcloud"
+
+[spotify]
+weight = 28
+format = "https://open.spotify.com/user/%v"
+icon = "fab fa-spotify"
+
+[bandcamp]
+weight = 29
+format = "https://%v.bandcamp.com/"
+icon = "fab fa-bandcamp"
+
+[paypal]
+weight = 30
+format = "https://paypal.me/%v"
+icon = "fab fa-paypal"
+
+[fivehundredpx]
+weight = 31
+format = "https://500px.com/%v"
+icon = "fab fa-500px"
+
+[mix]
+weight = 32
+format = "https://mix.com/%v"
+icon = "fab fa-mix"
+
+[goodreads]
+weight = 33
+format = "https://www.goodreads.com/user/show/%v"
+icon = "fab fa-goodreads"
+
+[lastfm]
+weight = 34
+format = "https://www.last.fm/user/%v"
+icon = "fab fa-lastfm"
+
+[foursquare]
+weight = 35
+format = "https://foursquare.com/%v"
+icon = "fab fa-foursquare"
+
+[hackernews]
+weight = 36
+format = "https://news.ycombinator.com/user?id=%v"
+icon = "fab fa-hacker-news"
+
+[kickstarter]
+weight = 37
+format = "https://kickstarter.com/profile/%v"
+icon = "fab fa-kickstarter"
+
+[patreon]
+weight = 38
+format = "https://patreon.com/%v"
+icon = "fab fa-patreon"
+
+[steam]
+weight = 39
+format = "https://steamcommunity.com/id/%v"
+icon = "fab fa-steam"
+
+[twitch]
+weight = 40
+format = "https://www.twitch.tv/%v"
+icon = "fab fa-twitch"
+
+[strava]
+weight = 41
+format = "https://www.strava.com/athletes/%v"
+icon = "fab fa-strava"
+
+[skype]
+weight = 42
+format = "skype:%v"
+icon = "fab fa-skype"
+
+[whatsapp]
+weight = 43
+format = "https://wa.me/%v"
+
+icon = "fab fa-whatsapp"
+
+[zhihu]
+weight = 44
+format = "https://www.zhihu.com/people/%v"
+text = "知"
+icon = "fab"
+
+[douban]
+weight = 45
+format = "https://www.douban.com/people/%v"
+text = "豆"
+icon = "fab"
+
+[angellist]
+weight = 46
+format = "https://angel.co/%v"
+icon = "fab fa-angellist"
+
+[slideshare]
+weight = 47
+format = "https://slideshare.com/%v"
+icon = "fab fa-slideshare"
+
+[jsfiddle]
+weight = 48
+format = "https://jsfiddle.com/%v"
+icon = "fab fa-jsfiddle"
+
+[deviantart]
+weight = 49
+format = "https://%v.deviantart.com/"
+icon = "fab fa-deviantart"
+
+[behance]
+weight = 50
+format = "https://behance.net/%v"
+icon = "fab fa-behance"
+
+[dribbble]
+weight = 51
+format = "https://dribbble.com/%v"
+icon = "fab fa-dribbble"
+
+[wordpress]
+weight = 52
+format = "https://%v.wordpress.com/"
+icon = "fab fa-wordpress"
+
+[vine]
+weight = 53
+format = "https://vine.co/%v"
+icon = "fab fa-vine"
+
+
+[researchgate]
+weight = 55
+format = "https://www.researchgate.net/profile/%v"
+icon = "fab fa-researchgate"
+
+[mastodon]
+weight = 56
+icon = "fab fa-mastodon"
+format = "https://mastodon.social/%v"
+
+[devto]
+weight = 58
+format = "https://dev.to/%v"
+icon = "fab fa-dev"
+
+[bilibili]
+weight = 66
+icon = "fab fa-bilibili"
+format = "https://space.bilibili.com/%v"
+
+[discord]
+weight = 63
+format = "https://discordapp.com/users/%v"
+icon = "fab fa-discord"
+
+[discordinvite]
+weight = 64
+format = "https://discord.gg/%v"
+icon = "fab fa-discord"
+
+[orcid]
+weight = 66
+format = "https://orcid.org/%v"
+icon = "fab fa-orcid"
+
+[kaggle]
+weight = 68
+format = "https://kaggle.com/%v"
+icon = "fab fa-kaggle"
+
+[phone]
+weight = 98
+format = "tel:%v"
+icon = "fas fa-phone"
+
+[email]
+weight = 99
+format = "mailto:%v"
+icon = "far fa-envelope"
+
+[rss]
+weight = 100
+url = "index.xml"
+newtab = true
+icon = "fas fa-rss"

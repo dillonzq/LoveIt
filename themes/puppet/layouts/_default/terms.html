@@ -1,0 +1,20 @@
+{{ define "main" }}
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <!-- Article List -->
+      <div class="mini-post-list">
+
+        <section class="">
+          <span class="fa listing-seperator"></span>
+          {{ range .Pages }}
+          {{ .Render "li" }}
+          {{ end }}
+        </section>
+      </div>
+
+    </div>
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,23 @@
+
+<section class="visible-md visible-lg">
+  <hr>
+  {{ with .Site.GetPage "/about" }}
+  <h5><a href={{"about/" | relURL }}>ABOUT ME</a></h5>
+  {{ else }}
+  <h5>ABOUT ME</h5>
+  {{ end }}
+
+  {{ $sidebar := .Site.Params.sidebar }}
+  <div class="short-about">
+    {{ if $sidebar.gravatarEmail }}
+    <img src="https://s.gravatar.com/avatar/{{ md5 $sidebar.gravatarEmail }}?s=200" />
+    {{ else if $sidebar.avatar }}
+    <img src="{{ $sidebar.avatar | relURL }}" />
+    {{ end }}
+    {{ with $sidebar.bio }}
+    <p>{{ $sidebar.bio }}</p>
+    {{ end }}
+    <!-- SNS Link -->
+    {{ partial "sns-links.html" (dict "center" false "social" .Site.Params.social ) }}
+  </div>
+</section>

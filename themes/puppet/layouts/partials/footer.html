@@ -1,0 +1,100 @@
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <!-- SNS Link -->
+        {{ partial "sns-links.html" (dict "center" true "social" .Site.Params.social ) }}
+        <p class="copyright text-muted">
+        {{- if site.Copyright }}
+          {{ site.Copyright | markdownify }}
+        {{- else }}
+          Copyright &copy; {{ .Site.Title }} {{ now.Format "2006" }}
+        {{- end }}  
+          <br>
+          Powered by <a href="https://gohugo.io">Hugo</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src={{ "js/jquery.min.js" | relURL }}></script>
+<script src={{"js/bootstrap.min.js" | relURL }} crossorigin="anonymous"></script>
+
+<!-- Custom Theme JavaScript -->
+{{ $mainJs := resources.Get "js/hux-blog.js" | minify | fingerprint }}
+<script src="{{ $mainJs.RelPermalink }}"></script>
+
+<!-- Simple Jekyll Search -->
+<script src={{ "js/simple-jekyll-search.min.js" | relURL }}></script>
+
+{{ $searchJs := resources.Get "js/search.js" | resources.ExecuteAsTemplate "js/search.js" . | minify | fingerprint }}
+<script src="{{ $searchJs.RelPermalink }}"></script>
+
+
+{{ if eq .Type "archive" }}
+{{ $archiveJS := resources.Get "js/archive.js" | minify | fingerprint }}
+<script src='{{ $archiveJS.RelPermalink }}'></script>
+{{ end }}
+
+{{ $toc := .Scratch.Get "toc" }}
+{{ if $toc }}
+<script type="text/javascript">
+  function generateCatalog(selector) {
+    _containerSelector = 'div.post-container'
+    // init
+    var P = $(_containerSelector), a, n, t, l, i, c;
+    a = P.find('h1,h2,h3,h4');
+    // clean
+    $(selector).html('')
+    // appending
+    a.each(function () {
+      n = $(this).prop('tagName').toLowerCase();
+      i = "#" + $(this).prop('id');
+      t = $(this).text();
+      c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+      l = $('<li class="' + n + '_nav"></li>').append(c);
+      $(selector).append(l);
+    });
+    return true;
+  }
+
+  generateCatalog(".catalog-body");
+
+  // toggle side catalog
+  $(".catalog-toggle").click((function (e) {
+    e.preventDefault();
+    $('.side-catalog').toggleClass("fold")
+  }))
+</script>
+
+{{ $navJs := resources.Get "js/jquery.nav.js" | minify | fingerprint }}
+<script type="text/javascript" src='{{ $navJs.RelPermalink }}'></script>
+<script>
+   $(document).ready( function () {
+    $('.catalog-body').onePageNav({
+      currentClass: "active",
+      changeHash: !1,
+      easing: "swing",
+      filter: "",
+      scrollSpeed: 700,
+      scrollOffset: 0,
+      scrollThreshold: .2,
+      begin: null,
+      end: null,
+      scrollChange: null,
+      padding: 80
+    });
+  });
+</script>
+
+{{ end }}
+
+
+{{ if not .Site.IsServer }}
+{{ template "_internal/google_analytics.html" . }}
+{{ end }}
+
+{{ $zoom_js := resources.Get "zoomjs/zoom.js" | resources.Minify }}
+<script src="{{ $zoom_js.RelPermalink }}"></script>

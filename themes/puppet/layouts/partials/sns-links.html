@@ -1,0 +1,46 @@
+{{- $socialMap := resources.Get "data/social.toml" | transform.Unmarshal -}}
+{{ $socialList := slice }}
+{{- range $key, $value := .social -}}
+  {{ if $value }}
+  {{- $social := $key | lower | index $socialMap | default dict -}}
+  {{- if reflect.IsMap $value -}}
+    {{- $social = merge $social $value -}}
+
+  {{- else if and $social (ne $value true)  -}}
+    {{ $social = merge $social (dict "id" $value) }}
+    
+  {{- else if $value -}}
+  {{- else -}}
+  {{ $social = dict }}
+  {{- end -}}
+  {{- with $social -}}
+  {{ $socialList = $socialList | append (dict "title" $key | merge $social) }}
+  {{- end -}}
+
+  {{ end }}
+{{- end -}}
+
+{{- if .center -}}
+<ul class="list-inline text-center">
+{{- else -}}
+<ul class="list-inline">
+{{- end -}}
+
+{{- range sort $socialList "weight" -}}
+{{ $destination := "" }}
+{{ if .url }}
+{{ $destination = .url | relURL }}
+{{ else if .format }}
+{{ $destination = printf (string .format) .id }}
+{{- end -}}
+<li>
+  <a href="{{ $destination | safeURL }}" {{- if (urls.Parse $destination).Host | or .newtab }} target="_blank" {{- end -}}>
+    <span class="fa-stack fa-lg">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="{{ .icon }} fa-stack-1x fa-inverse">{{- .text -}}</i>
+    </span>
+  </a>
+</li>
+{{- end -}}
+
+</ul>

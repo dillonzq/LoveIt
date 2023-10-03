@@ -1,0 +1,123 @@
+baseURL = "http://localhost:1313/subdir"
+title = "Puppet"
+
+theme = "puppet"
+themesDir = "../.."
+
+copyright = ""
+paginate = 3
+languageCode = "en"
+defaultContentLanguage = "en"
+
+hasCJKLanguage = true
+enableInlineShortcodes = true
+enableEmoji = true
+# prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
+# See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
+ignoreErrors = ["error-remote-getjson"]
+
+disqusShortname = ""
+googleAnalytics = ""
+
+[outputs]
+home = ["HTML", "JSON", "RSS"]
+
+# prevent build failures when using Hugo's template _internal/opengraph.html 
+[taxonomies]
+category = "categories"
+tag = "tags"
+series = "series"
+
+[markup]
+[markup.highlight]
+noClasses = true
+codeFences = true
+guessSyntax = true
+lineNos = true
+lineNumbersInTable = false
+style = "dracula"
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[menu]
+[[menu.main]]
+identifier = "home"
+name = "Home"
+url = "/"
+weight = -100
+[[menu.main]]
+identifier = "archive"
+name = "Archive"
+url = "/archive/"
+weight = 10
+[[menu.main]]
+identifier = "guide"
+name = "Guide"
+url = "/series/themes-guide/"
+weight = 20
+[[menu.main]]
+identifier = "about"
+name = "About"
+url = "/about/"
+weight = 50
+[[menu.main]]
+identifier = "github"
+name = "Github"
+url = "https://github.com/roninro/hugo-theme-puppet/"
+weight = 100
+
+
+[params]
+author = "Puppet"
+description = "A simple and clean theme for Hugo"
+keywords = "blog,developer,personal"
+img_home = "img/home-bg.jpg"
+img_404 = "img/404-bg.jpg"
+
+useFaviconGenerator = true
+
+custom_js = []
+custom_css = [] # ["css/custom.css"]  Add your file to assets folder  [assets/css/custom.css]
+
+[params.sidebar]
+enable = true
+gravatarEmail = ""
+# Overwritten by your gravatar image if `gravatarEmail` is filled
+avatar = "img/home-bg.jpg"
+bio = "a personal website"
+
+[params.social]
+twitter = "johndoe"
+facebook = "johndoe"
+zhihu = "johndoe"
+weibo = "johndoe"
+github = "johndoe"
+gitlab = "johndoe"
+linkedin = "johndoe"
+rss = true
+[params.social.mastodon]
+weight = 56
+icon = "fab fa-mastodon"
+format = "https://mastodon.social/%v"
+id = "johndoe"
+url = ""
+
+[[params.friends]]
+name = "John Doe"
+url = "https://gohugo.io"
+
+[[params.friends]]
+name = "John Doe"
+url = "https://gohugo.io"
+
+# See https://giscus.app/
+[params.giscus]
+enable = true
+repo = "roninro/hugo-theme-puppet"
+repo_id = "R_kgDOHuvyhw"
+category = "General"
+category_id = "DIC_kwDOHuvyh84CQjDo"
+input_position = "top"
+theme = "light_tritanopia"
+lang = "en"

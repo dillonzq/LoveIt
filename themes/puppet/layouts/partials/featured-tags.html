@@ -1,0 +1,12 @@
+<section>
+  {{ $bottom := .Scratch.Get "bottom" }}
+  {{ if $bottom }}
+  <hr class="hidden-sm hidden-xs">
+  {{ end }}
+  <h5>FEATURED TAGS</h5>
+  <div class="tags">
+    {{ range .Site.Taxonomies.tags }}
+    <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
+    {{ end }}
+  </div>
+</section>

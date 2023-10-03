@@ -1,0 +1,20 @@
+$start-color: #bbbbee;
+$end-color: #2f93b4;
+$spread: {{ .spread }};
+$weighting: {{ .weighting }};
+@function tagColor() {
+    $sr: red($start-color);
+    $sg: green($start-color);
+    $sb: blue($start-color);
+    $incr-r: (red($end-color) - $sr) / $spread;
+    $incr-g: (green($end-color) - $sg) / $spread;
+    $incr-b: (blue($end-color) - $sb) / $spread;
+
+    $tag-color: rgb( $sr + $incr-r * $weighting, $sg + $incr-g * $weighting, $sb + $incr-b * $weighting );
+    
+    @return $tag-color;
+}
+
+.tag-color__{{ .count }} {
+    background-color: tagColor() !important;
+}

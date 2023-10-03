@@ -1,0 +1,52 @@
+{{ $pages := .Site.RegularPages }}
+
+{{ if not (eq (len $.Site.Taxonomies.tags) 0) }}
+
+{{ $lens := slice }}
+{{ range $.Site.Taxonomies.tags }}
+{{ $lens = $lens | append .Count }}
+{{ end }}
+
+{{ $lens = $lens | uniq | sort }}
+
+{{ $max := index $lens (sub (len $lens) 1) }}
+{{ $min := index $lens 0 }}
+
+{{ $spread := sub $max $min }}
+{{ if eq $spread 0 }}
+{{ $spread = 1 }}
+{{ end }}
+
+<style type="text/css">
+{{ range $lens }}
+
+{{ $sassTemplate := resources.Get "sass/tagcolor-template.scss" }}
+{{ $params := dict "weighting" (sub . $min) "spread" $spread "count" .  }}
+
+{{ $style := $sassTemplate | resources.ExecuteAsTemplate (printf "tagscolors__%d.css" .) $params | resources.ToCSS }}
+{{ with $style }}
+  {{ .Content | safeCSS }}
+{{ end }}
+
+{{ end }}
+</style>
+<div id='tag_cloud' class="tags tags-sup js-tags">
+  <a class="tag-button--all" data-encode="">
+    Show All
+    <sup>{{ len $pages }}</sup>
+  </a>
+
+  {{ range .Site.Taxonomies.tags.ByCount }}
+<a data-sort="{{ printf " %04d" (sub (len $pages) .Count) }}" data-encode="{{ .Page.Title | lower | urlquery }}"
+  class="tag-button tag-color__{{ .Count }}" title="{{ .Page.Title }}" rel="{{ .Count }}">
+  {{ .Page.Title }}
+  <sup>{{ .Count }}</sup>
+</a>
+{{ end }}
+</div>
+{{ end }}
+
+
+
+
+
