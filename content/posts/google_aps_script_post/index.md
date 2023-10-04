@@ -1,23 +1,24 @@
 ---
-weight: 1
-title: "Google Apps Script: Automating G Suite"
-date:  2023-10-03
-draft: false
 author: "Marc Cubells"
+title: "Google Apps Script: Automating G Suite"
+subtitle: "Discover what Google Apps Scripts is all about and the core-concepts behind it"
 description: "Discover what Google Apps Scripts is all about and the core-concepts behind it"
-images: []
+date: "2023-07-15"
 
 tags: ["development"]
+header_img: "img/llm_post_header.png"
+toc: true
+series: ["Themes Guide"]
+comment: true
 
-lightgallery: true
-
-toc:
-  auto: true #Generate a table of contents based on the headings.
+draft: false
 ---
 
 ## Google Apps Script: Automating G Suite
 
 Google Apps Script (often abbreviated as GAS) is a rapid application development platform that allows developers to create business applications that integrate with G Suite applications like Google Sheets, Google Docs, and Gmail. Essentially, it provides the bridge to automate tasks across Google services and even beyond.
+
+![](featured-image.png)
 
 ### **What is Google Apps Script?**
 

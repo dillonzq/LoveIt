@@ -1,18 +1,17 @@
 ---
-weight: 1
-title: "Large Language Models (LLMs): An Overview"
-date:  2023-10-02
-draft: false
 author: "Marc Cubells"
-description: "Discover what the Large Language Models are all about and the core-concepts behind it."
-images: []
+title: "Large Language Models (LLMs): An Overview"
+subtitle: "Discover what the Large Language Models are all about and the core-concepts behind it"
+description: "Discover what the Large Language Models are all about and the core-concepts behind it"
+date: "2023-10-01"
 
-tags: ["llms"]
+tags: [ "llms"]
+header_img: "img/llm_post_header.png"
+toc: true
+series: ["Themes Guide"]
+comment: true
 
-lightgallery: true
-
-toc:
-  auto: true #Generate a table of contents based on the headings.
+draft: false
 ---
 
 ## Large Language Models (LLMs): An Overview
@@ -55,7 +54,7 @@ LLMs, with their immense capabilities, have the potential to revolutionize many 
 
 ---
 
-_References:_
+### References
 
 - [OpenAI Blog](https://www.openai.com/)
 
