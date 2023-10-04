@@ -42,10 +42,10 @@ ignoreErrors = ["error-remote-getjson"] # List of errors to be ignored.
 # Configuration Parameters for the Website
 [params]  
   author = "Puppet" # Author's name.
-  description = "Welcome to the P-Tech Blog" # Short description of the website.
-  keywords = "blog,developer,personal" # Keywords related to website content.
-  img_home = "img/bg5.jpg" # Background image for home.  "img/home-bg.jpg" 
-  img_404 = "img/404-bg.jpg" # Background image for 404 error page.
+  description = "Welcome to the P-Tech Blog" # Short description of the website
+  keywords = "blog,developer,personal" # Keywords related to website content
+  img_home = "img/bg6.jpg" # Background image for home
+  img_404 = "img/404.jpg" # Background image for 404 error page
 
   # Header Configuration
   [params.header]
