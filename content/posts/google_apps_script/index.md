@@ -1,12 +1,12 @@
 ---
 author: "Marc Cubells"
-title: "Google Apps Script: Automating G Suite"
-subtitle: "Discover what Google Apps Scripts is all about and the core-concepts behind it"
-description: "Discover what Google Apps Scripts is all about and the core-concepts behind it"
-date: "2023-07-15"
+title: "Streamlining Google Apps Script: Clasp"
+subtitle: "Build Google Apps Script apps locally and deploy with Clasp"
+description: "Elevate Your Workflow: Easy App Development with Google Apps Script"
+date: "2023-10-04"
 
 tags: ["development"]
-header_img: "img/llm_post_header.png"
+header_img: "img/google_apps_script/header_img.png"
 toc: true
 series: ["Themes Guide"]
 comment: true

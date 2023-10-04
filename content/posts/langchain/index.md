@@ -7,7 +7,7 @@ date: "2023-10-02"
 images: []
 
 tags: ["langchain", "llms"]
-header_img: "img/langchain_bg.png"
+header_img: "img/langchain/langchain_bg.png"
 toc: true
 series: ["Themes Guide"]
 comment: true

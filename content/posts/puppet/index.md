@@ -3,10 +3,10 @@ author: "Marc Cubells"
 title: "Puppet - Getting Started"
 subtitle: "Discover the power of the HUGO theme Puppet"
 description: "Discover the power of the HUGO theme Puppet"
-date: "2023-01-25"
+date: "2023-10-01"
 
 tags: ["development"]
-header_img: "img/llm_post_header.png"
+header_img: "img/puppet/home-bg.jpg"
 toc: true
 series: ["Themes Guide"]
 comment: true
