@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  {{ $title := .Title }}
+  {{- if not .IsHome }}
+    {{ $title = printf "%s | %s" .Title .Site.Title }}
+  {{ end -}}
+
+  <title>{{ $title }}</title>
+
+  {{- with .Site.Params.author }}
+  <meta name="author" content="{{ . }}">
+  {{ end -}}
+  <meta name="description" content="{{ .Description | default (.Summary | default .Site.Params.description ) }}">
+  <meta name="keywords" content="{{ (delimit .Keywords " ,") | default .Site.Params.keywords }}">
+
+  {{ template "_internal/twitter_cards.html" . }}
+  {{ template "_internal/opengraph.html" . }}
+  <link rel="stylesheet" href="{{ "css/bootstrap.min.css" | relURL }}"  crossorigin="anonymous">
+  <!-- font-awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" rel="stylesheet" type="text/css">
+
+  {{ $options := (dict "outputStyle" "compressed" "enableSourceMap" (not hugo.IsProduction) "includePaths" (slice
+  "sass")) }}
+  {{- $style := resources.Get "sass/main.scss" | resources.ToCSS $options -}}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+
+  {{ $zoom_css := resources.Get "zoomjs/zoom.css" | resources.Minify -}}
+  <link rel="stylesheet" href="{{ $zoom_css.RelPermalink }}">
+
+  {{ range .Site.Params.custom_css -}}
+  {{ $custom_template := resources.Get . }}
+  {{ if $custom_template }}
+  {{ $custom_style := $custom_template | resources.ToCSS | resources.Minify }}
+  <link rel="stylesheet" href="{{ $custom_style.RelPermalink }}">
+  {{ end }}
+  {{- end -}}
+
+  <script src={{ "js/lazysizes.min.js" | relURL }}></script>
+
+  <!-- custom js -->
+  {{- range .Site.Params.custom_js -}}
+  {{ $custom_template := resources.Get . }}
+  {{ if $custom_template }}
+  {{ $custom_js := $custom_template | resources.Minify | resources.Fingerprint }}
+  <script defer src="{{ $custom_js.RelPermalink }}"></script>
+  {{ end }}
+  {{ end -}}
+
+  {{ range .AlternativeOutputFormats -}}
+  {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .RelPermalink $.Site.Title | safeHTML }}
+  {{ end -}}
+
+  {{ if .Site.Params.useFaviconGenerator }}
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | relURL }}">
+  <link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
+  {{ else }}
+  <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
+  <link rel="shortcut icon" href="{{ "favicon.png" | relURL }}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ "favicon.ico" | relURL }}" type="image/x-icon">
+  <link rel="icon" href="{{ "logo.svg" | relURL }}" sizes="any" type="image/svg+xml" />
+{{ end }}
+
+</head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="">
+  {{- $header_img := .Param "header_img" -}}
+  {{- if .IsHome -}}
+  {{ $header_img = .Site.Params.img_home }}
+  {{- else if eq .Kind "404" -}}
+  {{ $header_img = .Site.Params.img_404 }}
+  {{- end -}}
+  {{- if $header_img -}}
+  {{ .Scratch.Set "header_img" ( $header_img | relURL ) }}
+  {{- end -}}
+
+  {{- if and .IsPage (.Params.toc) }}
+  {{ .Scratch.Set "toc" true }}
+  {{ end -}}
+
+  <!-- Nav -->
+  {{ partial "nav.html" . }}
+  {{ partial "search.html" . }}
+
+  <!-- Page Header -->
+  {{ partial "intro-header.html" . }}
+
+  {{ block "main" . }}
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      {{ if eq .Site.Params.sidebar.enable false }}
+
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1
+      postlist-container">
+        {{ block "container" . }}{{ end }}
+      </div>
+      <!-- Sidebar Container -->
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1
+      sidebar-container">
+        <!-- Featured Tags -->
+        {{ partial "featured-tags.html" . }}
+        <!-- Friends Blog -->
+        {{ partial "friends.html" . }}
+      </div>
+
+      {{ else }}
+      <!-- USE SIDEBAR -->
+      <!-- PostList Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12
+      col-xs-12 postlist-container">
+        {{ block "container" . }}{{ end }}
+      </div>
+      <!-- Sidebar Container -->
+      <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12
+      col-xs-12 sidebar-container">
+
+        <!-- Featured Tags -->
+        {{ partial "featured-tags.html" . }}
+        {{ partial "short-about.html" . }}
+        <!-- Friends Blog -->
+        {{ partial "friends.html" . }}
+
+      </div>
+      {{ end }}
+
+    </div>
+  </div>
+
+  {{ end }}
+
+  {{ partial "footer.html" . }}
+</body>
+
+</html>

@@ -1,225 +1,171 @@
-baseURL = "http://example.org/"
+# Fundamental Configuration Settings
+baseURL = "http://example.org/" # The base URL for your website.
+title = "P-Tech Blog" # The title of your website.
+theme = "puppet" # The theme that your website is using.
 
+# Settings Related to Language Configuration
+languageCode = "en" # The code for the primary language used.
+defaultContentLanguage = "en" # The default language for content.
+languageName = "English" # The full name of the default language.
 
-# Change the default theme to be use when building the site with Hugo
-theme = "LoveIt"
+# Configuration Related to Website Behavior and Features
+enableRobotsTXT = false # Toggle to enable robots.txt generation.
+enableEmoji = true  # Enable emoji support.
+hasCJKLanguage = true # Support for Chinese, Japanese, Korean languages.
+enableInlineShortcodes = true # Support for inline Hugo shortcodes.
+ignoreErrors = ["error-remote-getjson"] # List of errors to be ignored.
 
-
-# website title
-title = "P-Tech Blog"
-
-# Language config
-languageCode = "en"
-languageName = "English"
-
-
-# Author config
-[author]
-  name = "P-Tech Blog"
-  email = "p-tech-group@philico.com"
-  link = "https://philico.ch"
-
-
-# whether to use robots.txt
-enableRobotsTXT = false
-# whether to use emoji code
-enableEmoji = true 
-
-[languages]
-  [languages.en]
-    weight = 1
-    languageCode = "en"
-    languageName = "English"
-    hasCJKLanguage = false
-    [languages.en.menu]
-      [[languages.en.menu.main]]
-        weight = 1
-        identifier = "posts"
-        pre = "<i class='fa fa-pencil'></i> "
-        name = "Posts"
-        url = "/posts/"
-        title = "Posts"
-      [[languages.en.menu.main]]
-        weight = 2
-        identifier = "tags"
-        pre = "<i class='fa fa-tags'></i> "
-        name = "Tags"
-        url = "/tags/"
-        title = "Tags"
-    [languages.en.params]
-      [languages.en.params.search]
-        enable = true
-        type = "algolia"
-        contentLength = 4000
-        placeholder = ""
-        maxResultLength = 10
-        snippetLength = 30
-        highlightTag = "em"
-        absoluteURL = false
-        [languages.en.params.search.algolia]
-          index = "index.en"
-          appID = "PASDMWALPK"
-          searchKey = "b42948e51daaa93df92381c8e2ac0f93"
-      [languages.en.params.home]
-        rss = 10
-        [languages.en.params.home.profile]
-          enable = true
-          avatarURL = ""
-          title = ""
-          subtitle = ""
-          typeit = true
-          social = false
-          disclaimer = ""
-
-
-# Menu config
+# Configuration Settings for Menus
 [menu]
+  # Primary Menu Configuration
   [[menu.main]]
-    weight = 1
-    identifier = "posts"
-    # extra information before the name (HTML format is supported), such as icons
-    pre = "<i class='fa fa-pencil'></i> "
-    name = "Posts"
-    url = "/posts/"
-    # title will be shown when you hover on this menu link
-    title = "Posts"
+      weight = 1 # Determines the order of menu items.
+      identifier = "posts" # Unique identifier for this menu item.
+      name = "Posts" # Name displayed for this menu item.
+      url = "/posts/" # URL for this menu item.
+      title = "Posts" # Tooltip for this menu item.
+
   [[menu.main]]
-    weight = 2
-    identifier = "tags"
-    pre = "<i class='fa fa-tags'></i> "
-    name = "Tags"
-    url = "/tags/"
-    title = "Tags"
+      weight = 2
+      identifier = "tags"
+      name = "Tags"
+      url = "/tags/"
+      title = "Tags"
 
+  [[menu.main]]
+      weight = 3
+      identifier = "github"
+      name = "Github"
+      url = "https://github.com/philico-tech"
+      title = "Github"
 
- # Header config
+# Configuration Parameters for the Website
+[params]  
+  author = "Puppet" # Author's name.
+  description = "Welcome to the P-Tech Blog" # Short description of the website
+  keywords = "blog,developer,personal" # Keywords related to website content
+  img_home = "img/bg6.jpg" # Background image for home
+  img_404 = "img/404.jpg" # Background image for 404 error page
+
+  # Header Configuration
   [params.header]
-    desktopMode = "fixed"
-    mobileMode = "auto"
-    [params.header.title]
-      logo = "/images/PhilicoLogo_1.png"
-      name = "P-Tech Blog"
-      pre = ""
-      typeit = false  
+    desktopMode = "fixed" # Header behavior in desktop view.
+    mobileMode = "auto" # Header behavior in mobile view.
 
-   
-# Page global config
-[params.page]
-    hiddenFromHomePage = false
-    hiddenFromSearch = false
-    twemoji = false
-    lightgallery = false
-    ruby = true
-    fraction = true
-    fontawesome = true
-    linkToMarkdown = true
-    rssFullText = false
+  # Configuration for Giscus (Refer: https://giscus.app/)
+  [params.giscus]
+    enable = true # Enables Giscus.
+    repo = "roninro/hugo-theme-puppet" # Repository for Giscus.
+    repo_id = "R_kgDOHuvyhw" # Repository ID.
+    category = "General" # Default category.
+    category_id = "DIC_kwDOHuvyh84CQjDo" # Category ID.
+    input_position = "top" # Input box position.
+    theme = "light_tritanopia" # Theme for Giscus.
+    lang = "en" # Language for Giscus.
+
+  # General Configuration for Pages
+  [params.page]
+    hiddenFromHomePage = false # Hide from the homepage.
+    hiddenFromSearch = false # Hide from search results.
+    twemoji = false # Enable Twemoji.
+    lightgallery = false # Enable light gallery.
+    ruby = true # Support for ruby text annotation.
+    fraction = true # Support for fractions.
+    fontawesome = true # Enable FontAwesome.
+    linkToMarkdown = true # Allow linking to markdown files.
+    rssFullText = false # Show full text in RSS feed.
+
+    # Table of Contents Settings for Pages
     [params.page.toc]
-      enable = true
-      keepStatic = false
-      auto = true
+      enable = true # Enables the table of contents.
+      keepStatic = false # Static position for ToC.
+      auto = true # Automatically generate ToC.
+
+    # Code Settings for Pages
     [params.page.code]
-      copy = true
-      maxShownLines = 50
-    [params.page.share]
-      enable = true
-      Twitter = true
-      Facebook = true
-      Linkedin = true
-      Whatsapp = true
-      Pinterest = false
-      Tumblr = false
-      HackerNews = false
-      Reddit = false
-      VK = false
-      Buffer = false
-      Xing = false
-      Line = false
-      Instapaper = false
-      Pocket = false
-      Flipboard = false
-      Weibo = false
-      Blogger = false
-      Baidu = false
-      Odnoklassniki = false
-      Evernote = false
-      Skype = false
-      Trello = false
-      Mix = false
-    [params.page.library]
-      [params.page.library.css]
-      [params.page.library.js]
+      copy = true # Allow copying of code.
+      maxShownLines = 50 # Maximum lines to display.
 
-# TypeIt config
-[params.typeit]
-    speed = 100
-    cursorSpeed = 1000
-    cursorChar = "|"
-    duration = -1      
+  # Cookie Consent Configuration
+  [params.cookieconsent]
+    enable = false # Enable cookie consent banner.
 
-[params.cookieconsent]
-    enable = false
-    [params.cookieconsent.content]
-      message = ""
-      dismiss = ""
-      link = ""
-
-
-# Markup related configuration in Hugo
+# Markup Configuration Settings
 [markup]
+  # Code Highlighting Configuration
   [markup.highlight]
-    codeFences = true
-    guessSyntax = true
-    lineNos = true
-    lineNumbersInTable = true
-    noClasses = false
+    codeFences = true # Enable fenced code blocks.
+    guessSyntax = true # Automatically guess syntax.
+    lineNos = true # Display line numbers.
+    lineNumbersInTable = false # Table style line numbers.
+    noClasses = true # Avoid adding classes.
+    style = "dracula" # Style/theme for syntax highlighting.
+
+  # Goldmark Parser Configuration
   [markup.goldmark]
+    # Goldmark Extensions
     [markup.goldmark.extensions]
-      definitionList = true
-      footnote = true
-      linkify = true
-      strikethrough = true
-      table = true
-      taskList = true
-      typographer = true
+      definitionList = true # Enable definition lists.
+      footnote = true # Enable footnotes.
+      linkify = true # Automatically linkify URLs.
+      strikethrough = true # Enable strikethrough.
+      table = true # Enable tables.
+      taskList = true # Enable task lists.
+      typographer = true # Enable typographic replacements.
+
+    # Goldmark Renderer Configuration
     [markup.goldmark.renderer]
-      unsafe = true
+      unsafe = true # Render raw HTML.
+
+  # Table of Contents Configuration for Markup
   [markup.tableOfContents]
-    startLevel = 2
-    endLevel = 6 
+    startLevel = 2 # Starting header level.
+    endLevel = 6  # Ending header level.
 
+# Settings for Sitemap Generation
 [sitemap]
-  changefreq = "weekly"
-  filename = "sitemap.xml"
-  priority = 0.5         
+  changefreq = "weekly" # Change frequency.
+  filename = "sitemap.xml" # Sitemap filename.
+  priority = 0.5 # Priority value for sitemap.
 
-
+# Configuration for Custom Permalinks
 [Permalinks]
-  posts = ":filename"
+  posts = ":filename" # Custom permalink structure.
 
-
+# Privacy Configuration Settings
 [privacy]
+  # Google Analytics Settings
   [privacy.googleAnalytics]
+  
+  # Twitter Privacy Configuration
   [privacy.twitter]
-    enableDNT = true
+    enableDNT = true # Enable Do Not Track.
+
+  # YouTube Privacy Configuration
   [privacy.youtube]
-    privacyEnhanced = true
+    privacyEnhanced = true # Enable privacy-enhanced mode.
 
-
+# Configuration for Media Types
 [mediaTypes]
   [mediaTypes."text/plain"]
-    suffixes = ["md"]
+    suffixes = ["md"] # File extensions.
 
-
+# Configuration for Output Formats
 [outputFormats.MarkDown]
-  mediaType = "text/plain"
-  isPlainText = true
-  isHTML = false  
+  mediaType = "text/plain" # Media type for markdown.
+  isPlainText = true # Treated as plain text.
+  isHTML = false   # Not treated as HTML.
 
-
+# Outputs for Different Types of Content
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
-  page = ["HTML", "MarkDown"]
-  section = ["HTML", "RSS"]
-  taxonomy = ["HTML", "RSS"]
-  taxonomyTerm = ["HTML"]
+  home = ["HTML", "RSS", "JSON"] # Outputs for the home page.
+  page = ["HTML", "MarkDown"] # Outputs for individual pages.
+  section = ["HTML", "RSS"] # Outputs for sections.
+  taxonomy = ["HTML", "RSS"] # Outputs for taxonomy lists.
+  taxonomyTerm = ["HTML"] # Outputs for taxonomy terms.
+
+# Taxonomy Configuration Settings
+[taxonomies]
+category = "categories" # Category taxonomy configuration.
+tag = "tags" # Tag taxonomy configuration.
+series = "series" # Series taxonomy configuration.

@@ -1,0 +1,61 @@
+{{ $header_img := .Scratch.Get "header_img" }}
+
+{{ if .IsPage }}
+<style type="text/css">
+  header.intro-header {
+    position: relative;
+    background-image: url('{{ with $header_img }}{{- . -}}{{ end }}');
+  }
+</style>
+{{ if $header_img }}
+<header class="intro-header ">
+{{ else }}
+<header class="intro-header style-text">
+{{ end }}
+  <div class="header-mask"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <div class="tags">
+            {{ range (.GetTerms "tags") }}
+            <a class="tag" href="{{ .Page.RelPermalink }}" title="{{ .LinkTitle}}">{{ .LinkTitle }}</a>
+            {{ end }}
+          </div>
+          <h1>{{ .Title }}</h1>
+          <h2 class="subheading">{{ $.Params.subtitle }}</h2>
+          <span class="meta">
+            Posted by {{ with $.Params.author }} {{ $.Params.author }} {{ else }} {{ .Site.Params.author }} {{ end }}
+            on {{ .Date.Format "Mon, Jan 2, 2006" }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+{{ else }}
+{{ with $header_img }}
+<header class="intro-header" style="background-image: url('{{- . -}}')">
+{{ else}}
+<header class="intro-header style-text">
+{{ end }}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        {{ if eq (.Param "short") true }}
+        <div class="site-heading" id="tag-heading">
+        {{ else }}
+        <div class="site-heading">
+        {{ end }}
+          <h1>{{ with .Title }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}</h1>
+          {{ $description := .Description }}
+          {{ if .IsHome }}
+          {{ $description = .Site.Params.description }}
+          {{ end }}
+          <span class="subheading">{{ $description }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+{{ end }}

@@ -1,0 +1,5 @@
+{{- $.Scratch.Add "searchindex" slice -}}
+{{- range $index, $element := .Site.RegularPages -}}
+    {{- $.Scratch.Add "searchindex" (dict "title" $element.Title "url" $element.RelPermalink "tags" (delimit ($element.Params.tags | default "") " ") "subtitle" ( $element.Params.subtitle | default $element.Summary) "date" ($element.Date.Format ($.Param "dateformat" | default "2 January, 2006"))) -}}
+{{- end -}}
+{{- $.Scratch.Get "searchindex" | jsonify -}}

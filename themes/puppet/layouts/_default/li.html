@@ -1,0 +1,7 @@
+<div class="post-preview item" data-tags="{{ with .Params.tags }} {{- delimit  (apply (apply . "lower" ".") "urlquery" ".") "," -}} {{ end }}">
+  <a href="{{ .RelPermalink }}">
+      <h2 class="post-title">{{ .Title }}</h2>
+      <h3 class="post-subtitle">{{ .Params.subtitle }}</h3>
+  </a>
+<hr>
+</div>
