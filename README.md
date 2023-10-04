@@ -25,7 +25,7 @@ Streamline your development process for the Philico P-Tech blog using Visual Stu
      ```
 
   3. Post execution, the blog will be available for viewing in your preferred browser.
-     ![Blog Preview](blog_preview.png)
+     ![Blog Preview](blog_preview_new.png)
 
 ## 📌 Notes
 
