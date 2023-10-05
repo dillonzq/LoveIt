@@ -31,7 +31,7 @@ In this beginner’s guide, our goal is to provide you with a comprehensive intr
 
 The project’s website can be found at [https://python.langchain.com/en/latest/](https://python.langchain.com/en/latest/).
 
-![Alt text](langchain_1.png)
+![Alt Text](langchain_1.png)
 
 ## LangChain's Building Blocks & Use Cases
 
