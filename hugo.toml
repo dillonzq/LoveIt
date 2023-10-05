@@ -1,7 +1,7 @@
 # Fundamental Configuration Settings
 baseURL = "http://example.org/" # The base URL for your website.
 title = "P-Tech Blog" # The title of your website.
-theme = "puppet" # The theme that your website is using.
+theme = ["hugo-video", "puppet"]
 
 # Settings Related to Language Configuration
 languageCode = "en" # The code for the primary language used.
