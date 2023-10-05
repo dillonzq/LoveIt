@@ -61,6 +61,7 @@ With the repository cloned and authentication set up, you can now make changes t
 1. Make changes to your files in VS Code.
 2. Open the Source Control panel by clicking the branching icon on the sidebar.
 3. Review your changes, stage them, write a commit message, and then click the checkmark icon to commit.
+![image-2](image-2.png)
 4. Click the `...` icon for more actions and choose `Push` to send your commits to GitHub.
 
 ### **5. Pulling Changes from GitHub**
