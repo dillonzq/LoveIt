@@ -16,7 +16,7 @@ draft: false
 
 Visual Studio Code (VS Code) is a powerful code editor that has become increasingly popular among developers. One of its many strengths is the ability to integrate seamlessly with version control systems, especially GitHub. This guide will walk you through the process of connecting VS Code to your GitHub repositories, making it easier than ever to code, commit, and push.
 
-### **Prerequisites:**
+### **Prerequisites**
 
 - Install [Visual Studio Code](https://code.visualstudio.com/).
 - Install [Git](https://git-scm.com/).
@@ -61,15 +61,17 @@ With the repository cloned and authentication set up, you can now make changes t
 1. Make changes to your files in VS Code.
 2. Open the `Source Control` panel by clicking the branching icon on the sidebar.
 3. Click the `Commit`button to commit your changes:
-![image-2](image-2.png)
-4. Click the `Sync` button to push your commits to your GitHub Repository.
+![Alt text](image-6.png)
+4. Click the `Sync Changes` button to push your commits to your GitHub Repository.
+![image-3](image-3.png)
 
 ### **5. Pulling Changes from GitHub**
 
 If you're working in a team or across different machines, you might want to pull the latest changes from GitHub:
 
-1. Open the Source Control panel.
+1. Open the `Source Control` panel by clicking the branching icon on the sidebar.
 2. Click the `...` icon and choose `Pull` to fetch the latest updates.
+![image-4](image-4.png)
 
 ### **Conclusion**
 
@@ -77,6 +79,6 @@ Connecting VS Code to a GitHub repository offers a seamless development experien
 
 ---
 
-_Further reading: [Overview of all clasp features](https://developers.google.com/apps-script/guides/clasp)_
+_Further reading: [Visual Studio Marketplace - GitHub Repositories Extension](https://marketplace.visualstudio.com/items?itemName=GitHub.remotehub)_
 
 _Reminder: Like any online platform, always remember to follow best practices for security and privacy, especially if you're handling sensitive information._
