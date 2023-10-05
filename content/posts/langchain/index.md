@@ -26,7 +26,6 @@ Using LangChain and Streamlit, an HTML Query Chatbot has been developed to simpl
 
 The following video demonstrates how the chatbot behaves:
 
-
 {{< video src="screen" >}}
 
 
