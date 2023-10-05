@@ -26,17 +26,9 @@ Using LangChain and Streamlit, an HTML Query Chatbot has been developed to simpl
 
 The following video demonstrates how the chatbot behaves:
 
-{{< video src="movie3" >}}
+{{< video src="html_chatbot" >}}
 
-
-
-
-
-
-
-
-
-
+As can be seen in the video, the HTML file that is queried is locally stored.
 
 _Find the GitHub Repository for this application [here](https://github.com/philico-tech/langchain-ask-your-htmls)_
 
@@ -46,13 +38,8 @@ The English Enhancer Tool, lets users adjust text to fit specific criteria: tone
 
 The following video demonstrates how the application runs:
 
-
-
-
-
-
-
-
+<!-- TODO: Set the correct video here! -->
+{{< video src="english_enhancer" >}}  
 
 _Find the GitHub Repository for this application [here](https://github.com/philico-tech/langchain-email-enhancer)_
 
