@@ -18,9 +18,38 @@ In the ever-evolving landscape of artificial intelligence (AI) and machine learn
 
 LangChain, with its robust language processing capabilities, offers a seamless way to integrate complex language models into applications, while Streamlit provides an intuitive framework for creating interactive web applications with minimal effort. Together, they form a dynamic duo that can transform the way you approach AI development.
 
-Let's delve into three distinct web applications developed using LangChain and Streamlit, each showcasing a different facet of what's possible when these platforms are harnessed effectively.
+Let's delve into two distinct web applications developed using LangChain and Streamlit, each showcasing a different facet of what's possible when these platforms are harnessed effectively.
 
-## Conclusion
+## Ask your HTML files
+
+Using LangChain and Streamlit, an HTML Query Chatbot has been developed to simplify the task of searching through personal HTML files. You can interact with a chatbot interface to quickly locate specific content within your documents, eliminating the need for manual file-by-file searches.
+
+The following video demonstrates how the chatbot behaves:
+
+
+
+
+
+
+
+
+_Find the GitHub Repository for this application [here](https://github.com/philico-tech/langchain-ask-your-htmls)_
+
+## English Enhancer Tool
+
+The English Enhancer Tool, lets users adjust text to fit specific criteria: tone (formal/informal) and English variant (American/British). It's a practical solution for refining emails to match the intended audience's expectations.
+
+The following video demonstrates how the application runs:
+
+
+
+
+
+
+
+
+
+_Find the GitHub Repository for this application [here](https://github.com/philico-tech/langchain-email-enhancer)_
 
 ## Conclusion
 
