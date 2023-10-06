@@ -5,7 +5,7 @@ subtitle: "Using LangChain and Streamlit to accelerate your AI development workf
 description: "AI prototyping with LangChain and Streamlit"
 date: "2023-10-06"
 
-tags: ["langchain", "llms"]
+tags: ["ai", "development"]
 header_img: "img/langchain/langchain_bg.png"
 toc: true
 series: ["Themes Guide"]
