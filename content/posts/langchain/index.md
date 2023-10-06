@@ -14,9 +14,11 @@ comment: true
 draft: false
 ---
 
-In the dynamic world of AI and ML, there's a constant quest for tools that make life easier for developers. Tools that not only boost productivity but also speed up the journey from idea to final product. Meet LangChain and Streamlit – two powerful platforms that, when combined, can supercharge your AI development process.
+In the dynamic world of AI and ML, there's a constant quest for tools that make life easier for developers. Tools that not only boost productivity but also speed up the journey from idea to final product. Meet [**LangChain**](https://www.langchain.com) and [**Streamlit**](https://streamlit.io) – two powerful platforms that, when combined, can supercharge your AI development process.
 
-[LangChain](https://www.langchain.com), an open-source development framework available for Python and JavaScript, offers a seamless way to integrate large language models into applications, while [Streamlit](https://streamlit.io) provides an intuitive framework for creating interactive web applications with minimal effort. Together, they form a solid duo that can transform the way you approach AI development.
+**LangChain**, an open-source development framework available for Python and JavaScript, offers a seamless way to integrate large language models into applications. On the other hand, **Streamlit**, exclusively built in Python, is an intuitive framework for creating interactive web applications with minimal effort. One of Streamlit's standout features is its array of ready-to-use components that drastically simplify frontend development, enabling developers to effortlessly build interactive user interfaces. Given that both LangChain and Streamlit are **Python-based**, integrating them becomes a seamless experience, making the duo a formidable pair in the AI development landscape.
+
+![logos](logos.png)
 
 Here are some examples of web applications whose development can be eased considerably by using LangChain and Streamlit:
 
