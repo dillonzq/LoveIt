@@ -1,11 +1,11 @@
 ---
 author: "Marc Cubells"
-title: "AI prototyping with LangChain and Streamlit"
+title: "AI Prototyping with LangChain and Streamlit"
 subtitle: "Using LangChain and Streamlit to accelerate your AI development workflow"
 description: "AI prototyping with LangChain and Streamlit"
 date: "2023-10-06"
 
-tags: ["ai", "development"]
+tags: ["ai", "development", "tools", "langchain"]
 header_img: "img/langchain/langchain_bg.png"
 toc: true
 series: ["Themes Guide"]
@@ -58,9 +58,11 @@ You can find the application on its [GitHub Repository](https://github.com/phili
 
 As we've explored, the synergy between LangChain and Streamlit has the potential to revolutionize AI development. Their combined strengths offer developers a simplified yet powerful toolkit for AI-driven application development.
 
-## References
+---
 
-### Courses and Tutorials
+_**References:**_
+
+_Courses and Tutorials:_
 
 - [Youtube - LangChain Playlist Tutorial](https://www.youtube.com/playlist?list=PLqZXAkvF1bPNQER9mLmDbntNfSpzdDIU5)
 
@@ -70,7 +72,7 @@ As we've explored, the synergy between LangChain and Streamlit has the potential
 
 - [Udemy - Introduction to LangChain](https://www.udemy.com/course/langchain/)
 
-### Medium Articles
+_Further reading:_
 
 - [Dolly2 and LangChain: A Game Changer for Data Analytics by Ashutosh Kumar](https://ashukumar27.medium.com/dolly2-and-langchain-a-game-changer-for-text-data-analytics-7518d48d0ad7)
 

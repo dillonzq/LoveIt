@@ -1,11 +1,11 @@
 ---
 author: "Marc Cubells"
 title: "Linking VS Code to GitHub Repositories"
-subtitle: "Code Effortlessly in Visual Studio Code and Sync with Your GitHub Repositories"
+subtitle: "Code effortlessly in Visual Studio Code and sync with your GitHub Repositories"
 description: "Linking VS Code to GitHub Repositories"
 date: "2023-10-05"
 
-tags: ["development"]
+tags: ["development", "how-to", "vscode"]
 header_img: "img/vscode_github/vs_code_bg.png"
 toc: true
 series: ["Themes Guide"]
@@ -81,4 +81,6 @@ Connecting VS Code to a GitHub repository offers a seamless development experien
 
 ---
 
-_Further reading: [Visual Studio Marketplace - GitHub Repositories Extension](https://marketplace.visualstudio.com/items?itemName=GitHub.remotehub)_
+_**References:**_
+
+- [Visual Studio Marketplace - GitHub Repositories Extension](https://marketplace.visualstudio.com/items?itemName=GitHub.remotehub)

@@ -1,11 +1,11 @@
 ---
 author: "Marc Cubells"
-title: "Streamlining Google Apps Script with clasp"
+title: "Streamlining Google Apps Script with Clasp"
 subtitle: "Build Google Apps Script apps locally with clasp"
 description: "Elevate Your Workflow: Easy App Development with Google Apps Script"
 date: "2023-10-04"
 
-tags: ["development"]
+tags: ["development", "tools", "clasp","gas"]
 header_img: "img/google_apps_script/header_img.png"
 toc: true
 series: ["Themes Guide"]
@@ -137,4 +137,6 @@ Harnessing the power of Google Apps Script can revolutionize the way you interac
 
 ---
 
-_Further reading: [Overview of all clasp features](https://developers.google.com/apps-script/guides/clasp)_
+_**References:**_
+
+- [Overview of all clasp features](https://developers.google.com/apps-script/guides/clasp)
