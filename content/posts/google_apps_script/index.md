@@ -43,29 +43,27 @@ While GAS provides an integrated development environment (IDE) that facilitates 
 ![gas_ide](gas_ide.png)
 <!-- TODO: Add a footer to the image -->
 
-## The Solution: clasp
+## The Solution: `clasp`
 
-Enter `clasp` (Command Line Apps Script Projects), a game-changing tool for GAS developers. At its core, clasp acts as a bridge, connecting the proprietary environment of GAS's IDE with the vast world of modern local editors.
+Enter `clasp` (Command Line Apps Script Projects), a game-changing tool for GAS developers. At its core, `clasp` acts as a bridge, connecting the proprietary environment of GAS's IDE with the vast world of modern local editors.
 
 ![clasp](clasp.png)
 
 Here's how clasp revolutionizes the GAS development process:
 
-- **Local Development:** By synchronizing with the GAS remote repository, `clasp` lets you develop scripts on your local machine. This means you're no longer confined to the online IDE; instead, you can work in the familiar environment of your preferred local editor, be it [Visual Studio Code](https://code.visualstudio.com), [Atom](https://github.com/atom/atom.git), [Sublime](https://www.sublimetext.com/3), or any other. This not only enhances productivity but also makes coding more enjoyable and efficient. Modern editors come packed with extensions and tools that can aid in development, from linting and formatting to advanced debugging. With clasp, GAS developers can leverage these tools, resulting in cleaner, more efficient code.
+- **Local Development:** By synchronizing with the GAS remote repository, `clasp` lets you develop scripts on your local machine. This means you're no longer confined to the online IDE; instead, you can work in the familiar environment of your preferred local editor, be it [Visual Studio Code](https://code.visualstudio.com), [Atom](https://github.com/atom/atom.git), [Sublime](https://www.sublimetext.com/3), or any other. This not only enhances productivity but also makes coding more enjoyable and efficient. Modern editors come packed with extensions and tools that can aid in development, from linting and formatting to advanced debugging. With `clasp`, GAS developers can leverage these tools, resulting in cleaner, more efficient code.
 
 - **Version Control:** With your codebase now local, it becomes vastly simpler to manage version control. Traditional tools like `git` can be employed, offering powerful tracking, branching, and collaboration capabilities.
 
 - **Push to Popular Repositories:** Having your GAS projects stored locally allows them to tap into the collaborative and open-source advantages offered by platforms like [GitHub](https://github.com).
 
-In essence, `clasp` empowers developers by breaking the barriers of GAS's IDE, providing them with the freedom and tools typical of modern development workflows.
+At its core, `clasp` dismantles the limitations of GAS's IDE, offering developers the flexibility and resources inherent in modern IDEs. The diagram below illustrates a potential integration setup facilitated by `clasp`. In this model, GAS's IDE seamlessly syncs with Visual Studio Code, which concurrently manages the code base stored in a GitHub Remote Repository.
 
 ![diagram](diagram.png)
 
-<!-- TODO: Insert a footer to this image -->
-
 ## Setting Up clasp: A Step-by-step Guide
 
-To help you integrate clasp into your GAS development process, here's a detailed walkthrough:
+To help you integrate `clasp` into your GAS development process, here's a detailed walkthrough:
 
 ### 1.Install Node.js and NPM
 
@@ -100,7 +98,7 @@ Navigate to the Apps Script Settings page, click on `Google Apps Script API` and
 
 ![image3](google_apps_script_2.png)
 
-### 4. Authenticate clasp with Your GAS Account
+### 4. Authenticate `clasp` with Your GAS Account
 
 Execute `clasp login` and follow the browser instructions.
 
@@ -132,7 +130,7 @@ Locate the ID in your GAS remote repository settings:
 
 As a result, all your GAS files will be created locally on your computer. This will allow you to access them via your preferred IDE.
 
-_Note: Local GAS files use the .js extension, but clasp handles the conversion to .gs seamlessly._
+_Note: Local GAS files use the .js extension, but `clasp` handles the conversion to .gs seamlessly._
 
 ### 7. Push changes to the GAS Remote Repository
 
@@ -144,7 +142,7 @@ clasp push
 
 Optionally, you can create a `.claspignore` file to list the files that should not be pushed into the GAS Remote Repository.
 
-Alternitely, you can use `clasp push -w`. This option stands for `watch` and it allows clasp to push the code every time you save the file you're working on, so you don't have to run the clasp push command every time.
+Alternitely, you can use `clasp push -w`. This option stands for `watch` and it allows `clasp` to push the code every time you save the file you're working on, so you don't have to run the `clasp push` command every time.
 
 ```bash
 clasp push -w
