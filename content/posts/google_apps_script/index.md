@@ -57,11 +57,11 @@ Here's how clasp revolutionizes the GAS development process:
 
 - **Push to Popular Repositories:** Having your GAS projects stored locally allows them to tap into the collaborative and open-source advantages offered by platforms like [GitHub](https://github.com).
 
-In essence, clasp empowers developers by breaking the barriers of GAS's IDE, providing them with the freedom and tools typical of modern development workflows.
+In essence, `clasp` empowers developers by breaking the barriers of GAS's IDE, providing them with the freedom and tools typical of modern development workflows.
 
-![Alt text](image.png)
+![diagram](diagram.png)
 
-<!-- TODO: Insert a diagram that links the GAS Remote Repo with VS Code with GitHub Repo -->
+<!-- TODO: Insert a footer to this image -->
 
 ## Setting Up clasp: A Step-by-step Guide
 
