@@ -14,7 +14,7 @@ comment: true
 draft: false
 ---
 
-Harness the capabilities of Google Apps Script (GAS) to optimize your workflows, design bespoke solutions, and extract the utmost value from G Suite applications. Whether you're a seasoned developer or a business professional looking to automate mundane tasks, GAS provides the platform to bring your ideas to life.
+Google Apps Script (GAS) is not just another application development platform; it's a powerful JavaScript library tailored to interact seamlessly with the G Suite applications. With GAS, you can create bespoke solutions, optimize workflows, and derive maximum value from the G Suite ecosystem. Whether you're a seasoned developer or a business professional, GAS provides the tools to transform your ideas into functional applications.
 
 ![Google_Apps_Script](google_apps_script_1.png)
 
@@ -32,11 +32,26 @@ Harness the capabilities of Google Apps Script (GAS) to optimize your workflows,
 - **Flexibility**: Customize solutions to meet specific requirements.
 - **Security**: Rely on the robust security infrastructure that Google provides for its applications.
 
-## Local Development with clasp
+## The Challenge: GAS's Built-in IDE
 
-Clasp (Command Line Apps Script Projects) allows you to develop GAS projects on your local machine. This means leveraging your preferred tools like git and [Visual Studio Code](https://code.visualstudio.com), and synchronizing seamlessly with the cloud.
+While GAS provides an integrated development environment (IDE) that facilitates quick scripting, it's not without its limitations. Developers often find challenges in:
 
-Follow these steps to set up clasp in your machine:
+- Synchronizing their scripts with platforms like GitHub.
+- The absence of features that are standard in popular editors like [Visual Studio Code](https://code.visualstudio.com).
+- Organizing complex codebases efficiently.
+
+<!-- TODO: Insert a screenshot of the GAS Built-in IDE -->
+## The Solution: clasp
+
+![clasp](clasp.png)
+
+Enter `clasp` (Command Line Apps Script Projects). Clasp allows you to bridge the gap between GAS's IDE and your preferred local editor. You will be able to synchronize between the GAS remote repository and your local machine, enabling a seamless development experience. With your code now stored locally, you can make use of your preffered IDE and push to remote repositories like GitHub.
+
+<!-- TODO: Insert a diagram that links the GAS Remote Repo with VS Code with GitHub Repo -->
+
+## Setting Up clasp: A Step-by-step Guide
+
+To help you integrate clasp into your GAS development process, here's a detailed walkthrough:
 
 ### 1.Install Node.js and NPM
 
