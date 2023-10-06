@@ -138,5 +138,3 @@ Harnessing the power of Google Apps Script can revolutionize the way you interac
 ---
 
 _Further reading: [Overview of all clasp features](https://developers.google.com/apps-script/guides/clasp)_
-
-_Reminder: Like any online platform, always remember to follow best practices for security and privacy, especially if you're handling sensitive information._
