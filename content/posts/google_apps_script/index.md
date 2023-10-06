@@ -40,12 +40,26 @@ While GAS provides an integrated development environment (IDE) that facilitates 
 - The absence of features that are standard in popular editors like [Visual Studio Code](https://code.visualstudio.com).
 - Organizing complex codebases efficiently.
 
-<!-- TODO: Insert a screenshot of the GAS Built-in IDE -->
+![gas_ide](gas_ide.png)
+<!-- TODO: Add a footer to the image -->
+
 ## The Solution: clasp
+
+Enter `clasp` (Command Line Apps Script Projects), a game-changing tool for GAS developers. At its core, clasp acts as a bridge, connecting the proprietary environment of GAS's IDE with the vast world of modern local editors.
 
 ![clasp](clasp.png)
 
-Enter `clasp` (Command Line Apps Script Projects). Clasp allows you to bridge the gap between GAS's IDE and your preferred local editor. You will be able to synchronize between the GAS remote repository and your local machine, enabling a seamless development experience. With your code now stored locally, you can make use of your preffered IDE and push to remote repositories like GitHub.
+Here's how clasp revolutionizes the GAS development process:
+
+- **Local Development:** By synchronizing with the GAS remote repository, `clasp` lets you develop scripts on your local machine. This means you're no longer confined to the online IDE; instead, you can work in the familiar environment of your preferred local editor, be it [Visual Studio Code](https://code.visualstudio.com), [Atom](https://github.com/atom/atom.git), [Sublime](https://www.sublimetext.com/3), or any other. This not only enhances productivity but also makes coding more enjoyable and efficient. Modern editors come packed with extensions and tools that can aid in development, from linting and formatting to advanced debugging. With clasp, GAS developers can leverage these tools, resulting in cleaner, more efficient code.
+
+- **Version Control:** With your codebase now local, it becomes vastly simpler to manage version control. Traditional tools like `git` can be employed, offering powerful tracking, branching, and collaboration capabilities.
+
+- **Push to Popular Repositories:** Having your GAS projects stored locally allows them to tap into the collaborative and open-source advantages offered by platforms like [GitHub](https://github.com).
+
+In essence, clasp empowers developers by breaking the barriers of GAS's IDE, providing them with the freedom and tools typical of modern development workflows.
+
+![Alt text](image.png)
 
 <!-- TODO: Insert a diagram that links the GAS Remote Repo with VS Code with GitHub Repo -->
 
