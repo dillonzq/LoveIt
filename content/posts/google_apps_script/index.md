@@ -14,19 +14,20 @@ comment: true
 draft: false
 ---
 
-Google Apps Script (GAS) is not just another application development platform; it's a powerful JavaScript library tailored to interact seamlessly with the G Suite applications. With GAS, you can create bespoke solutions, optimize workflows, and derive maximum value from the G Suite ecosystem. Whether you're a seasoned developer or a business professional, GAS provides the tools to transform your ideas into functional applications.
+Google Apps Script (GAS) is not just another application development platform; it’s a powerful JavaScript library tailored to interact seamlessly with the G Suite applications such as Google Sheets, Google Docs, Google Slides, Google Calendar, and Gmail. Imagine creating a custom function in Google Sheets that automatically formats your data, or a script in Google Docs that translates your content into a predefined language. Perhaps you'd like to automate email workflows in Gmail based on certain triggers. With GAS, you can create bespoke solutions like these and derive maximum value from the G Suite ecosystem.
 
 ![Google_Apps_Script](google_apps_script_1.png)
 
-## Key Features of GAS
+## Key features and benefits of GAS
 
-- **Custom Menus in G Suite Apps**: Enhance Google Sheets or Docs with tailored menus that initiate your scripts.
-- **Automate Workflows**: Design scripts to send Gmails based on specific criteria, automating routine tasks.
-- **Integrate Google Services**: Seamlessly sync data between Sheets and Google Contacts or automate Google Calendar event additions from form submissions.
-- **Custom Functions for Google Sheets**: Elevate your data processing in Sheets by crafting your own functions.
-- **Web App Development**: Design and deploy web applications using GAS for internal or external users.
+These are some of GAS standout features:
 
-## Advantages of GAS
+- **Custom Menus in G Suite Apps**: Add personalized menus in Google Sheets or Docs to launch your specific scripts with ease.
+- **Automate Workflows**: Craft scripts to automatically send Gmail messages based on defined criteria, streamlining everyday tasks.
+- **Integrate Google Services**: Seamlessly merge data between Sheets and Google Contacts, or let form entries instantly generate events in your Google Calendar.
+- **Web App Development**: Create and roll out web applications tailored for both internal and external users using GAS.
+
+The adoption of GAS also brings forth a number of tangible benefits:
 
 - **Cost-Efficiency**: Eliminate the need for costly third-party integrations with this free offering from Google.
 - **Flexibility**: Customize solutions to meet specific requirements.
@@ -36,12 +37,9 @@ Google Apps Script (GAS) is not just another application development platform; i
 
 While GAS provides an integrated development environment (IDE) that facilitates quick scripting, it's not without its limitations. Developers often find challenges in:
 
-- Synchronizing their scripts with platforms like GitHub.
+- Synchronizing their scripts with platforms like [GitHub](https://github.com).
 - The absence of features that are standard in popular editors like [Visual Studio Code](https://code.visualstudio.com).
 - Organizing complex codebases efficiently.
-
-![gas_ide](gas_ide.png)
-<!-- TODO: Add a footer to the image -->
 
 ## The Solution: `clasp`
 
@@ -49,9 +47,9 @@ Enter `clasp` (Command Line Apps Script Projects), a game-changing tool for GAS 
 
 ![clasp](clasp.png)
 
-Here's how clasp revolutionizes the GAS development process:
+Here's how `clasp` has eased the GAS development process:
 
-- **Local Development:** By synchronizing with the GAS remote repository, `clasp` lets you develop scripts on your local machine. This means you're no longer confined to the online IDE; instead, you can work in the familiar environment of your preferred local editor, be it [Visual Studio Code](https://code.visualstudio.com), [Atom](https://github.com/atom/atom.git), [Sublime](https://www.sublimetext.com/3), or any other. This not only enhances productivity but also makes coding more enjoyable and efficient. Modern editors come packed with extensions and tools that can aid in development, from linting and formatting to advanced debugging. With `clasp`, GAS developers can leverage these tools, resulting in cleaner, more efficient code.
+- **Local Development:** By synchronizing with the GAS remote repository, `clasp` lets you develop scripts on your local machine. This means you're no longer confined to the online IDE; instead, you can work in the familiar environment of your preferred local editor, be it [Visual Studio Code](https://code.visualstudio.com), [Atom](https://github.com/atom/atom.git), [Sublime](https://www.sublimetext.com/3), or any other. This not only enhances productivity but also makes coding more enjoyable and efficient. Modern editors come packed with extensions and tools that can aid in development, from linting and formatting to advanced debugging. With `clasp`, GAS developers can leverage these tools, resulting in cleaner and more efficient code.
 
 - **Version Control:** With your codebase now local, it becomes vastly simpler to manage version control. Traditional tools like `git` can be employed, offering powerful tracking, branching, and collaboration capabilities.
 
@@ -61,7 +59,7 @@ At its core, `clasp` dismantles the limitations of GAS's IDE, offering developer
 
 ![diagram](diagram.png)
 
-## Setting Up clasp: A Step-by-step Guide
+## Setting Up `clasp`: A Step-by-step Guide
 
 To help you integrate `clasp` into your GAS development process, here's a detailed walkthrough:
 
@@ -76,7 +74,7 @@ node -v
 npm -v
 ```
 
-### 2. Install clasp
+### 2. Install `clasp`
 
 For MacOS or Linux:
 
@@ -150,7 +148,7 @@ clasp push -w
 
 You can stop the terminal from listening to changes by pressing `Ctrl + C` on your keyboard.
 
-### 8. Pull changes from the GAS remote repo into your local machine
+### 8. Pull changes from the GAS Remote Repository into your local machine
 
 Use the `clasp pull` command to fetch the latest from the GAS Remote Repository:
 
