@@ -5,7 +5,7 @@ subtitle: "Code effortlessly in Visual Studio Code and sync with your GitHub Rep
 description: "Linking VS Code to GitHub Repositories"
 date: "2023-10-05"
 
-tags: ["development", "how-to", "vscode"]
+tags: ["development", "how-to", "vscode", "tools"]
 header_img: "img/vscode_github/vs_code_bg.png"
 toc: true
 series: ["Themes Guide"]
