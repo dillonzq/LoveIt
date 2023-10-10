@@ -25,7 +25,7 @@ Streamline your development process for the Philico P-Tech blog using Visual Stu
      ```
 
   3. Post execution, the blog will be available for viewing in your preferred browser.
-     ![screenshot](https://github.com/philico-tech/ptech-blog/assets/138483812/b8c7fb07-0f17-40dd-9ca5-0f3c61744e87)
+     ![main_page](main_page.png)
 
 ## 📌 Notes
 
