@@ -1,7 +1,7 @@
 {{ define "container" }}
 {{ $paginator := .Paginate .Site.RegularPages }}
 {{ range $paginator.Pages }}
-   {{ .Render "summary" }}
+{{ .Render "summary" }}
 {{ end }}
 
 {{ if or ($paginator.HasPrev) ($paginator.HasNext) }}
