@@ -1,9 +1,0 @@
-{{- /* Checkbox unchecked */ -}}
-{{- $old := `<input disabled="" type="checkbox">` -}}
-{{- $new := `<i class="far fa-square fa-fw" aria-hidden="true"></i>` -}}
-{{- $content := replace . $old $new -}}
-
-{{- /* Checkbox checked */ -}}
-{{- $old = `<input checked="" disabled="" type="checkbox">` -}}
-{{- $new = `<i class="far fa-check-square fa-fw" aria-hidden="true"></i>` -}}
-{{- return replace $content $old $new -}}

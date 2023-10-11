@@ -1,5 +1,0 @@
-{{- /* Escape character */ -}}
-{{- /* {?X} -> X */ -}}
-{{- $REin := `\{\?(.)\}` -}}
-{{- $REout := `$1` -}}
-{{- return replaceRE $REin $REout . -}}
