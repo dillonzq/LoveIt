@@ -68,9 +68,9 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Specifies the runner type. Here we're using the latest version of Ubuntu
     needs: build # Specifies that the deploy job requires the build job to be successful
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy the site to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
