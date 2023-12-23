@@ -119,7 +119,7 @@
     noFavicon = false
     # modern SVG favicon to use in place of older style .png and .ico files
     # 更现代的 SVG 网站图标, 可替代旧的 .png 和 .ico 文件
-    svgFavicon = ""
+    svgFavicon = "ThePacket.png"
     # Android browser theme color
     # Android 浏览器主题色
     themeColor = "#ffffff"
