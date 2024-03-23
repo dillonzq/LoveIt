@@ -14,13 +14,13 @@ linkedin:
   Icon:
     Class: fab fa-linkedin fa-fw
 
-# 003: Twitter
-twitter:
+# 003: X Twitter
+x-twitter:
   Weight: 3
   Prefix: https://twitter.com/
-  Title: Twitter
+  Title: X
   Icon:
-    Class: fab fa-twitter fa-fw
+    Class: fab fa-x-twitter fa-fw
 
 # 004: Instagram
 instagram:
