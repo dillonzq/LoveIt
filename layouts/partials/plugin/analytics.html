@@ -1,4 +1,4 @@
-{{- $analytics := .Scratch.Get "analytics" | default dict -}}
+{{- $analytics := .Site.Param "analytics" | default dict -}}
 
 {{- if $analytics.enable -}}
     {{- /* Google Analytics */ -}}
