@@ -363,10 +363,16 @@ div.sub-menu-item {
       .menu-item {
         display: block;
         line-height: 2.5rem;
+        text-align: left;
+        padding-left: 20px;
       }
 
       &.active {
         display: block;
+      }
+
+      .inline {
+        display: inline;
       }
 
       [theme=dark] & {

@@ -169,16 +169,22 @@
                 {{- with .Page -}}
                     {{- $url = .RelPermalink -}}
                 {{- end -}}
-                <a class="menu-item" href="{{ $url }}" title="{{ .Title }}"{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
-                    {{- .Pre | safeHTML }}{{ .Name }}{{ .Post | safeHTML -}}
-                </a>
+                {{ if ne .Name "" }} {{/* Ignore menu items with empty string as name (e.g social media icons) */}}
+                    <a class="menu-item" href="{{ $url }}" title="{{ .Title }}"{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
+                        {{- .Pre | safeHTML }}{{ .Name }}{{ .Post | safeHTML -}}
+                    </a>
+                {{ else }}
+                    <a class="menu-item inline" href="{{ $url }}" title="{{ .Title }}"{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
+                        {{- .Pre | safeHTML }}{{ .Name }}{{ .Post | safeHTML -}}
+                    </a>
+                {{ end }}
             {{- end -}}
-            <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
+            <a href="javascript:void(0);" class="menu-item inline theme-switch" title="{{ T "switchTheme" }}">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a>
             {{- if .Site.IsMultiLingual -}}
             
-                <a href="javascript:void(0);" class="menu-item" title="{{ T "selectLanguage" }}">
+                <a href="javascript:void(0);" class="menu-item inline" title="{{ T "selectLanguage" }}">
                     <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
                     <select class="language-select" onchange="location = this.value;">
                         {{- if eq .Kind "404" -}}
