@@ -50,6 +50,56 @@ header {
   position: relative;
 }
 
+div.menu-item {
+  float: left;
+  overflow: hidden;
+}
+
+div.sub-menu-item {
+  float: left;
+  overflow: hidden;
+}
+
+/* The subnavigation menu */
+.subnav {
+}
+
+/* Style the subnav content - positioned absolute */
+.subnav-content {
+  display: none;
+  position: absolute;
+  flex-direction: column;
+  //left: 0;
+  //width: 100%;
+  background-color: #f8f8f8;
+  z-index: 1;
+}
+
+/* Style the subnav links */
+.subnav-content a {
+  float: left;
+  //color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-decoration: none;
+}
+
+.subnav-content a .menu-item {
+  float: none;
+  //color: white;
+  text-decoration: none;
+}
+
+/* Add a grey background color on hover */
+.subnav-content a:hover {
+  //color: black;
+}
+
+/* When you move the mouse over the subnav container, open the subnav content */
+.sub-menu-item:hover .subnav-content {
+  display: flex;
+}
+
 .language-select {
   position: absolute;
   opacity: 0;

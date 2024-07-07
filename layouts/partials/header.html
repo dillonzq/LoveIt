@@ -28,13 +28,40 @@
         <div class="menu">
             <div class="menu-inner">
                 {{- range .Site.Menus.main -}}
-                    {{- $url := .URL | relLangURL -}}
+                {{- $url := .URL | relLangURL -}}
                     {{- with .Page -}}
                         {{- $url = .RelPermalink -}}
                     {{- end -}}
-                    <a class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
-                        {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
-                    </a>
+
+                    {{ if .HasChildren }}
+                        <div class="sub-menu-item">
+                            <a class="subnavbtn menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
+                                {{- .Pre | safeHTML }} {{ or (T .Identifier) .Name }} {{ .Post | safeHTML -}} <i class="fa fa-caret-down"></i>
+                            </a>
+                            <div class="subnav-content">
+                            {{ range .Children }}
+                                <a class="sub-menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink .URL) }} active{{ end }}" href="{{ .URL | relLangURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>{{ or (T .Identifier) .Name }}</a>
+                            {{- end -}}
+                            </div>
+                        </div>
+                    {{- else -}}
+                        {{- $urlId := "-url" | printf "%s%s" .Identifier -}}
+                <div class="menu-item">
+                        <a
+                                class="{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}"
+                                href="{{ or (T $urlId) $url }}"
+                                {{ with .Title }}
+                                    title="{{ . }}"
+                                {{ end }}
+                                {{ if (urls.Parse $url).Host }}
+                                rel="noopener noreffer"
+                                target="_blank"{{ end }}
+                        >
+                            {{- .Pre | safeHTML }} {{ or (T .Identifier) .Name }} {{ .Post | safeHTML -}}
+                        </a>
+                </div>
+                    {{- end -}}
+
                 {{- end -}}
                 {{- if .Site.Menus.main -}}
                     <span class="menu-item delimiter"></span>
