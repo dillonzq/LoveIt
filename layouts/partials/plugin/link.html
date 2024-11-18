@@ -1,0 +1,9 @@
+{{- $rel := "" -}}
+<a href="{{ .Destination | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse .Destination).Host | or .Newtab }}{{ $rel = "noopener noreferrer" }} target="_blank"{{ end }} rel="{{ $rel }}{{ with .Rel }} {{ . }}{{ end }}"{{ with .Class }} class="{{ . }}"{{ end }}>
+    {{- with .Icon -}}
+        {{- partial "plugin/icon.html" . -}}
+    {{- end -}}
+    {{- with .Content -}}
+        {{- . | safeHTML -}}
+    {{- end -}}
+</a>

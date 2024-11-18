@@ -15,12 +15,12 @@
                 {{- . -}}
             </language>
         {{- end -}}
-        {{- with .Site.Author.email -}}
+        {{- with .Site.Params.Author.email -}}
             <managingEditor>
-                {{- . }}{{ with $.Site.Author.name }} ({{ . }}){{ end -}}
+                {{- . }}{{ with $.Site.Params.Author.name }} ({{ . }}){{ end -}}
             </managingEditor>
             <webMaster>
-                {{- . }}{{ with $.Site.Author.name }} ({{ . }}){{ end -}}
+                {{- . }}{{ with $.Site.Params.Author.name }} ({{ . }}){{ end -}}
             </webMaster>
         {{- end -}}
         {{- with .Site.Copyright -}}
