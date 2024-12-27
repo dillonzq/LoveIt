@@ -32,7 +32,7 @@
 
                 {{- /* Author */ -}}
                 {{- if ne .Site.Params.footer.author false -}}
-                    <span class="author" itemprop="copyrightHolder">&nbsp;<a href="{{ $.Site.Author.link | default .Site.Home.RelPermalink }}" target="_blank">{{ .Site.Author.name }}</a></span>
+                    <span class="author" itemprop="copyrightHolder">&nbsp;<a href="{{ $.Site.Params.Author.link | default .Site.Home.RelPermalink }}" target="_blank">{{ .Site.Params.Author.name }}</a></span>
                 {{- end -}}
 
                 {{- /* License */ -}}
