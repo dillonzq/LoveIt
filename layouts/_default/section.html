@@ -20,6 +20,16 @@
             {{- range $pages.PageGroups -}}
                 <h3 class="group-title">{{ .Key }}</h3>
                 {{- range .Pages -}}
+                    {{ if .Params.external_url }}
+                    <article class="archive-item">
+                        <a href="{{ .Params.external_url }}" target="_blank" class="archive-item-link" rel="noopener noreferrer">
+                            {{- .Title | emojify -}}
+                        </a>
+                        <span class="archive-item-date">
+                            {{- $.Site.Params.section.dateFormat | default "01-02" | .Date.Format -}}
+                        </span>
+                    </article>
+                    {{ else}}
                     <article class="archive-item">
                         <a href="{{ .RelPermalink }}" class="archive-item-link">
                             {{- .Title | emojify -}}
@@ -28,6 +38,7 @@
                             {{- $.Site.Params.section.dateFormat | default "01-02" | .Date.Format -}}
                         </span>
                     </article>
+                    {{ end }}
                 {{- end -}}
             {{- end -}}
             {{- partial "paginator.html" . -}}

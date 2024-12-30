@@ -8,10 +8,15 @@
     {{- end -}}
     {{- range $pages -}}
         {{- $uri := .RelPermalink -}}
+        {{- $external := false -}}
         {{- if $.Site.Params.search.absoluteURL -}}
             {{- $uri = .Permalink -}}
         {{- end -}}
-        {{- $meta := dict "uri" $uri "title" .Title "tags" .Params.tags "categories" .Params.categories -}}
+        {{- if .Params.external_url -}}
+            {{- $uri = .Params.external_url -}}
+            {{- $external = true -}}
+        {{- end -}}
+        {{- $meta := dict "uri" $uri "title" .Title "tags" .Params.tags "categories" .Params.categories "external" $external -}}
         {{- $meta = $.Site.Params.dateFormat | default "2006-01-02" | .PublishDate.Format | dict "date" | merge $meta -}}
         {{- with .Description -}}
             {{- $index = $index | append (dict "content" . "objectID" $uri | merge $meta) -}}

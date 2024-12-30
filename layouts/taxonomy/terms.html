@@ -28,11 +28,19 @@
                                 </a>
                             </h3>
                             {{- range first 5 $pages -}}
+                                {{ if .Params.external_url }}
+                                <article class="archive-item">
+                                    <a href="{{ .Params.external_url }}" target="_blank" class="archive-item-link" rel="noopener noreferrer">
+                                        {{- .Title | emojify -}}
+                                    </a>
+                                </article>
+                                {{ else }}
                                 <article class="archive-item">
                                     <a href="{{ .RelPermalink }}" class="archive-item-link">
                                         {{- .Title | emojify -}}
                                     </a>
                                 </article>
+                                {{ end }}
                             {{- end -}}
                             {{- if gt (len $pages) 5 -}}
                                 <span class="more-post">

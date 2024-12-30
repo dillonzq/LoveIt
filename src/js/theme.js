@@ -207,6 +207,8 @@ class Theme {
                                     title = title.replace(new RegExp(`(${key})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
                                     context = context.replace(new RegExp(`(${key})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
                                 });
+                                console.log(matchData)
+
                                 results[uri] = {
                                     'uri': uri,
                                     'title' : title,
@@ -288,6 +290,10 @@ class Theme {
                 },
             });
             autosearch.on('autocomplete:selected', (_event, suggestion, _dataset, _context) => {
+                if (suggestion.external) {
+                    window.open(suggestion.uri);
+                    return;
+                }
                 window.location.assign(suggestion.uri);
             });
             if (isMobile) this._searchMobile = autosearch;

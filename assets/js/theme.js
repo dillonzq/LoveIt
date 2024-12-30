@@ -368,6 +368,7 @@ var Theme = /*#__PURE__*/function () {
                       content = _ref4._snippetResult.content;
                   if (results[uri] && results[uri].context.length > content.value) return;
                   results[uri] = {
+                    external: _ref4.external,
                     uri: uri,
                     title: title.value,
                     date: date,
@@ -413,6 +414,11 @@ var Theme = /*#__PURE__*/function () {
           }
         });
         autosearch.on('autocomplete:selected', function (_event, suggestion, _dataset, _context) {
+          console.log(suggestion);
+          if (suggestion.external) {
+            window.open(suggestion.uri);
+            return;
+          }
           window.location.assign(suggestion.uri);
         });
         if (isMobile) _this3._searchMobile = autosearch;else _this3._searchDesktop = autosearch;
