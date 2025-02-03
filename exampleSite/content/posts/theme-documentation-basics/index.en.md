@@ -215,8 +215,6 @@ languageName = "English"
 # whether to include Chinese/Japanese/Korean
 hasCJKLanguage = false
 
-# default amount of posts in each pages
-paginate = 12
 # google analytics code [UA-XXXXXXXX-X]
 googleAnalytics = ""
 # copyright description used only for seo schema
@@ -231,6 +229,12 @@ enableEmoji = true
 
 # ignore some build errors
 ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
+
+# Pagination config
+[pagination]
+  disableAliases = false
+  pagerSize = 10
+  path = "page"
 
 # Author config
 [author]
