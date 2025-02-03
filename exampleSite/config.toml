@@ -52,13 +52,6 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   pagerSize = 10
   path = "page"
 
-# Author config
-# 作者配置
-[author]
-  name = "xxxx"
-  email = ""
-  link = ""
-
 # Menu config
 # 菜单配置
 [menu]
@@ -117,6 +110,13 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # website images for Open Graph and Twitter Cards
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = ["/logo.png"]
+
+  # Author config
+  # 作者配置
+  [params.author]
+    name = "xxxx"
+    email = ""
+    link = ""
 
   # Header config
   # 页面头部导航栏配置

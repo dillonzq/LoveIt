@@ -89,12 +89,6 @@ languageCode = "en"
 # language name ["English", "简体中文", "Français", "Polski", ...]
 languageName = "English"
 
-# Author config
-[author]
-  name = "xxxx"
-  email = ""
-  link = ""
-
 # Menu config
 [menu]
   [[menu.main]]
@@ -236,12 +230,6 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   pagerSize = 10
   path = "page"
 
-# Author config
-[author]
-  name = "xxxx"
-  email = ""
-  link = ""
-
 # Menu config
 [menu]
   [[menu.main]]
@@ -288,6 +276,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   description = "This is my cool site"
   # website images for Open Graph and Twitter Cards
   images = ["/logo.png"]
+
+# Author config
+  [params.author]
+    name = "xxxx"
+    email = ""
+    link = ""
 
   # Header config
   [params.header]

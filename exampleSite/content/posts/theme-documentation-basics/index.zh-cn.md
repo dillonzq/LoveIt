@@ -91,12 +91,6 @@ languageName = "简体中文"
 # 是否包括中日韩文字
 hasCJKLanguage = true
 
-# 作者配置
-[author]
-  name = "xxxx"
-  email = ""
-  link = ""
-
 # 菜单配置
 [menu]
   [[menu.main]]
@@ -238,12 +232,6 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   pagerSize = 10
   path = "page"
 
-# 作者配置
-[author]
-  name = "xxxx"
-  email = ""
-  link = ""
-
 # 菜单配置
 [menu]
   [[menu.main]]
@@ -290,6 +278,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   description = "这是我的全新 Hugo 网站"
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = ["/logo.png"]
+
+  # 作者配置
+  [params.author]
+    name = "xxxx"
+    email = ""
+    link = ""
 
   # 页面头部导航栏配置
   [params.header]

@@ -28,6 +28,13 @@
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = []
 
+  # Author config
+  # 作者配置
+  [params.author]
+    name = "xxxx"
+    email = ""
+    link = ""
+
   # Header config
   # 页面头部导航栏配置
   [params.header]
