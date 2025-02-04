@@ -23,7 +23,7 @@ lightgallery: true
 <!--more-->
 
 {{< admonition >}}
-这篇文章借鉴了一篇很棒的[来自 Grav 的文章](http://learn.getgrav.org/content/markdown).
+这篇文章借鉴了一篇很棒的[来自 Grav 的文章](https://learn.getgrav.org/content/markdown).
 
 如果你想了解 **Loveit** 主题的扩展 Markdown 语法, 请阅读[扩展 Markdown 语法页面](../theme-documentation-content#extended-markdown-syntax).
 {{< /admonition >}}

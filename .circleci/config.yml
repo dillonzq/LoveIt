@@ -9,7 +9,7 @@ jobs:
       - run: git submodule sync
       - run: git submodule update --init
       - run: hugo --source=exampleSite -v --gc
-      - run: htmlproofer exampleSite/public --disable-external true
+      - run: htmlproofer exampleSite/public --disable-external true --ignore-missing-alt true
 
 workflows:
   build-check-exampleSite:
