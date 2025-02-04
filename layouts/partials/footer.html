@@ -46,6 +46,12 @@
                     <span class="icp">{{ . | safeHTML }}</span>
                 {{- end -}}
             </div>
+            
+            {{- if ne .Site.Params.footer.mastodonRelme false -}}
+                <div class="footer-line">
+                    <a rel="me" href="{{ $.Site.Params.Social.mastodon }}"></a>
+                </div>
+            {{- end -}}
         </div>
     </footer>
 {{- end -}}
