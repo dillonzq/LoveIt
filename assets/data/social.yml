@@ -569,6 +569,14 @@ rootme:
   Icon:
     Src: svg/icons/rootme.svg
 
+# 073: Malt
+malt:
+  Weight: 73
+  Prefix: https://www.malt.fr/profile/
+  Title: Malt
+  Icon:
+    Src: svg/icons/malt.svg
+
 # Phone
 phone:
   Weight: 98
