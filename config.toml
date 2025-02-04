@@ -1,7 +1,7 @@
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.62.0"
+    min = "0.128.0"
 
 [params]
   # site default theme ["auto", "light", "dark"]
@@ -27,6 +27,13 @@
   # website images for Open Graph and Twitter Cards
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = []
+
+  # Author config
+  # 作者配置
+  [params.author]
+    name = "xxxx"
+    email = ""
+    link = ""
 
   # Header config
   # 页面头部导航栏配置

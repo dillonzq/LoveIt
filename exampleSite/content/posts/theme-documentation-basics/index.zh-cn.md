@@ -27,16 +27,14 @@ toc:
 
 ## 1 准备
 
-由于 Hugo 提供的便利性, [Hugo](https://gohugo.io/) 本身是这个主题唯一的依赖.
+由于 Hugo 提供的便利性, [Hugo](https://gohugo.io/) 是这个主题唯一的依赖.
 
-直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive fa-fw): Hugo (> 0.62.0)](https://gohugo.io/getting-started/installing/).
+直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新 **extended** 版本 [:(far fa-file-archive fa-fw): Hugo (> 0.128.0)](https://gohugo.io/getting-started/installing/).
 
-{{< admonition note "为什么不支持早期版本的 Hugo?" >}}
-由于 [Markdown 渲染钩子函数](https://gohugo.io/getting-started/configuration-markup#markdown-render-hooks) 在 [Hugo 圣诞节版本](https://gohugo.io/news/0.62.0-relnotes/) 中被引入, 本主题只支持高于 **0.62.0** 的 Hugo 版本.
-{{< /admonition >}}
+{{< admonition note "为什么需要使用 Hugo extended 版本" >}}
+由于这个主题的一些特性需要将 :(fab fa-sass fa-fw): SCSS 转换为 :(fab fa-css3 fa-fw): CSS, 你需要使用 Hugo **extended** 版本来获得正确的渲染效果.
 
-{{< admonition tip "推荐使用 Hugo extended 版本" >}}
-由于这个主题的一些特性需要将 :(fab fa-sass fa-fw): SCSS 转换为 :(fab fa-css3 fa-fw): CSS, 推荐使用 Hugo **extended** 版本来获得更好的使用体验.
+![Hugo extended 版本](hugo-extended-edition.png "Hugo extended 版本")
 {{< /admonition >}}
 
 ## 2 安装
@@ -90,12 +88,6 @@ languageCode = "zh-CN"
 languageName = "简体中文"
 # 是否包括中日韩文字
 hasCJKLanguage = true
-
-# 作者配置
-[author]
-  name = "xxxx"
-  email = ""
-  link = ""
 
 # 菜单配置
 [menu]
@@ -176,6 +168,7 @@ hugo serve
 ```bash
 hugo serve --disableFastRender
 ```
+
 {{< /admonition >}}
 
 ### 2.6 构建网站
@@ -217,8 +210,6 @@ languageName = "简体中文"
 # 是否包括中日韩文字
 hasCJKLanguage = true
 
-# 默认每页列表显示的文章数目
-paginate = 12
 # 谷歌分析代号 [UA-XXXXXXXX-X]
 googleAnalytics = ""
 # 版权描述，仅仅用于 SEO
@@ -234,11 +225,11 @@ enableEmoji = true
 # 忽略一些构建错误
 ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
-# 作者配置
-[author]
-  name = "xxxx"
-  email = ""
-  link = ""
+# 分页配置
+[pagination]
+  disableAliases = false
+  pagerSize = 10
+  path = "page"
 
 # 菜单配置
 [menu]
@@ -286,6 +277,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   description = "这是我的全新 Hugo 网站"
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = ["/logo.png"]
+
+  # 作者配置
+  [params.author]
+    name = "xxxx"
+    email = ""
+    link = ""
 
   # 页面头部导航栏配置
   [params.header]

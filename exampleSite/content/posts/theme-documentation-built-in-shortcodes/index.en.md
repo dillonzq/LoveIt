@@ -143,12 +143,12 @@ The rendered output looks like this:
 Example `tweet` input:
 
 ```markdown
-{{</* tweet 917359331535966209 */>}}
+{{</* tweet user=GoHugoIO id=917359331535966209 */>}}
 ```
 
 The rendered output looks like this:
 
-{{< tweet 917359331535966209 >}}
+{{< tweet user=GoHugoIO id=917359331535966209 >}}
 
 ## 8 vimeo
 

@@ -52,6 +52,7 @@
     {{- $source := $cdn.lightgalleryZoomJS | default "lib/lightgallery/plugins/zoom/lg-zoom.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- $config = dict "lightgallery" true | merge $config -}}
+    {{- $_ := (resources.Get "lib/lightgallery/images/loading.gif").RelPermalink -}}
 {{- end -}}
 
 {{- $code := $params.code | default dict -}}

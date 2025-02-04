@@ -383,7 +383,7 @@ Raw content using Markdown syntax: {{< raw >}}**Hello**{{< /raw >}}
 
 ## 13 person
 
-`person` is a shortcode to insert a link to a personal webpage marked up as [h-card](http://microformats.org/wiki/h-card).
+`person` is a shortcode to insert a link to a personal webpage marked up as [h-card](https://microformats.org/wiki/h-card).
 
 The `person` shortcode has the following named parameters:
 
