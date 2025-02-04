@@ -9,7 +9,7 @@ jobs:
       - run: git submodule sync
       - run: git submodule update --init
       - run: hugo --source=exampleSite -v --gc
-      - run: htmlproofer exampleSite/public --disable-external
+      - run: htmlproofer exampleSite/public --disable-external true
 
 workflows:
   build-check-exampleSite:
