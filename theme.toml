@@ -23,7 +23,7 @@ features = [
   "SEO Optimized"
 ]
 
-min_version = "0.62.0"
+min_version = "0.128.0"
 
 [author]
   name = "Dillon"

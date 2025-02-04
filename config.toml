@@ -1,7 +1,7 @@
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.62.0"
+    min = "0.128.0"
 
 [params]
   # site default theme ["auto", "light", "dark"]
