@@ -128,7 +128,7 @@ hasCJKLanguage = true
 ```
 
 {{< admonition >}}
-在构建网站时, 你可以使用 `--theme` 选项设置主题. 但是, 我建议你修改配置文件 (**config.toml**) 将本主题设置为默认主题.
+在构建网站时, 你可以使用 `--theme` 选项设置主题. 但是, 我建议你修改配置文件 (**hugo.toml**) 将本主题设置为默认主题.
 {{< /admonition >}}
 
 ### 2.4 创建你的第一篇文章
@@ -190,7 +190,7 @@ hugo
 
 ### 3.1 网站配置 {#site-configuration}
 
-除了 [Hugo 全局配置](https://gohugo.io/overview/configuration/) 和 [菜单配置](#basic-configuration) 之外, **LoveIt** 主题还允许您在网站配置中定义以下参数 (这是一个示例 `config.toml`, 其内容为默认值).
+除了 [Hugo 全局配置](https://gohugo.io/overview/configuration/) 和 [菜单配置](#basic-configuration) 之外, **LoveIt** 主题还允许您在网站配置中定义以下参数 (这是一个示例 `hugo.toml`, 其内容为默认值).
 
 请打开下面的代码块查看完整的示例配置 :(far fa-hand-point-down fa-fw)::
 
