@@ -378,7 +378,7 @@ console.log('Hello LoveIt!');
 
 ## 13 person
 
-`person` shortcode 用来在你的文章中以 [h-card](http://microformats.org/wiki/h-card) 的格式插入个人网站链接.
+`person` shortcode 用来在你的文章中以 [h-card](https://microformats.org/wiki/h-card) 的格式插入个人网站链接.
 
 `person` shortcode 有以下命名参数:
 

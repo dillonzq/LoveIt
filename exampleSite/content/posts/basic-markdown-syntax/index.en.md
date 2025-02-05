@@ -23,7 +23,7 @@ This article offers a sample of basic Markdown syntax that can be used in Hugo c
 <!--more-->
 
 {{< admonition >}}
-This article is a shameful copy of the great [Grav original page](http://learn.getgrav.org/content/markdown).
+This article is a shameful copy of the great [Grav original page](https://learn.getgrav.org/content/markdown).
 
 If you want to know about the extended Markdown syntax of **LoveIt** theme, please read [extended Markdown syntax page](../theme-documentation-content#extended-markdown-syntax).
 {{< /admonition >}}

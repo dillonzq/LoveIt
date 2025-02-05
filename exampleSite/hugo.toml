@@ -24,9 +24,6 @@ languageName = "English"
 # 是否包括中日韩文字
 hasCJKLanguage = false
 
-# default amount of posts in each pages
-# 默认每页列表显示的文章数目
-paginate = 12
 # google analytics code [UA-XXXXXXXX-X]
 # 谷歌分析代号 [UA-XXXXXXXX-X]
 googleAnalytics = ""
@@ -48,12 +45,12 @@ enableEmoji = true
 # 忽略一些构建错误
 ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
-# Author config
-# 作者配置
-[author]
-  name = "xxxx"
-  email = ""
-  link = ""
+# Pagination config
+# 分页配置
+[pagination]
+  disableAliases = false
+  pagerSize = 10
+  path = "page"
 
 # Menu config
 # 菜单配置
@@ -113,6 +110,13 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # website images for Open Graph and Twitter Cards
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = ["/logo.png"]
+
+  # Author config
+  # 作者配置
+  [params.author]
+    name = "xxxx"
+    email = ""
+    link = ""
 
   # Header config
   # 页面头部导航栏配置
@@ -747,7 +751,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 # Permalinks config (https://gohugo.io/content-management/urls/#permalinks)
 # Permalinks 配置 (https://gohugo.io/content-management/urls/#permalinks)
-[Permalinks]
+[permalinks]
   # posts = ":year/:month/:filename"
   posts = ":filename"
 

@@ -1,7 +1,7 @@
 # LoveIt 主题 | Hugo [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
-[![Hugo](https://img.shields.io/badge/Hugo-%5E0.62.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%5E0.128.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dillonzq_LoveIt&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dillonzq_LoveIt)
 [![CircleCI](https://circleci.com/gh/dillonzq/LoveIt/tree/master.svg?style=svg)](https://circleci.com/gh/dillonzq/LoveIt/tree/master)
@@ -62,7 +62,7 @@
 * 支持 **[Fathom Analytics](https://usefathom.com/)**
 * 支持 **[Plausible Analytics](https://plausible.io/)**
 * 支持 **[Yandex Metrica](https://metrica.yandex.com/)**
-* 支持搜索引擎的**网站验证** (Google, Bind, Yandex and Baidu)
+* 支持搜索引擎的**网站验证** (Google, Bind, Yandex 和 Baidu)
 * 支持所有第三方库的 **CDN**
 * 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为**懒加载**
 

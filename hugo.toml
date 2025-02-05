@@ -1,6 +1,5 @@
 [module]
   [module.hugoVersion]
-    extended = true
     min = "0.128.0"
 
 [params]
@@ -280,7 +279,6 @@
     Plume = ""
     HackTheBox = ""
     RootMe= ""
-    Malt = ""
     Email = ""
     Phone = ""
     RSS = ""
