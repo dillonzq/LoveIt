@@ -593,6 +593,11 @@
 
   # Cookie consent config
   # Cookie 许可配置
+  # Ads config
+  [params.ads]
+    enable = false
+    [params.ads.google]
+      id = ""
   [params.cookieconsent]
     enable = false
     # text strings used for Cookie consent banner
