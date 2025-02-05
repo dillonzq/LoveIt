@@ -1,0 +1,198 @@
+# Translations for Ukrainian
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ==
+[backToTop]
+other = "Повернутися до початку"
+
+[viewComments]
+other = "Переглянути коментарі"
+# === baseof ==
+
+# === Post ===
+[posts]
+other = "Публікації"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "Всі {{ .Some }}"
+
+[tag]
+other = "Тег"
+
+[tags]
+other = "Теги"
+
+[category]
+other = "Категорія"
+
+[categories]
+other = "Категорії"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "Більше"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "Змінити мову"
+
+[switchTheme]
+other = "Змінити тему"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Працює на основі {{ .Hugo }} | Theme - {{ .Theme }}"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "Ваш коментар ..."
+
+[facebookLanguageCode]
+other = "uk_UA"
+
+[giscusLang]
+other = "uk"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "Пошук"
+
+[searchPlaceholder]
+other = "Search titles or contents..."
+
+[clear]
+other = "Очистити"
+
+[cancel]
+other = "Скасувати"
+
+[noResultsFound]
+other = "Нічого не знайдено"
+
+[lunrLanguageCode]
+other = "uk"
+
+[copyToClipboard]
+other = "Скопіювати до буфера обміну"
+
+[cookieconsentMessage]
+other = "Цей веб-сайт використовує файли cookie, щоб покращити ваш досвід."
+
+[cookieconsentDismiss]
+other = "Зрозуміло!"
+
+[cookieconsentLink]
+other = "Дізнатися більше"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "Поділитися в"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "Зміст"
+
+[publishedOnDate]
+other = "опубліковано {{ .Date }}"
+
+[includedInCategories]
+other = "включений в{{ .Categories }}"
+
+[wordCount]
+one = "Одне слово"
+other = "{{ .Count }} слів"
+
+[readingTime]
+one = "Одна минута"
+other = "{{ .Count }} минут"
+
+[views]
+other = "перегляди"
+
+[author]
+other = "Автор"
+
+[updatedOnDate]
+other = "Оновлено {{ .Date }}"
+
+[readMarkdown]
+other = "Читати Markdown"
+
+[back]
+other = "Повернутися"
+
+[home]
+other = "Головна"
+
+[readMore]
+other = "Детальніше"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Сторінку не знайдено"
+
+[pageNotFoundText]
+other = "Сторінка, яку ви шукаєте, не існує. Вибачте."
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Примітка"
+
+[abstract]
+other = "Анотація"
+
+[info]
+other = "Інформація"
+
+[tip]
+other = "Порада"
+
+[success]
+other = "Успіх"
+
+[question]
+other = "Питання"
+
+[warning]
+other = "Попередження"
+
+[failure]
+other = "Невдача"
+
+[danger]
+other = "Небезпека"
+
+[bug]
+other = "Помилка"
+
+[example]
+other = "Приклад"
+
+[quote]
+other = "Цитата"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "НОВИЙ"
+
+[changed]
+other = "ЗМІНЕНИЙ"
+
+[deleted]
+other = "ВИДАЛЕНИЙ"
+# === shortcodes/version.html ===
