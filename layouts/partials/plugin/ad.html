@@ -1,0 +1,9 @@
+{{- $ad := .Scratch.Get "ad" | default dict -}}
+
+{{- if $ad.enable -}}
+    {{- /* Google AdSense */ -}}
+    {{- with $ad.google.id -}}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ . }}" crossorigin="anonymous">
+        </script>
+    {{- end -}}
+{{- end -}}

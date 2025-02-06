@@ -567,7 +567,13 @@
     # thumbnail URL
     # 缩略图 URL
     thumbnailUrl = ""
-
+  # AD config
+  # 广告配置
+  [params.ad]
+    enable = true
+    # Google AdSense
+    [params.ad.google]
+      id = ""
   # Analytics config
   # 网站分析配置
   [params.analytics]
@@ -578,6 +584,9 @@
       # whether to anonymize IP
       # 是否匿名化用户 IP
       anonymizeIP = true
+    # Baidu Analytics
+    [params.analytics.baidu]
+      id = ""
     # Fathom Analytics
     [params.analytics.fathom]
       id = ""
