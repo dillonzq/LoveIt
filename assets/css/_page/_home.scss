@@ -1,4 +1,6 @@
 .home {
+  padding-bottom: 5rem;
+
   .home-profile {
     @include transform(translateY( 16vh));
     padding: 0 0 .5rem;
