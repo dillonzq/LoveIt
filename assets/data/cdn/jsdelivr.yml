@@ -45,7 +45,7 @@ libFiles:
   mapboxGLJS: mapbox-gl@2.9.1/dist/mapbox-gl.min.js
   # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
   aplayerCSS: aplayer@1.10.1/dist/APlayer.min.css
-  aplayerJS: aplayer@1.10.1/dist/APlayer.min.js
+  #aplayerJS: aplayer@1.10.1/dist/APlayer.min.js
   # meting@2.0.1 https://github.com/metowolf/MetingJS
   metingJS: meting@2.0.1/dist/Meting.min.js
   # gitalk@1.7.2 https://github.com/gitalk/gitalk
