@@ -1,8 +1,9 @@
-# LoveIt 主题 | Hugo [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
+# LoveIt 主题 | Hugo
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.128.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
 [![CircleCI](https://circleci.com/gh/dillonzq/LoveIt/tree/master.svg?style=svg)](https://circleci.com/gh/dillonzq/LoveIt/tree/master)
 
 [English README](https://github.com/dillonzq/LoveIt/blob/master/README.md) | 简体中文说明
@@ -131,7 +132,7 @@ LoveIt 支持下列语言:
 * 繁体中文
 * 法语
 * 波兰语
-* 巴西葡萄牙语
+* 葡萄牙语(巴西)
 * 意大利语
 * 西班牙语
 * 德语
@@ -147,6 +148,7 @@ LoveIt 支持下列语言:
 * 土耳其语
 * 韩语
 * 印地语
+* 荷兰语
 * [贡献一种新的语言](https://github.com/dillonzq/LoveIt/pulls)
 
 [语言兼容性](https://hugoloveit.com/zh-cn/theme-documentation-basics/#language-compatibility)
