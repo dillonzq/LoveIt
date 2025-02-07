@@ -577,6 +577,30 @@ malt:
   Icon:
     Src: svg/icons/malt.svg
 
+# 074: TikTok
+tiktok:
+  Weight: 74
+  Url: https://www.tiktok.com/
+  Title: TikTok
+  Icon:
+    Simpleicons: tiktok
+
+# 075: TryHackMe
+tryhackme:
+  Weight: 75
+  Title: TryHackMe
+  Prefix: https://tryhackme.com/p/
+  Icon:
+    Simpleicons: Tryhackme
+
+# 076: Codeberg
+codeberg:
+  Weight: 76
+  Title: Codeberg
+  Prefix: https://codeberg.org/
+  Icon:
+    Simpleicons: codeberg
+
 # Phone
 phone:
   Weight: 98
@@ -601,11 +625,3 @@ rss:
   Newtab: true
   Icon:
     Class: fas fa-rss fa-fw
- 
-# TikTok
-tiktok:
-  Weight: 101
-  Url: https://www.tiktok.com/
-  Title: TikTok
-  Icon:
-    Simpleicons: tiktok

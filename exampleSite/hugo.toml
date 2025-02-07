@@ -363,6 +363,10 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     Plume = ""
     HackTheBox = ""
     RootMe= ""
+    Malt = ""
+    TikTok = ""
+    TryHackMe = ""
+    Codeberg = ""
     Email = ""
     RSS = ""
 
