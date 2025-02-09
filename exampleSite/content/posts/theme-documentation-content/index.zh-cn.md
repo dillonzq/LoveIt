@@ -276,13 +276,13 @@ resources:
 一个 `raw` 示例:
 
 ```markdown
-行内公式: {{</* raw */>}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{</* /raw */>}}
+行内公式: {?{}{< raw >}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){?{}{< /raw >}}
 
 公式块:
 
-{{</* raw */>}}
+{?{}{< raw >}}
 \[ a=b+c \\ d+e=f \]
-{{</* /raw */>}}
+{?{}{< /raw >}}
 ```
 
 呈现的输出效果如下:
@@ -305,7 +305,7 @@ resources:
 
 例如:
 
-```tex
+```markdown
 $c = \pm\sqrt{a^2 + b^2}$ 和 \\(f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi\\)
 ```
 
@@ -327,7 +327,7 @@ $c = \pm\sqrt{a^2 + b^2}$ 和 \\(f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 
 
 例如:
 
-```tex
+```markdown
 $$ c = \pm\sqrt{a^2 + b^2} $$
 
 \\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]

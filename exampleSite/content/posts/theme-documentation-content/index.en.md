@@ -278,13 +278,13 @@ which helps you write raw mathematical formula content.
 Example `raw` input:
 
 ```markdown
-Inline Formula: {{</* raw */>}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{</* /raw */>}}
+Inline Formula: {?{}{< raw >}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){?{}{< /raw >}}
 
 Block Formula:
 
-{{</* raw */>}}
+{?{}{< raw >}}
 \[ a=b+c \\ d+e=f \]
-{{</* /raw */>}}
+{?{}{< /raw >}}
 ```
 
 The rendered output looks like this:
@@ -293,7 +293,7 @@ Inline Formula: {{< raw >}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\
 
 Block Formula:
 
-{{< raw>}}
+{{< raw >}}
 \[ a=b+c \\ d+e=f \]
 {{< /raw >}}
 {{< /admonition >}}
@@ -307,7 +307,7 @@ The default inline delimiters are:
 
 For example:
 
-```tex
+```markdown
 $c = \pm\sqrt{a^2 + b^2}$ and \\(f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi\\)
 ```
 
@@ -329,7 +329,7 @@ The default block delimiters are:
 
 For example:
 
-```tex
+```markdown
 $$ c = \pm\sqrt{a^2 + b^2} $$
 
 \\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]

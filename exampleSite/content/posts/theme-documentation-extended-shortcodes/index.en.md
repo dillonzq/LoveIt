@@ -374,11 +374,6 @@ Block Formula:
 \[ a=b+c \\ d+e=f \]
 {{< /raw >}}
 
-{{< script >}}
-console.log('Hello LoveIt!');
-{{< /script >}}
-
-This renders as {{< person "https://dillonzq.com/" Dillon "author of the LoveIt theme" >}}.
 Raw content using Markdown syntax: {{< raw >}}**Hello**{{< /raw >}}
 
 ## 13 person
