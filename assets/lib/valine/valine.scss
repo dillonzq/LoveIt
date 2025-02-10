@@ -29,6 +29,20 @@ $code-background-color-dark: #272C34 !default;
   tab-size: $value;
 }
 
+@mixin transition($values...) {
+  -webkit-transition: $values;
+  -moz-transition: $values;
+  -o-transition: $values;
+  transition: $values;
+}
+
+@mixin transform($value) {
+  -webkit-transform: $value;
+  -ms-transform: $value;
+  -o-transform: $value;
+  transform: $value;
+}
+
 .v[data-class=v] {
   .vcards .vcard .vcontent.expand {
     &::before, &::after {
@@ -66,23 +80,19 @@ $code-background-color-dark: #272C34 !default;
     max-width: 1.5em;
     vertical-align: text-bottom;
   }
-}
 
-// fix valine.js inside css will be override pulse animate for page title
-@keyframes pulse {
+  // fix valine.js inside css will be override pulse animate for page title
+  @keyframes pulse {
     0% {
-        -webkit-transform: scaleX(1);
-        transform: scaleX(1)
+      @include transform(scaleX(1));
     }
 
     50% {
-        -webkit-transform: scale3d(1.05, 1.05, 1.05);
-        transform: scale3d(1.05, 1.05, 1.05)
+      @include transform(scale3d(1.05, 1.05, 1.05));
     }
 
     to {
-        -webkit-transform: scaleX(1);
-        transform: scaleX(1)
+      @include transform(scaleX(1));
     }
+  }
 }
-
