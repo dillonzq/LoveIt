@@ -1,6 +1,6 @@
 {
   "name": "loveit-src",
-  "version": "0.2.0",
+  "version": "0.2.11",
   "description": "LoveIt theme source file",
   "private": true,
   "devDependencies": {
@@ -16,14 +16,15 @@
   },
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
-    "babel": "npx babel src/js --out-file assets/js/theme.js",
-    "build": "npm run babel && hugo --source=exampleSite --themesDir ../.. --gc",
-    "build-lunr-segmentit": "browserify src/lib/lunr/lunr.segmentit.js -o assets/lib/lunr/lunr.segmentit.js -t babelify --presets @babel/preset-env",
-    "start": "npm run babel && hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender",
-    "start-production": "npm run babel && hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender -e production",
-    "check": "htmlproofer exampleSite/public --check-html --allow-hash-href --empty-alt-ignore --disable-external",
-    "copy": "rm -rf resources && cp -rf exampleSite/resources resources",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "compile": "npx babel src/js --out-file assets/js/theme.js",
+    "compile-lunr-segmentit": "browserify src/lib/lunr/lunr.segmentit.js -o assets/lib/lunr/lunr.segmentit.js -t babelify --presets @babel/preset-env",
+    "hugo": "hugo --source exampleSite --buildDrafts --gc",
+    "hugo-production": "hugo --source exampleSite --gc --minify --environment production",
+    "hugo-server": "hugo server --source exampleSite --buildDrafts --disableFastRender",
+    "hugo-server-production": "hugo server --source exampleSite --minify --disableFastRender --environment production",
+    "htmlproofer": "htmlproofer exampleSite/public --disable-external true --ignore-missing-alt true",
+    "copy-resources": "cp -rf exampleSite/resources ."
   },
   "repository": {
     "type": "git",
