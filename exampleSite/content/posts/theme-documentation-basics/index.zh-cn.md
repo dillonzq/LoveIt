@@ -32,7 +32,7 @@ toc:
 直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive fa-fw): Hugo](https://gohugo.io/getting-started/installing/).
 
 {{< admonition note "什么时候需要使用 Hugo extended 版本?" false >}}
-当你需要[自定义样式](#custom-style)时, 你要使用 Hugo **extended** 版本来获得正确的渲染效果.
+当你需要[自定义样式](#style-customization)时, 你要使用 Hugo **extended** 版本来获得正确的渲染效果.
 
 ![Hugo extended 版本](hugo-extended-edition.png "Hugo extended 版本")
 {{< /admonition >}}
@@ -910,7 +910,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 可以自定义 `browserconfig.xml` 和 `site.webmanifest` 文件来设置 theme-color 和 background-color.
 
-### 3.3 自定义样式 {#custom-style}
+### 3.3 自定义样式 {#style-customization}
 
 {{< version 0.2.8 changed >}}
 
