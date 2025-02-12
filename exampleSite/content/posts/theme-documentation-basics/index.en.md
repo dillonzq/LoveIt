@@ -31,7 +31,7 @@ Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only depende
 
 Just install latest **extended edition** of [:(far fa-file-archive fa-fw): Hugo (> 0.128.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
 
-{{< admonition note "Why need to use Hugo **extended edition**" >}}
+{{< admonition note "When you need to use Hugo extended edition?" false >}}
 Since some features of this theme need to processes :(fab fa-sass fa-fw): SCSS to :(fab fa-css3 fa-fw): CSS, you need to use Hugo **extended edition** for correct rendering.
 
 ![Hugo extended edition](hugo-extended-edition.png "Hugo extended edition")
@@ -208,8 +208,6 @@ languageName = "English"
 # whether to include Chinese/Japanese/Korean
 hasCJKLanguage = false
 
-# google analytics code [UA-XXXXXXXX-X]
-googleAnalytics = ""
 # copyright description used only for seo schema
 copyright = ""
 
@@ -511,7 +509,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # whether to enable the table of the contents
       enable = true
       # {{< version 0.2.9 >}} whether to keep the static table of the contents in front of the post
-      keepStatic = true
+      keepStatic = false
       # whether to make the table of the contents in the sidebar automatically collapsed
       auto = true
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} mathematical formulas

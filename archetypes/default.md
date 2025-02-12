@@ -29,6 +29,7 @@ rssFullText: false
 toc:
   enable: true
   auto: true
+  keepStatic: false
 code:
   copy: true
   maxShownLines: 50

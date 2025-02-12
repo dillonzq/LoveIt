@@ -29,10 +29,10 @@ toc:
 
 由于 Hugo 提供的便利性, [Hugo](https://gohugo.io/) 是这个主题唯一的依赖.
 
-直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新 **extended** 版本 [:(far fa-file-archive fa-fw): Hugo (> 0.128.0)](https://gohugo.io/getting-started/installing/).
+直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive fa-fw): Hugo](https://gohugo.io/getting-started/installing/).
 
-{{< admonition note "为什么需要使用 Hugo extended 版本" >}}
-由于这个主题的一些特性需要将 :(fab fa-sass fa-fw): SCSS 转换为 :(fab fa-css3 fa-fw): CSS, 你需要使用 Hugo **extended** 版本来获得正确的渲染效果.
+{{< admonition note "什么时候需要使用 Hugo extended 版本?" false >}}
+当你需要[自定义样式](#custom-style)时, 你要使用 Hugo **extended** 版本来获得正确的渲染效果.
 
 ![Hugo extended 版本](hugo-extended-edition.png "Hugo extended 版本")
 {{< /admonition >}}
@@ -54,7 +54,7 @@ cd my_website
 
 **LoveIt** 主题的仓库是: [https://github.com/dillonzq/LoveIt](https://github.com/dillonzq/LoveIt).
 
-你可以下载主题的 [最新版本 :(far fa-file-archive fa-fw): .zip 文件](https://github.com/dillonzq/LoveIt/releases) 并且解压放到 `themes` 目录.
+你可以下载主题的 [发布版本 :(far fa-file-archive fa-fw): .zip 文件](https://github.com/dillonzq/LoveIt/releases) 并且解压放到 `themes` 目录.
 
 另外, 也可以直接把这个主题克隆到 `themes` 目录:
 
@@ -68,6 +68,16 @@ git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt
 git init
 git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 ```
+
+{{< admonition note "主题的兼容性" >}}
+
+| 分支或版本 | 支持的 Hugo 版本 |
+|:---- |:----:|
+| master(不稳定) | ≥ 0.128.0 |
+| **0.3.X(推荐)** | 0.128.0 - 0.143.1 |
+| 0.2.X(过时) | 0.68.0 - 0.127.0 |
+
+{{< /admonition >}}
 
 ### 2.3 基础配置 {#basic-configuration}
 
@@ -210,8 +220,6 @@ languageName = "简体中文"
 # 是否包括中日韩文字
 hasCJKLanguage = true
 
-# 谷歌分析代号 [UA-XXXXXXXX-X]
-googleAnalytics = ""
 # 版权描述，仅仅用于 SEO
 copyright = ""
 
@@ -513,7 +521,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # 是否使用目录
       enable = true
       # {{< version 0.2.9 >}} 是否保持使用文章前面的静态目录
-      keepStatic = true
+      keepStatic = false
       # 是否使侧边目录自动折叠展开
       auto = true
     # {{< version 0.2.0 >}} 代码配置
@@ -902,12 +910,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 可以自定义 `browserconfig.xml` 和 `site.webmanifest` 文件来设置 theme-color 和 background-color.
 
-### 3.3 自定义样式
+### 3.3 自定义样式 {#custom-style}
 
 {{< version 0.2.8 changed >}}
 
-{{< admonition >}}
-Hugo **extended** 版本对于自定义样式是必需的.
+{{< admonition note "Hugo extended 版本是必需的" >}}
+由于需要将 :(fab fa-sass fa-fw): SCSS 转换为 :(fab fa-css3 fa-fw): CSS, Hugo **extended** 版本对于自定义样式是必需的.
 {{< /admonition >}}
 
 通过定义自定义 `.scss` 样式文件, **LoveIt** 主题支持可配置的样式.
