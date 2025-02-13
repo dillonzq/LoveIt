@@ -832,7 +832,7 @@ class Theme {
     if (document.getElementById('comments')) {
       const $viewComments = document.getElementById('view-comments');
       $viewComments.href = `#comments`;
-      $viewComments.style.display = 'block';
+      $viewComments.classList.add('fixed-button-enabled');
     }
 
     const $fixedButtons = document.getElementById('fixed-buttons');
