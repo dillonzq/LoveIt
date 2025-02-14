@@ -692,7 +692,8 @@ class Theme {
         if (document.getElementById('comments')) {
             const $viewComments = document.getElementById('view-comments');
             $viewComments.href = `#comments`;
-            $viewComments.style.display = 'block';
+            $viewComments.parentElement.removeChild($viewComments);
+            document.getElementById('fixed-buttons').appendChild($viewComments);
         }
         const $fixedButtons = document.getElementById('fixed-buttons');
         const ACCURACY = 20, MINIMUM = 100;

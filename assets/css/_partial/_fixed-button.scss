@@ -2,11 +2,16 @@
   display: none;
 }
 
-.fixed-button {
+#fixed-buttons-hidden {
   display: none;
+}
+
+.fixed-button {
+  display: block;
   z-index: 100;
   position: fixed;
   right: 1.5rem;
+  bottom: 1.5rem;
   font-size: 1rem;
   line-height: 1.3rem;
   padding: .6rem .6rem;
@@ -34,13 +39,16 @@
       color: $global-font-color-dark;
     }
   }
-}
 
-#back-to-top {
-  display: block;
-  bottom: 1.5rem;
-}
+  &:nth-last-of-type(1) {
+    bottom: 1.5rem;
+  }
 
-#view-comments {
-  bottom: 4.5rem;
+  &:nth-last-of-type(2) {
+    bottom: 4.5rem;
+  }
+
+  &:nth-last-of-type(3) {
+    bottom: 7.5rem;
+  }
 }
