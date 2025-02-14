@@ -2,8 +2,12 @@
   display: none;
 }
 
-.fixed-button {
+#fixed-buttons-hidden {
   display: none;
+}
+
+.fixed-button {
+  display: block;
   z-index: 100;
   position: fixed;
   right: 1.5rem;
@@ -36,19 +40,15 @@
     }
   }
 
-  &.fixed-button-enabled {
-    display: block;
+  &:nth-last-of-type(1) {
+    bottom: 1.5rem;
+  }
 
-    &:nth-last-child(1) {
-      bottom: 1.5rem;
-    }
+  &:nth-last-of-type(2) {
+    bottom: 4.5rem;
+  }
 
-    &:nth-last-child(2) {
-      bottom: 4.5rem;
-    }
-
-    &:nth-last-child(3) {
-      bottom: 7.5rem;
-    }
+  &:nth-last-of-type(3) {
+    bottom: 7.5rem;
   }
 }

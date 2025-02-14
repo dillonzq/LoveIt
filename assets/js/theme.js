@@ -832,7 +832,8 @@ class Theme {
     if (document.getElementById('comments')) {
       const $viewComments = document.getElementById('view-comments');
       $viewComments.href = `#comments`;
-      $viewComments.classList.add('fixed-button-enabled');
+      $viewComments.parentElement.removeChild($viewComments);
+      document.getElementById('fixed-buttons').appendChild($viewComments);
     }
 
     const $fixedButtons = document.getElementById('fixed-buttons');
