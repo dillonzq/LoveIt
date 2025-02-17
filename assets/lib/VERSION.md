@@ -2,7 +2,7 @@
 
 | Dependency Library                                                                  | Directory         | Version |
 |:------------------------------------------------------------------------------------|:------------------|--------:|
-| [Algolia Search Clinet](https://github.com/algolia/algoliasearch-client-javascript) | algoliasearch     |  5.20.2 |
+| [Algolia Search Client](https://github.com/algolia/algoliasearch-client-javascript) | algoliasearch     |  5.20.2 |
 | [Animate.css](https://github.com/daneden/animate.css)                               | animate           |   4.1.1 |
 | [APlayer](https://github.com/MoePlayer/APlayer)                                     | aplayer           |  1.10.1 |
 | [Autocomplete](https://github.com/algolia/autocomplete)                             | autocomplete      |  0.38.1 |
