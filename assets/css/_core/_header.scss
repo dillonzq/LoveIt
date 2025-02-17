@@ -328,7 +328,7 @@ header {
 
   &.open {
     .header-wrapper {
-      margin-top: -var(--header-height);
+      margin-top: calc(0px - var(--header-height));
     }
 
     .menu {
