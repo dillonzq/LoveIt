@@ -522,8 +522,20 @@ class Theme {
                 }
                 this._echartsArr = [];
                 this.util.forEach(document.getElementsByClassName('echarts'), $echarts => {
-                    const chart = echarts.init($echarts, this.isDark ? 'dark' : 'light', {renderer: 'svg'});
-                    chart.setOption(JSON.parse(this.data[$echarts.id]));
+                    let filename = $echarts.dataset.filename;
+                    const chart = echarts.init($echarts, this.isDark ? 'dark' : 'macarons', {renderer: 'svg'});
+                    if (! filename) {
+                        // has chart config stored in some element ID as JSON
+                        chart.setOption(JSON.parse(this.data[$echarts.id]));
+                    } else {
+                        // has data-filename attribute => load chart config from external file
+                        $echarts.innerHTML = '';
+                        import(filename).then(module => {
+                            chart.setOption(module.option);
+                        }).catch((err) => {
+                            console.error("While loading eChart for " + filename + ": " + err);
+                        })
+                    }
                     this._echartsArr.push(chart);
                 });
             });

@@ -33,7 +33,31 @@ The basic chart types ECharts supports include [line series](https://echarts.apa
 
 Just insert your ECharts option in `JSON`/`YAML`/`TOML` format in the `echarts` shortcode and that’s it.
 
-Example `echarts` input in `JSON` format:
+You have 2 ways to use this shortcode:
+
+**Direct embedding**
+: You can either [embed]({{< ref "#embedded" >}}) the definition of the chart in the body of the shortcode itself, as TOML.
+
+**Import a JS module**
+: Or you can [reference]({{< ref "#referenced" >}}) the path to a separate `.js` file which contains the JS specification of the chart, thereby supporting echarts with full JavaScript.
+
+You can also mix shortcodes of both types within the same page.
+
+## Embedded echart {#embedded}
+
+This is the simplest form of use. You simply embed the echart specification inside of the body of the `echarts` shortcode, in `JSON`, `YAML` or `TOML` format.
+
+Pros:
+
+- Simple to use and maintain.
+- Content of the chart visible in your page source itself.
+
+Cons:
+
+- Does not support JavaScript logic in chart.
+- Does not allow re-using charts.
+
+Here's an example `echarts` input in `JSON` format:
 
 ```json
 {{</* echarts */>}}
@@ -403,7 +427,38 @@ The rendered output looks like this:
 }
 {{< /echarts >}}
 
-The `echarts` shortcode has also the following named parameters:
+## Referenced echart {#referenced}
+
+In this way of use, your `echarts` shortcode references a JS file which contains the specification of the chart.
+
+Pros:
+
+- Your echart supports any JavaScript code, including logic to load or transform data.
+- Enables copy/paste prototyping from [echarts' online builder](https://echarts.apache.org/en/builder.html), without conversion to JSON / TOML / YAML.
+- Enables re-using a chart in multiple posts.
+- Avoids bloating your content with long chart specifications.
+- Accelerates page and chart loading by reducing page size and allowing browser to cache compiled chart.
+
+Cons:
+
+- Charts are separate files from posts.
+
+Here's how you use the shortcode in this way:
+
+1. Create a directory `content/charts/` inside your `content` directory
+2. Create a file `summary_line_chart.js` inside of that folder
+3. Paste any echart specification into that file; copy one e.g. from the [echarts gallery of examples](https://echarts.apache.org/examples/en/editor.html?c=area-stack-gradient).
+4. Change the prefix of the specification from ~~`option = {`~~ to `export const option = {`.
+5. Finally, add the following shortcode in your post, wherever you want the chart to be loaded:
+
+```
+{{</* echarts file="charts/summary_line_chart.js" >}}
+{{< /echarts */>}}
+```
+
+## echarts options
+
+The `echarts` shortcode has also the following named parameters, supported in both ways of use (direct and referenced):
 
 * **width** *[optional]* (**first** positional parameter)
 
