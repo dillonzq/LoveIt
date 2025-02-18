@@ -30,7 +30,7 @@ workflows:
   build-check:
     jobs:
       - build-check:
-          name: build-check-<< matrix.version >>
+          name: build-check
           matrix:
             parameters:
               version:
