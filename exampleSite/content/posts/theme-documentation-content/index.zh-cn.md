@@ -291,7 +291,7 @@ resources:
 
 公式块:
 
-{{< raw>}}
+{{< raw >}}
 \[ a=b+c \\ d+e=f \]
 {{< /raw >}}
 {{< /admonition >}}
