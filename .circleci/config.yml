@@ -1,8 +1,23 @@
 version: 2.1
+
+executors:
+  hugo:
+    parameters:
+      version:
+        description: "version tag"
+        type: string
+    docker:
+      - image: cibuilds/hugo:<<parameters.version>>
+
 jobs:
   build-check:
-    docker:
-      - image: cibuilds/hugo:0.128.0
+    parameters:
+      version:
+        description: "version tag"
+        type: string
+    executor:
+      name: hugo
+      version: <<parameters.version>>
     working_directory: ~/LoveIt
     steps:
       - checkout
@@ -12,6 +27,11 @@ jobs:
       - run: htmlproofer exampleSite/public --disable-external true --ignore-missing-alt true
 
 workflows:
-  build-check-exampleSite:
+  build-check:
     jobs:
-      - build-check
+      - build-check:
+          name: build-check-min
+          version: 0.128.0
+      - build-check:
+          name: build-check-max
+          version: 0.144.0
