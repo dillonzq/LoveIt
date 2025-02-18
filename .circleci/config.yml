@@ -30,9 +30,8 @@ workflows:
   build-check:
     jobs:
       - build-check:
-          name: build-check
-          matrix:
-            parameters:
-              version:
-                - 0.144.0
-                - 0.128.0
+          name: build-check-min
+          version: 0.128.0
+      - build-check:
+          name: build-check-max
+          version: 0.144.0
