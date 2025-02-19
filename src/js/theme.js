@@ -1,22 +1,22 @@
 class Util {
-    forEach(elements, handler) {
+    static forEach(elements, handler) {
         elements = elements || [];
         for (let i = 0; i < elements.length; i++) handler(elements[i]);
     }
 
-    getScrollTop() {
+    static getScrollTop() {
         return (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
     }
 
-    isMobile() {
+    static isMobile() {
         return window.matchMedia('only screen and (max-width: 680px)').matches;
     }
 
-    isTocStatic() {
+    static isTocStatic() {
         return window.matchMedia('only screen and (max-width: 960px)').matches;
     }
 
-    animateCSS(element, animation, reserved, callback) {
+    static animateCSS(element, animation, reserved, callback) {
         if (!Array.isArray(animation)) animation = [animation];
         element.classList.add('animate__animated', ...animation);
         const handler = () => {
@@ -33,8 +33,7 @@ class Theme {
         this.config = window.config;
         this.data = this.config.data;
         this.isDark = document.body.getAttribute('theme') === 'dark';
-        this.util = new Util();
-        this.newScrollTop = this.util.getScrollTop();
+        this.newScrollTop = Util.getScrollTop();
         this.oldScrollTop = this.newScrollTop;
         this.scrollEventSet = new Set();
         this.resizeEventSet = new Set();
@@ -44,13 +43,13 @@ class Theme {
     }
 
     initRaw() {
-        this.util.forEach(document.querySelectorAll('[data-raw]'), $raw => {
+        Util.forEach(document.querySelectorAll('[data-raw]'), $raw => {
             $raw.innerHTML = this.data[$raw.id];
         });
     }
 
     initSVGIcon() {
-        this.util.forEach(document.querySelectorAll('[data-svg-src]'), $icon => {
+        Util.forEach(document.querySelectorAll('[data-svg-src]'), $icon => {
             fetch($icon.getAttribute('data-svg-src'))
                 .then(response => response.text())
                 .then(svg => {
@@ -87,7 +86,7 @@ class Theme {
     }
 
     initSwitchTheme() {
-        this.util.forEach(document.getElementsByClassName('theme-switch'), $themeSwitch => {
+        Util.forEach(document.getElementsByClassName('theme-switch'), $themeSwitch => {
             $themeSwitch.addEventListener('click', () => {
                 if (document.body.getAttribute('theme') === 'dark') document.body.setAttribute('theme', 'light');
                 else document.body.setAttribute('theme', 'dark');
@@ -100,7 +99,7 @@ class Theme {
 
     initSearch() {
         const searchConfig = this.config.search;
-        const isMobile = this.util.isMobile();
+        const isMobile = Util.isMobile();
         if (!searchConfig || isMobile && this._searchMobileOnce || !isMobile && this._searchDesktopOnce) return;
 
         const maxResultLength = searchConfig.maxResultLength ? searchConfig.maxResultLength : 10;
@@ -198,10 +197,10 @@ class Theme {
                                 });
                                 position -= snippetLength / 5;
                                 if (position > 0) {
-                                    position += context.substr(position, 20).lastIndexOf(' ') + 1;
-                                    context = '...' + context.substr(position, snippetLength);
+                                    position += context.slice(position, position + 20).lastIndexOf(' ') + 1;
+                                    context = '...' + context.slice(position, position + snippetLength);
                                 } else {
-                                    context = context.substr(0, snippetLength);
+                                    context = context.slice(0, snippetLength);
                                 }
                                 Object.keys(metadata).forEach(key => {
                                     title = title.replace(new RegExp(`(${key})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
@@ -308,7 +307,7 @@ class Theme {
             script.async = true;
             if (script.readyState) {
                 script.onreadystatechange = () => {
-                    if (script.readyState == 'loaded' || script.readyState == 'complete'){
+                    if (script.readyState === 'loaded' || script.readyState === 'complete'){
                         script.onreadystatechange = null;
                         initAutosearch();
                     }
@@ -323,7 +322,7 @@ class Theme {
     }
 
     initDetails() {
-        this.util.forEach(document.getElementsByClassName('details'), $details => {
+        Util.forEach(document.getElementsByClassName('details'), $details => {
             const $summary = $details.getElementsByClassName('details-summary')[0];
             $summary.addEventListener('click', () => {
                 $details.classList.toggle('open');
@@ -348,7 +347,7 @@ class Theme {
     }
 
     initHighlight() {
-        this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), $preChroma => {
+        Util.forEach(document.querySelectorAll('.highlight > pre.chroma'), $preChroma => {
             const $chroma = document.createElement('div');
             $chroma.className = $preChroma.className;
             const $table = document.createElement('table');
@@ -362,7 +361,7 @@ class Theme {
             $preChroma.parentElement.replaceChild($chroma, $preChroma);
             $td.appendChild($preChroma);
         });
-        this.util.forEach(document.querySelectorAll('.highlight > .chroma'), $chroma => {
+        Util.forEach(document.querySelectorAll('.highlight > .chroma'), $chroma => {
             const $codeElements = $chroma.querySelectorAll('pre.chroma > code');
             if ($codeElements.length) {
                 const $code = $codeElements[$codeElements.length - 1];
@@ -386,13 +385,13 @@ class Theme {
                 $copy.insertAdjacentHTML('afterbegin', '<i class="far fa-copy fa-fw" aria-hidden="true"></i>');
                 $copy.classList.add('copy');
                 const code = $code.innerText;
-                if (this.config.code.maxShownLines < 0 || code.split('\n').length < this.config.code.maxShownLines + 2) $chroma.classList.add('open');
+                if (this.config.code.maxShownLines > 0 && code.split('\n').length < this.config.code.maxShownLines + 2) $chroma.classList.add('open');
                 if (this.config.code.copyTitle) {
                     $copy.setAttribute('data-clipboard-text', code);
                     $copy.title = this.config.code.copyTitle;
                     const clipboard = new ClipboardJS($copy);
                     clipboard.on('success', _e => {
-                        this.util.animateCSS($code, 'animate__flash');
+                        Util.animateCSS($code, 'animate__flash');
                     });
                     $header.appendChild($copy);
                 }
@@ -402,7 +401,7 @@ class Theme {
     }
 
     initTable() {
-        this.util.forEach(document.querySelectorAll('.content table'), $table => {
+        Util.forEach(document.querySelectorAll('.content table'), $table => {
             const $wrapper = document.createElement('div');
             $wrapper.className = 'table-wrapper';
             $table.parentElement.replaceChild($wrapper, $table);
@@ -412,7 +411,7 @@ class Theme {
 
     initHeaderLink() {
         for (let num = 1; num <= 6; num++) {
-            this.util.forEach(document.querySelectorAll('.single .content > h' + num), $header => {
+            Util.forEach(document.querySelectorAll('.single .content > h' + num), $header => {
                 $header.classList.add('headerLink');
                 $header.insertAdjacentHTML('afterbegin', `<a href="#${$header.id}" class="header-mark"></a>`);
             });
@@ -422,7 +421,7 @@ class Theme {
     initToc() {
         const $tocCore = document.getElementById('TableOfContents');
         if ($tocCore === null) return;
-        if (document.getElementById('toc-static').getAttribute('data-kept') || this.util.isTocStatic()) {
+        if (document.getElementById('toc-static').getAttribute('data-kept') || Util.isTocStatic()) {
             const $tocContentStatic = document.getElementById('toc-content-static');
             if ($tocCore.parentElement !== $tocContentStatic) {
                 $tocCore.parentElement.removeChild($tocCore);
@@ -464,14 +463,14 @@ class Theme {
                     $toc.style.top = `${TOP_SPACING}px`;
                 }
 
-                this.util.forEach($tocLinkElements, $tocLink => { $tocLink.classList.remove('active'); });
-                this.util.forEach($tocLiElements, $tocLi => { $tocLi.classList.remove('has-active'); });
+                Util.forEach($tocLinkElements, $tocLink => { $tocLink.classList.remove('active'); });
+                Util.forEach($tocLiElements, $tocLi => { $tocLi.classList.remove('has-active'); });
                 const INDEX_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
                 let activeTocIndex = $headerLinkElements.length - 1;
                 for (let i = 0; i < $headerLinkElements.length - 1; i++) {
                     const thisTop = $headerLinkElements[i].getBoundingClientRect().top;
                     const nextTop = $headerLinkElements[i + 1].getBoundingClientRect().top;
-                    if ((i == 0 && thisTop > INDEX_SPACING)
+                    if ((i === 0 && thisTop > INDEX_SPACING)
                      || (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)) {
                         activeTocIndex = i;
                         break;
@@ -500,7 +499,7 @@ class Theme {
             const $mermaidElements = document.getElementsByClassName('mermaid');
             if ($mermaidElements.length) {
                 mermaid.initialize({startOnLoad: false, theme: this.isDark ? 'dark' : 'neutral', securityLevel: 'loose'});
-                this.util.forEach($mermaidElements, $mermaid => {
+                Util.forEach($mermaidElements, $mermaid => {
                     mermaid.render('svg-' + $mermaid.id, this.data[$mermaid.id], svgCode => {
                         $mermaid.innerHTML = svgCode;
                     }, $mermaid);
@@ -521,7 +520,7 @@ class Theme {
                     this._echartsArr[i].dispose();
                 }
                 this._echartsArr = [];
-                this.util.forEach(document.getElementsByClassName('echarts'), $echarts => {
+                Util.forEach(document.getElementsByClassName('echarts'), $echarts => {
                     const chart = echarts.init($echarts, this.isDark ? 'dark' : 'light', {renderer: 'svg'});
                     chart.setOption(JSON.parse(this.data[$echarts.id]));
                     this._echartsArr.push(chart);
@@ -543,7 +542,7 @@ class Theme {
             mapboxgl.accessToken = this.config.mapbox.accessToken;
             mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
             this._mapboxArr = this._mapboxArr || [];
-            this.util.forEach(document.getElementsByClassName('mapbox'), $mapbox => {
+            Util.forEach(document.getElementsByClassName('mapbox'), $mapbox => {
                 const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = this.data[$mapbox.id];
                 const mapbox = new mapboxgl.Map({
                     container: $mapbox,
@@ -578,7 +577,7 @@ class Theme {
                 this._mapboxArr.push(mapbox);
             });
             this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || (() => {
-                this.util.forEach(this._mapboxArr, mapbox => {
+                Util.forEach(this._mapboxArr, mapbox => {
                     const $mapbox = mapbox.getContainer();
                     const { lightStyle, darkStyle } = this.data[$mapbox.id];
                     mapbox.setStyle(this.isDark ? darkStyle : lightStyle);
@@ -598,7 +597,7 @@ class Theme {
             Object.values(typeitConfig.data).forEach(group => {
                 const typeone = (i) => {
                     const id = group[i];
-                    const instance = new TypeIt(`#${id}`, {
+                    new TypeIt(`#${id}`, {
                         strings: this.data[id],
                         speed: speed,
                         lifeLike: true,
@@ -705,31 +704,31 @@ class Theme {
         const $fixedButtons = document.getElementById('fixed-buttons');
         const ACCURACY = 20, MINIMUM = 100;
         window.addEventListener('scroll', () => {
-            this.newScrollTop = this.util.getScrollTop();
+            this.newScrollTop = Util.getScrollTop();
             const scroll = this.newScrollTop - this.oldScrollTop;
-            const isMobile = this.util.isMobile();
-            this.util.forEach($headers, $header => {
+            const isMobile = Util.isMobile();
+            Util.forEach($headers, $header => {
                 if (scroll > ACCURACY) {
                     $header.classList.remove('animate__fadeInDown');
-                    this.util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
+                    Util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
                 } else if (scroll < - ACCURACY) {
                     $header.classList.remove('animate__fadeOutUp');
-                    this.util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
+                    Util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
                 }
             });
             if (this.newScrollTop > MINIMUM) {
                 if (isMobile && scroll > ACCURACY) {
                     $fixedButtons.classList.remove('animate__fadeIn');
-                    this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
+                    Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
                 } else if (!isMobile || scroll < - ACCURACY) {
                     $fixedButtons.style.display = 'block';
                     $fixedButtons.classList.remove('animate__fadeOut');
-                    this.util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
+                    Util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
                 }
             } else {
                 if (!isMobile) {
                     $fixedButtons.classList.remove('animate__fadeIn');
-                    this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
+                    Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
                 }
                 $fixedButtons.style.display = 'none';
             }
