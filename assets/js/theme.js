@@ -35,7 +35,7 @@ var Util = /*#__PURE__*/function () {
     _classCallCheck(this, Util);
   }
 
-  _createClass(Util, [{
+  _createClass(Util, null, [{
     key: "forEach",
     value: function forEach(elements, handler) {
       elements = elements || [];
@@ -91,8 +91,7 @@ var Theme = /*#__PURE__*/function () {
     this.config = window.config;
     this.data = this.config.data;
     this.isDark = document.body.getAttribute('theme') === 'dark';
-    this.util = new Util();
-    this.newScrollTop = this.util.getScrollTop();
+    this.newScrollTop = Util.getScrollTop();
     this.oldScrollTop = this.newScrollTop;
     this.scrollEventSet = new Set();
     this.resizeEventSet = new Set();
@@ -106,14 +105,14 @@ var Theme = /*#__PURE__*/function () {
     value: function initRaw() {
       var _this = this;
 
-      this.util.forEach(document.querySelectorAll('[data-raw]'), function ($raw) {
+      Util.forEach(document.querySelectorAll('[data-raw]'), function ($raw) {
         $raw.innerHTML = _this.data[$raw.id];
       });
     }
   }, {
     key: "initSVGIcon",
     value: function initSVGIcon() {
-      this.util.forEach(document.querySelectorAll('[data-svg-src]'), function ($icon) {
+      Util.forEach(document.querySelectorAll('[data-svg-src]'), function ($icon) {
         fetch($icon.getAttribute('data-svg-src')).then(function (response) {
           return response.text();
         }).then(function (svg) {
@@ -158,7 +157,7 @@ var Theme = /*#__PURE__*/function () {
     value: function initSwitchTheme() {
       var _this2 = this;
 
-      this.util.forEach(document.getElementsByClassName('theme-switch'), function ($themeSwitch) {
+      Util.forEach(document.getElementsByClassName('theme-switch'), function ($themeSwitch) {
         $themeSwitch.addEventListener('click', function () {
           if (document.body.getAttribute('theme') === 'dark') document.body.setAttribute('theme', 'light');else document.body.setAttribute('theme', 'dark');
           _this2.isDark = !_this2.isDark;
@@ -186,7 +185,7 @@ var Theme = /*#__PURE__*/function () {
       var _this3 = this;
 
       var searchConfig = this.config.search;
-      var isMobile = this.util.isMobile();
+      var isMobile = Util.isMobile();
       if (!searchConfig || isMobile && this._searchMobileOnce || !isMobile && this._searchDesktopOnce) return;
       var maxResultLength = searchConfig.maxResultLength ? searchConfig.maxResultLength : 10;
       var snippetLength = searchConfig.snippetLength ? searchConfig.snippetLength : 50;
@@ -299,10 +298,10 @@ var Theme = /*#__PURE__*/function () {
                   position -= snippetLength / 5;
 
                   if (position > 0) {
-                    position += context.substr(position, 20).lastIndexOf(' ') + 1;
-                    context = '...' + context.substr(position, snippetLength);
+                    position += context.slice(position, position + 20).lastIndexOf(' ') + 1;
+                    context = '...' + context.slice(position, position + snippetLength);
                   } else {
-                    context = context.substr(0, snippetLength);
+                    context = context.slice(0, snippetLength);
                   }
 
                   Object.keys(metadata).forEach(function (key) {
@@ -442,7 +441,7 @@ var Theme = /*#__PURE__*/function () {
 
         if (script.readyState) {
           script.onreadystatechange = function () {
-            if (script.readyState == 'loaded' || script.readyState == 'complete') {
+            if (script.readyState === 'loaded' || script.readyState === 'complete') {
               script.onreadystatechange = null;
               initAutosearch();
             }
@@ -459,7 +458,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "initDetails",
     value: function initDetails() {
-      this.util.forEach(document.getElementsByClassName('details'), function ($details) {
+      Util.forEach(document.getElementsByClassName('details'), function ($details) {
         var $summary = $details.getElementsByClassName('details-summary')[0];
         $summary.addEventListener('click', function () {
           $details.classList.toggle('open');
@@ -488,7 +487,7 @@ var Theme = /*#__PURE__*/function () {
     value: function initHighlight() {
       var _this5 = this;
 
-      this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), function ($preChroma) {
+      Util.forEach(document.querySelectorAll('.highlight > pre.chroma'), function ($preChroma) {
         var $chroma = document.createElement('div');
         $chroma.className = $preChroma.className;
         var $table = document.createElement('table');
@@ -502,7 +501,7 @@ var Theme = /*#__PURE__*/function () {
         $preChroma.parentElement.replaceChild($chroma, $preChroma);
         $td.appendChild($preChroma);
       });
-      this.util.forEach(document.querySelectorAll('.highlight > .chroma'), function ($chroma) {
+      Util.forEach(document.querySelectorAll('.highlight > .chroma'), function ($chroma) {
         var $codeElements = $chroma.querySelectorAll('pre.chroma > code');
 
         if ($codeElements.length) {
@@ -527,14 +526,14 @@ var Theme = /*#__PURE__*/function () {
           $copy.insertAdjacentHTML('afterbegin', '<i class="far fa-copy fa-fw" aria-hidden="true"></i>');
           $copy.classList.add('copy');
           var code = $code.innerText;
-          if (_this5.config.code.maxShownLines < 0 || code.split('\n').length < _this5.config.code.maxShownLines + 2) $chroma.classList.add('open');
+          if (_this5.config.code.maxShownLines > 0 && code.split('\n').length < _this5.config.code.maxShownLines + 2) $chroma.classList.add('open');
 
           if (_this5.config.code.copyTitle) {
             $copy.setAttribute('data-clipboard-text', code);
             $copy.title = _this5.config.code.copyTitle;
             var clipboard = new ClipboardJS($copy);
             clipboard.on('success', function (_e) {
-              _this5.util.animateCSS($code, 'animate__flash');
+              Util.animateCSS($code, 'animate__flash');
             });
             $header.appendChild($copy);
           }
@@ -546,7 +545,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "initTable",
     value: function initTable() {
-      this.util.forEach(document.querySelectorAll('.content table'), function ($table) {
+      Util.forEach(document.querySelectorAll('.content table'), function ($table) {
         var $wrapper = document.createElement('div');
         $wrapper.className = 'table-wrapper';
         $table.parentElement.replaceChild($wrapper, $table);
@@ -557,7 +556,7 @@ var Theme = /*#__PURE__*/function () {
     key: "initHeaderLink",
     value: function initHeaderLink() {
       for (var num = 1; num <= 6; num++) {
-        this.util.forEach(document.querySelectorAll('.single .content > h' + num), function ($header) {
+        Util.forEach(document.querySelectorAll('.single .content > h' + num), function ($header) {
           $header.classList.add('headerLink');
           $header.insertAdjacentHTML('afterbegin', "<a href=\"#".concat($header.id, "\" class=\"header-mark\"></a>"));
         });
@@ -571,7 +570,7 @@ var Theme = /*#__PURE__*/function () {
       var $tocCore = document.getElementById('TableOfContents');
       if ($tocCore === null) return;
 
-      if (document.getElementById('toc-static').getAttribute('data-kept') || this.util.isTocStatic()) {
+      if (document.getElementById('toc-static').getAttribute('data-kept') || Util.isTocStatic()) {
         var $tocContentStatic = document.getElementById('toc-content-static');
 
         if ($tocCore.parentElement !== $tocContentStatic) {
@@ -619,14 +618,12 @@ var Theme = /*#__PURE__*/function () {
             $toc.style.top = "".concat(TOP_SPACING, "px");
           }
 
-          _this6.util.forEach($tocLinkElements, function ($tocLink) {
+          Util.forEach($tocLinkElements, function ($tocLink) {
             $tocLink.classList.remove('active');
           });
-
-          _this6.util.forEach($tocLiElements, function ($tocLi) {
+          Util.forEach($tocLiElements, function ($tocLi) {
             $tocLi.classList.remove('has-active');
           });
-
           var INDEX_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
           var activeTocIndex = $headerLinkElements.length - 1;
 
@@ -634,7 +631,7 @@ var Theme = /*#__PURE__*/function () {
             var thisTop = $headerLinkElements[i].getBoundingClientRect().top;
             var nextTop = $headerLinkElements[i + 1].getBoundingClientRect().top;
 
-            if (i == 0 && thisTop > INDEX_SPACING || thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING) {
+            if (i === 0 && thisTop > INDEX_SPACING || thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING) {
               activeTocIndex = i;
               break;
             }
@@ -675,8 +672,7 @@ var Theme = /*#__PURE__*/function () {
             theme: _this7.isDark ? 'dark' : 'neutral',
             securityLevel: 'loose'
           });
-
-          _this7.util.forEach($mermaidElements, function ($mermaid) {
+          Util.forEach($mermaidElements, function ($mermaid) {
             mermaid.render('svg-' + $mermaid.id, _this7.data[$mermaid.id], function (svgCode) {
               $mermaid.innerHTML = svgCode;
             }, $mermaid);
@@ -705,8 +701,7 @@ var Theme = /*#__PURE__*/function () {
           }
 
           _this8._echartsArr = [];
-
-          _this8.util.forEach(document.getElementsByClassName('echarts'), function ($echarts) {
+          Util.forEach(document.getElementsByClassName('echarts'), function ($echarts) {
             var chart = echarts.init($echarts, _this8.isDark ? 'dark' : 'light', {
               renderer: 'svg'
             });
@@ -738,7 +733,7 @@ var Theme = /*#__PURE__*/function () {
         mapboxgl.accessToken = this.config.mapbox.accessToken;
         mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
         this._mapboxArr = this._mapboxArr || [];
-        this.util.forEach(document.getElementsByClassName('mapbox'), function ($mapbox) {
+        Util.forEach(document.getElementsByClassName('mapbox'), function ($mapbox) {
           var _this9$data$$mapbox$i = _this9.data[$mapbox.id],
               lng = _this9$data$$mapbox$i.lng,
               lat = _this9$data$$mapbox$i.lat,
@@ -791,7 +786,7 @@ var Theme = /*#__PURE__*/function () {
         });
 
         this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || function () {
-          _this9.util.forEach(_this9._mapboxArr, function (mapbox) {
+          Util.forEach(_this9._mapboxArr, function (mapbox) {
             var $mapbox = mapbox.getContainer();
             var _this9$data$$mapbox$i2 = _this9.data[$mapbox.id],
                 lightStyle = _this9$data$$mapbox$i2.lightStyle,
@@ -817,7 +812,7 @@ var Theme = /*#__PURE__*/function () {
         Object.values(typeitConfig.data).forEach(function (group) {
           var typeone = function typeone(i) {
             var id = group[i];
-            var instance = new TypeIt("#".concat(id), {
+            new TypeIt("#".concat(id), {
               strings: _this10.data[id],
               speed: speed,
               lifeLike: true,
@@ -944,39 +939,32 @@ var Theme = /*#__PURE__*/function () {
       var ACCURACY = 20,
           MINIMUM = 100;
       window.addEventListener('scroll', function () {
-        _this12.newScrollTop = _this12.util.getScrollTop();
+        _this12.newScrollTop = Util.getScrollTop();
         var scroll = _this12.newScrollTop - _this12.oldScrollTop;
-
-        var isMobile = _this12.util.isMobile();
-
-        _this12.util.forEach($headers, function ($header) {
+        var isMobile = Util.isMobile();
+        Util.forEach($headers, function ($header) {
           if (scroll > ACCURACY) {
             $header.classList.remove('animate__fadeInDown');
-
-            _this12.util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
+            Util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
           } else if (scroll < -ACCURACY) {
             $header.classList.remove('animate__fadeOutUp');
-
-            _this12.util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
+            Util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
           }
         });
 
         if (_this12.newScrollTop > MINIMUM) {
           if (isMobile && scroll > ACCURACY) {
             $fixedButtons.classList.remove('animate__fadeIn');
-
-            _this12.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
+            Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
           } else if (!isMobile || scroll < -ACCURACY) {
             $fixedButtons.style.display = 'block';
             $fixedButtons.classList.remove('animate__fadeOut');
-
-            _this12.util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
+            Util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
           }
         } else {
           if (!isMobile) {
             $fixedButtons.classList.remove('animate__fadeIn');
-
-            _this12.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
+            Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
           }
 
           $fixedButtons.style.display = 'none';
