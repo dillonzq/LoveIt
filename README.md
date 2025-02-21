@@ -154,6 +154,7 @@ LoveIt supports the following languages:
 * Korean
 * Hindi
 * Dutch
+* Bengali
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
 [Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)

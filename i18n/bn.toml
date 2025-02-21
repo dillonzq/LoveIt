@@ -1,4 +1,5 @@
-# Translations for English
+# Translations for Bengali
+# বাংলায় অনুবাদ
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === baseof ==
@@ -6,7 +7,7 @@
 other = "উপরে ফিরে যান"
 
 [viewComments]
-other = "মন্তব্যগুলি দেখুন"
+other = "মন্তব্যগুলো দেখুন"
 # === baseof ==
 
 # === Post ===
@@ -38,7 +39,7 @@ other = "আরো"
 
 # === partials/header.html ===
 [selectLanguage]
-other = "ভাষা নির্ধারণ"
+other = "ভাষা নির্বাচন"
 
 [switchTheme]
 other = "থিম পরিবর্তন"
@@ -46,7 +47,7 @@ other = "থিম পরিবর্তন"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "{{ .Hugo }} দ্বারা পরিচালিত | থিম - {{ .Theme }}"
+other = "{{ .Hugo }} দ্বারা চালিত | থিম - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -71,10 +72,10 @@ other = "খুঁজুন"
 other = "শিরোনাম অথবা কনটেন্ট খুঁজুন..."
 
 [clear]
-other = "পরিষ্কার"
+other = "পরিষ্কার করুন"
 
 [cancel]
-other = "বাতিল"
+other = "বাতিল করুন"
 
 [noResultsFound]
 other = "কোনো ফলাফল পাওয়া যায় নি"
@@ -86,7 +87,7 @@ other = "en"
 other = "ক্লিপবোর্ডে কপি করুন"
 
 [cookieconsentMessage]
-other = "ওয়েবসাইট ব্যবহারে ভালো অভিজ্ঞতা দেয়ার জন্য কুকিজ ব্যবহার করা হয়।"
+other = "এই ওয়েবসাইটটি আপনার ব্রাউজিং অভিজ্ঞতা সমৃদ্ধ করতে কুকিজ ব্যবহার করে।"
 
 [cookieconsentDismiss]
 other = "বুঝেছি!"
@@ -102,10 +103,10 @@ other = "শেয়ার করুন"
 
 # === posts/single.html ===
 [contents]
-other = "কন্টেন্টস"
+other = "বিষয়বস্তু"
 
 [publishedOnDate]
-other = "প্রকাশনার তারিখ {{ .Date }}"
+other = "প্রকাশিত {{ .Date }}"
 
 [includedInCategories]
 other = "ক্যাটাগরি {{ .Categories }}"
@@ -145,7 +146,7 @@ other = "আরো পড়ুন"
 other = "পেজটি খুঁজে পাওয়া যায় নি"
 
 [pageNotFoundText]
-other = "দুঃখিত, আপনি যে পেজটি খুঁজছেন তা উপস্থিত নেই।"
+other = "দুঃখিত, আপনি যে পেজটি খুঁজছেন তার কোনো অস্তিত্ব নেই।"
 # === 404.html ===
 
 # === shortcodes/admonition.html ===
@@ -174,7 +175,7 @@ other = "সতর্কীকরণ"
 other = "ব্যর্থ"
 
 [danger]
-other = "বিপদজনক"
+other = "বিপজ্জনক"
 
 [bug]
 other = "বাগ"

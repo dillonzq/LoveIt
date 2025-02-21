@@ -149,6 +149,7 @@ LoveIt 支持下列语言:
 * 韩语
 * 印地语
 * 荷兰语
+* 孟加拉语
 * [贡献一种新的语言](https://github.com/dillonzq/LoveIt/pulls)
 
 [语言兼容性](https://hugoloveit.com/zh-cn/theme-documentation-basics/#language-compatibility)
