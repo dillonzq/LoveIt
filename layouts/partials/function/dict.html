@@ -1,0 +1,14 @@
+{{- /* To Dict */ -}}
+{{- /* "a=1, b=2" -> dict "a" "1" "b" "2" */ -}}
+{{- $dict := dict -}}
+
+{{- if reflect.IsMap . -}}
+    {{- $dict = . -}}
+{{- else -}}
+    {{- range split . "," -}}
+        {{- $parts := split (trim . " ") "=" -}}
+        {{- $dict = dict (index $parts 0) (delimit (after 1 $parts) "") | merge $dict -}}
+    {{- end -}}}
+{{- end -}}
+
+{{- return $dict -}}

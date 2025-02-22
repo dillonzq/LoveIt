@@ -347,65 +347,31 @@ class Theme {
     }
 
     initHighlight() {
-        Util.forEach(document.querySelectorAll('.highlight > pre.chroma'), $preChroma => {
-            const $chroma = document.createElement('div');
-            $chroma.className = $preChroma.className;
-            const $table = document.createElement('table');
-            $chroma.appendChild($table);
-            const $tbody = document.createElement('tbody');
-            $table.appendChild($tbody);
-            const $tr = document.createElement('tr');
-            $tbody.appendChild($tr);
-            const $td = document.createElement('td');
-            $tr.appendChild($td);
-            $preChroma.parentElement.replaceChild($chroma, $preChroma);
-            $td.appendChild($preChroma);
-        });
-        Util.forEach(document.querySelectorAll('.highlight > .chroma'), $chroma => {
-            const $codeElements = $chroma.querySelectorAll('pre.chroma > code');
-            if ($codeElements.length) {
-                const $code = $codeElements[$codeElements.length - 1];
-                const $header = document.createElement('div');
-                $header.className = 'code-header ' + $code.className.toLowerCase();
-                const $title = document.createElement('span');
-                $title.classList.add('code-title');
-                $title.insertAdjacentHTML('afterbegin', '<i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i>');
-                $title.addEventListener('click', () => {
-                    $chroma.classList.toggle('open');
+        Util.forEach(document.querySelectorAll('.code-block'), $codeBlock => {
+            const $codeTitle = $codeBlock.querySelector('.code-header > .code-title');
+            if ($codeTitle) {
+                $codeTitle.addEventListener('click', () => {
+                    $codeBlock.classList.toggle('open');
                 }, false);
-                $header.appendChild($title);
-                const $ellipses = document.createElement('span');
-                $ellipses.insertAdjacentHTML('afterbegin', '<i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i>');
-                $ellipses.classList.add('ellipses');
-                $ellipses.addEventListener('click', () => {
-                    $chroma.classList.add('open');
-                }, false);
-                $header.appendChild($ellipses);
-                const $copy = document.createElement('span');
-                $copy.insertAdjacentHTML('afterbegin', '<i class="far fa-copy fa-fw" aria-hidden="true"></i>');
-                $copy.classList.add('copy');
-                const code = $code.innerText;
-                if (this.config.code.maxShownLines > 0 && code.split('\n').length < this.config.code.maxShownLines + 2) $chroma.classList.add('open');
-                if (this.config.code.copyTitle) {
-                    $copy.setAttribute('data-clipboard-text', code);
-                    $copy.title = this.config.code.copyTitle;
-                    const clipboard = new ClipboardJS($copy);
-                    clipboard.on('success', _e => {
-                        Util.animateCSS($code, 'animate__flash');
-                    });
-                    $header.appendChild($copy);
-                }
-                $chroma.insertBefore($header, $chroma.firstChild);
             }
-        });
-    }
-
-    initTable() {
-        Util.forEach(document.querySelectorAll('.content table'), $table => {
-            const $wrapper = document.createElement('div');
-            $wrapper.className = 'table-wrapper';
-            $table.parentElement.replaceChild($wrapper, $table);
-            $wrapper.appendChild($table);
+            const $ellipses = $codeBlock.querySelector('.code-header .ellipses');
+            if ($ellipses) {
+                $ellipses.addEventListener('click', () => {
+                    $codeBlock.classList.toggle('open');
+                }, false);
+            }
+            const $copy = $codeBlock.querySelector('.code-header .copy');
+            if ($copy) {
+                const $code = $codeBlock.querySelector('code');
+                $copy.setAttribute('data-clipboard-text', $code.innerText);
+                const clipboard = new ClipboardJS($copy);
+                const $codeLines = $code.querySelectorAll('span.cl');
+                clipboard.on('success', _e => {
+                    if ($codeLines) {
+                        Util.forEach($codeLines, $codeLine => Util.animateCSS($codeLine, 'animate__flash'))
+                    }
+                });
+            }
         });
     }
 
@@ -769,7 +735,6 @@ class Theme {
             this.initDetails();
             this.initLightGallery();
             this.initHighlight();
-            this.initTable();
             this.initHeaderLink();
             this.initMath();
             this.initMermaid();

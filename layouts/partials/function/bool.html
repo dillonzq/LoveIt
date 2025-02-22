@@ -1,0 +1,18 @@
+{{- /* To Bool */ -}}
+{{- $bool := . -}}
+
+{{- if eq . true -}}
+    {{- $bool = true -}}
+{{- else if eq . false -}}
+    {{- $bool = false -}}
+{{- else if eq . "true" -}}
+    {{- $bool = true -}}
+{{- else if eq . "false" -}}
+    {{- $bool = false -}}
+{{- else if eq . "1" -}}
+    {{- $bool = true -}}
+{{- else if eq . "0" -}}
+    {{- $bool = false -}}
+{{- end -}}
+
+{{- return $bool -}}

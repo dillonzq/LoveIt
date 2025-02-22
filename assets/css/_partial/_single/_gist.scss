@@ -1,0 +1,186 @@
+.gist {
+  font-family: var(--code-font-family);
+  font-size: var(--code-font-size);
+
+  table,
+  table thead,
+  table tr,
+  table td {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .gist-file, .gist-data, .gist-meta {
+    border: none;
+  }
+
+  .gist-meta {
+    padding: .4rem .8rem;
+    background-color: darken($code-background-color, 5%);
+
+    @include link(false, false);
+
+    [theme=dark] & {
+      background-color: darken($code-background-color-dark, 5%);
+    }
+  }
+
+  [theme=dark] & {
+    // imported from https://github.com/lonekorean/gist-syntax-themes/blob/master/stylesheets/one-dark.css
+    .highlight {
+      background: #141414;
+    }
+    .blob-num,
+    .blob-code-inner,
+    .highlight,
+    .pl-enm,
+    .pl-ko,
+    .pl-mo,
+    .pl-mp1 .pl-sf,
+    .pl-ms,
+    .pl-pdc1,
+    .pl-scp,
+    .pl-smc,
+    .pl-som,
+    .pl-va,
+    .pl-vpf,
+    .pl-vpu,
+    .pl-mdr {
+      color: #aab1bf;
+    }
+    .pl-mb,
+    .pl-pdb {
+      font-weight: 700;
+    }
+    .pl-c,
+    .pl-c span,
+    .pl-pdc {
+      color: #5b6270;
+      font-style: italic;
+    }
+    .pl-sr .pl-cce {
+      color: #56b5c2;
+      font-weight: 400;
+    }
+    .pl-ef,
+    .pl-en,
+    .pl-enf,
+    .pl-eoai,
+    .pl-kos,
+    .pl-mh .pl-pdh,
+    .pl-mr {
+      color: #61afef;
+    }
+    .pl-ens,
+    .pl-vi {
+      color: #be5046;
+    }
+    .pl-enti,
+    .pl-mai .pl-sf,
+    .pl-ml,
+    .pl-sf,
+    .pl-sr,
+    .pl-sr .pl-sra,
+    .pl-src,
+    .pl-st,
+    .pl-vo {
+      color: #56b5c2;
+    }
+    .pl-eoi,
+    .pl-mri,
+    .pl-pds,
+    .pl-pse .pl-s1,
+    .pl-s,
+    .pl-s1 {
+      color: #97c279;
+    }
+    .pl-k,
+    .pl-kolp,
+    .pl-mc,
+    .pl-pde {
+      color: #c578dd;
+    }
+    .pl-mi,
+    .pl-pdi {
+      color: #c578dd;
+      font-style: italic;
+    }
+    .pl-mp,
+    .pl-stp {
+      color: #818896;
+    }
+    .pl-mdh,
+    .pl-mdi,
+    .pl-mdr {
+      font-weight: 400;
+    }
+    .pl-mdht,
+    .pl-mi1 {
+      color: #97c279;
+      background: #020;
+    }
+    .pl-md,
+    .pl-mdhf {
+      color: #df6b75;
+      background: #200;
+    }
+    .pl-corl {
+      color: #df6b75;
+      text-decoration: underline;
+    }
+    .pl-ib {
+      background: #df6b75;
+    }
+    .pl-ii {
+      background: #e0c184;
+      color: #fff;
+    }
+    .pl-iu {
+      background: #e05151;
+    }
+    .pl-ms1 {
+      color: #aab1bf;
+      background: #373b41;
+    }
+    .pl-c1,
+    .pl-cn,
+    .pl-e,
+    .pl-eoa,
+    .pl-eoac,
+    .pl-eoac .pl-pde,
+    .pl-kou,
+    .pl-mm,
+    .pl-mp .pl-s3,
+    .pl-mq,
+    .pl-s3,
+    .pl-sok,
+    .pl-sv,
+    .pl-mb {
+      color: #d19965;
+    }
+    .pl-enc,
+    .pl-entc,
+    .pl-pse .pl-s2,
+    .pl-s2,
+    .pl-sc,
+    .pl-smp,
+    .pl-sr .pl-sre,
+    .pl-stj,
+    .pl-v,
+    .pl-pdb {
+      color: #e4bf7a;
+    }
+    .pl-ent,
+    .pl-entl,
+    .pl-entm,
+    .pl-mh,
+    .pl-pdv,
+    .pl-smi,
+    .pl-sol,
+    .pl-mdh,
+    .pl-mdi {
+      color: #df6b75;
+    }
+  }
+}
