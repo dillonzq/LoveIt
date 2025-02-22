@@ -74,7 +74,7 @@ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 | LoveIt branch or version | Supported Hugo versions |
 |:-------------------------|:-----------------------:|
 | master(Unstable)         |        ≥ 0.128.0        |
-| **0.3.X(Recommended)**   |    0.128.0 - 0.144.0    |
+| **0.3.X(Recommended)**   |    0.128.0 - 0.144.2    |
 | 0.2.X(Outdated)          |    0.68.0 - 0.127.0     |
 
 {{< /admonition >}}
