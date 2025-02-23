@@ -302,7 +302,6 @@ class Theme {
         if (searchConfig.lunrSegmentitURL && !document.getElementById('lunr-segmentit')) {
             const script = document.createElement('script');
             script.id = 'lunr-segmentit';
-            script.type = 'text/javascript';
             script.src = searchConfig.lunrSegmentitURL;
             script.async = true;
             if (script.readyState) {
@@ -599,7 +598,6 @@ class Theme {
                 const utterancesConfig = this.config.comment.utterances;
                 const script = document.createElement('script');
                 script.src = 'https://utteranc.es/client.js';
-                script.type = 'text/javascript';
                 script.setAttribute('repo', utterancesConfig.repo);
                 script.setAttribute('issue-term', utterancesConfig.issueTerm);
                 if (utterancesConfig.label) script.setAttribute('label', utterancesConfig.label);
@@ -622,7 +620,6 @@ class Theme {
                 const giscusConfig = this.config.comment.giscus;
                 const giscusScript = document.createElement('script');
                 giscusScript.src = 'https://giscus.app/client.js';
-                giscusScript.type = 'text/javascript';
                 giscusScript.setAttribute('data-repo', giscusConfig.repo);
                 giscusScript.setAttribute('data-repo-id', giscusConfig.repoId);
                 giscusScript.setAttribute('data-category', giscusConfig.category);
