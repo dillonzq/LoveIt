@@ -151,7 +151,7 @@
     {{- /* APlayer */ -}}
     {{- $source := $cdn.aplayerCSS | default "lib/aplayer/APlayer.min.css" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
-    {{- $options := dict "targetPath" "lib/aplayer/dark.min.css" "enableSourceMap" true -}}
+    {{- $options := dict "targetPath" "lib/aplayer/dark.min.css" "outputStyle" "compressed" "enableSourceMap" true -}}
     {{- dict "Source" "lib/aplayer/dark.scss" "ToCSS" $options "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
     {{- /* To fix https://github.com/dillonzq/LoveIt/issues/869 */ -}}
     {{- /* Local file from https://github.com/DIYgod/APlayer/pull/777, no CDN */ -}}
@@ -186,7 +186,7 @@
 {{- with (.Scratch.Get "this").styleArr -}}
     {{- $content := delimit . "" -}}
     {{- $path := substr (md5 $content) 0 6 | printf "css/%v" -}}
-    {{- $options := printf "%v.min.css" $path | dict "targetPath" -}}
+    {{- $options := printf "%v.min.css" $path | dict "targetPath" | merge (dict "outputStyle" "compressed") -}}
     {{- dict "Content" $content "Path" (printf "%v.scss" $path) "ToCSS" $options | dict "Scratch" $.Scratch "Data" | partial "scratch/style.html" -}}
 {{- end -}}
 
