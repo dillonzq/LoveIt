@@ -98,7 +98,7 @@ Check the [LICENSE file](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 
 Thanks to the authors of following resources included in the theme:
 
-* [normalize.css](https://github.com/necolas/normalize.css)
+* [modern-normalize](https://github.com/sindresorhus/modern-normalize)
 * [Font Awesome](https://fontawesome.com/)
 * [Simple Icons](https://github.com/simple-icons/simple-icons)
 * [Animate.css](https://daneden.github.io/animate.css/)

@@ -19,7 +19,7 @@
 | [Mapbox GL JS](https://github.com/mapbox/mapbox-gl-js)                              | mapbox-gl         |   2.9.1 |
 | [Mermaid](https://github.com/mermaid-js/mermaid)                                    | mermaid           |   9.1.3 |
 | [MetingJS](https://github.com/metowolf/MetingJS)                                    | meting            |   2.0.1 |
-| [normalize.css](https://github.com/necolas/normalize.css)                           | normalize         |   8.0.1 |
+| [modern-normalize](https://github.com/sindresorhus/modern-normalize)                | modern-normalize  |   3.0.1 |
 | [object-fit-images](https://github.com/fregante/object-fit-images)                  | object-fit-images |   3.2.4 |
 | [sharer.js](https://github.com/ellisonleao/sharer.js)                               | sharer            |   0.5.1 |
 | [Simple Icons](https://github.com/simple-icons/simple-icons)                        | simple-icons      |   7.3.0 |

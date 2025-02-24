@@ -15,8 +15,7 @@
             {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
         {{- end -}}
         {{- with .ToCSS -}}
-            {{- $options := . | merge (dict "outputStyle" "compressed") -}}
-            {{- $resource = $resource | toCSS $options -}}
+            {{- $resource = $resource | toCSS . -}}
         {{- end -}}
         {{- if .Minify -}}
             {{- $resource = $resource | minify -}}
