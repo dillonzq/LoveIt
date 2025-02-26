@@ -56,7 +56,6 @@
 {{- end -}}
 
 {{- $code := $params.code | default dict -}}
-{{- $config = cond (ne $code.maxShownLines nil) $code.maxShownLines 10 | dict "maxShownLines" | dict "code" | merge $config -}}
 
 {{- /* clipboard.js */ -}}
 {{- if ne $code.copy false -}}
