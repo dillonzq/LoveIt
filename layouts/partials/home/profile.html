@@ -53,7 +53,7 @@
                         {{- with $value.prefix -}}
                             {{- $social = dict "Prefix" . | merge $social -}}
                         {{- end -}}
-                        {{- with $value.template -}}
+                        {{- with index $value "template" -}}
                             {{- $social = dict "Template" . | merge $social -}}
                         {{- end -}}
                         {{- with $value.id -}}
