@@ -34,4 +34,4 @@ workflows:
           version: 0.128.0
       - build-check:
           name: build-check-max
-          version: 0.144.2
+          version: 0.145.0

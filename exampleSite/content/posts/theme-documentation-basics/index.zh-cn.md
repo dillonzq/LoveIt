@@ -71,10 +71,10 @@ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 
 {{< admonition note "主题的兼容性" >}}
 
-| 分支或版本         |    支持的 Hugo 版本    |
+| LoveIt 分支或版本  |    支持的 Hugo 版本    |
 |:--------------|:-----------------:|
 | master(不稳定)   |     ≥ 0.128.0     |
-| **0.3.X(推荐)** | 0.128.0 - 0.144.2 |
+| **0.3.X(推荐)** | 0.128.0 - 0.145.0 |
 | 0.2.X(过时)     | 0.68.0 - 0.127.0  |
 
 {{< /admonition >}}
