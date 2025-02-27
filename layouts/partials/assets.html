@@ -55,13 +55,10 @@
     {{- $_ := (resources.Get "lib/lightgallery/images/loading.gif").RelPermalink -}}
 {{- end -}}
 
-{{- $code := $params.code | default dict -}}
-
 {{- /* clipboard.js */ -}}
-{{- if ne $code.copy false -}}
+{{- if $params.code.copy | default true -}}
     {{- $source := $cdn.clipboardJS | default "lib/clipboard/clipboard.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-    {{- $config = T "copyToClipboard" | dict "copyTitle" | dict "code" | merge $config -}}
 {{- end -}}
 
 {{- /* Sharer.js */ -}}
