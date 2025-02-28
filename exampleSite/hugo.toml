@@ -715,13 +715,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
   # 语法高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
   [markup.highlight]
+    anchorLineNos = false
     codeFences = true
-    guessSyntax = true
-    lineNos = true
+    guessSyntax = false
+    lineNos = false
     lineNumbersInTable = true
-    # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
-    # false 是必要的设置 (https://github.com/dillonzq/LoveIt/issues/158)
-    noClasses = false
+    noClasses = true
   # Goldmark is from Hugo 0.60 the default library used for Markdown
   # Goldmark 是 Hugo 0.60 以来的默认 Markdown 解析库
   [markup.goldmark]

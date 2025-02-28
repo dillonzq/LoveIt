@@ -120,6 +120,15 @@ code, pre {
       }
     }
 
+    code {
+      min-width: 100%;
+
+      span.line {
+        display: block;
+        min-width: 100%;
+      }
+    }
+
     .c, /* Comment */
     .ch /* CommentHashbang */,
     .cm /* CommentMultiline */,
@@ -166,8 +175,14 @@ code, pre {
     }
 
     .highlight {
-      max-height: 10000px;
+      max-height: 20000px;
       @include details-transition-close;
+    }
+  }
+
+  &:not(.open) {
+    ::-webkit-scrollbar {
+      height: 0;
     }
   }
 
