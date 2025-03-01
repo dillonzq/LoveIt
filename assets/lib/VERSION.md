@@ -21,7 +21,7 @@
 | [MetingJS](https://github.com/metowolf/MetingJS)                                    | meting            |   2.0.1 |
 | [modern-normalize](https://github.com/sindresorhus/modern-normalize)                | modern-normalize  |   3.0.1 |
 | [object-fit-images](https://github.com/fregante/object-fit-images)                  | object-fit-images |   3.2.4 |
-| [sharer.js](https://github.com/ellisonleao/sharer.js)                               | sharer            |   0.5.1 |
+| [sharer.js](https://github.com/ellisonleao/sharer.js)                               | sharer            |   0.5.2 |
 | [Simple Icons](https://github.com/simple-icons/simple-icons)                        | simple-icons      |   7.3.0 |
 | [Twemoji](https://github.com/twitter/twemoji)                                       | twemoji           |  14.0.2 |
 | [TypeIt](https://github.com/alexmacarthur/typeit)                                   | typeit            |   8.6.0 |
