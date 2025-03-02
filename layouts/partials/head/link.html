@@ -36,7 +36,7 @@
 {{- partial "plugin/style.html" $options -}}
 
 {{- /* Font Awesome */ -}}
-{{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/all.min.css" -}}
+{{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/css/all.min.css" -}}
 {{- $options := dict "Source" $source "Fingerprint" $fingerprint "Preload" true -}}
 {{- partial "plugin/style.html" $options -}}
 

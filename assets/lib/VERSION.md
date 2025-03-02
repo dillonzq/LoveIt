@@ -10,7 +10,7 @@
 | [Cookie Consent](https://github.com/osano/cookieconsent)                            | cookieconsent     |   3.1.1 |
 | [Apache ECharts](https://github.com/apache/echarts)                                 | echarts           |   5.3.3 |
 | [emoji-data](https://github.com/iamcal/emoji-data)                                  | emoji-data        |  15.1.2 |
-| [Font Awesome Free](https://github.com/FortAwesome/Font-Awesome)                    | fontawesome-free  |   6.1.1 |
+| [Font Awesome Free](https://github.com/FortAwesome/Font-Awesome)                    | fontawesome-free  |   6.7.2 |
 | [Gitalk](https://github.com/gitalk/gitalk)                                          | gitalk            |   1.7.2 |
 | [KaTeX](https://github.com/KaTeX/KaTeX)                                             | katex             | 0.16.21 |
 | [lazysizes](https://github.com/aFarkas/lazysizes)                                   | lazysizes         |   5.3.2 |
