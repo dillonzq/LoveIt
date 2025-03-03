@@ -8,6 +8,9 @@
         {{- $integrity := .Integrity -}}
         {{- if (urls.Parse $src).Host | not -}}
             {{- $resource := resources.Get $src -}}
+            {{- with printf `%v.map` $src | resources.Get -}}
+                {{- .Publish -}}
+            {{- end -}}
             {{- with .Template -}}
                 {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
             {{- end -}}

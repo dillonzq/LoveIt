@@ -45,6 +45,12 @@
 {{- if $params.lightgallery -}}
     {{- $source := $cdn.lightgalleryCSS | default "lib/lightgallery/css/lightgallery-bundle.min.css" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+    {{- if not $cdn.lightgalleryCSS -}}
+        {{- (resources.Get "lib/lightgallery/images/loading.gif").Publish -}}
+        {{- range resources.Match "lib/lightgallery/fonts/*" -}}
+            {{- .Publish -}}
+        {{- end -}}
+    {{- end -}}
     {{- $source := $cdn.lightgalleryJS | default "lib/lightgallery/lightgallery.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- $source := $cdn.lightgalleryThumbnailJS | default "lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" -}}
@@ -52,7 +58,6 @@
     {{- $source := $cdn.lightgalleryZoomJS | default "lib/lightgallery/plugins/zoom/lg-zoom.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- $config = dict "lightgallery" true | merge $config -}}
-    {{- $_ := (resources.Get "lib/lightgallery/images/loading.gif").RelPermalink -}}
 {{- end -}}
 
 {{- /* clipboard.js */ -}}
@@ -85,6 +90,11 @@
 {{- if $math.enable -}}
     {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+    {{- if not $cdn.katexCSS -}}
+        {{- range resources.Match "lib/katex/fonts/*" -}}
+            {{- .Publish -}}
+        {{- end -}}
+    {{- end -}}
     {{- $source := $cdn.katexJS | default "lib/katex/katex.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- $source := $cdn.katexAutoRenderJS | default "lib/katex/contrib/auto-render.min.js" -}}
@@ -120,7 +130,6 @@
 {{- if (.Scratch.Get "this").mermaid -}}
     {{- $source := $cdn.mermaidJS | default "lib/mermaid/mermaid.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-    {{- $_ := (resources.Get "lib/mermaid/mermaid.min.js.map").RelPermalink -}}
 {{- end -}}
 
 {{- /* ECharts */ -}}
