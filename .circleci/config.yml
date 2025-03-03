@@ -15,6 +15,9 @@ jobs:
       version:
         description: "version tag"
         type: string
+      environment:
+        description: "hugo environment"
+        type: string
     executor:
       name: hugo
       version: <<parameters.version>>
@@ -23,15 +26,15 @@ jobs:
       - checkout
       - run: git submodule sync
       - run: git submodule update --init
-      - run: hugo --source exampleSite --gc --minify --environment production
+      - run: hugo --source exampleSite --gc --minify --environment <<parameters.environment>>
+      - run: cp -rf exampleSite/resources . && git diff --exit-code
       - run: htmlproofer exampleSite/public --disable-external true --ignore-missing-alt true
 
 workflows:
   build-check:
     jobs:
       - build-check:
-          name: build-check-min
-          version: 0.128.0
-      - build-check:
-          name: build-check-max
-          version: 0.145.0
+          matrix:
+            parameters:
+              version: [ "0.128.0", "0.145.0" ]
+              environment: [ development, production ]
