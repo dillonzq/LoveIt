@@ -6,6 +6,9 @@
     {{- $resource := 0 -}}
     {{- if $href | and (not (urls.Parse $href).Host) -}}
         {{- $resource = resources.Get $href -}}
+        {{- with printf `%v.map` $href | resources.Get -}}
+            {{- .Publish -}}
+        {{- end -}}
     {{- end -}}
     {{- with .Content -}}
         {{- $resource = resources.FromString $.Path . -}}

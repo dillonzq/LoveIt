@@ -19,8 +19,10 @@
     "compile": "npx babel src/js --out-file assets/js/theme.js",
     "compile-lunr-segmentit": "browserify src/lib/lunr/lunr.segmentit.js -o assets/lib/lunr/lunr.segmentit.js -t babelify --presets @babel/preset-env",
     "hugo": "hugo --source exampleSite --buildDrafts --gc",
+    "hugo-development": "hugo --source exampleSite --buildDrafts --gc --minify --environment development",
     "hugo-production": "hugo --source exampleSite --gc --minify --environment production",
     "hugo-server": "hugo server --source exampleSite --buildDrafts --disableFastRender",
+    "hugo-server-development": "hugo server --source exampleSite --buildDrafts --disableFastRender --environment development",
     "hugo-server-production": "hugo server --source exampleSite --minify --disableFastRender --environment production",
     "htmlproofer": "htmlproofer exampleSite/public --disable-external true --ignore-missing-alt true",
     "copy-resources": "cp -rf exampleSite/resources ."
