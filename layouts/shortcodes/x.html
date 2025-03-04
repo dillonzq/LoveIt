@@ -1,0 +1,5 @@
+{{- if ge hugo.Version "0.142.0" -}}
+    {{- partial "internal/x.html" . -}}
+{{- else -}}
+    {{- template "_internal/shortcodes/twitter.html" . -}}
+{{- end -}}
