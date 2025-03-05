@@ -195,4 +195,7 @@ other = "CHANGED"
 
 [deleted]
 other = "DELETED"
+
+[deprecated]
+other = "DEPRECATED"
 # === shortcodes/version.html ===

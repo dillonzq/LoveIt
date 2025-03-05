@@ -200,4 +200,7 @@ other = "更改"
 
 [deleted]
 other = "删除"
+
+[deprecated]
+other = "弃用"
 # === shortcodes/version.html ===

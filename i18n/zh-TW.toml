@@ -197,4 +197,7 @@ other = "更改"
 
 [deleted]
 other = "刪除"
+
+[deprecated]
+other = "棄用"
 # === shortcodes/version.html ===
