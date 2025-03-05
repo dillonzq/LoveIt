@@ -209,7 +209,7 @@
   [params.social]
     GitHub = ""
     Linkedin = ""
-    Twitter = ""
+    X = ""
     Instagram = ""
     Facebook = ""
     Telegram = ""
@@ -275,10 +275,10 @@
     ORCID = ""
     Pleroma = ""
     Kaggle = ""
-    MediaWiki= ""
+    MediaWiki = ""
     Plume = ""
     HackTheBox = ""
-    RootMe= ""
+    RootMe = ""
     Malt = ""
     TikTok = ""
     TryHackMe = ""
@@ -384,7 +384,7 @@
     # 文章页面的分享信息设置
     [params.page.share]
       enable = true
-      Twitter = true
+      X = true
       Facebook = true
       Linkedin = false
       Whatsapp = false

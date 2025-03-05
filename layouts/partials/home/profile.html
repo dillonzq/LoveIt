@@ -45,6 +45,9 @@
             {{- $socialArr := slice -}}
             {{- range $key, $value := .Site.Params.social -}}
                 {{- $social := $key | lower | index $socialMap | default dict -}}
+                {{- with $social.Alias -}}
+                    {{- $social = index $socialMap . | default dict -}}
+                {{- end -}}
                 {{- if $value -}}
                     {{- if reflect.IsMap $value -}}
                         {{- with $value.weight -}}
