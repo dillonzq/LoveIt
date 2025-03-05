@@ -567,7 +567,7 @@ rootme:
   Title: Root-Me
   Prefix: https://www.root-me.org/
   Icon:
-    Src: svg/icons/rootme.svg
+    Simpleicons: rootme
 
 # 073: Malt
 malt:
