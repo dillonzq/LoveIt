@@ -356,7 +356,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     ORCID = ""
     Pleroma = ""
     Kaggle = ""
-    MediaWiki= ""
+    MediaWiki = ""
     Plume = ""
     HackTheBox = ""
     RootMe= ""
@@ -465,6 +465,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     [params.page.share]
       enable = true
       X = true
+      Threads = true
       Facebook = true
       Linkedin = false
       Whatsapp = false
@@ -486,6 +487,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       Evernote = false
       Skype = false
       Trello = false
+      Diaspora = true
       Mix = false
     # Comment config
     # 评论系统设置
