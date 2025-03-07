@@ -483,7 +483,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     ORCID = ""
     Pleroma = ""
     Kaggle = ""
-    MediaWiki= ""
+    MediaWiki = ""
     Plume = ""
     HackTheBox = ""
     RootMe = ""
@@ -563,6 +563,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       enable = true
       X = true # {{< version 0.3.1 >}}
       Twitter = false # {{< version 0.3.1 deprecated >}}
+      Threads = true # {{< version 0.3.1 >}}
       Facebook = true
       Linkedin = false
       Whatsapp = false
@@ -584,6 +585,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       Evernote = false
       Skype = false
       Trello = false
+      Diaspora = true # {{< version 0.3.1 >}}
       Mix = false
     # {{< version 0.2.0 changed >}} Comment config
     [params.page.comment]
