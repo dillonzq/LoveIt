@@ -182,8 +182,15 @@
 
     {{- /* 026: Mix */ -}}
     {{- if $share.Mix -}}
-        <a href="//mix.com/add?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="{{ T `shareOn` }} Mix">
+        <a href="https://mix.com/add?url={{ .Permalink }}&amp;description={{ .Title }}" target="_blank" title="{{ T `shareOn` }} Mix">
             {{- dict "Class" "fab fa-mix fa-fw" | partial "plugin/icon.html" -}}
+        </a>
+    {{- end -}}
+
+    {{- /* 027: Telegram */ -}}
+    {{- if $share.Telegram -}}
+        <a href="https://t.me/share/url?url={{ .Permalink }}&amp;text={{ .Title }}" target="_blank" title="{{ T `shareOn` }} Telegram">
+            {{- dict "Class" "fab fa-telegram fa-fw" | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 {{- end -}}

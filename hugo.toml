@@ -385,6 +385,7 @@
     [params.page.share]
       enable = true
       X = true
+      Threads = true
       Facebook = true
       Linkedin = false
       Whatsapp = false
@@ -406,7 +407,9 @@
       Evernote = false
       Skype = false
       Trello = false
+      Diaspora = true
       Mix = false
+      Telegram = true
     # Comment config
     # 评论系统设置
     [params.page.comment]
