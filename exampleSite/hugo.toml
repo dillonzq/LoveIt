@@ -364,6 +364,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     TikTok = ""
     TryHackMe = ""
     Codeberg = ""
+    HuggingFace = ""
+    Threads = ""
     Email = ""
     RSS = ""
 
@@ -881,6 +883,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         Facebook = "xxxx"
         Telegram = "xxxx"
         Youtubelegacy = "xxxx"
+        HuggingFace = "xxxx"
+        Threads = "xxxx"
         Phone = "555-555-555"
         Email = "xxxx@xxxx.com"
         RSS = true

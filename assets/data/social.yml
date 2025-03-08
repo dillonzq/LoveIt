@@ -1,4 +1,4 @@
-# 001: Github
+# 001: GitHub
 github:
   Weight: 1
   Prefix: https://github.com/
@@ -33,7 +33,7 @@ instagram:
   Icon:
     Class: fab fa-instagram fa-fw
 
-# 005: facebook
+# 005: Facebook
 facebook:
   Weight: 5
   Prefix: https://facebook.com/
@@ -603,6 +603,22 @@ codeberg:
   Prefix: https://codeberg.org/
   Icon:
     Simpleicons: codeberg
+
+# 077: Hugging Face
+huggingface:
+  Weight: 77
+  Title: Hugging Face
+  Prefix: https://huggingface.co/
+  Icon:
+    Simpleicons: huggingface
+
+# 078: Threads
+threads:
+  Weight: 78
+  Title: Threads
+  Prefix: https://www.threads.net/@
+  Icon:
+    Class: fab fa-threads fa-fw
 
 # Phone
 phone:
