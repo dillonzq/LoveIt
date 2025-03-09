@@ -658,13 +658,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # Analytics config
   # 网站分析配置
   [params.analytics]
-    enable = false
     # Google Analytics
     [params.analytics.google]
       id = ""
-      # whether to anonymize IP
-      # 是否匿名化用户 IP
-      anonymizeIP = true
+      # whether to respect the browser’s “do not track” setting
+      # 是否遵循浏览器的 “Do Not Track” 设置
+      respectDoNotTrack = false
     # Fathom Analytics
     [params.analytics.fathom]
       id = ""
@@ -760,11 +759,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # posts = ":year/:month/:filename"
   posts = ":filename"
 
-# Privacy config (https://gohugo.io/about/hugo-and-gdpr/)
-# 隐私信息配置 (https://gohugo.io/about/hugo-and-gdpr/)
+# Privacy config (https://gohugo.io/configuration/privacy/)
+# 隐私信息配置 (https://gohugo.io/configuration/privacy/)
 [privacy]
-  # privacy of the Google Analytics (replaced by params.analytics.google)
-  # Google Analytics 相关隐私 (被 params.analytics.google 替代)
+  # privacy of the Google Analytics (can also be configured in params.analytics.google)
+  # Google Analytics 相关隐私设置 (也能在 params.analytics.google 配置)
   [privacy.googleAnalytics]
     # ...
   [privacy.twitter]
