@@ -725,12 +725,15 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
   # {{< version 0.2.0 >}} Analytics config
   [params.analytics]
-    enable = false
+    # {{< version 0.3.1 deleted >}}
+    enable = true
     # Google Analytics
     [params.analytics.google]
       id = ""
-      # whether to anonymize IP
+      # {{< version 0.3.1 deleted >}} whether to anonymize IP
       anonymizeIP = true
+      # {{< version 0.3.1 >}} whether to respect the browser’s “do not track” setting
+      respectDoNotTrack = false
     # Fathom Analytics
     [params.analytics.fathom]
       id = ""
@@ -810,7 +813,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 # {{< link "https://gohugo.io/about/hugo-and-gdpr/" "Privacy config" >}}
 [privacy]
-  # {{< version 0.2.0 deleted >}} privacy of the Google Analytics (replaced by params.analytics.google)
+  # {{< version 0.3.1 changed >}} privacy of the Google Analytics (can also be configured in params.analytics.google)
   [privacy.googleAnalytics]
     # ...
   [privacy.twitter]
