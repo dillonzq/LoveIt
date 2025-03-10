@@ -199,3 +199,8 @@ other = "DELETED"
 [deprecated]
 other = "DEPRECATED"
 # === shortcodes/version.html ===
+
+# === single/footer.html ===
+[RelatedPosts]
+other = "You might also like..."
+# === single/footer.html ===
