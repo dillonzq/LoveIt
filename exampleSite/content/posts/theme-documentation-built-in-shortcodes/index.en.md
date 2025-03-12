@@ -83,40 +83,42 @@ The HTML looks like this:
 Example `highlight` input:
 
 ```markdown
-{{</* highlight html */>}}
-<section id="main">
-    <div>
-        <h1 id="title">{{ .Title }}</h1>
-        {{ range .Pages }}
-            {{ .Render "summary"}}
-        {{ end }}
-    </div>
-</section>
+{{</* highlight go */>}}
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, 世界")
+}
 {{</* /highlight */>}}
 ```
 
 The rendered output looks like this:
 
-{{< highlight html >}}
-<section id="main">
-    <div>
-        <h1 id="title">{{ .Title }}</h1>
-        {{ range .Pages }}
-            {{ .Render "summary"}}
-        {{ end }}
-    </div>
-</section>
+{{< highlight go >}}
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, 世界")
+}
 {{< /highlight >}}
 
 ## 4 instagram
 
 [Documentation of `instagram`](https://gohugo.io/content-management/shortcodes#instagram)
 
-{{< admonition question "Instagram’s API was deprecated since October 24th, 2020" >}}
-The instagram-shortcode refers an endpoint of Instagram’s API, that’s deprecated since October 24th, 2020.
-Thus, no images can be fetched from this API endpoint, resulting in an error when the instagram-shortcode is used.
-For more information please have a look at GitHub issue [#7879](https://github.com/gohugoio/hugo/issues/7879).
-{{< /admonition >}}
+Example `highlight` input:
+
+```markdown
+{{</* instagram CxOWiQNP2MO */>}}
+```
+
+The rendered output looks like this:
+
+{{< instagram CxOWiQNP2MO >}}
 
 ## 5 param
 
@@ -132,11 +134,7 @@ The rendered output looks like this:
 
 {{< param description >}}
 
-## 6 ref and relref {#ref-and-relref}
-
-[Documentation of `ref` and `relref`](https://gohugo.io/content-management/shortcodes#ref-and-relref)
-
-## 7 x
+## 6 x
 
 [Documentation of `x`](https://gohugo.io/shortcodes/x/)
 
@@ -150,7 +148,7 @@ The rendered output looks like this:
 
 {{< x user=GoHugoIO id=917359331535966209 >}}
 
-## 8 vimeo
+## 7 vimeo
 
 [Documentation of `vimeo`](https://gohugo.io/content-management/shortcodes#vimeo)
 
@@ -164,7 +162,7 @@ The rendered output looks like this:
 
 {{< vimeo 146022717 >}}
 
-## 9 youtube
+## 8 youtube
 
 [Documentation of `youtube`](https://gohugo.io/content-management/shortcodes#youtube)
 
@@ -177,3 +175,7 @@ Example `youtube` input:
 The rendered output looks like this:
 
 {{< youtube w7Ft2ymGmfc >}}
+
+## 9 ref and relref {#ref-and-relref}
+
+[Documentation of `ref` and `relref`](https://gohugo.io/content-management/shortcodes#ref-and-relref)
