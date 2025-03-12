@@ -110,7 +110,7 @@ func main() {
 
 [Documentation of `instagram`](https://gohugo.io/content-management/shortcodes#instagram)
 
-Example `highlight` input:
+Example `instagram` input:
 
 ```markdown
 {{</* instagram CxOWiQNP2MO */>}}
