@@ -84,40 +84,42 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 一个 `highlight` 示例:
 
 ```markdown
-{{</* highlight html */>}}
-<section id="main">
-    <div>
-        <h1 id="title">{{ .Title }}</h1>
-        {{ range .Pages }}
-            {{ .Render "summary"}}
-        {{ end }}
-    </div>
-</section>
+{{</* highlight go */>}}
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, 世界")
+}
 {{</* /highlight */>}}
 ```
 
 呈现的输出效果如下:
 
-{{< highlight html >}}
-<section id="main">
-    <div>
-        <h1 id="title">{{ .Title }}</h1>
-        {{ range .Pages }}
-            {{ .Render "summary"}}
-        {{ end }}
-    </div>
-</section>
+{{< highlight go >}}
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, 世界")
+}
 {{< /highlight >}}
 
 ## 4 instagram
 
 [`instagram` 的文档](https://gohugo.io/content-management/shortcodes#instagram)
 
-{{< admonition question "Instagram’s API was deprecated since October 24th, 2020" >}}
-The instagram-shortcode refers an endpoint of Instagram’s API, that’s deprecated since October 24th, 2020.
-Thus, no images can be fetched from this API endpoint, resulting in an error when the instagram-shortcode is used.
-For more information please have a look at GitHub issue [#7879](https://github.com/gohugoio/hugo/issues/7879).
-{{< /admonition >}}
+一个 `instagram` 示例:
+
+```markdown
+{{</* instagram CxOWiQNP2MO */>}}
+```
+
+呈现的输出效果如下:
+
+{{< instagram CxOWiQNP2MO >}}
 
 ## 5 param
 
@@ -133,11 +135,7 @@ For more information please have a look at GitHub issue [#7879](https://github.c
 
 {{< param description >}}
 
-## 6 ref 和 relref {#ref-and-relref}
-
-[`ref` 和 `relref` 的文档](https://gohugo.io/content-management/shortcodes#ref-and-relref)
-
-## 7 x
+## 6 x
 
 [`x` 的文档](https://gohugo.io/shortcodes/x/)
 
@@ -151,7 +149,7 @@ For more information please have a look at GitHub issue [#7879](https://github.c
 
 {{< x user=GoHugoIO id=917359331535966209 >}}
 
-## 8 vimeo
+## 7 vimeo
 
 [`vimeo` 的文档](https://gohugo.io/content-management/shortcodes#vimeo)
 
@@ -165,7 +163,7 @@ For more information please have a look at GitHub issue [#7879](https://github.c
 
 {{< vimeo 146022717 >}}
 
-## 9 youtube
+## 8 youtube
 
 [`youtube` 的文档](https://gohugo.io/content-management/shortcodes#youtube)
 
@@ -178,3 +176,7 @@ For more information please have a look at GitHub issue [#7879](https://github.c
 呈现的输出效果如下:
 
 {{< youtube w7Ft2ymGmfc >}}
+
+## 9 ref 和 relref {#ref-and-relref}
+
+[`ref` 和 `relref` 的文档](https://gohugo.io/content-management/shortcodes#ref-and-relref)
