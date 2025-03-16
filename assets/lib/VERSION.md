@@ -17,7 +17,7 @@
 | [lightGallery](https://github.com/sachinchoolur/lightgallery)                       | lightgallery      |   2.5.0 |
 | [Lunr.js](https://github.com/olivernn/lunr.js)                                      | lunr              |   2.3.9 |
 | [Mapbox GL JS](https://github.com/mapbox/mapbox-gl-js)                              | mapbox-gl         |   2.9.1 |
-| [Mermaid](https://github.com/mermaid-js/mermaid)                                    | mermaid           |   9.1.3 |
+| [Mermaid](https://github.com/mermaid-js/mermaid)                                    | mermaid           |  11.5.0 |
 | [MetingJS](https://github.com/metowolf/MetingJS)                                    | meting            |   2.0.1 |
 | [modern-normalize](https://github.com/sindresorhus/modern-normalize)                | modern-normalize  |   3.0.1 |
 | [object-fit-images](https://github.com/fregante/object-fit-images)                  | object-fit-images |   3.2.4 |

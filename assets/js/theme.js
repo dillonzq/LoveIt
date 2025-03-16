@@ -559,9 +559,10 @@ var Theme = /*#__PURE__*/function () {
             securityLevel: 'loose'
           });
           Util.forEach($mermaidElements, function ($mermaid) {
-            mermaid.render('svg-' + $mermaid.id, _this6.data[$mermaid.id], function (svgCode) {
-              $mermaid.innerHTML = svgCode;
-            }, $mermaid);
+            mermaid.render('mermaid-svg-' + $mermaid.id, _this6.data[$mermaid.id]).then(function (_ref9) {
+              var svg = _ref9.svg;
+              $mermaid.innerHTML = svg;
+            });
           });
         }
       };
