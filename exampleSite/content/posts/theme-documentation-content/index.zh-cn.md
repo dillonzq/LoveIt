@@ -238,6 +238,19 @@ resources:
 
 **LoveIt** 主题提供了一些扩展的语法便于你撰写文章.
 
+### Mermaid 图表
+
+```mermaid
+graph TD
+    A[输入图表定义] --> B(预览)
+    B --> C{决定}
+    C --> D[保持]
+    C --> E[编辑定义]
+    E --> B
+    D --> F[保存图片和代码]
+    F --> B
+```
+
 ### Emoji 支持
 
 这部分内容在 [Emoji 支持页面](../emoji-support/) 中介绍.
