@@ -239,6 +239,19 @@ This part is shown in the [basic markdown syntax page](../basic-markdown-syntax/
 
 **LoveIt** theme has some extended syntax elements for you to write articles.
 
+### Mermaid Diagrams
+
+```mermaid
+graph TD
+    A[Enter Chart Definition] --> B(Preview)
+    B --> C{decide}
+    C --> D[Keep]
+    C --> E[Edit Definition]
+    E --> B
+    D --> F[Save Image and Code]
+    F --> B
+```
+
 ### Emoji Support
 
 This part is shown in the [emoji support page](../emoji-support/).
