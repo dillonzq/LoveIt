@@ -78,7 +78,7 @@ The HTML looks like this:
 
 ## 3 highlight
 
-[Documentation of `highlight`](https://gohugo.io/content-management/shortcodes#instagram)
+[Documentation of `highlight`](https://gohugo.io/content-management/shortcodes#highlight)
 
 Example `highlight` input:
 
