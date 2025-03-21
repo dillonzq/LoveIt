@@ -26,7 +26,7 @@ Hugo 使用 Markdown 为其简单的内容格式. 但是, Markdown 在很多方�
 
 但这恰好是一个坏主意. 大家使用 Markdown, 正是因为它即使不经过渲染也可以轻松阅读. 应该尽可能避免使用 HTML 以保持内容简洁.
 
-为了避免这种限制, Hugo 创建了 [shortcodes](https://gohugo.io/extras/shortcodes/).
+为了避免这种限制, Hugo 创建了 [shortcodes](https://gohugo.io/content-management/shortcodes/).
 shortcode 是一个简单代码段, 可以生成合理的 HTML 代码, 并且符合 Markdown 的设计哲学.
 
 Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见的用法.
@@ -34,32 +34,46 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 ## 1 figure {#figure}
 
-[`figure` 的文档](https://gohugo.io/content-management/shortcodes#figure)
+[`figure` 的文档](https://gohugo.io/shortcodes/figure/)
 
 一个 `figure` 示例:
 
 ```markdown
-{{</* figure src="/images/lighthouse.jpg" title="Lighthouse (figure)" */>}}
+{{</* figure
+    src="/images/zion-national-park.jpg"
+    alt="A photograph of Zion National Park"
+    link="https://www.nps.gov/zion/index.htm"
+    caption="Zion National Park"
+    class="ma0 w-75"
+*/>}}
 ```
 
 呈现的输出效果如下:
 
-{{< figure src="/images/lighthouse.jpg" title="Lighthouse (figure)" >}}
+{{< figure
+    src="/images/zion-national-park.jpg"
+    alt="A photograph of Zion National Park"
+    link="https://www.nps.gov/zion/index.htm"
+    caption="Zion National Park"
+    class="ma0 w-75"
+>}}
 
 输出的 HTML 看起来像这样:
 
 ```html
-<figure>
-    <img src="/images/lighthouse.jpg"/>
+<figure class="ma0 w-75">
+    <a href="https://www.nps.gov/zion/index.htm">
+        <img src="/images/zion-national-park.jpg" alt="A photograph of Zion National Park">
+    </a>
     <figcaption>
-        <h4>Lighthouse (figure)</h4>
+        <p>Zion National Park</p>
     </figcaption>
 </figure>
 ```
 
 ## 2 gist
 
-[`gist` 的文档](https://gohugo.io/content-management/shortcodes#gist)
+[`gist` 的文档](https://gohugo.io/shortcodes/gist/)
 
 一个 `gist` 示例:
 
@@ -79,7 +93,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 ## 3 highlight
 
-[`highlight` 的文档](https://gohugo.io/content-management/shortcodes#instagram)
+[`highlight` 的文档](https://gohugo.io/shortcodes/highlight/)
 
 一个 `highlight` 示例:
 
@@ -109,7 +123,7 @@ func main() {
 
 ## 4 instagram
 
-[`instagram` 的文档](https://gohugo.io/content-management/shortcodes#instagram)
+[`instagram` 的文档](https://gohugo.io/shortcodes/instagram/)
 
 一个 `instagram` 示例:
 
@@ -123,7 +137,7 @@ func main() {
 
 ## 5 param
 
-[`param` 的文档](https://gohugo.io/content-management/shortcodes#param)
+[`param` 的文档](https://gohugo.io/shortcodes/param/)
 
 一个 `param` 示例:
 
@@ -151,7 +165,7 @@ func main() {
 
 ## 7 vimeo
 
-[`vimeo` 的文档](https://gohugo.io/content-management/shortcodes#vimeo)
+[`vimeo` 的文档](https://gohugo.io/shortcodes/vimeo/)
 
 一个 `vimeo` 示例:
 
@@ -165,7 +179,7 @@ func main() {
 
 ## 8 youtube
 
-[`youtube` 的文档](https://gohugo.io/content-management/shortcodes#youtube)
+[`youtube` 的文档](https://gohugo.io/shortcodes/youtube/)
 
 一个 `youtube` 示例:
 
@@ -177,6 +191,10 @@ func main() {
 
 {{< youtube w7Ft2ymGmfc >}}
 
-## 9 ref 和 relref {#ref-and-relref}
+## 9 ref
 
-[`ref` 和 `relref` 的文档](https://gohugo.io/content-management/shortcodes#ref-and-relref)
+[`ref` 的文档](https://gohugo.io/shortcodes/ref/)
+
+## 10 relref
+
+[`relref` 的文档](https://gohugo.io/shortcodes/relref/)

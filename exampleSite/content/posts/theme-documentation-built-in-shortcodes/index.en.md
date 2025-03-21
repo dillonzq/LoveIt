@@ -33,32 +33,46 @@ Hugo ships with a set of predefined shortcodes that represent very common usage.
 
 ## 1 figure {#figure}
 
-[Documentation of `figure`](https://gohugo.io/content-management/shortcodes#figure)
+[Documentation of `figure`](https://gohugo.io/shortcodes/figure/)
 
 Example `figure` input:
 
 ```markdown
-{{</* figure src="/images/lighthouse.jpg" title="Lighthouse (figure)" */>}}
+{{</* figure
+    src="/images/zion-national-park.jpg"
+    alt="A photograph of Zion National Park"
+    link="https://www.nps.gov/zion/index.htm"
+    caption="Zion National Park"
+    class="ma0 w-75"
+*/>}}
 ```
 
 The rendered output looks like this:
 
-{{< figure src="/images/lighthouse.jpg" title="Lighthouse (figure)" >}}
+{{< figure
+    src="/images/zion-national-park.jpg"
+    alt="A photograph of Zion National Park"
+    link="https://www.nps.gov/zion/index.htm"
+    caption="Zion National Park"
+    class="ma0 w-75"
+>}}
 
 The HTML looks like this:
 
 ```html
-<figure>
-    <img src="/images/lighthouse.jpg"/>
+<figure class="ma0 w-75">
+    <a href="https://www.nps.gov/zion/index.htm">
+        <img src="/images/zion-national-park.jpg" alt="A photograph of Zion National Park">
+    </a>
     <figcaption>
-        <h4>Lighthouse (figure)</h4>
+        <p>Zion National Park</p>
     </figcaption>
 </figure>
 ```
 
 ## 2 gist
 
-[Documentation of `gist`](https://gohugo.io/content-management/shortcodes#gist)
+[Documentation of `gist`](https://gohugo.io/shortcodes/gist/)
 
 Example `gist` input:
 
@@ -78,7 +92,7 @@ The HTML looks like this:
 
 ## 3 highlight
 
-[Documentation of `highlight`](https://gohugo.io/content-management/shortcodes#highlight)
+[Documentation of `highlight`](https://gohugo.io/shortcodes/highlight/)
 
 Example `highlight` input:
 
@@ -108,7 +122,7 @@ func main() {
 
 ## 4 instagram
 
-[Documentation of `instagram`](https://gohugo.io/content-management/shortcodes#instagram)
+[Documentation of `instagram`](https://gohugo.io/shortcodes/instagram/)
 
 Example `instagram` input:
 
@@ -122,7 +136,7 @@ The rendered output looks like this:
 
 ## 5 param
 
-[Documentation of `param`](https://gohugo.io/content-management/shortcodes#param)
+[Documentation of `param`](https://gohugo.io/shortcodes/param/)
 
 Example `param` input:
 
@@ -150,7 +164,7 @@ The rendered output looks like this:
 
 ## 7 vimeo
 
-[Documentation of `vimeo`](https://gohugo.io/content-management/shortcodes#vimeo)
+[Documentation of `vimeo`](https://gohugo.io/shortcodes/vimeo/)
 
 Example `vimeo` input:
 
@@ -164,7 +178,7 @@ The rendered output looks like this:
 
 ## 8 youtube
 
-[Documentation of `youtube`](https://gohugo.io/content-management/shortcodes#youtube)
+[Documentation of `youtube`](https://gohugo.io/shortcodes/youtube/)
 
 Example `youtube` input:
 
@@ -176,6 +190,10 @@ The rendered output looks like this:
 
 {{< youtube w7Ft2ymGmfc >}}
 
-## 9 ref and relref {#ref-and-relref}
+## 9 ref
 
-[Documentation of `ref` and `relref`](https://gohugo.io/content-management/shortcodes#ref-and-relref)
+[Documentation of `ref`](https://gohugo.io/shortcodes/ref/)
+
+## 10  relref
+
+[Documentation of `relref`](https://gohugo.io/shortcodes/relref/)
