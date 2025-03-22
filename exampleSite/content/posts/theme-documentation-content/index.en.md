@@ -239,7 +239,21 @@ This part is shown in the [basic markdown syntax page](../basic-markdown-syntax/
 
 **LoveIt** theme has some extended syntax elements for you to write articles.
 
-### Mermaid Diagrams
+### Diagrams
+
+#### GoAT Diagrams (ASCII)
+
+```goat
+      .               .                .               .--- 1          .-- 1     / 1
+     / \              |                |           .---+            .-+         +
+    /   \         .---+---.         .--+--.        |   '--- 2      |   '-- 2   / \ 2
+   +     +        |       |        |       |    ---+            ---+          +
+  / \   / \     .-+-.   .-+-.     .+.     .+.      |   .--- 3      |   .-- 3   \ / 3
+ /   \ /   \    |   |   |   |    |   |   |   |     '---+            '-+         +
+ 1   2 3   4    1   2   3   4    1   2   3   4         '--- 4          '-- 4     \ 4
+```
+
+#### Mermaid Diagrams
 
 ```mermaid
 graph TD
