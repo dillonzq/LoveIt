@@ -238,6 +238,33 @@ resources:
 
 **LoveIt** 主题提供了一些扩展的语法便于你撰写文章.
 
+### 图表
+
+#### GoAT 图表 (ASCII)
+
+```goat
+      .               .                .               .--- 1          .-- 1     / 1
+     / \              |                |           .---+            .-+         +
+    /   \         .---+---.         .--+--.        |   '--- 2      |   '-- 2   / \ 2
+   +     +        |       |        |       |    ---+            ---+          +
+  / \   / \     .-+-.   .-+-.     .+.     .+.      |   .--- 3      |   .-- 3   \ / 3
+ /   \ /   \    |   |   |   |    |   |   |   |     '---+            '-+         +
+ 1   2 3   4    1   2   3   4    1   2   3   4         '--- 4          '-- 4     \ 4
+```
+
+#### Mermaid 图表
+
+```mermaid
+graph TD
+    A[输入图表定义] --> B(预览)
+    B --> C{决定}
+    C --> D[保持]
+    C --> E[编辑定义]
+    E --> B
+    D --> F[保存图片和代码]
+    F --> B
+```
+
 ### Emoji 支持
 
 这部分内容在 [Emoji 支持页面](../emoji-support/) 中介绍.
@@ -276,13 +303,13 @@ resources:
 一个 `raw` 示例:
 
 ```markdown
-行内公式: {{</* raw */>}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){{</* /raw */>}}
+行内公式: {?{}{< raw >}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\mathbf{E}_{2}+\mathbf{E}_{3}+\cdots\){?{}{< /raw >}}
 
 公式块:
 
-{{</* raw */>}}
+{?{}{< raw >}}
 \[ a=b+c \\ d+e=f \]
-{{</* /raw */>}}
+{?{}{< /raw >}}
 ```
 
 呈现的输出效果如下:
@@ -291,7 +318,7 @@ resources:
 
 公式块:
 
-{{< raw>}}
+{{< raw >}}
 \[ a=b+c \\ d+e=f \]
 {{< /raw >}}
 {{< /admonition >}}
@@ -305,7 +332,7 @@ resources:
 
 例如:
 
-```tex
+```markdown
 $c = \pm\sqrt{a^2 + b^2}$ 和 \\(f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi\\)
 ```
 
@@ -327,7 +354,7 @@ $c = \pm\sqrt{a^2 + b^2}$ 和 \\(f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 
 
 例如:
 
-```tex
+```markdown
 $$ c = \pm\sqrt{a^2 + b^2} $$
 
 \\[ f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi \\]

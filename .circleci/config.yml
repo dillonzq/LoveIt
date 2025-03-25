@@ -1,17 +1,40 @@
 version: 2.1
+
+executors:
+  hugo:
+    parameters:
+      version:
+        description: "version tag"
+        type: string
+    docker:
+      - image: cibuilds/hugo:<<parameters.version>>
+
 jobs:
   build-check:
-    docker:
-      - image: cibuilds/hugo:0.62
+    parameters:
+      version:
+        description: "version tag"
+        type: string
+      environment:
+        description: "hugo environment"
+        type: string
+    executor:
+      name: hugo
+      version: <<parameters.version>>
     working_directory: ~/LoveIt
     steps:
       - checkout
       - run: git submodule sync
       - run: git submodule update --init
-      - run: hugo --source=exampleSite -v --gc
-      - run: htmlproofer exampleSite/public --check-html --allow-hash-href --empty-alt-ignore --disable-external
+      - run: hugo --source exampleSite --gc --minify --environment <<parameters.environment>>
+      - run: cp -rf exampleSite/resources . && git diff --exit-code
+      - run: htmlproofer exampleSite/public --disable-external true --ignore-missing-alt true
 
 workflows:
-  build-check-exampleSite:
+  build-check:
     jobs:
-      - build-check
+      - build-check:
+          matrix:
+            parameters:
+              version: [ "0.128.0", "0.145.0" ]
+              environment: [ development, production ]

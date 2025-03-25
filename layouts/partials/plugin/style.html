@@ -6,6 +6,9 @@
     {{- $resource := 0 -}}
     {{- if $href | and (not (urls.Parse $href).Host) -}}
         {{- $resource = resources.Get $href -}}
+        {{- with printf `%v.map` $href | resources.Get -}}
+            {{- .Publish -}}
+        {{- end -}}
     {{- end -}}
     {{- with .Content -}}
         {{- $resource = resources.FromString $.Path . -}}
@@ -15,8 +18,7 @@
             {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
         {{- end -}}
         {{- with .ToCSS -}}
-            {{- $options := . | merge (dict "outputStyle" "compressed") -}}
-            {{- $resource = $resource | toCSS $options -}}
+            {{- $resource = $resource | toCSS . -}}
         {{- end -}}
         {{- if .Minify -}}
             {{- $resource = $resource | minify -}}

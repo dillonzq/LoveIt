@@ -31,14 +31,19 @@
 
 {{- /* style.min.css */ -}}
 {{- $options := dict "Source" "css/style.scss" "Fingerprint" $fingerprint -}}
-{{- $toCSS := dict "targetPath" "css/style.min.css" "enableSourceMap" true -}}
+{{- $toCSS := dict "targetPath" "css/style.min.css" "outputStyle" "compressed" "enableSourceMap" true -}}
 {{- $options = dict "Context" . "ToCSS" $toCSS | merge $options -}}
 {{- partial "plugin/style.html" $options -}}
 
 {{- /* Font Awesome */ -}}
-{{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/all.min.css" -}}
+{{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/css/all.min.css" -}}
 {{- $options := dict "Source" $source "Fingerprint" $fingerprint "Preload" true -}}
 {{- partial "plugin/style.html" $options -}}
+{{- if not $cdn.fontawesomeFreeCSS -}}
+    {{- range resources.Match "lib/fontawesome-free/webfonts/*" -}}
+        {{- .Publish -}}
+    {{- end -}}
+{{- end -}}
 
 {{- /* Animate.css */ -}}
 {{- $source := $cdn.animateCSS | default "lib/animate/animate.min.css" -}}

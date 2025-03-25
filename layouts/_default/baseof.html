@@ -15,7 +15,7 @@
     <body data-header-desktop="{{ .Site.Params.header.desktopMode }}" data-header-mobile="{{ .Site.Params.header.mobileMode }}">
         {{- /* Check theme isDark before body rendering */ -}}
         {{- $theme := .Site.Params.defaulttheme -}}
-        <script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('{{ $theme }}' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '{{ $theme }}' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+        <script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('{{ $theme }}' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '{{ $theme }}' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div>
 
@@ -35,7 +35,9 @@
             <a href="#" id="back-to-top" class="fixed-button" title="{{ T `backToTop` }}">
                 <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
             </a>
+        </div>
 
+        <div id="fixed-buttons-hidden">
             {{- /* comment button */ -}}
             <a href="#" id="view-comments" class="fixed-button" title="{{ T `viewComments` }}">
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>

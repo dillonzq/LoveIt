@@ -1,0 +1,29 @@
+[build]
+  publish = "exampleSite/public"
+
+    [build.environment]
+      HUGO_VERSION = "0.145.0"
+      HUGO_ENV = "production"
+      HUGO_ENABLEGITINFO = "true"
+
+[context.production]
+  command = "hugo --source exampleSite --theme repo --themesDir ../.. --baseURL ${URL} --gc --minify"
+
+[context.deploy-preview]
+  command = "hugo --source exampleSite --theme repo --themesDir ../.. --baseURL ${DEPLOY_PRIME_URL} --gc --minify --buildDrafts"
+
+[context.branch-deploy]
+  command = "hugo --source exampleSite --theme repo --themesDir ../.. --baseURL ${DEPLOY_PRIME_URL} --gc --minify"
+
+[[plugins]]
+  package = "netlify-plugin-hugo-cache-resources"
+
+  [plugins.inputs]
+    debug = true
+    srcdir = "exampleSite"
+
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+  [plugins.inputs.settings]
+    preset = "desktop"

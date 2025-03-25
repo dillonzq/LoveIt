@@ -1,4 +1,4 @@
-{{- .Scratch.Set "version" "0.2.11" -}}
+{{- .Scratch.Set "version" "0.3.1-DEV" -}}
 
 {{- $params := .Params | merge .Site.Params.page -}}
 
@@ -21,8 +21,9 @@
     {{- else if eq .Params.comment false -}}
         {{- .Scratch.Set "comment" dict -}}
     {{- end -}}
-{{- else if eq .Site .Sites.First -}}
-    {{- warnf "\n\nCurrent environment is \"development\". The \"comment system\", \"CDN\" and \"fingerprint\" will be disabled.\n当前运行环境是 \"development\". \"评论系统\", \"CDN\" 和 \"fingerprint\" 不会启用.\n" -}}
+{{- else if eq .Site .Sites.Default -}}
+    {{- warnf "Current environment is not \"production\". The \"comment system\", \"CDN\" and \"fingerprint\" will be disabled.\n" -}}
+    {{- warnf "当前运行环境不是 \"production\". \"评论系统\", \"CDN\" 和 \"fingerprint\" 不会启用.\n" -}}
 {{- end -}}
 
 {{- .Scratch.Set "params" $params -}}

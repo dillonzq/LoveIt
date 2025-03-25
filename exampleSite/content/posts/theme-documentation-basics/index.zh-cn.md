@@ -27,16 +27,14 @@ toc:
 
 ## 1 准备
 
-由于 Hugo 提供的便利性, [Hugo](https://gohugo.io/) 本身是这个主题唯一的依赖.
+由于 Hugo 提供的便利性, [Hugo](https://gohugo.io/) 是这个主题唯一的依赖.
 
-直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive fa-fw): Hugo (> 0.62.0)](https://gohugo.io/getting-started/installing/).
+直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive fa-fw): Hugo](https://gohugo.io/getting-started/installing/).
 
-{{< admonition note "为什么不支持早期版本的 Hugo?" >}}
-由于 [Markdown 渲染钩子函数](https://gohugo.io/getting-started/configuration-markup#markdown-render-hooks) 在 [Hugo 圣诞节版本](https://gohugo.io/news/0.62.0-relnotes/) 中被引入, 本主题只支持高于 **0.62.0** 的 Hugo 版本.
-{{< /admonition >}}
+{{< admonition note "什么时候需要使用 Hugo extended 版本?" false >}}
+当你需要[自定义样式](#style-customization)时, 你要使用 Hugo **extended** 版本来获得正确的渲染效果.
 
-{{< admonition tip "推荐使用 Hugo extended 版本" >}}
-由于这个主题的一些特性需要将 :(fab fa-sass fa-fw): SCSS 转换为 :(fab fa-css3 fa-fw): CSS, 推荐使用 Hugo **extended** 版本来获得更好的使用体验.
+![Hugo extended 版本](hugo-extended-edition.png "Hugo extended 版本")
 {{< /admonition >}}
 
 ## 2 安装
@@ -56,7 +54,7 @@ cd my_website
 
 **LoveIt** 主题的仓库是: [https://github.com/dillonzq/LoveIt](https://github.com/dillonzq/LoveIt).
 
-你可以下载主题的 [最新版本 :(far fa-file-archive fa-fw): .zip 文件](https://github.com/dillonzq/LoveIt/releases) 并且解压放到 `themes` 目录.
+你可以下载主题的 [发布版本 :(far fa-file-archive fa-fw): .zip 文件](https://github.com/dillonzq/LoveIt/releases) 并且解压放到 `themes` 目录.
 
 另外, 也可以直接把这个主题克隆到 `themes` 目录:
 
@@ -70,6 +68,16 @@ git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt
 git init
 git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 ```
+
+{{< admonition note "主题的兼容性" >}}
+
+| LoveIt 分支或版本  |    支持的 Hugo 版本    |
+|:--------------|:-----------------:|
+| master(不稳定)   |     ≥ 0.128.0     |
+| **0.3.X(推荐)** | 0.128.0 - 0.145.0 |
+| 0.2.X(过时)     | 0.68.0 - 0.127.0  |
+
+{{< /admonition >}}
 
 ### 2.3 基础配置 {#basic-configuration}
 
@@ -90,12 +98,6 @@ languageCode = "zh-CN"
 languageName = "简体中文"
 # 是否包括中日韩文字
 hasCJKLanguage = true
-
-# 作者配置
-[author]
-  name = "xxxx"
-  email = ""
-  link = ""
 
 # 菜单配置
 [menu]
@@ -136,7 +138,7 @@ hasCJKLanguage = true
 ```
 
 {{< admonition >}}
-在构建网站时, 你可以使用 `--theme` 选项设置主题. 但是, 我建议你修改配置文件 (**config.toml**) 将本主题设置为默认主题.
+在构建网站时, 你可以使用 `--theme` 选项设置主题. 但是, 我建议你修改配置文件 (**hugo.toml**) 将本主题设置为默认主题.
 {{< /admonition >}}
 
 ### 2.4 创建你的第一篇文章
@@ -176,6 +178,7 @@ hugo serve
 ```bash
 hugo serve --disableFastRender
 ```
+
 {{< /admonition >}}
 
 ### 2.6 构建网站
@@ -197,7 +200,7 @@ hugo
 
 ### 3.1 网站配置 {#site-configuration}
 
-除了 [Hugo 全局配置](https://gohugo.io/overview/configuration/) 和 [菜单配置](#basic-configuration) 之外, **LoveIt** 主题还允许您在网站配置中定义以下参数 (这是一个示例 `config.toml`, 其内容为默认值).
+除了 [Hugo 全局配置](https://gohugo.io/overview/configuration/) 和 [菜单配置](#basic-configuration) 之外, **LoveIt** 主题还允许您在网站配置中定义以下参数 (这是一个示例 `hugo.toml`, 其内容为默认值).
 
 请打开下面的代码块查看完整的示例配置 :(far fa-hand-point-down fa-fw)::
 
@@ -217,10 +220,6 @@ languageName = "简体中文"
 # 是否包括中日韩文字
 hasCJKLanguage = true
 
-# 默认每页列表显示的文章数目
-paginate = 12
-# 谷歌分析代号 [UA-XXXXXXXX-X]
-googleAnalytics = ""
 # 版权描述，仅仅用于 SEO
 copyright = ""
 
@@ -234,11 +233,11 @@ enableEmoji = true
 # 忽略一些构建错误
 ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
-# 作者配置
-[author]
-  name = "xxxx"
-  email = ""
-  link = ""
+# 分页配置
+[pagination]
+  disableAliases = false
+  pagerSize = 10
+  path = "page"
 
 # 菜单配置
 [menu]
@@ -286,6 +285,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   description = "这是我的全新 Hugo 网站"
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = ["/logo.png"]
+
+  # 作者配置
+  [params.author]
+    name = "xxxx"
+    email = ""
+    link = ""
 
   # 页面头部导航栏配置
   [params.header]
@@ -413,7 +418,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   [params.social]
     GitHub = "xxxx"
     Linkedin = ""
-    Twitter = "xxxx"
+    X = "xxxx" # {{< version 0.3.1 >}}
+    Twitter = "" # {{< version 0.3.1 deprecated >}}
     Instagram = "xxxx"
     Facebook = "xxxx"
     Telegram = "xxxx"
@@ -479,10 +485,16 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     ORCID = ""
     Pleroma = ""
     Kaggle = ""
-    MediaWiki= ""
+    MediaWiki = ""
     Plume = ""
     HackTheBox = ""
-    RootMe= ""
+    RootMe = ""
+    Malt = "" # {{< version 0.3.0 >}}
+    TikTok = "" # {{< version 0.3.0 >}}
+    TryHackMe = "" # {{< version 0.3.0 >}}
+    Codeberg = "" # {{< version 0.3.0 >}}
+    HuggingFace = "" # {{< version 0.3.1 >}}
+    Threads = "" # {{< version 0.3.1 >}}
     Phone = ""
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
@@ -512,7 +524,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # 是否使用目录
       enable = true
       # {{< version 0.2.9 >}} 是否保持使用文章前面的静态目录
-      keepStatic = true
+      keepStatic = false
       # 是否使侧边目录自动折叠展开
       auto = true
     # {{< version 0.2.0 >}} 代码配置
@@ -553,7 +565,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # {{< version 0.2.0 changed >}} 文章页面的分享信息设置
     [params.page.share]
       enable = true
-      Twitter = true
+      X = true # {{< version 0.3.1 >}}
+      Twitter = false # {{< version 0.3.1 deprecated >}}
+      Threads = true # {{< version 0.3.1 >}}
       Facebook = true
       Linkedin = false
       Whatsapp = false
@@ -575,7 +589,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       Evernote = false
       Skype = false
       Trello = false
+      Diaspora = true # {{< version 0.3.1 >}}
       Mix = false
+      Telegram = true # {{< version 0.3.1 >}}
     # {{< version 0.2.0 changed >}} 评论系统设置
     [params.page.comment]
       enable = false
@@ -711,12 +727,15 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
   # {{< version 0.2.0 >}} 网站分析配置
   [params.analytics]
-    enable = false
+    # {{< version 0.3.1 deleted >}}
+    enable = true
     # Google Analytics
     [params.analytics.google]
       id = ""
-      # 是否匿名化用户 IP
+      # {{< version 0.3.1 deleted >}} 是否匿名化用户 IP
       anonymizeIP = true
+      # {{< version 0.3.1 >}} 是否遵循浏览器的 “Do Not Track” 设置
+      respectDoNotTrack = false
     # Fathom Analytics
     [params.analytics.fathom]
       id = ""
@@ -796,13 +815,13 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 # {{< link "https://gohugo.io/about/hugo-and-gdpr/" "隐私信息配置" >}}
 [privacy]
-  # {{< version 0.2.0 deleted >}} Google Analytics 相关隐私 (被 params.analytics.google 替代)
+  # {{< version 0.3.1 changed >}} Google Analytics 相关隐私设置 (也能在 params.analytics.google 配置)
   [privacy.googleAnalytics]
     # ...
   [privacy.twitter]
-    enableDNT = true
+    # ...
   [privacy.youtube]
-    privacyEnhanced = true
+    # ...
 
 # 用于输出 Markdown 格式文档的设置
 [mediaTypes]
@@ -822,7 +841,6 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
-  taxonomyTerm = ["HTML"]
 ```
 
 {{< admonition >}}
@@ -901,12 +919,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 可以自定义 `browserconfig.xml` 和 `site.webmanifest` 文件来设置 theme-color 和 background-color.
 
-### 3.3 自定义样式
+### 3.3 自定义样式 {#style-customization}
 
 {{< version 0.2.8 changed >}}
 
-{{< admonition >}}
-Hugo **extended** 版本对于自定义样式是必需的.
+{{< admonition note "Hugo extended 版本是必需的" >}}
+由于需要将 :(fab fa-sass fa-fw): SCSS 转换为 :(fab fa-css3 fa-fw): CSS, Hugo **extended** 版本对于自定义样式是必需的.
 {{< /admonition >}}
 
 通过定义自定义 `.scss` 样式文件, **LoveIt** 主题支持可配置的样式.
@@ -934,29 +952,31 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 {{< version 0.2.10 changed >}}
 
-| 语言 | Hugo 代码 | HTML `lang` 属性 | 主题文档 | Lunr.js 支持 |
-|:---- |:----:|:----:|:----:|:----:|
-| 英语 | `en` | `en` | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
-| 简体中文 | `zh-cn` | `zh-CN` | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
-| 繁體中文 | `zh-tw` | `zh-TW` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-| 法语 | `fr` | `fr` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-| 波兰语 | `pl` | `pl` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
-| 巴西葡萄牙语 | `pt-br` | `pt-BR` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-| 意大利语 | `it` | `it` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-| 西班牙语 | `es` | `es` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-| 德语 | `de` | `de` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-| 塞尔维亚语 | `pl` | `pl` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
-| 俄语 | `ru` | `ru` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-| 罗马尼亚语 | `ro` | `ro` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-| 越南语 | `vi` | `vi` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-| 阿拉伯语 | `ar` | `ar` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-| 加泰罗尼亚语 | `ca` | `ca` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
-| 泰语 | `th` | `th` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-| 泰卢固语 | `te` | `te` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
-| 印尼语 | `id` | `id` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
-| 土耳其语 | `tr` | `tr` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-| 韩语 | `ko` | `ko` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
-| 印地语 | `hi` | `hi` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
+| 语言       | Hugo 代码 | HTML `lang` 属性 |             主题文档              |          Lunr.js 支持           |
+|:---------|:-------:|:--------------:|:-----------------------------:|:-----------------------------:|
+| 英语       |  `en`   |      `en`      | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
+| 简体中文     | `zh-cn` |    `zh-CN`     | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
+| 繁体中文     | `zh-tw` |    `zh-TW`     |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
+| 法语       |  `fr`   |      `fr`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
+| 波兰语      |  `pl`   |      `pl`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
+| 葡萄牙语(巴西) | `pt-br` |    `pt-BR`     |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
+| 意大利语     |  `it`   |      `it`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
+| 西班牙语     |  `es`   |      `es`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
+| 德语       |  `de`   |      `de`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
+| 塞尔维亚语    |  `pl`   |      `pl`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
+| 俄语       |  `ru`   |      `ru`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
+| 罗马尼亚语    |  `ro`   |      `ro`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
+| 越南语      |  `vi`   |      `vi`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
+| 阿拉伯语     |  `ar`   |      `ar`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
+| 加泰罗尼亚语   |  `ca`   |      `ca`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
+| 泰语       |  `th`   |      `th`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
+| 泰卢固语     |  `te`   |      `te`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
+| 印尼语      |  `id`   |      `id`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
+| 土耳其语     |  `tr`   |      `tr`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
+| 韩语       |  `ko`   |      `ko`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
+| 印地语      |  `hi`   |      `hi`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
+| 荷兰语      |  `nl`   |      `nl`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
+| 孟加拉语     |  `bn`   |      `bn`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
 
 ### 4.2 基本配置
 

@@ -1,0 +1,7 @@
+{{- $content := trim .InnerDeindent "\n\r" -}}
+{{- $lang := .Get 0 -}}
+{{- $options := "" -}}
+{{- if len .Params | eq 2 -}}
+    {{- $options = .Get 1  -}}
+{{- end -}}
+{{- dict "Content" $content "Lang" $lang "Options" $options "Page" .Page | partial "plugin/code-block.html" -}}

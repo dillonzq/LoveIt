@@ -13,7 +13,7 @@ math:
 
 {{< style "img { height: 1.25rem; }" >}}
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
-[![Hugo](https://img.shields.io/badge/Hugo-%5E0.62.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%5E0.128.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/dillonzq/LoveIt?style=social)](https://github.com/dillonzq/LoveIt)
 [![GitHub forks](https://img.shields.io/github/forks/dillonzq/LoveIt?style=social)](https://github.com/dillonzq/LoveIt/fork)
@@ -35,7 +35,7 @@ math:
 * :(far fa-chart-bar fa-fw): 支持 **[Fathom Analytics](https://usefathom.com/)**
 * :(fas fa-chart-column fa-fw): 支持 **[Plausible Analytics](https://plausible.io/)**
 * :(fab fa-yandex-international fa-fw): 支持 **[Yandex Metrica](https://metrica.yandex.com/)**
-* :(fas fa-sitemap fa-fw): 支持搜索引擎的**网站验证** (Google, Bind, Yandex and Baidu)
+* :(fas fa-sitemap fa-fw): 支持搜索引擎的**网站验证** (Google, Bind, Yandex 和 Baidu)
 * :(fas fa-tachometer-alt fa-fw): 支持所有第三方库的 **CDN**
 * :(fas fa-cloud-download-alt fa-fw): 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为**懒加载**
 
@@ -53,8 +53,8 @@ math:
 
 * :(far fa-user fa-fw): 支持 **[Gravatar](https://gravatar.com)** 头像
 * :(fas fa-user-circle fa-fw): 支持本地**头像**
-* :(far fa-id-card fa-fw): 支持多达 **73** 种社交链接
-* :(fas fa-share-square fa-fw): 支持多达 **24** 种网站分享
+* :(far fa-id-card fa-fw): 支持多达 **81** 种社交链接
+* :(fas fa-share-square fa-fw): 支持多达 **27** 种网站分享
 * :(far fa-comment fa-fw): 支持 **[Disqus](https://disqus.com)** 评论系统
 * :(far fa-comment-dots fa-fw): 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
 * :(far fa-comment-alt fa-fw): 支持 **[Valine](https://valine.js.org/)** 评论系统
@@ -98,7 +98,7 @@ LoveIt 根据 **MIT** 许可协议授权。
 
 LoveIt 主题中用到了以下项目，感谢它们的作者：
 
-* [normalize.css](https://github.com/necolas/normalize.css)
+* [modern-normalize](https://github.com/sindresorhus/modern-normalize)
 * [Font Awesome](https://fontawesome.com/)
 * [Simple Icons](https://github.com/simple-icons/simple-icons)
 * [Animate.css](https://daneden.github.io/animate.css/)

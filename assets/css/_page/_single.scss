@@ -167,7 +167,13 @@
       }
     }
 
-    .table-wrapper {
+    table {
+      width: 100%;
+      max-width: 100%;
+      margin: .625rem 0;
+      border-spacing: 0;
+      background: $table-background-color;
+      border-collapse: collapse;
       overflow-x: auto;
 
       &::-webkit-scrollbar {
@@ -178,33 +184,24 @@
         }
       }
 
-      > table {
-        width: 100%;
-        max-width: 100%;
-        margin: .625rem 0;
-        border-spacing: 0;
-        background: $table-background-color;
-        border-collapse: collapse;
+      [theme=dark] & {
+        background: $table-background-color-dark;
+      }
+
+      thead {
+        background: $table-thead-color;
 
         [theme=dark] & {
-          background: $table-background-color-dark;
+          background-color: $table-thead-color-dark;
         }
+      }
 
-        thead {
-          background: $table-thead-color;
+      th, td {
+        padding: .3rem 1rem;
+        border: 1px solid darken($table-thead-color, 2%);
 
-          [theme=dark] & {
-            background-color: $table-thead-color-dark;
-          }
-        }
-
-        th, td {
-          padding: .3rem 1rem;
-          border: 1px solid darken($table-thead-color, 2%);
-
-          [theme=dark] & {
-            border-color: darken($table-thead-color-dark, 2%);
-          }
+        [theme=dark] & {
+          border-color: darken($table-thead-color-dark, 2%);
         }
       }
     }
@@ -212,6 +209,7 @@
     img {
       max-width: 100%;
       min-height: 1em;
+      height: auto;
     }
 
     figure {
@@ -230,7 +228,6 @@
 
       img {
         display: block;
-        width: 100%;
         height: auto;
         margin: 0 auto;
         overflow: hidden;
@@ -263,6 +260,7 @@
     }
 
     @import "../_partial/_single/code";
+    @import "../_partial/_single/gist";
     @import "../_partial/_single/instagram";
     @import "../_partial/_single/admonition";
     @import "../_partial/_single/echarts";
@@ -312,7 +310,7 @@
       img {
         vertical-align: -12%;
         max-height: 1.1em;
-        margin-right: 0ex;
+        margin-right: 0;
         border-radius: 50%;
       }
     }

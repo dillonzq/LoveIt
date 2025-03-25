@@ -78,7 +78,7 @@ $search-background-color-dark: #363636 !default;
 // ========== Single Content ========== //
 // Font size of the TOC
 $toc-title-font-size: 1.2rem !default;
-$toc-content-font-size: 1rem !default;
+$toc-content-font-size: 0.875rem !default;
 
 // Color of the single link
 $single-link-color: #2d96bd !default;
@@ -163,6 +163,7 @@ $code-type-list:
   "language-perl" "Perl",
   "language-powershell" "PowerShell",
   "language-posh" "PowerShell",
+  "language-puppet" "Puppet",
   "language-pwsh" "PowerShell",
   "language-python" "Python",
   "language-r" "R",

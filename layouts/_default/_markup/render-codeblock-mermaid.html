@@ -1,0 +1,7 @@
+{{- $params := .Page.Scratch.Get "params" -}}
+{{- $render := $params.code.render | default dict -}}
+{{- if $render.mermaid | default true -}}
+    {{- dict "Content" .Inner "Page" .Page | partial "plugin/mermaid.html" -}}
+{{- else -}}
+    {{- template "_default/_markup/render-codeblock.html" . -}}
+{{- end -}}

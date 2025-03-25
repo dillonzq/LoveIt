@@ -1,5 +1,5 @@
 {{- with .Content -}}
-    <script type="text/javascript">{{ . | safeJS }}</script>
+    <script>{{ . | safeJS }}</script>
 {{- else -}}
     {{- if strings.HasPrefix .Source "<script" -}}
         {{- safeHTML .Source -}}
@@ -8,6 +8,9 @@
         {{- $integrity := .Integrity -}}
         {{- if (urls.Parse $src).Host | not -}}
             {{- $resource := resources.Get $src -}}
+            {{- with printf `%v.map` $src | resources.Get -}}
+                {{- .Publish -}}
+            {{- end -}}
             {{- with .Template -}}
                 {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
             {{- end -}}
@@ -36,6 +39,6 @@
         {{- with .Attr -}}
             {{- $attrs = add " " . | add $attrs -}}
         {{- end -}}
-        <script type="text/javascript" {{ $attrs | safeHTMLAttr }}></script>
+        <script {{ $attrs | safeHTMLAttr }}></script>
     {{- end -}}
 {{- end -}}

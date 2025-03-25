@@ -1,0 +1,199 @@
+# Translations for Bengali
+# বাংলায় অনুবাদ
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ==
+[backToTop]
+other = "উপরে ফিরে যান"
+
+[viewComments]
+other = "মন্তব্যগুলো দেখুন"
+# === baseof ==
+
+# === Post ===
+[posts]
+other = "পোস্ট"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "সকল {{ .Some }}"
+
+[tag]
+other = "ট্যাগ"
+
+[tags]
+other = "ট্যাগ"
+
+[category]
+other = "ক্যাটাগরি"
+
+[categories]
+other = "ক্যাটাগরি"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "আরো"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "ভাষা নির্বাচন"
+
+[switchTheme]
+other = "থিম পরিবর্তন"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "{{ .Hugo }} দ্বারা চালিত | থিম - {{ .Theme }}"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "en"
+
+[valinePlaceholder]
+other = "আপনার মন্তব্য ..."
+
+[facebookLanguageCode]
+other = "bn_IN"
+
+[giscusLang]
+other = "en"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "খুঁজুন"
+
+[searchPlaceholder]
+other = "শিরোনাম অথবা কনটেন্ট খুঁজুন..."
+
+[clear]
+other = "পরিষ্কার করুন"
+
+[cancel]
+other = "বাতিল করুন"
+
+[noResultsFound]
+other = "কোনো ফলাফল পাওয়া যায় নি"
+
+[lunrLanguageCode]
+other = "en"
+
+[copyToClipboard]
+other = "ক্লিপবোর্ডে কপি করুন"
+
+[cookieconsentMessage]
+other = "এই ওয়েবসাইটটি আপনার ব্রাউজিং অভিজ্ঞতা সমৃদ্ধ করতে কুকিজ ব্যবহার করে।"
+
+[cookieconsentDismiss]
+other = "বুঝেছি!"
+
+[cookieconsentLink]
+other = "আরো জানুন"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "শেয়ার করুন"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "বিষয়বস্তু"
+
+[publishedOnDate]
+other = "প্রকাশিত {{ .Date }}"
+
+[includedInCategories]
+other = "ক্যাটাগরি {{ .Categories }}"
+
+[wordCount]
+one = "একটি শব্দ"
+other = "{{ .Count }}টি শব্দ"
+
+[readingTime]
+one = "এক মিনিট"
+other = "{{ .Count }} মিনিট"
+
+[views]
+other = "ভিউ"
+
+[author]
+other = "লেখক"
+
+[updatedOnDate]
+other = "{{ .Date }} তারিখে আপডেট হয়েছে"
+
+[readMarkdown]
+other = "মার্কডাউন পড়ুন"
+
+[back]
+other = "পিছনে"
+
+[home]
+other = "হোম"
+
+[readMore]
+other = "আরো পড়ুন"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "পেজটি খুঁজে পাওয়া যায় নি"
+
+[pageNotFoundText]
+other = "দুঃখিত, আপনি যে পেজটি খুঁজছেন তার কোনো অস্তিত্ব নেই।"
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "নোট"
+
+[abstract]
+other = "সারাংশ"
+
+[info]
+other = "তথ্য"
+
+[tip]
+other = "টিপ"
+
+[success]
+other = "সফল"
+
+[question]
+other = "প্রশ্ন"
+
+[warning]
+other = "সতর্কীকরণ"
+
+[failure]
+other = "ব্যর্থ"
+
+[danger]
+other = "বিপজ্জনক"
+
+[bug]
+other = "বাগ"
+
+[example]
+other = "উদাহরণ"
+
+[quote]
+other = "উক্তি"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "নতুন"
+
+[changed]
+other = "পরিবর্তিত"
+
+[deleted]
+other = "মুছে ফেলা হয়েছে"
+# === shortcodes/version.html ===
