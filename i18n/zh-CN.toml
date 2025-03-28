@@ -207,3 +207,8 @@ other = "删除"
 [deprecated]
 other = "弃用"
 # === shortcodes/version.html ===
+
+# === single/footer.html ===
+[RelatedPosts]
+other = "您可能还喜欢："
+# === single/footer.html ===
