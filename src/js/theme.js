@@ -30,7 +30,7 @@ class Util {
 
 class Theme {
     constructor() {
-        this.config = window.config;
+        this.config = window.config || {};
         this.data = this.config.data;
         this.isDark = document.body.getAttribute('theme') === 'dark';
         this.newScrollTop = Util.getScrollTop();
