@@ -143,6 +143,12 @@ header {
 
 .theme-switch i {
   @include transform(rotate(225deg));
+  [cfg-theme=light] & {
+    --fa: '\f185';
+  }
+  [cfg-theme=dark] & {
+    --fa: '\f186';
+  }
 }
 
 #header-desktop {
