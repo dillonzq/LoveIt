@@ -1,0 +1,30 @@
+{{- /* X/Twitter Embed Shortcode */ -}}
+{{- $id := .Get 0 -}}
+
+{{- /* Extract tweet ID from URL if a full URL is provided */ -}}
+{{- if hasPrefix $id "http" -}}
+  {{- $urlParts := split $id "/" -}}
+  {{- $id = index (last 1 $urlParts) 0 -}}
+  {{- /* Remove any query parameters from the ID */ -}}
+  {{- if findRE "\\?" $id -}}
+    {{- $id = index (split $id "?") 0 -}}
+  {{- end -}}
+{{- end -}}
+
+<div class="x-tweet-container">
+  <blockquote class="twitter-tweet" data-dnt="true">
+    <a href="https://twitter.com/x/status/{{ $id }}"></a>
+  </blockquote>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+<style>
+.x-tweet-container {
+  display: flex;
+  justify-content: center;
+  margin: 1.5em 0;
+}
+.x-tweet-container > blockquote {
+  margin: 0;
+}
+</style>
