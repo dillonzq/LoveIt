@@ -17,6 +17,10 @@
                     {{- end -}}
                 </span>
             </div>
+            {{- if eq .Params.analytics.enable true -}}
+            <div id="page-views" class="post-info-mod">
+            </div>
+            {{- end -}}
             {{- with $params.license | string -}}
             <div class="post-info-license">
                 <span>

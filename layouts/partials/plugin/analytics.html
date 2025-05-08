@@ -58,12 +58,15 @@
 {{- /* Goat Counter */ -}}
 {{- with $analytics.goatCounter.code -}}
     <script>
-        var t = setInterval(function() {
-            if (window.goatcounter && window.goatcounter.visit_count) {
-                clearInterval(t)
-                window.goatcounter.visit_count({append: 'body'})
-            }
-        }, 100)
+        var pageViews = document.getElementById('page-views');
+        if(pageViews) {
+            var t = setInterval(function() {
+                if (window.goatcounter && window.goatcounter.visit_count) {
+                    clearInterval(t)
+                    window.goatcounter.visit_count({append: '#page-views'})
+                }
+            }, 100);
+        }
     </script>
     <script data-goatcounter="https://{{ . }}.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
