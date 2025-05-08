@@ -72,16 +72,21 @@
 
             r.open('GET', 'https://pmasschelier.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
             r.send()
+            console.log('Fetching...');
         }
 
+        console.log('views', views);
         if(views) {
             r.addEventListener('load', function() {
                 const count = JSON.parse(this.responseText).count;
+                console.log('count', count);
                 views.innerHtml = `${count} views on this page (powered by <a href="https://www.goatcounter.com/">Goat Counter</a>)`
             })
 
             var t = setInterval(function() {
+                console.log('test');
                 if (window.goatcounter && window.goatcounter.get_data) {
+                    console.log('load', window.goatcounter);
                     clearInterval(t)
                     loader()
                 }
