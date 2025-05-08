@@ -70,7 +70,7 @@
                 if (a.hostname.replace(/^www\./, '') === location.hostname.replace(/^www\./, ''))
                     loc = a
             }
-            const path = loc.pathname;
+            let path = loc.pathname;
             if(path.endsWith('/')) path = path.slice(0, -1);
             return path || '/';
         }
