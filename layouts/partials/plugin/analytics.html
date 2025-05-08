@@ -54,3 +54,17 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/{{ . }}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 {{- end -}}
+
+{{- /* Goat Counter */ -}}
+{{- with $analytics.goatCounter.code -}}
+    <script>
+        var t = setInterval(function() {
+            if (window.goatcounter && window.goatcounter.visit_count) {
+                clearInterval(t)
+                window.goatcounter.visit_count({append: 'body'})
+            }
+        }, 100)
+    </script>
+    <script data-goatcounter="https://{{ . }}.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+{{- end -}}
