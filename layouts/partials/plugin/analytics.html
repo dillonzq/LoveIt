@@ -58,15 +58,22 @@
 {{- /* Goat Counter */ -}}
 {{- with $analytics.goatCounter.code -}}
     <script>
-        var pageViews = document.getElementById('page-views');
-        if(pageViews) {
-            var t = setInterval(function() {
-                if (window.goatcounter && window.goatcounter.visit_count) {
-                    clearInterval(t)
-                    window.goatcounter.visit_count({append: '#page-views'})
-                }
-            }, 100);
-        }
+        let r = new XMLHttpRequest();
+        r.addEventListener('load', function() {
+            const count = JSON.parse(this.responseText).count;
+            document.querySelector('#view-counts').innerHtml = `${count} views on this page (powered by <a href="https://www.goatcounter.com/">Goat Counter</a>)`
+        })
+
+        // Should be exact (encoded) path as it appears in the UI. This uses
+        // GoatCounter's count.js
+        let path = window.goatcounter.get_data()['p']
+
+        // Or alternatively, do it manually. Will return HTTP status 404 if the
+        // path is not found).
+        //let path = location.pathname
+
+        r.open('GET', 'https://pmasschelier.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
+        r.send()
     </script>
     <script data-goatcounter="https://{{ . }}.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
