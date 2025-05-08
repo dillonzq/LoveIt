@@ -84,9 +84,9 @@
         console.log('views', views);
         if(views) {
             r.addEventListener('load', function() {
-                const count = JSON.parse(this.responseText).count;
+                const count = JSON.parse(this.responseText);
                 console.log('count', count);
-                views.innerHtml = `${count} views on this page (powered by <a href="https://www.goatcounter.com/">Goat Counter</a>)`
+                views.innerHTML = `${count.count_unique} views on this page (powered by <a href="https://www.goatcounter.com/">Goat Counter</a>)`
             })
 
             loader()
