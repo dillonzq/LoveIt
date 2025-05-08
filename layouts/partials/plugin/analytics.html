@@ -59,10 +59,13 @@
 {{- with $analytics.goatCounter.code -}}
     <script>
         let r = new XMLHttpRequest();
-        r.addEventListener('load', function() {
-            const count = JSON.parse(this.responseText).count;
-            document.querySelector('#view-counts').innerHtml = `${count} views on this page (powered by <a href="https://www.goatcounter.com/">Goat Counter</a>)`
-        })
+        let views = document.getElementById("page-views");
+        if(views) {
+            r.addEventListener('load', function() {
+                const count = JSON.parse(this.responseText).count;
+                views.innerHtml = `${count} views on this page (powered by <a href="https://www.goatcounter.com/">Goat Counter</a>)`
+            })
+        }
 
         // Should be exact (encoded) path as it appears in the UI. This uses
         // GoatCounter's count.js
