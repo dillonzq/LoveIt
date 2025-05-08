@@ -70,8 +70,9 @@
                 if (a.hostname.replace(/^www\./, '') === location.hostname.replace(/^www\./, ''))
                     loc = a
             }
-            console.log(loc);
-            return (loc.pathname + loc.search) || '/'
+            const path = loc.pathname;
+            if(path.endsWith('/')) path = path.slice(0, -1);
+            return path || '/';
         }
 
         var loader = () => {
