@@ -9,7 +9,7 @@ other = "Volver arriba"
 [viewComments]
 other = "Ver comentarios"
 # === baseof ==
-
+https://github.com/dillonzq/LoveIt/blob/master/i18n/es.toml
 # === Post ===
 [posts]
 other = "Artículos"
@@ -17,7 +17,7 @@ other = "Artículos"
 
 # === Taxonomy ===
 [allSome]
-other = "Todos los {{ .Some }}"
+other = "Todas las {{ .Some }}"
 
 [tag]
 other = "Etiqueta"
