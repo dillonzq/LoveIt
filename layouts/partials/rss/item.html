@@ -10,14 +10,10 @@
         {{- .Page.Date.Format "Mon, 02 Jan 2006 15:04:05 -0700"  -}}
     </pubDate>
     <author>
-      {{- with $params.author -}}
-        {{- with $params.author.email -}}
-          {{- $params.author.email }}{{ with $params.author.name }} ({{ . }}){{ end -}}
-        {{- else -}}
-          {{- $params.author.name -}}
-        {{ end -}}
+      {{- with .Site.Params.Author.email -}}
+        {{- . }}{{ with $.Site.Params.Author.name }} ({{ . }}){{ end -}}
       {{- else -}}
-        {{- default (T "author") -}}
+        {{- with $.Site.Params.Author.name }}{{ . }}{{ end -}}
       {{- end -}}
     </author>
     <guid>
