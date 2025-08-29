@@ -366,6 +366,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     Codeberg = ""
     HuggingFace = ""
     Threads = ""
+    Bluesky = ""
     Email = ""
     RSS = ""
 
