@@ -1,0 +1,52 @@
+baseURL = "https://fonsblog.vercel.app"
+languageCode = "zh-cn"
+title = "丰斯の小窝"
+theme = "LoveIt"
+
+defaultContentLanguage = "zh-cn"
+hasCJKLanguage = true
+
+# 首页
+[params.home]
+  # 如果没有背景图，可以直接用纯色背景
+  backgroundColor = "#ffe6f0"   # 粉粉嫩嫩的背景色
+  subtitle = "鳴らしていこう,継ぎ接ぎの音楽でいいから"
+
+# 网站配色
+[params]
+  themeColor = "#ff99cc"        # 主色调（可爱粉）
+  backgroundColor = "#ffe6f0"   # 整体背景（淡粉）
+  dateFormat = "2006-01-02"
+
+# 社交链接
+[[params.social]]
+  name = "GitHub"
+  url = "https://github.com/你的名字"
+
+[[params.social]]
+  name = "Twitter"
+  url = "https://twitter.com/你的名字"
+
+# 文章页面设置
+[params.page]
+  showReadingTime = true
+  showWordCount = true
+
+# 导航菜单
+[[menu.main]]
+  identifier = "home"
+  name = "首页"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  identifier = "posts"
+  name = "文章"
+  url = "/posts/"
+  weight = 2
+
+[[menu.main]]
+  identifier = "about"
+  name = "关于"
+  url = "/about/"
+  weight = 3
