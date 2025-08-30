@@ -139,7 +139,7 @@
   # Search config
   # 搜索配置
   [params.search]
-    enable = enable
+    enable = false
     # type of search engine ["lunr", "algolia"]
     # 搜索引擎的类型 ["lunr", "algolia"]
     type = "lunr"
@@ -178,7 +178,7 @@
       enable = true
       # Gravatar Email for preferred avatar in home page
       # Gravatar 邮箱，用于优先在主页显示的头像
-      gravatarEmail = ""
+      gravatarEmail = "undefined_fons@qq.com"
       # URL of avatar shown in home page
       # 主页显示头像的 URL
       avatarURL = ""
@@ -187,7 +187,7 @@
       title = ""
       # subtitle shown in home page (HTML format is supported)
       # 主页显示的网站副标题 (允许 HTML 格式)
-      subtitle = "观者自知."
+      subtitle = "鳴らしていこう,継ぎ接ぎの音楽でいいから"
       # whether to use typeit animation for subtitle
       # 是否为副标题显示打字机动画
       typeit = true
