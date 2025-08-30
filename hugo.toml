@@ -178,7 +178,7 @@
       enable = true
       # Gravatar Email for preferred avatar in home page
       # Gravatar 邮箱，用于优先在主页显示的头像
-      gravatarEmail = "undefined_fons@qq.com"
+      gravatarEmail = ""
       # URL of avatar shown in home page
       # 主页显示头像的 URL
       avatarURL = ""
