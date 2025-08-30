@@ -25,7 +25,7 @@
   description = "This is my cool site"
   # website images for Open Graph and Twitter Cards
   # 网站图片, 用于 Open Graph 和 Twitter Cards
-  images = [/storage/emulated/0/Android/data/bin.mt.plus/temp/CleanOnExit/Image_1756494093040.jpg]
+  images = []
 
   # Author config
   # 作者配置
