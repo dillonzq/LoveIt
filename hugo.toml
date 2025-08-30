@@ -181,7 +181,7 @@
       gravatarEmail = ""
       # URL of avatar shown in home page
       # 主页显示头像的 URL
-      avatarURL = ""
+      avatarURL = "https://www.pixiv.net/artworks/100168228#big_0"
       # title shown in home page (HTML format is supported)
       # 主页显示的网站标题 (支持 HTML 格式)
       title = ""
