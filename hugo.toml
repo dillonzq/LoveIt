@@ -131,7 +131,7 @@
     themeColor = "#ff99cc"
     # Safari mask icon color
     # Safari 图标颜色
-    iconColor = "#5bbad5"
+    iconColor = "#ffe6f0"
     # Windows v8-11 tile color
     # Windows v8-11 磁贴颜色
     tileColor = "#da532c"
