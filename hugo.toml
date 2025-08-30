@@ -30,7 +30,7 @@
   # Author config
   # 作者配置
   [params.author]
-    name = "xxxx"
+    name = "Fons"
     email = ""
     link = ""
 
