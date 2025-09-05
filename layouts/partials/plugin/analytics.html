@@ -81,7 +81,7 @@
                 views.innerHTML = `${count.count_unique} views on this page (powered by <a href="https://www.goatcounter.com/">Goat Counter</a>)`
             })
 
-            r.open('GET', 'https://pmasschelier.goatcounter.com/counter/' + encodeURIComponent(get_path()) + '.json')
+            r.open('GET', 'https://{{ . }}.goatcounter.com/counter/' + encodeURIComponent(get_path()) + '.json')
             r.send()
         }
     </script>
