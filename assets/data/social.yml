@@ -52,7 +52,7 @@ telegram:
 # 007: Medium
 medium:
   Weight: 7
-  Prefix: https://medium.com/@
+  Template: https://medium.com/@%v
   Title: Medium
   Icon:
     Class: fab fa-medium fa-fw
