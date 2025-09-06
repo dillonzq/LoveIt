@@ -88,10 +88,16 @@ class Theme {
     initSwitchTheme() {
         Util.forEach(document.getElementsByClassName('theme-switch'), $themeSwitch => {
             $themeSwitch.addEventListener('click', () => {
-                if (document.body.getAttribute('theme') === 'dark') document.body.setAttribute('theme', 'light');
-                else document.body.setAttribute('theme', 'dark');
-                this.isDark = !this.isDark;
-                window.localStorage && localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
+                const cfgTheme = document.body.getAttribute('cfg-theme');
+                const theme = document.body.getAttribute('theme');
+
+                const themes = ['auto', 'light' ,'dark'];
+                const newTheme = themes[(themes.indexOf(cfgTheme) + 1) % themes.length];
+
+                this.isDark = newTheme === 'dark' || (newTheme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                document.body.setAttribute('theme', this.isDark ? 'dark' : 'light');
+                document.body.setAttribute('cfg-theme', newTheme);
+                window.localStorage?.setItem('theme', newTheme);
                 for (let event of this.switchThemeEventSet) event();
             }, false);
         });
