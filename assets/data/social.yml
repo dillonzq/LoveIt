@@ -620,6 +620,14 @@ threads:
   Icon:
     Class: fab fa-threads fa-fw
 
+# 079: BlueSky
+bluesky:
+  Weight: 79
+  Title: BlueSky
+  Prefix: https://bsky.app/profile/
+  Icon:
+    Simpleicons: bluesky
+
 # Phone
 phone:
   Weight: 98
