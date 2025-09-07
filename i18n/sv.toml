@@ -1,0 +1,205 @@
+# Translations for Swedish
+# Översättning till svenska
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ===
+[backToTop]
+other = "Till toppen"
+
+[viewComments]
+other = "Visa kommentarer"
+# === baseof ===
+
+# === Post ===
+[posts]
+other = "Inlägg"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "Alla {{ .Some }}"
+
+[tag]
+other = "Tag"
+
+[tags]
+other = "Taggar"
+
+[category]
+other = "Kategori"
+
+[categories]
+other = "Kategorier"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "Mer"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "Välj språk"
+
+[switchTheme]
+other = "Byt tema"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Drivs av {{ .Hugo }} | Tema – {{ .Theme }}"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "sv"
+
+[valinePlaceholder]
+other = "Din kommentar …"
+
+[facebookLanguageCode]
+other = "sv_SE"
+
+[giscusLang]
+other = "sv"
+
+[walineLang]
+other = "sv"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "Sök"
+
+[searchPlaceholder]
+other = "Sök i titlar eller innehåll …"
+
+[clear]
+other = "Rensa"
+
+[cancel]
+other = "Avbryt"
+
+[noResultsFound]
+other = "Inga resultat hittades"
+
+[lunrLanguageCode]
+other = "sv"
+
+[copyToClipboard]
+other = "Kopiera till urklipp"
+
+[cookieconsentMessage]
+other = "Denna webbplats använder cookies för att förbättra din upplevelse."
+
+[cookieconsentDismiss]
+other = "Jag förstår!"
+
+[cookieconsentLink]
+other = "Läs mer"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "Dela på"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "Innehåll"
+
+[publishedOnDate]
+other = "publicerad {{ .Date }}"
+
+[includedInCategories]
+other = "i kategorin {{ .Categories }}"
+
+[wordCount]
+one = "Ett ord"
+other = "{{ .Count }} ord"
+
+[readingTime]
+one = "En minut"
+other = "{{ .Count }} minuter"
+
+[views]
+other = "visningar"
+
+[author]
+other = "Författare"
+
+[updatedOnDate]
+other = "Uppdaterad {{ .Date }}"
+
+[readMarkdown]
+other = "Läs Markdown"
+
+[back]
+other = "Tillbaka"
+
+[home]
+other = "Hem"
+
+[readMore]
+other = "Läs mer"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Sidan kunde inte hittas"
+
+[pageNotFoundText]
+other = "Sidan du söker finns inte. Beklagar."
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "Notering"
+
+[abstract]
+other = "Sammanfattning"
+
+[info]
+other = "Info"
+
+[tip]
+other = "Tips"
+
+[success]
+other = "Lyckades"
+
+[question]
+other = "Fråga"
+
+[warning]
+other = "Varning"
+
+[failure]
+other = "Misslyckades"
+
+[danger]
+other = "Fara"
+
+[bug]
+other = "Bug"
+
+[example]
+other = "Exempel"
+
+[quote]
+other = "Citat"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "NY"
+
+[changed]
+other = "ÄNDRAD"
+
+[deleted]
+other = "BORTTAGEN"
+
+[deprecated]
+other = "FÖRÅLDRAD"
+# === shortcodes/version.html ===
