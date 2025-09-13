@@ -54,3 +54,37 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/{{ . }}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 {{- end -}}
+
+{{- /* Goat Counter */ -}}
+{{- with $analytics.goatCounter.code -}}
+    <script>
+        let r = new XMLHttpRequest();
+        let views = document.getElementById("page-views");
+
+        var get_path = function() {
+            var loc = location,
+                c = document.querySelector('link[rel="canonical"][href]')
+            if (c) {  // May be relative or point to different domain.
+                var a = document.createElement('a')
+                a.href = c.href
+                if (a.hostname.replace(/^www\./, '') === location.hostname.replace(/^www\./, ''))
+                    loc = a
+            }
+            let path = loc.pathname;
+            if(path.endsWith('/')) path = path.slice(0, -1);
+            return path || '/';
+        }
+
+        if(views) {
+            r.addEventListener('load', function() {
+                const count = JSON.parse(this.responseText);
+                views.innerHTML = `${count.count_unique} views on this page (powered by <a href="https://www.goatcounter.com/">Goat Counter</a>)`
+            })
+
+            r.open('GET', 'https://{{ . }}.goatcounter.com/counter/' + encodeURIComponent(get_path()) + '.json')
+            r.send()
+        }
+    </script>
+    <script data-goatcounter="https://{{ . }}.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+{{- end -}}
