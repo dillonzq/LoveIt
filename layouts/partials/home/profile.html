@@ -39,6 +39,12 @@
         </div>
     {{- end -}}
 
+    {{- with $profile.extra -}}
+        <p class="home-extra{{ if not  $profile.extraItalic }} no-italic{{ end }}">
+            {{- . | safeHTML -}}
+        </p>
+    {{- end -}}
+
     {{- if $profile.social -}}
         <div class="links">
             {{- $socialMap := resources.Get "data/social.yml" | transform.Unmarshal -}}
