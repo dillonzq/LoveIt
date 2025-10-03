@@ -633,6 +633,7 @@ class Theme {
                 giscusScript.setAttribute('data-category-id', giscusConfig.categoryId);
                 giscusScript.setAttribute('data-lang', giscusConfig.lang);
                 giscusScript.setAttribute('data-mapping', giscusConfig.mapping);
+                if (giscusConfig.strict) giscusScript.setAttribute('data-strict', giscusConfig.strict);
                 giscusScript.setAttribute('data-reactions-enabled', giscusConfig.reactionsEnabled);
                 giscusScript.setAttribute('data-emit-metadata', giscusConfig.emitMetadata);
                 giscusScript.setAttribute('data-input-position', giscusConfig.inputPosition);

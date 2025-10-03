@@ -136,6 +136,7 @@
             {{- $commentConfig = dict "categoryId" $giscus.categoryId | dict "giscus" | merge $commentConfig -}}
             {{- $commentConfig = $giscus.lang | default (T "valineLang") | dict "lang" | dict "giscus" | merge $commentConfig -}}
             {{- $commentConfig = $giscus.mapping | default "pathname" | dict "mapping" | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.strict | default "0" | dict "strict" | dict "giscus" | merge $commentConfig -}}
             {{- $commentConfig = $giscus.reactionsEnabled | default "1" | dict "reactionsEnabled" | dict "giscus" | merge $commentConfig -}}
             {{- $commentConfig = $giscus.emitMetadata | default "0" | dict "emitMetadata" | dict "giscus" | merge $commentConfig -}}
             {{- $commentConfig = $giscus.inputPosition | default "bottom" | dict "inputPosition" | dict "giscus" | merge $commentConfig -}}
