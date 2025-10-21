@@ -12,7 +12,7 @@ linkedin:
   Prefix: https://linkedin.com/in/
   Title: LinkedIn
   Icon:
-    Class: fab fa-linkedin fa-fw
+    Class: fab fa-linkedin-in fa-fw
 
 # 003: X
 x:
