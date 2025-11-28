@@ -493,6 +493,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     Codeberg = "" # {{< version 0.3.0 >}}
     HuggingFace = "" # {{< version 0.3.1 >}}
     Threads = "" # {{< version 0.3.1 >}}
+    LeetCode = "" # {{< version 0.3.1 >}}
     Phone = ""
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
