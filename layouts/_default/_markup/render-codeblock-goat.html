@@ -3,5 +3,5 @@
 {{- if $render.goat | default true -}}
     {{- partial "plugin/goat.html" . -}}
 {{- else -}}
-    {{- template "_default/_markup/render-codeblock.html" . -}}
+    {{- dict "Content" .Inner "Lang" .Type "Options" .Options "Page" .Page | partial "plugin/code-block.html" -}}
 {{- end -}}
