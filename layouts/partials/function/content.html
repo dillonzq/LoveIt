@@ -1,9 +1,5 @@
 {{- $content := .Content -}}
 
-{{- if ne "" $content -}}
-    {{- return $content -}}
-{{- end -}}
-
 {{- if $content -}}
 
     {{- if .Ruby -}}
