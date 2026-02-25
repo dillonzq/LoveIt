@@ -62,8 +62,8 @@ var Util = /*#__PURE__*/function () {
 var Theme = /*#__PURE__*/function () {
   function Theme() {
     _classCallCheck(this, Theme);
-    this.config = window.config;
-    this.data = this.config.data;
+    this.config = window.config || {};
+    this.data = this.config.data || {};
     this.isDark = document.body.getAttribute('theme') === 'dark';
     this.newScrollTop = Util.getScrollTop();
     this.oldScrollTop = this.newScrollTop;

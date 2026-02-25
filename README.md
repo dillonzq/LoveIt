@@ -85,7 +85,7 @@ I hope you will LoveIt ❤️!
 
 * **Gravatar** supported by [Gravatar](https://gravatar.com)
 * Local **Avatar** supported
-* Up to **82** social links supported
+* Up to **84** social links supported
 * Up to **27** share sites supported
 * **Disqus** comment system supported by [Disqus](https://disqus.com)
 * **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
@@ -163,6 +163,7 @@ LoveIt supports the following languages:
 * Hindi
 * Dutch
 * Bengali
+* Japanese
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
 [Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)
