@@ -4,8 +4,10 @@
 {{- $height := .Height -}}
 {{- with dict "Path" $src "Resources" .Resources | partial "function/resource.html" -}}
     {{- $src = .RelPermalink -}}
-    {{- $width = $width | default .Width -}}
-    {{- $height = $height | default .Height -}}
+    {{ if not (eq .MediaType.SubType "svg") }}
+        {{- $width = $width | default .Width -}}
+        {{- $height = $height | default .Height -}}
+    {{ end }}
 {{- end -}}
 
 {{- $small := .SrcSmall | default $src -}}
