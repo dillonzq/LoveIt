@@ -628,6 +628,22 @@ bluesky:
   Icon:
     Simpleicons: bluesky
 
+# 080: LeetCode CN
+leetcodecn:
+  Weight: 80
+  Title: LeetCode
+  Prefix: https://leetcode.cn/u/
+  Icon:
+    Simpleicons: leetcode
+
+# 081: LeetCode
+leetcode:
+  Weight: 81
+  Title: LeetCode
+  Prefix: https://leetcode.com/
+  Icon:
+    Simpleicons: leetcode
+
 # Phone
 phone:
   Weight: 98
