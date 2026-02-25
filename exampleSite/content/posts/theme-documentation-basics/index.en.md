@@ -976,6 +976,7 @@ In `assets/css/_custom.scss`, you can add some css style code to customize the s
 | Hindi               |   `hi`    |         `hi`          |    :(far fa-square):    |    :(far fa-square):    |
 | Dutch               |   `nl`    |         `nl`          |    :(far fa-square):    | :(far fa-check-square): |
 | Bengali             |   `hi`    |         `hi`          |    :(far fa-square):    |    :(far fa-square):    |
+| Japanese            |   `ja`    |         `ja`          |    :(far fa-square):    |    :(far fa-check-square):    |
 
 ### 4.2 Basic Configuration
 
