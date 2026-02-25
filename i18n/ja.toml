@@ -1,0 +1,210 @@
+# 日本語翻訳
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === baseof ==
+[backToTop]
+other = "ページのトップへ"
+
+[viewComments]
+other = "コメントを見る"
+# === baseof ==
+
+# === Post ===
+[posts]
+other = "投稿"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "全ての{{ .Some }}"
+
+[tag]
+other = "タグ"
+
+[tags]
+other = "タグ"
+
+[category]
+other = "カテゴリー"
+
+[categories]
+other = "カテゴリー"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "もっと"
+# === Pagination ===
+
+# === partials/header.html ===
+[selectLanguage]
+other = "言語を選択"
+
+[switchTheme]
+other = "テーマの切り替え"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[poweredBySome]
+other = "Powered by {{ .Hugo }} | テーマ - {{ .Theme }}"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[valineLang]
+other = "ja"
+
+[valinePlaceholder]
+other = "コメント ..."
+
+[facebookLanguageCode]
+other = "ja_JP"
+
+[giscusLang]
+other = "ja"
+
+[walineLang]
+other = "ja"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[search]
+other = "検索"
+
+[searchPlaceholder]
+other = "タイトルと内容を検索..."
+
+[clear]
+other = "クリア"
+
+[cancel]
+other = "キャンセル"
+
+[noResultsFound]
+other = "見つかりませんでした"
+
+[lunrLanguageCode]
+other = "ja"
+
+[lunrLanguageLib]
+other = "lib/lunr/lunr.ja.js"
+
+[lunrSegmentitLib]
+other = "lib/lunr/lunr.segmentit.js"
+
+[copyToClipboard]
+other = "クリップボードにコピー"
+
+[cookieconsentMessage]
+other = "このサイトではユーザー体験を向上させるために Cookie を使用しています。"
+
+[cookieconsentDismiss]
+other = "OK"
+
+[cookieconsentLink]
+other = "もっと詳しく"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "共有先"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[contents]
+other = "目次"
+
+[publishedOnDate]
+other = "公開日 {{ .Date }}"
+
+[includedInCategories]
+other = "カテゴリー {{ .Categories }}"
+
+[wordCount]
+one = "1 語"
+other = "{{ .Count }} 語"
+
+[readingTime]
+one = "1 分"
+other = "{{ .Count }} 分"
+
+[views]
+other = "ビュー"
+
+[author]
+other = "投稿者"
+
+[updatedOnDate]
+other = "更新日 {{ .Date }}"
+
+[readMarkdown]
+other = "マークダウンを見る"
+
+[back]
+other = "戻る"
+
+[home]
+other = "ホーム"
+
+[readMore]
+other = "続きを読む"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "ページが見つかりません"
+
+[pageNotFoundText]
+other = "お探しのページは見つかりませんでした。申し訳ありません。"
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "メモ"
+
+[abstract]
+other = "要約"
+
+[info]
+other = "情報"
+
+[tip]
+other = "ヒント"
+
+[success]
+other = "成功"
+
+[question]
+other = "質問"
+
+[warning]
+other = "警告"
+
+[failure]
+other = "失敗"
+
+[danger]
+other = "危険"
+
+[bug]
+other = "バグ"
+
+[example]
+other = "例"
+
+[quote]
+other = "引用"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[new]
+other = "新規"
+
+[changed]
+other = "変更"
+
+[deleted]
+other = "削除"
+
+[deprecated]
+other = "非推奨"
+# === shortcodes/version.html ===

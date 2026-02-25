@@ -135,7 +135,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       name = "LoveIt"
       # you can add extra information before the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
-      pre = "<i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i>"
+      pre = "<i class='far fa-kiss-wink-heart' aria-hidden='true'></i>"
       # you can add extra information after the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
       post = ""
@@ -475,7 +475,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       X = true
       Threads = true
       Facebook = true
-      Linkedin = false
+      Linkedin = true
       Whatsapp = false
       Pinterest = false
       Tumblr = false
@@ -863,7 +863,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       [[languages.en.menu.main]]
         weight = 6
         identifier = "github"
-        pre = "<i class='fab fa-github fa-fw' aria-hidden='true'></i>"
+        pre = "<i class='fab fa-github' aria-hidden='true'></i>"
         post = ""
         name = ""
         url = "https://github.com/dillonzq/LoveIt"
@@ -896,6 +896,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       [languages.en.params.social]
         GitHub = "xxxx"
         X = "xxxx"
+        Linkedin = "xxxx"
         Instagram = "xxxx"
         Facebook = "xxxx"
         Telegram = "xxxx"
@@ -959,7 +960,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       [[languages.zh-cn.menu.main]]
         weight = 6
         identifier = "github"
-        pre = "<i class='fab fa-github fa-fw' aria-hidden='true'></i>"
+        pre = "<i class='fab fa-github' aria-hidden='true'></i>"
         post = ""
         name = ""
         url = "https://github.com/dillonzq/LoveIt"

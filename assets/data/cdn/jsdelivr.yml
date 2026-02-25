@@ -3,8 +3,8 @@ prefix:
   # simple-icons@15.14.0 https://github.com/simple-icons/simple-icons
   simpleIcons: https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/
 libFiles:
-  # fontawesome-free@6.7.2 https://fontawesome.com/
-  fontawesomeFreeCSS: "@fortawesome/fontawesome-free@6.7.2/css/all.min.css"
+  # fontawesome-free@7.2.0 https://fontawesome.com/
+  fontawesomeFreeCSS: "@fortawesome/fontawesome-free@7.2.0/css/all.min.css"
   # animate.css@4.1.1 https://github.com/daneden/animate.css
   animateCSS: animate.css@4.1.1/animate.min.css
   # autocomplete.js@0.38.1 https://github.com/algolia/autocomplete.js
