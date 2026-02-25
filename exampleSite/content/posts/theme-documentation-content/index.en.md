@@ -54,7 +54,7 @@ such as **links**, **images**, `image` shortcode, `music` shortcode and some par
 
 Images in page resources or assets directory [processing](https://gohugo.io/content-management/image-processing/)
 will be supported in the future.
-It's really cool! :(far fa-grin-squint fa-fw):
+It's really cool! :(far fa-grin-squint):
 {{< /admonition >}}
 
 ## 2 Front Matter {#front-matter}
@@ -498,14 +498,14 @@ You can easily use these icons in your articles.
 Get the `class` of icons you wanted from the [Font Awesome website](https://fontawesome.com/icons?d=gallery).
 
 ```markdown
-Gone camping! {?:}(fas fa-campground fa-fw): Be back soon.
+Gone camping! {?:}(fas fa-campground): Be back soon.
 
 That is so funny! {?:}(far fa-grin-tears):
 ```
 
 The rendered output looks like this:
 
-Gone camping! :(fas fa-campground fa-fw): Be back soon.
+Gone camping! :(fas fa-campground): Be back soon.
 
 That is so funny! :(far fa-grin-tears):
 

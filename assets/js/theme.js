@@ -363,7 +363,7 @@ var Theme = /*#__PURE__*/function () {
               _objectDestructuringEmpty(_ref7);
               var _ref8 = searchConfig.type === 'algolia' ? {
                   searchType: 'algolia',
-                  icon: '<i class="fab fa-algolia fa-fw" aria-hidden="true"></i>',
+                  icon: '<i class="fab fa-algolia" aria-hidden="true"></i>',
                   href: 'https://www.algolia.com/'
                 } : {
                   searchType: 'Lunr.js',

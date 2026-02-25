@@ -10,12 +10,10 @@
     "babelify": "^10.0.0",
     "browserify": "^17.0.1",
     "core-js": "^3.40.0",
-    "husky": "^9.1.7",
     "segmentit": "^2.0.3"
   },
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
-    "prepare": "husky install",
     "compile": "npx babel src/js --out-file assets/js/theme.js",
     "compile-lunr-segmentit": "browserify src/lib/lunr/lunr.segmentit.js -o assets/lib/lunr/lunr.segmentit.js -t babelify --presets @babel/preset-env",
     "hugo": "hugo --source exampleSite --buildDrafts --gc",

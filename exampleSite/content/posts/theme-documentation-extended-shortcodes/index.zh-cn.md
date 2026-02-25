@@ -39,7 +39,7 @@ Hugo **extended** 版本对于 `style` shortcode 是必需的.
 
 `style` shortcode 有两个位置参数.
 
-第一个参数是自定义样式的内容. 它支持 [:(fab fa-sass fa-fw): SASS](https://sass-lang.com/documentation/style-rules/declarations#nesting) 中的嵌套语法,
+第一个参数是自定义样式的内容. 它支持 [:(fab fa-sass): SASS](https://sass-lang.com/documentation/style-rules/declarations#nesting) 中的嵌套语法,
 并且 `&` 指代这个父元素.
 
 第二个参数是包裹你要更改样式的内容的 HTML 标签, 默认值是 `div`.
@@ -323,7 +323,7 @@ This is a **right-aligned** paragraph.
 
 {{< version 0.2.8 >}}
 
-`script` shortcode 用来在你的文章中插入 **:(fab fa-js fa-fw): Javascript** 脚本.
+`script` shortcode 用来在你的文章中插入 **:(fab fa-js): Javascript** 脚本.
 
 {{< admonition >}}
 脚本内容可以保证在所有的第三方库加载之后按顺序执行.
@@ -348,7 +348,7 @@ console.log('Hello LoveIt!');
 
 {{< version 0.2.11 >}}
 
-`raw` shortcode 用来在你的文章中插入原始 **:(fab fa-html5 fa-fw): HTML** 内容.
+`raw` shortcode 用来在你的文章中插入原始 **:(fab fa-html5): HTML** 内容.
 
 一个 `raw` 示例:
 

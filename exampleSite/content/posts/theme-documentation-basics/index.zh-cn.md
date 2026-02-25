@@ -29,7 +29,7 @@ toc:
 
 由于 Hugo 提供的便利性, [Hugo](https://gohugo.io/) 是这个主题唯一的依赖.
 
-直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive fa-fw): Hugo](https://gohugo.io/getting-started/installing/).
+直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive): Hugo](https://gohugo.io/getting-started/installing/).
 
 {{< admonition note "什么时候需要使用 Hugo extended 版本?" false >}}
 当你需要[自定义样式](#style-customization)时, 你要使用 Hugo **extended** 版本来获得正确的渲染效果.
@@ -54,7 +54,7 @@ cd my_website
 
 **LoveIt** 主题的仓库是: [https://github.com/dillonzq/LoveIt](https://github.com/dillonzq/LoveIt).
 
-你可以下载主题的 [发布版本 :(far fa-file-archive fa-fw): .zip 文件](https://github.com/dillonzq/LoveIt/releases) 并且解压放到 `themes` 目录.
+你可以下载主题的 [发布版本 :(far fa-file-archive): .zip 文件](https://github.com/dillonzq/LoveIt/releases) 并且解压放到 `themes` 目录.
 
 另外, 也可以直接把这个主题克隆到 `themes` 目录:
 
@@ -202,7 +202,7 @@ hugo
 
 除了 [Hugo 全局配置](https://gohugo.io/overview/configuration/) 和 [菜单配置](#basic-configuration) 之外, **LoveIt** 主题还允许您在网站配置中定义以下参数 (这是一个示例 `hugo.toml`, 其内容为默认值).
 
-请打开下面的代码块查看完整的示例配置 :(far fa-hand-point-down fa-fw)::
+请打开下面的代码块查看完整的示例配置 :(far fa-hand-point-down)::
 
 ```toml
 baseURL = "http://example.org/"
@@ -924,7 +924,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 {{< version 0.2.8 changed >}}
 
 {{< admonition note "Hugo extended 版本是必需的" >}}
-由于需要将 :(fab fa-sass fa-fw): SCSS 转换为 :(fab fa-css3 fa-fw): CSS, Hugo **extended** 版本对于自定义样式是必需的.
+由于需要将 :(fab fa-sass): SCSS 转换为 :(fab fa-css3): CSS, Hugo **extended** 版本对于自定义样式是必需的.
 {{< /admonition >}}
 
 通过定义自定义 `.scss` 样式文件, **LoveIt** 主题支持可配置的样式.
@@ -954,29 +954,29 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 | 语言       | Hugo 代码 | HTML `lang` 属性 |             主题文档              |          Lunr.js 支持           |
 |:---------|:-------:|:--------------:|:-----------------------------:|:-----------------------------:|
-| 英语       |  `en`   |      `en`      | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
-| 简体中文     | `zh-cn` |    `zh-CN`     | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
-| 繁体中文     | `zh-tw` |    `zh-TW`     |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
-| 法语       |  `fr`   |      `fr`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
-| 波兰语      |  `pl`   |      `pl`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
-| 葡萄牙语(巴西) | `pt-br` |    `pt-BR`     |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
-| 意大利语     |  `it`   |      `it`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
-| 西班牙语     |  `es`   |      `es`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
-| 德语       |  `de`   |      `de`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
-| 塞尔维亚语    |  `pl`   |      `pl`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
-| 俄语       |  `ru`   |      `ru`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
-| 罗马尼亚语    |  `ro`   |      `ro`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
-| 越南语      |  `vi`   |      `vi`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
-| 阿拉伯语     |  `ar`   |      `ar`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
-| 加泰罗尼亚语   |  `ca`   |      `ca`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
-| 泰语       |  `th`   |      `th`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
-| 泰卢固语     |  `te`   |      `te`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
-| 印尼语      |  `id`   |      `id`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
-| 土耳其语     |  `tr`   |      `tr`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
-| 韩语       |  `ko`   |      `ko`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
-| 印地语      |  `hi`   |      `hi`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
-| 荷兰语      |  `nl`   |      `nl`      |    :(far fa-square fa-fw):    | :(far fa-check-square fa-fw): |
-| 孟加拉语     |  `bn`   |      `bn`      |    :(far fa-square fa-fw):    |    :(far fa-square fa-fw):    |
+| 英语       |  `en`   |      `en`      | :(far fa-check-square): | :(far fa-check-square): |
+| 简体中文     | `zh-cn` |    `zh-CN`     | :(far fa-check-square): | :(far fa-check-square): |
+| 繁体中文     | `zh-tw` |    `zh-TW`     |    :(far fa-square):    | :(far fa-check-square): |
+| 法语       |  `fr`   |      `fr`      |    :(far fa-square):    | :(far fa-check-square): |
+| 波兰语      |  `pl`   |      `pl`      |    :(far fa-square):    |    :(far fa-square):    |
+| 葡萄牙语(巴西) | `pt-br` |    `pt-BR`     |    :(far fa-square):    | :(far fa-check-square): |
+| 意大利语     |  `it`   |      `it`      |    :(far fa-square):    | :(far fa-check-square): |
+| 西班牙语     |  `es`   |      `es`      |    :(far fa-square):    | :(far fa-check-square): |
+| 德语       |  `de`   |      `de`      |    :(far fa-square):    | :(far fa-check-square): |
+| 塞尔维亚语    |  `pl`   |      `pl`      |    :(far fa-square):    |    :(far fa-square):    |
+| 俄语       |  `ru`   |      `ru`      |    :(far fa-square):    | :(far fa-check-square): |
+| 罗马尼亚语    |  `ro`   |      `ro`      |    :(far fa-square):    | :(far fa-check-square): |
+| 越南语      |  `vi`   |      `vi`      |    :(far fa-square):    | :(far fa-check-square): |
+| 阿拉伯语     |  `ar`   |      `ar`      |    :(far fa-square):    | :(far fa-check-square): |
+| 加泰罗尼亚语   |  `ca`   |      `ca`      |    :(far fa-square):    |    :(far fa-square):    |
+| 泰语       |  `th`   |      `th`      |    :(far fa-square):    | :(far fa-check-square): |
+| 泰卢固语     |  `te`   |      `te`      |    :(far fa-square):    |    :(far fa-square):    |
+| 印尼语      |  `id`   |      `id`      |    :(far fa-square):    |    :(far fa-square):    |
+| 土耳其语     |  `tr`   |      `tr`      |    :(far fa-square):    | :(far fa-check-square): |
+| 韩语       |  `ko`   |      `ko`      |    :(far fa-square):    |    :(far fa-square):    |
+| 印地语      |  `hi`   |      `hi`      |    :(far fa-square):    |    :(far fa-square):    |
+| 荷兰语      |  `nl`   |      `nl`      |    :(far fa-square):    | :(far fa-check-square): |
+| 孟加拉语     |  `bn`   |      `bn`      |    :(far fa-square):    |    :(far fa-square):    |
 
 ### 4.2 基本配置
 
@@ -1104,7 +1104,7 @@ defaultContentLanguage = "zh-cn"
 
 要覆盖默认值, 请在你项目的 i18n 目录 `i18n/<languageCode>.toml` 中创建一个新文件，并从 `themes/LoveIt/i18n/en.toml` 中获得提示.
 
-另外, 由于你的翻译可能会帮助到其他人, 请花点时间通过 [:(fas fa-code-branch fa-fw): 创建一个 PR](https://github.com/dillonzq/LoveIt/pulls) 来贡献主题翻译, 谢谢!
+另外, 由于你的翻译可能会帮助到其他人, 请花点时间通过 [:(fas fa-code-branch): 创建一个 PR](https://github.com/dillonzq/LoveIt/pulls) 来贡献主题翻译, 谢谢!
 
 ## 5 搜索
 

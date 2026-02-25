@@ -10,7 +10,7 @@
                         {{- if $.Site.Params.gitRepo -}}
                             {{- with $.GitInfo -}}
                                 &nbsp;<a class="git-hash" href="{{ printf `%v/commit/%v` $.Site.Params.gitRepo .Hash }}" target="_blank" title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ .Hash }}: {{ .Subject }}">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>{{- .AbbreviatedHash -}}
+                                    <i class="fas fa-hashtag" aria-hidden="true"></i>{{- .AbbreviatedHash -}}
                                 </a>
                             {{- end -}}
                         {{- end -}}
@@ -52,7 +52,7 @@
     <div class="post-info-more">
         <section class="post-tags">
             {{- with .Params.tags -}}
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;
+                <i class="fas fa-tags" aria-hidden="true"></i>&nbsp;
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }},&nbsp;{{ end -}}
                     {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}
@@ -80,10 +80,10 @@
             {{- $nextPage = .NextInSection -}}
         {{- end -}}
         {{- with $prevPage -}}
-            <a href="{{ .RelPermalink }}" class="prev" rel="prev" title="{{ .Title }}"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>{{ .Title | emojify }}</a>
+            <a href="{{ .RelPermalink }}" class="prev" rel="prev" title="{{ .Title }}"><i class="fas fa-angle-left" aria-hidden="true"></i>{{ .Title | emojify }}</a>
         {{- end -}}
         {{ with $nextPage }}
-            <a href="{{ .RelPermalink }}" class="next" rel="next" title="{{ .Title }}">{{ .Title | emojify }}<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a>
+            <a href="{{ .RelPermalink }}" class="next" rel="next" title="{{ .Title }}">{{ .Title | emojify }}<i class="fas fa-angle-right" aria-hidden="true"></i></a>
         {{- end -}}
     </div>
 </div>
