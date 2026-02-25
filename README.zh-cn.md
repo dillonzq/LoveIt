@@ -80,7 +80,7 @@
 
 * 支持 **[Gravatar](https://gravatar.com)** 头像
 * 支持本地**头像**
-* 支持多达 **82** 种社交链接
+* 支持多达 **84** 种社交链接
 * 支持多达 **27** 种网站分享
 * 支持 **[Disqus](https://disqus.com)** 评论系统
 * 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
@@ -125,11 +125,11 @@ hugo server --source=exampleSite
 
 ## 兼容性
 
-| LoveIt 分支或版本  |    支持的 Hugo 版本    |
-|:--------------|:-----------------:|
-| master(不稳定)   |     ≥ 0.128.0     |
-| **0.3.X(推荐)** | 0.128.0 - 0.145.0 |
-| 0.2.X(过时)     | 0.68.0 - 0.127.0  |
+| LoveIt 分支或版本 | 支持的 Hugo 版本  |
+|:------------------|:-----------------:|
+| master(不稳定)    |     ≥ 0.128.0     |
+| **0.3.X(推荐)**   | 0.128.0 - 0.145.0 |
+| 0.2.X(过时)       | 0.68.0 - 0.127.0  |
 
 ## 多语言和国际化
 
@@ -158,6 +158,7 @@ LoveIt 支持下列语言:
 * 印地语
 * 荷兰语
 * 孟加拉语
+* 日语
 * [贡献一种新的语言](https://github.com/dillonzq/LoveIt/pulls)
 
 [语言兼容性](https://hugoloveit.com/zh-cn/theme-documentation-basics/#language-compatibility)
