@@ -191,6 +191,10 @@
       # whether to use typeit animation for subtitle
       # 是否为副标题显示打字机动画
       typeit = true
+      # you can add extra information after the subtitle, such as citations or a summary
+      extra = ""
+      # display extra text in italic (default: true)
+      extraItalic = true
       # whether to show social links
       # 是否显示社交账号
       social = true

@@ -39,6 +39,18 @@
       padding: .5rem;
     }
 
+    .home-extra {
+      font-size: 0.85rem;
+      font-weight: lighter;
+      font-style: italic;
+      margin: 0;
+      padding-bottom: .5rem;
+    }
+
+    .home-extra.no-italic {
+      font-style: normal;
+    }
+
     .links {
       padding: .5rem;
       font-size: 1.5rem;
