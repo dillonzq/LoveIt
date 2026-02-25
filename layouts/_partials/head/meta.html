@@ -2,8 +2,8 @@
 
 <meta name="Description" content="{{ $params.description | default .Site.Params.description }}">
 
-{{- template "_internal/opengraph.html" . -}}
-{{- template "_internal/twitter_cards.html" . -}}
+{{- partial "opengraph.html" . -}}
+{{- partial "twitter_cards.html" . -}}
 
 <meta name="application-name" content="{{ .Site.Params.app.title | default .Site.Title }}">
 <meta name="apple-mobile-web-app-title" content="{{ .Site.Params.app.title | default .Site.Title }}">
