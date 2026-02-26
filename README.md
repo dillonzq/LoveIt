@@ -4,7 +4,7 @@
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.128.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
-[![CircleCI](https://circleci.com/gh/dillonzq/LoveIt/tree/master.svg?style=svg)](https://circleci.com/gh/dillonzq/LoveIt/tree/master)
+[![Hugo build (multi-version) + HTML validate](https://github.com/dillonzq/LoveIt/actions/workflows/hugo-matrix-validate.yml/badge.svg)](https://github.com/dillonzq/LoveIt/actions/workflows/hugo-matrix-validate.yml)
 
 English README | [简体中文说明](https://github.com/dillonzq/LoveIt/blob/master/README.zh-cn.md)
 
