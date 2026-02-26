@@ -774,8 +774,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 # Permalinks config (https://gohugo.io/content-management/urls/#permalinks)
 # Permalinks 配置 (https://gohugo.io/content-management/urls/#permalinks)
 [permalinks]
-  # posts = ":year/:month/:filename"
-  posts = ":filename"
+  # posts = ":year/:month/:contentbasename"
+  posts = ":contentbasename"
 
 # Privacy config (https://gohugo.io/configuration/privacy/)
 # 隐私信息配置 (https://gohugo.io/configuration/privacy/)

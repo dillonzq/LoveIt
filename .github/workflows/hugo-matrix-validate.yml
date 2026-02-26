@@ -1,0 +1,53 @@
+name: Hugo build (multi-version) + HTML validate
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        hugo_version: [ "0.146.0", "0.156.0" ]
+        hugo_extended: [ true ]
+        hugo_env: [ development, production ]
+    env:
+      HUGO_ENV: ${{ matrix.hugo_env }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ matrix.hugo_version }}
+          extended: ${{ matrix.hugo_extended }}
+
+      - name: Build site
+        run: |
+          hugo --source exampleSite --gc --minify
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Install html-proofer
+        run: gem install html-proofer
+
+      - name: Validate HTML
+        run: |
+          htmlproofer exampleSite/public --disable-external --ignore-missing-alt --no-enforce-https

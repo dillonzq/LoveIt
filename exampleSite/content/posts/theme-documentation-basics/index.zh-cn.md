@@ -811,8 +811,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 # {{< link "https://gohugo.io/content-management/urls#permalinks" "Permalinks 配置" >}}
 [Permalinks]
-  # posts = ":year/:month/:filename"
-  posts = ":filename"
+  # posts = ":year/:month/:contentbasename"
+  posts = ":contentbasename"
 
 # {{< link "https://gohugo.io/about/hugo-and-gdpr/" "隐私信息配置" >}}
 [privacy]
@@ -953,32 +953,32 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 {{< version 0.2.10 changed >}}
 
-| 语言       | Hugo 代码 | HTML `lang` 属性 |             主题文档              |          Lunr.js 支持           |
-|:---------|:-------:|:--------------:|:-----------------------------:|:-----------------------------:|
-| 英语       |  `en`   |      `en`      | :(far fa-check-square): | :(far fa-check-square): |
-| 简体中文     | `zh-cn` |    `zh-CN`     | :(far fa-check-square): | :(far fa-check-square): |
-| 繁体中文     | `zh-tw` |    `zh-TW`     |    :(far fa-square):    | :(far fa-check-square): |
-| 法语       |  `fr`   |      `fr`      |    :(far fa-square):    | :(far fa-check-square): |
-| 波兰语      |  `pl`   |      `pl`      |    :(far fa-square):    |    :(far fa-square):    |
-| 葡萄牙语(巴西) | `pt-br` |    `pt-BR`     |    :(far fa-square):    | :(far fa-check-square): |
-| 意大利语     |  `it`   |      `it`      |    :(far fa-square):    | :(far fa-check-square): |
-| 西班牙语     |  `es`   |      `es`      |    :(far fa-square):    | :(far fa-check-square): |
-| 德语       |  `de`   |      `de`      |    :(far fa-square):    | :(far fa-check-square): |
-| 塞尔维亚语    |  `pl`   |      `pl`      |    :(far fa-square):    |    :(far fa-square):    |
-| 俄语       |  `ru`   |      `ru`      |    :(far fa-square):    | :(far fa-check-square): |
-| 罗马尼亚语    |  `ro`   |      `ro`      |    :(far fa-square):    | :(far fa-check-square): |
-| 越南语      |  `vi`   |      `vi`      |    :(far fa-square):    | :(far fa-check-square): |
-| 阿拉伯语     |  `ar`   |      `ar`      |    :(far fa-square):    | :(far fa-check-square): |
-| 加泰罗尼亚语   |  `ca`   |      `ca`      |    :(far fa-square):    |    :(far fa-square):    |
-| 泰语       |  `th`   |      `th`      |    :(far fa-square):    | :(far fa-check-square): |
-| 泰卢固语     |  `te`   |      `te`      |    :(far fa-square):    |    :(far fa-square):    |
-| 印尼语      |  `id`   |      `id`      |    :(far fa-square):    |    :(far fa-square):    |
-| 土耳其语     |  `tr`   |      `tr`      |    :(far fa-square):    | :(far fa-check-square): |
-| 韩语       |  `ko`   |      `ko`      |    :(far fa-square):    |    :(far fa-square):    |
-| 印地语      |  `hi`   |      `hi`      |    :(far fa-square):    |    :(far fa-square):    |
-| 荷兰语      |  `nl`   |      `nl`      |    :(far fa-square):    | :(far fa-check-square): |
-| 孟加拉语     |  `bn`   |      `bn`      |    :(far fa-square):    |    :(far fa-square):    |
-| 日语      |  `ja`   |      `ja`      |    :(far fa-square):    |    :(far fa-check-square):    |
+| 语言                       | Hugo 代码 | HTML `lang` 属性 |        主题文档         |      Lunr.js 支持       |
+|:---------------------------|:---------:|:----------------:|:-----------------------:|:-----------------------:|
+| 英语                       |   `en`    |       `en`       | :(far fa-check-square): | :(far fa-check-square): |
+| 简体中文                   |  `zh-cn`  |     `zh-CN`      | :(far fa-check-square): | :(far fa-check-square): |
+| 繁体中文                   |  `zh-tw`  |     `zh-TW`      |    :(far fa-square):    | :(far fa-check-square): |
+| 法语                       |   `fr`    |       `fr`       |    :(far fa-square):    | :(far fa-check-square): |
+| 波兰语                     |   `pl`    |       `pl`       |    :(far fa-square):    |    :(far fa-square):    |
+| 葡萄牙语(巴西)             |  `pt-br`  |     `pt-BR`      |    :(far fa-square):    | :(far fa-check-square): |
+| 意大利语                   |   `it`    |       `it`       |    :(far fa-square):    | :(far fa-check-square): |
+| 西班牙语                   |   `es`    |       `es`       |    :(far fa-square):    | :(far fa-check-square): |
+| 德语                       |   `de`    |       `de`       |    :(far fa-square):    | :(far fa-check-square): |
+| 塞尔维亚语                 |   `pl`    |       `pl`       |    :(far fa-square):    |    :(far fa-square):    |
+| 俄语                       |   `ru`    |       `ru`       |    :(far fa-square):    | :(far fa-check-square): |
+| 罗马尼亚语                 |   `ro`    |       `ro`       |    :(far fa-square):    | :(far fa-check-square): |
+| 越南语                     |   `vi`    |       `vi`       |    :(far fa-square):    | :(far fa-check-square): |
+| 阿拉伯语                   |   `ar`    |       `ar`       |    :(far fa-square):    | :(far fa-check-square): |
+| 加泰罗尼亚语               |   `ca`    |       `ca`       |    :(far fa-square):    |    :(far fa-square):    |
+| 泰语                       |   `th`    |       `th`       |    :(far fa-square):    | :(far fa-check-square): |
+| 泰卢固语                   |   `te`    |       `te`       |    :(far fa-square):    |    :(far fa-square):    |
+| 印尼语                     |   `id`    |       `id`       |    :(far fa-square):    |    :(far fa-square):    |
+| 土耳其语                   |   `tr`    |       `tr`       |    :(far fa-square):    | :(far fa-check-square): |
+| 韩语                       |   `ko`    |       `ko`       |    :(far fa-square):    |    :(far fa-square):    |
+| 印地语                     |   `hi`    |       `hi`       |    :(far fa-square):    |    :(far fa-square):    |
+| 荷兰语                     |   `nl`    |       `nl`       |    :(far fa-square):    | :(far fa-check-square): |
+| 孟加拉语                   |   `bn`    |       `bn`       |    :(far fa-square):    |    :(far fa-square):    |
+| 日语 {{< version 0.3.1 >}} |   `ja`    |       `ja`       |    :(far fa-square):    | :(far fa-check-square): |
 
 ### 4.2 基本配置
 

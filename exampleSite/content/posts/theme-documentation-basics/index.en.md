@@ -809,8 +809,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 # {{< link "https://gohugo.io/content-management/urls#permalinks" "Permalinks config" >}}
 [Permalinks]
-  # posts = ":year/:month/:filename"
-  posts = ":filename"
+  # posts = ":year/:month/:contentbasename"
+  posts = ":contentbasename"
 
 # {{< link "https://gohugo.io/about/hugo-and-gdpr/" "Privacy config" >}}
 [privacy]
@@ -949,35 +949,33 @@ In `assets/css/_custom.scss`, you can add some css style code to customize the s
 
 ### 4.1 Compatibility {#language-compatibility}
 
-{{< version 0.2.10 changed >}}
-
-| Language            | Hugo Code | HTML `lang` Attribute |          Theme Docs           |        Lunr.js Support        |
-|:--------------------|:---------:|:---------------------:|:-----------------------------:|:-----------------------------:|
-| English             |   `en`    |         `en`          | :(far fa-check-square): | :(far fa-check-square): |
-| Simplified Chinese  |  `zh-cn`  |        `zh-CN`        | :(far fa-check-square): | :(far fa-check-square): |
-| Traditional Chinese |  `zh-tw`  |        `zh-TW`        |    :(far fa-square):    | :(far fa-check-square): |
-| French              |   `fr`    |         `fr`          |    :(far fa-square):    | :(far fa-check-square): |
-| Polish              |   `pl`    |         `pl`          |    :(far fa-square):    |    :(far fa-square):    |
-| Portuguese (Brazil) |  `pt-br`  |        `pt-BR`        |    :(far fa-square):    | :(far fa-check-square): |
-| Italian             |   `it`    |         `it`          |    :(far fa-square):    | :(far fa-check-square): |
-| Spanish             |   `es`    |         `es`          |    :(far fa-square):    | :(far fa-check-square): |
-| German              |   `de`    |         `de`          |    :(far fa-square):    | :(far fa-check-square): |
-| German              |   `de`    |         `de`          |    :(far fa-square):    | :(far fa-check-square): |
-| Serbian             |   `sr`    |         `sr`          |    :(far fa-square):    |    :(far fa-square):    |
-| Russian             |   `ru`    |         `ru`          |    :(far fa-square):    | :(far fa-check-square): |
-| Romanian            |   `ro`    |         `ro`          |    :(far fa-square):    | :(far fa-check-square): |
-| Vietnamese          |   `vi`    |         `vi`          |    :(far fa-square):    | :(far fa-check-square): |
-| Arabic              |   `ar`    |         `ar`          |    :(far fa-square):    | :(far fa-check-square): |
-| Catalan             |   `ca`    |         `ca`          |    :(far fa-square):    |    :(far fa-square):    |
-| Thai                |   `th`    |         `th`          |    :(far fa-square):    | :(far fa-check-square): |
-| Telugu              |   `te`    |         `te`          |    :(far fa-square):    |    :(far fa-square):    |
-| Indonesian          |   `id`    |         `id`          |    :(far fa-square):    |    :(far fa-square):    |
-| Turkish             |   `tr`    |         `tr`          |    :(far fa-square):    | :(far fa-check-square): |
-| Korean              |   `ko`    |         `ko`          |    :(far fa-square):    |    :(far fa-square):    |
-| Hindi               |   `hi`    |         `hi`          |    :(far fa-square):    |    :(far fa-square):    |
-| Dutch               |   `nl`    |         `nl`          |    :(far fa-square):    | :(far fa-check-square): |
-| Bengali             |   `hi`    |         `hi`          |    :(far fa-square):    |    :(far fa-square):    |
-| Japanese            |   `ja`    |         `ja`          |    :(far fa-square):    |    :(far fa-check-square):    |
+| Language                       | Hugo Code | HTML `lang` Attribute |       Theme Docs        |     Lunr.js Support     |
+|:-------------------------------|:---------:|:---------------------:|:-----------------------:|:-----------------------:|
+| English                        |   `en`    |         `en`          | :(far fa-check-square): | :(far fa-check-square): |
+| Simplified Chinese             |  `zh-cn`  |        `zh-CN`        | :(far fa-check-square): | :(far fa-check-square): |
+| Traditional Chinese            |  `zh-tw`  |        `zh-TW`        |    :(far fa-square):    | :(far fa-check-square): |
+| French                         |   `fr`    |         `fr`          |    :(far fa-square):    | :(far fa-check-square): |
+| Polish                         |   `pl`    |         `pl`          |    :(far fa-square):    |    :(far fa-square):    |
+| Portuguese (Brazil)            |  `pt-br`  |        `pt-BR`        |    :(far fa-square):    | :(far fa-check-square): |
+| Italian                        |   `it`    |         `it`          |    :(far fa-square):    | :(far fa-check-square): |
+| Spanish                        |   `es`    |         `es`          |    :(far fa-square):    | :(far fa-check-square): |
+| German                         |   `de`    |         `de`          |    :(far fa-square):    | :(far fa-check-square): |
+| German                         |   `de`    |         `de`          |    :(far fa-square):    | :(far fa-check-square): |
+| Serbian                        |   `sr`    |         `sr`          |    :(far fa-square):    |    :(far fa-square):    |
+| Russian                        |   `ru`    |         `ru`          |    :(far fa-square):    | :(far fa-check-square): |
+| Romanian                       |   `ro`    |         `ro`          |    :(far fa-square):    | :(far fa-check-square): |
+| Vietnamese                     |   `vi`    |         `vi`          |    :(far fa-square):    | :(far fa-check-square): |
+| Arabic                         |   `ar`    |         `ar`          |    :(far fa-square):    | :(far fa-check-square): |
+| Catalan                        |   `ca`    |         `ca`          |    :(far fa-square):    |    :(far fa-square):    |
+| Thai                           |   `th`    |         `th`          |    :(far fa-square):    | :(far fa-check-square): |
+| Telugu                         |   `te`    |         `te`          |    :(far fa-square):    |    :(far fa-square):    |
+| Indonesian                     |   `id`    |         `id`          |    :(far fa-square):    |    :(far fa-square):    |
+| Turkish                        |   `tr`    |         `tr`          |    :(far fa-square):    | :(far fa-check-square): |
+| Korean                         |   `ko`    |         `ko`          |    :(far fa-square):    |    :(far fa-square):    |
+| Hindi                          |   `hi`    |         `hi`          |    :(far fa-square):    |    :(far fa-square):    |
+| Dutch                          |   `nl`    |         `nl`          |    :(far fa-square):    | :(far fa-check-square): |
+| Bengali                        |   `hi`    |         `hi`          |    :(far fa-square):    |    :(far fa-square):    |
+| Japanese {{< version 0.3.1 >}} |   `ja`    |         `ja`          |    :(far fa-square):    | :(far fa-check-square): |
 
 ### 4.2 Basic Configuration
 
