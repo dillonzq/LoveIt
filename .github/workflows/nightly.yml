@@ -1,0 +1,65 @@
+name: Nightly
+
+on:
+  schedule:
+    - cron: "0 10 * * *"
+  workflow_dispatch:
+    inputs:
+      hugo_version:
+        description: "Hugo version (e.g. 0.146.0 or latest)"
+        required: true
+        default: "latest"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nightly
+  cancel-in-progress: true
+
+jobs:
+  latest-validate:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        hugo_env: [ production, development ]
+        include:
+          - hugo_env: production
+            build_args: "--source exampleSite --gc --minify --panicOnWarning"
+          - hugo_env: development
+            build_args: "--source exampleSite --buildDrafts --buildFuture"
+    env:
+      HUGO_ENV: ${{ matrix.hugo_env }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.hugo_version || 'latest' }}
+          extended: true
+
+      - name: Build
+        run: |
+          hugo ${{ matrix.build_args }}
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+
+      - name: Install Validator
+        run: gem install html-proofer -v 5.2.0
+
+      - name: Validate Output
+        run: |
+          htmlproofer ./exampleSite/public \
+            --disable-external \
+            --ignore-missing-alt \
+            --no-enforce-https
