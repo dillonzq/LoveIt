@@ -1,0 +1,71 @@
+name: ci
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        hugo_version: [ "0.146.0", "0.156.0" ]
+        include:
+          - hugo_env: production
+            build_args: "--source exampleSite --gc --minify --panicOnWarning"
+          - hugo_env: development
+            build_args: "--source exampleSite --buildDrafts --buildFuture"
+    env:
+      HUGO_ENV: ${{ matrix.hugo_env }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ matrix.hugo_version }}
+          extended: true
+
+      - name: Build
+        run: |
+          hugo ${{ matrix.build_args }}
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+
+      - name: Install Validator
+        run: gem install html-proofer -v 5.2.0
+
+      - name: Validate Output
+        run: |
+          htmlproofer ./exampleSite/public \
+            --disable-external \
+            --ignore-missing-alt \
+            --no-enforce-https
+
+  ci-gate:
+    runs-on: ubuntu-latest
+    needs: [ build-and-validate ]
+    if: always()
+    steps:
+      - run: |
+          echo "build-and-validate result: ${{ needs.build-and-validate.result }}"
+          if [ "${{ needs.build-and-validate.result }}" != "success" ]; then
+            exit 1
+          fi
