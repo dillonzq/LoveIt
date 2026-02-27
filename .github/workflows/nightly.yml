@@ -1,4 +1,4 @@
-name: nightly
+name: Nightly
 
 on:
   schedule:
@@ -23,6 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        hugo_env: [ production, development ]
         include:
           - hugo_env: production
             build_args: "--source exampleSite --gc --minify --panicOnWarning"
