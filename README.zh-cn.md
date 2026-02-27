@@ -4,6 +4,8 @@
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.128.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
+[![CI](https://github.com/dillonzq/LoveIt/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/dillonzq/LoveIt/actions/workflows/ci.yml)
+[![Nightly](https://github.com/dillonzq/LoveIt/actions/workflows/nightly.yml/badge.svg?branch=master&event=schedule)](https://github.com/dillonzq/LoveIt/actions/workflows/nightly.yml)
 
 [English README](https://github.com/dillonzq/LoveIt/blob/master/README.md) | 简体中文说明
 
