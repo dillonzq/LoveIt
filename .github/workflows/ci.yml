@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        hugo_version: [ "0.146.0", "0.156.0" ]
+        hugo_version: [ "0.146.0", "0.157.0" ]
         hugo_env: [ production, development ]
         include:
           - hugo_env: production
