@@ -1,7 +1,7 @@
 prefix:
   libFiles: https://cdnjs.cloudflare.com/ajax/libs/
-  # simple-icons@15.14.0 https://github.com/simple-icons/simple-icons
-  simpleIcons: https://cdnjs.cloudflare.com/ajax/libs/simple-icons/15.14.0/
+  # simple-icons@15.16.0 https://github.com/simple-icons/simple-icons
+  simpleIcons: https://cdnjs.cloudflare.com/ajax/libs/simple-icons/15.16.0/
 libFiles:
   # fontawesome-free@7.2.0 https://fontawesome.com/
   fontawesomeFreeCSS: font-awesome/7.2.0/css/all.min.css
