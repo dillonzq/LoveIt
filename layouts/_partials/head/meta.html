@@ -15,3 +15,8 @@
 {{- with .Site.Params.app.tileColor -}}
     <meta name="msapplication-TileColor" content="{{ . }}">
 {{- end -}}
+
+{{- /* Content-Security-Policy meta tag (when HTTP headers cannot be set) - see https://content-security-policy.com/examples/meta/ */ -}}
+{{- with .Site.Params.security.contentSecurityPolicy -}}
+    <meta http-equiv="Content-Security-Policy" content="{{ . }}">
+{{- end -}}
