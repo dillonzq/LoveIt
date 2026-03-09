@@ -1,0 +1,44 @@
+{{- /* Column toggle: segmented pill with list/grid icons */ -}}
+{{- /* @param .columns  default column count (1 or 2) from config */ -}}
+{{- /* @param .target   CSS selector of the grid container(s) to toggle */ -}}
+{{- $columns := .columns | default 1 -}}
+{{- $target := .target -}}
+<div class="columns-toggle" data-target="{{ $target }}" data-default-columns="{{ $columns }}">
+    <button class="columns-toggle-btn{{ if ne (int $columns) 2 }} active{{ end }}" data-columns="1"
+            title="{{ T "singleColumn" | default "Single column" }}">
+        <i class="fas fa-list" aria-hidden="true"></i>
+    </button>
+    <button class="columns-toggle-btn{{ if eq (int $columns) 2 }} active{{ end }}" data-columns="2"
+            title="{{ T "twoColumns" | default "Two columns" }}">
+        <i class="fas fa-th-large" aria-hidden="true"></i>
+    </button>
+</div>
+<script>
+    (function() {
+        var wrapper = document.currentScript.previousElementSibling;
+        var target = wrapper.getAttribute('data-target');
+        var defaultCols = parseInt(wrapper.getAttribute('data-default-columns')) || 1;
+        var storageKey = 'columns-' + target;
+        var saved = window.localStorage && window.localStorage.getItem(storageKey);
+        var current = saved ? parseInt(saved) : defaultCols;
+        var buttons = wrapper.querySelectorAll('.columns-toggle-btn');
+
+        function apply(cols) {
+            var grids = document.querySelectorAll(target);
+            grids.forEach(function(grid) { grid.setAttribute('data-columns', cols); });
+            buttons.forEach(function(btn) {
+                btn.classList.toggle('active', parseInt(btn.getAttribute('data-columns')) === cols);
+            });
+            if (window.localStorage) window.localStorage.setItem(storageKey, cols);
+            current = cols;
+        }
+
+        apply(current);
+
+        buttons.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                apply(parseInt(btn.getAttribute('data-columns')));
+            });
+        });
+    })();
+</script>

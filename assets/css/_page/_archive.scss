@@ -3,6 +3,60 @@
     text-align: right;
   }
 
+  .columns-toggle {
+    float: right;
+    display: inline-flex;
+    padding: .5rem 0;
+
+    .columns-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid $global-border-color;
+      background: transparent;
+      color: $global-font-secondary-color;
+      cursor: pointer;
+      font-size: .875rem;
+      transition: all 0.2s ease;
+
+      &:first-child {
+        border-radius: .25rem 0 0 .25rem;
+      }
+
+      &:last-child {
+        border-radius: 0 .25rem .25rem 0;
+        border-left: none;
+      }
+
+      &:hover {
+        color: $global-link-hover-color;
+      }
+
+      &.active {
+        background: $global-link-color;
+        color: #fff;
+        border-color: $global-link-color;
+      }
+
+      [theme=dark] & {
+        border-color: $global-border-color-dark;
+        color: $global-font-secondary-color-dark;
+
+        &:hover {
+          color: $global-link-hover-color-dark;
+        }
+
+        &.active {
+          background: $global-link-color-dark;
+          color: #fff;
+          border-color: $global-link-color-dark;
+        }
+      }
+    }
+  }
+
   .group-title {
     margin-top: 1.5rem;
     margin-bottom: 1rem;

@@ -32,9 +32,13 @@
             {{- else -}}
                 {{- $pages = .Paginate $pages -}}
             {{- end -}}
-            {{- range $pages.Pages -}}
-                {{- .Render "summary" -}}
-            {{- end -}}
+            {{- $columns := $posts.columns | default 1 -}}
+            {{- partial "columns-toggle.html" (dict "columns" $columns "target" ".home-posts-grid") -}}
+            <div class="home-posts-grid" data-columns="{{ $columns }}">
+                {{- range $pages.Pages -}}
+                    {{- .Render "summary" -}}
+                {{- end -}}
+            </div>
             {{- partial "paginator.html" . -}}
         {{- end -}}
     </div>

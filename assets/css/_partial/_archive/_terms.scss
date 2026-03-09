@@ -39,6 +39,18 @@
   }
 }
 
+.archive-items-grid {
+  &[data-columns="2"] {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 1.5rem;
+
+    @media only screen and (max-width: 680px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
 .archive-item {
   display: flex;
   justify-content: space-between;

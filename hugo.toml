@@ -100,6 +100,8 @@
     # amount of RSS pages
     # RSS 文章数目
     rss = 10
+    # number of columns [1, 2] / 列数 [1, 2]
+    columns = 1
 
   # List (category or tag) page config
   # List (目录或标签) 页面配置
@@ -113,6 +115,8 @@
     # amount of RSS pages
     # RSS 文章数目
     rss = 10
+    # number of columns [1, 2] / 列数 [1, 2]
+    columns = 1
 
   # App icon config
   # 应用图标配置
@@ -217,6 +221,8 @@
       # special amount of posts in each home posts page
       # 主页每页显示文章数量
       paginate = 6
+      # number of columns [1, 2] / 列数 [1, 2]
+      columns = 1
   # Social config in home page
   # 主页的社交信息设置
   [params.social]
