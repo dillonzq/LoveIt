@@ -114,6 +114,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     name = "xxxx"
     email = ""
     link = ""
+    # URL of the author avatar (photo)
+    # 作者头像（照片）的 URL
+    avatar = "/images/avatar.png"
 
   # Header config
   # 页面头部导航栏配置

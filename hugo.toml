@@ -33,6 +33,9 @@
     name = "xxxx"
     email = ""
     link = ""
+    # URL of the author avatar (photo)
+    # 作者头像（照片）的 URL
+    avatar = ""
 
   # Header config
   # 页面头部导航栏配置
