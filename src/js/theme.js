@@ -550,18 +550,42 @@ class Theme {
         if (this.config.math) renderMathInElement(document.body, this.config.math);
     }
 
+    getMermaidDefinition(element) {
+        if (!element) return null;
+
+        const id = element.id;
+        if (id && this.data && typeof this.data[id] === 'string') {
+            const fromConfig = this.data[id].trim();
+            if (fromConfig.length > 0) return fromConfig;
+        }
+
+        const fromText = element.textContent;
+        if (fromText && fromText.trim().length > 0) {
+            return fromText.trim();
+        }
+
+        return null;
+    }
+
     initMermaid() {
         this._mermaidOnSwitchTheme = this._mermaidOnSwitchTheme || (() => {
             const $mermaidElements = document.getElementsByClassName('mermaid');
-            if ($mermaidElements.length) {
-                mermaid.initialize({startOnLoad: false, theme: this.isDark ? 'dark' : 'neutral', securityLevel: 'loose'});
-                Util.forEach($mermaidElements, $mermaid => {
-                    mermaid.render('mermaid-svg-' + $mermaid.id, this.data[$mermaid.id])
-                        .then(({ svg }) => {
-                            $mermaid.innerHTML = svg;
-                        });
-                });
-            }
+            if (!$mermaidElements.length) return;
+
+            mermaid.initialize({startOnLoad: false, theme: this.isDark ? 'dark' : 'neutral', securityLevel: 'loose'});
+            Util.forEach($mermaidElements, $mermaid => {
+                const definition = this.getMermaidDefinition($mermaid);
+                if (!definition) return;
+
+                mermaid
+                    .render('mermaid-svg-' + $mermaid.id, definition)
+                    .then(({ svg }) => {
+                        $mermaid.innerHTML = svg;
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            });
         });
         this.switchThemeEventSet.add(this._mermaidOnSwitchTheme);
         this._mermaidOnSwitchTheme();
