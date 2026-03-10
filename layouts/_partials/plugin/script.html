@@ -15,7 +15,7 @@
                 {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
             {{- end -}}
             {{- if .JSBuild -}}
-                {{- $opts := dict "target" "es5" -}}
+                {{- $opts := dict "target" "es2015" -}}
                 {{- if .Minify -}}
                     {{- $opts = merge $opts (dict "minify" true) -}}
                 {{- end -}}
