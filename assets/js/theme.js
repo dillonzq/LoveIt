@@ -1,931 +1,883 @@
-"use strict";
+class Util {
+    static forEach(elements, handler) {
+        elements = elements || [];
+        for (let i = 0; i < elements.length; i++) handler(elements[i]);
+    }
 
-function _objectDestructuringEmpty(t) { if (null == t) throw new TypeError("Cannot destructure " + t); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-var Util = /*#__PURE__*/function () {
-  function Util() {
-    _classCallCheck(this, Util);
-  }
-  return _createClass(Util, null, [{
-    key: "forEach",
-    value: function forEach(elements, handler) {
-      elements = elements || [];
-      for (var i = 0; i < elements.length; i++) handler(elements[i]);
+    static getScrollTop() {
+        return (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
     }
-  }, {
-    key: "getScrollTop",
-    value: function getScrollTop() {
-      return document.documentElement && document.documentElement.scrollTop || document.body.scrollTop;
+
+    static isMobile() {
+        return window.matchMedia('only screen and (max-width: 680px)').matches;
     }
-  }, {
-    key: "isMobile",
-    value: function isMobile() {
-      return window.matchMedia('only screen and (max-width: 680px)').matches;
+
+    static isTocStatic() {
+        return window.matchMedia('only screen and (max-width: 960px)').matches;
     }
-  }, {
-    key: "isTocStatic",
-    value: function isTocStatic() {
-      return window.matchMedia('only screen and (max-width: 960px)').matches;
+
+    static animateCSS(element, animation, reserved, callback) {
+        if (!Array.isArray(animation)) animation = [animation];
+        element.classList.add('animate__animated', ...animation);
+        const handler = () => {
+            element.classList.remove('animate__animated', ...animation);
+            element.removeEventListener('animationend', handler);
+            if (typeof callback === 'function') callback();
+        };
+        if (!reserved) element.addEventListener('animationend', handler, false);
     }
-  }, {
-    key: "animateCSS",
-    value: function animateCSS(element, animation, reserved, callback) {
-      var _element$classList;
-      if (!Array.isArray(animation)) animation = [animation];
-      (_element$classList = element.classList).add.apply(_element$classList, ['animate__animated'].concat(_toConsumableArray(animation)));
-      var _handler = function handler() {
-        var _element$classList2;
-        (_element$classList2 = element.classList).remove.apply(_element$classList2, ['animate__animated'].concat(_toConsumableArray(animation)));
-        element.removeEventListener('animationend', _handler);
-        if (typeof callback === 'function') callback();
-      };
-      if (!reserved) element.addEventListener('animationend', _handler, false);
+}
+
+class Theme {
+    constructor() {
+        this.config = window.config || {};
+        this.data = this.config.data || {};
+        this.isDark = document.body.getAttribute('theme') === 'dark';
+        this.newScrollTop = Util.getScrollTop();
+        this.oldScrollTop = this.newScrollTop;
+        this.scrollEventSet = new Set();
+        this.resizeEventSet = new Set();
+        this.switchThemeEventSet = new Set();
+        this.clickMaskEventSet = new Set();
+        if (window.objectFitImages) objectFitImages();
     }
-  }]);
-}();
-var Theme = /*#__PURE__*/function () {
-  function Theme() {
-    _classCallCheck(this, Theme);
-    this.config = window.config || {};
-    this.data = this.config.data || {};
-    this.isDark = document.body.getAttribute('theme') === 'dark';
-    this.newScrollTop = Util.getScrollTop();
-    this.oldScrollTop = this.newScrollTop;
-    this.scrollEventSet = new Set();
-    this.resizeEventSet = new Set();
-    this.switchThemeEventSet = new Set();
-    this.clickMaskEventSet = new Set();
-    if (window.objectFitImages) objectFitImages();
-  }
-  return _createClass(Theme, [{
-    key: "initRaw",
-    value: function initRaw() {
-      var _this = this;
-      Util.forEach(document.querySelectorAll('[data-raw]'), function ($raw) {
-        $raw.innerHTML = _this.data[$raw.id];
-      });
-    }
-  }, {
-    key: "initSVGIcon",
-    value: function initSVGIcon() {
-      Util.forEach(document.querySelectorAll('[data-svg-src]'), function ($icon) {
-        fetch($icon.getAttribute('data-svg-src')).then(function (response) {
-          return response.text();
-        }).then(function (svg) {
-          var $temp = document.createElement('div');
-          $temp.insertAdjacentHTML('afterbegin', svg);
-          var $svg = $temp.firstChild;
-          $svg.setAttribute('data-svg-src', $icon.getAttribute('data-svg-src'));
-          $svg.classList.add('icon');
-          var $titleElements = $svg.getElementsByTagName('title');
-          if ($titleElements.length) $svg.removeChild($titleElements[0]);
-          $icon.parentElement.replaceChild($svg, $icon);
-        }).catch(function (err) {
-          console.error(err);
+
+    initRaw() {
+        Util.forEach(document.querySelectorAll('[data-raw]'), $raw => {
+            $raw.innerHTML = this.data[$raw.id];
         });
-      });
     }
-  }, {
-    key: "initTwemoji",
-    value: function initTwemoji() {
-      if (this.config.twemoji) twemoji.parse(document.body);
+
+    initSVGIcon() {
+        Util.forEach(document.querySelectorAll('[data-svg-src]'), $icon => {
+            fetch($icon.getAttribute('data-svg-src'))
+                .then(response => response.text())
+                .then(svg => {
+                    const $temp = document.createElement('div');
+                    $temp.insertAdjacentHTML('afterbegin', svg);
+                    const $svg = $temp.firstChild;
+                    $svg.setAttribute('data-svg-src', $icon.getAttribute('data-svg-src'));
+                    $svg.classList.add('icon');
+                    const $titleElements = $svg.getElementsByTagName('title');
+                    if ($titleElements.length) $svg.removeChild($titleElements[0]);
+                    $icon.parentElement.replaceChild($svg, $icon);
+                })
+                .catch(err => { console.error(err); });
+        });
     }
-  }, {
-    key: "initMenuMobile",
-    value: function initMenuMobile() {
-      var $menuToggleMobile = document.getElementById('menu-toggle-mobile');
-      var $menuMobile = document.getElementById('menu-mobile');
-      $menuToggleMobile.addEventListener('click', function () {
-        document.body.classList.toggle('blur');
-        $menuToggleMobile.classList.toggle('active');
-        $menuMobile.classList.toggle('active');
-      }, false);
-      this._menuMobileOnClickMask = this._menuMobileOnClickMask || function () {
-        $menuToggleMobile.classList.remove('active');
-        $menuMobile.classList.remove('active');
-      };
-      this.clickMaskEventSet.add(this._menuMobileOnClickMask);
+
+    initTwemoji() {
+        if (this.config.twemoji) twemoji.parse(document.body);
     }
-  }, {
-    key: "initSwitchTheme",
-    value: function initSwitchTheme() {
-      var _this2 = this;
-      Util.forEach(document.getElementsByClassName('theme-switch'), function ($themeSwitch) {
-        $themeSwitch.addEventListener('click', function () {
-          var _window$localStorage;
-          var cfgTheme = document.body.getAttribute('cfg-theme');
-          var theme = document.body.getAttribute('theme');
-          var themes = ['auto', 'light', 'dark'];
-          var newTheme = themes[(themes.indexOf(cfgTheme) + 1) % themes.length];
-          _this2.isDark = newTheme === 'dark' || newTheme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches;
-          document.body.setAttribute('theme', _this2.isDark ? 'dark' : 'light');
-          document.body.setAttribute('cfg-theme', newTheme);
-          (_window$localStorage = window.localStorage) === null || _window$localStorage === void 0 || _window$localStorage.setItem('theme', newTheme);
-          var _iterator = _createForOfIteratorHelper(_this2.switchThemeEventSet),
-            _step;
-          try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              var event = _step.value;
-              event();
-            }
-          } catch (err) {
-            _iterator.e(err);
-          } finally {
-            _iterator.f();
-          }
+
+    initMenuMobile() {
+        const $menuToggleMobile = document.getElementById('menu-toggle-mobile');
+        const $menuMobile = document.getElementById('menu-mobile');
+        $menuToggleMobile.addEventListener('click', () => {
+            document.body.classList.toggle('blur');
+            $menuToggleMobile.classList.toggle('active');
+            $menuMobile.classList.toggle('active');
         }, false);
-      });
+        this._menuMobileOnClickMask = this._menuMobileOnClickMask || (() => {
+            $menuToggleMobile.classList.remove('active');
+            $menuMobile.classList.remove('active');
+        });
+        this.clickMaskEventSet.add(this._menuMobileOnClickMask);
     }
-  }, {
-    key: "initSearch",
-    value: function initSearch() {
-      var _this3 = this;
-      var searchConfig = this.config.search;
-      var isMobile = Util.isMobile();
-      if (!searchConfig || isMobile && this._searchMobileOnce || !isMobile && this._searchDesktopOnce) return;
-      var maxResultLength = searchConfig.maxResultLength ? searchConfig.maxResultLength : 10;
-      var snippetLength = searchConfig.snippetLength ? searchConfig.snippetLength : 50;
-      var highlightTag = searchConfig.highlightTag ? searchConfig.highlightTag : 'em';
-      var suffix = isMobile ? 'mobile' : 'desktop';
-      var $header = document.getElementById("header-".concat(suffix));
-      var $searchInput = document.getElementById("search-input-".concat(suffix));
-      var $searchToggle = document.getElementById("search-toggle-".concat(suffix));
-      var $searchLoading = document.getElementById("search-loading-".concat(suffix));
-      var $searchClear = document.getElementById("search-clear-".concat(suffix));
-      if (isMobile) {
-        this._searchMobileOnce = true;
-        $searchInput.addEventListener('focus', function () {
-          document.body.classList.add('blur');
-          $header.classList.add('open');
+
+    initSwitchTheme() {
+        Util.forEach(document.getElementsByClassName('theme-switch'), $themeSwitch => {
+            $themeSwitch.addEventListener('click', () => {
+                const cfgTheme = document.body.getAttribute('cfg-theme');
+                const theme = document.body.getAttribute('theme');
+
+                const themes = ['auto', 'light' ,'dark'];
+                const newTheme = themes[(themes.indexOf(cfgTheme) + 1) % themes.length];
+
+                this.isDark = newTheme === 'dark' || (newTheme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                document.body.setAttribute('theme', this.isDark ? 'dark' : 'light');
+                document.body.setAttribute('cfg-theme', newTheme);
+                window.localStorage?.setItem('theme', newTheme);
+                for (let event of this.switchThemeEventSet) event();
+            }, false);
+        });
+    }
+
+    initSearch() {
+        const searchConfig = this.config.search;
+        const isMobile = Util.isMobile();
+        if (!searchConfig || isMobile && this._searchMobileOnce || !isMobile && this._searchDesktopOnce) return;
+
+        const maxResultLength = searchConfig.maxResultLength ? searchConfig.maxResultLength : 10;
+        const snippetLength = searchConfig.snippetLength ? searchConfig.snippetLength : 50;
+        const highlightTag = searchConfig.highlightTag ? searchConfig.highlightTag : 'em';
+
+        const suffix = isMobile ? 'mobile' : 'desktop';
+        const $header = document.getElementById(`header-${suffix}`);
+        const $searchInput = document.getElementById(`search-input-${suffix}`);
+        const $searchToggle = document.getElementById(`search-toggle-${suffix}`);
+        const $searchLoading = document.getElementById(`search-loading-${suffix}`);
+        const $searchClear = document.getElementById(`search-clear-${suffix}`);
+        if (isMobile) {
+            this._searchMobileOnce = true;
+            $searchInput.addEventListener('focus', () => {
+                document.body.classList.add('blur');
+                $header.classList.add('open');
+            }, false);
+            document.getElementById('search-cancel-mobile').addEventListener('click', () => {
+                $header.classList.remove('open');
+                document.body.classList.remove('blur');
+                document.getElementById('menu-toggle-mobile').classList.remove('active');
+                document.getElementById('menu-mobile').classList.remove('active');
+                $searchLoading.style.display = 'none';
+                $searchClear.style.display = 'none';
+                this._searchMobile && this._searchMobile.autocomplete.setVal('');
+            }, false);
+            $searchClear.addEventListener('click', () => {
+                $searchClear.style.display = 'none';
+                this._searchMobile && this._searchMobile.autocomplete.setVal('');
+            }, false);
+            this._searchMobileOnClickMask = this._searchMobileOnClickMask || (() => {
+                $header.classList.remove('open');
+                $searchLoading.style.display = 'none';
+                $searchClear.style.display = 'none';
+                this._searchMobile && this._searchMobile.autocomplete.setVal('');
+            });
+            this.clickMaskEventSet.add(this._searchMobileOnClickMask);
+        } else {
+            this._searchDesktopOnce = true;
+            $searchToggle.addEventListener('click', () => {
+                document.body.classList.add('blur');
+                $header.classList.add('open');
+                $searchInput.focus();
+            }, false);
+            $searchClear.addEventListener('click', () => {
+                $searchClear.style.display = 'none';
+                this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
+            }, false);
+            this._searchDesktopOnClickMask = this._searchDesktopOnClickMask || (() => {
+                $header.classList.remove('open');
+                $searchLoading.style.display = 'none';
+                $searchClear.style.display = 'none';
+                this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
+            });
+            this.clickMaskEventSet.add(this._searchDesktopOnClickMask);
+        }
+        $searchInput.addEventListener('input', () => {
+            if ($searchInput.value === '') $searchClear.style.display = 'none';
+            else $searchClear.style.display = 'inline';
         }, false);
-        document.getElementById('search-cancel-mobile').addEventListener('click', function () {
-          $header.classList.remove('open');
-          document.body.classList.remove('blur');
-          document.getElementById('menu-toggle-mobile').classList.remove('active');
-          document.getElementById('menu-mobile').classList.remove('active');
-          $searchLoading.style.display = 'none';
-          $searchClear.style.display = 'none';
-          _this3._searchMobile && _this3._searchMobile.autocomplete.setVal('');
-        }, false);
-        $searchClear.addEventListener('click', function () {
-          $searchClear.style.display = 'none';
-          _this3._searchMobile && _this3._searchMobile.autocomplete.setVal('');
-        }, false);
-        this._searchMobileOnClickMask = this._searchMobileOnClickMask || function () {
-          $header.classList.remove('open');
-          $searchLoading.style.display = 'none';
-          $searchClear.style.display = 'none';
-          _this3._searchMobile && _this3._searchMobile.autocomplete.setVal('');
-        };
-        this.clickMaskEventSet.add(this._searchMobileOnClickMask);
-      } else {
-        this._searchDesktopOnce = true;
-        $searchToggle.addEventListener('click', function () {
-          document.body.classList.add('blur');
-          $header.classList.add('open');
-          $searchInput.focus();
-        }, false);
-        $searchClear.addEventListener('click', function () {
-          $searchClear.style.display = 'none';
-          _this3._searchDesktop && _this3._searchDesktop.autocomplete.setVal('');
-        }, false);
-        this._searchDesktopOnClickMask = this._searchDesktopOnClickMask || function () {
-          $header.classList.remove('open');
-          $searchLoading.style.display = 'none';
-          $searchClear.style.display = 'none';
-          _this3._searchDesktop && _this3._searchDesktop.autocomplete.setVal('');
-        };
-        this.clickMaskEventSet.add(this._searchDesktopOnClickMask);
-      }
-      $searchInput.addEventListener('input', function () {
-        if ($searchInput.value === '') $searchClear.style.display = 'none';else $searchClear.style.display = 'inline';
-      }, false);
-      var initAutosearch = function initAutosearch() {
-        var autosearch = autocomplete("#search-input-".concat(suffix), {
-          hint: false,
-          autoselect: true,
-          dropdownMenuContainer: "#search-dropdown-".concat(suffix),
-          clearOnSelected: true,
-          cssClasses: {
-            noPrefix: true
-          },
-          debug: true
-        }, {
-          name: 'search',
-          source: function source(query, callback) {
-            $searchLoading.style.display = 'inline';
-            $searchClear.style.display = 'none';
-            var finish = function finish(results) {
-              $searchLoading.style.display = 'none';
-              $searchClear.style.display = 'inline';
-              callback(results);
-            };
-            if (searchConfig.type === 'lunr') {
-              var search = function search() {
-                if (lunr.queryHandler) query = lunr.queryHandler(query);
-                var results = {};
-                _this3._index.search(query).forEach(function (_ref) {
-                  var ref = _ref.ref,
-                    metadata = _ref.matchData.metadata;
-                  var matchData = _this3._indexData[ref];
-                  var uri = matchData.uri,
-                    title = matchData.title,
-                    context = matchData.content;
-                  if (results[uri]) return;
-                  var position = 0;
-                  Object.values(metadata).forEach(function (_ref2) {
-                    var content = _ref2.content;
-                    if (content) {
-                      var matchPosition = content.position[0][0];
-                      if (matchPosition < position || position === 0) position = matchPosition;
+
+        const initAutosearch = () => {
+            const autosearch = autocomplete(`#search-input-${suffix}`, {
+                hint: false,
+                autoselect: true,
+                dropdownMenuContainer: `#search-dropdown-${suffix}`,
+                clearOnSelected: true,
+                cssClasses: { noPrefix: true },
+                debug: true,
+            }, {
+                name: 'search',
+                source: (query, callback) => {
+                    $searchLoading.style.display = 'inline';
+                    $searchClear.style.display = 'none';
+                    const finish = (results) => {
+                        $searchLoading.style.display = 'none';
+                        $searchClear.style.display = 'inline';
+                        callback(results);
+                    };
+                    if (searchConfig.type === 'lunr') {
+                        const search = () => {
+                            if (lunr.queryHandler) query = lunr.queryHandler(query);
+                            const results = {};
+                            this._index.search(query).forEach(({ ref, matchData: { metadata } }) => {
+                                const matchData = this._indexData[ref];
+                                let { uri, title, content: context } = matchData;
+                                if (results[uri]) return;
+                                let position = 0;
+                                Object.values(metadata).forEach(({ content }) => {
+                                    if (content) {
+                                        const matchPosition = content.position[0][0];
+                                        if (matchPosition < position || position === 0) position = matchPosition;
+                                    }
+                                });
+                                position -= snippetLength / 5;
+                                if (position > 0) {
+                                    position += context.slice(position, position + 20).lastIndexOf(' ') + 1;
+                                    context = '...' + context.slice(position, position + snippetLength);
+                                } else {
+                                    context = context.slice(0, snippetLength);
+                                }
+                                Object.keys(metadata).forEach(key => {
+                                    title = title.replace(new RegExp(`(${key})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
+                                    context = context.replace(new RegExp(`(${key})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
+                                });
+                                results[uri] = {
+                                    'uri': uri,
+                                    'title' : title,
+                                    'date' : matchData.date,
+                                    'context' : context,
+                                };
+                            });
+                            return Object.values(results).slice(0, maxResultLength);
+                        }
+                        if (!this._index) {
+                            fetch(searchConfig.lunrIndexURL)
+                                .then(response => response.json())
+                                .then(data => {
+                                    const indexData = {};
+                                    this._index = lunr(function () {
+                                        if (searchConfig.lunrLanguageCode) this.use(lunr[searchConfig.lunrLanguageCode]);
+                                        this.ref('objectID');
+                                        this.field('title', { boost: 50 });
+                                        this.field('tags', { boost: 20 });
+                                        this.field('categories', { boost: 20 });
+                                        this.field('content', { boost: 10 });
+                                        this.metadataWhitelist = ['position'];
+                                        data.forEach((record) => {
+                                            indexData[record.objectID] = record;
+                                            this.add(record);
+                                        });
+                                    });
+                                    this._indexData = indexData;
+                                    finish(search());
+                                }).catch(err => {
+                                    console.error(err);
+                                    finish([]);
+                                });
+                        } else finish(search());
+                    } else if (searchConfig.type === 'algolia') {
+                        const { liteClient: algoliasearch } = window['algoliasearch/lite'];
+                        this._algoliaIndex = this._algoliaIndex || algoliasearch(searchConfig.algoliaAppID, searchConfig.algoliaSearchKey);
+                        this._algoliaIndex
+                            .search({
+                                requests: [
+                                    {
+                                        indexName: searchConfig.algoliaIndex,
+                                        query: query,
+                                        offset: 0,
+                                        length: maxResultLength * 8,
+                                        attributesToHighlight: ['title'],
+                                        attributesToSnippet: [`content:${snippetLength}`],
+                                        highlightPreTag: `<${highlightTag}>`,
+                                        highlightPostTag: `</${highlightTag}>`,
+                                    }
+                                ]
+                            })
+                            .then(({ results: [{ hits }] }) => {
+                                const results = {};
+                                hits.forEach(({ uri, date, _highlightResult: { title }, _snippetResult: { content } }) => {
+                                    if (results[uri] && results[uri].context.length > content.value) return;
+                                    results[uri] = {
+                                        uri: uri,
+                                        title: title.value,
+                                        date: date,
+                                        context: content.value,
+                                    };
+                                });
+                                finish(Object.values(results).slice(0, maxResultLength));
+                            })
+                            .catch(err => {
+                                console.error(err);
+                                finish([]);
+                            });
+                    } else if (searchConfig.type === 'fuse') {
+                        const search = () => {
+                            const results = {};
+                            this._fuse.search(query).forEach(({ item, matches }) => {
+                                let { uri, title, content: context, date } = item;
+                                if (results[uri]) return;
+                                let position = 0;
+                                if (matches) {
+                                    for (const match of matches) {
+                                        if (match.key === 'content' && match.indices.length > 0) {
+                                            position = match.indices[0][0];
+                                            break;
+                                        }
+                                    }
+                                }
+                                position -= snippetLength / 5;
+                                if (position > 0) {
+                                    position += context.slice(position, position + 20).lastIndexOf(' ') + 1;
+                                    context = '...' + context.slice(position, position + snippetLength);
+                                } else {
+                                    context = context.slice(0, snippetLength);
+                                }
+                                const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                                title = title.replace(new RegExp(`(${escapedQuery})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
+                                context = context.replace(new RegExp(`(${escapedQuery})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
+                                results[uri] = { uri, title, date, context };
+                            });
+                            return Object.values(results).slice(0, maxResultLength);
+                        };
+                        if (!this._fuse) {
+                            fetch(searchConfig.fuseIndexURL)
+                                .then(response => response.json())
+                                .then(data => {
+                                    const fuseOpts = Object.assign({
+                                        isCaseSensitive: false,
+                                        findAllMatches: false,
+                                        minMatchCharLength: 2,
+                                        location: 0,
+                                        threshold: 0.3,
+                                        distance: 100,
+                                        ignoreLocation: false,
+                                        includeMatches: true,
+                                        keys: [
+                                            { name: 'title', weight: 5 },
+                                            { name: 'tags', weight: 2 },
+                                            { name: 'categories', weight: 2 },
+                                            { name: 'content', weight: 1 },
+                                        ],
+                                    }, searchConfig.fuseOpts || {}, { includeMatches: true });
+                                    this._fuse = new Fuse(data, fuseOpts);
+                                    finish(search());
+                                }).catch(err => {
+                                    console.error(err);
+                                    finish([]);
+                                });
+                        } else finish(search());
+                    } else if (searchConfig.type === 'pagefind') {
+                        const search = async () => {
+                            try {
+                                if (!this._pagefind) {
+                                    const basePath = searchConfig.pagefindBasePath || '/_pagefind/';
+                                    this._pagefind = await import(`${basePath}pagefind.js`);
+                                    await this._pagefind.init();
+                                }
+                                const searchResult = await this._pagefind.search(query);
+                                const results = {};
+                                const loaded = await Promise.all(
+                                    searchResult.results.slice(0, maxResultLength).map(r => r.data())
+                                );
+                                loaded.forEach(item => {
+                                    const uri = item.url;
+                                    if (results[uri]) return;
+                                    let title = item.meta?.title || '';
+                                    let context = item.excerpt || item.content || '';
+                                    context = context.slice(0, snippetLength);
+                                    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                                    title = title.replace(new RegExp(`(${escapedQuery})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
+                                    context = context.replace(new RegExp(`(${escapedQuery})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
+                                    results[uri] = { uri, title, date: '', context };
+                                });
+                                finish(Object.values(results));
+                            } catch (err) {
+                                console.error(err);
+                                finish([]);
+                            }
+                        };
+                        search();
                     }
-                  });
-                  position -= snippetLength / 5;
-                  if (position > 0) {
-                    position += context.slice(position, position + 20).lastIndexOf(' ') + 1;
-                    context = '...' + context.slice(position, position + snippetLength);
-                  } else {
-                    context = context.slice(0, snippetLength);
-                  }
-                  Object.keys(metadata).forEach(function (key) {
-                    title = title.replace(new RegExp("(".concat(key, ")"), 'gi'), "<".concat(highlightTag, ">$1</").concat(highlightTag, ">"));
-                    context = context.replace(new RegExp("(".concat(key, ")"), 'gi'), "<".concat(highlightTag, ">$1</").concat(highlightTag, ">"));
-                  });
-                  results[uri] = {
-                    'uri': uri,
-                    'title': title,
-                    'date': matchData.date,
-                    'context': context
-                  };
-                });
-                return Object.values(results).slice(0, maxResultLength);
-              };
-              if (!_this3._index) {
-                fetch(searchConfig.lunrIndexURL).then(function (response) {
-                  return response.json();
-                }).then(function (data) {
-                  var indexData = {};
-                  _this3._index = lunr(function () {
-                    var _this4 = this;
-                    if (searchConfig.lunrLanguageCode) this.use(lunr[searchConfig.lunrLanguageCode]);
-                    this.ref('objectID');
-                    this.field('title', {
-                      boost: 50
-                    });
-                    this.field('tags', {
-                      boost: 20
-                    });
-                    this.field('categories', {
-                      boost: 20
-                    });
-                    this.field('content', {
-                      boost: 10
-                    });
-                    this.metadataWhitelist = ['position'];
-                    data.forEach(function (record) {
-                      indexData[record.objectID] = record;
-                      _this4.add(record);
-                    });
-                  });
-                  _this3._indexData = indexData;
-                  finish(search());
-                }).catch(function (err) {
-                  console.error(err);
-                  finish([]);
-                });
-              } else finish(search());
-            } else if (searchConfig.type === 'algolia') {
-              var algoliasearch = window['algoliasearch/lite'].liteClient;
-              _this3._algoliaIndex = _this3._algoliaIndex || algoliasearch(searchConfig.algoliaAppID, searchConfig.algoliaSearchKey);
-              _this3._algoliaIndex.search({
-                requests: [{
-                  indexName: searchConfig.algoliaIndex,
-                  query: query,
-                  offset: 0,
-                  length: maxResultLength * 8,
-                  attributesToHighlight: ['title'],
-                  attributesToSnippet: ["content:".concat(snippetLength)],
-                  highlightPreTag: "<".concat(highlightTag, ">"),
-                  highlightPostTag: "</".concat(highlightTag, ">")
-                }]
-              }).then(function (_ref3) {
-                var _ref3$results = _slicedToArray(_ref3.results, 1),
-                  hits = _ref3$results[0].hits;
-                var results = {};
-                hits.forEach(function (_ref4) {
-                  var uri = _ref4.uri,
-                    date = _ref4.date,
-                    title = _ref4._highlightResult.title,
-                    content = _ref4._snippetResult.content;
-                  if (results[uri] && results[uri].context.length > content.value) return;
-                  results[uri] = {
-                    uri: uri,
-                    title: title.value,
-                    date: date,
-                    context: content.value
-                  };
-                });
-                finish(Object.values(results).slice(0, maxResultLength));
-              }).catch(function (err) {
-                console.error(err);
-                finish([]);
-              });
-            }
-          },
-          templates: {
-            suggestion: function suggestion(_ref5) {
-              var title = _ref5.title,
-                date = _ref5.date,
-                context = _ref5.context;
-              return "<div><span class=\"suggestion-title\">".concat(title, "</span><span class=\"suggestion-date\">").concat(date, "</span></div><div class=\"suggestion-context\">").concat(context, "</div>");
-            },
-            empty: function empty(_ref6) {
-              var query = _ref6.query;
-              return "<div class=\"search-empty\">".concat(searchConfig.noResultsFound, ": <span class=\"search-query\">\"").concat(query, "\"</span></div>");
-            },
-            footer: function footer(_ref7) {
-              _objectDestructuringEmpty(_ref7);
-              var _ref8 = searchConfig.type === 'algolia' ? {
-                  searchType: 'algolia',
-                  icon: '<i class="fab fa-algolia" aria-hidden="true"></i>',
-                  href: 'https://www.algolia.com/'
-                } : {
-                  searchType: 'Lunr.js',
-                  icon: '',
-                  href: 'https://lunrjs.com/'
                 },
-                searchType = _ref8.searchType,
-                icon = _ref8.icon,
-                href = _ref8.href;
-              return "<div class=\"search-footer\">Search by <a href=\"".concat(href, "\" rel=\"noopener noreffer\" target=\"_blank\">").concat(icon, " ").concat(searchType, "</a></div>");
+                templates: {
+                    suggestion: ({ title, date, context }) => `<div><span class="suggestion-title">${title}</span><span class="suggestion-date">${date}</span></div><div class="suggestion-context">${context}</div>`,
+                    empty: ({ query }) => `<div class="search-empty">${searchConfig.noResultsFound}: <span class="search-query">"${query}"</span></div>`,
+                    footer: ({}) => {
+                        const searchTypes = {
+                            algolia: { searchType: 'algolia', icon: '<i class="fab fa-algolia" aria-hidden="true"></i>', href: 'https://www.algolia.com/' },
+                            lunr: { searchType: 'Lunr.js', icon: '', href: 'https://lunrjs.com/' },
+                            fuse: { searchType: 'Fuse.js', icon: '', href: 'https://www.fusejs.io/' },
+                            pagefind: { searchType: 'Pagefind', icon: '', href: 'https://pagefind.app/' },
+                        };
+                        const { searchType, icon, href } = searchTypes[searchConfig.type] || searchTypes.lunr;
+                        return `<div class="search-footer">Search by <a href="${href}" rel="noopener noreffer" target="_blank">${icon} ${searchType}</a></div>`;},
+                },
+            });
+            autosearch.on('autocomplete:selected', (_event, suggestion, _dataset, _context) => {
+                window.location.assign(suggestion.uri);
+            });
+            if (isMobile) this._searchMobile = autosearch;
+            else this._searchDesktop = autosearch;
+        };
+        if (searchConfig.lunrSegmentitURL && !document.getElementById('lunr-segmentit')) {
+            const script = document.createElement('script');
+            script.id = 'lunr-segmentit';
+            script.src = searchConfig.lunrSegmentitURL;
+            script.async = true;
+            if (script.readyState) {
+                script.onreadystatechange = () => {
+                    if (script.readyState === 'loaded' || script.readyState === 'complete'){
+                        script.onreadystatechange = null;
+                        initAutosearch();
+                    }
+                };
+            } else {
+                script.onload = () => {
+                    initAutosearch();
+                };
             }
-          }
+            document.body.appendChild(script);
+        } else initAutosearch();
+    }
+
+    initDetails() {
+        Util.forEach(document.getElementsByClassName('details'), $details => {
+            const $summary = $details.getElementsByClassName('details-summary')[0];
+            $summary.addEventListener('click', () => {
+                $details.classList.toggle('open');
+            }, false);
         });
-        autosearch.on('autocomplete:selected', function (_event, suggestion, _dataset, _context) {
-          window.location.assign(suggestion.uri);
+    }
+
+    initLightGallery() {
+        if (this.config.lightgallery) lightGallery(document.getElementById('content'), {
+            plugins: [lgThumbnail, lgZoom],
+            selector: '.lightgallery',
+            speed: 400,
+            hideBarsDelay: 2000,
+            allowMediaOverlap: true,
+            exThumbImage: 'data-thumbnail',
+            toggleThumb: true,
+            thumbWidth: 80,
+            thumbHeight: '60px',
+            actualSize: false,
+            showZoomInOutIcons: true,
         });
-        if (isMobile) _this3._searchMobile = autosearch;else _this3._searchDesktop = autosearch;
-      };
-      if (searchConfig.lunrSegmentitURL && !document.getElementById('lunr-segmentit')) {
-        var script = document.createElement('script');
-        script.id = 'lunr-segmentit';
-        script.src = searchConfig.lunrSegmentitURL;
-        script.async = true;
-        if (script.readyState) {
-          script.onreadystatechange = function () {
-            if (script.readyState === 'loaded' || script.readyState === 'complete') {
-              script.onreadystatechange = null;
-              initAutosearch();
+    }
+
+    initHighlight() {
+        Util.forEach(document.querySelectorAll('.code-block'), $codeBlock => {
+            const $codeTitle = $codeBlock.querySelector('.code-header > .code-title');
+            if ($codeTitle) {
+                $codeTitle.addEventListener('click', () => {
+                    $codeBlock.classList.toggle('open');
+                }, false);
             }
-          };
+            const $ellipses = $codeBlock.querySelector('.code-header .ellipses');
+            if ($ellipses) {
+                $ellipses.addEventListener('click', () => {
+                    $codeBlock.classList.toggle('open');
+                }, false);
+            }
+            const $copy = $codeBlock.querySelector('.code-header .copy');
+            if ($copy) {
+                const $code = $codeBlock.querySelector('code');
+                $copy.setAttribute('data-clipboard-text', $code.innerText);
+                const clipboard = new ClipboardJS($copy);
+                const $codeLines = $code.querySelectorAll('span.cl');
+                clipboard.on('success', _e => {
+                    if ($codeLines) {
+                        Util.forEach($codeLines, $codeLine => Util.animateCSS($codeLine, 'animate__flash'))
+                    }
+                });
+            }
+        });
+    }
+
+    initHeaderLink() {
+        for (let num = 1; num <= 6; num++) {
+            Util.forEach(document.querySelectorAll('.single .content > h' + num), $header => {
+                $header.classList.add('headerLink');
+                $header.insertAdjacentHTML('afterbegin', `<a href="#${$header.id}" class="header-mark"></a>`);
+            });
+        }
+    }
+
+    initToc() {
+        const $tocCore = document.getElementById('TableOfContents');
+        if ($tocCore === null) return;
+        if (document.getElementById('toc-static').getAttribute('data-kept') || Util.isTocStatic()) {
+            const $tocContentStatic = document.getElementById('toc-content-static');
+            if ($tocCore.parentElement !== $tocContentStatic) {
+                $tocCore.parentElement.removeChild($tocCore);
+                $tocContentStatic.appendChild($tocCore);
+            }
+            if (this._tocOnScroll) this.scrollEventSet.delete(this._tocOnScroll);
         } else {
-          script.onload = function () {
-            initAutosearch();
-          };
-        }
-        document.body.appendChild(script);
-      } else initAutosearch();
-    }
-  }, {
-    key: "initDetails",
-    value: function initDetails() {
-      Util.forEach(document.getElementsByClassName('details'), function ($details) {
-        var $summary = $details.getElementsByClassName('details-summary')[0];
-        $summary.addEventListener('click', function () {
-          $details.classList.toggle('open');
-        }, false);
-      });
-    }
-  }, {
-    key: "initLightGallery",
-    value: function initLightGallery() {
-      if (this.config.lightgallery) lightGallery(document.getElementById('content'), {
-        plugins: [lgThumbnail, lgZoom],
-        selector: '.lightgallery',
-        speed: 400,
-        hideBarsDelay: 2000,
-        allowMediaOverlap: true,
-        exThumbImage: 'data-thumbnail',
-        toggleThumb: true,
-        thumbWidth: 80,
-        thumbHeight: '60px',
-        actualSize: false,
-        showZoomInOutIcons: true
-      });
-    }
-  }, {
-    key: "initHighlight",
-    value: function initHighlight() {
-      Util.forEach(document.querySelectorAll('.code-block'), function ($codeBlock) {
-        var $codeTitle = $codeBlock.querySelector('.code-header > .code-title');
-        if ($codeTitle) {
-          $codeTitle.addEventListener('click', function () {
-            $codeBlock.classList.toggle('open');
-          }, false);
-        }
-        var $ellipses = $codeBlock.querySelector('.code-header .ellipses');
-        if ($ellipses) {
-          $ellipses.addEventListener('click', function () {
-            $codeBlock.classList.toggle('open');
-          }, false);
-        }
-        var $copy = $codeBlock.querySelector('.code-header .copy');
-        if ($copy) {
-          var $code = $codeBlock.querySelector('code');
-          $copy.setAttribute('data-clipboard-text', $code.innerText);
-          var clipboard = new ClipboardJS($copy);
-          var $codeLines = $code.querySelectorAll('span.cl');
-          clipboard.on('success', function (_e) {
-            if ($codeLines) {
-              Util.forEach($codeLines, function ($codeLine) {
-                return Util.animateCSS($codeLine, 'animate__flash');
-              });
+            const $tocContentAuto = document.getElementById('toc-content-auto');
+            if ($tocCore.parentElement !== $tocContentAuto) {
+                $tocCore.parentElement.removeChild($tocCore);
+                $tocContentAuto.appendChild($tocCore);
             }
-          });
-        }
-      });
-    }
-  }, {
-    key: "initHeaderLink",
-    value: function initHeaderLink() {
-      for (var num = 1; num <= 6; num++) {
-        Util.forEach(document.querySelectorAll('.single .content > h' + num), function ($header) {
-          $header.classList.add('headerLink');
-          $header.insertAdjacentHTML('afterbegin', "<a href=\"#".concat($header.id, "\" class=\"header-mark\"></a>"));
-        });
-      }
-    }
-  }, {
-    key: "initToc",
-    value: function initToc() {
-      var _this5 = this;
-      var $tocCore = document.getElementById('TableOfContents');
-      if ($tocCore === null) return;
-      if (document.getElementById('toc-static').getAttribute('data-kept') || Util.isTocStatic()) {
-        var $tocContentStatic = document.getElementById('toc-content-static');
-        if ($tocCore.parentElement !== $tocContentStatic) {
-          $tocCore.parentElement.removeChild($tocCore);
-          $tocContentStatic.appendChild($tocCore);
-        }
-        if (this._tocOnScroll) this.scrollEventSet.delete(this._tocOnScroll);
-      } else {
-        var $tocContentAuto = document.getElementById('toc-content-auto');
-        if ($tocCore.parentElement !== $tocContentAuto) {
-          $tocCore.parentElement.removeChild($tocCore);
-          $tocContentAuto.appendChild($tocCore);
-        }
-        var $toc = document.getElementById('toc-auto');
-        var $page = document.getElementsByClassName('page')[0];
-        var rect = $page.getBoundingClientRect();
-        $toc.style.left = "".concat(rect.left + rect.width + 20, "px");
-        $toc.style.maxWidth = "".concat($page.getBoundingClientRect().left - 20, "px");
-        $toc.style.visibility = 'visible';
-        var $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
-        var $tocLiElements = $tocCore.getElementsByTagName('li');
-        var $headerLinkElements = document.getElementsByClassName('headerLink');
-        var headerIsFixed = document.body.getAttribute('data-header-desktop') !== 'normal';
-        var headerHeight = document.getElementById('header-desktop').offsetHeight;
-        var TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
-        var minTocTop = $toc.offsetTop;
-        var minScrollTop = minTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
-        this._tocOnScroll = this._tocOnScroll || function () {
-          var footerTop = document.getElementById('post-footer').offsetTop;
-          var maxTocTop = footerTop - $toc.getBoundingClientRect().height;
-          var maxScrollTop = maxTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
-          if (_this5.newScrollTop < minScrollTop) {
-            $toc.style.position = 'absolute';
-            $toc.style.top = "".concat(minTocTop, "px");
-          } else if (_this5.newScrollTop > maxScrollTop) {
-            $toc.style.position = 'absolute';
-            $toc.style.top = "".concat(maxTocTop, "px");
-          } else {
-            $toc.style.position = 'fixed';
-            $toc.style.top = "".concat(TOP_SPACING, "px");
-          }
-          Util.forEach($tocLinkElements, function ($tocLink) {
-            $tocLink.classList.remove('active');
-          });
-          Util.forEach($tocLiElements, function ($tocLi) {
-            $tocLi.classList.remove('has-active');
-          });
-          var INDEX_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
-          var activeTocIndex = $headerLinkElements.length - 1;
-          for (var i = 0; i < $headerLinkElements.length - 1; i++) {
-            var thisTop = $headerLinkElements[i].getBoundingClientRect().top;
-            var nextTop = $headerLinkElements[i + 1].getBoundingClientRect().top;
-            if (i === 0 && thisTop > INDEX_SPACING || thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING) {
-              activeTocIndex = i;
-              break;
-            }
-          }
-          if (activeTocIndex !== -1) {
-            $tocLinkElements[activeTocIndex].classList.add('active');
-            var $parent = $tocLinkElements[activeTocIndex].parentElement;
-            while ($parent !== $tocCore) {
-              $parent.classList.add('has-active');
-              $parent = $parent.parentElement.parentElement;
-            }
-          }
-        };
-        this._tocOnScroll();
-        this.scrollEventSet.add(this._tocOnScroll);
-      }
-    }
-  }, {
-    key: "initMath",
-    value: function initMath() {
-      if (this.config.math) renderMathInElement(document.body, this.config.math);
-    }
-  }, {
-    key: "initMermaid",
-    value: function initMermaid() {
-      var _this6 = this;
-      this._mermaidOnSwitchTheme = this._mermaidOnSwitchTheme || function () {
-        var $mermaidElements = document.getElementsByClassName('mermaid');
-        if ($mermaidElements.length) {
-          mermaid.initialize({
-            startOnLoad: false,
-            theme: _this6.isDark ? 'dark' : 'neutral',
-            securityLevel: 'loose'
-          });
-          Util.forEach($mermaidElements, function ($mermaid) {
-            mermaid.render('mermaid-svg-' + $mermaid.id, _this6.data[$mermaid.id]).then(function (_ref9) {
-              var svg = _ref9.svg;
-              $mermaid.innerHTML = svg;
-            });
-          });
-        }
-      };
-      this.switchThemeEventSet.add(this._mermaidOnSwitchTheme);
-      this._mermaidOnSwitchTheme();
-    }
-  }, {
-    key: "initEcharts",
-    value: function initEcharts() {
-      var _this7 = this;
-      if (this.config.echarts) {
-        echarts.registerTheme('light', this.config.echarts.lightTheme);
-        echarts.registerTheme('dark', this.config.echarts.darkTheme);
-        this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || function () {
-          _this7._echartsArr = _this7._echartsArr || [];
-          for (var i = 0; i < _this7._echartsArr.length; i++) {
-            _this7._echartsArr[i].dispose();
-          }
-          _this7._echartsArr = [];
-          Util.forEach(document.getElementsByClassName('echarts'), function ($echarts) {
-            var chart = echarts.init($echarts, _this7.isDark ? 'dark' : 'light', {
-              renderer: 'svg'
-            });
-            chart.setOption(JSON.parse(_this7.data[$echarts.id]));
-            _this7._echartsArr.push(chart);
-          });
-        };
-        this.switchThemeEventSet.add(this._echartsOnSwitchTheme);
-        this._echartsOnSwitchTheme();
-        this._echartsOnResize = this._echartsOnResize || function () {
-          for (var i = 0; i < _this7._echartsArr.length; i++) {
-            _this7._echartsArr[i].resize();
-          }
-        };
-        this.resizeEventSet.add(this._echartsOnResize);
-      }
-    }
-  }, {
-    key: "initMapbox",
-    value: function initMapbox() {
-      var _this8 = this;
-      if (this.config.mapbox) {
-        mapboxgl.accessToken = this.config.mapbox.accessToken;
-        mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
-        this._mapboxArr = this._mapboxArr || [];
-        Util.forEach(document.getElementsByClassName('mapbox'), function ($mapbox) {
-          var _this8$data$$mapbox$i = _this8.data[$mapbox.id],
-            lng = _this8$data$$mapbox$i.lng,
-            lat = _this8$data$$mapbox$i.lat,
-            zoom = _this8$data$$mapbox$i.zoom,
-            lightStyle = _this8$data$$mapbox$i.lightStyle,
-            darkStyle = _this8$data$$mapbox$i.darkStyle,
-            marked = _this8$data$$mapbox$i.marked,
-            navigation = _this8$data$$mapbox$i.navigation,
-            geolocate = _this8$data$$mapbox$i.geolocate,
-            scale = _this8$data$$mapbox$i.scale,
-            fullscreen = _this8$data$$mapbox$i.fullscreen;
-          var mapbox = new mapboxgl.Map({
-            container: $mapbox,
-            center: [lng, lat],
-            zoom: zoom,
-            minZoom: .2,
-            style: _this8.isDark ? darkStyle : lightStyle,
-            attributionControl: false
-          });
-          if (marked) {
-            new mapboxgl.Marker().setLngLat([lng, lat]).addTo(mapbox);
-          }
-          if (navigation) {
-            mapbox.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
-          }
-          if (geolocate) {
-            mapbox.addControl(new mapboxgl.GeolocateControl({
-              positionOptions: {
-                enableHighAccuracy: true
-              },
-              showUserLocation: true,
-              trackUserLocation: true
-            }), 'bottom-right');
-          }
-          if (scale) {
-            mapbox.addControl(new mapboxgl.ScaleControl());
-          }
-          if (fullscreen) {
-            mapbox.addControl(new mapboxgl.FullscreenControl());
-          }
-          mapbox.addControl(new MapboxLanguage());
-          _this8._mapboxArr.push(mapbox);
-        });
-        this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || function () {
-          Util.forEach(_this8._mapboxArr, function (mapbox) {
-            var $mapbox = mapbox.getContainer();
-            var _this8$data$$mapbox$i2 = _this8.data[$mapbox.id],
-              lightStyle = _this8$data$$mapbox$i2.lightStyle,
-              darkStyle = _this8$data$$mapbox$i2.darkStyle;
-            mapbox.setStyle(_this8.isDark ? darkStyle : lightStyle);
-            mapbox.addControl(new MapboxLanguage());
-          });
-        };
-        this.switchThemeEventSet.add(this._mapboxOnSwitchTheme);
-      }
-    }
-  }, {
-    key: "initTypeit",
-    value: function initTypeit() {
-      var _this9 = this;
-      if (this.config.typeit) {
-        var typeitConfig = this.config.typeit;
-        var speed = typeitConfig.speed ? typeitConfig.speed : 100;
-        var cursorSpeed = typeitConfig.cursorSpeed ? typeitConfig.cursorSpeed : 1000;
-        var cursorChar = typeitConfig.cursorChar ? typeitConfig.cursorChar : '|';
-        Object.values(typeitConfig.data).forEach(function (group) {
-          var _typeone = function typeone(i) {
-            var id = group[i];
-            new TypeIt("#".concat(id), {
-              strings: _this9.data[id],
-              speed: speed,
-              lifeLike: true,
-              cursorSpeed: cursorSpeed,
-              cursorChar: cursorChar,
-              waitUntilVisible: true,
-              afterComplete: function afterComplete() {
-                if (i === group.length - 1) {
-                  if (typeitConfig.duration >= 0) window.setTimeout(function () {
-                    instance.destroy();
-                  }, typeitConfig.duration);
-                  return;
+            const $toc = document.getElementById('toc-auto');
+            const $page = document.getElementsByClassName('page')[0];
+            const rect = $page.getBoundingClientRect();
+            $toc.style.left = `${rect.left + rect.width + 20}px`;
+            $toc.style.maxWidth = `${$page.getBoundingClientRect().left - 20}px`;
+            $toc.style.visibility = 'visible';
+            const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
+            const $tocLiElements = $tocCore.getElementsByTagName('li');
+            const $headerLinkElements = document.getElementsByClassName('headerLink');
+            const headerIsFixed = document.body.getAttribute('data-header-desktop') !== 'normal';
+            const headerHeight = document.getElementById('header-desktop').offsetHeight;
+            const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
+            const minTocTop = $toc.offsetTop;
+            const minScrollTop = minTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
+            this._tocOnScroll = this._tocOnScroll || (() => {
+                const footerTop = document.getElementById('post-footer').offsetTop;
+                const maxTocTop = footerTop - $toc.getBoundingClientRect().height;
+                const maxScrollTop = maxTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
+                if (this.newScrollTop < minScrollTop) {
+                    $toc.style.position = 'absolute';
+                    $toc.style.top = `${minTocTop}px`;
+                } else if (this.newScrollTop > maxScrollTop) {
+                    $toc.style.position = 'absolute';
+                    $toc.style.top = `${maxTocTop}px`;
+                } else {
+                    $toc.style.position = 'fixed';
+                    $toc.style.top = `${TOP_SPACING}px`;
                 }
-                instance.destroy();
-                _typeone(i + 1);
-              }
-            }).go();
-          };
-          _typeone(0);
+
+                Util.forEach($tocLinkElements, $tocLink => { $tocLink.classList.remove('active'); });
+                Util.forEach($tocLiElements, $tocLi => { $tocLi.classList.remove('has-active'); });
+                const INDEX_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
+                let activeTocIndex = $headerLinkElements.length - 1;
+                for (let i = 0; i < $headerLinkElements.length - 1; i++) {
+                    const thisTop = $headerLinkElements[i].getBoundingClientRect().top;
+                    const nextTop = $headerLinkElements[i + 1].getBoundingClientRect().top;
+                    if ((i === 0 && thisTop > INDEX_SPACING)
+                     || (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)) {
+                        activeTocIndex = i;
+                        break;
+                    }
+                }
+                if (activeTocIndex !== -1) {
+                    $tocLinkElements[activeTocIndex].classList.add('active');
+                    let $parent = $tocLinkElements[activeTocIndex].parentElement;
+                    while ($parent !== $tocCore) {
+                        $parent.classList.add('has-active');
+                        $parent = $parent.parentElement.parentElement;
+                    }
+                }
+            });
+            this._tocOnScroll();
+            this.scrollEventSet.add(this._tocOnScroll);
+        }
+    }
+
+    initMath() {
+        if (this.config.math) renderMathInElement(document.body, this.config.math);
+    }
+
+    getMermaidDefinition(element) {
+        if (!element) return null;
+
+        const id = element.id;
+        if (id && this.data && typeof this.data[id] === 'string') {
+            const fromConfig = this.data[id].trim();
+            if (fromConfig.length > 0) return fromConfig;
+        }
+
+        const fromText = element.textContent;
+        if (fromText && fromText.trim().length > 0) {
+            return fromText.trim();
+        }
+
+        return null;
+    }
+
+    initMermaid() {
+        this._mermaidOnSwitchTheme = this._mermaidOnSwitchTheme || (() => {
+            const $mermaidElements = document.getElementsByClassName('mermaid');
+            if (!$mermaidElements.length) return;
+
+            mermaid.initialize({startOnLoad: false, theme: this.isDark ? 'dark' : 'neutral', securityLevel: 'loose'});
+            Util.forEach($mermaidElements, $mermaid => {
+                const definition = this.getMermaidDefinition($mermaid);
+                if (!definition) return;
+
+                mermaid
+                    .render('mermaid-svg-' + $mermaid.id, definition)
+                    .then(({ svg }) => {
+                        $mermaid.innerHTML = svg;
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            });
         });
-      }
+        this.switchThemeEventSet.add(this._mermaidOnSwitchTheme);
+        this._mermaidOnSwitchTheme();
     }
-  }, {
-    key: "initComment",
-    value: function initComment() {
-      var _this10 = this;
-      if (this.config.comment) {
-        if (this.config.comment.gitalk) {
-          this.config.comment.gitalk.body = decodeURI(window.location.href);
-          var gitalk = new Gitalk(this.config.comment.gitalk);
-          gitalk.render('gitalk');
+
+    initEcharts() {
+        if (this.config.echarts) {
+            echarts.registerTheme('light', this.config.echarts.lightTheme);
+            echarts.registerTheme('dark', this.config.echarts.darkTheme);
+            this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || (() => {
+                this._echartsArr = this._echartsArr || [];
+                for (let i = 0; i < this._echartsArr.length; i++) {
+                    this._echartsArr[i].dispose();
+                }
+                this._echartsArr = [];
+                Util.forEach(document.getElementsByClassName('echarts'), $echarts => {
+                    const chart = echarts.init($echarts, this.isDark ? 'dark' : 'light', {renderer: 'svg'});
+                    chart.setOption(JSON.parse(this.data[$echarts.id]));
+                    this._echartsArr.push(chart);
+                });
+            });
+            this.switchThemeEventSet.add(this._echartsOnSwitchTheme);
+            this._echartsOnSwitchTheme();
+            this._echartsOnResize = this._echartsOnResize || (() => {
+                for (let i = 0; i < this._echartsArr.length; i++) {
+                    this._echartsArr[i].resize();
+                }
+            });
+            this.resizeEventSet.add(this._echartsOnResize);
         }
-        if (this.config.comment.valine) new Valine(this.config.comment.valine);
-        if (this.config.comment.utterances) {
-          var utterancesConfig = this.config.comment.utterances;
-          var script = document.createElement('script');
-          script.src = 'https://utteranc.es/client.js';
-          script.setAttribute('repo', utterancesConfig.repo);
-          script.setAttribute('issue-term', utterancesConfig.issueTerm);
-          if (utterancesConfig.label) script.setAttribute('label', utterancesConfig.label);
-          script.setAttribute('theme', this.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme);
-          script.crossOrigin = 'anonymous';
-          script.async = true;
-          document.getElementById('utterances').appendChild(script);
-          this._utterancesOnSwitchTheme = this._utterancesOnSwitchTheme || function () {
-            var message = {
-              type: 'set-theme',
-              theme: _this10.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme
-            };
-            var iframe = document.querySelector('.utterances-frame');
-            iframe.contentWindow.postMessage(message, 'https://utteranc.es');
-          };
-          this.switchThemeEventSet.add(this._utterancesOnSwitchTheme);
-        }
-        if (this.config.comment.giscus) {
-          var giscusConfig = this.config.comment.giscus;
-          var giscusScript = document.createElement('script');
-          giscusScript.src = 'https://giscus.app/client.js';
-          giscusScript.setAttribute('data-repo', giscusConfig.repo);
-          giscusScript.setAttribute('data-repo-id', giscusConfig.repoId);
-          giscusScript.setAttribute('data-category', giscusConfig.category);
-          giscusScript.setAttribute('data-category-id', giscusConfig.categoryId);
-          giscusScript.setAttribute('data-lang', giscusConfig.lang);
-          giscusScript.setAttribute('data-mapping', giscusConfig.mapping);
-          giscusScript.setAttribute('data-reactions-enabled', giscusConfig.reactionsEnabled);
-          giscusScript.setAttribute('data-emit-metadata', giscusConfig.emitMetadata);
-          giscusScript.setAttribute('data-input-position', giscusConfig.inputPosition);
-          if (giscusConfig.lazyLoading) giscusScript.setAttribute('data-loading', 'lazy');
-          giscusScript.setAttribute('data-theme', this.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme);
-          giscusScript.crossOrigin = 'anonymous';
-          giscusScript.async = true;
-          document.getElementById('giscus').appendChild(giscusScript);
-          this._giscusOnSwitchTheme = this._giscusOnSwitchTheme || function () {
-            var message = {
-              setConfig: {
-                theme: _this10.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme,
-                reactionsEnabled: false
-              }
-            };
-            var iframe = document.querySelector('iframe.giscus-frame');
-            if (!iframe) return;
-            iframe.contentWindow.postMessage({
-              giscus: message
-            }, 'https://giscus.app');
-          };
-          this.switchThemeEventSet.add(this._giscusOnSwitchTheme);
-        }
-        if (this.config.comment.waline) Waline.init(this.config.comment.waline);
-      }
     }
-  }, {
-    key: "initCookieconsent",
-    value: function initCookieconsent() {
-      if (this.config.cookieconsent) cookieconsent.initialise(this.config.cookieconsent);
-    }
-  }, {
-    key: "onScroll",
-    value: function onScroll() {
-      var _this11 = this;
-      var $headers = [];
-      if (document.body.getAttribute('data-header-desktop') === 'auto') $headers.push(document.getElementById('header-desktop'));
-      if (document.body.getAttribute('data-header-mobile') === 'auto') $headers.push(document.getElementById('header-mobile'));
-      if (document.getElementById('comments')) {
-        var $viewComments = document.getElementById('view-comments');
-        $viewComments.href = "#comments";
-        $viewComments.parentElement.removeChild($viewComments);
-        document.getElementById('fixed-buttons').appendChild($viewComments);
-      }
-      var $fixedButtons = document.getElementById('fixed-buttons');
-      var ACCURACY = 20,
-        MINIMUM = 100;
-      window.addEventListener('scroll', function () {
-        _this11.newScrollTop = Util.getScrollTop();
-        var scroll = _this11.newScrollTop - _this11.oldScrollTop;
-        var isMobile = Util.isMobile();
-        Util.forEach($headers, function ($header) {
-          if (scroll > ACCURACY) {
-            $header.classList.remove('animate__fadeInDown');
-            Util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
-          } else if (scroll < -ACCURACY) {
-            $header.classList.remove('animate__fadeOutUp');
-            Util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
-          }
-        });
-        if (_this11.newScrollTop > MINIMUM) {
-          if (isMobile && scroll > ACCURACY) {
-            $fixedButtons.classList.remove('animate__fadeIn');
-            Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
-          } else if (!isMobile || scroll < -ACCURACY) {
-            $fixedButtons.style.display = 'block';
-            $fixedButtons.classList.remove('animate__fadeOut');
-            Util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
-          }
-        } else {
-          if (!isMobile) {
-            $fixedButtons.classList.remove('animate__fadeIn');
-            Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
-          }
-          $fixedButtons.style.display = 'none';
+
+    initMapbox() {
+        if (this.config.mapbox) {
+            mapboxgl.accessToken = this.config.mapbox.accessToken;
+            mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
+            this._mapboxArr = this._mapboxArr || [];
+            Util.forEach(document.getElementsByClassName('mapbox'), $mapbox => {
+                const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = this.data[$mapbox.id];
+                const mapbox = new mapboxgl.Map({
+                    container: $mapbox,
+                    center: [lng, lat],
+                    zoom: zoom,
+                    minZoom: .2,
+                    style: this.isDark ? darkStyle : lightStyle,
+                    attributionControl: false,
+                });
+                if (marked) {
+                    new mapboxgl.Marker().setLngLat([lng, lat]).addTo(mapbox);
+                }
+                if (navigation) {
+                    mapbox.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+                }
+                if (geolocate) {
+                    mapbox.addControl(new mapboxgl.GeolocateControl({
+                        positionOptions: {
+                            enableHighAccuracy: true,
+                        },
+                        showUserLocation: true,
+                        trackUserLocation: true,
+                    }), 'bottom-right');
+                }
+                if (scale) {
+                    mapbox.addControl(new mapboxgl.ScaleControl());
+                }
+                if (fullscreen) {
+                    mapbox.addControl(new mapboxgl.FullscreenControl());
+                }
+                mapbox.addControl(new MapboxLanguage());
+                this._mapboxArr.push(mapbox);
+            });
+            this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || (() => {
+                Util.forEach(this._mapboxArr, mapbox => {
+                    const $mapbox = mapbox.getContainer();
+                    const { lightStyle, darkStyle } = this.data[$mapbox.id];
+                    mapbox.setStyle(this.isDark ? darkStyle : lightStyle);
+                    mapbox.addControl(new MapboxLanguage());
+                });
+            });
+            this.switchThemeEventSet.add(this._mapboxOnSwitchTheme);
         }
-        var _iterator2 = _createForOfIteratorHelper(_this11.scrollEventSet),
-          _step2;
-        try {
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-            var event = _step2.value;
-            event();
-          }
-        } catch (err) {
-          _iterator2.e(err);
-        } finally {
-          _iterator2.f();
-        }
-        _this11.oldScrollTop = _this11.newScrollTop;
-      }, false);
     }
-  }, {
-    key: "onResize",
-    value: function onResize() {
-      var _this12 = this;
-      window.addEventListener('resize', function () {
-        if (!_this12._resizeTimeout) {
-          _this12._resizeTimeout = window.setTimeout(function () {
-            _this12._resizeTimeout = null;
-            var _iterator3 = _createForOfIteratorHelper(_this12.resizeEventSet),
-              _step3;
-            try {
-              for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-                var event = _step3.value;
-                event();
-              }
-            } catch (err) {
-              _iterator3.e(err);
-            } finally {
-              _iterator3.f();
+
+    initTypeit() {
+        if (this.config.typeit) {
+            const typeitConfig = this.config.typeit;
+            const speed = typeitConfig.speed ? typeitConfig.speed : 100;
+            const cursorSpeed = typeitConfig.cursorSpeed ? typeitConfig.cursorSpeed : 1000;
+            const cursorChar = typeitConfig.cursorChar ? typeitConfig.cursorChar : '|';
+            Object.values(typeitConfig.data).forEach(group => {
+                const typeone = (i) => {
+                    const id = group[i];
+                    new TypeIt(`#${id}`, {
+                        strings: this.data[id],
+                        speed: speed,
+                        lifeLike: true,
+                        cursorSpeed: cursorSpeed,
+                        cursorChar: cursorChar,
+                        waitUntilVisible: true,
+                        afterComplete: () => {
+                            if (i === group.length - 1) {
+                                if (typeitConfig.duration >= 0) window.setTimeout(() => {
+                                    instance.destroy();
+                                }, typeitConfig.duration);
+                                return;
+                            }
+                            instance.destroy();
+                            typeone(i + 1);
+                        },
+                    }).go();
+                };
+                typeone(0);
+            });
+        }
+    }
+
+    initComment() {
+        if (this.config.comment) {
+            if (this.config.comment.gitalk) {
+                this.config.comment.gitalk.body = decodeURI(window.location.href);
+                const gitalk = new Gitalk(this.config.comment.gitalk);
+                gitalk.render('gitalk');
             }
-            _this12.initToc();
-            _this12.initMermaid();
-            _this12.initSearch();
-          }, 100);
+            if (this.config.comment.valine) new Valine(this.config.comment.valine);
+            if (this.config.comment.utterances) {
+                const utterancesConfig = this.config.comment.utterances;
+                const script = document.createElement('script');
+                script.src = 'https://utteranc.es/client.js';
+                script.setAttribute('repo', utterancesConfig.repo);
+                script.setAttribute('issue-term', utterancesConfig.issueTerm);
+                if (utterancesConfig.label) script.setAttribute('label', utterancesConfig.label);
+                script.setAttribute('theme', this.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme);
+                script.crossOrigin = 'anonymous';
+                script.async = true;
+                document.getElementById('utterances').appendChild(script);
+                this._utterancesOnSwitchTheme = this._utterancesOnSwitchTheme || (() => {
+                    const message = {
+                        type: 'set-theme',
+                        theme: this.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme,
+                    };
+                    const iframe = document.querySelector('.utterances-frame');
+                    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+                });
+                this.switchThemeEventSet.add(this._utterancesOnSwitchTheme);
+            }
+
+            if (this.config.comment.giscus) {
+                const giscusConfig = this.config.comment.giscus;
+                const giscusScript = document.createElement('script');
+                giscusScript.src = 'https://giscus.app/client.js';
+                giscusScript.setAttribute('data-repo', giscusConfig.repo);
+                giscusScript.setAttribute('data-repo-id', giscusConfig.repoId);
+                giscusScript.setAttribute('data-category', giscusConfig.category);
+                giscusScript.setAttribute('data-category-id', giscusConfig.categoryId);
+                giscusScript.setAttribute('data-lang', giscusConfig.lang);
+                giscusScript.setAttribute('data-mapping', giscusConfig.mapping);
+                giscusScript.setAttribute('data-reactions-enabled', giscusConfig.reactionsEnabled);
+                giscusScript.setAttribute('data-emit-metadata', giscusConfig.emitMetadata);
+                giscusScript.setAttribute('data-input-position', giscusConfig.inputPosition);
+                if (giscusConfig.lazyLoading) giscusScript.setAttribute('data-loading', 'lazy');
+                giscusScript.setAttribute('data-theme', this.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme);
+                giscusScript.crossOrigin = 'anonymous';
+                giscusScript.async = true;
+                document.getElementById('giscus').appendChild(giscusScript);
+                this._giscusOnSwitchTheme = this._giscusOnSwitchTheme || (() => {
+                    const message = {
+                        setConfig: {
+                            theme: this.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme,
+                            reactionsEnabled: false,
+                        }
+                    };
+                    const iframe = document.querySelector('iframe.giscus-frame');
+                    if (!iframe) return;
+                    iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+                });
+                this.switchThemeEventSet.add(this._giscusOnSwitchTheme);
+            }
+            if (this.config.comment.waline) Waline.init(this.config.comment.waline);
         }
-      }, false);
     }
-  }, {
-    key: "onClickMask",
-    value: function onClickMask() {
-      var _this13 = this;
-      document.getElementById('mask').addEventListener('click', function () {
-        var _iterator4 = _createForOfIteratorHelper(_this13.clickMaskEventSet),
-          _step4;
+
+    initCookieconsent() {
+        if (this.config.cookieconsent) cookieconsent.initialise(this.config.cookieconsent);
+    }
+
+    onScroll() {
+        const $headers = [];
+        if (document.body.getAttribute('data-header-desktop') === 'auto') $headers.push(document.getElementById('header-desktop'));
+        if (document.body.getAttribute('data-header-mobile') === 'auto') $headers.push(document.getElementById('header-mobile'));
+        if (document.getElementById('comments')) {
+            const $viewComments = document.getElementById('view-comments');
+            $viewComments.href = `#comments`;
+            $viewComments.parentElement.removeChild($viewComments);
+            document.getElementById('fixed-buttons').appendChild($viewComments);
+        }
+        const $fixedButtons = document.getElementById('fixed-buttons');
+        const ACCURACY = 20, MINIMUM = 100;
+        window.addEventListener('scroll', () => {
+            this.newScrollTop = Util.getScrollTop();
+            const scroll = this.newScrollTop - this.oldScrollTop;
+            const isMobile = Util.isMobile();
+            Util.forEach($headers, $header => {
+                if (scroll > ACCURACY) {
+                    $header.classList.remove('animate__fadeInDown');
+                    Util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
+                } else if (scroll < - ACCURACY) {
+                    $header.classList.remove('animate__fadeOutUp');
+                    Util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
+                }
+            });
+            if (this.newScrollTop > MINIMUM) {
+                if (isMobile && scroll > ACCURACY) {
+                    $fixedButtons.classList.remove('animate__fadeIn');
+                    Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
+                } else if (!isMobile || scroll < - ACCURACY) {
+                    $fixedButtons.style.display = 'block';
+                    $fixedButtons.classList.remove('animate__fadeOut');
+                    Util.animateCSS($fixedButtons, ['animate__FadeIn', 'animate__faster'], true);
+                }
+            } else {
+                if (!isMobile) {
+                    $fixedButtons.classList.remove('animate__fadeIn');
+                    Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
+                }
+                $fixedButtons.style.display = 'none';
+            }
+            for (let event of this.scrollEventSet) event();
+            this.oldScrollTop = this.newScrollTop;
+        }, false);
+    }
+
+    onResize() {
+        window.addEventListener('resize', () => {
+            if (!this._resizeTimeout) {
+                this._resizeTimeout = window.setTimeout(() => {
+                    this._resizeTimeout = null;
+                    for (let event of this.resizeEventSet) event();
+                    this.initToc();
+                    this.initMermaid();
+                    this.initSearch();
+                }, 100);
+            }
+        }, false);
+    }
+
+    onClickMask() {
+        document.getElementById('mask').addEventListener('click', () => {
+            for (let event of this.clickMaskEventSet) event();
+            document.body.classList.remove('blur');
+        }, false);
+    }
+
+    init() {
         try {
-          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-            var event = _step4.value;
-            event();
-          }
+            this.initRaw();
+            this.initSVGIcon();
+            this.initTwemoji();
+            this.initMenuMobile();
+            this.initSwitchTheme();
+            this.initSearch();
+            this.initDetails();
+            this.initLightGallery();
+            this.initHighlight();
+            this.initHeaderLink();
+            this.initMath();
+            this.initMermaid();
+            this.initEcharts();
+            this.initTypeit();
+            this.initMapbox();
+            this.initCookieconsent();
         } catch (err) {
-          _iterator4.e(err);
-        } finally {
-          _iterator4.f();
+            console.error(err);
         }
-        document.body.classList.remove('blur');
-      }, false);
+
+        window.setTimeout(() => {
+            this.initToc();
+            this.initComment();
+
+            this.onScroll();
+            this.onResize();
+            this.onClickMask();
+        }, 100);
     }
-  }, {
-    key: "init",
-    value: function init() {
-      var _this14 = this;
-      try {
-        this.initRaw();
-        this.initSVGIcon();
-        this.initTwemoji();
-        this.initMenuMobile();
-        this.initSwitchTheme();
-        this.initSearch();
-        this.initDetails();
-        this.initLightGallery();
-        this.initHighlight();
-        this.initHeaderLink();
-        this.initMath();
-        this.initMermaid();
-        this.initEcharts();
-        this.initTypeit();
-        this.initMapbox();
-        this.initCookieconsent();
-      } catch (err) {
-        console.error(err);
-      }
-      window.setTimeout(function () {
-        _this14.initToc();
-        _this14.initComment();
-        _this14.onScroll();
-        _this14.onResize();
-        _this14.onClickMask();
-      }, 100);
-    }
-  }]);
-}();
-var themeInit = function themeInit() {
-  var theme = new Theme();
-  theme.init();
+}
+
+const themeInit = () => {
+    const theme = new Theme();
+    theme.init();
 };
+
 if (document.readyState !== 'loading') {
-  themeInit();
+    themeInit();
 } else {
-  document.addEventListener('DOMContentLoaded', themeInit, false);
+    document.addEventListener('DOMContentLoaded', themeInit, false);
 }
