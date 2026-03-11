@@ -23,6 +23,16 @@
       display: inline-block;
     }
 
+    .post-author {
+      .h-card img {
+        max-height: 1.5em;
+        width: auto;
+        margin-right: .25rem;
+        border-radius: 50%;
+        vertical-align: middle;
+      }
+    }
+
     [theme=dark] & {
       color: $global-font-secondary-color-dark;
     }
