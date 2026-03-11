@@ -2,6 +2,15 @@
   [module.hugoVersion]
     min = "0.128.0"
 
+# Goldmark passthrough extension for mathematics (Hugo 0.132.0+).
+# Used with layouts/_markup/render-passthrough.html for server-side LaTeX rendering.
+# See: https://gohugo.io/render-hooks/passthrough/ and https://gohugo.io/content-management/mathematics/
+[markup.goldmark.extensions.passthrough]
+  enable = true
+  [markup.goldmark.extensions.passthrough.delimiters]
+    block = [["\\[", "\\]"], ["$$", "$$"]]
+    inline = [["\\(", "\\)"]]
+
 [params]
   # site default theme ["auto", "light", "dark"]
   # 网站默认主题 ["auto", "light", "dark"]
@@ -360,6 +369,7 @@
       mermaid = true
     # KaTeX mathematical formulas config (KaTeX https://katex.org/)
     # KaTeX 数学公式配置 (KaTeX https://katex.org/)
+    # With Goldmark passthrough enabled above, math can also be server-rendered via render-passthrough.html (Hugo 0.132.0+).
     [params.page.math]
       enable = false
       # default inline delimiter is $ ... $ and \( ... \)
