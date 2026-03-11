@@ -621,6 +621,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         lazyLoading = false
         lightTheme = "light"
         darkTheme = "dark"
+      # Mastodon / Fediverse comment config (https://github.com/dpecos/mastodon-comments)
+      # Mastodon / Fediverse 评论系统设置 (https://github.com/dpecos/mastodon-comments)
+      [params.page.comment.mastodon]
+        enable = false
+        host = ""
+        user = ""
       # Waline comment config (https://waline.js.org/)
       # Waline 评论系统设置 (https://waline.js.org/)
       [params.page.comment.waline]

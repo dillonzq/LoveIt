@@ -147,6 +147,30 @@
             </noscript>
         {{- end -}}
 
+        {{- /* Mastodon / Fediverse Comment System */ -}}
+        {{- $mastodon := $comment.mastodon | default dict -}}
+        {{- $fediverseTootId := .Params.fediverse | default .Params.mastodonTootId -}}
+        {{- if and $mastodon.enable $mastodon.host $mastodon.user $fediverseTootId -}}
+            <div id="mastodon-comments" class="comment">
+                <noscript>
+                    <div id="mastodon-comments-noscript">
+                        {{ T "mastodonCommentsNoscript" | default "Please enable JavaScript to view the comments powered by the Fediverse." }}
+                    </div>
+                </noscript>
+                <p class="mastodon-comments-prompt">
+                    {{ T "mastodonCommentsPrompt" | default "You can use your Fediverse (e.g. Mastodon) account to reply to this" }}
+                    <a href="https://{{ $mastodon.host }}/@{{ $mastodon.user }}/{{ $fediverseTootId }}" rel="noopener noreferrer" target="_blank">{{ T "mastodonCommentsPost" | default "post" }}</a>.
+                </p>
+                <mastodon-comments host="{{ $mastodon.host }}" user="{{ $mastodon.user }}" toot-id="{{ $fediverseTootId }}"></mastodon-comments>
+            </div>
+            {{- $dompurify := "https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.1/purify.min.js" -}}
+            {{- dict "Source" $dompurify "Defer" false "Crossorigin" true "Integrity" "sha512-uHOKtSfJWScGmyyFr2O2+efpDx2nhwHU2v7MVeptzZoiC7bdF6Ny/CmZhN2AwIK1oCFiVQQ5DA/L9FSzyPNu6Q==" | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+            {{- dict "Source" "https://cdn.jsdelivr.net/gh/dpecos/mastodon-comments@master/mastodon-comments.js" "Defer" true "Crossorigin" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+            <noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/dpecos/mastodon-comments">Mastodon Comments</a>.
+            </noscript>
+        {{- end -}}
+
         {{- /* Waline Comment System */ -}}
         {{- $waline := $comment.waline | default dict -}}
         {{- if $waline.enable -}}
