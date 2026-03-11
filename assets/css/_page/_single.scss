@@ -167,14 +167,9 @@
       }
     }
 
-    table {
-      width: 100%;
-      max-width: 100%;
-      margin: .625rem 0;
-      border-spacing: 0;
-      background: $table-background-color;
-      border-collapse: collapse;
+    .table-wrapper {
       overflow-x: auto;
+      margin: .625rem 0;
 
       &::-webkit-scrollbar {
         background-color: $table-background-color;
@@ -183,6 +178,15 @@
           background-color: $table-background-color-dark;
         }
       }
+    }
+
+    table {
+      width: 100%;
+      max-width: 100%;
+      margin: .625rem 0;
+      border-spacing: 0;
+      background: $table-background-color;
+      border-collapse: collapse;
 
       [theme=dark] & {
         background: $table-background-color-dark;
