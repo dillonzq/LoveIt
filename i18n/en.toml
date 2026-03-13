@@ -64,6 +64,12 @@ other = "en"
 
 [walineLang]
 other = "en"
+[mastodonCommentsNoscript]
+other = "Please enable JavaScript to view the comments powered by the Fediverse."
+[mastodonCommentsPrompt]
+other = "You can use your Fediverse (e.g. Mastodon) account to reply to this"
+[mastodonCommentsPost]
+other = "post"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
