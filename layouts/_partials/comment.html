@@ -165,36 +165,84 @@
                     {{ T "mastodonCommentsPrompt" | default "You can use your Fediverse (e.g. Mastodon) account to reply to this" }}
                     <a href="https://{{ $mastodon.host }}/@{{ $mastodon.user }}/{{ $fediverseTootId }}" rel="noopener noreferrer" target="_blank">{{ T "mastodonCommentsPost" | default "post" }}</a>.
                 </p>
+                <div class="mastodon-comments-loading">
+                    <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                    <span>Loading comments…</span>
+                </div>
                 <mastodon-comments host="{{ $mastodon.host }}" user="{{ $mastodon.user }}" toot-id="{{ $fediverseTootId }}"></mastodon-comments>
             </div>
-            {{- $dompurify := "https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.1/purify.min.js" -}}
-            {{- dict "Source" $dompurify "Defer" false "Crossorigin" true "Integrity" "sha512-uHOKtSfJWScGmyyFr2O2+efpDx2nhwHU2v7MVeptzZoiC7bdF6Ny/CmZhN2AwIK1oCFiVQQ5DA/L9FSzyPNu6Q==" | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-            {{- dict "Source" "https://cdn.jsdelivr.net/gh/dpecos/mastodon-comments@master/mastodon-comments.js" "Defer" true "Crossorigin" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
             <script>
               (function () {
-                function updateEmptyState() {
-                  var list = document.querySelector('mastodon-comments #mastodon-comments-list');
-                  if (!list) return;
-                  if (list.textContent && list.textContent.trim() === 'No comments found') {
-                    list.textContent = 'No comments yet \u2013 be the first to reply on Mastodon.';
-                  }
-                }
+                var mastodonScriptsLoaded = false;
 
-                function initObserver() {
-                  var list = document.querySelector('mastodon-comments #mastodon-comments-list');
+                function enhanceMastodonComments() {
+                  var root = document.getElementById('mastodon-comments');
+                  if (!root) return;
+                  var loading = root.querySelector('.mastodon-comments-loading');
+                  var list = root.querySelector('mastodon-comments #mastodon-comments-list');
                   if (!list) return;
 
                   var observer = new MutationObserver(function () {
-                    updateEmptyState();
+                    // Hide loading spinner once component starts rendering something
+                    if (loading && list.innerHTML.trim() !== '') {
+                      loading.style.display = 'none';
+                    }
+                    // Friendlier empty state
+                    if (list.textContent && list.textContent.trim() === 'No comments found') {
+                      list.textContent = 'No comments yet \u2013 be the first to reply on Mastodon.';
+                    }
                   });
                   observer.observe(list, { childList: true, characterData: true, subtree: true });
-                  updateEmptyState();
+                }
+
+                function loadMastodonScripts() {
+                  if (mastodonScriptsLoaded) return;
+                  mastodonScriptsLoaded = true;
+
+                  var head = document.head || document.getElementsByTagName('head')[0];
+
+                  // Load DOMPurify first
+                  var purifyScript = document.createElement('script');
+                  purifyScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.1/purify.min.js';
+                  purifyScript.integrity = 'sha512-uHOKtSfJWScGmyyFr2O2+efpDx2nhwHU2v7MVeptzZoiC7bdF6Ny/CmZhN2AwIK1oCFiVQQ5DA/L9FSzyPNu6Q==';
+                  purifyScript.crossOrigin = 'anonymous';
+                  purifyScript.referrerPolicy = 'no-referrer';
+                  purifyScript.onload = function () {
+                    var mcScript = document.createElement('script');
+                    mcScript.src = 'https://cdn.jsdelivr.net/gh/dpecos/mastodon-comments@master/mastodon-comments.js';
+                    mcScript.crossOrigin = 'anonymous';
+                    mcScript.defer = true;
+                    mcScript.onload = function () {
+                      enhanceMastodonComments();
+                    };
+                    head.appendChild(mcScript);
+                  };
+                  head.appendChild(purifyScript);
+                }
+
+                function initIntersectionObserver() {
+                  var root = document.getElementById('mastodon-comments');
+                  if (!root || !('IntersectionObserver' in window)) {
+                    // Fallback: load immediately
+                    loadMastodonScripts();
+                    return;
+                  }
+
+                  var observer = new IntersectionObserver(function (entries, obs) {
+                    entries.forEach(function (entry) {
+                      if (entry.isIntersecting || entry.intersectionRatio > 0) {
+                        loadMastodonScripts();
+                        obs.disconnect();
+                      }
+                    });
+                  });
+                  observer.observe(root);
                 }
 
                 if (document.readyState === 'loading') {
-                  document.addEventListener('DOMContentLoaded', initObserver);
+                  document.addEventListener('DOMContentLoaded', initIntersectionObserver);
                 } else {
-                  initObserver();
+                  initIntersectionObserver();
                 }
               })();
             </script>

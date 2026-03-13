@@ -7,6 +7,25 @@
   }
 
   /* Mastodon / Fediverse comments (mastodon-comments web component) */
+  .mastodon-comments-powered {
+    margin-bottom: .5rem;
+    font-size: .9rem;
+    color: #5d686f;
+
+    i {
+      margin-right: .35rem;
+    }
+  }
+
+  .mastodon-comments-loading {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin: .5rem 0 1rem;
+    font-size: .9rem;
+    color: #5d686f;
+  }
+
   .mastodon-comments-prompt {
     margin-bottom: 1rem;
   }
