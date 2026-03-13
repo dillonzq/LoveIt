@@ -152,6 +152,10 @@
         {{- $fediverseTootId := .Params.fediverse | default .Params.mastodonTootId -}}
         {{- if and $mastodon.enable $mastodon.host $mastodon.user $fediverseTootId -}}
             <div id="mastodon-comments" class="comment">
+                <p class="mastodon-comments-powered">
+                    <i class="fas fa-comments" aria-hidden="true"></i>
+                    Comments are powered by the Fediverse (Mastodon).
+                </p>
                 <noscript>
                     <div id="mastodon-comments-noscript">
                         {{ T "mastodonCommentsNoscript" | default "Please enable JavaScript to view the comments powered by the Fediverse." }}
@@ -166,6 +170,34 @@
             {{- $dompurify := "https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.1/purify.min.js" -}}
             {{- dict "Source" $dompurify "Defer" false "Crossorigin" true "Integrity" "sha512-uHOKtSfJWScGmyyFr2O2+efpDx2nhwHU2v7MVeptzZoiC7bdF6Ny/CmZhN2AwIK1oCFiVQQ5DA/L9FSzyPNu6Q==" | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
             {{- dict "Source" "https://cdn.jsdelivr.net/gh/dpecos/mastodon-comments@master/mastodon-comments.js" "Defer" true "Crossorigin" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+            <script>
+              (function () {
+                function updateEmptyState() {
+                  var list = document.querySelector('mastodon-comments #mastodon-comments-list');
+                  if (!list) return;
+                  if (list.textContent && list.textContent.trim() === 'No comments found') {
+                    list.textContent = 'No comments yet \u2013 be the first to reply on Mastodon.';
+                  }
+                }
+
+                function initObserver() {
+                  var list = document.querySelector('mastodon-comments #mastodon-comments-list');
+                  if (!list) return;
+
+                  var observer = new MutationObserver(function () {
+                    updateEmptyState();
+                  });
+                  observer.observe(list, { childList: true, characterData: true, subtree: true });
+                  updateEmptyState();
+                }
+
+                if (document.readyState === 'loading') {
+                  document.addEventListener('DOMContentLoaded', initObserver);
+                } else {
+                  initObserver();
+                }
+              })();
+            </script>
             <noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/dpecos/mastodon-comments">Mastodon Comments</a>.
             </noscript>
