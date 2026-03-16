@@ -1,4 +1,5 @@
 {{- $params := .Params | merge .Site.Params.page -}}
+{{- $siteAuthor := .Site.Params.author | default dict -}}
 
 <article class="single summary" itemscope itemtype="http://schema.org/Article">
     {{- /* Featured image */ -}}
@@ -24,8 +25,8 @@
 
     {{- /* Meta */ -}}
     <div class="post-meta">
-        {{- $author := $params.author | default .Site.Author.name | default (T "author") -}}
-        {{- $authorLink := $params.authorlink | default .Site.Author.link | default .Site.Home.RelPermalink -}}
+        {{- $author := $params.author | default $siteAuthor.name | default (T "author") -}}
+        {{- $authorLink := $params.authorlink | default $siteAuthor.link | default .Site.Home.RelPermalink -}}
         <span class="post-author">
             {{- $options := dict "Class" "author" "Destination" $authorLink "Title" "Author" "Rel" "author" "Icon" (dict "Class" "fas fa-user-circle fa-fw") "Content" $author -}}
             {{- partial "plugin/a.html" $options -}}

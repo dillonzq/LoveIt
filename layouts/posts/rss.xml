@@ -1,3 +1,4 @@
+{{- $siteAuthor := .Site.Params.author | default dict -}}
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>
@@ -15,12 +16,12 @@
                 {{- . -}}
             </language>
         {{- end -}}
-        {{- with .Site.Author.email -}}
+        {{- with $siteAuthor.email -}}
             <managingEditor>
-                {{- . }}{{ with $.Site.Author.name }} ({{ . }}){{ end -}}
+                {{- . }}{{ with $siteAuthor.name }} ({{ . }}){{ end -}}
             </managingEditor>
             <webMaster>
-                {{- . }}{{ with $.Site.Author.name }} ({{ . }}){{ end -}}
+                {{- . }}{{ with $siteAuthor.name }} ({{ . }}){{ end -}}
             </webMaster>
         {{- end -}}
         {{- with .Site.Copyright -}}
