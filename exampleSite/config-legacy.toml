@@ -1,0 +1,11 @@
+# Hugo < 0.158 language keys. scripts/hugo.mjs selects this overlay automatically.
+languageCode = "en"
+languageName = "English"
+
+[languages.en]
+languageCode = "en"
+languageName = "English"
+
+[languages.zh-cn]
+languageCode = "zh-CN"
+languageName = "简体中文"

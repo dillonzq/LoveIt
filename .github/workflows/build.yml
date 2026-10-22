@@ -1,0 +1,56 @@
+name: Build and validate
+
+on:
+  workflow_call:
+    inputs:
+      hugo_version:
+        type: string
+        default: locked
+      hugo_env:
+        type: string
+        default: production
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      LOVEIT_HUGO_VERSION: ${{ inputs.hugo_version }}
+      HUGO_ENV: ${{ inputs.hugo_env }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules/.cache/loveit
+            exampleSite/resources
+          key: hugo-${{ runner.os }}-${{ inputs.hugo_version }}-${{ hashFiles('.hvm', 'package-lock.json', 'hugo.toml', 'assets/css/**') }}
+      - name: Build example site
+        shell: bash
+        run: |
+          mkdir -p test-results
+          if [[ "$HUGO_ENV" == production ]]; then
+            npm run build 2>&1 | tee test-results/build.log
+          else
+            node scripts/hugo.mjs build --environment "$HUGO_ENV" --buildDrafts --buildFuture 2>&1 | tee test-results/build.log
+          fi
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      - name: Validate HTML
+        run: npm run htmlproofer
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: checks-${{ inputs.hugo_version }}-${{ inputs.hugo_env }}
+          path: test-results/
