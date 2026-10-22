@@ -7,6 +7,7 @@
     "segmentit": "^2.0.3",
     "sass-embedded": "1.106.1",
     "pagefind": "1.5.2",
+    "@playwright/test": "1.64.1",
     "esbuild": "0.28.2"
   },
   "scripts": {
@@ -21,7 +22,9 @@
     "copy-resources": "cp -rf exampleSite/resources .",
     "build": "node scripts/hugo.mjs build --gc --minify --environment production --panicOnWarning",
     "dev": "node scripts/hugo.mjs server --buildDrafts --disableFastRender --environment development",
-    "hugo:version": "node scripts/hugo.mjs version"
+    "hugo:version": "node scripts/hugo.mjs version",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "playwright test"
   },
   "repository": {
     "type": "git",

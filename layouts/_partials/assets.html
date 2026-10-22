@@ -44,7 +44,8 @@
         {{- with $search.pagefind -}}
             {{- $basePath = .basePath | default "/_pagefind/" -}}
         {{- end -}}
-        {{- $config = dict "type" "pagefind" "pagefindBasePath" $basePath | dict "search" | merge $config -}}
+        {{- $basePath = printf "%s/" (strings.TrimSuffix "/" (strings.TrimPrefix "/" $basePath)) | relURL -}}
+        {{- $config = dict "type" "pagefind" "pagefindBasePath" $basePath "pagefindBaseURL" (urls.Parse .Site.BaseURL).Path | dict "search" | merge $config -}}
     {{- end -}}
 {{- end -}}
 
@@ -139,7 +140,7 @@
     {{- end -}}
     {{- $delimiters = $delimiters | append (dict "left" "$" "right" "$" "display" false) (dict "left" "\\(" "right" "\\)" "display" false) -}}
     {{- if and $math.inlineLeftDelimiter $math.inlineRightDelimiter -}}
-        {{- $delimiters = $delimiters | append (dict "left" $math.inlineRightDelimiter "right" $math.inlineRightDelimiter "display" false) -}}
+        {{- $delimiters = $delimiters | append (dict "left" $math.inlineLeftDelimiter "right" $math.inlineRightDelimiter "display" false) -}}
     {{- end -}}
     {{- $config = dict "strict" false "delimiters" $delimiters | dict "math" | merge $config -}}
 {{- end -}}

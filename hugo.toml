@@ -183,8 +183,8 @@
       distance = 100
       ignoreLocation = false
     [params.search.pagefind]
-      # Pagefind base path (run "npx pagefind --site public" after hugo build)
-      # Pagefind 基础路径 (在 hugo 构建后运行 "npx pagefind --site public")
+      # Pagefind base path (run "npx pagefind --site public --output-subdir _pagefind" after hugo build)
+      # Pagefind 基础路径 (在 hugo 构建后运行 "npx pagefind --site public --output-subdir _pagefind")
       basePath = "/_pagefind/"
 
   # Home page config

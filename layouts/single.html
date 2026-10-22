@@ -2,9 +2,9 @@
 
 {{- define "content" -}}
     {{- $params := .Scratch.Get "params" -}}
-    <div class="page single special">
+    <div class="page single special"{{ if partial "function/searchable.html" . }} data-pagefind-body{{ end }}>
         {{- /* Title */ -}}
-        <h1 class="single-title animate__animated animate__pulse animate__faster">
+        <h1 class="single-title animate__animated animate__pulse animate__faster" data-pagefind-meta="title[data-title]" data-title="{{ .Title }}">
             {{- .Title -}}
         </h1>
 
@@ -19,6 +19,6 @@
         </div>
 
         {{- /* Comment */ -}}
-        {{- partial "comment.html" . -}}
+        <div data-pagefind-ignore>{{- partial "comment.html" . -}}</div>
     </div>
 {{- end -}}

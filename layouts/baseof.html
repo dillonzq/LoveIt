@@ -12,7 +12,7 @@
         {{- partial "head/link.html" . -}}
         {{- partial "head/seo.html" . -}}
     </head>
-    <body data-header-desktop="{{ .Site.Params.header.desktopMode }}" data-header-mobile="{{ .Site.Params.header.mobileMode }}">
+    <body data-header-desktop="{{ .Site.Params.header.desktopMode }}" data-header-mobile="{{ .Site.Params.header.mobileMode }}"{{ if not (partial "function/searchable.html" .) }} data-pagefind-ignore="all"{{ end }}>
         {{- /* Check theme isDark before body rendering */ -}}
         {{- $theme := .Site.Params.defaulttheme -}}
         <script>
