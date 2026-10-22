@@ -121,8 +121,11 @@
 在本地构建文档:
 
 ```bash
-hugo server --source=exampleSite
+npm ci --ignore-scripts
+npm run dev
 ```
+
+开发环境使用 `.hvm` 锁定 Hugo，并通过 npm 提供 Dart Sass。运行 `npm run build` 生成生产站点；多版本、搜索和测试说明见[开发指南](docs/development.md)。
 
 ## 兼容性
 

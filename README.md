@@ -126,8 +126,11 @@ I hope you will LoveIt ❤️!
 Build Documentation Locally:
 
 ```bash
-hugo server --source=exampleSite
+npm ci --ignore-scripts
+npm run dev
 ```
+
+Development uses `.hvm` to pin Hugo and npm to provide Dart Sass. Run `npm run build` for production; see the [development guide](docs/development.md) for version overrides, search and tests.
 
 ## Compatibility
 
