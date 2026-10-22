@@ -45,7 +45,7 @@ appropriate to their Hugo version.
 remain supported and are checked by browser fixtures that override both files.
 Global deprecated Sass functions have been migrated. Only the `import` deprecation is silenced to keep
 the public override API compatible; other warnings still fail strict builds.
-
+Source maps are emitted in development only.
 
 ## Search
 

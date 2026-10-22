@@ -103,3 +103,20 @@ test('mobile navigation and search survive resizing', async ({ page }) => {
   await page.locator('#search-input-desktop').fill('Needle');
   await expect(page.locator('#search-dropdown-desktop .suggestion-title')).toContainText('Search');
 });
+
+test('first-screen avatar loads directly and scroll bursts share a frame', async ({ page }) => {
+  await page.goto('/fuse/blog/');
+  const avatar = page.locator('.home-avatar img');
+  await expect(avatar).toHaveAttribute('loading', 'eager');
+  await expect(avatar).toHaveAttribute('fetchpriority', 'high');
+  await expect(avatar).not.toHaveAttribute('src', /loading\.svg/);
+  const frames = await page.evaluate(() => {
+    let count = 0;
+    const original = window.requestAnimationFrame;
+    window.requestAnimationFrame = callback => { count++; return original(callback); };
+    for (let i = 0; i < 20; i++) window.dispatchEvent(new Event('scroll'));
+    window.requestAnimationFrame = original;
+    return count;
+  });
+  expect(frames).toBe(1);
+});

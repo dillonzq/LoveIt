@@ -625,38 +625,43 @@ class Theme {
         }
         const $fixedButtons = document.getElementById('fixed-buttons');
         const ACCURACY = 20, MINIMUM = 100;
+        let scrollFrame;
         window.addEventListener('scroll', () => {
-            this.newScrollTop = Util.getScrollTop();
-            const scroll = this.newScrollTop - this.oldScrollTop;
-            const isMobile = Util.isMobile();
-            Util.forEach($headers, $header => {
-                if (scroll > ACCURACY) {
-                    $header.classList.remove('animate__fadeInDown');
-                    Util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
-                } else if (scroll < - ACCURACY) {
-                    $header.classList.remove('animate__fadeOutUp');
-                    Util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
+            if (scrollFrame) return;
+            scrollFrame = requestAnimationFrame(() => {
+                scrollFrame = null;
+                this.newScrollTop = Util.getScrollTop();
+                const scroll = this.newScrollTop - this.oldScrollTop;
+                const isMobile = Util.isMobile();
+                Util.forEach($headers, $header => {
+                    if (scroll > ACCURACY) {
+                        $header.classList.remove('animate__fadeInDown');
+                        Util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
+                    } else if (scroll < - ACCURACY) {
+                        $header.classList.remove('animate__fadeOutUp');
+                        Util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
+                    }
+                });
+                if (this.newScrollTop > MINIMUM) {
+                    if (isMobile && scroll > ACCURACY) {
+                        $fixedButtons.classList.remove('animate__fadeIn');
+                        Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
+                    } else if (!isMobile || scroll < - ACCURACY) {
+                        $fixedButtons.style.display = 'block';
+                        $fixedButtons.classList.remove('animate__fadeOut');
+                        Util.animateCSS($fixedButtons, ['animate__FadeIn', 'animate__faster'], true);
+                    }
+                } else {
+                    if (!isMobile) {
+                        $fixedButtons.classList.remove('animate__fadeIn');
+                        Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
+                    }
+                    $fixedButtons.style.display = 'none';
                 }
+                for (let event of this.scrollEventSet) event();
+                this.oldScrollTop = this.newScrollTop;
             });
-            if (this.newScrollTop > MINIMUM) {
-                if (isMobile && scroll > ACCURACY) {
-                    $fixedButtons.classList.remove('animate__fadeIn');
-                    Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
-                } else if (!isMobile || scroll < - ACCURACY) {
-                    $fixedButtons.style.display = 'block';
-                    $fixedButtons.classList.remove('animate__fadeOut');
-                    Util.animateCSS($fixedButtons, ['animate__FadeIn', 'animate__faster'], true);
-                }
-            } else {
-                if (!isMobile) {
-                    $fixedButtons.classList.remove('animate__fadeIn');
-                    Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
-                }
-                $fixedButtons.style.display = 'none';
-            }
-            for (let event of this.scrollEventSet) event();
-            this.oldScrollTop = this.newScrollTop;
-        }, false);
+        }, { passive: true });
     }
 
     onResize() {
@@ -691,6 +696,7 @@ class Theme {
             this.initSwitchTheme();
             this.initSearch();
             this.onResize();
+            this.onScroll();
             this.initDetails();
             this.initLightGallery();
             this.initHighlight();
@@ -708,8 +714,6 @@ class Theme {
         window.setTimeout(() => {
             this.initToc();
             this.initComment();
-
-            this.onScroll();
 
         }, 100);
     }

@@ -3,16 +3,7 @@
 {{- $params := .Params | merge .Site.Params.page -}}
 
 {{- if eq hugo.Environment "production" -}}
-    {{- $cdn := .Site.Params.cdn -}}
-    {{- with $cdn.data -}}
-        {{- $cdnData := printf "data/cdn/%v" . | resources.Get | transform.Unmarshal -}}
-        {{- $cdn = dict "simpleIconsPrefix" $cdnData.prefix.simpleIcons -}}
-        {{- $prefix := $cdnData.prefix.libFiles | default "" -}}
-        {{- range $key, $value := $cdnData.libFiles -}}
-            {{- $cdn = printf "%v%v" $prefix $value | dict $key | merge $cdn -}}
-        {{- end -}}
-    {{- end -}}
-    {{- .Scratch.Set "cdn" $cdn -}}
+    {{- .Scratch.Set "cdn" (partialCached "function/cdn.html" .Site .Site.Language.Lang) -}}
     {{- .Scratch.Set "fingerprint" .Site.Params.fingerprint -}}
     {{- .Scratch.Set "analytics" .Site.Params.analytics -}}
     {{- .Scratch.Set "comment" $params.comment -}}
