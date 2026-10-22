@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .admonition {
   position: relative;
   margin: 1rem 0;
@@ -36,7 +38,7 @@
       .admonition-title {
         color: $color;
         border-bottom-color: $background-color;
-        background-color: opacify($background-color, 0.15);
+        background-color: color.adjust($background-color, $alpha: 0.15);
       }
 
       &.open .admonition-title {
@@ -55,7 +57,7 @@
         .admonition-title {
           color: $color;
           border-bottom-color: $background-color;
-          background-color: opacify($background-color, 0.15);
+          background-color: color.adjust($background-color, $alpha: 0.15);
         }
 
         &.open .admonition-title {

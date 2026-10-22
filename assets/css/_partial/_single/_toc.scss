@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .toc {
   .toc-title {
     font-size: var(--toc-title-font-size);
@@ -125,10 +127,10 @@
     justify-content: space-between;
     line-height: 2em;
     padding: 0 .75rem;
-    background: darken($code-background-color, 6%);
+    background: color.adjust($code-background-color, $lightness: -6%, $space: hsl);
 
     [theme=dark] & {
-      background: darken($code-background-color-dark, 6%);
+      background: color.adjust($code-background-color-dark, $lightness: -6%, $space: hsl);
     }
   }
 
@@ -147,10 +149,10 @@
 
   &.open {
     .toc-title {
-      background: darken($code-background-color, 3%);
+      background: color.adjust($code-background-color, $lightness: -3%, $space: hsl);
 
       [theme=dark] & {
-        background: darken($code-background-color-dark, 3%);
+        background: color.adjust($code-background-color-dark, $lightness: -3%, $space: hsl);
       }
     }
   }

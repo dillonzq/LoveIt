@@ -31,8 +31,8 @@ toc:
 
 直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive): Hugo](https://gohugo.io/getting-started/installing/).
 
-{{< admonition note "什么时候需要使用 Hugo extended 版本?" false >}}
-当你需要[自定义样式](#style-customization)时, 你要使用 Hugo **extended** 版本来获得正确的渲染效果.
+{{< admonition note "master 分支需要 Dart Sass" false >}}
+master 分支需要 Hugo **0.146.0 或更新版本**和 **Dart Sass**。在主题仓库运行 `npm ci --ignore-scripts` 后，`npm run dev` 会自动选择 `.hvm` 指定的 Hugo 并使用 Dart Sass。独立站点也可以安装 Dart Sass 后直接运行 Hugo。
 
 ![Hugo extended 版本](hugo-extended-edition.png "Hugo extended 版本")
 {{< /admonition >}}
@@ -73,7 +73,7 @@ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 
 | LoveIt 分支或版本  |    支持的 Hugo 版本    |
 |:--------------|:-----------------:|
-| master(不稳定)   |     ≥ 0.128.0     |
+| master(不稳定)   |     ≥ 0.146.0     |
 | **0.3.X(推荐)** | 0.128.0 - 0.145.0 |
 | 0.2.X(过时)     | 0.68.0 - 0.127.0  |
 
@@ -93,9 +93,9 @@ theme = "LoveIt"
 title = "我的全新 Hugo 网站"
 
 # 网站语言, 仅在这里 CN 大写 ["en", "zh-CN", "fr", "pl", ...]
-languageCode = "zh-CN"
+locale = "zh-CN"
 # 语言名称 ["English", "简体中文", "Français", "Polski", ...]
-languageName = "简体中文"
+label = "简体中文"
 # 是否包括中日韩文字
 hasCJKLanguage = true
 
@@ -214,9 +214,9 @@ theme = "LoveIt"
 title = "我的全新 Hugo 网站"
 
 # 网站语言, 仅在这里 CN 大写 ["en", "zh-CN", "fr", "pl", ...]
-languageCode = "zh-CN"
+locale = "zh-CN"
 # 语言名称 ["English", "简体中文", "Français", "Polski", ...]
-languageName = "简体中文"
+label = "简体中文"
 # 是否包括中日韩文字
 hasCJKLanguage = true
 
@@ -924,8 +924,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 {{< version 0.2.8 changed >}}
 
-{{< admonition note "Hugo extended 版本是必需的" >}}
-由于需要将 :(fab fa-sass): SCSS 转换为 :(fab fa-css3): CSS, Hugo **extended** 版本对于自定义样式是必需的.
+{{< admonition note "Dart Sass 是必需的" >}}
+master 分支使用 **Dart Sass** 将 :(fab fa-sass): SCSS 转换为 :(fab fa-css3): CSS；`_override.scss` 和 `_custom.scss` 的覆盖方式保持不变。
 {{< /admonition >}}
 
 通过定义自定义 `.scss` 样式文件, **LoveIt** 主题支持可配置的样式.
@@ -994,8 +994,8 @@ defaultContentLanguage = "zh-cn"
   [languages.en]
     weight = 1
     title = "My New Hugo Site"
-    languageCode = "en"
-    languageName = "English"
+    locale = "en"
+    label = "English"
     [[languages.en.menu.main]]
       weight = 1
       identifier = "posts"
@@ -1024,8 +1024,8 @@ defaultContentLanguage = "zh-cn"
   [languages.zh-cn]
     weight = 2
     title = "我的全新 Hugo 网站"
-    languageCode = "zh-CN"
-    languageName = "简体中文"
+    locale = "zh-CN"
+    label = "简体中文"
     hasCJKLanguage = true
     [[languages.zh-cn.menu.main]]
       weight = 1
@@ -1055,8 +1055,8 @@ defaultContentLanguage = "zh-cn"
   [languages.fr]
     weight = 3
     title = "Mon nouveau site Hugo"
-    languageCode = "fr"
-    languageName = "Français"
+    locale = "fr"
+    label = "Français"
     [[languages.fr.menu.main]]
       weight = 1
       identifier = "posts"

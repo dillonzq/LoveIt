@@ -18,7 +18,9 @@
             {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
         {{- end -}}
         {{- with .ToCSS -}}
-            {{- $resource = $resource | toCSS . -}}
+            {{- /* Keep @import-based user overrides until the public Sass API can migrate. */ -}}
+            {{- $options := merge . (dict "transpiler" "dartsass" "silenceDeprecations" (slice "import")) -}}
+            {{- $resource = $resource | css.Sass $options -}}
         {{- end -}}
         {{- if .Minify -}}
             {{- $resource = $resource | minify -}}

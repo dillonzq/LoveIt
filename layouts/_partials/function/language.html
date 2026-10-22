@@ -1,0 +1,11 @@
+{{- /* Access only methods supported by this Hugo version. */ -}}
+{{- $locale := "" -}}
+{{- $label := "" -}}
+{{- if ge hugo.Version "0.158.0" -}}
+    {{- $locale = .Language.Locale -}}
+    {{- $label = .Language.Label -}}
+{{- else -}}
+    {{- $locale = .Language.LanguageCode -}}
+    {{- $label = .Language.LanguageName -}}
+{{- end -}}
+{{- return (dict "locale" ($locale | default .Language.Lang) "label" ($label | default .Language.Lang)) -}}
