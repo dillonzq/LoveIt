@@ -10,6 +10,7 @@ mkdirSync(source, { recursive: true });
 for (const directory of ['assets', 'static']) cpSync(path.join(root, 'exampleSite', directory), path.join(source, directory), { recursive: true });
 cpSync(path.join(root, 'tests/fixtures/assets'), path.join(source, 'assets'), { recursive: true });
 cpSync(path.join(root, 'tests/fixtures/content'), path.join(source, 'content'), { recursive: true });
+cpSync(path.join(root, 'tests/fixtures/layouts'), path.join(source, 'layouts'), { recursive: true });
 const configs = [path.join(root, 'exampleSite/hugo.toml'), path.join(root, 'tests/fixtures/config.toml')];
 const { version } = await getHugo();
 const [, major, minor] = version.match(/v(\d+)\.(\d+)\./);

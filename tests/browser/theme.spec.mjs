@@ -69,12 +69,13 @@ test('Algolia mock preserves the latest async query', async ({ page }) => {
   await expect(page.locator('.suggestion-title')).toHaveText('second');
 });
 
-test('Mermaid, custom math delimiters, copy controls and persisted theme', async ({ page }) => {
+test('Mermaid survives cached content; math, copy controls and persisted theme work', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/fuse/blog/guide/');
   await expect(page.locator('html')).toHaveCSS('font-size', '17px');
   await expect(page.locator('.single-title')).toHaveCSS('letter-spacing', '0.125px');
+  await expect(page.locator('script[src*="mermaid.min.js"]')).toHaveCount(1);
   await expect(page.locator('.mermaid svg')).toBeVisible();
   await expect(page.locator('.katex').first()).toBeVisible();
   await expect(page.locator('.code-header .copy').first()).toBeVisible();
