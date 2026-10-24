@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { pagefindSearches } from '../scripts/tools.mjs';
+import { pagefindSearches, takeOption } from '../scripts/tools.mjs';
 
 test('a language may select Pagefind while inheriting enabled and bundle path', () => {
   const searches = pagefindSearches({
@@ -20,4 +20,13 @@ test('language overrides can disable a global Pagefind engine', () => {
 
 test('single-language builds use the root search configuration', () => {
   assert.equal(pagefindSearches({ params: { search: { enable: true, type: 'pagefind' } } }).length, 1);
+});
+
+test('wrapper options accept Hugo long and short spellings', () => {
+  const args = ['-d', 'out', '--environment=production', '-b=http://x/?a=b', '--minify'];
+  assert.equal(takeOption(args, '--destination', '-d'), 'out');
+  assert.equal(takeOption(args, '--environment', '-e'), 'production');
+  assert.equal(takeOption(args, '--baseURL', '-b'), 'http://x/?a=b');
+  assert.equal(takeOption(args, '--source', '-s'), undefined);
+  assert.deepEqual(args, ['--minify']);
 });

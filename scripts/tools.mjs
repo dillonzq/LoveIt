@@ -21,6 +21,14 @@ export function pagefindSearches(config) {
     .filter(search => search.enable && search.type === 'pagefind');
 }
 
+// Accepts Hugo's long and short spellings: `--name value`, `--name=value`, `-n value`, `-n=value`.
+export function takeOption(args, ...names) {
+  const index = args.findIndex(arg => names.some(name => arg === name || arg.startsWith(`${name}=`)));
+  if (index < 0) return undefined;
+  const arg = args[index];
+  return arg.includes('=') ? args.splice(index, 1)[0].split(/=(.*)/s)[1] : args.splice(index, 2)[1];
+}
+
 async function download(url) {
   const response = await fetch(url, { signal: AbortSignal.timeout(120_000) });
   if (!response.ok) throw new Error(`Download failed: ${url} (${response.status})`);

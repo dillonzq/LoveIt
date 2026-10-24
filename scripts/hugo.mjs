@@ -1,14 +1,7 @@
 import { execFileSync, spawn } from 'node:child_process';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { getHugo, pagefindSearches, root, toolDir, toolEnv } from './tools.mjs';
-
-function takeOption(args, name) {
-  const index = args.findIndex(arg => arg === name || arg.startsWith(`${name}=`));
-  if (index < 0) return undefined;
-  const arg = args[index];
-  return arg.includes('=') ? args.splice(index, 1)[0].slice(name.length + 1) : args.splice(index, 2)[1];
-}
+import { getHugo, pagefindSearches, root, takeOption, toolDir, toolEnv } from './tools.mjs';
 
 async function main() {
   const args = process.argv.slice(2);
@@ -18,7 +11,7 @@ async function main() {
     console.log(version);
     return;
   }
-  const source = path.resolve(takeOption(args, '--source') || path.join(root, 'exampleSite'));
+  const source = path.resolve(takeOption(args, '--source', '-s') || path.join(root, 'exampleSite'));
   const configs = (takeOption(args, '--config') || path.join(source, 'hugo.toml')).split(',').map(p => path.resolve(p));
   const match = version.match(/v(\d+)\.(\d+)\./);
   if (!match) throw new Error(`Cannot read Hugo version: ${version}`);
@@ -63,8 +56,8 @@ async function main() {
     if (command === 'server') return;
     // Resolve Hugo's merged config, including language and environment overrides.
     const configArgs = [];
-    for (const option of ['--environment', '--baseURL', '--destination']) {
-      const value = takeOption([...args], option);
+    for (const [option, short] of [['--environment', '-e'], ['--baseURL', '-b'], ['--destination', '-d']]) {
+      const value = takeOption([...args], option, short);
       if (value) configArgs.push(option, value);
     }
     const config = JSON.parse(execFileSync(binary, ['config', ...common, ...configArgs, '--format', 'json'], { cwd: root, env: toolEnv, encoding: 'utf8' }));
