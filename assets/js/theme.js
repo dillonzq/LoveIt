@@ -649,7 +649,7 @@ class Theme {
                     } else if (!isMobile || scroll < - ACCURACY) {
                         $fixedButtons.style.display = 'block';
                         $fixedButtons.classList.remove('animate__fadeOut');
-                        Util.animateCSS($fixedButtons, ['animate__FadeIn', 'animate__faster'], true);
+                        Util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
                     }
                 } else {
                     if (!isMobile) {

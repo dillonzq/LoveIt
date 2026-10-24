@@ -128,3 +128,9 @@ test('grouped TypeIt elements type one after another', async ({ page }) => {
   await expect(lines.nth(0)).toContainText('First typed line', { timeout: 15_000 });
   await expect(lines.nth(1)).toContainText('Second typed line', { timeout: 15_000 });
 });
+
+test('fixed buttons fade in after scrolling down', async ({ page }) => {
+  await page.goto('/fuse/blog/guide/');
+  await page.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo(0, 400); });
+  await expect(page.locator('#fixed-buttons')).toHaveClass(/\banimate__fadeIn\b/);
+});
