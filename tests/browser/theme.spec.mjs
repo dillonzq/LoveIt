@@ -126,7 +126,7 @@ test('first-screen avatar loads directly and scroll bursts share a frame', async
   expect(frames).toBe(1);
 });
 
-test('content shortcodes survive cached content; grouped TypeIt types in order', async ({ page }) => {
+test('content shortcodes survive cached content and nesting; grouped TypeIt types in order', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/fuse/blog/typeit/');
@@ -135,7 +135,9 @@ test('content shortcodes survive cached content; grouped TypeIt types in order',
   await expect(lines.nth(1)).toContainText('Second typed line', { timeout: 15_000 });
   await expect(page.locator('.raw-check')).toHaveText('Raw HTML');
   await expect(page.getByText('Styled text')).toHaveCSS('color', 'rgb(1, 2, 3)');
-  expect(await page.evaluate(() => window.scriptOrder)).toEqual(['first', 'second']);
+  await expect(page.getByText('Nested alpha')).toHaveCSS('color', 'rgb(4, 5, 6)');
+  await expect(page.getByText('Nested beta')).toHaveCSS('color', 'rgb(7, 8, 9)');
+  expect(await page.evaluate(() => window.scriptOrder)).toEqual(['first', 'second', 'nested a', 'nested b']);
   await expect(page.locator('.mermaid svg')).toBeVisible();
   const ids = await page.$$eval('[id^="id-"]', elements => elements.map(element => element.id));
   expect(new Set(ids).size).toBe(ids.length);
