@@ -19,7 +19,6 @@
     "hugo-server-development": "node scripts/hugo.mjs server --buildDrafts --disableFastRender --environment development",
     "hugo-server-production": "node scripts/hugo.mjs server --minify --disableFastRender --environment production",
     "htmlproofer": "bundle exec htmlproofer exampleSite/public --disable-external --ignore-missing-alt --no-enforce-https",
-    "copy-resources": "cp -rf exampleSite/resources .",
     "build": "node scripts/hugo.mjs build --gc --minify --environment production --panicOnWarning",
     "dev": "node scripts/hugo.mjs server --buildDrafts --disableFastRender --environment development",
     "hugo:version": "node scripts/hugo.mjs version",

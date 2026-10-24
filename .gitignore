@@ -1,5 +1,6 @@
 # Hugo default output directory
 public/
+/resources/
 /exampleSite/resources/
 /exampleSite/.hugo_build.lock
 **/assets/jsconfig.json
