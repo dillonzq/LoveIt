@@ -1,5 +1,3 @@
-{{- $id := dict "Content" .Content "Scratch" .Page.Scratch | partial "function/id.html" -}}
+{{- $id := dict "Content" .Content "Page" .Page "Key" .Key | partial "function/id.html" -}}
 <div class="mermaid" id="{{ $id }}">{{ .Content }}</div>
-{{- /* Content may be cached before init.html resets the per-output "this" map. */ -}}
-{{- .Page.Store.Set "hasMermaid" true -}}
-{{- .Page.Scratch.SetInMap "this" "mermaid" true -}}
+{{- .Page.Store.SetInMap "contentAssets" "mermaid" true -}}

@@ -1,6 +1,6 @@
 {{- $content := .Content -}}
 {{- $lang := .Lang -}}
-{{- $params := .Page.Scratch.Get "params" -}}
+{{- $params := partial "function/params.html" .Page -}}
 {{- $maxShownLines := $params.code.maxShownLines | default 10 | int -}}
 {{- $copy := $params.code.copy | default true -}}
 {{- $lines := split $content "\n" | len -}}

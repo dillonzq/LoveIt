@@ -1,6 +1,6 @@
 {{- .Scratch.Set "version" "1.0.0" -}}
 
-{{- $params := .Params | merge .Site.Params.page -}}
+{{- $params := partial "function/params.html" . -}}
 
 {{- if eq hugo.Environment "production" -}}
     {{- .Scratch.Set "cdn" (partialCached "function/cdn.html" .Site .Site.Language.Lang) -}}

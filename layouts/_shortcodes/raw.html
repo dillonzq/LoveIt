@@ -1,2 +1,2 @@
-{{- $id := dict "Content" .Inner "Scratch" .Page.Scratch | partial "function/id.html" -}}
+{{- $id := dict "Content" .Inner "Page" .Page "Key" (printf "%s-%d" .Name .Ordinal) | partial "function/id.html" -}}
 <data id="{{ $id }}" data-raw></data>

@@ -1,2 +1,2 @@
-{{- $scriptArr := (.Page.Scratch.Get "this").scriptArr | default slice -}}
-{{- $scriptArr | append (trim .Inner "\n") | .Page.Scratch.SetInMap "this" "scriptArr" -}}
+{{- /* Keyed by ordinal: map keys are ranged in order, so scripts keep their order in the content. */ -}}
+{{- trim .Inner "\n" | .Page.Store.SetInMap "contentScript" (printf "%06d" .Ordinal) -}}
