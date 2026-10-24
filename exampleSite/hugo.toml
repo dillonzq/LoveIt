@@ -212,10 +212,10 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     themeColor = "#ffffff"
     # Safari mask icon color
     # Safari 图标颜色
-    iconColor = "#5bbad5"
+    iconColor = "#1c1c1e"
     # Windows v8-11 tile color
     # Windows v8-11 磁贴颜色
-    tileColor = "#da532c"
+    tileColor = "#ffffff"
 
   # Security config
   # 安全配置

@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/logo/logo-wordmark-dark.svg">
+    <img src="images/logo/logo-wordmark-light.svg" alt="LoveIt" height="72">
+  </picture>
+</p>
+
 # LoveIt 主题 | Hugo
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
