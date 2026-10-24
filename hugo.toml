@@ -541,6 +541,14 @@
         lazyLoading = false
         lightTheme = "light"
         darkTheme = "dark"
+      # Mastodon / Fediverse comment config (https://github.com/dpecos/mastodon-comments)
+      # Mastodon / Fediverse 评论系统设置 (https://github.com/dpecos/mastodon-comments)
+      [params.page.comment.mastodon]
+        enable = false
+        # Your Mastodon instance host (e.g. mastodon.social, fosstodon.org)
+        host = ""
+        # Your Mastodon username (without @). Per-post: set 'fediverse' or 'mastodonTootId' in front matter to the toot ID.
+        user = ""
     # Third-party library config
     # 第三方库配置
     [params.page.library]
