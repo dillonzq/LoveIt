@@ -2,7 +2,7 @@
 public/
 /resources/
 /exampleSite/resources/
-/exampleSite/.hugo_build.lock
+.hugo_build.lock
 **/assets/jsconfig.json
 
 node_modules/
