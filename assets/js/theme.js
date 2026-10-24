@@ -569,6 +569,7 @@ class Theme {
                         theme: this.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme,
                     };
                     const iframe = document.querySelector('.utterances-frame');
+                    if (!iframe) return;
                     iframe.contentWindow.postMessage(message, 'https://utteranc.es');
                 });
                 this.switchThemeEventSet.add(this._utterancesOnSwitchTheme);
