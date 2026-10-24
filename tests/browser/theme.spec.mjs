@@ -79,6 +79,10 @@ test('Mermaid survives cached content; math, copy controls and persisted theme w
   await expect(page.locator('.mermaid svg')).toBeVisible();
   await expect(page.locator('.katex').first()).toBeVisible();
   await expect(page.locator('.code-header .copy').first()).toBeVisible();
+  await page.locator('.mermaid svg').evaluate(svg => { svg.dataset.original = ''; });
+  await page.setViewportSize({ width: 1000, height: 700 });
+  await page.waitForTimeout(300);
+  await expect(page.locator('.mermaid svg[data-original]')).toHaveCount(1);
   const before = await page.locator('body').getAttribute('cfg-theme');
   await page.locator('#header-desktop .theme-switch').click();
   const after = await page.locator('body').getAttribute('cfg-theme');

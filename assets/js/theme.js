@@ -673,7 +673,6 @@ class Theme {
                     this._resizeTimeout = null;
                     for (let event of this.resizeEventSet) event();
                     this.initToc();
-                    this.initMermaid();
                     this.initSearch();
                 }, 100);
             }
