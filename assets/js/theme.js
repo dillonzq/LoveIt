@@ -415,12 +415,13 @@ class Theme {
             if (!$mermaidElements.length) return;
 
             mermaid.initialize({startOnLoad: false, theme: this.isDark ? 'dark' : 'neutral', securityLevel: 'loose'});
-            Util.forEach($mermaidElements, $mermaid => {
+            // Identical diagrams in separately rendered blocks share an element id; the index keeps render ids unique.
+            Array.from($mermaidElements).forEach(($mermaid, index) => {
                 const definition = this.getMermaidDefinition($mermaid);
                 if (!definition) return;
 
                 mermaid
-                    .render('mermaid-svg-' + $mermaid.id, definition)
+                    .render(`mermaid-svg-${$mermaid.id}-${index}`, definition)
                     .then(({ svg }) => {
                         $mermaid.innerHTML = svg;
                     })
