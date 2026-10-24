@@ -121,3 +121,10 @@ test('first-screen avatar loads directly and scroll bursts share a frame', async
   });
   expect(frames).toBe(1);
 });
+
+test('grouped TypeIt elements type one after another', async ({ page }) => {
+  await page.goto('/fuse/blog/typeit/');
+  const lines = page.locator('.typeit > div');
+  await expect(lines.nth(0)).toContainText('First typed line', { timeout: 15_000 });
+  await expect(lines.nth(1)).toContainText('Second typed line', { timeout: 15_000 });
+});

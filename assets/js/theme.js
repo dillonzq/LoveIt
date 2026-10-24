@@ -527,7 +527,7 @@ class Theme {
                         cursorSpeed: cursorSpeed,
                         cursorChar: cursorChar,
                         waitUntilVisible: true,
-                        afterComplete: () => {
+                        afterComplete: instance => {
                             if (i === group.length - 1) {
                                 if (typeitConfig.duration >= 0) window.setTimeout(() => {
                                     instance.destroy();
