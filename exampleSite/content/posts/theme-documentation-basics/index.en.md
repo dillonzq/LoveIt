@@ -561,6 +561,10 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       scale = true
       # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol" FullscreenControl >}}
       fullscreen = true
+    # {{< version 1.0.0 >}} {{< link "https://github.com/metowolf/MetingJS" "MetingJS" >}} config for the music shortcode
+    [params.page.music]
+      # Meting API URL, supports :server, :type, :id, :auth and :r placeholders
+      api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&r=:r"
     # {{< version 0.2.0 changed >}} social share links in post page
     [params.page.share]
       enable = true

@@ -408,6 +408,12 @@
       # whether to add FullscreenControl (https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol)
       # 是否添加 FullscreenControl (https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol)
       fullscreen = true
+    # MetingJS config for the music shortcode (MetingJS https://github.com/metowolf/MetingJS)
+    # music shortcode 的 MetingJS 配置 (MetingJS https://github.com/metowolf/MetingJS)
+    [params.page.music]
+      # Meting API URL, supports :server, :type, :id, :auth and :r placeholders
+      # Meting API 地址, 支持 :server, :type, :id, :auth 和 :r 占位符
+      api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&r=:r"
     # Social share links in post page
     # 文章页面的分享信息设置
     [params.page.share]
