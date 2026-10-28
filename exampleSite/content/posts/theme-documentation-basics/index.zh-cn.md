@@ -563,6 +563,10 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       scale = true
       # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol" FullscreenControl >}}
       fullscreen = true
+    # {{< version 1.0.0 >}} music shortcode 的 {{< link "https://github.com/metowolf/MetingJS" "MetingJS" >}} 配置
+    [params.page.music]
+      # Meting API 地址, 支持 :server, :type, :id, :auth 和 :r 占位符
+      api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&r=:r"
     # {{< version 0.2.0 changed >}} 文章页面的分享信息设置
     [params.page.share]
       enable = true

@@ -144,6 +144,20 @@ test('content shortcodes survive cached content and nesting; grouped TypeIt type
   expect(errors).toEqual([]);
 });
 
+test('music shortcode uses the configured Meting API and its api override', async ({ page }) => {
+  const requests = [];
+  await page.route(/^https:\/\/(api\.injahow\.cn|meting\.test)\//, route => {
+    requests.push(route.request().url());
+    route.fulfill({ contentType: 'application/json', body: JSON.stringify([{ name: 'Mocked song', artist: 'Mocked artist', url: '', pic: '', lrc: '' }]) });
+  });
+  await page.goto('/fuse/blog/music/');
+  await expect(page.locator('meting-js .aplayer-title')).toHaveText(['Mocked song', 'Mocked song']);
+  expect(requests.map(url => url.replace(/&r=[\d.]+$/, '')).sort()).toEqual([
+    'https://api.injahow.cn/meting/?server=netease&type=song&id=1868553',
+    'https://meting.test/api?server=netease&type=playlist&id=60198',
+  ]);
+});
+
 test('fixed buttons fade in after scrolling down', async ({ page }) => {
   await page.goto('/fuse/blog/guide/');
   await page.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo(0, 400); });

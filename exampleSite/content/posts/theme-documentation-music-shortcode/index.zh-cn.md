@@ -112,6 +112,10 @@ hiddenFromHomePage: true
 
 `music` shortcode 有一些可以应用于以上三种方式的其它命名参数:
 
+* **api** *[可选]*
+
+    {{< version 1.0.0 >}} Meting API 地址, 仅适用于音乐平台 URL 自动识别和自定义音乐平台, 默认值是[主题配置](../theme-documentation-basics#site-configuration)中的 `params.page.music.api`.
+
 * **theme** *[可选]*
 
     {{< version 0.2.0 changed >}} 音乐播放器的主题色, 默认值是 `#448aff`.
