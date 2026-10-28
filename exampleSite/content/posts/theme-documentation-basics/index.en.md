@@ -767,7 +767,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
   # {{< version 0.2.8 >}} Compatibility config
   [params.compatibility]
-    # whether to use Polyfill.io to be compatible with older browsers
+    # whether to use the Polyfill service (cdnjs) to be compatible with older browsers
     polyfill = false
     # whether to use object-fit-images to be compatible with older browsers
     objectFit = false
