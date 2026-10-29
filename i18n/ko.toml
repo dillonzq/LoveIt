@@ -64,7 +64,7 @@ other = "ko-KR"
 other = "ko"
 
 [walineLang]
-other = "en"
+other = "ko"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

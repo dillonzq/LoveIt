@@ -64,7 +64,7 @@ other = "sv_SE"
 other = "sv"
 
 [walineLang]
-other = "sv"
+other = "en"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
