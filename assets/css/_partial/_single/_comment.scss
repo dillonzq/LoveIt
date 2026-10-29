@@ -5,4 +5,139 @@
     max-width: 1.5em;
     max-height: 1.5em;
   }
+
+  /* Mastodon / Fediverse comments (mastodon-comments web component) */
+  .mastodon-comments-powered {
+    margin-bottom: .5rem;
+    font-size: .9rem;
+    color: #5d686f;
+
+    i {
+      margin-right: .35rem;
+    }
+  }
+
+  .mastodon-comments-loading {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin: .5rem 0 1rem;
+    font-size: .9rem;
+    color: #5d686f;
+  }
+
+  .mastodon-comments-prompt {
+    margin-bottom: 1rem;
+  }
+
+  mastodon-comments {
+    --font-color: #5d686f;
+    --font-size: 1rem;
+    --block-border-width: 1px;
+    --block-border-radius: 3px;
+    --block-border-color: #ededf0;
+    --block-background-color: #f7f8f8;
+    --comment-indent: 40px;
+  }
+
+  .mastodon-comment {
+    background-color: var(--block-background-color, #f7f8f8);
+    border-radius: var(--block-border-radius, 3px);
+    border: 1px solid var(--block-border-color, #ededf0);
+    padding: 20px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    color: var(--font-color, #5d686f);
+    font-size: var(--font-size, 1rem);
+
+    p {
+      margin-bottom: 0;
+    }
+
+    .author {
+      padding-top: 0;
+      display: flex;
+
+      a {
+        text-decoration: none;
+      }
+
+      .avatar img {
+        margin-right: 1rem;
+        min-width: 60px;
+        border-radius: 5px;
+      }
+
+      .details {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .details .name {
+        font-weight: bold;
+      }
+
+      .details .user {
+        color: #5d686f;
+        font-size: medium;
+      }
+
+      .date {
+        margin-left: auto;
+        font-size: small;
+      }
+    }
+
+    .content {
+      margin: 15px 20px;
+
+      p:first-child {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    .attachments {
+      margin: 0 10px;
+
+      > * {
+        margin: 0 10px;
+      }
+    }
+
+    .status > div {
+      display: inline-block;
+      margin-right: 15px;
+    }
+
+    .status a {
+      color: #5d686f;
+      text-decoration: none;
+    }
+
+    .status .replies.active a {
+      color: #003eaa;
+    }
+
+    .status .reblogs.active a {
+      color: #8c8dff;
+    }
+
+    .status .favourites.active a {
+      color: #ca8f04;
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    mastodon-comments {
+      --comment-indent: 20px;
+    }
+  }
+
+  @media only screen and (max-width: 640px) {
+    mastodon-comments {
+      --comment-indent: 0;
+    }
+  }
 }
