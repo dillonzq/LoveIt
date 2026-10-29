@@ -173,6 +173,10 @@
       overflow-x: auto;
       margin: .625rem 0;
 
+      > table {
+        margin: 0;
+      }
+
       &::-webkit-scrollbar {
         background-color: $table-background-color;
 
