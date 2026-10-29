@@ -31,8 +31,8 @@ Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only depende
 
 Just install latest edition of [:(far fa-file-archive): Hugo](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
 
-{{< admonition note "When you need to use Hugo extended edition?" false >}}
-When you want [style customization](#style-customization), you need to use the Hugo **extended edition** for correct rendering.
+{{< admonition note "The master branch requires Dart Sass" false >}}
+The master branch requires **Hugo 0.146.0 or later** and **Dart Sass**. In the theme repository, run `npm ci --ignore-scripts` and `npm run dev` to use the Hugo version pinned by `.hvm` with Dart Sass. Standalone sites can install Dart Sass and run Hugo directly.
 
 ![Hugo extended edition](hugo-extended-edition.png "Hugo extended edition")
 {{< /admonition >}}
@@ -73,7 +73,7 @@ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 
 | LoveIt branch or version | Supported Hugo versions |
 |:-------------------------|:-----------------------:|
-| master(Unstable)         |        ≥ 0.128.0        |
+| master(Unstable)         |        ≥ 0.146.0        |
 | **0.3.X(Recommended)**   |    0.128.0 - 0.145.0    |
 | 0.2.X(Outdated)          |    0.68.0 - 0.127.0     |
 
@@ -93,9 +93,9 @@ theme = "LoveIt"
 title = "My New Hugo Site"
 
 # language code ["en", "zh-CN", "fr", "pl", ...]
-languageCode = "en"
+locale = "en"
 # language name ["English", "简体中文", "Français", "Polski", ...]
-languageName = "English"
+label = "English"
 
 # Menu config
 [menu]
@@ -212,9 +212,9 @@ theme = "LoveIt"
 title = "My New Hugo Site"
 
 # language code ["en", "zh-CN", "fr", "pl", ...]
-languageCode = "en"
+locale = "en"
 # language name ["English", "简体中文", "Français", "Polski", ...]
-languageName = "English"
+label = "English"
 # whether to include Chinese/Japanese/Korean
 hasCJKLanguage = false
 
@@ -561,6 +561,10 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       scale = true
       # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol" FullscreenControl >}}
       fullscreen = true
+    # {{< version 1.0.0 >}} {{< link "https://github.com/metowolf/MetingJS" "MetingJS" >}} config for the music shortcode
+    [params.page.music]
+      # Meting API URL, supports :server, :type, :id, :auth and :r placeholders
+      api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&r=:r"
     # {{< version 0.2.0 changed >}} social share links in post page
     [params.page.share]
       enable = true
@@ -767,7 +771,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
   # {{< version 0.2.8 >}} Compatibility config
   [params.compatibility]
-    # whether to use Polyfill.io to be compatible with older browsers
+    # whether to use the Polyfill service (cdnjs) to be compatible with older browsers
     polyfill = false
     # whether to use object-fit-images to be compatible with older browsers
     objectFit = false
@@ -921,9 +925,9 @@ Customize `browserconfig.xml` and `site.webmanifest` to set theme-color and back
 
 {{< version 0.2.8 changed >}}
 
-{{< admonition note "Hugo extended version is necessary" >}}
+{{< admonition note "Dart Sass is required" >}}
 Since Hugo need to processes :(fab fa-sass): SCSS to :(fab fa-css3): CSS,
-Hugo **extended** version is necessary for the style customization.
+The master branch uses **Dart Sass**. Existing `_override.scss` and `_custom.scss` customizations remain supported.
 {{< /admonition >}}
 
 **LoveIt** theme has been built to be as configurable as possible by defining custom `.scss` style files.
@@ -991,8 +995,8 @@ defaultContentLanguage = "en"
   [languages.en]
     weight = 1
     title = "My New Hugo Site"
-    languageCode = "en"
-    languageName = "English"
+    locale = "en"
+    label = "English"
     [[languages.en.menu.main]]
       weight = 1
       identifier = "posts"
@@ -1021,8 +1025,8 @@ defaultContentLanguage = "en"
   [languages.zh-cn]
     weight = 2
     title = "我的全新 Hugo 网站"
-    languageCode = "zh-CN"
-    languageName = "简体中文"
+    locale = "zh-CN"
+    label = "简体中文"
     hasCJKLanguage = true
     [[languages.zh-cn.menu.main]]
       weight = 1
@@ -1052,8 +1056,8 @@ defaultContentLanguage = "en"
   [languages.fr]
     weight = 3
     title = "Mon nouveau site Hugo"
-    languageCode = "fr"
-    languageName = "Français"
+    locale = "fr"
+    label = "Français"
     [[languages.fr.menu.main]]
       weight = 1
       identifier = "posts"

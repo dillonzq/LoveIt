@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .gist {
   font-family: var(--code-font-family);
   font-size: var(--code-font-size);
@@ -17,12 +19,12 @@
 
   .gist-meta {
     padding: .4rem .8rem;
-    background-color: darken($code-background-color, 5%);
+    background-color: color.adjust($code-background-color, $lightness: -5%, $space: hsl);
 
     @include link(false, false);
 
     [theme=dark] & {
-      background-color: darken($code-background-color-dark, 5%);
+      background-color: color.adjust($code-background-color-dark, $lightness: -5%, $space: hsl);
     }
   }
 

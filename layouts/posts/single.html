@@ -18,9 +18,9 @@
         </div>
     {{- end -}}
 
-    <article class="page single">
+    <article class="page single"{{ if partial "function/searchable.html" . }} data-pagefind-body{{ end }}>
         {{- /* Title */ -}}
-        <h1 class="single-title animate__animated animate__flipInX">{{ .Title | emojify }}</h1>
+        <h1 class="single-title animate__animated animate__flipInX" data-pagefind-meta="title[data-title]" data-title="{{ .Title }}">{{ .Title | emojify }}</h1>
 
         {{- /* Subtitle */ -}}
         {{- with $params.subtitle -}}
@@ -28,7 +28,7 @@
         {{- end -}}
 
         {{- /* Meta */ -}}
-        <div class="post-meta">
+        <div class="post-meta" data-pagefind-ignore>
             <div class="post-meta-line">
                 {{- $author := $params.author | default .Site.Params.Author.name | default (T "author") -}}
                 {{- $authorLink := $params.authorlink | default .Site.Params.Author.link | default .Site.Home.RelPermalink -}}
@@ -70,13 +70,13 @@
         {{- end -}}
         {{- with $image -}}
             <div class="featured-image">
-                {{- dict "Src" . "Title" $.Description "Resources" $.Resources | partial "plugin/img.html" -}}
+                {{- dict "Src" . "Title" $.Description "Resources" $.Resources "Eager" true | partial "plugin/img.html" -}}
             </div>
         {{- end -}}
 
         {{- /* Static TOC */ -}}
         {{- if ne $toc.enable false -}}
-            <div class="details toc" id="toc-static"  data-kept="{{ if $toc.keepStatic }}true{{ end }}">
+            <div class="details toc" id="toc-static" data-pagefind-ignore data-kept="{{ if $toc.keepStatic }}true{{ end }}">
                 <div class="details-summary toc-title">
                     <span>{{ T "contents" }}</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
@@ -93,9 +93,9 @@
         </div>
 
         {{- /* Footer */ -}}
-        {{- partial "single/footer.html" . -}}
+        <div data-pagefind-ignore>{{- partial "single/footer.html" . -}}</div>
 
         {{- /* Comment */ -}}
-        {{- partial "comment.html" . -}}
+        <div data-pagefind-ignore>{{- partial "comment.html" . -}}</div>
     </article>
 {{- end -}}

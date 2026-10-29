@@ -1,3 +1,5 @@
+import { SearchClient, escapeHTML, highlight } from './search.mjs';
+
 class Util {
     static forEach(elements, handler) {
         elements = elements || [];
@@ -108,8 +110,6 @@ class Theme {
         const isMobile = Util.isMobile();
         if (!searchConfig || isMobile && this._searchMobileOnce || !isMobile && this._searchDesktopOnce) return;
 
-        const maxResultLength = searchConfig.maxResultLength ? searchConfig.maxResultLength : 10;
-        const snippetLength = searchConfig.snippetLength ? searchConfig.snippetLength : 50;
         const highlightTag = searchConfig.highlightTag ? searchConfig.highlightTag : 'em';
 
         const suffix = isMobile ? 'mobile' : 'desktop';
@@ -163,7 +163,12 @@ class Theme {
             });
             this.clickMaskEventSet.add(this._searchDesktopOnClickMask);
         }
+        let requestId = 0;
+        let searchTimer;
         $searchInput.addEventListener('input', () => {
+            requestId++;
+            clearTimeout(searchTimer);
+            $searchLoading.style.display = 'none';
             if ($searchInput.value === '') $searchClear.style.display = 'none';
             else $searchClear.style.display = 'inline';
         }, false);
@@ -179,200 +184,37 @@ class Theme {
             }, {
                 name: 'search',
                 source: (query, callback) => {
+                    const id = ++requestId;
+                    clearTimeout(searchTimer);
+                    if (!query.trim()) {
+                        $searchLoading.style.display = 'none';
+                        callback([]);
+                        return;
+                    }
                     $searchLoading.style.display = 'inline';
                     $searchClear.style.display = 'none';
-                    const finish = (results) => {
+                    searchTimer = setTimeout(async () => {
+                        let results = [];
+                        try {
+                            this._searchClient = this._searchClient || new SearchClient(searchConfig);
+                            results = await this._searchClient.search(query);
+                        } catch (error) {
+                            console.error(error);
+                        }
+                        if (id !== requestId || $searchInput.value !== query) return;
                         $searchLoading.style.display = 'none';
                         $searchClear.style.display = 'inline';
-                        callback(results);
-                    };
-                    if (searchConfig.type === 'lunr') {
-                        const search = () => {
-                            if (lunr.queryHandler) query = lunr.queryHandler(query);
-                            const results = {};
-                            this._index.search(query).forEach(({ ref, matchData: { metadata } }) => {
-                                const matchData = this._indexData[ref];
-                                let { uri, title, content: context } = matchData;
-                                if (results[uri]) return;
-                                let position = 0;
-                                Object.values(metadata).forEach(({ content }) => {
-                                    if (content) {
-                                        const matchPosition = content.position[0][0];
-                                        if (matchPosition < position || position === 0) position = matchPosition;
-                                    }
-                                });
-                                position -= snippetLength / 5;
-                                if (position > 0) {
-                                    position += context.slice(position, position + 20).lastIndexOf(' ') + 1;
-                                    context = '...' + context.slice(position, position + snippetLength);
-                                } else {
-                                    context = context.slice(0, snippetLength);
-                                }
-                                Object.keys(metadata).forEach(key => {
-                                    title = title.replace(new RegExp(`(${key})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
-                                    context = context.replace(new RegExp(`(${key})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
-                                });
-                                results[uri] = {
-                                    'uri': uri,
-                                    'title' : title,
-                                    'date' : matchData.date,
-                                    'context' : context,
-                                };
-                            });
-                            return Object.values(results).slice(0, maxResultLength);
-                        }
-                        if (!this._index) {
-                            fetch(searchConfig.lunrIndexURL)
-                                .then(response => response.json())
-                                .then(data => {
-                                    const indexData = {};
-                                    this._index = lunr(function () {
-                                        if (searchConfig.lunrLanguageCode) this.use(lunr[searchConfig.lunrLanguageCode]);
-                                        this.ref('objectID');
-                                        this.field('title', { boost: 50 });
-                                        this.field('tags', { boost: 20 });
-                                        this.field('categories', { boost: 20 });
-                                        this.field('content', { boost: 10 });
-                                        this.metadataWhitelist = ['position'];
-                                        data.forEach((record) => {
-                                            indexData[record.objectID] = record;
-                                            this.add(record);
-                                        });
-                                    });
-                                    this._indexData = indexData;
-                                    finish(search());
-                                }).catch(err => {
-                                    console.error(err);
-                                    finish([]);
-                                });
-                        } else finish(search());
-                    } else if (searchConfig.type === 'algolia') {
-                        const { liteClient: algoliasearch } = window['algoliasearch/lite'];
-                        this._algoliaIndex = this._algoliaIndex || algoliasearch(searchConfig.algoliaAppID, searchConfig.algoliaSearchKey);
-                        this._algoliaIndex
-                            .search({
-                                requests: [
-                                    {
-                                        indexName: searchConfig.algoliaIndex,
-                                        query: query,
-                                        offset: 0,
-                                        length: maxResultLength * 8,
-                                        attributesToHighlight: ['title'],
-                                        attributesToSnippet: [`content:${snippetLength}`],
-                                        highlightPreTag: `<${highlightTag}>`,
-                                        highlightPostTag: `</${highlightTag}>`,
-                                    }
-                                ]
-                            })
-                            .then(({ results: [{ hits }] }) => {
-                                const results = {};
-                                hits.forEach(({ uri, date, _highlightResult: { title }, _snippetResult: { content } }) => {
-                                    if (results[uri] && results[uri].context.length > content.value) return;
-                                    results[uri] = {
-                                        uri: uri,
-                                        title: title.value,
-                                        date: date,
-                                        context: content.value,
-                                    };
-                                });
-                                finish(Object.values(results).slice(0, maxResultLength));
-                            })
-                            .catch(err => {
-                                console.error(err);
-                                finish([]);
-                            });
-                    } else if (searchConfig.type === 'fuse') {
-                        const search = () => {
-                            const results = {};
-                            this._fuse.search(query).forEach(({ item, matches }) => {
-                                let { uri, title, content: context, date } = item;
-                                if (results[uri]) return;
-                                let position = 0;
-                                if (matches) {
-                                    for (const match of matches) {
-                                        if (match.key === 'content' && match.indices.length > 0) {
-                                            position = match.indices[0][0];
-                                            break;
-                                        }
-                                    }
-                                }
-                                position -= snippetLength / 5;
-                                if (position > 0) {
-                                    position += context.slice(position, position + 20).lastIndexOf(' ') + 1;
-                                    context = '...' + context.slice(position, position + snippetLength);
-                                } else {
-                                    context = context.slice(0, snippetLength);
-                                }
-                                const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                                title = title.replace(new RegExp(`(${escapedQuery})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
-                                context = context.replace(new RegExp(`(${escapedQuery})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
-                                results[uri] = { uri, title, date, context };
-                            });
-                            return Object.values(results).slice(0, maxResultLength);
-                        };
-                        if (!this._fuse) {
-                            fetch(searchConfig.fuseIndexURL)
-                                .then(response => response.json())
-                                .then(data => {
-                                    const fuseOpts = Object.assign({
-                                        isCaseSensitive: false,
-                                        findAllMatches: false,
-                                        minMatchCharLength: 2,
-                                        location: 0,
-                                        threshold: 0.3,
-                                        distance: 100,
-                                        ignoreLocation: false,
-                                        includeMatches: true,
-                                        keys: [
-                                            { name: 'title', weight: 5 },
-                                            { name: 'tags', weight: 2 },
-                                            { name: 'categories', weight: 2 },
-                                            { name: 'content', weight: 1 },
-                                        ],
-                                    }, searchConfig.fuseOpts || {}, { includeMatches: true });
-                                    this._fuse = new Fuse(data, fuseOpts);
-                                    finish(search());
-                                }).catch(err => {
-                                    console.error(err);
-                                    finish([]);
-                                });
-                        } else finish(search());
-                    } else if (searchConfig.type === 'pagefind') {
-                        const search = async () => {
-                            try {
-                                if (!this._pagefind) {
-                                    const basePath = searchConfig.pagefindBasePath || '/_pagefind/';
-                                    this._pagefind = await import(`${basePath}pagefind.js`);
-                                    await this._pagefind.init();
-                                }
-                                const searchResult = await this._pagefind.search(query);
-                                const results = {};
-                                const loaded = await Promise.all(
-                                    searchResult.results.slice(0, maxResultLength).map(r => r.data())
-                                );
-                                loaded.forEach(item => {
-                                    const uri = item.url;
-                                    if (results[uri]) return;
-                                    let title = item.meta?.title || '';
-                                    let context = item.excerpt || item.content || '';
-                                    context = context.slice(0, snippetLength);
-                                    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                                    title = title.replace(new RegExp(`(${escapedQuery})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
-                                    context = context.replace(new RegExp(`(${escapedQuery})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
-                                    results[uri] = { uri, title, date: '', context };
-                                });
-                                finish(Object.values(results));
-                            } catch (err) {
-                                console.error(err);
-                                finish([]);
-                            }
-                        };
-                        search();
-                    }
+                        callback(results.map(item => ({
+                            ...item,
+                            title: highlight(item.title, query, highlightTag),
+                            context: highlight(item.context, query, highlightTag),
+                            date: escapeHTML(item.date || ''),
+                        })));
+                    }, 120);
                 },
                 templates: {
                     suggestion: ({ title, date, context }) => `<div><span class="suggestion-title">${title}</span><span class="suggestion-date">${date}</span></div><div class="suggestion-context">${context}</div>`,
-                    empty: ({ query }) => `<div class="search-empty">${searchConfig.noResultsFound}: <span class="search-query">"${query}"</span></div>`,
+                    empty: ({ query }) => `<div class="search-empty">${escapeHTML(searchConfig.noResultsFound)}: <span class="search-query">"${escapeHTML(query)}"</span></div>`,
                     footer: ({}) => {
                         const searchTypes = {
                             algolia: { searchType: 'algolia', icon: '<i class="fab fa-algolia" aria-hidden="true"></i>', href: 'https://www.algolia.com/' },
@@ -381,7 +223,7 @@ class Theme {
                             pagefind: { searchType: 'Pagefind', icon: '', href: 'https://pagefind.app/' },
                         };
                         const { searchType, icon, href } = searchTypes[searchConfig.type] || searchTypes.lunr;
-                        return `<div class="search-footer">Search by <a href="${href}" rel="noopener noreffer" target="_blank">${icon} ${searchType}</a></div>`;},
+                        return `<div class="search-footer">Search by <a href="${href}" rel="noopener noreferrer" target="_blank">${icon} ${searchType}</a></div>`;},
                 },
             });
             autosearch.on('autocomplete:selected', (_event, suggestion, _dataset, _context) => {
@@ -550,18 +392,43 @@ class Theme {
         if (this.config.math) renderMathInElement(document.body, this.config.math);
     }
 
+    getMermaidDefinition(element) {
+        if (!element) return null;
+
+        const id = element.id;
+        if (id && this.data && typeof this.data[id] === 'string') {
+            const fromConfig = this.data[id].trim();
+            if (fromConfig.length > 0) return fromConfig;
+        }
+
+        const fromText = element.textContent;
+        if (fromText && fromText.trim().length > 0) {
+            return fromText.trim();
+        }
+
+        return null;
+    }
+
     initMermaid() {
         this._mermaidOnSwitchTheme = this._mermaidOnSwitchTheme || (() => {
             const $mermaidElements = document.getElementsByClassName('mermaid');
-            if ($mermaidElements.length) {
-                mermaid.initialize({startOnLoad: false, theme: this.isDark ? 'dark' : 'neutral', securityLevel: 'loose'});
-                Util.forEach($mermaidElements, $mermaid => {
-                    mermaid.render('mermaid-svg-' + $mermaid.id, this.data[$mermaid.id])
-                        .then(({ svg }) => {
-                            $mermaid.innerHTML = svg;
-                        });
-                });
-            }
+            if (!$mermaidElements.length) return;
+
+            mermaid.initialize({startOnLoad: false, theme: this.isDark ? 'dark' : 'neutral', securityLevel: 'loose'});
+            // Identical diagrams in separately rendered blocks share an element id; the index keeps render ids unique.
+            Array.from($mermaidElements).forEach(($mermaid, index) => {
+                const definition = this.getMermaidDefinition($mermaid);
+                if (!definition) return;
+
+                mermaid
+                    .render(`mermaid-svg-${$mermaid.id}-${index}`, definition)
+                    .then(({ svg }) => {
+                        $mermaid.innerHTML = svg;
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            });
         });
         this.switchThemeEventSet.add(this._mermaidOnSwitchTheme);
         this._mermaidOnSwitchTheme();
@@ -661,7 +528,7 @@ class Theme {
                         cursorSpeed: cursorSpeed,
                         cursorChar: cursorChar,
                         waitUntilVisible: true,
-                        afterComplete: () => {
+                        afterComplete: instance => {
                             if (i === group.length - 1) {
                                 if (typeitConfig.duration >= 0) window.setTimeout(() => {
                                     instance.destroy();
@@ -703,6 +570,7 @@ class Theme {
                         theme: this.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme,
                     };
                     const iframe = document.querySelector('.utterances-frame');
+                    if (!iframe) return;
                     iframe.contentWindow.postMessage(message, 'https://utteranc.es');
                 });
                 this.switchThemeEventSet.add(this._utterancesOnSwitchTheme);
@@ -759,48 +627,53 @@ class Theme {
         }
         const $fixedButtons = document.getElementById('fixed-buttons');
         const ACCURACY = 20, MINIMUM = 100;
+        let scrollFrame;
         window.addEventListener('scroll', () => {
-            this.newScrollTop = Util.getScrollTop();
-            const scroll = this.newScrollTop - this.oldScrollTop;
-            const isMobile = Util.isMobile();
-            Util.forEach($headers, $header => {
-                if (scroll > ACCURACY) {
-                    $header.classList.remove('animate__fadeInDown');
-                    Util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
-                } else if (scroll < - ACCURACY) {
-                    $header.classList.remove('animate__fadeOutUp');
-                    Util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
+            if (scrollFrame) return;
+            scrollFrame = requestAnimationFrame(() => {
+                scrollFrame = null;
+                this.newScrollTop = Util.getScrollTop();
+                const scroll = this.newScrollTop - this.oldScrollTop;
+                const isMobile = Util.isMobile();
+                Util.forEach($headers, $header => {
+                    if (scroll > ACCURACY) {
+                        $header.classList.remove('animate__fadeInDown');
+                        Util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
+                    } else if (scroll < - ACCURACY) {
+                        $header.classList.remove('animate__fadeOutUp');
+                        Util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
+                    }
+                });
+                if (this.newScrollTop > MINIMUM) {
+                    if (isMobile && scroll > ACCURACY) {
+                        $fixedButtons.classList.remove('animate__fadeIn');
+                        Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
+                    } else if (!isMobile || scroll < - ACCURACY) {
+                        $fixedButtons.style.display = 'block';
+                        $fixedButtons.classList.remove('animate__fadeOut');
+                        Util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
+                    }
+                } else {
+                    if (!isMobile) {
+                        $fixedButtons.classList.remove('animate__fadeIn');
+                        Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
+                    }
+                    $fixedButtons.style.display = 'none';
                 }
+                for (let event of this.scrollEventSet) event();
+                this.oldScrollTop = this.newScrollTop;
             });
-            if (this.newScrollTop > MINIMUM) {
-                if (isMobile && scroll > ACCURACY) {
-                    $fixedButtons.classList.remove('animate__fadeIn');
-                    Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
-                } else if (!isMobile || scroll < - ACCURACY) {
-                    $fixedButtons.style.display = 'block';
-                    $fixedButtons.classList.remove('animate__fadeOut');
-                    Util.animateCSS($fixedButtons, ['animate__FadeIn', 'animate__faster'], true);
-                }
-            } else {
-                if (!isMobile) {
-                    $fixedButtons.classList.remove('animate__fadeIn');
-                    Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
-                }
-                $fixedButtons.style.display = 'none';
-            }
-            for (let event of this.scrollEventSet) event();
-            this.oldScrollTop = this.newScrollTop;
-        }, false);
+        }, { passive: true });
     }
 
     onResize() {
+        window.matchMedia('only screen and (max-width: 680px)').addEventListener('change', () => this.initSearch());
         window.addEventListener('resize', () => {
             if (!this._resizeTimeout) {
                 this._resizeTimeout = window.setTimeout(() => {
                     this._resizeTimeout = null;
                     for (let event of this.resizeEventSet) event();
                     this.initToc();
-                    this.initMermaid();
                     this.initSearch();
                 }, 100);
             }
@@ -820,8 +693,11 @@ class Theme {
             this.initSVGIcon();
             this.initTwemoji();
             this.initMenuMobile();
+            this.onClickMask();
             this.initSwitchTheme();
             this.initSearch();
+            this.onResize();
+            this.onScroll();
             this.initDetails();
             this.initLightGallery();
             this.initHighlight();
@@ -840,9 +716,6 @@ class Theme {
             this.initToc();
             this.initComment();
 
-            this.onScroll();
-            this.onResize();
-            this.onClickMask();
         }, 100);
     }
 }

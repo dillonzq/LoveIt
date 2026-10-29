@@ -1,6 +1,9 @@
 {{- $theme := "#448aff" -}}
+{{- $music := (partial "function/params.html" .Page).music | default dict -}}
+{{- $api := $music.api -}}
 {{- if .IsNamedParams -}}
     {{- $theme = .Get "theme" | default $theme -}}
+    {{- $api = .Get "api" | default $api -}}
     {{- if .Get "url" -}}
         {{- $url := .Get "url" -}}
         {{- with dict "Path" $url "Resources" .Page.Resources | partial "function/resource.html" -}}
@@ -19,6 +22,7 @@
         ></meting-js>
     {{- else if .Get "auto" -}}
         <meting-js auto="{{ .Get `auto` }}" theme="{{ $theme }}"
+        {{- with $api }} api="{{ . }}"{{ end -}}
         {{- with .Get "fixed" }} fixed="{{ . }}"{{ end -}}
         {{- with .Get "mini" }} mini="{{ . }}"{{ end -}}
         {{- with .Get "autoplay" }} autoplay="{{ . }}"{{ end -}}
@@ -31,6 +35,7 @@
         ></meting-js>
     {{- else -}}
         <meting-js server="{{ .Get `server` }}" type="{{ .Get `type` }}" id="{{ .Get `id` }}" theme="{{ $theme }}"
+        {{- with $api }} api="{{ . }}"{{ end -}}
         {{- with .Get "fixed" }} fixed="{{ . }}"{{ end -}}
         {{- with .Get "mini" }} mini="{{ . }}"{{ end -}}
         {{- with .Get "autoplay" }} autoplay="{{ . }}"{{ end -}}
@@ -43,8 +48,8 @@
         ></meting-js>
     {{- end -}}
 {{- else if (.Get 0 | urls.Parse).Host -}}
-    <meting-js auto="{{ .Get 0 }}" theme="{{ $theme }}"></meting-js>
+    <meting-js auto="{{ .Get 0 }}" theme="{{ $theme }}"{{ with $api }} api="{{ . }}"{{ end }}></meting-js>
 {{- else -}}
-    <meting-js server="{{ .Get 0 }}" type="{{ .Get 1 }}" id="{{ .Get 2 }}" theme="{{ $theme }}"></meting-js>
+    <meting-js server="{{ .Get 0 }}" type="{{ .Get 1 }}" id="{{ .Get 2 }}" theme="{{ $theme }}"{{ with $api }} api="{{ . }}"{{ end }}></meting-js>
 {{- end -}}
-{{- .Page.Scratch.SetInMap "this" "music" true -}}
+{{- .Page.Store.SetInMap "contentAssets" "music" true -}}

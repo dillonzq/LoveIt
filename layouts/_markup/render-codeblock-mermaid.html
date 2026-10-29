@@ -1,7 +1,7 @@
-{{- $params := .Page.Scratch.Get "params" -}}
+{{- $params := partial "function/params.html" .Page -}}
 {{- $render := $params.code.render | default dict -}}
 {{- if $render.mermaid | default true -}}
-    {{- dict "Content" .Inner "Page" .Page | partial "plugin/mermaid.html" -}}
+    {{- dict "Content" .Inner "Page" .Page "Key" (printf "codeblock-%d" .Ordinal) | partial "plugin/mermaid.html" -}}
 {{- else -}}
     {{- template "_markup/render-codeblock.html" . -}}
 {{- end -}}

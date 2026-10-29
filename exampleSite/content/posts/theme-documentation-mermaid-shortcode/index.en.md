@@ -15,7 +15,7 @@ resources:
 tags: ["shortcodes"]
 categories: ["documentation"]
 
-hiddenFromHomePage: true
+hiddenFromHomePage: false
 ---
 
 {{< version 0.2.11 changed >}}
@@ -42,7 +42,7 @@ graph LR;
 {{</* /mermaid */>}}
 ```
 
-The rendered output looks like this:
+The rendered output looks like this (should work both on the home page and on the single post page):
 
 {{< mermaid >}}
 graph LR;

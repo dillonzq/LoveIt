@@ -25,22 +25,22 @@
 {{- if .Linked -}}
     <a class="lightgallery" href="{{ $large | safeURL }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $small | safeURL }}"{{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
         <img
-            class="lazyload{{ with .Class }} {{ . }}{{ end }}"
-            src="{{ $loading.RelPermalink }}"
-            data-src="{{ $src | safeURL }}"
-            data-srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
-            data-sizes="auto"
+            class="{{ if not .Eager }}lazyload{{ end }}{{ with .Class }} {{ . }}{{ end }}"
+            src="{{ if .Eager }}{{ $src | safeURL }}{{ else }}{{ $loading.RelPermalink }}{{ end }}"
+            {{ if .Eager }}loading="eager" fetchpriority="high" decoding="async"{{ else }}data-src="{{ $src | safeURL }}"{{ end }}
+            {{ if .Eager }}srcset{{ else }}data-srcset{{ end }}="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
+            {{ if not .Eager }}data-sizes="auto"{{ end }}
             alt="{{ $alt }}"
             {{- with $width }} width="{{ . }}"{{ end }}
             {{- with $height }} height="{{ . }}"{{ end }} />
     </a>
 {{- else -}}
     <img
-        class="lazyload{{ with .Class }} {{ . }}{{ end }}"
-        src="{{ $loading.RelPermalink }}"
-        data-src="{{ $src | safeURL }}"
-        data-srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
-        data-sizes="auto"
+        class="{{ if not .Eager }}lazyload{{ end }}{{ with .Class }} {{ . }}{{ end }}"
+        src="{{ if .Eager }}{{ $src | safeURL }}{{ else }}{{ $loading.RelPermalink }}{{ end }}"
+        {{ if .Eager }}loading="eager" fetchpriority="high" decoding="async"{{ else }}data-src="{{ $src | safeURL }}"{{ end }}
+        {{ if .Eager }}srcset{{ else }}data-srcset{{ end }}="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
+        {{ if not .Eager }}data-sizes="auto"{{ end }}
         alt="{{ $alt }}"
         title="{{ .Title | default $alt }}"
         {{- with $width }} width="{{ . }}"{{ end }}

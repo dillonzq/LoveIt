@@ -1,7 +1,30 @@
 {{- $params := .Scratch.Get "params" -}}
 {{- $cdn := .Scratch.Get "cdn" | default dict -}}
 {{- $fingerprint := .Scratch.Get "fingerprint" -}}
-{{- $config := (.Scratch.Get "this").config -}}
+{{- $this := .Scratch.Get "this" -}}
+{{- $config := $this.config | default dict -}}
+
+{{- /* State written while rendering content; see function/id.html. */ -}}
+{{- /* The "this" keys are still read for site overrides of the shortcodes. */ -}}
+{{- $contentAssets := .Store.Get "contentAssets" | default dict -}}
+{{- with .Store.Get "contentData" -}}
+    {{- $config = dict "data" . | merge $config -}}
+{{- end -}}
+{{- $typeitMap := merge (.Store.Get "contentTypeit" | default dict) ($this.typeitMap | default dict) -}}
+{{- $styleArr := slice -}}
+{{- range .Store.Get "contentStyle" | default dict -}}
+    {{- $styleArr = $styleArr | append . -}}
+{{- end -}}
+{{- with $this.styleArr -}}
+    {{- $styleArr = $styleArr | append . -}}
+{{- end -}}
+{{- $scriptArr := slice -}}
+{{- range .Store.Get "contentScript" | default dict -}}
+    {{- $scriptArr = $scriptArr | append . -}}
+{{- end -}}
+{{- with $this.scriptArr -}}
+    {{- $scriptArr = $scriptArr | append . -}}
+{{- end -}}
 
 {{- /* Search */ -}}
 {{- if .Site.Params.search | and .Site.Params.search.enable -}}
@@ -44,7 +67,8 @@
         {{- with $search.pagefind -}}
             {{- $basePath = .basePath | default "/_pagefind/" -}}
         {{- end -}}
-        {{- $config = dict "type" "pagefind" "pagefindBasePath" $basePath | dict "search" | merge $config -}}
+        {{- $basePath = printf "%s/" (strings.TrimSuffix "/" (strings.TrimPrefix "/" $basePath)) | relURL -}}
+        {{- $config = dict "type" "pagefind" "pagefindBasePath" $basePath "pagefindBaseURL" (urls.Parse .Site.BaseURL).Path | dict "search" | merge $config -}}
     {{- end -}}
 {{- end -}}
 
@@ -91,7 +115,7 @@
 {{- end -}}
 
 {{- /* TypeIt */ -}}
-{{- with (.Scratch.Get "this").typeitMap -}}
+{{- with $typeitMap -}}
     {{- $typeit := $.Site.Params.typeit -}}
     {{- $source := $cdn.typeitJS | default "lib/typeit/index.umd.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
@@ -139,19 +163,19 @@
     {{- end -}}
     {{- $delimiters = $delimiters | append (dict "left" "$" "right" "$" "display" false) (dict "left" "\\(" "right" "\\)" "display" false) -}}
     {{- if and $math.inlineLeftDelimiter $math.inlineRightDelimiter -}}
-        {{- $delimiters = $delimiters | append (dict "left" $math.inlineRightDelimiter "right" $math.inlineRightDelimiter "display" false) -}}
+        {{- $delimiters = $delimiters | append (dict "left" $math.inlineLeftDelimiter "right" $math.inlineRightDelimiter "display" false) -}}
     {{- end -}}
     {{- $config = dict "strict" false "delimiters" $delimiters | dict "math" | merge $config -}}
 {{- end -}}
 
 {{- /* mermaid */ -}}
-{{- if (.Scratch.Get "this").mermaid -}}
+{{- if or $contentAssets.mermaid $this.mermaid -}}
     {{- $source := $cdn.mermaidJS | default "lib/mermaid/mermaid.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 
 {{- /* ECharts */ -}}
-{{- if (.Scratch.Get "this").echarts -}}
+{{- if or $contentAssets.echarts $this.echarts -}}
     {{- $source := $cdn.echartsJS | default "lib/echarts/echarts.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- $lightTheme := resources.Get "lib/echarts/theme/light.yml" | transform.Unmarshal -}}
@@ -160,7 +184,7 @@
 {{- end -}}
 
 {{- /* Mapbox GL */ -}}
-{{- if (.Scratch.Get "this").mapbox -}}
+{{- if or $contentAssets.mapbox $this.mapbox -}}
     {{- $source := $cdn.mapboxGLCSS | default "lib/mapbox-gl/mapbox-gl.min.css" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
     {{- $source := $cdn.mapboxGLJS | default "lib/mapbox-gl/mapbox-gl.min.js" -}}
@@ -170,7 +194,7 @@
 {{- end -}}
 
 {{- /* Music */ -}}
-{{- if (.Scratch.Get "this").music -}}
+{{- if or $contentAssets.music $this.music -}}
     {{- /* APlayer */ -}}
     {{- $source := $cdn.aplayerCSS | default "lib/aplayer/APlayer.min.css" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
@@ -206,7 +230,7 @@
     {{- dict "Source" . "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 
-{{- with (.Scratch.Get "this").styleArr -}}
+{{- with $styleArr -}}
     {{- $content := delimit . "" -}}
     {{- $path := substr (md5 $content) 0 6 | printf "css/%v" -}}
     {{- $options := printf "%v.min.css" $path | dict "targetPath" | merge (dict "outputStyle" "compressed") -}}
@@ -219,7 +243,7 @@
 {{- /* Theme script */ -}}
 {{- dict "Source" "js/theme.js" "JSBuild" true "Minify" true "TargetPath" "js/theme.js" "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 
-{{- with (.Scratch.Get "this").scriptArr -}}
+{{- with $scriptArr -}}
     {{- delimit . "\n" | dict "Content" | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 

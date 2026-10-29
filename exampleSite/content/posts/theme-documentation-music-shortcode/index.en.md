@@ -113,6 +113,10 @@ The rendered output looks like this:
 
 The `music` shortcode has other named parameters applying to the above three ways:
 
+* **api** *[optional]*
+
+    {{< version 1.0.0 >}} Meting API URL, only applying to the music platform URL automatic identification and the custom music platform, default value is `params.page.music.api` in the [theme configuration](../theme-documentation-basics#site-configuration).
+
 * **theme** *[optional]*
 
     {{< version 0.2.0 changed >}} Main color of the music player, default value is `#448aff`.

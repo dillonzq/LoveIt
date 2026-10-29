@@ -16,10 +16,10 @@ title = "LoveIt"
 defaultContentLanguage = "en"
 # language code ["en", "zh-CN", "fr", "pl", ...]
 # 网站语言, 仅在这里 CN 大写 ["en", "zh-CN", "fr", "pl", ...]
-languageCode = "en"
+locale = "en"
 # language name ["English", "简体中文", "Français", "Polski", ...]
 # 语言名称 ["English", "简体中文", "Français", "Polski", ...]
-languageName = "English"
+label = "English"
 # whether to include Chinese/Japanese/Korean
 # 是否包括中日韩文字
 hasCJKLanguage = false
@@ -212,10 +212,10 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     themeColor = "#ffffff"
     # Safari mask icon color
     # Safari 图标颜色
-    iconColor = "#5bbad5"
+    iconColor = "#1c1c1e"
     # Windows v8-11 tile color
     # Windows v8-11 磁贴颜色
-    tileColor = "#da532c"
+    tileColor = "#ffffff"
 
   # Security config
   # 安全配置
@@ -263,8 +263,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       distance = 100
       ignoreLocation = false
     [params.search.pagefind]
-      # Pagefind base path (run "npx pagefind --site public" after hugo build)
-      # Pagefind 基础路径 (在 hugo 构建后运行 "npx pagefind --site public")
+      # Pagefind base path (run "npx pagefind --site public --output-subdir _pagefind" after hugo build)
+      # Pagefind 基础路径 (在 hugo 构建后运行 "npx pagefind --site public --output-subdir _pagefind")
       basePath = "/_pagefind/"
 
   # Home page config
@@ -488,6 +488,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # whether to add FullscreenControl (https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol)
       # 是否添加 FullscreenControl (https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol)
       fullscreen = true
+    # MetingJS config for the music shortcode (MetingJS https://github.com/metowolf/MetingJS)
+    # music shortcode 的 MetingJS 配置 (MetingJS https://github.com/metowolf/MetingJS)
+    [params.page.music]
+      # Meting API URL, supports :server, :type, :id, :auth and :r placeholders
+      # Meting API 地址, 支持 :server, :type, :id, :auth 和 :r 占位符
+      api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&r=:r"
     # Social share links in post page
     # 文章页面的分享信息设置
     [params.page.share]
@@ -744,8 +750,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # Compatibility config
   # 兼容性设置
   [params.compatibility]
-    # whether to use Polyfill.io to be compatible with older browsers
-    # 是否使用 Polyfill.io 来兼容旧式浏览器
+    # whether to use the Polyfill service (cdnjs) to be compatible with older browsers
+    # 是否使用 Polyfill 服务 (cdnjs) 来兼容旧式浏览器
     polyfill = false
     # whether to use object-fit-images to be compatible with older browsers
     # 是否使用 object-fit-images 来兼容旧式浏览器
@@ -835,8 +841,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 [languages]
   [languages.en]
     weight = 1
-    languageCode = "en"
-    languageName = "English"
+    locale = "en"
+    label = "English"
     hasCJKLanguage = false
     copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
     [languages.en.menu]
@@ -891,7 +897,6 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     [languages.en.params]
       [languages.en.params.search]
         enable = true
-        type = "algolia"
         contentLength = 4000
         placeholder = ""
         maxResultLength = 10
@@ -933,8 +938,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
   [languages.zh-cn]
     weight = 2
-    languageCode = "zh-CN"
-    languageName = "简体中文"
+    locale = "zh-CN"
+    label = "简体中文"
     hasCJKLanguage = true
     copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
     [languages.zh-cn.menu]
@@ -988,7 +993,6 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     [languages.zh-cn.params]
       [languages.zh-cn.params.search]
         enable = true
-        type = "algolia"
         contentLength = 4000
         placeholder = ""
         maxResultLength = 10
