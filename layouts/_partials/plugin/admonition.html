@@ -1,0 +1,46 @@
+{{- $type := .Type | default "note" -}}
+{{- $open := .Open | ne false -}}
+{{- $inner := .Inner -}}
+
+{{- $aliases := dict "summary" "abstract" -}}
+{{- $aliases  = dict "tldr" "abstract" | merge $aliases -}}
+{{- $aliases  = dict "hint" "tip" | merge $aliases -}}
+{{- $aliases  = dict "important" "tip" | merge $aliases -}}
+{{- $aliases  = dict "check" "success" | merge $aliases -}}
+{{- $aliases  = dict "done" "success" | merge $aliases -}}
+{{- $aliases  = dict "help" "question" | merge $aliases -}}
+{{- $aliases  = dict "faq" "question" | merge $aliases -}}
+{{- $aliases  = dict "warn" "warning" | merge $aliases -}}
+{{- $aliases  = dict "caution" "warning" | merge $aliases -}}
+{{- $aliases  = dict "attention" "warning" | merge $aliases -}}
+{{- $aliases  = dict "fail" "failure" | merge $aliases -}}
+{{- $aliases  = dict "missing" "failure" | merge $aliases -}}
+{{- $aliases  = dict "error" "danger" | merge $aliases -}}
+{{- $aliases  = dict "cite" "quote" | merge $aliases -}}
+{{- $type = index $aliases $type | default $type -}}
+{{- $title := .Title | default (T $type) -}}
+
+{{- $iconMap := dict "note" "far fa-pen-to-square" -}}
+{{- $iconMap  = dict "abstract" "far fa-rectangle-list" | merge $iconMap -}}
+{{- $iconMap  = dict "info" "fas fa-info" | merge $iconMap -}}
+{{- $iconMap  = dict "todo" "far fa-square-check" | merge $iconMap -}}
+{{- $iconMap  = dict "tip" "far fa-lightbulb" | merge $iconMap -}}
+{{- $iconMap  = dict "success" "far fa-circle-check" | merge $iconMap -}}
+{{- $iconMap  = dict "question" "far fa-circle-question" | merge $iconMap -}}
+{{- $iconMap  = dict "warning" "fas fa-exclamation" | merge $iconMap -}}
+{{- $iconMap  = dict "failure" "far fa-circle-xmark" | merge $iconMap -}}
+{{- $iconMap  = dict "danger" "fas fa-bolt" | merge $iconMap -}}
+{{- $iconMap  = dict "bug" "fas fa-bug" | merge $iconMap -}}
+{{- $iconMap  = dict "example" "fas fa-list-ol" | merge $iconMap -}}
+{{- $iconMap  = dict "quote" "fas fa-quote-right" | merge $iconMap -}}
+
+<div class="details admonition {{ $type }}{{ if $open }} open{{ end }}">
+    <div class="details-summary admonition-title">
+        <i class="icon {{ index $iconMap $type }}" aria-hidden="true"></i>{{ $title }}<i class="details-icon fas fa-angle-right" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+        <div class="admonition-content">
+            {{- $inner -}}
+        </div>
+    </div>
+</div>

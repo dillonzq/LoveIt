@@ -1,0 +1,7 @@
+{{- $params := partial "function/params.html" .Page -}}
+{{- $render := $params.code.render | default dict -}}
+{{- if $render.goat | default true -}}
+    {{- partial "plugin/goat.html" . -}}
+{{- else -}}
+    {{- template "_markup/render-codeblock.html" . -}}
+{{- end -}}

@@ -1,7 +1,9 @@
+@use "sass:meta";
+
 :root {
   // ========== Global ========== //
   // Font and Line Height
-  --global-font-family: #{inspect($global-font-family)};
+  --global-font-family: #{meta.inspect($global-font-family)};
   --global-font-size: #{$global-font-size};
   --global-font-weight: #{$global-font-weight};
   --global-line-height: #{$global-line-height};
@@ -12,7 +14,7 @@
   --header-height: #{$header-height};
 
   // Font family and size of the header title
-  --header-title-font-family: #{inspect($header-title-font-family)};
+  --header-title-font-family: #{meta.inspect($header-title-font-family)};
   --header-title-font-size: #{$header-title-font-size};
   // ========== Header ========== //
 
@@ -24,7 +26,7 @@
 
   // ========== Code ========== //
   // Font family and size of the code
-  --code-font-family: #{inspect($code-font-family)};
+  --code-font-family: #{meta.inspect($code-font-family)};
   --code-font-size: #{$code-font-size};
   // ========== Code ========== //
 }

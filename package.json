@@ -1,31 +1,29 @@
 {
   "name": "loveit-src",
-  "version": "0.3.1",
+  "version": "1.0.0",
   "description": "LoveIt theme source file",
   "private": true,
   "devDependencies": {
-    "@babel/cli": "^7.26.4",
-    "@babel/core": "^7.26.9",
-    "@babel/preset-env": "^7.26.9",
-    "babelify": "^10.0.0",
-    "browserify": "^17.0.1",
-    "core-js": "^3.40.0",
-    "husky": "^9.1.7",
-    "segmentit": "^2.0.3"
+    "segmentit": "^2.0.3",
+    "sass-embedded": "1.106.1",
+    "pagefind": "1.5.2",
+    "@playwright/test": "1.64.1",
+    "esbuild": "0.28.2"
   },
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
-    "prepare": "husky install",
-    "compile": "npx babel src/js --out-file assets/js/theme.js",
-    "compile-lunr-segmentit": "browserify src/lib/lunr/lunr.segmentit.js -o assets/lib/lunr/lunr.segmentit.js -t babelify --presets @babel/preset-env",
-    "hugo": "hugo --source exampleSite --buildDrafts --gc",
-    "hugo-development": "hugo --source exampleSite --buildDrafts --gc --minify --environment development",
-    "hugo-production": "hugo --source exampleSite --gc --minify --environment production",
-    "hugo-server": "hugo server --source exampleSite --buildDrafts --disableFastRender",
-    "hugo-server-development": "hugo server --source exampleSite --buildDrafts --disableFastRender --environment development",
-    "hugo-server-production": "hugo server --source exampleSite --minify --disableFastRender --environment production",
-    "htmlproofer": "htmlproofer exampleSite/public --disable-external true --ignore-missing-alt true",
-    "copy-resources": "cp -rf exampleSite/resources ."
+    "compile-lunr-segmentit": "node scripts/compile-lunr.mjs",
+    "hugo": "node scripts/hugo.mjs build --buildDrafts --gc",
+    "hugo-development": "node scripts/hugo.mjs build --buildDrafts --gc --minify --environment development",
+    "hugo-production": "node scripts/hugo.mjs build --gc --minify --environment production",
+    "hugo-server": "node scripts/hugo.mjs server --buildDrafts --disableFastRender",
+    "hugo-server-development": "node scripts/hugo.mjs server --buildDrafts --disableFastRender --environment development",
+    "hugo-server-production": "node scripts/hugo.mjs server --minify --disableFastRender --environment production",
+    "htmlproofer": "bundle exec htmlproofer exampleSite/public --disable-external --ignore-missing-alt --no-enforce-https",
+    "build": "node scripts/hugo.mjs build --gc --minify --environment production --panicOnWarning",
+    "dev": "node scripts/hugo.mjs server --buildDrafts --disableFastRender --environment development",
+    "hugo:version": "node scripts/hugo.mjs version",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "playwright test"
   },
   "repository": {
     "type": "git",
@@ -40,5 +38,8 @@
   "bugs": {
     "url": "https://github.com/dillonzq/LoveIt/issues"
   },
-  "homepage": "https://github.com/dillonzq/LoveIt#readme"
+  "homepage": "https://github.com/dillonzq/LoveIt#readme",
+  "engines": {
+    "node": ">=24"
+  }
 }

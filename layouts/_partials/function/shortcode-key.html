@@ -1,0 +1,6 @@
+{{- /* A key unique on the page that sorts in document order: .Ordinal only counts within the parent shortcode. */ -}}
+{{- $key := printf "%06d" .Ordinal -}}
+{{- with .Parent -}}
+    {{- $key = printf "%v/%v" (partial "function/shortcode-key.html" .) $key -}}
+{{- end -}}
+{{- return $key -}}

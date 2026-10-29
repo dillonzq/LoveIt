@@ -1,0 +1,1 @@
+{{- dict "Content" (trim .Inner "\n") "Page" .Page "Key" (partial "function/shortcode-key.html" . | printf "%s-%s" .Name) | partial "plugin/mermaid.html" -}}

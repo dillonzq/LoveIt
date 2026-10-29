@@ -1,0 +1,2 @@
+{{- /* Map keys are ranged in order, so scripts keep their order in the content. */ -}}
+{{- trim .Inner "\n" | .Page.Store.SetInMap "contentScript" (partial "function/shortcode-key.html" .) -}}

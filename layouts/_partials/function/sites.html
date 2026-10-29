@@ -1,0 +1,7 @@
+{{- $sites := slice -}}
+{{- if ge hugo.Version "0.156.0" -}}
+    {{- $sites = hugo.Sites -}}
+{{- else -}}
+    {{- $sites = .Sites -}}
+{{- end -}}
+{{- return $sites -}}

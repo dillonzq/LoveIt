@@ -1,0 +1,11 @@
+{{- /* Pure site-level data; page Scratch updates stay in init.html. */ -}}
+{{- $cdn := .Params.cdn | default dict -}}
+{{- with $cdn.data -}}
+    {{- $data := printf "data/cdn/%v" . | resources.Get | transform.Unmarshal -}}
+    {{- $cdn = dict "simpleIconsPrefix" $data.prefix.simpleIcons -}}
+    {{- $prefix := $data.prefix.libFiles | default "" -}}
+    {{- range $key, $value := $data.libFiles -}}
+        {{- $cdn = merge $cdn (dict $key (printf "%v%v" $prefix $value)) -}}
+    {{- end -}}
+{{- end -}}
+{{- return $cdn -}}

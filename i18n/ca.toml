@@ -162,6 +162,9 @@ other = "Resum"
 [info]
 other = "Informació"
 
+[todo]
+other = "Pendent"
+
 [tip]
 other = "Consell"
 

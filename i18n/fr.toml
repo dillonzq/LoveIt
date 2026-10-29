@@ -165,6 +165,9 @@ other = "Résumé"
 [info]
 other = "Info"
 
+[todo]
+other = "À faire"
+
 [tip]
 other = "Astuces"
 

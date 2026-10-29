@@ -166,8 +166,11 @@ other = "摘要"
 [info]
 other = "信息"
 
+[todo]
+other = "待办"
+
 [tip]
-other = "技巧"
+other = "提示"
 
 [success]
 other = "成功"

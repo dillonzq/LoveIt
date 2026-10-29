@@ -1,0 +1,23 @@
+{{- .Scratch.Set "version" "1.0.0" -}}
+
+{{- $params := partial "function/params.html" . -}}
+
+{{- if eq hugo.Environment "production" -}}
+    {{- .Scratch.Set "cdn" (partialCached "function/cdn.html" .Site .Site.Language.Lang) -}}
+    {{- .Scratch.Set "fingerprint" .Site.Params.fingerprint -}}
+    {{- .Scratch.Set "analytics" .Site.Params.analytics -}}
+    {{- .Scratch.Set "comment" $params.comment -}}
+    {{- if eq .Params.comment true -}}
+        {{- .Scratch.Set "comment" .Site.Params.comment -}}
+    {{- else if eq .Params.comment false -}}
+        {{- .Scratch.Set "comment" dict -}}
+    {{- end -}}
+{{- else if eq .Site (partial "function/sites.html" .).Default -}}
+    {{- warnf "Current environment is not \"production\". The \"comment system\", \"CDN\" and \"fingerprint\" will be disabled.\n" -}}
+    {{- warnf "当前运行环境不是 \"production\". \"评论系统\", \"CDN\" 和 \"fingerprint\" 不会启用.\n" -}}
+{{- end -}}
+
+{{- .Scratch.Set "params" $params -}}
+{{- .Scratch.Set "this" dict -}}
+
+{{- partial "plugin/compatibility.html" . -}}

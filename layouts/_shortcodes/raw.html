@@ -1,0 +1,2 @@
+{{- $id := dict "Content" .Inner "Page" .Page "Key" (partial "function/shortcode-key.html" . | printf "%s-%s" .Name) | partial "function/id.html" -}}
+<data id="{{ $id }}" data-raw></data>

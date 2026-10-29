@@ -1,0 +1,9 @@
+{{- $inner := .Inner | .Page.RenderString -}}
+{{- $options := .Inner | .Page.RenderString | dict "Inner" -}}
+
+{{- if .IsNamedParams -}}
+    {{- $options = dict "Type" (.Get "type") "Title" (.Get "title") "Open" (.Get "open") | merge $options -}}
+{{- else -}}
+    {{- $options = dict "Type" (.Get 0) "Title" (.Get 1) "Open" (.Get 2) | merge $options -}}
+{{- end -}}
+{{- partial "plugin/admonition.html" $options -}}

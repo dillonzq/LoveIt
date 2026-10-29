@@ -162,6 +162,9 @@ other = "Abstrak"
 [info]
 other = "Info"
 
+[todo]
+other = "Todo"
+
 [tip]
 other = "Kiat"
 

@@ -1,4 +1,0 @@
-#!/bin/zsh
-. "$(dirname "$0")/_/husky.sh"
-
-npm run compile && npm run compile-lunr-segmentit && npm run hugo-production && npm run copy-resources && git add resources assets

@@ -10,7 +10,7 @@
 | [Cookie Consent](https://github.com/osano/cookieconsent)                            | cookieconsent     |   3.1.1 |
 | [Apache ECharts](https://github.com/apache/echarts)                                 | echarts           |   5.6.0 |
 | [emoji-data](https://github.com/iamcal/emoji-data)                                  | emoji-data        |  15.1.2 |
-| [Font Awesome Free](https://github.com/FortAwesome/Font-Awesome)                    | fontawesome-free  |   6.7.2 |
+| [Font Awesome Free](https://github.com/FortAwesome/Font-Awesome)                    | fontawesome-free  |   7.2.0 |
 | [Gitalk](https://github.com/gitalk/gitalk)                                          | gitalk            |   1.7.2 |
 | [KaTeX](https://github.com/KaTeX/KaTeX)                                             | katex             | 0.16.21 |
 | [lazysizes](https://github.com/aFarkas/lazysizes)                                   | lazysizes         |   5.3.2 |
@@ -22,7 +22,7 @@
 | [modern-normalize](https://github.com/sindresorhus/modern-normalize)                | modern-normalize  |   3.0.1 |
 | [object-fit-images](https://github.com/fregante/object-fit-images)                  | object-fit-images |   3.2.4 |
 | [sharer.js](https://github.com/ellisonleao/sharer.js)                               | sharer            |   0.5.2 |
-| [Simple Icons](https://github.com/simple-icons/simple-icons)                        | simple-icons      | 15.14.0 |
+| [Simple Icons](https://github.com/simple-icons/simple-icons)                        | simple-icons      |  16.9.0 |
 | [Twemoji](https://github.com/twitter/twemoji)                                       | twemoji           |  14.0.2 |
 | [TypeIt](https://github.com/alexmacarthur/typeit)                                   | typeit            |   8.6.0 |
 | [Valine](https://github.com/xCss/Valine)                                            | valine            |   1.5.3 |

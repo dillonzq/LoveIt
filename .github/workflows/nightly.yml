@@ -1,0 +1,29 @@
+name: Nightly
+
+on:
+  schedule:
+    - cron: "0 10 * * *"
+  workflow_dispatch:
+    inputs:
+      hugo_version:
+        description: "Hugo version (e.g. 0.146.0 or latest)"
+        required: true
+        default: "latest"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nightly
+  cancel-in-progress: true
+
+jobs:
+  build-and-validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        hugo_env: [production, development]
+    uses: ./.github/workflows/build.yml
+    with:
+      hugo_version: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.hugo_version || 'latest' }}
+      hugo_env: ${{ matrix.hugo_env }}

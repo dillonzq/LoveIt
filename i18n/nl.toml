@@ -159,6 +159,9 @@ other = "Abstract"
 [info]
 other = "Info"
 
+[todo]
+other = "Te doen"
+
 [tip]
 other = "Tip"
 

@@ -1,10 +1,18 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/logo/logo-wordmark-dark.svg">
+    <img src="images/logo/logo-wordmark-light.svg" alt="LoveIt" height="72">
+  </picture>
+</p>
+
 # LoveIt Theme | Hugo
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
-[![Hugo](https://img.shields.io/badge/Hugo-%5E0.128.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%5E0.146.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
-[![CircleCI](https://circleci.com/gh/dillonzq/LoveIt/tree/master.svg?style=svg)](https://circleci.com/gh/dillonzq/LoveIt/tree/master)
+[![CI](https://github.com/dillonzq/LoveIt/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/dillonzq/LoveIt/actions/workflows/ci.yml)
+[![Nightly](https://github.com/dillonzq/LoveIt/actions/workflows/nightly.yml/badge.svg?branch=master&event=schedule)](https://github.com/dillonzq/LoveIt/actions/workflows/nightly.yml)
 
 English README | [简体中文说明](https://github.com/dillonzq/LoveIt/blob/master/README.zh-cn.md)
 
@@ -85,7 +93,7 @@ I hope you will LoveIt ❤️!
 
 * **Gravatar** supported by [Gravatar](https://gravatar.com)
 * Local **Avatar** supported
-* Up to **81** social links supported
+* Up to **84** social links supported
 * Up to **27** share sites supported
 * **Disqus** comment system supported by [Disqus](https://disqus.com)
 * **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
@@ -125,14 +133,17 @@ I hope you will LoveIt ❤️!
 Build Documentation Locally:
 
 ```bash
-hugo server --source=exampleSite
+npm ci --ignore-scripts
+npm run dev
 ```
+
+Development uses `.hvm` to pin Hugo and npm to provide Dart Sass. Run `npm run build` for production; see the [development guide](docs/development.md) for version overrides, search and tests.
 
 ## Compatibility
 
 | LoveIt branch or version | Supported Hugo versions |
 |:-------------------------|:-----------------------:|
-| master(Unstable)         |        ≥ 0.128.0        |
+| master(Unstable)         |       >= 0.146.0        |
 | **0.3.X(Recommended)**   |    0.128.0 - 0.145.0    |
 | 0.2.X(Outdated)          |    0.68.0 - 0.127.0     |
 
@@ -163,6 +174,7 @@ LoveIt supports the following languages:
 * Hindi
 * Dutch
 * Bengali
+* Japanese
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
 [Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)

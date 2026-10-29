@@ -1,0 +1,6 @@
+{{- $content := .Inner | transform.Unmarshal | jsonify -}}
+{{- $id := dict "Content" $content "Page" .Page "Key" (partial "function/shortcode-key.html" . | printf "%s-%s" .Name) | partial "function/id.html" -}}
+{{- $width := cond .IsNamedParams (.Get "width") (.Get 0) | default "100%" -}}
+{{- $height := cond .IsNamedParams (.Get "height") (.Get 1) | default "30rem" -}}
+<div class="echarts" id="{{ $id }}" style="width: {{ $width }}; height: {{ $height }};"></div>
+{{- .Page.Store.SetInMap "contentAssets" "echarts" true -}}

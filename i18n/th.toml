@@ -165,6 +165,9 @@ other = "บทคัดย่อ"
 [info]
 other = "ข้อมูล"
 
+[todo]
+other = "งานที่ต้องทำ"
+
 [tip]
 other = "ทิป"
 

@@ -1,0 +1,48 @@
+{{- /* lazysizes and lightgallery */ -}}
+{{- $src := .Src -}}
+{{- $width := .Width -}}
+{{- $height := .Height -}}
+{{- with dict "Path" $src "Resources" .Resources | partial "function/resource.html" -}}
+    {{- $src = .RelPermalink -}}
+    {{ if not (eq .MediaType.SubType "svg") }}
+        {{- $width = $width | default .Width -}}
+        {{- $height = $height | default .Height -}}
+    {{ end }}
+{{- end -}}
+
+{{- $small := .SrcSmall | default $src -}}
+{{- with dict "Path" .SrcSmall "Resources" .Resources | partial "function/resource.html" -}}
+    {{- $small = .RelPermalink -}}
+{{- end -}}
+
+{{- $large := .SrcLarge | default $src -}}
+{{- with dict "Path" .SrcLarge "Resources" .Resources | partial "function/resource.html" -}}
+    {{- $large = .RelPermalink -}}
+{{- end -}}
+
+{{- $alt := .Alt | default $src -}}
+{{- $loading := resources.Get "svg/loading.svg" | minify -}}
+{{- if .Linked -}}
+    <a class="lightgallery" href="{{ $large | safeURL }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $small | safeURL }}"{{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
+        <img
+            class="{{ if not .Eager }}lazyload{{ end }}{{ with .Class }} {{ . }}{{ end }}"
+            src="{{ if .Eager }}{{ $src | safeURL }}{{ else }}{{ $loading.RelPermalink }}{{ end }}"
+            {{ if .Eager }}loading="eager" fetchpriority="high" decoding="async"{{ else }}data-src="{{ $src | safeURL }}"{{ end }}
+            {{ if .Eager }}srcset{{ else }}data-srcset{{ end }}="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
+            {{ if not .Eager }}data-sizes="auto"{{ end }}
+            alt="{{ $alt }}"
+            {{- with $width }} width="{{ . }}"{{ end }}
+            {{- with $height }} height="{{ . }}"{{ end }} />
+    </a>
+{{- else -}}
+    <img
+        class="{{ if not .Eager }}lazyload{{ end }}{{ with .Class }} {{ . }}{{ end }}"
+        src="{{ if .Eager }}{{ $src | safeURL }}{{ else }}{{ $loading.RelPermalink }}{{ end }}"
+        {{ if .Eager }}loading="eager" fetchpriority="high" decoding="async"{{ else }}data-src="{{ $src | safeURL }}"{{ end }}
+        {{ if .Eager }}srcset{{ else }}data-srcset{{ end }}="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
+        {{ if not .Eager }}data-sizes="auto"{{ end }}
+        alt="{{ $alt }}"
+        title="{{ .Title | default $alt }}"
+        {{- with $width }} width="{{ . }}"{{ end }}
+        {{- with $height }} height="{{ . }}"{{ end }} />
+{{- end -}}

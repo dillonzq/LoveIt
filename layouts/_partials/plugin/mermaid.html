@@ -1,0 +1,3 @@
+{{- $id := dict "Content" .Content "Page" .Page "Key" .Key | partial "function/id.html" -}}
+<div class="mermaid" id="{{ $id }}">{{ .Content }}</div>
+{{- .Page.Store.SetInMap "contentAssets" "mermaid" true -}}

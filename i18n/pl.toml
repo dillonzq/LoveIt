@@ -162,6 +162,9 @@ other = "Streszczenie"
 [info]
 other = "Info"
 
+[todo]
+other = "Do zrobienia"
+
 [tip]
 other = "Wskazówka"
 

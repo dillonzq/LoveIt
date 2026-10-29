@@ -1,10 +1,14 @@
 # Hugo default output directory
 public/
+/resources/
 /exampleSite/resources/
-/exampleSite/.hugo_build.lock
+.hugo_build.lock
+**/assets/jsconfig.json
 
 node_modules/
 build/
+test-results/
+playwright-report/
 
 ## OS Files
 # Windows

@@ -54,7 +54,7 @@ John Gruber, Markdown 的作者如是说:
 话不多说, 我们来回顾一下 Markdown 的主要语法以及生成的 HTML 样式!
 
 {{< admonition tip >}}
-:(far fa-bookmark fa-fw): 将此页保存为书签，以备将来参考!
+:(far fa-bookmark): 将此页保存为书签，以备将来参考!
 {{< /admonition >}}
 
 ## 1 标题

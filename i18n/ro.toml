@@ -165,6 +165,9 @@ other = "Rezumat"
 [info]
 other = "Info"
 
+[todo]
+other = "De făcut"
+
 [tip]
 other = "Sfat"
 

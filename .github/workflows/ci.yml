@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        hugo_version: [minimum, locked]
+        hugo_env: [production, development]
+    uses: ./.github/workflows/build.yml
+    with:
+      hugo_version: ${{ matrix.hugo_version }}
+      hugo_env: ${{ matrix.hugo_env }}
+
+  ci-gate:
+    runs-on: ubuntu-latest
+    needs: [ build-and-validate ]
+    if: always()
+    steps:
+      - run: |
+          echo "build-and-validate result: ${{ needs.build-and-validate.result }}"
+          if [ "${{ needs.build-and-validate.result }}" != "success" ]; then
+            exit 1
+          fi

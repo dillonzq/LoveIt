@@ -53,7 +53,7 @@ math:
 例如 **链接**, **图片**, `image` shortcode, `music` shortcode 和**前置参数**中的部分参数.
 
 页面资源或者 **assets** 目录中的[图片处理](https://gohugo.io/content-management/image-processing/)会在未来的版本中得到支持.
-非常酷的功能! :(far fa-grin-squint fa-fw):
+非常酷的功能! :(far fa-grin-squint):
 {{< /admonition >}}
 
 ## 2 前置参数 {#front-matter}
@@ -496,14 +496,14 @@ $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 从 [Font Awesome 网站](https://fontawesome.com/icons?d=gallery) 上获取所需的图标 `class`.
 
 ```markdown
-去露营啦! {?:}(fas fa-campground fa-fw): 很快就回来.
+去露营啦! {?:}(fas fa-campground): 很快就回来.
 
 真开心! {?:}(far fa-grin-tears):
 ```
 
 呈现的输出效果如下:
 
-去露营啦! :(fas fa-campground fa-fw): 很快就回来.
+去露营啦! :(fas fa-campground): 很快就回来.
 
 真开心! :(far fa-grin-tears):
 

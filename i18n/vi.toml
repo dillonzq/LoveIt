@@ -165,6 +165,9 @@ other = "Tóm tắt"
 [info]
 other = "Thông tin"
 
+[todo]
+other = "Cần làm"
+
 [tip]
 other = "Mẹo"
 

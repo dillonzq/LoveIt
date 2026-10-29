@@ -40,7 +40,7 @@ Hugo **extended** version is necessary for `style` shortcode.
 The `style` shortcode has two positional parameters.
 
 The **first** one is the custom style content,
-which supports nesting syntax in [:(fab fa-sass fa-fw): SASS](https://sass-lang.com/documentation/style-rules/declarations#nesting)
+which supports nesting syntax in [:(fab fa-sass): SASS](https://sass-lang.com/documentation/style-rules/declarations#nesting)
 and `&` referring to this parent HTML element.
 
 And the **second** one is the tag name of the HTML element wrapping the content you want to change style, and whose default value is `div`.
@@ -65,7 +65,9 @@ This is a **right-aligned** paragraph.
 
 `link` shortcode is an alternative to [Markdown link syntax](../basic-markdown-syntax#links). `link` shortcode can provide some other features and can be used in code blocks.
 
+{{< admonition tip >}}
 {{< version 0.2.10 >}} The complete usage of [local resource references](../theme-documentation-content#contents-organization) is supported.
+{{< /admonition >}}
 
 The `link` shortcode has the following named parameters:
 
@@ -131,7 +133,9 @@ The rendered output looks like this (hover over the link, there should be a tool
 
 `image` shortcode is an alternative to [`figure` shortcode](../theme-documentation-built-in-shortcodes#figure). `image` shortcode can take full advantage of the dependent libraries of [lazysizes](https://github.com/aFarkas/lazysizes) and [lightGallery](https://github.com/sachinchoolur/lightgallery).
 
+{{< admonition tip >}}
 {{< version 0.2.10 >}} The complete usage of [local resource references](../theme-documentation-content#contents-organization) is supported.
+{{< /admonition >}}
 
 The `image` shortcode has the following named parameters:
 
@@ -195,15 +199,19 @@ The rendered output looks like this:
 
 ## 4 admonition
 
-The `admonition` shortcode supports **12** types of banners to help you put notice in your page.
+{{< version 1.0.0 changed >}}
+
+The `admonition` shortcode supports **13** types of admonition banners to help you put notice in your page.
 
 *Markdown or HTML format in the content is supported.*
 
-{{< admonition >}}
+{{< admonition note >}}
 A **note** banner
 {{< /admonition >}}
 
 {{< admonition abstract >}}
+**Aliases**: `summary`, `tldr`
+
 An **abstract** banner
 {{< /admonition >}}
 
@@ -211,27 +219,45 @@ An **abstract** banner
 A **info** banner
 {{< /admonition >}}
 
+{{< admonition todo >}}
+{{< version 1.0.0 >}}
+
+A **todo** banner
+{{< /admonition >}}
+
 {{< admonition tip >}}
+**Aliases**: `hint`, `important`
+
 A **tip** banner
 {{< /admonition >}}
 
 {{< admonition success >}}
+**Aliases**: `check`, `done`
+
 A **success** banner
 {{< /admonition >}}
 
 {{< admonition question >}}
+**Aliases**: `help`, `faq`
+
 A **question** banner
 {{< /admonition >}}
 
 {{< admonition warning >}}
+**Aliases**: `warn`, `caution`, `attention`
+
 A **warning** banner
 {{< /admonition >}}
 
 {{< admonition failure >}}
+**Aliases**: `fail`, `missing`
+
 A **failure** banner
 {{< /admonition >}}
 
 {{< admonition danger >}}
+**Aliases**: `error`
+
 A **danger** banner
 {{< /admonition >}}
 
@@ -244,6 +270,8 @@ An **example** banner
 {{< /admonition >}}
 
 {{< admonition quote >}}
+**Aliases**: `cite`
+
 A **quote** banner
 {{< /admonition >}}
 
@@ -265,11 +293,11 @@ Example `admonition` input:
 
 ```markdown
 {{</* admonition type=tip title="This is a tip" open=false */>}}
-A **tip** banner
+This is a tip
 {{</* /admonition */>}}
 Or
 {{</* admonition tip "This is a tip" false */>}}
-A **tip** banner
+This is a tip
 {{</* /admonition */>}}
 ```
 
@@ -323,7 +351,7 @@ The full documentation is provided in [Theme Documentation - typeit Shortcode](.
 
 {{< version 0.2.8 >}}
 
-`script` is a shortcode to insert custom **:(fab fa-js fa-fw): Javascript** in your post.
+`script` is a shortcode to insert custom **:(fab fa-js): Javascript** in your post.
 
 {{< admonition >}}
 The script content can be guaranteed to be executed in order after all third-party libraries are loaded. So you are free to use third-party libraries.
@@ -347,7 +375,7 @@ console.log('Hello LoveIt!');
 
 {{< version 0.2.11 >}}
 
-`raw` is a shortcode to insert raw **:(fab fa-html5 fa-fw): HTML** content in your post.
+`raw` is a shortcode to insert raw **:(fab fa-html5): HTML** content in your post.
 This is useful when you want to include some Markdown content to **avoid being rendered or escaped** by Hugo.
 
 Example `raw` input:

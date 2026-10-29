@@ -162,6 +162,9 @@ other = "요약"
 [info]
 other = "정보"
 
+[todo]
+other = "할일"
+
 [tip]
 other = "팁"
 

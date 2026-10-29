@@ -1,0 +1,3 @@
+{{- /* Page params over the site page defaults. Content templates call this directly: */ -}}
+{{- /* the content may be rendered before init.html runs for the current output. */ -}}
+{{- return merge .Site.Params.page .Params -}}

@@ -1,0 +1,21 @@
+{{- /* ID */ -}}
+{{- /* Content (shortcodes and render hooks) passes "Page" and a "Key" unique on the page. Its content */ -}}
+{{- /* is rendered once and may be reused by any output, even one that rendered it before init.html */ -}}
+{{- /* reset the per-output "this" map, so its IDs come from the key and data, and the data lives in */ -}}
+{{- /* the page Store; rendering it again overwrites the same entries. */ -}}
+{{- /* Layouts pass "Scratch" and count within the current output. */ -}}
+{{- $id := "" -}}
+{{- if .Page -}}
+    {{- $id = substr (printf "%v|%v" .Key (jsonify .Content) | md5) 0 12 | printf "id-%v" -}}
+    {{- with .Content -}}
+        {{- $.Page.Store.SetInMap "contentData" $id . -}}
+    {{- end -}}
+{{- else -}}
+    {{- $count := (.Scratch.Get "this").count | default 1 -}}
+    {{- $id = printf "id-%d" $count -}}
+    {{- $count | add 1 | .Scratch.SetInMap "this" "count" -}}
+    {{- with .Content -}}
+        {{- dict $id . | dict "data" | dict "config" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
+    {{- end -}}
+{{- end -}}
+{{- return $id -}}

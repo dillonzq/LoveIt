@@ -159,6 +159,9 @@ other = "সারাংশ"
 [info]
 other = "তথ্য"
 
+[todo]
+other = "টুডু"
+
 [tip]
 other = "টিপ"
 

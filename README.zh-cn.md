@@ -1,10 +1,18 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/logo/logo-wordmark-dark.svg">
+    <img src="images/logo/logo-wordmark-light.svg" alt="LoveIt" height="72">
+  </picture>
+</p>
+
 # LoveIt 主题 | Hugo
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
-[![Hugo](https://img.shields.io/badge/Hugo-%5E0.128.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%5E0.146.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
-[![CircleCI](https://circleci.com/gh/dillonzq/LoveIt/tree/master.svg?style=svg)](https://circleci.com/gh/dillonzq/LoveIt/tree/master)
+[![CI](https://github.com/dillonzq/LoveIt/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/dillonzq/LoveIt/actions/workflows/ci.yml)
+[![Nightly](https://github.com/dillonzq/LoveIt/actions/workflows/nightly.yml/badge.svg?branch=master&event=schedule)](https://github.com/dillonzq/LoveIt/actions/workflows/nightly.yml)
 
 [English README](https://github.com/dillonzq/LoveIt/blob/master/README.md) | 简体中文说明
 
@@ -80,7 +88,7 @@
 
 * 支持 **[Gravatar](https://gravatar.com)** 头像
 * 支持本地**头像**
-* 支持多达 **81** 种社交链接
+* 支持多达 **84** 种社交链接
 * 支持多达 **27** 种网站分享
 * 支持 **[Disqus](https://disqus.com)** 评论系统
 * 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
@@ -120,16 +128,19 @@
 在本地构建文档:
 
 ```bash
-hugo server --source=exampleSite
+npm ci --ignore-scripts
+npm run dev
 ```
+
+开发环境使用 `.hvm` 锁定 Hugo，并通过 npm 提供 Dart Sass。运行 `npm run build` 生成生产站点；多版本、搜索和测试说明见[开发指南](docs/development.md)。
 
 ## 兼容性
 
-| LoveIt 分支或版本  |    支持的 Hugo 版本    |
-|:--------------|:-----------------:|
-| master(不稳定)   |     ≥ 0.128.0     |
-| **0.3.X(推荐)** | 0.128.0 - 0.145.0 |
-| 0.2.X(过时)     | 0.68.0 - 0.127.0  |
+| LoveIt 分支或版本 | 支持的 Hugo 版本  |
+|:------------------|:-----------------:|
+| master(不稳定)    |    >= 0.146.0     |
+| **0.3.X(推荐)**   | 0.128.0 - 0.145.0 |
+| 0.2.X(过时)       | 0.68.0 - 0.127.0  |
 
 ## 多语言和国际化
 
@@ -158,6 +169,7 @@ LoveIt 支持下列语言:
 * 印地语
 * 荷兰语
 * 孟加拉语
+* 日语
 * [贡献一种新的语言](https://github.com/dillonzq/LoveIt/pulls)
 
 [语言兼容性](https://hugoloveit.com/zh-cn/theme-documentation-basics/#language-compatibility)

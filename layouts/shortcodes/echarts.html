@@ -1,6 +1,0 @@
-{{- $content := .Inner | transform.Unmarshal | jsonify -}}
-{{- $id := dict "Content" $content "Scratch" .Page.Scratch | partial "function/id.html" -}}
-{{- $width := cond .IsNamedParams (.Get "width") (.Get 0) | default "100%" -}}
-{{- $height := cond .IsNamedParams (.Get "height") (.Get 1) | default "30rem" -}}
-<div class="echarts" id="{{ $id }}" style="width: {{ $width }}; height: {{ $height }};"></div>
-{{- .Page.Scratch.SetInMap "this" "echarts" true -}}

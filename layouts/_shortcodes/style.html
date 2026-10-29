@@ -1,0 +1,7 @@
+{{- $content := .Inner | .Page.RenderString -}}
+{{- $id := dict "Page" .Page "Key" (partial "function/shortcode-key.html" . | printf "%s-%s" .Name) | partial "function/id.html" -}}
+{{- $tag := .Get 1 | default "div" -}}
+{{- printf `<%v id="%v">%v</%v>` $tag $id $content $tag | safeHTML -}}
+
+{{- $style := .Get 0 | printf "#%v{%v}" $id -}}
+{{- .Page.Store.SetInMap "contentStyle" $id $style -}}
