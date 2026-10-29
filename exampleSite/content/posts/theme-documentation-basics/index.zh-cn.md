@@ -401,6 +401,10 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       subtitle = "这是我的全新 Hugo 网站"
       # 是否为副标题显示打字机动画
       typeit = true
+      # {{< version 1.0.0 >}} 副标题下方显示的额外文本, 例如引用或简短介绍 (支持 HTML 格式)
+      extra = ""
+      # {{< version 1.0.0 >}} 是否以斜体显示额外文本
+      extraItalic = true
       # 是否显示社交账号
       social = true
       # {{< version 0.2.0 >}} 免责声明 (支持 HTML 格式)
