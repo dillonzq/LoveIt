@@ -40,7 +40,7 @@
     {{- end -}}
 
     {{- with $profile.extra -}}
-        <p class="home-extra{{ if not  $profile.extraItalic }} no-italic{{ end }}">
+        <p class="home-extra{{ if not $profile.extraItalic }} no-italic{{ end }}">
             {{- . | safeHTML -}}
         </p>
     {{- end -}}

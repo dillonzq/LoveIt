@@ -292,9 +292,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # whether to use typeit animation for subtitle
       # 是否为副标题显示打字机动画
       typeit = true
-      # you can add extra information after the subtitle, such as citations or a summary
+      # extra text shown below the subtitle, such as a quote or a short summary (HTML format is supported)
+      # 副标题下方显示的额外文本, 例如引用或简短介绍 (支持 HTML 格式)
       extra = ""
-      # display extra text in italic (default: true)
+      # whether to show the extra text in italic
+      # 是否以斜体显示额外文本
       extraItalic = true
       # whether to show social links
       # 是否显示社交账号

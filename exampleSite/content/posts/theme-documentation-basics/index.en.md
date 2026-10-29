@@ -399,6 +399,10 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       subtitle = "This is My New Hugo Site"
       # whether to use typeit animation for subtitle
       typeit = true
+      # {{< version 1.0.0 >}} extra text shown below the subtitle, such as a quote or a short summary (HTML format is supported)
+      extra = ""
+      # {{< version 1.0.0 >}} whether to show the extra text in italic
+      extraItalic = true
       # whether to show social links
       social = true
       # {{< version 0.2.0 >}} disclaimer (HTML format is supported)
