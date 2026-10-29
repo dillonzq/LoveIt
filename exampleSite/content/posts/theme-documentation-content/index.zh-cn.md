@@ -458,6 +458,29 @@ $$ \ce{CO2 + C -> 2 CO} $$
 
 $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
+#### 服务端渲染
+
+{{< version 1.0.0 >}}
+
+**LoveIt** 主题还提供了一个 [直通渲染钩子 (passthrough render hook)](https://gohugo.io/render-hooks/passthrough/),
+在构建时通过 Hugo 的 [`transform.ToMath`](https://gohugo.io/functions/transform/tomath/) 将公式渲染为 HTML.
+这些公式既不需要上面那些额外的转义字符, 也不需要 JavaScript: 未启用 `[params.math]` 时, 包含它们的页面只会加载 $\KaTeX$ 的样式表.
+
+Hugo 不会读取主题中的 `markup` 配置, 所以需要在你自己的 [网站配置](../theme-documentation-basics#site-configuration) 中启用 Goldmark 的 passthrough 扩展:
+
+```toml
+[markup.goldmark.extensions.passthrough]
+  enable = true
+  [markup.goldmark.extensions.passthrough.delimiters]
+    block = [["\\[", "\\]"], ["$$", "$$"]]
+    inline = [["\\(", "\\)"]]
+```
+
+{{< admonition note >}}
+无论是否启用了 `[params.math]`, 这些定界符之间的公式都会在服务端渲染,
+公式有误时构建会失败并给出其位置.
+{{< /admonition >}}
+
 ### 字符注音或者注释 {#ruby}
 
 **LoveIt** 主题支持一种 **字符注音或者注释** Markdown 扩展语法:

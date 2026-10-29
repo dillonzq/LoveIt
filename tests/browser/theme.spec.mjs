@@ -158,6 +158,18 @@ test('music shortcode uses the configured Meting API and its api override', asyn
   ]);
 });
 
+test('passthrough math renders on the server and loads only the KaTeX stylesheet', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('/fuse/blog/math/');
+  await expect(page.locator('.content .katex')).toHaveCount(2);
+  await expect(page.locator('.content .katex-display')).toBeVisible();
+  await expect(page.locator('.content .katex-mathml').first()).toHaveCSS('position', 'absolute');
+  await expect(page.locator('link[href*="katex"]')).toHaveCount(1);
+  await expect(page.locator('script[src*="katex"]')).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
 test('fixed buttons fade in after scrolling down', async ({ page }) => {
   await page.goto('/fuse/blog/guide/');
   await page.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo(0, 400); });

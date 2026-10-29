@@ -18,3 +18,8 @@ inlineRightDelimiter = "))"
 appID = "test"
 searchKey = "test"
 index = "posts"
+[markup.goldmark.extensions.passthrough]
+enable = true
+[markup.goldmark.extensions.passthrough.delimiters]
+block = [["\\[", "\\]"], ["$$", "$$"]]
+inline = [["\\(", "\\)"]]
