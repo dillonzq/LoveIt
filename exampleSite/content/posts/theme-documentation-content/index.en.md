@@ -460,6 +460,29 @@ $$ \ce{CO2 + C -> 2 CO} $$
 
 $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
+#### Server-side Rendering
+
+{{< version 1.0.0 >}}
+
+**LoveIt** theme also provides a [passthrough render hook](https://gohugo.io/render-hooks/passthrough/),
+which renders formulas into HTML at build time with Hugo's [`transform.ToMath`](https://gohugo.io/functions/transform/tomath/).
+These formulas need neither the extra escape characters above nor JavaScript: when `[params.math]` is disabled, pages that contain them only load the $\KaTeX$ stylesheet.
+
+Hugo does not read the `markup` configuration from themes, so enable the Goldmark passthrough extension in your own [site configuration](../theme-documentation-basics#site-configuration):
+
+```toml
+[markup.goldmark.extensions.passthrough]
+  enable = true
+  [markup.goldmark.extensions.passthrough.delimiters]
+    block = [["\\[", "\\]"], ["$$", "$$"]]
+    inline = [["\\(", "\\)"]]
+```
+
+{{< admonition note >}}
+Formulas between these delimiters are rendered on the server whether or not `[params.math]` is enabled,
+and an invalid formula stops the build with its position.
+{{< /admonition >}}
+
 ### Ruby Annotation {#ruby}
 
 An extended Markdown syntax for **ruby annotation** is supported in **LoveIt** theme:
