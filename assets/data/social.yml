@@ -504,10 +504,10 @@ discord:
     Class: fab fa-discord
 
 # 064: Discord Server Invite Link
-discordInvite:
+discordinvite:
   Weight: 64
   Prefix: https://discord.gg/
-  Title: Discord
+  Title: Discord Server Invite
   Icon:
     Class: fab fa-discord
 

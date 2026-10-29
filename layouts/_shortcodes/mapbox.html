@@ -1,4 +1,4 @@
-{{- $mapbox := (.Page.Scratch.Get "params").mapbox | default dict -}}
+{{- $mapbox := (partial "function/params.html" .Page).mapbox | default dict -}}
 
 {{- $lng := cond .IsNamedParams (.Get "lng") (.Get 0) -}}
 {{- $lat := cond .IsNamedParams (.Get "lat") (.Get 1) -}}
@@ -28,6 +28,6 @@
 {{- end -}}
 {{- $darkStyle = $darkStyle | default $lightStyle -}}
 {{- $options := dict "lng" $lng "lat" $lat "zoom" $zoom "marked" $marked "lightStyle" $lightStyle "darkStyle" $darkStyle "geolocate" $geolocate "navigation" $navigation "scale" $scale "fullscreen" $fullscreen -}}
-{{- $id := dict "Content" $options "Scratch" .Page.Scratch | partial "function/id.html" -}}
+{{- $id := dict "Content" $options "Page" .Page "Key" (partial "function/shortcode-key.html" . | printf "%s-%s" .Name) | partial "function/id.html" -}}
 <div class="mapbox" id="{{ $id }}" style="width: {{ $width }}; height: {{ $height }};"></div>
-{{- .Page.Scratch.SetInMap "this" "mapbox" true -}}
+{{- .Page.Store.SetInMap "contentAssets" "mapbox" true -}}

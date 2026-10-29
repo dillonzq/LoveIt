@@ -1,7 +1,14 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/logo/logo-wordmark-dark.svg">
+    <img src="images/logo/logo-wordmark-light.svg" alt="LoveIt" height="72">
+  </picture>
+</p>
+
 # LoveIt Theme | Hugo
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
-[![Hugo](https://img.shields.io/badge/Hugo-%5E0.128.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%5E0.146.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
 [![CI](https://github.com/dillonzq/LoveIt/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/dillonzq/LoveIt/actions/workflows/ci.yml)
@@ -126,8 +133,11 @@ I hope you will LoveIt ❤️!
 Build Documentation Locally:
 
 ```bash
-hugo server --source=exampleSite
+npm ci --ignore-scripts
+npm run dev
 ```
+
+Development uses `.hvm` to pin Hugo and npm to provide Dart Sass. Run `npm run build` for production; see the [development guide](docs/development.md) for version overrides, search and tests.
 
 ## Compatibility
 

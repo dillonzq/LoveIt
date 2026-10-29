@@ -1,0 +1,5 @@
+{{- $hidden := .Site.Params.page.hiddenFromSearch | default false -}}
+{{- if isset .Params "hiddenfromsearch" -}}
+    {{- $hidden = .Params.hiddenfromsearch -}}
+{{- end -}}
+{{- return (and .IsPage (not $hidden)) -}}

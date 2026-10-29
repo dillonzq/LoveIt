@@ -1,0 +1,75 @@
+name: Build and validate
+
+on:
+  workflow_call:
+    inputs:
+      hugo_version:
+        type: string
+        default: locked
+      hugo_env:
+        type: string
+        default: production
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      LOVEIT_HUGO_VERSION: ${{ inputs.hugo_version }}
+      HUGO_ENV: ${{ inputs.hugo_env }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules/.cache/loveit
+            exampleSite/resources
+          key: hugo-${{ runner.os }}-${{ inputs.hugo_version }}-${{ hashFiles('.hvm', 'package-lock.json', 'hugo.toml', 'assets/css/**') }}
+      - name: Unit tests
+        run: |
+          mkdir -p test-results
+          node --test --test-reporter=junit tests/*.test.mjs > test-results/unit.xml
+      - name: Build example site
+        shell: bash
+        run: |
+          if [[ "$HUGO_ENV" == production ]]; then
+            npm run build 2>&1 | tee test-results/build.log
+          else
+            node scripts/hugo.mjs build --environment "$HUGO_ENV" --buildDrafts --buildFuture 2>&1 | tee test-results/build.log
+          fi
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      - name: Validate HTML
+        run: npm run htmlproofer
+      - name: Browser regression tests
+        if: inputs.hugo_env == 'production'
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: test-results/browser.json
+        shell: bash
+        run: |
+          npx --no-install playwright install --with-deps chromium
+          if [[ "$LOVEIT_HUGO_VERSION" == minimum ]]; then
+            npm run test:browser -- --grep 'Mermaid|Chinese|content shortcodes'
+          else
+            npm run test:browser
+          fi
+      - name: Name check artifacts
+        if: always()
+        id: artifact
+        run: node -e 'console.log("name=checks-" + process.env.LOVEIT_HUGO_VERSION.replace(/[^a-zA-Z0-9_.-]/g, "-") + "-" + process.env.HUGO_ENV)' >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ${{ steps.artifact.outputs.name }}
+          path: test-results/

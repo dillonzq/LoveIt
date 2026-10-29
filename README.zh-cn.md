@@ -1,7 +1,14 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/logo/logo-wordmark-dark.svg">
+    <img src="images/logo/logo-wordmark-light.svg" alt="LoveIt" height="72">
+  </picture>
+</p>
+
 # LoveIt 主题 | Hugo
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
-[![Hugo](https://img.shields.io/badge/Hugo-%5E0.128.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%5E0.146.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
 [![CI](https://github.com/dillonzq/LoveIt/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/dillonzq/LoveIt/actions/workflows/ci.yml)
@@ -121,8 +128,11 @@
 在本地构建文档:
 
 ```bash
-hugo server --source=exampleSite
+npm ci --ignore-scripts
+npm run dev
 ```
+
+开发环境使用 `.hvm` 锁定 Hugo，并通过 npm 提供 Dart Sass。运行 `npm run build` 生成生产站点；多版本、搜索和测试说明见[开发指南](docs/development.md)。
 
 ## 兼容性
 

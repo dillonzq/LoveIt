@@ -1,0 +1,5 @@
+{{- /* Reproduce content being cached by another output before page initialization. */ -}}
+{{- if .IsPage -}}
+    {{- $content := .Content -}}
+    {{- partial "init.html" . -}}
+{{- end -}}
