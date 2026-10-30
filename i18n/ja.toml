@@ -63,7 +63,7 @@ other = "ja_JP"
 other = "ja"
 
 [walineLang]
-other = "ja"
+other = "jp"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

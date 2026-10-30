@@ -170,6 +170,31 @@ test('passthrough math renders on the server and loads only the KaTeX stylesheet
   expect(errors).toEqual([]);
 });
 
+test('Waline loads its UMD build, renders comments and follows the dark theme', async ({ page }) => {
+  const errors = [];
+  const requests = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.route(/^https:\/\/emoji\.test\//, route => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ name: 'twemoji', prefix: '', type: 'png', icon: '1f603', items: ['1f603'] }) }));
+  await page.route(/^https:\/\/waline\.test\//, route => {
+    const url = new URL(route.request().url());
+    requests.push(`${url.pathname}?${url.searchParams.get('lang')}`);
+    const data = url.pathname === '/api/comment' && url.searchParams.has('path')
+      ? { page: 1, totalPages: 1, pageSize: 10, count: 1, data: [{ objectId: '1', nick: 'Mocked visitor', comment: '<p>Mocked comment</p>', time: Date.UTC(2025, 0, 5), link: '', avatar: '', like: 0, children: [] }] }
+      : [];
+    route.fulfill({ contentType: 'application/json', body: JSON.stringify({ errno: 0, errmsg: '', data }) });
+  });
+  await page.goto('/fuse/blog/waline/');
+  await expect(page.locator('script[src*="waline"]')).toHaveCount(1);
+  await expect(page.locator('#waline .wl-card .wl-content')).toHaveText('Mocked comment');
+  expect(requests).toContain('/api/comment?en');
+  const background = () => page.locator('#waline').evaluate(element => getComputedStyle(element).getPropertyValue('--waline-bg-color').trim());
+  await page.evaluate(() => document.body.setAttribute('theme', 'light'));
+  expect(await background()).toBe('#fff');
+  await page.evaluate(() => document.body.setAttribute('theme', 'dark'));
+  expect(await background()).toBe('#1e1e1e');
+  expect(errors).toEqual([]);
+});
+
 test('fixed buttons fade in after scrolling down', async ({ page }) => {
   await page.goto('/fuse/blog/guide/');
   await page.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo(0, 400); });

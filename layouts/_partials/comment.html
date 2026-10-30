@@ -153,9 +153,9 @@
             <div id="waline" class="comment"></div>
             {{- $source := $cdn.walineCSS | default "lib/waline/waline.css" -}}
             {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
-            {{- $source := $cdn.walineJS | default "lib/waline/waline.js" -}}
+            {{- $source := $cdn.walineJS | default "lib/waline/waline.umd.js" -}}
             {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-            {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" ($waline.lang | default (T "walineLang")) | dict "waline" | merge $commentConfig -}}
+            {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" ($waline.lang | default (T "walineLang")) "dark" "body[theme=dark]" | dict "waline" | merge $commentConfig -}}
             {{- with $waline.emoji -}}
                 {{- $commentConfig = dict "emoji" . | dict "waline" | merge $commentConfig -}}
             {{- end -}}
