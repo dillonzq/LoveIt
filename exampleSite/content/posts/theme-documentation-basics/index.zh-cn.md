@@ -38,6 +38,9 @@ toc:
 请在安装 Hugo 的同时安装 Dart Sass; 只安装 Hugo extended 版本是不够的, 并且 Hugo 从 0.170.0 起不再提供 extended 版本.
 
 如果你从 LoveIt 0.3.X 升级, 请先阅读 [从 0.3.X 升级](#upgrade-from-0-3).
+
+{{< version 1.0.0 changed >}} **master** 分支需要 **Hugo 0.158.0 或更新版本**.
+如果你从 LoveIt 0.4.X 升级到 master 分支, 请阅读 [从 0.4.X 升级](#upgrade-from-0-4).
 {{< /admonition >}}
 
 ## 2 安装
@@ -76,7 +79,7 @@ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 
 | LoveIt 分支或版本  |    支持的 Hugo 版本    |
 |:--------------|:-----------------:|
-| master(不稳定)   |     ≥ 0.146.0     |
+| master(不稳定)   |     ≥ 0.158.0     |
 | **0.4.X(推荐)** |     ≥ 0.146.0     |
 | 0.3.X         | 0.128.0 - 0.145.0 |
 | 0.2.X(过时)     | 0.68.0 - 0.127.0  |
@@ -1287,3 +1290,12 @@ npx pagefind --site public --output-subdir _pagefind --serve
 * [Content-Security-Policy](#site-configuration) meta 标签 (`[params.security]`)
 * 数学公式的服务端渲染, Markdown 表格和引用块提示 (alert) 的渲染钩子
 * 主页个人信息副标题下方的额外文本 (`[params.home.profile]` 中的 `extra`)
+
+## 7 从 0.4.X 升级 {#upgrade-from-0-4}
+
+{{< version 1.0.0 >}}
+
+从 **LoveIt 0.4.X** 升级到 **master** 分支 (将作为 1.0.0 发布) 时, 请检查以下内容.
+
+* **将 Hugo 升级到 0.158.0 或更新版本.** LoveIt 0.4.X 支持 Hugo 0.146.0 及更新版本.
+* **语言配置.** 请使用 `locale` 和 `label` 代替 `languageCode` 和 `languageName`, 后两者已被 Hugo 废弃.

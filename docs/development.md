@@ -30,16 +30,14 @@ records the actual version. Netlify calls the same build entry point.
 
 ## Hugo and Sass compatibility
 
-The master branch supports Hugo 0.146.0 and later. Install **Dart Sass** even
-with extended Hugo. `npm ci` supplies a pinned `sass-embedded` executable to the
+The master branch supports Hugo 0.158.0 and later. Install **Dart Sass**; the
+extended edition of Hugo is not enough, and Hugo 0.170.0 no longer ships one.
+`npm ci` supplies a pinned `sass-embedded` executable to the
 wrapper; sites using the theme directly may install standalone Dart Sass instead.
 Prebuilt LibSass resources are not a substitute for Dart Sass.
 
-The example config uses `locale` and `label`. The wrapper adds
-`exampleSite/config-legacy.toml` on Hugo before 0.158.0. If running Hugo directly
-on those versions, pass both config files. Theme templates use a version-aware
-helper for the language API; downstream sites should use the language keys
-appropriate to their Hugo version.
+The example config uses the language keys `locale` and `label`, and the theme
+templates read `.Language.Locale` and `.Language.Label`.
 
 `assets/css/_override.scss` (variables) and `assets/css/_custom.scss` (styles)
 remain supported and are checked by browser fixtures that override both files.

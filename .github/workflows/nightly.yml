@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       hugo_version:
-        description: "Hugo version (e.g. 0.146.0 or latest)"
+        description: "Hugo version (e.g. 0.158.0 or latest)"
         required: true
         default: "latest"
 
