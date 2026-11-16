@@ -1235,9 +1235,12 @@ you need to upload different `index.json` for each language to the different ind
 Pagefind indexes the HTML files that Hugo has published, so generate the index after every build:
 
 ```bash
-hugo
+hugo --cleanDestinationDir
 npx pagefind --site public --output-subdir _pagefind
 ```
+
+`--cleanDestinationDir` removes the pages that no longer exist from `public`, so Pagefind does not index them again.
+`npx` comes with [Node.js](https://nodejs.org/); without Node.js, use the [standalone Pagefind binary](https://pagefind.app/docs/installation/) with the same arguments.
 
 `--output-subdir` must be the same directory as `basePath` in `[params.search.pagefind]`.
 Pages with `hiddenFromSearch` are not indexed, and one run indexes all languages.

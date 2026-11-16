@@ -1235,9 +1235,12 @@ defaultContentLanguage = "zh-cn"
 Pagefind 索引的是 Hugo 已经发布的 HTML 文件, 所以每次构建后都要生成索引:
 
 ```bash
-hugo
+hugo --cleanDestinationDir
 npx pagefind --site public --output-subdir _pagefind
 ```
+
+`--cleanDestinationDir` 会从 `public` 中删除已不存在的页面, 避免 Pagefind 再次索引它们.
+`npx` 随 [Node.js](https://nodejs.org/) 一起安装; 如果没有 Node.js, 可以使用 [Pagefind 独立可执行文件](https://pagefind.app/docs/installation/), 参数相同.
 
 `--output-subdir` 必须和 `[params.search.pagefind]` 中的 `basePath` 是同一个目录.
 设置了 `hiddenFromSearch` 的页面不会被索引, 运行一次即可索引所有语言.
