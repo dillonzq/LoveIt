@@ -1255,6 +1255,7 @@ npx pagefind --site public --output-subdir _pagefind --serve
 ```
 
 The preview serves `public` at the root. If your `baseURL` contains a subpath, build the preview with `hugo --baseURL /`.
+On a multihost site, preview one language at a time, for example with `npx pagefind --site public/en --output-subdir _pagefind --serve`.
 {{< /admonition >}}
 
 ## 6 Upgrade from 0.3.X {#upgrade-from-0-3}

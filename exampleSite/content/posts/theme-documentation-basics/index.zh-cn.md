@@ -1255,6 +1255,7 @@ npx pagefind --site public --output-subdir _pagefind --serve
 ```
 
 预览时 `public` 目录位于根路径. 如果你的 `baseURL` 带有子路径, 请用 `hugo --baseURL /` 构建后再预览.
+多主机站点需要逐个语言预览, 例如 `npx pagefind --site public/en --output-subdir _pagefind --serve`.
 {{< /admonition >}}
 
 ## 6 从 0.3.X 升级 {#upgrade-from-0-3}
