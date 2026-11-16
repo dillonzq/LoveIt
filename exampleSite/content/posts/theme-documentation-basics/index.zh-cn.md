@@ -1244,7 +1244,9 @@ Hugo 不会从 `public` 中删除已删除或改名的页面, Pagefind 会再次
 `npx` 随 [Node.js](https://nodejs.org/) 一起安装; 如果没有 Node.js, 可以使用 [Pagefind 独立可执行文件](https://pagefind.app/docs/installation/), 参数相同.
 
 `--output-subdir` 必须和 `[params.search.pagefind]` 中的 `basePath` 是同一个目录.
-设置了 `hiddenFromSearch` 的页面不会被索引, 运行一次即可索引所有语言.
+设置了 `hiddenFromSearch` 的页面不会被索引. 单主机站点运行一次即可索引所有语言.
+[多主机](https://gohugo.io/configuration/languages/#multihost) 站点的每种语言会生成到单独的目录中, 例如 `public/en`.
+请对每个目录分别运行一次命令, 例如 `npx pagefind --site public/en --output-subdir _pagefind`, 使每个主机都有自己的索引.
 
 `hugo server` 不会生成索引. 要预览搜索效果, 请先构建网站, 再启动 Pagefind 自带的服务:
 

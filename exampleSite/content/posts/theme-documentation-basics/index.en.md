@@ -1244,7 +1244,9 @@ After deleting or renaming pages, delete `public` before you run `hugo`. Keep fi
 `npx` comes with [Node.js](https://nodejs.org/); without Node.js, use the [standalone Pagefind binary](https://pagefind.app/docs/installation/) with the same arguments.
 
 `--output-subdir` must be the same directory as `basePath` in `[params.search.pagefind]`.
-Pages with `hiddenFromSearch` are not indexed, and one run indexes all languages.
+Pages with `hiddenFromSearch` are not indexed. On a single-host site, one run indexes all languages.
+On a [multihost](https://gohugo.io/configuration/languages/#multihost) site, each language is built into its own directory, such as `public/en`.
+Run the command once for each of these directories, for example `npx pagefind --site public/en --output-subdir _pagefind`, so that each host serves its own index.
 
 `hugo server` does not generate the index. To preview the search, build the site and serve the output:
 
