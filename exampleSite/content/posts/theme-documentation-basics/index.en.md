@@ -31,10 +31,13 @@ Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only depende
 
 Just install latest edition of [:(far fa-file-archive): Hugo](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
 
-{{< admonition note "The master branch requires Dart Sass" false >}}
-The master branch requires **Hugo 0.146.0 or later** and **Dart Sass**. In the theme repository, run `npm ci --ignore-scripts` and `npm run dev` to use the Hugo version pinned by `.hvm` with Dart Sass. Standalone sites can install Dart Sass and run Hugo directly.
+{{< admonition note "LoveIt 1.0 requires Dart Sass" >}}
+{{< version 1.0.0 >}}
 
-![Hugo extended edition](hugo-extended-edition.png "Hugo extended edition")
+**LoveIt 1.0** requires **Hugo 0.146.0 or later** and [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass).
+Install Dart Sass next to Hugo; the extended edition of Hugo is not enough, and Hugo 0.170.0 no longer ships one.
+
+If you are upgrading from LoveIt 0.3.X, read [Upgrade to 1.0](#upgrade-to-1-0) first.
 {{< /admonition >}}
 
 ## 2 Installation
@@ -73,8 +76,8 @@ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 
 | LoveIt branch or version | Supported Hugo versions |
 |:-------------------------|:-----------------------:|
-| master(Unstable)         |        ≥ 0.146.0        |
-| **0.3.X(Recommended)**   |    0.128.0 - 0.145.0    |
+| **1.0.X(Recommended)**   |        ≥ 0.146.0        |
+| 0.3.X                    |    0.128.0 - 0.145.0    |
 | 0.2.X(Outdated)          |    0.68.0 - 0.127.0     |
 
 {{< /admonition >}}
@@ -363,7 +366,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # {{< version 0.2.0 >}} Search config
   [params.search]
     enable = true
-    # type of search engine ["lunr", "algolia"]
+    # {{< version 1.0.0 changed >}} type of search engine ["lunr", "algolia", "fuse", "pagefind"]
     type = "lunr"
     # max index length of the chunked content
     contentLength = 4000
@@ -381,6 +384,19 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       index = ""
       appID = ""
       searchKey = ""
+    # {{< version 1.0.0 >}} {{< link "https://fusejs.io/api/options.html" "Fuse.js" >}} options
+    [params.search.fuse]
+      isCaseSensitive = false
+      minMatchCharLength = 2
+      findAllMatches = false
+      location = 0
+      threshold = 0.3
+      distance = 100
+      ignoreLocation = false
+    # {{< version 1.0.0 >}} {{< link "https://pagefind.app/" "Pagefind" >}} config
+    [params.search.pagefind]
+      # directory of the Pagefind index, relative to the baseURL
+      basePath = "/_pagefind/"
 
   # Home page config
   [params.home]
@@ -498,6 +514,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     HuggingFace = "" # {{< version 0.3.1 >}}
     Threads = "" # {{< version 0.3.1 >}}
     LeetCode = "" # {{< version 0.3.1 >}}
+    Bluesky = "" # {{< version 0.3.1 >}}
     Phone = ""
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
@@ -685,6 +702,15 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         lazyLoading = false
         lightTheme = "light"
         darkTheme = "dark"
+      # {{< version 0.3.1 >}} {{< link "https://waline.js.org/" "Waline" >}} comment config
+      # {{< version 1.0.0 changed >}} the bundled client is Waline v3, which requires a Waline server v1.27.0 or later
+      [params.page.comment.waline]
+        enable = false
+        serverURL = ""
+        # automatically adapt the current theme i18n configuration when empty
+        lang = ""
+        # emoji presets, the Waline default is used when empty
+        emoji = []
     # {{< version 0.2.7 >}} Third-party library config
     [params.page.library]
       [params.page.library.css]
@@ -725,6 +751,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     pinterest = ""
     baidu = ""
 
+  # {{< version 1.0.0 >}} Security config
+  [params.security]
+    # Content-Security-Policy meta tag, for when HTTP headers cannot be set
+    # https://content-security-policy.com/examples/meta/
+    contentSecurityPolicy = ""
+
   # {{< version 0.2.10 >}} Site SEO config
   [params.seo]
     # image URL
@@ -754,6 +786,10 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # Yandex Metrica
     [params.analytics.yandexMetrica]
       id = ""
+    # {{< version 0.3.1 >}} GoatCounter Analytics
+    [params.analytics.goatCounter]
+      # the code of your site, as in https://<code>.goatcounter.com
+      code = ""
 
   # {{< version 0.2.7 >}} Cookie consent config
   [params.cookieconsent]
@@ -930,8 +966,8 @@ Customize `browserconfig.xml` and `site.webmanifest` to set theme-color and back
 {{< version 0.2.8 changed >}}
 
 {{< admonition note "Dart Sass is required" >}}
-Since Hugo need to processes :(fab fa-sass): SCSS to :(fab fa-css3): CSS,
-The master branch uses **Dart Sass**. Existing `_override.scss` and `_custom.scss` customizations remain supported.
+{{< version 1.0.0 >}} Hugo uses [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass) to process :(fab fa-sass): SCSS to :(fab fa-css3): CSS.
+Existing `_override.scss` and `_custom.scss` customizations remain supported.
 {{< /admonition >}}
 
 **LoveIt** theme has been built to be as configurable as possible by defining custom `.scss` style files.
@@ -1116,11 +1152,12 @@ By the way, as these translations could be used by other people, please take the
 
 {{< version 0.2.0 >}}
 
-Based on [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/), searching is supported in **LoveIt** theme.
+Based on [Lunr.js](https://lunrjs.com/), [algolia](https://www.algolia.com/), [Fuse.js](https://fusejs.io/) or [Pagefind](https://pagefind.app/), searching is supported in **LoveIt** theme.
 
 ### 5.1 Output Configuration
 
 In order to generate `index.json` for searching, add `JSON` output file type to the `home` of the `outputs` part in your [site configuration](#site-configuration).
+`lunr`, `algolia` and `fuse` need this file; `pagefind` builds its own index and does not.
 
 ```toml
 [outputs]
@@ -1136,7 +1173,7 @@ Here is the search configuration in your [site configuration](#site-configuratio
 ```toml
 [params.search]
   enable = true
-  # type of search engine ["lunr", "algolia"]
+  # {{< version 1.0.0 changed >}} type of search engine ["lunr", "algolia", "fuse", "pagefind"]
   type = "lunr"
   # max index length of the chunked content
   contentLength = 4000
@@ -1154,14 +1191,31 @@ Here is the search configuration in your [site configuration](#site-configuratio
     index = ""
     appID = ""
     searchKey = ""
+  # {{< version 1.0.0 >}} {{< link "https://fusejs.io/api/options.html" "Fuse.js" >}} options
+  [params.search.fuse]
+    isCaseSensitive = false
+    minMatchCharLength = 2
+    findAllMatches = false
+    location = 0
+    threshold = 0.3
+    distance = 100
+    ignoreLocation = false
+  # {{< version 1.0.0 >}} {{< link "https://pagefind.app/" "Pagefind" >}} config
+  [params.search.pagefind]
+    # directory of the Pagefind index, relative to the baseURL
+    basePath = "/_pagefind/"
 ```
 
 {{< admonition note "How to choose search engine?" >}}
-The following is a comparison of two search engines:
+The following is a comparison of the search engines:
 
 * `lunr`: simple, no need to synchronize `index.json`, no limit for `contentLength`,
   but high bandwidth and low performance (Especially for Chinese which needs a large segmentit library)
 * `algolia`: high performance and low bandwidth, but need to synchronize `index.json` and limit for `contentLength`
+* `fuse` {{< version 1.0.0 >}}: fuzzy search in the browser from `index.json`, no service to synchronize and no segmentit library,
+  but the whole `index.json` is downloaded on the first query
+* `pagefind` {{< version 1.0.0 >}}: a static index split into small chunks, so low bandwidth even on large sites and no service to synchronize,
+  but the index must be generated after every build
 
 {{< version 0.2.3 >}} The content of the post is separated by `h2` and `h3` HTML tag to improve query performance and basically implement full-text search.
 `contentLength` is used to limit the max index length of the part starting with `h2` and `h3` HTML tag.
@@ -1174,3 +1228,55 @@ The official [Algolia CLI](https://github.com/algolia/algolia-cli) is a good cho
 To be compatible with Hugo multilingual mode,
 you need to upload different `index.json` for each language to the different index of algolia, such as `zh-cn/index.json` or `fr/index.json`...
 {{< /admonition >}}
+
+{{< admonition tip "Tips about Pagefind" >}}
+{{< version 1.0.0 >}}
+
+Pagefind indexes the HTML files that Hugo has published, so generate the index after every build:
+
+```bash
+hugo
+npx pagefind --site public --output-subdir _pagefind
+```
+
+`--output-subdir` must be the same directory as `basePath` in `[params.search.pagefind]`.
+Pages with `hiddenFromSearch` are not indexed, and one run indexes all languages.
+
+`hugo server` does not generate the index. To preview the search, build the site and serve the output:
+
+```bash
+npx pagefind --site public --output-subdir _pagefind --serve
+```
+{{< /admonition >}}
+
+## 6 Upgrade to 1.0 {#upgrade-to-1-0}
+
+{{< version 1.0.0 >}}
+
+Check the following when you upgrade from **LoveIt 0.3.X**.
+
+### 6.1 What You Must Do
+
+* **Upgrade Hugo to 0.146.0 or later.** LoveIt 0.3.X supported Hugo 0.128.0 - 0.145.0.
+* **Install [Dart Sass](https://gohugo.io/functions/css/sass/#dart-sass).**
+  The theme no longer compiles with LibSass and no longer ships prebuilt CSS, so the extended edition of Hugo alone is not enough.
+  Install Dart Sass on your build service (Netlify, Vercel, GitHub Actions...) as well.
+* **Check your custom styles.** `assets/css/_override.scss` and `assets/css/_custom.scss` work as before,
+  but they are now compiled by Dart Sass, which may warn about or reject syntax that LibSass accepted.
+* **Check your template overrides.** The theme templates now follow the [new template system](https://gohugo.io/templates/lookup-order/) of Hugo
+  and live in `layouts/_partials`, `layouts/_shortcodes` and `layouts/_markup`.
+  If your site overrides theme templates, compare them with the new ones.
+
+### 6.2 What Has Changed
+
+* **Language configuration.** On Hugo 0.158.0 or later, use `locale` and `label` instead of the deprecated `languageCode` and `languageName`.
+* **Polyfill.** `params.compatibility.polyfill` now loads from `cdnjs.cloudflare.com` instead of `polyfill.io`.
+* **Music.** The default Meting API has been replaced. Set `api` in `[params.page.music]` to use your own.
+* **Waline.** The bundled client is Waline v3, which requires a Waline server v1.27.0 or later.
+
+### 6.3 What Is New
+
+* [Fuse.js and Pagefind](#5-search) search engines
+* [Content-Security-Policy](#site-configuration) meta tag (`[params.security]`)
+* Server-side rendering of mathematical formulas, Markdown table and blockquote alert render hooks
+* Extra text below the subtitle of the home page profile (`extra` in `[params.home.profile]`)

@@ -31,10 +31,13 @@ toc:
 
 直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive): Hugo](https://gohugo.io/getting-started/installing/).
 
-{{< admonition note "master 分支需要 Dart Sass" false >}}
-master 分支需要 Hugo **0.146.0 或更新版本**和 **Dart Sass**。在主题仓库运行 `npm ci --ignore-scripts` 后，`npm run dev` 会自动选择 `.hvm` 指定的 Hugo 并使用 Dart Sass。独立站点也可以安装 Dart Sass 后直接运行 Hugo。
+{{< admonition note "LoveIt 1.0 需要 Dart Sass" >}}
+{{< version 1.0.0 >}}
 
-![Hugo extended 版本](hugo-extended-edition.png "Hugo extended 版本")
+**LoveIt 1.0** 需要 **Hugo 0.146.0 或更新版本**和 [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass).
+请在安装 Hugo 的同时安装 Dart Sass; 只安装 Hugo extended 版本是不够的, 并且 Hugo 从 0.170.0 起不再提供 extended 版本.
+
+如果你从 LoveIt 0.3.X 升级, 请先阅读 [升级到 1.0](#upgrade-to-1-0).
 {{< /admonition >}}
 
 ## 2 安装
@@ -73,8 +76,8 @@ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 
 | LoveIt 分支或版本  |    支持的 Hugo 版本    |
 |:--------------|:-----------------:|
-| master(不稳定)   |     ≥ 0.146.0     |
-| **0.3.X(推荐)** | 0.128.0 - 0.145.0 |
+| **1.0.X(推荐)** |     ≥ 0.146.0     |
+| 0.3.X         | 0.128.0 - 0.145.0 |
 | 0.2.X(过时)     | 0.68.0 - 0.127.0  |
 
 {{< /admonition >}}
@@ -365,7 +368,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # {{< version 0.2.0 >}} 搜索配置
   [params.search]
     enable = true
-    # 搜索引擎的类型 ["lunr", "algolia"]
+    # {{< version 1.0.0 changed >}} 搜索引擎的类型 ["lunr", "algolia", "fuse", "pagefind"]
     type = "lunr"
     # 文章内容最长索引长度
     contentLength = 4000
@@ -383,6 +386,19 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       index = ""
       appID = ""
       searchKey = ""
+    # {{< version 1.0.0 >}} {{< link "https://fusejs.io/api/options.html" "Fuse.js" >}} 选项
+    [params.search.fuse]
+      isCaseSensitive = false
+      minMatchCharLength = 2
+      findAllMatches = false
+      location = 0
+      threshold = 0.3
+      distance = 100
+      ignoreLocation = false
+    # {{< version 1.0.0 >}} {{< link "https://pagefind.app/" "Pagefind" >}} 配置
+    [params.search.pagefind]
+      # Pagefind 索引所在目录, 相对于 baseURL
+      basePath = "/_pagefind/"
 
   # 主页配置
   [params.home]
@@ -500,6 +516,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     HuggingFace = "" # {{< version 0.3.1 >}}
     Threads = "" # {{< version 0.3.1 >}}
     LeetCodeCN = "" # {{< version 0.3.1 >}}
+    Bluesky = "" # {{< version 0.3.1 >}}
     Phone = ""
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
@@ -687,6 +704,15 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         lazyLoading = false
         lightTheme = "light"
         darkTheme = "dark"
+      # {{< version 0.3.1 >}} {{< link "https://waline.js.org/" "Waline" >}} 评论系统设置
+      # {{< version 1.0.0 changed >}} 内置客户端为 Waline v3, 需要 v1.27.0 及以上的 Waline 服务端
+      [params.page.comment.waline]
+        enable = false
+        serverURL = ""
+        # 为空时自动适配当前主题 i18n 配置
+        lang = ""
+        # 表情预设, 为空时使用 Waline 的默认值
+        emoji = []
     # {{< version 0.2.7 >}} 第三方库配置
     [params.page.library]
       [params.page.library.css]
@@ -727,6 +753,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     pinterest = ""
     baidu = ""
 
+  # {{< version 1.0.0 >}} 安全配置
+  [params.security]
+    # 当无法设置 HTTP 响应头时使用的 Content-Security-Policy meta 标签
+    # https://content-security-policy.com/examples/meta/
+    contentSecurityPolicy = ""
+
   # {{< version 0.2.10 >}} 网站 SEO 配置
   [params.seo]
     # 图片 URL
@@ -756,6 +788,10 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # Yandex Metrica
     [params.analytics.yandexMetrica]
       id = ""
+    # {{< version 0.3.1 >}} GoatCounter Analytics
+    [params.analytics.goatCounter]
+      # 你的站点代码, 即 https://<code>.goatcounter.com 中的 code
+      code = ""
 
   # {{< version 0.2.7 >}} Cookie 许可配置
   [params.cookieconsent]
@@ -933,7 +969,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 {{< version 0.2.8 changed >}}
 
 {{< admonition note "Dart Sass 是必需的" >}}
-master 分支使用 **Dart Sass** 将 :(fab fa-sass): SCSS 转换为 :(fab fa-css3): CSS；`_override.scss` 和 `_custom.scss` 的覆盖方式保持不变。
+{{< version 1.0.0 >}} Hugo 使用 [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass) 将 :(fab fa-sass): SCSS 转换为 :(fab fa-css3): CSS.
+`_override.scss` 和 `_custom.scss` 的覆盖方式保持不变.
 {{< /admonition >}}
 
 通过定义自定义 `.scss` 样式文件, **LoveIt** 主题支持可配置的样式.
@@ -1120,11 +1157,12 @@ defaultContentLanguage = "zh-cn"
 
 {{< version 0.2.0 >}}
 
-基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/), **LoveIt** 主题支持搜索功能.
+基于 [Lunr.js](https://lunrjs.com/), [algolia](https://www.algolia.com/), [Fuse.js](https://fusejs.io/) 或 [Pagefind](https://pagefind.app/), **LoveIt** 主题支持搜索功能.
 
 ### 5.1 输出配置
 
 为了生成搜索功能所需要的 `index.json`, 请在你的 [网站配置](#site-configuration) 中添加 `JSON` 输出文件类型到 `outputs` 部分的 `home` 字段中.
+`lunr`, `algolia` 和 `fuse` 需要这个文件; `pagefind` 自行生成索引, 不需要它.
 
 ```toml
 [outputs]
@@ -1140,7 +1178,7 @@ defaultContentLanguage = "zh-cn"
 ```toml
 [params.search]
   enable = true
-  # 搜索引擎的类型 ["lunr", "algolia"]
+  # {{< version 1.0.0 changed >}} 搜索引擎的类型 ["lunr", "algolia", "fuse", "pagefind"]
   type = "lunr"
   # 文章内容最长索引长度
   contentLength = 4000
@@ -1158,13 +1196,28 @@ defaultContentLanguage = "zh-cn"
     index = ""
     appID = ""
     searchKey = ""
+  # {{< version 1.0.0 >}} {{< link "https://fusejs.io/api/options.html" "Fuse.js" >}} 选项
+  [params.search.fuse]
+    isCaseSensitive = false
+    minMatchCharLength = 2
+    findAllMatches = false
+    location = 0
+    threshold = 0.3
+    distance = 100
+    ignoreLocation = false
+  # {{< version 1.0.0 >}} {{< link "https://pagefind.app/" "Pagefind" >}} 配置
+  [params.search.pagefind]
+    # Pagefind 索引所在目录, 相对于 baseURL
+    basePath = "/_pagefind/"
 ```
 
 {{< admonition note "怎样选择搜索引擎?" >}}
-以下是两种搜索引擎的对比:
+以下是几种搜索引擎的对比:
 
 * `lunr`: 简单, 无需同步 `index.json`, 没有 `contentLength` 的限制, 但占用带宽大且性能低 (特别是中文需要一个较大的分词依赖库)
 * `algolia`: 高性能并且占用带宽低, 但需要同步 `index.json` 且有 `contentLength` 的限制
+* `fuse` {{< version 1.0.0 >}}: 在浏览器中基于 `index.json` 做模糊搜索, 无需同步到任何服务, 也不需要分词依赖库, 但首次搜索时要下载完整的 `index.json`
+* `pagefind` {{< version 1.0.0 >}}: 静态索引被切分成小块按需加载, 大型网站占用带宽也低, 无需同步到任何服务, 但每次构建后都要重新生成索引
 
 {{< version 0.2.3 >}} 文章内容被 `h2` 和 `h3` HTML 标签切分来提高查询效果并且基本实现全文搜索.
 `contentLength` 用来限制 `h2` 和 `h3` HTML 标签开头的内容部分的最大长度.
@@ -1175,3 +1228,55 @@ defaultContentLanguage = "zh-cn"
 官方提供的 [Algolia CLI](https://github.com/algolia/algolia-cli) 是一个不错的选择.
 为了兼容 Hugo 的多语言模式, 你需要上传不同语言的 `index.json` 文件到对应的 algolia index, 例如 `zh-cn/index.json` 或 `fr/index.json`...
 {{< /admonition >}}
+
+{{< admonition tip "关于 Pagefind 的使用技巧" >}}
+{{< version 1.0.0 >}}
+
+Pagefind 索引的是 Hugo 已经发布的 HTML 文件, 所以每次构建后都要生成索引:
+
+```bash
+hugo
+npx pagefind --site public --output-subdir _pagefind
+```
+
+`--output-subdir` 必须和 `[params.search.pagefind]` 中的 `basePath` 是同一个目录.
+设置了 `hiddenFromSearch` 的页面不会被索引, 运行一次即可索引所有语言.
+
+`hugo server` 不会生成索引. 要预览搜索效果, 请先构建网站, 再启动 Pagefind 自带的服务:
+
+```bash
+npx pagefind --site public --output-subdir _pagefind --serve
+```
+{{< /admonition >}}
+
+## 6 升级到 1.0 {#upgrade-to-1-0}
+
+{{< version 1.0.0 >}}
+
+从 **LoveIt 0.3.X** 升级时, 请检查以下内容.
+
+### 6.1 必须处理的事项
+
+* **将 Hugo 升级到 0.146.0 或更新版本.** LoveIt 0.3.X 支持的是 Hugo 0.128.0 - 0.145.0.
+* **安装 [Dart Sass](https://gohugo.io/functions/css/sass/#dart-sass).**
+  主题不再使用 LibSass 编译, 也不再附带预编译的 CSS, 所以只安装 Hugo extended 版本是不够的.
+  你的构建服务 (Netlify, Vercel, GitHub Actions...) 上同样需要安装 Dart Sass.
+* **检查自定义样式.** `assets/css/_override.scss` 和 `assets/css/_custom.scss` 的用法不变,
+  但它们现在由 Dart Sass 编译, 一些 LibSass 能接受的写法可能会产生警告或被拒绝.
+* **检查覆盖的模板.** 主题模板已迁移到 Hugo 的 [新模板系统](https://gohugo.io/templates/lookup-order/),
+  位于 `layouts/_partials`, `layouts/_shortcodes` 和 `layouts/_markup`.
+  如果你的网站覆盖了主题模板, 请和新的模板对照一遍.
+
+### 6.2 行为变化
+
+* **语言配置.** 在 Hugo 0.158.0 或更新版本中, 请使用 `locale` 和 `label` 代替已废弃的 `languageCode` 和 `languageName`.
+* **Polyfill.** `params.compatibility.polyfill` 改为从 `cdnjs.cloudflare.com` 加载, 不再使用 `polyfill.io`.
+* **音乐.** 默认的 Meting API 已更换. 可以在 `[params.page.music]` 中设置 `api` 来使用你自己的服务.
+* **Waline.** 内置客户端为 Waline v3, 需要 v1.27.0 及以上的 Waline 服务端.
+
+### 6.3 新增功能
+
+* [Fuse.js 和 Pagefind](#5-搜索) 搜索引擎
+* [Content-Security-Policy](#site-configuration) meta 标签 (`[params.security]`)
+* 数学公式的服务端渲染, Markdown 表格和引用块提示 (alert) 的渲染钩子
+* 主页个人信息副标题下方的额外文本 (`[params.home.profile]` 中的 `extra`)

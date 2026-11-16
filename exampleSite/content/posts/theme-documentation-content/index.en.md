@@ -266,6 +266,35 @@ graph TD
     F --> B
 ```
 
+### Alerts {#alerts}
+
+{{< version 1.0.0 >}}
+
+A blockquote that starts with an alert type is rendered in the same style as the [`admonition` shortcode](../theme-documentation-extended-shortcodes/#4-admonition),
+and accepts the same types.
+
+```markdown
+> [!NOTE]
+> An alert with the default title.
+
+> [!TIP] A custom title
+> An alert with a custom title.
+
+> [!WARNING]- Collapsed by default
+> Add `-` after the type to collapse the alert, or `+` to keep it open.
+```
+
+The rendered output looks like this:
+
+> [!NOTE]
+> An alert with the default title.
+
+> [!TIP] A custom title
+> An alert with a custom title.
+
+> [!WARNING]- Collapsed by default
+> Add `-` after the type to collapse the alert, or `+` to keep it open.
+
 ### Emoji Support
 
 This part is shown in the [emoji support page](../emoji-support/).
