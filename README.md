@@ -41,7 +41,7 @@ Compared to the original LeaveIt theme and the KeepIt theme, the LoveIt theme ha
 * Some beautiful **CSS animations**
 * Easy-to-use and self-expanding **table of contents**
 * More **social links**, **share sites** and **comment system**
-* **Search** supported by [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/)
+* **Search** supported by [Lunr.js](https://lunrjs.com/), [algolia](https://www.algolia.com/), [Fuse.js](https://fusejs.io/) or [Pagefind](https://pagefind.app/)
 * **Copy code** to clipboard with one click
 * Extended Markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
 * Extended Markdown syntax for **ruby annotation**
@@ -103,10 +103,11 @@ I hope you will LoveIt ❤️!
 * **Commento** comment system supported by [Commento](https://commento.io/)
 * **utterances** comment system supported by [utterances](https://utteranc.es/)
 * **giscus** comment system supported by [giscus](https://giscus.app/)
+* **Waline** comment system supported by [Waline](https://waline.js.org/)
 
 ### Extended Features
 
-* **Search** supported by [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/)
+* **Search** supported by [Lunr.js](https://lunrjs.com/), [algolia](https://www.algolia.com/), [Fuse.js](https://fusejs.io/) or [Pagefind](https://pagefind.app/)
 * **Twemoji** supported
 * Automatically **highlighting** code
 * **Copy code** to clipboard with one click
@@ -144,7 +145,8 @@ Development uses `.hvm` to pin Hugo and npm to provide Dart Sass. Run `npm run b
 | LoveIt branch or version | Supported Hugo versions |
 |:-------------------------|:-----------------------:|
 | master(Unstable)         |       >= 0.146.0        |
-| **0.3.X(Recommended)**   |    0.128.0 - 0.145.0    |
+| **0.4.X(Recommended)**   |       >= 0.146.0        |
+| 0.3.X                    |    0.128.0 - 0.145.0    |
 | 0.2.X(Outdated)          |    0.68.0 - 0.127.0     |
 
 ## Multilingual and i18n
@@ -200,6 +202,8 @@ Thanks to the authors of following resources included in the theme:
 * [autocomplete](https://github.com/algolia/autocomplete)
 * [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
+* [Fuse.js](https://fusejs.io/)
+* [Pagefind](https://pagefind.app/)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
 * [object-fit-images](https://github.com/fregante/object-fit-images)
 * [Twemoji](https://github.com/twitter/twemoji)
@@ -216,6 +220,7 @@ Thanks to the authors of following resources included in the theme:
 * [MetingJS](https://github.com/metowolf/MetingJS)
 * [Gitalk](https://github.com/gitalk/gitalk)
 * [Valine](https://valine.js.org/)
+* [Waline](https://waline.js.org/)
 * [cookieconsent](https://github.com/osano/cookieconsent)
 
 ## Author
