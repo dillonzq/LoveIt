@@ -31,13 +31,13 @@ toc:
 
 直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive): Hugo](https://gohugo.io/getting-started/installing/).
 
-{{< admonition note "LoveIt 1.0 需要 Dart Sass" >}}
+{{< admonition note "master 分支需要 Dart Sass" >}}
 {{< version 1.0.0 >}}
 
-**LoveIt 1.0** 需要 **Hugo 0.146.0 或更新版本**和 [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass).
+**master** 分支需要 **Hugo 0.146.0 或更新版本**和 [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass).
 请在安装 Hugo 的同时安装 Dart Sass; 只安装 Hugo extended 版本是不够的, 并且 Hugo 从 0.170.0 起不再提供 extended 版本.
 
-如果你从 LoveIt 0.3.X 升级, 请先阅读 [升级到 1.0](#upgrade-to-1-0).
+如果你从 LoveIt 0.3.X 升级, 请先阅读 [从 0.3.X 升级](#upgrade-from-0-3).
 {{< /admonition >}}
 
 ## 2 安装
@@ -76,8 +76,8 @@ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 
 | LoveIt 分支或版本  |    支持的 Hugo 版本    |
 |:--------------|:-----------------:|
-| **1.0.X(推荐)** |     ≥ 0.146.0     |
-| 0.3.X         | 0.128.0 - 0.145.0 |
+| master(不稳定)   |     ≥ 0.146.0     |
+| **0.3.X(推荐)** | 0.128.0 - 0.145.0 |
 | 0.2.X(过时)     | 0.68.0 - 0.127.0  |
 
 {{< /admonition >}}
@@ -1247,13 +1247,15 @@ npx pagefind --site public --output-subdir _pagefind
 ```bash
 npx pagefind --site public --output-subdir _pagefind --serve
 ```
+
+预览时 `public` 目录位于根路径. 如果你的 `baseURL` 带有子路径, 请用 `hugo --baseURL /` 构建后再预览.
 {{< /admonition >}}
 
-## 6 升级到 1.0 {#upgrade-to-1-0}
+## 6 从 0.3.X 升级 {#upgrade-from-0-3}
 
 {{< version 1.0.0 >}}
 
-从 **LoveIt 0.3.X** 升级时, 请检查以下内容.
+从 **LoveIt 0.3.X** 升级到 **master** 分支 (将作为 1.0.0 发布) 时, 请检查以下内容.
 
 ### 6.1 必须处理的事项
 

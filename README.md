@@ -143,8 +143,8 @@ Development uses `.hvm` to pin Hugo and npm to provide Dart Sass. Run `npm run b
 
 | LoveIt branch or version | Supported Hugo versions |
 |:-------------------------|:-----------------------:|
-| **1.0.X(Recommended)**   |       >= 0.146.0        |
-| 0.3.X                    |    0.128.0 - 0.145.0    |
+| master(Unstable)         |       >= 0.146.0        |
+| **0.3.X(Recommended)**   |    0.128.0 - 0.145.0    |
 | 0.2.X(Outdated)          |    0.68.0 - 0.127.0     |
 
 ## Multilingual and i18n

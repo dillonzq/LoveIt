@@ -31,13 +31,13 @@ Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only depende
 
 Just install latest edition of [:(far fa-file-archive): Hugo](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
 
-{{< admonition note "LoveIt 1.0 requires Dart Sass" >}}
+{{< admonition note "The master branch requires Dart Sass" >}}
 {{< version 1.0.0 >}}
 
-**LoveIt 1.0** requires **Hugo 0.146.0 or later** and [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass).
+The **master** branch requires **Hugo 0.146.0 or later** and [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass).
 Install Dart Sass next to Hugo; the extended edition of Hugo is not enough, and Hugo 0.170.0 no longer ships one.
 
-If you are upgrading from LoveIt 0.3.X, read [Upgrade to 1.0](#upgrade-to-1-0) first.
+If you are upgrading from LoveIt 0.3.X, read [Upgrade from 0.3.X](#upgrade-from-0-3) first.
 {{< /admonition >}}
 
 ## 2 Installation
@@ -76,8 +76,8 @@ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 
 | LoveIt branch or version | Supported Hugo versions |
 |:-------------------------|:-----------------------:|
-| **1.0.X(Recommended)**   |        ≥ 0.146.0        |
-| 0.3.X                    |    0.128.0 - 0.145.0    |
+| master(Unstable)         |        ≥ 0.146.0        |
+| **0.3.X(Recommended)**   |    0.128.0 - 0.145.0    |
 | 0.2.X(Outdated)          |    0.68.0 - 0.127.0     |
 
 {{< /admonition >}}
@@ -1247,13 +1247,15 @@ Pages with `hiddenFromSearch` are not indexed, and one run indexes all languages
 ```bash
 npx pagefind --site public --output-subdir _pagefind --serve
 ```
+
+The preview serves `public` at the root. If your `baseURL` contains a subpath, build the preview with `hugo --baseURL /`.
 {{< /admonition >}}
 
-## 6 Upgrade to 1.0 {#upgrade-to-1-0}
+## 6 Upgrade from 0.3.X {#upgrade-from-0-3}
 
 {{< version 1.0.0 >}}
 
-Check the following when you upgrade from **LoveIt 0.3.X**.
+Check the following when you upgrade from **LoveIt 0.3.X** to the **master** branch, which will be released as 1.0.0.
 
 ### 6.1 What You Must Do
 
