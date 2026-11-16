@@ -114,7 +114,7 @@ hiddenFromHomePage: true
 
 * **api** *[可选]*
 
-    {{< version 1.0.0 >}} Meting API 地址, 仅适用于音乐平台 URL 自动识别和自定义音乐平台, 默认值是[主题配置](../theme-documentation-basics#site-configuration)中的 `params.page.music.api`.
+    {{< version 0.4.0 >}} Meting API 地址, 仅适用于音乐平台 URL 自动识别和自定义音乐平台, 默认值是[主题配置](../theme-documentation-basics#site-configuration)中的 `params.page.music.api`.
 
 * **theme** *[可选]*
 

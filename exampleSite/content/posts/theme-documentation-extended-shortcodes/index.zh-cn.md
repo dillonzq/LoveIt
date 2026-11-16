@@ -199,7 +199,7 @@ This is a **right-aligned** paragraph.
 
 ## 4 admonition
 
-{{< version 1.0.0 changed >}}
+{{< version 0.4.0 changed >}}
 
 `admonition` shortcode 支持 **13** 种 帮助你在页面中插入提示的横幅.
 
@@ -220,7 +220,7 @@ This is a **right-aligned** paragraph.
 {{< /admonition >}}
 
 {{< admonition todo >}}
-{{< version 1.0.0 >}}
+{{< version 0.4.0 >}}
 
 一个 **待办** 横幅
 {{< /admonition >}}

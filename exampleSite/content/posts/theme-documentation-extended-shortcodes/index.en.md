@@ -199,7 +199,7 @@ The rendered output looks like this:
 
 ## 4 admonition
 
-{{< version 1.0.0 changed >}}
+{{< version 0.4.0 changed >}}
 
 The `admonition` shortcode supports **13** types of admonition banners to help you put notice in your page.
 
@@ -220,7 +220,7 @@ A **info** banner
 {{< /admonition >}}
 
 {{< admonition todo >}}
-{{< version 1.0.0 >}}
+{{< version 0.4.0 >}}
 
 A **todo** banner
 {{< /admonition >}}

@@ -265,6 +265,34 @@ graph TD
     F --> B
 ```
 
+### 提示 (Alert) {#alerts}
+
+{{< version 0.4.0 >}}
+
+以提示类型开头的引用块, 会以和 [`admonition` shortcode](../theme-documentation-extended-shortcodes/#4-admonition) 相同的样式渲染, 支持的类型也相同.
+
+```markdown
+> [!NOTE]
+> 使用默认标题的提示.
+
+> [!TIP] 自定义标题
+> 使用自定义标题的提示.
+
+> [!WARNING]- 默认折叠
+> 在类型后加 `-` 使提示默认折叠, 加 `+` 则保持展开.
+```
+
+呈现的输出效果如下:
+
+> [!NOTE]
+> 使用默认标题的提示.
+
+> [!TIP] 自定义标题
+> 使用自定义标题的提示.
+
+> [!WARNING]- 默认折叠
+> 在类型后加 `-` 使提示默认折叠, 加 `+` 则保持展开.
+
 ### Emoji 支持
 
 这部分内容在 [Emoji 支持页面](../emoji-support/) 中介绍.
@@ -460,7 +488,7 @@ $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
 #### 服务端渲染
 
-{{< version 1.0.0 >}}
+{{< version 0.4.0 >}}
 
 **LoveIt** 主题还提供了一个 [直通渲染钩子 (passthrough render hook)](https://gohugo.io/render-hooks/passthrough/),
 在构建时通过 Hugo 的 [`transform.ToMath`](https://gohugo.io/functions/transform/tomath/) 将公式渲染为 HTML.

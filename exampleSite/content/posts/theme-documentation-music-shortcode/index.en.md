@@ -115,7 +115,7 @@ The `music` shortcode has other named parameters applying to the above three way
 
 * **api** *[optional]*
 
-    {{< version 1.0.0 >}} Meting API URL, only applying to the music platform URL automatic identification and the custom music platform, default value is `params.page.music.api` in the [theme configuration](../theme-documentation-basics#site-configuration).
+    {{< version 0.4.0 >}} Meting API URL, only applying to the music platform URL automatic identification and the custom music platform, default value is `params.page.music.api` in the [theme configuration](../theme-documentation-basics#site-configuration).
 
 * **theme** *[optional]*
 

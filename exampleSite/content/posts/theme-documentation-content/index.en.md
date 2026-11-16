@@ -266,6 +266,35 @@ graph TD
     F --> B
 ```
 
+### Alerts {#alerts}
+
+{{< version 0.4.0 >}}
+
+A blockquote that starts with an alert type is rendered in the same style as the [`admonition` shortcode](../theme-documentation-extended-shortcodes/#4-admonition),
+and accepts the same types.
+
+```markdown
+> [!NOTE]
+> An alert with the default title.
+
+> [!TIP] A custom title
+> An alert with a custom title.
+
+> [!WARNING]- Collapsed by default
+> Add `-` after the type to collapse the alert, or `+` to keep it open.
+```
+
+The rendered output looks like this:
+
+> [!NOTE]
+> An alert with the default title.
+
+> [!TIP] A custom title
+> An alert with a custom title.
+
+> [!WARNING]- Collapsed by default
+> Add `-` after the type to collapse the alert, or `+` to keep it open.
+
 ### Emoji Support
 
 This part is shown in the [emoji support page](../emoji-support/).
@@ -462,7 +491,7 @@ $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
 #### Server-side Rendering
 
-{{< version 1.0.0 >}}
+{{< version 0.4.0 >}}
 
 **LoveIt** theme also provides a [passthrough render hook](https://gohugo.io/render-hooks/passthrough/),
 which renders formulas into HTML at build time with Hugo's [`transform.ToMath`](https://gohugo.io/functions/transform/tomath/).
