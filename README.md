@@ -8,7 +8,7 @@
 # LoveIt Theme | Hugo
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
-[![Hugo](https://img.shields.io/badge/Hugo-%5E0.146.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%5E0.158.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
 [![CI](https://github.com/dillonzq/LoveIt/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/dillonzq/LoveIt/actions/workflows/ci.yml)
@@ -144,7 +144,7 @@ Development uses `.hvm` to pin Hugo and npm to provide Dart Sass. Run `npm run b
 
 | LoveIt branch or version | Supported Hugo versions |
 |:-------------------------|:-----------------------:|
-| master(Unstable)         |       >= 0.146.0        |
+| master(Unstable)         |       >= 0.158.0        |
 | **0.4.X(Recommended)**   |       >= 0.146.0        |
 | 0.3.X                    |    0.128.0 - 0.145.0    |
 | 0.2.X(Outdated)          |    0.68.0 - 0.127.0     |

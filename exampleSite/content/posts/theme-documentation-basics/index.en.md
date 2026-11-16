@@ -38,6 +38,9 @@ Just install latest edition of [:(far fa-file-archive): Hugo](https://gohugo.io/
 Install Dart Sass next to Hugo; the extended edition of Hugo is not enough, and Hugo 0.170.0 no longer ships one.
 
 If you are upgrading from LoveIt 0.3.X, read [Upgrade from 0.3.X](#upgrade-from-0-3) first.
+
+{{< version 1.0.0 changed >}} The **master** branch requires **Hugo 0.158.0 or later**.
+If you are upgrading from LoveIt 0.4.X to the master branch, read [Upgrade from 0.4.X](#upgrade-from-0-4).
 {{< /admonition >}}
 
 ## 2 Installation
@@ -76,7 +79,7 @@ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 
 | LoveIt branch or version | Supported Hugo versions |
 |:-------------------------|:-----------------------:|
-| master(Unstable)         |        ≥ 0.146.0        |
+| master(Unstable)         |        ≥ 0.158.0        |
 | **0.4.X(Recommended)**   |        ≥ 0.146.0        |
 | 0.3.X                    |    0.128.0 - 0.145.0    |
 | 0.2.X(Outdated)          |    0.68.0 - 0.127.0     |
@@ -1287,3 +1290,12 @@ Check the following when you upgrade from **LoveIt 0.3.X** to **0.4.X**.
 * [Content-Security-Policy](#site-configuration) meta tag (`[params.security]`)
 * Server-side rendering of mathematical formulas, Markdown table and blockquote alert render hooks
 * Extra text below the subtitle of the home page profile (`extra` in `[params.home.profile]`)
+
+## 7 Upgrade from 0.4.X {#upgrade-from-0-4}
+
+{{< version 1.0.0 >}}
+
+Check the following when you upgrade from **LoveIt 0.4.X** to the **master** branch, which will be released as 1.0.0.
+
+* **Upgrade Hugo to 0.158.0 or later.** LoveIt 0.4.X supports Hugo 0.146.0 and later.
+* **Language configuration.** Use `locale` and `label` instead of `languageCode` and `languageName`, which Hugo has deprecated.

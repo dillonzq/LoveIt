@@ -12,9 +12,6 @@ cpSync(path.join(root, 'tests/fixtures/assets'), path.join(source, 'assets'), { 
 cpSync(path.join(root, 'tests/fixtures/content'), path.join(source, 'content'), { recursive: true });
 cpSync(path.join(root, 'tests/fixtures/layouts'), path.join(source, 'layouts'), { recursive: true });
 const configs = [path.join(root, 'exampleSite/hugo.toml'), path.join(root, 'tests/fixtures/config.toml')];
-const { version } = await getHugo();
-const [, major, minor] = version.match(/v(\d+)\.(\d+)\./);
-if (Number(major) === 0 && Number(minor) < 158) configs.push(path.join(root, 'exampleSite/config-legacy.toml'));
 for (const engine of ['fuse', 'lunr', 'pagefind', 'algolia']) {
   rmSync(path.join(root, 'build/resources', engine), { recursive: true, force: true });
   rmSync(path.join(root, 'build/browser', engine), { recursive: true, force: true });

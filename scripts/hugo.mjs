@@ -13,13 +13,6 @@ async function main() {
   }
   const source = path.resolve(takeOption(args, '--source', '-s') || path.join(root, 'exampleSite'));
   const configs = (takeOption(args, '--config') || path.join(source, 'hugo.toml')).split(',').map(p => path.resolve(p));
-  const match = version.match(/v(\d+)\.(\d+)\./);
-  if (!match) throw new Error(`Cannot read Hugo version: ${version}`);
-  const legacy = Number(match[1]) === 0 && Number(match[2]) < 158;
-  // Only the example site needs an overlay; downstream sites own their language config.
-  if (legacy && source === path.join(root, 'exampleSite')) {
-    configs.push(path.join(source, 'config-legacy.toml'));
-  }
   mkdirSync(toolDir, { recursive: true });
   const temporary = mkdtempSync(path.join(toolDir, 'build-'));
   try {

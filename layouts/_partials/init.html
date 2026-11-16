@@ -1,4 +1,4 @@
-{{- .Scratch.Set "version" "0.4.0" -}}
+{{- .Scratch.Set "version" "1.0.0" -}}
 
 {{- $params := partial "function/params.html" . -}}
 
@@ -12,7 +12,7 @@
     {{- else if eq .Params.comment false -}}
         {{- .Scratch.Set "comment" dict -}}
     {{- end -}}
-{{- else if eq .Site (partial "function/sites.html" .).Default -}}
+{{- else if eq .Site hugo.Sites.Default -}}
     {{- warnf "Current environment is not \"production\". The \"comment system\", \"CDN\" and \"fingerprint\" will be disabled.\n" -}}
     {{- warnf "当前运行环境不是 \"production\". \"评论系统\", \"CDN\" 和 \"fingerprint\" 不会启用.\n" -}}
 {{- end -}}
