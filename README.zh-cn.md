@@ -40,7 +40,7 @@
 * 一些美观的 **CSS 动画**
 * 易用和自动展开的**文章目录**
 * 支持更多的**社交链接**、**网站分享**和**评论系统**
-* 支持基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/) 的**搜索**
+* 支持基于 [Lunr.js](https://lunrjs.com/), [algolia](https://www.algolia.com/), [Fuse.js](https://fusejs.io/) 或 [Pagefind](https://pagefind.app/) 的**搜索**
 * 一键**复制代码**到剪贴板
 * 支持基于 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
 * 支持**上标注释**的扩展 Markdown 语法
@@ -98,10 +98,11 @@
 * 支持 **[Commento](https://commento.io/)** 评论系统
 * 支持 **[utterances](https://utteranc.es/)** 评论系统
 * 支持 **[giscus](https://giscus.app/)** 评论系统
+* 支持 **[Waline](https://waline.js.org/)** 评论系统
 
 ### 扩展功能
 
-* 支持基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/) 的**搜索**
+* 支持基于 [Lunr.js](https://lunrjs.com/), [algolia](https://www.algolia.com/), [Fuse.js](https://fusejs.io/) 或 [Pagefind](https://pagefind.app/) 的**搜索**
 * 支持 **Twemoji**
 * 支持**代码高亮**
 * 一键**复制代码**到剪贴板
@@ -139,7 +140,8 @@ npm run dev
 | LoveIt 分支或版本 | 支持的 Hugo 版本  |
 |:------------------|:-----------------:|
 | master(不稳定)    |    >= 0.146.0     |
-| **0.3.X(推荐)**   | 0.128.0 - 0.145.0 |
+| **0.4.X(推荐)**   |    >= 0.146.0     |
+| 0.3.X             | 0.128.0 - 0.145.0 |
 | 0.2.X(过时)       | 0.68.0 - 0.127.0  |
 
 ## 多语言和国际化
@@ -195,6 +197,8 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [autocomplete](https://github.com/algolia/autocomplete)
 * [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
+* [Fuse.js](https://fusejs.io/)
+* [Pagefind](https://pagefind.app/)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
 * [object-fit-images](https://github.com/fregante/object-fit-images)
 * [Twemoji](https://github.com/twitter/twemoji)
@@ -211,6 +215,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [MetingJS](https://github.com/metowolf/MetingJS)
 * [Gitalk](https://github.com/gitalk/gitalk)
 * [Valine](https://valine.js.org/)
+* [Waline](https://waline.js.org/)
 * [cookieconsent](https://github.com/osano/cookieconsent)
 
 ## 作者

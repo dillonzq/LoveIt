@@ -63,10 +63,11 @@ math:
 * :(fas fa-comment-dots): 支持 **[Commento](https://commento.io/)** 评论系统
 * :(far fa-comment-alt): 支持 **[utterances](https://utteranc.es/)** 评论系统
 * :(fas fa-comments): 支持 **[giscus](https://giscus.app/)** 评论系统
+* :(far fa-comment-dots): 支持 **[Waline](https://waline.js.org/)** 评论系统
 
 ### 扩展功能
 
-* :(fas fa-search): 支持基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/) 的**搜索**
+* :(fas fa-search): 支持基于 [Lunr.js](https://lunrjs.com/), [algolia](https://www.algolia.com/), [Fuse.js](https://fusejs.io/) 或 [Pagefind](https://pagefind.app/) 的**搜索**
 * :(far fa-grin-tongue-wink): 支持 **Twemoji**
 * :(fas fa-code): 支持**代码高亮**
 * :(far fa-copy): 一键**复制代码**到剪贴板
@@ -105,6 +106,8 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [autocomplete](https://github.com/algolia/autocomplete)
 * [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
+* [Fuse.js](https://fusejs.io/)
+* [Pagefind](https://pagefind.app/)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
 * [object-fit-images](https://github.com/fregante/object-fit-images)
 * [Twemoji](https://github.com/twitter/twemoji)
@@ -121,4 +124,5 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [MetingJS](https://github.com/metowolf/MetingJS)
 * [Gitalk](https://github.com/gitalk/gitalk)
 * [Valine](https://valine.js.org/)
+* [Waline](https://waline.js.org/)
 * [cookieconsent](https://github.com/osano/cookieconsent)
