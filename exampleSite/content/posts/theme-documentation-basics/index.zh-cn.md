@@ -32,7 +32,7 @@ toc:
 直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive): Hugo](https://gohugo.io/getting-started/installing/).
 
 {{< admonition note "master 分支需要 Dart Sass" >}}
-{{< version 1.0.0 >}}
+{{< version 0.4.0 >}}
 
 **master** 分支需要 **Hugo 0.146.0 或更新版本**和 [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass).
 请在安装 Hugo 的同时安装 Dart Sass; 只安装 Hugo extended 版本是不够的, 并且 Hugo 从 0.170.0 起不再提供 extended 版本.
@@ -368,7 +368,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # {{< version 0.2.0 >}} 搜索配置
   [params.search]
     enable = true
-    # {{< version 1.0.0 changed >}} 搜索引擎的类型 ["lunr", "algolia", "fuse", "pagefind"]
+    # {{< version 0.4.0 changed >}} 搜索引擎的类型 ["lunr", "algolia", "fuse", "pagefind"]
     type = "lunr"
     # 文章内容最长索引长度
     contentLength = 4000
@@ -386,7 +386,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       index = ""
       appID = ""
       searchKey = ""
-    # {{< version 1.0.0 >}} {{< link "https://fusejs.io/api/options.html" "Fuse.js" >}} 选项
+    # {{< version 0.4.0 >}} {{< link "https://fusejs.io/api/options.html" "Fuse.js" >}} 选项
     [params.search.fuse]
       isCaseSensitive = false
       minMatchCharLength = 2
@@ -395,7 +395,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       threshold = 0.3
       distance = 100
       ignoreLocation = false
-    # {{< version 1.0.0 >}} {{< link "https://pagefind.app/" "Pagefind" >}} 配置
+    # {{< version 0.4.0 >}} {{< link "https://pagefind.app/" "Pagefind" >}} 配置
     [params.search.pagefind]
       # Pagefind 索引所在目录, 相对于 baseURL
       basePath = "/_pagefind/"
@@ -417,9 +417,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       subtitle = "这是我的全新 Hugo 网站"
       # 是否为副标题显示打字机动画
       typeit = true
-      # {{< version 1.0.0 >}} 副标题下方显示的额外文本, 例如引用或简短介绍 (支持 HTML 格式)
+      # {{< version 0.4.0 >}} 副标题下方显示的额外文本, 例如引用或简短介绍 (支持 HTML 格式)
       extra = ""
-      # {{< version 1.0.0 >}} 是否以斜体显示额外文本
+      # {{< version 0.4.0 >}} 是否以斜体显示额外文本
       extraItalic = true
       # 是否显示社交账号
       social = true
@@ -584,7 +584,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       scale = true
       # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol" FullscreenControl >}}
       fullscreen = true
-    # {{< version 1.0.0 >}} music shortcode 的 {{< link "https://github.com/metowolf/MetingJS" "MetingJS" >}} 配置
+    # {{< version 0.4.0 >}} music shortcode 的 {{< link "https://github.com/metowolf/MetingJS" "MetingJS" >}} 配置
     [params.page.music]
       # Meting API 地址, 支持 :server, :type, :id, :auth 和 :r 占位符
       api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&r=:r"
@@ -705,7 +705,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         lightTheme = "light"
         darkTheme = "dark"
       # {{< version 0.3.1 >}} {{< link "https://waline.js.org/" "Waline" >}} 评论系统设置
-      # {{< version 1.0.0 changed >}} 内置客户端为 Waline v3, 需要 v1.27.0 及以上的 Waline 服务端
+      # {{< version 0.4.0 changed >}} 内置客户端为 Waline v3, 需要 v1.27.0 及以上的 Waline 服务端
       [params.page.comment.waline]
         enable = false
         serverURL = ""
@@ -753,7 +753,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     pinterest = ""
     baidu = ""
 
-  # {{< version 1.0.0 >}} 安全配置
+  # {{< version 0.4.0 >}} 安全配置
   [params.security]
     # 当无法设置 HTTP 响应头时使用的 Content-Security-Policy meta 标签
     # https://content-security-policy.com/examples/meta/
@@ -969,7 +969,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 {{< version 0.2.8 changed >}}
 
 {{< admonition note "Dart Sass 是必需的" >}}
-{{< version 1.0.0 >}} Hugo 使用 [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass) 将 :(fab fa-sass): SCSS 转换为 :(fab fa-css3): CSS.
+{{< version 0.4.0 >}} Hugo 使用 [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass) 将 :(fab fa-sass): SCSS 转换为 :(fab fa-css3): CSS.
 `_override.scss` 和 `_custom.scss` 的覆盖方式保持不变.
 {{< /admonition >}}
 
@@ -1178,7 +1178,7 @@ defaultContentLanguage = "zh-cn"
 ```toml
 [params.search]
   enable = true
-  # {{< version 1.0.0 changed >}} 搜索引擎的类型 ["lunr", "algolia", "fuse", "pagefind"]
+  # {{< version 0.4.0 changed >}} 搜索引擎的类型 ["lunr", "algolia", "fuse", "pagefind"]
   type = "lunr"
   # 文章内容最长索引长度
   contentLength = 4000
@@ -1196,7 +1196,7 @@ defaultContentLanguage = "zh-cn"
     index = ""
     appID = ""
     searchKey = ""
-  # {{< version 1.0.0 >}} {{< link "https://fusejs.io/api/options.html" "Fuse.js" >}} 选项
+  # {{< version 0.4.0 >}} {{< link "https://fusejs.io/api/options.html" "Fuse.js" >}} 选项
   [params.search.fuse]
     isCaseSensitive = false
     minMatchCharLength = 2
@@ -1205,7 +1205,7 @@ defaultContentLanguage = "zh-cn"
     threshold = 0.3
     distance = 100
     ignoreLocation = false
-  # {{< version 1.0.0 >}} {{< link "https://pagefind.app/" "Pagefind" >}} 配置
+  # {{< version 0.4.0 >}} {{< link "https://pagefind.app/" "Pagefind" >}} 配置
   [params.search.pagefind]
     # Pagefind 索引所在目录, 相对于 baseURL
     basePath = "/_pagefind/"
@@ -1216,8 +1216,8 @@ defaultContentLanguage = "zh-cn"
 
 * `lunr`: 简单, 无需同步 `index.json`, 没有 `contentLength` 的限制, 但占用带宽大且性能低 (特别是中文需要一个较大的分词依赖库)
 * `algolia`: 高性能并且占用带宽低, 但需要同步 `index.json` 且有 `contentLength` 的限制
-* `fuse` {{< version 1.0.0 >}}: 在浏览器中基于 `index.json` 做模糊搜索, 无需同步到任何服务, 也不需要分词依赖库, 但首次搜索时要下载完整的 `index.json`
-* `pagefind` {{< version 1.0.0 >}}: 静态索引被切分成小块按需加载, 大型网站占用带宽也低, 无需同步到任何服务, 但每次构建后都要重新生成索引
+* `fuse` {{< version 0.4.0 >}}: 在浏览器中基于 `index.json` 做模糊搜索, 无需同步到任何服务, 也不需要分词依赖库, 但首次搜索时要下载完整的 `index.json`
+* `pagefind` {{< version 0.4.0 >}}: 静态索引被切分成小块按需加载, 大型网站占用带宽也低, 无需同步到任何服务, 但每次构建后都要重新生成索引
 
 {{< version 0.2.3 >}} 文章内容被 `h2` 和 `h3` HTML 标签切分来提高查询效果并且基本实现全文搜索.
 `contentLength` 用来限制 `h2` 和 `h3` HTML 标签开头的内容部分的最大长度.
@@ -1230,7 +1230,7 @@ defaultContentLanguage = "zh-cn"
 {{< /admonition >}}
 
 {{< admonition tip "关于 Pagefind 的使用技巧" >}}
-{{< version 1.0.0 >}}
+{{< version 0.4.0 >}}
 
 Pagefind 索引的是 Hugo 已经发布的 HTML 文件, 所以每次构建后都要生成索引:
 
@@ -1253,9 +1253,9 @@ npx pagefind --site public --output-subdir _pagefind --serve
 
 ## 6 从 0.3.X 升级 {#upgrade-from-0-3}
 
-{{< version 1.0.0 >}}
+{{< version 0.4.0 >}}
 
-从 **LoveIt 0.3.X** 升级到 **master** 分支 (将作为 1.0.0 发布) 时, 请检查以下内容.
+从 **LoveIt 0.3.X** 升级到 **master** 分支 (将作为 0.4.0 发布) 时, 请检查以下内容.
 
 ### 6.1 必须处理的事项
 

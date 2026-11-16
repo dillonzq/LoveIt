@@ -32,7 +32,7 @@ Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only depende
 Just install latest edition of [:(far fa-file-archive): Hugo](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
 
 {{< admonition note "The master branch requires Dart Sass" >}}
-{{< version 1.0.0 >}}
+{{< version 0.4.0 >}}
 
 The **master** branch requires **Hugo 0.146.0 or later** and [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass).
 Install Dart Sass next to Hugo; the extended edition of Hugo is not enough, and Hugo 0.170.0 no longer ships one.
@@ -366,7 +366,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # {{< version 0.2.0 >}} Search config
   [params.search]
     enable = true
-    # {{< version 1.0.0 changed >}} type of search engine ["lunr", "algolia", "fuse", "pagefind"]
+    # {{< version 0.4.0 changed >}} type of search engine ["lunr", "algolia", "fuse", "pagefind"]
     type = "lunr"
     # max index length of the chunked content
     contentLength = 4000
@@ -384,7 +384,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       index = ""
       appID = ""
       searchKey = ""
-    # {{< version 1.0.0 >}} {{< link "https://fusejs.io/api/options.html" "Fuse.js" >}} options
+    # {{< version 0.4.0 >}} {{< link "https://fusejs.io/api/options.html" "Fuse.js" >}} options
     [params.search.fuse]
       isCaseSensitive = false
       minMatchCharLength = 2
@@ -393,7 +393,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       threshold = 0.3
       distance = 100
       ignoreLocation = false
-    # {{< version 1.0.0 >}} {{< link "https://pagefind.app/" "Pagefind" >}} config
+    # {{< version 0.4.0 >}} {{< link "https://pagefind.app/" "Pagefind" >}} config
     [params.search.pagefind]
       # directory of the Pagefind index, relative to the baseURL
       basePath = "/_pagefind/"
@@ -415,9 +415,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       subtitle = "This is My New Hugo Site"
       # whether to use typeit animation for subtitle
       typeit = true
-      # {{< version 1.0.0 >}} extra text shown below the subtitle, such as a quote or a short summary (HTML format is supported)
+      # {{< version 0.4.0 >}} extra text shown below the subtitle, such as a quote or a short summary (HTML format is supported)
       extra = ""
-      # {{< version 1.0.0 >}} whether to show the extra text in italic
+      # {{< version 0.4.0 >}} whether to show the extra text in italic
       extraItalic = true
       # whether to show social links
       social = true
@@ -582,7 +582,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       scale = true
       # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol" FullscreenControl >}}
       fullscreen = true
-    # {{< version 1.0.0 >}} {{< link "https://github.com/metowolf/MetingJS" "MetingJS" >}} config for the music shortcode
+    # {{< version 0.4.0 >}} {{< link "https://github.com/metowolf/MetingJS" "MetingJS" >}} config for the music shortcode
     [params.page.music]
       # Meting API URL, supports :server, :type, :id, :auth and :r placeholders
       api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&r=:r"
@@ -703,7 +703,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         lightTheme = "light"
         darkTheme = "dark"
       # {{< version 0.3.1 >}} {{< link "https://waline.js.org/" "Waline" >}} comment config
-      # {{< version 1.0.0 changed >}} the bundled client is Waline v3, which requires a Waline server v1.27.0 or later
+      # {{< version 0.4.0 changed >}} the bundled client is Waline v3, which requires a Waline server v1.27.0 or later
       [params.page.comment.waline]
         enable = false
         serverURL = ""
@@ -751,7 +751,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     pinterest = ""
     baidu = ""
 
-  # {{< version 1.0.0 >}} Security config
+  # {{< version 0.4.0 >}} Security config
   [params.security]
     # Content-Security-Policy meta tag, for when HTTP headers cannot be set
     # https://content-security-policy.com/examples/meta/
@@ -966,7 +966,7 @@ Customize `browserconfig.xml` and `site.webmanifest` to set theme-color and back
 {{< version 0.2.8 changed >}}
 
 {{< admonition note "Dart Sass is required" >}}
-{{< version 1.0.0 >}} Hugo uses [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass) to process :(fab fa-sass): SCSS to :(fab fa-css3): CSS.
+{{< version 0.4.0 >}} Hugo uses [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass) to process :(fab fa-sass): SCSS to :(fab fa-css3): CSS.
 Existing `_override.scss` and `_custom.scss` customizations remain supported.
 {{< /admonition >}}
 
@@ -1173,7 +1173,7 @@ Here is the search configuration in your [site configuration](#site-configuratio
 ```toml
 [params.search]
   enable = true
-  # {{< version 1.0.0 changed >}} type of search engine ["lunr", "algolia", "fuse", "pagefind"]
+  # {{< version 0.4.0 changed >}} type of search engine ["lunr", "algolia", "fuse", "pagefind"]
   type = "lunr"
   # max index length of the chunked content
   contentLength = 4000
@@ -1191,7 +1191,7 @@ Here is the search configuration in your [site configuration](#site-configuratio
     index = ""
     appID = ""
     searchKey = ""
-  # {{< version 1.0.0 >}} {{< link "https://fusejs.io/api/options.html" "Fuse.js" >}} options
+  # {{< version 0.4.0 >}} {{< link "https://fusejs.io/api/options.html" "Fuse.js" >}} options
   [params.search.fuse]
     isCaseSensitive = false
     minMatchCharLength = 2
@@ -1200,7 +1200,7 @@ Here is the search configuration in your [site configuration](#site-configuratio
     threshold = 0.3
     distance = 100
     ignoreLocation = false
-  # {{< version 1.0.0 >}} {{< link "https://pagefind.app/" "Pagefind" >}} config
+  # {{< version 0.4.0 >}} {{< link "https://pagefind.app/" "Pagefind" >}} config
   [params.search.pagefind]
     # directory of the Pagefind index, relative to the baseURL
     basePath = "/_pagefind/"
@@ -1212,9 +1212,9 @@ The following is a comparison of the search engines:
 * `lunr`: simple, no need to synchronize `index.json`, no limit for `contentLength`,
   but high bandwidth and low performance (Especially for Chinese which needs a large segmentit library)
 * `algolia`: high performance and low bandwidth, but need to synchronize `index.json` and limit for `contentLength`
-* `fuse` {{< version 1.0.0 >}}: fuzzy search in the browser from `index.json`, no service to synchronize and no segmentit library,
+* `fuse` {{< version 0.4.0 >}}: fuzzy search in the browser from `index.json`, no service to synchronize and no segmentit library,
   but the whole `index.json` is downloaded on the first query
-* `pagefind` {{< version 1.0.0 >}}: a static index split into small chunks, so low bandwidth even on large sites and no service to synchronize,
+* `pagefind` {{< version 0.4.0 >}}: a static index split into small chunks, so low bandwidth even on large sites and no service to synchronize,
   but the index must be generated after every build
 
 {{< version 0.2.3 >}} The content of the post is separated by `h2` and `h3` HTML tag to improve query performance and basically implement full-text search.
@@ -1230,7 +1230,7 @@ you need to upload different `index.json` for each language to the different ind
 {{< /admonition >}}
 
 {{< admonition tip "Tips about Pagefind" >}}
-{{< version 1.0.0 >}}
+{{< version 0.4.0 >}}
 
 Pagefind indexes the HTML files that Hugo has published, so generate the index after every build:
 
@@ -1253,9 +1253,9 @@ The preview serves `public` at the root. If your `baseURL` contains a subpath, b
 
 ## 6 Upgrade from 0.3.X {#upgrade-from-0-3}
 
-{{< version 1.0.0 >}}
+{{< version 0.4.0 >}}
 
-Check the following when you upgrade from **LoveIt 0.3.X** to the **master** branch, which will be released as 1.0.0.
+Check the following when you upgrade from **LoveIt 0.3.X** to the **master** branch, which will be released as 0.4.0.
 
 ### 6.1 What You Must Do
 
