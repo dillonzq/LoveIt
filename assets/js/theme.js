@@ -275,6 +275,14 @@ class Theme {
             thumbHeight: '60px',
             actualSize: false,
             showZoomInOutIcons: true,
+            // lightGallery 3 hides the zoom buttons on touch devices; keep them as in v2.
+            // mobileSettings replaces the defaults as a whole, so restate the others.
+            mobileSettings: {
+                controls: false,
+                showCloseIcon: false,
+                download: false,
+                showGestureButtons: true,
+            },
         });
     }
 
