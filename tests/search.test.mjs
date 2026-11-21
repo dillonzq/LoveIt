@@ -26,14 +26,15 @@ test('simultaneous first queries share one fetch and index', async () => {
     assert.equal(indexes, 1);
 });
 
-test('Fuse.js is imported once from fuseURL, and a failed import retries', async () => {
+test('Fuse.js is imported once from fuseURL, and a failed import retries with a fresh URL', async () => {
     const imports = [];
     const client = new SearchClient({ type: 'fuse', fuseURL: '/lib/fuse/fuse.min.mjs', fuseIndexURL: '/index.json' }, {
         globals: {},
         fetcher: async () => ({ ok: true, json: async () => [{ uri: '/post/', title: 'Post', content: 'needle' }] }),
         importer: async url => {
             imports.push(url);
-            if (imports.length === 1) throw new Error('offline');
+            // Like browsers before Chrome 156, the first URL keeps failing once its load failed.
+            if (url === '/lib/fuse/fuse.min.mjs') throw new Error('offline');
             return { default: class { constructor(records) { this.records = records; } search() {
                 return this.records.map(item => ({ item }));
             } } };
@@ -42,7 +43,7 @@ test('Fuse.js is imported once from fuseURL, and a failed import retries', async
     await assert.rejects(client.search('needle'), /offline/);
     assert.deepEqual((await client.search('needle')).map(item => item.uri), ['/post/']);
     await client.search('needle');
-    assert.deepEqual(imports, ['/lib/fuse/fuse.min.mjs', '/lib/fuse/fuse.min.mjs']);
+    assert.deepEqual(imports, ['/lib/fuse/fuse.min.mjs', '/lib/fuse/fuse.min.mjs?retry=1']);
 });
 
 test('a UMD fuseURL override works through the Fuse global it sets', async () => {

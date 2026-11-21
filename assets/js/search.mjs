@@ -49,10 +49,17 @@ export class SearchClient {
         // Fuse.js only ships ES modules, so it is imported in parallel with the index fetch.
         let fuse;
         if (config.type === 'fuse') {
+            // Browsers before Chrome 156 cache a failed module load, so a retry needs a distinct URL.
+            const url = this.fuseImportFailures
+                ? `${config.fuseURL}${config.fuseURL.includes('?') ? '&' : '?'}retry=${this.fuseImportFailures}`
+                : config.fuseURL;
             fuse = this.globals.Fuse
                 ? Promise.resolve(this.globals.Fuse)
                 // A UMD build (e.g. an old `fuseJS` CDN override) has no default export but sets `Fuse` globally.
-                : this.importer(config.fuseURL).then(module => module.default || this.globals.Fuse);
+                : this.importer(url).then(module => module.default || this.globals.Fuse, error => {
+                    this.fuseImportFailures = (this.fuseImportFailures || 0) + 1;
+                    throw error;
+                });
             // Awaited below; this only avoids an unhandled rejection if the fetch fails first.
             fuse.catch(() => {});
         }
