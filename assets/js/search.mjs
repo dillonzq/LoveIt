@@ -46,10 +46,27 @@ export class SearchClient {
         if (config.type === 'algolia') {
             return this.globals['algoliasearch/lite'].liteClient(config.algoliaAppID, config.algoliaSearchKey);
         }
+        // Fuse.js only ships ES modules, so it is imported in parallel with the index fetch.
+        let fuse;
+        if (config.type === 'fuse') {
+            // Browsers before Chrome 156 cache a failed module load, so a retry needs a distinct URL.
+            const url = this.fuseImportFailures
+                ? `${config.fuseURL}${config.fuseURL.includes('?') ? '&' : '?'}retry=${this.fuseImportFailures}`
+                : config.fuseURL;
+            fuse = this.globals.Fuse
+                ? Promise.resolve(this.globals.Fuse)
+                // A UMD build (e.g. an old `fuseJS` CDN override) has no default export but sets `Fuse` globally.
+                : this.importer(url).then(module => module.default || this.globals.Fuse, error => {
+                    this.fuseImportFailures = (this.fuseImportFailures || 0) + 1;
+                    throw error;
+                });
+            // Awaited below; this only avoids an unhandled rejection if the fetch fails first.
+            fuse.catch(() => {});
+        }
         const response = await this.fetcher(config.fuseIndexURL || config.lunrIndexURL);
         if (!response.ok) throw new Error(`Search index: HTTP ${response.status}`);
         const records = await response.json();
-        if (config.type === 'fuse') return new this.globals.Fuse(records, {
+        if (config.type === 'fuse') return new (await fuse)(records, {
             isCaseSensitive: false, minMatchCharLength: 2, threshold: 0.3,
             keys: [{ name: 'title', weight: 5 }, { name: 'tags', weight: 2 }, { name: 'categories', weight: 2 }, { name: 'content', weight: 1 }],
             ...config.fuseOpts, includeMatches: true,

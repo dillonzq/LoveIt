@@ -57,8 +57,17 @@
         {{- with .Site.Home.OutputFormats.Get "json" -}}
             {{- $config = dict "type" "fuse" "fuseIndexURL" .RelPermalink | dict "search" | merge $config -}}
         {{- end -}}
-        {{- $source := $cdn.fuseJS | default "lib/fuse/fuse.min.js" -}}
-        {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+        {{- /* Fuse.js >= 7.3.0 ships only ES modules, so it is imported on the first search. */ -}}
+        {{- /* Published as .js: module scripts need a JavaScript MIME type, which not every host maps for .mjs. */ -}}
+        {{- $fuseURL := $cdn.fuseJS -}}
+        {{- if not $fuseURL -}}
+            {{- $resource := resources.Get "lib/fuse/fuse.min.mjs" | resources.Copy "lib/fuse/fuse.min.js" -}}
+            {{- with $fingerprint -}}
+                {{- $resource = $resource | fingerprint . -}}
+            {{- end -}}
+            {{- $fuseURL = $resource.RelPermalink -}}
+        {{- end -}}
+        {{- $config = dict "fuseURL" $fuseURL | dict "search" | merge $config -}}
         {{- with $search.fuse -}}
             {{- $config = dict "fuseOpts" (dict "isCaseSensitive" .isCaseSensitive "minMatchCharLength" .minMatchCharLength "findAllMatches" .findAllMatches "location" .location "threshold" .threshold "distance" .distance "ignoreLocation" .ignoreLocation) | dict "search" | merge $config -}}
         {{- end -}}
