@@ -165,6 +165,10 @@ test('passthrough math renders on the server and loads only the KaTeX stylesheet
   await expect(page.locator('.content .katex')).toHaveCount(2);
   await expect(page.locator('.content .katex-display')).toBeVisible();
   await expect(page.locator('.content .katex-mathml').first()).toHaveCSS('position', 'absolute');
+  // KaTeX >= 0.18 prefixes internal classes; old Hugo's markup must be renamed to match the bundled stylesheet.
+  await expect(page.locator('.content .katex-html > .katex-base').first()).toHaveCSS('display', 'inline-block');
+  await expect(page.locator('.content .katex-strut').first()).toHaveCSS('display', 'inline-block');
+  await expect(page.locator('.content .katex-html .base, .content .katex-html .strut')).toHaveCount(0);
   await expect(page.locator('link[href*="katex"]')).toHaveCount(1);
   await expect(page.locator('script[src*="katex"]')).toHaveCount(0);
   expect(errors).toEqual([]);

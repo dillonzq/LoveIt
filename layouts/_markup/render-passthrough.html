@@ -8,7 +8,21 @@
   {{- with .Err -}}
     {{- errorf "Unable to render mathematical markup (transform.ToMath): %s at %s" . $.Position -}}
   {{- else -}}
-    {{- .Value -}}
+    {{- $html := .Value -}}
+    {{- /*
+      KaTeX 0.18 prefixed its internal CSS classes with "katex-". Hugo < 0.166.0 embeds KaTeX 0.16,
+      whose markup would not match the bundled KaTeX stylesheet, so rename those classes here.
+      Each pass renames at most one token per class attribute (KaTeX 0.16 emits at most one per element),
+      and already-prefixed tokens cannot match again, so the extra passes are a no-op safety margin.
+    */ -}}
+    {{- if lt hugo.Version "0.166.0" -}}
+      {{- $pattern := `(class="(?:[^"]*\s)?)(accent|base|fix|hdashline|hline|inner|newline|overlay|overline|root|rule|sizing|sout|stretchy|strut|tag|thinbox|underline|vbox)([\s"])` -}}
+      {{- range 3 -}}
+        {{- $html = replaceRE $pattern "${1}katex-${2}${3}" $html -}}
+      {{- end -}}
+      {{- $html = $html | safeHTML -}}
+    {{- end -}}
+    {{- $html -}}
     {{- $.Page.Store.Set "hasMath" true -}}
   {{- end -}}
 {{- end -}}
