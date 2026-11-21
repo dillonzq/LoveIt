@@ -37,7 +37,7 @@ async function download(url) {
 
 async function getHvm() {
   if (process.env.HVM_BIN) return path.resolve(process.env.HVM_BIN);
-  const version = '0.17.0';
+  const version = '1.0.0';
   const platform = { linux: 'linux', darwin: 'darwin', win32: 'windows' }[process.platform];
   const arch = { x64: 'amd64', arm64: 'arm64' }[process.arch];
   if (!platform || !arch) throw new Error('Install hvm for this platform and set HVM_BIN to its executable.');
