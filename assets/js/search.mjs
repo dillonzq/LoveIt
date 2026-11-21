@@ -51,7 +51,8 @@ export class SearchClient {
         if (config.type === 'fuse') {
             fuse = this.globals.Fuse
                 ? Promise.resolve(this.globals.Fuse)
-                : this.importer(config.fuseURL).then(module => module.default);
+                // A UMD build (e.g. an old `fuseJS` CDN override) has no default export but sets `Fuse` globally.
+                : this.importer(config.fuseURL).then(module => module.default || this.globals.Fuse);
             // Awaited below; this only avoids an unhandled rejection if the fetch fails first.
             fuse.catch(() => {});
         }

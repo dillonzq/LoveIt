@@ -45,6 +45,21 @@ test('Fuse.js is imported once from fuseURL, and a failed import retries', async
     assert.deepEqual(imports, ['/lib/fuse/fuse.min.mjs', '/lib/fuse/fuse.min.mjs']);
 });
 
+test('a UMD fuseURL override works through the Fuse global it sets', async () => {
+    const globals = {};
+    const client = new SearchClient({ type: 'fuse', fuseURL: 'https://cdn.example/fuse.js@7.0.0/dist/fuse.min.js' }, {
+        globals,
+        fetcher: async () => ({ ok: true, json: async () => [{ uri: '/post/', title: 'Post', content: 'needle' }] }),
+        importer: async () => {
+            globals.Fuse = class { constructor(records) { this.records = records; } search() {
+                return this.records.map(item => ({ item }));
+            } };
+            return {};
+        },
+    });
+    assert.deepEqual((await client.search('needle')).map(item => item.uri), ['/post/']);
+});
+
 test('failed index loads retry, and empty queries do not fetch', async () => {
     let calls = 0;
     const client = new SearchClient({ type: 'fuse' }, {
