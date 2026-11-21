@@ -450,6 +450,7 @@
       Diaspora = true
       Mix = false
       Telegram = true
+      Bluesky = false
     # Comment config
     # 评论系统设置
     [params.page.comment]
