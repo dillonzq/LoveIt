@@ -1,11 +1,18 @@
 {{- /* Pure site-level data; page Scratch updates stay in init.html. */ -}}
 {{- $cdn := .Params.cdn | default dict -}}
 {{- with $cdn.data -}}
-    {{- $data := printf "data/cdn/%v" . | resources.Get | transform.Unmarshal -}}
-    {{- $cdn = dict "simpleIconsPrefix" $data.prefix.simpleIcons -}}
-    {{- $prefix := $data.prefix.libFiles | default "" -}}
-    {{- range $key, $value := $data.libFiles -}}
-        {{- $cdn = merge $cdn (dict $key (printf "%v%v" $prefix $value)) -}}
+    {{- $file := . -}}
+    {{- with printf "data/cdn/%v" $file | resources.Get -}}
+        {{- $data := transform.Unmarshal . -}}
+        {{- $cdn = dict "simpleIconsPrefix" $data.prefix.simpleIcons -}}
+        {{- $prefix := $data.prefix.libFiles | default "" -}}
+        {{- range $key, $value := $data.libFiles -}}
+            {{- $cdn = merge $cdn (dict $key (printf "%v%v" $prefix $value)) -}}
+        {{- end -}}
+    {{- else -}}
+        {{- warnf "CDN data file \"assets/data/cdn/%v\" not found. The bundled library files will be used instead.\n" $file -}}
+        {{- warnf "未找到 CDN 数据文件 \"assets/data/cdn/%v\". 将使用主题自带的库文件.\n" $file -}}
+        {{- $cdn = dict -}}
     {{- end -}}
 {{- end -}}
 {{- return $cdn -}}
