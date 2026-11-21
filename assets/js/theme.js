@@ -463,8 +463,12 @@ class Theme {
 
     initMapbox() {
         if (this.config.mapbox) {
+            // Mapbox GL JS v3 requires WebGL 2; skip maps instead of throwing and aborting the remaining init steps.
+            if (!mapboxgl.supported()) {
+                console.warn('Mapbox GL JS is not supported by this browser (WebGL 2 is required).');
+                return;
+            }
             mapboxgl.accessToken = this.config.mapbox.accessToken;
-            mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
             this._mapboxArr = this._mapboxArr || [];
             Util.forEach(document.getElementsByClassName('mapbox'), $mapbox => {
                 const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = this.data[$mapbox.id];
