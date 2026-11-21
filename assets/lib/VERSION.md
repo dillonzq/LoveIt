@@ -14,7 +14,7 @@
 | [Gitalk](https://github.com/gitalk/gitalk)                                          | gitalk            |   1.7.2 |
 | [KaTeX](https://github.com/KaTeX/KaTeX)                                             | katex             |  0.19.1 |
 | [lazysizes](https://github.com/aFarkas/lazysizes)                                   | lazysizes         |   5.3.2 |
-| [lightGallery](https://github.com/sachinchoolur/lightgallery)                       | lightgallery      |   2.5.0 |
+| [lightGallery](https://github.com/sachinchoolur/lightgallery)                       | lightgallery      |   3.0.0 |
 | [Lunr.js](https://github.com/olivernn/lunr.js)                                      | lunr              |   2.3.9 |
 | [Mapbox GL JS](https://github.com/mapbox/mapbox-gl-js)                              | mapbox-gl         |   2.9.1 |
 | [Mermaid](https://github.com/mermaid-js/mermaid)                                    | mermaid           |  12.3.0 |

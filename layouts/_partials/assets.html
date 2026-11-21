@@ -89,9 +89,6 @@
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
     {{- if not $cdn.lightgalleryCSS -}}
         {{- (resources.Get "lib/lightgallery/images/loading.gif").Publish -}}
-        {{- range resources.Match "lib/lightgallery/fonts/*" -}}
-            {{- .Publish -}}
-        {{- end -}}
     {{- end -}}
     {{- $source := $cdn.lightgalleryJS | default "lib/lightgallery/lightgallery.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}

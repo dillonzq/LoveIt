@@ -204,3 +204,28 @@ test('fixed buttons fade in after scrolling down', async ({ page }) => {
   await page.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo(0, 400); });
   await expect(page.locator('#fixed-buttons')).toHaveClass(/\banimate__fadeIn\b/);
 });
+
+test('lightGallery opens linked images with thumbnails, zoom and SVG icons', async ({ page }) => {
+  const errors = [];
+  const missing = [];
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('response', response => { if (response.status() >= 400) missing.push(response.url()); });
+  await page.goto('/fuse/blog/gallery/');
+  await page.locator('a.lightgallery').first().click();
+  const outer = page.locator('.lg-outer');
+  await expect(outer).toHaveClass(/\blg-visible\b/);
+  await expect(page.locator('.lg-current .lg-image')).toHaveAttribute('src', /Wavelength\.jpg$/);
+  await expect(page.locator('.lg-sub-html h2')).toHaveText('Wavelength');
+  await expect(page.locator('.lg-thumb-item')).toHaveCount(2);
+  for (const button of ['.lg-close', '.lg-download', '.lg-toggle-thumb', '.lg-zoom-in', '.lg-zoom-out']) {
+    await expect(page.locator(`.lg-toolbar ${button} svg`)).toBeVisible();
+  }
+  await page.locator('.lg-next').click();
+  await expect(page.locator('.lg-counter')).toContainText('2 / 2');
+  await page.locator('.lg-zoom-in').click();
+  await expect(outer).toHaveClass(/\blg-zoomed\b/);
+  await page.locator('.lg-close').click();
+  await expect(outer).not.toHaveClass(/\blg-visible\b/);
+  expect(errors).toEqual([]);
+  expect(missing).toEqual([]);
+});
