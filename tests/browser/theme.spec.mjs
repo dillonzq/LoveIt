@@ -211,7 +211,16 @@ test('lightGallery opens linked images with thumbnails, zoom and SVG icons', asy
   page.on('pageerror', error => errors.push(error.message));
   page.on('response', response => { if (response.status() >= 400) missing.push(response.url()); });
   await page.goto('/fuse/blog/gallery/');
-  await page.locator('a.lightgallery').first().click();
+  // lightGallery ignores navigation while a slide transition, including the
+  // opening one, is running, so each step waits for its lgAfterSlide.
+  const slideAfter = async action => {
+    await page.evaluate(() => {
+      window.lgSlid = new Promise(resolve => document.getElementById('content').addEventListener('lgAfterSlide', resolve, { once: true }));
+    });
+    await action();
+    await page.evaluate(() => window.lgSlid);
+  };
+  await slideAfter(() => page.locator('a.lightgallery').first().click());
   const outer = page.locator('.lg-outer');
   await expect(outer).toHaveClass(/\blg-visible\b/);
   await expect(page.locator('.lg-current .lg-image')).toHaveAttribute('src', /Wavelength\.jpg$/);
@@ -220,7 +229,7 @@ test('lightGallery opens linked images with thumbnails, zoom and SVG icons', asy
   for (const button of ['.lg-close', '.lg-download', '.lg-toggle-thumb', '.lg-zoom-in', '.lg-zoom-out']) {
     await expect(page.locator(`.lg-toolbar ${button} svg`)).toBeVisible();
   }
-  await page.locator('.lg-next').click();
+  await slideAfter(() => page.locator('.lg-next').click());
   await expect(page.locator('.lg-counter')).toContainText('2 / 2');
   await page.locator('.lg-zoom-in').click();
   await expect(outer).toHaveClass(/\blg-zoomed\b/);
