@@ -30,8 +30,8 @@ libFiles:
   clipboardJS: clipboard@2.0.11/dist/clipboard.min.js
   # sharer.js@0.5.2 https://github.com/ellisonleao/sharer.js
   sharerJS: sharer.js@0.5.2/sharer.min.js
-  # typeit@8.6.0 https://github.com/alexmacarthur/typeit
-  typeitJS: typeit@8.6.0/dist/index.umd.js
+  # typeit@8.8.7 https://github.com/alexmacarthur/typeit
+  typeitJS: typeit@8.8.7/dist/index.umd.js
   # katex@0.19.1 https://katex.org/
   katexCSS: katex@0.19.1/dist/katex.min.css
   katexJS: katex@0.19.1/dist/katex.min.js
