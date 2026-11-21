@@ -174,6 +174,27 @@ test('passthrough math renders on the server and loads only the KaTeX stylesheet
   expect(errors).toEqual([]);
 });
 
+test('ECharts renders with the site themes and re-renders on theme switch', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('/fuse/blog/echarts/');
+  await expect(page.locator('script[src*="echarts.min.js"]')).toHaveCount(1);
+  const chart = page.locator('.echarts svg');
+  await expect(chart).toBeVisible();
+  await expect(chart).toContainText('Weekly visits');
+  await expect(chart).toContainText('Visits');
+  expect(await page.evaluate(() => echarts.version)).toMatch(/^6\./);
+  const background = () => page.locator('.echarts').evaluate(element => echarts.getInstanceByDom(element).getOption().backgroundColor);
+  await expect(page.locator('body')).toHaveAttribute('theme', 'light');
+  expect(await background()).toBe('rgba(0,0,0,0)');
+  // The switch cycles auto -> light -> dark.
+  for (let i = 0; i < 3 && await page.locator('body').getAttribute('theme') !== 'dark'; i++) await page.locator('#header-desktop .theme-switch').click();
+  await expect(page.locator('body')).toHaveAttribute('theme', 'dark');
+  expect(await background()).toBe('rgba(41,52,65,1)');
+  await expect(chart).toContainText('Weekly visits');
+  expect(errors).toEqual([]);
+});
+
 test('Waline loads its UMD build, renders comments and follows the dark theme', async ({ page }) => {
   const errors = [];
   const requests = [];
