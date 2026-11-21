@@ -27,4 +27,4 @@
 | [Twemoji](https://github.com/jdecked/twemoji)                                       | twemoji           |  17.0.3 |
 | [TypeIt](https://github.com/alexmacarthur/typeit)                                   | typeit            |   8.8.7 |
 | [Valine](https://github.com/xCss/Valine)                                            | valine            |   1.5.3 |
-| [Waline](https://github.com/walinejs/waline)                                        | waline            |  3.16.1 |
+| [Waline](https://github.com/walinejs/waline)                                        | waline            |  3.16.2 |
