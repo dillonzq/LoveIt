@@ -23,7 +23,7 @@
 | [object-fit-images](https://github.com/fregante/object-fit-images)                  | object-fit-images |   3.2.4 |
 | [sharer.js](https://github.com/ellisonleao/sharer.js)                               | sharer            |   0.5.2 |
 | [Simple Icons](https://github.com/simple-icons/simple-icons)                        | simple-icons      | 16.38.0 |
-| [Twemoji](https://github.com/twitter/twemoji)                                       | twemoji           |  14.0.2 |
+| [Twemoji](https://github.com/jdecked/twemoji)                                       | twemoji           |  17.0.3 |
 | [TypeIt](https://github.com/alexmacarthur/typeit)                                   | typeit            |   8.6.0 |
 | [Valine](https://github.com/xCss/Valine)                                            | valine            |   1.5.3 |
 | [Waline](https://github.com/walinejs/waline)                                        | waline            |  3.16.1 |

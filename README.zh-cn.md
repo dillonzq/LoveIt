@@ -201,7 +201,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [Pagefind](https://pagefind.app/)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
 * [object-fit-images](https://github.com/fregante/object-fit-images)
-* [Twemoji](https://github.com/twitter/twemoji)
+* [Twemoji](https://github.com/jdecked/twemoji)
 * [emoji-data](https://github.com/iamcal/emoji-data)
 * [lightGallery](https://github.com/sachinchoolur/lightgallery)
 * [clipboard.js](https://github.com/zenorocha/clipboard.js)

@@ -110,7 +110,7 @@ Thanks to the authors of following resources included in the theme:
 * [Pagefind](https://pagefind.app/)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
 * [object-fit-images](https://github.com/fregante/object-fit-images)
-* [Twemoji](https://github.com/twitter/twemoji)
+* [Twemoji](https://github.com/jdecked/twemoji)
 * [emoji-data](https://github.com/iamcal/emoji-data)
 * [lightGallery](https://github.com/sachinchoolur/lightgallery)
 * [clipboard.js](https://github.com/zenorocha/clipboard.js)
