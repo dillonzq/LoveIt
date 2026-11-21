@@ -16,7 +16,7 @@
 | [lazysizes](https://github.com/aFarkas/lazysizes)                                   | lazysizes         |   5.3.2 |
 | [lightGallery](https://github.com/sachinchoolur/lightgallery)                       | lightgallery      |   2.5.0 |
 | [Lunr.js](https://github.com/olivernn/lunr.js)                                      | lunr              |   2.3.9 |
-| [Mapbox GL JS](https://github.com/mapbox/mapbox-gl-js)                              | mapbox-gl         |   2.9.1 |
+| [Mapbox GL JS](https://github.com/mapbox/mapbox-gl-js)                              | mapbox-gl         |  3.35.2 |
 | [Mermaid](https://github.com/mermaid-js/mermaid)                                    | mermaid           |  12.3.0 |
 | [MetingJS](https://github.com/metowolf/MetingJS)                                    | meting            |   2.0.1 |
 | [modern-normalize](https://github.com/sindresorhus/modern-normalize)                | modern-normalize  |   3.0.1 |

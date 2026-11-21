@@ -464,7 +464,6 @@ class Theme {
     initMapbox() {
         if (this.config.mapbox) {
             mapboxgl.accessToken = this.config.mapbox.accessToken;
-            mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
             this._mapboxArr = this._mapboxArr || [];
             Util.forEach(document.getElementsByClassName('mapbox'), $mapbox => {
                 const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = this.data[$mapbox.id];

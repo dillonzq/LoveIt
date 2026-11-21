@@ -42,9 +42,9 @@ libFiles:
   mermaidJS: mermaid@12.3.0/dist/mermaid.min.js
   # echarts@5.6.0 https://echarts.apache.org/
   echartsJS: echarts@5.6.0/dist/echarts.min.js
-  # mapbox-gl@2.9.1 https://docs.mapbox.com/mapbox-gl-js
-  mapboxGLCSS: mapbox-gl@2.9.1/dist/mapbox-gl.min.css
-  mapboxGLJS: mapbox-gl@2.9.1/dist/mapbox-gl.min.js
+  # mapbox-gl@3.35.2 https://docs.mapbox.com/mapbox-gl-js
+  mapboxGLCSS: mapbox-gl@3.35.2/dist/mapbox-gl.css
+  mapboxGLJS: mapbox-gl@3.35.2/dist/mapbox-gl.js
   # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
   aplayerCSS: aplayer@1.10.1/dist/APlayer.min.css
   #aplayerJS: aplayer@1.10.1/dist/APlayer.min.js
