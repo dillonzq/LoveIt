@@ -17,13 +17,13 @@
 | [lightGallery](https://github.com/sachinchoolur/lightgallery)                       | lightgallery      |   2.5.0 |
 | [Lunr.js](https://github.com/olivernn/lunr.js)                                      | lunr              |   2.3.9 |
 | [Mapbox GL JS](https://github.com/mapbox/mapbox-gl-js)                              | mapbox-gl         |   2.9.1 |
-| [Mermaid](https://github.com/mermaid-js/mermaid)                                    | mermaid           |  11.5.0 |
+| [Mermaid](https://github.com/mermaid-js/mermaid)                                    | mermaid           |  12.3.0 |
 | [MetingJS](https://github.com/metowolf/MetingJS)                                    | meting            |   2.0.1 |
 | [modern-normalize](https://github.com/sindresorhus/modern-normalize)                | modern-normalize  |   3.0.1 |
 | [object-fit-images](https://github.com/fregante/object-fit-images)                  | object-fit-images |   3.2.4 |
 | [sharer.js](https://github.com/ellisonleao/sharer.js)                               | sharer            |   0.5.2 |
 | [Simple Icons](https://github.com/simple-icons/simple-icons)                        | simple-icons      | 16.38.0 |
-| [Twemoji](https://github.com/twitter/twemoji)                                       | twemoji           |  14.0.2 |
+| [Twemoji](https://github.com/jdecked/twemoji)                                       | twemoji           |  17.0.3 |
 | [TypeIt](https://github.com/alexmacarthur/typeit)                                   | typeit            |   8.6.0 |
 | [Valine](https://github.com/xCss/Valine)                                            | valine            |   1.5.3 |
 | [Waline](https://github.com/walinejs/waline)                                        | waline            |  3.16.1 |
