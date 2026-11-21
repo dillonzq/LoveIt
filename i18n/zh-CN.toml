@@ -65,6 +65,12 @@ other = "zh-CN"
 
 [walineLang]
 other = "zh-CN"
+[mastodonCommentsNoscript]
+other = "请启用 JavaScript 以查看由 Fediverse 提供的评论。"
+[mastodonCommentsPrompt]
+other = "您可以使用 Fediverse（如 Mastodon）账号回复本"
+[mastodonCommentsPost]
+other = "帖子"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

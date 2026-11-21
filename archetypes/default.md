@@ -43,6 +43,8 @@ share:
   # ...
 comment:
   enable: true
+  # Set fediverse or mastodonTootId to a Mastodon toot ID to enable Fediverse comments for this post
+  # fediverse: ""
   # ...
 library:
   css:
