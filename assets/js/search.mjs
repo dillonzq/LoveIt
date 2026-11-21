@@ -46,10 +46,19 @@ export class SearchClient {
         if (config.type === 'algolia') {
             return this.globals['algoliasearch/lite'].liteClient(config.algoliaAppID, config.algoliaSearchKey);
         }
+        // Fuse.js only ships ES modules, so it is imported in parallel with the index fetch.
+        let fuse;
+        if (config.type === 'fuse') {
+            fuse = this.globals.Fuse
+                ? Promise.resolve(this.globals.Fuse)
+                : this.importer(config.fuseURL).then(module => module.default);
+            // Awaited below; this only avoids an unhandled rejection if the fetch fails first.
+            fuse.catch(() => {});
+        }
         const response = await this.fetcher(config.fuseIndexURL || config.lunrIndexURL);
         if (!response.ok) throw new Error(`Search index: HTTP ${response.status}`);
         const records = await response.json();
-        if (config.type === 'fuse') return new this.globals.Fuse(records, {
+        if (config.type === 'fuse') return new (await fuse)(records, {
             isCaseSensitive: false, minMatchCharLength: 2, threshold: 0.3,
             keys: [{ name: 'title', weight: 5 }, { name: 'tags', weight: 2 }, { name: 'categories', weight: 2 }, { name: 'content', weight: 1 }],
             ...config.fuseOpts, includeMatches: true,

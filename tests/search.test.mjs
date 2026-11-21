@@ -26,6 +26,25 @@ test('simultaneous first queries share one fetch and index', async () => {
     assert.equal(indexes, 1);
 });
 
+test('Fuse.js is imported once from fuseURL, and a failed import retries', async () => {
+    const imports = [];
+    const client = new SearchClient({ type: 'fuse', fuseURL: '/lib/fuse/fuse.min.mjs', fuseIndexURL: '/index.json' }, {
+        globals: {},
+        fetcher: async () => ({ ok: true, json: async () => [{ uri: '/post/', title: 'Post', content: 'needle' }] }),
+        importer: async url => {
+            imports.push(url);
+            if (imports.length === 1) throw new Error('offline');
+            return { default: class { constructor(records) { this.records = records; } search() {
+                return this.records.map(item => ({ item }));
+            } } };
+        },
+    });
+    await assert.rejects(client.search('needle'), /offline/);
+    assert.deepEqual((await client.search('needle')).map(item => item.uri), ['/post/']);
+    await client.search('needle');
+    assert.deepEqual(imports, ['/lib/fuse/fuse.min.mjs', '/lib/fuse/fuse.min.mjs']);
+});
+
 test('failed index loads retry, and empty queries do not fetch', async () => {
     let calls = 0;
     const client = new SearchClient({ type: 'fuse' }, {
