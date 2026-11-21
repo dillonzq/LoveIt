@@ -275,6 +275,14 @@ class Theme {
             thumbHeight: '60px',
             actualSize: false,
             showZoomInOutIcons: true,
+            // lightGallery 3 hides the zoom buttons on touch devices; keep them as in v2.
+            // mobileSettings replaces the defaults as a whole, so restate the others.
+            mobileSettings: {
+                controls: false,
+                showCloseIcon: false,
+                download: false,
+                showGestureButtons: true,
+            },
         });
     }
 
@@ -463,8 +471,12 @@ class Theme {
 
     initMapbox() {
         if (this.config.mapbox) {
+            // Mapbox GL JS v3 requires WebGL 2; skip maps instead of throwing and aborting the remaining init steps.
+            if (!mapboxgl.supported()) {
+                console.warn('Mapbox GL JS is not supported by this browser (WebGL 2 is required).');
+                return;
+            }
             mapboxgl.accessToken = this.config.mapbox.accessToken;
-            mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
             this._mapboxArr = this._mapboxArr || [];
             Util.forEach(document.getElementsByClassName('mapbox'), $mapbox => {
                 const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = this.data[$mapbox.id];
