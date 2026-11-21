@@ -141,10 +141,24 @@
                 {{- end -}}
             {{- end -}}
         },
-        {{- with .Params.author | default .Site.Params.Author.name | default (T "author") -}}
+        {{- $authorName := .Params.author | default .Site.Params.Author.name | default (T "author") -}}
+        {{- with $authorName -}}
             "author": {
                 "@type": "Person",
                 "name": {{ . | safeHTML }}
+                {{- $authorAvatar := $.Params.authorAvatar | default $.Site.Params.Author.avatar -}}
+                {{- with dict "Path" $authorAvatar "Resources" $.Resources | partial "function/resource.html" -}}
+                    ,"image": {
+                        "@type": "ImageObject",
+                        "url": "{{ .Permalink }}",
+                        "width": {{ .Width }},
+                        "height": {{ .Height }}
+                    }
+                {{- else -}}
+                    {{- with $authorAvatar -}}
+                        ,"image": "{{ . | absURL }}"
+                    {{- end -}}
+                {{- end -}}
             },
         {{- end -}}
         "description": {{ .Description | safeHTML }}
