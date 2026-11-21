@@ -530,6 +530,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       Diaspora = true
       Mix = false
       Telegram = true
+      Bluesky = true
     # Comment config
     # 评论系统设置
     [params.page.comment]

@@ -193,4 +193,11 @@
             {{- dict "Class" "fab fa-telegram" | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
+
+    {{- /* 028: Bluesky */ -}}
+    {{- if $share.Bluesky -}}
+        <a href="javascript:void(0);" title="{{ T `shareOn` }} Bluesky" data-sharer="bluesky" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
+            {{- dict "Class" "fab fa-bluesky" | partial "plugin/icon.html" -}}
+        </a>
+    {{- end -}}
 {{- end -}}
