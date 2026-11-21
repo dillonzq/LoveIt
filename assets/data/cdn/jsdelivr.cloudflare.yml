@@ -19,8 +19,8 @@ libFiles:
   lazysizesJS: lazysizes@5.3.2/lazysizes.min.js
   # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
   objectFitImagesJS: object-fit-images@3.2.4/dist/ofi.min.js
-  # twemoji@14.0.2 https://github.com/twitter/twemoji
-  twemojiJS: twemoji@14.0.2/dist/twemoji.min.js
+  # @twemoji/api@17.0.3 https://github.com/jdecked/twemoji
+  twemojiJS: "@twemoji/api@17.0.3/dist/twemoji.min.js"
   # lightgallery@2.5.0 https://github.com/sachinchoolur/lightgallery
   lightgalleryCSS: lightgallery@2.5.0/css/lightgallery-bundle.min.css
   lightgalleryJS: lightgallery@2.5.0/lightgallery.min.js
