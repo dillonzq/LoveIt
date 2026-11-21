@@ -226,6 +226,8 @@ test('lightGallery opens linked images with thumbnails, zoom and SVG icons', asy
   await expect(page.locator('.lg-current .lg-image')).toHaveAttribute('src', /Wavelength\.jpg$/);
   await expect(page.locator('.lg-sub-html h2')).toHaveText('Wavelength');
   await expect(page.locator('.lg-thumb-item')).toHaveCount(2);
+  // The second image sets its own thumbnail (src_s), which exThumbImage must pick up.
+  await expect(page.locator('.lg-thumb-item img').nth(1)).toHaveAttribute('src', /Wavelength\.jpg$/);
   for (const button of ['.lg-close', '.lg-download', '.lg-toggle-thumb', '.lg-zoom-in', '.lg-zoom-out']) {
     await expect(page.locator(`.lg-toolbar ${button} svg`)).toBeVisible();
   }
@@ -237,4 +239,21 @@ test('lightGallery opens linked images with thumbnails, zoom and SVG icons', asy
   await expect(outer).not.toHaveClass(/\blg-visible\b/);
   expect(errors).toEqual([]);
   expect(missing).toEqual([]);
+});
+
+test('lightGallery keeps the zoom buttons and mobile defaults on phones', async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1',
+  });
+  const page = await context.newPage();
+  await page.goto('/fuse/blog/gallery/');
+  await page.locator('a.lightgallery').first().click();
+  await expect(page.locator('.lg-outer')).toHaveClass(/\blg-visible\b/);
+  await expect(page.locator('.lg-toolbar .lg-zoom-in')).toBeVisible();
+  await expect(page.locator('.lg-toolbar .lg-zoom-out')).toBeVisible();
+  for (const hidden of ['.lg-close', '.lg-download', '.lg-next', '.lg-prev']) {
+    await expect(page.locator(hidden)).toHaveCount(0);
+  }
+  await context.close();
 });

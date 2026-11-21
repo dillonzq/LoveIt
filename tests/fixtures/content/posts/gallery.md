@@ -6,4 +6,4 @@ lightgallery: true
 
 ![Wavelength](/images/Wavelength.jpg "Wavelength")
 
-![Avatar](/images/avatar.png "Avatar")
+{{< image src="/images/avatar.png" src_s="/images/Wavelength.jpg" caption="Avatar" >}}
