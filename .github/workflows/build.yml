@@ -20,15 +20,15 @@ jobs:
       LOVEIT_HUGO_VERSION: ${{ inputs.hugo_version }}
       HUGO_ENV: ${{ inputs.hugo_env }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci --ignore-scripts
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: |
             node_modules/.cache/loveit
@@ -68,7 +68,7 @@ jobs:
         if: always()
         id: artifact
         run: node -e 'console.log("name=checks-" + process.env.LOVEIT_HUGO_VERSION.replace(/[^a-zA-Z0-9_.-]/g, "-") + "-" + process.env.HUGO_ENV)' >> "$GITHUB_OUTPUT"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: ${{ steps.artifact.outputs.name }}
