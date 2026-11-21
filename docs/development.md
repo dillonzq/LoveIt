@@ -11,7 +11,7 @@ npm run build
 
 The repository's `.hvm` pins the Hugo version **and edition**. The Node wrapper
 works from any directory and does not depend on shell aliases. It bootstraps
-hvm 0.17.0 from a checksum-verified release and caches tools under
+hvm 1.0.0 from a checksum-verified release and caches tools under
 `node_modules/.cache/loveit`. Set `HVM_BIN` to reuse an existing hvm executable,
 or `LOVEIT_TOOLS_DIR` to relocate the cache. Normal builds never rewrite `.hvm`.
 Commit `.hvm` when intentionally changing the default with `hvm use`.
