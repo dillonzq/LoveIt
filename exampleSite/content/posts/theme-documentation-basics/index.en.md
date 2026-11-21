@@ -605,19 +605,24 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       Xing = false
       Line = true
       Instapaper = false
-      Pocket = false
+      Pocket = false # {{< version 0.4.1 deleted >}}
       Flipboard = false
       Weibo = true
       Blogger = false
-      Baidu = false
+      Baidu = false # {{< version 0.4.1 deleted >}}
       Odnoklassniki = false
       Evernote = false
-      Skype = false
+      Skype = false # {{< version 0.4.1 deleted >}}
       Trello = false
       Diaspora = true # {{< version 0.3.1 >}}
       Mix = false
       Telegram = true # {{< version 0.3.1 >}}
       Bluesky = false # {{< version 0.4.1 >}}
+      Email = false # {{< version 0.4.1 >}}
+      Douban = false # {{< version 0.4.1 >}}
+      Qzone = false # {{< version 0.4.1 >}}
+      Pinboard = false # {{< version 0.4.1 >}}
+      WordPress = false # {{< version 0.4.1 >}}
     # {{< version 0.2.0 changed >}} Comment config
     [params.page.comment]
       enable = false

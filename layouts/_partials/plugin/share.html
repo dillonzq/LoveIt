@@ -110,13 +110,6 @@
         </a>
     {{- end -}}
 
-    {{- /* 016: Pocket */ -}}
-    {{- if $share.Pocket -}}
-        <a href="javascript:void(0);" title="{{ T `shareOn` }} Pocket" data-sharer="pocket" data-url="{{ .Permalink }}">
-            {{- dict "Class" "fab fa-get-pocket" | partial "plugin/icon.html" -}}
-        </a>
-    {{- end -}}
-
     {{- /* 017: Flipboard */ -}}
     {{- if $share.Flipboard -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} Flipboard" data-sharer="flipboard" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
@@ -138,13 +131,6 @@
         </a>
     {{- end -}}
 
-    {{- /* 020: Baidu */ -}}
-    {{- if $share.Baidu -}}
-        <a href="javascript:void(0);" title="{{ T `shareOn` }} 百度" data-sharer="baidu" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
-            {{- dict "Simpleicons" "baidu" "Prefix" (.Scratch.Get "cdn" | default dict).simpleIconsPrefix | partial "plugin/icon.html" -}}
-        </a>
-    {{- end -}}
-
     {{- /* 021: OK.RU */ -}}
     {{- if $share.Odnoklassniki -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} OK.RU" data-sharer="okru" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
@@ -156,13 +142,6 @@
     {{- if $share.Evernote -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} Evernote" data-sharer="evernote" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
             {{- dict "Class" "fab fa-evernote" | partial "plugin/icon.html" -}}
-        </a>
-    {{- end -}}
-
-    {{- /* 023: Skype */ -}}
-    {{- if $share.Skype -}}
-        <a href="javascript:void(0);" title="{{ T `shareOn` }} Skype" data-sharer="skype" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
-            {{- dict "Class" "fab fa-skype" | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 
@@ -198,6 +177,41 @@
     {{- if $share.Bluesky -}}
         <a href="javascript:void(0);" title="{{ T `shareOn` }} Bluesky" data-sharer="bluesky" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
             {{- dict "Class" "fab fa-bluesky" | partial "plugin/icon.html" -}}
+        </a>
+    {{- end -}}
+
+    {{- /* 029: Email */ -}}
+    {{- if $share.Email -}}
+        <a href="javascript:void(0);" title="{{ T `shareOn` }} Email" data-sharer="email" data-url="{{ .Permalink }}" data-title="{{ .Title }}" data-subject="{{ .Title }}" data-link="true">
+            {{- dict "Class" "fas fa-envelope" | partial "plugin/icon.html" -}}
+        </a>
+    {{- end -}}
+
+    {{- /* 030: Douban */ -}}
+    {{- if $share.Douban -}}
+        <a href="javascript:void(0);" title="{{ T `shareOn` }} 豆瓣" data-sharer="douban" data-url="{{ .Permalink }}" data-name="{{ .Title }}"{{ with .Description }} data-description="{{ . }}"{{ end }}{{ with .Params.featuredImage }} data-image="{{ . }}"{{ end }}>
+            {{- dict "Simpleicons" "douban" "Prefix" (.Scratch.Get "cdn" | default dict).simpleIconsPrefix | partial "plugin/icon.html" -}}
+        </a>
+    {{- end -}}
+
+    {{- /* 031: Qzone */ -}}
+    {{- if $share.Qzone -}}
+        <a href="javascript:void(0);" title="{{ T `shareOn` }} QQ 空间" data-sharer="qzone" data-url="{{ .Permalink }}">
+            {{- dict "Simpleicons" "qzone" "Prefix" (.Scratch.Get "cdn" | default dict).simpleIconsPrefix | partial "plugin/icon.html" -}}
+        </a>
+    {{- end -}}
+
+    {{- /* 032: Pinboard */ -}}
+    {{- if $share.Pinboard -}}
+        <a href="javascript:void(0);" title="{{ T `shareOn` }} Pinboard" data-sharer="pinboard" data-url="{{ .Permalink }}" data-title="{{ .Title }}"{{ with .Description }} data-description="{{ . }}"{{ end }}>
+            {{- dict "Simpleicons" "pinboard" "Prefix" (.Scratch.Get "cdn" | default dict).simpleIconsPrefix | partial "plugin/icon.html" -}}
+        </a>
+    {{- end -}}
+
+    {{- /* 033: WordPress */ -}}
+    {{- if $share.WordPress -}}
+        <a href="javascript:void(0);" title="{{ T `shareOn` }} WordPress" data-sharer="wordpress" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
+            {{- dict "Class" "fab fa-wordpress" | partial "plugin/icon.html" -}}
         </a>
     {{- end -}}
 {{- end -}}

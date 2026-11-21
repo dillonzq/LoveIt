@@ -518,19 +518,21 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       Xing = false
       Line = true
       Instapaper = false
-      Pocket = false
       Flipboard = false
       Weibo = true
       Blogger = false
-      Baidu = false
       Odnoklassniki = false
       Evernote = false
-      Skype = false
       Trello = false
       Diaspora = true
       Mix = false
       Telegram = true
       Bluesky = true
+      Email = true
+      Douban = true
+      Qzone = true
+      Pinboard = false
+      WordPress = false
     # Comment config
     # 评论系统设置
     [params.page.comment]
