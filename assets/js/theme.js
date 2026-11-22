@@ -536,7 +536,7 @@ class Theme {
                 Object.values(typeitConfig.data).forEach(group => group.forEach(id => {
                     const $typeit = document.getElementById(id);
                     const strings = this.data[id];
-                    if ($typeit) $typeit.innerHTML = Array.isArray(strings) ? strings.join('<br>') : strings;
+                    if ($typeit) $typeit.innerHTML = Array.isArray(strings) ? strings.join('<br>') : (strings ?? '');
                 }));
                 return;
             }
