@@ -375,8 +375,11 @@ class Theme {
             const headerIsFixed = document.body.getAttribute('data-header-desktop') !== 'normal';
             const headerHeight = document.getElementById('header-desktop').offsetHeight;
             const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
+            // Keep the whole TOC on screen while it is fixed; longer contents scroll inside it.
+            $toc.style.maxHeight = `calc(100vh - ${TOP_SPACING + 20}px)`;
             const minTocTop = $toc.offsetTop;
             const minScrollTop = minTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
+            let lastActiveTocIndex = -1;
             this._tocOnScroll = this._tocOnScroll || (() => {
                 const footerTop = document.getElementById('post-footer').offsetTop;
                 const maxTocTop = footerTop - $toc.getBoundingClientRect().height;
@@ -411,6 +414,17 @@ class Theme {
                     while ($parent !== $tocCore) {
                         $parent.classList.add('has-active');
                         $parent = $parent.parentElement.parentElement;
+                    }
+                }
+                // When the active section changes, scroll it into view inside the TOC only,
+                // leaving the page scroll alone and the reader free to browse the TOC otherwise.
+                if (activeTocIndex !== lastActiveTocIndex) {
+                    lastActiveTocIndex = activeTocIndex;
+                    if (activeTocIndex !== -1 && $tocContentAuto.scrollHeight > $tocContentAuto.clientHeight) {
+                        const box = $tocContentAuto.getBoundingClientRect();
+                        const link = $tocLinkElements[activeTocIndex].getBoundingClientRect();
+                        if (link.top < box.top) $tocContentAuto.scrollTop += Math.floor(link.top - box.top);
+                        else if (link.bottom > box.bottom) $tocContentAuto.scrollTop += Math.ceil(link.bottom - box.bottom);
                     }
                 }
             });

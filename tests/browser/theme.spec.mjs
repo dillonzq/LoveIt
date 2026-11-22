@@ -176,6 +176,31 @@ for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/'
   });
 }
 
+test('a long auto TOC stays within the viewport and scrolls to the active section', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 600 });
+  await page.goto('/fuse/blog/long-toc/');
+  const toc = page.locator('#toc-auto');
+  const content = page.locator('#toc-content-auto');
+  await expect(toc).toBeVisible();
+  expect(await content.evaluate(el => el.scrollHeight > el.clientHeight)).toBe(true);
+  await expect(content).toHaveCSS('overflow-y', 'auto');
+
+  await page.evaluate(() => {
+    const top = document.getElementById('section-35').getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top - 10, behavior: 'instant' });
+  });
+  const active = content.locator('a.active');
+  await expect(active).toHaveText('Section 35');
+  await expect.poll(() => content.evaluate(el => el.scrollTop)).toBeGreaterThan(0);
+
+  const tocBox = await toc.boundingBox();
+  expect(tocBox.y + tocBox.height).toBeLessThanOrEqual(600);
+  const contentBox = await content.boundingBox();
+  const activeBox = await active.boundingBox();
+  expect(activeBox.y).toBeGreaterThanOrEqual(contentBox.y);
+  expect(activeBox.y + activeBox.height).toBeLessThanOrEqual(contentBox.y + contentBox.height);
+});
+
 test('first-screen avatar loads directly and scroll bursts share a frame', async ({ page }) => {
   await page.goto('/fuse/blog/');
   const avatar = page.locator('.home-avatar img');
