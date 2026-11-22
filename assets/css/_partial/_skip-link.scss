@@ -1,7 +1,7 @@
 .skip-link {
   position: fixed;
   top: .5rem;
-  left: .5rem;
+  inset-inline-start: .5rem;
   z-index: 300;
   padding: .5rem 1rem;
   font-weight: bold;

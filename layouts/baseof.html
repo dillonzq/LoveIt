@@ -1,7 +1,8 @@
 {{- partial "init.html" . -}}
+{{- $language := partialCached "function/language.html" .Site .Site.Language.Lang -}}
 
 <!DOCTYPE html>
-<html lang="{{ (partialCached "function/language.html" .Site .Site.Language.Lang).locale }}">
+<html lang="{{ $language.locale }}" dir="{{ $language.direction }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">

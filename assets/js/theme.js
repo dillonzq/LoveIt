@@ -362,8 +362,12 @@ class Theme {
             const $toc = document.getElementById('toc-auto');
             const $page = document.getElementsByClassName('page')[0];
             const rect = $page.getBoundingClientRect();
-            $toc.style.left = `${rect.left + rect.width + 20}px`;
-            $toc.style.maxWidth = `${$page.getBoundingClientRect().left - 20}px`;
+            // The TOC sits beside the page on its inline-end side: right in LTR, left in RTL.
+            const gap = 20;
+            const width = rect.left - gap;
+            const isRtl = window.getComputedStyle($toc).direction === 'rtl';
+            $toc.style.left = `${isRtl ? rect.left - gap - width : rect.right + gap}px`;
+            $toc.style.maxWidth = `${width}px`;
             $toc.style.visibility = 'visible';
             const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
             const $tocLiElements = $tocCore.getElementsByTagName('li');
