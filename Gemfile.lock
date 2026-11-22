@@ -31,7 +31,7 @@ GEM
       fiber-storage
     fiber-storage (1.0.1)
     hashery (2.1.2)
-    html-proofer (5.2.0)
+    html-proofer (5.2.3)
       addressable (~> 2.3)
       async (~> 2.1)
       benchmark (~> 0.5)
@@ -86,7 +86,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  html-proofer (= 5.2.0)
+  html-proofer (= 5.2.3)
 
 BUNDLED WITH
    2.6.7
