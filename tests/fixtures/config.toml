@@ -23,3 +23,9 @@ enable = true
 [markup.goldmark.extensions.passthrough.delimiters]
 block = [["\\[", "\\]"], ["$$", "$$"]]
 inline = [["\\(", "\\)"]]
+
+# Right-to-left fixture. Hugo < 0.158 ignores `direction`; the theme then infers RTL from the language code.
+[languages.ar]
+weight = 3
+title = "LoveIt RTL"
+direction = "rtl"

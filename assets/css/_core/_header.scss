@@ -17,11 +17,11 @@ header {
   }
 
   .logo, .header-title-pre {
-    padding-right: .25rem;
+    padding-inline-end: .25rem;
   }
 
   .header-title-post {
-    padding-left: .25rem;
+    padding-inline-start: .25rem;
   }
 
   &:hover {
@@ -40,7 +40,7 @@ header {
 .header-title {
   font-family: var(--header-title-font-family);
   font-weight: bold;
-  margin-right: .5rem;
+  margin-inline-end: .5rem;
   min-width: 10%;
   overflow: hidden;
   white-space: nowrap;
@@ -55,7 +55,7 @@ header {
 .language-select {
   position: absolute;
   opacity: 0;
-  left: 0;
+  inset-inline-start: 0;
   top: 0;
   width: 100%;
   height: 100%;
@@ -90,13 +90,13 @@ header {
   .search-button {
     margin: 0;
     position: absolute;
-    left: auto;
-    right: 1rem;
+    inset-inline-start: auto;
+    inset-inline-end: 1rem;
   }
 
   .search-toggle {
-    left: .5rem;
-    right: auto;
+    inset-inline-start: .5rem;
+    inset-inline-end: auto;
   }
 
   .search-loading {
@@ -164,7 +164,8 @@ header {
   }
 
   .header-wrapper {
-    padding: 0 2rem 0 10vh;
+    padding-block: 0;
+    padding-inline: 10vh 2rem;
 
     .header-title {
       font-size: var(--header-title-font-size);
@@ -176,25 +177,29 @@ header {
 
       .menu-inner {
         float: right;
+
+        [dir=rtl] & {
+          float: left;
+        }
       }
 
       .menu-item {
         margin: 0 .5rem;
 
         &.delimiter {
-          border-left: 1.5px solid $global-font-color;
+          border-inline-start: 1.5px solid $global-font-color;
 
           [theme=dark] & {
-            border-left-color: $global-border-color-dark;
+            border-inline-start-color: $global-border-color-dark;
           }
         }
 
         &.language {
-          margin-right: 0;
+          margin-inline-end: 0;
         }
 
         &.search {
-          margin: 0 -.5rem 0 0;
+          margin-inline: 0 -.5rem;
         }
       }
 
@@ -210,7 +215,7 @@ header {
   }
 
   &.open .header-wrapper .menu .menu-item.search {
-    margin: 0 .25rem 0 .5rem;
+    margin-inline: .5rem .25rem;
 
     input {
       width: 24rem;
@@ -315,7 +320,7 @@ header {
 
       .search-cancel {
         display: none;
-        margin-left: .75rem;
+        margin-inline-start: .75rem;
       }
 
       .menu-item {
@@ -362,17 +367,17 @@ header {
   @include box-shadow(0 .125rem .25rem rgba(0, 0, 0, .1));
 
   &.desktop {
-    right: 2rem;
+    inset-inline-end: 2rem;
     width: 30rem;
   }
 
   &.mobile {
-    right: 0;
+    inset-inline-end: 0;
     width: 100%;
   }
 
   .dropdown-menu {
-    right: 0 !important;
+    inset-inline: 0 !important;
     background-color: $global-background-color;
 
     [theme=dark] & {
@@ -399,7 +404,11 @@ header {
         .suggestion-date {
           font-size: .875rem;
           float: right;
-          text-align: right;
+          text-align: end;
+
+          [dir=rtl] & {
+            float: left;
+          }
           color: $global-font-secondary-color;
 
           [theme=dark] & {
@@ -461,6 +470,10 @@ header {
       padding: .5rem 1rem;
       float: right;
       font-size: .8rem;
+
+      [dir=rtl] & {
+        float: left;
+      }
       color: $global-font-secondary-color;
 
       [theme=dark] {

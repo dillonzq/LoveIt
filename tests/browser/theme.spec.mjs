@@ -149,6 +149,33 @@ test('header, share and back controls are labelled, keyboard-operable buttons', 
   await expect(page).toHaveURL(/\/fuse\/blog\/$/);
 });
 
+for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/', dir: 'rtl' }]) {
+  test(`${dir}: header, search dropdown and auto TOC follow the language direction`, async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto(`/fuse/blog/${language}guide/`);
+    await expect(page.locator('html')).toHaveAttribute('dir', dir);
+    const box = selector => page.locator(selector).boundingBox();
+    const rtl = dir === 'rtl';
+
+    const title = await box('#header-desktop .header-title');
+    const menu = await box('#header-desktop .menu');
+    expect(rtl ? title.x > menu.x : title.x < menu.x).toBe(true);
+
+    const toc = page.locator('#toc-auto');
+    await expect(toc).toBeVisible();
+    const tocBox = await toc.boundingBox();
+    const article = await box('article.page');
+    if (rtl) expect(tocBox.x + tocBox.width).toBeLessThanOrEqual(article.x);
+    else expect(tocBox.x).toBeGreaterThanOrEqual(article.x + article.width);
+    await expect(toc).toHaveCSS(rtl ? 'border-right-width' : 'border-left-width', '4px');
+
+    await page.locator('#search-toggle-desktop').click();
+    const dropdown = await box('#search-dropdown-desktop');
+    const viewport = page.viewportSize();
+    expect(rtl ? dropdown.x < viewport.width / 2 : dropdown.x > viewport.width / 2).toBe(true);
+  });
+}
+
 test('first-screen avatar loads directly and scroll bursts share a frame', async ({ page }) => {
   await page.goto('/fuse/blog/');
   const avatar = page.locator('.home-avatar img');

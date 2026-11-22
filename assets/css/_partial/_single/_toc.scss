@@ -12,13 +12,13 @@
 
     ul {
       text-indent: -0.85rem;
-      padding-left: .8rem;
+      padding-inline-start: .8rem;
       list-style: none;
 
       a:first-child::before {
         content: "|";
         font-weight: bolder;
-        margin-right: .5rem;
+        margin-inline-end: .5rem;
         color: $single-link-color;
 
         [theme=dark] & {
@@ -27,7 +27,7 @@
       }
 
       ul {
-        padding-left: 1.5rem;
+        padding-inline-start: 1.5rem;
       }
     }
   }
@@ -55,7 +55,7 @@
   width: 10000px;
   max-width: 0;
   padding: 0 .8rem;
-  border-left: 4px solid $global-border-color;
+  border-inline-start: 4px solid $global-border-color;
   @include overflow-wrap(break-word);
   box-sizing: border-box;
   top: 10rem;
@@ -69,7 +69,7 @@
   @include blur;
 
   [theme=dark] & {
-    border-left-color: $global-border-color-dark;
+    border-inline-start-color: $global-border-color-dark;
   }
 
   .toc-title {
@@ -139,7 +139,8 @@
 
     > nav > ul {
       margin: 0;
-      padding: .4rem 1rem .4rem 1.8rem;
+      padding-block: .4rem;
+      padding-inline: 1.8rem 1rem;
     }
 
     [theme=dark] & {

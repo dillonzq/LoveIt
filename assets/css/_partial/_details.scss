@@ -12,6 +12,11 @@
     [theme=dark] & {
       color: $global-font-secondary-color-dark;
     }
+
+    // Point the closed-state arrow toward the inline end.
+    [dir=rtl] & {
+      @include transform(rotate(180deg));
+    }
   }
 
   .details-content {

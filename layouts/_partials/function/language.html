@@ -1,11 +1,25 @@
 {{- /* Access only methods supported by this Hugo version. */ -}}
 {{- $locale := "" -}}
 {{- $label := "" -}}
+{{- $direction := "" -}}
 {{- if ge hugo.Version "0.158.0" -}}
     {{- $locale = .Language.Locale -}}
     {{- $label = .Language.Label -}}
+    {{- $direction = .Language.Direction -}}
 {{- else -}}
     {{- $locale = .Language.LanguageCode -}}
     {{- $label = .Language.LanguageName -}}
+    {{- $direction = .Language.LanguageDirection -}}
 {{- end -}}
-{{- return (dict "locale" ($locale | default .Language.Lang) "label" ($label | default .Language.Lang)) -}}
+{{- $locale = $locale | default .Language.Lang -}}
+{{- $direction = lower $direction -}}
+{{- if not (in (slice "ltr" "rtl") $direction) -}}
+    {{- /* Fall back to the script direction of the primary language subtag. */ -}}
+    {{- $primary := index (split (lower (replace $locale "_" "-")) "-") 0 -}}
+    {{- $rtl := slice "ar" "arc" "ckb" "dv" "fa" "he" "iw" "ps" "sd" "syr" "ug" "ur" "yi" -}}
+    {{- $direction = "ltr" -}}
+    {{- if in $rtl $primary -}}
+        {{- $direction = "rtl" -}}
+    {{- end -}}
+{{- end -}}
+{{- return (dict "locale" $locale "label" ($label | default .Language.Lang) "direction" $direction) -}}
