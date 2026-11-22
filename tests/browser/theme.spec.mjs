@@ -393,6 +393,9 @@ test('JSON-LD is valid for home and pages with special characters and non-raster
   const site = await structuredData(page, '/fuse/blog/');
   expect(site).toMatchObject({ '@context': 'https://schema.org', '@type': 'WebSite', name: 'LoveIt', inLanguage: 'en' });
   expect(site.image).toMatchObject({ '@type': 'ImageObject', width: 3200, height: 2048 });
+  expect(site.thumbnailUrl).toMatch(/\/fuse\/blog\/images\/screenshot\.png$/);
+  const rtlSite = await structuredData(page, '/fuse/blog/ar/');
+  expect(rtlSite.thumbnailUrl).toBe('https://cdn.example.com/thumbnail.png');
 
   const post = await structuredData(page, '/fuse/blog/structured-data/');
   expect(post).toMatchObject({

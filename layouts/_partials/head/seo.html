@@ -41,7 +41,12 @@
         {{- $schema = merge $schema (dict "image" .) -}}
     {{- end -}}
     {{- with dict "Path" .Site.Params.seo.thumbnailUrl "Resources" .Resources | partial "function/schema-image.html" -}}
-        {{- $schema = merge $schema (dict "thumbnailUrl" (cond (reflect.IsMap .) .url .)) -}}
+        {{- /* thumbnailUrl is a URL, not an ImageObject. */ -}}
+        {{- $thumbnail := . -}}
+        {{- if reflect.IsMap . -}}
+            {{- $thumbnail = .url -}}
+        {{- end -}}
+        {{- $schema = merge $schema (dict "thumbnailUrl" $thumbnail) -}}
     {{- end -}}
     {{- with .Site.Copyright -}}
         {{- $schema = merge $schema (dict "license" .) -}}
