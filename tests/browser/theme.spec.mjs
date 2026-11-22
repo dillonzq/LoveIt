@@ -184,6 +184,8 @@ test('a long auto TOC stays within the viewport and scrolls to the active sectio
   await expect(toc).toBeVisible();
   expect(await content.evaluate(el => el.scrollHeight > el.clientHeight)).toBe(true);
   await expect(content).toHaveCSS('overflow-y', 'auto');
+  const restingBox = await toc.boundingBox();
+  expect(restingBox.y + restingBox.height).toBeLessThanOrEqual(600);
 
   await page.evaluate(() => {
     const top = document.getElementById('section-35').getBoundingClientRect().top + window.scrollY;
@@ -199,6 +201,13 @@ test('a long auto TOC stays within the viewport and scrolls to the active sectio
   const activeBox = await active.boundingBox();
   expect(activeBox.y).toBeGreaterThanOrEqual(contentBox.y);
   expect(activeBox.y + activeBox.height).toBeLessThanOrEqual(contentBox.y + contentBox.height);
+
+  // Shrinking the window keeps the active link visible in the shorter TOC.
+  await page.setViewportSize({ width: 1280, height: 400 });
+  await expect.poll(async () => {
+    const [c, a] = await Promise.all([content.boundingBox(), active.boundingBox()]);
+    return a.y >= c.y && a.y + a.height <= c.y + c.height && c.y + c.height <= 400;
+  }).toBe(true);
 });
 
 test('first-screen avatar loads directly and scroll bursts share a frame', async ({ page }) => {
