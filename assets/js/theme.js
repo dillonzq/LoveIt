@@ -377,7 +377,13 @@ class Theme {
             const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
             const minTocTop = $toc.offsetTop;
             const minScrollTop = minTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
+            // Re-check that the active link is visible after every (re)initialization, e.g. on resize.
+            this._lastActiveTocIndex = -1;
             this._tocOnScroll = this._tocOnScroll || (() => {
+                // Keep the whole TOC on screen: cap its height to the space below its current top,
+                // which is lower at rest than while fixed. Longer contents scroll inside it.
+                const tocViewportTop = Math.max(minTocTop + (headerIsFixed ? 0 : headerHeight) - this.newScrollTop, TOP_SPACING);
+                $toc.style.maxHeight = `calc(100vh - ${tocViewportTop + 20}px)`;
                 const footerTop = document.getElementById('post-footer').offsetTop;
                 const maxTocTop = footerTop - $toc.getBoundingClientRect().height;
                 const maxScrollTop = maxTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
@@ -411,6 +417,17 @@ class Theme {
                     while ($parent !== $tocCore) {
                         $parent.classList.add('has-active');
                         $parent = $parent.parentElement.parentElement;
+                    }
+                }
+                // When the active section changes, scroll it into view inside the TOC only,
+                // leaving the page scroll alone and the reader free to browse the TOC otherwise.
+                if (activeTocIndex !== this._lastActiveTocIndex) {
+                    this._lastActiveTocIndex = activeTocIndex;
+                    if (activeTocIndex !== -1 && $tocContentAuto.scrollHeight > $tocContentAuto.clientHeight) {
+                        const box = $tocContentAuto.getBoundingClientRect();
+                        const link = $tocLinkElements[activeTocIndex].getBoundingClientRect();
+                        if (link.top < box.top) $tocContentAuto.scrollTop += Math.floor(link.top - box.top);
+                        else if (link.bottom > box.bottom) $tocContentAuto.scrollTop += Math.ceil(link.bottom - box.bottom);
                     }
                 }
             });

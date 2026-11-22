@@ -50,7 +50,8 @@
 }
 
 #toc-auto {
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   width: 10000px;
   max-width: 0;
@@ -73,10 +74,20 @@
   }
 
   .toc-title {
+    flex: none;
     margin: .8rem 0;
   }
 
+  // A long TOC scrolls inside its own box instead of running past the viewport;
+  // theme.js caps the height of #toc-auto to the space below the header.
   .toc-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+
     &.always-active ul {
       display: block;
     }
