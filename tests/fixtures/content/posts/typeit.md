@@ -11,6 +11,10 @@ First typed line
 Second typed line
 {{< /typeit >}}
 
+{{< typeit tag=input >}}
+Typed input
+{{< /typeit >}}
+
 {{< raw >}}<span class="raw-check">Raw HTML</span>{{< /raw >}}
 
 {{< style "color: rgb(1, 2, 3);" >}}Styled text{{< /style >}}

@@ -535,8 +535,17 @@ class Theme {
                 // Show the full text at once instead of typing it out.
                 Object.values(typeitConfig.data).forEach(group => group.forEach(id => {
                     const $typeit = document.getElementById(id);
+                    if (!$typeit) return;
                     const strings = this.data[id];
-                    if ($typeit) $typeit.innerHTML = Array.isArray(strings) ? strings.join('<br>') : (strings ?? '');
+                    const html = Array.isArray(strings) ? strings.join('<br>') : (strings ?? '');
+                    if ($typeit instanceof HTMLInputElement || $typeit instanceof HTMLTextAreaElement) {
+                        // Like TypeIt, form fields get the text content as their value.
+                        const template = document.createElement('template');
+                        template.innerHTML = html;
+                        $typeit.value = template.content.textContent;
+                    } else {
+                        $typeit.innerHTML = html;
+                    }
                 }));
                 return;
             }

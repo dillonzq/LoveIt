@@ -305,6 +305,7 @@ test('reduced motion disables smooth scrolling, transitions and the TypeIt anima
   await expect(reduced.locator('html')).toHaveCSS('scroll-behavior', 'auto');
   const lines = reduced.locator('.typeit > div');
   await expect(lines).toHaveText(['First typed line', 'Second typed line'], { timeout: 1_000 });
+  await expect(reduced.locator('.typeit > input')).toHaveValue('Typed input', { timeout: 1_000 });
   await expect(reduced.locator('.ti-cursor')).toHaveCount(0);
   await reduced.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo(0, 400); });
   const fixedButtons = reduced.locator('#fixed-buttons');
