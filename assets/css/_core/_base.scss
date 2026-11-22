@@ -6,7 +6,9 @@ html {
   line-height: var(--global-line-height);
   width:100%;
 
-  scroll-behavior: smooth;
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
 
   main [id] {
     scroll-margin-top: calc(var(--header-height) + .5rem);
@@ -79,3 +81,5 @@ button.link-like,
 @import "../_partial/details";
 @import "../_partial/fixed-button";
 @import "../_partial/cookieconsent";
+@import "../_partial/skip-link";
+@import "../_partial/reduced-motion";

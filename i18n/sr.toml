@@ -3,6 +3,9 @@
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === baseof ==
+[skipToContent]
+other = "Пређи на главни садржај"
+
 [backToTop]
 other = "Назад на Врх"
 
