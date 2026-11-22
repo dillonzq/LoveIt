@@ -43,6 +43,18 @@ other = "Pilih Bahasa"
 
 [switchTheme]
 other = "Ganti Tema"
+
+[themeAuto]
+other = "Otomatis"
+
+[themeLight]
+other = "Terang"
+
+[themeDark]
+other = "Gelap"
+
+[menu]
+other = "Menu"
 # === partials/header.html ===
 
 # === partials/footer.html ===

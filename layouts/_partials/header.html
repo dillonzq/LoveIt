@@ -42,25 +42,23 @@
 
                 {{- if .Site.Params.search.enable -}}
                     <span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-desktop">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="{{ T `search` }}">
+                        <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-desktop" aria-label="{{ T `search` }}">
+                        <button type="button" class="search-button search-toggle link-like" id="search-toggle-desktop" title="{{ T `search` }}" aria-label="{{ T `search` }}">
                             <i class="fas fa-search" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="{{ T `clear` }}">
+                        </button>
+                        <button type="button" class="search-button search-clear link-like" id="search-clear-desktop" title="{{ T `clear` }}" aria-label="{{ T `clear` }}">
                             <i class="fas fa-times-circle" aria-hidden="true"></i>
-                        </a>
+                        </button>
                         <span class="search-button search-loading" id="search-loading-desktop">
                             <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
                         </span>
                     </span>
                 {{- end -}}
-                <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
-                    <i class="fas fa-adjust" aria-hidden="true"></i>
-                </a>
+                {{- partial "plugin/theme-switch.html" . -}}
                 {{- if hugo.IsMultilingual -}}
-                <a href="javascript:void(0);" class="menu-item language" title="{{ T "selectLanguage" }}">
+                <span class="menu-item language link-like" title="{{ T "selectLanguage" }}">
                     <i class="fa fa-globe" aria-hidden="true"></i>
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;">
+                    <select class="language-select" id="language-select-desktop" aria-label="{{ T "selectLanguage" }}" onchange="location = this.value;">
                         {{- if eq .Kind "404" -}}
                             {{- /* https://github.com/dillonzq/LoveIt/issues/378 */ -}}
                             {{- range partial "function/sites.html" . -}}
@@ -77,7 +75,7 @@
                             {{- end -}}
                         {{- end -}}
                     </select>
-                </a>
+                </span>
             {{- end -}}
             </div>
         </div>
@@ -112,28 +110,28 @@
                     {{- end -}}
                 </a>
             </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
+            <button type="button" class="menu-toggle" id="menu-toggle-mobile" title="{{ T "menu" }}" aria-label="{{ T "menu" }}" aria-controls="menu-mobile" aria-expanded="false">
                 <span></span><span></span><span></span>
-            </div>
+            </button>
         </div>
         <div class="menu" id="menu-mobile">
             {{- if .Site.Params.search.enable -}}
                 <div class="search-wrapper">
                     <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-mobile">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="{{ T `search` }}">
+                        <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-mobile" aria-label="{{ T `search` }}">
+                        <button type="button" class="search-button search-toggle link-like" id="search-toggle-mobile" title="{{ T `search` }}" aria-label="{{ T `search` }}">
                             <i class="fas fa-search" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="{{ T `clear` }}">
+                        </button>
+                        <button type="button" class="search-button search-clear link-like" id="search-clear-mobile" title="{{ T `clear` }}" aria-label="{{ T `clear` }}">
                             <i class="fas fa-times-circle" aria-hidden="true"></i>
-                        </a>
+                        </button>
                         <span class="search-button search-loading" id="search-loading-mobile">
                             <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                    <button type="button" class="search-cancel link-like" id="search-cancel-mobile">
                         {{ T `cancel` }}
-                    </a>
+                    </button>
                 </div>
             {{- end -}}
             {{- $currentPage := . -}}
@@ -146,13 +144,11 @@
                     {{- .Pre | safeHTML }}{{ .Name }}{{ .Post | safeHTML -}}
                 </a>
             {{- end -}}
-            <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
-                <i class="fas fa-adjust" aria-hidden="true"></i>
-            </a>
+            {{- partial "plugin/theme-switch.html" . -}}
             {{- if hugo.IsMultilingual -}}
-                <a href="javascript:void(0);" class="menu-item" title="{{ T "selectLanguage" }}">
+                <span class="menu-item language link-like" title="{{ T "selectLanguage" }}">
                     <i class="fa fa-globe" aria-hidden="true"></i>
-                    <select class="language-select" onchange="location = this.value;">
+                    <select class="language-select" id="language-select-mobile" aria-label="{{ T "selectLanguage" }}" onchange="location = this.value;">
                         {{- if eq .Kind "404" -}}
                             {{- /* https://github.com/dillonzq/LoveIt/issues/378 */ -}}
                             {{- range partial "function/sites.html" . -}}
@@ -169,7 +165,7 @@
                             {{- end -}}
                         {{- end -}}
                     </select>
-                </a>
+                </span>
             {{- end -}}
         </div>
     </div>

@@ -42,6 +42,18 @@ other = "言語を選択"
 
 [switchTheme]
 other = "テーマの切り替え"
+
+[themeAuto]
+other = "自動"
+
+[themeLight]
+other = "ライト"
+
+[themeDark]
+other = "ダーク"
+
+[menu]
+other = "メニュー"
 # === partials/header.html ===
 
 # === partials/footer.html ===

@@ -43,6 +43,18 @@ other = "ভাষা নির্বাচন"
 
 [switchTheme]
 other = "থিম পরিবর্তন"
+
+[themeAuto]
+other = "স্বয়ংক্রিয়"
+
+[themeLight]
+other = "হালকা"
+
+[themeDark]
+other = "গাঢ়"
+
+[menu]
+other = "মেনু"
 # === partials/header.html ===
 
 # === partials/footer.html ===

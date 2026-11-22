@@ -43,6 +43,18 @@ other = "Chọn Ngôn ngữ"
 
 [switchTheme]
 other = "Đổi chủ đề"
+
+[themeAuto]
+other = "Tự động"
+
+[themeLight]
+other = "Sáng"
+
+[themeDark]
+other = "Tối"
+
+[menu]
+other = "Menu"
 # === partials/header.html ===
 
 # === partials/footer.html ===

@@ -95,18 +95,58 @@ test('Mermaid survives cached content; math, copy controls and persisted theme w
 test('mobile navigation and search survive resizing', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/fuse/blog/');
-  await page.locator('#menu-toggle-mobile').click();
+  const menuToggle = page.getByRole('button', { name: 'Menu' });
+  await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
+  await menuToggle.click();
   await expect(page.locator('#menu-mobile')).toHaveClass(/active/);
+  await expect(menuToggle).toHaveAttribute('aria-expanded', 'true');
   await page.locator('#mask').click({ position: { x: 300, y: 600 } });
   await expect(page.locator('#menu-mobile')).not.toHaveClass(/active/);
-  await page.locator('#menu-toggle-mobile').click();
+  await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
+  await menuToggle.click();
   await page.locator('#search-input-mobile').fill('Needle');
   await expect(page.locator('#search-dropdown-mobile .suggestion-title')).toContainText('Search');
   await page.locator('#search-cancel-mobile').click();
+  await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.locator('#search-toggle-desktop').click();
   await page.locator('#search-input-desktop').fill('Needle');
   await expect(page.locator('#search-dropdown-desktop .suggestion-title')).toContainText('Search');
+});
+
+test('header, share and back controls are labelled, keyboard-operable buttons', async ({ page }) => {
+  await page.addInitScript(() => {
+    window.__opened = [];
+    window.open = url => { window.__opened.push(String(url)); return null; };
+  });
+  await page.goto('/fuse/blog/');
+  await page.goto('/fuse/blog/gallery/');
+  await expect(page.locator('a[href^="javascript:"]')).toHaveCount(0);
+
+  const header = page.locator('#header-desktop');
+  await expect(header.getByRole('button', { name: 'Search' })).toBeVisible();
+  await expect(header.getByRole('button', { name: 'Clear', includeHidden: true })).toBeAttached();
+  await expect(header.getByRole('combobox', { name: 'Search' })).toBeAttached();
+  await expect(header.getByRole('combobox', { name: 'Select Language' })).toBeAttached();
+
+  const themeSwitch = header.getByRole('button', { name: /^Switch Theme/ });
+  await expect(themeSwitch).toHaveAccessibleName('Switch Theme: Auto');
+  await themeSwitch.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('body')).toHaveAttribute('cfg-theme', 'light');
+  await expect(themeSwitch).toHaveAccessibleName('Switch Theme: Light');
+  await page.keyboard.press('Space');
+  await expect(page.locator('body')).toHaveAttribute('cfg-theme', 'dark');
+  await expect(themeSwitch).toHaveAccessibleName('Switch Theme: Dark');
+  await expect(page.locator('#header-mobile .theme-switch')).toHaveAttribute('aria-label', 'Switch Theme: Dark');
+
+  const shareOnX = page.getByRole('button', { name: 'Share on X' });
+  await shareOnX.focus();
+  await page.keyboard.press('Enter');
+  await expect.poll(() => page.evaluate(() => window.__opened)).toEqual([expect.stringContaining('x.com')]);
+
+  await page.locator('.post-info-more').getByRole('button', { name: 'Back' }).click();
+  await expect(page).toHaveURL(/\/fuse\/blog\/$/);
 });
 
 test('first-screen avatar loads directly and scroll bursts share a frame', async ({ page }) => {
