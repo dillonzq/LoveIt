@@ -92,8 +92,9 @@ npm run htmlproofer
 Browser tests build isolated multilingual fixtures for Fuse, Lunr, Pagefind and
 mocked Algolia. They cover subpaths, hidden pages, literal HTML/regex characters,
 concurrent index loads, stale responses, Mermaid, custom math delimiters,
-Sass overrides, theme persistence and mobile navigation. Set
-`PLAYWRIGHT_CHROMIUM_EXECUTABLE` to use an installed Chrome executable.
+Sass overrides, theme persistence, mobile navigation, the skip link and reduced
+motion. Set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` to use an installed Chrome
+executable.
 
 Hugo, npm and Ruby dependencies are cached in the reusable CI workflow. The
 existing `ci-gate` remains the required aggregate check. Build logs and test

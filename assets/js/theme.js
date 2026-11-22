@@ -18,6 +18,10 @@ class Util {
         return window.matchMedia('only screen and (max-width: 960px)').matches;
     }
 
+    static prefersReducedMotion() {
+        return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
     static animateCSS(element, animation, reserved, callback) {
         if (!Array.isArray(animation)) animation = [animation];
         element.classList.add('animate__animated', ...animation);
@@ -527,6 +531,15 @@ class Theme {
     initTypeit() {
         if (this.config.typeit) {
             const typeitConfig = this.config.typeit;
+            if (Util.prefersReducedMotion()) {
+                // Show the full text at once instead of typing it out.
+                Object.values(typeitConfig.data).forEach(group => group.forEach(id => {
+                    const $typeit = document.getElementById(id);
+                    const strings = this.data[id];
+                    if ($typeit) $typeit.innerHTML = Array.isArray(strings) ? strings.join('<br>') : strings;
+                }));
+                return;
+            }
             const speed = typeitConfig.speed ? typeitConfig.speed : 100;
             const cursorSpeed = typeitConfig.cursorSpeed ? typeitConfig.cursorSpeed : 1000;
             const cursorChar = typeitConfig.cursorChar ? typeitConfig.cursorChar : '|';

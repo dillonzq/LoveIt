@@ -3,6 +3,9 @@
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === baseof ==
+[skipToContent]
+other = "Aller au contenu principal"
+
 [backToTop]
 other = "Retour en haut"
 

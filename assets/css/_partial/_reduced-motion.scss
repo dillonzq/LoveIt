@@ -1,0 +1,15 @@
+// Honor the user's reduced motion preference: transitions and animations
+// (including animate.css) finish instantly. A tiny non-zero duration keeps
+// animationend/transitionend events firing for scripts that wait for them.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

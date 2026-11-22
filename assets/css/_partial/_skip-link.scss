@@ -1,0 +1,37 @@
+.skip-link {
+  position: fixed;
+  top: .5rem;
+  left: .5rem;
+  z-index: 300;
+  padding: .5rem 1rem;
+  font-weight: bold;
+  color: $global-font-color;
+  background-color: $global-background-color;
+  border: 2px solid $global-link-hover-color;
+  @include border-radius(4px);
+  transform: translateY(calc(-100% - 1rem));
+
+  &:focus {
+    transform: none;
+    outline: none;
+  }
+
+  &:hover {
+    color: $global-link-hover-color;
+  }
+
+  [theme=dark] & {
+    color: $global-font-color-dark;
+    background-color: $global-background-color-dark;
+
+    &:hover {
+      color: $global-link-hover-color-dark;
+    }
+  }
+}
+
+// The skip link target receives focus programmatically; the focus ring
+// would outline the whole page body.
+#main-content:focus {
+  outline: none;
+}

@@ -278,3 +278,38 @@ test('lightGallery keeps the zoom buttons and mobile defaults on phones', async 
   }
   await context.close();
 });
+
+test('skip link is the first tab stop and moves focus to the main content', async ({ page }) => {
+  await page.goto('/fuse/blog/guide/');
+  const skipLink = page.locator('.skip-link');
+  await expect(skipLink).toHaveText('Skip to main content');
+  expect((await skipLink.boundingBox()).y + (await skipLink.boundingBox()).height).toBeLessThanOrEqual(0);
+  await page.keyboard.press('Tab');
+  await expect(skipLink).toBeFocused();
+  await expect(skipLink).toBeInViewport();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#main-content')).toBeFocused();
+  await page.goto('/fuse/blog/zh-cn/');
+  await expect(page.locator('.skip-link')).toHaveText('跳到正文');
+});
+
+test('reduced motion disables smooth scrolling, transitions and the TypeIt animation', async ({ browser, page }) => {
+  await page.goto('/fuse/blog/guide/');
+  await expect(page.locator('html')).toHaveCSS('scroll-behavior', 'smooth');
+
+  const context = await browser.newContext({ reducedMotion: 'reduce' });
+  const reduced = await context.newPage();
+  const errors = [];
+  reduced.on('pageerror', error => errors.push(error.message));
+  await reduced.goto('/fuse/blog/typeit/');
+  await expect(reduced.locator('html')).toHaveCSS('scroll-behavior', 'auto');
+  const lines = reduced.locator('.typeit > div');
+  await expect(lines).toHaveText(['First typed line', 'Second typed line'], { timeout: 1_000 });
+  await expect(reduced.locator('.ti-cursor')).toHaveCount(0);
+  await reduced.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo(0, 400); });
+  const fixedButtons = reduced.locator('#fixed-buttons');
+  await expect(fixedButtons).toHaveClass(/\banimate__fadeIn\b/);
+  expect(parseFloat(await fixedButtons.evaluate(element => getComputedStyle(element).animationDuration))).toBeLessThan(0.01);
+  expect(errors).toEqual([]);
+  await context.close();
+});
