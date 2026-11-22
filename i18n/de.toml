@@ -43,6 +43,18 @@ other = "Sprache wählen"
 
 [switchTheme]
 other = "Darstellung ändern"
+
+[themeAuto]
+other = "Automatisch"
+
+[themeLight]
+other = "Hell"
+
+[themeDark]
+other = "Dunkel"
+
+[menu]
+other = "Menü"
 # === partials/header.html ===
 
 # === partials/footer.html ===

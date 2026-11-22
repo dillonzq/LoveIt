@@ -43,6 +43,18 @@ other = "Välj språk"
 
 [switchTheme]
 other = "Byt tema"
+
+[themeAuto]
+other = "Automatiskt"
+
+[themeLight]
+other = "Ljust"
+
+[themeDark]
+other = "Mörkt"
+
+[menu]
+other = "Meny"
 # === partials/header.html ===
 
 # === partials/footer.html ===

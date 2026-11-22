@@ -1,5 +1,5 @@
 @mixin link($light, $dark) {
-  a, a::before, a::after {
+  a, a::before, a::after, .link-like {
     text-decoration: none;
 
     @if $light {
@@ -18,7 +18,9 @@
   }
 
   a:active,
-  a:hover {
+  a:hover,
+  .link-like:active,
+  .link-like:hover {
     @if $light {
       color: $global-link-hover-color;
     } @else {

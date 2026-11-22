@@ -43,6 +43,18 @@ other = "언어 변경"
 
 [switchTheme]
 other = "테마 변경"
+
+[themeAuto]
+other = "자동"
+
+[themeLight]
+other = "라이트"
+
+[themeDark]
+other = "다크"
+
+[menu]
+other = "메뉴"
 # === partials/header.html ===
 
 # === partials/footer.html ===

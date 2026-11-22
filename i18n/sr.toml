@@ -43,6 +43,18 @@ other = "Изабери Језик"
 
 [switchTheme]
 other = "Промени Тему"
+
+[themeAuto]
+other = "Аутоматски"
+
+[themeLight]
+other = "Светла"
+
+[themeDark]
+other = "Тамна"
+
+[menu]
+other = "Мени"
 # === partials/header.html ===
 
 # === partials/footer.html ===

@@ -43,6 +43,18 @@ other = "選擇語言"
 
 [switchTheme]
 other = "切換主題"
+
+[themeAuto]
+other = "跟隨系統"
+
+[themeLight]
+other = "淺色"
+
+[themeDark]
+other = "深色"
+
+[menu]
+other = "選單"
 # === partials/header.html ===
 
 # === partials/footer.html ===

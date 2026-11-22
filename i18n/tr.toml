@@ -43,6 +43,18 @@ other = "Dil Seç"
 
 [switchTheme]
 other = "Switch Theme"
+
+[themeAuto]
+other = "Otomatik"
+
+[themeLight]
+other = "Açık"
+
+[themeDark]
+other = "Koyu"
+
+[menu]
+other = "Menü"
 # === partials/header.html ===
 
 # === partials/footer.html ===

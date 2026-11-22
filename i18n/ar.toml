@@ -43,6 +43,18 @@ other = "إختيار اللغة"
 
 [switchTheme]
 other = "تغيير القالب"
+
+[themeAuto]
+other = "تلقائي"
+
+[themeLight]
+other = "فاتح"
+
+[themeDark]
+other = "داكن"
+
+[menu]
+other = "القائمة"
 # === partials/header.html ===
 
 # === partials/footer.html ===

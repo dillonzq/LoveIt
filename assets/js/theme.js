@@ -72,22 +72,37 @@ class Theme {
         if (this.config.twemoji) twemoji.parse(document.body);
     }
 
+    setMenuMobileOpen(open) {
+        const $menuToggleMobile = document.getElementById('menu-toggle-mobile');
+        $menuToggleMobile.classList.toggle('active', open);
+        $menuToggleMobile.setAttribute('aria-expanded', String(open));
+        document.getElementById('menu-mobile').classList.toggle('active', open);
+    }
+
     initMenuMobile() {
         const $menuToggleMobile = document.getElementById('menu-toggle-mobile');
-        const $menuMobile = document.getElementById('menu-mobile');
         $menuToggleMobile.addEventListener('click', () => {
             document.body.classList.toggle('blur');
-            $menuToggleMobile.classList.toggle('active');
-            $menuMobile.classList.toggle('active');
+            this.setMenuMobileOpen(!$menuToggleMobile.classList.contains('active'));
         }, false);
-        this._menuMobileOnClickMask = this._menuMobileOnClickMask || (() => {
-            $menuToggleMobile.classList.remove('active');
-            $menuMobile.classList.remove('active');
-        });
+        this._menuMobileOnClickMask = this._menuMobileOnClickMask || (() => this.setMenuMobileOpen(false));
         this.clickMaskEventSet.add(this._menuMobileOnClickMask);
     }
 
+    updateThemeSwitchLabels() {
+        const cfgTheme = document.body.getAttribute('cfg-theme');
+        Util.forEach(document.getElementsByClassName('theme-switch'), $themeSwitch => {
+            const label = $themeSwitch.dataset.label;
+            const mode = $themeSwitch.getAttribute(`data-label-${cfgTheme}`);
+            if (!label) return;
+            const text = mode ? `${label}: ${mode}` : label;
+            $themeSwitch.setAttribute('title', text);
+            $themeSwitch.setAttribute('aria-label', text);
+        });
+    }
+
     initSwitchTheme() {
+        this.updateThemeSwitchLabels();
         Util.forEach(document.getElementsByClassName('theme-switch'), $themeSwitch => {
             $themeSwitch.addEventListener('click', () => {
                 const cfgTheme = document.body.getAttribute('cfg-theme');
@@ -100,6 +115,7 @@ class Theme {
                 document.body.setAttribute('theme', this.isDark ? 'dark' : 'light');
                 document.body.setAttribute('cfg-theme', newTheme);
                 window.localStorage?.setItem('theme', newTheme);
+                this.updateThemeSwitchLabels();
                 for (let event of this.switchThemeEventSet) event();
             }, false);
         });
@@ -127,8 +143,7 @@ class Theme {
             document.getElementById('search-cancel-mobile').addEventListener('click', () => {
                 $header.classList.remove('open');
                 document.body.classList.remove('blur');
-                document.getElementById('menu-toggle-mobile').classList.remove('active');
-                document.getElementById('menu-mobile').classList.remove('active');
+                this.setMenuMobileOpen(false);
                 $searchLoading.style.display = 'none';
                 $searchClear.style.display = 'none';
                 this._searchMobile && this._searchMobile.autocomplete.setVal('');

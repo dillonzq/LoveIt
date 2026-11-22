@@ -43,6 +43,18 @@ other = "भाषा चुने"
 
 [switchTheme]
 other = "थीम स्विच करें"
+
+[themeAuto]
+other = "स्वचालित"
+
+[themeLight]
+other = "लाइट"
+
+[themeDark]
+other = "डार्क"
+
+[menu]
+other = "मेनू"
 # === partials/header.html ===
 
 # === partials/footer.html ===

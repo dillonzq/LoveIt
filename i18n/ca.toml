@@ -43,6 +43,18 @@ other = "Escolliu L'idioma"
 
 [switchTheme]
 other = "Canvia Tema"
+
+[themeAuto]
+other = "Automàtic"
+
+[themeLight]
+other = "Clar"
+
+[themeDark]
+other = "Fosc"
+
+[menu]
+other = "Menú"
 # === partials/header.html ===
 
 # === partials/footer.html ===

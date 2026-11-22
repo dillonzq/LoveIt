@@ -42,6 +42,18 @@ other = "Змінити мову"
 
 [switchTheme]
 other = "Змінити тему"
+
+[themeAuto]
+other = "Авто"
+
+[themeLight]
+other = "Світла"
+
+[themeDark]
+other = "Темна"
+
+[menu]
+other = "Меню"
 # === partials/header.html ===
 
 # === partials/footer.html ===

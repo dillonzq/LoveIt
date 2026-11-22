@@ -51,6 +51,26 @@ body {
   }
 }
 
+/* Buttons that look like the surrounding links or icons */
+button.link-like,
+.menu-toggle {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+
+.menu-toggle {
+  color: inherit;
+}
+
 @include link(true, true);
 
 @import "../_partial/mask";

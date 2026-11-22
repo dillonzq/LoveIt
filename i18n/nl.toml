@@ -43,6 +43,18 @@ other = "Selecteer Taal"
 
 [switchTheme]
 other = "Verander Thema"
+
+[themeAuto]
+other = "Automatisch"
+
+[themeLight]
+other = "Licht"
+
+[themeDark]
+other = "Donker"
+
+[menu]
+other = "Menu"
 # === partials/header.html ===
 
 # === partials/footer.html ===

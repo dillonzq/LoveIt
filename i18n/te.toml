@@ -43,6 +43,18 @@ other = "భాష ఎంపిక"
 
 [switchTheme]
 other = "నేపథ్యాన్ని మార్చండి"
+
+[themeAuto]
+other = "స్వయంచాలకం"
+
+[themeLight]
+other = "లైట్"
+
+[themeDark]
+other = "డార్క్"
+
+[menu]
+other = "మెనూ"
 # === partials/header.html ===
 
 # === partials/footer.html ===

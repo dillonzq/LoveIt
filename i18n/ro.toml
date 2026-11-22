@@ -43,6 +43,18 @@ other = "Selectare Limbă"
 
 [switchTheme]
 other = "Schimbare Temă"
+
+[themeAuto]
+other = "Automat"
+
+[themeLight]
+other = "Luminos"
+
+[themeDark]
+other = "Întunecat"
+
+[menu]
+other = "Meniu"
 # === partials/header.html ===
 
 # === partials/footer.html ===
