@@ -1,0 +1,19 @@
+{{- /*
+    Resolve an image path for JSON-LD.
+    Input: dict "Path" (string) "Resources" (page resources, optional).
+    Returns an ImageObject dict for local resources (with dimensions for raster images),
+    an absolute URL string for other paths, or "" when the path is empty.
+*/ -}}
+{{- $image := "" -}}
+{{- with .Path -}}
+    {{- with dict "Path" . "Resources" $.Resources | partial "function/resource.html" -}}
+        {{- $image = dict "@type" "ImageObject" "url" .Permalink -}}
+        {{- /* Only raster formats Hugo can decode expose Width and Height (not SVG or ICO). */ -}}
+        {{- if and (eq .ResourceType "image") (in (slice "jpeg" "png" "gif" "webp" "bmp" "tiff") .MediaType.SubType) -}}
+            {{- $image = merge $image (dict "width" .Width "height" .Height) -}}
+        {{- end -}}
+    {{- else -}}
+        {{- $image = absURL . -}}
+    {{- end -}}
+{{- end -}}
+{{- return $image -}}

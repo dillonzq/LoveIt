@@ -381,3 +381,37 @@ test('reduced motion disables smooth scrolling, transitions and the TypeIt anima
   expect(errors).toEqual([]);
   await context.close();
 });
+
+async function structuredData(page, path) {
+  await page.goto(path);
+  const scripts = page.locator('script[type="application/ld+json"]');
+  await expect(scripts).toHaveCount(1);
+  return JSON.parse(await scripts.textContent());
+}
+
+test('JSON-LD is valid for home and pages with special characters and non-raster images', async ({ page }) => {
+  const site = await structuredData(page, '/fuse/blog/');
+  expect(site).toMatchObject({ '@context': 'https://schema.org', '@type': 'WebSite', name: 'LoveIt', inLanguage: 'en' });
+  expect(site.image).toMatchObject({ '@type': 'ImageObject', width: 3200, height: 2048 });
+
+  const post = await structuredData(page, '/fuse/blog/structured-data/');
+  expect(post).toMatchObject({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: 'Structured "data" \\ </script> check',
+    description: 'Quotes " and a closing </script><script>window.injected = true</script> tag',
+    keywords: 'quote "tag", plain',
+    datePublished: '2025-01-02T00:00:00+00:00',
+    dateModified: '2025-01-03T00:00:00+00:00',
+  });
+  expect(post.wordCount).toBeGreaterThan(0);
+  expect(post.image).toEqual([
+    { '@type': 'ImageObject', url: expect.stringMatching(/\/fuse\/blog\/structured-data\/diagram\.svg$/) },
+    'https://cdn.example.com/cover.png',
+  ]);
+  expect(await page.evaluate(() => window.injected)).toBeUndefined();
+
+  const translated = await structuredData(page, '/fuse/blog/zh-cn/guide/');
+  expect(translated).toMatchObject({ headline: '中文搜索指南', inLanguage: 'zh-CN' });
+  expect(translated).not.toHaveProperty('description');
+});

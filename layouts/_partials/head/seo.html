@@ -16,138 +16,98 @@
     <meta name="baidu-site-verification" content="{{ . }}" />
 {{- end -}}
 
+{{- /* Structured data is built as a dict and serialized with jsonify, so values are always valid JSON. */ -}}
+{{- $language := partialCached "function/language.html" .Site .Site.Language.Lang -}}
+{{- $schema := dict -}}
+
 {{- /* Home SEO */ -}}
 {{- if .IsHome -}}
-    <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "WebSite",
-        "url": "{{ .Permalink }}",
-        {{- with (partialCached "function/language.html" .Site .Site.Language.Lang).locale -}}
-            "inLanguage": "{{ . }}",
-        {{- end -}}
-        {{- with .Site.Params.Author.name -}}
-            "author": {
-                "@type": "Person",
-                "name": {{ . | safeHTML }}
-            },
-        {{- end -}}
-        {{- with .Site.Params.description -}}
-            "description": {{ . | safeHTML }},
-        {{- end -}}
-        {{- $image := .Site.Params.seo.image -}}
-        {{- with dict "Path" $image "Resources" .Resources | partial "function/resource.html" -}}
-            "image": {
-                "@type": "ImageObject",
-                "url": "{{ .Permalink }}",
-                "width": {{ .Width }},
-                "height": {{ .Height }}
-            },
-        {{- else -}}
-            {{- with $image -}}
-                "image": "{{ . | absURL }}",
-            {{- end -}}
-        {{- end -}}
-        {{- with .Site.Params.seo.thumbnailUrl -}}
-            {{- with dict "Path" . "Resources" $.Resources | partial "function/resource.html" -}}
-                "thumbnailUrl": "{{ .Permalink }}",
-            {{- else -}}
-                "thumbnailUrl": "{{ . | absURL }}",
-            {{- end -}}
-        {{- end -}}
-        {{- with .Site.Copyright -}}
-            "license": "{{ . | safeHTML }}",
-        {{- end -}}
-        "name": {{ .Site.Title | safeHTML }}
-    }
-    </script>
+    {{- $schema = dict
+        "@context" "https://schema.org"
+        "@type" "WebSite"
+        "url" .Permalink
+        "name" .Site.Title
+    -}}
+    {{- with $language.locale -}}
+        {{- $schema = merge $schema (dict "inLanguage" .) -}}
+    {{- end -}}
+    {{- with .Site.Params.Author.name -}}
+        {{- $schema = merge $schema (dict "author" (dict "@type" "Person" "name" .)) -}}
+    {{- end -}}
+    {{- with .Site.Params.description -}}
+        {{- $schema = merge $schema (dict "description" .) -}}
+    {{- end -}}
+    {{- with dict "Path" .Site.Params.seo.image "Resources" .Resources | partial "function/schema-image.html" -}}
+        {{- $schema = merge $schema (dict "image" .) -}}
+    {{- end -}}
+    {{- with dict "Path" .Site.Params.seo.thumbnailUrl "Resources" .Resources | partial "function/schema-image.html" -}}
+        {{- $schema = merge $schema (dict "thumbnailUrl" (cond (reflect.IsMap .) .url .)) -}}
+    {{- end -}}
+    {{- with .Site.Copyright -}}
+        {{- $schema = merge $schema (dict "license" .) -}}
+    {{- end -}}
 
 {{- /* Page SEO */ -}}
 {{- else if .IsPage -}}
-    <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": {{ .Title | safeHTML }},
-        "inLanguage": "{{ (partialCached "function/language.html" .Site .Site.Language.Lang).locale }}",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "{{ .Permalink }}"
-        },
-        {{- $images := $params.seo.images | default slice -}}
-        {{- if not $images -}}
-            {{- with .Resources.GetMatch "featured-image-preview" -}}
-                {{- $images = slice "featured-image-preview" -}}
-            {{- end -}}
-            {{- with .Resources.GetMatch "featured-image" -}}
-                {{- $images = slice "featured-image" -}}
-            {{- end -}}
+    {{- $schema = dict
+        "@context" "https://schema.org"
+        "@type" "BlogPosting"
+        "headline" .Title
+        "inLanguage" $language.locale
+        "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+        "genre" .Type
+        "wordCount" .WordCount
+        "url" .Permalink
+    -}}
+    {{- $images := $params.seo.images | default slice -}}
+    {{- if not $images -}}
+        {{- with .Resources.GetMatch "featured-image-preview" -}}
+            {{- $images = slice "featured-image-preview" -}}
         {{- end -}}
-        {{- with .Site.Params.seo.image -}}
-            {{- $images = $images | default (slice .) -}}
+        {{- with .Resources.GetMatch "featured-image" -}}
+            {{- $images = slice "featured-image" -}}
         {{- end -}}
-        {{- with $images -}}
-            "image": [
-                {{- range $index, $value := . -}}
-                    {{- if gt $index 0 }},{{ end -}}
-                    {{- with dict "Path" $value "Resources" $.Resources | partial "function/resource.html" -}}
-                        {
-                            "@type": "ImageObject",
-                            "url": "{{ .Permalink }}",
-                            "width": {{ .Width }},
-                            "height": {{ .Height }}
-                        }
-                    {{- else -}}
-                        {{- with $value -}}
-                            "{{ . | absURL }}"
-                        {{- end -}}
-                    {{- end -}}
-                {{- end -}}
-            ],
+    {{- end -}}
+    {{- with .Site.Params.seo.image -}}
+        {{- $images = $images | default (slice .) -}}
+    {{- end -}}
+    {{- $imageObjects := slice -}}
+    {{- range $images -}}
+        {{- with dict "Path" . "Resources" $.Resources | partial "function/schema-image.html" -}}
+            {{- $imageObjects = $imageObjects | append . -}}
         {{- end -}}
-        "genre": "{{ .Type }}",
-        {{- with .Params.tags -}}
-            "keywords": "{{ delimit . ", " }}",
-        {{- end -}}
-        "wordcount": {{ .WordCount }},
-        "url": "{{ .Permalink }}",
-        {{- if not .PublishDate.IsZero -}}
-            "datePublished": {{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | safeHTML }},
-        {{- else if not .Date.IsZero -}}
-            "datePublished": {{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }},
-        {{- end -}}
-        {{- with .Lastmod -}}
-            "dateModified": {{ .Format "2006-01-02T15:04:05-07:00" | safeHTML }},
-        {{- end -}}
-        {{- with .Site.Copyright -}}
-            "license": {{ . | safeHTML }},
-        {{- end -}}
-        {{- $publisher := .Params.author | default .Site.Params.Author.name | default (T "author") | dict "name" -}}
-        {{- $publisher = $params.seo.publisher | default dict | merge $publisher -}}
-        "publisher": {
-            "@type": "Organization",
-            "name": {{ $publisher.name | safeHTML }}
-            {{- $logo := $publisher.logoUrl -}}
-            {{- with dict "Path" $logo "Resources" .Resources | partial "function/resource.html" -}}
-                ,"logo": {
-                    "@type": "ImageObject",
-                    "url": "{{ .Permalink }}",
-                    "width": {{ .Width }},
-                    "height": {{ .Height }}
-                }
-            {{- else -}}
-                {{- with $logo -}}
-                    ,"logo": "{{ . | absURL }}"
-                {{- end -}}
-            {{- end -}}
-        },
-        {{- with .Params.author | default .Site.Params.Author.name | default (T "author") -}}
-            "author": {
-                "@type": "Person",
-                "name": {{ . | safeHTML }}
-            },
-        {{- end -}}
-        "description": {{ .Description | safeHTML }}
-    }
-    </script>
+    {{- end -}}
+    {{- with $imageObjects -}}
+        {{- $schema = merge $schema (dict "image" .) -}}
+    {{- end -}}
+    {{- with .Params.tags -}}
+        {{- $schema = merge $schema (dict "keywords" (delimit . ", ")) -}}
+    {{- end -}}
+    {{- $published := cond .PublishDate.IsZero .Date .PublishDate -}}
+    {{- if not $published.IsZero -}}
+        {{- $schema = merge $schema (dict "datePublished" ($published.Format "2006-01-02T15:04:05-07:00")) -}}
+    {{- end -}}
+    {{- if not .Lastmod.IsZero -}}
+        {{- $schema = merge $schema (dict "dateModified" (.Lastmod.Format "2006-01-02T15:04:05-07:00")) -}}
+    {{- end -}}
+    {{- with .Site.Copyright -}}
+        {{- $schema = merge $schema (dict "license" .) -}}
+    {{- end -}}
+    {{- $publisher := .Params.author | default .Site.Params.Author.name | default (T "author") | dict "name" -}}
+    {{- $publisher = $params.seo.publisher | default dict | merge $publisher -}}
+    {{- $organization := dict "@type" "Organization" "name" $publisher.name -}}
+    {{- with dict "Path" $publisher.logoUrl "Resources" .Resources | partial "function/schema-image.html" -}}
+        {{- $organization = merge $organization (dict "logo" .) -}}
+    {{- end -}}
+    {{- $schema = merge $schema (dict "publisher" $organization) -}}
+    {{- with .Params.author | default .Site.Params.Author.name | default (T "author") -}}
+        {{- $schema = merge $schema (dict "author" (dict "@type" "Person" "name" .)) -}}
+    {{- end -}}
+    {{- with .Description -}}
+        {{- $schema = merge $schema (dict "description" .) -}}
+    {{- end -}}
+{{- end -}}
+
+{{- with $schema -}}
+    <script type="application/ld+json">{{ . | jsonify | safeJS }}</script>
 {{- end -}}
