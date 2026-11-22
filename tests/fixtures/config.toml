@@ -29,3 +29,7 @@ inline = [["\\(", "\\)"]]
 weight = 3
 title = "LoveIt RTL"
 direction = "rtl"
+
+# A remote thumbnail exercises the string branch of the home JSON-LD image helper.
+[languages.ar.params.seo]
+thumbnailUrl = "https://cdn.example.com/thumbnail.png"
