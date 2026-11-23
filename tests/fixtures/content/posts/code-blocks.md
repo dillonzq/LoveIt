@@ -9,7 +9,7 @@ echo one
 echo three
 ```
 
-```kql
+```kql {lineNoStart=5}
 let answer = 42;
 print answer
 ```
@@ -17,4 +17,8 @@ print answer
 ```
 plain one
 plain two
+```
+
+```kql {lineNos=false}
+print 'no numbers'
 ```

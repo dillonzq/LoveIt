@@ -1,1 +1,18 @@
-{{- dict "Content" .Inner "Lang" .Type "Options" .Options "Page" .Page | partial "plugin/code-block.html" -}}
+{{- $options := .Options -}}
+{{- /* Older Hugo versions (e.g. 0.146) put the highlighting options of a language Chroma
+    doesn't know in .Attributes, with lower-cased names. Recover them so lineNos=false
+    or lineNoStart still apply to the plain-text fallback in plugin/code-block.html. */ -}}
+{{- if not $options -}}
+    {{- $options = dict -}}
+    {{- $names := dict
+        "linenos" "lineNos" "linenostart" "lineNoStart" "hl_lines" "hl_lines" "hl_inline" "hl_inline"
+        "anchorlinenos" "anchorLineNos" "lineanchors" "lineAnchors" "linenumbersintable" "lineNumbersInTable"
+        "style" "style" "tabwidth" "tabWidth" "noclasses" "noClasses" "guesssyntax" "guessSyntax"
+    -}}
+    {{- range $key, $value := .Attributes -}}
+        {{- with index $names (lower $key) -}}
+            {{- $options = dict . $value | merge $options -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- dict "Content" .Inner "Lang" .Type "Options" $options "Page" .Page | partial "plugin/code-block.html" -}}

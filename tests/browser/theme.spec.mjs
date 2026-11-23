@@ -460,7 +460,11 @@ test('copy buttons copy code verbatim and unknown languages keep the code block 
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/fuse/blog/code-blocks/');
   const blocks = page.locator('.code-block');
-  await expect(blocks).toHaveCount(3);
+  await expect(blocks).toHaveCount(4);
+  // Options of an unknown language apply to its plain-text fallback, whichever Hugo version stores them.
+  await expect(blocks.nth(1)).toHaveAttribute('style', /counter-reset: ?code-block 4\b/);
+  await expect(blocks.nth(1)).toHaveClass(/\bcode-line-numbers\b/);
+  await expect(blocks.nth(3)).not.toHaveClass(/\bcode-line-numbers\b/);
   const expected = ['echo one\n  echo two\necho three', 'let answer = 42;\nprint answer', 'plain one\nplain two'];
   for (const [index, text] of expected.entries()) {
     const block = blocks.nth(index);
