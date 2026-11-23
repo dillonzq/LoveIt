@@ -1,5 +1,5 @@
 {{- /* Posts for the home page and its RSS feed: every page in the posts section,
-    whatever its type, plus pages in other sections whose type is "posts". */ -}}
+    whatever its type, plus pages in other sections whose type is "posts" or "post". */ -}}
 {{- $pages := where .Site.RegularPages "Section" "posts" -}}
-{{- $pages = where .Site.RegularPages "Type" "posts" | union $pages -}}
+{{- $pages = where .Site.RegularPages "Type" "in" (slice "posts" "post") | union $pages -}}
 {{- return $pages.ByWeight -}}

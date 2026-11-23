@@ -475,15 +475,18 @@ test('copy buttons copy code verbatim and unknown languages keep the code block 
   }
   expect(errors).toEqual([]);
   await context.close();
+});
 
-test('home page and its feed list the posts section and pages typed "posts"', async ({ page, request }) => {
+test('home page and its feed list the posts section and pages typed "posts" or "post"', async ({ page, request }) => {
   await page.goto('/fuse/blog/');
   const titles = page.locator('.home .single-title');
   await expect(titles.filter({ hasText: 'Typed post' })).toHaveCount(1);
   await expect(titles.filter({ hasText: 'Posts type elsewhere' })).toHaveCount(1);
+  await expect(titles.filter({ hasText: 'Post type elsewhere' })).toHaveCount(1);
   await expect(titles.filter({ hasText: 'Plain note' })).toHaveCount(0);
   const feed = await (await request.get('/fuse/blog/index.xml')).text();
   expect(feed).toContain('<title>Typed post</title>');
   expect(feed).toContain('<title>Posts type elsewhere</title>');
+  expect(feed).toContain('<title>Post type elsewhere</title>');
   expect(feed).not.toContain('<title>Plain note</title>');
 });
