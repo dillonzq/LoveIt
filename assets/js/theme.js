@@ -322,7 +322,9 @@ class Theme {
             const $copy = $codeBlock.querySelector('.code-header .copy');
             if ($copy) {
                 const $code = $codeBlock.querySelector('code');
-                $copy.setAttribute('data-clipboard-text', $code.innerText);
+                // innerText adds a line break after every block-level line span on top of
+                // the newline already in the code, so copied code had blank lines between lines.
+                $copy.setAttribute('data-clipboard-text', $code.textContent);
                 const clipboard = new ClipboardJS($copy);
                 const $codeLines = $code.querySelectorAll('span.cl');
                 clipboard.on('success', _e => {
