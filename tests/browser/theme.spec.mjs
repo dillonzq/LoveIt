@@ -452,3 +452,27 @@ test('JSON-LD is valid for home and pages with special characters and non-raster
   expect(translated).toMatchObject({ headline: '中文搜索指南', inLanguage: 'zh-CN' });
   expect(translated).not.toHaveProperty('description');
 });
+
+test('copy buttons copy code verbatim and unknown languages keep the code block style', async ({ browser }) => {
+  const context = await browser.newContext({ permissions: ['clipboard-read', 'clipboard-write'] });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('/fuse/blog/code-blocks/');
+  const blocks = page.locator('.code-block');
+  await expect(blocks).toHaveCount(4);
+  // Options of an unknown language apply to its plain-text fallback, whichever Hugo version stores them.
+  await expect(blocks.nth(1)).toHaveAttribute('style', /counter-reset: ?code-block 4\b/);
+  await expect(blocks.nth(1)).toHaveClass(/\bcode-line-numbers\b/);
+  await expect(blocks.nth(3)).not.toHaveClass(/\bcode-line-numbers\b/);
+  const expected = ['echo one\n  echo two\necho three', 'let answer = 42;\nprint answer', 'plain one\nplain two'];
+  for (const [index, text] of expected.entries()) {
+    const block = blocks.nth(index);
+    // Every block is highlighted by Chroma, so it gets line numbers and the code colors.
+    await expect(block.locator('pre.chroma span.line')).toHaveCount(text.split('\n').length);
+    await block.locator('.copy').click();
+    await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe(text);
+  }
+  expect(errors).toEqual([]);
+  await context.close();
+});

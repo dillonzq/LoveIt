@@ -11,6 +11,11 @@
 
 {{- $options = dict "noClasses" false "lineNos" false | merge $options -}}
 {{- $result := transform.Highlight $content $lang $options -}}
+{{- /* Without a Chroma lexer for the language (or no language), Hugo returns a bare pre:
+    highlight it as plain text so the block keeps its styling and line numbers. */ -}}
+{{- if not (strings.Contains $result `class="chroma"`) -}}
+    {{- $result = transform.Highlight $content "text" $options -}}
+{{- end -}}
 <div class="code-block{{ if $lineNos }} code-line-numbers{{ end }}{{ if le $lines $maxShownLines }} open{{ end }}" style="counter-reset: code-block {{ sub $lineNoStart 1 }}">
     <div class="code-header language-{{ $lang }}">
         <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
