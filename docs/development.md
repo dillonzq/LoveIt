@@ -112,6 +112,32 @@ with separate cold caches and repeated warm builds. Template cumulative times
 overlap; never sum them as a build duration. Preserve page-specific Scratch
 updates when adding partial caches.
 
+## Baseline metrics
+
+```sh
+npx --no-install playwright install chromium
+npm run metrics
+```
+
+`npm run metrics` builds the example site into `build/metrics/site` twice, from
+empty caches and again with them warm, and records the build time Hugo reports.
+It then serves the output locally with gzip and runs Lighthouse CI
+(`lighthouserc.json`, mobile defaults, three runs) on the home page and an
+article, and `@axe-core/playwright` on the home page, an article, the post list,
+the 404 page and the open search dropdown. It also records the size of
+`assets/lib`. `build/metrics/summary.md` and `summary.json` hold the results;
+full Lighthouse reports and axe results sit next to them. Lighthouse and axe use
+Playwright's Chromium unless `CHROME_PATH` is set; `LOVEIT_METRICS_PORT` changes
+the local port (default 48138).
+
+The Metrics workflow runs the same script on every pull request and push to
+master, writes the summary to the job summary and uploads the reports as the
+`metrics` artifact. It only records numbers: no score or violation fails it, and
+it is not part of `ci-gate`. Lighthouse scores vary between runs and runners;
+compare trends, not single values.
+
 References: [hvm](https://github.com/jmooring/hvm),
 [Hugo Sass](https://gohugo.io/functions/css/sass/),
-[Pagefind](https://pagefind.app/docs/).
+[Pagefind](https://pagefind.app/docs/),
+[Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci),
+[axe-core](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright).

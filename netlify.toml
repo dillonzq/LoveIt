@@ -20,9 +20,3 @@
   [plugins.inputs]
     debug = true
     srcdir = "exampleSite"
-
-[[plugins]]
-  package = "@netlify/plugin-lighthouse"
-
-  [plugins.inputs.settings]
-    preset = "desktop"

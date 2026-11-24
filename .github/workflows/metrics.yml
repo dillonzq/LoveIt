@@ -1,0 +1,49 @@
+name: Metrics
+
+# Records baseline performance and accessibility numbers for the example site.
+# Results are reported in the job summary and uploaded as an artifact; no
+# threshold fails the run, so this workflow is not part of the ci-gate check.
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: metrics-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - uses: actions/cache@v6
+        with:
+          path: node_modules/.cache/loveit
+          key: hugo-tools-${{ runner.os }}-${{ hashFiles('.hvm', 'package-lock.json') }}
+      - run: npx --no-install playwright install --with-deps chromium
+      - name: Lighthouse, axe-core and build time
+        run: npm run metrics
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: metrics
+          path: |
+            build/metrics/
+            !build/metrics/site/
+            !build/metrics/cache/
+            !build/metrics/resources/
+          if-no-files-found: ignore

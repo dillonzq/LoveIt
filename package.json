@@ -4,11 +4,13 @@
   "description": "LoveIt theme source file",
   "private": true,
   "devDependencies": {
-    "segmentit": "^2.0.3",
-    "sass-embedded": "1.108.2",
-    "pagefind": "1.6.0",
+    "@axe-core/playwright": "4.14.0",
+    "@lhci/cli": "0.16.1",
     "@playwright/test": "1.65.1",
-    "esbuild": "0.28.2"
+    "esbuild": "0.28.2",
+    "pagefind": "1.6.0",
+    "sass-embedded": "1.108.2",
+    "segmentit": "^2.0.3"
   },
   "scripts": {
     "compile-lunr-segmentit": "node scripts/compile-lunr.mjs",
@@ -23,7 +25,8 @@
     "dev": "node scripts/hugo.mjs server --buildDrafts --disableFastRender --environment development",
     "hugo:version": "node scripts/hugo.mjs version",
     "test": "node --test tests/*.test.mjs",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "metrics": "node scripts/metrics.mjs"
   },
   "repository": {
     "type": "git",
