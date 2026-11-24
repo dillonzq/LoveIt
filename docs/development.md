@@ -89,6 +89,13 @@ bundle install
 npm run htmlproofer
 ```
 
+`npm test` also checks every `i18n/*.toml` against `i18n/en.toml`: duplicate
+or unknown keys, a missing `other` form and placeholders English does not
+provide fail the run. Keys a language has not translated yet are only reported
+as warnings, because Hugo falls back to the default language for them. Keys
+that only some languages need (`lunrLanguageLib`, `lunrSegmentitLib`) are
+allowed without an English entry.
+
 Browser tests build isolated multilingual fixtures for Fuse, Lunr, Pagefind and
 mocked Algolia. They cover subpaths, hidden pages, literal HTML/regex characters,
 concurrent index loads, stale responses, Mermaid, custom math delimiters,
