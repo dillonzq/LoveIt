@@ -42,14 +42,17 @@ Both are dual-licensed: GPL-3.0 or a paid commercial license.
 
 - **TypeIt** loads when any `typeit` option is on or a page uses the `typeit`
   shortcode. The default config turns it on for the home page subtitle
-  (`params.home.profile.typeit = true`). Its author states that a commercial
-  project needs a paid license: <https://www.typeitjs.com/licenses>.
+  (`params.home.profile.typeit = true`). Its author offers a paid license for
+  commercial projects that cannot meet the GPL-3.0 terms:
+  <https://www.typeitjs.com/licenses>.
 - **lightGallery** loads only when `params.page.lightgallery` (or the page's
   `lightgallery` front matter) is `true`. The default is `false`. Terms are in
   `lightgallery/LICENSE` and `lightgallery/LICENSE-COMMERCIAL.md`.
 
 A site that cannot meet GPL-3.0 should buy a commercial license or turn these
-features off.
+features off. Turning a feature off only keeps its library out of the generated
+site. The theme source still contains the library, so anyone who redistributes
+that source must still follow the library's license.
 
 ### Valine
 

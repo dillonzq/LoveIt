@@ -193,7 +193,7 @@ LoveIt is licensed under the **MIT** license. Check the [LICENSE file](https://g
 
 The MIT license covers the theme's own code only. Bundled third-party libraries keep their own licenses, listed in [`assets/lib/VERSION.md`](https://github.com/dillonzq/LoveIt/blob/master/assets/lib/VERSION.md). Some of them are not permissive:
 
-* [TypeIt](https://typeitjs.com/) and [lightGallery](https://github.com/sachinchoolur/lightgallery) are dual-licensed under GPL-3.0 or a paid commercial license. TypeIt runs the home page subtitle animation, which is on by default; lightGallery is off by default. A commercial site that cannot meet GPL-3.0 should buy a commercial license or turn these features off.
+* [TypeIt](https://typeitjs.com/) and [lightGallery](https://github.com/sachinchoolur/lightgallery) are dual-licensed under GPL-3.0 or a paid commercial license. TypeIt runs the home page subtitle animation, which is on by default; lightGallery is off by default. A commercial site that cannot meet GPL-3.0 should buy a commercial license or turn these features off. Turning a feature off only keeps its library out of the generated site; the theme source still contains it, and redistributing that source must follow the library's license.
 * [Valine](https://valine.js.org/) is GPL-2.0.
 * [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) is proprietary and follows the Mapbox Terms of Service.
 
