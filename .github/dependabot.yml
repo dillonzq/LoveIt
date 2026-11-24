@@ -1,0 +1,59 @@
+# Dependabot version updates
+# https://docs.github.com/code-security/dependabot/working-with-dependabot/dependabot-options-reference
+#
+# Each ecosystem is checked once a week and its updates are grouped into a
+# single pull request. npm major versions get their own pull requests so a
+# breaking upgrade doesn't hold back the rest of the batch.
+#
+# Not covered here: the Hugo version in .hvm, the Node version in .nvmrc and
+# the vendored front-end libraries in assets/lib, which are updated by hand.
+
+version: 2
+
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: ci
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: build
+      include: scope
+    groups:
+      npm:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: bundler
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: build
+      include: scope
+    groups:
+      bundler:
+        patterns:
+          - "*"
