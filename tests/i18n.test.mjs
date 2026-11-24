@@ -44,11 +44,16 @@ function parseTranslations(file) {
 const placeholders = forms => new Set(Object.values(forms).flatMap(value => value.match(/{{.*?}}/g) || []).map(p => p.replace(/\s+/g, '')));
 
 const files = readdirSync(i18nDir).filter(file => file.endsWith('.toml')).sort();
-let english;
+// Every test loads English itself, so a filtered run (--test-name-pattern) still works.
+let englishCache;
+const loadEnglish = () => {
+  assert.ok(files.includes(reference), `i18n/${reference} is missing`);
+  englishCache ??= parseTranslations(reference);
+  return englishCache;
+};
 
 test('English is the reference translation and defines every key with an "other" form', () => {
-  assert.ok(files.includes(reference), `i18n/${reference} is missing`);
-  english = parseTranslations(reference);
+  const english = loadEnglish();
   for (const [key, { forms }] of english) {
     assert.ok('other' in forms, `${reference}: "${key}" has no "other" form`);
   }
@@ -56,7 +61,7 @@ test('English is the reference translation and defines every key with an "other"
 
 for (const file of files.filter(file => file !== reference)) {
   test(`i18n/${file} matches the English keys`, t => {
-    assert.ok(english, `i18n/${reference} could not be parsed`);
+    const english = loadEnglish();
     const entries = parseTranslations(file);
     const unknown = [...entries.keys()].filter(key => !english.has(key) && !languageOnlyKeys.has(key));
     assert.deepEqual(unknown, [], `${file} has keys that English does not define (typo or stale key?)`);
