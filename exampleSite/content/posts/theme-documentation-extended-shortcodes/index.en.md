@@ -32,7 +32,7 @@ math:
 {{< version 0.2.0 changed >}}
 
 {{< admonition >}}
-Hugo **extended** version is necessary for `style` shortcode.
+[**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass) is necessary for `style` shortcode, because the style content is compiled with it. The extended edition of Hugo alone is not enough, see [Theme Documentation - Basics](../theme-documentation-basics).
 {{< /admonition >}}
 
 `style` is a shortcode to insert custom style in your post.
@@ -77,7 +77,8 @@ The `link` shortcode has the following named parameters:
 
 * **content** *[optional]* (**second** positional parameter)
 
-    Content of the link, default value is the value of **href** parameter.
+    Content of the link. When using positional parameters, default value is the value of **href** parameter.
+    When using named parameters, there is **no default value**: if `content` is omitted, the link is rendered as an empty `a` tag, so always set `content=` explicitly.
 
     *Markdown or HTML format is supported.*
 
@@ -98,11 +99,11 @@ Example `link` input:
 ```markdown
 {{</* link "https://assemble.io" */>}}
 Or
-{{</* link href="https://assemble.io" */>}}
+{{</* link href="https://assemble.io" content="https://assemble.io" */>}}
 
 {{</* link "mailto:contact@revolunet.com" */>}}
 Or
-{{</* link href="mailto:contact@revolunet.com" */>}}
+{{</* link href="mailto:contact@revolunet.com" content="mailto:contact@revolunet.com" */>}}
 
 {{</* link "https://assemble.io" Assemble */>}}
 Or
@@ -161,7 +162,7 @@ The `image` shortcode has the following named parameters:
 
 * **class** *[optional]*
 
-    `class` attribute of the HTML `figure` tag.
+    `class` attribute of the HTML `figure` tag. Named parameter only, and it takes effect only when **caption** is set, because the `figure` tag is only rendered with a caption.
 
 * **src_s** *[optional]*
 
@@ -181,7 +182,8 @@ The `image` shortcode has the following named parameters:
 
 * **linked** *[optional]*
 
-    Whether the image needs to be hyperlinked, default value is `true`.
+    Whether the image needs to be hyperlinked. With named parameters, default value is `true`.
+    With positional parameters, the image is hyperlinked only when a **caption** is given (use named parameters to control it explicitly).
 
 * **rel** *[optional]*
 
@@ -398,7 +400,7 @@ Inline Formula: {{< raw >}}\(\mathbf{E}=\sum_{i} \mathbf{E}_{i}=\mathbf{E}_{1}+\
 
 Block Formula:
 
-{{< raw>}}
+{{< raw >}}
 \[ a=b+c \\ d+e=f \]
 {{< /raw >}}
 
@@ -428,7 +430,7 @@ The `person` shortcode has the following named parameters:
 
 * **nick** *[optional]*
 
-    Nickame of the person.
+    Nickname of the person (named parameter only).
 
 Example `person` input:
 

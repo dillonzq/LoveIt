@@ -32,7 +32,7 @@ math:
 {{< version 0.2.0 changed >}}
 
 {{< admonition >}}
-Hugo **extended** 版本对于 `style` shortcode 是必需的.
+`style` shortcode 需要 [**Dart Sass**](https://gohugo.io/functions/css/sass/#dart-sass), 样式内容会用它来编译. 仅有 Hugo extended 版本是不够的, 参见 [主题文档 - 基本概念](../theme-documentation-basics).
 {{< /admonition >}}
 
 `style` shortcode 用来在你的文章中插入自定义样式.
@@ -77,7 +77,8 @@ This is a **right-aligned** paragraph.
 
 * **content** *[可选]* (**第二个**位置参数)
 
-    链接的内容, 默认值是 **href** 参数的值.
+    链接的内容. 使用位置参数时, 默认值是 **href** 参数的值.
+    使用命名参数时**没有默认值**: 如果省略 `content`, 渲染出的是一个空的 `a` 标签, 所以请务必显式设置 `content=`.
 
     *支持 Markdown 或者 HTML 格式.*
 
@@ -98,11 +99,11 @@ This is a **right-aligned** paragraph.
 ```markdown
 {{</* link "https://assemble.io" */>}}
 或者
-{{</* link href="https://assemble.io" */>}}
+{{</* link href="https://assemble.io" content="https://assemble.io" */>}}
 
 {{</* link "mailto:contact@revolunet.com" */>}}
 或者
-{{</* link href="mailto:contact@revolunet.com" */>}}
+{{</* link href="mailto:contact@revolunet.com" content="mailto:contact@revolunet.com" */>}}
 
 {{</* link "https://assemble.io" Assemble */>}}
 或者
@@ -161,7 +162,7 @@ This is a **right-aligned** paragraph.
 
 * **class** *[可选]*
 
-    HTML `figure` 标签的 `class` 属性.
+    HTML `figure` 标签的 `class` 属性. 仅支持命名参数, 并且只有设置了 **caption** 时才有效, 因为只有带标题时才会渲染 `figure` 标签.
 
 * **src_s** *[可选]*
 
@@ -181,7 +182,8 @@ This is a **right-aligned** paragraph.
 
 * **linked** *[可选]*
 
-    图片是否需要被链接, 默认值是 `true`.
+    图片是否需要被链接. 使用命名参数时, 默认值是 `true`.
+    使用位置参数时, 仅当提供了 **caption** 时图片才会被链接 (需要明确控制时请使用命名参数).
 
 * **rel** *[可选]*
 
@@ -398,7 +400,7 @@ console.log('Hello LoveIt!');
 
 公式块:
 
-{{< raw>}}
+{{< raw >}}
 \[ a=b+c \\ d+e=f \]
 {{< /raw >}}
 
@@ -420,15 +422,15 @@ console.log('Hello LoveIt!');
 
 * **text** *[可选]* (**第三个**位置参数)
 
-    Text to display as hover tooltip of the link.
+    作为链接悬停提示显示的文本.
 
 * **picture** *[可选]* (**第四个**位置参数)
 
-    A picture to use as person's avatar.
+    用作此人头像的图片.
 
 * **nick** *[可选]*
 
-    Nickame of the person.
+    此人的昵称 (仅支持命名参数).
 
 一个 `person` 示例:
 

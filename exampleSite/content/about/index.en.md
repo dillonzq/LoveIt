@@ -13,7 +13,7 @@ math:
 
 {{< style "img { height: 1.25rem; }" >}}
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
-[![Hugo](https://img.shields.io/badge/Hugo-%5E0.128.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%5E0.146.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/dillonzq/LoveIt?style=social)](https://github.com/dillonzq/LoveIt)
 [![GitHub forks](https://img.shields.io/github/forks/dillonzq/LoveIt?style=social)](https://github.com/dillonzq/LoveIt/fork)
@@ -35,7 +35,7 @@ math:
 * :(far fa-chart-bar): **[Fathom Analytics](https://usefathom.com/)** supported
 * :(fas fa-chart-column): **[Plausible Analytics](https://plausible.io/)** supported
 * :(fab fa-yandex-international): **[Yandex Metrica](https://metrica.yandex.com/)** supported
-* :(fas fa-sitemap): Search engine **verification** supported (Google, Bind, Yandex and Baidu)
+* :(fas fa-sitemap): Search engine **verification** supported (Google, Bing, Yandex and Baidu)
 * :(fas fa-tachometer-alt): **CDN** for third-party libraries supported
 * :(fas fa-cloud-download-alt): Automatically converted images with **Lazy Load** by [lazysizes](https://github.com/aFarkas/lazysizes)
 
@@ -47,14 +47,16 @@ math:
 * :(fas fa-ellipsis-h): **Pagination** supported
 * :(far fa-list-alt): Easy-to-use and self-expanding **table of contents**
 * :(fas fa-language): **Multilanguage** supported and i18n ready
+* :(fas fa-text-width): **Right-to-left** languages supported
 * :(fab fa-css3-alt): Beautiful **CSS animation**
+* :(fas fa-universal-access): **Accessibility**: skip link, reduced motion and semantic controls
 
 ### Social and Comment Systems
 
 * :(far fa-user): **Gravatar** supported by [Gravatar](https://gravatar.com)
 * :(fas fa-user-circle): Local **Avatar** supported
 * :(far fa-id-card): Up to **84** social links supported
-* :(fas fa-share-square): Up to **27** share sites supported
+* :(fas fa-share-square): Up to **30** share sites supported
 * :(far fa-comment): **Disqus** comment system supported by [Disqus](https://disqus.com)
 * :(far fa-comment-dots): **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
 * :(far fa-comment-alt): **Valine** comment system supported by [Valine](https://valine.js.org/)

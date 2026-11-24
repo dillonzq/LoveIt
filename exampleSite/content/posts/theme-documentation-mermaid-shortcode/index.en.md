@@ -20,13 +20,22 @@ hiddenFromHomePage: false
 
 {{< version 0.2.11 changed >}}
 
-The `mermaid` shortcode supports diagrams in Hugo with [Mermaid](https://mermaidjs.github.io/) library.
+The `mermaid` shortcode supports diagrams in Hugo with [Mermaid](https://mermaid.js.org/) library.
 
 <!--more-->
 
 **Mermaid** is a library helping you to generate diagram and flowcharts from text, in a similar manner as Markdown.
 
 Just insert your mermaid code in the `mermaid` shortcode and that’s it.
+
+A fenced code block with the `mermaid` language is rendered as a diagram too. This is controlled by `[params.page.code.render] mermaid` in the [site configuration](../theme-documentation-basics#site-configuration) (enabled by default) and can be overridden per page with `code.render.mermaid` in the [front matter](../theme-documentation-content#front-matter).
+
+````markdown
+```mermaid
+graph LR;
+    A[Hard edge] -->|Link text| B(Round edge)
+```
+````
 
 ## Flowchart {#flowchart}
 

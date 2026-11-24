@@ -99,10 +99,14 @@ rssFullText: false
 
 toc:
   enable: true
+  keepStatic: false
   auto: true
 code:
   copy: true
   maxShownLines: 50
+  render:
+    goat: true
+    mermaid: true
 math:
   enable: false
   # ...
@@ -133,13 +137,13 @@ seo:
 
 * **title**: the title for the content.
 * **subtitle**: {{< version 0.2.0 >}} the subtitle for the content.
-* **date**: the datetime assigned to this page, which is usually fetched from the `date` field in front matter, but this behaviour is configurabl in the [site configuration](../theme-documentation-basics#site-configuration).
+* **date**: the datetime assigned to this page, which is usually fetched from the `date` field in front matter, but this behaviour is configurable in the [site configuration](../theme-documentation-basics#site-configuration).
 * **lastmod**: the datetime at which the content was last modified.
 * **draft**: if `true`, the content will not be rendered unless the `--buildDrafts`/`-D` flag is passed to the `hugo` command.
 * **author**: the author for the content.
 * **authorLink**: the link of the author.
 * **description**: the description for the content.
-* **license**: the special lisence for this content.
+* **license**: the special license for this content.
 * **images**: page images for Open Graph and Twitter Cards.
 
 * **tags**: the tags for the content.
@@ -155,11 +159,11 @@ seo:
 * **ruby**: {{< version 0.2.0 >}} if `true`, the content will enable the [ruby extended syntax](#ruby).
 * **fraction**: {{< version 0.2.0 >}} if `true`, the content will enable the [fraction extended syntax](#fraction).
 * **fontawesome**: {{< version 0.2.0 >}} if `true`, the content will enable the [Font Awesome extended syntax](#fontawesome).
-* **linkToMarkdown**: if `true`, the footer of the content will be shown the link to the orignal Markdown file.
+* **linkToMarkdown**: if `true`, the footer of the content will be shown the link to the original Markdown file.
 * **rssFullText**: {{< version 0.2.4 >}} if `true`, the full text content will be shown in RSS.
 
-* **toc**: {{< version 0.2.9 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics#site-configuration).
-* **code**: {{< version 0.2.0 >}} the same as the `params.page.code` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **toc**: {{< version 0.2.9 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics#site-configuration), including `enable`, `keepStatic` (whether to keep the static table of contents in front of the post) and `auto`.
+* **code**: {{< version 0.2.0 >}} the same as the `params.page.code` part in the [site configuration](../theme-documentation-basics#site-configuration), including `copy`, `maxShownLines` and `render.goat` / `render.mermaid` (see [Diagrams](#diagrams)).
 * **math**: {{< version 0.2.0 changed >}} the same as the `params.page.math` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **mapbox**: {{< version 0.2.0 >}} the same as the `params.page.mapbox` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **share**: the same as the `params.page.share` part in the [site configuration](../theme-documentation-basics#site-configuration).
@@ -222,10 +226,12 @@ You may add the `<!--more-->` summary divider at the start of the article. Keep 
 
 Because there are multiple ways in which a summary can be specified it is useful to understand the order. It is as follows:
 
-1. If there is a `<!--more-->` summary divider present in the article but no content is before the divider, the description will be used as the summary.
-2. If there is a `<!--more-->` summary divider present in the article the text up to the divider will be provided as per the manual summary split method.
-3. If there is a summary variable in the article front matter the value of the variable will be provided as per the front matter summary method.
-4. The text at the start of the article will be provided as per the automatic summary split method.
+1. If there is a `<!--more-->` summary divider present in the article with content before it, the text up to the divider will be provided as per the manual summary split method.
+2. Otherwise, if there is a summary variable in the article front matter, the value of the variable will be provided as per the front matter summary method.
+3. Otherwise, if there is no `<!--more-->` summary divider, the text at the start of the article will be provided as per the automatic summary split method.
+4. If the summary is still empty (for example, a `<!--more-->` divider with no content before it and no `summary` in the front matter), the `description` will be used as the summary.
+
+In other words, the `description` is only a fallback: a `summary` in the front matter takes precedence over it, even if the article starts with an empty `<!--more-->` divider.
 
 {{< admonition >}}
 It is not recommended to include rich text block elements in the summary, which will cause typographic errors. Such as code blocks, pictures, tables, etc.
@@ -240,6 +246,11 @@ This part is shown in the [basic markdown syntax page](../basic-markdown-syntax/
 **LoveIt** theme has some extended syntax elements for you to write articles.
 
 ### Diagrams
+
+The `goat` and `mermaid` code blocks are rendered as diagrams by default.
+Set `goat = false` or `mermaid = false` under `[params.page.code.render]` in your [site configuration](../theme-documentation-basics#site-configuration)
+(or `code.render.goat` / `code.render.mermaid` in the front matter of a page) to turn the corresponding code block render hook off.
+The code block then falls back to a plain code block.
 
 #### GoAT Diagrams (ASCII)
 
@@ -305,7 +316,7 @@ This part is shown in the [emoji support page](../emoji-support/).
 
 **LoveIt** theme supports mathematical formulas based on [$\KaTeX$](https://katex.org/).
 
-Set the property `enable = true` under `[params.math]` in your [site configuration](../theme-documentation-basics#site-configuration)
+Set the property `enable = true` under `[params.page.math]` in your [site configuration](../theme-documentation-basics#site-configuration)
 and the property `math: true` of the article front matter to enable the automatic rendering of mathematical formulas.
 **$\KaTeX$** automatically renders formulas based on **specific delimiters**.
 
@@ -465,7 +476,7 @@ You can add more inline and block delimiters in your [site configuration](../the
 
 By the extension, when selecting and copying $\KaTeX$ rendered elements, copies their $\LaTeX$ source to the clipboard.
 
-Set the property `copyTex = true` under `[params.math]` in your [site configuration](../theme-documentation-basics#site-configuration) to enable Copy-tex.
+Copy-tex is on by default when math is enabled. Set the property `copyTex = false` under `[params.page.math]` in your [site configuration](../theme-documentation-basics#site-configuration) to disable it.
 
 Select and copy the formula rendered in the previous section, and you can find that the copied content is the $\LaTeX$ source code.
 
@@ -475,7 +486,7 @@ Select and copy the formula rendered in the previous section, and you can find t
 
 By the extension, you can write beautiful chemical equations easily in the article.
 
-Set the property `mhchem = true` under `[params.math]` in your [site configuration](../theme-documentation-basics#site-configuration) to enable mhchem.
+mhchem is on by default when math is enabled. Set the property `mhchem = false` under `[params.page.math]` in your [site configuration](../theme-documentation-basics#site-configuration) to disable it.
 
 ```markdown
 $$ \ce{CO2 + C -> 2 CO} $$
@@ -495,7 +506,7 @@ $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
 **LoveIt** theme also provides a [passthrough render hook](https://gohugo.io/render-hooks/passthrough/),
 which renders formulas into HTML at build time with Hugo's [`transform.ToMath`](https://gohugo.io/functions/transform/tomath/).
-These formulas need neither the extra escape characters above nor JavaScript: when `[params.math]` is disabled, pages that contain them only load the $\KaTeX$ stylesheet.
+These formulas need neither the extra escape characters above nor JavaScript: when `[params.page.math]` is disabled, pages that contain them only load the $\KaTeX$ stylesheet.
 
 Hugo does not read the `markup` configuration from themes, so enable the Goldmark passthrough extension in your own [site configuration](../theme-documentation-basics#site-configuration):
 
@@ -508,7 +519,7 @@ Hugo does not read the `markup` configuration from themes, so enable the Goldmar
 ```
 
 {{< admonition note >}}
-Formulas between these delimiters are rendered on the server whether or not `[params.math]` is enabled,
+Formulas between these delimiters are rendered on the server whether or not `[params.page.math]` is enabled,
 and an invalid formula stops the build with its position.
 {{< /admonition >}}
 
@@ -540,7 +551,7 @@ The rendered output looks like this:
 
 [Light]/[Dark]
 
-[90]/[100]
+[99]/[100]
 
 ### Font Awesome {#fontawesome}
 

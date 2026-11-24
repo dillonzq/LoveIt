@@ -98,10 +98,14 @@ rssFullText: false
 
 toc:
   enable: true
+  keepStatic: false
   auto: true
 code:
   copy: true
   maxShownLines: 50
+  render:
+    goat: true
+    mermaid: true
 math:
   enable: false
   # ...
@@ -157,8 +161,8 @@ seo:
 * **linkToMarkdown**: 如果设为 `true`, 内容的页脚将显示指向原始 Markdown 文件的链接.
 * **rssFullText**: {{< version 0.2.4 >}} 如果设为 `true`, 在 RSS 中将会显示全文内容.
 
-* **toc**: {{< version 0.2.9 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.toc` 部分相同.
-* **code**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.code` 部分相同.
+* **toc**: {{< version 0.2.9 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.toc` 部分相同, 包括 `enable`, `keepStatic` (是否保持使用文章前面的静态目录) 和 `auto`.
+* **code**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.code` 部分相同, 包括 `copy`, `maxShownLines` 以及 `render.goat` / `render.mermaid` (见 [图表](#diagrams)).
 * **math**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.math` 部分相同.
 * **mapbox**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.mapbox` 部分相同.
 * **share**: 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.share` 部分相同.
@@ -221,10 +225,12 @@ resources:
 
 由于可以通过多种方式指定摘要, 因此了解顺序很有用. 如下:
 
-1. 如果文章中有 `<!--more-->` 摘要分隔符, 但分隔符之前没有内容, 则使用描述作为摘要.
-2. 如果文章中有 `<!--more-->` 摘要分隔符, 则将按照手动摘要拆分的方法获得摘要.
-3. 如果文章前置参数中有摘要变量, 那么将以该值作为摘要.
-4. 按照自动摘要拆分方法.
+1. 如果文章中有 `<!--more-->` 摘要分隔符, 并且分隔符之前有内容, 则将按照手动摘要拆分的方法获得摘要.
+2. 否则, 如果文章前置参数中有摘要变量, 那么将以该值作为摘要.
+3. 否则, 如果文章中没有 `<!--more-->` 摘要分隔符, 则按照自动摘要拆分方法获得摘要.
+4. 如果摘要仍然为空 (例如, 文章中有 `<!--more-->` 摘要分隔符但分隔符之前没有内容, 并且前置参数中没有 `summary`), 则使用描述作为摘要.
+
+也就是说, 描述只是后备选项: 即使文章以空的 `<!--more-->` 摘要分隔符开头, 前置参数中的 `summary` 也优先于描述.
 
 {{< admonition >}}
 不建议在摘要内容中包含富文本块元素, 这会导致渲染错误. 例如代码块, 图片, 表格等.
@@ -238,7 +244,11 @@ resources:
 
 **LoveIt** 主题提供了一些扩展的语法便于你撰写文章.
 
-### 图表
+### 图表 {#diagrams}
+
+默认情况下, `goat` 和 `mermaid` 代码块会被渲染为图表.
+在 [网站配置](../theme-documentation-basics#site-configuration) 的 `[params.page.code.render]` 下设置 `goat = false` 或 `mermaid = false` (或者在页面前置参数中设置 `code.render.goat` / `code.render.mermaid`) 可以关闭对应的代码块渲染钩子,
+此时该代码块会回退为普通代码块.
 
 #### GoAT 图表 (ASCII)
 
@@ -303,7 +313,7 @@ graph TD
 
 **LoveIt** 基于 [$\KaTeX$](https://katex.org/) 提供数学公式的支持.
 
-在你的 [网站配置](../theme-documentation-basics#site-configuration) 中的 `[params.math]` 下面设置属性 `enable = true`,
+在你的 [网站配置](../theme-documentation-basics#site-configuration) 中的 `[params.page.math]` 下面设置属性 `enable = true`,
 并在文章的前置参数中设置属性 `math: true`来启用数学公式的自动渲染.
 **$\KaTeX$** 根据 **特定的分隔符** 来自动渲染公式.
 
@@ -462,7 +472,7 @@ $$ c = \pm\sqrt{a^2 + b^2} $$
 
 通过这个扩展, 在选择并复制 $\KaTeX$ 渲染的公式时, 会将其 $\LaTeX$ 源代码复制到剪贴板.
 
-在你的 [网站配置](../theme-documentation-basics#site-configuration) 中的 `[params.math]` 下面设置属性 `copyTex = true` 来启用 Copy-tex.
+启用数学公式后, Copy-tex 默认处于开启状态. 在你的 [网站配置](../theme-documentation-basics#site-configuration) 中的 `[params.page.math]` 下面设置属性 `copyTex = false` 可以禁用它.
 
 选择并复制上一节中渲染的公式, 可以发现复制的内容为 $\LaTeX$ 源代码.
 
@@ -472,7 +482,7 @@ $$ c = \pm\sqrt{a^2 + b^2} $$
 
 通过这个扩展, 你可以在文章中轻松编写漂亮的化学方程式.
 
-在你的 [网站配置](../theme-documentation-basics#site-configuration) 中的 `[params.math]` 下面设置属性 `mhchem = true` 来启用 mhchem.
+启用数学公式后, mhchem 默认处于开启状态. 在你的 [网站配置](../theme-documentation-basics#site-configuration) 中的 `[params.page.math]` 下面设置属性 `mhchem = false` 可以禁用它.
 
 ```markdown
 $$ \ce{CO2 + C -> 2 CO} $$
@@ -492,7 +502,7 @@ $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
 **LoveIt** 主题还提供了一个 [直通渲染钩子 (passthrough render hook)](https://gohugo.io/render-hooks/passthrough/),
 在构建时通过 Hugo 的 [`transform.ToMath`](https://gohugo.io/functions/transform/tomath/) 将公式渲染为 HTML.
-这些公式既不需要上面那些额外的转义字符, 也不需要 JavaScript: 未启用 `[params.math]` 时, 包含它们的页面只会加载 $\KaTeX$ 的样式表.
+这些公式既不需要上面那些额外的转义字符, 也不需要 JavaScript: 未启用 `[params.page.math]` 时, 包含它们的页面只会加载 $\KaTeX$ 的样式表.
 
 Hugo 不会读取主题中的 `markup` 配置, 所以需要在你自己的 [网站配置](../theme-documentation-basics#site-configuration) 中启用 Goldmark 的 passthrough 扩展:
 
@@ -505,7 +515,7 @@ Hugo 不会读取主题中的 `markup` 配置, 所以需要在你自己的 [网�
 ```
 
 {{< admonition note >}}
-无论是否启用了 `[params.math]`, 这些定界符之间的公式都会在服务端渲染,
+无论是否启用了 `[params.page.math]`, 这些定界符之间的公式都会在服务端渲染,
 公式有误时构建会失败并给出其位置.
 {{< /admonition >}}
 
@@ -537,7 +547,7 @@ Hugo 不会读取主题中的 `markup` 配置, 所以需要在你自己的 [网�
 
 [浅色]/[深色]
 
-[90]/[100]
+[99]/[100]
 
 ### Font Awesome {#fontawesome}
 

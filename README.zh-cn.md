@@ -70,7 +70,7 @@
 * 支持 **[Fathom Analytics](https://usefathom.com/)**
 * 支持 **[Plausible Analytics](https://plausible.io/)**
 * 支持 **[Yandex Metrica](https://metrica.yandex.com/)**
-* 支持搜索引擎的**网站验证** (Google, Bind, Yandex 和 Baidu)
+* 支持搜索引擎的**网站验证** (Google, Bing, Yandex 和 Baidu)
 * 支持所有第三方库的 **CDN**
 * 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为**懒加载**
 
@@ -82,14 +82,16 @@
 * 支持**分页**
 * 易用和自动展开的**文章目录**
 * 支持**多语言**和国际化
+* 支持**从右到左**书写的语言
 * 美观的 **CSS 动画**
+* **无障碍**：跳转链接、减少动画和语义化控件
 
 ### 社交和评论系统
 
 * 支持 **[Gravatar](https://gravatar.com)** 头像
 * 支持本地**头像**
 * 支持多达 **84** 种社交链接
-* 支持多达 **27** 种网站分享
+* 支持多达 **30** 种网站分享
 * 支持 **[Disqus](https://disqus.com)** 评论系统
 * 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
 * 支持 **[Valine](https://valine.js.org/)** 评论系统
@@ -172,11 +174,11 @@ LoveIt 支持下列语言:
 * 荷兰语
 * 孟加拉语
 * 日语
+* 瑞典语
+* 乌克兰语
 * [贡献一种新的语言](https://github.com/dillonzq/LoveIt/pulls)
 
 [语言兼容性](https://hugoloveit.com/zh-cn/theme-documentation-basics/#language-compatibility)
-
-## [路线图](https://github.com/dillonzq/LoveIt/projects/1)
 
 ## 问题、想法、 bugs 和 PRs
 

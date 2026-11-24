@@ -75,7 +75,7 @@ I hope you will LoveIt ❤️!
 * **[Fathom Analytics](https://usefathom.com/)** supported
 * **[Plausible Analytics](https://plausible.io/)** supported
 * **[Yandex Metrica](https://metrica.yandex.com/)** supported
-* Search engine **verification** supported (Google, Bind, Yandex and Baidu)
+* Search engine **verification** supported (Google, Bing, Yandex and Baidu)
 * **CDN** for third-party libraries supported
 * Automatically converted images with **Lazy Load** by [lazysizes](https://github.com/aFarkas/lazysizes)
 
@@ -87,14 +87,16 @@ I hope you will LoveIt ❤️!
 * **Pagination** supported
 * Easy-to-use and self-expanding **table of contents**
 * **Multilanguage** supported and i18n ready
+* **Right-to-left** languages supported
 * Beautiful **CSS animation**
+* **Accessibility**: skip link, reduced motion and semantic controls
 
 ### Social and Comment Systems
 
 * **Gravatar** supported by [Gravatar](https://gravatar.com)
 * Local **Avatar** supported
 * Up to **84** social links supported
-* Up to **27** share sites supported
+* Up to **30** share sites supported
 * **Disqus** comment system supported by [Disqus](https://disqus.com)
 * **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
 * **Valine** comment system supported by [Valine](https://valine.js.org/)
@@ -177,11 +179,11 @@ LoveIt supports the following languages:
 * Dutch
 * Bengali
 * Japanese
+* Swedish
+* Ukrainian
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
 
 [Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)
-
-## [Roadmap](https://github.com/dillonzq/LoveIt/projects/1)
 
 ## Questions, ideas, bugs, pull requests
 

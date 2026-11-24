@@ -652,12 +652,12 @@
   # CDN config for third-party library files
   # 第三方库文件的 CDN 设置
   [params.cdn]
-    # CDN data file name, disabled by default
+    # CDN data file name, default is "jsdelivr.yml", set to "" to serve the bundled local files
     # ["jsdelivr.yml"]
     # located in "themes/LoveIt/assets/data/cdn/" directory
     # you can store your own data files in the same path under your project:
     # "assets/data/cdn/"
-    # CDN 数据文件名称, 默认不启用
+    # CDN 数据文件名称, 默认是 "jsdelivr.yml", 设置为 "" 时使用主题自带的本地文件
     # ["jsdelivr.yml"]
     # 位于 "themes/LoveIt/assets/data/cdn/" 目录
     # 可以在你的项目下相同路径存放你自己的数据文件:
