@@ -54,8 +54,9 @@ Hugo 0.146.0 or later and Dart Sass are still required.
   Twemoji 17.0.3 ([#1062]), TypeIt 8.8.7 ([#1065]) and Waline 3.16.2 ([#1076]).
   Changes that authors may notice:
   - **Mermaid 12** uses the ELK layout and the `neo` look by default, so some
-    diagrams are laid out and styled differently. Add `layout: dagre` and
-    `look: classic` to a diagram's front matter to get the previous rendering.
+    diagrams are laid out and styled differently. Set `layout: dagre` and
+    `look: classic` under `config:` in a diagram's front matter to get the
+    previous rendering.
     The library file is about twice as large, but it only loads on pages that
     use Mermaid.
   - **ECharts 6** places the legend at the bottom by default and keeps axis
@@ -164,6 +165,7 @@ for the full upgrade guide.
 [#1053]: https://github.com/dillonzq/LoveIt/pull/1053
 [#1059]: https://github.com/dillonzq/LoveIt/pull/1059
 [#1060]: https://github.com/dillonzq/LoveIt/pull/1060
+[#1061]: https://github.com/dillonzq/LoveIt/pull/1061
 [#1062]: https://github.com/dillonzq/LoveIt/pull/1062
 [#1063]: https://github.com/dillonzq/LoveIt/pull/1063
 [#1064]: https://github.com/dillonzq/LoveIt/pull/1064
