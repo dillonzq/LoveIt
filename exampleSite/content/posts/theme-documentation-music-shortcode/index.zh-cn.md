@@ -30,11 +30,11 @@ hiddenFromHomePage: true
 
 `music` shortcode 有以下命名参数来使用自定义音乐 URL:
 
-* **server** *[必需]*
+* **url** *[必需]*
 
     音乐的链接.
 
-* **type** *[可选]*
+* **name** *[可选]*
 
     音乐的名称.
 
@@ -60,7 +60,7 @@ hiddenFromHomePage: true
 
 `music` shortcode 有一个命名参数来使用音乐平台 URL 的自动识别:
 
-* **auto** *[必需]]* (**第一个**位置参数)
+* **auto** *[必需]* (**第一个**位置参数)
 
     用来自动识别的音乐平台 URL, 支持 `netease`, `tencent` 和 `xiami` 平台.
 
@@ -110,7 +110,7 @@ hiddenFromHomePage: true
 
 ## 4 其它参数 {#other-parameters}
 
-`music` shortcode 有一些可以应用于以上三种方式的其它命名参数:
+`music` shortcode 还有一些其它命名参数. 它们只能以命名参数的方式使用 (不能使用位置参数), 以下参数适用于以上三种方式 (`api` 不适用于自定义音乐 URL):
 
 * **api** *[可选]*
 
@@ -140,7 +140,7 @@ hiddenFromHomePage: true
 
     是否自动暂停其它播放器, 默认值是 `true`.
 
-`music` shortcode 还有一些只适用于音乐列表方式的其它命名参数:
+`music` shortcode 还有一些只适用于音乐平台 URL 自动识别和自定义音乐平台 (不适用于自定义音乐 URL) 的其它命名参数:
 
 * **loop** *[可选]*
 

@@ -234,9 +234,6 @@ enableGitInfo = true
 # 是否使用 emoji 代码
 enableEmoji = true
 
-# 忽略一些构建错误
-ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
-
 # 分页配置
 [pagination]
   disableAliases = false
@@ -288,7 +285,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # 网站描述, 用于 RSS, SEO, Open Graph 和 Twitter Cards
   description = "这是我的全新 Hugo 网站"
   # 网站图片, 用于 Open Graph 和 Twitter Cards
-  images = ["/logo.png"]
+  images = []
 
   # 作者配置
   [params.author]
@@ -307,7 +304,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # LOGO 的 URL
       logo = ""
       # 标题名称
-      name = ""
+      name = "My cool site"
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
       pre = ""
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
@@ -327,11 +324,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # {{< version 0.2.0 >}} 是否显示作者
     author = true
     # 网站创立年份
-    since = 2019
+    since = 2022
     # ICP 备案信息，仅在中国使用 (支持 HTML 格式)
     icp = ""
     # 许可协议信息 (支持 HTML 格式)
-    license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+    license = ""
 
   # {{< version 0.2.0 >}} Section (所有文章) 页面配置
   [params.section]
@@ -363,12 +360,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     themeColor = "#ffffff"
     # Safari 图标颜色
     iconColor = "#5bbad5"
-    # Windows v8-10磁贴颜色
+    # Windows v8-11 磁贴颜色
     tileColor = "#da532c"
 
   # {{< version 0.2.0 >}} 搜索配置
   [params.search]
-    enable = true
+    enable = false
     # {{< version 0.4.0 changed >}} 搜索引擎的类型 ["lunr", "algolia", "fuse", "pagefind"]
     type = "lunr"
     # 文章内容最长索引长度
@@ -378,7 +375,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # {{< version 0.2.1 >}} 最大结果数目
     maxResultLength = 10
     # {{< version 0.2.3 >}} 结果内容片段长度
-    snippetLength = 50
+    snippetLength = 30
     # {{< version 0.2.1 >}} 搜索结果中高亮部分的 HTML 标签
     highlightTag = "em"
     # {{< version 0.2.4 >}} 是否在搜索索引中使用基于 baseURL 的绝对路径
@@ -411,7 +408,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # Gravatar 邮箱，用于优先在主页显示的头像
       gravatarEmail = ""
       # 主页显示头像的 URL
-      avatarURL = "/images/avatar.png"
+      avatarURL = ""
       # {{< version 0.2.7 changed >}} 主页显示的网站标题 (支持 HTML 格式)
       title = ""
       # 主页显示的网站副标题 (允许 HTML 格式)
@@ -431,19 +428,16 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       enable = true
       # 主页每页显示文章数量
       paginate = 6
-      # {{< version 0.2.0 deleted >}} 被 params.page 中的 hiddenFromHomePage 替代
-      # 当你没有在文章前置参数中设置 "hiddenFromHomePage" 时的默认行为
-      defaultHiddenFromHomePage = false
 
   # 作者的社交信息设置
   [params.social]
-    GitHub = "xxxx"
+    GitHub = ""
     Linkedin = ""
-    X = "xxxx" # {{< version 0.3.1 >}}
+    X = "" # {{< version 0.3.1 >}}
     Twitter = "" # {{< version 0.3.1 deprecated >}}
-    Instagram = "xxxx"
-    Facebook = "xxxx"
-    Telegram = "xxxx"
+    Instagram = ""
+    Facebook = ""
+    Telegram = ""
     Medium = ""
     Gitlab = ""
     Youtubelegacy = ""
@@ -516,11 +510,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     Codeberg = "" # {{< version 0.3.0 >}}
     HuggingFace = "" # {{< version 0.3.1 >}}
     Threads = "" # {{< version 0.3.1 >}}
-    LeetCodeCN = "" # {{< version 0.3.1 >}}
+    LeetCode = "" # {{< version 0.3.1 >}}
+    LeetCodeCN = ""
     Bluesky = "" # {{< version 0.3.1 >}}
+    Email = ""
     Phone = ""
-    Email = "xxxx@xxxx.com"
-    RSS = true # {{< version 0.2.0 >}}
+    RSS = "" # {{< version 0.2.0 >}}
 
   # {{< version 0.2.0 changed >}} 文章页面全局配置
   [params.page]
@@ -556,9 +551,14 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       copy = true
       # 默认展开显示的代码行数
       maxShownLines = 50
+    [params.page.code.render]
+      # 是否渲染代码块中的 goat 图表
+      goat = true
+      # 是否渲染代码块中的 mermaid 图表
+      mermaid = true
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} 数学公式
     [params.page.math]
-      enable = true
+      enable = false
       # {{< version 0.2.11 changed >}} 默认行内定界符是 $ ... $ 和 \( ... \)
       inlineLeftDelimiter = ""
       inlineRightDelimiter = ""
@@ -598,6 +598,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       Facebook = true
       Linkedin = false
       Whatsapp = false
+      Viber = false
       Pinterest = false
       Tumblr = false
       HackerNews = true
@@ -671,7 +672,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         numPosts = 10
         appId = ""
         # 为空时自动适配当前主题 i18n 配置
-        languageCode = "zh_CN"
+        languageCode = ""
       # {{< version 0.2.0 >}} {{< link "https://comments.app/" "Telegram Comments" >}} 评论系统设置
       [params.page.comment.telegram]
         enable = false
@@ -775,13 +776,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
   # {{< version 0.2.0 >}} 网站分析配置
   [params.analytics]
-    # {{< version 0.3.1 deleted >}}
-    enable = true
+    # 是否在文章页脚显示 GoatCounter 浏览量 (仅在设置了 goatCounter.code 时有效), 默认不设置
+    enable = false
     # Google Analytics
     [params.analytics.google]
       id = ""
-      # {{< version 0.3.1 deleted >}} 是否匿名化用户 IP
-      anonymizeIP = true
       # {{< version 0.3.1 >}} 是否遵循浏览器的 “Do Not Track” 设置
       respectDoNotTrack = false
     # Fathom Analytics
@@ -802,7 +801,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
   # {{< version 0.2.7 >}} Cookie 许可配置
   [params.cookieconsent]
-    enable = true
+    enable = false
     # 用于 Cookie 许可横幅的文本字符串
     [params.cookieconsent.content]
       message = ""
@@ -811,12 +810,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
   # {{< version 0.2.7 changed >}} 第三方库文件的 CDN 设置
   [params.cdn]
-    # CDN 数据文件名称, 默认不启用
+    # CDN 数据文件名称, 默认是 "jsdelivr.yml", 设置为 "" 时使用主题自带的本地文件
     # ["jsdelivr.yml"]
     # 位于 "themes/LoveIt/assets/data/cdn/" 目录
     # 可以在你的项目下相同路径存放你自己的数据文件:
     # "assets/data/cdn/"
-    data = ""
+    data = "jsdelivr.yml"
 
   # {{< version 0.2.8 >}} 兼容性设置
   [params.compatibility]
@@ -914,13 +913,15 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 ```toml
 [params.cdn]
-  # CDN 数据文件名称, 默认不启用
+  # CDN 数据文件名称, 默认是 "jsdelivr.yml", 设置为 "" 时使用主题自带的本地文件
   # ["jsdelivr.yml"]
-  data = ""
-````
+  data = "jsdelivr.yml"
+```
 
+CDN 默认启用, 使用 `jsdelivr.yml`. 将 `data` 设置为 `""` 可改用主题自带的库文件.
 默认的 CDN 数据文件位于 `themes/LoveIt/assets/data/cdn/` 目录.
 可以在你的项目下相同路径存放你自己的数据文件: `assets/data/cdn/`.
+如果 `data` 指定的文件不存在, 构建时会输出警告, 并使用主题自带的本地文件.
 {{< /admonition >}}
 
 {{< admonition tip "关于社交链接配置的技巧" >}}
@@ -950,7 +951,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     title = "Mastodon"
 ```
 
-所有支持的社交链接的默认数据位于 `themes/LoveIt/assets/data/social.yaml`.
+所有支持的社交链接的默认数据位于 `themes/LoveIt/assets/data/social.yml`.
 你可以参考它来配置你的社交链接.
 {{< /admonition >}}
 
@@ -969,7 +970,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 放在 `/static` 目录. 利用 [https://realfavicongenerator.net/](https://realfavicongenerator.net/) 可以很容易地生成这些文件.
 
-可以自定义 `browserconfig.xml` 和 `site.webmanifest` 文件来设置 theme-color 和 background-color.
+主题会从站点根目录引用 `site.webmanifest` 和 `safari-pinned-tab.svg`, 可以自定义 `site.webmanifest` 来设置网页应用安装后的主题色和背景色.
+`theme-color` 和 `msapplication-TileColor` meta 标签以及 Safari 图标颜色分别来自 `[params.app]` 中的 `themeColor`, `tileColor` 和 `iconColor`.
+主题不会引用 `browserconfig.xml`, 因此不需要它.
 
 ### 3.3 自定义样式 {#style-customization}
 
@@ -1003,8 +1006,6 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 ### 4.1 兼容性 {#language-compatibility}
 
-{{< version 0.2.10 changed >}}
-
 | 语言                       | Hugo 代码 | HTML `lang` 属性 |        主题文档         |      Lunr.js 支持       |
 |:---------------------------|:---------:|:----------------:|:-----------------------:|:-----------------------:|
 | 英语                       |   `en`    |       `en`       | :(far fa-check-square): | :(far fa-check-square): |
@@ -1016,21 +1017,23 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 | 意大利语                   |   `it`    |       `it`       |    :(far fa-square):    | :(far fa-check-square): |
 | 西班牙语                   |   `es`    |       `es`       |    :(far fa-square):    | :(far fa-check-square): |
 | 德语                       |   `de`    |       `de`       |    :(far fa-square):    | :(far fa-check-square): |
-| 塞尔维亚语                 |   `pl`    |       `pl`       |    :(far fa-square):    |    :(far fa-square):    |
+| 塞尔维亚语                 |   `sr`    |       `sr`       |    :(far fa-square):    |    :(far fa-square):    |
 | 俄语                       |   `ru`    |       `ru`       |    :(far fa-square):    | :(far fa-check-square): |
 | 罗马尼亚语                 |   `ro`    |       `ro`       |    :(far fa-square):    | :(far fa-check-square): |
 | 越南语                     |   `vi`    |       `vi`       |    :(far fa-square):    | :(far fa-check-square): |
-| 阿拉伯语                   |   `ar`    |       `ar`       |    :(far fa-square):    | :(far fa-check-square): |
+| 阿拉伯语                   |   `ar`    |       `ar`       |    :(far fa-square):    |    :(far fa-square):    |
 | 加泰罗尼亚语               |   `ca`    |       `ca`       |    :(far fa-square):    |    :(far fa-square):    |
 | 泰语                       |   `th`    |       `th`       |    :(far fa-square):    | :(far fa-check-square): |
 | 泰卢固语                   |   `te`    |       `te`       |    :(far fa-square):    |    :(far fa-square):    |
 | 印尼语                     |   `id`    |       `id`       |    :(far fa-square):    |    :(far fa-square):    |
-| 土耳其语                   |   `tr`    |       `tr`       |    :(far fa-square):    | :(far fa-check-square): |
+| 土耳其语                   |   `tr`    |       `tr`       |    :(far fa-square):    |    :(far fa-square):    |
 | 韩语                       |   `ko`    |       `ko`       |    :(far fa-square):    |    :(far fa-square):    |
 | 印地语                     |   `hi`    |       `hi`       |    :(far fa-square):    |    :(far fa-square):    |
-| 荷兰语                     |   `nl`    |       `nl`       |    :(far fa-square):    | :(far fa-check-square): |
+| 荷兰语                     |   `nl`    |       `nl`       |    :(far fa-square):    |    :(far fa-square):    |
 | 孟加拉语                   |   `bn`    |       `bn`       |    :(far fa-square):    |    :(far fa-square):    |
 | 日语 {{< version 0.3.1 >}} |   `ja`    |       `ja`       |    :(far fa-square):    | :(far fa-check-square): |
+| 瑞典语 {{< version 0.3.1 >}} |   `sv`    |       `sv`       |    :(far fa-square):    |    :(far fa-square):    |
+| 乌克兰语 {{< version 0.3.0 >}} |   `uk`    |       `uk`       |    :(far fa-square):    |    :(far fa-square):    |
 
 ### 4.2 基本配置
 
@@ -1184,7 +1187,7 @@ defaultContentLanguage = "zh-cn"
 
 ```toml
 [params.search]
-  enable = true
+  enable = false
   # {{< version 0.4.0 changed >}} 搜索引擎的类型 ["lunr", "algolia", "fuse", "pagefind"]
   type = "lunr"
   # 文章内容最长索引长度
@@ -1194,7 +1197,7 @@ defaultContentLanguage = "zh-cn"
   # {{< version 0.2.1 >}} 最大结果数目
   maxResultLength = 10
   # {{< version 0.2.3 >}} 结果内容片段长度
-  snippetLength = 50
+  snippetLength = 30
   # {{< version 0.2.1 >}} 搜索结果中高亮部分的 HTML 标签
   highlightTag = "em"
   # {{< version 0.2.4 >}} 是否在搜索索引中使用基于 baseURL 的绝对路径

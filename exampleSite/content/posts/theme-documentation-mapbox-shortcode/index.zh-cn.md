@@ -32,6 +32,10 @@ mapbox:
 
 **Mapbox GL JS** 是一个 JavaScript 库，它使用 WebGL, 以 [vector tiles](https://docs.mapbox.com/help/glossary/vector-tiles/) 和 [Mapbox styles](https://docs.mapbox.com/mapbox-gl-js/style-spec/) 为来源, 将它们渲染成互动式地图.
 
+{{< admonition note >}}
+加载 Mapbox 地图需要 access token, 请在[网站配置](../theme-documentation-basics#site-configuration)的 `[params.page.mapbox]` 中通过 `accessToken` 设置. Mapbox GL JS v3 还要求浏览器支持 WebGL 2; 不支持时会跳过地图, 并在浏览器控制台中输出警告.
+{{< /admonition >}}
+
 `mapbox` shortcode 有以下命名参数来使用 Mapbox GL JS:
 
 * **lng** *[必需]* (**第一个**位置参数)
@@ -60,19 +64,19 @@ mapbox:
 
 * **navigation** *[可选]*
 
-    是否添加 [NavigationControl](https://docs.mapbox.com/mapbox-gl-js/api#navigationcontrol), 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
+    是否保留 [NavigationControl](https://docs.mapbox.com/mapbox-gl-js/api#navigationcontrol). 仅当[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中启用了该控件时才会添加; 将此参数设置为 `false` 会在当前地图中移除该控件, 但设置为 `true` 无法启用在那里被禁用的控件.
 
 * **geolocate** *[可选]*
 
-    是否添加 [GeolocateControl](https://docs.mapbox.com/mapbox-gl-js/api#geolocatecontrol), 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
+    是否保留 [GeolocateControl](https://docs.mapbox.com/mapbox-gl-js/api#geolocatecontrol). 仅当[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中启用了该控件时才会添加; 将此参数设置为 `false` 会在当前地图中移除该控件, 但设置为 `true` 无法启用在那里被禁用的控件.
 
 * **scale** *[可选]*
 
-    是否添加 [ScaleControl](https://docs.mapbox.com/mapbox-gl-js/api#scalecontrol), 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
+    是否保留 [ScaleControl](https://docs.mapbox.com/mapbox-gl-js/api#scalecontrol). 仅当[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中启用了该控件时才会添加; 将此参数设置为 `false` 会在当前地图中移除该控件, 但设置为 `true` 无法启用在那里被禁用的控件.
 
 * **fullscreen** *[可选]*
 
-   是否添加 [FullscreenControl](https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol), 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
+    是否保留 [FullscreenControl](https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol). 仅当[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中启用了该控件时才会添加; 将此参数设置为 `false` 会在当前地图中移除该控件, 但设置为 `true` 无法启用在那里被禁用的控件.
 
 * **width** *[可选]*
 

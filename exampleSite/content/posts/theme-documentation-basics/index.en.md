@@ -90,7 +90,7 @@ The following is a basic configuration for the LoveIt theme:
 ```toml
 baseURL = "http://example.org/"
 
-# Change the default theme to be use when building the site with Hugo
+# Change the default theme to be used when building the site with Hugo
 theme = "LoveIt"
 
 # website title
@@ -174,7 +174,7 @@ When you run `hugo serve`, when the contents of the files change, the page autom
 {{< /admonition >}}
 
 {{< admonition >}}
-Since the theme use `.Scratch` in Hugo to implement some features,
+Since the theme uses `.Scratch` in Hugo to implement some features,
 it is highly recommended that you add `--disableFastRender` parameter to `hugo server` command for the live preview of the page you are editing.
 
 ```bash
@@ -209,7 +209,7 @@ Please open the code block below to view the complete sample configuration :(far
 ```toml
 baseURL = "http://example.org/"
 
-# Change the default theme to be use when building the site with Hugo
+# Change the default theme to be used when building the site with Hugo
 theme = "LoveIt"
 
 # website title
@@ -231,9 +231,6 @@ enableRobotsTXT = true
 enableGitInfo = true
 # whether to use emoji code
 enableEmoji = true
-
-# ignore some build errors
-ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 # Pagination config
 [pagination]
@@ -286,7 +283,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # website description for RSS, SEO, Open Graph and Twitter Cards
   description = "This is my cool site"
   # website images for Open Graph and Twitter Cards
-  images = ["/logo.png"]
+  images = []
 
 # Author config
   [params.author]
@@ -305,7 +302,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # URL of the LOGO
       logo = ""
       # title name
-      name = ""
+      name = "My cool site"
       # you can add extra information before the name (HTML format is supported), such as icons
       pre = ""
       # you can add extra information after the name (HTML format is supported), such as icons
@@ -325,11 +322,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # {{< version 0.2.0 >}} whether to show the author
     author = true
     # Site creation time
-    since = 2019
+    since = 2022
     # ICP info only in China (HTML format is supported)
     icp = ""
     # license info (HTML format is supported)
-    license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+    license = ""
 
   # {{< version 0.2.0 >}} Section (all posts) page config
   [params.section]
@@ -361,12 +358,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     themeColor = "#ffffff"
     # Safari mask icon color
     iconColor = "#5bbad5"
-    # Windows v8-10 tile color
+    # Windows v8-11 tile color
     tileColor = "#da532c"
 
   # {{< version 0.2.0 >}} Search config
   [params.search]
-    enable = true
+    enable = false
     # {{< version 0.4.0 changed >}} type of search engine ["lunr", "algolia", "fuse", "pagefind"]
     type = "lunr"
     # max index length of the chunked content
@@ -409,11 +406,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # Gravatar Email for preferred avatar in home page
       gravatarEmail = ""
       # URL of avatar shown in home page
-      avatarURL = "/images/avatar.png"
+      avatarURL = ""
       # {{< version 0.2.7 changed >}} title shown in home page (HTML format is supported)
       title = ""
       # subtitle shown in home page (HTML format is supported)
-      subtitle = "This is My New Hugo Site"
+      subtitle = "This is my cool site"
       # whether to use typeit animation for subtitle
       typeit = true
       # {{< version 0.4.0 >}} extra text shown below the subtitle, such as a quote or a short summary (HTML format is supported)
@@ -429,19 +426,16 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       enable = true
       # special amount of posts in each home posts page
       paginate = 6
-      # {{< version 0.2.0 deleted >}} replaced with hiddenFromHomePage in params.page
-      # default behavior when you don't set "hiddenFromHomePage" in front matter
-      defaultHiddenFromHomePage = false
 
   # Social config about the author
   [params.social]
-    GitHub = "xxxx"
+    GitHub = ""
     Linkedin = ""
-    X = "xxxx" # {{< version 0.3.1 >}}
+    X = "" # {{< version 0.3.1 >}}
     Twitter = "" # {{< version 0.3.1 deprecated >}}
-    Instagram = "xxxx"
-    Facebook = "xxxx"
-    Telegram = "xxxx"
+    Instagram = ""
+    Facebook = ""
+    Telegram = ""
     Medium = ""
     Gitlab = ""
     Youtubelegacy = ""
@@ -515,10 +509,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     HuggingFace = "" # {{< version 0.3.1 >}}
     Threads = "" # {{< version 0.3.1 >}}
     LeetCode = "" # {{< version 0.3.1 >}}
+    LeetCodeCN = ""
     Bluesky = "" # {{< version 0.3.1 >}}
+    Email = ""
     Phone = ""
-    Email = "xxxx@xxxx.com"
-    RSS = true # {{< version 0.2.0 >}}
+    RSS = "" # {{< version 0.2.0 >}}
 
   # {{< version 0.2.0 changed >}} Page global config
   [params.page]
@@ -550,7 +545,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       auto = true
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} mathematical formulas
     [params.page.math]
-      enable = true
+      enable = false
       # {{< version 0.2.11 changed >}} default inline delimiter is $ ... $ and \( ... \)
       inlineLeftDelimiter = ""
       inlineRightDelimiter = ""
@@ -567,6 +562,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       copy = true
       # the maximum number of lines of displayed code by default
       maxShownLines = 50
+    [params.page.code.render]
+      # whether to render goat diagrams in code blocks
+      goat = true
+      # whether to render mermaid diagrams in code blocks
+      mermaid = true
     # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config
     [params.page.mapbox]
       # access token of Mapbox GL JS
@@ -596,6 +596,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       Facebook = true
       Linkedin = false
       Whatsapp = false
+      Viber = false
       Pinterest = false
       Tumblr = false
       HackerNews = true
@@ -773,13 +774,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
   # {{< version 0.2.0 >}} Analytics config
   [params.analytics]
-    # {{< version 0.3.1 deleted >}}
-    enable = true
+    # whether to show the GoatCounter page view counter in the post footer (only with goatCounter.code set), not set by default
+    enable = false
     # Google Analytics
     [params.analytics.google]
       id = ""
-      # {{< version 0.3.1 deleted >}} whether to anonymize IP
-      anonymizeIP = true
       # {{< version 0.3.1 >}} whether to respect the browser’s “do not track” setting
       respectDoNotTrack = false
     # Fathom Analytics
@@ -800,7 +799,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
   # {{< version 0.2.7 >}} Cookie consent config
   [params.cookieconsent]
-    enable = true
+    enable = false
     # text strings used for Cookie consent banner
     [params.cookieconsent.content]
       message = ""
@@ -809,12 +808,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
   # {{< version 0.2.7 changed >}} CDN config for third-party library files
   [params.cdn]
-    # CDN data file name, disabled by default
+    # CDN data file name, default is "jsdelivr.yml", set to "" to serve the bundled local files
     # ["jsdelivr.yml"]
     # located in "themes/LoveIt/assets/data/cdn/" directory
     # you can store your own data files in the same path under your project:
     # "assets/data/cdn/"
-    data = ""
+    data = "jsdelivr.yml"
 
   # {{< version 0.2.8 >}} Compatibility config
   [params.compatibility]
@@ -911,13 +910,15 @@ You could enable these features with `hugo serve -e production`.
 
 ```toml
 [params.cdn]
-  # CDN data file name, disabled by default
+  # CDN data file name, default is "jsdelivr.yml", set to "" to serve the bundled local files
   # ["jsdelivr.yml"]
-  data = ""
-````
+  data = "jsdelivr.yml"
+```
 
-The default CDN data file is located in `themes/LoveIt/assets/data/cdn/` directory.
+The CDN is enabled by default and uses `jsdelivr.yml`. Set `data = ""` to serve the library files bundled with the theme instead.
+The default CDN data files are located in `themes/LoveIt/assets/data/cdn/` directory.
 You can store your own data file in the same path under your project: `assets/data/cdn/`.
+If `data` names a file that does not exist, the build prints a warning and the bundled local files are used.
 {{< /admonition >}}
 
 {{< admonition tip "Tips about social Configuration" >}}
@@ -947,7 +948,7 @@ Or You can set more options through a dict:
     title = "Mastodon"
 ```
 
-The default data of all supported social links is located in `themes/LoveIt/assets/data/social.yaml`,
+The default data of all supported social links is located in `themes/LoveIt/assets/data/social.yml`,
 which is you can refer to.
 {{< /admonition >}}
 
@@ -966,7 +967,9 @@ It is recommended to put your own favicons:
 
 into `/static`. They’re easily created via [https://realfavicongenerator.net/](https://realfavicongenerator.net/).
 
-Customize `browserconfig.xml` and `site.webmanifest` to set theme-color and background-color.
+The theme links `site.webmanifest` and `safari-pinned-tab.svg` from the site root, so customize `site.webmanifest` to set the theme color and background color of the installed web app.
+The `theme-color` and `msapplication-TileColor` meta tags and the Safari mask icon color come from `themeColor`, `tileColor` and `iconColor` in `[params.app]`.
+The theme does not reference `browserconfig.xml`, so it is not needed.
 
 ### 3.3 Style Customization {#style-customization}
 
@@ -1011,22 +1014,23 @@ In `assets/css/_custom.scss`, you can add some css style code to customize the s
 | Italian                        |   `it`    |         `it`          |    :(far fa-square):    | :(far fa-check-square): |
 | Spanish                        |   `es`    |         `es`          |    :(far fa-square):    | :(far fa-check-square): |
 | German                         |   `de`    |         `de`          |    :(far fa-square):    | :(far fa-check-square): |
-| German                         |   `de`    |         `de`          |    :(far fa-square):    | :(far fa-check-square): |
 | Serbian                        |   `sr`    |         `sr`          |    :(far fa-square):    |    :(far fa-square):    |
 | Russian                        |   `ru`    |         `ru`          |    :(far fa-square):    | :(far fa-check-square): |
 | Romanian                       |   `ro`    |         `ro`          |    :(far fa-square):    | :(far fa-check-square): |
 | Vietnamese                     |   `vi`    |         `vi`          |    :(far fa-square):    | :(far fa-check-square): |
-| Arabic                         |   `ar`    |         `ar`          |    :(far fa-square):    | :(far fa-check-square): |
+| Arabic                         |   `ar`    |         `ar`          |    :(far fa-square):    |    :(far fa-square):    |
 | Catalan                        |   `ca`    |         `ca`          |    :(far fa-square):    |    :(far fa-square):    |
 | Thai                           |   `th`    |         `th`          |    :(far fa-square):    | :(far fa-check-square): |
 | Telugu                         |   `te`    |         `te`          |    :(far fa-square):    |    :(far fa-square):    |
 | Indonesian                     |   `id`    |         `id`          |    :(far fa-square):    |    :(far fa-square):    |
-| Turkish                        |   `tr`    |         `tr`          |    :(far fa-square):    | :(far fa-check-square): |
+| Turkish                        |   `tr`    |         `tr`          |    :(far fa-square):    |    :(far fa-square):    |
 | Korean                         |   `ko`    |         `ko`          |    :(far fa-square):    |    :(far fa-square):    |
 | Hindi                          |   `hi`    |         `hi`          |    :(far fa-square):    |    :(far fa-square):    |
-| Dutch                          |   `nl`    |         `nl`          |    :(far fa-square):    | :(far fa-check-square): |
-| Bengali                        |   `hi`    |         `hi`          |    :(far fa-square):    |    :(far fa-square):    |
+| Dutch                          |   `nl`    |         `nl`          |    :(far fa-square):    |    :(far fa-square):    |
+| Bengali                        |   `bn`    |         `bn`          |    :(far fa-square):    |    :(far fa-square):    |
 | Japanese {{< version 0.3.1 >}} |   `ja`    |         `ja`          |    :(far fa-square):    | :(far fa-check-square): |
+| Swedish {{< version 0.3.1 >}}  |   `sv`    |         `sv`          |    :(far fa-square):    |    :(far fa-square):    |
+| Ukrainian {{< version 0.3.0 >}} |   `uk`    |         `uk`          |    :(far fa-square):    |    :(far fa-square):    |
 
 ### 4.2 Basic Configuration
 
@@ -1179,7 +1183,7 @@ Here is the search configuration in your [site configuration](#site-configuratio
 
 ```toml
 [params.search]
-  enable = true
+  enable = false
   # {{< version 0.4.0 changed >}} type of search engine ["lunr", "algolia", "fuse", "pagefind"]
   type = "lunr"
   # max index length of the chunked content

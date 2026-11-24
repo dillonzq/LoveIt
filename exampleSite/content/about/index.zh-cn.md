@@ -13,7 +13,7 @@ math:
 
 {{< style "img { height: 1.25rem; }" >}}
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
-[![Hugo](https://img.shields.io/badge/Hugo-%5E0.128.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%5E0.146.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/dillonzq/LoveIt?style=social)](https://github.com/dillonzq/LoveIt)
 [![GitHub forks](https://img.shields.io/github/forks/dillonzq/LoveIt?style=social)](https://github.com/dillonzq/LoveIt/fork)
@@ -35,7 +35,7 @@ math:
 * :(far fa-chart-bar): 支持 **[Fathom Analytics](https://usefathom.com/)**
 * :(fas fa-chart-column): 支持 **[Plausible Analytics](https://plausible.io/)**
 * :(fab fa-yandex-international): 支持 **[Yandex Metrica](https://metrica.yandex.com/)**
-* :(fas fa-sitemap): 支持搜索引擎的**网站验证** (Google, Bind, Yandex 和 Baidu)
+* :(fas fa-sitemap): 支持搜索引擎的**网站验证** (Google, Bing, Yandex 和 Baidu)
 * :(fas fa-tachometer-alt): 支持所有第三方库的 **CDN**
 * :(fas fa-cloud-download-alt): 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为**懒加载**
 
@@ -47,21 +47,23 @@ math:
 * :(fas fa-ellipsis-h): 支持**分页**
 * :(far fa-list-alt): 易用和自动展开的**文章目录**
 * :(fas fa-language): 支持**多语言**和国际化
+* :(fas fa-text-width): 支持**从右到左**书写的语言
 * :(fab fa-css3-alt): 美观的 **CSS 动画**
+* :(fas fa-universal-access): **无障碍**：跳转链接、减少动画和语义化控件
 
-#### 社交和评论系统
+### 社交和评论系统
 
 * :(far fa-user): 支持 **[Gravatar](https://gravatar.com)** 头像
 * :(fas fa-user-circle): 支持本地**头像**
 * :(far fa-id-card): 支持多达 **84** 种社交链接
-* :(fas fa-share-square): 支持多达 **27** 种网站分享
+* :(fas fa-share-square): 支持多达 **30** 种网站分享
 * :(far fa-comment): 支持 **[Disqus](https://disqus.com)** 评论系统
 * :(far fa-comment-dots): 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
 * :(far fa-comment-alt): 支持 **[Valine](https://valine.js.org/)** 评论系统
 * :(far fa-comments): 支持 **[Facebook comments](https://developers.facebook.com/docs/plugins/comments/)** 评论系统
 * :(fas fa-comment): 支持 **[Telegram comments](https://comments.app/)** 评论系统
 * :(fas fa-comment-dots): 支持 **[Commento](https://commento.io/)** 评论系统
-* :(far fa-comment-alt): 支持 **[utterances](https://utteranc.es/)** 评论系统
+* :(fas fa-comment-alt): 支持 **[utterances](https://utteranc.es/)** 评论系统
 * :(fas fa-comments): 支持 **[giscus](https://giscus.app/)** 评论系统
 * :(far fa-comment-dots): 支持 **[Waline](https://waline.js.org/)** 评论系统
 

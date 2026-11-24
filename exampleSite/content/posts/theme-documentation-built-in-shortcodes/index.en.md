@@ -26,7 +26,7 @@ Hugo uses Markdown for its simple content format. However, there are a lot of th
 
 But this happens to be a bad idea. Everyone uses Markdown because it’s pure and simple to read even non-rendered. You should avoid HTML to keep it as simple as possible.
 
-To avoid this limitations, Hugo created [shortcodes](https://gohugo.io/extras/shortcodes/).
+To avoid this limitation, Hugo created [shortcodes](https://gohugo.io/content-management/shortcodes/).
 A shortcode is a simple snippet that can generate reasonable HTML code and conforms to Markdown's design philosophy.
 
 Hugo ships with a set of predefined shortcodes that represent very common usage. These shortcodes are provided for author convenience and to keep your markdown content clean.
@@ -74,6 +74,10 @@ The HTML looks like this:
 
 [Documentation of `gist`](https://gohugo.io/shortcodes/gist/)
 
+{{< admonition note >}}
+The theme overrides this shortcode (`layouts/_shortcodes/gist.html`). It only accepts positional parameters: the GitHub user name, the gist ID and an optional file name, in this order. Named parameters are not supported.
+{{< /admonition >}}
+
 Example `gist` input:
 
 ```markdown
@@ -87,12 +91,16 @@ The rendered output looks like this:
 The HTML looks like this:
 
 ```html
-<script type="application/javascript" src="https://gist.github.com/spf13/7896402.js"></script>
+<script src="https://gist.github.com/spf13/7896402.js"></script>
 ```
 
 ## 3 highlight
 
 [Documentation of `highlight`](https://gohugo.io/shortcodes/highlight/)
+
+{{< admonition note >}}
+The theme overrides this shortcode (`layouts/_shortcodes/highlight.html`). It only accepts positional parameters: the language, and optionally one options string as the second parameter, such as `"lineNos=false,lineNoStart=5"`. Named parameters are not supported, and the theme's code block rendering is used instead of Hugo's.
+{{< /admonition >}}
 
 Example `highlight` input:
 
@@ -194,6 +202,6 @@ The rendered output looks like this:
 
 [Documentation of `ref`](https://gohugo.io/shortcodes/ref/)
 
-## 10  relref
+## 10 relref
 
 [Documentation of `relref`](https://gohugo.io/shortcodes/relref/)

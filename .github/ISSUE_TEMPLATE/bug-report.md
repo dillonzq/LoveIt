@@ -24,11 +24,12 @@ If applicable, add screenshots to help explain your problem.
 ### Build Environment 构建环境
 
 - OS: [e.g. Windows 11, macOS, Ubuntu]
-- Theme version/commit [e.g. 0.2.0, 2ccba79]
-- Hugo version [e.g. 0.69.0]
+- Theme version/commit [e.g. 0.4.0, 2ccba79]
+- Hugo version and edition, the output of `hugo version` [e.g. hugo v0.170.1 ... linux/amd64]
+- Dart Sass version, the output of `sass --version` [e.g. 1.108.2]
 
-Please try to use Hugo **extended** version before opening the issue.
-请在创建 issue 之前先尝试使用 Hugo **extended** 版本构建.
+LoveIt requires Hugo 0.146.0 or later and Dart Sass. Please check both before opening the issue.
+LoveIt 需要 Hugo 0.146.0 及以上版本和 Dart Sass, 请在创建 issue 之前先确认.
 
 ### Preview Environment 预览环境
 

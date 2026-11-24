@@ -22,7 +22,7 @@ The `music` shortcode embeds a responsive music player based on [APlayer](https:
 
 <!--more-->
 
-There are three ways to use it the `music` shortcode.
+There are three ways to use the `music` shortcode.
 
 ## 1 Custom Music URL {#custom-music-url}
 
@@ -30,7 +30,7 @@ There are three ways to use it the `music` shortcode.
 
 The `music` shortcode has the following named parameters by custom music URL:
 
-* **server** *[required]*
+* **url** *[required]*
 
     URL of the custom music.
 
@@ -42,7 +42,7 @@ The `music` shortcode has the following named parameters by custom music URL:
 
     Artist of the custom music.
 
-* **cover** *[required]*
+* **cover** *[optional]*
 
     URL of the custom music cover.
 
@@ -111,7 +111,7 @@ The rendered output looks like this:
 
 ## 4 Other Parameters {#other-parameters}
 
-The `music` shortcode has other named parameters applying to the above three ways:
+The `music` shortcode has other named parameters. They can only be used as named parameters (not positional ones), and the ones below apply to all three ways (`api` does not apply to the custom music URL):
 
 * **api** *[optional]*
 
@@ -141,7 +141,7 @@ The `music` shortcode has other named parameters applying to the above three way
 
     Whether to pause other players when this player starts playing, default value is `true`.
 
-The `music` shortcode has the following named parameters only applying to the type of music list:
+The `music` shortcode has the following named parameters only applying to the music platform URL automatic identification and the custom music platform (not to the custom music URL):
 
 * **loop** *[optional]*
 

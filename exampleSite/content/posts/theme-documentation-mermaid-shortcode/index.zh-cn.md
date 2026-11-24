@@ -20,13 +20,22 @@ hiddenFromHomePage: true
 
 {{< version 0.2.11 changed >}}
 
-`mermaid` shortcode 使用 [Mermaid](https://mermaidjs.github.io/) 库提供绘制图表和流程图的功能.
+`mermaid` shortcode 使用 [Mermaid](https://mermaid.js.org/) 库提供绘制图表和流程图的功能.
 
 <!--more-->
 
-[mermaid](https://mermaidjs.github.io/) 是一个可以帮助你在文章中绘制图表和流程图的库, 类似 Markdown 的语法.
+[mermaid](https://mermaid.js.org/) 是一个可以帮助你在文章中绘制图表和流程图的库, 类似 Markdown 的语法.
 
 只需将你的 mermaid 代码插入 `mermaid` shortcode 中即可.
+
+语言为 `mermaid` 的围栏代码块也会被渲染为图表. 该功能由[网站配置](../theme-documentation-basics#site-configuration)中的 `[params.page.code.render] mermaid` 控制 (默认开启), 也可以在[前置参数](../theme-documentation-content#front-matter)中通过 `code.render.mermaid` 针对单篇文章覆盖.
+
+````markdown
+```mermaid
+graph LR;
+    A[Hard edge] -->|Link text| B(Round edge)
+```
+````
 
 ## 流程图 {#flowchart}
 
@@ -296,7 +305,7 @@ journey
       Sit down: 5: Me
 {{< /mermaid >}}
 
-## 饼图 {#pie}
+## 饼图 {#pie-chart}
 
 一个 **饼图** `mermaid` 示例:
 
@@ -318,9 +327,9 @@ pie
     "Rats" : 15
 {{< /mermaid >}}
 
-## 依赖图 {#requirement-diagram}
+## 需求图 {#requirement-diagram}
 
-一个 **依赖图** `mermaid` 示例:
+一个 **需求图** `mermaid` 示例:
 
 ```markdown
 {{</* mermaid */>}}
