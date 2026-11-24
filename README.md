@@ -187,6 +187,8 @@ LoveIt supports the following languages:
 
 All feedback is welcome! Head over to the [issue tracker](https://github.com/dillonzq/LoveIt/issues).
 
+Before opening a pull request, read the [contributing guide](CONTRIBUTING.md). Report security vulnerabilities privately as described in the [security policy](SECURITY.md). Changes between versions are listed in the [changelog](CHANGELOG.md).
+
 ## License
 
 LoveIt is licensed under the **MIT** license. Check the [LICENSE file](https://github.com/dillonzq/LoveIt/blob/master/LICENSE) for details.

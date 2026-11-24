@@ -182,6 +182,8 @@ LoveIt 支持下列语言:
 
 所有的反馈都是欢迎的！详见 [issue tracker](https://github.com/dillonzq/LoveIt/issues)。
 
+提交 PR 之前请先阅读[贡献指南](CONTRIBUTING.md)。安全漏洞请按照[安全策略](SECURITY.md)私下报告。各版本的变更记录见[更新日志](CHANGELOG.md)。
+
 ## 许可协议
 
 LoveIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)。
