@@ -186,6 +186,12 @@ LoveIt 支持下列语言:
 
 LoveIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件](https://github.com/dillonzq/LoveIt/blob/master/LICENSE)。
 
+MIT 许可协议只适用于主题自身的代码。主题打包的第三方库各自保留原有的许可证，详见 [`assets/lib/VERSION.md`](https://github.com/dillonzq/LoveIt/blob/master/assets/lib/VERSION.md)。其中部分库不是宽松许可证：
+
+* [TypeIt](https://typeitjs.com/) 和 [lightGallery](https://github.com/sachinchoolur/lightgallery) 采用 GPL-3.0 与付费商业许可证的双许可。TypeIt 用于主页副标题的打字动画，默认开启；lightGallery 默认关闭。无法满足 GPL-3.0 要求的商业站点，应购买商业许可证或关闭这些功能。关闭功能只会让生成的站点不包含该库，主题源码中仍然有它，再分发主题源码时仍须遵守该库的许可证。
+* [Valine](https://valine.js.org/) 采用 GPL-2.0。
+* [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) 不是开源软件，使用时须遵守 Mapbox 服务条款。
+
 ## 特别感谢
 
 LoveIt 主题中用到了以下项目，感谢它们的作者：
