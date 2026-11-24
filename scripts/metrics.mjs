@@ -40,7 +40,7 @@ function run(command, args, options = {}) {
     child.stdout.on('data', chunk => { output += chunk; process.stdout.write(chunk); });
     child.stderr.on('data', chunk => { output += chunk; process.stderr.write(chunk); });
     child.once('error', reject);
-    child.once('exit', code => code === 0 ? resolve(output) : reject(new Error(`${path.basename(command)} ${args[0]} exited with ${code}`)));
+    child.once('close', code => code === 0 ? resolve(output) : reject(new Error(`${path.basename(args[0] || command)} ${args[1] || ''} exited with ${code}`)));
   });
 }
 
@@ -65,9 +65,10 @@ async function lighthouse() {
   const outputDir = path.join(root, lighthouseConfig.ci.upload.outputDir);
   const urls = pages.filter(page => page.lighthouse).map(page => `--collect.url=${origin}${page.path}`);
   const env = { ...process.env, CHROME_PATH: process.env.CHROME_PATH || chromium.executablePath() };
-  const lhci = path.join(root, 'node_modules/.bin/lhci');
-  await run(lhci, ['collect', '--config=lighthouserc.json', ...urls], { env });
-  await run(lhci, ['upload', '--config=lighthouserc.json'], { env });
+  // Run the CLI's entry point through Node: Windows cannot spawn the .bin shim without a shell.
+  const lhci = path.join(root, 'node_modules/@lhci/cli/src/cli.js');
+  await run(process.execPath, [lhci, 'collect', '--config=lighthouserc.json', ...urls], { env });
+  await run(process.execPath, [lhci, 'upload', '--config=lighthouserc.json'], { env });
   const manifest = JSON.parse(readFileSync(path.join(outputDir, 'manifest.json'), 'utf8'));
   return pages.filter(page => page.lighthouse).map(page => {
     const entry = manifest.find(item => item.isRepresentativeRun && new URL(item.url).pathname === page.path);
