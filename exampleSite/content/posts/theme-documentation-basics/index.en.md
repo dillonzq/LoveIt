@@ -1183,7 +1183,7 @@ Here is the search configuration in your [site configuration](#site-configuratio
 
 ```toml
 [params.search]
-  enable = false
+  enable = true
   # {{< version 0.4.0 changed >}} type of search engine ["lunr", "algolia", "fuse", "pagefind"]
   type = "lunr"
   # max index length of the chunked content

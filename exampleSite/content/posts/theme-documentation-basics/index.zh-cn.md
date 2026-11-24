@@ -1187,7 +1187,7 @@ defaultContentLanguage = "zh-cn"
 
 ```toml
 [params.search]
-  enable = false
+  enable = true
   # {{< version 0.4.0 changed >}} 搜索引擎的类型 ["lunr", "algolia", "fuse", "pagefind"]
   type = "lunr"
   # 文章内容最长索引长度
