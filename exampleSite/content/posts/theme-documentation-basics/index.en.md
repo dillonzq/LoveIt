@@ -634,6 +634,7 @@ enableEmoji = true
         # Disqus shortname to use Disqus in posts
         shortname = ""
       # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} comment config
+      # clientSecret is published in any page with Gitalk enabled, see "Notes about comment systems" below
       [params.page.comment.gitalk]
         # {{< version 0.1.1 >}}
         enable = false
@@ -642,6 +643,7 @@ enableEmoji = true
         clientId = ""
         clientSecret = ""
       # {{< link "https://github.com/xCss/Valine" Valine >}} comment config
+      # GPL-2.0-only, stores comments in LeanCloud, see "Notes about comment systems" below
       [params.page.comment.valine]
         enable = false
         appId = ""
@@ -681,7 +683,8 @@ enableEmoji = true
         colorful = true
         dislikes = false
         outlined = false
-      # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} comment config
+      # {{< version 0.2.0 >}} {{< link "https://gitlab.com/commento/commento" "Commento" >}} comment config
+      # the hosted Commento script no longer serves Commento, see "Notes about comment systems" below
       [params.page.comment.commento]
         enable = false
       # {{< version 0.2.5 >}} {{< link "https://utteranc.es/" "utterances" >}} comment config
@@ -903,6 +906,42 @@ Due to limitations in the local `development` environment,
 the **comment system**, **CDN** and **fingerprint** will not be enabled in the `development` environment.
 
 You could enable these features with `hugo serve -e production`.
+{{< /admonition >}}
+
+{{< admonition warning "Notes about comment systems" >}}
+For a new site, [giscus](https://giscus.app/) is recommended.
+It stores comments in GitHub Discussions and does not need any secret in your site.
+The notes below were checked on November 26, 2026.
+
+**Gitalk**: the theme bundles Gitalk 1.8.0, which logs visitors in with a GitHub OAuth App.
+The `clientSecret` you configure is written into each page that renders Gitalk,
+so anyone can read it in the page source.
+When a visitor logs in, Gitalk 1.x also sends the login code and this secret to GitHub
+through a CORS proxy run by a third party (`cors-anywhere.azm.workers.dev`),
+and the theme has no option to change this proxy.
+The [Gitalk repository](https://github.com/gitalk/gitalk) now marks the 1.x line as end-of-life.
+If you keep Gitalk, use an OAuth App that is only used for these comments.
+
+**Commento**: the theme loads the hosted Commento script from `https://cdn.commento.io/js/commento.js`
+and has no option for a self-hosted Commento server.
+Users [reported commento.io down](https://news.ycombinator.com/item?id=46196323) in December 2025,
+and on November 26, 2026 a request for `https://commento.io/` or for the script URL above
+was redirected to an unrelated third-party page (or answered with HTTP 404) instead of serving Commento.
+Do not enable this option, because the browser would load a script from a domain
+that no longer serves Commento.
+The [open source code](https://gitlab.com/commento/commento) has had no commits since February 2021.
+If you run your own Commento server, this option cannot be pointed at it.
+
+**Valine**: Valine is licensed under GPL-2.0-only
+(its package declares the SPDX identifier `GPL-2.0`),
+and when it is enabled the theme loads it from the configured CDN (jsDelivr by default),
+or serves the bundled copy (`assets/lib/valine/Valine.min.js`) when no CDN is used.
+Valine has no server of its own: it stores comments in a [LeanCloud](https://docs.leancloud.cn/) app,
+which is what `appId`, `appKey` and `serverURLs` refer to.
+LeanCloud [stopped new sign-ups and new apps](https://docs.leancloud.cn/en/sdk/announcements/sunset-announcement/)
+on January 12, 2026, and will shut down all public services on January 12, 2027.
+After that, Valine cannot load or save comments, and LeanCloud says it will permanently destroy or anonymize the user data it retains.
+Export your comments before that date and move to another comment system.
 {{< /admonition >}}
 
 {{< admonition tip "Tips about CDN Configuration" >}}

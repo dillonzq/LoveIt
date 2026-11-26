@@ -72,6 +72,13 @@ Hugo 0.146.0 or later and Dart Sass are still required.
   CI; the minimum supported version is unchanged ([#1061]). Development tools,
   GitHub Actions and Dependabot updates are refreshed ([#1078], [#1079],
   [#1089]).
+- The comment system documentation warns that Gitalk 1.x publishes its
+  `clientSecret` in any page with Gitalk enabled and sends it through a
+  third-party CORS proxy, and recommends giscus for new sites. It says that
+  the hosted Commento script the theme loads no longer serves Commento and
+  that the theme cannot use a self-hosted Commento server, and that Valine
+  is licensed under GPL-2.0-only and stores comments in LeanCloud, which
+  shuts down on January 12, 2027. The options themselves are unchanged.
 
 ### Removed
 
