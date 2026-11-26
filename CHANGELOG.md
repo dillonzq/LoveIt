@@ -12,6 +12,8 @@ This file starts at 0.4.0. Older releases are described on the
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-11-27
+
 Hugo 0.146.0 or later and Dart Sass are still required.
 
 ### Added
@@ -126,6 +128,9 @@ Hugo 0.146.0 or later and Dart Sass are still required.
   `og:image:width` and `og:image:height`, and SVG images, which social
   networks cannot show, are skipped. The example site no longer sets
   `params.images` to a missing `/logo.png` ([#1101], [#789]).
+- Valine comment avatars have an empty `alt` attribute, including avatars
+  added by pagination, replies and new comments, since the commenter's name
+  is next to them ([#1096]).
 - An SVG image in `params.page.seo.images` or the publisher logo no longer
   fails the build ([#1086]).
 - `unpkg.yml` pointed at four files that do not exist on unpkg ([#1067]).
@@ -171,7 +176,8 @@ for the full upgrade guide.
 - The Discord server invite social link ([#1037]).
 - Nested shortcodes, TypeIt, utterances and cached page content.
 
-[Unreleased]: https://github.com/dillonzq/LoveIt/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/dillonzq/LoveIt/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/dillonzq/LoveIt/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/dillonzq/LoveIt/compare/v0.3.1...v0.4.0
 
 [#789]: https://github.com/dillonzq/LoveIt/issues/789
@@ -224,5 +230,6 @@ for the full upgrade guide.
 [#1088]: https://github.com/dillonzq/LoveIt/pull/1088
 [#1089]: https://github.com/dillonzq/LoveIt/pull/1089
 [#1095]: https://github.com/dillonzq/LoveIt/pull/1095
+[#1096]: https://github.com/dillonzq/LoveIt/pull/1096
 [#1098]: https://github.com/dillonzq/LoveIt/pull/1098
 [#1101]: https://github.com/dillonzq/LoveIt/pull/1101
