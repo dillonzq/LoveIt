@@ -98,6 +98,11 @@ Hugo 0.146.0 or later and Dart Sass are still required.
   numbers and code block styles ([#1088]).
 - Posts in `content/posts/` with a custom `type` no longer disappear from the
   home page and its RSS feed ([#1087], [#863]).
+- Every translation now defines every English key: the `DEPRECATED` version
+  badge label in 21 languages, the Swedish "Todo" admonition title, the
+  traditional Chinese giscus language and the Waline language for Bengali,
+  Dutch and Ukrainian (English, which Waline uses for languages it does not
+  support). `npm test` fails when a translation misses a key.
 - An SVG image in `params.page.seo.images` or the publisher logo no longer
   fails the build ([#1086]).
 - `unpkg.yml` pointed at four files that do not exist on unpkg ([#1067]).

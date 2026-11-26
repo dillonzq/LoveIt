@@ -217,4 +217,7 @@ other = "تم تعديله"
 
 [deleted]
 other = "حُذف"
+
+[deprecated]
+other = "مُهمَل"
 # === shortcodes/version.html ===

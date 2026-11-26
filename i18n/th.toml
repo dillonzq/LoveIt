@@ -220,4 +220,7 @@ other = "เปลี่ยนแปลง"
 
 [deleted]
 other = "ลบ"
+
+[deprecated]
+other = "เลิกใช้"
 # === shortcodes/version.html ===

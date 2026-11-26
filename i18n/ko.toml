@@ -217,4 +217,7 @@ other = "변경"
 
 [deleted]
 other = "삭제"
+
+[deprecated]
+other = "사용 중단"
 # === shortcodes/version.html ===

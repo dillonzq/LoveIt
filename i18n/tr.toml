@@ -217,4 +217,7 @@ other = "DEĞİŞTİRİLDİ"
 
 [deleted]
 other = "SİLİNDİ"
+
+[deprecated]
+other = "KULLANIM DIŞI"
 # === shortcodes/version.html ===

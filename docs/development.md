@@ -89,10 +89,12 @@ bundle install
 npm run htmlproofer
 ```
 
-`npm test` also checks every `i18n/*.toml` against `i18n/en.toml`: duplicate
-or unknown keys, a missing `other` form and placeholders English does not
-provide fail the run. Keys a language has not translated yet are only reported
-as warnings, because Hugo falls back to the default language for them. Keys
+`npm test` also checks every `i18n/*.toml` against `i18n/en.toml`: duplicate,
+unknown or missing keys, a missing `other` form and placeholders English does
+not provide fail the run. Every language must define every English key, so a
+missing translation cannot silently fall back to the site's default language
+(`defaultContentLanguage`). Where a language has no better value, such as a
+locale code a comment provider does not support, use the English one. Keys
 that only some languages need (`lunrLanguageLib`, `lunrSegmentitLib`) are
 allowed without an English entry.
 

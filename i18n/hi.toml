@@ -217,4 +217,7 @@ other = "बदला हुआ"
 
 [deleted]
 other = "हटाए गए"
+
+[deprecated]
+other = "अप्रचलित"
 # === shortcodes/version.html ===

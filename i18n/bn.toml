@@ -77,6 +77,10 @@ other = "bn_IN"
 
 [giscusLang]
 other = "en"
+
+# Waline has no locale for this language, so it uses English
+[walineLang]
+other = "en"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
@@ -214,4 +218,7 @@ other = "পরিবর্তিত"
 
 [deleted]
 other = "মুছে ফেলা হয়েছে"
+
+[deprecated]
+other = "অপ্রচলিত"
 # === shortcodes/version.html ===

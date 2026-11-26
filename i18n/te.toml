@@ -219,4 +219,7 @@ other = "మార్చబడింది"
 
 [deleted]
 other = "తొలగించిన"
+
+[deprecated]
+other = "కాలం చెల్లినది"
 # === shortcodes/version.html ===
