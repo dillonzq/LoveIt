@@ -78,7 +78,8 @@ Hugo 0.146.0 or later and Dart Sass are still required.
   the hosted Commento script the theme loads no longer serves Commento and
   that the theme cannot use a self-hosted Commento server, and that Valine
   is licensed under GPL-2.0-only and stores comments in LeanCloud, which
-  shuts down on January 12, 2027. The options themselves are unchanged.
+  shuts down on January 12, 2027. The options themselves are unchanged
+  ([#1098]).
 
 ### Removed
 
@@ -201,3 +202,4 @@ for the full upgrade guide.
 [#1087]: https://github.com/dillonzq/LoveIt/pull/1087
 [#1088]: https://github.com/dillonzq/LoveIt/pull/1088
 [#1089]: https://github.com/dillonzq/LoveIt/pull/1089
+[#1098]: https://github.com/dillonzq/LoveIt/pull/1098
