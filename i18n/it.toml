@@ -220,4 +220,7 @@ other = "CAMBIATO"
 
 [deleted]
 other = "CANCELLATO"
+
+[deprecated]
+other = "DEPRECATO"
 # === shortcodes/version.html ===

@@ -217,4 +217,7 @@ other = "BERUBAH"
 
 [deleted]
 other = "DIHAPUS"
+
+[deprecated]
+other = "USANG"
 # === shortcodes/version.html ===

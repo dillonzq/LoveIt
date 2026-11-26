@@ -77,6 +77,10 @@ other = "nl_nl"
 
 [giscusLang]
 other = "nl"
+
+# Waline has no locale for this language, so it uses English
+[walineLang]
+other = "en"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
@@ -214,4 +218,7 @@ other = "VERANDERD"
 
 [deleted]
 other = "VERWIJDERD"
+
+[deprecated]
+other = "VEROUDERD"
 # === shortcodes/version.html ===
