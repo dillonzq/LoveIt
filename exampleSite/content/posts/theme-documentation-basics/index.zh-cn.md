@@ -72,6 +72,20 @@ git init
 git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 ```
 
+{{< admonition warning "从 Git 仓库部署" >}}
+Netlify, Vercel, Cloudflare Pages 和 GitHub Actions 等构建服务从你的网站仓库构建,
+所以主题必须作为子模块 (如上所示的 `git submodule add`) 存在于仓库中.
+如果你用 `git clone` 把主题克隆到网站仓库的 `themes/` 目录中再提交,
+Git 只会记录对这个嵌套仓库的引用, 而不包含它的文件.
+这样网站在你的电脑上可以构建, 在构建服务上却会失败,
+并报告 `template for shortcode "typeit" not found`
+或 `found no layout file for "html" for kind "home"` 之类的错误.
+
+使用 GitHub Actions 时, 还需要检出子模块 (为 `actions/checkout` 设置 `submodules: true`).
+另外, 把构建服务使用的 Hugo 版本 (例如 Netlify 和 Vercel 上的 `HUGO_VERSION` 环境变量)
+设为本主题支持的版本: 旧版本的 Hugo 也会报告同样的 `found no layout file` 警告.
+{{< /admonition >}}
+
 {{< admonition note "主题的兼容性" >}}
 
 | LoveIt 分支或版本  |    支持的 Hugo 版本    |

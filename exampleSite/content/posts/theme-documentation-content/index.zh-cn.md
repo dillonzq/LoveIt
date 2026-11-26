@@ -170,6 +170,22 @@ seo:
 * **library**: {{< version 0.2.7 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.library` 部分相同.
 * **seo**: {{< version 0.2.10 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.seo` 部分相同.
 
+{{< admonition tip "自动更新 lastmod" >}}
+主题把 `lastmod` 作为 "更新于" 日期显示在页面末尾, 并用于网站地图和结构化数据.
+不需要手动设置它, 在网站配置中设置 `enableGitInfo = true` 即可:
+Hugo 会使用最后一次修改该内容文件的 Git 提交的日期, 优先于前置参数中的 `lastmod`.
+如果要改变这个顺序, 或者使用文件的修改时间, 请配置 Hugo 的
+[前置参数日期](https://gohugo.io/configuration/front-matter/#dates):
+
+```toml
+[frontmatter]
+  lastmod = ["lastmod", ":git", ":fileModTime", ":default"]
+```
+
+提交日期依赖 Git 历史: 如果构建服务只克隆了最新的一次提交,
+所有页面都会得到这次提交的日期. 使用 GitHub Actions 时, 为 `actions/checkout` 设置 `fetch-depth: 0`.
+{{< /admonition >}}
+
 {{< admonition tip >}}
 {{< version 0.2.10 >}}
 

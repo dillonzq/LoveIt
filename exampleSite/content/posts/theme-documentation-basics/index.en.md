@@ -72,6 +72,20 @@ git init
 git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 ```
 
+{{< admonition warning "Deploying from a Git repository" >}}
+Build services such as Netlify, Vercel, Cloudflare Pages and GitHub Actions build from your site's repository,
+so the theme must be in it as a submodule (`git submodule add`, as above).
+If you `git clone` the theme into `themes/` inside your site repository and commit it,
+Git records only a reference to the nested repository, not its files.
+The site then builds on your computer but not on the service,
+which reports errors such as `template for shortcode "typeit" not found`
+or `found no layout file for "html" for kind "home"`.
+
+With GitHub Actions, check out the submodules too (`submodules: true` for `actions/checkout`).
+Also set the Hugo version the service uses (for example the `HUGO_VERSION` environment variable on Netlify and Vercel)
+to one this theme supports: older Hugo versions report the same `found no layout file` warnings.
+{{< /admonition >}}
+
 {{< admonition note "LoveIt theme's compatibility" >}}
 
 | LoveIt branch or version | Supported Hugo versions |
