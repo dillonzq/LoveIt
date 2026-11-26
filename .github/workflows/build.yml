@@ -34,13 +34,16 @@ jobs:
             node_modules/.cache/loveit
             exampleSite/resources
           key: hugo-${{ runner.os }}-${{ inputs.hugo_version }}-${{ hashFiles('.hvm', 'package-lock.json', 'hugo.toml', 'assets/css/**') }}
+      # hvm looks up Hugo releases through the GitHub API; the token lifts the
+      # anonymous limit of 60 requests an hour that shared runners exhaust.
+      # The unit tests build fixture sites too, so they may be the first to fetch Hugo.
       - name: Unit tests
+        env:
+          HVM_GITHUB_TOKEN: ${{ github.token }}
         run: |
           mkdir -p test-results
           node --test --test-reporter=spec --test-reporter-destination=stdout \
             --test-reporter=junit --test-reporter-destination=test-results/unit.xml tests/*.test.mjs
-      # hvm looks up Hugo releases through the GitHub API; the token lifts the
-      # anonymous limit of 60 requests an hour that shared runners exhaust.
       - name: Build example site
         env:
           HVM_GITHUB_TOKEN: ${{ github.token }}

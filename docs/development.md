@@ -89,6 +89,29 @@ Search implementation lives in `assets/js/search.mjs`; Hugo bundles it with
 `assets/js/theme.js` using `js.Build`. The independent, checked-in Lunr Chinese
 segmenter is regenerated with `npm run compile-lunr-segmentit` (esbuild).
 
+## Theme version
+
+`package.json` is the source of the theme version. Templates read it from
+`layouts/_partials/loveit/version.html`, a partial generated from it by
+`scripts/version.mjs` and checked in, so sites that run Hugo directly, with the
+theme in a themes directory or as a Hugo Module, need no Node step.
+
+To prepare a release:
+
+```sh
+npm version <version> --no-git-tag-version
+```
+
+This updates `package.json` and `package-lock.json`, and npm's `version`
+script regenerates the partial. Review and commit the three files, then tag
+the release (`v<version>`) once that commit is merged. If your npm
+configuration sets `ignore-scripts`, add `--ignore-scripts=false`.
+
+`npm test` fails when `package-lock.json` or the partial does not match
+`package.json` (run `npm run version` to regenerate the partial), and checks
+that the documented command changes the version in the footer of sites using
+the theme from a themes directory and as a Hugo Module.
+
 ## Checks
 
 ```sh
