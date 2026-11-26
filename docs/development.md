@@ -26,7 +26,17 @@ LOVEIT_HUGO_VERSION=latest npm run build
 
 `minimum` reads `module.hugoVersion.min`; `locked` reads `.hvm`. CI uses minimum
 and locked versions in production and development. Nightly probes latest and
-records the actual version. Netlify calls the same build entry point.
+records the actual version. Scheduled Nightly runs, and manual runs of `latest`
+on the default branch, maintain one issue titled "Nightly build against the
+latest Hugo is failing": a failure opens it or comments on it, and a later such
+run that passes in both environments closes it. Runs in which either build was
+cancelled or skipped, and manual runs of other versions or branches, leave it
+alone. Netlify calls the same build entry
+point.
+
+hvm looks up Hugo releases through the GitHub API, which allows 60 anonymous
+requests an hour. CI passes the workflow token as `HVM_GITHUB_TOKEN`; set the
+same variable to a token locally if you hit the limit.
 
 ## Hugo and Sass compatibility
 
