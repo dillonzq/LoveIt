@@ -175,13 +175,16 @@ seo:
 The theme shows `lastmod` as the "Updated on" date at the end of a page, and uses it in the sitemap and structured data.
 Instead of setting it by hand, set `enableGitInfo = true` in the site configuration:
 Hugo then uses the date of the last Git commit that changed the content file, ahead of `lastmod` in the front matter.
-To change that order, or to use the file's modification time, configure
-[front matter dates](https://gohugo.io/configuration/front-matter/#dates) in Hugo:
+To change that order, configure [front matter dates](https://gohugo.io/configuration/front-matter/#dates) in Hugo.
+Hugo uses the first source that has a date. This order lets `lastmod` in the front matter win over the Git date,
+and falls back to the file's modification time for files Git does not track:
 
 ```toml
 [frontmatter]
   lastmod = ["lastmod", ":git", ":fileModTime", ":default"]
 ```
+
+Put `":fileModTime"` first to always use the file's modification time instead.
 
 Commit dates need the Git history: when a build service clones only the latest commit,
 every page gets that commit's date. With GitHub Actions, set `fetch-depth: 0` for `actions/checkout`.

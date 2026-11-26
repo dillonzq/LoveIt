@@ -80,6 +80,14 @@ Git records only a reference to the nested repository, not its files.
 The site then builds on your computer but not on the service,
 which reports errors such as `template for shortcode "typeit" not found`
 or `found no layout file for "html" for kind "home"`.
+If you have already committed such a clone, turn it into a submodule
+(`git submodule add` reuses the existing clone):
+
+```bash
+git rm --cached themes/LoveIt
+git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
+git commit -m "Add LoveIt as a submodule"
+```
 
 With GitHub Actions, check out the submodules too (`submodules: true` for `actions/checkout`).
 Also set the Hugo version the service uses (for example the `HUGO_VERSION` environment variable on Netlify and Vercel)

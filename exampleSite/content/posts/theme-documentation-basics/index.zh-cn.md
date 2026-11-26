@@ -80,6 +80,13 @@ Git 只会记录对这个嵌套仓库的引用, 而不包含它的文件.
 这样网站在你的电脑上可以构建, 在构建服务上却会失败,
 并报告 `template for shortcode "typeit" not found`
 或 `found no layout file for "html" for kind "home"` 之类的错误.
+如果已经提交了这样的克隆, 可以把它改为子模块 (`git submodule add` 会复用已有的克隆):
+
+```bash
+git rm --cached themes/LoveIt
+git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
+git commit -m "Add LoveIt as a submodule"
+```
 
 使用 GitHub Actions 时, 还需要检出子模块 (为 `actions/checkout` 设置 `submodules: true`).
 另外, 把构建服务使用的 Hugo 版本 (例如 Netlify 和 Vercel 上的 `HUGO_VERSION` 环境变量)
