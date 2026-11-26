@@ -282,7 +282,7 @@ enableEmoji = true
   title = "My cool site"
   # website description for RSS, SEO, Open Graph and Twitter Cards
   description = "This is my cool site"
-  # website images for Open Graph and Twitter Cards
+  # default images for Open Graph and Twitter Cards when a page has none (path under "static/" or "assets/", or a URL)
   images = []
 
 # Author config

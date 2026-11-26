@@ -1,0 +1,47 @@
+{{- /*
+    Pick the images that represent a page, for Open Graph, Twitter Cards and JSON-LD.
+    Input: a page. Returns the non-empty paths of the first source that has any:
+    the page's seo.images, its images (Hugo's standard parameter), its featured image,
+    then the site's params.page.seo.images, params.images and params.seo.image.
+    A path is a page resource name, a path under assets/ or static/, or a URL.
+*/ -}}
+{{- $sources := slice -}}
+{{- with .Params.seo -}}
+    {{- $sources = $sources | append (dict "images" .images) -}}
+{{- end -}}
+{{- $sources = $sources | append (dict "images" .Params.images) -}}
+{{- $featured := "" -}}
+{{- with .Resources.GetMatch "featured-image" -}}
+    {{- $featured = "featured-image" -}}
+{{- else with .Params.featuredImage -}}
+    {{- $featured = . -}}
+{{- else with .Resources.GetMatch "featured-image-preview" -}}
+    {{- $featured = "featured-image-preview" -}}
+{{- else with .Params.featuredImagePreview -}}
+    {{- $featured = . -}}
+{{- end -}}
+{{- $sources = $sources | append (dict "images" $featured) -}}
+{{- with .Site.Params.page -}}
+    {{- with .seo -}}
+        {{- $sources = $sources | append (dict "images" .images) -}}
+    {{- end -}}
+{{- end -}}
+{{- $sources = $sources | append (dict "images" .Site.Params.images) -}}
+{{- with .Site.Params.seo -}}
+    {{- $sources = $sources | append (dict "images" .image) -}}
+{{- end -}}
+
+{{- $paths := slice -}}
+{{- range $sources -}}
+    {{- if not $paths -}}
+        {{- with .images -}}
+            {{- $images := cond (reflect.IsSlice .) . (slice .) -}}
+            {{- range $images -}}
+                {{- with . | string | strings.TrimSpace -}}
+                    {{- $paths = $paths | append . -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- return $paths -}}

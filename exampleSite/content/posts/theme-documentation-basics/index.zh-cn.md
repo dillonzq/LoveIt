@@ -284,7 +284,7 @@ enableEmoji = true
   title = "我的网站"
   # 网站描述, 用于 RSS, SEO, Open Graph 和 Twitter Cards
   description = "这是我的全新 Hugo 网站"
-  # 网站图片, 用于 Open Graph 和 Twitter Cards
+  # 页面没有图片时用于 Open Graph 和 Twitter Cards 的默认图片 (位于 "static/" 或 "assets/" 下的路径, 或者 URL)
   images = []
 
   # 作者配置

@@ -495,6 +495,44 @@ test('JSON-LD is valid for home and pages with special characters and non-raster
   expect(translated).not.toHaveProperty('description');
 });
 
+async function socialImages(page, path) {
+  await page.goto(path);
+  return page.locator('head').evaluate(head => ({
+    og: [...head.querySelectorAll('meta[property^="og:image"]')].map(meta => [meta.getAttribute('property'), meta.content]),
+    card: head.querySelector('meta[name="twitter:card"]')?.content,
+    twitter: head.querySelector('meta[name="twitter:image"]')?.content,
+  }));
+}
+
+test('Open Graph and Twitter Cards use the theme images and publish local ones', async ({ page, request }) => {
+  const home = await socialImages(page, '/fuse/blog/');
+  expect(home.og).toEqual([
+    ['og:image', expect.stringMatching(/\/fuse\/blog\/images\/Apple-Devices-Preview\.png$/)],
+    ['og:image:width', '3200'],
+    ['og:image:height', '2048'],
+  ]);
+  expect(home).toMatchObject({ card: 'summary_large_image', twitter: home.og[0][1] });
+
+  // seo.images comes first; empty entries and SVG images are skipped.
+  const post = await socialImages(page, '/fuse/blog/structured-data/');
+  expect(post).toEqual({
+    og: [['og:image', 'https://cdn.example.com/cover.png']],
+    card: 'summary_large_image',
+    twitter: 'https://cdn.example.com/cover.png',
+  });
+
+  const featured = await socialImages(page, '/fuse/blog/social-image/');
+  expect(featured.og).toEqual([
+    ['og:image', expect.stringMatching(/\/fuse\/blog\/images\/zion-national-park\.jpg$/)],
+    ['og:image:width', '600'],
+    ['og:image:height', '400'],
+  ]);
+  expect(featured.twitter).toBe(featured.og[0][1]);
+  for (const url of [home.og[0][1], featured.og[0][1]]) {
+    expect((await request.get(url)).ok()).toBe(true);
+  }
+});
+
 test('copy buttons copy code verbatim and unknown languages keep the code block style', async ({ browser }) => {
   const context = await browser.newContext({ permissions: ['clipboard-read', 'clipboard-write'] });
   const page = await context.newPage();

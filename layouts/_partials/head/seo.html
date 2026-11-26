@@ -64,20 +64,8 @@
         "wordCount" .WordCount
         "url" .Permalink
     -}}
-    {{- $images := $params.seo.images | default slice -}}
-    {{- if not $images -}}
-        {{- with .Resources.GetMatch "featured-image-preview" -}}
-            {{- $images = slice "featured-image-preview" -}}
-        {{- end -}}
-        {{- with .Resources.GetMatch "featured-image" -}}
-            {{- $images = slice "featured-image" -}}
-        {{- end -}}
-    {{- end -}}
-    {{- with .Site.Params.seo.image -}}
-        {{- $images = $images | default (slice .) -}}
-    {{- end -}}
     {{- $imageObjects := slice -}}
-    {{- range $images -}}
+    {{- range partial "function/page-images.html" . -}}
         {{- with dict "Path" . "Resources" $.Resources | partial "function/schema-image.html" -}}
             {{- $imageObjects = $imageObjects | append . -}}
         {{- end -}}

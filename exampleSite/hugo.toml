@@ -104,9 +104,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # website description for RSS, SEO, Open Graph and Twitter Cards
   # 网站描述, 用于 RSS, SEO, Open Graph 和 Twitter Cards
   description = "Hugo theme - LoveIt"
-  # website images for Open Graph and Twitter Cards
-  # 网站图片, 用于 Open Graph 和 Twitter Cards
-  images = ["/logo.png"]
+  # default images for Open Graph and Twitter Cards when a page has none (path under "static/" or "assets/", or a URL)
+  # 页面没有图片时用于 Open Graph 和 Twitter Cards 的默认图片 (位于 "static/" 或 "assets/" 下的路径, 或者 URL)
+  images = ["/images/Apple-Devices-Preview.png"]
 
   # Author config
   # 作者配置
