@@ -88,6 +88,9 @@ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 git commit -m "Add LoveIt as a submodule"
 ```
 
+如果你在这个克隆中修改过主题, 请把你的提交推送到一个 fork, 并改用 fork 的 URL:
+构建服务只能拉取子模块仓库中存在的提交.
+
 使用 GitHub Actions 时, 还需要检出子模块 (为 `actions/checkout` 设置 `submodules: true`).
 另外, 把构建服务使用的 Hugo 版本 (例如 Netlify 和 Vercel 上的 `HUGO_VERSION` 环境变量)
 设为本主题支持的版本: 旧版本的 Hugo 也会报告同样的 `found no layout file` 警告.

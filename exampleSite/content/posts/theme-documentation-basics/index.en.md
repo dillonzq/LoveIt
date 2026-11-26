@@ -89,6 +89,9 @@ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 git commit -m "Add LoveIt as a submodule"
 ```
 
+If you changed the theme in that clone, push your commits to a fork and use the fork's URL instead:
+a build service can only fetch commits that exist in the submodule's repository.
+
 With GitHub Actions, check out the submodules too (`submodules: true` for `actions/checkout`).
 Also set the Hugo version the service uses (for example the `HUGO_VERSION` environment variable on Netlify and Vercel)
 to one this theme supports: older Hugo versions report the same `found no layout file` warnings.
