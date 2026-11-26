@@ -528,7 +528,15 @@ test('Open Graph and Twitter Cards use the theme images and publish local ones',
     ['og:image:height', '400'],
   ]);
   expect(featured.twitter).toBe(featured.og[0][1]);
-  for (const url of [home.og[0][1], featured.og[0][1]]) {
+
+  // Like Hugo's own templates, a bundle image named like *cover* is used without any image parameter.
+  const bundle = await socialImages(page, '/fuse/blog/bundle-cover/');
+  expect(bundle.og).toEqual([
+    ['og:image', expect.stringMatching(/\/fuse\/blog\/bundle-cover\/cover\.jpg$/)],
+    ['og:image:width', '800'],
+    ['og:image:height', '533'],
+  ]);
+  for (const url of [home.og[0][1], featured.og[0][1], bundle.og[0][1]]) {
     expect((await request.get(url)).ok()).toBe(true);
   }
 });

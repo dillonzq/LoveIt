@@ -73,9 +73,11 @@ Hugo 0.146.0 or later and Dart Sass are still required.
   GitHub Actions and Dependabot updates are refreshed ([#1078], [#1079],
   [#1089]).
 - Open Graph, Twitter Cards and JSON-LD pick a page's images in one order:
-  its `seo.images`, its `images`, its featured image, then the site's
+  its `seo.images`, its `images`, its featured image, a bundle image named
+  like `*feature*`, `*cover*` or `*thumbnail*`, then the site's
   `params.page.seo.images`, `params.images` and `params.seo.image`. JSON-LD
-  now includes a page's `images` and `featuredImage`. The theme provides
+  now includes a page's `images` and `featuredImage`, and the home page's
+  JSON-LD image follows the same order. The theme provides
   `_partials/opengraph.html` and `_partials/twitter_cards.html` in place of
   Hugo's embedded templates; a site's own copies still take precedence
   ([#1101]).

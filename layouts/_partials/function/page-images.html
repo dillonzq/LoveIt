@@ -2,6 +2,7 @@
     Pick the images that represent a page, for Open Graph, Twitter Cards and JSON-LD.
     Input: a page. Returns the non-empty paths of the first source that has any:
     the page's seo.images, its images (Hugo's standard parameter), its featured image,
+    an image resource named like *feature*, *cover* or *thumbnail* (as Hugo's own templates find),
     then the site's params.page.seo.images, params.images and params.seo.image.
     A path is a page resource name, a path under assets/ or static/, or a URL.
 */ -}}
@@ -21,6 +22,12 @@
     {{- $featured = . -}}
 {{- end -}}
 {{- $sources = $sources | append (dict "images" $featured) -}}
+{{- $bundled := "" -}}
+{{- $resources := .Resources.ByType "image" -}}
+{{- with $resources.GetMatch "*feature*" | default ($resources.GetMatch "{*cover*,*thumbnail*}") -}}
+    {{- $bundled = .Name -}}
+{{- end -}}
+{{- $sources = $sources | append (dict "images" $bundled) -}}
 {{- with .Site.Params.page -}}
     {{- with .seo -}}
         {{- $sources = $sources | append (dict "images" .images) -}}

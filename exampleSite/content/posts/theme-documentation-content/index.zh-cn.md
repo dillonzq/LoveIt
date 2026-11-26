@@ -195,7 +195,8 @@ resources:
 1. 前置参数中的 `seo.images`
 2. 前置参数中的 `images`
 3. 特色图片: `featured-image` 资源或 `featuredImage`, 否则是 `featured-image-preview` 资源或 `featuredImagePreview`
-4. 网站配置中的 `params.page.seo.images`, 其次是 `params.images`, 最后是 `params.seo.image`
+4. 页面包中名称包含 `feature`, `cover` 或 `thumbnail` 的图片
+5. 网站配置中的 `params.page.seo.images`, 其次是 `params.images`, 最后是 `params.seo.image`
 
 每张图片可以是页面资源, `assets/` 或 `static/` 下文件的路径, 或者 URL.
 SVG 图片不会用于 Open Graph 和 Twitter Cards, 因为社交网络无法显示它们.

@@ -197,7 +197,8 @@ come from the first of these that is set:
 1. `seo.images` in the front matter
 2. `images` in the front matter
 3. the featured image: the `featured-image` resource or `featuredImage`, otherwise the `featured-image-preview` resource or `featuredImagePreview`
-4. `params.page.seo.images`, then `params.images`, then `params.seo.image` in the site configuration
+4. an image in the page bundle whose name contains `feature`, `cover` or `thumbnail`
+5. `params.page.seo.images`, then `params.images`, then `params.seo.image` in the site configuration
 
 Each image can be a page resource, the path of a file under `assets/` or `static/`, or a URL.
 SVG images are left out of Open Graph and Twitter Cards because social networks cannot show them.
