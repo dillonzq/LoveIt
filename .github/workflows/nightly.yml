@@ -18,12 +18,87 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-validate:
-    strategy:
-      fail-fast: false
-      matrix:
-        hugo_env: [production, development]
+  # One job per environment (not a matrix) so the tracker sees each result:
+  # a matrix reports success when one leg passes and another is cancelled.
+  build-production:
     uses: ./.github/workflows/build.yml
     with:
       hugo_version: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.hugo_version || 'latest' }}
-      hugo_env: ${{ matrix.hugo_env }}
+      hugo_env: production
+
+  build-development:
+    uses: ./.github/workflows/build.yml
+    with:
+      hugo_version: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.hugo_version || 'latest' }}
+      hugo_env: development
+
+  # Opens one tracking issue when the latest-Hugo build fails and closes it when
+  # a later run passes in both environments. A run in which either build was
+  # cancelled or skipped changes nothing. Manual runs that pin a Hugo version, or that run on another branch,
+  # do not touch the issue.
+  track:
+    needs: [ build-production, build-development ]
+    # Scheduled runs always use the default branch; their event payload has no
+    # repository object. The step re-checks manual runs case-sensitively,
+    # because expression comparisons ignore case.
+    if: >-
+      !cancelled()
+      && (github.event_name == 'schedule'
+        || (github.event.inputs.hugo_version == 'latest'
+          && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)))
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      EVENT: ${{ github.event_name }}
+      INPUT_VERSION: ${{ github.event.inputs.hugo_version }}
+      REF: ${{ github.ref }}
+      DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+      PRODUCTION: ${{ needs.build-production.result }}
+      DEVELOPMENT: ${{ needs.build-development.result }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/attempts/${{ github.run_attempt }}
+      TITLE: Nightly build against the latest Hugo is failing
+    steps:
+      - name: Update tracking issue
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$EVENT" != schedule && ( "$INPUT_VERSION" != latest || "$REF" != "refs/heads/$DEFAULT_BRANCH" ) ]]; then
+            echo "Manual run of '$INPUT_VERSION' on $REF does not track latest on the default branch; leaving the tracking issue unchanged."
+            exit 0
+          fi
+          # Only a run in which both builds finished updates the issue.
+          for r in "$PRODUCTION" "$DEVELOPMENT"; do
+            if [[ "$r" != success && "$r" != failure ]]; then
+              echo "Build results are production=$PRODUCTION, development=$DEVELOPMENT; leaving the tracking issue unchanged."
+              exit 0
+            fi
+          done
+          if [[ "$PRODUCTION" == failure || "$DEVELOPMENT" == failure ]]; then
+            result=failure
+          else
+            result=success
+          fi
+          issues=$(gh api --paginate "repos/$GH_REPO/issues?state=open&creator=github-actions%5Bbot%5D&per_page=100" \
+            --jq '.[] | select(.pull_request == null and .title == env.TITLE) | .number')
+          issue=${issues%%$'\n'*}
+          today=$(date -u +%Y-%m-%d)
+          if [[ "$result" == failure ]]; then
+            if [[ -n "$issue" ]]; then
+              gh issue comment "$issue" --body "Still failing on $today (production: $PRODUCTION, development: $DEVELOPMENT): $RUN_URL"
+              echo "Commented on tracking issue #$issue."
+            else
+              gh issue create --title "$TITLE" --body "$(printf '%s\n\n%s\n\n%s\n' \
+                "The Nightly workflow, which builds and tests the example site with the latest Hugo release, failed on $today (production: $PRODUCTION, development: $DEVELOPMENT)." \
+                "Failed run: $RUN_URL" \
+                "The workflow comments here on each further failure and closes this issue when a later run passes in both environments.")"
+            fi
+          elif [[ -n "$issue" ]]; then
+            gh issue close "$issue" --reason completed --comment "Passing again on $today: $RUN_URL"
+            echo "Closed tracking issue #$issue."
+          else
+            echo "Build passed and no tracking issue is open."
+          fi
