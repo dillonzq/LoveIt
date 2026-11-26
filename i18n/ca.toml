@@ -217,4 +217,7 @@ other = "CANVIAT"
 
 [deleted]
 other = "SUPRIMIT"
+
+[deprecated]
+other = "OBSOLET"
 # === shortcodes/version.html ===

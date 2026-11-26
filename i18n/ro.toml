@@ -220,4 +220,7 @@ other = "SCHIMBAT"
 
 [deleted]
 other = "ȘTERS"
+
+[deprecated]
+other = "ÎNVECHIT"
 # === shortcodes/version.html ===

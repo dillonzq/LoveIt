@@ -177,6 +177,9 @@ other = "Sammanfattning"
 [info]
 other = "Info"
 
+[todo]
+other = "Att göra"
+
 [tip]
 other = "Tips"
 

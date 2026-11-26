@@ -60,7 +60,7 @@ test('English is the reference translation and defines every key with an "other"
 });
 
 for (const file of files.filter(file => file !== reference)) {
-  test(`i18n/${file} matches the English keys`, t => {
+  test(`i18n/${file} matches the English keys`, () => {
     const english = loadEnglish();
     const entries = parseTranslations(file);
     const unknown = [...entries.keys()].filter(key => !english.has(key) && !languageOnlyKeys.has(key));
@@ -74,10 +74,10 @@ for (const file of files.filter(file => file !== reference)) {
       assert.deepEqual(extra, [], `${file}:${line}: "${key}" uses placeholders that English does not provide`);
     }
 
-    // Hugo falls back to the default language for missing keys, so report them without failing.
+    // Hugo would quietly fall back to the site's default language for a missing key. Every
+    // translation must define every English key, using the English value where the language has
+    // no better one (for example a locale code the comment provider does not support).
     const missing = [...english.keys()].filter(key => !entries.has(key));
-    if (missing.length) {
-      t.diagnostic(`warning: ${file} is missing ${missing.length} key(s): ${missing.join(', ')}`);
-    }
+    assert.deepEqual(missing, [], `${file} is missing key(s) that English defines`);
   });
 }

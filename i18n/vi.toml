@@ -220,4 +220,7 @@ other = "THAY ĐỔI"
 
 [deleted]
 other = "XOÁ"
+
+[deprecated]
+other = "LỖI THỜI"
 # === shortcodes/version.html ===

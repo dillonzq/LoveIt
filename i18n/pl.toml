@@ -217,4 +217,7 @@ other = "Zmieniono"
 
 [deleted]
 other = "Usunięte"
+
+[deprecated]
+other = "Przestarzałe"
 # === shortcodes/version.html ===

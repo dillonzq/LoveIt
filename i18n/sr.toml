@@ -217,4 +217,7 @@ other = "ПРОМЕЊЕНО"
 
 [deleted]
 other = "ОБРИСАНО"
+
+[deprecated]
+other = "ЗАСТАРЕЛО"
 # === shortcodes/version.html ===

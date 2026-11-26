@@ -220,4 +220,7 @@ other = "ИЗМЕНЕН"
 
 [deleted]
 other = "УДАЛЕН"
+
+[deprecated]
+other = "УСТАРЕЛ"
 # === shortcodes/version.html ===

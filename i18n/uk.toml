@@ -76,6 +76,10 @@ other = "uk_UA"
 
 [giscusLang]
 other = "uk"
+
+# Waline has no locale for this language, so it uses English
+[walineLang]
+other = "en"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
@@ -213,4 +217,7 @@ other = "ЗМІНЕНИЙ"
 
 [deleted]
 other = "ВИДАЛЕНИЙ"
+
+[deprecated]
+other = "ЗАСТАРІЛИЙ"
 # === shortcodes/version.html ===

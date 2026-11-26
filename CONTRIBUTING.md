@@ -89,7 +89,8 @@ reference. To add or update a language:
 
 1. Copy the keys from `i18n/en.toml` and translate the values. Keep
    placeholders such as `{{ .Count }}` unchanged.
-2. Run `npm test`. It reports missing, unknown and duplicate keys.
+2. Run `npm test`. It fails on missing, unknown and duplicate keys. If a
+   comment provider has no locale for the language, use its English code.
 3. For a new language, add it to the language tables in `README.md`,
    `README.zh-cn.md` and the
    [language compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)
