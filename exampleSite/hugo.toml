@@ -566,7 +566,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         # 为空时自动适配当前主题 i18n 配置
         lang = ""
         visitor = true
-        recordIP = true
+        # recordIP looks up every visitor's IP address with a third-party service as soon as
+        # the comment widget loads, over a protocol-relative URL (plain HTTP on an HTTP origin)
+        # recordIP 会在评论组件加载时就向第三方服务查询每位访客的 IP 地址,
+        # 使用协议相对地址 (在 HTTP 源上为明文 HTTP)
+        recordIP = false
         highlight = true
         enableQQ = false
         serverURLs = "https://valine.hugoloveit.com"
