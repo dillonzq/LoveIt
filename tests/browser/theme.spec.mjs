@@ -321,6 +321,48 @@ test('Waline loads its UMD build, renders comments and follows the dark theme', 
   expect(errors).toEqual([]);
 });
 
+test('Valine avatars are decorative on every page of comments and the example site skips the IP lookup', async ({ page }) => {
+  const errors = [];
+  const requests = [];
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('request', request => requests.push(request.url()));
+  await page.route(/\/avatar\//, route => route.fulfill({ status: 204 }));
+  // Valine reuses a LeanCloud SDK that is already on the page, so a small stand-in
+  // serves three top-level comments, two per page, and one reply.
+  await page.addInitScript(() => {
+    const comment = (id, nick, extra = {}) => {
+      const fields = { nick, mail: `${id}@example.com`, link: '', ua: '', comment: `<p>Comment ${id}</p>`, insertedAt: new Date(Date.UTC(2025, 0, 6)), url: '/', ...extra };
+      return { id, get: key => fields[key] };
+    };
+    const comments = [comment('c1', 'First'), comment('c2', 'Second'), comment('c3', 'Third')];
+    class Query {
+      static or() { return new Query(); }
+      static doCloudQuery(cql) { return Promise.resolve({ results: cql.includes('"c1"') ? [comment('r1', 'Reply', { rid: 'c1' })] : [] }); }
+      doesNotExist() { return this; }
+      equalTo() { return this; }
+      exists() { return this; }
+      addDescending() { return this; }
+      limit(size) { this.size = size; return this; }
+      skip(start) { this.start = start; return this; }
+      count() { return Promise.resolve(comments.length); }
+      find() { return Promise.resolve(comments.slice(this.start, this.start + this.size)); }
+    }
+    window.AV = { version: '4.0.0', applicationId: 'test', applicationKey: 'test', init() {}, Query };
+  });
+  await page.goto('/fuse/blog/valine/');
+  const avatars = page.locator('#valine img.vimg');
+  const decorative = page.locator('#valine img.vimg[alt=""]');
+  await expect(page.locator('#valine .vcards > .vcard')).toHaveCount(2);
+  await expect(avatars).toHaveCount(3);
+  await expect(decorative).toHaveCount(3);
+  await page.locator('#valine .vpage .vmore').click();
+  await expect(page.locator('#valine .vcards > .vcard')).toHaveCount(3);
+  await expect(avatars).toHaveCount(4);
+  await expect(decorative).toHaveCount(4);
+  expect(requests.filter(url => url.includes('upaiyun.com'))).toEqual([]);
+  expect(errors).toEqual([]);
+});
+
 test('fixed buttons fade in after scrolling down', async ({ page }) => {
   await page.goto('/fuse/blog/guide/');
   await page.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo(0, 400); });
