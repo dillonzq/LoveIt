@@ -26,7 +26,8 @@
     "hugo:version": "node scripts/hugo.mjs version",
     "test": "node --test tests/*.test.mjs",
     "test:browser": "playwright test",
-    "metrics": "node scripts/metrics.mjs"
+    "metrics": "node scripts/metrics.mjs",
+    "version": "node scripts/version.mjs"
   },
   "repository": {
     "type": "git",
