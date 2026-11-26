@@ -102,7 +102,7 @@ Hugo 0.146.0 or later and Dart Sass are still required.
   badge label in 21 languages, the Swedish "Todo" admonition title, the
   traditional Chinese giscus language and the Waline language for Bengali,
   Dutch and Ukrainian (English, which Waline uses for languages it does not
-  support). `npm test` fails when a translation misses a key.
+  support). `npm test` fails when a translation misses a key ([#1095]).
 - An SVG image in `params.page.seo.images` or the publisher logo no longer
   fails the build ([#1086]).
 - `unpkg.yml` pointed at four files that do not exist on unpkg ([#1067]).
@@ -199,3 +199,4 @@ for the full upgrade guide.
 [#1087]: https://github.com/dillonzq/LoveIt/pull/1087
 [#1088]: https://github.com/dillonzq/LoveIt/pull/1088
 [#1089]: https://github.com/dillonzq/LoveIt/pull/1089
+[#1095]: https://github.com/dillonzq/LoveIt/pull/1095
