@@ -1,0 +1,29 @@
+{{- /*
+    Overrides Hugo's embedded Twitter Cards template so twitter:image matches og:image
+    (see function/social-images.html).
+*/ -}}
+{{- with partial "function/social-images.html" . }}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ (index . 0).url }}">
+{{- else }}
+    <meta name="twitter:card" content="summary">
+{{- end }}
+
+{{- with or .Title .Site.Title .Site.Params.title | plainify }}
+    <meta name="twitter:title" content="{{ . }}">
+{{- end }}
+
+{{- with or .Description .Summary .Site.Params.description | plainify | htmlUnescape }}
+    <meta name="twitter:description" content="{{ trim . "\n\r\t " }}">
+{{- end }}
+
+{{- with .Site.Params.social }}
+    {{- if reflect.IsMap . }}
+        {{- with .twitter }}
+            {{- /* LoveIt also accepts a map (id, prefix) for social links; only a handle names the site. */ -}}
+            {{- if eq (printf "%T" .) "string" }}
+                <meta name="twitter:site" content="{{ cond (strings.HasPrefix . "@") . (printf "@%s" .) }}">
+            {{- end }}
+        {{- end }}
+    {{- end }}
+{{- end }}

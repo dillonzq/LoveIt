@@ -72,6 +72,15 @@ Hugo 0.146.0 or later and Dart Sass are still required.
   CI; the minimum supported version is unchanged ([#1061]). Development tools,
   GitHub Actions and Dependabot updates are refreshed ([#1078], [#1079],
   [#1089]).
+- Open Graph, Twitter Cards and JSON-LD pick a page's images in one order:
+  its `seo.images`, its `images`, its featured image, a bundle image named
+  like `*feature*`, `*cover*` or `*thumbnail*`, then the site's
+  `params.page.seo.images`, `params.images` and `params.seo.image`. JSON-LD
+  now includes a page's `images` and `featuredImage`, and the home page's
+  JSON-LD image follows the same order. The theme provides
+  `_partials/opengraph.html` and `_partials/twitter_cards.html` in place of
+  Hugo's embedded templates; a site's own copies still take precedence
+  ([#1101]).
 - The comment system documentation warns that Gitalk 1.x publishes its
   `clientSecret` in any page with Gitalk enabled and sends it through a
   third-party CORS proxy, and recommends giscus for new sites. It says that
@@ -111,6 +120,12 @@ Hugo 0.146.0 or later and Dart Sass are still required.
   traditional Chinese giscus language and the Waline language for Bengali,
   Dutch and Ukrainian (English, which Waline uses for languages it does not
   support). `npm test` fails when a translation misses a key ([#1095]).
+- `og:image` and `twitter:image` ignored `seo.images` and featured images
+  set with `featuredImage`, and pointed at files under `assets/` that were
+  never published. Local images are now published and get
+  `og:image:width` and `og:image:height`, and SVG images, which social
+  networks cannot show, are skipped. The example site no longer sets
+  `params.images` to a missing `/logo.png` ([#1101], [#789]).
 - An SVG image in `params.page.seo.images` or the publisher logo no longer
   fails the build ([#1086]).
 - `unpkg.yml` pointed at four files that do not exist on unpkg ([#1067]).
@@ -159,6 +174,7 @@ for the full upgrade guide.
 [Unreleased]: https://github.com/dillonzq/LoveIt/compare/v0.4.0...HEAD
 [0.4.0]: https://github.com/dillonzq/LoveIt/compare/v0.3.1...v0.4.0
 
+[#789]: https://github.com/dillonzq/LoveIt/issues/789
 [#863]: https://github.com/dillonzq/LoveIt/issues/863
 [#963]: https://github.com/dillonzq/LoveIt/issues/963
 [#997]: https://github.com/dillonzq/LoveIt/pull/997
@@ -209,3 +225,4 @@ for the full upgrade guide.
 [#1089]: https://github.com/dillonzq/LoveIt/pull/1089
 [#1095]: https://github.com/dillonzq/LoveIt/pull/1095
 [#1098]: https://github.com/dillonzq/LoveIt/pull/1098
+[#1101]: https://github.com/dillonzq/LoveIt/pull/1101

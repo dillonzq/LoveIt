@@ -187,6 +187,21 @@ resources:
 ```
 {{< /admonition >}}
 
+{{< admonition note "用于 Open Graph, Twitter Cards 和 SEO 的图片" >}}
+{{< version 0.4.1 changed >}}
+
+页面被分享到社交网络时显示的图片, 以及结构化数据中的图片, 来自以下第一个已设置的项:
+
+1. 前置参数中的 `seo.images`
+2. 前置参数中的 `images`
+3. 特色图片: `featured-image` 资源或 `featuredImage`, 否则是 `featured-image-preview` 资源或 `featuredImagePreview`
+4. 页面包中名称包含 `feature`, `cover` 或 `thumbnail` 的图片
+5. 网站配置中的 `params.page.seo.images`, 其次是 `params.images`, 最后是 `params.seo.image`
+
+每张图片可以是页面资源, `assets/` 或 `static/` 下文件的路径, 或者 URL.
+SVG 图片不会用于 Open Graph 和 Twitter Cards, 因为社交网络无法显示它们.
+{{< /admonition >}}
+
 ## 3 内容摘要
 
 **LoveIt** 主题使用内容摘要在主页中显示大致文章信息。Hugo 支持生成文章的摘要.

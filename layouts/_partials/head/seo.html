@@ -37,8 +37,13 @@
     {{- with .Site.Params.description -}}
         {{- $schema = merge $schema (dict "description" .) -}}
     {{- end -}}
-    {{- with dict "Path" .Site.Params.seo.image "Resources" .Resources | partial "function/schema-image.html" -}}
-        {{- $schema = merge $schema (dict "image" .) -}}
+    {{- /* A WebSite has one image: the first that resolves, in the shared image order. */ -}}
+    {{- range partial "function/page-images.html" . -}}
+        {{- if not $schema.image -}}
+            {{- with dict "Path" . "Resources" $.Resources | partial "function/schema-image.html" -}}
+                {{- $schema = merge $schema (dict "image" .) -}}
+            {{- end -}}
+        {{- end -}}
     {{- end -}}
     {{- with dict "Path" .Site.Params.seo.thumbnailUrl "Resources" .Resources | partial "function/schema-image.html" -}}
         {{- /* thumbnailUrl is a URL, not an ImageObject. */ -}}
@@ -64,20 +69,8 @@
         "wordCount" .WordCount
         "url" .Permalink
     -}}
-    {{- $images := $params.seo.images | default slice -}}
-    {{- if not $images -}}
-        {{- with .Resources.GetMatch "featured-image-preview" -}}
-            {{- $images = slice "featured-image-preview" -}}
-        {{- end -}}
-        {{- with .Resources.GetMatch "featured-image" -}}
-            {{- $images = slice "featured-image" -}}
-        {{- end -}}
-    {{- end -}}
-    {{- with .Site.Params.seo.image -}}
-        {{- $images = $images | default (slice .) -}}
-    {{- end -}}
     {{- $imageObjects := slice -}}
-    {{- range $images -}}
+    {{- range partial "function/page-images.html" . -}}
         {{- with dict "Path" . "Resources" $.Resources | partial "function/schema-image.html" -}}
             {{- $imageObjects = $imageObjects | append . -}}
         {{- end -}}

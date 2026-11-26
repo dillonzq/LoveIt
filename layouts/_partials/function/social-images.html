@@ -1,0 +1,23 @@
+{{- /*
+    Resolve the images of a page for Open Graph and Twitter Cards.
+    Input: a page. Returns up to 6 dicts with "url" and, for local images, "width" and "height".
+    Local paths are looked up in page resources and assets/ (which publishes them),
+    then treated as static/ files. SVG and other formats social networks cannot show are skipped.
+*/ -}}
+{{- $images := slice -}}
+{{- range partial "function/page-images.html" . -}}
+    {{- $image := dict -}}
+    {{- with dict "Path" . "Resources" $.Resources | partial "function/resource.html" -}}
+        {{- if and (eq .ResourceType "image") (in (slice "jpeg" "png" "gif" "webp") .MediaType.SubType) -}}
+            {{- $image = dict "url" .Permalink "width" .Width "height" .Height -}}
+        {{- end -}}
+    {{- else -}}
+        {{- if not (strings.HasSuffix (lower (urls.Parse .).Path) ".svg") -}}
+            {{- $image = dict "url" (absURL .) -}}
+        {{- end -}}
+    {{- end -}}
+    {{- with $image -}}
+        {{- $images = $images | append . -}}
+    {{- end -}}
+{{- end -}}
+{{- return first 6 $images -}}

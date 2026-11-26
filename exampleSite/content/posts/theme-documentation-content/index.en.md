@@ -188,6 +188,22 @@ resources:
 ```
 {{< /admonition >}}
 
+{{< admonition note "Images for Open Graph, Twitter Cards and SEO" >}}
+{{< version 0.4.1 changed >}}
+
+The images shown when a page is shared on social networks, and the images in its structured data,
+come from the first of these that is set:
+
+1. `seo.images` in the front matter
+2. `images` in the front matter
+3. the featured image: the `featured-image` resource or `featuredImage`, otherwise the `featured-image-preview` resource or `featuredImagePreview`
+4. an image in the page bundle whose name contains `feature`, `cover` or `thumbnail`
+5. `params.page.seo.images`, then `params.images`, then `params.seo.image` in the site configuration
+
+Each image can be a page resource, the path of a file under `assets/` or `static/`, or a URL.
+SVG images are left out of Open Graph and Twitter Cards because social networks cannot show them.
+{{< /admonition >}}
+
 ## 3 Content Summaries
 
 **LoveIt** theme uses the summary of the content to display abstract information in the home page. Hugo can generate summaries of your content.
