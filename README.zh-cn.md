@@ -231,17 +231,3 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 ## 作者
 
 [Dillon](https://dillonzq.com)
-
-## 赞助支持
-
-如果你喜爱这个主题, 请考虑给我买杯咖啡 ☕️.
-
-* [PayPal](https://paypal.me/dillonzq)
-* [支付宝](https://github.com/dillonzq/LoveIt/raw/master/images/Alipay.jpg)
-* [微信支付](https://github.com/dillonzq/LoveIt/raw/master/images/Wechat.jpg)
-
-谢谢! ❤️
-
-## Star 数目趋势
-
-[![Star 数目趋势](https://starchart.cc/dillonzq/LoveIt.svg)](https://starchart.cc/dillonzq/LoveIt)
