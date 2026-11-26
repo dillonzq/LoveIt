@@ -636,6 +636,7 @@ enableEmoji = true
         # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
         shortname = ""
       # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} 评论系统设置
+      # clientSecret 会公开在启用 Gitalk 的页面中, 参见下文的 "关于评论系统"
       [params.page.comment.gitalk]
         # {{< version 0.1.1 >}}
         enable = false
@@ -644,6 +645,7 @@ enableEmoji = true
         clientId = ""
         clientSecret = ""
       # {{< link "https://github.com/xCss/Valine" Valine >}} 评论系统设置
+      # GPL-2.0-only 许可, 评论存储在 LeanCloud, 参见下文的 "关于评论系统"
       [params.page.comment.valine]
         enable = false
         appId = ""
@@ -683,7 +685,8 @@ enableEmoji = true
         colorful = true
         dislikes = false
         outlined = false
-      # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} 评论系统设置
+      # {{< version 0.2.0 >}} {{< link "https://gitlab.com/commento/commento" "Commento" >}} 评论系统设置
+      # Commento 托管服务的脚本地址已不再提供 Commento, 参见下文的 "关于评论系统"
       [params.page.comment.commento]
         enable = false
       # {{< version 0.2.5 >}} {{< link "https://utteranc.es/" "utterances" >}} 评论系统设置
@@ -906,6 +909,41 @@ enableEmoji = true
 **评论系统**, **CDN** 和 **fingerprint** 不会在 `development` 环境下启用.
 
 你可以使用 `hugo serve -e production` 命令来开启这些特性.
+{{< /admonition >}}
+
+{{< admonition warning "关于评论系统" >}}
+新网站推荐使用 [giscus](https://giscus.app/zh-CN).
+它把评论存储在 GitHub Discussions 中, 网站中不需要放置任何密钥.
+以下内容核实于 2026 年 11 月 26 日.
+
+**Gitalk**: 主题内置的是 Gitalk 1.8.0, 它通过 GitHub OAuth App 让访客登录.
+你配置的 `clientSecret` 会写入每个启用 Gitalk 评论的页面,
+任何人都可以在页面源代码中看到它.
+访客登录时, Gitalk 1.x 还会通过第三方运营的 CORS 代理 (`cors-anywhere.azm.workers.dev`)
+把登录 code 和这个密钥发送给 GitHub,
+而主题没有提供修改该代理的选项.
+[Gitalk 仓库](https://github.com/gitalk/gitalk) 现已将 1.x 版本标记为停止维护 (end-of-life).
+如果继续使用 Gitalk, 请使用一个仅用于这些评论的 OAuth App.
+
+**Commento**: 主题从 `https://cdn.commento.io/js/commento.js` 加载 Commento 托管服务的脚本,
+并且没有提供使用自托管 Commento 服务器的选项.
+用户在 2025 年 12 月[报告 commento.io 无法访问](https://news.ycombinator.com/item?id=46196323),
+而在 2026 年 11 月 26 日, 请求 `https://commento.io/` 或上面的脚本地址时,
+会被重定向到一个无关的第三方页面 (或返回 HTTP 404), 而不是提供 Commento 服务.
+请不要启用此选项, 否则浏览器会从一个已不再提供 Commento 的域名加载脚本.
+[开源代码](https://gitlab.com/commento/commento) 自 2021 年 2 月以来没有新的提交.
+如果你运行自己的 Commento 服务器, 此选项也无法指向它.
+
+**Valine**: Valine 使用 GPL-2.0-only 许可
+(它的软件包声明的 SPDX 标识符是 `GPL-2.0`),
+启用后主题会从配置的 CDN (默认是 jsDelivr) 加载它,
+不使用 CDN 时则提供内置的副本 (`assets/lib/valine/Valine.min.js`).
+Valine 没有自己的服务器: 它把评论存储在 [LeanCloud](https://docs.leancloud.cn/) 应用中,
+`appId`, `appKey` 和 `serverURLs` 指的就是这个应用.
+LeanCloud 已于 2026 年 1 月 12 日[停止新用户注册和新建应用](https://docs.leancloud.cn/sdk/announcements/sunset-announcement/),
+并将于 2027 年 1 月 12 日关闭所有对外服务.
+此后 Valine 将无法加载或保存评论, LeanCloud 表示会永久销毁留存的用户数据或对其进行匿名化处理.
+请在此日期之前导出你的评论并迁移到其他评论系统.
 {{< /admonition >}}
 
 {{< admonition tip "关于 CDN 配置的技巧" >}}
