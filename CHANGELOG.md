@@ -68,6 +68,30 @@ This file starts at 0.4.0. Older releases are described on the
   icons are `<svg class="icon …">` instead of `<i>`, so CSS that targets
   `i.icon` or `i.details-icon` should drop the `i`. Remote `Src` icons render
   as `<img>`.
+- Images use Hugo's image processing instead of lazysizes ([#974]). Markdown
+  images, the `image` shortcode, featured images and the home page avatar
+  found in the page bundle or under `assets/` get `width` and `height`, which
+  keep the page from shifting while they load, and JPEG, PNG and WebP images
+  get a `srcset` with a WebP copy up to 800 pixels wide and `sizes`. The
+  original file stays the `src`, the last `srcset` candidate when it is
+  wider, and the lightGallery full-size image. Images are rotated as their
+  Exif orientation says. Before Hugo 0.155.0, PNG and WebP images keep
+  the original file so the browser can apply its orientation. GIF, BMP
+  and TIFF images, animated PNG and WebP images and images Hugo cannot
+  decode only get their size; SVG, files under `static/` and remote URLs are
+  used as they are. The home page avatar can also be a resource of the home
+  page bundle. WebP copies need the extended edition of Hugo before 0.153.0,
+  and browsers without WebP support (Safari 13 and older) cannot show them.
+  The first cold build of a site takes longer while Hugo makes the copies;
+  later builds reuse them from `resources/_gen`.
+- The featured image of a post and the home page avatar load with
+  `fetchpriority="high"`; the header logo loads normally; other images use
+  native lazy loading (`loading="lazy"` and `decoding="async"`) instead of a
+  placeholder that JavaScript replaced. The featured image of a post now has
+  `width` and `height` too. Without a `src_s`, the lightGallery thumbnail of a
+  processed image is its smallest WebP copy.
+- The `image` shortcode fills in a missing `width` or `height` from the
+  image's aspect ratio when the other one is a number.
 
 ### Deprecated
 
@@ -78,6 +102,10 @@ This file starts at 0.4.0. Older releases are described on the
 ### Removed
 
 - The runtime loader for `data-svg-src` icons in `theme.js`.
+- lazysizes, the `lazysizesJS` key of the CDN data files and
+  `svg/loading.svg`. Images no longer get the `lazyload`, `lazyloading` and
+  `lazyloaded` classes or `data-src`/`data-srcset` attributes; update custom
+  styles or scripts that rely on them.
 
 ## [0.4.1] - 2026-11-27
 
@@ -250,6 +278,7 @@ for the full upgrade guide.
 [#789]: https://github.com/dillonzq/LoveIt/issues/789
 [#863]: https://github.com/dillonzq/LoveIt/issues/863
 [#963]: https://github.com/dillonzq/LoveIt/issues/963
+[#974]: https://github.com/dillonzq/LoveIt/issues/974
 [#993]: https://github.com/dillonzq/LoveIt/issues/993
 [#997]: https://github.com/dillonzq/LoveIt/pull/997
 [#1012]: https://github.com/dillonzq/LoveIt/pull/1012

@@ -15,8 +15,6 @@ libFiles:
   algoliasearchJS: algoliasearch@5.65.0/dist/lite/builds/browser.umd.js
   # fuse.js@7.5.0 https://fusejs.io/
   fuseJS: fuse.js@7.5.0/dist/fuse.min.mjs
-  # lazysizes@5.3.2 https://github.com/aFarkas/lazysizes
-  lazysizesJS: lazysizes@5.3.2/lazysizes.min.js
   # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
   objectFitImagesJS: object-fit-images@3.2.4/dist/ofi.min.js
   # @twemoji/api@17.0.3 https://github.com/jdecked/twemoji

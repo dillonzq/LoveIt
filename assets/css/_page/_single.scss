@@ -53,14 +53,10 @@
 
     img {
       display: block;
-      max-width: 100%;
+      width: 100%;
       height: auto;
       margin: 0 auto;
       overflow: hidden;
-    }
-
-    img.lazyloaded {
-      width: 100%;
     }
   }
 
@@ -373,6 +369,7 @@
     }
 
     .version {
+      width: auto;
       height: 1.25em;
       vertical-align: text-bottom;
     }

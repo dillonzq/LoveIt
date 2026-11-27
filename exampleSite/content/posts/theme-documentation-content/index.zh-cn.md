@@ -52,8 +52,25 @@ math:
 在这个主题中的很多地方可以使用上面的本地资源引用,
 例如 **链接**, **图片**, `image` shortcode, `music` shortcode 和**前置参数**中的部分参数.
 
-页面资源或者 **assets** 目录中的[图片处理](https://gohugo.io/content-management/image-processing/)会在未来的版本中得到支持.
-非常酷的功能! :(far fa-grin-squint):
+{{< version 0.5.0 >}} 页面资源或者 **assets** 目录中的图片会经过 Hugo 的[图片处理](https://gohugo.io/content-management/image-processing/).
+Markdown 图片, `image` shortcode, 文章特色图片和主页头像都会这样处理
+(网站 logo 只会带上 `width` 和 `height`):
+
+* JPEG, PNG 和 WebP 图片会带上 `width` 和 `height`, 避免图片加载时页面发生偏移,
+  并带上包含宽度不超过 800 像素的 WebP 副本的 `srcset`,
+  浏览器会下载适合屏幕的尺寸.
+  原图比副本更宽时会作为 `srcset` 的最后一个候选, 同时也是图片的 `src`.
+  图片会按照 Exif 方向信息旋转. Hugo 0.155.0 之前的版本会保留 PNG 和 WebP 原图,
+  由浏览器按方向信息显示.
+* GIF, BMP, TIFF 图片和 PNG, WebP 动图只会带上 `width` 和 `height`, 因此动图仍然会动.
+  Hugo 无法解码的图片也是如此.
+* SVG 等其他格式, **static** 目录中的文件和远程 URL 会原样使用.
+  需要处理的图片请放在页面包或者 **assets** 目录中.
+
+Hugo 0.153.0 之前的版本需要 extended 版本才能生成 WebP 副本; 这些版本的标准版只会为图片带上尺寸.
+
+文章的特色图片和主页头像通常是首屏中最大的元素, 因此会立即以 `fetchpriority="high"` 加载.
+其他图片使用浏览器原生的懒加载 (`loading="lazy"`).
 {{< /admonition >}}
 
 ## 2 前置参数 {#front-matter}
