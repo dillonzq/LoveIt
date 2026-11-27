@@ -141,6 +141,8 @@ test('a replacement under a section that does not exist fails the build', () => 
 test('deprecation keys and replacements must be keys under params', () => {
   for (const [name, entry] of Object.entries({
     'bad-key': '- key: config.oldFlag\n  since: 0.5.0\n  removal: 0.7.0',
+    'empty-key': '- key: ""\n  replacement: params.newFlag\n  since: 0.5.0\n  removal: 0.7.0',
+    'missing-key': '- replacement: params.newFlag\n  since: 0.5.0\n  removal: 0.7.0',
     'bad-replacement': '- key: params.oldFlag\n  replacement: config.newFlag\n  since: 0.5.0\n  removal: 0.7.0',
     'empty-segment': '- key: params.oldFlag\n  replacement: params..newFlag\n  since: 0.5.0\n  removal: 0.7.0',
   })) {

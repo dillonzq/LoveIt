@@ -9,9 +9,9 @@
     {{- $deprecations = transform.Unmarshal . -}}
 {{- end -}}
 {{- range $deprecations -}}
-    {{- range slice .key .replacement -}}
-        {{- if and . (or (not (hasPrefix . "params.")) (in (split . ".") "")) -}}
-            {{- errorf "assets/data/deprecations.yml: %q must be a key under \"params.\"" . -}}
+    {{- range $i, $path := slice .key .replacement -}}
+        {{- if and (or $path (eq $i 0)) (or (not (hasPrefix $path "params.")) (in (split $path ".") "")) -}}
+            {{- errorf "assets/data/deprecations.yml: %q must be a key under \"params.\"" $path -}}
         {{- end -}}
     {{- end -}}
     {{- $value := $params -}}
