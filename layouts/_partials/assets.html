@@ -29,8 +29,6 @@
 {{- /* Search */ -}}
 {{- if .Site.Params.search | and .Site.Params.search.enable -}}
     {{- $search := .Site.Params.search -}}
-    {{- $source := $cdn.autocompleteJS | default "lib/autocomplete/autocomplete.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- $config = dict "maxResultLength" $search.maxResultLength "snippetLength" $search.snippetLength "highlightTag" $search.highlightTag "noResultsFound" (T "noResultsFound") | dict "search" | merge $config -}}
     {{- if eq $search.type "lunr" -}}
         {{- with .Site.Home.OutputFormats.Get "json" -}}
@@ -80,10 +78,6 @@
         {{- $config = dict "type" "pagefind" "pagefindBasePath" $basePath "pagefindBaseURL" (urls.Parse .Site.BaseURL).Path | dict "search" | merge $config -}}
     {{- end -}}
 {{- end -}}
-
-{{- /* lazysizes */ -}}
-{{- $source := $cdn.lazysizesJS | default "lib/lazysizes/lazysizes.min.js" -}}
-{{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 
 {{- /* twemoji */ -}}
 {{- if $params.twemoji -}}
@@ -177,9 +171,24 @@
 {{- end -}}
 
 {{- /* mermaid */ -}}
+{{- $securityLevel := "strict" -}}
+{{- $value := .Site.Params.security.mermaidSecurityLevel -}}
+{{- $type := printf "%T" $value -}}
+{{- $known := eq $type "<nil>" -}}
+{{- if eq $type "string" -}}
+    {{- $known = in (slice "" "strict" "loose") $value -}}
+    {{- if eq $value "loose" -}}
+        {{- $securityLevel = "loose" -}}
+    {{- end -}}
+{{- end -}}
+{{- if not $known -}}
+    {{- warnf "Unknown params.security.mermaidSecurityLevel \"%v\". \"strict\" will be used instead.\n" $value -}}
+    {{- warnf "未知的 params.security.mermaidSecurityLevel \"%v\". 将使用 \"strict\".\n" $value -}}
+{{- end -}}
 {{- if or $contentAssets.mermaid $this.mermaid -}}
     {{- $source := $cdn.mermaidJS | default "lib/mermaid/mermaid.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+    {{- $config = dict "securityLevel" $securityLevel | dict "mermaid" | merge $config -}}
 {{- end -}}
 
 {{- /* ECharts */ -}}

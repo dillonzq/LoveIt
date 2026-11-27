@@ -98,6 +98,12 @@ other = "Abbrechen"
 [noResultsFound]
 other = "Keine Ergebnisse gefunden"
 
+[searchResults]
+other = "Suchergebnisse"
+
+[searchSlashShortcut]
+other = "Suche mit / öffnen"
+
 [lunrLanguageCode]
 other = "de"
 
@@ -160,6 +166,9 @@ other = "Startseite"
 
 [readMore]
 other = "Weiterlesen"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -224,3 +233,10 @@ other = "GELÖSCHT"
 [deprecated]
 other = "VERALTET"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Abgehakt"
+
+[taskUnchecked]
+other = "Nicht abgehakt"

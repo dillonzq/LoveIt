@@ -557,6 +557,10 @@ enableEmoji = true
     fraction = true
     # {{< version 0.2.0 >}} 是否使用 fontawesome 扩展语法
     fontawesome = true
+    # {{< version 0.5.0 >}} 何时加载 Font Awesome 样式和字体 ["auto", true, false]
+    # "auto": 仅在内容或配置的 HTML (菜单, 页脚...) 使用 Font Awesome 类的页面加载, 主题自身图标为内联 SVG;
+    # true: 总是加载, 例如你自己的布局使用了它; false: 从不加载
+    fontawesomeCSS = "auto"
     # 是否在文章页面显示原始 Markdown 文档链接
     linkToMarkdown = true
     # {{< version 0.2.4 >}} 是否在 RSS 中显示全文内容
@@ -793,6 +797,12 @@ enableEmoji = true
     # 当无法设置 HTTP 响应头时使用的 Content-Security-Policy meta 标签
     # https://content-security-policy.com/examples/meta/
     contentSecurityPolicy = ""
+    # {{< version 0.5.0 >}} <meta name="referrer"> 标签的引荐来源策略
+    # 设置为 "no-referrer" 则完全不发送 Referer 请求头
+    referrerPolicy = "strict-origin-when-cross-origin"
+    # {{< version 0.5.0 >}} Mermaid 安全级别 ["strict", "loose"]
+    # "loose" 允许图表中的点击事件和 HTML 标签
+    mermaidSecurityLevel = "strict"
 
   # {{< version 0.2.10 >}} 网站 SEO 配置
   [params.seo]
@@ -1344,7 +1354,7 @@ npx pagefind --site public --output-subdir _pagefind --serve
 ### 6.2 行为变化
 
 * **语言配置.** 在 Hugo 0.158.0 或更新版本中, 请使用 `locale` 和 `label` 代替已废弃的 `languageCode` 和 `languageName`.
-* **Polyfill.** 在 0.4.X 中 `params.compatibility.polyfill` 改为从 `cdnjs.cloudflare.com` 加载, 不再使用 `polyfill.io`. LoveIt 0.5.0 移除了该配置和 Polyfill 服务.
+* **Polyfill.** 在 0.4.X 中 `params.compatibility.polyfill` 改为从 `cdnjs.cloudflare.com` 加载, 不再使用 `polyfill.io`. LoveIt 0.5.0 移除了 Polyfill 服务, 参见 [弃用的配置](#deprecated-options).
 * **音乐.** 默认的 Meting API 已更换. 可以在 `[params.page.music]` 中设置 `api` 来使用你自己的服务.
 * **Waline.** 内置客户端为 Waline v3, 需要 v1.27.0 及以上的 Waline 服务端.
 
@@ -1354,3 +1364,26 @@ npx pagefind --site public --output-subdir _pagefind --serve
 * [Content-Security-Policy](#site-configuration) meta 标签 (`[params.security]`)
 * 数学公式的服务端渲染, Markdown 表格和引用块提示 (alert) 的渲染钩子
 * 主页个人信息副标题下方的额外文本 (`[params.home.profile]` 中的 `extra`)
+
+## 7 弃用的配置 {#deprecated-options}
+
+{{< version 0.5.0 >}}
+
+当网站配置使用了弃用的配置项时, `hugo` 每次构建会打印一次如下警告.
+警告会一直打印到「移除于」一列的版本. 部分配置项已经不再起作用, 处理方式见下表.
+除非使用 `--panicOnWarning` 构建, 否则构建不会失败.
+迁移期间如需让这类构建通过, 可将警告中的 ID 加入 `ignoreLogs`.
+
+```plain
+WARN  LoveIt: "params.compatibility.polyfill" 已于 v0.5.0 弃用, 将在 v0.7.0 移除. ...
+You can suppress this warning by adding the following to your site configuration:
+ignoreLogs = ['loveit-deprecated-params-compatibility-polyfill']
+```
+
+配置项的值不是 `false` 或空字符串时才算使用, 因此从主题配置中复制的 `false` 默认值不会产生警告.
+
+| 配置项 | 弃用于 | 移除于 | 处理方式 |
+|:-------|:------:|:------:|:---------|
+| `params.compatibility.polyfill` | 0.5.0 | 0.7.0 | 删除该配置. 它已不起作用: 主题不再加载 Polyfill 服务, 主题支持的浏览器也不需要它. |
+| `params.compatibility.objectFit` | 0.5.0 | 0.7.0 | 删除该配置. 它已不起作用: 主题不再加载 object-fit-images, 主题支持的浏览器原生支持 `object-fit`. |
+| `params.cdn.autocompleteJS` | 0.5.0 | 0.7.0 | 删除该配置. 搜索不再使用 autocomplete.js. |

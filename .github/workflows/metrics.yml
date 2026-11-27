@@ -1,26 +1,39 @@
 name: Metrics
 
-# Records baseline performance and accessibility numbers for the example site.
-# Results are reported in the job summary and uploaded as an artifact; no
-# threshold fails the run, so this workflow is not part of the ci-gate check.
+# Measures the example site: Lighthouse, axe-core and build time. CI calls this
+# workflow on every pull request and push to master. Master runs upload the
+# `metrics` artifact that later pull requests use as their baseline; pull
+# requests are compared with it, and a value worse than metrics-budget.json
+# allows fails the job and therefore ci-gate.
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
+  workflow_call:
+    inputs:
+      compare:
+        description: Compare with the master baseline
+        type: boolean
+        default: false
   workflow_dispatch:
+    inputs:
+      compare:
+        description: Compare with the master baseline
+        type: boolean
+        default: true
 
 permissions:
   contents: read
 
-concurrency:
-  group: metrics-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  baseline:
+  metrics:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # Includes up to baseline.waitMinutes for the base commit's own run.
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      # Lists master runs and downloads their artifacts.
+      actions: read
+      # Reads the pull request's labels for the accept label.
+      pull-requests: read
     steps:
       - uses: actions/checkout@v7
         with:
@@ -36,7 +49,17 @@ jobs:
           key: hugo-tools-${{ runner.os }}-${{ hashFiles('.hvm', 'package-lock.json') }}
       - run: npx --no-install playwright install --with-deps chromium
       - name: Lighthouse, axe-core and build time
+        env:
+          HVM_GITHUB_TOKEN: ${{ github.token }}
         run: npm run metrics
+      - name: Compare with master
+        if: inputs.compare
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          LOVEIT_METRICS_BRANCH: ${{ github.event.repository.default_branch }}
+          LOVEIT_METRICS_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: npm run metrics:compare
       - uses: actions/upload-artifact@v7
         if: always()
         with:

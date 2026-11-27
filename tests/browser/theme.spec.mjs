@@ -1,9 +1,20 @@
 import { test, expect } from '@playwright/test';
+import { AxeBuilder } from '@axe-core/playwright';
+import { getHugo } from '../../scripts/tools.mjs';
+
+async function hugoImageFeatures() {
+  const { version } = await getHugo();
+  const [major, minor] = version.match(/v(\d+)\.(\d+)\./).slice(1).map(Number);
+  return {
+    encodesWebP: version.includes('+extended') || major > 0 || minor >= 153,
+    readsPngOrientation: major > 0 || minor >= 155,
+  };
+}
 
 async function openSearch(page, engine, language = '') {
   await page.goto(`/${engine}/blog/${language}`);
   await page.locator('#search-toggle-desktop').click();
-  return page.locator('#search-input-desktop');
+  return page.locator('#search-input');
 }
 
 for (const engine of ['fuse', 'lunr', 'pagefind']) {
@@ -48,7 +59,7 @@ test('rapid input shares an index request and clearing hides stale results', asy
   expect(fetches).toBe(1);
   await input.fill('beta');
   await input.fill('');
-  await expect(page.locator('#search-loading-desktop')).toBeHidden();
+  await expect(page.locator('#search-loading')).toBeHidden();
   await expect(page.locator('.suggestion-title')).toHaveCount(0);
 });
 
@@ -61,13 +72,340 @@ test('Algolia mock preserves the latest async query', async ({ page }) => {
     } }) };
   });
   await page.locator('#search-toggle-desktop').click();
-  await page.locator('#search-input-desktop').fill('first');
+  await page.locator('#search-input').fill('first');
   await page.waitForTimeout(200);
-  await page.locator('#search-input-desktop').fill('second');
+  await page.locator('#search-input').fill('second');
   await expect(page.locator('.suggestion-title')).toHaveText('second');
   await page.waitForTimeout(800);
   await expect(page.locator('.suggestion-title')).toHaveText('second');
 });
+
+async function mockAlgolia(page) {
+  await page.goto('/algolia/blog/');
+  await page.evaluate(() => {
+    window['algoliasearch/lite'] = { liteClient: () => ({ search: async ({ requests: [{ query }] }) => ({ results: [{
+      hits: ['guide', 'gallery', 'math'].map(slug => ({ uri: `/algolia/blog/${slug}/`, title: `${query} ${slug}`, content: query })),
+    }] }) }) };
+  });
+}
+
+test('search dialog opens with / and Ctrl/Cmd+K, closes with Esc and returns focus', async ({ page }) => {
+  await mockAlgolia(page);
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const input = page.getByRole('combobox', { name: 'Search', includeHidden: true });
+  const toggle = page.locator('#search-toggle-desktop');
+  await expect(toggle).toHaveAttribute('aria-haspopup', 'dialog');
+
+  await page.keyboard.press('/');
+  await expect(dialog).toBeVisible();
+  await expect(input).toBeFocused();
+  await expect(input).toHaveValue('');
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+
+  for (const shortcut of ['Control+k', 'Meta+k']) {
+    await toggle.focus();
+    await page.keyboard.press(shortcut);
+    await expect(dialog).toBeVisible();
+    await expect(input).toBeFocused();
+    await input.fill('kw');
+    await expect(page.locator('#search-results [role="option"]')).toHaveCount(3);
+    await page.keyboard.press('Escape');
+    await expect(dialog).toBeHidden();
+    await expect(toggle).toBeFocused();
+    await expect(input).toHaveValue('');
+  }
+
+  // `/` types normally in other fields; Ctrl+K still opens search from them.
+  await page.evaluate(() => document.querySelector('main').append(Object.assign(document.createElement('textarea'), { id: 'probe' })));
+  await page.locator('#probe').focus();
+  await page.keyboard.press('/');
+  await expect(page.locator('#probe')).toHaveValue('/');
+  await expect(dialog).toBeHidden();
+  await page.keyboard.press('Control+k');
+  await expect(input).toBeFocused();
+
+  // A click on the backdrop closes the dialog.
+  await page.mouse.click(10, 700);
+  await expect(dialog).toBeHidden();
+  await expect(page.locator('#probe')).toBeFocused();
+});
+
+test('search combobox: arrow keys move the active option and Enter opens it', async ({ page }) => {
+  await mockAlgolia(page);
+  await page.locator('#search-toggle-desktop').click();
+  const input = page.getByRole('combobox', { name: 'Search' });
+  await expect(input).toHaveAttribute('aria-expanded', 'false');
+  await expect(input).toHaveAttribute('aria-controls', 'search-results');
+  await input.fill('kw');
+  const listbox = page.getByRole('listbox', { name: 'Search results' });
+  const options = listbox.getByRole('option');
+  await expect(options).toHaveCount(3);
+  await expect(input).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.getByRole('status')).toHaveText('Search results: 3');
+  await expect(input).not.toHaveAttribute('aria-activedescendant');
+
+  const expectActive = async index => {
+    const id = await options.nth(index).getAttribute('id');
+    await expect(input).toHaveAttribute('aria-activedescendant', id);
+    await expect(options.nth(index)).toHaveAttribute('aria-selected', 'true');
+    await expect(listbox.locator('[aria-selected="true"]')).toHaveCount(1);
+  };
+  await page.keyboard.press('ArrowDown');
+  await expectActive(0);
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('ArrowDown');
+  await expectActive(2);
+  await page.keyboard.press('ArrowDown');
+  await expectActive(0);
+  await page.keyboard.press('ArrowUp');
+  await expectActive(2);
+  await expect(input).toBeFocused();
+
+  // Typing starts over from the first option.
+  await input.fill('kx');
+  await expect(options.first()).toContainText('kx guide');
+  await expect(input).not.toHaveAttribute('aria-activedescendant');
+  await page.keyboard.press('ArrowUp');
+  await expectActive(2);
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/algolia\/blog\/math\/$/);
+});
+
+test('search: Enter without an active option opens the first result; no results are announced', async ({ page }) => {
+  await page.goto('/fuse/blog/');
+  await page.keyboard.press('/');
+  const input = page.locator('#search-input');
+  await input.fill('NoSuchWordAnywhere');
+  await expect(page.locator('.search-empty')).toBeVisible();
+  await expect(page.getByRole('status')).toHaveText('No results found');
+  await expect(input).toHaveAttribute('aria-expanded', 'false');
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/fuse\/blog\/$/);
+  await input.fill('Needle');
+  await expect(page.locator('.suggestion-title').first()).toContainText('Search <guide> & safety');
+  await page.locator('#search-clear').click();
+  await expect(input).toHaveValue('');
+  await expect(input).toBeFocused();
+  await expect(page.locator('#search-results [role="option"]')).toHaveCount(0);
+  await expect(page.locator('#search-results')).toBeHidden();
+  await input.fill('Needle');
+  await expect(page.locator('.suggestion-title').first()).toBeVisible();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/fuse\/blog\/guide\/$/);
+});
+
+test('search: Enter during a pending query opens the new first result, never a stale or unsafe one', async ({ page }) => {
+  await page.goto('/algolia/blog/');
+  await page.evaluate(() => {
+    const slugs = { kw: ['guide', 'gallery'], slow: ['math', 'guide'] };
+    window['algoliasearch/lite'] = { liteClient: () => ({ search: async ({ requests: [{ query }] }) => {
+      if (query === 'slow') await new Promise(resolve => setTimeout(resolve, 600));
+      const hits = query === 'evil'
+        ? [{ uri: 'javascript:window.__pwned=1', title: 'evil', content: 'evil' }]
+        : (slugs[query] || []).map(slug => ({ uri: `/algolia/blog/${slug}/`, title: `${query} ${slug}`, content: query }));
+      return { results: [{ hits }] };
+    } }) };
+  });
+  await page.keyboard.press('/');
+  const input = page.locator('#search-input');
+  const options = page.locator('#search-results [role="option"]');
+
+  await input.fill('evil');
+  await expect(options).toHaveCount(1);
+  await page.keyboard.press('Enter');
+  await options.first().click();
+  expect(await page.evaluate(() => window.__pwned)).toBeUndefined();
+  await expect(page).toHaveURL(/\/algolia\/blog\/$/);
+
+  // Confirming an IME candidate in Safari sends Enter with keyCode 229.
+  await input.fill('kw');
+  await expect(options).toHaveCount(2);
+  await input.evaluate(el => el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', keyCode: 229, bubbles: true, cancelable: true })));
+  await page.waitForTimeout(200);
+  await expect(page).toHaveURL(/\/algolia\/blog\/$/);
+
+  await page.keyboard.press('ArrowDown');
+  await input.fill('slow');
+  await expect(page.locator('#search-results')).toHaveAttribute('aria-busy', 'true');
+  await expect(input).not.toHaveAttribute('aria-activedescendant');
+  await page.keyboard.press('ArrowDown');
+  await expect(input).not.toHaveAttribute('aria-activedescendant');
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/algolia\/blog\/math\/$/);
+});
+
+test('search: visitors can turn off the / shortcut and the choice persists', async ({ page }) => {
+  await page.goto('/fuse/blog/');
+  const toggle = page.locator('#search-toggle-desktop');
+  const dialog = page.locator('#search-dialog');
+  await expect(toggle).toHaveAttribute('aria-keyshortcuts', '/ Control+K Meta+K');
+  await toggle.click();
+  const checkbox = page.getByRole('checkbox', { name: 'Press / to open search' });
+  await expect(checkbox).toBeChecked();
+  await checkbox.uncheck();
+  await expect(toggle).toHaveAttribute('aria-keyshortcuts', 'Control+K Meta+K');
+  await page.keyboard.press('Escape');
+  await page.keyboard.press('/');
+  await expect(dialog).toBeHidden();
+  await page.reload();
+  await page.keyboard.press('/');
+  await expect(dialog).toBeHidden();
+  await page.keyboard.press('Control+k');
+  await expect(dialog).toBeVisible();
+  await expect(checkbox).not.toBeChecked();
+  await checkbox.check();
+  await page.keyboard.press('Escape');
+  await page.keyboard.press('/');
+  await expect(dialog).toBeVisible();
+});
+
+test('search: pending results cannot be opened and same-page results close the dialog', async ({ page }) => {
+  await page.goto('/algolia/blog/guide/');
+  await page.evaluate(() => {
+    window.openedSearchTabs = [];
+    window.open = url => { window.openedSearchTabs.push(url); return null; };
+    const pending = new Promise(resolve => { window.finishSearch = resolve; });
+    window['algoliasearch/lite'] = { liteClient: () => ({ search: async ({ requests: [{ query }] }) => {
+      const next = query === 'next';
+      if (next) await pending;
+      const uri = next ? '#final-section' : '/algolia/blog/gallery/';
+      return { results: [{ hits: [{ uri, title: query, content: query }] }] };
+    } }) };
+  });
+  const toggle = page.locator('#search-toggle-desktop');
+  await toggle.click();
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const input = dialog.getByRole('combobox');
+  const listbox = dialog.getByRole('listbox');
+  const option = listbox.getByRole('option');
+  const openedTabs = () => page.evaluate(() => window.openedSearchTabs);
+  await input.fill('first');
+  await expect(option).toContainText('first');
+  await input.fill('next');
+  await expect(listbox).toHaveAttribute('aria-busy', 'true');
+
+  await option.click({ button: 'middle' });
+  expect(await openedTabs()).toEqual([]);
+  await option.click();
+  await expect(page).toHaveURL(/\/algolia\/blog\/guide\/$/);
+  for (const key of ['Control+Enter', 'Meta+Enter', 'Shift+Enter']) await input.press(key);
+  await page.evaluate(() => window.finishSearch());
+  await expect(option).toContainText('next');
+  expect(await openedTabs()).toEqual([]);
+
+  await input.press('Control+Enter');
+  expect(await openedTabs()).toEqual([expect.stringMatching(/\/guide\/#final-section$/)]);
+  await input.press('Enter');
+  await expect(page).toHaveURL(/\/guide\/#final-section$/);
+  await expect(dialog).toBeHidden();
+  await expect(toggle).not.toBeFocused();
+});
+
+test('search: the / shortcut can be turned off when browser storage is full', async ({ page }) => {
+  await page.addInitScript(() => {
+    const setItem = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (key, value) {
+      if (key === 'search-slash') throw new DOMException('Storage is full', 'QuotaExceededError');
+      return setItem.call(this, key, value);
+    };
+  });
+  await page.goto('/fuse/blog/');
+  const toggle = page.locator('#search-toggle-desktop');
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const checkbox = dialog.getByRole('checkbox', { name: 'Press / to open search' });
+  await toggle.click();
+  await checkbox.uncheck();
+  await expect(checkbox).not.toBeChecked();
+  await expect(toggle).toHaveAttribute('aria-keyshortcuts', 'Control+K Meta+K');
+  await page.keyboard.press('Escape');
+  await page.keyboard.press('/');
+  await expect(dialog).toBeHidden();
+  await page.keyboard.press('Control+k');
+  await expect(checkbox).not.toBeChecked();
+});
+
+test('lunr: a failed Chinese segmenter load is retried by the next search', async ({ page }) => {
+  let attempts = 0;
+  await page.route('**/lunr.segmentit*.js', route => attempts++ ? route.continue() : route.abort());
+  await page.goto('/lunr/blog/zh-cn/');
+  await page.locator('#search-toggle-desktop').click();
+  await expect.poll(() => attempts).toBe(1);
+  await page.locator('#search-input').fill('中文');
+  await expect(page.locator('.suggestion-title').first()).toContainText('中文搜索指南');
+  expect(attempts).toBe(2);
+});
+
+test('search: closing and reopening invalidates a queued Enter', async ({ page }) => {
+  await page.goto('/algolia/blog/guide/');
+  await page.evaluate(() => {
+    window['algoliasearch/lite'] = { liteClient: () => ({ search: async ({ requests: [{ query }] }) => {
+      if (query === 'old') await new Promise(resolve => { window.finishOldSearch = resolve; });
+      return { results: [{ hits: [{ uri: '#final-section', title: query, content: query }] }] };
+    } }) };
+  });
+  const toggle = page.locator('#search-toggle-desktop');
+  await toggle.click();
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const input = dialog.getByRole('combobox');
+  await input.fill('old');
+  await expect.poll(() => page.evaluate(() => Boolean(window.finishOldSearch))).toBe(true);
+  await input.press('Enter');
+  await page.evaluate(() => {
+    document.getElementById('search-dialog').close();
+    document.getElementById('search-toggle-desktop').click();
+    window.finishOldSearch();
+  });
+  await expect(dialog).toBeVisible();
+  await expect(input).toBeFocused();
+  await expect(input).toHaveValue('');
+  await expect(page).toHaveURL(/\/guide\/$/);
+  await input.fill('fresh');
+  await expect(dialog.getByRole('option')).toContainText('fresh');
+  await input.press('Enter');
+  await expect(page).toHaveURL(/\/guide\/#final-section$/);
+});
+
+test('mobile: search footer and last result fit above the keyboard', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await mockAlgolia(page);
+  await page.locator('#search-toggle-mobile').click();
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const input = dialog.getByRole('combobox');
+  const listbox = dialog.getByRole('listbox');
+  await input.fill('mobile');
+  const last = listbox.getByRole('option').last();
+  await expect(last).toBeAttached();
+  await page.evaluate(() => {
+    Object.defineProperty(window.visualViewport, 'height', { configurable: true, value: 220 });
+    window.visualViewport.dispatchEvent(new Event('resize'));
+    Object.defineProperty(window.visualViewport, 'offsetTop', { configurable: true, value: 35 });
+    window.visualViewport.dispatchEvent(new Event('scroll'));
+  });
+  await expect(dialog).toHaveCSS('height', '220px');
+  await expect(dialog).toHaveCSS('top', '35px');
+  await input.press('ArrowUp');
+  await expect(last).toHaveAttribute('aria-selected', 'true');
+  await expect.poll(() => dialog.evaluate(el => {
+    const list = el.querySelector('#search-results').getBoundingClientRect();
+    const option = el.querySelector('#search-results li:last-child').getBoundingClientRect();
+    const footer = el.querySelector('.search-footer').getBoundingClientRect();
+    return option.top >= list.top && option.bottom <= list.bottom && footer.bottom <= 255;
+  })).toBe(true);
+});
+
+for (const { name, viewport } of [{ name: 'desktop', viewport: { width: 1280, height: 800 } }, { name: 'mobile', viewport: { width: 390, height: 844 } }]) {
+  test(`${name}: the open search dialog has no critical or region axe violations`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    await page.goto('/fuse/blog/');
+    await page.locator(`#search-toggle-${name}`).click();
+    await page.locator('#search-input').fill('Needle');
+    await expect(page.locator('.suggestion-title').first()).toBeVisible();
+    await page.keyboard.press('ArrowDown');
+    const { violations } = await new AxeBuilder({ page }).analyze();
+    expect(violations.filter(v => v.impact === 'critical' || v.id === 'region').map(v => `${v.id}: ${v.nodes.map(n => n.target).join(', ')}`)).toEqual([]);
+  });
+}
 
 test('Mermaid survives cached content; math, copy controls and persisted theme work', async ({ page }) => {
   const errors = [];
@@ -92,6 +430,34 @@ test('Mermaid survives cached content; math, copy controls and persisted theme w
   expect(errors).toEqual([]);
 });
 
+// The referrer meta tag is covered by tests/security-defaults.test.mjs; the fixture overrides head/meta.html.
+test('Mermaid uses securityLevel "strict" unless the config says "loose"', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('/fuse/blog/guide/');
+  await expect(page.locator('.mermaid svg')).toBeVisible();
+  const securityLevel = () => page.evaluate(() => mermaid.mermaidAPI.getConfig().securityLevel);
+  expect(await page.evaluate(() => window.config.mermaid)).toEqual({ securityLevel: 'strict' });
+  expect(await securityLevel()).toBe('strict');
+  // The theme switch re-initializes Mermaid from window.config.
+  const rerender = async mermaidConfig => {
+    await page.evaluate(value => {
+      if (value === undefined) delete window.config.mermaid;
+      else window.config.mermaid = value;
+      document.querySelector('.mermaid').innerHTML = '';
+    }, mermaidConfig);
+    await page.locator('#header-desktop .theme-switch').click();
+    await expect(page.locator('.mermaid svg')).toBeVisible();
+  };
+  await rerender({ securityLevel: 'loose' });
+  expect(await securityLevel()).toBe('loose');
+  await rerender({ securityLevel: 'antiscript' });
+  expect(await securityLevel()).toBe('strict');
+  await rerender(undefined);
+  expect(await securityLevel()).toBe('strict');
+  expect(errors).toEqual([]);
+});
+
 test('mobile navigation and search survive resizing', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/fuse/blog/');
@@ -104,14 +470,21 @@ test('mobile navigation and search survive resizing', async ({ page }) => {
   await expect(page.locator('#menu-mobile')).not.toHaveClass(/active/);
   await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
   await menuToggle.click();
-  await page.locator('#search-input-mobile').fill('Needle');
-  await expect(page.locator('#search-dropdown-mobile .suggestion-title')).toContainText('Search');
-  await page.locator('#search-cancel-mobile').click();
+  await page.locator('#search-toggle-mobile').click();
   await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator('#search-input')).toBeFocused();
+  const dialog = await page.locator('#search-dialog').boundingBox();
+  expect(dialog).toMatchObject({ x: 0, y: 0, width: 390, height: 844 });
+  await page.locator('#search-input').fill('Needle');
+  await expect(page.locator('#search-results .suggestion-title')).toContainText('Search');
+  await page.locator('#search-cancel').click();
+  await expect(page.locator('#search-dialog')).toBeHidden();
+  await expect(page.locator('#search-toggle-mobile')).toBeFocused();
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.locator('#search-toggle-desktop').click();
-  await page.locator('#search-input-desktop').fill('Needle');
-  await expect(page.locator('#search-dropdown-desktop .suggestion-title')).toContainText('Search');
+  await expect(page.locator('#search-input')).toHaveValue('');
+  await page.locator('#search-input').fill('Needle');
+  await expect(page.locator('#search-results .suggestion-title')).toContainText('Search');
 });
 
 test('header, share and back controls are labelled, keyboard-operable buttons', async ({ page }) => {
@@ -125,8 +498,8 @@ test('header, share and back controls are labelled, keyboard-operable buttons', 
 
   const header = page.locator('#header-desktop');
   await expect(header.getByRole('button', { name: 'Search' })).toBeVisible();
-  await expect(header.getByRole('button', { name: 'Clear', includeHidden: true })).toBeAttached();
-  await expect(header.getByRole('combobox', { name: 'Search' })).toBeAttached();
+  await expect(page.getByRole('button', { name: 'Clear', includeHidden: true })).toBeAttached();
+  await expect(page.getByRole('combobox', { name: 'Search', includeHidden: true })).toBeAttached();
   await expect(header.getByRole('combobox', { name: 'Select Language' })).toBeAttached();
 
   const themeSwitch = header.getByRole('button', { name: /^Switch Theme/ });
@@ -149,8 +522,68 @@ test('header, share and back controls are labelled, keyboard-operable buttons', 
   await expect(page).toHaveURL(/\/fuse\/blog\/$/);
 });
 
+test('theme icons are inline SVG and only content that uses Font Awesome loads it', async ({ page }) => {
+  const fontBytes = {};
+  const iconRequests = [];
+  page.on('requestfinished', async request => {
+    if (/\/lib\/(fontawesome-free|simple-icons)\//.test(request.url())) iconRequests.push(request.url());
+    if (request.resourceType() !== 'font') return;
+    const { responseBodySize } = await request.sizes();
+    fontBytes[page.url()] = (fontBytes[page.url()] || 0) + responseBodySize;
+  });
+  for (const path of ['/fuse/blog/', '/fuse/blog/gallery/', '/fuse/blog/tags/icons/', '/fuse/blog/404.html']) {
+    await page.goto(path, { waitUntil: 'networkidle' });
+    await expect(page.locator('link[href*="fontawesome"]')).toHaveCount(0);
+    await expect(page.locator('[data-svg-src], i[class*="fa-"]')).toHaveCount(0);
+    await expect(page.locator('#header-desktop .theme-switch svg.icon')).toHaveCount(3);
+    const { violations } = await new AxeBuilder({ page }).withRules(['svg-img-alt']).analyze();
+    expect(violations).toEqual([]);
+    expect(fontBytes[page.url()] || 0).toBeLessThanOrEqual(60 * 1024);
+  }
+  expect(iconRequests).toEqual([]);
+
+  // Icon-only social links are named by their icon.
+  await page.goto('/fuse/blog/');
+  await expect(page.locator('.home-profile .links svg[role="img"]').first()).toHaveAttribute('aria-label', /\S/);
+  // Each theme mode shows its own icon.
+  const visibleIcon = () => page.locator('#header-desktop .theme-switch svg:visible').getAttribute('class');
+  await expect.poll(visibleIcon).toContain('theme-icon-auto');
+  await page.locator('#header-desktop .theme-switch').click();
+  await expect.poll(visibleIcon).toContain('theme-icon-light');
+
+  await page.goto('/fuse/blog/font-awesome/');
+  await expect(page.locator('link[href*="fontawesome"]')).not.toHaveCount(0);
+  const rocket = page.locator('#content i.fas.fa-rocket');
+  await expect(rocket).toBeVisible();
+  await expect.poll(() => rocket.evaluate(icon => getComputedStyle(icon, '::before').fontFamily)).toContain('Font Awesome');
+  await expect(page.locator('#content .admonition svg.icon')).toHaveCount(3);
+  // Only the title icon is positioned; icons in the admonition body stay in the text flow.
+  await expect(page.locator('#content .admonition .admonition-content svg.icon')).toHaveCSS('position', 'static');
+  await expect(page.locator('#content').getByRole('img', { name: 'Checked', exact: true })).toHaveCount(2);
+  await expect(page.locator('#content').getByRole('img', { name: 'Unchecked', exact: true })).toHaveCount(1);
+  const { violations } = await new AxeBuilder({ page }).include('#content').withRules(['svg-img-alt', 'label']).analyze();
+  expect(violations).toEqual([]);
+
+  // HTML that the raw shortcode inserts after load still gets the webfont.
+  await page.goto('/fuse/blog/raw-icon/');
+  await expect(page.locator('link[href*="fontawesome"]')).not.toHaveCount(0);
+  await expect(page.locator('#content i.fas.fa-anchor')).toBeVisible();
+
+  // So does a byline whose author name uses a Font Awesome class.
+  await page.goto('/fuse/blog/author-icon/');
+  await expect(page.locator('link[href*="fontawesome"]')).not.toHaveCount(0);
+});
+
+test('icon prose does not load webfonts and local SVGs retain their fills', async ({ page }) => {
+  await page.goto('/fuse/blog/icon-prose/');
+  await expect(page.locator('link[href*="fontawesome"]')).toHaveCount(0);
+  const icon = page.getByRole('img', { name: 'Custom SVG' });
+  await expect(icon.locator('path').first()).toHaveCSS('fill', 'rgb(255, 0, 0)');
+  await expect(icon.locator('path').last()).toHaveCSS('fill', 'none');
+});
+
 for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/', dir: 'rtl' }]) {
-  test(`${dir}: header, search dropdown and auto TOC follow the language direction`, async ({ page }) => {
+  test(`${dir}: header, search dialog and auto TOC follow the language direction`, async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto(`/fuse/blog/${language}guide/`);
     await expect(page.locator('html')).toHaveAttribute('dir', dir);
@@ -170,9 +603,11 @@ for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/'
     await expect(toc).toHaveCSS(rtl ? 'border-right-width' : 'border-left-width', '4px');
 
     await page.locator('#search-toggle-desktop').click();
-    const dropdown = await box('#search-dropdown-desktop');
-    const viewport = page.viewportSize();
-    expect(rtl ? dropdown.x < viewport.width / 2 : dropdown.x > viewport.width / 2).toBe(true);
+    const input = await box('#search-input');
+    const cancel = await box('#search-cancel');
+    const icon = await box('#search-dialog .search-icon');
+    expect(rtl ? cancel.x < input.x : cancel.x > input.x).toBe(true);
+    expect(rtl ? icon.x > input.x + input.width / 2 : icon.x < input.x + input.width / 2).toBe(true);
   });
 }
 
@@ -211,11 +646,18 @@ test('a long auto TOC stays within the viewport and scrolls to the active sectio
 });
 
 test('first-screen avatar loads directly and scroll bursts share a frame', async ({ page }) => {
+  const { readsPngOrientation } = await hugoImageFeatures();
   await page.goto('/fuse/blog/');
   const avatar = page.locator('.home-avatar img');
   await expect(avatar).toHaveAttribute('loading', 'eager');
   await expect(avatar).toHaveAttribute('fetchpriority', 'high');
   await expect(avatar).not.toHaveAttribute('src', /loading\.svg/);
+  if (readsPngOrientation) {
+    await expect(avatar).toHaveAttribute('sizes', '6rem');
+    await expect(avatar).toHaveAttribute('srcset', /\.webp 480w, \S+avatar\.png 528w$/);
+  } else {
+    await expect(avatar).not.toHaveAttribute('srcset');
+  }
   const frames = await page.evaluate(() => {
     let count = 0;
     const original = window.requestAnimationFrame;
@@ -411,6 +853,7 @@ test('on phones the fixed buttons hide while scrolling down and come back when s
 });
 
 test('lightGallery opens linked images with thumbnails, zoom and SVG icons', async ({ page }) => {
+  const { encodesWebP } = await hugoImageFeatures();
   const errors = [];
   const missing = [];
   page.on('pageerror', error => errors.push(error.message));
@@ -431,7 +874,9 @@ test('lightGallery opens linked images with thumbnails, zoom and SVG icons', asy
   await expect(page.locator('.lg-current .lg-image')).toHaveAttribute('src', /Wavelength\.jpg$/);
   await expect(page.locator('.lg-sub-html h2')).toHaveText('Wavelength');
   await expect(page.locator('.lg-thumb-item')).toHaveCount(2);
-  // The second image sets its own thumbnail (src_s), which exThumbImage must pick up.
+  // The first thumbnail uses the smallest available copy. The second sets its own (src_s).
+  const firstThumbnail = encodesWebP ? /Wavelength_hu_\w+\.webp$/ : /Wavelength\.jpg$/;
+  await expect(page.locator('.lg-thumb-item img').first()).toHaveAttribute('src', firstThumbnail);
   await expect(page.locator('.lg-thumb-item img').nth(1)).toHaveAttribute('src', /Wavelength\.jpg$/);
   for (const button of ['.lg-close', '.lg-download', '.lg-toggle-thumb', '.lg-zoom-in', '.lg-zoom-out']) {
     await expect(page.locator(`.lg-toolbar ${button} svg`)).toBeVisible();
@@ -444,6 +889,103 @@ test('lightGallery opens linked images with thumbnails, zoom and SVG icons', asy
   await expect(outer).not.toHaveClass(/\blg-visible\b/);
   expect(errors).toEqual([]);
   expect(missing).toEqual([]);
+});
+
+test('local images get their size, WebP srcset and native lazy loading; others are left alone', async ({ page }) => {
+  const { encodesWebP, readsPngOrientation } = await hugoImageFeatures();
+  await page.goto('/fuse/blog/image-processing/');
+  await expect(page.locator('script[src*="lazysizes"], img.lazyload, img[data-src]')).toHaveCount(0);
+  const images = page.locator('#content img');
+  // Exif orientation 6: the 600x400 JPEG is shown 400x600, and its WebP copy is rotated to match.
+  const rotated = images.nth(0);
+  await expect(rotated).toHaveAttribute('src', /\/image-processing\/rotated\.jpg$/);
+  await expect(rotated).toHaveAttribute('width', '400');
+  await expect(rotated).toHaveAttribute('height', '600');
+  if (encodesWebP) {
+    await expect(rotated).toHaveAttribute('srcset', /^\S+\.webp 400w$/);
+    await expect(rotated).toHaveAttribute('sizes', /100vw/);
+  } else {
+    await expect(rotated).not.toHaveAttribute('srcset');
+    await expect(rotated).not.toHaveAttribute('sizes');
+  }
+  await expect(rotated).toHaveAttribute('loading', 'lazy');
+  await expect(rotated).toHaveAttribute('decoding', 'async');
+  await rotated.scrollIntoViewIfNeeded();
+  // naturalWidth follows the density that sizes gives the candidate, so compare the aspect ratio.
+  await expect.poll(() => rotated.evaluate(img => img.complete && [img.currentSrc.endsWith('.webp'), Math.round(img.naturalHeight / img.naturalWidth * 10) / 10]))
+    .toEqual([encodesWebP, 1.5]);
+  // A width alone gets the height that keeps the aspect ratio.
+  const narrow = images.nth(1);
+  await expect(narrow).toHaveAttribute('width', '200');
+  await expect(narrow).toHaveAttribute('height', '300');
+  // Files under static/ and remote images are used as they are.
+  for (const [index, src] of [[2, /\/android-chrome-192x192\.png$/], [3, /^https:\/\/cdn\.example\.com\/remote\.png$/]]) {
+    const image = images.nth(index);
+    await expect(image).toHaveAttribute('src', src);
+    await expect(image).not.toHaveAttribute('srcset');
+    await expect(image).not.toHaveAttribute('width');
+    await expect(image).toHaveAttribute('loading', 'lazy');
+  }
+  // Hugo reads a PNG's Exif orientation from 0.155.0 (.Meta); before that, only JPEG and TIFF orientation.
+  const png = images.nth(4);
+  const [pngWidth, pngHeight] = readsPngOrientation ? ['40', '60'] : ['60', '40'];
+  await expect(png).toHaveAttribute('width', pngWidth);
+  await expect(png).toHaveAttribute('height', pngHeight);
+  await png.scrollIntoViewIfNeeded();
+  if (encodesWebP && readsPngOrientation) {
+    await expect(png).toHaveAttribute('srcset', new RegExp(`^\\S+\\.webp ${pngWidth}w$`));
+    await expect.poll(() => png.evaluate(img => img.complete && [img.currentSrc.endsWith('.webp'), Math.round(img.naturalHeight / img.naturalWidth * 10) / 10]))
+      .toEqual([true, 1.5]);
+  } else {
+    await expect(png).not.toHaveAttribute('srcset');
+    await expect.poll(() => png.evaluate(img => img.currentSrc.endsWith('/oriented.png') && img.naturalWidth > 0)).toBe(true);
+    await expect.poll(() => png.evaluate(img => img.naturalHeight / img.naturalWidth)).toBeCloseTo(1.5);
+  }
+  // Animated PNG and WebP keep their animation: their size, but no WebP copies.
+  // The APNG has a text chunk that mentions IDAT and acTL before its real acTL chunk.
+  for (const [index, size] of [[5, ['60', '40']], [6, ['160', '33']]]) {
+    const image = images.nth(index);
+    await expect(image).toHaveAttribute('src', /\/image-processing\/animated\.(png|webp)$/);
+    await expect(image).not.toHaveAttribute('srcset');
+    await expect(image).toHaveAttribute('width', size[0]);
+    await expect(image).toHaveAttribute('height', size[1]);
+  }
+  // A width of 0 counts as missing.
+  await expect(images.nth(7)).toHaveAttribute('width', '400');
+  await expect(images.nth(7)).toHaveAttribute('height', '600');
+  // An oriented JPEG Hugo cannot decode keeps its size and is used as it is, without failing the build.
+  const broken = images.nth(8);
+  await expect(broken).toHaveAttribute('src', /\/image-processing\/broken\.jpg$/);
+  await expect(broken).toHaveAttribute('width', '400');
+  await expect(broken).toHaveAttribute('height', '600');
+  await expect(broken).not.toHaveAttribute('srcset');
+
+  const truncated = page.getByAltText('Truncated JPEG', { exact: true });
+  await expect(truncated).toHaveAttribute('src', /\/image-processing\/truncated\.jpg$/);
+  await expect(truncated).toHaveAttribute('width', '120');
+  await expect(truncated).not.toHaveAttribute('height');
+  await expect(truncated).not.toHaveAttribute('srcset');
+
+  const paddedApng = page.locator('#content img[title="APNG with metadata"]');
+  await expect(paddedApng).toHaveAttribute('src', /\/image-processing\/animated-metadata\.png$/);
+  await expect(paddedApng).toHaveAttribute('width', '60');
+  await expect(paddedApng).toHaveAttribute('height', '40');
+  await expect(paddedApng).not.toHaveAttribute('srcset');
+
+  // The bundle's featured image is the first-screen image: loaded at once with a high priority.
+  const featured = page.locator('.featured-image img');
+  await expect(featured).toHaveAttribute('src', /\/image-processing\/featured-image\.jpg$/);
+  await expect(featured).toHaveAttribute('fetchpriority', 'high');
+  await expect(featured).toHaveAttribute('loading', 'eager');
+  await expect(featured).not.toHaveAttribute('decoding');
+  await expect(featured).toHaveAttribute('width', '600');
+  await expect(featured).toHaveAttribute('height', '400');
+  await expect.poll(() => featured.evaluate(img => img.offsetWidth === img.parentElement.clientWidth)).toBe(true);
+  if (encodesWebP) {
+    await expect(featured).toHaveAttribute('srcset', /^\S+\.webp 600w$/);
+  } else {
+    await expect(featured).not.toHaveAttribute('srcset');
+  }
 });
 
 test('lightGallery keeps the zoom buttons and mobile defaults on phones', async ({ browser }) => {
@@ -688,4 +1230,165 @@ test('home page and its feed list the posts section and pages typed "posts" or "
   expect(feed).toContain('<title>Posts type elsewhere</title>');
   expect(feed).toContain('<title>Post type elsewhere</title>');
   expect(feed).not.toContain('<title>Plain note</title>');
+});
+
+test.describe('heading anchors without JavaScript', () => {
+  test.use({ javaScriptEnabled: false });
+
+  test('are built into article headings, named by them and keep their formatting', async ({ page }) => {
+    await page.goto('/fuse/blog/headings/');
+    const content = page.locator('.content#content');
+    const anchors = content.locator('> :is(h2, h3, h4, h5, h6) > a.header-mark');
+    await expect(anchors).toHaveCount(5);
+    for (const [id, name] of [
+      ['plain-section', 'Plain section'],
+      ['section-with-code-and-emphasis', 'Section with code and emphasis'],
+      ['custom-id', 'Custom attributes'],
+      ['content', 'Content'],
+      ['last-section', 'Last section'],
+    ]) {
+      const anchor = content.locator(`#${id} > a.header-mark`);
+      await expect(anchor).toBeVisible();
+      await expect(anchor).toHaveAttribute('href', `#${id}`);
+      await expect(anchor).toHaveAccessibleName(name);
+      // The decorative "#" or "|" mark stays out of the heading's own name.
+      await expect(content.getByRole('heading', { name, exact: true })).toHaveAttribute('id', id);
+    }
+    const formatted = content.locator('#section-with-code-and-emphasis');
+    await expect(formatted.locator('code')).toHaveText('code');
+    await expect(formatted.locator('em')).toHaveText('emphasis');
+    const custom = content.locator('#custom-id');
+    await expect(custom).toHaveClass('custom-class');
+    await expect(custom).toHaveAttribute('data-count', '42');
+    await expect(custom).toHaveAttribute('title', 'Say "hi" & <go>');
+    // Headings the theme never marked keep no visible or focusable anchor.
+    await expect(content.locator('#top-level-heading > a.header-mark')).toBeHidden();
+    await expect(content.locator('.admonition #nested-heading > a.header-mark')).toBeHidden();
+    // An empty heading keeps its ID but gets no unnamed link. It sits in the admonition to stay out of the TOC.
+    await expect(content.locator('h5#divider')).toBeAttached();
+    await expect(content.locator('#divider > a')).toHaveCount(0);
+    await expect(content.locator('h5#space-divider')).toBeAttached();
+    await expect(content.locator('#space-divider > a')).toHaveCount(0);
+    await expect(content.locator('h5#formatted-space-divider')).toBeAttached();
+    await expect(content.locator('#formatted-space-divider > a')).toHaveCount(0);
+
+    await content.locator('#last-section > a.header-mark').click();
+    await expect(page).toHaveURL(/\/headings\/#last-section$/);
+  });
+
+  test('stay out of the feed and the Markdown output', async ({ request }) => {
+    const feed = await (await request.get('/fuse/blog/index.xml')).text();
+    expect(feed).toContain('<h2 id="plain-section">Plain section</h2>');
+    expect(feed).not.toContain('header-mark');
+    const markdown = await (await request.get('/fuse/blog/headings/index.md')).text();
+    expect(markdown).toContain('## Plain section');
+    expect(markdown).not.toContain('header-mark');
+  });
+});
+
+test('every link on an article with heading anchors has an accessible name', async ({ page }) => {
+  await page.goto('/fuse/blog/headings/');
+  const { violations } = await new AxeBuilder({ page }).withRules(['link-name']).analyze();
+  expect(violations).toEqual([]);
+});
+
+for (const missing of [false, true]) {
+  test(`the auto TOC follows the article headings it links to${missing ? ', skipping links without a heading' : ''}`, async ({ page }) => {
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    // With autoHeadingID off, Hugo links headings that have no ID to "#".
+    if (missing) {
+      await page.route('**/fuse/blog/headings/', async route => {
+        const response = await route.fetch();
+        const body = (await response.text()).replace(/<a href=["']?#(plain-section|section-with-code-and-emphasis)["']?>/g, '<a href="#">');
+        await route.fulfill({ response, body });
+      });
+    }
+    await page.setViewportSize({ width: 1280, height: 400 });
+    await page.goto('/fuse/blog/headings/');
+    const content = page.locator('#toc-content-auto');
+    await expect(page.locator('#toc-auto')).toBeVisible();
+    if (missing) await expect(content.locator('a[href="#"]')).toHaveCount(2);
+    const sections = [['custom-id', 'Custom attributes'], ['content', 'Content'], ['last-section', 'Last section']];
+    if (!missing) sections.unshift(['plain-section', 'Plain section']);
+    for (const [id, name] of sections) {
+      await page.locator(`.content :is(h2, h3)[id="${id}"]`).evaluate(heading => {
+        const top = heading.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: top - 10, behavior: 'instant' });
+      });
+      await expect(content.locator('a.active')).toHaveText(name);
+    }
+    expect(errors).toEqual([]);
+  });
+}
+
+test('Read More links name their post, microdata uses https and summaries keep it', async ({ page }) => {
+  await page.goto('/fuse/blog/');
+  const readMore = page.locator('.home .summary .post-footer > a').first();
+  // Only "Read More" shows; the post title stays in the link text for crawlers but off screen.
+  await expect(readMore).toHaveAccessibleName(/^Read More: \S/);
+  const typed = page.getByRole('link', { name: 'Read More: Typed post' });
+  await expect(typed).toHaveText('Read More Typed post', { useInnerText: true });
+  expect(await typed.evaluate(link => link.firstChild.textContent)).toBe('Read More');
+  const hidden = await typed.locator('.visually-hidden').boundingBox();
+  expect(hidden.width * hidden.height).toBeLessThanOrEqual(1);
+  await typed.focus();
+  await expect(typed).toBeFocused();
+  const literalTitle = 'std::vector<int> & 😄';
+  const literal = page.getByRole('link', { name: `Read More: ${literalTitle}`, exact: true });
+  await expect(literal.locator('.visually-hidden')).toHaveText(literalTitle);
+  await expect(page.locator('[itemtype^="http:"]')).toHaveCount(0);
+  await expect(page.locator('.summary[itemtype="https://schema.org/Article"]').first()).toBeAttached();
+  await expect(page.locator('.footer [itemtype="https://schema.org/CreativeWork"]')).toHaveCount(1);
+  await page.goto('/fuse/blog/zh-cn/');
+  await expect(page.getByRole('link', { name: '阅读全文：中文搜索指南' })).toHaveCount(1);
+});
+
+test('footnotes and their references are highlighted when a link jumps to them', async ({ browser, page }) => {
+  await page.goto('/fuse/blog/long-toc/');
+  const reference = page.locator('sup[id^="fnref"]').first();
+  const note = page.locator('.footnotes li').first();
+  await expect(note).not.toHaveCSS('outline-style', 'solid');
+  await reference.locator('a').focus();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#fn:1$/);
+  await expect(note).toHaveCSS('outline-style', 'solid');
+  await expect(note).toHaveCSS('animation-name', 'footnote-target');
+  await expect(note).toBeInViewport();
+  await note.locator('a.footnote-backref').focus();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#fnref:1$/);
+  await expect(reference).toHaveCSS('outline-style', 'solid');
+  await expect(note).not.toHaveCSS('outline-style', 'solid');
+
+  // Highlighted text and links keep at least 4.5:1 contrast in both themes.
+  const contrast = locator => locator.evaluate(element => {
+    const rgba = value => value.match(/[\d.]+/g).map(Number);
+    const over = ([r, g, b, a = 1], [br, bg, bb]) => [r * a + br * (1 - a), g * a + bg * (1 - a), b * a + bb * (1 - a)];
+    const target = element.closest(':target');
+    const background = over(rgba(getComputedStyle(target).backgroundColor), rgba(getComputedStyle(document.body).backgroundColor));
+    const luminance = rgb => rgb.map(v => v / 255).map(v => v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)
+      .reduce((sum, v, i) => sum + v * [0.2126, 0.7152, 0.0722][i], 0);
+    const [a, b] = [luminance(over(rgba(getComputedStyle(element).color), background)), luminance(background)];
+    return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+  });
+  for (const theme of ['light', 'dark']) {
+    await page.goto('/fuse/blog/long-toc/#fnref:1');
+    await page.evaluate(theme => document.body.setAttribute('theme', theme), theme);
+    expect(await contrast(reference.locator('a'))).toBeGreaterThanOrEqual(4.5);
+    await page.goto('/fuse/blog/long-toc/#fn:1');
+    await page.evaluate(theme => document.body.setAttribute('theme', theme), theme);
+    expect(await contrast(note.locator('p'))).toBeGreaterThanOrEqual(4.5);
+    expect(await contrast(note.locator('a.footnote-backref'))).toBeGreaterThanOrEqual(4.5);
+  }
+  await expect(note).toHaveCSS('outline-color', 'rgb(85, 189, 226)');
+
+  // Reduced motion keeps the highlight but drops the animation.
+  const context = await browser.newContext({ reducedMotion: 'reduce' });
+  const reduced = await context.newPage();
+  await reduced.goto('/fuse/blog/long-toc/#fn:1');
+  const reducedNote = reduced.locator('.footnotes li').first();
+  await expect(reducedNote).toHaveCSS('outline-style', 'solid');
+  await expect(reducedNote).toHaveCSS('animation-name', 'none');
+  await context.close();
 });

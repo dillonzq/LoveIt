@@ -143,6 +143,16 @@
     # https://content-security-policy.com/examples/meta/
     # 当无法设置 HTTP 响应头时使用的 Content-Security-Policy meta 标签
     # contentSecurityPolicy = "default-src 'self'"
+    # referrer policy of the <meta name="referrer"> tag
+    # set "no-referrer" to send no Referer header at all
+    # <meta name="referrer"> 标签的引荐来源策略
+    # 设置为 "no-referrer" 则完全不发送 Referer 请求头
+    referrerPolicy = "strict-origin-when-cross-origin"
+    # Mermaid securityLevel ["strict", "loose"]
+    # "loose" allows click events and HTML labels in diagrams
+    # Mermaid 安全级别 ["strict", "loose"]
+    # "loose" 允许图表中的点击事件和 HTML 标签
+    mermaidSecurityLevel = "strict"
 
   # Search config
   # 搜索配置
@@ -342,6 +352,13 @@
     # whether to enable the fontawesome extended syntax
     # 是否使用 fontawesome 扩展语法
     fontawesome = true
+    # when to load the Font Awesome stylesheet and webfonts ["auto", true, false]
+    # "auto": only on pages whose content or configured HTML (menu, footer...) uses Font Awesome classes,
+    # the theme's own icons are inline SVG; true: always, e.g. for your own layouts that use them; false: never
+    # 何时加载 Font Awesome 样式和字体 ["auto", true, false]
+    # "auto": 仅在内容或配置的 HTML (菜单, 页脚...) 使用 Font Awesome 类的页面加载, 主题自身图标为内联 SVG;
+    # true: 总是加载, 例如你自己的布局使用了它; false: 从不加载
+    fontawesomeCSS = "auto"
     # whether to show link to Raw Markdown content of the content
     # 是否显示原始 Markdown 文档内容的链接
     linkToMarkdown = true

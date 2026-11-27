@@ -98,6 +98,12 @@ other = "ยกเลิก"
 [noResultsFound]
 other = "ไม่พบเนื้อหา"
 
+[searchResults]
+other = "ผลการค้นหา"
+
+[searchSlashShortcut]
+other = "กด / เพื่อเปิดการค้นหา"
+
 [lunrLanguageCode]
 other = "th"
 
@@ -160,6 +166,9 @@ other = "หน้าหลัก"
 
 [readMore]
 other = "อ่านเพิ่มเติม"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -224,3 +233,10 @@ other = "ลบ"
 [deprecated]
 other = "เลิกใช้"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "เลือกแล้ว"
+
+[taskUnchecked]
+other = "ยังไม่ได้เลือก"

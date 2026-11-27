@@ -98,6 +98,12 @@ other = "Avbryt"
 [noResultsFound]
 other = "Inga resultat hittades"
 
+[searchResults]
+other = "Sökresultat"
+
+[searchSlashShortcut]
+other = "Tryck på / för att öppna sökningen"
+
 [lunrLanguageCode]
 other = "sv"
 
@@ -157,6 +163,9 @@ other = "Hem"
 
 [readMore]
 other = "Läs mer"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -221,3 +230,10 @@ other = "BORTTAGEN"
 [deprecated]
 other = "FÖRÅLDRAD"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Markerad"
+
+[taskUnchecked]
+other = "Inte markerad"

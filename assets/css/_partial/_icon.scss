@@ -1,12 +1,18 @@
+// Inline SVG icons (plugin/icon.html), sized like Font Awesome 7 glyphs.
 svg.icon {
   display: inline-block;
   width: 1.25em;
   height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
   text-align: center;
+}
 
-  path {
-    fill: currentColor;
-  }
+img.icon {
+  width: 1.25em;
+  height: 1em;
+  object-fit: contain;
+  vertical-align: -0.125em;
 }
 
 img.emoji {
@@ -14,4 +20,18 @@ img.emoji {
   width: 1em;
   margin: 0 .05em 0 .1em;
   vertical-align: -.1em;
+}
+
+.icon-spin {
+  animation: icon-spin 2s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes icon-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

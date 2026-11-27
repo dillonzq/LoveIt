@@ -98,6 +98,12 @@ other = "Anulare"
 [noResultsFound]
 other = "Nici un rezultat gasit"
 
+[searchResults]
+other = "Rezultatele căutării"
+
+[searchSlashShortcut]
+other = "Apasă / pentru a deschide căutarea"
+
 [lunrLanguageCode]
 other = "ro"
 
@@ -160,6 +166,9 @@ other = "Acasă"
 
 [readMore]
 other = "Citește mai mult"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -224,3 +233,10 @@ other = "ȘTERS"
 [deprecated]
 other = "ÎNVECHIT"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Bifat"
+
+[taskUnchecked]
+other = "Nebifat"

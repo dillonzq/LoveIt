@@ -98,6 +98,12 @@ other = "Huỷ"
 [noResultsFound]
 other = "Không tìm thấy"
 
+[searchResults]
+other = "Kết quả tìm kiếm"
+
+[searchSlashShortcut]
+other = "Nhấn / để mở tìm kiếm"
+
 [lunrLanguageCode]
 other = "vi"
 
@@ -160,6 +166,9 @@ other = "Trang chủ"
 
 [readMore]
 other = "Đọc thêm"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -224,3 +233,10 @@ other = "XOÁ"
 [deprecated]
 other = "LỖI THỜI"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Đã chọn"
+
+[taskUnchecked]
+other = "Chưa chọn"

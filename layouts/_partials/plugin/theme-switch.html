@@ -1,4 +1,7 @@
 {{- /* Theme switch button; theme.js appends the current mode to its label */ -}}
 <button type="button" class="menu-item theme-switch link-like" title="{{ T `switchTheme` }}" aria-label="{{ T `switchTheme` }}" data-label="{{ T `switchTheme` }}" data-label-auto="{{ T `themeAuto` }}" data-label-light="{{ T `themeLight` }}" data-label-dark="{{ T `themeDark` }}">
-    <i class="fas fa-adjust" aria-hidden="true"></i>
+    {{- /* CSS shows the icon of the configured mode: auto, light or dark */ -}}
+    {{ dict "Class" "theme-icon-auto fas fa-circle-half-stroke" | partial "plugin/icon.html" }}
+    {{- dict "Class" "theme-icon-light fas fa-sun" | partial "plugin/icon.html" }}
+    {{- dict "Class" "theme-icon-dark fas fa-moon" | partial "plugin/icon.html" }}
 </button>

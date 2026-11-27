@@ -99,6 +99,12 @@ other = "రద్దు"
 [noResultsFound]
 other = "ఎటువంటి ఫలితాలు లభించలేదు"
 
+[searchResults]
+other = "శోధన ఫలితాలు"
+
+[searchSlashShortcut]
+other = "శోధనను తెరవడానికి / నొక్కండి"
+
 [lunrLanguageCode]
 # not supported
 other = "te"
@@ -159,6 +165,9 @@ other = "ప్రథమ"
 
 [readMore]
 other = "ఇంకా చదవండి"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -223,3 +232,10 @@ other = "తొలగించిన"
 [deprecated]
 other = "కాలం చెల్లినది"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "ఎంచుకోబడింది"
+
+[taskUnchecked]
+other = "ఎంచుకోబడలేదు"

@@ -98,6 +98,12 @@ other = "Поништи"
 [noResultsFound]
 other = "Без резултата"
 
+[searchResults]
+other = "Резултати претраге"
+
+[searchSlashShortcut]
+other = "Отвори претрагу тастером /"
+
 [lunrLanguageCode]
 other = "sr"
 
@@ -157,6 +163,9 @@ other = "Почетна"
 
 [readMore]
 other = "Прочитај више"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -221,3 +230,10 @@ other = "ОБРИСАНО"
 [deprecated]
 other = "ЗАСТАРЕЛО"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Означено"
+
+[taskUnchecked]
+other = "Није означено"

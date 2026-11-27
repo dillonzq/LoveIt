@@ -1,0 +1,36 @@
+# Deprecated configuration keys, read by layouts/_partials/function/config.html.
+#
+# key:         the old key, as written in the site configuration (Hugo matches it in any case).
+# replacement: optional new key. While the new key is unset, the normalized configuration copies
+#              the old value to it, so templates only read the new key. The new key wins when both
+#              are set, so it must not have a default in the theme's hugo.toml (templates apply its
+#              default with "default" instead). Every section above the new key must already exist
+#              in the theme's hugo.toml, so that the new key reads in any case; the build fails otherwise.
+# since:       the theme version that deprecates the key.
+# removal:     the theme version that stops reading it.
+# hint:        what to do instead, in English (en) and Simplified Chinese (zh).
+#
+# A key counts as used when its value is truthy (true, a non-empty string, map or list), so the
+# theme's own defaults of false or "" never warn. Each used key is warned about once per build.
+# The upgrade notes for every key are in the "Deprecated Options" section of the documentation.
+
+- key: params.compatibility.polyfill
+  since: 0.5.0
+  removal: 0.7.0
+  hint:
+    en: Remove it. It has no effect, because the theme no longer loads the Polyfill service.
+    zh: 删除该配置. 主题不再加载 Polyfill 服务, 该配置已不起作用.
+
+- key: params.compatibility.objectFit
+  since: 0.5.0
+  removal: 0.7.0
+  hint:
+    en: Remove it. It has no effect, because the theme no longer loads object-fit-images.
+    zh: 删除该配置. 主题不再加载 object-fit-images, 该配置已不起作用.
+
+- key: params.cdn.autocompleteJS
+  since: 0.5.0
+  removal: 0.7.0
+  hint:
+    en: Remove it. Search no longer uses autocomplete.js.
+    zh: 删除该配置. 搜索不再使用 autocomplete.js.

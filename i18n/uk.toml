@@ -98,6 +98,12 @@ other = "Скасувати"
 [noResultsFound]
 other = "Нічого не знайдено"
 
+[searchResults]
+other = "Результати пошуку"
+
+[searchSlashShortcut]
+other = "Відкривати пошук клавішею /"
+
 [lunrLanguageCode]
 other = "uk"
 
@@ -157,6 +163,9 @@ other = "Головна"
 
 [readMore]
 other = "Детальніше"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -221,3 +230,10 @@ other = "ВИДАЛЕНИЙ"
 [deprecated]
 other = "ЗАСТАРІЛИЙ"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Позначено"
+
+[taskUnchecked]
+other = "Не позначено"

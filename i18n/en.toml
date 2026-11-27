@@ -97,6 +97,12 @@ other = "Cancel"
 [noResultsFound]
 other = "No results found"
 
+[searchResults]
+other = "Search results"
+
+[searchSlashShortcut]
+other = "Press / to open search"
+
 [lunrLanguageCode]
 other = "en"
 
@@ -156,6 +162,9 @@ other = "Home"
 
 [readMore]
 other = "Read More"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -220,3 +229,10 @@ other = "DELETED"
 [deprecated]
 other = "DEPRECATED"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Checked"
+
+[taskUnchecked]
+other = "Unchecked"

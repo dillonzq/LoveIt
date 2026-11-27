@@ -98,6 +98,12 @@ other = "취소"
 [noResultsFound]
 other = "검색 결과 없음"
 
+[searchResults]
+other = "검색 결과"
+
+[searchSlashShortcut]
+other = "/ 키로 검색 열기"
+
 [lunrLanguageCode]
 other = "en"
 
@@ -157,6 +163,9 @@ other = "홈"
 
 [readMore]
 other = "더 읽기"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -221,3 +230,10 @@ other = "삭제"
 [deprecated]
 other = "사용 중단"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "선택됨"
+
+[taskUnchecked]
+other = "선택 안 됨"

@@ -4,7 +4,7 @@
 {{- $n := .Nickname | default .Name | default .Email | default .URL | default "👀" -}}
 <span class="h-card{{ with .Class }} {{ . }}{{- end -}}">
 {{- with .URL -}}<a href="{{ . }}" class="u-url url"{{ with $rel }} rel="{{ . }}"{{- end -}}{{ with $text }} title="{{ . }}"{{ end }}>{{- else -}}{{- with .Email -}}<a href="mailto:{{ . }}" class="email"{{ with $text }} title="{{ . }}"{{ end }}>{{- end -}}{{- end -}}
-{{- with .Image -}}<img class="u-photo photo" src="{{ . }}" alt="{{ $n }}">{{- else -}}<i class="far fa-user-circle" aria-hidden="true"></i>{{ end -}}&#8201;
+{{- with .Image -}}<img class="u-photo photo" src="{{ . }}" alt="{{ $n }}">{{- else -}}{{ dict "Class" "far fa-user-circle" | partial "plugin/icon.html" }}{{ end -}}&#8201;
 {{- with .Name -}}<span class="p-name fn">{{ . }}</span>{{ with $nick }} ({{- end -}}{{- end -}}
 {{- with .Nickname -}}<span class="p-nickname nickname">{{ . }}</span>{{- end -}}
 {{- with .Name -}}{{ with $nick }}){{- end -}}{{- end -}}

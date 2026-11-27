@@ -98,6 +98,12 @@ other = "İptal"
 [noResultsFound]
 other = "Sonuç bulunamadı"
 
+[searchResults]
+other = "Arama sonuçları"
+
+[searchSlashShortcut]
+other = "Aramayı açmak için / tuşuna basın"
+
 [lunrLanguageCode]
 other = "tr"
 
@@ -157,6 +163,9 @@ other = "Anasayfa"
 
 [readMore]
 other = "Daha fazla oku"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -221,3 +230,10 @@ other = "SİLİNDİ"
 [deprecated]
 other = "KULLANIM DIŞI"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "İşaretli"
+
+[taskUnchecked]
+other = "İşaretsiz"

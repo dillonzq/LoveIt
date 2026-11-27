@@ -12,8 +12,100 @@ This file starts at 0.4.0. Older releases are described on the
 
 ## [Unreleased]
 
+### Added
+
+- A footnote, or the reference in the text that links to it, is outlined and
+  highlighted after a link jumps to it. The outline animates in briefly unless
+  reduced motion is preferred ([#993]).
+- The "Read More" link of each post summary names its post: screen readers
+  hear a localized label such as "Read More: Post title", and search engines
+  see the title in visually hidden link text.
+- A build warning, printed once per build, when the site configuration uses a
+  deprecated option. Each warning names the version that removes the option
+  and links to the
+  [Deprecated Options](https://hugoloveit.com/theme-documentation-basics/#deprecated-options)
+  section of the documentation. Builds with `--panicOnWarning` fail; add the
+  ID shown in the warning to `ignoreLogs` to silence it.
+- `params.page.fontawesomeCSS` (`"auto"` by default, or `true` / `false`)
+  controls when the Font Awesome stylesheet and webfonts load.
+- Keyboard shortcuts for search: `/` (outside text fields) and `Ctrl+K` or
+  `⌘K` open it. Arrow keys move through the results, `Enter` opens one
+  (`Ctrl`/`⌘`/`Shift+Enter` or a middle click opens it in a new tab), and
+  `Esc` closes search and returns focus to where it was. Visitors can turn
+  off the `/` shortcut with a checkbox in the search dialog; the choice is
+  remembered in the browser.
+
 ### Changed
 
+- The microdata `itemtype` of post summaries and the footer uses
+  `https://schema.org`.
+- Heading anchor links are built into the page by a Markdown render hook
+  (`_markup/render-heading.html`) instead of being added by JavaScript, so
+  they work without JavaScript. Each link is named by its heading for screen
+  readers, and the `#` or `|` mark is no longer read as part of the heading.
+  Feeds have no anchor links. Headings no longer get the `headerLink` class;
+  custom CSS or scripts that use it can select `.single .content > h2`
+  (and other levels) instead. A site with its own `render-heading` hook keeps
+  it and gets no anchor links.
+- The `<meta name="referrer">` tag defaults to `strict-origin-when-cross-origin`
+  instead of `no-referrer`: requests to your own origin carry the full URL,
+  cross-origin requests (including other subdomains) carry only your origin,
+  and HTTPS-to-HTTP requests carry none. Set `referrerPolicy = "no-referrer"`
+  in `[params.security]` to keep the old behaviour. Unknown values fall back
+  to the default with a build warning.
+- Mermaid diagrams render with `securityLevel` `strict` instead of `loose`,
+  which disables `click` interactions and restricts HTML in labels. Set
+  `mermaidSecurityLevel = "loose"` (exactly) in `[params.security]` if you
+  trust your diagram sources and need these features. Invalid values produce
+  a build warning and fall back to `strict`.
+- The theme's own icons (header, footer, social links, post meta, share
+  buttons, admonitions, code blocks, task lists) are inline SVG rendered at
+  build time, so pages no longer fetch icon files at runtime. Decorative icons
+  are hidden from assistive technology; icon-only social links are named by
+  their title. Task list checkboxes are named "Checked" or "Unchecked" in
+  the page language.
+- Font Awesome's stylesheet and webfonts load only on pages whose content uses
+  the `:(fa…):` syntax or Font Awesome classes, or whose configured HTML still
+  does (menu and title `pre`/`post` icons are inlined when the theme has them).
+  Sites whose own layouts use Font Awesome classes should set
+  `params.page.fontawesomeCSS = true`.
+- Sites that override templates or styles: `_partials/plugin/icon.html` keeps
+  its `Class`, `Src`, `Simpleicons` and `Prefix` options and adds `Label`;
+  icons are `<svg class="icon …">` instead of `<i>`, so CSS that targets
+  `i.icon` or `i.details-icon` should drop the `i`. Remote `Src` icons render
+  as `<img>`.
+- Images use Hugo's image processing instead of lazysizes ([#974]). Markdown
+  images, the `image` shortcode, featured images and the home page avatar
+  found in the page bundle or under `assets/` get `width` and `height`, which
+  keep the page from shifting while they load, and JPEG, PNG and WebP images
+  get a `srcset` with a WebP copy up to 800 pixels wide and `sizes`. The
+  original file stays the `src`, the last `srcset` candidate when it is
+  wider, and the lightGallery full-size image. Images are rotated as their
+  Exif orientation says. Before Hugo 0.155.0, PNG and WebP images keep
+  the original file so the browser can apply its orientation. GIF, BMP
+  and TIFF images, animated PNG and WebP images and images Hugo cannot
+  decode only get their size; SVG, files under `static/` and remote URLs are
+  used as they are. The home page avatar can also be a resource of the home
+  page bundle. WebP copies need the extended edition of Hugo before 0.153.0,
+  and browsers without WebP support (Safari 13 and older) cannot show them.
+  The first cold build of a site takes longer while Hugo makes the copies;
+  later builds reuse them from `resources/_gen`.
+- The featured image of a post and the home page avatar load with
+  `fetchpriority="high"`; the header logo loads normally; other images use
+  native lazy loading (`loading="lazy"` and `decoding="async"`) instead of a
+  placeholder that JavaScript replaced. The featured image of a post now has
+  `width` and `height` too. Without a `src_s`, the lightGallery thumbnail of a
+  processed image is its smallest WebP copy.
+- The `image` shortcode fills in a missing `width` or `height` from the
+  image's aspect ratio when the other one is a number.
+- Search opens in a native `<dialog>` with an ARIA combobox and listbox
+  instead of the inline header field and dropdown. The desktop and mobile
+  headers each show a search button; the mobile menu no longer contains a
+  search field. Screen readers hear the number of results. All four engines
+  (Lunr.js, Fuse.js, Algolia, Pagefind) and every `params.search` option
+  work as before. Sites that override `_partials/header.html` or style the
+  old `#search-*-desktop`, `#search-*-mobile` or `.search-dropdown` elements
+  need to follow the new markup in `_partials/search.html`.
 - The page title entrance, the auto-hiding header, the fixed buttons and the
   copy feedback of code blocks use the theme's own CSS instead of animate.css.
   With reduced motion, page titles and copied code no longer animate.
@@ -27,15 +119,31 @@ This file starts at 0.4.0. Older releases are described on the
   reports its state with `aria-expanded`. Sites that override
   `_partials/plugin/code-block.html` should compare it with the new one.
 
+### Deprecated
+
+- `params.compatibility.polyfill`, `params.compatibility.objectFit` and
+  `params.cdn.autocompleteJS`. None of them has any effect any more, because
+  the Polyfill service, object-fit-images and autocomplete.js were removed.
+  All three warn until 0.7.0; remove them from your configuration. Setting
+  them to `false` or `""` does not warn.
+
 ### Removed
 
+- The runtime loader for `data-svg-src` icons in `theme.js`.
+- lazysizes, the `lazysizesJS` key of the CDN data files and
+  `svg/loading.svg`. Images no longer get the `lazyload`, `lazyloading` and
+  `lazyloaded` classes or `data-src`/`data-srcset` attributes; update custom
+  styles or scripts that rely on them.
+- autocomplete.js 0.38.1. `params.cdn.autocompleteJS` no longer has any
+  effect.
 - object-fit-images, the cdnjs Polyfill service, clipboard.js and animate.css:
   their bundled files, the `objectFitImagesJS`, `clipboardJS` and `animateCSS`
   entries of the CDN data files, `assets/data/polyfill.yml` and
   `_partials/plugin/compatibility.html`. Browsers supported by the theme
   provide `object-fit`, the Clipboard API and CSS animations natively.
   `params.compatibility.polyfill` and `params.compatibility.objectFit` no
-  longer load anything; remove them. Your own CDN data files can drop the
+  longer load anything and only print the deprecation warning; remove them.
+  Your own CDN data files can drop the
   three entries. Template overrides that add `animate__*` classes or scripts
   that call `ClipboardJS` must load those libraries themselves.
 
@@ -210,6 +318,8 @@ for the full upgrade guide.
 [#789]: https://github.com/dillonzq/LoveIt/issues/789
 [#863]: https://github.com/dillonzq/LoveIt/issues/863
 [#963]: https://github.com/dillonzq/LoveIt/issues/963
+[#974]: https://github.com/dillonzq/LoveIt/issues/974
+[#993]: https://github.com/dillonzq/LoveIt/issues/993
 [#997]: https://github.com/dillonzq/LoveIt/pull/997
 [#1012]: https://github.com/dillonzq/LoveIt/pull/1012
 [#1019]: https://github.com/dillonzq/LoveIt/pull/1019

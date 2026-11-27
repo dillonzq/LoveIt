@@ -98,6 +98,12 @@ other = "取消"
 [noResultsFound]
 other = "沒有找到結果"
 
+[searchResults]
+other = "搜尋結果"
+
+[searchSlashShortcut]
+other = "按 / 鍵開啟搜尋"
+
 [lunrLanguageCode]
 other = "zh"
 
@@ -161,6 +167,9 @@ other = "主頁"
 
 [readMore]
 other = "閱讀全文"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}：{{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -225,3 +234,10 @@ other = "刪除"
 [deprecated]
 other = "棄用"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "已勾選"
+
+[taskUnchecked]
+other = "未勾選"

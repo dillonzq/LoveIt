@@ -20,9 +20,9 @@
 <div class="code-block{{ if $lineNos }} code-line-numbers{{ end }}{{ if $open }} open{{ end }}" style="counter-reset: code-block {{ sub $lineNoStart 1 }}">
     <div class="code-header language-{{ $lang }}">
         {{- /* A disclosure button; its name is the language shown by the ::after content. */}}
-        <button type="button" class="code-title link-like" aria-expanded="{{ $open }}"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></button>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        {{ if $copy }}<button type="button" class="copy link-like" title="{{ T "copyToClipboard" }}" aria-label="{{ T "copyToClipboard" }}" data-copied="{{ T "success" }}" data-copy-failed="{{ T "failure" }}"><i class="far fa-copy" aria-hidden="true"></i></button><span class="copy-status" role="status"></span>{{ end }}
+        <button type="button" class="code-title link-like" aria-expanded="{{ $open }}">{{ dict "Class" "arrow fas fa-angle-right" | partial "plugin/icon.html" }}</button>
+        <span class="ellipses">{{ dict "Class" "fas fa-ellipsis-h" | partial "plugin/icon.html" }}</span>
+        {{ if $copy }}<button type="button" class="copy link-like" title="{{ T "copyToClipboard" }}" aria-label="{{ T "copyToClipboard" }}" data-copied="{{ T "success" }}" data-copy-failed="{{ T "failure" }}">{{ dict "Class" "far fa-copy" | partial "plugin/icon.html" }}</button><span class="copy-status" role="status"></span>{{ end }}
     </div>
     {{- $result -}}
 </div>

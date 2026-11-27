@@ -99,6 +99,12 @@ other = "Annuleren"
 [noResultsFound]
 other = "Geen resultaten gevonden"
 
+[searchResults]
+other = "Zoekresultaten"
+
+[searchSlashShortcut]
+other = "Druk op / om te zoeken"
+
 [lunrLanguageCode]
 other = "nl"
 
@@ -158,6 +164,9 @@ other = "Homepagina"
 
 [readMore]
 other = "Lees Meer"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -222,3 +231,10 @@ other = "VERWIJDERD"
 [deprecated]
 other = "VEROUDERD"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Aangevinkt"
+
+[taskUnchecked]
+other = "Niet aangevinkt"

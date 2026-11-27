@@ -21,18 +21,18 @@ $global-background-color-dark: #292a2d !default;
 
 // Color of the text
 $global-font-color: #161209 !default;
-$global-font-color-dark: #a9a9b3 !default;
+$global-font-color-dark: #c9c9d0 !default;
 
 // Color of the secondary text
-$global-font-secondary-color: #a9a9b3 !default;
-$global-font-secondary-color-dark: #5d5d5f !default;
+$global-font-secondary-color: #666670 !default;
+$global-font-secondary-color-dark: #a0a0aa !default;
 
 // Color of the link
 $global-link-color: #161209 !default;
-$global-link-color-dark: #a9a9b3 !default;
+$global-link-color-dark: #c9c9d0 !default;
 
 // Color of the hover link
-$global-link-hover-color: #2d96bd !default;
+$global-link-hover-color: #1d6f94 !default;
 $global-link-hover-color-dark: #fff !default;
 
 // Color of the border
@@ -81,11 +81,11 @@ $toc-title-font-size: 1.2rem !default;
 $toc-content-font-size: 0.875rem !default;
 
 // Color of the single link
-$single-link-color: #2d96bd !default;
+$single-link-color: #1d6f94 !default;
 $single-link-color-dark: #55bde2 !default;
 
 // Color of the hover single link
-$single-link-hover-color: #ef3982 !default;
+$single-link-hover-color: #c62f6c !default;
 $single-link-hover-color-dark: #bdebfc !default;
 
 // Color of the table background
@@ -117,14 +117,14 @@ $code-font-family: "Source Code Pro", Menlo, Monaco, Consolas, "Liberation Mono"
 $code-font-size: .875rem !default;
 
 // Color of the code
-$code-color: #E74C3C !default;
+$code-color: #c0392b !default;
 $code-color-dark: #E5BF78 !default;
 
 // Color of the code background
 $code-background-color: #f5f5f5 !default;
 $code-background-color-dark: #272C34 !default;
 
-$code-info-color: #9c9c9c !default;
+$code-info-color: #626262 !default;
 $code-info-color-dark: #b1b0b0 !default;
 
 // Color of the copy button after the code is copied or could not be copied
@@ -192,7 +192,7 @@ $code-type-list:
 
 // Color map of the code highlight
 $code-highlight-color-map: (
-  /* Parentheses */ "p": #a9a9b3,
+  /* Parentheses */ "p": #6c6c73,
   /* Keyword */ "k": #b501a9,
   /* KeywordConstant */ "kc": #b501a9,
   /* KeywordDeclaration */ "kd": #b501a9,
@@ -201,69 +201,69 @@ $code-highlight-color-map: (
   /* KeywordReserved */ "kr": #b501a9,
   /* KeywordType */ "kt": #b501a9,
   /* Name */ "n": #333333,
-  /* NameAttribute */ "na": #2b77fa,
-  /* NameBuiltin */ "nb": #f74840,
-  /* NameBuiltinPseudo */ "bp": #f74840,
-  /* NameClass */ "nc": #cb8100,
-  /* NameConstant */ "no": #2b77fa,
-  /* NameDecorator */ "nd": #0086c1,
-  /* NameEntity */ "ni": #2b77fa,
-  /* NameException */ "ne": #2b77fa,
-  /* NameFunction */ "nf": #2b77fa,
-  /* NameFunctionMagic */ "fm": #1ccad6,
-  /* NameLabel */ "nl": #2b77fa,
-  /* NameNamespace */ "nn": #2b77fa,
+  /* NameAttribute */ "na": #2568da,
+  /* NameBuiltin */ "nb": #c63a33,
+  /* NameBuiltinPseudo */ "bp": #c63a33,
+  /* NameClass */ "nc": #986100,
+  /* NameConstant */ "no": #2568da,
+  /* NameDecorator */ "nd": #0073a6,
+  /* NameEntity */ "ni": #2568da,
+  /* NameException */ "ne": #2568da,
+  /* NameFunction */ "nf": #2568da,
+  /* NameFunctionMagic */ "fm": #117980,
+  /* NameLabel */ "nl": #2568da,
+  /* NameNamespace */ "nn": #2568da,
   /* NameOther */ "nx": #333333,
-  /* NameProperty */ "py": #2b77fa,
-  /* NameTag */ "nt": #2b77fa,
-  /* NameVariable */ "nv": #2b77fa,
-  /* NameVariableClass */ "vc": #2b77fa,
-  /* NameVariableGlobal */ "vg": #2b77fa,
-  /* NameVariableInstance */ "vi": #2b77fa,
-  /* NameVariableMagic */ "vm": #2b77fa,
-  /* Literal */ "l": #2aa198,
-  /* LiteralDate */ "ld": #2aa198,
-  /* LiteralString */ "s": #24a443,
-  /* LiteralStringAffix */ "sa": #24a443,
-  /* LiteralStringBacktick */ "sb": #24a443,
-  /* LiteralStringChar */ "sc": #24a443,
-  /* LiteralStringDelimiter */ "dl": #24a443,
-  /* LiteralStringDoc */ "sd": #24a443,
-  /* LiteralStringDouble */ "s2": #24a443,
-  /* LiteralStringEscape */ "se": #24a443,
-  /* LiteralStringHeredoc */ "sh": #24a443,
-  /* LiteralStringInterpol */ "si": #24a443,
-  /* LiteralStringOther */ "sx": #24a443,
-  /* LiteralStringRegex */ "sr": #24a443,
-  /* LiteralStringSingle */ "s1": #24a443,
-  /* LiteralStringSymbol */ "ss": #24a443,
-  /* LiteralNumber */ "m": #e2893c,
-  /* LiteralNumberBin */ "mb": #e2893c,
-  /* LiteralNumberFloat */ "mf": #e2893c,
-  /* LiteralNumberHex */ "mh": #e2893c,
-  /* LiteralNumberInteger */ "mi": #e2893c,
-  /* LiteralNumberIntegerLong */ "il": #e2893c,
-  /* LiteralNumberOct */ "mo": #e2893c,
-  /* Operator */ "o": #f19b04,
+  /* NameProperty */ "py": #2568da,
+  /* NameTag */ "nt": #2568da,
+  /* NameVariable */ "nv": #2568da,
+  /* NameVariableClass */ "vc": #2568da,
+  /* NameVariableGlobal */ "vg": #2568da,
+  /* NameVariableInstance */ "vi": #2568da,
+  /* NameVariableMagic */ "vm": #2568da,
+  /* Literal */ "l": #207a74,
+  /* LiteralDate */ "ld": #207a74,
+  /* LiteralString */ "s": #1c7e34,
+  /* LiteralStringAffix */ "sa": #1c7e34,
+  /* LiteralStringBacktick */ "sb": #1c7e34,
+  /* LiteralStringChar */ "sc": #1c7e34,
+  /* LiteralStringDelimiter */ "dl": #1c7e34,
+  /* LiteralStringDoc */ "sd": #1c7e34,
+  /* LiteralStringDouble */ "s2": #1c7e34,
+  /* LiteralStringEscape */ "se": #1c7e34,
+  /* LiteralStringHeredoc */ "sh": #1c7e34,
+  /* LiteralStringInterpol */ "si": #1c7e34,
+  /* LiteralStringOther */ "sx": #1c7e34,
+  /* LiteralStringRegex */ "sr": #1c7e34,
+  /* LiteralStringSingle */ "s1": #1c7e34,
+  /* LiteralStringSymbol */ "ss": #1c7e34,
+  /* LiteralNumber */ "m": #a35200,
+  /* LiteralNumberBin */ "mb": #a35200,
+  /* LiteralNumberFloat */ "mf": #a35200,
+  /* LiteralNumberHex */ "mh": #a35200,
+  /* LiteralNumberInteger */ "mi": #a35200,
+  /* LiteralNumberIntegerLong */ "il": #a35200,
+  /* LiteralNumberOct */ "mo": #a35200,
+  /* Operator */ "o": #986203,
   /* OperatorWord */ "ow": #b501a9,
-  /* Comment */ "c": #a0a1a8,
-  /* CommentHashbang */ "ch": #a0a1a8,
-  /* CommentMultiline */ "cm": #a0a1a8,
-  /* CommentSingle */ "c1": #a0a1a8,
-  /* CommentSpecial */ "cs": #a0a1a8,
-  /* CommentPreproc */ "cp": #a0a1a8,
-  /* CommentPreprocFile */ "cpf": #a0a1a8,
-  /* Generic */ "g": #e72d40,
-  /* GenericDeleted */ "gd": #e72d40,
-  /* GenericEmph */ "ge": #e72d40,
-  /* GenericError */ "gr": #e72d40,
-  /* GenericHeading */ "gh": #e72d40,
-  /* GenericInserted */ "gi": #e72d40,
-  /* GenericOutput */ "go": #e72d40,
-  /* GenericPrompt */ "gp": #e72d40,
-  /* GenericStrong */ "gs": #e72d40,
-  /* GenericSubheading */ "gu": #e72d40,
-  /* GenericTraceback */ "gt": #e72d40,
+  /* Comment */ "c": #6d6d72,
+  /* CommentHashbang */ "ch": #6d6d72,
+  /* CommentMultiline */ "cm": #6d6d72,
+  /* CommentSingle */ "c1": #6d6d72,
+  /* CommentSpecial */ "cs": #6d6d72,
+  /* CommentPreproc */ "cp": #6d6d72,
+  /* CommentPreprocFile */ "cpf": #6d6d72,
+  /* Generic */ "g": #d0293a,
+  /* GenericDeleted */ "gd": #d0293a,
+  /* GenericEmph */ "ge": #d0293a,
+  /* GenericError */ "gr": #d0293a,
+  /* GenericHeading */ "gh": #d0293a,
+  /* GenericInserted */ "gi": #d0293a,
+  /* GenericOutput */ "go": #d0293a,
+  /* GenericPrompt */ "gp": #d0293a,
+  /* GenericStrong */ "gs": #d0293a,
+  /* GenericSubheading */ "gu": #d0293a,
+  /* GenericTraceback */ "gt": #d0293a,
   /* TextWhitespace */ "w": #bbbbbb,
 ) !default;
 $code-highlight-color-map-dark: (
@@ -296,8 +296,8 @@ $code-highlight-color-map-dark: (
   /* NameVariableGlobal */ "vg": #41b0f5,
   /* NameVariableInstance */ "vi": #41b0f5,
   /* NameVariableMagic */ "vm": #41b0f5,
-  /* Literal */ "l": #2aa198,
-  /* LiteralDate */ "ld": #2aa198,
+  /* Literal */ "l": #37a79e,
+  /* LiteralDate */ "ld": #37a79e,
   /* LiteralString */ "s": #8cc570,
   /* LiteralStringAffix */ "sa": #8cc570,
   /* LiteralStringBacktick */ "sb": #8cc570,
@@ -321,24 +321,24 @@ $code-highlight-color-map-dark: (
   /* LiteralNumberOct */ "mo": #db985c,
   /* Operator */ "o": #ecbf6f,
   /* OperatorWord */ "ow": #d371e3,
-  /* Comment */ "c": #7e848f,
-  /* CommentHashbang */ "ch": #7e848f,
-  /* CommentMultiline */ "cm": #7e848f,
-  /* CommentSingle */ "c1": #7e848f,
-  /* CommentSpecial */ "cs": #7e848f,
-  /* CommentPreproc */ "cp": #7e848f,
-  /* CommentPreprocFile */ "cpf": #7e848f,
-  /* Generic */ "g": #f16372,
-  /* GenericDeleted */ "gd": #f16372,
-  /* GenericEmph */ "ge": #f16372,
-  /* GenericError */ "gr": #f16372,
-  /* GenericHeading */ "gh": #f16372,
-  /* GenericInserted */ "gi": #f16372,
-  /* GenericOutput */ "go": #f16372,
-  /* GenericPrompt */ "gp": #f16372,
-  /* GenericStrong */ "gs": #f16372,
-  /* GenericSubheading */ "gu": #f16372,
-  /* GenericTraceback */ "gt": #f16372,
+  /* Comment */ "c": #9398a1,
+  /* CommentHashbang */ "ch": #9398a1,
+  /* CommentMultiline */ "cm": #9398a1,
+  /* CommentSingle */ "c1": #9398a1,
+  /* CommentSpecial */ "cs": #9398a1,
+  /* CommentPreproc */ "cp": #9398a1,
+  /* CommentPreprocFile */ "cpf": #9398a1,
+  /* Generic */ "g": #f26c7a,
+  /* GenericDeleted */ "gd": #f26c7a,
+  /* GenericEmph */ "ge": #f26c7a,
+  /* GenericError */ "gr": #f26c7a,
+  /* GenericHeading */ "gh": #f26c7a,
+  /* GenericInserted */ "gi": #f26c7a,
+  /* GenericOutput */ "go": #f26c7a,
+  /* GenericPrompt */ "gp": #f26c7a,
+  /* GenericStrong */ "gs": #f26c7a,
+  /* GenericSubheading */ "gu": #f26c7a,
+  /* GenericTraceback */ "gt": #f26c7a,
   /* TextWhitespace */ "w": #bbbbbb,
 ) !default;
 // ========== Code ========== //

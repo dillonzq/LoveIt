@@ -1,7 +1,7 @@
-// Records baseline metrics for the example site: Hugo build time (cold and
-// warm), Lighthouse CI on mobile, axe-core violations and the size of
-// assets/lib. Nothing here enforces a threshold; results are written to
-// build/metrics and, in GitHub Actions, to the job summary.
+// Records metrics for the example site: Hugo build time (cold and warm),
+// Lighthouse CI on mobile, axe-core violations and the size of assets/lib.
+// Results are written to build/metrics and, in GitHub Actions, to the job
+// summary; scripts/metrics-gate.mjs compares them with the master baseline.
 import { spawn } from 'node:child_process';
 import { appendFileSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -10,6 +10,7 @@ import { AxeBuilder } from '@axe-core/playwright';
 import { getHugo, root } from './tools.mjs';
 import { serve } from './serve.mjs';
 import { parseHugoTotal, renderMarkdown, summarizeAxe, summarizeLighthouse } from './metrics-report.mjs';
+import { SUMMARY_SCHEMA } from './metrics-compare.mjs';
 
 const port = Number(process.env.LOVEIT_METRICS_PORT || 48138);
 const origin = `http://127.0.0.1:${port}`;
@@ -18,7 +19,7 @@ const site = path.join(out, 'site');
 const lighthouseConfig = JSON.parse(readFileSync(path.join(root, 'lighthouserc.json'), 'utf8'));
 
 // Lighthouse covers the home page and an ordinary article; axe also checks a
-// list page, the 404 page and the open search dropdown.
+// list page, the 404 page and the open search dialog.
 const pages = [
   { name: 'home', path: '/', lighthouse: true },
   { name: 'post', path: '/basic-markdown-syntax/', lighthouse: true },
@@ -27,8 +28,8 @@ const pages = [
   {
     name: 'search', path: '/', async prepare(page) {
       await page.locator('#search-toggle-desktop').click();
-      await page.locator('#search-input-desktop').fill('markdown');
-      await page.locator('#search-dropdown-desktop .suggestion-title').first().waitFor();
+      await page.locator('#search-input').fill('markdown');
+      await page.locator('#search-results .suggestion-title').first().waitFor();
     },
   },
 ];
@@ -112,7 +113,7 @@ function directorySize(directory) {
 
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
-const summary = { build: await build(), lighthouseRuns: lighthouseConfig.ci.collect.numberOfRuns };
+const summary = { schema: SUMMARY_SCHEMA, build: await build(), lighthouseRuns: lighthouseConfig.ci.collect.numberOfRuns };
 const server = await serve(site, port);
 try {
   summary.lighthouse = await lighthouse();

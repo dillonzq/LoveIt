@@ -37,7 +37,7 @@ math:
 * :(fab fa-yandex-international): **[Yandex Metrica](https://metrica.yandex.com/)** supported
 * :(fas fa-sitemap): Search engine **verification** supported (Google, Bing, Yandex and Baidu)
 * :(fas fa-tachometer-alt): **CDN** for third-party libraries supported
-* :(fas fa-cloud-download-alt): Automatically converted images with **Lazy Load** by [lazysizes](https://github.com/aFarkas/lazysizes)
+* :(fas fa-cloud-download-alt): **Responsive images** processed by Hugo, with WebP copies, `width`/`height` and native lazy loading
 
 ### Appearance and Layout
 
@@ -104,12 +104,10 @@ Thanks to the authors of following resources included in the theme:
 * [modern-normalize](https://github.com/sindresorhus/modern-normalize)
 * [Font Awesome](https://fontawesome.com/)
 * [Simple Icons](https://github.com/simple-icons/simple-icons)
-* [autocomplete](https://github.com/algolia/autocomplete)
 * [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
 * [Fuse.js](https://fusejs.io/)
 * [Pagefind](https://pagefind.app/)
-* [lazysizes](https://github.com/aFarkas/lazysizes)
 * [Twemoji](https://github.com/jdecked/twemoji)
 * [emoji-data](https://github.com/iamcal/emoji-data)
 * [lightGallery](https://github.com/sachinchoolur/lightgallery)

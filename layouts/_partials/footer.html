@@ -12,15 +12,15 @@
             {{- if ne .Site.Params.footer.hugo false -}}
                 <div class="footer-line">
                     {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo %v">Hugo</a>` hugo.Version -}}
-                    {{- $theme := .Scratch.Get "version" | printf `<a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreferrer" title="LoveIt %v"><i class="far fa-kiss-wink-heart" aria-hidden="true"></i> LoveIt</a>` -}}
+                    {{- $theme := printf `<a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreferrer" title="LoveIt %v">%v LoveIt</a>` (.Scratch.Get "version") (dict "Class" "far fa-kiss-wink-heart" | partial "plugin/icon.html") -}}
                     {{- dict "Hugo" $hugo "Theme" $theme | T "poweredBySome" | safeHTML }}
                 </div>
             {{- end -}}
 
-            <div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork">
+            <div class="footer-line" itemscope itemtype="https://schema.org/CreativeWork">
                 {{- /* Copyright year */ -}}
                 {{- if ne .Site.Params.footer.copyright false -}}
-                    <i class="far fa-copyright" aria-hidden="true"></i>
+                    {{ dict "Class" "far fa-copyright" | partial "plugin/icon.html" }}
                     {{- with .Site.Params.footer.since -}}
                         <span itemprop="copyrightYear">
                             {{- if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year -}}

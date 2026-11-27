@@ -98,6 +98,12 @@ other = "Cancel·lar"
 [noResultsFound]
 other = "Sense resultats"
 
+[searchResults]
+other = "Resultats de la cerca"
+
+[searchSlashShortcut]
+other = "Prem / per obrir la cerca"
+
 [lunrLanguageCode]
 other = "ca"
 
@@ -157,6 +163,9 @@ other = "Inici"
 
 [readMore]
 other = "Llegeix Més"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -221,3 +230,10 @@ other = "SUPRIMIT"
 [deprecated]
 other = "OBSOLET"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Marcat"
+
+[taskUnchecked]
+other = "No marcat"

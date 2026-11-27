@@ -133,8 +133,10 @@ code, pre {
       background: $code-background-color-dark;
     }
 
+    // A pale yellow tint marks highlighted lines in the light theme; darkening
+    // the gray background instead would push the code colors below 4.5:1.
     .hl {
-      background-color: color.adjust($code-background-color, $lightness: -10%, $space: hsl);
+      background-color: round-rgb(color.mix(#fff3b0, $code-background-color, 50%, $method: rgb));
 
       [theme=dark] & {
         background-color: color.adjust($code-background-color-dark, $lightness: -5%, $space: hsl);

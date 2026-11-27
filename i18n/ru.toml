@@ -98,6 +98,12 @@ other = "Отменить"
 [noResultsFound]
 other = "Результатов не найдено"
 
+[searchResults]
+other = "Результаты поиска"
+
+[searchSlashShortcut]
+other = "Открывать поиск клавишей /"
+
 [lunrLanguageCode]
 other = "ru"
 
@@ -160,6 +166,9 @@ other = "Домой"
 
 [readMore]
 other = "Читать больше"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -224,3 +233,10 @@ other = "УДАЛЕН"
 [deprecated]
 other = "УСТАРЕЛ"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Отмечено"
+
+[taskUnchecked]
+other = "Не отмечено"

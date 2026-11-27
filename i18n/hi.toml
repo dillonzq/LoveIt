@@ -98,6 +98,12 @@ other = "रद्द करना"
 [noResultsFound]
 other = "कोई परिणाम नहीं मिला"
 
+[searchResults]
+other = "खोज परिणाम"
+
+[searchSlashShortcut]
+other = "खोज खोलने के लिए / दबाएँ"
+
 [lunrLanguageCode]
 other = "hi"
 
@@ -157,6 +163,9 @@ other = "घर"
 
 [readMore]
 other = "अधिक पढ़ें"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -221,3 +230,10 @@ other = "हटाए गए"
 [deprecated]
 other = "अप्रचलित"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "चिह्नित"
+
+[taskUnchecked]
+other = "अचिह्नित"
