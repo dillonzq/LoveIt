@@ -225,3 +225,10 @@ other = "VERWIJDERD"
 [deprecated]
 other = "VEROUDERD"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Aangevinkt"
+
+[taskUnchecked]
+other = "Niet aangevinkt"

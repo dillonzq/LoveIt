@@ -1,0 +1,13 @@
+{{- /* Whether configured HTML shown on every page still uses Font Awesome classes. */ -}}
+{{- /* Title and menu pre/post icons are inlined by function/icons.html when possible. */ -}}
+{{- $html := slice -}}
+{{- with .Params.header.title -}}
+    {{- $html = $html | append (partialCached "function/icons.html" (string .pre) (string .pre)) (partialCached "function/icons.html" (string .post) (string .post)) -}}
+{{- end -}}
+{{- range .Menus.main -}}
+    {{- $html = $html | append (partialCached "function/icons.html" (string .Pre) (string .Pre)) (partialCached "function/icons.html" (string .Post) (string .Post)) -}}
+{{- end -}}
+{{- with .Params.footer -}}
+    {{- $html = $html | append (string .custom) (string .license) (string .icp) -}}
+{{- end -}}
+{{- return partial "function/fontawesome-markup.html" (dict "Content" (delimit $html "\n")) -}}

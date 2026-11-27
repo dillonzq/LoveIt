@@ -227,3 +227,10 @@ other = "ลบ"
 [deprecated]
 other = "เลิกใช้"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "เลือกแล้ว"
+
+[taskUnchecked]
+other = "ยังไม่ได้เลือก"

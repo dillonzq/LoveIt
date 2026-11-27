@@ -1,0 +1,19 @@
+{{- /* Replaces empty <i class="…"></i> Font Awesome tags in configured HTML (menu and title pre/post) */ -}}
+{{- /* with inline SVG when plugin/icon.html can build it, so those icons do not need the webfont. */ -}}
+{{- $html := string . -}}
+{{- range findRE `<i\s[^>]*>\s*</i>` $html | uniq -}}
+    {{- $tag := . -}}
+    {{- with findRESubmatch `\sclass=["']([^"']*)["']` $tag 1 -}}
+        {{- $class := index . 0 1 -}}
+        {{- $label := "" -}}
+        {{- with findRESubmatch `\saria-label=["']([^"']*)["']` $tag 1 -}}
+            {{- $label = index . 0 1 | htmlUnescape -}}
+        {{- end -}}
+        {{- with partial "plugin/icon.html" (dict "Class" $class "Label" $label) -}}
+            {{- if hasPrefix . "<svg" -}}
+                {{- $html = replace $html $tag . -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- return $html -}}

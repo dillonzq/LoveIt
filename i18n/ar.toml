@@ -224,3 +224,10 @@ other = "حُذف"
 [deprecated]
 other = "مُهمَل"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "محدد"
+
+[taskUnchecked]
+other = "غير محدد"

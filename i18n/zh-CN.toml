@@ -228,3 +228,10 @@ other = "删除"
 [deprecated]
 other = "弃用"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "已勾选"
+
+[taskUnchecked]
+other = "未勾选"

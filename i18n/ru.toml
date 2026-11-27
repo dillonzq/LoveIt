@@ -227,3 +227,10 @@ other = "УДАЛЕН"
 [deprecated]
 other = "УСТАРЕЛ"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Отмечено"
+
+[taskUnchecked]
+other = "Не отмечено"

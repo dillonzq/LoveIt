@@ -224,3 +224,10 @@ other = "ВИДАЛЕНИЙ"
 [deprecated]
 other = "ЗАСТАРІЛИЙ"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Позначено"
+
+[taskUnchecked]
+other = "Не позначено"

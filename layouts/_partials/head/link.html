@@ -35,13 +35,15 @@
 {{- $options = dict "Context" . "ToCSS" $toCSS | merge $options -}}
 {{- partial "plugin/style.html" $options -}}
 
-{{- /* Font Awesome */ -}}
-{{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/css/all.min.css" -}}
-{{- $options := dict "Source" $source "Fingerprint" $fingerprint "Preload" true -}}
-{{- partial "plugin/style.html" $options -}}
-{{- if not $cdn.fontawesomeFreeCSS -}}
-    {{- range resources.Match "lib/fontawesome-free/webfonts/*" -}}
-        {{- .Publish -}}
+{{- /* Font Awesome, only for content and configured HTML that use its classes */ -}}
+{{- if partial "function/fontawesome-css.html" . -}}
+    {{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/css/all.min.css" -}}
+    {{- $options := dict "Source" $source "Fingerprint" $fingerprint "Preload" true -}}
+    {{- partial "plugin/style.html" $options -}}
+    {{- if not $cdn.fontawesomeFreeCSS -}}
+        {{- range resources.Match "lib/fontawesome-free/webfonts/*" -}}
+            {{- .Publish -}}
+        {{- end -}}
     {{- end -}}
 {{- end -}}
 

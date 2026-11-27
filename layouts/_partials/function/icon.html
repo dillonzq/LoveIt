@@ -1,0 +1,61 @@
+{{- /* Icon as inline SVG markup, built from a local SVG resource at build time; "" when it cannot be. */ -}}
+{{- /* Class: Font Awesome classes such as "fab fa-github" (legacy names work, see svgs/aliases.json) */ -}}
+{{- /*        and theme classes kept on the SVG; size, animation and other fa-* modifiers are not supported. */ -}}
+{{- /* Simpleicons (with an optional local Prefix) or Src: a local SVG resource. */ -}}
+{{- /* Label: accessible name; without it the icon is decorative and hidden from assistive technology. */ -}}
+{{- /* Templates call plugin/icon.html, which caches the result. */ -}}
+{{- $resource := false -}}
+{{- $classes := slice "icon" -}}
+{{- with .Class -}}
+    {{- $styles := dict "fa" "solid" "fas" "solid" "fa-solid" "solid" "far" "regular" "fa-regular" "regular" "fab" "brands" "fa-brands" "brands" -}}
+    {{- $style := "" -}}
+    {{- $names := slice -}}
+    {{- range split (trim . " ") " " -}}
+        {{- if index $styles . -}}
+            {{- $style = index $styles . -}}
+        {{- else if hasPrefix . "fa-" -}}
+            {{- /* Font Awesome 7 icons are fixed width by default. */ -}}
+            {{- if ne . "fa-fw" -}}
+                {{- $names = $names | append (strings.TrimPrefix "fa-" .) -}}
+            {{- end -}}
+        {{- else if . -}}
+            {{- $classes = $classes | append . -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if and $style (eq (len $names) 1) -}}
+        {{- $name := index $names 0 -}}
+        {{- $aliases := resources.Get "lib/fontawesome-free/svgs/aliases.json" | transform.Unmarshal -}}
+        {{- $resource = printf "lib/fontawesome-free/svgs/%v/%v.svg" $style (index $aliases $name | default $name) | resources.Get -}}
+    {{- end -}}
+{{- else -}}
+    {{- $src := .Src -}}
+    {{- with .Simpleicons -}}
+        {{- /* The bundled copy is used even when a CDN prefix is configured. */ -}}
+        {{- $prefix := $.Prefix -}}
+        {{- if not $prefix | or (urls.Parse (string $prefix)).Host -}}
+            {{- $prefix = "lib/simple-icons/icons" -}}
+        {{- end -}}
+        {{- $src = printf "%v/%v.svg" (strings.TrimSuffix "/" $prefix) . -}}
+    {{- end -}}
+    {{- if $src | and (not (urls.Parse $src).Host) -}}
+        {{- $resource = resources.Get (strings.TrimPrefix "/" $src) -}}
+    {{- end -}}
+{{- end -}}
+
+{{- $svg := "" -}}
+{{- with $resource -}}
+    {{- $source := .Content -}}
+    {{- $open := index (findRE `<svg\b[^>]*>` $source 1) 0 | default "" -}}
+    {{- $viewBox := index (findRESubmatch `\sviewBox="([^"]*)"` $open 1) 0 -}}
+    {{- if $viewBox -}}
+        {{- /* Keep the Font Awesome license comment (minified output drops it); drop titles (Label names the icon) and the fill the <svg> sets. */ -}}
+        {{- $inner := replaceRE `(?s)^.*?<svg\b[^>]*>` "" $source 1 | replaceRE `(?s)</svg>\s*$` "" | replaceRE `(?s)<title>.*?</title>` "" | replaceRE `\s+fill="currentColor"` "" | strings.TrimSpace -}}
+        {{- $a11y := `aria-hidden="true"` -}}
+        {{- with $.Label -}}
+            {{- $a11y = printf `role="img" aria-label="%v"` (htmlEscape .) -}}
+        {{- end -}}
+        {{- /* The size attributes keep the icon small where the theme's CSS does not apply (feed readers). */ -}}
+        {{- $svg = printf `<svg class="%v" viewBox="%v" width="1.25em" height="1em" fill="currentColor" %v>%v</svg>` (delimit (uniq $classes) " ") (index $viewBox 1) $a11y $inner -}}
+    {{- end -}}
+{{- end -}}
+{{- return $svg -}}

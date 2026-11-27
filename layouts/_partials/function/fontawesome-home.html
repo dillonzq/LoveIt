@@ -1,0 +1,29 @@
+{{- /* Whether the home profile or the post summaries listed on the home page use Font Awesome. */ -}}
+{{- $need := false -}}
+{{- $profile := .Site.Params.home.profile -}}
+{{- if ne $profile.enable false -}}
+    {{- $html := slice (string $profile.title) (string $profile.subtitle) (string $profile.extra) (string $profile.disclaimer) -}}
+    {{- /* Social icons configured with a class that cannot be inlined (see plugin/icon.html). */ -}}
+    {{- if $profile.social -}}
+        {{- range .Site.Params.social -}}
+            {{- if reflect.IsMap . -}}
+                {{- with .icon -}}
+                    {{- if reflect.IsMap . -}}
+                        {{- $html = $html | append (partial "plugin/icon.html" (dict "Class" .class "Simpleicons" .simpleicons "Prefix" .prefix "Src" .src)) -}}
+                    {{- end -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $need = partial "function/fontawesome-markup.html" (dict "Content" (delimit $html "\n")) -}}
+{{- end -}}
+{{- if not $need | and (ne .Site.Params.home.posts.enable false) -}}
+    {{- range partial "function/home-pages.html" . -}}
+        {{- $params := partial "function/params.html" . -}}
+        {{- if dict "Content" (printf "%v\n%v" .Summary .Description) "Fontawesome" $params.fontawesome | partial "function/fontawesome-markup.html" -}}
+            {{- $need = true -}}
+            {{- break -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- return $need -}}

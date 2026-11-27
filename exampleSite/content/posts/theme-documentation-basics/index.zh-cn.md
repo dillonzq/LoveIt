@@ -557,6 +557,10 @@ enableEmoji = true
     fraction = true
     # {{< version 0.2.0 >}} 是否使用 fontawesome 扩展语法
     fontawesome = true
+    # {{< version 0.5.0 >}} 何时加载 Font Awesome 样式和字体 ["auto", true, false]
+    # "auto": 仅在内容或配置的 HTML (菜单, 页脚...) 使用 Font Awesome 类的页面加载, 主题自身图标为内联 SVG;
+    # true: 总是加载, 例如你自己的布局使用了它; false: 从不加载
+    fontawesomeCSS = "auto"
     # 是否在文章页面显示原始 Markdown 文档链接
     linkToMarkdown = true
     # {{< version 0.2.4 >}} 是否在 RSS 中显示全文内容

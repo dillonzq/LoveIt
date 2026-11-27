@@ -224,3 +224,10 @@ other = "삭제"
 [deprecated]
 other = "사용 중단"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "선택됨"
+
+[taskUnchecked]
+other = "선택 안 됨"

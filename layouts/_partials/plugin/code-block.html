@@ -18,9 +18,9 @@
 {{- end -}}
 <div class="code-block{{ if $lineNos }} code-line-numbers{{ end }}{{ if le $lines $maxShownLines }} open{{ end }}" style="counter-reset: code-block {{ sub $lineNoStart 1 }}">
     <div class="code-header language-{{ $lang }}">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        {{ if $copy }}<span class="copy" title="{{ T "copyToClipboard" }}"><i class="far fa-copy" aria-hidden="true"></i></span>{{ end }}
+        <span class="code-title">{{ dict "Class" "arrow fas fa-angle-right" | partial "plugin/icon.html" }}</span>
+        <span class="ellipses">{{ dict "Class" "fas fa-ellipsis-h" | partial "plugin/icon.html" }}</span>
+        {{ if $copy }}<span class="copy" title="{{ T "copyToClipboard" }}">{{ dict "Class" "far fa-copy" | partial "plugin/icon.html" }}</span>{{ end }}
     </div>
     {{- $result -}}
 </div>

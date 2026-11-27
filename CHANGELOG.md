@@ -26,6 +26,8 @@ This file starts at 0.4.0. Older releases are described on the
   [Deprecated Options](https://hugoloveit.com/theme-documentation-basics/#deprecated-options)
   section of the documentation. Builds with `--panicOnWarning` fail; add the
   ID shown in the warning to `ignoreLogs` to silence it.
+- `params.page.fontawesomeCSS` (`"auto"` by default, or `true` / `false`)
+  controls when the Font Awesome stylesheet and webfonts load.
 
 ### Changed
 
@@ -50,12 +52,32 @@ This file starts at 0.4.0. Older releases are described on the
   `mermaidSecurityLevel = "loose"` (exactly) in `[params.security]` if you
   trust your diagram sources and need these features. Invalid values produce
   a build warning and fall back to `strict`.
+- The theme's own icons (header, footer, social links, post meta, share
+  buttons, admonitions, code blocks, task lists) are inline SVG rendered at
+  build time, so pages no longer fetch icon files at runtime. Decorative icons
+  are hidden from assistive technology; icon-only social links are named by
+  their title. Task list checkboxes are named "Checked" or "Unchecked" in
+  the page language.
+- Font Awesome's stylesheet and webfonts load only on pages whose content uses
+  the `:(fa…):` syntax or Font Awesome classes, or whose configured HTML still
+  does (menu and title `pre`/`post` icons are inlined when the theme has them).
+  Sites whose own layouts use Font Awesome classes should set
+  `params.page.fontawesomeCSS = true`.
+- Sites that override templates or styles: `_partials/plugin/icon.html` keeps
+  its `Class`, `Src`, `Simpleicons` and `Prefix` options and adds `Label`;
+  icons are `<svg class="icon …">` instead of `<i>`, so CSS that targets
+  `i.icon` or `i.details-icon` should drop the `i`. Remote `Src` icons render
+  as `<img>`.
 
 ### Deprecated
 
 - `params.compatibility.polyfill`, `params.compatibility.objectFit` and
   `params.cdn.autocompleteJS`. They still work and will be removed in 0.7.0.
   Setting them to `false` or `""` does not warn.
+
+### Removed
+
+- The runtime loader for `data-svg-src` icons in `theme.js`.
 
 ## [0.4.1] - 2026-11-27
 

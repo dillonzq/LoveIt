@@ -556,6 +556,10 @@ enableEmoji = true
     fraction = true
     # {{< version 0.2.0 >}} whether to enable the fontawesome extended syntax
     fontawesome = true
+    # {{< version 0.5.0 >}} when to load the Font Awesome stylesheet and webfonts ["auto", true, false]
+    # "auto": only on pages whose content or configured HTML (menu, footer...) uses Font Awesome classes,
+    # the theme's own icons are inline SVG; true: always, e.g. for your own layouts that use them; false: never
+    fontawesomeCSS = "auto"
     # whether to show link to Raw Markdown content of the content
     linkToMarkdown = true
     # {{< version 0.2.4 >}} whether to show the full text content in RSS

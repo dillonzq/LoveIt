@@ -1,0 +1,8 @@
+{{- /* Whether HTML (Content) still needs the Font Awesome stylesheet: an element with a Font Awesome */ -}}
+{{- /* class, or the :(fa…): syntax when Fontawesome enables it (function/fontawesome.html). */ -}}
+{{- $content := string .Content -}}
+{{- $need := findRE `(?i)\sclass\s*=\s*["']?[^"'>]*\bfa[srb]?\b` $content 1 | len | lt 0 -}}
+{{- if not $need | and .Fontawesome -}}
+    {{- $need = findRE `:\([\w- ]+?\):` $content 1 | len | lt 0 -}}
+{{- end -}}
+{{- return $need -}}

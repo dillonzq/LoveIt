@@ -54,24 +54,6 @@ class Theme {
         });
     }
 
-    initSVGIcon() {
-        Util.forEach(document.querySelectorAll('[data-svg-src]'), $icon => {
-            fetch($icon.getAttribute('data-svg-src'))
-                .then(response => response.text())
-                .then(svg => {
-                    const $temp = document.createElement('div');
-                    $temp.insertAdjacentHTML('afterbegin', svg);
-                    const $svg = $temp.firstChild;
-                    $svg.setAttribute('data-svg-src', $icon.getAttribute('data-svg-src'));
-                    $svg.classList.add('icon');
-                    const $titleElements = $svg.getElementsByTagName('title');
-                    if ($titleElements.length) $svg.removeChild($titleElements[0]);
-                    $icon.parentElement.replaceChild($svg, $icon);
-                })
-                .catch(err => { console.error(err); });
-        });
-    }
-
     initTwemoji() {
         if (this.config.twemoji) twemoji.parse(document.body);
     }
@@ -236,7 +218,7 @@ class Theme {
                     empty: ({ query }) => `<div class="search-empty">${escapeHTML(searchConfig.noResultsFound)}: <span class="search-query">"${escapeHTML(query)}"</span></div>`,
                     footer: ({}) => {
                         const searchTypes = {
-                            algolia: { searchType: 'algolia', icon: '<i class="fab fa-algolia" aria-hidden="true"></i>', href: 'https://www.algolia.com/' },
+                            algolia: { searchType: 'algolia', icon: searchConfig.algoliaIcon || '', href: 'https://www.algolia.com/' },
                             lunr: { searchType: 'Lunr.js', icon: '', href: 'https://lunrjs.com/' },
                             fuse: { searchType: 'Fuse.js', icon: '', href: 'https://www.fusejs.io/' },
                             pagefind: { searchType: 'Pagefind', icon: '', href: 'https://pagefind.app/' },
@@ -773,7 +755,6 @@ class Theme {
     init() {
         try {
             this.initRaw();
-            this.initSVGIcon();
             this.initTwemoji();
             this.initMenuMobile();
             this.onClickMask();
