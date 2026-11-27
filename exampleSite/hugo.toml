@@ -428,6 +428,13 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # whether to enable the fontawesome extended syntax
     # 是否使用 fontawesome 扩展语法
     fontawesome = true
+    # when to load the Font Awesome stylesheet and webfonts ["auto", true, false]
+    # "auto": only on pages whose content or configured HTML (menu, footer...) uses Font Awesome classes,
+    # the theme's own icons are inline SVG; true: always, e.g. for your own layouts that use them; false: never
+    # 何时加载 Font Awesome 样式和字体 ["auto", true, false]
+    # "auto": 仅在内容或配置的 HTML (菜单, 页脚...) 使用 Font Awesome 类的页面加载, 主题自身图标为内联 SVG;
+    # true: 总是加载, 例如你自己的布局使用了它; false: 从不加载
+    fontawesomeCSS = "auto"
     # whether to show link to Raw Markdown content of the content
     # 是否显示原始 Markdown 文档内容的链接
     linkToMarkdown = true

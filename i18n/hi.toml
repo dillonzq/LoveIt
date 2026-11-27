@@ -224,3 +224,10 @@ other = "हटाए गए"
 [deprecated]
 other = "अप्रचलित"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "चिह्नित"
+
+[taskUnchecked]
+other = "अचिह्नित"

@@ -1,7 +1,12 @@
 {{- $rel := "" -}}
 <a href="{{ .Destination | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse .Destination).Host | or .Newtab }}{{ $rel = "noopener noreferrer " }} target="_blank"{{ end }} rel="{{ $rel }}{{ with .Rel }}{{ . }}{{ end }}"{{ with .Class }} class="{{ . }}"{{ end }}>
     {{- with .Icon -}}
-        {{- partial "plugin/icon.html" . -}}
+        {{- /* An icon-only link is named by the icon */ -}}
+        {{- $icon := . -}}
+        {{- if not $.Content | and $.Title -}}
+            {{- $icon = dict "Label" $.Title | merge $icon -}}
+        {{- end -}}
+        {{- partial "plugin/icon.html" $icon -}}
     {{- end -}}
     {{- with .Content -}}
         {{- . | safeHTML -}}

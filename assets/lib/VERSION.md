@@ -80,6 +80,18 @@ MPL-1.1. Some of them have their own license:
 
 `wordcut.js` is shipped but no template loads it.
 
+### Font Awesome icons
+
+The theme's own icons (header, footer, social links, post meta, share buttons,
+admonitions, code blocks) are inlined into the HTML as SVG at build time. They
+come from Font Awesome Free 7.3.1, the same release as the bundled webfonts, and
+are copied unchanged to `fontawesome-free/svgs/` by `scripts/icons.mjs`, which
+also writes `svgs/aliases.json` for legacy icon names. The icons are CC-BY-4.0:
+every SVG file keeps Font Awesome's attribution comment, and this section is the
+attribution for the inlined copies. The stylesheet and webfonts (OFL-1.1 and
+MIT) still load on pages whose content uses Font Awesome classes or the
+`:(fa…):` syntax. Simple Icons are inlined the same way and are CC0-1.0.
+
 ### Emoji images
 
 These images are loaded from a CDN, not bundled, and have their own terms:

@@ -226,3 +226,10 @@ other = "తొలగించిన"
 [deprecated]
 other = "కాలం చెల్లినది"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "ఎంచుకోబడింది"
+
+[taskUnchecked]
+other = "ఎంచుకోబడలేదు"

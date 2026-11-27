@@ -47,53 +47,7 @@
 
     {{- if $profile.social -}}
         <div class="links">
-            {{- $socialMap := resources.Get "data/social.yml" | transform.Unmarshal -}}
-            {{- $socialArr := slice -}}
-            {{- range $key, $value := .Site.Params.social -}}
-                {{- $social := $key | lower | index $socialMap | default dict -}}
-                {{- with $social.Alias -}}
-                    {{- $social = index $socialMap . | default dict -}}
-                {{- end -}}
-                {{- if $value -}}
-                    {{- if reflect.IsMap $value -}}
-                        {{- with $value.weight -}}
-                            {{- $social = dict "Weight" . | merge $social -}}
-                        {{- end -}}
-                        {{- with $value.prefix -}}
-                            {{- $social = dict "Prefix" . | merge $social -}}
-                        {{- end -}}
-                        {{- with index $value "template" -}}
-                            {{- $social = dict "Template" . | merge $social -}}
-                        {{- end -}}
-                        {{- with $value.id -}}
-                            {{- $social = dict "Id" . | merge $social -}}
-                        {{- end -}}
-                        {{- with $value.url -}}
-                            {{- $social = dict "Url" . | merge $social -}}
-                        {{- end -}}
-                        {{- with $value.title -}}
-                            {{- $social = dict "Title" . | merge $social -}}
-                        {{- end -}}
-                        {{- with $value.newtab -}}
-                            {{- $social = dict "Newtab" . | merge $social -}}
-                        {{- end -}}
-                        {{- with $value.icon -}}
-                            {{- $social = dict "Icon" . | merge $social -}}
-                        {{- end -}}
-                        {{- with $value.rel -}}
-                            {{- $social = dict "Rel" . | merge $social -}}
-                        {{- end -}}
-                    {{- else if ne $value true -}}
-                        {{- $social = dict "Id" $value | merge $social -}}
-                    {{- end -}}
-                    {{- if $social.Icon.Simpleicons -}}
-                        {{- $prefix := ($.Scratch.Get "cdn" | default dict).simpleIconsPrefix -}}
-                        {{- $social = dict "Prefix" $prefix | dict "Icon" | merge $social -}}
-                    {{- end -}}
-                    {{- $socialArr = $socialArr | append $social -}}
-                {{- end -}}
-            {{- end -}}
-            {{- range sort $socialArr "Weight" -}}
+            {{- range partial "function/social.html" . -}}
                 {{- partial "plugin/social.html" . -}}
             {{- end -}}
         </div>

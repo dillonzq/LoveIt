@@ -224,3 +224,10 @@ other = "SİLİNDİ"
 [deprecated]
 other = "KULLANIM DIŞI"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "İşaretli"
+
+[taskUnchecked]
+other = "İşaretsiz"

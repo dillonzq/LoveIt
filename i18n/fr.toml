@@ -227,3 +227,10 @@ other = "EFFACÉ"
 [deprecated]
 other = "OBSOLÈTE"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Coché"
+
+[taskUnchecked]
+other = "Non coché"

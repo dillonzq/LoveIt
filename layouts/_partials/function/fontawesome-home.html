@@ -1,0 +1,36 @@
+{{- /* Whether the home profile or the home page's post summaries use Font Awesome. */ -}}
+{{- /* All visible summaries are checked, not the current pager page, so the home layout */ -}}
+{{- /* stays the first to call Paginate. */ -}}
+{{- $need := false -}}
+{{- $profile := .Site.Params.home.profile -}}
+{{- if ne $profile.enable false -}}
+    {{- $html := slice (string $profile.title) (string $profile.subtitle) (string $profile.extra) (string $profile.disclaimer) -}}
+    {{- /* Social icons that plugin/icon.html cannot inline fall back to the webfont. */ -}}
+    {{- if $profile.social -}}
+        {{- range partial "function/social.html" . -}}
+            {{- with .Icon -}}
+                {{- $html = $html | append (partial "plugin/icon.html" .) -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $need = partial "function/fontawesome-markup.html" (dict "Content" (delimit $html "\n")) -}}
+{{- end -}}
+{{- if not $need | and (ne .Site.Params.home.posts.enable false) -}}
+    {{- /* The posts home.html lists */ -}}
+    {{- $pages := partial "function/home-pages.html" . -}}
+    {{- if .Site.Params.page.hiddenFromHomePage -}}
+        {{- $pages = where $pages "Params.hiddenfromhomepage" false -}}
+    {{- else -}}
+        {{- $pages = where $pages "Params.hiddenfromhomepage" "!=" true -}}
+    {{- end -}}
+    {{- range $pages -}}
+        {{- $params := partial "function/params.html" . -}}
+        {{- /* summary.html shows the summary (or description) and the author as HTML */ -}}
+        {{- $html := printf "%v\n%v" (.Summary | default .Description) ($params.author | default .Site.Params.Author.name) -}}
+        {{- if dict "Content" $html "Fontawesome" $params.fontawesome | partial "function/fontawesome-markup.html" -}}
+            {{- $need = true -}}
+            {{- break -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- return $need -}}

@@ -227,3 +227,10 @@ other = "ȘTERS"
 [deprecated]
 other = "ÎNVECHIT"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Bifat"
+
+[taskUnchecked]
+other = "Nebifat"

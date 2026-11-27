@@ -224,3 +224,10 @@ other = "BORTTAGEN"
 [deprecated]
 other = "FÖRÅLDRAD"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Markerad"
+
+[taskUnchecked]
+other = "Inte markerad"

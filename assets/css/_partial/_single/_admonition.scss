@@ -41,14 +41,14 @@
     padding: .5rem 0;
   }
 
-  i.icon {
+  .admonition-icon {
     font-size: 0.85rem;
     position: absolute;
     top: .6rem;
     left: .4rem;
   }
 
-  i.details-icon {
+  .details-icon {
     position: absolute;
     top: .6rem;
     right: .3rem;
@@ -69,7 +69,7 @@
         background-color: $background-color;
       }
 
-      i.icon {
+      .admonition-icon {
         color: $color;
         vertical-align: -0.125em;
       }
@@ -88,7 +88,7 @@
           background-color: $background-color;
         }
 
-        i.icon {
+        .admonition-icon {
           color: $color;
           vertical-align: -0.125em;
         }

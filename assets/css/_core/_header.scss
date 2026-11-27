@@ -147,14 +147,21 @@ header {
   }
 }
 
-.theme-switch i {
+.theme-switch .icon {
   @include transform(rotate(225deg));
-  [cfg-theme=light] & {
-    --fa: '\f185';
-  }
-  [cfg-theme=dark] & {
-    --fa: '\f186';
-  }
+}
+
+// Show the icon of the configured mode (plugin/theme-switch.html).
+.theme-switch .theme-icon-light,
+.theme-switch .theme-icon-dark,
+[cfg-theme=light] .theme-switch .theme-icon-auto,
+[cfg-theme=dark] .theme-switch .theme-icon-auto {
+  display: none;
+}
+
+[cfg-theme=light] .theme-switch .theme-icon-light,
+[cfg-theme=dark] .theme-switch .theme-icon-dark {
+  display: inline-block;
 }
 
 #header-desktop {

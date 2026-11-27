@@ -229,3 +229,10 @@ other = "削除"
 [deprecated]
 other = "非推奨"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "チェック済み"
+
+[taskUnchecked]
+other = "未チェック"

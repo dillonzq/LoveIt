@@ -178,6 +178,66 @@ test('header, share and back controls are labelled, keyboard-operable buttons', 
   await expect(page).toHaveURL(/\/fuse\/blog\/$/);
 });
 
+test('theme icons are inline SVG and only content that uses Font Awesome loads it', async ({ page }) => {
+  const fontBytes = {};
+  const iconRequests = [];
+  page.on('requestfinished', async request => {
+    if (/\/lib\/(fontawesome-free|simple-icons)\//.test(request.url())) iconRequests.push(request.url());
+    if (request.resourceType() !== 'font') return;
+    const { responseBodySize } = await request.sizes();
+    fontBytes[page.url()] = (fontBytes[page.url()] || 0) + responseBodySize;
+  });
+  for (const path of ['/fuse/blog/', '/fuse/blog/gallery/', '/fuse/blog/tags/icons/', '/fuse/blog/404.html']) {
+    await page.goto(path, { waitUntil: 'networkidle' });
+    await expect(page.locator('link[href*="fontawesome"]')).toHaveCount(0);
+    await expect(page.locator('[data-svg-src], i[class*="fa-"]')).toHaveCount(0);
+    await expect(page.locator('#header-desktop .theme-switch svg.icon')).toHaveCount(3);
+    const { violations } = await new AxeBuilder({ page }).withRules(['svg-img-alt']).analyze();
+    expect(violations).toEqual([]);
+    expect(fontBytes[page.url()] || 0).toBeLessThanOrEqual(60 * 1024);
+  }
+  expect(iconRequests).toEqual([]);
+
+  // Icon-only social links are named by their icon.
+  await page.goto('/fuse/blog/');
+  await expect(page.locator('.home-profile .links svg[role="img"]').first()).toHaveAttribute('aria-label', /\S/);
+  // Each theme mode shows its own icon.
+  const visibleIcon = () => page.locator('#header-desktop .theme-switch svg:visible').getAttribute('class');
+  await expect.poll(visibleIcon).toContain('theme-icon-auto');
+  await page.locator('#header-desktop .theme-switch').click();
+  await expect.poll(visibleIcon).toContain('theme-icon-light');
+
+  await page.goto('/fuse/blog/font-awesome/');
+  await expect(page.locator('link[href*="fontawesome"]')).not.toHaveCount(0);
+  const rocket = page.locator('#content i.fas.fa-rocket');
+  await expect(rocket).toBeVisible();
+  await expect.poll(() => rocket.evaluate(icon => getComputedStyle(icon, '::before').fontFamily)).toContain('Font Awesome');
+  await expect(page.locator('#content .admonition svg.icon')).toHaveCount(3);
+  // Only the title icon is positioned; icons in the admonition body stay in the text flow.
+  await expect(page.locator('#content .admonition .admonition-content svg.icon')).toHaveCSS('position', 'static');
+  await expect(page.locator('#content').getByRole('img', { name: 'Checked', exact: true })).toHaveCount(2);
+  await expect(page.locator('#content').getByRole('img', { name: 'Unchecked', exact: true })).toHaveCount(1);
+  const { violations } = await new AxeBuilder({ page }).include('#content').withRules(['svg-img-alt', 'label']).analyze();
+  expect(violations).toEqual([]);
+
+  // HTML that the raw shortcode inserts after load still gets the webfont.
+  await page.goto('/fuse/blog/raw-icon/');
+  await expect(page.locator('link[href*="fontawesome"]')).not.toHaveCount(0);
+  await expect(page.locator('#content i.fas.fa-anchor')).toBeVisible();
+
+  // So does a byline whose author name uses a Font Awesome class.
+  await page.goto('/fuse/blog/author-icon/');
+  await expect(page.locator('link[href*="fontawesome"]')).not.toHaveCount(0);
+});
+
+test('icon prose does not load webfonts and local SVGs retain their fills', async ({ page }) => {
+  await page.goto('/fuse/blog/icon-prose/');
+  await expect(page.locator('link[href*="fontawesome"]')).toHaveCount(0);
+  const icon = page.getByRole('img', { name: 'Custom SVG' });
+  await expect(icon.locator('path').first()).toHaveCSS('fill', 'rgb(255, 0, 0)');
+  await expect(icon.locator('path').last()).toHaveCSS('fill', 'none');
+});
+
 for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/', dir: 'rtl' }]) {
   test(`${dir}: header, search dropdown and auto TOC follow the language direction`, async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });

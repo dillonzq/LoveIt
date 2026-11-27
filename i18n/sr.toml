@@ -224,3 +224,10 @@ other = "ОБРИСАНО"
 [deprecated]
 other = "ЗАСТАРЕЛО"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Означено"
+
+[taskUnchecked]
+other = "Није означено"

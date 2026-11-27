@@ -8,7 +8,7 @@
                         {{- dict "Src" . "Class" "logo" | partial "plugin/img.html" -}}
                     {{- end -}}
                     {{- with .pre -}}
-                        <span class="header-title-pre">{{ . | safeHTML }}</span>
+                        <span class="header-title-pre">{{ partialCached "function/icons.html" (string .) (string .) | safeHTML }}</span>
                     {{- end -}}
                     {{- if .typeit -}}
                         {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
@@ -18,7 +18,7 @@
                         {{- .name -}}
                     {{- end -}}
                     {{- with .post -}}
-                        <span class="header-title-post">{{ . | safeHTML }}</span>
+                        <span class="header-title-post">{{ partialCached "function/icons.html" (string .) (string .) | safeHTML }}</span>
                     {{- end -}}
                 {{- else -}}
                     {{- .Site.Title -}}
@@ -33,7 +33,7 @@
                         {{- $url = .RelPermalink -}}
                     {{- end -}}
                     <a class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end }}>
-                        {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
+                        {{- partialCached "function/icons.html" (string .Pre) (string .Pre) | safeHTML }} {{ .Name }} {{ partialCached "function/icons.html" (string .Post) (string .Post) | safeHTML -}}
                     </a>
                 {{- end -}}
                 {{- if .Site.Menus.main -}}
@@ -44,20 +44,20 @@
                     <span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-desktop" aria-label="{{ T `search` }}">
                         <button type="button" class="search-button search-toggle link-like" id="search-toggle-desktop" title="{{ T `search` }}" aria-label="{{ T `search` }}">
-                            <i class="fas fa-search" aria-hidden="true"></i>
+                            {{ dict "Class" "fas fa-search" | partial "plugin/icon.html" }}
                         </button>
                         <button type="button" class="search-button search-clear link-like" id="search-clear-desktop" title="{{ T `clear` }}" aria-label="{{ T `clear` }}">
-                            <i class="fas fa-times-circle" aria-hidden="true"></i>
+                            {{ dict "Class" "fas fa-times-circle" | partial "plugin/icon.html" }}
                         </button>
                         <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                            {{ dict "Class" "fas fa-spinner icon-spin" | partial "plugin/icon.html" }}
                         </span>
                     </span>
                 {{- end -}}
                 {{- partial "plugin/theme-switch.html" . -}}
                 {{- if hugo.IsMultilingual -}}
                 <span class="menu-item language link-like" title="{{ T "selectLanguage" }}">
-                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    {{ dict "Class" "fa fa-globe" | partial "plugin/icon.html" }}
                     <select class="language-select" id="language-select-desktop" aria-label="{{ T "selectLanguage" }}" onchange="location = this.value;">
                         {{- if eq .Kind "404" -}}
                             {{- /* https://github.com/dillonzq/LoveIt/issues/378 */ -}}
@@ -93,7 +93,7 @@
                             {{- dict "Src" . "Class" "logo" | partial "plugin/img.html" -}}
                         {{- end -}}
                         {{- with .pre -}}
-                            <span class="header-title-pre">{{ . | safeHTML }}</span>
+                            <span class="header-title-pre">{{ partialCached "function/icons.html" (string .) (string .) | safeHTML }}</span>
                         {{- end -}}
                         {{- if .typeit -}}
                             {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
@@ -103,7 +103,7 @@
                             {{- .name -}}
                         {{- end -}}
                         {{- with .post -}}
-                            <span class="header-title-post">{{ . | safeHTML }}</span>
+                            <span class="header-title-post">{{ partialCached "function/icons.html" (string .) (string .) | safeHTML }}</span>
                         {{- end -}}
                     {{- else -}}
                         {{- .Site.Title -}}
@@ -120,13 +120,13 @@
                     <div class="search mobile" id="search-mobile">
                         <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-mobile" aria-label="{{ T `search` }}">
                         <button type="button" class="search-button search-toggle link-like" id="search-toggle-mobile" title="{{ T `search` }}" aria-label="{{ T `search` }}">
-                            <i class="fas fa-search" aria-hidden="true"></i>
+                            {{ dict "Class" "fas fa-search" | partial "plugin/icon.html" }}
                         </button>
                         <button type="button" class="search-button search-clear link-like" id="search-clear-mobile" title="{{ T `clear` }}" aria-label="{{ T `clear` }}">
-                            <i class="fas fa-times-circle" aria-hidden="true"></i>
+                            {{ dict "Class" "fas fa-times-circle" | partial "plugin/icon.html" }}
                         </button>
                         <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                            {{ dict "Class" "fas fa-spinner icon-spin" | partial "plugin/icon.html" }}
                         </span>
                     </div>
                     <button type="button" class="search-cancel link-like" id="search-cancel-mobile">
@@ -141,13 +141,13 @@
                     {{- $url = .RelPermalink -}}
                 {{- end -}}
                 <a class="menu-item" href="{{ $url }}" title="{{ .Title }}"{{ if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end }}>
-                    {{- .Pre | safeHTML }}{{ .Name }}{{ .Post | safeHTML -}}
+                    {{- partialCached "function/icons.html" (string .Pre) (string .Pre) | safeHTML }}{{ .Name }}{{ partialCached "function/icons.html" (string .Post) (string .Post) | safeHTML -}}
                 </a>
             {{- end -}}
             {{- partial "plugin/theme-switch.html" . -}}
             {{- if hugo.IsMultilingual -}}
                 <span class="menu-item language link-like" title="{{ T "selectLanguage" }}">
-                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    {{ dict "Class" "fa fa-globe" | partial "plugin/icon.html" }}
                     <select class="language-select" id="language-select-mobile" aria-label="{{ T "selectLanguage" }}" onchange="location = this.value;">
                         {{- if eq .Kind "404" -}}
                             {{- /* https://github.com/dillonzq/LoveIt/issues/378 */ -}}

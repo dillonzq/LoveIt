@@ -227,3 +227,10 @@ other = "XOÁ"
 [deprecated]
 other = "LỖI THỜI"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Đã chọn"
+
+[taskUnchecked]
+other = "Chưa chọn"

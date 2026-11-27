@@ -227,3 +227,10 @@ other = "GELÖSCHT"
 [deprecated]
 other = "VERALTET"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Abgehakt"
+
+[taskUnchecked]
+other = "Nicht abgehakt"

@@ -1,13 +1,11 @@
-{{- with .Class -}}
-    <i class="{{ . }}" aria-hidden="true"></i>
+{{- /* Icon rendered at build time as inline SVG (or an image for remote or unscalable files); */ -}}
+{{- /* see function/icon.html for the options. A Class that cannot be inlined falls back to the */ -}}
+{{- /* Font Awesome webfont, which function/fontawesome-css.html then loads for configured icons. */ -}}
+{{- $key := printf "%v|%v|%v|%v|%v" .Class .Simpleicons .Prefix .Src .Label -}}
+{{- with partialCached "function/icon.html" . $key -}}
+    {{- safeHTML . -}}
 {{- else -}}
-    {{- $src := .Src -}}
-    {{- with .Simpleicons -}}
-        {{- $prefix := $.Prefix | default "lib/simple-icons/icons" | strings.TrimSuffix "/" -}}
-        {{- $src = printf "%v/%v.svg" $prefix . -}}
+    {{- with .Class -}}
+        <i class="{{ . }}"{{ with $.Label }} role="img" aria-label="{{ . }}"{{ else }} aria-hidden="true"{{ end }}></i>
     {{- end -}}
-    {{- if (urls.Parse $src).Host | not -}}
-        {{- $src = (resources.Get $src | minify).RelPermalink -}}
-    {{- end -}}
-    <i data-svg-src="{{ $src }}" aria-hidden="true"></i>
 {{- end -}}

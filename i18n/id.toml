@@ -224,3 +224,10 @@ other = "DIHAPUS"
 [deprecated]
 other = "USANG"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Dicentang"
+
+[taskUnchecked]
+other = "Tidak dicentang"
