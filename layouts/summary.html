@@ -62,7 +62,8 @@
     <div class="post-footer">
         {{- /* aria-label gives screen readers the localized name; the hidden title makes the link text itself descriptive for crawlers. */ -}}
         {{- $title := .Title | emojify | plainify | htmlUnescape -}}
-        <a href="{{ .RelPermalink }}" aria-label="{{ dict `Title` $title | T `readMoreTitle` }}">{{ T "readMore" }}<span class="visually-hidden"> {{ $title }}</span></a>
+        {{- $readMore := T "readMore" -}}
+        <a href="{{ .RelPermalink }}" aria-label="{{ dict `ReadMore` $readMore `Title` $title | T `readMoreTitle` }}">{{ $readMore }}<span class="visually-hidden"> {{ $title }}</span></a>
         {{- with .Params.tags -}}
             <div class="post-tags">
                 <i class="fas fa-tags" aria-hidden="true"></i>&nbsp;

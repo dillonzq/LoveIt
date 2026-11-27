@@ -161,7 +161,7 @@ other = "ప్రథమ"
 other = "ఇంకా చదవండి"
 
 [readMoreTitle]
-other = "ఇంకా చదవండి: {{ .Title }}"
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===

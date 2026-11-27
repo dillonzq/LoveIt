@@ -150,7 +150,7 @@ other = "Strona główna"
 other = "Czytaj więcej"
 
 [readMoreTitle]
-other = "Czytaj więcej: {{ .Title }}"
+other = "{{ .ReadMore }}: {{ .Title }}"
 
 [cookieconsentMessage]
 other = "Ta strona korzysta z plików Cookies, aby poprawić komfort użytkowania."

@@ -270,6 +270,7 @@
     }
 
     // Mark the footnote, or the reference back in the text, that a link just jumped to.
+    // Links take the text color (underlined) so everything stays readable on the tint.
     .footnotes li:target,
     sup[id^="fnref"]:target {
       color: $global-font-color;
@@ -278,9 +279,15 @@
       outline-offset: 2px;
       @include border-radius(3px);
 
+      a,
+      a:hover {
+        color: inherit;
+        text-decoration: underline;
+      }
+
       [theme=dark] & {
         color: $global-font-color-dark;
-        background-color: $selection-color-dark;
+        background-color: rgba($selection-color-dark, .2);
         outline-color: $single-link-color-dark;
       }
 

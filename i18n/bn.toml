@@ -160,7 +160,7 @@ other = "হোম"
 other = "আরো পড়ুন"
 
 [readMoreTitle]
-other = "আরো পড়ুন: {{ .Title }}"
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===

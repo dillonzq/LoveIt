@@ -162,7 +162,7 @@ other = "Inicio"
 other = "Leer más"
 
 [readMoreTitle]
-other = "Leer más: {{ .Title }}"
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===

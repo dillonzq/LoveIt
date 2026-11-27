@@ -162,7 +162,7 @@ other = "Acasă"
 other = "Citește mai mult"
 
 [readMoreTitle]
-other = "Citește mai mult: {{ .Title }}"
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
