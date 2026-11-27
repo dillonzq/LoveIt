@@ -1,0 +1,14 @@
+{{- /* The home page's pager of posts. Shared by home.html and function/fontawesome-home.html, */ -}}
+{{- /* so both see the same visible posts and Paginate receives the same arguments. */ -}}
+{{- $pages := partial "function/home-pages.html" . -}}
+{{- if .Site.Params.page.hiddenFromHomePage -}}
+    {{- $pages = where $pages "Params.hiddenfromhomepage" false -}}
+{{- else -}}
+    {{- $pages = where $pages "Params.hiddenfromhomepage" "!=" true -}}
+{{- end -}}
+{{- with .Site.Params.home.posts.paginate | default .Site.Params.paginate -}}
+    {{- $pages = $.Paginate $pages . -}}
+{{- else -}}
+    {{- $pages = .Paginate $pages -}}
+{{- end -}}
+{{- return $pages -}}

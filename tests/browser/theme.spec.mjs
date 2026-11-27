@@ -212,11 +212,18 @@ test('theme icons are inline SVG and only content that uses Font Awesome loads i
   const rocket = page.locator('#content i.fas.fa-rocket');
   await expect(rocket).toBeVisible();
   await expect.poll(() => rocket.evaluate(icon => getComputedStyle(icon, '::before').fontFamily)).toContain('Font Awesome');
-  await expect(page.locator('#content .admonition svg.icon')).toHaveCount(2);
-  await expect(page.locator('#content').getByRole('img', { name: 'Checked', exact: true })).toHaveCount(1);
+  await expect(page.locator('#content .admonition svg.icon')).toHaveCount(3);
+  // Only the title icon is positioned; icons in the admonition body stay in the text flow.
+  await expect(page.locator('#content .admonition .admonition-content svg.icon')).toHaveCSS('position', 'static');
+  await expect(page.locator('#content').getByRole('img', { name: 'Checked', exact: true })).toHaveCount(2);
   await expect(page.locator('#content').getByRole('img', { name: 'Unchecked', exact: true })).toHaveCount(1);
   const { violations } = await new AxeBuilder({ page }).include('#content').withRules(['svg-img-alt', 'label']).analyze();
   expect(violations).toEqual([]);
+
+  // HTML that the raw shortcode inserts after load still gets the webfont.
+  await page.goto('/fuse/blog/raw-icon/');
+  await expect(page.locator('link[href*="fontawesome"]')).not.toHaveCount(0);
+  await expect(page.locator('#content i.fas.fa-anchor')).toBeVisible();
 });
 
 for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/', dir: 'rtl' }]) {

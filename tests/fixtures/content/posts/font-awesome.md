@@ -15,4 +15,6 @@ The :(fas fa-rocket): extended syntax still renders with the Font Awesome webfon
 
 {{< admonition tip >}}
 Theme icons stay inline SVG.
+
+- [x] Task inside an admonition
 {{< /admonition >}}

@@ -36,7 +36,7 @@
 
 <div class="details admonition {{ $type }}{{ if $open }} open{{ end }}">
     <div class="details-summary admonition-title">
-        {{ dict "Class" (index $iconMap $type) | partial "plugin/icon.html" }}{{ $title }}{{ dict "Class" "details-icon fas fa-angle-right" | partial "plugin/icon.html" }}
+        {{ dict "Class" (index $iconMap $type | printf "admonition-icon %v") | partial "plugin/icon.html" }}{{ $title }}{{ dict "Class" "details-icon fas fa-angle-right" | partial "plugin/icon.html" }}
     </div>
     <div class="details-content">
         <div class="admonition-content">

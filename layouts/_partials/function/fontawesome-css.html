@@ -10,10 +10,16 @@
 {{- if not (in (slice "true" "false") $mode) -}}
     {{- $need = partialCached "function/fontawesome-site.html" .Site .Site.Language.Lang -}}
     {{- if not $need -}}
-        {{- $need = dict "Content" (printf "%v\n%v" .Content $params.license) "Fontawesome" $params.fontawesome | partial "function/fontawesome-markup.html" -}}
+        {{- $html := slice (string .Content) (string $params.license) -}}
+        {{- /* HTML that raw and typeit insert after load; rendering .Content above stores it. */ -}}
+        {{- range .Store.Get "contentData" -}}
+            {{- $html = $html | append (printf "%v" .) -}}
+        {{- end -}}
+        {{- $need = dict "Content" (delimit $html "\n") "Fontawesome" $params.fontawesome | partial "function/fontawesome-markup.html" -}}
     {{- end -}}
+    {{- /* Not cached: each home pager page checks its own summaries. */ -}}
     {{- if not $need | and .IsHome -}}
-        {{- $need = partialCached "function/fontawesome-home.html" . .Site.Language.Lang -}}
+        {{- $need = partial "function/fontawesome-home.html" . -}}
     {{- end -}}
 {{- end -}}
 {{- return $need -}}

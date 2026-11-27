@@ -1,10 +1,11 @@
-{{- /* Icon as inline SVG markup, built from a local SVG resource at build time; "" when it cannot be. */ -}}
+{{- /* Icon markup built at build time, or "" when it cannot be (plugin/icon.html then falls back). */ -}}
 {{- /* Class: Font Awesome classes such as "fab fa-github" (legacy names work, see svgs/aliases.json) */ -}}
 {{- /*        and theme classes kept on the SVG; size, animation and other fa-* modifiers are not supported. */ -}}
-{{- /* Simpleicons (with an optional local Prefix) or Src: a local SVG resource. */ -}}
+{{- /* Simpleicons (with an optional Prefix) or Src: an SVG resource, inlined when local. */ -}}
 {{- /* Label: accessible name; without it the icon is decorative and hidden from assistive technology. */ -}}
 {{- /* Templates call plugin/icon.html, which caches the result. */ -}}
 {{- $resource := false -}}
+{{- $remote := "" -}}
 {{- $classes := slice "icon" -}}
 {{- with .Class -}}
     {{- $styles := dict "fa" "solid" "fas" "solid" "fa-solid" "solid" "far" "regular" "fa-regular" "regular" "fab" "brands" "fa-brands" "brands" -}}
@@ -30,32 +31,54 @@
 {{- else -}}
     {{- $src := .Src -}}
     {{- with .Simpleicons -}}
-        {{- /* The bundled copy is used even when a CDN prefix is configured. */ -}}
-        {{- $prefix := $.Prefix -}}
-        {{- if not $prefix | or (urls.Parse (string $prefix)).Host -}}
-            {{- $prefix = "lib/simple-icons/icons" -}}
+        {{- $prefix := $.Prefix | default "lib/simple-icons/icons" | string | strings.TrimSuffix "/" -}}
+        {{- $src = printf "%v/%v.svg" $prefix . -}}
+        {{- /* The bundled copy is used even when a CDN prefix is configured; the CDN serves icons it lacks. */ -}}
+        {{- if (urls.Parse $prefix).Host -}}
+            {{- $resource = printf "lib/simple-icons/icons/%v.svg" . | resources.Get -}}
         {{- end -}}
-        {{- $src = printf "%v/%v.svg" (strings.TrimSuffix "/" $prefix) . -}}
     {{- end -}}
-    {{- if $src | and (not (urls.Parse $src).Host) -}}
-        {{- $resource = resources.Get (strings.TrimPrefix "/" $src) -}}
+    {{- if not $resource | and $src -}}
+        {{- if (urls.Parse (string $src)).Host -}}
+            {{- $remote = $src -}}
+        {{- else -}}
+            {{- $resource = resources.Get (strings.TrimPrefix "/" $src) -}}
+        {{- end -}}
     {{- end -}}
 {{- end -}}
 
-{{- $svg := "" -}}
+{{- $class := delimit (uniq $classes) " " | htmlEscape -}}
+{{- $label := .Label | default "" | htmlEscape -}}
+{{- $a11y := `aria-hidden="true"` -}}
+{{- with $label -}}
+    {{- $a11y = printf `role="img" aria-label="%v"` . -}}
+{{- end -}}
+{{- $markup := "" -}}
 {{- with $resource -}}
     {{- $source := .Content -}}
     {{- $open := index (findRE `<svg\b[^>]*>` $source 1) 0 | default "" -}}
-    {{- $viewBox := index (findRESubmatch `\sviewBox="([^"]*)"` $open 1) 0 -}}
-    {{- if $viewBox -}}
-        {{- /* Keep the Font Awesome license comment (minified output drops it); drop titles (Label names the icon) and the fill the <svg> sets. */ -}}
-        {{- $inner := replaceRE `(?s)^.*?<svg\b[^>]*>` "" $source 1 | replaceRE `(?s)</svg>\s*$` "" | replaceRE `(?s)<title>.*?</title>` "" | replaceRE `\s+fill="currentColor"` "" | strings.TrimSpace -}}
-        {{- $a11y := `aria-hidden="true"` -}}
-        {{- with $.Label -}}
-            {{- $a11y = printf `role="img" aria-label="%v"` (htmlEscape .) -}}
+    {{- if findRE `\sviewBox\s*=` $open 1 -}}
+        {{- /* Keep the root's presentation attributes (viewBox, fill, stroke...); the theme sets class, */ -}}
+        {{- /* size and accessibility, and fills with the text color unless the root sets a fill. */ -}}
+        {{- $attrs := replaceRE `^<svg|/?>$` "" $open | replaceRE `\s(class|width|height|role|aria-[\w-]+|xmlns|style)\s*=\s*("[^"]*"|'[^']*')` "" | strings.TrimSpace -}}
+        {{- if not (findRE `(^|\s)fill\s*=` $attrs 1) -}}
+            {{- $attrs = printf `%v fill="currentColor"` $attrs -}}
+        {{- end -}}
+        {{- /* Keep the Font Awesome license comment (minified output drops it); drop titles, Label names the icon. */ -}}
+        {{- $inner := replaceRE `(?s)^.*?<svg\b[^>]*>` "" $source 1 | replaceRE `(?s)</svg>\s*$` "" | replaceRE `(?s)<title\b.*?</title>` "" -}}
+        {{- if $.Class -}}
+            {{- /* Font Awesome paths repeat the root's fill. */ -}}
+            {{- $inner = replaceRE `\s+fill="currentColor"` "" $inner -}}
         {{- end -}}
         {{- /* The size attributes keep the icon small where the theme's CSS does not apply (feed readers). */ -}}
-        {{- $svg = printf `<svg class="%v" viewBox="%v" width="1.25em" height="1em" fill="currentColor" %v>%v</svg>` (delimit (uniq $classes) " ") (index $viewBox 1) $a11y $inner -}}
+        {{- $markup = printf `<svg class="%v" %v width="1.25em" height="1em" %v>%v</svg>` $class $attrs $a11y (strings.TrimSpace $inner) -}}
+    {{- else -}}
+        {{- /* No viewBox to scale by: publish the file and show it as an image. */ -}}
+        {{- $markup = printf `<img class="%v" src="%v" alt="%v"%v>` $class .RelPermalink $label (cond (eq $label "") ` aria-hidden="true"` "") -}}
+    {{- end -}}
+{{- else -}}
+    {{- with $remote -}}
+        {{- $markup = printf `<img class="%v" src="%v" alt="%v"%v>` $class (htmlEscape .) $label (cond (eq $label "") ` aria-hidden="true"` "") -}}
     {{- end -}}
 {{- end -}}
-{{- return $svg -}}
+{{- return $markup -}}

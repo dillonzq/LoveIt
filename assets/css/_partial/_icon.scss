@@ -12,6 +12,20 @@ svg.icon {
   }
 }
 
+img.icon {
+  width: 1.25em;
+  height: 1em;
+  object-fit: contain;
+  vertical-align: -0.125em;
+}
+
+img.emoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+  vertical-align: -.1em;
+}
+
 .icon-spin {
   animation: icon-spin 2s linear infinite;
 
