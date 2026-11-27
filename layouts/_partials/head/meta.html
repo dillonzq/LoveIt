@@ -7,7 +7,18 @@
 
 <meta name="application-name" content="{{ .Site.Params.app.title | default .Site.Title }}">
 <meta name="apple-mobile-web-app-title" content="{{ .Site.Params.app.title | default .Site.Title }}">
-<meta name="referrer" content="no-referrer" />
+{{- /* Referrer-Policy meta tag; unknown values fall back to the default. */ -}}
+{{- $referrerPolicy := "strict-origin-when-cross-origin" -}}
+{{- with .Site.Params.security.referrerPolicy -}}
+    {{- $policy := . | string | lower | strings.TrimSpace -}}
+    {{- if in (slice "no-referrer" "no-referrer-when-downgrade" "origin" "origin-when-cross-origin" "same-origin" "strict-origin" "strict-origin-when-cross-origin" "unsafe-url") $policy -}}
+        {{- $referrerPolicy = $policy -}}
+    {{- else -}}
+        {{- warnf "Unknown params.security.referrerPolicy \"%v\". \"%v\" will be used instead.\n" . $referrerPolicy -}}
+        {{- warnf "未知的 params.security.referrerPolicy \"%v\". 将使用 \"%v\".\n" . $referrerPolicy -}}
+    {{- end -}}
+{{- end -}}
+<meta name="referrer" content="{{ $referrerPolicy }}" />
 {{- with .Site.Params.app.themeColor -}}
     <meta name="theme-color" content="{{ . }}">
 {{- end -}}

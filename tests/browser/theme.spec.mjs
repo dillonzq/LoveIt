@@ -92,6 +92,34 @@ test('Mermaid survives cached content; math, copy controls and persisted theme w
   expect(errors).toEqual([]);
 });
 
+// The referrer meta tag is covered by tests/security-defaults.test.mjs; the fixture overrides head/meta.html.
+test('Mermaid uses securityLevel "strict" unless the config says "loose"', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('/fuse/blog/guide/');
+  await expect(page.locator('.mermaid svg')).toBeVisible();
+  const securityLevel = () => page.evaluate(() => mermaid.mermaidAPI.getConfig().securityLevel);
+  expect(await page.evaluate(() => window.config.mermaid)).toEqual({ securityLevel: 'strict' });
+  expect(await securityLevel()).toBe('strict');
+  // The theme switch re-initializes Mermaid from window.config.
+  const rerender = async mermaidConfig => {
+    await page.evaluate(value => {
+      if (value === undefined) delete window.config.mermaid;
+      else window.config.mermaid = value;
+      document.querySelector('.mermaid').innerHTML = '';
+    }, mermaidConfig);
+    await page.locator('#header-desktop .theme-switch').click();
+    await expect(page.locator('.mermaid svg')).toBeVisible();
+  };
+  await rerender({ securityLevel: 'loose' });
+  expect(await securityLevel()).toBe('loose');
+  await rerender({ securityLevel: 'antiscript' });
+  expect(await securityLevel()).toBe('strict');
+  await rerender(undefined);
+  expect(await securityLevel()).toBe('strict');
+  expect(errors).toEqual([]);
+});
+
 test('mobile navigation and search survive resizing', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/fuse/blog/');
