@@ -310,13 +310,17 @@ test('a long auto TOC stays within the viewport and scrolls to the active sectio
 });
 
 test('first-screen avatar loads directly and scroll bursts share a frame', async ({ page }) => {
-  const { encodesWebP } = await hugoImageFeatures();
+  const { readsPngOrientation } = await hugoImageFeatures();
   await page.goto('/fuse/blog/');
   const avatar = page.locator('.home-avatar img');
   await expect(avatar).toHaveAttribute('loading', 'eager');
   await expect(avatar).toHaveAttribute('fetchpriority', 'high');
   await expect(avatar).not.toHaveAttribute('src', /loading\.svg/);
-  if (encodesWebP) await expect(avatar).toHaveAttribute('sizes', '6rem');
+  if (readsPngOrientation) {
+    await expect(avatar).toHaveAttribute('sizes', '6rem');
+  } else {
+    await expect(avatar).not.toHaveAttribute('srcset');
+  }
   const frames = await page.evaluate(() => {
     let count = 0;
     const original = window.requestAnimationFrame;
@@ -550,13 +554,14 @@ test('local images get their size, WebP srcset and native lazy loading; others a
   await expect(png).toHaveAttribute('width', pngWidth);
   await expect(png).toHaveAttribute('height', pngHeight);
   await png.scrollIntoViewIfNeeded();
-  if (encodesWebP) {
+  if (encodesWebP && readsPngOrientation) {
     await expect(png).toHaveAttribute('srcset', new RegExp(`^\\S+\\.webp ${pngWidth}w$`));
     await expect.poll(() => png.evaluate(img => img.complete && [img.currentSrc.endsWith('.webp'), Math.round(img.naturalHeight / img.naturalWidth * 10) / 10]))
-      .toEqual([true, readsPngOrientation ? 1.5 : 0.7]);
+      .toEqual([true, 1.5]);
   } else {
     await expect(png).not.toHaveAttribute('srcset');
     await expect.poll(() => png.evaluate(img => img.currentSrc.endsWith('/oriented.png') && img.naturalWidth > 0)).toBe(true);
+    await expect.poll(() => png.evaluate(img => img.naturalHeight / img.naturalWidth)).toBeCloseTo(1.5);
   }
   // Animated PNG and WebP keep their animation: their size, but no WebP copies.
   // The APNG has a text chunk that mentions IDAT and acTL before its real acTL chunk.
@@ -597,8 +602,9 @@ test('local images get their size, WebP srcset and native lazy loading; others a
   await expect(featured).not.toHaveAttribute('decoding');
   await expect(featured).toHaveAttribute('width', '600');
   await expect(featured).toHaveAttribute('height', '400');
+  await expect.poll(() => featured.evaluate(img => img.offsetWidth === img.parentElement.clientWidth)).toBe(true);
   if (encodesWebP) {
-    await expect(featured).toHaveAttribute('srcset', /^\S+\.webp 480w, \S+\.webp 600w$/);
+    await expect(featured).toHaveAttribute('srcset', /^\S+\.webp 400w, \S+\.webp 600w$/);
   } else {
     await expect(featured).not.toHaveAttribute('srcset');
   }

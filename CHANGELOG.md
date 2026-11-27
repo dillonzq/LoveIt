@@ -72,10 +72,11 @@ This file starts at 0.4.0. Older releases are described on the
   images, the `image` shortcode, featured images and the home page avatar
   found in the page bundle or under `assets/` get `width` and `height`, which
   keep the page from shifting while they load, and JPEG, PNG and WebP images
-  get a `srcset` of WebP copies 480 and 960 pixels wide with `sizes`. The
+  get a `srcset` of WebP copies 400 and 800 pixels wide with `sizes`. The
   original file stays the `src`, the last `srcset` candidate when it is
   wider, and the lightGallery full-size image. Images are rotated as their
-  Exif orientation says (JPEG and TIFF only before Hugo 0.155.0). GIF, BMP
+  Exif orientation says. Before Hugo 0.155.0, PNG and WebP images keep
+  the original file so the browser can apply its orientation. GIF, BMP
   and TIFF images, animated PNG and WebP images and images Hugo cannot
   decode only get their size; SVG, files under `static/` and remote URLs are
   used as they are. The home page avatar can also be a resource of the home

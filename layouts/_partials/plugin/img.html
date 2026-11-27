@@ -18,14 +18,15 @@
     Page resources and global resources (assets/) in JPEG, PNG or WebP get
     width, height and a srcset of WebP copies made with Hugo's image
     processing, followed by the original file when it is wider than the
-    largest copy. GIF, BMP, TIFF and animated PNG or WebP only get their size;
+    largest copy. GIF, BMP, TIFF and animated PNG or WebP only get their size.
+    Before Hugo 0.155.0, PNG and WebP are kept as originals to preserve orientation.
     SVG, other formats, files under static/ and remote URLs are linked as
     they are.
 */ -}}
 {{- $src := .Src -}}
 {{- $width := .Width -}}
 {{- $height := .Height -}}
-{{- $widths := cond (isset . "Widths") .Widths (slice 480 960) -}}
+{{- $widths := cond (isset . "Widths") .Widths (slice 400 800) -}}
 {{- $sizes := .Sizes | default "(max-width: 680px) 100vw, (max-width: 960px) 80vw, (max-width: 1280px) 52vw, (max-width: 1440px) 56vw, (max-width: 1688px) 64vw, 1080px" -}}
 {{- $candidates := slice -}}
 {{- $thumbnail := "" -}}
@@ -43,8 +44,9 @@
     {{- if and $dimensions.Width $dimensions.Height -}}
         {{- /* The browser applies the Exif orientation to the original; Hugo does not when it resizes. */ -}}
         {{- /* Unreadable metadata counts as no orientation. */ -}}
+        {{- $modernMetadata := ge hugo.Version "0.155.0" -}}
         {{- $orientation := 1 -}}
-        {{- if ge hugo.Version "0.155.0" -}}
+        {{- if $modernMetadata -}}
             {{- if in (slice "jpeg" "png" "webp" "tiff") $type -}}
                 {{- with try .Meta -}}
                     {{- with .Value -}}
@@ -87,7 +89,8 @@
         {{- $height = $height | default $imageHeight -}}
 
         {{- /* WebP encoding needs the extended edition before Hugo 0.153.0. */ -}}
-        {{- $process := and $widths (in (slice "jpeg" "png" "webp") $type) (or hugo.IsExtended (ge hugo.Version "0.153.0")) -}}
+        {{- $canOrient := or (eq $type "jpeg") (and $modernMetadata (in (slice "png" "webp") $type)) -}}
+        {{- $process := and $widths $canOrient (or hugo.IsExtended (ge hugo.Version "0.153.0")) -}}
 
         {{- /*
             Animated PNG and WebP keep only their size, like GIF: WebP copies would be still or fail
