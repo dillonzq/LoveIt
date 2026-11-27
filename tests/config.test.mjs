@@ -97,6 +97,7 @@ test('the normalized configuration maps old keys to unset new keys', () => {
   const table = [
     '- key: params.oldSection.someFlag\n  replacement: params.newSection.someFlag\n  since: 0.5.0\n  removal: 0.7.0',
     '- key: params.oldTop\n  replacement: params.newTop\n  since: 0.5.0\n  removal: 0.7.0',
+    '- key: params.oldMap\n  replacement: params.newMap\n  since: 0.5.0\n  removal: 0.7.0',
     '- key: params.oldBoth\n  replacement: params.newBoth\n  since: 0.5.0\n  removal: 0.7.0\n  hint:\n    en: Custom hint.\n    zh: 自定义提示.',
     // Paths through missing sections and non-map values are unset.
     '- key: params.title.sub\n  replacement: params.newTitle\n  since: 0.5.0\n  removal: 0.7.0',
@@ -104,24 +105,27 @@ test('the normalized configuration maps old keys to unset new keys', () => {
   ].join('\n');
   const show = '{{ $c := partialCached "function/config.html" .Site .Site.Language.Lang }}'
     + '{{ $c.newSection.someFlag }}|{{ $c.newsection.someflag }}|{{ $c.newSection.other }}|{{ $c.newTop }}|{{ $c.newtop }}'
-    + '|{{ $c.newBoth }}|{{ $c.newTitle }}|{{ $c.compatibility.objectFit }}|{{ $c.defaultTheme }}|{{ $c.oldBoth }}\n';
+    + '|{{ $c.newMap.current }}{{ $c.newMap.obsolete }}|{{ $c.newBoth }}|{{ $c.newTitle }}|{{ $c.compatibility.objectFit }}|{{ $c.defaultTheme }}|{{ $c.oldBoth }}\n';
   const directory = site('replacement', [
     'disableKinds = ["page", "section", "taxonomy", "term", "rss", "sitemap", "robotsTXT", "404"]',
     '[params]\ntitle = "Site"\noldTop = "top"\noldBoth = "old"\nnewBoth = "new"',
     '[params.oldSection]\nsomeFlag = "mapped"',
     '[params.newSection]\nother = "kept"',
+    '[params.oldMap]\nobsolete = "obsolete"',
+    '[params.newMap]\ncurrent = "current"',
     '[languages.zh-cn.params]\noldBoth = ""',
   ].join('\n'), { 'assets/data/deprecations.yml': table, 'layouts/home.html': show });
   const { status, output } = build(directory);
   assert.equal(status, 0, output);
   // Theme defaults keep their case-insensitive keys; the new key wins when both are set.
   // Mapped keys read in any case, next to the keys already in the section.
-  assert.equal(page(directory, 'index.html'), 'mapped|mapped|kept|top|top|new||false|auto|old\n');
-  assert.equal(page(directory, 'zh-cn/index.html'), 'mapped|mapped|kept|top|top|new||false|auto|\n');
+  assert.equal(page(directory, 'index.html'), 'mapped|mapped|kept|top|top|current|new||false|auto|old\n');
+  assert.equal(page(directory, 'zh-cn/index.html'), 'mapped|mapped|kept|top|top|current|new||false|auto|\n');
   assert.equal(count(output, "'loveit-deprecated-params-oldsection-someflag'"), 1, output);
   assert.equal(count(output, 'Use "params.newSection.someFlag" instead.'), 1, output);
   assert.equal(count(output, '请改用 "params.newSection.someFlag".'), 1, output);
   assert.equal(count(output, 'Custom hint.'), 1, output);
+  assert.equal(count(output, "'loveit-deprecated-params-oldmap'"), 1, output);
   assert.doesNotMatch(output, /params-title-sub|params-missing-key/);
 });
 
@@ -132,4 +136,17 @@ test('a replacement under a section that does not exist fails the build', () => 
   const { status, output } = build(directory);
   assert.notEqual(status, 0);
   assert.match(output, /the replacement "params\.absentSection\.flag" needs the section "absentsection"/);
+});
+
+test('deprecation keys and replacements must be keys under params', () => {
+  for (const [name, entry] of Object.entries({
+    'bad-key': '- key: config.oldFlag\n  since: 0.5.0\n  removal: 0.7.0',
+    'bad-replacement': '- key: params.oldFlag\n  replacement: config.newFlag\n  since: 0.5.0\n  removal: 0.7.0',
+    'empty-segment': '- key: params.oldFlag\n  replacement: params..newFlag\n  since: 0.5.0\n  removal: 0.7.0',
+  })) {
+    const directory = site(name, '[params]\noldFlag = true', { 'assets/data/deprecations.yml': entry });
+    const { status, output } = build(directory);
+    assert.notEqual(status, 0, name);
+    assert.match(output, /must be a key under "params\."/, name);
+  }
 });

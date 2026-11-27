@@ -9,8 +9,10 @@
     {{- $deprecations = transform.Unmarshal . -}}
 {{- end -}}
 {{- range $deprecations -}}
-    {{- if not (hasPrefix .key "params.") -}}
-        {{- errorf "assets/data/deprecations.yml: key %q must start with \"params.\"" .key -}}
+    {{- range slice .key .replacement -}}
+        {{- if and . (or (not (hasPrefix . "params.")) (in (split . ".") "")) -}}
+            {{- errorf "assets/data/deprecations.yml: %q must be a key under \"params.\"" . -}}
+        {{- end -}}
     {{- end -}}
     {{- $value := $params -}}
     {{- range after 1 (split .key ".") -}}
@@ -40,11 +42,14 @@
                     {{- break -}}
                 {{- end -}}
             {{- end -}}
-            {{- $nested := $value -}}
-            {{- range seq (len $segments) 1 -}}
-                {{- $nested = dict (index $segments (sub . 1)) $nested -}}
+            {{- /* A new key that is set wins as a whole: a map value is not merged with the old one. */ -}}
+            {{- if and (reflect.IsMap $parent) (not (isset $parent (index $segments (sub (len $segments) 1)))) -}}
+                {{- $nested := $value -}}
+                {{- range seq (len $segments) 1 -}}
+                    {{- $nested = dict (index $segments (sub . 1)) $nested -}}
+                {{- end -}}
+                {{- $override = merge $override $nested -}}
             {{- end -}}
-            {{- $override = merge $override $nested -}}
         {{- end -}}
         {{- warnidf (replace .key "." "-" | lower | printf "loveit-deprecated-%v")
             "LoveIt: %q is deprecated since v%v and will be removed in v%v. %v\nLoveIt: %q 已于 v%v 弃用, 将在 v%v 移除. %v\nSee / 参见 https://hugoloveit.com/theme-documentation-basics/#deprecated-options\n"
