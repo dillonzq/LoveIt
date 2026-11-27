@@ -128,6 +128,8 @@ ID `loveit-deprecated-<key with dots as dashes, lowercase>` for `ignoreLogs`.
 - With `replacement`, the old value fills the new key in the returned params
   while the new key is unset. Templates then read only the new key, which must
   not have a default in `hugo.toml`; apply it with `default` in the template.
+  Every section above the new key must exist in `hugo.toml` (the build fails
+  otherwise), so that the mapped key reads in any case like other params.
 - Until a key is removed, templates that still read it should read it from the
   returned params rather than `.Site.Params`.
 - Add the key to "Deprecated Options" in both languages of

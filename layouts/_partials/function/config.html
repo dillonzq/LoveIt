@@ -28,7 +28,18 @@
             {{- $en = $en | default (printf "Use %q instead." .) -}}
             {{- $zh = $zh | default (printf "请改用 %q." .) -}}
             {{- /* Build {a: {b: value}} from "params.a.b" so that merge only fills the new key when it is unset. */ -}}
-            {{- $segments := after 1 (split . ".") -}}
+            {{- /* Lowercase keys merged into existing sections keep them case-insensitive (maps.Params); */ -}}
+            {{- /* a section the merge had to create would be a plain map, so every parent must exist already. */ -}}
+            {{- $replacement := . -}}
+            {{- $segments := after 1 (split (lower .) ".") -}}
+            {{- $parent := $params -}}
+            {{- range first (sub (len $segments) 1) $segments -}}
+                {{- $parent = index $parent . -}}
+                {{- if not (reflect.IsMap $parent) -}}
+                    {{- errorf "assets/data/deprecations.yml: the replacement %q needs the section %q in the theme's hugo.toml" $replacement . -}}
+                    {{- break -}}
+                {{- end -}}
+            {{- end -}}
             {{- $nested := $value -}}
             {{- range seq (len $segments) 1 -}}
                 {{- $nested = dict (index $segments (sub . 1)) $nested -}}

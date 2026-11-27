@@ -4,7 +4,8 @@
 # replacement: optional new key. While the new key is unset, the normalized configuration copies
 #              the old value to it, so templates only read the new key. The new key wins when both
 #              are set, so it must not have a default in the theme's hugo.toml (templates apply its
-#              default with "default" instead).
+#              default with "default" instead). Every section above the new key must already exist
+#              in the theme's hugo.toml, so that the new key reads in any case; the build fails otherwise.
 # since:       the theme version that deprecates the key.
 # removal:     the theme version that stops reading it.
 # hint:        what to do instead, in English (en) and Simplified Chinese (zh).

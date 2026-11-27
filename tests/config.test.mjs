@@ -59,7 +59,8 @@ test('theme defaults and explicit false values do not warn', () => {
 });
 
 test('each deprecated key warns once per build and keeps working until it is removed', () => {
-  const config = '[params.compatibility]\npolyfill = true\nobjectFit = true\n[params.cdn]\ndata = ""\nautocompleteJS = "https://cdn.example.org/autocomplete.js"';
+  const config = '[params.compatibility]\npolyfill = true\nobjectFit = true\n[params.search]\nenable = true\n'
+    + '[params.cdn]\ndata = ""\nautocompleteJS = "https://cdn.example.org/autocomplete.js"';
   const directory = site('deprecated', config);
   const { status, output } = build(directory);
   assert.equal(status, 0, output);
@@ -71,6 +72,7 @@ test('each deprecated key warns once per build and keeps working until it is rem
     const html = page(directory, file);
     assert.match(html, new RegExp(polyfill.replaceAll('.', '\\.')), file);
     assert.match(html, new RegExp(objectFit.replaceAll('.', '\\.')), file);
+    assert.match(html, /<script src="?https:\/\/cdn\.example\.org\/autocomplete\.js"?[\s>]/, file);
   }
 
   // They are warnings: builds that panic on warnings fail unless ignoreLogs silences them.
@@ -94,27 +96,40 @@ test('language params follow Hugo merging and warn once', () => {
 test('the normalized configuration maps old keys to unset new keys', () => {
   const table = [
     '- key: params.oldSection.someFlag\n  replacement: params.newSection.someFlag\n  since: 0.5.0\n  removal: 0.7.0',
+    '- key: params.oldTop\n  replacement: params.newTop\n  since: 0.5.0\n  removal: 0.7.0',
     '- key: params.oldBoth\n  replacement: params.newBoth\n  since: 0.5.0\n  removal: 0.7.0\n  hint:\n    en: Custom hint.\n    zh: 自定义提示.',
     // Paths through missing sections and non-map values are unset.
     '- key: params.title.sub\n  replacement: params.newTitle\n  since: 0.5.0\n  removal: 0.7.0',
     '- key: params.missing.key\n  since: 0.5.0\n  removal: 0.7.0',
   ].join('\n');
   const show = '{{ $c := partialCached "function/config.html" .Site .Site.Language.Lang }}'
-    + '{{ $c.newSection.someFlag }}|{{ $c.newBoth }}|{{ $c.newTitle }}|{{ $c.compatibility.objectFit }}|{{ $c.defaultTheme }}|{{ $c.oldBoth }}\n';
+    + '{{ $c.newSection.someFlag }}|{{ $c.newsection.someflag }}|{{ $c.newSection.other }}|{{ $c.newTop }}|{{ $c.newtop }}'
+    + '|{{ $c.newBoth }}|{{ $c.newTitle }}|{{ $c.compatibility.objectFit }}|{{ $c.defaultTheme }}|{{ $c.oldBoth }}\n';
   const directory = site('replacement', [
     'disableKinds = ["page", "section", "taxonomy", "term", "rss", "sitemap", "robotsTXT", "404"]',
-    '[params]\ntitle = "Site"\noldBoth = "old"\nnewBoth = "new"',
+    '[params]\ntitle = "Site"\noldTop = "top"\noldBoth = "old"\nnewBoth = "new"',
     '[params.oldSection]\nsomeFlag = "mapped"',
+    '[params.newSection]\nother = "kept"',
     '[languages.zh-cn.params]\noldBoth = ""',
   ].join('\n'), { 'assets/data/deprecations.yml': table, 'layouts/home.html': show });
   const { status, output } = build(directory);
   assert.equal(status, 0, output);
   // Theme defaults keep their case-insensitive keys; the new key wins when both are set.
-  assert.equal(page(directory, 'index.html'), 'mapped|new||false|auto|old\n');
-  assert.equal(page(directory, 'zh-cn/index.html'), 'mapped|new||false|auto|\n');
+  // Mapped keys read in any case, next to the keys already in the section.
+  assert.equal(page(directory, 'index.html'), 'mapped|mapped|kept|top|top|new||false|auto|old\n');
+  assert.equal(page(directory, 'zh-cn/index.html'), 'mapped|mapped|kept|top|top|new||false|auto|\n');
   assert.equal(count(output, "'loveit-deprecated-params-oldsection-someflag'"), 1, output);
   assert.equal(count(output, 'Use "params.newSection.someFlag" instead.'), 1, output);
   assert.equal(count(output, '请改用 "params.newSection.someFlag".'), 1, output);
   assert.equal(count(output, 'Custom hint.'), 1, output);
   assert.doesNotMatch(output, /params-title-sub|params-missing-key/);
+});
+
+test('a replacement under a section that does not exist fails the build', () => {
+  const directory = site('absent-section', '[params]\noldFlag = true', {
+    'assets/data/deprecations.yml': '- key: params.oldFlag\n  replacement: params.absentSection.flag\n  since: 0.5.0\n  removal: 0.7.0',
+  });
+  const { status, output } = build(directory);
+  assert.notEqual(status, 0);
+  assert.match(output, /the replacement "params\.absentSection\.flag" needs the section "absentsection"/);
 });
