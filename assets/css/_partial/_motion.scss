@@ -1,4 +1,4 @@
-// Motion that used to come from animate.css.
+// The theme's own motion: header auto-hide, page title entrance and copy feedback.
 
 // Auto-hiding headers slide out while scrolling down and come back when
 // scrolling up (see onScroll in theme.js). Keyboard focus brings them back.
@@ -15,57 +15,46 @@ header.is-hidden {
 // Entrance of page titles, skipped when the reader prefers reduced motion.
 @media (prefers-reduced-motion: no-preference) {
   .title-pulse {
-    animation: title-pulse 0.5s ease-in-out both;
+    animation: title-pulse 0.6s ease-in-out both;
   }
 
   .title-flip-in {
-    backface-visibility: visible;
-    animation: title-flip-in 1s both;
+    animation: title-flip-in 0.8s cubic-bezier(0.2, 0.8, 0.3, 1.2) both;
   }
 }
 
 @keyframes title-pulse {
   from, to {
-    transform: scale3d(1, 1, 1);
-  }
-
-  50% {
-    transform: scale3d(1.05, 1.05, 1.05);
-  }
-}
-
-@keyframes title-flip-in {
-  from {
-    opacity: 0;
-    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-    animation-timing-function: ease-in;
+    transform: none;
   }
 
   40% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-    animation-timing-function: ease-in;
-  }
-
-  60% {
-    opacity: 1;
-    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-  }
-
-  80% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-  }
-
-  to {
-    transform: perspective(400px);
+    transform: scale(1.04);
   }
 }
 
+// The title swings down into place around its top edge.
+@keyframes title-flip-in {
+  from {
+    opacity: 0;
+    transform-origin: 50% 0;
+    transform: perspective(600px) rotateX(-75deg);
+  }
+
+  to {
+    opacity: 1;
+    transform-origin: 50% 0;
+    transform: perspective(600px) rotateX(0);
+  }
+}
+
+// Copied code blinks twice.
 @keyframes code-copied-flash {
-  from, 50%, to {
+  0%, 50%, 100% {
     opacity: 1;
   }
 
-  25%, 75% {
-    opacity: 0;
+  20%, 70% {
+    opacity: 0.2;
   }
 }

@@ -88,9 +88,20 @@ code, pre {
       padding: .4rem;
     }
 
+    // Announces the result of the copy button to screen readers only.
+    .copy-status {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
     .copy {
       display: none;
       padding: .4rem;
+      color: inherit;
 
       &:hover {
         cursor: pointer;
@@ -172,7 +183,7 @@ code, pre {
       }
 
       .copy {
-        display: inline;
+        display: inline-block;
       }
     }
 

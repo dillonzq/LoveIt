@@ -1344,7 +1344,7 @@ npx pagefind --site public --output-subdir _pagefind --serve
 ### 6.2 行为变化
 
 * **语言配置.** 在 Hugo 0.158.0 或更新版本中, 请使用 `locale` 和 `label` 代替已废弃的 `languageCode` 和 `languageName`.
-* **Polyfill.** `params.compatibility.polyfill` 改为从 `cdnjs.cloudflare.com` 加载, 不再使用 `polyfill.io`.
+* **Polyfill.** 在 0.4.X 中 `params.compatibility.polyfill` 改为从 `cdnjs.cloudflare.com` 加载, 不再使用 `polyfill.io`. LoveIt 0.5.0 移除了该配置和 Polyfill 服务.
 * **音乐.** 默认的 Meting API 已更换. 可以在 `[params.page.music]` 中设置 `api` 来使用你自己的服务.
 * **Waline.** 内置客户端为 Waline v3, 需要 v1.27.0 及以上的 Waline 服务端.
 

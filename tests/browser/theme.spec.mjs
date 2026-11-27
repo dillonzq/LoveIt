@@ -370,23 +370,44 @@ test('fixed buttons fade in after scrolling down and the auto header hides until
   await page.addInitScript(() => document.addEventListener('DOMContentLoaded', () => document.body.setAttribute('data-header-desktop', 'auto')));
   await page.goto('/fuse/blog/guide/');
   const fixedButtons = page.locator('#fixed-buttons');
+  const backToTop = page.locator('#back-to-top');
   const header = page.locator('#header-desktop');
-  await expect(fixedButtons).toBeHidden();
-  await page.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo(0, 400); });
+  await expect(backToTop).toBeHidden();
+  await page.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo({ top: 400, behavior: 'instant' }); });
   await expect(fixedButtons).toHaveClass(/\bis-visible\b/);
-  await expect(page.locator('#back-to-top')).toBeVisible();
+  await expect(backToTop).toBeVisible();
+  await expect(backToTop).toHaveCSS('pointer-events', 'auto');
   await expect(header).toHaveClass(/\bis-hidden\b/);
   await expect(header).toHaveCSS('opacity', '0');
-  await page.evaluate(() => window.scrollTo(0, 200));
+  await page.evaluate(() => window.scrollTo({ top: 200, behavior: 'instant' }));
   await expect(header).not.toHaveClass(/\bis-hidden\b/);
   await expect(header).toHaveCSS('opacity', '1');
-  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
   await expect(fixedButtons).not.toHaveClass(/\bis-visible\b/);
-  await expect(fixedButtons).toBeHidden();
+  // Hidden at once for clicks, even while it fades out.
+  await expect(backToTop).toHaveCSS('pointer-events', 'none');
+  await expect(backToTop).toBeHidden();
   // No page loads animate.css any more; the page title animates with the theme styles.
   await expect(page.locator('link[href*="animate"]')).toHaveCount(0);
   await expect(page.locator('h1.single-title')).toHaveCSS('animation-name', /^title-/);
   expect(errors).toEqual([]);
+});
+
+test('on phones the fixed buttons hide while scrolling down and come back when scrolling up', async ({ browser }) => {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  await page.goto('/fuse/blog/guide/');
+  const backToTop = page.locator('#back-to-top');
+  const header = page.locator('#header-mobile');
+  await page.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo({ top: 400, behavior: 'instant' }); });
+  await expect(header).toHaveClass(/\bis-hidden\b/);
+  await expect(backToTop).toBeHidden();
+  await page.evaluate(() => window.scrollTo({ top: 300, behavior: 'instant' }));
+  await expect(header).not.toHaveClass(/\bis-hidden\b/);
+  await expect(backToTop).toBeVisible();
+  await page.evaluate(() => window.scrollTo({ top: 600, behavior: 'instant' }));
+  await expect(backToTop).toBeHidden();
+  await context.close();
 });
 
 test('lightGallery opens linked images with thumbnails, zoom and SVG icons', async ({ page }) => {
@@ -580,9 +601,12 @@ test('copy buttons copy code verbatim and unknown languages keep the code block 
     const block = blocks.nth(index);
     // Every block is highlighted by Chroma, so it gets line numbers and the code colors.
     await expect(block.locator('pre.chroma span.line')).toHaveCount(text.split('\n').length);
-    await block.locator('.copy').click();
+    const copy = block.getByRole('button', { name: 'Copy to clipboard' });
+    await copy.focus();
+    await page.keyboard.press('Enter');
     await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe(text);
     await expect(block).toHaveClass(/\bcopied\b/);
+    await expect(block.getByRole('status')).toHaveText('Copy to clipboard: Success');
   }
   await expect(blocks.first()).not.toHaveClass(/\bcopied\b/, { timeout: 5_000 });
   await expect(page.locator('script[src*="clipboard"]')).toHaveCount(0);
@@ -614,6 +638,7 @@ test('copy buttons fall back to execCommand and leave the code selected when cop
   await block.locator('.copy').click();
   await expect(block).toHaveClass(/\bcopy-failed\b/);
   await expect(block).not.toHaveClass(/\bcopied\b/);
+  await expect(block.getByRole('status')).toHaveText('Copy to clipboard: Failure');
   expect(await page.evaluate(() => window.getSelection().toString().trim())).toContain('echo three');
   await expect(block.locator('.copy')).toHaveCSS('color', 'rgb(198, 40, 40)');
   expect(errors).toEqual([]);

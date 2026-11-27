@@ -1347,7 +1347,7 @@ Check the following when you upgrade from **LoveIt 0.3.X** to **0.4.X**.
 ### 6.2 What Has Changed
 
 * **Language configuration.** On Hugo 0.158.0 or later, use `locale` and `label` instead of the deprecated `languageCode` and `languageName`.
-* **Polyfill.** `params.compatibility.polyfill` now loads from `cdnjs.cloudflare.com` instead of `polyfill.io`.
+* **Polyfill.** `params.compatibility.polyfill` loads from `cdnjs.cloudflare.com` instead of `polyfill.io` in 0.4.X. LoveIt 0.5.0 removes the option and the Polyfill service.
 * **Music.** The default Meting API has been replaced. Set `api` in `[params.page.music]` to use your own.
 * **Waline.** The bundled client is Waline v3, which requires a Waline server v1.27.0 or later.
 

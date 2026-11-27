@@ -20,7 +20,7 @@
     <div class="code-header language-{{ $lang }}">
         <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        {{ if $copy }}<span class="copy" title="{{ T "copyToClipboard" }}"><i class="far fa-copy" aria-hidden="true"></i></span>{{ end }}
+        {{ if $copy }}<button type="button" class="copy link-like" title="{{ T "copyToClipboard" }}" aria-label="{{ T "copyToClipboard" }}" data-copied="{{ T "success" }}" data-copy-failed="{{ T "failure" }}"><i class="far fa-copy" aria-hidden="true"></i></button><span class="copy-status" role="status"></span>{{ end }}
     </div>
     {{- $result -}}
 </div>

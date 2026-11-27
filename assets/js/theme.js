@@ -340,6 +340,7 @@ class Theme {
             const $copy = $codeBlock.querySelector('.code-header .copy');
             if ($copy) {
                 const $code = $codeBlock.querySelector('code');
+                const $status = $codeBlock.querySelector('.code-header .copy-status');
                 let resetTimeout;
                 $copy.addEventListener('click', () => {
                     // innerText adds a line break after every block-level line span on top of
@@ -352,7 +353,14 @@ class Theme {
                         $codeBlock.classList.add(copied ? 'copied' : 'copy-failed');
                         // Leave the code selected so it can be copied by hand.
                         if (!copied) window.getSelection().selectAllChildren($code);
-                        resetTimeout = window.setTimeout(() => $codeBlock.classList.remove('copied', 'copy-failed'), 2000);
+                        if ($status) {
+                            const result = $copy.getAttribute(copied ? 'data-copied' : 'data-copy-failed');
+                            $status.textContent = `${$copy.getAttribute('aria-label')}: ${result}`;
+                        }
+                        resetTimeout = window.setTimeout(() => {
+                            $codeBlock.classList.remove('copied', 'copy-failed');
+                            if ($status) $status.textContent = '';
+                        }, 2000);
                     });
                 }, false);
             }
