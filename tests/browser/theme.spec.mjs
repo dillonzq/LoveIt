@@ -606,3 +606,74 @@ test('home page and its feed list the posts section and pages typed "posts" or "
   expect(feed).toContain('<title>Post type elsewhere</title>');
   expect(feed).not.toContain('<title>Plain note</title>');
 });
+
+test('Read More links name their post, microdata uses https and summaries keep it', async ({ page }) => {
+  await page.goto('/fuse/blog/');
+  const readMore = page.locator('.home .summary .post-footer > a').first();
+  // Only "Read More" shows; the post title stays in the link text for crawlers but off screen.
+  await expect(readMore).toHaveAccessibleName(/^Read More: \S/);
+  const typed = page.getByRole('link', { name: 'Read More: Typed post' });
+  await expect(typed).toHaveText('Read More Typed post', { useInnerText: true });
+  expect(await typed.evaluate(link => link.firstChild.textContent)).toBe('Read More');
+  const hidden = await typed.locator('.visually-hidden').boundingBox();
+  expect(hidden.width * hidden.height).toBeLessThanOrEqual(1);
+  await typed.focus();
+  await expect(typed).toBeFocused();
+  const literalTitle = 'std::vector<int> & 😄';
+  const literal = page.getByRole('link', { name: `Read More: ${literalTitle}`, exact: true });
+  await expect(literal.locator('.visually-hidden')).toHaveText(literalTitle);
+  await expect(page.locator('[itemtype^="http:"]')).toHaveCount(0);
+  await expect(page.locator('.summary[itemtype="https://schema.org/Article"]').first()).toBeAttached();
+  await expect(page.locator('.footer [itemtype="https://schema.org/CreativeWork"]')).toHaveCount(1);
+  await page.goto('/fuse/blog/zh-cn/');
+  await expect(page.getByRole('link', { name: '阅读全文：中文搜索指南' })).toHaveCount(1);
+});
+
+test('footnotes and their references are highlighted when a link jumps to them', async ({ browser, page }) => {
+  await page.goto('/fuse/blog/long-toc/');
+  const reference = page.locator('sup[id^="fnref"]').first();
+  const note = page.locator('.footnotes li').first();
+  await expect(note).not.toHaveCSS('outline-style', 'solid');
+  await reference.locator('a').focus();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#fn:1$/);
+  await expect(note).toHaveCSS('outline-style', 'solid');
+  await expect(note).toHaveCSS('animation-name', 'footnote-target');
+  await expect(note).toBeInViewport();
+  await note.locator('a.footnote-backref').focus();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#fnref:1$/);
+  await expect(reference).toHaveCSS('outline-style', 'solid');
+  await expect(note).not.toHaveCSS('outline-style', 'solid');
+
+  // Highlighted text and links keep at least 4.5:1 contrast in both themes.
+  const contrast = locator => locator.evaluate(element => {
+    const rgba = value => value.match(/[\d.]+/g).map(Number);
+    const over = ([r, g, b, a = 1], [br, bg, bb]) => [r * a + br * (1 - a), g * a + bg * (1 - a), b * a + bb * (1 - a)];
+    const target = element.closest(':target');
+    const background = over(rgba(getComputedStyle(target).backgroundColor), rgba(getComputedStyle(document.body).backgroundColor));
+    const luminance = rgb => rgb.map(v => v / 255).map(v => v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)
+      .reduce((sum, v, i) => sum + v * [0.2126, 0.7152, 0.0722][i], 0);
+    const [a, b] = [luminance(over(rgba(getComputedStyle(element).color), background)), luminance(background)];
+    return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+  });
+  for (const theme of ['light', 'dark']) {
+    await page.goto('/fuse/blog/long-toc/#fnref:1');
+    await page.evaluate(theme => document.body.setAttribute('theme', theme), theme);
+    expect(await contrast(reference.locator('a'))).toBeGreaterThanOrEqual(4.5);
+    await page.goto('/fuse/blog/long-toc/#fn:1');
+    await page.evaluate(theme => document.body.setAttribute('theme', theme), theme);
+    expect(await contrast(note.locator('p'))).toBeGreaterThanOrEqual(4.5);
+    expect(await contrast(note.locator('a.footnote-backref'))).toBeGreaterThanOrEqual(4.5);
+  }
+  await expect(note).toHaveCSS('outline-color', 'rgb(85, 189, 226)');
+
+  // Reduced motion keeps the highlight but drops the animation.
+  const context = await browser.newContext({ reducedMotion: 'reduce' });
+  const reduced = await context.newPage();
+  await reduced.goto('/fuse/blog/long-toc/#fn:1');
+  const reducedNote = reduced.locator('.footnotes li').first();
+  await expect(reducedNote).toHaveCSS('outline-style', 'solid');
+  await expect(reducedNote).toHaveCSS('animation-name', 'none');
+  await context.close();
+});

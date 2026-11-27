@@ -12,8 +12,19 @@ This file starts at 0.4.0. Older releases are described on the
 
 ## [Unreleased]
 
+### Added
+
+- A footnote, or the reference in the text that links to it, is outlined and
+  highlighted after a link jumps to it. The outline animates in briefly unless
+  reduced motion is preferred ([#993]).
+- The "Read More" link of each post summary names its post: screen readers
+  hear a localized label such as "Read More: Post title", and search engines
+  see the title in visually hidden link text.
+
 ### Changed
 
+- The microdata `itemtype` of post summaries and the footer uses
+  `https://schema.org`.
 - The `<meta name="referrer">` tag defaults to `strict-origin-when-cross-origin`
   instead of `no-referrer`: requests to your own origin carry the full URL,
   cross-origin requests (including other subdomains) carry only your origin,
@@ -197,6 +208,7 @@ for the full upgrade guide.
 [#789]: https://github.com/dillonzq/LoveIt/issues/789
 [#863]: https://github.com/dillonzq/LoveIt/issues/863
 [#963]: https://github.com/dillonzq/LoveIt/issues/963
+[#993]: https://github.com/dillonzq/LoveIt/issues/993
 [#997]: https://github.com/dillonzq/LoveIt/pull/997
 [#1012]: https://github.com/dillonzq/LoveIt/pull/1012
 [#1019]: https://github.com/dillonzq/LoveIt/pull/1019

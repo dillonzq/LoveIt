@@ -162,6 +162,9 @@ other = "ホーム"
 
 [readMore]
 other = "続きを読む"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}：{{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
