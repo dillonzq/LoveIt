@@ -23,6 +23,10 @@ const cases = [
     referrer: 'same-origin', mermaid: 'strict', warnings: [/mermaidSecurityLevel "LOOSE"/], noWarnings: [/referrerPolicy/],
   },
   {
+    name: 'padded loose', security: 'mermaidSecurityLevel = " loose "\n',
+    referrer: 'strict-origin-when-cross-origin', mermaid: 'strict', warnings: [/mermaidSecurityLevel " loose "/],
+  },
+  {
     name: 'unknown values', security: 'referrerPolicy = "always"\nmermaidSecurityLevel = "antiscript"\n',
     referrer: 'strict-origin-when-cross-origin', mermaid: 'strict', warnings: [/referrerPolicy "always"/, /mermaidSecurityLevel "antiscript"/],
   },

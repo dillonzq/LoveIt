@@ -23,8 +23,8 @@ This file starts at 0.4.0. Older releases are described on the
 - Mermaid diagrams render with `securityLevel` `strict` instead of `loose`,
   which disables `click` interactions and restricts HTML in labels. Set
   `mermaidSecurityLevel = "loose"` (exactly) in `[params.security]` if you
-  trust your diagram sources and need these features. Other values fall back
-  to `strict` with a build warning.
+  trust your diagram sources and need these features. Invalid values produce
+  a build warning and fall back to `strict`.
 
 ## [0.4.1] - 2026-11-27
 
