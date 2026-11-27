@@ -99,6 +99,9 @@ other = "বাতিল করুন"
 [noResultsFound]
 other = "কোনো ফলাফল পাওয়া যায় নি"
 
+[searchResults]
+other = "অনুসন্ধানের ফলাফল"
+
 [lunrLanguageCode]
 other = "en"
 

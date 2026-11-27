@@ -98,6 +98,9 @@ other = "Batal"
 [noResultsFound]
 other = "Hasil tidak ditemukan"
 
+[searchResults]
+other = "Hasil pencarian"
+
 [lunrLanguageCode]
 other = "en"
 

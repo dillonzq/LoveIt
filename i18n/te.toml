@@ -99,6 +99,9 @@ other = "రద్దు"
 [noResultsFound]
 other = "ఎటువంటి ఫలితాలు లభించలేదు"
 
+[searchResults]
+other = "శోధన ఫలితాలు"
+
 [lunrLanguageCode]
 # not supported
 other = "te"

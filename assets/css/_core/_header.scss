@@ -1,5 +1,3 @@
-@use "sass:color";
-
 header {
   width: 100%;
   z-index: 150;
@@ -65,84 +63,6 @@ header {
   }
 }
 
-.search {
-  position: relative;
-
-  input {
-    color: transparent;
-    box-sizing: border-box;
-    height: 2.5rem;
-    width: 2.5rem;
-    @include border-radius(.5rem);
-    border: none;
-    outline: none;
-    background-color: $header-background-color;
-    vertical-align: baseline !important;
-    @include transition(width 0.3s ease);
-
-    [theme=dark] & {
-      background-color: $header-background-color-dark;
-    }
-  }
-
-  @include placeholder(transparent);
-
-  .search-button {
-    margin: 0;
-    position: absolute;
-    inset-inline-start: auto;
-    inset-inline-end: 1rem;
-  }
-
-  .search-toggle {
-    inset-inline-start: .5rem;
-    inset-inline-end: auto;
-  }
-
-  .search-loading {
-    display: none;
-  }
-
-  .search-clear {
-    display: none;
-  }
-
-  .open &, &.mobile {
-    input {
-      color: $global-font-color;
-      background-color: $search-background-color;
-      padding: 0 2rem 0 2rem;
-    }
-
-    [theme=dark] & {
-      input {
-        color: $global-font-color-dark;
-        background-color: $search-background-color-dark;
-      }
-
-      @include placeholder($global-font-secondary-color-dark);
-    }
-
-    @include placeholder($global-font-secondary-color);
-
-    .search-button {
-      color: $global-font-secondary-color;
-
-      [theme=dark] & {
-        color: $global-font-secondary-color-dark;
-      }
-    }
-
-    .search-clear:hover {
-      color: #ff6b6b;
-    }
-
-    .search-toggle:hover {
-      cursor: default;
-    }
-  }
-}
-
 .theme-switch i {
   @include transform(rotate(225deg));
   [cfg-theme=light] & {
@@ -197,10 +117,6 @@ header {
         &.language {
           margin-inline-end: 0;
         }
-
-        &.search {
-          margin-inline: 0 -.5rem;
-        }
       }
 
       a.active {
@@ -211,14 +127,6 @@ header {
           color: $header-hover-color-dark;
         }
       }
-    }
-  }
-
-  &.open .header-wrapper .menu .menu-item.search {
-    margin-inline: .5rem .25rem;
-
-    input {
-      width: 24rem;
     }
   }
 }
@@ -245,6 +153,11 @@ header {
       .header-title {
         font-size: var(--header-title-font-size);
         max-width: 80%;
+      }
+
+      .search-toggle {
+        margin-inline-end: 1.25rem;
+        line-height: 4rem;
       }
 
       .menu-toggle {
@@ -297,32 +210,6 @@ header {
       padding-top: .5rem;
       @include box-shadow(0 .125rem .25rem rgba(0, 0, 0, .1));
 
-      .search-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-sizing: border-box;
-        padding: calc((var(--header-height) - 2.5rem) / 2) 1rem;
-        line-height: 2.5rem;
-      }
-
-      .search {
-        flex-grow: 10;
-
-        .algolia-autocomplete, input {
-          width: 100%;
-        }
-      }
-
-      .search-button {
-        top: 0;
-      }
-
-      .search-cancel {
-        display: none;
-        margin-inline-start: .75rem;
-      }
-
       .menu-item {
         display: block;
         width: 100%;
@@ -336,154 +223,6 @@ header {
       [theme=dark] & {
         background: $header-background-color-dark;
         border-top-color: $global-border-color-dark;
-      }
-    }
-  }
-
-  &.open {
-    .header-wrapper {
-      margin-top: calc(0px - var(--header-height));
-    }
-
-    .menu {
-      padding-top: 0;
-      border-top: none;
-
-      .menu-item {
-        display: none;
-      }
-
-      .search-cancel {
-        display: inline;
-      }
-    }
-  }
-}
-
-.search-dropdown {
-  position: fixed;
-  z-index: 200;
-  top: var(--header-height);
-  @include box-shadow(0 .125rem .25rem rgba(0, 0, 0, .1));
-
-  &.desktop {
-    inset-inline-end: 2rem;
-    width: 30rem;
-  }
-
-  &.mobile {
-    inset-inline-end: 0;
-    width: 100%;
-  }
-
-  .dropdown-menu {
-    inset-inline: 0 !important;
-    background-color: $global-background-color;
-
-    [theme=dark] & {
-      background-color: $global-background-color-dark;
-    }
-
-    .suggestions {
-      overflow-y: auto;
-      max-height: calc(100vh - var(--header-height));
-
-      .suggestion {
-        padding: .75rem 1rem;
-
-        .suggestion-title {
-          display: inline-block;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          font-size: 1rem;
-          font-weight: bold;
-          max-width: 75%;
-        }
-
-        .suggestion-date {
-          font-size: .875rem;
-          float: right;
-          text-align: end;
-
-          [dir=rtl] & {
-            float: left;
-          }
-          color: $global-font-secondary-color;
-
-          [theme=dark] & {
-            color: $global-font-secondary-color-dark;
-          }
-        }
-
-        .suggestion-context {
-          line-height: 1.25rem;
-          @include box(vertical);
-          -webkit-line-clamp: 2;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          @include overflow-wrap(break-word);
-          color: $global-font-secondary-color;
-
-          [theme=dark] & {
-            color: $global-font-secondary-color-dark;
-          }
-        }
-
-        em {
-          font-style: normal;
-          background-color: $selection-color;
-
-          [theme=dark] & {
-            background-color: $selection-color-dark;
-          }
-        }
-
-        &.cursor {
-          background: color.adjust($code-background-color, $lightness: -5%, $space: hsl);
-
-          [theme=dark] & {
-            background: color.adjust($code-background-color-dark, $lightness: 5%, $space: hsl);
-          }
-        }
-
-        &:hover {
-          cursor: pointer;
-        }
-      }
-    }
-
-    .search-empty {
-      padding: 1rem;
-      text-align: center;
-
-      .search-query {
-        font-weight: bold;
-
-        [theme=dark] & {
-          color: #ddd;
-        }
-      }
-    }
-
-    .search-footer {
-      padding: .5rem 1rem;
-      float: right;
-      font-size: .8rem;
-
-      [dir=rtl] & {
-        float: left;
-      }
-      color: $global-font-secondary-color;
-
-      [theme=dark] {
-        color: $global-font-secondary-color-dark;
-      }
-
-      @include link(false, false);
-
-      a {
-        font-size: 1rem;
       }
     }
   }

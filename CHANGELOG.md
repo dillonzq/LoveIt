@@ -12,6 +12,29 @@ This file starts at 0.4.0. Older releases are described on the
 
 ## [Unreleased]
 
+### Added
+
+- Keyboard shortcuts for search: `/` (outside text fields) and `Ctrl+K` or
+  `⌘K` open it. Arrow keys move through the results, `Enter` opens one
+  (`Ctrl`/`⌘`/`Shift+Enter` or a middle click opens it in a new tab), and
+  `Esc` closes search and returns focus to where it was.
+
+### Changed
+
+- Search opens in a native `<dialog>` with an ARIA combobox and listbox
+  instead of the inline header field and dropdown. The desktop and mobile
+  headers each show a search button; the mobile menu no longer contains a
+  search field. Screen readers hear the number of results. All four engines
+  (Lunr.js, Fuse.js, Algolia, Pagefind) and every `params.search` option
+  work as before. Sites that override `_partials/header.html` or style the
+  old `#search-*-desktop`, `#search-*-mobile` or `.search-dropdown` elements
+  need to follow the new markup in `_partials/search.html`.
+
+### Removed
+
+- autocomplete.js 0.38.1. `params.cdn.autocompleteJS` no longer has any
+  effect and the build warns when it is set.
+
 ## [0.4.1] - 2026-11-27
 
 Hugo 0.146.0 or later and Dart Sass are still required.

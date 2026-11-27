@@ -98,6 +98,9 @@ other = "ยกเลิก"
 [noResultsFound]
 other = "ไม่พบเนื้อหา"
 
+[searchResults]
+other = "ผลการค้นหา"
+
 [lunrLanguageCode]
 other = "th"
 

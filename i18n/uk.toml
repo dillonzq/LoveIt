@@ -98,6 +98,9 @@ other = "Скасувати"
 [noResultsFound]
 other = "Нічого не знайдено"
 
+[searchResults]
+other = "Результати пошуку"
+
 [lunrLanguageCode]
 other = "uk"
 

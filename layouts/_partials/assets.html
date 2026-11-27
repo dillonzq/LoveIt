@@ -29,8 +29,6 @@
 {{- /* Search */ -}}
 {{- if .Site.Params.search | and .Site.Params.search.enable -}}
     {{- $search := .Site.Params.search -}}
-    {{- $source := $cdn.autocompleteJS | default "lib/autocomplete/autocomplete.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- $config = dict "maxResultLength" $search.maxResultLength "snippetLength" $search.snippetLength "highlightTag" $search.highlightTag "noResultsFound" (T "noResultsFound") | dict "search" | merge $config -}}
     {{- if eq $search.type "lunr" -}}
         {{- with .Site.Home.OutputFormats.Get "json" -}}

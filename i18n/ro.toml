@@ -98,6 +98,9 @@ other = "Anulare"
 [noResultsFound]
 other = "Nici un rezultat gasit"
 
+[searchResults]
+other = "Rezultatele căutării"
+
 [lunrLanguageCode]
 other = "ro"
 

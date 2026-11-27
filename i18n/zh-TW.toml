@@ -98,6 +98,9 @@ other = "取消"
 [noResultsFound]
 other = "沒有找到結果"
 
+[searchResults]
+other = "搜尋結果"
+
 [lunrLanguageCode]
 other = "zh"
 

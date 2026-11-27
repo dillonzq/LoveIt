@@ -99,6 +99,9 @@ other = "Annuleren"
 [noResultsFound]
 other = "Geen resultaten gevonden"
 
+[searchResults]
+other = "Zoekresultaten"
+
 [lunrLanguageCode]
 other = "nl"
 

@@ -98,6 +98,9 @@ other = "Cancelar"
 [noResultsFound]
 other = "No se encontraron resultados"
 
+[searchResults]
+other = "Resultados de búsqueda"
+
 [lunrLanguageCode]
 other = "es"
 

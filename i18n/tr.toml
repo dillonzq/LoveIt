@@ -98,6 +98,9 @@ other = "İptal"
 [noResultsFound]
 other = "Sonuç bulunamadı"
 
+[searchResults]
+other = "Arama sonuçları"
+
 [lunrLanguageCode]
 other = "tr"
 

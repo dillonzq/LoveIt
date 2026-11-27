@@ -98,6 +98,9 @@ other = "Поништи"
 [noResultsFound]
 other = "Без резултата"
 
+[searchResults]
+other = "Резултати претраге"
+
 [lunrLanguageCode]
 other = "sr"
 

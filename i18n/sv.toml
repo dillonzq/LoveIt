@@ -98,6 +98,9 @@ other = "Avbryt"
 [noResultsFound]
 other = "Inga resultat hittades"
 
+[searchResults]
+other = "Sökresultat"
+
 [lunrLanguageCode]
 other = "sv"
 

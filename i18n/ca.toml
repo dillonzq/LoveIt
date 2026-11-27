@@ -98,6 +98,9 @@ other = "Cancel·lar"
 [noResultsFound]
 other = "Sense resultats"
 
+[searchResults]
+other = "Resultats de la cerca"
+
 [lunrLanguageCode]
 other = "ca"
 

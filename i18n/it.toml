@@ -98,6 +98,9 @@ other = "Annulla"
 [noResultsFound]
 other = "Nessun risultato trovato"
 
+[searchResults]
+other = "Risultati della ricerca"
+
 [lunrLanguageCode]
 other = "it"
 

@@ -98,6 +98,9 @@ other = "Huỷ"
 [noResultsFound]
 other = "Không tìm thấy"
 
+[searchResults]
+other = "Kết quả tìm kiếm"
+
 [lunrLanguageCode]
 other = "vi"
 

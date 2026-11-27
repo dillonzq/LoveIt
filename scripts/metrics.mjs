@@ -18,7 +18,7 @@ const site = path.join(out, 'site');
 const lighthouseConfig = JSON.parse(readFileSync(path.join(root, 'lighthouserc.json'), 'utf8'));
 
 // Lighthouse covers the home page and an ordinary article; axe also checks a
-// list page, the 404 page and the open search dropdown.
+// list page, the 404 page and the open search dialog.
 const pages = [
   { name: 'home', path: '/', lighthouse: true },
   { name: 'post', path: '/basic-markdown-syntax/', lighthouse: true },
@@ -27,8 +27,8 @@ const pages = [
   {
     name: 'search', path: '/', async prepare(page) {
       await page.locator('#search-toggle-desktop').click();
-      await page.locator('#search-input-desktop').fill('markdown');
-      await page.locator('#search-dropdown-desktop .suggestion-title').first().waitFor();
+      await page.locator('#search-input').fill('markdown');
+      await page.locator('#search-results .suggestion-title').first().waitFor();
     },
   },
 ];

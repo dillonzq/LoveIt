@@ -41,18 +41,9 @@
                 {{- end -}}
 
                 {{- if .Site.Params.search.enable -}}
-                    <span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-desktop" aria-label="{{ T `search` }}">
-                        <button type="button" class="search-button search-toggle link-like" id="search-toggle-desktop" title="{{ T `search` }}" aria-label="{{ T `search` }}">
-                            <i class="fas fa-search" aria-hidden="true"></i>
-                        </button>
-                        <button type="button" class="search-button search-clear link-like" id="search-clear-desktop" title="{{ T `clear` }}" aria-label="{{ T `clear` }}">
-                            <i class="fas fa-times-circle" aria-hidden="true"></i>
-                        </button>
-                        <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </span>
+                    <button type="button" class="menu-item search-toggle link-like" id="search-toggle-desktop" title="{{ T `search` }}" aria-label="{{ T `search` }}" aria-haspopup="dialog" aria-controls="search-dialog" aria-keyshortcuts="/ Control+K Meta+K">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </button>
                 {{- end -}}
                 {{- partial "plugin/theme-switch.html" . -}}
                 {{- if hugo.IsMultilingual -}}
@@ -110,30 +101,16 @@
                     {{- end -}}
                 </a>
             </div>
+            {{- if .Site.Params.search.enable -}}
+                <button type="button" class="search-toggle link-like" id="search-toggle-mobile" title="{{ T `search` }}" aria-label="{{ T `search` }}" aria-haspopup="dialog" aria-controls="search-dialog" aria-keyshortcuts="/ Control+K Meta+K">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </button>
+            {{- end -}}
             <button type="button" class="menu-toggle" id="menu-toggle-mobile" title="{{ T "menu" }}" aria-label="{{ T "menu" }}" aria-controls="menu-mobile" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
         </div>
         <div class="menu" id="menu-mobile">
-            {{- if .Site.Params.search.enable -}}
-                <div class="search-wrapper">
-                    <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-mobile" aria-label="{{ T `search` }}">
-                        <button type="button" class="search-button search-toggle link-like" id="search-toggle-mobile" title="{{ T `search` }}" aria-label="{{ T `search` }}">
-                            <i class="fas fa-search" aria-hidden="true"></i>
-                        </button>
-                        <button type="button" class="search-button search-clear link-like" id="search-clear-mobile" title="{{ T `clear` }}" aria-label="{{ T `clear` }}">
-                            <i class="fas fa-times-circle" aria-hidden="true"></i>
-                        </button>
-                        <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <button type="button" class="search-cancel link-like" id="search-cancel-mobile">
-                        {{ T `cancel` }}
-                    </button>
-                </div>
-            {{- end -}}
             {{- $currentPage := . -}}
             {{- range .Site.Menus.main -}}
                 {{- $url := .URL | relLangURL -}}
@@ -172,10 +149,5 @@
 </header>
 
 {{- if .Site.Params.search.enable -}}
-    <div class="search-dropdown desktop">
-        <div id="search-dropdown-desktop"></div>
-    </div>
-    <div class="search-dropdown mobile">
-        <div id="search-dropdown-mobile"></div>
-    </div>
+    {{- partial "search.html" . -}}
 {{- end -}}

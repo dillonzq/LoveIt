@@ -1,0 +1,35 @@
+{{- /* Search dialog shared by the desktop and mobile headers; see initSearch in assets/js/theme.js. */ -}}
+{{- $search := .Site.Params.search -}}
+{{- $engines := dict
+    "algolia" (dict "name" "Algolia" "href" "https://www.algolia.com/" "icon" "fab fa-algolia")
+    "lunr" (dict "name" "Lunr.js" "href" "https://lunrjs.com/")
+    "fuse" (dict "name" "Fuse.js" "href" "https://www.fusejs.io/")
+    "pagefind" (dict "name" "Pagefind" "href" "https://pagefind.app/")
+-}}
+{{- $engine := index $engines ($search.type | default "lunr") | default $engines.lunr -}}
+<dialog class="search-dialog" id="search-dialog" aria-label="{{ T `search` }}">
+    <div class="search-panel" role="search">
+        <div class="search-bar">
+            <div class="search-field">
+                <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                <input type="text" class="search-input" id="search-input" role="combobox" aria-label="{{ T `search` }}" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results" placeholder="{{ $search.placeholder | default (T `searchPlaceholder`) }}" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go">
+                <span class="search-loading" id="search-loading" hidden>
+                    <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                </span>
+                <button type="button" class="search-clear link-like" id="search-clear" title="{{ T `clear` }}" aria-label="{{ T `clear` }}" hidden>
+                    <i class="fas fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <button type="button" class="search-cancel link-like" id="search-cancel">{{ T `cancel` }}</button>
+        </div>
+        <ul class="search-results" id="search-results" role="listbox" aria-label="{{ T `searchResults` }}" hidden></ul>
+        <div class="search-empty" id="search-empty" hidden></div>
+        <div class="search-status" id="search-status" role="status"></div>
+        <div class="search-footer">
+            Search by <a href="{{ $engine.href }}" rel="noopener noreferrer" target="_blank">
+                {{- with $engine.icon }}<i class="{{ . }}" aria-hidden="true"></i> {{ end -}}
+                {{- $engine.name -}}
+            </a>
+        </div>
+    </div>
+</dialog>

@@ -97,6 +97,9 @@ other = "キャンセル"
 [noResultsFound]
 other = "見つかりませんでした"
 
+[searchResults]
+other = "検索結果"
+
 [lunrLanguageCode]
 other = "ja"
 

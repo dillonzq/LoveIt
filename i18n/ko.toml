@@ -98,6 +98,9 @@ other = "취소"
 [noResultsFound]
 other = "검색 결과 없음"
 
+[searchResults]
+other = "검색 결과"
+
 [lunrLanguageCode]
 other = "en"
 

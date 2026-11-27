@@ -98,6 +98,9 @@ other = "Отменить"
 [noResultsFound]
 other = "Результатов не найдено"
 
+[searchResults]
+other = "Результаты поиска"
+
 [lunrLanguageCode]
 other = "ru"
 

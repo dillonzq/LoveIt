@@ -1,9 +1,10 @@
 import { test, expect } from '@playwright/test';
+import { AxeBuilder } from '@axe-core/playwright';
 
 async function openSearch(page, engine, language = '') {
   await page.goto(`/${engine}/blog/${language}`);
   await page.locator('#search-toggle-desktop').click();
-  return page.locator('#search-input-desktop');
+  return page.locator('#search-input');
 }
 
 for (const engine of ['fuse', 'lunr', 'pagefind']) {
@@ -48,7 +49,7 @@ test('rapid input shares an index request and clearing hides stale results', asy
   expect(fetches).toBe(1);
   await input.fill('beta');
   await input.fill('');
-  await expect(page.locator('#search-loading-desktop')).toBeHidden();
+  await expect(page.locator('#search-loading')).toBeHidden();
   await expect(page.locator('.suggestion-title')).toHaveCount(0);
 });
 
@@ -61,13 +62,141 @@ test('Algolia mock preserves the latest async query', async ({ page }) => {
     } }) };
   });
   await page.locator('#search-toggle-desktop').click();
-  await page.locator('#search-input-desktop').fill('first');
+  await page.locator('#search-input').fill('first');
   await page.waitForTimeout(200);
-  await page.locator('#search-input-desktop').fill('second');
+  await page.locator('#search-input').fill('second');
   await expect(page.locator('.suggestion-title')).toHaveText('second');
   await page.waitForTimeout(800);
   await expect(page.locator('.suggestion-title')).toHaveText('second');
 });
+
+async function mockAlgolia(page) {
+  await page.goto('/algolia/blog/');
+  await page.evaluate(() => {
+    window['algoliasearch/lite'] = { liteClient: () => ({ search: async ({ requests: [{ query }] }) => ({ results: [{
+      hits: ['guide', 'gallery', 'math'].map(slug => ({ uri: `/algolia/blog/${slug}/`, title: `${query} ${slug}`, content: query })),
+    }] }) }) };
+  });
+}
+
+test('search dialog opens with / and Ctrl/Cmd+K, closes with Esc and returns focus', async ({ page }) => {
+  await mockAlgolia(page);
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const input = page.getByRole('combobox', { name: 'Search', includeHidden: true });
+  const toggle = page.locator('#search-toggle-desktop');
+  await expect(toggle).toHaveAttribute('aria-haspopup', 'dialog');
+
+  await page.keyboard.press('/');
+  await expect(dialog).toBeVisible();
+  await expect(input).toBeFocused();
+  await expect(input).toHaveValue('');
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+
+  for (const shortcut of ['Control+k', 'Meta+k']) {
+    await toggle.focus();
+    await page.keyboard.press(shortcut);
+    await expect(dialog).toBeVisible();
+    await expect(input).toBeFocused();
+    await input.fill('kw');
+    await expect(page.locator('#search-results [role="option"]')).toHaveCount(3);
+    await page.keyboard.press('Escape');
+    await expect(dialog).toBeHidden();
+    await expect(toggle).toBeFocused();
+    await expect(input).toHaveValue('');
+  }
+
+  // `/` types normally in other fields; Ctrl+K still opens search from them.
+  await page.evaluate(() => document.querySelector('main').append(Object.assign(document.createElement('textarea'), { id: 'probe' })));
+  await page.locator('#probe').focus();
+  await page.keyboard.press('/');
+  await expect(page.locator('#probe')).toHaveValue('/');
+  await expect(dialog).toBeHidden();
+  await page.keyboard.press('Control+k');
+  await expect(input).toBeFocused();
+
+  // A click on the backdrop closes the dialog.
+  await page.mouse.click(10, 700);
+  await expect(dialog).toBeHidden();
+  await expect(page.locator('#probe')).toBeFocused();
+});
+
+test('search combobox: arrow keys move the active option and Enter opens it', async ({ page }) => {
+  await mockAlgolia(page);
+  await page.locator('#search-toggle-desktop').click();
+  const input = page.getByRole('combobox', { name: 'Search' });
+  await expect(input).toHaveAttribute('aria-expanded', 'false');
+  await expect(input).toHaveAttribute('aria-controls', 'search-results');
+  await input.fill('kw');
+  const listbox = page.getByRole('listbox', { name: 'Search results' });
+  const options = listbox.getByRole('option');
+  await expect(options).toHaveCount(3);
+  await expect(input).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.getByRole('status')).toHaveText('Search results: 3');
+  await expect(input).not.toHaveAttribute('aria-activedescendant');
+
+  const expectActive = async index => {
+    const id = await options.nth(index).getAttribute('id');
+    await expect(input).toHaveAttribute('aria-activedescendant', id);
+    await expect(options.nth(index)).toHaveAttribute('aria-selected', 'true');
+    await expect(listbox.locator('[aria-selected="true"]')).toHaveCount(1);
+  };
+  await page.keyboard.press('ArrowDown');
+  await expectActive(0);
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('ArrowDown');
+  await expectActive(2);
+  await page.keyboard.press('ArrowDown');
+  await expectActive(0);
+  await page.keyboard.press('ArrowUp');
+  await expectActive(2);
+  await expect(input).toBeFocused();
+
+  // Typing starts over from the first option.
+  await input.fill('kx');
+  await expect(options.first()).toContainText('kx guide');
+  await expect(input).not.toHaveAttribute('aria-activedescendant');
+  await page.keyboard.press('ArrowUp');
+  await expectActive(2);
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/algolia\/blog\/math\/$/);
+});
+
+test('search: Enter without an active option opens the first result; no results are announced', async ({ page }) => {
+  await page.goto('/fuse/blog/');
+  await page.keyboard.press('/');
+  const input = page.locator('#search-input');
+  await input.fill('NoSuchWordAnywhere');
+  await expect(page.locator('.search-empty')).toBeVisible();
+  await expect(page.getByRole('status')).toHaveText('No results found');
+  await expect(input).toHaveAttribute('aria-expanded', 'false');
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/fuse\/blog\/$/);
+  await input.fill('Needle');
+  await expect(page.locator('.suggestion-title').first()).toContainText('Search <guide> & safety');
+  await page.locator('#search-clear').click();
+  await expect(input).toHaveValue('');
+  await expect(input).toBeFocused();
+  await expect(page.locator('#search-results [role="option"]')).toHaveCount(0);
+  await expect(page.locator('#search-results')).toBeHidden();
+  await input.fill('Needle');
+  await expect(page.locator('.suggestion-title').first()).toBeVisible();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/fuse\/blog\/guide\/$/);
+});
+
+for (const { name, viewport } of [{ name: 'desktop', viewport: { width: 1280, height: 800 } }, { name: 'mobile', viewport: { width: 390, height: 844 } }]) {
+  test(`${name}: the open search dialog has no critical or region axe violations`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    await page.goto('/fuse/blog/');
+    await page.locator(`#search-toggle-${name}`).click();
+    await page.locator('#search-input').fill('Needle');
+    await expect(page.locator('.suggestion-title').first()).toBeVisible();
+    await page.keyboard.press('ArrowDown');
+    const { violations } = await new AxeBuilder({ page }).analyze();
+    expect(violations.filter(v => v.impact === 'critical' || v.id === 'region').map(v => `${v.id}: ${v.nodes.map(n => n.target).join(', ')}`)).toEqual([]);
+  });
+}
 
 test('Mermaid survives cached content; math, copy controls and persisted theme work', async ({ page }) => {
   const errors = [];
@@ -104,14 +233,21 @@ test('mobile navigation and search survive resizing', async ({ page }) => {
   await expect(page.locator('#menu-mobile')).not.toHaveClass(/active/);
   await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
   await menuToggle.click();
-  await page.locator('#search-input-mobile').fill('Needle');
-  await expect(page.locator('#search-dropdown-mobile .suggestion-title')).toContainText('Search');
-  await page.locator('#search-cancel-mobile').click();
+  await page.locator('#search-toggle-mobile').click();
   await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator('#search-input')).toBeFocused();
+  const dialog = await page.locator('#search-dialog').boundingBox();
+  expect(dialog).toMatchObject({ x: 0, y: 0, width: 390, height: 844 });
+  await page.locator('#search-input').fill('Needle');
+  await expect(page.locator('#search-results .suggestion-title')).toContainText('Search');
+  await page.locator('#search-cancel').click();
+  await expect(page.locator('#search-dialog')).toBeHidden();
+  await expect(page.locator('#search-toggle-mobile')).toBeFocused();
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.locator('#search-toggle-desktop').click();
-  await page.locator('#search-input-desktop').fill('Needle');
-  await expect(page.locator('#search-dropdown-desktop .suggestion-title')).toContainText('Search');
+  await expect(page.locator('#search-input')).toHaveValue('');
+  await page.locator('#search-input').fill('Needle');
+  await expect(page.locator('#search-results .suggestion-title')).toContainText('Search');
 });
 
 test('header, share and back controls are labelled, keyboard-operable buttons', async ({ page }) => {
@@ -125,8 +261,8 @@ test('header, share and back controls are labelled, keyboard-operable buttons', 
 
   const header = page.locator('#header-desktop');
   await expect(header.getByRole('button', { name: 'Search' })).toBeVisible();
-  await expect(header.getByRole('button', { name: 'Clear', includeHidden: true })).toBeAttached();
-  await expect(header.getByRole('combobox', { name: 'Search' })).toBeAttached();
+  await expect(page.getByRole('button', { name: 'Clear', includeHidden: true })).toBeAttached();
+  await expect(page.getByRole('combobox', { name: 'Search', includeHidden: true })).toBeAttached();
   await expect(header.getByRole('combobox', { name: 'Select Language' })).toBeAttached();
 
   const themeSwitch = header.getByRole('button', { name: /^Switch Theme/ });
@@ -150,7 +286,7 @@ test('header, share and back controls are labelled, keyboard-operable buttons', 
 });
 
 for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/', dir: 'rtl' }]) {
-  test(`${dir}: header, search dropdown and auto TOC follow the language direction`, async ({ page }) => {
+  test(`${dir}: header, search dialog and auto TOC follow the language direction`, async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto(`/fuse/blog/${language}guide/`);
     await expect(page.locator('html')).toHaveAttribute('dir', dir);
@@ -170,9 +306,11 @@ for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/'
     await expect(toc).toHaveCSS(rtl ? 'border-right-width' : 'border-left-width', '4px');
 
     await page.locator('#search-toggle-desktop').click();
-    const dropdown = await box('#search-dropdown-desktop');
-    const viewport = page.viewportSize();
-    expect(rtl ? dropdown.x < viewport.width / 2 : dropdown.x > viewport.width / 2).toBe(true);
+    const input = await box('#search-input');
+    const cancel = await box('#search-cancel');
+    const icon = await box('#search-dialog .search-icon');
+    expect(rtl ? cancel.x < input.x : cancel.x > input.x).toBe(true);
+    expect(rtl ? icon.x > input.x + input.width / 2 : icon.x < input.x + input.width / 2).toBe(true);
   });
 }
 
