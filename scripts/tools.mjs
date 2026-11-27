@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, renameSync, rmdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -66,6 +66,68 @@ async function getHvm() {
   return executable;
 }
 
+function removeEmptyDirectory(directory) {
+  try { rmdirSync(directory); } catch (error) {
+    if (!['ENOENT', 'ENOTEMPTY', 'EEXIST'].includes(error.code)) throw error;
+  }
+}
+
+function reclaimToolLock(lock) {
+  let owners;
+  try { owners = readdirSync(lock); } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+    return;
+  }
+  if (owners.length === 1) {
+    const [owner] = owners;
+    const pid = owner.match(/^([1-9]\d*)-[a-zA-Z0-9]+$/)?.[1];
+    if (!pid) return;
+    try {
+      process.kill(Number(pid), 0);
+      return;
+    } catch (error) {
+      if (error.code !== 'ESRCH') return;
+    }
+    // Remove only the observed owner's marker. A replacement has a different name.
+    removeEmptyDirectory(path.join(lock, owner));
+  }
+  removeEmptyDirectory(lock);
+}
+
+// Install the directory and its owner marker atomically. The marker keeps the lock
+// nonempty, so neither rename nor cleanup can replace a lock held by another process.
+async function withToolLock(fn) {
+  mkdirSync(toolDir, { recursive: true });
+  const lock = path.join(toolDir, 'hugo.lock');
+  const candidate = mkdtempSync(`${lock}-`);
+  const owner = `${process.pid}-${path.basename(candidate).slice(-6)}`;
+  const start = Date.now();
+  let acquired = false;
+  try {
+    mkdirSync(path.join(candidate, owner));
+    while (!acquired) {
+      try {
+        renameSync(candidate, lock);
+        acquired = true;
+      } catch (error) {
+        const windowsContention = process.platform === 'win32' && error.code === 'EPERM' && existsSync(lock);
+        if (!windowsContention && !['ENOTEMPTY', 'EEXIST'].includes(error.code)) throw error;
+        reclaimToolLock(lock);
+        if (Date.now() - start > 20 * 60_000) throw new Error(`Timed out waiting for ${lock}`);
+        await new Promise(resolve => setTimeout(resolve, 200));
+      }
+    }
+    return await fn();
+  } finally {
+    if (acquired) {
+      removeEmptyDirectory(path.join(lock, owner));
+      removeEmptyDirectory(lock);
+    } else {
+      rmSync(candidate, { recursive: true, force: true });
+    }
+  }
+}
+
 export async function getHugo() {
   const hvm = await getHvm();
   const requested = process.env.LOVEIT_HUGO_VERSION;
@@ -79,8 +141,15 @@ export async function getHugo() {
   }
   // An override gets its own directory: the checked-in .hvm is never rewritten by CI.
   const cwd = requested && requested !== 'locked' ? path.join(toolDir, 'versions', spec.replaceAll('/', '-')) : root;
+  return withToolLock(() => resolveHugo(hvm, spec, cwd));
+}
+
+function resolveHugo(hvm, spec, cwd) {
   mkdirSync(cwd, { recursive: true });
-  if (cwd !== root && !spec.startsWith('latest/')) writeFileSync(path.join(cwd, '.hvm'), spec);
+  const dotFile = path.join(cwd, '.hvm');
+  if (cwd !== root && !spec.startsWith('latest/') && !(existsSync(dotFile) && readFileSync(dotFile, 'utf8') === spec)) {
+    writeFileSync(dotFile, spec);
+  }
   const options = { cwd, env: toolEnv, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] };
   let binary;
   if (!spec.startsWith('latest/')) {

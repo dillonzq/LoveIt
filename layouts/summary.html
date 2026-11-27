@@ -1,6 +1,6 @@
 {{- $params := .Params | merge .Site.Params.page -}}
 
-<article class="single summary" itemscope itemtype="http://schema.org/Article">
+<article class="single summary" itemscope itemtype="https://schema.org/Article">
     {{- /* Featured image */ -}}
     {{- $image := $params.featuredimagepreview | default $params.featuredimage -}}
     {{- with .Resources.GetMatch "featured-image" -}}
@@ -60,7 +60,10 @@
 
     {{- /* Footer */ -}}
     <div class="post-footer">
-        <a href="{{ .RelPermalink }}">{{ T "readMore" }}</a>
+        {{- /* aria-label gives screen readers the localized name; the hidden title makes the link text itself descriptive for crawlers. */ -}}
+        {{- $title := .Title | emojify | string -}}
+        {{- $readMore := T "readMore" -}}
+        <a href="{{ .RelPermalink }}" aria-label="{{ dict `ReadMore` $readMore `Title` $title | T `readMoreTitle` }}">{{ $readMore }}<span class="visually-hidden"> {{ $title }}</span></a>
         {{- with .Params.tags -}}
             <div class="post-tags">
                 <i class="fas fa-tags" aria-hidden="true"></i>&nbsp;

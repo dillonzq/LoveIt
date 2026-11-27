@@ -461,7 +461,9 @@ class Theme {
             const $mermaidElements = document.getElementsByClassName('mermaid');
             if (!$mermaidElements.length) return;
 
-            mermaid.initialize({startOnLoad: false, theme: this.isDark ? 'dark' : 'neutral', securityLevel: 'loose'});
+            // "loose" only when the site sets it explicitly; anything else renders with "strict".
+            const securityLevel = this.config.mermaid && this.config.mermaid.securityLevel === 'loose' ? 'loose' : 'strict';
+            mermaid.initialize({startOnLoad: false, theme: this.isDark ? 'dark' : 'neutral', securityLevel});
             // Identical diagrams in separately rendered blocks share an element id; the index keeps render ids unique.
             Array.from($mermaidElements).forEach(($mermaid, index) => {
                 const definition = this.getMermaidDefinition($mermaid);

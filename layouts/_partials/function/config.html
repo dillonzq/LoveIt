@@ -1,0 +1,65 @@
+{{- /* Site-level configuration: the site params as Hugo merges them (theme defaults < site configuration < */ -}}
+{{- /* language params), with the deprecated keys in assets/data/deprecations.yml warned about and mapped to */ -}}
+{{- /* their replacements. Call it with partialCached so that each site and language warns at most once: */ -}}
+{{- /*   partialCached "function/config.html" .Site .Site.Language.Lang */ -}}
+{{- $params := .Params -}}
+{{- $override := dict -}}
+{{- $deprecations := slice -}}
+{{- with resources.Get "data/deprecations.yml" -}}
+    {{- $deprecations = transform.Unmarshal . -}}
+{{- end -}}
+{{- range $deprecations -}}
+    {{- range $i, $path := slice .key .replacement -}}
+        {{- if and (or $path (eq $i 0)) (or (not (hasPrefix $path "params.")) (in (split $path ".") "")) -}}
+            {{- errorf "assets/data/deprecations.yml: %q must be a key under \"params.\"" $path -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $value := $params -}}
+    {{- range after 1 (split .key ".") -}}
+        {{- if reflect.IsMap $value -}}
+            {{- $value = index $value . -}}
+        {{- else -}}
+            {{- $value = false -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if $value -}}
+        {{- $hint := .hint | default dict -}}
+        {{- $en := $hint.en -}}
+        {{- $zh := $hint.zh -}}
+        {{- with .replacement -}}
+            {{- $en = $en | default (printf "Use %q instead." .) -}}
+            {{- $zh = $zh | default (printf "请改用 %q." .) -}}
+            {{- /* Build {a: {b: value}} from "params.a.b" so that merge only fills the new key when it is unset. */ -}}
+            {{- /* Lowercase keys merged into existing sections keep them case-insensitive (maps.Params); */ -}}
+            {{- /* a section the merge had to create would be a plain map, so every parent must exist already. */ -}}
+            {{- $replacement := . -}}
+            {{- $segments := after 1 (split (lower .) ".") -}}
+            {{- $parent := $params -}}
+            {{- range first (sub (len $segments) 1) $segments -}}
+                {{- $parent = index $parent . -}}
+                {{- if not (reflect.IsMap $parent) -}}
+                    {{- errorf "assets/data/deprecations.yml: the replacement %q needs the section %q in the theme's hugo.toml" $replacement . -}}
+                    {{- break -}}
+                {{- end -}}
+            {{- end -}}
+            {{- /* A new key that is set wins as a whole: a map value is not merged with the old one. */ -}}
+            {{- if and (reflect.IsMap $parent) (not (isset $parent (index $segments (sub (len $segments) 1)))) -}}
+                {{- $nested := $value -}}
+                {{- range seq (len $segments) 1 -}}
+                    {{- $nested = dict (index $segments (sub . 1)) $nested -}}
+                {{- end -}}
+                {{- $override = merge $override $nested -}}
+            {{- end -}}
+        {{- end -}}
+        {{- warnidf (replace .key "." "-" | lower | printf "loveit-deprecated-%v")
+            "LoveIt: %q is deprecated since v%v and will be removed in v%v. %v\nLoveIt: %q 已于 v%v 弃用, 将在 v%v 移除. %v\nSee / 参见 https://hugoloveit.com/theme-documentation-basics/#deprecated-options\n"
+            .key .since .removal $en .key .since .removal $zh
+        -}}
+    {{- end -}}
+{{- end -}}
+{{- /* The params come last so that the result keeps their case-insensitive keys and a new key that is */ -}}
+{{- /* already set wins over the old one. */ -}}
+{{- with $override -}}
+    {{- $params = merge . $params -}}
+{{- end -}}
+{{- return $params -}}

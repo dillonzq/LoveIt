@@ -12,8 +12,25 @@ This file starts at 0.4.0. Older releases are described on the
 
 ## [Unreleased]
 
+### Added
+
+- A footnote, or the reference in the text that links to it, is outlined and
+  highlighted after a link jumps to it. The outline animates in briefly unless
+  reduced motion is preferred ([#993]).
+- The "Read More" link of each post summary names its post: screen readers
+  hear a localized label such as "Read More: Post title", and search engines
+  see the title in visually hidden link text.
+- A build warning, printed once per build, when the site configuration uses a
+  deprecated option. Each warning names the version that removes the option
+  and links to the
+  [Deprecated Options](https://hugoloveit.com/theme-documentation-basics/#deprecated-options)
+  section of the documentation. Builds with `--panicOnWarning` fail; add the
+  ID shown in the warning to `ignoreLogs` to silence it.
+
 ### Changed
 
+- The microdata `itemtype` of post summaries and the footer uses
+  `https://schema.org`.
 - Heading anchor links are built into the page by a Markdown render hook
   (`_markup/render-heading.html`) instead of being added by JavaScript, so
   they work without JavaScript. Each link is named by its heading for screen
@@ -22,6 +39,23 @@ This file starts at 0.4.0. Older releases are described on the
   custom CSS or scripts that use it can select `.single .content > h2`
   (and other levels) instead. A site with its own `render-heading` hook keeps
   it and gets no anchor links.
+- The `<meta name="referrer">` tag defaults to `strict-origin-when-cross-origin`
+  instead of `no-referrer`: requests to your own origin carry the full URL,
+  cross-origin requests (including other subdomains) carry only your origin,
+  and HTTPS-to-HTTP requests carry none. Set `referrerPolicy = "no-referrer"`
+  in `[params.security]` to keep the old behaviour. Unknown values fall back
+  to the default with a build warning.
+- Mermaid diagrams render with `securityLevel` `strict` instead of `loose`,
+  which disables `click` interactions and restricts HTML in labels. Set
+  `mermaidSecurityLevel = "loose"` (exactly) in `[params.security]` if you
+  trust your diagram sources and need these features. Invalid values produce
+  a build warning and fall back to `strict`.
+
+### Deprecated
+
+- `params.compatibility.polyfill`, `params.compatibility.objectFit` and
+  `params.cdn.autocompleteJS`. They still work and will be removed in 0.7.0.
+  Setting them to `false` or `""` does not warn.
 
 ## [0.4.1] - 2026-11-27
 
@@ -194,6 +228,7 @@ for the full upgrade guide.
 [#789]: https://github.com/dillonzq/LoveIt/issues/789
 [#863]: https://github.com/dillonzq/LoveIt/issues/863
 [#963]: https://github.com/dillonzq/LoveIt/issues/963
+[#993]: https://github.com/dillonzq/LoveIt/issues/993
 [#997]: https://github.com/dillonzq/LoveIt/pull/997
 [#1012]: https://github.com/dillonzq/LoveIt/pull/1012
 [#1019]: https://github.com/dillonzq/LoveIt/pull/1019
