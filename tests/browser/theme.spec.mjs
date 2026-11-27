@@ -336,6 +336,64 @@ test('lunr: a failed Chinese segmenter load is retried by the next search', asyn
   expect(attempts).toBe(2);
 });
 
+test('search: closing and reopening invalidates a queued Enter', async ({ page }) => {
+  await page.goto('/algolia/blog/guide/');
+  await page.evaluate(() => {
+    window['algoliasearch/lite'] = { liteClient: () => ({ search: async ({ requests: [{ query }] }) => {
+      if (query === 'old') await new Promise(resolve => { window.finishOldSearch = resolve; });
+      return { results: [{ hits: [{ uri: '#final-section', title: query, content: query }] }] };
+    } }) };
+  });
+  const toggle = page.locator('#search-toggle-desktop');
+  await toggle.click();
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const input = dialog.getByRole('combobox');
+  await input.fill('old');
+  await expect.poll(() => page.evaluate(() => Boolean(window.finishOldSearch))).toBe(true);
+  await input.press('Enter');
+  await page.evaluate(() => {
+    document.getElementById('search-dialog').close();
+    document.getElementById('search-toggle-desktop').click();
+    window.finishOldSearch();
+  });
+  await expect(dialog).toBeVisible();
+  await expect(input).toBeFocused();
+  await expect(input).toHaveValue('');
+  await expect(page).toHaveURL(/\/guide\/$/);
+  await input.fill('fresh');
+  await expect(dialog.getByRole('option')).toContainText('fresh');
+  await input.press('Enter');
+  await expect(page).toHaveURL(/\/guide\/#final-section$/);
+});
+
+test('mobile: search footer and last result fit above the keyboard', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await mockAlgolia(page);
+  await page.locator('#search-toggle-mobile').click();
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const input = dialog.getByRole('combobox');
+  const listbox = dialog.getByRole('listbox');
+  await input.fill('mobile');
+  const last = listbox.getByRole('option').last();
+  await expect(last).toBeAttached();
+  await page.evaluate(() => {
+    Object.defineProperty(window.visualViewport, 'height', { configurable: true, value: 220 });
+    window.visualViewport.dispatchEvent(new Event('resize'));
+    Object.defineProperty(window.visualViewport, 'offsetTop', { configurable: true, value: 35 });
+    window.visualViewport.dispatchEvent(new Event('scroll'));
+  });
+  await expect(dialog).toHaveCSS('height', '220px');
+  await expect(dialog).toHaveCSS('top', '35px');
+  await input.press('ArrowUp');
+  await expect(last).toHaveAttribute('aria-selected', 'true');
+  await expect.poll(() => dialog.evaluate(el => {
+    const list = el.querySelector('#search-results').getBoundingClientRect();
+    const option = el.querySelector('#search-results li:last-child').getBoundingClientRect();
+    const footer = el.querySelector('.search-footer').getBoundingClientRect();
+    return option.top >= list.top && option.bottom <= list.bottom && footer.bottom <= 255;
+  })).toBe(true);
+});
+
 for (const { name, viewport } of [{ name: 'desktop', viewport: { width: 1280, height: 800 } }, { name: 'mobile', viewport: { width: 390, height: 844 } }]) {
   test(`${name}: the open search dialog has no critical or region axe violations`, async ({ page }) => {
     await page.setViewportSize(viewport);

@@ -288,8 +288,10 @@ html:has(.search-dialog[open]) {
 
 @media only screen and (max-width: 680px) {
   .search-dialog {
+    position: fixed;
+    inset: var(--search-viewport-top, 0px) 0 auto;
     width: 100%;
-    height: 100%;
+    height: var(--search-viewport-height, 100%);
     margin: 0;
     @include border-radius(0);
   }

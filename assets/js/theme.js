@@ -122,6 +122,7 @@ class Theme {
         const $toggles = document.querySelectorAll('[aria-controls="search-dialog"]');
         const $slash = document.getElementById('search-slash');
         const resultsLabel = $results.getAttribute('aria-label');
+        const viewport = window.visualViewport;
         let requestId = 0;
         let searchTimer;
         let active = -1;
@@ -257,11 +258,26 @@ class Theme {
                 queuedEnter = false;
             }, 120);
         };
+        const resetSearch = () => {
+            $input.value = '';
+            search();
+        };
+        // The mobile keyboard can resize the visual viewport alone.
+        const fitViewport = () => {
+            $dialog.style.setProperty('--search-viewport-height', `${viewport.height}px`);
+            $dialog.style.setProperty('--search-viewport-top', `${viewport.offsetTop}px`);
+        };
         const open = $opener => {
             if (!$dialog.open) {
+                resetSearch();
                 // Safari does not focus a clicked button, so the toggle is passed in.
                 opener = $opener || document.activeElement;
                 $dialog.showModal();
+                if (viewport) {
+                    fitViewport();
+                    viewport.addEventListener('resize', fitViewport);
+                    viewport.addEventListener('scroll', fitViewport);
+                }
                 loadSegmentit().catch(() => {});
             }
             $input.focus();
@@ -315,8 +331,11 @@ class Theme {
             if (pressedBackdrop && event.target === $dialog) $dialog.close();
         }, false);
         $dialog.addEventListener('close', () => {
-            $input.value = '';
-            search();
+            // An earlier close event can arrive after the dialog has reopened.
+            if ($dialog.open) return;
+            viewport?.removeEventListener('resize', fitViewport);
+            viewport?.removeEventListener('scroll', fitViewport);
+            resetSearch();
             if (opener?.isConnected && opener !== document.body) opener.focus();
             opener = undefined;
         }, false);
