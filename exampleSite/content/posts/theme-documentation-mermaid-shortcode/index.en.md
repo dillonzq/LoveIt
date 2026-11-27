@@ -37,6 +37,8 @@ graph LR;
 ```
 ````
 
+{{< version 0.5.0 changed >}} Diagrams are rendered with the Mermaid `securityLevel` set to `strict`, which disables `click` interactions and restricts HTML in labels. If you trust the diagram sources and need these features, set `mermaidSecurityLevel = "loose"` in `[params.security]` of the [site configuration](../theme-documentation-basics#site-configuration).
+
 ## Flowchart {#flowchart}
 
 Example **flowchart** `mermaid` input:
