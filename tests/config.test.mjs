@@ -58,7 +58,7 @@ test('theme defaults and explicit false values do not warn', () => {
   assert.doesNotMatch(page(directory, 'index.html'), /polyfill\.min\.js|ofi\.min\.js/);
 });
 
-test('each deprecated key warns once per build and keeps working until it is removed', () => {
+test('each deprecated key warns once per build; the compatibility keys keep working until they are removed', () => {
   const config = '[params.compatibility]\npolyfill = true\nobjectFit = true\n[params.search]\nenable = true\n'
     + '[params.cdn]\ndata = ""\nautocompleteJS = "https://cdn.example.org/autocomplete.js"';
   const directory = site('deprecated', config);
@@ -72,7 +72,8 @@ test('each deprecated key warns once per build and keeps working until it is rem
     const html = page(directory, file);
     assert.match(html, new RegExp(polyfill.replaceAll('.', '\\.')), file);
     assert.match(html, new RegExp(objectFit.replaceAll('.', '\\.')), file);
-    assert.match(html, /<script src="?https:\/\/cdn\.example\.org\/autocomplete\.js"?[\s>]/, file);
+    // autocomplete.js is gone, so the old key only warns.
+    assert.doesNotMatch(html, /autocomplete\.js/, file);
   }
 
   // They are warnings: builds that panic on warnings fail unless ignoreLogs silences them.

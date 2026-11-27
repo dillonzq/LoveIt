@@ -32,5 +32,5 @@
   since: 0.5.0
   removal: 0.7.0
   hint:
-    en: Remove it. The search box will no longer use autocomplete.js.
-    zh: 删除该配置. 搜索框将不再使用 autocomplete.js.
+    en: Remove it. Search no longer uses autocomplete.js.
+    zh: 删除该配置. 搜索不再使用 autocomplete.js.

@@ -98,6 +98,12 @@ other = "Anuluj"
 [noResultsFound]
 other = "Nie znaleziono wyników"
 
+[searchResults]
+other = "Wyniki wyszukiwania"
+
+[searchSlashShortcut]
+other = "Naciśnij /, aby otworzyć wyszukiwanie"
+
 [lunrLanguageCode]
 other = "pl"
 

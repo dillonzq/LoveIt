@@ -109,149 +109,246 @@ class Theme {
 
     initSearch() {
         const searchConfig = this.config.search;
-        const isMobile = Util.isMobile();
-        if (!searchConfig || isMobile && this._searchMobileOnce || !isMobile && this._searchDesktopOnce) return;
+        const $dialog = document.getElementById('search-dialog');
+        if (!searchConfig || !$dialog) return;
 
-        const highlightTag = searchConfig.highlightTag ? searchConfig.highlightTag : 'em';
-
-        const suffix = isMobile ? 'mobile' : 'desktop';
-        const $header = document.getElementById(`header-${suffix}`);
-        const $searchInput = document.getElementById(`search-input-${suffix}`);
-        const $searchToggle = document.getElementById(`search-toggle-${suffix}`);
-        const $searchLoading = document.getElementById(`search-loading-${suffix}`);
-        const $searchClear = document.getElementById(`search-clear-${suffix}`);
-        if (isMobile) {
-            this._searchMobileOnce = true;
-            $searchInput.addEventListener('focus', () => {
-                document.body.classList.add('blur');
-                $header.classList.add('open');
-            }, false);
-            document.getElementById('search-cancel-mobile').addEventListener('click', () => {
-                $header.classList.remove('open');
-                document.body.classList.remove('blur');
-                this.setMenuMobileOpen(false);
-                $searchLoading.style.display = 'none';
-                $searchClear.style.display = 'none';
-                this._searchMobile && this._searchMobile.autocomplete.setVal('');
-            }, false);
-            $searchClear.addEventListener('click', () => {
-                $searchClear.style.display = 'none';
-                this._searchMobile && this._searchMobile.autocomplete.setVal('');
-            }, false);
-            this._searchMobileOnClickMask = this._searchMobileOnClickMask || (() => {
-                $header.classList.remove('open');
-                $searchLoading.style.display = 'none';
-                $searchClear.style.display = 'none';
-                this._searchMobile && this._searchMobile.autocomplete.setVal('');
-            });
-            this.clickMaskEventSet.add(this._searchMobileOnClickMask);
-        } else {
-            this._searchDesktopOnce = true;
-            $searchToggle.addEventListener('click', () => {
-                document.body.classList.add('blur');
-                $header.classList.add('open');
-                $searchInput.focus();
-            }, false);
-            $searchClear.addEventListener('click', () => {
-                $searchClear.style.display = 'none';
-                this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
-            }, false);
-            this._searchDesktopOnClickMask = this._searchDesktopOnClickMask || (() => {
-                $header.classList.remove('open');
-                $searchLoading.style.display = 'none';
-                $searchClear.style.display = 'none';
-                this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
-            });
-            this.clickMaskEventSet.add(this._searchDesktopOnClickMask);
-        }
+        const highlightTag = searchConfig.highlightTag || 'em';
+        const $input = document.getElementById('search-input');
+        const $results = document.getElementById('search-results');
+        const $empty = document.getElementById('search-empty');
+        const $status = document.getElementById('search-status');
+        const $loading = document.getElementById('search-loading');
+        const $clear = document.getElementById('search-clear');
+        const $toggles = document.querySelectorAll('[aria-controls="search-dialog"]');
+        const $slash = document.getElementById('search-slash');
+        const resultsLabel = $results.getAttribute('aria-label');
+        const viewport = window.visualViewport;
         let requestId = 0;
         let searchTimer;
-        $searchInput.addEventListener('input', () => {
-            requestId++;
-            clearTimeout(searchTimer);
-            $searchLoading.style.display = 'none';
-            if ($searchInput.value === '') $searchClear.style.display = 'none';
-            else $searchClear.style.display = 'inline';
-        }, false);
+        let active = -1;
+        // While a new query is pending, the listed options belong to the previous one.
+        let stale = false;
+        let queuedEnter = false;
+        let opener;
+        let ready;
 
-        const initAutosearch = () => {
-            const autosearch = autocomplete(`#search-input-${suffix}`, {
-                hint: false,
-                autoselect: true,
-                dropdownMenuContainer: `#search-dropdown-${suffix}`,
-                clearOnSelected: true,
-                cssClasses: { noPrefix: true },
-                debug: true,
-            }, {
-                name: 'search',
-                source: (query, callback) => {
-                    const id = ++requestId;
-                    clearTimeout(searchTimer);
-                    if (!query.trim()) {
-                        $searchLoading.style.display = 'none';
-                        callback([]);
-                        return;
-                    }
-                    $searchLoading.style.display = 'inline';
-                    $searchClear.style.display = 'none';
-                    searchTimer = setTimeout(async () => {
-                        let results = [];
-                        try {
-                            this._searchClient = this._searchClient || new SearchClient(searchConfig);
-                            results = await this._searchClient.search(query);
-                        } catch (error) {
-                            console.error(error);
-                        }
-                        if (id !== requestId || $searchInput.value !== query) return;
-                        $searchLoading.style.display = 'none';
-                        $searchClear.style.display = 'inline';
-                        callback(results.map(item => ({
-                            ...item,
-                            title: highlight(item.title, query, highlightTag),
-                            context: highlight(item.context, query, highlightTag),
-                            date: escapeHTML(item.date || ''),
-                        })));
-                    }, 120);
-                },
-                templates: {
-                    suggestion: ({ title, date, context }) => `<div><span class="suggestion-title">${title}</span><span class="suggestion-date">${date}</span></div><div class="suggestion-context">${context}</div>`,
-                    empty: ({ query }) => `<div class="search-empty">${escapeHTML(searchConfig.noResultsFound)}: <span class="search-query">"${escapeHTML(query)}"</span></div>`,
-                    footer: ({}) => {
-                        const searchTypes = {
-                            algolia: { searchType: 'algolia', icon: searchConfig.algoliaIcon || '', href: 'https://www.algolia.com/' },
-                            lunr: { searchType: 'Lunr.js', icon: '', href: 'https://lunrjs.com/' },
-                            fuse: { searchType: 'Fuse.js', icon: '', href: 'https://www.fusejs.io/' },
-                            pagefind: { searchType: 'Pagefind', icon: '', href: 'https://pagefind.app/' },
-                        };
-                        const { searchType, icon, href } = searchTypes[searchConfig.type] || searchTypes.lunr;
-                        return `<div class="search-footer">Search by <a href="${href}" rel="noopener noreferrer" target="_blank">${icon} ${searchType}</a></div>`;},
-                },
-            });
-            autosearch.on('autocomplete:selected', (_event, suggestion, _dataset, _context) => {
-                window.location.assign(suggestion.uri);
-            });
-            if (isMobile) this._searchMobile = autosearch;
-            else this._searchDesktop = autosearch;
-        };
-        if (searchConfig.lunrSegmentitURL && !document.getElementById('lunr-segmentit')) {
+        // Lunr's Chinese segmenter is a classic script, loaded before the first search.
+        // A failed load is retried by the next search instead of building an index without it.
+        const loadSegmentit = () => ready ??= new Promise((resolve, reject) => {
+            if (!searchConfig.lunrSegmentitURL || window.lunr?.segmentit) return resolve();
+            document.getElementById('lunr-segmentit')?.remove();
             const script = document.createElement('script');
             script.id = 'lunr-segmentit';
             script.src = searchConfig.lunrSegmentitURL;
             script.async = true;
-            if (script.readyState) {
-                script.onreadystatechange = () => {
-                    if (script.readyState === 'loaded' || script.readyState === 'complete'){
-                        script.onreadystatechange = null;
-                        initAutosearch();
-                    }
-                };
-            } else {
-                script.onload = () => {
-                    initAutosearch();
-                };
-            }
+            script.onload = () => resolve();
+            script.onerror = () => {
+                script.remove();
+                ready = undefined;
+                reject(new Error(`Search segmenter: cannot load ${searchConfig.lunrSegmentitURL}`));
+            };
             document.body.appendChild(script);
-        } else initAutosearch();
+        });
+
+        // `/` is a single-character shortcut, so visitors can turn it off (WCAG 2.1.4).
+        let slashEnabled = true;
+        try { slashEnabled = window.localStorage?.getItem('search-slash') !== 'off'; } catch {}
+        $slash.checked = slashEnabled;
+        const updateShortcuts = () => {
+            Util.forEach($toggles, $toggle => $toggle.setAttribute('aria-keyshortcuts', `${slashEnabled ? '/ ' : ''}Control+K Meta+K`));
+        };
+        updateShortcuts();
+        $slash.addEventListener('change', () => {
+            slashEnabled = $slash.checked;
+            try { window.localStorage?.setItem('search-slash', slashEnabled ? 'on' : 'off'); } catch {}
+            updateShortcuts();
+        }, false);
+
+        const options = () => $results.querySelectorAll('[role="option"]');
+        const setActive = index => {
+            const $options = options();
+            for (let i = 0; i < $options.length; i++) $options[i].setAttribute('aria-selected', String(i === index));
+            active = index;
+            if (index < 0) {
+                $input.removeAttribute('aria-activedescendant');
+                return;
+            }
+            $input.setAttribute('aria-activedescendant', $options[index].id);
+            $options[index].scrollIntoView({ block: 'nearest' });
+        };
+        const render = (query, results) => {
+            stale = false;
+            active = -1;
+            $input.removeAttribute('aria-activedescendant');
+            $results.removeAttribute('aria-busy');
+            $results.replaceChildren(...results.map((item, index) => {
+                const $option = document.createElement('li');
+                $option.id = `search-option-${index}`;
+                $option.className = 'suggestion';
+                $option.setAttribute('role', 'option');
+                $option.setAttribute('aria-selected', 'false');
+                $option.dataset.uri = item.uri;
+                $option.innerHTML = `<div><span class="suggestion-title">${highlight(item.title, query, highlightTag)}</span>`
+                    + `<span class="suggestion-date">${escapeHTML(item.date || '')}</span></div>`
+                    + `<div class="suggestion-context">${highlight(item.context, query, highlightTag)}</div>`;
+                return $option;
+            }));
+            const expanded = results.length > 0;
+            $results.hidden = !expanded;
+            $input.setAttribute('aria-expanded', String(expanded));
+            $empty.hidden = !query || expanded;
+            $empty.innerHTML = $empty.hidden ? ''
+                : `${escapeHTML(searchConfig.noResultsFound)}: <span class="search-query">"${escapeHTML(query)}"</span>`;
+            $status.textContent = !query ? '' : expanded ? `${resultsLabel}: ${results.length}` : searchConfig.noResultsFound;
+        };
+        const go = ($option, newTab) => {
+            const uri = $option?.dataset.uri;
+            if (stale || !$dialog.open || !uri) return;
+            let url;
+            try {
+                url = new URL(uri, document.baseURI);
+            } catch {
+                return;
+            }
+            // Records come from an index or a remote service; never follow `javascript:` and the like.
+            if (!['http:', 'https:'].includes(url.protocol)) return;
+            if (newTab) {
+                window.open(url.href, '_blank', 'noopener');
+            } else {
+                // Closing first allows same-page fragment navigation to move focus to the result.
+                opener = undefined;
+                $dialog.close();
+                window.location.assign(url.href);
+            }
+        };
+        const markStale = () => {
+            stale = true;
+            setActive(-1);
+            $results.setAttribute('aria-busy', 'true');
+        };
+        const search = () => {
+            const id = ++requestId;
+            const query = $input.value;
+            clearTimeout(searchTimer);
+            queuedEnter = false;
+            $clear.hidden = !query;
+            if (!query.trim()) {
+                $loading.hidden = true;
+                render('', []);
+                return;
+            }
+            markStale();
+            $loading.hidden = false;
+            $clear.hidden = true;
+            searchTimer = setTimeout(async () => {
+                let results = [];
+                try {
+                    await loadSegmentit();
+                    this._searchClient = this._searchClient || new SearchClient(searchConfig);
+                    results = await this._searchClient.search(query);
+                } catch (error) {
+                    console.error(error);
+                }
+                if (id !== requestId || $input.value !== query) return;
+                $loading.hidden = true;
+                $clear.hidden = false;
+                render(query, results);
+                // Enter pressed while this query was pending opens its first result.
+                if (queuedEnter) go(options()[0], false);
+                queuedEnter = false;
+            }, 120);
+        };
+        const resetSearch = () => {
+            $input.value = '';
+            search();
+        };
+        // The mobile keyboard can resize the visual viewport alone.
+        const fitViewport = () => {
+            $dialog.style.setProperty('--search-viewport-height', `${viewport.height}px`);
+            $dialog.style.setProperty('--search-viewport-top', `${viewport.offsetTop}px`);
+        };
+        const open = $opener => {
+            if (!$dialog.open) {
+                resetSearch();
+                // Safari does not focus a clicked button, so the toggle is passed in.
+                opener = $opener || document.activeElement;
+                $dialog.showModal();
+                if (viewport) {
+                    fitViewport();
+                    viewport.addEventListener('resize', fitViewport);
+                    viewport.addEventListener('scroll', fitViewport);
+                }
+                loadSegmentit().catch(() => {});
+            }
+            $input.focus();
+            $input.select();
+        };
+
+        Util.forEach($toggles, $toggle => $toggle.addEventListener('click', () => {
+            this.setMenuMobileOpen(false);
+            document.body.classList.remove('blur');
+            open($toggle);
+        }, false));
+        document.getElementById('search-cancel').addEventListener('click', () => $dialog.close(), false);
+        $clear.addEventListener('click', () => {
+            $input.value = '';
+            search();
+            $input.focus();
+        }, false);
+        $input.addEventListener('input', search, false);
+        // Safari reports the Enter that commits an IME candidate with isComposing false and keyCode 229.
+        const composing = event => event.isComposing || event.keyCode === 229;
+        $input.addEventListener('keydown', event => {
+            if (composing(event)) return;
+            const count = options().length;
+            const newTab = event.ctrlKey || event.metaKey || event.shiftKey;
+            if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+                if (!count || stale) return;
+                event.preventDefault();
+                const step = event.key === 'ArrowDown' ? 1 : -1;
+                setActive(active < 0 && step < 0 ? count - 1 : (active + step + count) % count);
+            } else if (event.key === 'Enter') {
+                if (stale) {
+                    event.preventDefault();
+                    // Opening a new tab requires the keypress's user activation.
+                    if (!newTab && !event.altKey) queuedEnter = true;
+                } else if (count) {
+                    event.preventDefault();
+                    go(options()[Math.max(active, 0)], newTab);
+                }
+            }
+        }, false);
+        $results.addEventListener('click', event => {
+            go(event.target.closest('[role="option"]'), event.ctrlKey || event.metaKey || event.shiftKey);
+        }, false);
+        $results.addEventListener('auxclick', event => {
+            if (event.button === 1) go(event.target.closest('[role="option"]'), true);
+        }, false);
+        // A click on the backdrop lands on the dialog itself; ignore drags that start inside the panel.
+        let pressedBackdrop = false;
+        $dialog.addEventListener('pointerdown', event => { pressedBackdrop = event.target === $dialog; }, false);
+        $dialog.addEventListener('click', event => {
+            if (pressedBackdrop && event.target === $dialog) $dialog.close();
+        }, false);
+        $dialog.addEventListener('close', () => {
+            // An earlier close event can arrive after the dialog has reopened.
+            if ($dialog.open) return;
+            viewport?.removeEventListener('resize', fitViewport);
+            viewport?.removeEventListener('scroll', fitViewport);
+            resetSearch();
+            if (opener?.isConnected && opener !== document.body) opener.focus();
+            opener = undefined;
+        }, false);
+        document.addEventListener('keydown', event => {
+            // Autofill dispatches keydown events without a key.
+            if (event.defaultPrevented || composing(event) || event.altKey || !event.key) return;
+            const shortcut = (event.ctrlKey || event.metaKey) && !event.shiftKey && event.key.toLowerCase() === 'k';
+            const slash = event.key === '/' && !event.ctrlKey && !event.metaKey && !$dialog.open && slashEnabled
+                && !event.target.closest?.('input, textarea, select, [contenteditable]:not([contenteditable="false"])');
+            if (!shortcut && !slash) return;
+            event.preventDefault();
+            open();
+        }, false);
     }
 
     initDetails() {
@@ -732,14 +829,12 @@ class Theme {
     }
 
     onResize() {
-        window.matchMedia('only screen and (max-width: 680px)').addEventListener('change', () => this.initSearch());
         window.addEventListener('resize', () => {
             if (!this._resizeTimeout) {
                 this._resizeTimeout = window.setTimeout(() => {
                     this._resizeTimeout = null;
                     for (let event of this.resizeEventSet) event();
                     this.initToc();
-                    this.initSearch();
                 }, 100);
             }
         }, false);

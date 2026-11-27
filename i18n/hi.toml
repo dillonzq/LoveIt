@@ -98,6 +98,12 @@ other = "रद्द करना"
 [noResultsFound]
 other = "कोई परिणाम नहीं मिला"
 
+[searchResults]
+other = "खोज परिणाम"
+
+[searchSlashShortcut]
+other = "खोज खोलने के लिए / दबाएँ"
+
 [lunrLanguageCode]
 other = "hi"
 

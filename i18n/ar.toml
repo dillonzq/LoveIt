@@ -98,6 +98,12 @@ other = "إلغاء"
 [noResultsFound]
 other = "لا يوجد نتائج"
 
+[searchResults]
+other = "نتائج البحث"
+
+[searchSlashShortcut]
+other = "اضغط / لفتح البحث"
+
 [lunrLanguageCode]
 other = "ar"
 

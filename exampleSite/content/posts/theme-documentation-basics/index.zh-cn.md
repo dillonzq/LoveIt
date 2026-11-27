@@ -1393,4 +1393,4 @@ ignoreLogs = ['loveit-deprecated-params-compatibility-polyfill']
 |:-------|:------:|:------:|:---------|
 | `params.compatibility.polyfill` | 0.5.0 | 0.7.0 | 删除该配置. 主题支持的浏览器不需要 Polyfill 服务. |
 | `params.compatibility.objectFit` | 0.5.0 | 0.7.0 | 删除该配置. 主题支持的浏览器原生支持 `object-fit`. |
-| `params.cdn.autocompleteJS` | 0.5.0 | 0.7.0 | 删除该配置. 搜索框将不再使用 autocomplete.js. |
+| `params.cdn.autocompleteJS` | 0.5.0 | 0.7.0 | 删除该配置. 搜索不再使用 autocomplete.js. |

@@ -98,6 +98,12 @@ other = "ยกเลิก"
 [noResultsFound]
 other = "ไม่พบเนื้อหา"
 
+[searchResults]
+other = "ผลการค้นหา"
+
+[searchSlashShortcut]
+other = "กด / เพื่อเปิดการค้นหา"
+
 [lunrLanguageCode]
 other = "th"
 

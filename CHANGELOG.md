@@ -28,6 +28,12 @@ This file starts at 0.4.0. Older releases are described on the
   ID shown in the warning to `ignoreLogs` to silence it.
 - `params.page.fontawesomeCSS` (`"auto"` by default, or `true` / `false`)
   controls when the Font Awesome stylesheet and webfonts load.
+- Keyboard shortcuts for search: `/` (outside text fields) and `Ctrl+K` or
+  `⌘K` open it. Arrow keys move through the results, `Enter` opens one
+  (`Ctrl`/`⌘`/`Shift+Enter` or a middle click opens it in a new tab), and
+  `Esc` closes search and returns focus to where it was. Visitors can turn
+  off the `/` shortcut with a checkbox in the search dialog; the choice is
+  remembered in the browser.
 
 ### Changed
 
@@ -92,11 +98,20 @@ This file starts at 0.4.0. Older releases are described on the
   processed image is its smallest WebP copy.
 - The `image` shortcode fills in a missing `width` or `height` from the
   image's aspect ratio when the other one is a number.
+- Search opens in a native `<dialog>` with an ARIA combobox and listbox
+  instead of the inline header field and dropdown. The desktop and mobile
+  headers each show a search button; the mobile menu no longer contains a
+  search field. Screen readers hear the number of results. All four engines
+  (Lunr.js, Fuse.js, Algolia, Pagefind) and every `params.search` option
+  work as before. Sites that override `_partials/header.html` or style the
+  old `#search-*-desktop`, `#search-*-mobile` or `.search-dropdown` elements
+  need to follow the new markup in `_partials/search.html`.
 
 ### Deprecated
 
 - `params.compatibility.polyfill`, `params.compatibility.objectFit` and
-  `params.cdn.autocompleteJS`. They still work and will be removed in 0.7.0.
+  `params.cdn.autocompleteJS`. The first two still work; `autocompleteJS` has
+  no effect since autocomplete.js was removed. All three warn until 0.7.0.
   Setting them to `false` or `""` does not warn.
 
 ### Removed
@@ -106,6 +121,8 @@ This file starts at 0.4.0. Older releases are described on the
   `svg/loading.svg`. Images no longer get the `lazyload`, `lazyloading` and
   `lazyloaded` classes or `data-src`/`data-srcset` attributes; update custom
   styles or scripts that rely on them.
+- autocomplete.js 0.38.1. `params.cdn.autocompleteJS` no longer has any
+  effect.
 
 ## [0.4.1] - 2026-11-27
 

@@ -14,7 +14,7 @@ async function hugoImageFeatures() {
 async function openSearch(page, engine, language = '') {
   await page.goto(`/${engine}/blog/${language}`);
   await page.locator('#search-toggle-desktop').click();
-  return page.locator('#search-input-desktop');
+  return page.locator('#search-input');
 }
 
 for (const engine of ['fuse', 'lunr', 'pagefind']) {
@@ -59,7 +59,7 @@ test('rapid input shares an index request and clearing hides stale results', asy
   expect(fetches).toBe(1);
   await input.fill('beta');
   await input.fill('');
-  await expect(page.locator('#search-loading-desktop')).toBeHidden();
+  await expect(page.locator('#search-loading')).toBeHidden();
   await expect(page.locator('.suggestion-title')).toHaveCount(0);
 });
 
@@ -72,13 +72,340 @@ test('Algolia mock preserves the latest async query', async ({ page }) => {
     } }) };
   });
   await page.locator('#search-toggle-desktop').click();
-  await page.locator('#search-input-desktop').fill('first');
+  await page.locator('#search-input').fill('first');
   await page.waitForTimeout(200);
-  await page.locator('#search-input-desktop').fill('second');
+  await page.locator('#search-input').fill('second');
   await expect(page.locator('.suggestion-title')).toHaveText('second');
   await page.waitForTimeout(800);
   await expect(page.locator('.suggestion-title')).toHaveText('second');
 });
+
+async function mockAlgolia(page) {
+  await page.goto('/algolia/blog/');
+  await page.evaluate(() => {
+    window['algoliasearch/lite'] = { liteClient: () => ({ search: async ({ requests: [{ query }] }) => ({ results: [{
+      hits: ['guide', 'gallery', 'math'].map(slug => ({ uri: `/algolia/blog/${slug}/`, title: `${query} ${slug}`, content: query })),
+    }] }) }) };
+  });
+}
+
+test('search dialog opens with / and Ctrl/Cmd+K, closes with Esc and returns focus', async ({ page }) => {
+  await mockAlgolia(page);
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const input = page.getByRole('combobox', { name: 'Search', includeHidden: true });
+  const toggle = page.locator('#search-toggle-desktop');
+  await expect(toggle).toHaveAttribute('aria-haspopup', 'dialog');
+
+  await page.keyboard.press('/');
+  await expect(dialog).toBeVisible();
+  await expect(input).toBeFocused();
+  await expect(input).toHaveValue('');
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+
+  for (const shortcut of ['Control+k', 'Meta+k']) {
+    await toggle.focus();
+    await page.keyboard.press(shortcut);
+    await expect(dialog).toBeVisible();
+    await expect(input).toBeFocused();
+    await input.fill('kw');
+    await expect(page.locator('#search-results [role="option"]')).toHaveCount(3);
+    await page.keyboard.press('Escape');
+    await expect(dialog).toBeHidden();
+    await expect(toggle).toBeFocused();
+    await expect(input).toHaveValue('');
+  }
+
+  // `/` types normally in other fields; Ctrl+K still opens search from them.
+  await page.evaluate(() => document.querySelector('main').append(Object.assign(document.createElement('textarea'), { id: 'probe' })));
+  await page.locator('#probe').focus();
+  await page.keyboard.press('/');
+  await expect(page.locator('#probe')).toHaveValue('/');
+  await expect(dialog).toBeHidden();
+  await page.keyboard.press('Control+k');
+  await expect(input).toBeFocused();
+
+  // A click on the backdrop closes the dialog.
+  await page.mouse.click(10, 700);
+  await expect(dialog).toBeHidden();
+  await expect(page.locator('#probe')).toBeFocused();
+});
+
+test('search combobox: arrow keys move the active option and Enter opens it', async ({ page }) => {
+  await mockAlgolia(page);
+  await page.locator('#search-toggle-desktop').click();
+  const input = page.getByRole('combobox', { name: 'Search' });
+  await expect(input).toHaveAttribute('aria-expanded', 'false');
+  await expect(input).toHaveAttribute('aria-controls', 'search-results');
+  await input.fill('kw');
+  const listbox = page.getByRole('listbox', { name: 'Search results' });
+  const options = listbox.getByRole('option');
+  await expect(options).toHaveCount(3);
+  await expect(input).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.getByRole('status')).toHaveText('Search results: 3');
+  await expect(input).not.toHaveAttribute('aria-activedescendant');
+
+  const expectActive = async index => {
+    const id = await options.nth(index).getAttribute('id');
+    await expect(input).toHaveAttribute('aria-activedescendant', id);
+    await expect(options.nth(index)).toHaveAttribute('aria-selected', 'true');
+    await expect(listbox.locator('[aria-selected="true"]')).toHaveCount(1);
+  };
+  await page.keyboard.press('ArrowDown');
+  await expectActive(0);
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('ArrowDown');
+  await expectActive(2);
+  await page.keyboard.press('ArrowDown');
+  await expectActive(0);
+  await page.keyboard.press('ArrowUp');
+  await expectActive(2);
+  await expect(input).toBeFocused();
+
+  // Typing starts over from the first option.
+  await input.fill('kx');
+  await expect(options.first()).toContainText('kx guide');
+  await expect(input).not.toHaveAttribute('aria-activedescendant');
+  await page.keyboard.press('ArrowUp');
+  await expectActive(2);
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/algolia\/blog\/math\/$/);
+});
+
+test('search: Enter without an active option opens the first result; no results are announced', async ({ page }) => {
+  await page.goto('/fuse/blog/');
+  await page.keyboard.press('/');
+  const input = page.locator('#search-input');
+  await input.fill('NoSuchWordAnywhere');
+  await expect(page.locator('.search-empty')).toBeVisible();
+  await expect(page.getByRole('status')).toHaveText('No results found');
+  await expect(input).toHaveAttribute('aria-expanded', 'false');
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/fuse\/blog\/$/);
+  await input.fill('Needle');
+  await expect(page.locator('.suggestion-title').first()).toContainText('Search <guide> & safety');
+  await page.locator('#search-clear').click();
+  await expect(input).toHaveValue('');
+  await expect(input).toBeFocused();
+  await expect(page.locator('#search-results [role="option"]')).toHaveCount(0);
+  await expect(page.locator('#search-results')).toBeHidden();
+  await input.fill('Needle');
+  await expect(page.locator('.suggestion-title').first()).toBeVisible();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/fuse\/blog\/guide\/$/);
+});
+
+test('search: Enter during a pending query opens the new first result, never a stale or unsafe one', async ({ page }) => {
+  await page.goto('/algolia/blog/');
+  await page.evaluate(() => {
+    const slugs = { kw: ['guide', 'gallery'], slow: ['math', 'guide'] };
+    window['algoliasearch/lite'] = { liteClient: () => ({ search: async ({ requests: [{ query }] }) => {
+      if (query === 'slow') await new Promise(resolve => setTimeout(resolve, 600));
+      const hits = query === 'evil'
+        ? [{ uri: 'javascript:window.__pwned=1', title: 'evil', content: 'evil' }]
+        : (slugs[query] || []).map(slug => ({ uri: `/algolia/blog/${slug}/`, title: `${query} ${slug}`, content: query }));
+      return { results: [{ hits }] };
+    } }) };
+  });
+  await page.keyboard.press('/');
+  const input = page.locator('#search-input');
+  const options = page.locator('#search-results [role="option"]');
+
+  await input.fill('evil');
+  await expect(options).toHaveCount(1);
+  await page.keyboard.press('Enter');
+  await options.first().click();
+  expect(await page.evaluate(() => window.__pwned)).toBeUndefined();
+  await expect(page).toHaveURL(/\/algolia\/blog\/$/);
+
+  // Confirming an IME candidate in Safari sends Enter with keyCode 229.
+  await input.fill('kw');
+  await expect(options).toHaveCount(2);
+  await input.evaluate(el => el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', keyCode: 229, bubbles: true, cancelable: true })));
+  await page.waitForTimeout(200);
+  await expect(page).toHaveURL(/\/algolia\/blog\/$/);
+
+  await page.keyboard.press('ArrowDown');
+  await input.fill('slow');
+  await expect(page.locator('#search-results')).toHaveAttribute('aria-busy', 'true');
+  await expect(input).not.toHaveAttribute('aria-activedescendant');
+  await page.keyboard.press('ArrowDown');
+  await expect(input).not.toHaveAttribute('aria-activedescendant');
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/algolia\/blog\/math\/$/);
+});
+
+test('search: visitors can turn off the / shortcut and the choice persists', async ({ page }) => {
+  await page.goto('/fuse/blog/');
+  const toggle = page.locator('#search-toggle-desktop');
+  const dialog = page.locator('#search-dialog');
+  await expect(toggle).toHaveAttribute('aria-keyshortcuts', '/ Control+K Meta+K');
+  await toggle.click();
+  const checkbox = page.getByRole('checkbox', { name: 'Press / to open search' });
+  await expect(checkbox).toBeChecked();
+  await checkbox.uncheck();
+  await expect(toggle).toHaveAttribute('aria-keyshortcuts', 'Control+K Meta+K');
+  await page.keyboard.press('Escape');
+  await page.keyboard.press('/');
+  await expect(dialog).toBeHidden();
+  await page.reload();
+  await page.keyboard.press('/');
+  await expect(dialog).toBeHidden();
+  await page.keyboard.press('Control+k');
+  await expect(dialog).toBeVisible();
+  await expect(checkbox).not.toBeChecked();
+  await checkbox.check();
+  await page.keyboard.press('Escape');
+  await page.keyboard.press('/');
+  await expect(dialog).toBeVisible();
+});
+
+test('search: pending results cannot be opened and same-page results close the dialog', async ({ page }) => {
+  await page.goto('/algolia/blog/guide/');
+  await page.evaluate(() => {
+    window.openedSearchTabs = [];
+    window.open = url => { window.openedSearchTabs.push(url); return null; };
+    const pending = new Promise(resolve => { window.finishSearch = resolve; });
+    window['algoliasearch/lite'] = { liteClient: () => ({ search: async ({ requests: [{ query }] }) => {
+      const next = query === 'next';
+      if (next) await pending;
+      const uri = next ? '#final-section' : '/algolia/blog/gallery/';
+      return { results: [{ hits: [{ uri, title: query, content: query }] }] };
+    } }) };
+  });
+  const toggle = page.locator('#search-toggle-desktop');
+  await toggle.click();
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const input = dialog.getByRole('combobox');
+  const listbox = dialog.getByRole('listbox');
+  const option = listbox.getByRole('option');
+  const openedTabs = () => page.evaluate(() => window.openedSearchTabs);
+  await input.fill('first');
+  await expect(option).toContainText('first');
+  await input.fill('next');
+  await expect(listbox).toHaveAttribute('aria-busy', 'true');
+
+  await option.click({ button: 'middle' });
+  expect(await openedTabs()).toEqual([]);
+  await option.click();
+  await expect(page).toHaveURL(/\/algolia\/blog\/guide\/$/);
+  for (const key of ['Control+Enter', 'Meta+Enter', 'Shift+Enter']) await input.press(key);
+  await page.evaluate(() => window.finishSearch());
+  await expect(option).toContainText('next');
+  expect(await openedTabs()).toEqual([]);
+
+  await input.press('Control+Enter');
+  expect(await openedTabs()).toEqual([expect.stringMatching(/\/guide\/#final-section$/)]);
+  await input.press('Enter');
+  await expect(page).toHaveURL(/\/guide\/#final-section$/);
+  await expect(dialog).toBeHidden();
+  await expect(toggle).not.toBeFocused();
+});
+
+test('search: the / shortcut can be turned off when browser storage is full', async ({ page }) => {
+  await page.addInitScript(() => {
+    const setItem = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (key, value) {
+      if (key === 'search-slash') throw new DOMException('Storage is full', 'QuotaExceededError');
+      return setItem.call(this, key, value);
+    };
+  });
+  await page.goto('/fuse/blog/');
+  const toggle = page.locator('#search-toggle-desktop');
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const checkbox = dialog.getByRole('checkbox', { name: 'Press / to open search' });
+  await toggle.click();
+  await checkbox.uncheck();
+  await expect(checkbox).not.toBeChecked();
+  await expect(toggle).toHaveAttribute('aria-keyshortcuts', 'Control+K Meta+K');
+  await page.keyboard.press('Escape');
+  await page.keyboard.press('/');
+  await expect(dialog).toBeHidden();
+  await page.keyboard.press('Control+k');
+  await expect(checkbox).not.toBeChecked();
+});
+
+test('lunr: a failed Chinese segmenter load is retried by the next search', async ({ page }) => {
+  let attempts = 0;
+  await page.route('**/lunr.segmentit*.js', route => attempts++ ? route.continue() : route.abort());
+  await page.goto('/lunr/blog/zh-cn/');
+  await page.locator('#search-toggle-desktop').click();
+  await expect.poll(() => attempts).toBe(1);
+  await page.locator('#search-input').fill('中文');
+  await expect(page.locator('.suggestion-title').first()).toContainText('中文搜索指南');
+  expect(attempts).toBe(2);
+});
+
+test('search: closing and reopening invalidates a queued Enter', async ({ page }) => {
+  await page.goto('/algolia/blog/guide/');
+  await page.evaluate(() => {
+    window['algoliasearch/lite'] = { liteClient: () => ({ search: async ({ requests: [{ query }] }) => {
+      if (query === 'old') await new Promise(resolve => { window.finishOldSearch = resolve; });
+      return { results: [{ hits: [{ uri: '#final-section', title: query, content: query }] }] };
+    } }) };
+  });
+  const toggle = page.locator('#search-toggle-desktop');
+  await toggle.click();
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const input = dialog.getByRole('combobox');
+  await input.fill('old');
+  await expect.poll(() => page.evaluate(() => Boolean(window.finishOldSearch))).toBe(true);
+  await input.press('Enter');
+  await page.evaluate(() => {
+    document.getElementById('search-dialog').close();
+    document.getElementById('search-toggle-desktop').click();
+    window.finishOldSearch();
+  });
+  await expect(dialog).toBeVisible();
+  await expect(input).toBeFocused();
+  await expect(input).toHaveValue('');
+  await expect(page).toHaveURL(/\/guide\/$/);
+  await input.fill('fresh');
+  await expect(dialog.getByRole('option')).toContainText('fresh');
+  await input.press('Enter');
+  await expect(page).toHaveURL(/\/guide\/#final-section$/);
+});
+
+test('mobile: search footer and last result fit above the keyboard', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await mockAlgolia(page);
+  await page.locator('#search-toggle-mobile').click();
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const input = dialog.getByRole('combobox');
+  const listbox = dialog.getByRole('listbox');
+  await input.fill('mobile');
+  const last = listbox.getByRole('option').last();
+  await expect(last).toBeAttached();
+  await page.evaluate(() => {
+    Object.defineProperty(window.visualViewport, 'height', { configurable: true, value: 220 });
+    window.visualViewport.dispatchEvent(new Event('resize'));
+    Object.defineProperty(window.visualViewport, 'offsetTop', { configurable: true, value: 35 });
+    window.visualViewport.dispatchEvent(new Event('scroll'));
+  });
+  await expect(dialog).toHaveCSS('height', '220px');
+  await expect(dialog).toHaveCSS('top', '35px');
+  await input.press('ArrowUp');
+  await expect(last).toHaveAttribute('aria-selected', 'true');
+  await expect.poll(() => dialog.evaluate(el => {
+    const list = el.querySelector('#search-results').getBoundingClientRect();
+    const option = el.querySelector('#search-results li:last-child').getBoundingClientRect();
+    const footer = el.querySelector('.search-footer').getBoundingClientRect();
+    return option.top >= list.top && option.bottom <= list.bottom && footer.bottom <= 255;
+  })).toBe(true);
+});
+
+for (const { name, viewport } of [{ name: 'desktop', viewport: { width: 1280, height: 800 } }, { name: 'mobile', viewport: { width: 390, height: 844 } }]) {
+  test(`${name}: the open search dialog has no critical or region axe violations`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    await page.goto('/fuse/blog/');
+    await page.locator(`#search-toggle-${name}`).click();
+    await page.locator('#search-input').fill('Needle');
+    await expect(page.locator('.suggestion-title').first()).toBeVisible();
+    await page.keyboard.press('ArrowDown');
+    const { violations } = await new AxeBuilder({ page }).analyze();
+    expect(violations.filter(v => v.impact === 'critical' || v.id === 'region').map(v => `${v.id}: ${v.nodes.map(n => n.target).join(', ')}`)).toEqual([]);
+  });
+}
 
 test('Mermaid survives cached content; math, copy controls and persisted theme work', async ({ page }) => {
   const errors = [];
@@ -143,14 +470,21 @@ test('mobile navigation and search survive resizing', async ({ page }) => {
   await expect(page.locator('#menu-mobile')).not.toHaveClass(/active/);
   await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
   await menuToggle.click();
-  await page.locator('#search-input-mobile').fill('Needle');
-  await expect(page.locator('#search-dropdown-mobile .suggestion-title')).toContainText('Search');
-  await page.locator('#search-cancel-mobile').click();
+  await page.locator('#search-toggle-mobile').click();
   await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator('#search-input')).toBeFocused();
+  const dialog = await page.locator('#search-dialog').boundingBox();
+  expect(dialog).toMatchObject({ x: 0, y: 0, width: 390, height: 844 });
+  await page.locator('#search-input').fill('Needle');
+  await expect(page.locator('#search-results .suggestion-title')).toContainText('Search');
+  await page.locator('#search-cancel').click();
+  await expect(page.locator('#search-dialog')).toBeHidden();
+  await expect(page.locator('#search-toggle-mobile')).toBeFocused();
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.locator('#search-toggle-desktop').click();
-  await page.locator('#search-input-desktop').fill('Needle');
-  await expect(page.locator('#search-dropdown-desktop .suggestion-title')).toContainText('Search');
+  await expect(page.locator('#search-input')).toHaveValue('');
+  await page.locator('#search-input').fill('Needle');
+  await expect(page.locator('#search-results .suggestion-title')).toContainText('Search');
 });
 
 test('header, share and back controls are labelled, keyboard-operable buttons', async ({ page }) => {
@@ -164,8 +498,8 @@ test('header, share and back controls are labelled, keyboard-operable buttons', 
 
   const header = page.locator('#header-desktop');
   await expect(header.getByRole('button', { name: 'Search' })).toBeVisible();
-  await expect(header.getByRole('button', { name: 'Clear', includeHidden: true })).toBeAttached();
-  await expect(header.getByRole('combobox', { name: 'Search' })).toBeAttached();
+  await expect(page.getByRole('button', { name: 'Clear', includeHidden: true })).toBeAttached();
+  await expect(page.getByRole('combobox', { name: 'Search', includeHidden: true })).toBeAttached();
   await expect(header.getByRole('combobox', { name: 'Select Language' })).toBeAttached();
 
   const themeSwitch = header.getByRole('button', { name: /^Switch Theme/ });
@@ -249,7 +583,7 @@ test('icon prose does not load webfonts and local SVGs retain their fills', asyn
 });
 
 for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/', dir: 'rtl' }]) {
-  test(`${dir}: header, search dropdown and auto TOC follow the language direction`, async ({ page }) => {
+  test(`${dir}: header, search dialog and auto TOC follow the language direction`, async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto(`/fuse/blog/${language}guide/`);
     await expect(page.locator('html')).toHaveAttribute('dir', dir);
@@ -269,9 +603,11 @@ for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/'
     await expect(toc).toHaveCSS(rtl ? 'border-right-width' : 'border-left-width', '4px');
 
     await page.locator('#search-toggle-desktop').click();
-    const dropdown = await box('#search-dropdown-desktop');
-    const viewport = page.viewportSize();
-    expect(rtl ? dropdown.x < viewport.width / 2 : dropdown.x > viewport.width / 2).toBe(true);
+    const input = await box('#search-input');
+    const cancel = await box('#search-cancel');
+    const icon = await box('#search-dialog .search-icon');
+    expect(rtl ? cancel.x < input.x : cancel.x > input.x).toBe(true);
+    expect(rtl ? icon.x > input.x + input.width / 2 : icon.x < input.x + input.width / 2).toBe(true);
   });
 }
 

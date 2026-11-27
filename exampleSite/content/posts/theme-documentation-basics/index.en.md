@@ -1397,4 +1397,4 @@ so the `false` defaults copied from the theme configuration do not warn.
 |:-------|:-------------:|:----------:|:-----------|
 | `params.compatibility.polyfill` | 0.5.0 | 0.7.0 | Remove it. Browsers supported by the theme do not need the Polyfill service. |
 | `params.compatibility.objectFit` | 0.5.0 | 0.7.0 | Remove it. Browsers supported by the theme support `object-fit` natively. |
-| `params.cdn.autocompleteJS` | 0.5.0 | 0.7.0 | Remove it. The search box will no longer use autocomplete.js. |
+| `params.cdn.autocompleteJS` | 0.5.0 | 0.7.0 | Remove it. Search no longer uses autocomplete.js. |

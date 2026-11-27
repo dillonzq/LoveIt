@@ -98,6 +98,12 @@ other = "Abbrechen"
 [noResultsFound]
 other = "Keine Ergebnisse gefunden"
 
+[searchResults]
+other = "Suchergebnisse"
+
+[searchSlashShortcut]
+other = "Suche mit / öffnen"
+
 [lunrLanguageCode]
 other = "de"
 
