@@ -7,7 +7,8 @@
     "The notes record the spread between seven Metrics runs of master commits",
     "(November 2026), which the tolerances leave room for. The gate reads",
     "`baseline` from the pull request's base commit, so changes to it apply",
-    "once merged; the tolerances come from the pull request itself."
+    "once merged (keep BOOTSTRAP_BASELINE in scripts/metrics-compare.mjs in",
+    "step); the tolerances come from the pull request itself."
   ],
   "baseline": {
     "workflows": ["ci.yml", "metrics.yml"],

@@ -1,8 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import { compareSummaries, parseBudget, renderComparison, summaryProblems } from '../scripts/metrics-compare.mjs';
-import { findBaseline, githubApi, trustedRuns } from '../scripts/metrics-baseline.mjs';
+import { execFileSync } from 'node:child_process';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { BOOTSTRAP_BASELINE, compareSummaries, parseBaselinePolicy, parseBudget, renderComparison, summaryProblems } from '../scripts/metrics-compare.mjs';
+import { findBaseline, gitHelpers, githubApi, trustedRuns } from '../scripts/metrics-baseline.mjs';
 
 const readJson = file => JSON.parse(readFileSync(new URL(file, import.meta.url), 'utf8'));
 const budget = parseBudget(readJson('../metrics-budget.json'));
@@ -143,8 +146,9 @@ test('only successful pushes to master of this repository are trusted', () => {
   assert.deepEqual(trustedRuns(runs, { repository, branch: 'master', workflows: ['ci.yml', 'metrics.yml'] }).map(item => item.id), [6, 1]);
 });
 
-// `runs` are the successful runs, newest first, paged 100 at a time like the
-// API; `exact` are all runs of the base commit, whatever their state.
+// `runs` are the successful runs of ci.yml (or { workflow: runs }), newest
+// first, paged 100 at a time like the API; `exact` are all ci.yml runs of the
+// base commit, whatever their state.
 function fakeGitHub({ runs, exact = [], artifacts = {}, zips = {} }) {
   const requests = [];
   const api = {
@@ -155,10 +159,11 @@ function fakeGitHub({ runs, exact = [], artifacts = {}, zips = {} }) {
         const query = new URLSearchParams(match[2]);
         assert.equal(query.get('branch'), 'master');
         assert.equal(query.get('event'), 'push');
-        if (match[1] !== 'ci.yml') throw Object.assign(new Error('Not Found'), { status: 404 });
-        if (query.get('head_sha')) return { workflow_runs: exact.filter(item => item.head_sha === query.get('head_sha')) };
+        const list = Array.isArray(runs) ? { 'ci.yml': runs } : runs;
+        if (!(match[1] in list)) throw Object.assign(new Error('Not Found'), { status: 404 });
+        if (query.get('head_sha')) return { workflow_runs: match[1] === 'ci.yml' ? exact.filter(item => item.head_sha === query.get('head_sha')) : [] };
         const page = Number(query.get('page'));
-        return { workflow_runs: runs.slice((page - 1) * 100, page * 100) };
+        return { workflow_runs: list[match[1]].slice((page - 1) * 100, page * 100) };
       }
       if ((match = /\/actions\/runs\/(\d+)\/artifacts/.exec(pathname))) return { artifacts: artifacts[match[1]] || [] };
       if ((match = /\/actions\/artifacts\/(\d+)\/zip$/.exec(pathname)) && binary) {
@@ -216,6 +221,55 @@ test('older commits are searched page by page', async () => {
   assert.deepEqual(github.requests.filter(pathname => pathname.includes('/workflows/ci.yml/') && pathname.includes('status=success')).map(pathname => new URL(pathname, 'https://x').searchParams.get('page')), ['1', '2']);
 });
 
+test('the closest ancestor wins across pages and workflows', async () => {
+  // ci.yml's first page holds only newer runs; metrics.yml's first page holds
+  // a distant ancestor; the parent commit's run is on ci.yml's second page.
+  const newer = Array.from({ length: 100 }, (_, index) => run(1000 + index, 'x'));
+  const github = fakeGitHub({
+    runs: { 'ci.yml': [...newer, run(12, 'c')], 'metrics.yml': [run(15, 'a', { path: '.github/workflows/metrics.yml' })] },
+    artifacts: { 12: artifact(102), 15: artifact(105) },
+    zips: { 102: good, 105: good },
+  });
+  const result = await find(github);
+  assert.equal(result.run.id, 12);
+  assert.equal(result.distance, 1);
+});
+
+test('a failed download moves on to the run\'s older artifact', async () => {
+  const github = fakeGitHub({ runs: [], exact: [run(13, 'd')], artifacts: { 13: [...artifact(201), ...artifact(203)] }, zips: { 201: good } });
+  const result = await find(github);
+  assert.equal(result.run.id, 13);
+  assert.deepEqual(result.skipped, ['run 13 (ddddddd): cannot read summary.json from artifact 203 (download failed)']);
+});
+
+test('the base budget is read from git, telling a missing file from an error', t => {
+  const directory = mkdtempSync(path.join(tmpdir(), 'loveit-git-'));
+  t.after(() => rmSync(directory, { recursive: true, force: true }));
+  const run = (...args) => execFileSync('git', args, { cwd: directory, encoding: 'utf8' }).trim();
+  run('init', '-q');
+  writeFileSync(path.join(directory, 'metrics-budget.json'), '{"baseline": {}}\n');
+  run('add', '.');
+  run('-c', 'user.name=test', '-c', 'user.email=test@example.com', 'commit', '-q', '-m', 'one');
+  const one = run('rev-parse', 'HEAD');
+  run('rm', '-q', 'metrics-budget.json');
+  run('-c', 'user.name=test', '-c', 'user.email=test@example.com', 'commit', '-q', '-m', 'two');
+  const two = run('rev-parse', 'HEAD');
+  const helpers = gitHelpers(directory);
+  assert.equal(helpers.show(one, 'metrics-budget.json'), '{"baseline": {}}');
+  assert.equal(helpers.show(two, 'metrics-budget.json'), null);
+  assert.throws(() => helpers.show('0'.repeat(40), 'metrics-budget.json'));
+  assert.equal(helpers.distance(one, two), 1);
+  assert.equal(helpers.distance(two, one), null);
+});
+
+test('the base commit\'s baseline settings are validated on their own', () => {
+  assert.deepEqual(parseBaselinePolicy({ missing: 'fail' }), { workflows: ['ci.yml'], artifact: 'metrics', waitMinutes: 0, missing: 'fail', acceptLabel: null });
+  assert.throws(() => parseBaselinePolicy({ branch: 'feature' }), /baseline: unknown key "branch"/);
+  assert.throws(() => parseBaselinePolicy([]), /baseline: expected an object/);
+  // The built-in settings are what the shipped budget asks for.
+  assert.deepEqual(parseBaselinePolicy(BOOTSTRAP_BASELINE), budget.baseline);
+});
+
 test('the newest artifact of a re-run comes first, and older ones are tried next', async () => {
   const partial = JSON.stringify({ ...masterRuns[0], axe: undefined });
   const github = fakeGitHub({
@@ -234,7 +288,7 @@ test('a missing or unreadable baseline is reported, not thrown', async () => {
   assert.match(result.missing, /no successful master push run of ci\.yml or metrics\.yml is an ancestor of ddddddd/);
   result = await find(fakeGitHub({ runs: [run(12, 'c')], artifacts: { 12: artifact(102) } }));
   assert.match(result.missing, /no usable baseline among the 1 closest/);
-  assert.deepEqual(result.skipped, ['run 12 (ccccccc): download failed']);
+  assert.deepEqual(result.skipped, ['run 12 (ccccccc): cannot read summary.json from artifact 102 (download failed)']);
   result = await find(fakeGitHub({ runs: [run(12, 'c')], artifacts: { 12: artifact(102) }, zips: { 102: 'not json' } }));
   assert.match(result.skipped[0], /cannot read summary\.json from artifact 102/);
 });

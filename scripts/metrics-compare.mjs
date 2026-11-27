@@ -33,6 +33,16 @@ const repositoryMetrics = {
 const baselineDefaults = {
   workflows: ['ci.yml'], artifact: 'metrics', waitMinutes: 0, missing: 'warn', acceptLabel: null,
 };
+// The `baseline` settings used when the base commit has no usable
+// metrics-budget.json: before the gate existed, or when the file there is broken.
+// Defined here rather than taken from the pull request, which could loosen them.
+export const BOOTSTRAP_BASELINE = Object.freeze({
+  workflows: Object.freeze(['ci.yml', 'metrics.yml']),
+  artifact: 'metrics',
+  waitMinutes: 20,
+  missing: 'warn',
+  acceptLabel: 'accept-metrics-regression',
+});
 
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const isNumberOrNull = value => value === null || (typeof value === 'number' && Number.isFinite(value));
@@ -65,13 +75,10 @@ function checkRules(section, metrics, where, extra = []) {
     .map(([key, rule]) => [key, checkRule(rule, `${where}.${key}`)]));
 }
 
-// Returns a normalized budget or throws with the path of the first mistake, so
-// a typo cannot silently turn a check off.
-export function parseBudget(budget) {
-  if (!isObject(budget)) throw new Error('metrics budget: expected a JSON object');
-  checkKeys(budget, ['$comment', 'baseline', 'lighthouse', 'axe', 'build', 'repository'], 'metrics budget');
-  const baseline = { ...baselineDefaults, ...(budget.baseline ?? {}) };
-  if (!isObject(budget.baseline ?? {})) throw new Error('baseline: expected an object');
+// Returns the normalized `baseline` section of a budget, or throws.
+export function parseBaselinePolicy(section) {
+  if (!isObject(section ?? {})) throw new Error('baseline: expected an object');
+  const baseline = { ...baselineDefaults, ...(section ?? {}) };
   checkKeys(baseline, Object.keys(baselineDefaults), 'baseline');
   if (!Array.isArray(baseline.workflows) || !baseline.workflows.length
     || !baseline.workflows.every(file => typeof file === 'string' && /^[\w.-]+\.ya?ml$/.test(file))) {
@@ -85,6 +92,15 @@ export function parseBudget(budget) {
   if (baseline.acceptLabel !== null && (typeof baseline.acceptLabel !== 'string' || !baseline.acceptLabel)) {
     throw new Error('baseline.acceptLabel: expected a label name or null');
   }
+  return baseline;
+}
+
+// Returns a normalized budget or throws with the path of the first mistake, so
+// a typo cannot silently turn a check off.
+export function parseBudget(budget) {
+  if (!isObject(budget)) throw new Error('metrics budget: expected a JSON object');
+  checkKeys(budget, ['$comment', 'baseline', 'lighthouse', 'axe', 'build', 'repository'], 'metrics budget');
+  const baseline = parseBaselinePolicy(budget.baseline);
   if (budget.axe !== undefined && 'newRules' in (budget.axe ?? {}) && typeof budget.axe.newRules !== 'boolean') {
     throw new Error('axe.newRules: expected true or false');
   }

@@ -45,13 +45,12 @@ export function gitHelpers(cwd) {
     mergeBase(ref, branch) {
       return git('merge-base', ref, `refs/remotes/origin/${branch}`);
     },
-    // The file's content at `sha`, or null when it does not exist there.
+    // The file's content at commit `sha`, or null when it does not exist
+    // there. Any other failure (an unknown commit, a git error) throws.
     show(sha, file) {
-      try {
-        return git('show', `${sha}:${file}`);
-      } catch {
-        return null;
-      }
+      git('cat-file', '-e', `${sha}^{commit}`);
+      if (!git('ls-tree', '--name-only', sha, '--', file)) return null;
+      return git('show', `${sha}:${file}`);
     },
     changed(sha, file) {
       try {
@@ -151,7 +150,6 @@ export async function findBaseline({ api, git, repository, branch, baseSha, conf
 
   const tried = new Set();
   let downloads = 0;
-  let ancestors = 0;
   // Returns the run's summary, or null after recording why it cannot be used.
   async function summaryOf(run) {
     tried.add(run.id);
@@ -168,9 +166,9 @@ export async function findBaseline({ api, git, repository, branch, baseSha, conf
         }
         if (downloads >= maxDownloads) return null;
         downloads += 1;
-        const zip = await api.request(`/repos/${repository}/actions/artifacts/${found.id}/zip`, { binary: true });
         let summary;
         try {
+          const zip = await api.request(`/repos/${repository}/actions/artifacts/${found.id}/zip`, { binary: true });
           summary = JSON.parse(readZip(zip).toString('utf8'));
         } catch (error) {
           skipped.push(`${label}: cannot read summary.json from artifact ${found.id} (${error.message.split('\n')[0]})`);
@@ -190,22 +188,29 @@ export async function findBaseline({ api, git, repository, branch, baseSha, conf
     const summary = await summaryOf(run);
     if (summary) return { summary, run, distance: 0, skipped };
   }
-  // Older commits, page by page; within a page, the closest commit first and,
-  // for re-runs of one commit, the newest run.
-  for (let page = 1; page <= maxPages && downloads < maxDownloads && ancestors < maxCandidates; page += 1) {
+  // Older commits: gather the ancestors on up to `maxPages` pages of every
+  // workflow's successful runs before choosing, because a workflow's first page
+  // may hold only a distant ancestor while a closer one sits on a later page of
+  // another. Stop early once the base commit's parent is among them.
+  const candidates = new Map();
+  const distances = new Map();
+  for (let page = 1; page <= maxPages; page += 1) {
     const { runs, exhausted } = await listRuns(`status=success&page=${page}`);
-    const candidates = runs
-      .filter(run => succeeded(run) && !tried.has(run.id))
-      .map(run => ({ run, distance: git.distance(run.head_sha, baseSha) }))
-      .filter(candidate => candidate.distance !== null)
-      .sort((a, b) => a.distance - b.distance);
-    for (const { run, distance } of candidates) {
-      if (downloads >= maxDownloads || ancestors >= maxCandidates) break;
-      ancestors += 1;
-      const summary = await summaryOf(run);
-      if (summary) return { summary, run, distance, skipped };
+    for (const run of runs) {
+      if (!succeeded(run) || tried.has(run.id) || candidates.has(run.id)) continue;
+      if (!distances.has(run.head_sha)) distances.set(run.head_sha, git.distance(run.head_sha, baseSha));
+      const distance = distances.get(run.head_sha);
+      if (distance !== null) candidates.set(run.id, { run, distance });
     }
-    if (exhausted) break;
+    if (exhausted || [...candidates.values()].some(candidate => candidate.distance <= 1)) break;
+  }
+  // The closest commit first; for re-runs of one commit, the newest run.
+  const ranked = [...candidates.values()].sort((a, b) => a.distance - b.distance
+    || String(b.run.created_at).localeCompare(String(a.run.created_at)));
+  for (const { run, distance } of ranked.slice(0, maxCandidates)) {
+    if (downloads >= maxDownloads) break;
+    const summary = await summaryOf(run);
+    if (summary) return { summary, run, distance, skipped };
   }
   const reason = tried.size
     ? `no usable baseline among the ${tried.size} closest successful ${branch} runs`

@@ -8,7 +8,7 @@ import { appendFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path';
 import { parseArgs } from 'node:util';
 import { root } from './tools.mjs';
-import { compareSummaries, parseBudget, renderComparison, summaryProblems } from './metrics-compare.mjs';
+import { BOOTSTRAP_BASELINE, compareSummaries, parseBaselinePolicy, parseBudget, renderComparison, summaryProblems } from './metrics-compare.mjs';
 import { findBaseline, gitHelpers, githubApi } from './metrics-baseline.mjs';
 
 const { values: options } = parseArgs({
@@ -67,21 +67,24 @@ if (options.baseline) {
   // Without the base commit there is nothing to compare with; that is a setup
   // error (shallow clone, missing remote branch), not a missing baseline.
   const baseSha = env.LOVEIT_METRICS_BASE || git.mergeBase('HEAD', branch);
+  // A read error throws here and fails the job; only a file that does not
+  // exist at the base, or a broken one, falls back to the built-in settings.
+  const trusted = git.show(baseSha, budgetFile);
+  policy = BOOTSTRAP_BASELINE;
+  if (trusted === null) {
+    notes.push(`\`${budgetFile}\` does not exist at the base commit; the built-in \`baseline\` settings apply.`);
+  } else {
+    try {
+      policy = parseBaselinePolicy(JSON.parse(trusted)?.baseline);
+    } catch (error) {
+      notes.push(`The \`baseline\` settings in \`${budgetFile}\` at the base commit are invalid (${error.message}); the built-in ones apply.`);
+    }
+  }
+  if (JSON.stringify(policy) !== JSON.stringify(budget.baseline)) {
+    notes.push(`This pull request's \`baseline\` settings in \`${budgetFile}\` differ from those used here; they apply once it is merged.`);
+  }
   let result;
   try {
-    const trusted = git.show(baseSha, budgetFile);
-    if (trusted === null) {
-      notes.push(`\`${budgetFile}\` does not exist at the base commit; its \`baseline\` settings come from this pull request.`);
-    } else {
-      try {
-        policy = parseBudget(JSON.parse(trusted)).baseline;
-      } catch (error) {
-        notes.push(`\`${budgetFile}\` at the base commit is invalid (${error.message}); its \`baseline\` settings come from this pull request.`);
-      }
-      if (JSON.stringify(policy) !== JSON.stringify(budget.baseline)) {
-        notes.push(`This pull request changes the \`baseline\` settings in \`${budgetFile}\`; they apply once it is merged.`);
-      }
-    }
     result = await findBaseline({
       api, git, repository: env.GITHUB_REPOSITORY, branch, baseSha, config: policy,
       sleep: ms => new Promise(resolve => setTimeout(resolve, ms)), log: console.log,

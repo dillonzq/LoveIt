@@ -221,7 +221,9 @@ to `build/metrics/comparison.md`.
   merged state. Otherwise it uses an older master commit and says so in the
   summary. The `baseline` settings are read from the base commit's
   `metrics-budget.json`, so a pull request that changes them, unlike the
-  tolerances, does not use its own version.
+  tolerances, does not use its own version. Where the base commit has no such
+  file, or its `baseline` settings are invalid, the gate uses built-in settings
+  equal to the current ones; a failure to read the file fails the job.
 - **No baseline.** When no baseline can be found or downloaded, or none has a
   format the gate understands, the job passes with a warning
   (`baseline.missing: "warn"`); set it to `"fail"` to require one. Re-run the job
