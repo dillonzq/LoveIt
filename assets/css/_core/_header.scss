@@ -432,9 +432,11 @@ header {
 
         em {
           font-style: normal;
+          color: $global-font-color;
           background-color: $selection-color;
 
           [theme=dark] & {
+            color: $global-font-color-dark;
             background-color: $selection-color-dark;
           }
         }
@@ -476,7 +478,7 @@ header {
       }
       color: $global-font-secondary-color;
 
-      [theme=dark] {
+      [theme=dark] & {
         color: $global-font-secondary-color-dark;
       }
 

@@ -3,9 +3,19 @@
 $border-color: #f0f0f0;
 $border-color-dark: #363636;
 
+// Colors of the text and links, matching the theme
+$secondary-color: #666670;
+$secondary-color-dark: #a0a0aa;
+$link-color: #1d6f94;
+$link-color-dark: #55bde2;
+$link-hover-color: #c62f6c;
+$link-hover-color-dark: #bdebfc;
+$button-color-dark: #b2b2b5;
+$font-color-dark: #c9c9d0;
+
 // ========== Code ========== //
 // Color of the code
-$code-color: #E74C3C !default;
+$code-color: #c0392b !default;
 $code-color-dark: #E5BF78 !default;
 
 // Color of the code background
@@ -73,6 +83,54 @@ $code-background-color-dark: #272C34 !default;
     [theme=dark] & {
       color: $code-color-dark;
       background: $code-background-color-dark;
+    }
+  }
+
+  // Valine injects its own stylesheet after this one, so these overrides
+  // carry the #valine id to win over its low-contrast defaults.
+  @at-root #valine#{&} {
+    .vpower,
+    .vtime,
+    .vsys {
+      color: $secondary-color;
+
+      [theme=dark] & {
+        color: $secondary-color-dark;
+      }
+    }
+
+    a,
+    .vcards .vcard .vh .vmeta .vat {
+      color: $link-color;
+
+      [theme=dark] & {
+        color: $link-color-dark;
+      }
+    }
+
+    a:hover {
+      color: $link-hover-color;
+
+      [theme=dark] & {
+        color: $link-hover-color-dark;
+      }
+    }
+
+    p,
+    .vinput,
+    .veditor,
+    .vempty,
+    .status-bar {
+      [theme=dark] & {
+        color: $font-color-dark;
+      }
+    }
+
+    .vbtn {
+      [theme=dark] & {
+        color: $button-color-dark;
+        border-color: $button-color-dark;
+      }
     }
   }
 

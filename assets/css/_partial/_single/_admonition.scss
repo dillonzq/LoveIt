@@ -1,4 +1,18 @@
 @use "sass:color";
+@use "sass:math";
+
+// The title sits on the admonition's tint plus the closed title's extra 0.15
+// alpha. Darken (light theme) or lighten (dark theme) its text just enough to
+// stay readable there; the border and icon keep the original color.
+@mixin admonition-title-color($color, $background-color) {
+  $alpha: color.channel($background-color, "alpha");
+  $tint: color.change($background-color, $alpha: math.min(1, $alpha + 0.15));
+  color: readable-color($color, flatten($tint, flatten($background-color, $global-background-color)));
+
+  [theme=dark] & {
+    color: readable-color($color, flatten($tint, flatten($background-color, $global-background-color-dark)));
+  }
+}
 
 .admonition {
   position: relative;
@@ -36,7 +50,7 @@
       border-left-color: $color;
 
       .admonition-title {
-        color: $color;
+        @include admonition-title-color($color, $background-color);
         border-bottom-color: $background-color;
         background-color: color.adjust($background-color, $alpha: 0.15);
       }
@@ -55,7 +69,7 @@
         border-left-color: $color;
 
         .admonition-title {
-          color: $color;
+          @include admonition-title-color($color, $background-color);
           border-bottom-color: $background-color;
           background-color: color.adjust($background-color, $alpha: 0.15);
         }

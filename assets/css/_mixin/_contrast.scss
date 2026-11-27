@@ -1,0 +1,60 @@
+@use "sass:color";
+@use "sass:math";
+
+// WCAG relative luminance of an opaque color.
+@function relative-luminance($color) {
+  $luminance: 0;
+  $weights: ("red": 0.2126, "green": 0.7152, "blue": 0.0722);
+
+  @each $channel, $weight in $weights {
+    $value: math.div(color.channel($color, $channel, $space: rgb), 255);
+
+    @if $value <= 0.04045 {
+      $value: math.div($value, 12.92);
+    } @else {
+      $value: math.pow(math.div($value + 0.055, 1.055), 2.4);
+    }
+    $luminance: $luminance + $value * $weight;
+  }
+
+  @return $luminance;
+}
+
+// WCAG contrast ratio between two opaque colors.
+@function contrast-ratio($a, $b) {
+  $la: relative-luminance($a);
+  $lb: relative-luminance($b);
+  @return math.div(math.max($la, $lb) + 0.05, math.min($la, $lb) + 0.05);
+}
+
+// Paints a translucent color over an opaque background.
+@function flatten($color, $background) {
+  @return color.mix(color.change($color, $alpha: 1), $background, color.channel($color, "alpha") * 100%);
+}
+
+// Mixes $color with black on a light background, or with white on a dark one,
+// just enough to reach $ratio against $background. Keeps the hue of colors that
+// are already readable and fixes ones a site overrides without checking.
+@function readable-color($color, $background, $ratio: 4.5) {
+  $toward: #fff;
+
+  @if relative-luminance($background) > 0.18 {
+    $toward: #000;
+  }
+
+  @for $weight from 0 through 100 {
+    $mixed: color.mix($toward, $color, $weight * 1%);
+    // Round to whole channels so the checked color is the one the browser paints.
+    $candidate: rgb(
+      math.round(color.channel($mixed, "red", $space: rgb)),
+      math.round(color.channel($mixed, "green", $space: rgb)),
+      math.round(color.channel($mixed, "blue", $space: rgb))
+    );
+
+    @if contrast-ratio($candidate, $background) >= $ratio {
+      @return $candidate;
+    }
+  }
+
+  @return $toward;
+}

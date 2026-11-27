@@ -37,6 +37,12 @@
 
     @include link(false, true);
 
+    // Underline links so they stand apart from the meta text by more than color.
+    a {
+      text-decoration: underline;
+      text-underline-offset: .2em;
+    }
+
     .author {
       font-size: 1.05rem;
     }
@@ -148,6 +154,12 @@
     a {
       @include overflow-wrap(break-word);
 
+      // Underline links so they stand apart from body text by more than color.
+      &:not(.lightgallery) {
+        text-decoration: underline;
+        text-underline-offset: .2em;
+      }
+
       [theme=dark] & b, [theme=dark] & strong {
         color: $single-link-color-dark;
       }
@@ -246,7 +258,11 @@
         padding: .5rem;
         margin: 0 auto;
         font-size: .875rem;
-        color: #969696;
+        color: $global-font-secondary-color;
+
+        [theme=dark] & {
+          color: $global-font-secondary-color-dark;
+        }
       }
 
       img {
@@ -266,7 +282,8 @@
 
       [theme=dark] & {
         border-left-color: $blockquote-color-dark;
-        background-color: rgba($blockquote-color-dark, .2);
+        // A lighter tint keeps text in nested quotes readable.
+        background-color: rgba($blockquote-color-dark, .12);
       }
     }
 
