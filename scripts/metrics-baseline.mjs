@@ -191,7 +191,7 @@ export async function findBaseline({ api, git, repository, branch, baseSha, conf
   // Older commits: gather the ancestors on up to `maxPages` pages of every
   // workflow's successful runs before choosing, because a workflow's first page
   // may hold only a distant ancestor while a closer one sits on a later page of
-  // another. Stop early once the base commit's parent is among them.
+  // another. Even the base commit's parent might have no usable artifact.
   const candidates = new Map();
   const distances = new Map();
   for (let page = 1; page <= maxPages; page += 1) {
@@ -202,7 +202,7 @@ export async function findBaseline({ api, git, repository, branch, baseSha, conf
       const distance = distances.get(run.head_sha);
       if (distance !== null) candidates.set(run.id, { run, distance });
     }
-    if (exhausted || [...candidates.values()].some(candidate => candidate.distance <= 1)) break;
+    if (exhausted) break;
   }
   // The closest commit first; for re-runs of one commit, the newest run.
   const ranked = [...candidates.values()].sort((a, b) => a.distance - b.distance

@@ -77,16 +77,16 @@ function checkRules(section, metrics, where, extra = []) {
 
 // Returns the normalized `baseline` section of a budget, or throws.
 export function parseBaselinePolicy(section) {
-  if (!isObject(section ?? {})) throw new Error('baseline: expected an object');
-  const baseline = { ...baselineDefaults, ...(section ?? {}) };
+  if (!isObject(section)) throw new Error('baseline: expected an object');
+  const baseline = { ...baselineDefaults, ...section };
   checkKeys(baseline, Object.keys(baselineDefaults), 'baseline');
   if (!Array.isArray(baseline.workflows) || !baseline.workflows.length
     || !baseline.workflows.every(file => typeof file === 'string' && /^[\w.-]+\.ya?ml$/.test(file))) {
     throw new Error('baseline.workflows: expected a list of workflow file names');
   }
   if (typeof baseline.artifact !== 'string' || !baseline.artifact) throw new Error('baseline.artifact: expected an artifact name');
-  if (!(Number.isFinite(baseline.waitMinutes) && baseline.waitMinutes >= 0 && baseline.waitMinutes <= 60)) {
-    throw new Error('baseline.waitMinutes: expected a number from 0 to 60');
+  if (!(Number.isFinite(baseline.waitMinutes) && baseline.waitMinutes >= 0 && baseline.waitMinutes <= 20)) {
+    throw new Error('baseline.waitMinutes: expected a number from 0 to 20');
   }
   if (!['warn', 'fail'].includes(baseline.missing)) throw new Error('baseline.missing: expected "warn" or "fail"');
   if (baseline.acceptLabel !== null && (typeof baseline.acceptLabel !== 'string' || !baseline.acceptLabel)) {
@@ -100,7 +100,7 @@ export function parseBaselinePolicy(section) {
 export function parseBudget(budget) {
   if (!isObject(budget)) throw new Error('metrics budget: expected a JSON object');
   checkKeys(budget, ['$comment', 'baseline', 'lighthouse', 'axe', 'build', 'repository'], 'metrics budget');
-  const baseline = parseBaselinePolicy(budget.baseline);
+  const baseline = parseBaselinePolicy(budget.baseline ?? {});
   if (budget.axe !== undefined && 'newRules' in (budget.axe ?? {}) && typeof budget.axe.newRules !== 'boolean') {
     throw new Error('axe.newRules: expected true or false');
   }

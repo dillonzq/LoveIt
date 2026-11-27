@@ -216,11 +216,11 @@ to `build/metrics/comparison.md`.
   forks and other branches never count, and nothing from the artifact is run:
   only `summary.json` is read, and it must have every field the current summary
   format has, or the next older run is tried. When the base commit's own run is
-  still in progress, the job waits up to `baseline.waitMinutes` for it, so a
-  pull request updated right after another one is merged compares with the
-  merged state. Otherwise it uses an older master commit and says so in the
-  summary. The `baseline` settings are read from the base commit's
-  `metrics-budget.json`, so a pull request that changes them, unlike the
+  still in progress, the job waits for it up to `baseline.waitMinutes`, capped
+  at 20 minutes. This lets a pull request updated just after another merge
+  compare against the merged state. Otherwise the gate uses an older master
+  commit and names it in the summary. The `baseline` settings come from the
+  base commit's `metrics-budget.json`, so a pull request that changes them, unlike the
   tolerances, does not use its own version. Where the base commit has no such
   file, or its `baseline` settings are invalid, the gate uses built-in settings
   equal to the current ones; a failure to read the file fails the job.

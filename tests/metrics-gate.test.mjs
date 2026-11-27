@@ -235,6 +235,19 @@ test('the closest ancestor wins across pages and workflows', async () => {
   assert.equal(result.distance, 1);
 });
 
+test('an expired artifact on the parent commit does not hide an older baseline on page two', async () => {
+  const firstPage = Array.from({ length: 99 }, (_, index) => run(1000 + index, 'x'));
+  const github = fakeGitHub({
+    runs: [...firstPage, run(12, 'c'), run(14, 'b')],
+    artifacts: { 12: artifact(102, { expired: true }), 14: artifact(104) },
+    zips: { 104: good },
+  });
+  const result = await find(github);
+  assert.equal(result.run.id, 14);
+  assert.equal(result.distance, 2);
+  assert.deepEqual(result.skipped, ['run 12 (ccccccc) has no unexpired "metrics" artifact']);
+});
+
 test('a failed download moves on to the run\'s older artifact', async () => {
   const github = fakeGitHub({ runs: [], exact: [run(13, 'd')], artifacts: { 13: [...artifact(201), ...artifact(203)] }, zips: { 201: good } });
   const result = await find(github);
@@ -266,6 +279,9 @@ test('the base commit\'s baseline settings are validated on their own', () => {
   assert.deepEqual(parseBaselinePolicy({ missing: 'fail' }), { workflows: ['ci.yml'], artifact: 'metrics', waitMinutes: 0, missing: 'fail', acceptLabel: null });
   assert.throws(() => parseBaselinePolicy({ branch: 'feature' }), /baseline: unknown key "branch"/);
   assert.throws(() => parseBaselinePolicy([]), /baseline: expected an object/);
+  assert.throws(() => parseBaselinePolicy(null), /baseline: expected an object/);
+  assert.throws(() => parseBaselinePolicy(undefined), /baseline: expected an object/);
+  assert.throws(() => parseBaselinePolicy({ waitMinutes: 21 }), /baseline\.waitMinutes: expected a number from 0 to 20/);
   // The built-in settings are what the shipped budget asks for.
   assert.deepEqual(parseBaselinePolicy(BOOTSTRAP_BASELINE), budget.baseline);
 });
