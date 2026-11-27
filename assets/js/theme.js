@@ -336,15 +336,6 @@ class Theme {
         });
     }
 
-    initHeaderLink() {
-        for (let num = 1; num <= 6; num++) {
-            Util.forEach(document.querySelectorAll('.single .content > h' + num), $header => {
-                $header.classList.add('headerLink');
-                $header.insertAdjacentHTML('afterbegin', `<a href="#${$header.id}" class="header-mark"></a>`);
-            });
-        }
-    }
-
     initToc() {
         const $tocCore = document.getElementById('TableOfContents');
         if ($tocCore === null) return;
@@ -373,7 +364,7 @@ class Theme {
             $toc.style.visibility = 'visible';
             const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
             const $tocLiElements = $tocCore.getElementsByTagName('li');
-            const $headerLinkElements = document.getElementsByClassName('headerLink');
+            const $headerLinkElements = document.querySelectorAll('.single .content > :is(h1, h2, h3, h4, h5, h6)');
             const headerIsFixed = document.body.getAttribute('data-header-desktop') !== 'normal';
             const headerHeight = document.getElementById('header-desktop').offsetHeight;
             const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
@@ -785,7 +776,6 @@ class Theme {
             this.initDetails();
             this.initLightGallery();
             this.initHighlight();
-            this.initHeaderLink();
             this.initMath();
             this.initMermaid();
             this.initEcharts();

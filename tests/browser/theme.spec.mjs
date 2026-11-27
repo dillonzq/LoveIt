@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { AxeBuilder } from '@axe-core/playwright';
 
 async function openSearch(page, engine, language = '') {
   await page.goto(`/${engine}/blog/${language}`);
@@ -577,4 +578,53 @@ test('home page and its feed list the posts section and pages typed "posts" or "
   expect(feed).toContain('<title>Posts type elsewhere</title>');
   expect(feed).toContain('<title>Post type elsewhere</title>');
   expect(feed).not.toContain('<title>Plain note</title>');
+});
+
+test.describe('heading anchors without JavaScript', () => {
+  test.use({ javaScriptEnabled: false });
+
+  test('are built into article headings, named by them and keep their formatting', async ({ page }) => {
+    await page.goto('/fuse/blog/headings/');
+    const content = page.locator('#content');
+    const anchors = content.locator('> :is(h2, h3, h4, h5, h6) > a.header-mark');
+    await expect(anchors).toHaveCount(4);
+    for (const [id, name] of [
+      ['plain-section', 'Plain section'],
+      ['section-with-code-and-emphasis', 'Section with code and emphasis'],
+      ['custom-id', 'Custom attributes'],
+      ['last-section', 'Last section'],
+    ]) {
+      const anchor = content.locator(`#${id} > a.header-mark`);
+      await expect(anchor).toBeVisible();
+      await expect(anchor).toHaveAttribute('href', `#${id}`);
+      await expect(anchor).toHaveAccessibleName(name);
+      // The decorative "#" or "|" mark stays out of the heading's own name.
+      await expect(content.getByRole('heading', { name, exact: true })).toHaveAttribute('id', id);
+    }
+    const formatted = content.locator('#section-with-code-and-emphasis');
+    await expect(formatted.locator('code')).toHaveText('code');
+    await expect(formatted.locator('em')).toHaveText('emphasis');
+    await expect(content.locator('#custom-id')).toHaveClass('custom-class');
+    // Headings the theme never marked keep no visible or focusable anchor.
+    await expect(content.locator('#top-level-heading > a.header-mark')).toBeHidden();
+    await expect(content.locator('.admonition #nested-heading > a.header-mark')).toBeHidden();
+
+    await content.locator('#last-section > a.header-mark').click();
+    await expect(page).toHaveURL(/\/headings\/#last-section$/);
+  });
+
+  test('stay out of the feed and the Markdown output', async ({ request }) => {
+    const feed = await (await request.get('/fuse/blog/index.xml')).text();
+    expect(feed).toContain('<h2 id="plain-section">Plain section</h2>');
+    expect(feed).not.toContain('header-mark');
+    const markdown = await (await request.get('/fuse/blog/headings/index.md')).text();
+    expect(markdown).toContain('## Plain section');
+    expect(markdown).not.toContain('header-mark');
+  });
+});
+
+test('every link on an article with heading anchors has an accessible name', async ({ page }) => {
+  await page.goto('/fuse/blog/headings/');
+  const { violations } = await new AxeBuilder({ page }).withRules(['link-name']).analyze();
+  expect(violations).toEqual([]);
 });

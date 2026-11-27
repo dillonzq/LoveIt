@@ -98,13 +98,25 @@
       }
     }
 
+    // Markdown headings carry their anchor link from the build. It shows only
+    // on the article's own h2-h6, as before; elsewhere it is not rendered.
+    .header-mark {
+      display: none;
+    }
+
     > h2,
     > h3,
     > h4,
     > h5,
     > h6 {
+      > .header-mark {
+        display: inline;
+      }
+
       > .header-mark::before {
         content: "|";
+        // The mark is decoration: keep it out of the heading's accessible name.
+        content: "|" / "";
         margin-right: .3125rem;
         color: $single-link-color;
 
@@ -116,6 +128,7 @@
 
     > h2 > .header-mark::before {
       content: "#";
+      content: "#" / "";
     }
 
     p {

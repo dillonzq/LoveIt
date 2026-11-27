@@ -12,6 +12,17 @@ This file starts at 0.4.0. Older releases are described on the
 
 ## [Unreleased]
 
+### Changed
+
+- Heading anchor links are built into the page by a Markdown render hook
+  (`_markup/render-heading.html`) instead of being added by JavaScript, so
+  they work without JavaScript. Each link is named by its heading for screen
+  readers, and the `#` or `|` mark is no longer read as part of the heading.
+  Feeds have no anchor links. Headings no longer get the `headerLink` class;
+  custom CSS or scripts that use it can select `.single .content > h2`
+  (and other levels) instead. A site with its own `render-heading` hook keeps
+  it and gets no anchor links.
+
 ## [0.4.1] - 2026-11-27
 
 Hugo 0.146.0 or later and Dart Sass are still required.
