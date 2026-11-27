@@ -850,6 +850,7 @@ enableEmoji = true
     data = "jsdelivr.yml"
 
   # {{< version 0.2.8 >}} Compatibility config
+  # {{< version 0.5.0 deprecated >}} see [Deprecated Options](#deprecated-options)
   [params.compatibility]
     # whether to use the Polyfill service (cdnjs) to be compatible with older browsers
     polyfill = false
@@ -1370,3 +1371,26 @@ Check the following when you upgrade from **LoveIt 0.3.X** to **0.4.X**.
 * [Content-Security-Policy](#site-configuration) meta tag (`[params.security]`)
 * Server-side rendering of mathematical formulas, Markdown table and blockquote alert render hooks
 * Extra text below the subtitle of the home page profile (`extra` in `[params.home.profile]`)
+
+## 7 Deprecated Options {#deprecated-options}
+
+{{< version 0.5.0 >}}
+
+When your site configuration uses a deprecated option, `hugo` prints a warning once per build like the one below.
+The option still works until it is removed, and the build does not fail unless you build with `--panicOnWarning`.
+To keep such a build passing while you migrate, add the ID from the warning to `ignoreLogs`.
+
+```plain
+WARN  LoveIt: "params.compatibility.polyfill" is deprecated since v0.5.0 and will be removed in v0.7.0. ...
+You can suppress this warning by adding the following to your site configuration:
+ignoreLogs = ['loveit-deprecated-params-compatibility-polyfill']
+```
+
+An option counts as used when it is set to a value other than `false` or an empty string,
+so the `false` defaults copied from the theme configuration do not warn.
+
+| Option | Deprecated in | Removed in | What to do |
+|:-------|:-------------:|:----------:|:-----------|
+| `params.compatibility.polyfill` | 0.5.0 | 0.7.0 | Remove it. Browsers supported by the theme do not need the Polyfill service. |
+| `params.compatibility.objectFit` | 0.5.0 | 0.7.0 | Remove it. Browsers supported by the theme support `object-fit` natively. |
+| `params.cdn.autocompleteJS` | 0.5.0 | 0.7.0 | Remove it. The search box will no longer use autocomplete.js. |

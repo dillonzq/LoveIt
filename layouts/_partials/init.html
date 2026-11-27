@@ -1,5 +1,8 @@
 {{- .Scratch.Set "version" (partial "loveit/version.html" .) -}}
 
+{{- /* Warns about deprecated keys once per site and language. */ -}}
+{{- $_ := partialCached "function/config.html" .Site .Site.Language.Lang -}}
+
 {{- $params := partial "function/params.html" . -}}
 
 {{- if eq hugo.Environment "production" -}}

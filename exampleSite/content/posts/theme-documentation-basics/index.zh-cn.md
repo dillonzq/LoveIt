@@ -851,6 +851,7 @@ enableEmoji = true
     data = "jsdelivr.yml"
 
   # {{< version 0.2.8 >}} 兼容性设置
+  # {{< version 0.5.0 deprecated >}} 参见 [弃用的配置](#deprecated-options)
   [params.compatibility]
     # 是否使用 Polyfill 服务 (cdnjs) 来兼容旧式浏览器
     polyfill = false
@@ -1367,3 +1368,25 @@ npx pagefind --site public --output-subdir _pagefind --serve
 * [Content-Security-Policy](#site-configuration) meta 标签 (`[params.security]`)
 * 数学公式的服务端渲染, Markdown 表格和引用块提示 (alert) 的渲染钩子
 * 主页个人信息副标题下方的额外文本 (`[params.home.profile]` 中的 `extra`)
+
+## 7 弃用的配置 {#deprecated-options}
+
+{{< version 0.5.0 >}}
+
+当网站配置使用了弃用的配置项时, `hugo` 每次构建会打印一次如下警告.
+在移除之前该配置项仍然有效, 除非使用 `--panicOnWarning` 构建, 否则构建不会失败.
+迁移期间如需让这类构建通过, 可将警告中的 ID 加入 `ignoreLogs`.
+
+```plain
+WARN  LoveIt: "params.compatibility.polyfill" 已于 v0.5.0 弃用, 将在 v0.7.0 移除. ...
+You can suppress this warning by adding the following to your site configuration:
+ignoreLogs = ['loveit-deprecated-params-compatibility-polyfill']
+```
+
+配置项的值不是 `false` 或空字符串时才算使用, 因此从主题配置中复制的 `false` 默认值不会产生警告.
+
+| 配置项 | 弃用于 | 移除于 | 处理方式 |
+|:-------|:------:|:------:|:---------|
+| `params.compatibility.polyfill` | 0.5.0 | 0.7.0 | 删除该配置. 主题支持的浏览器不需要 Polyfill 服务. |
+| `params.compatibility.objectFit` | 0.5.0 | 0.7.0 | 删除该配置. 主题支持的浏览器原生支持 `object-fit`. |
+| `params.cdn.autocompleteJS` | 0.5.0 | 0.7.0 | 删除该配置. 搜索框将不再使用 autocomplete.js. |

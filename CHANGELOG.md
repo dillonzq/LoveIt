@@ -20,6 +20,12 @@ This file starts at 0.4.0. Older releases are described on the
 - The "Read More" link of each post summary names its post: screen readers
   hear a localized label such as "Read More: Post title", and search engines
   see the title in visually hidden link text.
+- A build warning, printed once per build, when the site configuration uses a
+  deprecated option. Each warning names the version that removes the option
+  and links to the
+  [Deprecated Options](https://hugoloveit.com/theme-documentation-basics/#deprecated-options)
+  section of the documentation. Builds with `--panicOnWarning` fail; add the
+  ID shown in the warning to `ignoreLogs` to silence it.
 
 ### Changed
 
@@ -36,6 +42,12 @@ This file starts at 0.4.0. Older releases are described on the
   `mermaidSecurityLevel = "loose"` (exactly) in `[params.security]` if you
   trust your diagram sources and need these features. Invalid values produce
   a build warning and fall back to `strict`.
+
+### Deprecated
+
+- `params.compatibility.polyfill`, `params.compatibility.objectFit` and
+  `params.cdn.autocompleteJS`. They still work and will be removed in 0.7.0.
+  Setting them to `false` or `""` does not warn.
 
 ## [0.4.1] - 2026-11-27
 
