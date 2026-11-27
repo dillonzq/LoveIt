@@ -1,5 +1,5 @@
 // Pure helpers that turn Lighthouse, axe-core and build output into the
-// baseline metrics summary. Kept separate from scripts/metrics.mjs so they can
+// metrics summary. Kept separate from scripts/metrics.mjs so they can
 // be unit tested without a browser.
 
 const categories = ['performance', 'accessibility', 'best-practices', 'seo'];
@@ -61,7 +61,7 @@ const ms = value => value === null ? '–' : `${Math.round(value)} ms`;
 const score = value => value === null ? '–' : String(value);
 
 export function renderMarkdown(summary) {
-  const lines = ['## Baseline metrics', ''];
+  const lines = ['## Metrics', ''];
   if (summary.lighthouse?.length) {
     lines.push(
       `### Lighthouse (mobile, representative of ${summary.lighthouseRuns} runs)`, '',
@@ -89,6 +89,6 @@ export function renderMarkdown(summary) {
   if (summary.repository) {
     lines.push(`- \`assets/lib\`: ${(summary.repository.assetsLib.bytes / 1024 / 1024).toFixed(1)} MiB in ${summary.repository.assetsLib.files} files`);
   }
-  lines.push('', 'Recorded only; no thresholds are enforced yet.', '');
+  lines.push('');
   return lines.join('\n');
 }
