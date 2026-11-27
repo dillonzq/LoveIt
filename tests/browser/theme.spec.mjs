@@ -524,12 +524,19 @@ test('local images get their size, WebP srcset and native lazy loading; others a
     await expect(image).not.toHaveAttribute('width');
     await expect(image).toHaveAttribute('loading', 'lazy');
   }
-  // A PNG's Exif orientation is read on Hugo 0.155.3 and later (.Meta); either way its size and copy agree.
+  // Hugo reads a PNG's Exif orientation from 0.155.0 (.Meta); before that, only JPEG and TIFF orientation.
+  const hugoVersion = process.env.LOVEIT_HUGO_VERSION || 'locked';
+  const readsPngOrientation = !(hugoVersion === 'minimum' || /^v?0\.(?:\d{1,2}|1[0-4]\d|15[0-4])\./.test(hugoVersion));
   const png = images.nth(4);
-  const pngSize = [await png.getAttribute('width'), await png.getAttribute('height')];
-  expect([['40', '60'], ['60', '40']]).toContainEqual(pngSize);
-  await expect(png).toHaveAttribute('srcset', new RegExp(`^\\S+\\.webp ${pngSize[0]}w$`));
+  const [pngWidth, pngHeight] = readsPngOrientation ? ['40', '60'] : ['60', '40'];
+  await expect(png).toHaveAttribute('width', pngWidth);
+  await expect(png).toHaveAttribute('height', pngHeight);
+  await expect(png).toHaveAttribute('srcset', new RegExp(`^\\S+\\.webp ${pngWidth}w$`));
+  await png.scrollIntoViewIfNeeded();
+  await expect.poll(() => png.evaluate(img => img.complete && [img.currentSrc.endsWith('.webp'), Math.round(img.naturalHeight / img.naturalWidth * 10) / 10]))
+    .toEqual([true, readsPngOrientation ? 1.5 : 0.7]);
   // Animated PNG and WebP keep their animation: their size, but no WebP copies.
+  // The APNG has a text chunk that mentions IDAT and acTL before its real acTL chunk.
   for (const [index, size] of [[5, ['60', '40']], [6, ['160', '33']]]) {
     const image = images.nth(index);
     await expect(image).toHaveAttribute('src', /\/image-processing\/animated\.(png|webp)$/);
@@ -540,6 +547,12 @@ test('local images get their size, WebP srcset and native lazy loading; others a
   // A width of 0 counts as missing.
   await expect(images.nth(7)).toHaveAttribute('width', '400');
   await expect(images.nth(7)).toHaveAttribute('height', '600');
+  // An oriented JPEG Hugo cannot decode keeps its size and is used as it is, without failing the build.
+  const broken = images.nth(8);
+  await expect(broken).toHaveAttribute('src', /\/image-processing\/broken\.jpg$/);
+  await expect(broken).toHaveAttribute('width', '400');
+  await expect(broken).toHaveAttribute('height', '600');
+  await expect(broken).not.toHaveAttribute('srcset');
 
   // The bundle's featured image is the first-screen image: loaded at once with a high priority.
   const featured = page.locator('.featured-image img');

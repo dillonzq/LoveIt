@@ -30,3 +30,7 @@ Animated PNG and WebP keep their animation, so they get no WebP copies.
 A width of 0 counts as missing.
 
 {{< image src="rotated.jpg" alt="Zero" width="0" linked=false >}}
+
+A JPEG with Exif orientation 6 whose image data is cut short keeps its size and is used as it is.
+
+![Broken](broken.jpg)

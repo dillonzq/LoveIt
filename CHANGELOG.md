@@ -75,7 +75,7 @@ This file starts at 0.4.0. Older releases are described on the
   get a `srcset` of WebP copies 480 and 960 pixels wide with `sizes`. The
   original file stays the `src`, the last `srcset` candidate when it is
   wider, and the lightGallery full-size image. Images are rotated as their
-  Exif orientation says (JPEG and TIFF only before Hugo 0.155.3). GIF, BMP
+  Exif orientation says (JPEG and TIFF only before Hugo 0.155.0). GIF, BMP
   and TIFF images, animated PNG and WebP images and images Hugo cannot
   decode only get their size; SVG, files under `static/` and remote URLs are
   used as they are. The home page avatar can also be a resource of the home

@@ -35,16 +35,21 @@
     {{- $type := .MediaType.SubType -}}
     {{- if eq .ResourceType "image" | and (in (slice "jpeg" "png" "webp" "gif" "bmp" "tiff") $type) -}}
         {{- /* The browser applies the Exif orientation to the original; Hugo does not when it resizes. */ -}}
+        {{- /* Unreadable metadata counts as no orientation. */ -}}
         {{- $orientation := 1 -}}
-        {{- if ge hugo.Version "0.155.3" -}}
+        {{- if ge hugo.Version "0.155.0" -}}
             {{- if in (slice "jpeg" "png" "webp" "tiff") $type -}}
-                {{- with .Meta -}}
-                    {{- $orientation = .Orientation | default 1 -}}
+                {{- with try .Meta -}}
+                    {{- with .Value -}}
+                        {{- $orientation = .Orientation | default 1 -}}
+                    {{- end -}}
                 {{- end -}}
             {{- end -}}
         {{- else if in (slice "jpeg" "tiff") $type -}}
-            {{- with .Exif -}}
-                {{- $orientation = index .Tags "Orientation" | default 1 -}}
+            {{- with try .Exif -}}
+                {{- with .Value -}}
+                    {{- $orientation = index .Tags "Orientation" | default 1 -}}
+                {{- end -}}
             {{- end -}}
         {{- end -}}
         {{- $orientation = int $orientation -}}
@@ -74,19 +79,52 @@
         {{- $width = $width | default $imageWidth -}}
         {{- $height = $height | default $imageHeight -}}
 
-        {{- /* Animated PNG and WebP keep only their size, like GIF: WebP copies would be still or fail to decode. */ -}}
-        {{- $animated := false -}}
-        {{- if eq $type "png" -}}
-            {{- $animated = strings.Contains (index (split .Content "IDAT") 0) "acTL" -}}
-        {{- else if eq $type "webp" -}}
-            {{- $animated = strings.Contains (index (split (index (split .Content "VP8 ") 0) "VP8L") 0) "ANIM" -}}
+        {{- /* WebP encoding needs the extended edition before Hugo 0.153.0. */ -}}
+        {{- $process := and $widths (in (slice "jpeg" "png" "webp") $type) (or hugo.IsExtended (ge hugo.Version "0.153.0")) -}}
+
+        {{- /*
+            Animated PNG and WebP keep only their size, like GIF: WebP copies would be still or fail
+            to decode. The first bytes are read as hex: an APNG has an acTL chunk before its first
+            IDAT chunk; an animated WebP has the animation flag (0x02) in its VP8X chunk.
+        */ -}}
+        {{- if and $process (eq $type "png") -}}
+            {{- $hex := printf "%.65536x" .Content -}}
+            {{- $offset := 16 -}}
+            {{- range seq 64 -}}
+                {{- if gt (add $offset 16) (len $hex) -}}
+                    {{- break -}}
+                {{- end -}}
+                {{- $chunk := substr $hex (add $offset 8) 8 -}}
+                {{- if eq $chunk "6163544c" -}}
+                    {{- $process = false -}}
+                    {{- break -}}
+                {{- else if eq $chunk "49444154" -}}
+                    {{- break -}}
+                {{- end -}}
+                {{- $offset = printf "0x%s" (substr $hex $offset 8) | int | mul 2 | add 24 | add $offset -}}
+            {{- end -}}
+        {{- else if and $process (eq $type "webp") -}}
+            {{- $hex := printf "%.21x" .Content -}}
+            {{- if and (eq (len $hex) 42) (eq (substr $hex 24 8) "56503858") -}}
+                {{- $flags := printf "0x%s" (substr $hex 40 2) | int -}}
+                {{- if eq (mod (div $flags 2) 2) 1 -}}
+                    {{- $process = false -}}
+                {{- end -}}
+            {{- end -}}
         {{- end -}}
 
-        {{- /* WebP encoding needs the extended edition before Hugo 0.153.0. */ -}}
-        {{- if in (slice "jpeg" "png" "webp") $type | and (not $animated) (or hugo.IsExtended (ge hugo.Version "0.153.0")) -}}
+        {{- if $process -}}
+            {{- /* An image Hugo cannot decode keeps only its size instead of failing the build. */ -}}
             {{- $image := . -}}
+            {{- $failed := false -}}
             {{- if gt $orientation 1 -}}
-                {{- $image = $image.Filter images.AutoOrient -}}
+                {{- with try ($image.Filter images.AutoOrient) -}}
+                    {{- if .Err -}}
+                        {{- $failed = true -}}
+                    {{- else -}}
+                        {{- $image = .Value -}}
+                    {{- end -}}
+                {{- end -}}
             {{- end -}}
             {{- /* Copies narrower than the image, plus one at its own width when a width reaches it. */ -}}
             {{- $copies := slice -}}
@@ -99,9 +137,10 @@
             {{- if $covered -}}
                 {{- $copies = $copies | append $imageWidth -}}
             {{- end -}}
-            {{- /* An image Hugo cannot decode keeps only its size instead of failing the build. */ -}}
-            {{- $failed := false -}}
             {{- range sort ($copies | uniq) -}}
+                {{- if $failed -}}
+                    {{- break -}}
+                {{- end -}}
                 {{- with try ($image.Resize (printf "%dx webp" .)) -}}
                     {{- if .Err -}}
                         {{- $failed = true -}}
