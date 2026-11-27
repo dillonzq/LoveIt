@@ -1,0 +1,15 @@
+{{- /* Renders a Markdown heading. With "Anchor", a non-empty heading with an ID starts with a link to itself. The link is named by the heading, so it needs no JavaScript or translation. */ -}}
+{{- $anchor := .Context.Anchor -}}
+<h{{ .Context.Level }}
+    {{- with $anchor }} id="{{ . }}"{{ end }}
+    {{- range $k, $v := .Context.Attributes }}
+        {{- if ne $k "id" }}{{ printf ` %s="%s"` $k (string $v | htmlEscape) | safeHTMLAttr }}{{ end -}}
+    {{- end }}>
+    {{- /* An empty heading would give its link no name. */ -}}
+    {{- if and .Anchor $anchor (findRE `[^\s\p{Z}\x{0085}\x{000B}]` (htmlUnescape .Context.PlainText) 1) -}}
+        {{- $label := printf "%s:%s" .Context.Page.Path $anchor | sha256 | printf "loveit-heading-%s" -}}
+        <a href="#{{ $anchor }}" class="header-mark" aria-labelledby="{{ $label }}"></a><span id="{{ $label }}">{{ .Context.Text }}</span>
+    {{- else -}}
+        {{- .Context.Text -}}
+    {{- end -}}
+</h{{ .Context.Level }}>

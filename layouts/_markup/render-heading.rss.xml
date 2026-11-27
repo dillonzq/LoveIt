@@ -1,0 +1,2 @@
+{{- /* Feeds get plain headings: no anchor link that only works on the article page. */ -}}
+{{- dict "Context" . "Anchor" false | partial "plugin/heading.html" -}}

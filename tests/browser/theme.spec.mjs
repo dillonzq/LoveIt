@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { AxeBuilder } from '@axe-core/playwright';
 
 async function openSearch(page, engine, language = '') {
   await page.goto(`/${engine}/blog/${language}`);
@@ -606,6 +607,96 @@ test('home page and its feed list the posts section and pages typed "posts" or "
   expect(feed).toContain('<title>Post type elsewhere</title>');
   expect(feed).not.toContain('<title>Plain note</title>');
 });
+
+test.describe('heading anchors without JavaScript', () => {
+  test.use({ javaScriptEnabled: false });
+
+  test('are built into article headings, named by them and keep their formatting', async ({ page }) => {
+    await page.goto('/fuse/blog/headings/');
+    const content = page.locator('.content#content');
+    const anchors = content.locator('> :is(h2, h3, h4, h5, h6) > a.header-mark');
+    await expect(anchors).toHaveCount(5);
+    for (const [id, name] of [
+      ['plain-section', 'Plain section'],
+      ['section-with-code-and-emphasis', 'Section with code and emphasis'],
+      ['custom-id', 'Custom attributes'],
+      ['content', 'Content'],
+      ['last-section', 'Last section'],
+    ]) {
+      const anchor = content.locator(`#${id} > a.header-mark`);
+      await expect(anchor).toBeVisible();
+      await expect(anchor).toHaveAttribute('href', `#${id}`);
+      await expect(anchor).toHaveAccessibleName(name);
+      // The decorative "#" or "|" mark stays out of the heading's own name.
+      await expect(content.getByRole('heading', { name, exact: true })).toHaveAttribute('id', id);
+    }
+    const formatted = content.locator('#section-with-code-and-emphasis');
+    await expect(formatted.locator('code')).toHaveText('code');
+    await expect(formatted.locator('em')).toHaveText('emphasis');
+    const custom = content.locator('#custom-id');
+    await expect(custom).toHaveClass('custom-class');
+    await expect(custom).toHaveAttribute('data-count', '42');
+    await expect(custom).toHaveAttribute('title', 'Say "hi" & <go>');
+    // Headings the theme never marked keep no visible or focusable anchor.
+    await expect(content.locator('#top-level-heading > a.header-mark')).toBeHidden();
+    await expect(content.locator('.admonition #nested-heading > a.header-mark')).toBeHidden();
+    // An empty heading keeps its ID but gets no unnamed link. It sits in the admonition to stay out of the TOC.
+    await expect(content.locator('h5#divider')).toBeAttached();
+    await expect(content.locator('#divider > a')).toHaveCount(0);
+    await expect(content.locator('h5#space-divider')).toBeAttached();
+    await expect(content.locator('#space-divider > a')).toHaveCount(0);
+    await expect(content.locator('h5#formatted-space-divider')).toBeAttached();
+    await expect(content.locator('#formatted-space-divider > a')).toHaveCount(0);
+
+    await content.locator('#last-section > a.header-mark').click();
+    await expect(page).toHaveURL(/\/headings\/#last-section$/);
+  });
+
+  test('stay out of the feed and the Markdown output', async ({ request }) => {
+    const feed = await (await request.get('/fuse/blog/index.xml')).text();
+    expect(feed).toContain('<h2 id="plain-section">Plain section</h2>');
+    expect(feed).not.toContain('header-mark');
+    const markdown = await (await request.get('/fuse/blog/headings/index.md')).text();
+    expect(markdown).toContain('## Plain section');
+    expect(markdown).not.toContain('header-mark');
+  });
+});
+
+test('every link on an article with heading anchors has an accessible name', async ({ page }) => {
+  await page.goto('/fuse/blog/headings/');
+  const { violations } = await new AxeBuilder({ page }).withRules(['link-name']).analyze();
+  expect(violations).toEqual([]);
+});
+
+for (const missing of [false, true]) {
+  test(`the auto TOC follows the article headings it links to${missing ? ', skipping links without a heading' : ''}`, async ({ page }) => {
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    // With autoHeadingID off, Hugo links headings that have no ID to "#".
+    if (missing) {
+      await page.route('**/fuse/blog/headings/', async route => {
+        const response = await route.fetch();
+        const body = (await response.text()).replace(/<a href=["']?#(plain-section|section-with-code-and-emphasis)["']?>/g, '<a href="#">');
+        await route.fulfill({ response, body });
+      });
+    }
+    await page.setViewportSize({ width: 1280, height: 400 });
+    await page.goto('/fuse/blog/headings/');
+    const content = page.locator('#toc-content-auto');
+    await expect(page.locator('#toc-auto')).toBeVisible();
+    if (missing) await expect(content.locator('a[href="#"]')).toHaveCount(2);
+    const sections = [['custom-id', 'Custom attributes'], ['content', 'Content'], ['last-section', 'Last section']];
+    if (!missing) sections.unshift(['plain-section', 'Plain section']);
+    for (const [id, name] of sections) {
+      await page.locator(`.content :is(h2, h3)[id="${id}"]`).evaluate(heading => {
+        const top = heading.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: top - 10, behavior: 'instant' });
+      });
+      await expect(content.locator('a.active')).toHaveText(name);
+    }
+    expect(errors).toEqual([]);
+  });
+}
 
 test('Read More links name their post, microdata uses https and summaries keep it', async ({ page }) => {
   await page.goto('/fuse/blog/');
