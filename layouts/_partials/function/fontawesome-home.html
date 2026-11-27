@@ -25,7 +25,9 @@
     {{- end -}}
     {{- range $pages -}}
         {{- $params := partial "function/params.html" . -}}
-        {{- if dict "Content" (.Summary | default .Description) "Fontawesome" $params.fontawesome | partial "function/fontawesome-markup.html" -}}
+        {{- /* summary.html shows the summary (or description) and the author as HTML */ -}}
+        {{- $html := printf "%v\n%v" (.Summary | default .Description) ($params.author | default .Site.Params.Author.name) -}}
+        {{- if dict "Content" $html "Fontawesome" $params.fontawesome | partial "function/fontawesome-markup.html" -}}
             {{- $need = true -}}
             {{- break -}}
         {{- end -}}

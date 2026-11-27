@@ -224,6 +224,10 @@ test('theme icons are inline SVG and only content that uses Font Awesome loads i
   await page.goto('/fuse/blog/raw-icon/');
   await expect(page.locator('link[href*="fontawesome"]')).not.toHaveCount(0);
   await expect(page.locator('#content i.fas.fa-anchor')).toBeVisible();
+
+  // So does a byline whose author name uses a Font Awesome class.
+  await page.goto('/fuse/blog/author-icon/');
+  await expect(page.locator('link[href*="fontawesome"]')).not.toHaveCount(0);
 });
 
 for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/', dir: 'rtl' }]) {

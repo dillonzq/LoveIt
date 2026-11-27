@@ -12,6 +12,8 @@
     {{- $html = $html | append (partialCached "function/icons.html" (string .Pre) (string .Pre)) (partialCached "function/icons.html" (string .Post) (string .Post)) -}}
 {{- end -}}
 {{- with .Params.footer -}}
-    {{- $html = $html | append (string .custom) (string .license) (string .icp) -}}
+    {{- if ne .enable false -}}
+        {{- $html = $html | append (string .custom) (string .license) (string .icp) -}}
+    {{- end -}}
 {{- end -}}
 {{- return partial "function/fontawesome-markup.html" (dict "Content" (delimit $html "\n")) -}}
