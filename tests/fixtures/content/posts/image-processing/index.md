@@ -34,3 +34,11 @@ A width of 0 counts as missing.
 A JPEG with Exif orientation 6 whose image data is cut short keeps its size and is used as it is.
 
 ![Broken](broken.jpg)
+
+A JPEG truncated before its size can be read keeps the original URL and any explicit dimensions.
+
+{{< image src="truncated.jpg" alt="Truncated JPEG" width="120" linked=false >}}
+
+An APNG with a large metadata chunk before its animation control stays animated.
+
+![APNG with metadata](animated-metadata.png)

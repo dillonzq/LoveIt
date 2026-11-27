@@ -5,6 +5,8 @@
         {{- $avatar = md5 . | printf "https://www.gravatar.com/avatar/%v?s=240&d=mp" -}}
     {{- end -}}
     {{- if $avatar -}}
+        {{- $sizes := cond (ne .Site.Params.home.posts.enable false) "6rem" "8rem" -}}
+        {{- $image := dict "Src" $avatar "Resources" .Resources "Eager" true "Sizes" $sizes "Widths" (slice 160 320 480) -}}
         <div class="home-avatar">
             {{- $menus := $.Site.Menus.main | default slice -}}
             {{- with index $menus 0 -}}
@@ -13,10 +15,10 @@
                     {{- $url = .RelPermalink -}}
                 {{- end -}}
                 <a href="{{ $url }}"{{ with .Title | default .Name }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end }}>
-                    {{- dict "Src" $avatar "Resources" $.Resources "Eager" true "Sizes" "8rem" "Widths" (slice 160 320 480) | partial "plugin/img.html" -}}
+                    {{- partial "plugin/img.html" $image -}}
                 </a>
             {{- else -}}
-                {{- dict "Src" $avatar "Resources" $.Resources "Eager" true "Sizes" "8rem" "Widths" (slice 160 320 480) | partial "plugin/img.html" -}}
+                {{- partial "plugin/img.html" $image -}}
             {{- end -}}
         </div>
     {{- end -}}

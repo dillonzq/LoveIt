@@ -33,7 +33,14 @@
 {{- with dict "Path" $src "Resources" .Resources | partial "function/resource.html" -}}
     {{- $src = .RelPermalink -}}
     {{- $type := .MediaType.SubType -}}
+    {{- $dimensions := dict -}}
     {{- if eq .ResourceType "image" | and (in (slice "jpeg" "png" "webp" "gif" "bmp" "tiff") $type) -}}
+        {{- with (try (dict "Width" .Width "Height" .Height)).Value -}}
+            {{- $dimensions = . -}}
+        {{- end -}}
+    {{- end -}}
+    {{- /* An unreadable header leaves the original URL and caller-supplied dimensions. */ -}}
+    {{- if and $dimensions.Width $dimensions.Height -}}
         {{- /* The browser applies the Exif orientation to the original; Hugo does not when it resizes. */ -}}
         {{- /* Unreadable metadata counts as no orientation. */ -}}
         {{- $orientation := 1 -}}
@@ -53,11 +60,11 @@
             {{- end -}}
         {{- end -}}
         {{- $orientation = int $orientation -}}
-        {{- $imageWidth := .Width -}}
-        {{- $imageHeight := .Height -}}
+        {{- $imageWidth := $dimensions.Width -}}
+        {{- $imageHeight := $dimensions.Height -}}
         {{- if ge $orientation 5 -}}
-            {{- $imageWidth = .Height -}}
-            {{- $imageHeight = .Width -}}
+            {{- $imageWidth = $dimensions.Height -}}
+            {{- $imageHeight = $dimensions.Width -}}
         {{- end -}}
 
         {{- /* Fill in a missing dimension from the aspect ratio when the other one is a number of pixels; 0 counts as missing. */ -}}
@@ -90,15 +97,17 @@
         {{- if and $process (eq $type "png") -}}
             {{- $hex := printf "%.65536x" .Content -}}
             {{- $offset := 16 -}}
+            {{- /* Only process when the scan confirms that image data starts before acTL. */ -}}
+            {{- $process = false -}}
             {{- range seq 64 -}}
                 {{- if gt (add $offset 16) (len $hex) -}}
                     {{- break -}}
                 {{- end -}}
                 {{- $chunk := substr $hex (add $offset 8) 8 -}}
                 {{- if eq $chunk "6163544c" -}}
-                    {{- $process = false -}}
                     {{- break -}}
                 {{- else if eq $chunk "49444154" -}}
+                    {{- $process = true -}}
                     {{- break -}}
                 {{- end -}}
                 {{- $offset = printf "0x%s" (substr $hex $offset 8) | int | mul 2 | add 24 | add $offset -}}
