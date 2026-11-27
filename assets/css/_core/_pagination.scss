@@ -9,12 +9,16 @@
 
   a {
     font-size: .8rem;
-    color: #bfbfbf;
+    color: $global-font-secondary-color;
     letter-spacing: .1rem;
     font-weight: 700;
     padding: 5px 5px;
     text-decoration: none;
     @include transition(0.3s);
+
+    [theme=dark] & {
+      color: $global-font-secondary-color-dark;
+    }
   }
 
   li {

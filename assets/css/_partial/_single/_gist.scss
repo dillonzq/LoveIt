@@ -24,6 +24,7 @@
     @include link(false, false);
 
     [theme=dark] & {
+      color: $global-font-secondary-color-dark;
       background-color: color.adjust($code-background-color-dark, $lightness: -5%, $space: hsl);
     }
   }
@@ -58,7 +59,7 @@
     .pl-c,
     .pl-c span,
     .pl-pdc {
-      color: #5b6270;
+      color: #7c818d;
       font-style: italic;
     }
     .pl-sr .pl-cce {
@@ -76,7 +77,7 @@
     }
     .pl-ens,
     .pl-vi {
-      color: #be5046;
+      color: #c6655c;
     }
     .pl-enti,
     .pl-mai .pl-sf,
@@ -133,13 +134,15 @@
     }
     .pl-ib {
       background: #df6b75;
+      color: #141414;
     }
     .pl-ii {
       background: #e0c184;
-      color: #fff;
+      color: #141414;
     }
     .pl-iu {
       background: #e05151;
+      color: #141414;
     }
     .pl-ms1 {
       color: #aab1bf;

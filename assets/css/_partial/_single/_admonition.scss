@@ -1,4 +1,28 @@
 @use "sass:color";
+@use "sass:math";
+
+// The title sits on the admonition's tint plus its own: the same tint when
+// open, 0.15 more alpha when closed. Darken (light theme) or lighten (dark
+// theme) its text just enough to stay readable on both; the border and icon
+// keep the configured color. 4.6 leaves headroom for the rounding browsers
+// and checkers apply when they blend the translucent layers.
+@function admonition-title-backgrounds($background-color, $page-background) {
+  @if not is-sass-color($background-color) {
+    @return (null,);
+  }
+
+  $box: flatten($background-color, $page-background);
+  $closed: color.change($background-color, $alpha: math.min(1, color.channel($background-color, "alpha") + 0.15));
+  @return (flatten($background-color, $box), flatten($closed, $box));
+}
+
+@mixin admonition-title-color($color, $background-color) {
+  color: readable-color($color, admonition-title-backgrounds($background-color, $global-background-color), 4.6);
+
+  [theme=dark] & {
+    color: readable-color($color, admonition-title-backgrounds($background-color, $global-background-color-dark), 4.6);
+  }
+}
 
 .admonition {
   position: relative;
@@ -36,7 +60,7 @@
       border-left-color: $color;
 
       .admonition-title {
-        color: $color;
+        @include admonition-title-color($color, $background-color);
         border-bottom-color: $background-color;
         background-color: color.adjust($background-color, $alpha: 0.15);
       }
@@ -55,7 +79,7 @@
         border-left-color: $color;
 
         .admonition-title {
-          color: $color;
+          @include admonition-title-color($color, $background-color);
           border-bottom-color: $background-color;
           background-color: color.adjust($background-color, $alpha: 0.15);
         }
