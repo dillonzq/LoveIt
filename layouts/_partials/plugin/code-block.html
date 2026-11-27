@@ -16,11 +16,14 @@
 {{- if not (strings.Contains $result `class="chroma"`) -}}
     {{- $result = transform.Highlight $content "text" $options -}}
 {{- end -}}
-<div class="code-block{{ if $lineNos }} code-line-numbers{{ end }}{{ if le $lines $maxShownLines }} open{{ end }}" style="counter-reset: code-block {{ sub $lineNoStart 1 }}">
+{{- $open := le $lines $maxShownLines -}}
+<div class="code-block{{ if $lineNos }} code-line-numbers{{ end }}{{ if $open }} open{{ end }}" style="counter-reset: code-block {{ sub $lineNoStart 1 }}">
     <div class="code-header language-{{ $lang }}">
-        <span class="code-title">{{ dict "Class" "arrow fas fa-angle-right" | partial "plugin/icon.html" }}</span>
+        {{- /* A disclosure button. CSS shows the language label (::after), which not every */}}
+        {{- /* assistive technology reads, so the button is also named by the language. */}}
+        <button type="button" class="code-title link-like" aria-expanded="{{ $open }}" aria-label="{{ $lang | default "Code" }}">{{ dict "Class" "arrow fas fa-angle-right" | partial "plugin/icon.html" }}</button>
         <span class="ellipses">{{ dict "Class" "fas fa-ellipsis-h" | partial "plugin/icon.html" }}</span>
-        {{ if $copy }}<span class="copy" title="{{ T "copyToClipboard" }}">{{ dict "Class" "far fa-copy" | partial "plugin/icon.html" }}</span>{{ end }}
+        {{ if $copy }}<button type="button" class="copy link-like" title="{{ T "copyToClipboard" }}" aria-label="{{ T "copyToClipboard" }}" data-copied="{{ T "success" }}" data-copy-failed="{{ T "failure" }}">{{ dict "Class" "far fa-copy" | partial "plugin/icon.html" }}</button><span class="copy-status" role="status"></span>{{ end }}
     </div>
     {{- $result -}}
 </div>

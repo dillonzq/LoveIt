@@ -1,5 +1,21 @@
 #fixed-buttons {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  @include transition(opacity 0.5s ease, visibility 0.5s);
+
+  // While fading out, the buttons no longer take clicks meant for the page below.
+  .fixed-button {
+    pointer-events: none;
+  }
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+
+    .fixed-button {
+      pointer-events: auto;
+    }
+  }
 }
 
 #fixed-buttons-hidden {

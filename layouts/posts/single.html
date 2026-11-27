@@ -20,7 +20,7 @@
 
     <article class="page single"{{ if partial "function/searchable.html" . }} data-pagefind-body{{ end }}>
         {{- /* Title */ -}}
-        <h1 class="single-title animate__animated animate__flipInX" data-pagefind-meta="title[data-title]" data-title="{{ .Title }}">{{ .Title | emojify }}</h1>
+        <h1 class="single-title title-flip-in" data-pagefind-meta="title[data-title]" data-title="{{ .Title }}">{{ .Title | emojify }}</h1>
 
         {{- /* Subtitle */ -}}
         {{- with $params.subtitle -}}

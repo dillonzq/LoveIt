@@ -5,7 +5,7 @@
 {{- define "content" -}}
     <div class="page archive">
         {{- /* Title */ -}}
-        <h2 class="single-title animate__animated animate__pulse animate__faster">
+        <h2 class="single-title title-pulse">
             {{- $taxonomy := .Data.Singular -}}
             {{- if eq $taxonomy "category" -}}
                 {{ dict "Class" "far fa-folder-open" | partial "plugin/icon.html" }}&nbsp;{{ .Title }}

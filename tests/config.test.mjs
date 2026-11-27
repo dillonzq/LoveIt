@@ -14,8 +14,8 @@ test.after(() => rmSync(temporary, { recursive: true, force: true }));
 
 const ids = ['params-compatibility-polyfill', 'params-compatibility-objectfit', 'params-cdn-autocompletejs']
   .map(key => `loveit-deprecated-${key}`);
-const polyfill = 'cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js';
-const objectFit = 'object-fit-images/ofi.min.js';
+// The libraries behind the deprecated keys are gone; no page may load them.
+const removed = /polyfill\.min\.js|ofi\.min\.js|object-fit-images|autocomplete\.js/;
 
 function site(name, config, files = {}) {
   const directory = path.join(temporary, name);
@@ -55,10 +55,10 @@ test('theme defaults and explicit false values do not warn', () => {
   const { status, output } = build(directory, '--panicOnWarning');
   assert.equal(status, 0, output);
   assert.doesNotMatch(output, /loveit-deprecated/);
-  assert.doesNotMatch(page(directory, 'index.html'), /polyfill\.min\.js|ofi\.min\.js/);
+  assert.doesNotMatch(page(directory, 'index.html'), removed);
 });
 
-test('each deprecated key warns once per build; the compatibility keys keep working until they are removed', () => {
+test('each deprecated key warns once per build and no longer loads anything', () => {
   const config = '[params.compatibility]\npolyfill = true\nobjectFit = true\n[params.search]\nenable = true\n'
     + '[params.cdn]\ndata = ""\nautocompleteJS = "https://cdn.example.org/autocomplete.js"';
   const directory = site('deprecated', config);
@@ -69,11 +69,8 @@ test('each deprecated key warns once per build; the compatibility keys keep work
   assert.equal(count(output, '已于 v0.5.0 弃用, 将在 v0.7.0 移除'), 3, output);
   assert.equal(count(output, 'https://hugoloveit.com/theme-documentation-basics/#deprecated-options'), 3, output);
   for (const file of ['index.html', 'zh-cn/index.html', 'posts/post-1/index.html']) {
-    const html = page(directory, file);
-    assert.match(html, new RegExp(polyfill.replaceAll('.', '\\.')), file);
-    assert.match(html, new RegExp(objectFit.replaceAll('.', '\\.')), file);
-    // autocomplete.js is gone, so the old key only warns.
-    assert.doesNotMatch(html, /autocomplete\.js/, file);
+    // The Polyfill service, object-fit-images and autocomplete.js are gone, so the old keys only warn.
+    assert.doesNotMatch(page(directory, file), removed, file);
   }
 
   // They are warnings: builds that panic on warnings fail unless ignoreLogs silences them.
@@ -90,8 +87,7 @@ test('language params follow Hugo merging and warn once', () => {
   assert.equal(status, 0, output);
   assert.equal(count(output, `'${ids[0]}'`), 1, output);
   assert.doesNotMatch(output, new RegExp(`${ids[1]}|${ids[2]}`));
-  assert.doesNotMatch(page(directory, 'index.html'), /polyfill\.min\.js/);
-  assert.match(page(directory, 'zh-cn/index.html'), /polyfill\.min\.js/);
+  for (const file of ['index.html', 'zh-cn/index.html']) assert.doesNotMatch(page(directory, file), removed, file);
 });
 
 test('the normalized configuration maps old keys to unset new keys', () => {
@@ -106,7 +102,7 @@ test('the normalized configuration maps old keys to unset new keys', () => {
   ].join('\n');
   const show = '{{ $c := partialCached "function/config.html" .Site .Site.Language.Lang }}'
     + '{{ $c.newSection.someFlag }}|{{ $c.newsection.someflag }}|{{ $c.newSection.other }}|{{ $c.newTop }}|{{ $c.newtop }}'
-    + '|{{ $c.newMap.current }}{{ $c.newMap.obsolete }}|{{ $c.newBoth }}|{{ $c.newTitle }}|{{ $c.compatibility.objectFit }}|{{ $c.defaultTheme }}|{{ $c.oldBoth }}\n';
+    + '|{{ $c.newMap.current }}{{ $c.newMap.obsolete }}|{{ $c.newBoth }}|{{ $c.newTitle }}|{{ $c.header.desktopMode }}|{{ $c.defaultTheme }}|{{ $c.oldBoth }}\n';
   const directory = site('replacement', [
     'disableKinds = ["page", "section", "taxonomy", "term", "rss", "sitemap", "robotsTXT", "404"]',
     '[params]\ntitle = "Site"\noldTop = "top"\noldBoth = "old"\nnewBoth = "new"',
@@ -120,8 +116,8 @@ test('the normalized configuration maps old keys to unset new keys', () => {
   assert.equal(status, 0, output);
   // Theme defaults keep their case-insensitive keys; the new key wins when both are set.
   // Mapped keys read in any case, next to the keys already in the section.
-  assert.equal(page(directory, 'index.html'), 'mapped|mapped|kept|top|top|current|new||false|auto|old\n');
-  assert.equal(page(directory, 'zh-cn/index.html'), 'mapped|mapped|kept|top|top|current|new||false|auto|\n');
+  assert.equal(page(directory, 'index.html'), 'mapped|mapped|kept|top|top|current|new||fixed|auto|old\n');
+  assert.equal(page(directory, 'zh-cn/index.html'), 'mapped|mapped|kept|top|top|current|new||fixed|auto|\n');
   assert.equal(count(output, "'loveit-deprecated-params-oldsection-someflag'"), 1, output);
   assert.equal(count(output, 'Use "params.newSection.someFlag" instead.'), 1, output);
   assert.equal(count(output, '请改用 "params.newSection.someFlag".'), 1, output);

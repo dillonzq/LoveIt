@@ -1,0 +1,60 @@
+// The theme's own motion: header auto-hide, page title entrance and copy feedback.
+
+// Auto-hiding headers slide out while scrolling down and come back when
+// scrolling up (see onScroll in theme.js). Keyboard focus brings them back.
+header.is-hidden {
+  opacity: 0;
+  @include transform(translateY(-100%));
+
+  &:focus-within {
+    opacity: 1;
+    @include transform(none);
+  }
+}
+
+// Entrance of page titles, skipped when the reader prefers reduced motion.
+@media (prefers-reduced-motion: no-preference) {
+  .title-pulse {
+    animation: title-pulse 0.6s ease-in-out both;
+  }
+
+  .title-flip-in {
+    animation: title-flip-in 0.8s cubic-bezier(0.2, 0.8, 0.3, 1.2) both;
+  }
+}
+
+@keyframes title-pulse {
+  from, to {
+    transform: none;
+  }
+
+  40% {
+    transform: scale(1.04);
+  }
+}
+
+// The title swings down into place around its top edge.
+@keyframes title-flip-in {
+  from {
+    opacity: 0;
+    transform-origin: 50% 0;
+    transform: perspective(600px) rotateX(-75deg);
+  }
+
+  to {
+    opacity: 1;
+    transform-origin: 50% 0;
+    transform: perspective(600px) rotateX(0);
+  }
+}
+
+// Copied code blinks twice.
+@keyframes code-copied-flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+
+  20%, 70% {
+    opacity: 0.2;
+  }
+}

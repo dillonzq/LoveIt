@@ -775,17 +775,6 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # "assets/data/cdn/"
     data = "jsdelivr.yml"
 
-  # Compatibility config, deprecated since 0.5.0 and removed in 0.7.0
-  # 兼容性设置, 已于 0.5.0 弃用, 将在 0.7.0 移除
-  # https://hugoloveit.com/theme-documentation-basics/#deprecated-options
-  [params.compatibility]
-    # whether to use the Polyfill service (cdnjs) to be compatible with older browsers
-    # 是否使用 Polyfill 服务 (cdnjs) 来兼容旧式浏览器
-    polyfill = false
-    # whether to use object-fit-images to be compatible with older browsers
-    # 是否使用 object-fit-images 来兼容旧式浏览器
-    objectFit = false
-
 # Markup related configuration in Hugo
 # Hugo 解析文档的配置
 [markup]

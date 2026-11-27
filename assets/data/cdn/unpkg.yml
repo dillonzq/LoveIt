@@ -5,16 +5,12 @@ prefix:
 libFiles:
   # fontawesome-free@7.3.1 https://fontawesome.com/
   fontawesomeFreeCSS: "@fortawesome/fontawesome-free@7.3.1/css/all.min.css"
-  # animate.css@4.1.1 https://github.com/daneden/animate.css
-  animateCSS: animate.css@4.1.1/animate.min.css
   # lunr.js@2.3.9 https://lunrjs.com/
   lunrJS: lunr@2.3.9/lunr.min.js
   # algoliasearch@5.65.0 https://github.com/algolia/algoliasearch-client-javascript
   algoliasearchJS: algoliasearch@5.65.0/dist/lite/builds/browser.umd.js
   # fuse.js@7.5.0 https://fusejs.io/
   fuseJS: fuse.js@7.5.0/dist/fuse.min.mjs
-  # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
-  objectFitImagesJS: object-fit-images@3.2.4/dist/ofi.min.js
   # @twemoji/api@17.0.3 https://github.com/jdecked/twemoji
   twemojiJS: "@twemoji/api@17.0.3/dist/twemoji.min.js"
   # lightgallery@3.0.0 https://github.com/sachinchoolur/lightgallery
@@ -22,8 +18,6 @@ libFiles:
   lightgalleryJS: lightgallery@3.0.0/lightgallery.min.js
   lightgalleryThumbnailJS: lightgallery@3.0.0/plugins/thumbnail/lg-thumbnail.min.js
   lightgalleryZoomJS: lightgallery@3.0.0/plugins/zoom/lg-zoom.min.js
-  # clipboard.js@2.0.11 https://github.com/zenorocha/clipboard.js
-  clipboardJS: clipboard@2.0.11/dist/clipboard.min.js
   # sharer.js@0.5.4 https://github.com/ellisonleao/sharer.js
   sharerJS: sharer.js@0.5.4/sharer.min.js
   # typeit@8.8.7 https://github.com/alexmacarthur/typeit

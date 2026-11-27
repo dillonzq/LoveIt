@@ -1,5 +1,5 @@
 // Honor the user's reduced motion preference: transitions and animations
-// (including animate.css) finish instantly. A tiny non-zero duration keeps
+// finish instantly. A tiny non-zero duration keeps
 // animationend/transitionend events firing for scripts that wait for them.
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -106,13 +106,26 @@ This file starts at 0.4.0. Older releases are described on the
   work as before. Sites that override `_partials/header.html` or style the
   old `#search-*-desktop`, `#search-*-mobile` or `.search-dropdown` elements
   need to follow the new markup in `_partials/search.html`.
+- The page title entrance, the auto-hiding header, the fixed buttons and the
+  copy feedback of code blocks use the theme's own CSS instead of animate.css.
+  With reduced motion, page titles and copied code no longer animate.
+- The copy button of code blocks uses the Clipboard API, and falls back to
+  `document.execCommand("copy")` where the API is missing or refused, such as
+  on pages served over plain HTTP. The button turns green when the code is
+  copied. When copying fails, it turns red and the code is left selected so it
+  can be copied by hand. Screen readers announce the result.
+- The copy control and the code title that expands or collapses a code block
+  are `<button>` elements, so keyboard users can reach them. The code title
+  reports its state with `aria-expanded`. Sites that override
+  `_partials/plugin/code-block.html` should compare it with the new one.
 
 ### Deprecated
 
 - `params.compatibility.polyfill`, `params.compatibility.objectFit` and
-  `params.cdn.autocompleteJS`. The first two still work; `autocompleteJS` has
-  no effect since autocomplete.js was removed. All three warn until 0.7.0.
-  Setting them to `false` or `""` does not warn.
+  `params.cdn.autocompleteJS`. None of them has any effect any more, because
+  the Polyfill service, object-fit-images and autocomplete.js were removed.
+  All three warn until 0.7.0; remove them from your configuration. Setting
+  them to `false` or `""` does not warn.
 
 ### Removed
 
@@ -123,6 +136,16 @@ This file starts at 0.4.0. Older releases are described on the
   styles or scripts that rely on them.
 - autocomplete.js 0.38.1. `params.cdn.autocompleteJS` no longer has any
   effect.
+- object-fit-images, the cdnjs Polyfill service, clipboard.js and animate.css:
+  their bundled files, the `objectFitImagesJS`, `clipboardJS` and `animateCSS`
+  entries of the CDN data files, `assets/data/polyfill.yml` and
+  `_partials/plugin/compatibility.html`. Browsers supported by the theme
+  provide `object-fit`, the Clipboard API and CSS animations natively.
+  `params.compatibility.polyfill` and `params.compatibility.objectFit` no
+  longer load anything and only print the deprecation warning; remove them.
+  Your own CDN data files can drop the
+  three entries. Template overrides that add `animate__*` classes or scripts
+  that call `ClipboardJS` must load those libraries themselves.
 
 ## [0.4.1] - 2026-11-27
 

@@ -854,14 +854,6 @@ enableEmoji = true
     # "assets/data/cdn/"
     data = "jsdelivr.yml"
 
-  # {{< version 0.2.8 >}} 兼容性设置
-  # {{< version 0.5.0 deprecated >}} 参见 [弃用的配置](#deprecated-options)
-  [params.compatibility]
-    # 是否使用 Polyfill 服务 (cdnjs) 来兼容旧式浏览器
-    polyfill = false
-    # 是否使用 object-fit-images 来兼容旧式浏览器
-    objectFit = false
-
 # Hugo 解析文档的配置
 [markup]
   # {{< link "https://gohugo.io/content-management/syntax-highlighting" "语法高亮设置" >}}
@@ -1362,7 +1354,7 @@ npx pagefind --site public --output-subdir _pagefind --serve
 ### 6.2 行为变化
 
 * **语言配置.** 在 Hugo 0.158.0 或更新版本中, 请使用 `locale` 和 `label` 代替已废弃的 `languageCode` 和 `languageName`.
-* **Polyfill.** `params.compatibility.polyfill` 改为从 `cdnjs.cloudflare.com` 加载, 不再使用 `polyfill.io`.
+* **Polyfill.** 在 0.4.X 中 `params.compatibility.polyfill` 改为从 `cdnjs.cloudflare.com` 加载, 不再使用 `polyfill.io`. LoveIt 0.5.0 移除了 Polyfill 服务, 参见 [弃用的配置](#deprecated-options).
 * **音乐.** 默认的 Meting API 已更换. 可以在 `[params.page.music]` 中设置 `api` 来使用你自己的服务.
 * **Waline.** 内置客户端为 Waline v3, 需要 v1.27.0 及以上的 Waline 服务端.
 
@@ -1378,7 +1370,8 @@ npx pagefind --site public --output-subdir _pagefind --serve
 {{< version 0.5.0 >}}
 
 当网站配置使用了弃用的配置项时, `hugo` 每次构建会打印一次如下警告.
-在移除之前该配置项仍然有效, 除非使用 `--panicOnWarning` 构建, 否则构建不会失败.
+警告会一直打印到「移除于」一列的版本. 部分配置项已经不再起作用, 处理方式见下表.
+除非使用 `--panicOnWarning` 构建, 否则构建不会失败.
 迁移期间如需让这类构建通过, 可将警告中的 ID 加入 `ignoreLogs`.
 
 ```plain
@@ -1391,6 +1384,6 @@ ignoreLogs = ['loveit-deprecated-params-compatibility-polyfill']
 
 | 配置项 | 弃用于 | 移除于 | 处理方式 |
 |:-------|:------:|:------:|:---------|
-| `params.compatibility.polyfill` | 0.5.0 | 0.7.0 | 删除该配置. 主题支持的浏览器不需要 Polyfill 服务. |
-| `params.compatibility.objectFit` | 0.5.0 | 0.7.0 | 删除该配置. 主题支持的浏览器原生支持 `object-fit`. |
+| `params.compatibility.polyfill` | 0.5.0 | 0.7.0 | 删除该配置. 它已不起作用: 主题不再加载 Polyfill 服务, 主题支持的浏览器也不需要它. |
+| `params.compatibility.objectFit` | 0.5.0 | 0.7.0 | 删除该配置. 它已不起作用: 主题不再加载 object-fit-images, 主题支持的浏览器原生支持 `object-fit`. |
 | `params.cdn.autocompleteJS` | 0.5.0 | 0.7.0 | 删除该配置. 搜索不再使用 autocomplete.js. |

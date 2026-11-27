@@ -18,15 +18,15 @@
   since: 0.5.0
   removal: 0.7.0
   hint:
-    en: Remove it. Browsers supported by the theme do not need the Polyfill service.
-    zh: 删除该配置. 主题支持的浏览器不需要 Polyfill 服务.
+    en: Remove it. It has no effect, because the theme no longer loads the Polyfill service.
+    zh: 删除该配置. 主题不再加载 Polyfill 服务, 该配置已不起作用.
 
 - key: params.compatibility.objectFit
   since: 0.5.0
   removal: 0.7.0
   hint:
-    en: Remove it. Browsers supported by the theme support object-fit natively.
-    zh: 删除该配置. 主题支持的浏览器原生支持 object-fit.
+    en: Remove it. It has no effect, because the theme no longer loads object-fit-images.
+    zh: 删除该配置. 主题不再加载 object-fit-images, 该配置已不起作用.
 
 - key: params.cdn.autocompleteJS
   since: 0.5.0

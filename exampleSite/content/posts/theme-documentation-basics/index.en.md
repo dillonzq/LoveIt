@@ -853,14 +853,6 @@ enableEmoji = true
     # "assets/data/cdn/"
     data = "jsdelivr.yml"
 
-  # {{< version 0.2.8 >}} Compatibility config
-  # {{< version 0.5.0 deprecated >}} see [Deprecated Options](#deprecated-options)
-  [params.compatibility]
-    # whether to use the Polyfill service (cdnjs) to be compatible with older browsers
-    polyfill = false
-    # whether to use object-fit-images to be compatible with older browsers
-    objectFit = false
-
 # Markup related config in Hugo
 [markup]
   # {{< link "https://gohugo.io/content-management/syntax-highlighting" "Syntax Highlighting" >}}
@@ -1365,7 +1357,7 @@ Check the following when you upgrade from **LoveIt 0.3.X** to **0.4.X**.
 ### 6.2 What Has Changed
 
 * **Language configuration.** On Hugo 0.158.0 or later, use `locale` and `label` instead of the deprecated `languageCode` and `languageName`.
-* **Polyfill.** `params.compatibility.polyfill` now loads from `cdnjs.cloudflare.com` instead of `polyfill.io`.
+* **Polyfill.** `params.compatibility.polyfill` loads from `cdnjs.cloudflare.com` instead of `polyfill.io` in 0.4.X. LoveIt 0.5.0 removes the Polyfill service, see [Deprecated Options](#deprecated-options).
 * **Music.** The default Meting API has been replaced. Set `api` in `[params.page.music]` to use your own.
 * **Waline.** The bundled client is Waline v3, which requires a Waline server v1.27.0 or later.
 
@@ -1381,7 +1373,8 @@ Check the following when you upgrade from **LoveIt 0.3.X** to **0.4.X**.
 {{< version 0.5.0 >}}
 
 When your site configuration uses a deprecated option, `hugo` prints a warning once per build like the one below.
-The option still works until it is removed, and the build does not fail unless you build with `--panicOnWarning`.
+The warning is printed until the version in the "Removed in" column. Some options no longer have any effect; the table says what to do with each one.
+The build does not fail unless you build with `--panicOnWarning`.
 To keep such a build passing while you migrate, add the ID from the warning to `ignoreLogs`.
 
 ```plain
@@ -1395,6 +1388,6 @@ so the `false` defaults copied from the theme configuration do not warn.
 
 | Option | Deprecated in | Removed in | What to do |
 |:-------|:-------------:|:----------:|:-----------|
-| `params.compatibility.polyfill` | 0.5.0 | 0.7.0 | Remove it. Browsers supported by the theme do not need the Polyfill service. |
-| `params.compatibility.objectFit` | 0.5.0 | 0.7.0 | Remove it. Browsers supported by the theme support `object-fit` natively. |
+| `params.compatibility.polyfill` | 0.5.0 | 0.7.0 | Remove it. It has no effect: the theme no longer loads the Polyfill service, which the browsers it supports do not need. |
+| `params.compatibility.objectFit` | 0.5.0 | 0.7.0 | Remove it. It has no effect: the theme no longer loads object-fit-images, because the browsers it supports handle `object-fit` natively. |
 | `params.cdn.autocompleteJS` | 0.5.0 | 0.7.0 | Remove it. Search no longer uses autocomplete.js. |

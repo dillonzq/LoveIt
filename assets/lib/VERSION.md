@@ -3,9 +3,7 @@
 | Dependency Library                                                                  | Directory         | Version | License                                 |
 |:------------------------------------------------------------------------------------|:------------------|--------:|:----------------------------------------|
 | [Algolia Search Client](https://github.com/algolia/algoliasearch-client-javascript) | algoliasearch     |  5.65.0 | MIT                                     |
-| [Animate.css](https://github.com/daneden/animate.css)                               | animate           |   4.1.1 | MIT                                     |
 | [APlayer](https://github.com/MoePlayer/APlayer)                                     | aplayer           |  1.10.1 | MIT                                     |
-| [clipboard.js](https://github.com/zenorocha/clipboard.js)                           | clipboard         |  2.0.11 | MIT                                     |
 | [Cookie Consent](https://github.com/osano/cookieconsent)                            | cookieconsent     |   3.1.1 | MIT                                     |
 | [Apache ECharts](https://github.com/apache/echarts)                                 | echarts           |   6.1.0 | Apache-2.0                              |
 | [emoji-data](https://github.com/iamcal/emoji-data)                                  | emoji-data        |  15.1.2 | MIT (see [Emoji images](#emoji-images)) |
@@ -19,7 +17,6 @@
 | [Mermaid](https://github.com/mermaid-js/mermaid)                                    | mermaid           |  12.3.0 | MIT                                     |
 | [MetingJS](https://github.com/metowolf/MetingJS)                                    | meting            |   2.0.2 | MIT                                     |
 | [modern-normalize](https://github.com/sindresorhus/modern-normalize)                | modern-normalize  |   3.0.1 | MIT                                     |
-| [object-fit-images](https://github.com/fregante/object-fit-images)                  | object-fit-images |   3.2.4 | MIT                                     |
 | [sharer.js](https://github.com/ellisonleao/sharer.js)                               | sharer            |   0.5.4 | MIT                                     |
 | [Simple Icons](https://github.com/simple-icons/simple-icons)                        | simple-icons      | 16.38.0 | CC0-1.0                                 |
 | [Twemoji](https://github.com/jdecked/twemoji)                                       | twemoji           |  17.0.3 | MIT AND CC-BY-4.0                       |

@@ -66,10 +66,13 @@ code, pre {
     .code-title {
       width: 100%;
       padding: .4rem;
+      color: inherit;
+      font-weight: inherit;
+      text-align: start;
     }
 
     .code-title::after {
-      padding-left: .2rem;
+      padding-inline-start: .2rem;
       content: "Code";
     }
 
@@ -82,15 +85,30 @@ code, pre {
     .arrow {
       padding: 0 .2rem;
       @include transition(transform 0.2s ease);
+
+      [dir=rtl] & {
+        @include transform(rotate(180deg));
+      }
     }
 
     .ellipses {
       padding: .4rem;
     }
 
+    // Announces the result of the copy button to screen readers only.
+    .copy-status {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
     .copy {
       display: none;
       padding: .4rem;
+      color: inherit;
 
       &:hover {
         cursor: pointer;
@@ -107,6 +125,7 @@ code, pre {
     position: relative;
     max-height: 0;
     overflow-y: hidden;
+    visibility: hidden;
     @include details-transition-open;
     background: $code-background-color;
 
@@ -174,12 +193,13 @@ code, pre {
       }
 
       .copy {
-        display: inline;
+        display: inline-block;
       }
     }
 
     .highlight {
       max-height: 20000px;
+      visibility: visible;
       @include details-transition-close;
     }
   }
@@ -206,6 +226,34 @@ code, pre {
       [theme=dark] & {
         color: $code-info-color-dark;
       }
+    }
+  }
+
+  // Feedback after the copy button is clicked: the button turns green and the
+  // code flashes, or the button turns red and the code is left selected.
+  &.copied .code-header .copy {
+    &, &:hover {
+      color: $code-copied-color;
+    }
+
+    [theme=dark] &, [theme=dark] &:hover {
+      color: $code-copied-color-dark;
+    }
+  }
+
+  &.copy-failed .code-header .copy {
+    &, &:hover {
+      color: $code-copy-failed-color;
+    }
+
+    [theme=dark] &, [theme=dark] &:hover {
+      color: $code-copy-failed-color-dark;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &.copied span.cl {
+      animation: code-copied-flash 1s both;
     }
   }
 }

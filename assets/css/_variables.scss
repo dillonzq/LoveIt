@@ -127,6 +127,12 @@ $code-background-color-dark: #272C34 !default;
 $code-info-color: #626262 !default;
 $code-info-color-dark: #b1b0b0 !default;
 
+// Color of the copy button after the code is copied or could not be copied
+$code-copied-color: #2e7d32 !default;
+$code-copied-color-dark: #66bb6a !default;
+$code-copy-failed-color: #c62828 !default;
+$code-copy-failed-color-dark: #ef5350 !default;
+
 // Code type list
 $code-type-list:
   "language-bash" "Bash",

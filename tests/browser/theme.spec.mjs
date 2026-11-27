@@ -805,10 +805,51 @@ test('Valine avatars are decorative on every page of comments and the example si
   expect(errors).toEqual([]);
 });
 
-test('fixed buttons fade in after scrolling down', async ({ page }) => {
+test('fixed buttons fade in after scrolling down and the auto header hides until scrolling up', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  // Switch the desktop header to the "auto" mode before the theme script reads it.
+  await page.addInitScript(() => document.addEventListener('DOMContentLoaded', () => document.body.setAttribute('data-header-desktop', 'auto')));
   await page.goto('/fuse/blog/guide/');
-  await page.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo(0, 400); });
-  await expect(page.locator('#fixed-buttons')).toHaveClass(/\banimate__fadeIn\b/);
+  const fixedButtons = page.locator('#fixed-buttons');
+  const backToTop = page.locator('#back-to-top');
+  const header = page.locator('#header-desktop');
+  await expect(backToTop).toBeHidden();
+  await page.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo({ top: 400, behavior: 'instant' }); });
+  await expect(fixedButtons).toHaveClass(/\bis-visible\b/);
+  await expect(backToTop).toBeVisible();
+  await expect(backToTop).toHaveCSS('pointer-events', 'auto');
+  await expect(header).toHaveClass(/\bis-hidden\b/);
+  await expect(header).toHaveCSS('opacity', '0');
+  await page.evaluate(() => window.scrollTo({ top: 200, behavior: 'instant' }));
+  await expect(header).not.toHaveClass(/\bis-hidden\b/);
+  await expect(header).toHaveCSS('opacity', '1');
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await expect(fixedButtons).not.toHaveClass(/\bis-visible\b/);
+  // Hidden at once for clicks, even while it fades out.
+  await expect(backToTop).toHaveCSS('pointer-events', 'none');
+  await expect(backToTop).toBeHidden();
+  // No page loads animate.css any more; the page title animates with the theme styles.
+  await expect(page.locator('link[href*="animate"]')).toHaveCount(0);
+  await expect(page.locator('h1.single-title')).toHaveCSS('animation-name', /^title-/);
+  expect(errors).toEqual([]);
+});
+
+test('on phones the fixed buttons hide while scrolling down and come back when scrolling up', async ({ browser }) => {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  await page.goto('/fuse/blog/guide/');
+  const backToTop = page.locator('#back-to-top');
+  const header = page.locator('#header-mobile');
+  await page.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo({ top: 400, behavior: 'instant' }); });
+  await expect(header).toHaveClass(/\bis-hidden\b/);
+  await expect(backToTop).toBeHidden();
+  await page.evaluate(() => window.scrollTo({ top: 300, behavior: 'instant' }));
+  await expect(header).not.toHaveClass(/\bis-hidden\b/);
+  await expect(backToTop).toBeVisible();
+  await page.evaluate(() => window.scrollTo({ top: 600, behavior: 'instant' }));
+  await expect(backToTop).toBeHidden();
+  await context.close();
 });
 
 test('lightGallery opens linked images with thumbnails, zoom and SVG icons', async ({ page }) => {
@@ -994,8 +1035,10 @@ test('reduced motion disables smooth scrolling, transitions and the TypeIt anima
   await expect(reduced.locator('.ti-cursor')).toHaveCount(0);
   await reduced.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo(0, 400); });
   const fixedButtons = reduced.locator('#fixed-buttons');
-  await expect(fixedButtons).toHaveClass(/\banimate__fadeIn\b/);
-  expect(parseFloat(await fixedButtons.evaluate(element => getComputedStyle(element).animationDuration))).toBeLessThan(0.01);
+  await expect(fixedButtons).toHaveClass(/\bis-visible\b/);
+  expect(parseFloat(await fixedButtons.evaluate(element => getComputedStyle(element).transitionDuration))).toBeLessThan(0.01);
+  await reduced.goto('/fuse/blog/guide/');
+  await expect(reduced.locator('h1.single-title')).toHaveCSS('animation-name', 'none');
   expect(errors).toEqual([]);
   await context.close();
 });
@@ -1100,11 +1143,79 @@ test('copy buttons copy code verbatim and unknown languages keep the code block 
     const block = blocks.nth(index);
     // Every block is highlighted by Chroma, so it gets line numbers and the code colors.
     await expect(block.locator('pre.chroma span.line')).toHaveCount(text.split('\n').length);
-    await block.locator('.copy').click();
+    const copy = block.getByRole('button', { name: 'Copy to clipboard' });
+    await copy.focus();
+    await page.keyboard.press('Enter');
     await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe(text);
+    await expect(block).toHaveClass(/\bcopied\b/);
+    await expect(block.getByRole('status')).toHaveText('Copy to clipboard: Success');
   }
+  await expect(blocks.first()).not.toHaveClass(/\bcopied\b/, { timeout: 5_000 });
+  await expect(page.locator('script[src*="clipboard"]')).toHaveCount(0);
   expect(errors).toEqual([]);
   await context.close();
+});
+
+test('keyboard users can expand a collapsed code block and copy it', async ({ browser }) => {
+  const context = await browser.newContext({ permissions: ['clipboard-read', 'clipboard-write'] });
+  const page = await context.newPage();
+  await page.goto('/fuse/blog/code-collapsed/');
+  const block = page.locator('.code-block');
+  const toggle = block.getByRole('button', { name: 'Bash' });
+  const copy = block.getByRole('button', { name: 'Copy to clipboard' });
+  const code = block.locator('.highlight pre');
+  const arrow = toggle.locator('.arrow');
+  await expect(block).not.toHaveClass(/\bopen\b/);
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(copy).toBeHidden();
+  await expect(code).toBeHidden();
+  await toggle.focus();
+  await page.keyboard.press('Tab');
+  await expect(code).not.toBeFocused();
+
+  await page.locator('html').evaluate(element => { element.dir = 'rtl'; });
+  await expect(arrow).toHaveCSS('transform', 'matrix(-1, 0, 0, -1, 0, 0)');
+  await toggle.focus();
+  await page.keyboard.press('Enter');
+  await expect(block).toHaveClass(/\bopen\b/);
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(code).toBeVisible();
+  await expect(arrow).toHaveCSS('transform', 'matrix(0, 1, -1, 0, 0, 0)');
+  await page.keyboard.press('Tab');
+  await expect(copy).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe('echo one\necho two\necho three');
+  await context.close();
+});
+
+test('copy buttons fall back to execCommand and leave the code selected when copying fails', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.addInitScript(() => {
+    window.copied = [];
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText: () => Promise.reject(new DOMException('Denied', 'NotAllowedError')) } });
+    document.execCommand = command => {
+      if (command !== 'copy' || window.failCopy) return false;
+      window.copied.push(document.activeElement.value);
+      return true;
+    };
+  });
+  await page.goto('/fuse/blog/code-blocks/');
+  const block = page.locator('.code-block').first();
+  await block.locator('.copy').click();
+  await expect(block).toHaveClass(/\bcopied\b/);
+  expect(await page.evaluate(() => window.copied)).toEqual(['echo one\n  echo two\necho three']);
+  // The hidden textarea used for the fallback is removed again.
+  await expect(page.locator('body > textarea')).toHaveCount(0);
+
+  await page.evaluate(() => { window.failCopy = true; });
+  await block.locator('.copy').click();
+  await expect(block).toHaveClass(/\bcopy-failed\b/);
+  await expect(block).not.toHaveClass(/\bcopied\b/);
+  await expect(block.getByRole('status')).toHaveText('Copy to clipboard: Failure');
+  expect(await page.evaluate(() => window.getSelection().toString().trim())).toContain('echo three');
+  await expect(block.locator('.copy')).toHaveCSS('color', 'rgb(198, 40, 40)');
+  expect(errors).toEqual([]);
 });
 
 test('home page and its feed list the posts section and pages typed "posts" or "post"', async ({ page, request }) => {
