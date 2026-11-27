@@ -4,7 +4,7 @@
     {{- $params := .Scratch.Get "params" -}}
     <div class="page single special"{{ if partial "function/searchable.html" . }} data-pagefind-body{{ end }}>
         {{- /* Title */ -}}
-        <h1 class="single-title animate__animated animate__pulse animate__faster" data-pagefind-meta="title[data-title]" data-title="{{ .Title }}">
+        <h1 class="single-title title-pulse" data-pagefind-meta="title[data-title]" data-title="{{ .Title }}">
             {{- .Title -}}
         </h1>
 

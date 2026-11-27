@@ -12,6 +12,29 @@ This file starts at 0.4.0. Older releases are described on the
 
 ## [Unreleased]
 
+### Changed
+
+- The page title entrance, the auto-hiding header, the fixed buttons and the
+  copy feedback of code blocks use the theme's own CSS instead of animate.css.
+  With reduced motion, page titles and copied code no longer animate.
+- The copy button of code blocks uses the Clipboard API, and falls back to
+  `document.execCommand("copy")` where the API is missing or refused, such as
+  on pages served over plain HTTP. The button turns green when the code is
+  copied. When copying fails, it turns red and the code is left selected so it
+  can be copied by hand.
+
+### Removed
+
+- object-fit-images, the cdnjs Polyfill service, clipboard.js and animate.css:
+  their bundled files, the `objectFitImagesJS`, `clipboardJS` and `animateCSS`
+  entries of the CDN data files, `assets/data/polyfill.yml` and
+  `_partials/plugin/compatibility.html`. Browsers supported by the theme
+  provide `object-fit`, the Clipboard API and CSS animations natively.
+  `params.compatibility.polyfill` and `params.compatibility.objectFit` no
+  longer load anything; remove them. Your own CDN data files can drop the
+  three entries. Template overrides that add `animate__*` classes or scripts
+  that call `ClipboardJS` must load those libraries themselves.
+
 ## [0.4.1] - 2026-11-27
 
 Hugo 0.146.0 or later and Dart Sass are still required.

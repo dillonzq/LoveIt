@@ -22,15 +22,34 @@ class Util {
         return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     }
 
-    static animateCSS(element, animation, reserved, callback) {
-        if (!Array.isArray(animation)) animation = [animation];
-        element.classList.add('animate__animated', ...animation);
-        const handler = () => {
-            element.classList.remove('animate__animated', ...animation);
-            element.removeEventListener('animationend', handler);
-            if (typeof callback === 'function') callback();
+    // Copies text with the Clipboard API. Where it is missing or refused (pages
+    // served over plain HTTP, denied permission), falls back to execCommand on a
+    // hidden textarea, as clipboard.js did. Resolves to whether the text was copied.
+    static copyText(text) {
+        const fallback = () => {
+            const $active = document.activeElement;
+            const $textarea = document.createElement('textarea');
+            $textarea.value = text;
+            $textarea.setAttribute('readonly', '');
+            $textarea.style.position = 'fixed';
+            $textarea.style.top = '0';
+            $textarea.style.opacity = '0';
+            document.body.appendChild($textarea);
+            $textarea.select();
+            let copied = false;
+            try {
+                copied = document.execCommand('copy');
+            } catch (_e) {
+                copied = false;
+            }
+            $textarea.remove();
+            if ($active && typeof $active.focus === 'function') $active.focus({ preventScroll: true });
+            return copied;
         };
-        if (!reserved) element.addEventListener('animationend', handler, false);
+        if (navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(text).then(() => true, fallback);
+        }
+        return Promise.resolve(fallback());
     }
 }
 
@@ -45,7 +64,6 @@ class Theme {
         this.resizeEventSet = new Set();
         this.switchThemeEventSet = new Set();
         this.clickMaskEventSet = new Set();
-        if (window.objectFitImages) objectFitImages();
     }
 
     initRaw() {
@@ -322,16 +340,21 @@ class Theme {
             const $copy = $codeBlock.querySelector('.code-header .copy');
             if ($copy) {
                 const $code = $codeBlock.querySelector('code');
-                // innerText adds a line break after every block-level line span on top of
-                // the newline already in the code, so copied code had blank lines between lines.
-                $copy.setAttribute('data-clipboard-text', $code.textContent);
-                const clipboard = new ClipboardJS($copy);
-                const $codeLines = $code.querySelectorAll('span.cl');
-                clipboard.on('success', _e => {
-                    if ($codeLines) {
-                        Util.forEach($codeLines, $codeLine => Util.animateCSS($codeLine, 'animate__flash'))
-                    }
-                });
+                let resetTimeout;
+                $copy.addEventListener('click', () => {
+                    // innerText adds a line break after every block-level line span on top of
+                    // the newline already in the code, so copied code had blank lines between lines.
+                    Util.copyText($code.textContent).then(copied => {
+                        window.clearTimeout(resetTimeout);
+                        $codeBlock.classList.remove('copied', 'copy-failed');
+                        // Restart the flash when the code is copied again before it ends.
+                        void $codeBlock.offsetWidth;
+                        $codeBlock.classList.add(copied ? 'copied' : 'copy-failed');
+                        // Leave the code selected so it can be copied by hand.
+                        if (!copied) window.getSelection().selectAllChildren($code);
+                        resetTimeout = window.setTimeout(() => $codeBlock.classList.remove('copied', 'copy-failed'), 2000);
+                    });
+                }, false);
             }
         });
     }
@@ -720,29 +743,14 @@ class Theme {
                 const scroll = this.newScrollTop - this.oldScrollTop;
                 const isMobile = Util.isMobile();
                 Util.forEach($headers, $header => {
-                    if (scroll > ACCURACY) {
-                        $header.classList.remove('animate__fadeInDown');
-                        Util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
-                    } else if (scroll < - ACCURACY) {
-                        $header.classList.remove('animate__fadeOutUp');
-                        Util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
-                    }
+                    if (scroll > ACCURACY) $header.classList.add('is-hidden');
+                    else if (scroll < - ACCURACY) $header.classList.remove('is-hidden');
                 });
                 if (this.newScrollTop > MINIMUM) {
-                    if (isMobile && scroll > ACCURACY) {
-                        $fixedButtons.classList.remove('animate__fadeIn');
-                        Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
-                    } else if (!isMobile || scroll < - ACCURACY) {
-                        $fixedButtons.style.display = 'block';
-                        $fixedButtons.classList.remove('animate__fadeOut');
-                        Util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
-                    }
+                    if (isMobile && scroll > ACCURACY) $fixedButtons.classList.remove('is-visible');
+                    else if (!isMobile || scroll < - ACCURACY) $fixedButtons.classList.add('is-visible');
                 } else {
-                    if (!isMobile) {
-                        $fixedButtons.classList.remove('animate__fadeIn');
-                        Util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
-                    }
-                    $fixedButtons.style.display = 'none';
+                    $fixedButtons.classList.remove('is-visible');
                 }
                 for (let event of this.scrollEventSet) event();
                 this.oldScrollTop = this.newScrollTop;

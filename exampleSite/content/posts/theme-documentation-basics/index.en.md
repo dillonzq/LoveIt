@@ -843,13 +843,6 @@ enableEmoji = true
     # "assets/data/cdn/"
     data = "jsdelivr.yml"
 
-  # {{< version 0.2.8 >}} Compatibility config
-  [params.compatibility]
-    # whether to use the Polyfill service (cdnjs) to be compatible with older browsers
-    polyfill = false
-    # whether to use object-fit-images to be compatible with older browsers
-    objectFit = false
-
 # Markup related config in Hugo
 [markup]
   # {{< link "https://gohugo.io/content-management/syntax-highlighting" "Syntax Highlighting" >}}

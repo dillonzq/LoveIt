@@ -108,12 +108,6 @@
     {{- $config = dict "lightgallery" true | merge $config -}}
 {{- end -}}
 
-{{- /* clipboard.js */ -}}
-{{- if $params.code.copy | default true -}}
-    {{- $source := $cdn.clipboardJS | default "lib/clipboard/clipboard.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-{{- end -}}
-
 {{- /* Sharer.js */ -}}
 {{- if $params.share.enable -}}
     {{- $source := $cdn.sharerJS | default "lib/sharer/sharer.min.js" -}}

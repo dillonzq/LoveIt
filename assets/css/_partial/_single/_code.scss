@@ -206,4 +206,32 @@ code, pre {
       }
     }
   }
+
+  // Feedback after the copy button is clicked: the button turns green and the
+  // code flashes, or the button turns red and the code is left selected.
+  &.copied .code-header .copy {
+    &, &:hover {
+      color: $code-copied-color;
+    }
+
+    [theme=dark] &, [theme=dark] &:hover {
+      color: $code-copied-color-dark;
+    }
+  }
+
+  &.copy-failed .code-header .copy {
+    &, &:hover {
+      color: $code-copy-failed-color;
+    }
+
+    [theme=dark] &, [theme=dark] &:hover {
+      color: $code-copy-failed-color-dark;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &.copied span.cl {
+      animation: code-copied-flash 1s both;
+    }
+  }
 }

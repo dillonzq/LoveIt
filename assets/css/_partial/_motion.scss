@@ -1,0 +1,71 @@
+// Motion that used to come from animate.css.
+
+// Auto-hiding headers slide out while scrolling down and come back when
+// scrolling up (see onScroll in theme.js). Keyboard focus brings them back.
+header.is-hidden {
+  opacity: 0;
+  @include transform(translateY(-100%));
+
+  &:focus-within {
+    opacity: 1;
+    @include transform(none);
+  }
+}
+
+// Entrance of page titles, skipped when the reader prefers reduced motion.
+@media (prefers-reduced-motion: no-preference) {
+  .title-pulse {
+    animation: title-pulse 0.5s ease-in-out both;
+  }
+
+  .title-flip-in {
+    backface-visibility: visible;
+    animation: title-flip-in 1s both;
+  }
+}
+
+@keyframes title-pulse {
+  from, to {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+}
+
+@keyframes title-flip-in {
+  from {
+    opacity: 0;
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    animation-timing-function: ease-in;
+  }
+
+  40% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    opacity: 1;
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+  }
+
+  80% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  to {
+    transform: perspective(400px);
+  }
+}
+
+@keyframes code-copied-flash {
+  from, 50%, to {
+    opacity: 1;
+  }
+
+  25%, 75% {
+    opacity: 0;
+  }
+}

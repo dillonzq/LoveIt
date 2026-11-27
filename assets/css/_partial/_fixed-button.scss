@@ -1,5 +1,12 @@
 #fixed-buttons {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  @include transition(opacity 0.5s ease, visibility 0.5s);
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 #fixed-buttons-hidden {
