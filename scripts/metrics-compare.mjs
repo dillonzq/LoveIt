@@ -21,7 +21,7 @@ const lighthouseMetrics = {
   requests: { label: 'Requests', unit: 'count', get: page => page.requests },
 };
 const axeMetrics = Object.fromEntries(impacts.map(impact => [impact, {
-  label: `${impact[0].toUpperCase()}${impact.slice(1)} nodes`, unit: 'count', get: page => page.counts[impact]?.nodes ?? 0,
+  label: `${impact[0].toUpperCase()}${impact.slice(1)} nodes`, unit: 'count', get: page => page.counts[impact].nodes,
 }]));
 const buildMetrics = {
   cold: { label: 'Cold build', unit: 'ms', get: build => build.cold },
@@ -31,7 +31,7 @@ const repositoryMetrics = {
   assetsLib: { label: '`assets/lib` bytes', unit: 'bytes', get: repository => repository.assetsLib.bytes },
 };
 const baselineDefaults = {
-  branch: 'master', workflows: ['ci.yml'], artifact: 'metrics', waitMinutes: 0, missing: 'warn', acceptLabel: null,
+  workflows: ['ci.yml'], artifact: 'metrics', waitMinutes: 0, missing: 'warn', acceptLabel: null,
 };
 
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -73,7 +73,6 @@ export function parseBudget(budget) {
   const baseline = { ...baselineDefaults, ...(budget.baseline ?? {}) };
   if (!isObject(budget.baseline ?? {})) throw new Error('baseline: expected an object');
   checkKeys(baseline, Object.keys(baselineDefaults), 'baseline');
-  if (typeof baseline.branch !== 'string' || !/^[\w./-]+$/.test(baseline.branch)) throw new Error('baseline.branch: expected a branch name');
   if (!Array.isArray(baseline.workflows) || !baseline.workflows.length
     || !baseline.workflows.every(file => typeof file === 'string' && /^[\w.-]+\.ya?ml$/.test(file))) {
     throw new Error('baseline.workflows: expected a list of workflow file names');
@@ -99,55 +98,53 @@ export function parseBudget(budget) {
   };
 }
 
-// Checks the shape of a summary written by scripts/metrics.mjs. Returns a list
-// of problems; an empty list means the summary can be compared.
+const isCount = value => Number.isInteger(value) && value >= 0;
+const isMeasurement = value => value === null || (typeof value === 'number' && Number.isFinite(value) && value >= 0);
+const transferTypes = ['script', 'stylesheet', 'font', 'image', 'document', 'other', 'total'];
+
+// Checks that a summary has every field scripts/metrics.mjs writes for this
+// schema. Lighthouse scores and timings may be null (not measured); a missing
+// field is a problem, so an incomplete artifact is never read as zeros. Returns
+// a list of problems; an empty list means the summary can be compared.
 export function summaryProblems(summary) {
   if (!isObject(summary)) return ['not a JSON object'];
   const problems = [];
   const schema = summary.schema ?? SUMMARY_SCHEMA;
   if (schema !== SUMMARY_SCHEMA) return [`schema ${JSON.stringify(schema)} is not ${SUMMARY_SCHEMA}`];
-  const names = (list, where) => {
-    const seen = new Set();
-    for (const [index, page] of list.entries()) {
-      if (!isObject(page) || typeof page.name !== 'string' || !page.name) problems.push(`${where}[${index}]: missing name`);
-      else if (seen.has(page.name)) problems.push(`${where}: duplicate page "${page.name}"`);
-      else seen.add(page.name);
+  const fields = (object, keys, valid, where) => {
+    if (!isObject(object)) return problems.push(`${where} missing`);
+    for (const key of keys) {
+      if (!Object.hasOwn(object, key)) problems.push(`${where}.${key} missing`);
+      else if (!valid(object[key])) problems.push(`${where}.${key} is not valid`);
     }
   };
-  if (!Array.isArray(summary.lighthouse)) problems.push('lighthouse: expected a list');
-  else {
-    names(summary.lighthouse, 'lighthouse');
-    for (const page of summary.lighthouse.filter(isObject)) {
-      const missing = ['scores', 'metrics', 'transfer'].filter(group => !isObject(page[group]));
-      if (missing.length) {
-        problems.push(`lighthouse ${page.name}: ${missing.join(', ')} missing`);
+  const pages = (list, where, check) => {
+    if (!Array.isArray(list) || !list.length) return problems.push(`${where}: expected a list of pages`);
+    const seen = new Set();
+    for (const [index, page] of list.entries()) {
+      if (!isObject(page) || typeof page.name !== 'string' || !page.name) {
+        problems.push(`${where}[${index}]: missing name`);
         continue;
       }
-      for (const [key, metric] of Object.entries(lighthouseMetrics)) {
-        if (!isNumberOrNull(metric.get(page) ?? null)) problems.push(`lighthouse ${page.name}: ${key} is not a number`);
-      }
+      if (seen.has(page.name)) problems.push(`${where}: duplicate page "${page.name}"`);
+      seen.add(page.name);
+      check(page, `${where} ${page.name}`);
     }
-  }
-  if (!Array.isArray(summary.axe)) problems.push('axe: expected a list');
-  else {
-    names(summary.axe, 'axe');
-    for (const page of summary.axe.filter(isObject)) {
-      if (!isObject(page.counts) || !Array.isArray(page.rules) || !page.rules.every(rule => typeof rule === 'string')) {
-        problems.push(`axe ${page.name}: counts or rules missing`);
-        continue;
-      }
-      for (const impact of impacts) {
-        const nodes = page.counts[impact]?.nodes ?? 0;
-        if (!Number.isInteger(nodes) || nodes < 0) problems.push(`axe ${page.name}: ${impact} nodes is not a count`);
-      }
-    }
-  }
-  if (!isObject(summary.build) || !isNumberOrNull(summary.build.cold ?? null) || !isNumberOrNull(summary.build.warm ?? null)) {
-    problems.push('build: cold and warm times missing');
-  }
-  if (!isObject(summary.repository?.assetsLib) || !isNumberOrNull(summary.repository.assetsLib.bytes ?? null)) {
-    problems.push('repository: assets/lib size missing');
-  }
+  };
+  if (!isCount(summary.lighthouseRuns) || !summary.lighthouseRuns) problems.push('lighthouseRuns is not a count');
+  pages(summary.lighthouse, 'lighthouse', (page, where) => {
+    fields(page.scores, ['performance', 'accessibility', 'best-practices', 'seo'], isMeasurement, `${where}: scores`);
+    fields(page.metrics, ['fcp', 'lcp', 'tbt', 'cls'], isMeasurement, `${where}: metrics`);
+    fields(page.transfer, transferTypes, isCount, `${where}: transfer`);
+    fields(page, ['requests'], isCount, where);
+  });
+  pages(summary.axe, 'axe', (page, where) => {
+    if (!Array.isArray(page.rules) || !page.rules.every(rule => typeof rule === 'string')) problems.push(`${where}: rules missing`);
+    if (!isObject(page.counts)) return problems.push(`${where}: counts missing`);
+    for (const impact of impacts) fields(page.counts[impact], ['rules', 'nodes'], isCount, `${where}: ${impact}`);
+  });
+  fields(summary.build, ['cold', 'warm'], value => typeof value === 'number' && Number.isFinite(value) && value >= 0, 'build');
+  fields(summary.repository?.assetsLib, ['bytes', 'files'], isCount, 'repository.assetsLib');
   return problems;
 }
 
@@ -170,25 +167,29 @@ const ruleId = rule => rule.replace(/\s*\([^)]*\)$/, '');
 export function compareSummaries(baseline, current, budget) {
   const checks = [];
   const warnings = [];
-  const pairs = (group, before, after) => {
+  const pairs = (group, label, before, after) => {
     const afterByName = new Map(after.map(page => [page.name, page]));
     const beforeNames = new Set(before.map(page => page.name));
     for (const page of after) {
-      if (!beforeNames.has(page.name)) warnings.push(`${group} page "${page.name}" has no baseline and was not compared.`);
+      if (!beforeNames.has(page.name)) warnings.push(`${label} page "${page.name}" has no baseline and was not compared.`);
     }
     return before.flatMap(page => {
       if (afterByName.has(page.name)) return [[page, afterByName.get(page.name)]];
-      warnings.push(`${group} page "${page.name}" from the baseline was not measured in this run.`);
+      // Dropping or renaming a page would otherwise drop its checks silently.
+      checks.push({
+        group, page: page.name, metric: 'coverage', label: `${label} measured`, unit: 'text',
+        baseline: 'yes', current: 'no', status: 'fail', reason: 'page from the baseline was not measured',
+      });
       return [];
     });
   };
-  for (const [before, after] of pairs('Lighthouse', baseline.lighthouse, current.lighthouse)) {
+  for (const [before, after] of pairs('lighthouse', 'Lighthouse', baseline.lighthouse, current.lighthouse)) {
     for (const [key, rule] of Object.entries(budget.lighthouse)) {
       const metric = lighthouseMetrics[key];
-      checks.push(check({ group: 'lighthouse', page: after.name, key, metric, rule, baseline: metric.get(before) ?? null, current: metric.get(after) ?? null }));
+      checks.push(check({ group: 'lighthouse', page: after.name, key, metric, rule, baseline: metric.get(before), current: metric.get(after) }));
     }
   }
-  for (const [before, after] of pairs('axe', baseline.axe, current.axe)) {
+  for (const [before, after] of pairs('axe', 'axe', baseline.axe, current.axe)) {
     for (const [key, rule] of Object.entries(budget.axe)) {
       const metric = axeMetrics[key];
       checks.push(check({ group: 'axe', page: after.name, key, metric, rule, baseline: metric.get(before), current: metric.get(after) }));
@@ -204,17 +205,17 @@ export function compareSummaries(baseline, current, budget) {
   }
   for (const [key, rule] of Object.entries(budget.build)) {
     const metric = buildMetrics[key];
-    checks.push(check({ group: 'build', page: '–', key, metric, rule, baseline: metric.get(baseline.build) ?? null, current: metric.get(current.build) ?? null }));
+    checks.push(check({ group: 'build', page: '–', key, metric, rule, baseline: metric.get(baseline.build), current: metric.get(current.build) }));
   }
   for (const [key, rule] of Object.entries(budget.repository)) {
     const metric = repositoryMetrics[key];
-    checks.push(check({ group: 'repository', page: '–', key, metric, rule, baseline: metric.get(baseline.repository) ?? null, current: metric.get(current.repository) ?? null }));
+    checks.push(check({ group: 'repository', page: '–', key, metric, rule, baseline: metric.get(baseline.repository), current: metric.get(current.repository) }));
   }
   if (baseline.build.hugo && current.build.hugo && baseline.build.hugo !== current.build.hugo) {
     warnings.push(`The baseline was built with Hugo ${baseline.build.hugo}, this run with ${current.build.hugo}.`);
   }
   if (baseline.lighthouseRuns !== current.lighthouseRuns) {
-    warnings.push(`The baseline used ${baseline.lighthouseRuns ?? 'an unknown number of'} Lighthouse runs, this run ${current.lighthouseRuns}.`);
+    warnings.push(`The baseline used ${baseline.lighthouseRuns} Lighthouse runs, this run ${current.lighthouseRuns}.`);
   }
   return { checks, warnings, failed: checks.some(item => item.status === 'fail') };
 }
@@ -225,12 +226,14 @@ function format(value, unit) {
     case 'ms': return `${Math.round(value)} ms`;
     case 'bytes': return Math.abs(value) >= 1024 * 1024 ? `${(value / 1024 / 1024).toFixed(2)} MiB` : `${(value / 1024).toFixed(1)} KiB`;
     case 'cls': return value.toFixed(3);
+    case 'text': return String(value);
     default: return String(Math.round(value));
   }
 }
 
 function change(item) {
   if (item.metric === 'rules') return item.added.length ? item.added.join(', ') : '–';
+  if (item.metric === 'coverage') return '–';
   if (typeof item.baseline !== 'number' || typeof item.current !== 'number') return '–';
   const delta = item.current - item.baseline;
   const sign = delta > 0 ? '+' : delta < 0 ? '−' : '±';

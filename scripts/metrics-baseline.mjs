@@ -13,6 +13,8 @@ const maxArtifactBytes = 200 * 1024 * 1024;
 const maxSummaryBytes = 1024 * 1024;
 const maxCandidates = 10;
 const maxDownloads = 3;
+const perPage = 100;
+const maxPages = 5;
 
 // Keeps completed, successful runs a push to `branch` of `repository` started
 // in one of `workflows`, newest first.
@@ -42,6 +44,14 @@ export function gitHelpers(cwd) {
     },
     mergeBase(ref, branch) {
       return git('merge-base', ref, `refs/remotes/origin/${branch}`);
+    },
+    // The file's content at `sha`, or null when it does not exist there.
+    show(sha, file) {
+      try {
+        return git('show', `${sha}:${file}`);
+      } catch {
+        return null;
+      }
     },
     changed(sha, file) {
       try {
@@ -100,28 +110,37 @@ export function githubApi({ token, apiUrl = 'https://api.github.com', fetchImpl 
 }
 
 // Looks up, waits for (when the exact base is still running) and downloads the
-// baseline. Returns { summary, run, distance, skipped } or { missing, skipped }.
-export async function findBaseline({ api, git, repository, baseSha, config, sleep, now = Date.now, log = () => {}, readZip = readSummaryFromZip }) {
-  const { branch, workflows, artifact, waitMinutes } = config;
+// baseline: a run of the base commit itself first, then the closest successful
+// run of an older commit on `branch`. Returns { summary, run, distance, skipped }
+// or { missing, skipped }.
+export async function findBaseline({ api, git, repository, branch, baseSha, config, sleep, now = Date.now, log = () => {}, readZip = readSummaryFromZip }) {
+  const { workflows, artifact, waitMinutes } = config;
   const skipped = [];
-  const listRuns = async query => (await Promise.all(workflows.map(async workflow => {
-    try {
-      const page = await api.request(`/repos/${repository}/actions/workflows/${encodeURIComponent(workflow)}/runs?${query}`);
-      return page.workflow_runs || [];
-    } catch (error) {
-      // A workflow listed in the budget may not exist on master (yet).
-      if (error.status === 404) return [];
-      throw error;
-    }
-  }))).flat();
-  const branchQuery = `branch=${encodeURIComponent(branch)}&event=push`;
+  const trust = runs => trustedRuns(runs, { repository, branch, workflows });
+  const succeeded = run => run.status === 'completed' && run.conclusion === 'success';
+  const branchQuery = `branch=${encodeURIComponent(branch)}&event=push&per_page=${perPage}`;
+  // Returns the runs of every listed workflow and whether all lists are exhausted.
+  const listRuns = async query => {
+    const pages = await Promise.all(workflows.map(async workflow => {
+      try {
+        const page = await api.request(`/repos/${repository}/actions/workflows/${encodeURIComponent(workflow)}/runs?${branchQuery}&${query}`);
+        return page.workflow_runs || [];
+      } catch (error) {
+        // A workflow listed in the budget may not exist on the branch (yet).
+        if (error.status === 404) return [];
+        throw error;
+      }
+    }));
+    return { runs: trust(pages.flat()), exhausted: pages.every(page => page.length < perPage) };
+  };
 
   // A pull request opened right after a merge would otherwise compare with the
   // commit before that merge; give the base commit's own run time to finish.
   const deadline = now() + waitMinutes * 60_000;
+  let exact;
   for (;;) {
-    const pending = trustedRuns(await listRuns(`${branchQuery}&head_sha=${baseSha}&per_page=20`), { repository, branch, workflows })
-      .filter(run => run.status !== 'completed');
+    ({ runs: exact } = await listRuns(`head_sha=${baseSha}`));
+    const pending = exact.filter(run => run.status !== 'completed');
     if (!pending.length || now() >= deadline) {
       if (pending.length) skipped.push(`run ${pending[0].id} for the base commit was still ${pending[0].status} after waiting ${waitMinutes} min`);
       break;
@@ -130,53 +149,66 @@ export async function findBaseline({ api, git, repository, baseSha, config, slee
     await sleep(Math.min(60_000, Math.max(0, deadline - now())));
   }
 
-  const runs = trustedRuns(await listRuns(`${branchQuery}&status=success&per_page=50`), { repository, branch, workflows })
-    .filter(run => run.conclusion === 'success' && run.status === 'completed');
-  const candidates = [];
-  for (const run of runs) {
-    const distance = git.distance(run.head_sha, baseSha);
-    if (distance === null) continue;
-    candidates.push({ run, distance });
-  }
-  // Closest commit first; for re-runs of one commit, the newest run.
-  candidates.sort((a, b) => a.distance - b.distance);
-
+  const tried = new Set();
   let downloads = 0;
-  for (const { run, distance } of candidates.slice(0, maxCandidates)) {
+  let ancestors = 0;
+  // Returns the run's summary, or null after recording why it cannot be used.
+  async function summaryOf(run) {
+    tried.add(run.id);
     const label = `run ${run.id} (${run.head_sha.slice(0, 7)})`;
     try {
-      const { artifacts = [] } = await api.request(`/repos/${repository}/actions/runs/${run.id}/artifacts?name=${encodeURIComponent(artifact)}&per_page=10`);
-      const found = artifacts.find(item => item.name === artifact && !item.expired);
-      if (!found) {
-        skipped.push(`${label} has no unexpired "${artifact}" artifact`);
-        continue;
+      const { artifacts = [] } = await api.request(`/repos/${repository}/actions/runs/${run.id}/artifacts?name=${encodeURIComponent(artifact)}&per_page=100`);
+      // A re-run adds another artifact of the same name; the newest comes first.
+      const matches = artifacts.filter(item => item.name === artifact && !item.expired).sort((a, b) => b.id - a.id);
+      if (!matches.length) skipped.push(`${label} has no unexpired "${artifact}" artifact`);
+      for (const found of matches) {
+        if (found.size_in_bytes > maxArtifactBytes) {
+          skipped.push(`${label}: artifact ${found.id} is larger than ${maxArtifactBytes / 1024 / 1024} MiB`);
+          continue;
+        }
+        if (downloads >= maxDownloads) return null;
+        downloads += 1;
+        const zip = await api.request(`/repos/${repository}/actions/artifacts/${found.id}/zip`, { binary: true });
+        let summary;
+        try {
+          summary = JSON.parse(readZip(zip).toString('utf8'));
+        } catch (error) {
+          skipped.push(`${label}: cannot read summary.json from artifact ${found.id} (${error.message.split('\n')[0]})`);
+          continue;
+        }
+        const problems = summaryProblems(summary);
+        if (!problems.length) return summary;
+        skipped.push(`${label}: summary.json in artifact ${found.id} has an unexpected format (${problems.slice(0, 3).join('; ')})`);
       }
-      if (found.size_in_bytes > maxArtifactBytes) {
-        skipped.push(`${label}: the artifact is larger than ${maxArtifactBytes / 1024 / 1024} MiB`);
-        continue;
-      }
-      if (downloads >= maxDownloads) break;
-      downloads += 1;
-      const zip = await api.request(`/repos/${repository}/actions/artifacts/${found.id}/zip`, { binary: true });
-      let summary;
-      try {
-        summary = JSON.parse(readZip(zip).toString('utf8'));
-      } catch (error) {
-        skipped.push(`${label}: cannot read summary.json (${error.message.split('\n')[0]})`);
-        continue;
-      }
-      const problems = summaryProblems(summary);
-      if (problems.length) {
-        skipped.push(`${label}: summary.json has an unexpected format (${problems.slice(0, 3).join('; ')})`);
-        continue;
-      }
-      return { summary, run, distance, skipped };
     } catch (error) {
       skipped.push(`${label}: ${error.message}`);
     }
+    return null;
   }
-  const reason = candidates.length
-    ? `no usable baseline among the ${Math.min(candidates.length, maxCandidates)} closest successful ${branch} runs`
+
+  for (const run of exact.filter(succeeded)) {
+    const summary = await summaryOf(run);
+    if (summary) return { summary, run, distance: 0, skipped };
+  }
+  // Older commits, page by page; within a page, the closest commit first and,
+  // for re-runs of one commit, the newest run.
+  for (let page = 1; page <= maxPages && downloads < maxDownloads && ancestors < maxCandidates; page += 1) {
+    const { runs, exhausted } = await listRuns(`status=success&page=${page}`);
+    const candidates = runs
+      .filter(run => succeeded(run) && !tried.has(run.id))
+      .map(run => ({ run, distance: git.distance(run.head_sha, baseSha) }))
+      .filter(candidate => candidate.distance !== null)
+      .sort((a, b) => a.distance - b.distance);
+    for (const { run, distance } of candidates) {
+      if (downloads >= maxDownloads || ancestors >= maxCandidates) break;
+      ancestors += 1;
+      const summary = await summaryOf(run);
+      if (summary) return { summary, run, distance, skipped };
+    }
+    if (exhausted) break;
+  }
+  const reason = tried.size
+    ? `no usable baseline among the ${tried.size} closest successful ${branch} runs`
     : `no successful ${branch} push run of ${workflows.join(' or ')} is an ancestor of ${baseSha.slice(0, 7)}`;
   return { missing: reason, skipped };
 }

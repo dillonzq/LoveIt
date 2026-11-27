@@ -43,6 +43,14 @@ if (currentProblems.length) throw new Error(`This run's metrics have an unexpect
 
 const git = gitHelpers(root);
 const notes = [];
+// The branch whose push runs count as baselines; CI passes the default branch.
+const branch = env.LOVEIT_METRICS_BRANCH || 'master';
+if (!/^[\w./-]+$/.test(branch)) throw new Error(`Invalid baseline branch: ${branch}`);
+const budgetFile = path.relative(root, options.budget).split(path.sep).join('/');
+// Tolerances come from this pull request. Where the baseline comes from and
+// what happens without one come from the base commit, so a pull request cannot
+// loosen them for itself; changes to them take effect once merged.
+let policy = budget.baseline;
 let baseline;
 let source;
 let baselineSha;
@@ -56,11 +64,26 @@ if (options.baseline) {
   if (problems.length) throw new Error(`The baseline has an unexpected format: ${problems.join('; ')}`);
   source = `\`${options.baseline}\``;
 } else if (api) {
+  // Without the base commit there is nothing to compare with; that is a setup
+  // error (shallow clone, missing remote branch), not a missing baseline.
+  const baseSha = env.LOVEIT_METRICS_BASE || git.mergeBase('HEAD', branch);
   let result;
   try {
-    const baseSha = env.LOVEIT_METRICS_BASE || git.mergeBase('HEAD', budget.baseline.branch);
+    const trusted = git.show(baseSha, budgetFile);
+    if (trusted === null) {
+      notes.push(`\`${budgetFile}\` does not exist at the base commit; its \`baseline\` settings come from this pull request.`);
+    } else {
+      try {
+        policy = parseBudget(JSON.parse(trusted)).baseline;
+      } catch (error) {
+        notes.push(`\`${budgetFile}\` at the base commit is invalid (${error.message}); its \`baseline\` settings come from this pull request.`);
+      }
+      if (JSON.stringify(policy) !== JSON.stringify(budget.baseline)) {
+        notes.push(`This pull request changes the \`baseline\` settings in \`${budgetFile}\`; they apply once it is merged.`);
+      }
+    }
     result = await findBaseline({
-      api, git, repository: env.GITHUB_REPOSITORY, baseSha, config: budget.baseline,
+      api, git, repository: env.GITHUB_REPOSITORY, branch, baseSha, config: policy,
       sleep: ms => new Promise(resolve => setTimeout(resolve, ms)), log: console.log,
     });
     if (result.summary) {
@@ -69,7 +92,7 @@ if (options.baseline) {
       const where = result.distance === 0
         ? `the base commit \`${baseSha.slice(0, 7)}\``
         : `\`${baselineSha.slice(0, 7)}\`, ${result.distance} ${result.distance === 1 ? 'commit' : 'commits'} before the base commit \`${baseSha.slice(0, 7)}\``;
-      source = `[run ${result.run.id}](${result.run.html_url}) of ${budget.baseline.branch} at ${where}.`;
+      source = `[run ${result.run.id}](${result.run.html_url}) of ${branch} at ${where}.`;
       if (result.distance > 0) notes.push(`Changes merged after \`${baselineSha.slice(0, 7)}\` are counted as part of this pull request.`);
     }
   } catch (error) {
@@ -78,8 +101,8 @@ if (options.baseline) {
   // Explain why a closer master run was not used.
   if (!result.summary || result.distance > 0) for (const reason of result.skipped) notes.push(`Skipped ${reason}.`);
   if (!baseline) {
-    const fail = budget.baseline.missing === 'fail';
-    const message = `No ${budget.baseline.branch} baseline: ${result.missing}.`;
+    const fail = policy.missing === 'fail';
+    const message = `No ${branch} baseline: ${result.missing}.`;
     console.log(`::${fail ? 'error' : 'warning'} title=Metrics not compared::${message}`);
     report([
       '## Metrics compared with master', '',
@@ -92,23 +115,23 @@ if (options.baseline) {
   throw new Error('Pass --baseline <summary.json>, or set GITHUB_TOKEN and GITHUB_REPOSITORY to download the master baseline');
 }
 
-if (baselineSha && git.changed(baselineSha, path.relative(root, options.budget))) {
-  notes.push('`metrics-budget.json` differs from the baseline commit; this run uses the version in this pull request.');
+if (baselineSha && git.changed(baselineSha, budgetFile)) {
+  notes.push(`\`${budgetFile}\` differs from the baseline commit; the tolerances in this pull request apply.`);
 }
 
 const result = compareSummaries(baseline, current, budget);
 let accepted = false;
-if (result.failed && api && budget.baseline.acceptLabel && /^\d+$/.test(env.PR_NUMBER || '')) {
+if (result.failed && api && policy.acceptLabel && /^\d+$/.test(env.PR_NUMBER || '')) {
   // Read the labels now rather than from the event payload, so that adding the
   // label and re-running this job is enough.
   try {
     const labels = await api.request(`/repos/${env.GITHUB_REPOSITORY}/issues/${env.PR_NUMBER}/labels?per_page=100`);
-    accepted = labels.some(label => label.name === budget.baseline.acceptLabel);
+    accepted = labels.some(label => label.name === policy.acceptLabel);
   } catch (error) {
     notes.push(`Cannot read the pull request's labels: ${error.message}.`);
   }
-  if (accepted) notes.push(`The \`${budget.baseline.acceptLabel}\` label accepts these regressions; the check passes.`);
-  else notes.push(`If the regressions are intended, a maintainer can add the \`${budget.baseline.acceptLabel}\` label and re-run this job.`);
+  if (accepted) notes.push(`The \`${policy.acceptLabel}\` label accepts these regressions; the check passes.`);
+  else notes.push(`If the regressions are intended, a maintainer can add the \`${policy.acceptLabel}\` label and re-run this job.`);
 }
 report(renderComparison(result, { source, notes }), { baseline: source, accepted, ...result });
 if (result.failed) {

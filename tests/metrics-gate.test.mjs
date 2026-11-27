@@ -67,15 +67,15 @@ test('improvements pass and missing values are reported', () => {
   assert.equal(find('home', 'lcp').status, 'improved');
   assert.equal(find('home', 'tbt').status, 'fail');
   assert.equal(find('post', 'tbt').status, 'skipped');
-  assert.deepEqual(result.warnings, [
-    'Lighthouse page "tags" has no baseline and was not compared.',
-    'axe page "404" from the baseline was not measured in this run.',
-  ]);
+  assert.deepEqual(result.warnings, ['Lighthouse page "tags" has no baseline and was not compared.']);
+  // A page the baseline measured but this run did not is a failure, not a warning.
+  assert.equal(find('404', 'coverage').status, 'fail');
+  assert.match(renderComparison(result), /\| 404 \| axe measured \| yes \| no \| – \| – \| ❌ worse \(page from the baseline was not measured\) \|/);
 });
 
 test('the allowed change is the larger of the relative and absolute tolerance', () => {
   const rules = parseBudget({ build: { cold: { relative: 0.5, absolute: 100 } } });
-  const summary = cold => ({ ...clone(masterRuns[0]), build: { cold, warm: 0 } });
+  const summary = cold => ({ ...clone(masterRuns[0]), build: { hugo: 'v0.170.1', cold, warm: 0 } });
   const allowed = (base, current) => compareSummaries(summary(base), summary(current), rules).checks[0];
   assert.equal(allowed(100, 200).status, 'pass');
   assert.equal(allowed(100, 201).status, 'fail');
@@ -99,15 +99,27 @@ test('summaries in an unknown format are rejected', () => {
   assert.deepEqual(summaryProblems([]), ['not a JSON object']);
   const broken = clone(masterRuns[0]);
   broken.lighthouse[0].metrics.lcp = '5 s';
+  delete broken.lighthouse[0].metrics.tbt;
   delete broken.lighthouse[1].transfer;
-  broken.axe.push(clone(broken.axe[0]));
+  broken.axe[0].counts = {};
+  broken.axe.push(clone(broken.axe[1]));
   delete broken.build;
   assert.deepEqual(summaryProblems(broken), [
-    'lighthouse home: lcp is not a number',
+    'lighthouse home: metrics.lcp is not valid',
+    'lighthouse home: metrics.tbt missing',
     'lighthouse post: transfer missing',
-    'axe: duplicate page "home"',
-    'build: cold and warm times missing',
+    'axe home: critical missing',
+    'axe home: serious missing',
+    'axe home: moderate missing',
+    'axe home: minor missing',
+    'axe: duplicate page "post"',
+    'build missing',
   ]);
+  // Lighthouse may not measure a value; null is valid, a missing field is not.
+  const unmeasured = clone(masterRuns[0]);
+  unmeasured.lighthouse[0].metrics.tbt = null;
+  assert.deepEqual(summaryProblems(unmeasured), []);
+  assert.deepEqual(summaryProblems({ ...clone(masterRuns[0]), lighthouse: [] }), ['lighthouse: expected a list of pages']);
 });
 
 const repository = 'owner/repo';
@@ -131,7 +143,9 @@ test('only successful pushes to master of this repository are trusted', () => {
   assert.deepEqual(trustedRuns(runs, { repository, branch: 'master', workflows: ['ci.yml', 'metrics.yml'] }).map(item => item.id), [6, 1]);
 });
 
-function fakeGitHub({ runs, pending = [], artifacts = {}, zips = {} }) {
+// `runs` are the successful runs, newest first, paged 100 at a time like the
+// API; `exact` are all runs of the base commit, whatever their state.
+function fakeGitHub({ runs, exact = [], artifacts = {}, zips = {} }) {
   const requests = [];
   const api = {
     async request(pathname, { binary } = {}) {
@@ -139,9 +153,12 @@ function fakeGitHub({ runs, pending = [], artifacts = {}, zips = {} }) {
       let match;
       if ((match = /\/actions\/workflows\/([^/]+)\/runs\?(.*)$/.exec(pathname))) {
         const query = new URLSearchParams(match[2]);
+        assert.equal(query.get('branch'), 'master');
+        assert.equal(query.get('event'), 'push');
         if (match[1] !== 'ci.yml') throw Object.assign(new Error('Not Found'), { status: 404 });
-        if (query.get('head_sha')) return { workflow_runs: pending.filter(item => item.head_sha === query.get('head_sha')) };
-        return { workflow_runs: runs };
+        if (query.get('head_sha')) return { workflow_runs: exact.filter(item => item.head_sha === query.get('head_sha')) };
+        const page = Number(query.get('page'));
+        return { workflow_runs: runs.slice((page - 1) * 100, page * 100) };
       }
       if ((match = /\/actions\/runs\/(\d+)\/artifacts/.exec(pathname))) return { artifacts: artifacts[match[1]] || [] };
       if ((match = /\/actions\/artifacts\/(\d+)\/zip$/.exec(pathname)) && binary) {
@@ -156,66 +173,87 @@ function fakeGitHub({ runs, pending = [], artifacts = {}, zips = {} }) {
 // Commits a ← b ← c ← d (base); x is on another branch.
 const history = { [sha('d')]: 0, [sha('c')]: 1, [sha('b')]: 2, [sha('a')]: 3 };
 const git = { distance: head => history[head] ?? null };
-const config = { branch: 'master', workflows: ['ci.yml', 'metrics.yml'], artifact: 'metrics', waitMinutes: 0 };
+const config = { workflows: ['ci.yml', 'metrics.yml'], artifact: 'metrics', waitMinutes: 0 };
 const artifact = (id, extra = {}) => [{ id, name: 'metrics', expired: false, size_in_bytes: 1000, ...extra }];
 const good = JSON.stringify(masterRuns[0]);
 
+const find = (github, extra = {}) => findBaseline({
+  api: github.api, git, repository, branch: 'master', baseSha: sha('d'), config, sleep: async () => {}, readZip: zip => zip, ...extra,
+});
+
 test('the baseline is the closest ancestor with a usable artifact', async () => {
-  const { api } = fakeGitHub({
+  const result = await find(fakeGitHub({
     runs: [run(11, 'x'), run(12, 'c'), run(13, 'd'), run(14, 'b')],
+    exact: [run(13, 'd')],
     artifacts: { 13: artifact(103, { expired: true }), 12: artifact(102), 14: artifact(104) },
     zips: { 102: '{"schema": 7}', 104: good },
-  });
-  const result = await findBaseline({ api, git, repository, baseSha: sha('d'), config, sleep: async () => {}, readZip: zip => zip });
+  }));
   assert.equal(result.run.id, 14);
   assert.equal(result.distance, 2);
   assert.deepEqual(result.summary, masterRuns[0]);
   assert.deepEqual(result.skipped, [
     'run 13 (ddddddd) has no unexpired "metrics" artifact',
-    'run 12 (ccccccc): summary.json has an unexpected format (schema 7 is not 1)',
+    'run 12 (ccccccc): summary.json in artifact 102 has an unexpected format (schema 7 is not 1)',
   ]);
 });
 
+test('the base commit run is used even when many newer runs exist', async () => {
+  // A re-run of an old pull request: its base is far behind the branch tip.
+  const newer = Array.from({ length: 150 }, (_, index) => run(1000 + index, 'x'));
+  const github = fakeGitHub({ runs: newer, exact: [run(13, 'd')], artifacts: { 13: artifact(103) }, zips: { 103: good } });
+  const result = await find(github);
+  assert.equal(result.run.id, 13);
+  assert.equal(result.distance, 0);
+  assert.equal(github.requests.some(pathname => pathname.includes('status=success')), false);
+});
+
+test('older commits are searched page by page', async () => {
+  const newer = Array.from({ length: 100 }, (_, index) => run(1000 + index, 'x'));
+  const github = fakeGitHub({ runs: [...newer, run(12, 'c')], artifacts: { 12: artifact(102) }, zips: { 102: good } });
+  const result = await find(github);
+  assert.equal(result.run.id, 12);
+  assert.equal(result.distance, 1);
+  assert.deepEqual(github.requests.filter(pathname => pathname.includes('/workflows/ci.yml/') && pathname.includes('status=success')).map(pathname => new URL(pathname, 'https://x').searchParams.get('page')), ['1', '2']);
+});
+
+test('the newest artifact of a re-run comes first, and older ones are tried next', async () => {
+  const partial = JSON.stringify({ ...masterRuns[0], axe: undefined });
+  const github = fakeGitHub({
+    runs: [], exact: [run(13, 'd')],
+    artifacts: { 13: [...artifact(201), ...artifact(203), { ...artifact(202)[0], name: 'other' }] },
+    zips: { 201: good, 203: partial },
+  });
+  const result = await find(github);
+  assert.equal(result.run.id, 13);
+  assert.deepEqual(result.skipped, ['run 13 (ddddddd): summary.json in artifact 203 has an unexpected format (axe: expected a list of pages)']);
+  assert.deepEqual(github.requests.filter(pathname => pathname.endsWith('/zip')), ['/repos/owner/repo/actions/artifacts/203/zip', '/repos/owner/repo/actions/artifacts/201/zip']);
+});
+
 test('a missing or unreadable baseline is reported, not thrown', async () => {
-  let result = await findBaseline({ api: fakeGitHub({ runs: [run(11, 'x')] }).api, git, repository, baseSha: sha('d'), config, sleep: async () => {} });
+  let result = await find(fakeGitHub({ runs: [run(11, 'x')] }));
   assert.match(result.missing, /no successful master push run of ci\.yml or metrics\.yml is an ancestor of ddddddd/);
-  result = await findBaseline({
-    api: fakeGitHub({ runs: [run(13, 'd')], artifacts: { 13: artifact(103) } }).api,
-    git, repository, baseSha: sha('d'), config, sleep: async () => {},
-  });
+  result = await find(fakeGitHub({ runs: [run(12, 'c')], artifacts: { 12: artifact(102) } }));
   assert.match(result.missing, /no usable baseline among the 1 closest/);
-  assert.deepEqual(result.skipped, ['run 13 (ddddddd): download failed']);
-  result = await findBaseline({
-    api: fakeGitHub({ runs: [run(13, 'd')], artifacts: { 13: artifact(103) }, zips: { 103: 'not json' } }).api,
-    git, repository, baseSha: sha('d'), config, sleep: async () => {}, readZip: zip => zip,
-  });
-  assert.match(result.skipped[0], /cannot read summary\.json/);
+  assert.deepEqual(result.skipped, ['run 12 (ccccccc): download failed']);
+  result = await find(fakeGitHub({ runs: [run(12, 'c')], artifacts: { 12: artifact(102) }, zips: { 102: 'not json' } }));
+  assert.match(result.skipped[0], /cannot read summary\.json from artifact 102/);
 });
 
 test('waits for the base commit run, up to the configured time', async () => {
   let clock = 0;
-  const pending = [run(13, 'd', { status: 'in_progress', conclusion: null })];
-  const github = fakeGitHub({ runs: [run(12, 'c')], pending, artifacts: { 12: artifact(102), 13: artifact(103) }, zips: { 102: good, 103: good } });
+  const exact = [run(13, 'd', { status: 'in_progress', conclusion: null })];
+  const github = fakeGitHub({ runs: [run(12, 'c')], exact, artifacts: { 12: artifact(102), 13: artifact(103) }, zips: { 102: good, 103: good } });
   const sleep = async ms => {
     clock += ms;
-    if (clock >= 120_000) {
-      pending[0] = { ...pending[0], status: 'completed', conclusion: 'success' };
-    }
+    if (clock >= 120_000) exact[0] = { ...exact[0], status: 'completed', conclusion: 'success' };
   };
-  // The finished run shows up in the list of successful runs.
-  const original = github.api.request;
-  github.api.request = async (pathname, options) => {
-    const response = await original(pathname, options);
-    if (pathname.includes('status=success') && pending[0].status === 'completed') return { workflow_runs: [...response.workflow_runs, pending[0]] };
-    return response;
-  };
-  let result = await findBaseline({ api: github.api, git, repository, baseSha: sha('d'), config: { ...config, waitMinutes: 10 }, sleep, now: () => clock, readZip: zip => zip });
+  let result = await find(github, { config: { ...config, waitMinutes: 10 }, sleep, now: () => clock });
   assert.equal(result.run.id, 13);
   assert.equal(clock, 120_000);
 
   clock = 0;
-  pending[0] = run(13, 'd', { status: 'queued', conclusion: null });
-  result = await findBaseline({ api: github.api, git, repository, baseSha: sha('d'), config: { ...config, waitMinutes: 1 }, sleep: async ms => { clock += ms; }, now: () => clock, readZip: zip => zip });
+  exact[0] = run(13, 'd', { status: 'queued', conclusion: null });
+  result = await find(github, { config: { ...config, waitMinutes: 1 }, sleep: async ms => { clock += ms; }, now: () => clock });
   assert.equal(result.run.id, 12);
   assert.deepEqual(result.skipped, ['run 13 for the base commit was still queued after waiting 1 min']);
 });

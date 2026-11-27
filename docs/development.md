@@ -204,19 +204,24 @@ to `build/metrics/comparison.md`.
   baseline) and an `absolute` tolerance; a value fails when it is worse by more
   than the larger of the two. Scores fail when they drop; timings, bytes,
   requests, axe nodes and build times fail when they grow, and so does any axe
-  rule the baseline did not violate. The `note` of each entry records the
+  rule the baseline did not violate, and a page the baseline measured but this
+  run did not. The `note` of each entry records the
   spread between master runs that the tolerance leaves room for; Lighthouse
   timings and build times vary much more between runners than bytes and axe
   results, which barely change. A metric left out of the budget is not checked,
   and an unknown key is an error.
-- **Baseline.** The baseline is the `summary.json` of the closest successful
-  run of a push to master (`baseline.workflows`) whose commit is an ancestor of
-  the pull request's base. Pull request runs, forks and other branches never
-  count, and nothing from the artifact is run: only `summary.json` is read and
-  its format checked. When the base commit's own run is still in progress, the
-  job waits up to `baseline.waitMinutes` for it, so a pull request updated right
-  after another one is merged compares with the merged state. Otherwise it uses
-  an older master commit and says so in the summary.
+- **Baseline.** The baseline is the `summary.json` of a successful run of a
+  push to the default branch (`baseline.workflows`) for the pull request's base
+  commit or, failing that, for the closest ancestor of it. Pull request runs,
+  forks and other branches never count, and nothing from the artifact is run:
+  only `summary.json` is read, and it must have every field the current summary
+  format has, or the next older run is tried. When the base commit's own run is
+  still in progress, the job waits up to `baseline.waitMinutes` for it, so a
+  pull request updated right after another one is merged compares with the
+  merged state. Otherwise it uses an older master commit and says so in the
+  summary. The `baseline` settings are read from the base commit's
+  `metrics-budget.json`, so a pull request that changes them, unlike the
+  tolerances, does not use its own version.
 - **No baseline.** When no baseline can be found or downloaded, or none has a
   format the gate understands, the job passes with a warning
   (`baseline.missing: "warn"`); set it to `"fail"` to require one. Re-run the job

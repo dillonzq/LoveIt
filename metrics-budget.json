@@ -5,10 +5,11 @@
     "max(relative × baseline, absolute). Scores are worse when lower; every",
     "other value is worse when higher. A metric left out is not checked.",
     "The notes record the spread between seven Metrics runs of master commits",
-    "(November 2026), which the tolerances leave room for."
+    "(November 2026), which the tolerances leave room for. The gate reads",
+    "`baseline` from the pull request's base commit, so changes to it apply",
+    "once merged; the tolerances come from the pull request itself."
   ],
   "baseline": {
-    "branch": "master",
     "workflows": ["ci.yml", "metrics.yml"],
     "artifact": "metrics",
     "waitMinutes": 20,
