@@ -130,9 +130,9 @@ The rendered output looks like this (hover over the link, there should be a tool
 
 ## 3 image {#image}
 
-{{< version 0.2.0 changed >}}
+{{< version 0.5.0 changed >}}
 
-`image` shortcode is an alternative to [`figure` shortcode](../theme-documentation-built-in-shortcodes#figure). `image` shortcode can take full advantage of the dependent libraries of [lazysizes](https://github.com/aFarkas/lazysizes) and [lightGallery](https://github.com/sachinchoolur/lightgallery).
+`image` shortcode is an alternative to [`figure` shortcode](../theme-documentation-built-in-shortcodes#figure). `image` shortcode uses Hugo's [image processing](../theme-documentation-content#contents-organization) and native lazy loading, and can take full advantage of [lightGallery](https://github.com/sachinchoolur/lightgallery).
 
 {{< admonition tip >}}
 {{< version 0.2.10 >}} The complete usage of [local resource references](../theme-documentation-content#contents-organization) is supported.
@@ -166,7 +166,7 @@ The `image` shortcode has the following named parameters:
 
 * **src_s** *[optional]*
 
-    URL of the image thumbnail, used for lightgallery, default value is the value of **src** parameter.
+    URL of the image thumbnail, used for lightgallery, default value is the smallest WebP copy of a processed image, otherwise the value of **src** parameter.
 
 * **src_l** *[optional]*
 
@@ -174,11 +174,11 @@ The `image` shortcode has the following named parameters:
 
 * **height** *[optional]*
 
-    `height` attribute of the image.
+    `height` attribute of the image. {{< version 0.5.0 changed >}} When only one of **width** and **height** is a number of pixels, the other one follows the aspect ratio of the image when Hugo can read its size.
 
 * **width** *[optional]*
 
-    `width` attribute of the image.
+    `width` attribute of the image. By default, the size of an image in the page bundle or in **assets** (not SVG).
 
 * **linked** *[optional]*
 

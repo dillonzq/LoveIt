@@ -52,9 +52,26 @@ The **priority** of references is also in the above order.
 There are many places in the theme where the above local resource references can be used,
 such as **links**, **images**, `image` shortcode, `music` shortcode and some params in the **front matter**.
 
-Images in page resources or assets directory [processing](https://gohugo.io/content-management/image-processing/)
-will be supported in the future.
-It's really cool! :(far fa-grin-squint):
+{{< version 0.5.0 >}} Images in page resources or in the assets directory are
+[processed](https://gohugo.io/content-management/image-processing/) by Hugo.
+This applies to Markdown images, the `image` shortcode, featured images and the home page avatar
+(the header logo only gets its `width` and `height`):
+
+* JPEG, PNG and WebP images get their `width` and `height`, which keeps the page from shifting while they load,
+  and a `srcset` of WebP copies 480 and 960 pixels wide (no wider than the image),
+  so browsers download a size that fits the screen.
+  The original file is the last `srcset` candidate when it is wider, and the `src` of the image.
+  Images are rotated as their Exif orientation says.
+* GIF, BMP and TIFF images get their `width` and `height` only, so animated GIFs stay animated.
+* SVG and other formats, files in the **static** directory and remote URLs are used as they are.
+  Put an image in the page bundle or in **assets** to have it processed.
+
+WebP copies need the extended edition of Hugo before 0.153.0; with the standard edition of those versions,
+images only get their size.
+
+The featured image of a post and the home page avatar are loaded at once with `fetchpriority="high"`,
+because they are usually the largest element in the first screen.
+Other images use the browser's native lazy loading (`loading="lazy"`).
 {{< /admonition >}}
 
 ## 2 Front Matter {#front-matter}

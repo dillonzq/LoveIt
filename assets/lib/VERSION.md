@@ -14,7 +14,6 @@
 | [Fuse.js](https://github.com/krisk/Fuse)                                            | fuse              |   7.5.0 | Apache-2.0                              |
 | [Gitalk](https://github.com/gitalk/gitalk)                                          | gitalk            |   1.8.0 | MIT                                     |
 | [KaTeX](https://github.com/KaTeX/KaTeX)                                             | katex             |  0.19.1 | MIT                                     |
-| [lazysizes](https://github.com/aFarkas/lazysizes)                                   | lazysizes         |   5.3.2 | MIT                                     |
 | [lightGallery](https://github.com/sachinchoolur/lightgallery)                       | lightgallery      |   3.0.0 | **GPL-3.0-only OR Commercial**          |
 | [Lunr.js](https://github.com/olivernn/lunr.js)                                      | lunr              |   2.3.9 | MIT (see [Lunr](#lunr))                 |
 | [Mapbox GL JS](https://github.com/mapbox/mapbox-gl-js)                              | mapbox-gl         |  3.35.2 | **Proprietary (Mapbox ToS)**            |

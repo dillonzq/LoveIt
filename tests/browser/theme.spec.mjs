@@ -479,7 +479,9 @@ test('lightGallery opens linked images with thumbnails, zoom and SVG icons', asy
   await expect(page.locator('.lg-current .lg-image')).toHaveAttribute('src', /Wavelength\.jpg$/);
   await expect(page.locator('.lg-sub-html h2')).toHaveText('Wavelength');
   await expect(page.locator('.lg-thumb-item')).toHaveCount(2);
-  // The second image sets its own thumbnail (src_s), which exThumbImage must pick up.
+  // The first thumbnail is the smallest WebP copy; the second image sets its own (src_s),
+  // which exThumbImage must pick up.
+  await expect(page.locator('.lg-thumb-item img').first()).toHaveAttribute('src', /Wavelength_hu_\w+\.webp$/);
   await expect(page.locator('.lg-thumb-item img').nth(1)).toHaveAttribute('src', /Wavelength\.jpg$/);
   for (const button of ['.lg-close', '.lg-download', '.lg-toggle-thumb', '.lg-zoom-in', '.lg-zoom-out']) {
     await expect(page.locator(`.lg-toolbar ${button} svg`)).toBeVisible();
@@ -492,6 +494,46 @@ test('lightGallery opens linked images with thumbnails, zoom and SVG icons', asy
   await expect(outer).not.toHaveClass(/\blg-visible\b/);
   expect(errors).toEqual([]);
   expect(missing).toEqual([]);
+});
+
+test('local images get their size, WebP srcset and native lazy loading; others are left alone', async ({ page }) => {
+  await page.goto('/fuse/blog/image-processing/');
+  await expect(page.locator('script[src*="lazysizes"], img.lazyload, img[data-src]')).toHaveCount(0);
+  const images = page.locator('#content img');
+  // Exif orientation 6: the 600x400 JPEG is shown 400x600, and its WebP copy is rotated to match.
+  const rotated = images.nth(0);
+  await expect(rotated).toHaveAttribute('src', /\/image-processing\/rotated\.jpg$/);
+  await expect(rotated).toHaveAttribute('width', '400');
+  await expect(rotated).toHaveAttribute('height', '600');
+  await expect(rotated).toHaveAttribute('srcset', /^\S+\.webp 400w$/);
+  await expect(rotated).toHaveAttribute('sizes', /100vw/);
+  await expect(rotated).toHaveAttribute('loading', 'lazy');
+  await expect(rotated).toHaveAttribute('decoding', 'async');
+  await rotated.scrollIntoViewIfNeeded();
+  // naturalWidth follows the density that sizes gives the candidate, so compare the aspect ratio.
+  await expect.poll(() => rotated.evaluate(img => img.complete && [img.currentSrc.endsWith('.webp'), Math.round(img.naturalHeight / img.naturalWidth * 10) / 10])).toEqual([true, 1.5]);
+  // A width alone gets the height that keeps the aspect ratio.
+  const narrow = images.nth(1);
+  await expect(narrow).toHaveAttribute('width', '200');
+  await expect(narrow).toHaveAttribute('height', '300');
+  // Files under static/ and remote images are used as they are.
+  for (const [index, src] of [[2, /\/android-chrome-192x192\.png$/], [3, /^https:\/\/cdn\.example\.com\/remote\.png$/]]) {
+    const image = images.nth(index);
+    await expect(image).toHaveAttribute('src', src);
+    await expect(image).not.toHaveAttribute('srcset');
+    await expect(image).not.toHaveAttribute('width');
+    await expect(image).toHaveAttribute('loading', 'lazy');
+  }
+
+  // The bundle's featured image is the first-screen image: loaded at once with a high priority.
+  const featured = page.locator('.featured-image img');
+  await expect(featured).toHaveAttribute('src', /\/image-processing\/featured-image\.jpg$/);
+  await expect(featured).toHaveAttribute('fetchpriority', 'high');
+  await expect(featured).toHaveAttribute('loading', 'eager');
+  await expect(featured).not.toHaveAttribute('decoding');
+  await expect(featured).toHaveAttribute('width', '600');
+  await expect(featured).toHaveAttribute('height', '400');
+  await expect(featured).toHaveAttribute('srcset', /^\S+\.webp 480w, \S+\.webp 600w$/);
 });
 
 test('lightGallery keeps the zoom buttons and mobile defaults on phones', async ({ browser }) => {

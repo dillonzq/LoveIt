@@ -4,10 +4,10 @@
     {{- /* Featured image */ -}}
     {{- $image := $params.featuredimagepreview | default $params.featuredimage -}}
     {{- with .Resources.GetMatch "featured-image" -}}
-        {{- $image = .RelPermalink -}}
+        {{- $image = .Name -}}
     {{- end -}}
     {{- with .Resources.GetMatch "featured-image-preview" -}}
-        {{- $image = .RelPermalink -}}
+        {{- $image = .Name -}}
     {{- end -}}
     {{- with $image -}}
         <div class="featured-image-preview">

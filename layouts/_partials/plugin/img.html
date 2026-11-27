@@ -1,48 +1,121 @@
-{{- /* lazysizes and lightgallery */ -}}
+{{- /*
+    Render an image, optionally linked for lightGallery.
+
+    Options:
+    - Src: page resource name, path under assets/ or static/, or URL.
+    - Resources: the page resources to look Src up in first.
+    - Alt, Title, Caption, Class, Rel, Linked: as before.
+    - Width, Height: override the intrinsic size. When only one is a number,
+      the other follows the image's aspect ratio.
+    - SrcSmall, SrcLarge: lightGallery thumbnail and full-size image.
+    - Eager: an image in the first screen that may be the largest one
+      (loading="eager" and fetchpriority="high").
+    - Lazy: false loads the image at once without raising its priority.
+      Other images are lazy-loaded natively and decoded asynchronously.
+    - Widths: widths of the WebP copies in srcset; an empty slice disables them.
+    - Sizes: the sizes attribute that goes with srcset.
+
+    Page resources and global resources (assets/) in JPEG, PNG or WebP get
+    width, height and a srcset of WebP copies made with Hugo's image
+    processing, followed by the original file when it is wider than the
+    largest copy. GIF, BMP and TIFF only get their size; SVG, other formats,
+    files under static/ and remote URLs are linked as they are.
+*/ -}}
 {{- $src := .Src -}}
 {{- $width := .Width -}}
 {{- $height := .Height -}}
+{{- $widths := cond (isset . "Widths") .Widths (slice 480 960) -}}
+{{- $sizes := .Sizes | default "(max-width: 680px) 100vw, (max-width: 960px) 80vw, (max-width: 1280px) 52vw, (max-width: 1440px) 56vw, (max-width: 1688px) 64vw, 1080px" -}}
+{{- $candidates := slice -}}
+{{- $thumbnail := "" -}}
+
 {{- with dict "Path" $src "Resources" .Resources | partial "function/resource.html" -}}
     {{- $src = .RelPermalink -}}
-    {{ if not (eq .MediaType.SubType "svg") }}
-        {{- $width = $width | default .Width -}}
-        {{- $height = $height | default .Height -}}
-    {{ end }}
+    {{- $type := .MediaType.SubType -}}
+    {{- if eq .ResourceType "image" | and (in (slice "jpeg" "png" "webp" "gif" "bmp" "tiff") $type) -}}
+        {{- $image := . -}}
+        {{- /* Hugo does not apply the Exif orientation when it resizes; the browser does for the original. */ -}}
+        {{- if in (slice "jpeg" "tiff" "webp") $type -}}
+            {{- $orientation := 1 -}}
+            {{- if ge hugo.Version "0.155.3" -}}
+                {{- with .Meta -}}
+                    {{- $orientation = .Orientation -}}
+                {{- end -}}
+            {{- else if ne $type "webp" -}}
+                {{- with .Exif -}}
+                    {{- $orientation = index .Tags "Orientation" | default 1 -}}
+                {{- end -}}
+            {{- end -}}
+            {{- if gt (int $orientation) 1 -}}
+                {{- $image = $image.Filter images.AutoOrient -}}
+            {{- end -}}
+        {{- end -}}
+
+        {{- /* Fill in a missing dimension from the aspect ratio when the other one is a number of pixels. */ -}}
+        {{- $w := string $width -}}
+        {{- $h := string $height -}}
+        {{- if and $w (not $h) (findRE `^\d+$` $w) -}}
+            {{- $height = math.Round (div (mul (float $w) $image.Height) $image.Width) | int -}}
+        {{- else if and $h (not $w) (findRE `^\d+$` $h) -}}
+            {{- $width = math.Round (div (mul (float $h) $image.Width) $image.Height) | int -}}
+        {{- end -}}
+        {{- $width = $width | default $image.Width -}}
+        {{- $height = $height | default $image.Height -}}
+
+        {{- /* WebP encoding needs the extended edition before Hugo 0.153.0. */ -}}
+        {{- if in (slice "jpeg" "png" "webp") $type | and (or hugo.IsExtended (ge hugo.Version "0.153.0")) -}}
+            {{- /* Copies narrower than the image, plus one at its own width when a width reaches it. */ -}}
+            {{- $copies := slice -}}
+            {{- range $widths -}}
+                {{- if lt . $image.Width -}}
+                    {{- $copies = $copies | append . -}}
+                {{- end -}}
+            {{- end -}}
+            {{- $covered := lt (len $copies) (len $widths) -}}
+            {{- if $covered -}}
+                {{- $copies = $copies | append $image.Width -}}
+            {{- end -}}
+            {{- range sort ($copies | uniq) -}}
+                {{- $resized := $image.Resize (printf "%dx webp" .) -}}
+                {{- $candidates = $candidates | append (dict "URL" $resized.RelPermalink "Descriptor" (printf "%dw" $resized.Width)) -}}
+                {{- $thumbnail = $thumbnail | default $resized.RelPermalink -}}
+            {{- end -}}
+            {{- if and $candidates (not $covered) -}}
+                {{- $candidates = $candidates | append (dict "URL" $src "Descriptor" (printf "%dw" $image.Width)) -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
 {{- end -}}
 
-{{- $small := .SrcSmall | default $src -}}
+{{- /* Explicit thumbnail and full-size images for lightGallery; without them, unprocessed images keep using Src. */ -}}
+{{- $small := .SrcSmall -}}
 {{- with dict "Path" .SrcSmall "Resources" .Resources | partial "function/resource.html" -}}
     {{- $small = .RelPermalink -}}
 {{- end -}}
-
 {{- $large := .SrcLarge | default $src -}}
 {{- with dict "Path" .SrcLarge "Resources" .Resources | partial "function/resource.html" -}}
     {{- $large = .RelPermalink -}}
 {{- end -}}
+{{- /* Unprocessed images keep the former density srcset when a small or large variant is given. */ -}}
+{{- $srcset := $candidates -}}
+{{- if not $candidates | and (or .SrcSmall .SrcLarge) -}}
+    {{- $srcset = slice (dict "URL" ($small | default $src)) (dict "URL" $src "Descriptor" "1.5x") (dict "URL" $large "Descriptor" "2x") -}}
+{{- end -}}
+{{- $thumbnail = $small | default $thumbnail | default $src -}}
 
 {{- $alt := .Alt | default $src -}}
-{{- $loading := resources.Get "svg/loading.svg" | minify -}}
+
 {{- if .Linked -}}
-    <a class="lightgallery" href="{{ $large | safeURL }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $small | safeURL }}"{{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
-        <img
-            class="{{ if not .Eager }}lazyload{{ end }}{{ with .Class }} {{ . }}{{ end }}"
-            src="{{ if .Eager }}{{ $src | safeURL }}{{ else }}{{ $loading.RelPermalink }}{{ end }}"
-            {{ if .Eager }}loading="eager" fetchpriority="high" decoding="async"{{ else }}data-src="{{ $src | safeURL }}"{{ end }}
-            {{ if .Eager }}srcset{{ else }}data-srcset{{ end }}="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
-            {{ if not .Eager }}data-sizes="auto"{{ end }}
-            alt="{{ $alt }}"
-            {{- with $width }} width="{{ . }}"{{ end }}
-            {{- with $height }} height="{{ . }}"{{ end }} />
+    <a class="lightgallery" href="{{ $large | safeURL }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $thumbnail | safeURL }}"{{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
+{{- end -}}
+<img
+    {{- with .Class }} class="{{ . }}"{{ end }} src="{{ $src | safeURL }}"
+    {{- with $srcset }} srcset="{{ range $i, $c := . }}{{ if $i }}, {{ end }}{{ $c.URL | safeURL }}{{ with $c.Descriptor }} {{ . }}{{ end }}{{ end }}"{{ end }}
+    {{- if $candidates }} sizes="{{ $sizes }}"{{ end }} alt="{{ $alt }}"
+    {{- if not $.Linked }} title="{{ $.Title | default $alt }}"{{ end }}
+    {{- with $width }} width="{{ . }}"{{ end }}
+    {{- with $height }} height="{{ . }}"{{ end }}
+    {{- if .Eager }} loading="eager" fetchpriority="high"{{ else if ne .Lazy false }} loading="lazy" decoding="async"{{ end }} />
+{{- if .Linked -}}
     </a>
-{{- else -}}
-    <img
-        class="{{ if not .Eager }}lazyload{{ end }}{{ with .Class }} {{ . }}{{ end }}"
-        src="{{ if .Eager }}{{ $src | safeURL }}{{ else }}{{ $loading.RelPermalink }}{{ end }}"
-        {{ if .Eager }}loading="eager" fetchpriority="high" decoding="async"{{ else }}data-src="{{ $src | safeURL }}"{{ end }}
-        {{ if .Eager }}srcset{{ else }}data-srcset{{ end }}="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
-        {{ if not .Eager }}data-sizes="auto"{{ end }}
-        alt="{{ $alt }}"
-        title="{{ .Title | default $alt }}"
-        {{- with $width }} width="{{ . }}"{{ end }}
-        {{- with $height }} height="{{ . }}"{{ end }} />
 {{- end -}}
