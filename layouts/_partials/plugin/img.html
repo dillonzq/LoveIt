@@ -26,7 +26,7 @@
 {{- $src := .Src -}}
 {{- $width := .Width -}}
 {{- $height := .Height -}}
-{{- $widths := cond (isset . "Widths") .Widths (slice 400 800) -}}
+{{- $widths := cond (isset . "Widths") .Widths (slice 800) -}}
 {{- $sizes := .Sizes | default "(max-width: 680px) 100vw, (max-width: 960px) 80vw, (max-width: 1280px) 52vw, (max-width: 1440px) 56vw, (max-width: 1688px) 64vw, 1080px" -}}
 {{- $candidates := slice -}}
 {{- $thumbnail := "" -}}

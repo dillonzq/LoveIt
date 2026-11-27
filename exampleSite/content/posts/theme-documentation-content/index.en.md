@@ -58,7 +58,7 @@ This applies to Markdown images, the `image` shortcode, featured images and the 
 (the header logo only gets its `width` and `height`):
 
 * JPEG, PNG and WebP images get their `width` and `height`, which keeps the page from shifting while they load,
-  and a `srcset` of WebP copies 400 and 800 pixels wide (no wider than the image),
+  and a `srcset` with a WebP copy up to 800 pixels wide,
   so browsers download a size that fits the screen.
   The original file is the last `srcset` candidate when it is wider, and the `src` of the image.
   Images follow their Exif orientation. Before Hugo 0.155.0, PNG and WebP images

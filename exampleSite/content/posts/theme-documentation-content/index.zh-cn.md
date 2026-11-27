@@ -57,7 +57,7 @@ Markdown 图片, `image` shortcode, 文章特色图片和主页头像都会这�
 (网站 logo 只会带上 `width` 和 `height`):
 
 * JPEG, PNG 和 WebP 图片会带上 `width` 和 `height`, 避免图片加载时页面发生偏移,
-  并带上由 400 和 800 像素宽 (不超过原图宽度) 的 WebP 副本组成的 `srcset`,
+  并带上包含宽度不超过 800 像素的 WebP 副本的 `srcset`,
   浏览器会下载适合屏幕的尺寸.
   原图比副本更宽时会作为 `srcset` 的最后一个候选, 同时也是图片的 `src`.
   图片会按照 Exif 方向信息旋转. Hugo 0.155.0 之前的版本会保留 PNG 和 WebP 原图,

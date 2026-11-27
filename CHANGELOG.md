@@ -72,7 +72,7 @@ This file starts at 0.4.0. Older releases are described on the
   images, the `image` shortcode, featured images and the home page avatar
   found in the page bundle or under `assets/` get `width` and `height`, which
   keep the page from shifting while they load, and JPEG, PNG and WebP images
-  get a `srcset` of WebP copies 400 and 800 pixels wide with `sizes`. The
+  get a `srcset` with a WebP copy up to 800 pixels wide and `sizes`. The
   original file stays the `src`, the last `srcset` candidate when it is
   wider, and the lightGallery full-size image. Images are rotated as their
   Exif orientation says. Before Hugo 0.155.0, PNG and WebP images keep

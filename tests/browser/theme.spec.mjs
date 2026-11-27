@@ -318,6 +318,7 @@ test('first-screen avatar loads directly and scroll bursts share a frame', async
   await expect(avatar).not.toHaveAttribute('src', /loading\.svg/);
   if (readsPngOrientation) {
     await expect(avatar).toHaveAttribute('sizes', '6rem');
+    await expect(avatar).toHaveAttribute('srcset', /\.webp 480w, \S+avatar\.png 528w$/);
   } else {
     await expect(avatar).not.toHaveAttribute('srcset');
   }
@@ -604,7 +605,7 @@ test('local images get their size, WebP srcset and native lazy loading; others a
   await expect(featured).toHaveAttribute('height', '400');
   await expect.poll(() => featured.evaluate(img => img.offsetWidth === img.parentElement.clientWidth)).toBe(true);
   if (encodesWebP) {
-    await expect(featured).toHaveAttribute('srcset', /^\S+\.webp 400w, \S+\.webp 600w$/);
+    await expect(featured).toHaveAttribute('srcset', /^\S+\.webp 600w$/);
   } else {
     await expect(featured).not.toHaveAttribute('srcset');
   }
