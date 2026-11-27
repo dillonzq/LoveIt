@@ -66,6 +66,9 @@ code, pre {
     .code-title {
       width: 100%;
       padding: .4rem;
+      color: inherit;
+      font-weight: inherit;
+      text-align: start;
     }
 
     .code-title::after {

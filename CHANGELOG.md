@@ -21,7 +21,11 @@ This file starts at 0.4.0. Older releases are described on the
   `document.execCommand("copy")` where the API is missing or refused, such as
   on pages served over plain HTTP. The button turns green when the code is
   copied. When copying fails, it turns red and the code is left selected so it
-  can be copied by hand.
+  can be copied by hand. Screen readers announce the result.
+- The copy control and the code title that expands or collapses a code block
+  are `<button>` elements, so keyboard users can reach them. The code title
+  reports its state with `aria-expanded`. Sites that override
+  `_partials/plugin/code-block.html` should compare it with the new one.
 
 ### Removed
 

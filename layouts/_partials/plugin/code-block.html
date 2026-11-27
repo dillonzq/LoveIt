@@ -16,9 +16,11 @@
 {{- if not (strings.Contains $result `class="chroma"`) -}}
     {{- $result = transform.Highlight $content "text" $options -}}
 {{- end -}}
-<div class="code-block{{ if $lineNos }} code-line-numbers{{ end }}{{ if le $lines $maxShownLines }} open{{ end }}" style="counter-reset: code-block {{ sub $lineNoStart 1 }}">
+{{- $open := le $lines $maxShownLines -}}
+<div class="code-block{{ if $lineNos }} code-line-numbers{{ end }}{{ if $open }} open{{ end }}" style="counter-reset: code-block {{ sub $lineNoStart 1 }}">
     <div class="code-header language-{{ $lang }}">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        {{- /* A disclosure button; its name is the language shown by the ::after content. */}}
+        <button type="button" class="code-title link-like" aria-expanded="{{ $open }}"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></button>
         <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
         {{ if $copy }}<button type="button" class="copy link-like" title="{{ T "copyToClipboard" }}" aria-label="{{ T "copyToClipboard" }}" data-copied="{{ T "success" }}" data-copy-failed="{{ T "failure" }}"><i class="far fa-copy" aria-hidden="true"></i></button><span class="copy-status" role="status"></span>{{ end }}
     </div>

@@ -614,6 +614,27 @@ test('copy buttons copy code verbatim and unknown languages keep the code block 
   await context.close();
 });
 
+test('keyboard users can expand a collapsed code block and copy it', async ({ browser }) => {
+  const context = await browser.newContext({ permissions: ['clipboard-read', 'clipboard-write'] });
+  const page = await context.newPage();
+  await page.goto('/fuse/blog/code-collapsed/');
+  const block = page.locator('.code-block');
+  const toggle = block.getByRole('button', { name: 'Bash' });
+  const copy = block.getByRole('button', { name: 'Copy to clipboard' });
+  await expect(block).not.toHaveClass(/\bopen\b/);
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(copy).toBeHidden();
+  await toggle.focus();
+  await page.keyboard.press('Enter');
+  await expect(block).toHaveClass(/\bopen\b/);
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await page.keyboard.press('Tab');
+  await expect(copy).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe('echo one\necho two\necho three');
+  await context.close();
+});
+
 test('copy buttons fall back to execCommand and leave the code selected when copying fails', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));

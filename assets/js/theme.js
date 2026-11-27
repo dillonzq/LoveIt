@@ -326,17 +326,13 @@ class Theme {
     initHighlight() {
         Util.forEach(document.querySelectorAll('.code-block'), $codeBlock => {
             const $codeTitle = $codeBlock.querySelector('.code-header > .code-title');
-            if ($codeTitle) {
-                $codeTitle.addEventListener('click', () => {
-                    $codeBlock.classList.toggle('open');
-                }, false);
-            }
+            const toggle = () => {
+                const open = $codeBlock.classList.toggle('open');
+                if ($codeTitle) $codeTitle.setAttribute('aria-expanded', open);
+            };
+            if ($codeTitle) $codeTitle.addEventListener('click', toggle, false);
             const $ellipses = $codeBlock.querySelector('.code-header .ellipses');
-            if ($ellipses) {
-                $ellipses.addEventListener('click', () => {
-                    $codeBlock.classList.toggle('open');
-                }, false);
-            }
+            if ($ellipses) $ellipses.addEventListener('click', toggle, false);
             const $copy = $codeBlock.querySelector('.code-header .copy');
             if ($copy) {
                 const $code = $codeBlock.querySelector('code');
