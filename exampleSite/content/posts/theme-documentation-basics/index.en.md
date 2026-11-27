@@ -792,6 +792,12 @@ enableEmoji = true
     # Content-Security-Policy meta tag, for when HTTP headers cannot be set
     # https://content-security-policy.com/examples/meta/
     contentSecurityPolicy = ""
+    # {{< version 0.5.0 >}} referrer policy of the <meta name="referrer"> tag
+    # set "no-referrer" to send no Referer header at all
+    referrerPolicy = "strict-origin-when-cross-origin"
+    # {{< version 0.5.0 >}} Mermaid securityLevel ["strict", "loose"]
+    # "loose" allows click events and HTML labels in diagrams
+    mermaidSecurityLevel = "strict"
 
   # {{< version 0.2.10 >}} Site SEO config
   [params.seo]

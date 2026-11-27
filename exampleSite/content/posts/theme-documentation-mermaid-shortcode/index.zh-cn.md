@@ -37,6 +37,8 @@ graph LR;
 ```
 ````
 
+{{< version 0.5.0 changed >}} 图表使用 Mermaid 的 `strict` 安全级别 (`securityLevel`) 渲染, 这会禁用 `click` 交互并限制标签中的 HTML. 如果你信任图表的来源并需要这些功能, 可以在[网站配置](../theme-documentation-basics#site-configuration)的 `[params.security]` 中设置 `mermaidSecurityLevel = "loose"`.
+
 ## 流程图 {#flowchart}
 
 一个 **流程图** `mermaid` 示例:
