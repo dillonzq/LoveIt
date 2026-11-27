@@ -101,6 +101,9 @@ other = "Без резултата"
 [searchResults]
 other = "Резултати претраге"
 
+[searchSlashShortcut]
+other = "Отвори претрагу тастером /"
+
 [lunrLanguageCode]
 other = "sr"
 

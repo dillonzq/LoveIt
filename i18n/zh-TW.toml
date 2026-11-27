@@ -101,6 +101,9 @@ other = "沒有找到結果"
 [searchResults]
 other = "搜尋結果"
 
+[searchSlashShortcut]
+other = "按 / 鍵開啟搜尋"
+
 [lunrLanguageCode]
 other = "zh"
 

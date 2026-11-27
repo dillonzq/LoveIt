@@ -101,6 +101,9 @@ other = "Нічого не знайдено"
 [searchResults]
 other = "Результати пошуку"
 
+[searchSlashShortcut]
+other = "Відкривати пошук клавішею /"
+
 [lunrLanguageCode]
 other = "uk"
 

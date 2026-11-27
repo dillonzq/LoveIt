@@ -102,6 +102,9 @@ other = "কোনো ফলাফল পাওয়া যায় নি"
 [searchResults]
 other = "অনুসন্ধানের ফলাফল"
 
+[searchSlashShortcut]
+other = "অনুসন্ধান খুলতে / চাপুন"
+
 [lunrLanguageCode]
 other = "en"
 

@@ -102,6 +102,9 @@ other = "Geen resultaten gevonden"
 [searchResults]
 other = "Zoekresultaten"
 
+[searchSlashShortcut]
+other = "Druk op / om te zoeken"
+
 [lunrLanguageCode]
 other = "nl"
 

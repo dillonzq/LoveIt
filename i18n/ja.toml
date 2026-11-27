@@ -100,6 +100,9 @@ other = "見つかりませんでした"
 [searchResults]
 other = "検索結果"
 
+[searchSlashShortcut]
+other = "/ キーで検索を開く"
+
 [lunrLanguageCode]
 other = "ja"
 

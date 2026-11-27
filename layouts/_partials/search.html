@@ -26,10 +26,15 @@
         <div class="search-empty" id="search-empty" hidden></div>
         <div class="search-status" id="search-status" role="status"></div>
         <div class="search-footer">
-            Search by <a href="{{ $engine.href }}" rel="noopener noreferrer" target="_blank">
-                {{- with $engine.icon }}<i class="{{ . }}" aria-hidden="true"></i> {{ end -}}
-                {{- $engine.name -}}
-            </a>
+            <label class="search-shortcut">
+                <input type="checkbox" id="search-slash" checked> {{ T `searchSlashShortcut` }}
+            </label>
+            <span class="search-by">
+                Search by <a href="{{ $engine.href }}" rel="noopener noreferrer" target="_blank">
+                    {{- with $engine.icon }}<i class="{{ . }}" aria-hidden="true"></i> {{ end -}}
+                    {{- $engine.name -}}
+                </a>
+            </span>
         </div>
     </div>
 </dialog>

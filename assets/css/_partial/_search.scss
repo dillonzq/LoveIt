@@ -141,6 +141,11 @@ html:has(.search-dialog[open]) {
     display: none;
   }
 
+  // The options belong to the previous query until the new results arrive.
+  &[aria-busy=true] {
+    opacity: .6;
+  }
+
   .suggestion {
     padding: .75rem 1rem;
     border-inline-start: 3px solid transparent;
@@ -237,9 +242,13 @@ html:has(.search-dialog[open]) {
 }
 
 .search-footer {
+  display: flex;
   flex: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .25rem 1rem;
   padding: .5rem 1rem;
-  text-align: end;
   font-size: .8rem;
   color: $global-font-secondary-color;
   border-top: 1px solid $global-border-color;
@@ -253,6 +262,21 @@ html:has(.search-dialog[open]) {
 
   a {
     font-size: 1rem;
+  }
+
+  .search-shortcut {
+    display: inline-flex;
+    align-items: center;
+    gap: .375rem;
+    cursor: pointer;
+
+    input {
+      margin: 0;
+    }
+  }
+
+  .search-by {
+    margin-inline-start: auto;
   }
 }
 

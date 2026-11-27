@@ -101,6 +101,9 @@ other = "Sonuç bulunamadı"
 [searchResults]
 other = "Arama sonuçları"
 
+[searchSlashShortcut]
+other = "Aramayı açmak için / tuşuna basın"
+
 [lunrLanguageCode]
 other = "tr"
 

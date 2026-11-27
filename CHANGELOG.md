@@ -17,7 +17,9 @@ This file starts at 0.4.0. Older releases are described on the
 - Keyboard shortcuts for search: `/` (outside text fields) and `Ctrl+K` or
   `⌘K` open it. Arrow keys move through the results, `Enter` opens one
   (`Ctrl`/`⌘`/`Shift+Enter` or a middle click opens it in a new tab), and
-  `Esc` closes search and returns focus to where it was.
+  `Esc` closes search and returns focus to where it was. Visitors can turn
+  off the `/` shortcut with a checkbox in the search dialog; the choice is
+  remembered in the browser.
 
 ### Changed
 
@@ -33,7 +35,7 @@ This file starts at 0.4.0. Older releases are described on the
 ### Removed
 
 - autocomplete.js 0.38.1. `params.cdn.autocompleteJS` no longer has any
-  effect and the build warns when it is set.
+  effect.
 
 ## [0.4.1] - 2026-11-27
 

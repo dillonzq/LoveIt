@@ -101,6 +101,9 @@ other = "Sense resultats"
 [searchResults]
 other = "Resultats de la cerca"
 
+[searchSlashShortcut]
+other = "Prem / per obrir la cerca"
+
 [lunrLanguageCode]
 other = "ca"
 

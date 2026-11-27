@@ -138,23 +138,49 @@ class Theme {
         const $loading = document.getElementById('search-loading');
         const $clear = document.getElementById('search-clear');
         const $toggles = document.querySelectorAll('[aria-controls="search-dialog"]');
+        const $slash = document.getElementById('search-slash');
         const resultsLabel = $results.getAttribute('aria-label');
         let requestId = 0;
         let searchTimer;
         let active = -1;
+        // While a new query is pending, the listed options belong to the previous one.
+        let stale = false;
+        let queuedEnter;
         let opener;
         let ready;
 
         // Lunr's Chinese segmenter is a classic script, loaded before the first search.
-        const loadSegmentit = () => ready ??= new Promise(resolve => {
-            if (!searchConfig.lunrSegmentitURL || document.getElementById('lunr-segmentit')) return resolve();
+        // A failed load is retried by the next search instead of building an index without it.
+        const loadSegmentit = () => ready ??= new Promise((resolve, reject) => {
+            if (!searchConfig.lunrSegmentitURL || window.lunr?.segmentit) return resolve();
+            document.getElementById('lunr-segmentit')?.remove();
             const script = document.createElement('script');
             script.id = 'lunr-segmentit';
             script.src = searchConfig.lunrSegmentitURL;
             script.async = true;
-            script.onload = script.onerror = () => resolve();
+            script.onload = () => resolve();
+            script.onerror = () => {
+                script.remove();
+                ready = undefined;
+                reject(new Error(`Search segmenter: cannot load ${searchConfig.lunrSegmentitURL}`));
+            };
             document.body.appendChild(script);
         });
+
+        // `/` is a single-character shortcut, so visitors can turn it off (WCAG 2.1.4).
+        const slashEnabled = () => {
+            try { return window.localStorage?.getItem('search-slash') !== 'off'; } catch { return true; }
+        };
+        const updateShortcuts = () => {
+            const enabled = slashEnabled();
+            $slash.checked = enabled;
+            Util.forEach($toggles, $toggle => $toggle.setAttribute('aria-keyshortcuts', `${enabled ? '/ ' : ''}Control+K Meta+K`));
+        };
+        updateShortcuts();
+        $slash.addEventListener('change', () => {
+            try { window.localStorage?.setItem('search-slash', $slash.checked ? 'on' : 'off'); } catch {}
+            updateShortcuts();
+        }, false);
 
         const options = () => $results.querySelectorAll('[role="option"]');
         const setActive = index => {
@@ -169,8 +195,10 @@ class Theme {
             $options[index].scrollIntoView({ block: 'nearest' });
         };
         const render = (query, results) => {
+            stale = false;
             active = -1;
             $input.removeAttribute('aria-activedescendant');
+            $results.removeAttribute('aria-busy');
             $results.replaceChildren(...results.map((item, index) => {
                 const $option = document.createElement('li');
                 $option.id = `search-option-${index}`;
@@ -192,21 +220,34 @@ class Theme {
             $status.textContent = !query ? '' : expanded ? `${resultsLabel}: ${results.length}` : searchConfig.noResultsFound;
         };
         const go = ($option, newTab) => {
-            const uri = $option?.dataset.uri;
-            if (!uri) return;
-            if (newTab) window.open(uri, '_blank', 'noopener');
-            else window.location.assign(uri);
+            let url;
+            try {
+                url = new URL($option?.dataset.uri ?? '', document.baseURI);
+            } catch {
+                return;
+            }
+            // Records come from an index or a remote service; never follow `javascript:` and the like.
+            if (!$option?.dataset.uri || !['http:', 'https:'].includes(url.protocol)) return;
+            if (newTab) window.open(url.href, '_blank', 'noopener');
+            else window.location.assign(url.href);
+        };
+        const markStale = () => {
+            stale = true;
+            setActive(-1);
+            $results.setAttribute('aria-busy', 'true');
         };
         const search = () => {
             const id = ++requestId;
             const query = $input.value;
             clearTimeout(searchTimer);
+            queuedEnter = undefined;
             $clear.hidden = !query;
             if (!query.trim()) {
                 $loading.hidden = true;
                 render('', []);
                 return;
             }
+            markStale();
             $loading.hidden = false;
             $clear.hidden = true;
             searchTimer = setTimeout(async () => {
@@ -222,13 +263,17 @@ class Theme {
                 $loading.hidden = true;
                 $clear.hidden = false;
                 render(query, results);
+                // Enter pressed while this query was pending opens its first result.
+                if (queuedEnter !== undefined) go(options()[0], queuedEnter);
+                queuedEnter = undefined;
             }, 120);
         };
-        const open = () => {
+        const open = $opener => {
             if (!$dialog.open) {
-                opener = document.activeElement;
+                // Safari does not focus a clicked button, so the toggle is passed in.
+                opener = $opener || document.activeElement;
                 $dialog.showModal();
-                loadSegmentit();
+                loadSegmentit().catch(() => {});
             }
             $input.focus();
             $input.select();
@@ -237,7 +282,7 @@ class Theme {
         Util.forEach($toggles, $toggle => $toggle.addEventListener('click', () => {
             this.setMenuMobileOpen(false);
             document.body.classList.remove('blur');
-            open();
+            open($toggle);
         }, false));
         document.getElementById('search-cancel').addEventListener('click', () => $dialog.close(), false);
         $clear.addEventListener('click', () => {
@@ -246,17 +291,25 @@ class Theme {
             $input.focus();
         }, false);
         $input.addEventListener('input', search, false);
+        // Safari reports the Enter that commits an IME candidate with isComposing false and keyCode 229.
+        const composing = event => event.isComposing || event.keyCode === 229;
         $input.addEventListener('keydown', event => {
-            if (event.isComposing) return;
+            if (composing(event)) return;
             const count = options().length;
+            const newTab = event.ctrlKey || event.metaKey || event.shiftKey;
             if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-                if (!count) return;
+                if (!count || stale) return;
                 event.preventDefault();
                 const step = event.key === 'ArrowDown' ? 1 : -1;
                 setActive(active < 0 && step < 0 ? count - 1 : (active + step + count) % count);
-            } else if (event.key === 'Enter' && count) {
-                event.preventDefault();
-                go(options()[Math.max(active, 0)], event.ctrlKey || event.metaKey || event.shiftKey);
+            } else if (event.key === 'Enter') {
+                if (stale) {
+                    event.preventDefault();
+                    queuedEnter = newTab;
+                } else if (count) {
+                    event.preventDefault();
+                    go(options()[Math.max(active, 0)], newTab);
+                }
             }
         }, false);
         $results.addEventListener('click', event => {
@@ -279,9 +332,9 @@ class Theme {
         }, false);
         document.addEventListener('keydown', event => {
             // Autofill dispatches keydown events without a key.
-            if (event.defaultPrevented || event.isComposing || event.altKey || !event.key) return;
+            if (event.defaultPrevented || composing(event) || event.altKey || !event.key) return;
             const shortcut = (event.ctrlKey || event.metaKey) && !event.shiftKey && event.key.toLowerCase() === 'k';
-            const slash = event.key === '/' && !event.ctrlKey && !event.metaKey && !$dialog.open
+            const slash = event.key === '/' && !event.ctrlKey && !event.metaKey && !$dialog.open && slashEnabled()
                 && !event.target.closest?.('input, textarea, select, [contenteditable]:not([contenteditable="false"])');
             if (!shortcut && !slash) return;
             event.preventDefault();

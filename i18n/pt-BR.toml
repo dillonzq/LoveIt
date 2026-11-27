@@ -101,6 +101,9 @@ other = "Nenhum resultado encontrado"
 [searchResults]
 other = "Resultados da pesquisa"
 
+[searchSlashShortcut]
+other = "Pressione / para abrir a pesquisa"
+
 [lunrLanguageCode]
 other = "pt"
 

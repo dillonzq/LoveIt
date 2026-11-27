@@ -185,6 +185,82 @@ test('search: Enter without an active option opens the first result; no results 
   await expect(page).toHaveURL(/\/fuse\/blog\/guide\/$/);
 });
 
+test('search: Enter during a pending query opens the new first result, never a stale or unsafe one', async ({ page }) => {
+  await page.goto('/algolia/blog/');
+  await page.evaluate(() => {
+    const slugs = { kw: ['guide', 'gallery'], slow: ['math', 'guide'] };
+    window['algoliasearch/lite'] = { liteClient: () => ({ search: async ({ requests: [{ query }] }) => {
+      if (query === 'slow') await new Promise(resolve => setTimeout(resolve, 600));
+      const hits = query === 'evil'
+        ? [{ uri: 'javascript:window.__pwned=1', title: 'evil', content: 'evil' }]
+        : (slugs[query] || []).map(slug => ({ uri: `/algolia/blog/${slug}/`, title: `${query} ${slug}`, content: query }));
+      return { results: [{ hits }] };
+    } }) };
+  });
+  await page.keyboard.press('/');
+  const input = page.locator('#search-input');
+  const options = page.locator('#search-results [role="option"]');
+
+  await input.fill('evil');
+  await expect(options).toHaveCount(1);
+  await page.keyboard.press('Enter');
+  await options.first().click();
+  expect(await page.evaluate(() => window.__pwned)).toBeUndefined();
+  await expect(page).toHaveURL(/\/algolia\/blog\/$/);
+
+  // Confirming an IME candidate in Safari sends Enter with keyCode 229.
+  await input.fill('kw');
+  await expect(options).toHaveCount(2);
+  await input.evaluate(el => el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', keyCode: 229, bubbles: true, cancelable: true })));
+  await page.waitForTimeout(200);
+  await expect(page).toHaveURL(/\/algolia\/blog\/$/);
+
+  await page.keyboard.press('ArrowDown');
+  await input.fill('slow');
+  await expect(page.locator('#search-results')).toHaveAttribute('aria-busy', 'true');
+  await expect(input).not.toHaveAttribute('aria-activedescendant');
+  await page.keyboard.press('ArrowDown');
+  await expect(input).not.toHaveAttribute('aria-activedescendant');
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/algolia\/blog\/math\/$/);
+});
+
+test('search: visitors can turn off the / shortcut and the choice persists', async ({ page }) => {
+  await page.goto('/fuse/blog/');
+  const toggle = page.locator('#search-toggle-desktop');
+  const dialog = page.locator('#search-dialog');
+  await expect(toggle).toHaveAttribute('aria-keyshortcuts', '/ Control+K Meta+K');
+  await toggle.click();
+  const checkbox = page.getByRole('checkbox', { name: 'Press / to open search' });
+  await expect(checkbox).toBeChecked();
+  await checkbox.uncheck();
+  await expect(toggle).toHaveAttribute('aria-keyshortcuts', 'Control+K Meta+K');
+  await page.keyboard.press('Escape');
+  await page.keyboard.press('/');
+  await expect(dialog).toBeHidden();
+  await page.reload();
+  await page.keyboard.press('/');
+  await expect(dialog).toBeHidden();
+  await page.keyboard.press('Control+k');
+  await expect(dialog).toBeVisible();
+  await expect(checkbox).not.toBeChecked();
+  await checkbox.check();
+  await page.keyboard.press('Escape');
+  await page.keyboard.press('/');
+  await expect(dialog).toBeVisible();
+});
+
+test('lunr: a failed Chinese segmenter load is retried by the next search', async ({ page }) => {
+  let attempts = 0;
+  await page.route('**/lunr.segmentit*.js', route => attempts++ ? route.continue() : route.abort());
+  await page.goto('/lunr/blog/zh-cn/');
+  await page.locator('#search-toggle-desktop').click();
+  await expect.poll(() => attempts).toBe(1);
+  await page.locator('#search-input').fill('中文');
+  await expect(page.locator('.suggestion-title').first()).toContainText('中文搜索指南');
+  expect(attempts).toBe(2);
+});
+
 for (const { name, viewport } of [{ name: 'desktop', viewport: { width: 1280, height: 800 } }, { name: 'mobile', viewport: { width: 390, height: 844 } }]) {
   test(`${name}: the open search dialog has no critical or region axe violations`, async ({ page }) => {
     await page.setViewportSize(viewport);

@@ -101,6 +101,9 @@ other = "Nici un rezultat gasit"
 [searchResults]
 other = "Rezultatele căutării"
 
+[searchSlashShortcut]
+other = "Apasă / pentru a deschide căutarea"
+
 [lunrLanguageCode]
 other = "ro"
 

@@ -101,6 +101,9 @@ other = "Không tìm thấy"
 [searchResults]
 other = "Kết quả tìm kiếm"
 
+[searchSlashShortcut]
+other = "Nhấn / để mở tìm kiếm"
+
 [lunrLanguageCode]
 other = "vi"
 
