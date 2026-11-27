@@ -110,7 +110,8 @@ async function withToolLock(fn) {
         renameSync(candidate, lock);
         acquired = true;
       } catch (error) {
-        if (!['ENOTEMPTY', 'EEXIST'].includes(error.code)) throw error;
+        const windowsContention = process.platform === 'win32' && error.code === 'EPERM' && existsSync(lock);
+        if (!windowsContention && !['ENOTEMPTY', 'EEXIST'].includes(error.code)) throw error;
         reclaimToolLock(lock);
         if (Date.now() - start > 20 * 60_000) throw new Error(`Timed out waiting for ${lock}`);
         await new Promise(resolve => setTimeout(resolve, 200));
