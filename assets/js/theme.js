@@ -127,7 +127,7 @@ class Theme {
         let active = -1;
         // While a new query is pending, the listed options belong to the previous one.
         let stale = false;
-        let queuedEnter;
+        let queuedEnter = false;
         let opener;
         let ready;
 
@@ -150,17 +150,16 @@ class Theme {
         });
 
         // `/` is a single-character shortcut, so visitors can turn it off (WCAG 2.1.4).
-        const slashEnabled = () => {
-            try { return window.localStorage?.getItem('search-slash') !== 'off'; } catch { return true; }
-        };
+        let slashEnabled = true;
+        try { slashEnabled = window.localStorage?.getItem('search-slash') !== 'off'; } catch {}
+        $slash.checked = slashEnabled;
         const updateShortcuts = () => {
-            const enabled = slashEnabled();
-            $slash.checked = enabled;
-            Util.forEach($toggles, $toggle => $toggle.setAttribute('aria-keyshortcuts', `${enabled ? '/ ' : ''}Control+K Meta+K`));
+            Util.forEach($toggles, $toggle => $toggle.setAttribute('aria-keyshortcuts', `${slashEnabled ? '/ ' : ''}Control+K Meta+K`));
         };
         updateShortcuts();
         $slash.addEventListener('change', () => {
-            try { window.localStorage?.setItem('search-slash', $slash.checked ? 'on' : 'off'); } catch {}
+            slashEnabled = $slash.checked;
+            try { window.localStorage?.setItem('search-slash', slashEnabled ? 'on' : 'off'); } catch {}
             updateShortcuts();
         }, false);
 
@@ -202,16 +201,24 @@ class Theme {
             $status.textContent = !query ? '' : expanded ? `${resultsLabel}: ${results.length}` : searchConfig.noResultsFound;
         };
         const go = ($option, newTab) => {
+            const uri = $option?.dataset.uri;
+            if (stale || !$dialog.open || !uri) return;
             let url;
             try {
-                url = new URL($option?.dataset.uri ?? '', document.baseURI);
+                url = new URL(uri, document.baseURI);
             } catch {
                 return;
             }
             // Records come from an index or a remote service; never follow `javascript:` and the like.
-            if (!$option?.dataset.uri || !['http:', 'https:'].includes(url.protocol)) return;
-            if (newTab) window.open(url.href, '_blank', 'noopener');
-            else window.location.assign(url.href);
+            if (!['http:', 'https:'].includes(url.protocol)) return;
+            if (newTab) {
+                window.open(url.href, '_blank', 'noopener');
+            } else {
+                // Closing first allows same-page fragment navigation to move focus to the result.
+                opener = undefined;
+                $dialog.close();
+                window.location.assign(url.href);
+            }
         };
         const markStale = () => {
             stale = true;
@@ -222,7 +229,7 @@ class Theme {
             const id = ++requestId;
             const query = $input.value;
             clearTimeout(searchTimer);
-            queuedEnter = undefined;
+            queuedEnter = false;
             $clear.hidden = !query;
             if (!query.trim()) {
                 $loading.hidden = true;
@@ -246,8 +253,8 @@ class Theme {
                 $clear.hidden = false;
                 render(query, results);
                 // Enter pressed while this query was pending opens its first result.
-                if (queuedEnter !== undefined) go(options()[0], queuedEnter);
-                queuedEnter = undefined;
+                if (queuedEnter) go(options()[0], false);
+                queuedEnter = false;
             }, 120);
         };
         const open = $opener => {
@@ -287,7 +294,8 @@ class Theme {
             } else if (event.key === 'Enter') {
                 if (stale) {
                     event.preventDefault();
-                    queuedEnter = newTab;
+                    // Opening a new tab requires the keypress's user activation.
+                    if (!newTab && !event.altKey) queuedEnter = true;
                 } else if (count) {
                     event.preventDefault();
                     go(options()[Math.max(active, 0)], newTab);
@@ -316,7 +324,7 @@ class Theme {
             // Autofill dispatches keydown events without a key.
             if (event.defaultPrevented || composing(event) || event.altKey || !event.key) return;
             const shortcut = (event.ctrlKey || event.metaKey) && !event.shiftKey && event.key.toLowerCase() === 'k';
-            const slash = event.key === '/' && !event.ctrlKey && !event.metaKey && !$dialog.open && slashEnabled()
+            const slash = event.key === '/' && !event.ctrlKey && !event.metaKey && !$dialog.open && slashEnabled
                 && !event.target.closest?.('input, textarea, select, [contenteditable]:not([contenteditable="false"])');
             if (!shortcut && !slash) return;
             event.preventDefault();

@@ -260,6 +260,71 @@ test('search: visitors can turn off the / shortcut and the choice persists', asy
   await expect(dialog).toBeVisible();
 });
 
+test('search: pending results cannot be opened and same-page results close the dialog', async ({ page }) => {
+  await page.goto('/algolia/blog/guide/');
+  await page.evaluate(() => {
+    window.openedSearchTabs = [];
+    window.open = url => { window.openedSearchTabs.push(url); return null; };
+    const pending = new Promise(resolve => { window.finishSearch = resolve; });
+    window['algoliasearch/lite'] = { liteClient: () => ({ search: async ({ requests: [{ query }] }) => {
+      const next = query === 'next';
+      if (next) await pending;
+      const uri = next ? '#final-section' : '/algolia/blog/gallery/';
+      return { results: [{ hits: [{ uri, title: query, content: query }] }] };
+    } }) };
+  });
+  const toggle = page.locator('#search-toggle-desktop');
+  await toggle.click();
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const input = dialog.getByRole('combobox');
+  const listbox = dialog.getByRole('listbox');
+  const option = listbox.getByRole('option');
+  const openedTabs = () => page.evaluate(() => window.openedSearchTabs);
+  await input.fill('first');
+  await expect(option).toContainText('first');
+  await input.fill('next');
+  await expect(listbox).toHaveAttribute('aria-busy', 'true');
+
+  await option.click({ button: 'middle' });
+  expect(await openedTabs()).toEqual([]);
+  await option.click();
+  await expect(page).toHaveURL(/\/algolia\/blog\/guide\/$/);
+  for (const key of ['Control+Enter', 'Meta+Enter', 'Shift+Enter']) await input.press(key);
+  await page.evaluate(() => window.finishSearch());
+  await expect(option).toContainText('next');
+  expect(await openedTabs()).toEqual([]);
+
+  await input.press('Control+Enter');
+  expect(await openedTabs()).toEqual([expect.stringMatching(/\/guide\/#final-section$/)]);
+  await input.press('Enter');
+  await expect(page).toHaveURL(/\/guide\/#final-section$/);
+  await expect(dialog).toBeHidden();
+  await expect(toggle).not.toBeFocused();
+});
+
+test('search: the / shortcut can be turned off when browser storage is full', async ({ page }) => {
+  await page.addInitScript(() => {
+    const setItem = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (key, value) {
+      if (key === 'search-slash') throw new DOMException('Storage is full', 'QuotaExceededError');
+      return setItem.call(this, key, value);
+    };
+  });
+  await page.goto('/fuse/blog/');
+  const toggle = page.locator('#search-toggle-desktop');
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const checkbox = dialog.getByRole('checkbox', { name: 'Press / to open search' });
+  await toggle.click();
+  await checkbox.uncheck();
+  await expect(checkbox).not.toBeChecked();
+  await expect(toggle).toHaveAttribute('aria-keyshortcuts', 'Control+K Meta+K');
+  await page.keyboard.press('Escape');
+  await page.keyboard.press('/');
+  await expect(dialog).toBeHidden();
+  await page.keyboard.press('Control+k');
+  await expect(checkbox).not.toBeChecked();
+});
+
 test('lunr: a failed Chinese segmenter load is retried by the next search', async ({ page }) => {
   let attempts = 0;
   await page.route('**/lunr.segmentit*.js', route => attempts++ ? route.continue() : route.abort());
