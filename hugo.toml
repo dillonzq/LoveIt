@@ -143,6 +143,16 @@
     # https://content-security-policy.com/examples/meta/
     # 当无法设置 HTTP 响应头时使用的 Content-Security-Policy meta 标签
     # contentSecurityPolicy = "default-src 'self'"
+    # referrer policy of the <meta name="referrer"> tag
+    # set "no-referrer" to send no Referer header at all
+    # <meta name="referrer"> 标签的引荐来源策略
+    # 设置为 "no-referrer" 则完全不发送 Referer 请求头
+    referrerPolicy = "strict-origin-when-cross-origin"
+    # Mermaid securityLevel ["strict", "loose"]
+    # "loose" allows click events and HTML labels in diagrams
+    # Mermaid 安全级别 ["strict", "loose"]
+    # "loose" 允许图表中的点击事件和 HTML 标签
+    mermaidSecurityLevel = "strict"
 
   # Search config
   # 搜索配置

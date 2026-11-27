@@ -793,6 +793,12 @@ enableEmoji = true
     # 当无法设置 HTTP 响应头时使用的 Content-Security-Policy meta 标签
     # https://content-security-policy.com/examples/meta/
     contentSecurityPolicy = ""
+    # {{< version 0.5.0 >}} <meta name="referrer"> 标签的引荐来源策略
+    # 设置为 "no-referrer" 则完全不发送 Referer 请求头
+    referrerPolicy = "strict-origin-when-cross-origin"
+    # {{< version 0.5.0 >}} Mermaid 安全级别 ["strict", "loose"]
+    # "loose" 允许图表中的点击事件和 HTML 标签
+    mermaidSecurityLevel = "strict"
 
   # {{< version 0.2.10 >}} 网站 SEO 配置
   [params.seo]

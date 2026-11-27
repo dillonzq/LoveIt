@@ -157,6 +157,9 @@ other = "الرئيسية"
 
 [readMore]
 other = "قراءة المزيد"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
