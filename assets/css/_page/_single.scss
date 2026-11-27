@@ -155,7 +155,7 @@
       @include overflow-wrap(break-word);
 
       // Underline links so they stand apart from body text by more than color.
-      &:not(.lightgallery) {
+      &:not(.lightgallery, .header-mark) {
         text-decoration: underline;
         text-underline-offset: .2em;
       }
