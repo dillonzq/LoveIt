@@ -1,5 +1,4 @@
 @use "sass:color";
-@use "sass:list";
 @use "sass:math";
 @use "sass:meta";
 
@@ -43,6 +42,21 @@
   @return math.div(math.max($la, $lb) + 0.05, math.min($la, $lb) + 0.05);
 }
 
+// The lowest contrast ratio between $color and any of $backgrounds.
+@function min-contrast-ratio($color, $backgrounds) {
+  $lowest: null;
+
+  @each $background in $backgrounds {
+    $ratio: contrast-ratio($color, $background);
+
+    @if $lowest == null or $ratio < $lowest {
+      $lowest: $ratio;
+    }
+  }
+
+  @return $lowest;
+}
+
 // Paints a translucent color over an opaque background, or returns null when
 // either is a runtime value.
 @function flatten($color, $background) {
@@ -53,10 +67,9 @@
   @return round-rgb(color.mix(color.change($color, $alpha: 1), $background, color.channel($color, "alpha") * 100%, $method: rgb));
 }
 
-// Mixes $color with black on light backgrounds, or with white on dark ones,
-// just enough to reach $ratio against every color in $backgrounds. Keeps the
-// hue of colors that are already readable and fixes ones a site overrides
-// without checking. Returns $color unchanged when a value is not a Sass color.
+// Mixes $color with black or white just enough to reach $ratio against every
+// color in $backgrounds. Keeps the hue of colors that are already readable and
+// fixes ones a site overrides without checking. Returns $color unchanged when a value is not a Sass color.
 @function readable-color($color, $backgrounds, $ratio: 4.5) {
   @if not is-sass-color($color) {
     @return $color;
@@ -68,23 +81,18 @@
     }
   }
 
-  $toward: #fff;
+  // Mix toward whichever of black and white reads better on the least
+  // readable background; it is also the answer when nothing reaches $ratio.
+  $toward: #000;
 
-  @if relative-luminance(list.nth($backgrounds, 1)) > 0.18 {
-    $toward: #000;
+  @if min-contrast-ratio(#fff, $backgrounds) > min-contrast-ratio(#000, $backgrounds) {
+    $toward: #fff;
   }
 
   @for $weight from 0 through 100 {
     $candidate: round-rgb(color.mix($toward, $color, $weight * 1%, $method: rgb));
-    $passes: true;
 
-    @each $background in $backgrounds {
-      @if contrast-ratio($candidate, $background) < $ratio {
-        $passes: false;
-      }
-    }
-
-    @if $passes {
+    @if min-contrast-ratio($candidate, $backgrounds) >= $ratio {
       @return $candidate;
     }
   }

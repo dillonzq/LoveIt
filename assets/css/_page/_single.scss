@@ -158,6 +158,11 @@
       &:not(.lightgallery, .header-mark) {
         text-decoration: underline;
         text-underline-offset: .2em;
+
+        // Inline code is an inline-block, which an ancestor's underline skips.
+        code {
+          text-decoration: inherit;
+        }
       }
 
       [theme=dark] & b, [theme=dark] & strong {
