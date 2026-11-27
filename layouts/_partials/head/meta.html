@@ -7,16 +7,16 @@
 
 <meta name="application-name" content="{{ .Site.Params.app.title | default .Site.Title }}">
 <meta name="apple-mobile-web-app-title" content="{{ .Site.Params.app.title | default .Site.Title }}">
-{{- /* Referrer-Policy meta tag; unknown values fall back to the default. */ -}}
+{{- /* Referrer-Policy meta tag; empty values use the default, unknown values warn and use it too. */ -}}
 {{- $referrerPolicy := "strict-origin-when-cross-origin" -}}
-{{- with .Site.Params.security.referrerPolicy -}}
-    {{- $policy := . | string | lower | strings.TrimSpace -}}
-    {{- if in (slice "no-referrer" "no-referrer-when-downgrade" "origin" "origin-when-cross-origin" "same-origin" "strict-origin" "strict-origin-when-cross-origin" "unsafe-url") $policy -}}
-        {{- $referrerPolicy = $policy -}}
-    {{- else -}}
-        {{- warnf "Unknown params.security.referrerPolicy \"%v\". \"%v\" will be used instead.\n" . $referrerPolicy -}}
-        {{- warnf "未知的 params.security.referrerPolicy \"%v\". 将使用 \"%v\".\n" . $referrerPolicy -}}
-    {{- end -}}
+{{- $value := .Site.Params.security.referrerPolicy -}}
+{{- $type := printf "%T" $value -}}
+{{- $policy := cond (eq $type "string") (printf "%v" $value | lower | strings.TrimSpace) "" -}}
+{{- if in (slice "no-referrer" "no-referrer-when-downgrade" "origin" "origin-when-cross-origin" "same-origin" "strict-origin" "strict-origin-when-cross-origin" "unsafe-url") $policy -}}
+    {{- $referrerPolicy = $policy -}}
+{{- else if or $policy (and (ne $type "string") (ne $type "<nil>")) -}}
+    {{- warnf "Unknown params.security.referrerPolicy \"%v\". \"%v\" will be used instead.\n" $value $referrerPolicy -}}
+    {{- warnf "未知的 params.security.referrerPolicy \"%v\". 将使用 \"%v\".\n" $value $referrerPolicy -}}
 {{- end -}}
 <meta name="referrer" content="{{ $referrerPolicy }}" />
 {{- with .Site.Params.app.themeColor -}}

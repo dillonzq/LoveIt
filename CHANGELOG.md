@@ -15,15 +15,16 @@ This file starts at 0.4.0. Older releases are described on the
 ### Changed
 
 - The `<meta name="referrer">` tag defaults to `strict-origin-when-cross-origin`
-  instead of `no-referrer`, so other sites see only your origin and same-site
-  requests keep their full referrer. Set `referrerPolicy = "no-referrer"` in
-  `[params.security]` to keep the old behaviour. Unknown values fall back to
-  the default with a build warning.
+  instead of `no-referrer`: requests to your own origin carry the full URL,
+  cross-origin requests (including other subdomains) carry only your origin,
+  and HTTPS-to-HTTP requests carry none. Set `referrerPolicy = "no-referrer"`
+  in `[params.security]` to keep the old behaviour. Unknown values fall back
+  to the default with a build warning.
 - Mermaid diagrams render with `securityLevel` `strict` instead of `loose`,
   which disables `click` interactions and restricts HTML in labels. Set
-  `mermaidSecurityLevel = "loose"` in `[params.security]` if you trust your
-  diagram sources and need these features. Other values fall back to
-  `strict` with a build warning.
+  `mermaidSecurityLevel = "loose"` (exactly) in `[params.security]` if you
+  trust your diagram sources and need these features. Other values fall back
+  to `strict` with a build warning.
 
 ## [0.4.1] - 2026-11-27
 

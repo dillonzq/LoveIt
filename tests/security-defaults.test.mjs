@@ -16,10 +16,23 @@ const cases = [
   { name: 'defaults', security: '', referrer: 'strict-origin-when-cross-origin', mermaid: 'strict' },
   { name: 'empty values', security: 'referrerPolicy = ""\nmermaidSecurityLevel = ""\n', referrer: 'strict-origin-when-cross-origin', mermaid: 'strict' },
   { name: 'explicit overrides', security: 'referrerPolicy = "no-referrer"\nmermaidSecurityLevel = "loose"\n', referrer: 'no-referrer', mermaid: 'loose' },
-  { name: 'other spellings', security: 'referrerPolicy = " Same-Origin "\nmermaidSecurityLevel = "LOOSE"\n', referrer: 'same-origin', mermaid: 'loose' },
+  { name: 'explicit strict', security: 'referrerPolicy = "strict-origin-when-cross-origin"\nmermaidSecurityLevel = "strict"\n', referrer: 'strict-origin-when-cross-origin', mermaid: 'strict' },
+  // Referrer-Policy tokens are case-insensitive; only the exact "loose" relaxes Mermaid.
+  {
+    name: 'other spellings', security: 'referrerPolicy = " Same-Origin "\nmermaidSecurityLevel = "LOOSE"\n',
+    referrer: 'same-origin', mermaid: 'strict', warnings: [/mermaidSecurityLevel "LOOSE"/], noWarnings: [/referrerPolicy/],
+  },
   {
     name: 'unknown values', security: 'referrerPolicy = "always"\nmermaidSecurityLevel = "antiscript"\n',
     referrer: 'strict-origin-when-cross-origin', mermaid: 'strict', warnings: [/referrerPolicy "always"/, /mermaidSecurityLevel "antiscript"/],
+  },
+  {
+    name: 'arrays', security: 'referrerPolicy = ["no-referrer"]\nmermaidSecurityLevel = ["loose"]\n',
+    referrer: 'strict-origin-when-cross-origin', mermaid: 'strict', warnings: [/referrerPolicy "\[no-referrer\]"/, /mermaidSecurityLevel "\[loose\]"/],
+  },
+  {
+    name: 'booleans', security: 'referrerPolicy = false\nmermaidSecurityLevel = true\n',
+    referrer: 'strict-origin-when-cross-origin', mermaid: 'strict', warnings: [/referrerPolicy "false"/, /mermaidSecurityLevel "true"/],
   },
 ];
 
@@ -27,7 +40,7 @@ test('referrer policy and Mermaid securityLevel defaults, overrides and fallback
   const { binary } = await getHugo();
   const temporary = mkdtempSync(path.join(os.tmpdir(), 'loveit-security-'));
   try {
-    for (const { name, security, referrer: expectedReferrer, mermaid, warnings = [] } of cases) {
+    for (const { name, security, referrer: expectedReferrer, mermaid, warnings = [], noWarnings = [] } of cases) {
       for (const environment of ['production', 'development']) {
         const site = path.join(temporary, `${name.replaceAll(' ', '-')}-${environment}`);
         mkdirSync(path.join(site, 'content/posts'), { recursive: true });
@@ -44,6 +57,7 @@ test('referrer policy and Mermaid securityLevel defaults, overrides and fallback
         const label = `${name} (${environment})`;
         for (const warning of warnings) assert.match(result.stderr, warning, label);
         if (!warnings.length) assert.doesNotMatch(result.stderr, /params\.security/, label);
+        for (const warning of noWarnings) assert.doesNotMatch(result.stderr, warning, label);
         assert.equal(referrer(readFileSync(path.join(site, 'public/index.html'), 'utf8')), expectedReferrer, label);
         assert.deepEqual(mermaidConfig(readFileSync(path.join(site, 'public/posts/diagram/index.html'), 'utf8')), { securityLevel: mermaid }, label);
       }
