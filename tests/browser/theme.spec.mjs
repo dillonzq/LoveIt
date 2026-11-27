@@ -591,6 +591,9 @@ test('Read More links name their post, microdata uses https and summaries keep i
   expect(hidden.width * hidden.height).toBeLessThanOrEqual(1);
   await typed.focus();
   await expect(typed).toBeFocused();
+  const literalTitle = 'std::vector<int> & 😄';
+  const literal = page.getByRole('link', { name: `Read More: ${literalTitle}`, exact: true });
+  await expect(literal.locator('.visually-hidden')).toHaveText(literalTitle);
   await expect(page.locator('[itemtype^="http:"]')).toHaveCount(0);
   await expect(page.locator('.summary[itemtype="https://schema.org/Article"]').first()).toBeAttached();
   await expect(page.locator('.footer [itemtype="https://schema.org/CreativeWork"]')).toHaveCount(1);
