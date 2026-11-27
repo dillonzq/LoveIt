@@ -611,6 +611,9 @@ test.describe('heading anchors without JavaScript', () => {
     // Headings the theme never marked keep no visible or focusable anchor.
     await expect(content.locator('#top-level-heading > a.header-mark')).toBeHidden();
     await expect(content.locator('.admonition #nested-heading > a.header-mark')).toBeHidden();
+    // An empty heading keeps its ID but gets no unnamed link. It sits in the admonition to stay out of the TOC.
+    await expect(content.locator('h5#divider')).toBeAttached();
+    await expect(content.locator('#divider > a')).toHaveCount(0);
 
     await content.locator('#last-section > a.header-mark').click();
     await expect(page).toHaveURL(/\/headings\/#last-section$/);
@@ -632,19 +635,32 @@ test('every link on an article with heading anchors has an accessible name', asy
   expect(violations).toEqual([]);
 });
 
-test('the auto TOC follows the article headings it links to', async ({ page }) => {
-  const errors = [];
-  page.on('pageerror', error => errors.push(error.message));
-  await page.setViewportSize({ width: 1280, height: 400 });
-  await page.goto('/fuse/blog/headings/');
-  const content = page.locator('#toc-content-auto');
-  await expect(page.locator('#toc-auto')).toBeVisible();
-  for (const [id, name] of [['plain-section', 'Plain section'], ['custom-id', 'Custom attributes'], ['last-section', 'Last section']]) {
-    await page.evaluate(id => {
-      const top = document.getElementById(id).getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top: top - 10, behavior: 'instant' });
-    }, id);
-    await expect(content.locator('a.active')).toHaveText(name);
-  }
-  expect(errors).toEqual([]);
-});
+for (const missing of [false, true]) {
+  test(`the auto TOC follows the article headings it links to${missing ? ', skipping links without a heading' : ''}`, async ({ page }) => {
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    // With autoHeadingID off, Hugo links headings that have no ID to "#".
+    if (missing) {
+      await page.route('**/fuse/blog/headings/', async route => {
+        const response = await route.fetch();
+        const body = (await response.text()).replace(/<a href=["']?#(plain-section|section-with-code-and-emphasis)["']?>/g, '<a href="#">');
+        await route.fulfill({ response, body });
+      });
+    }
+    await page.setViewportSize({ width: 1280, height: 400 });
+    await page.goto('/fuse/blog/headings/');
+    const content = page.locator('#toc-content-auto');
+    await expect(page.locator('#toc-auto')).toBeVisible();
+    if (missing) await expect(content.locator('a[href="#"]')).toHaveCount(2);
+    const sections = [['custom-id', 'Custom attributes'], ['last-section', 'Last section']];
+    if (!missing) sections.unshift(['plain-section', 'Plain section']);
+    for (const [id, name] of sections) {
+      await page.evaluate(id => {
+        const top = document.getElementById(id).getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: top - 10, behavior: 'instant' });
+      }, id);
+      await expect(content.locator('a.active')).toHaveText(name);
+    }
+    expect(errors).toEqual([]);
+  });
+}

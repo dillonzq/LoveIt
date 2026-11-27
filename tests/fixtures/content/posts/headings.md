@@ -24,6 +24,8 @@ Text for the custom heading.
 #### Nested heading
 
 Text inside the admonition.
+
+##### {#divider}
 {{< /admonition >}}
 
 ## Last section

@@ -1,11 +1,12 @@
-{{- /* Renders a Markdown heading. With "Anchor", a link to the heading comes first; it is named by the heading itself, so it needs no JavaScript or translation. */ -}}
+{{- /* Renders a Markdown heading. With "Anchor", a non-empty heading with an ID starts with a link to itself. The link is named by the heading, so it needs no JavaScript or translation. */ -}}
 {{- $anchor := .Context.Anchor -}}
 <h{{ .Context.Level }}
     {{- with $anchor }} id="{{ . }}"{{ end }}
     {{- range $k, $v := .Context.Attributes }}
         {{- if ne $k "id" }}{{ printf ` %s="%s"` $k (string $v | htmlEscape) | safeHTMLAttr }}{{ end -}}
     {{- end }}>
-    {{- if and .Anchor $anchor -}}
+    {{- /* An empty heading would give its link no name. */ -}}
+    {{- if and .Anchor $anchor (trim (string .Context.Text) " \t\r\n") -}}
         <a href="#{{ $anchor }}" class="header-mark" aria-labelledby="{{ $anchor }}"></a>
     {{- end -}}
     {{- .Context.Text -}}

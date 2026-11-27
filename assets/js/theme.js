@@ -364,7 +364,11 @@ class Theme {
             $toc.style.visibility = 'visible';
             const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
             const $tocLiElements = $tocCore.getElementsByTagName('li');
-            const $headerLinkElements = Array.from($tocLinkElements, $tocLink => document.getElementById($tocLink.getAttribute('href').slice(1)));
+            // Pair each TOC link with the heading it points to, skipping links whose heading has no ID.
+            const $tocTargets = Array.from($tocLinkElements, $tocLink => [$tocLink, document.getElementById($tocLink.getAttribute('href').slice(1))])
+                .filter(([, $heading]) => $heading);
+            const $headerLinkElements = $tocTargets.map(([, $heading]) => $heading);
+            const $targetTocLinks = $tocTargets.map(([$tocLink]) => $tocLink);
             const headerIsFixed = document.body.getAttribute('data-header-desktop') !== 'normal';
             const headerHeight = document.getElementById('header-desktop').offsetHeight;
             const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
@@ -405,8 +409,8 @@ class Theme {
                     }
                 }
                 if (activeTocIndex !== -1) {
-                    $tocLinkElements[activeTocIndex].classList.add('active');
-                    let $parent = $tocLinkElements[activeTocIndex].parentElement;
+                    $targetTocLinks[activeTocIndex].classList.add('active');
+                    let $parent = $targetTocLinks[activeTocIndex].parentElement;
                     while ($parent !== $tocCore) {
                         $parent.classList.add('has-active');
                         $parent = $parent.parentElement.parentElement;
@@ -418,7 +422,7 @@ class Theme {
                     this._lastActiveTocIndex = activeTocIndex;
                     if (activeTocIndex !== -1 && $tocContentAuto.scrollHeight > $tocContentAuto.clientHeight) {
                         const box = $tocContentAuto.getBoundingClientRect();
-                        const link = $tocLinkElements[activeTocIndex].getBoundingClientRect();
+                        const link = $targetTocLinks[activeTocIndex].getBoundingClientRect();
                         if (link.top < box.top) $tocContentAuto.scrollTop += Math.floor(link.top - box.top);
                         else if (link.bottom > box.bottom) $tocContentAuto.scrollTop += Math.ceil(link.bottom - box.bottom);
                     }
