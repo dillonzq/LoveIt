@@ -166,6 +166,9 @@ other = "Home"
 
 [readMore]
 other = "Leggi di più"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -230,3 +233,10 @@ other = "CANCELLATO"
 [deprecated]
 other = "DEPRECATO"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Selezionato"
+
+[taskUnchecked]
+other = "Non selezionato"

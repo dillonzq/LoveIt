@@ -167,6 +167,9 @@ other = "主页"
 
 [readMore]
 other = "阅读全文"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}：{{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -231,3 +234,10 @@ other = "删除"
 [deprecated]
 other = "弃用"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "已勾选"
+
+[taskUnchecked]
+other = "未勾选"

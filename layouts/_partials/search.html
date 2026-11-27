@@ -11,13 +11,13 @@
     <div class="search-panel" role="search">
         <div class="search-bar">
             <div class="search-field">
-                <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                <span class="search-icon">{{ dict "Class" "fas fa-search" | partial "plugin/icon.html" }}</span>
                 <input type="text" class="search-input" id="search-input" role="combobox" aria-label="{{ T `search` }}" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results" placeholder="{{ $search.placeholder | default (T `searchPlaceholder`) }}" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go">
                 <span class="search-loading" id="search-loading" hidden>
-                    <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                    {{ dict "Class" "fas fa-spinner icon-spin" | partial "plugin/icon.html" }}
                 </span>
                 <button type="button" class="search-clear link-like" id="search-clear" title="{{ T `clear` }}" aria-label="{{ T `clear` }}" hidden>
-                    <i class="fas fa-times-circle" aria-hidden="true"></i>
+                    {{ dict "Class" "fas fa-times-circle" | partial "plugin/icon.html" }}
                 </button>
             </div>
             <button type="button" class="search-cancel link-like" id="search-cancel">{{ T `cancel` }}</button>
@@ -31,7 +31,7 @@
             </label>
             <span class="search-by">
                 Search by <a href="{{ $engine.href }}" rel="noopener noreferrer" target="_blank">
-                    {{- with $engine.icon }}<i class="{{ . }}" aria-hidden="true"></i> {{ end -}}
+                    {{- with $engine.icon }}{{ dict "Class" . | partial "plugin/icon.html" }} {{ end -}}
                     {{- $engine.name -}}
                 </a>
             </span>

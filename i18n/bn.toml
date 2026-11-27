@@ -164,6 +164,9 @@ other = "হোম"
 
 [readMore]
 other = "আরো পড়ুন"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -228,3 +231,10 @@ other = "মুছে ফেলা হয়েছে"
 [deprecated]
 other = "অপ্রচলিত"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "চিহ্নিত"
+
+[taskUnchecked]
+other = "চিহ্নিত নয়"

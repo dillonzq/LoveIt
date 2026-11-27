@@ -54,24 +54,6 @@ class Theme {
         });
     }
 
-    initSVGIcon() {
-        Util.forEach(document.querySelectorAll('[data-svg-src]'), $icon => {
-            fetch($icon.getAttribute('data-svg-src'))
-                .then(response => response.text())
-                .then(svg => {
-                    const $temp = document.createElement('div');
-                    $temp.insertAdjacentHTML('afterbegin', svg);
-                    const $svg = $temp.firstChild;
-                    $svg.setAttribute('data-svg-src', $icon.getAttribute('data-svg-src'));
-                    $svg.classList.add('icon');
-                    const $titleElements = $svg.getElementsByTagName('title');
-                    if ($titleElements.length) $svg.removeChild($titleElements[0]);
-                    $icon.parentElement.replaceChild($svg, $icon);
-                })
-                .catch(err => { console.error(err); });
-        });
-    }
-
     initTwemoji() {
         if (this.config.twemoji) twemoji.parse(document.body);
     }
@@ -406,15 +388,6 @@ class Theme {
         });
     }
 
-    initHeaderLink() {
-        for (let num = 1; num <= 6; num++) {
-            Util.forEach(document.querySelectorAll('.single .content > h' + num), $header => {
-                $header.classList.add('headerLink');
-                $header.insertAdjacentHTML('afterbegin', `<a href="#${$header.id}" class="header-mark"></a>`);
-            });
-        }
-    }
-
     initToc() {
         const $tocCore = document.getElementById('TableOfContents');
         if ($tocCore === null) return;
@@ -443,7 +416,13 @@ class Theme {
             $toc.style.visibility = 'visible';
             const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
             const $tocLiElements = $tocCore.getElementsByTagName('li');
-            const $headerLinkElements = document.getElementsByClassName('headerLink');
+            // Match headings inside the article so a wrapper with the same ID cannot become a TOC target.
+            const $headings = $page.querySelectorAll('.content :is(h1, h2, h3, h4, h5, h6)[id]');
+            const headingsById = new Map(Array.from($headings, $heading => [$heading.id, $heading]));
+            const $tocTargets = Array.from($tocLinkElements, $tocLink => [$tocLink, headingsById.get($tocLink.getAttribute('href').slice(1))])
+                .filter(([, $heading]) => $heading);
+            const $headerLinkElements = $tocTargets.map(([, $heading]) => $heading);
+            const $targetTocLinks = $tocTargets.map(([$tocLink]) => $tocLink);
             const headerIsFixed = document.body.getAttribute('data-header-desktop') !== 'normal';
             const headerHeight = document.getElementById('header-desktop').offsetHeight;
             const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
@@ -484,8 +463,8 @@ class Theme {
                     }
                 }
                 if (activeTocIndex !== -1) {
-                    $tocLinkElements[activeTocIndex].classList.add('active');
-                    let $parent = $tocLinkElements[activeTocIndex].parentElement;
+                    $targetTocLinks[activeTocIndex].classList.add('active');
+                    let $parent = $targetTocLinks[activeTocIndex].parentElement;
                     while ($parent !== $tocCore) {
                         $parent.classList.add('has-active');
                         $parent = $parent.parentElement.parentElement;
@@ -497,7 +476,7 @@ class Theme {
                     this._lastActiveTocIndex = activeTocIndex;
                     if (activeTocIndex !== -1 && $tocContentAuto.scrollHeight > $tocContentAuto.clientHeight) {
                         const box = $tocContentAuto.getBoundingClientRect();
-                        const link = $tocLinkElements[activeTocIndex].getBoundingClientRect();
+                        const link = $targetTocLinks[activeTocIndex].getBoundingClientRect();
                         if (link.top < box.top) $tocContentAuto.scrollTop += Math.floor(link.top - box.top);
                         else if (link.bottom > box.bottom) $tocContentAuto.scrollTop += Math.ceil(link.bottom - box.bottom);
                     }
@@ -534,7 +513,9 @@ class Theme {
             const $mermaidElements = document.getElementsByClassName('mermaid');
             if (!$mermaidElements.length) return;
 
-            mermaid.initialize({startOnLoad: false, theme: this.isDark ? 'dark' : 'neutral', securityLevel: 'loose'});
+            // "loose" only when the site sets it explicitly; anything else renders with "strict".
+            const securityLevel = this.config.mermaid && this.config.mermaid.securityLevel === 'loose' ? 'loose' : 'strict';
+            mermaid.initialize({startOnLoad: false, theme: this.isDark ? 'dark' : 'neutral', securityLevel});
             // Identical diagrams in separately rendered blocks share an element id; the index keeps render ids unique.
             Array.from($mermaidElements).forEach(($mermaid, index) => {
                 const definition = this.getMermaidDefinition($mermaid);
@@ -842,7 +823,6 @@ class Theme {
     init() {
         try {
             this.initRaw();
-            this.initSVGIcon();
             this.initTwemoji();
             this.initMenuMobile();
             this.onClickMask();
@@ -853,7 +833,6 @@ class Theme {
             this.initDetails();
             this.initLightGallery();
             this.initHighlight();
-            this.initHeaderLink();
             this.initMath();
             this.initMermaid();
             this.initEcharts();

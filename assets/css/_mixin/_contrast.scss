@@ -1,0 +1,101 @@
+@use "sass:color";
+@use "sass:math";
+@use "sass:meta";
+
+// Whether a value is a color Sass can compute with, not a runtime value like var().
+@function is-sass-color($value) {
+  @return meta.type-of($value) == "color";
+}
+
+// Rounds a color to whole sRGB channels, as the browser paints it.
+@function round-rgb($color) {
+  @return rgb(
+    math.round(color.channel($color, "red", $space: rgb)),
+    math.round(color.channel($color, "green", $space: rgb)),
+    math.round(color.channel($color, "blue", $space: rgb))
+  );
+}
+
+// WCAG relative luminance of an opaque color.
+@function relative-luminance($color) {
+  $luminance: 0;
+  $weights: ("red": 0.2126, "green": 0.7152, "blue": 0.0722);
+
+  @each $channel, $weight in $weights {
+    $value: math.div(color.channel($color, $channel, $space: rgb), 255);
+
+    @if $value <= 0.04045 {
+      $value: math.div($value, 12.92);
+    } @else {
+      $value: math.pow(math.div($value + 0.055, 1.055), 2.4);
+    }
+    $luminance: $luminance + $value * $weight;
+  }
+
+  @return $luminance;
+}
+
+// WCAG contrast ratio between two opaque colors.
+@function contrast-ratio($a, $b) {
+  $la: relative-luminance($a);
+  $lb: relative-luminance($b);
+  @return math.div(math.max($la, $lb) + 0.05, math.min($la, $lb) + 0.05);
+}
+
+// The lowest contrast ratio between $color and any of $backgrounds.
+@function min-contrast-ratio($color, $backgrounds) {
+  $lowest: null;
+
+  @each $background in $backgrounds {
+    $ratio: contrast-ratio($color, $background);
+
+    @if $lowest == null or $ratio < $lowest {
+      $lowest: $ratio;
+    }
+  }
+
+  @return $lowest;
+}
+
+// Paints a translucent color over an opaque background, or returns null when
+// either is a runtime value.
+@function flatten($color, $background) {
+  @if not is-sass-color($color) or not is-sass-color($background) {
+    @return null;
+  }
+
+  @return round-rgb(color.mix(color.change($color, $alpha: 1), $background, color.channel($color, "alpha") * 100%, $method: rgb));
+}
+
+// Mixes $color with black or white just enough to reach $ratio against every
+// color in $backgrounds. Keeps the hue of colors that are already readable and
+// fixes ones a site overrides without checking. Returns $color unchanged when a value is not a Sass color.
+@function readable-color($color, $backgrounds, $ratio: 4.5) {
+  @if not is-sass-color($color) {
+    @return $color;
+  }
+
+  @each $background in $backgrounds {
+    @if not is-sass-color($background) {
+      @return $color;
+    }
+  }
+
+  // Mix toward whichever of black and white reads better on the least
+  // readable background; it is also the answer when nothing reaches $ratio.
+  $toward: #000;
+
+  @if min-contrast-ratio(#fff, $backgrounds) > min-contrast-ratio(#000, $backgrounds) {
+    $toward: #fff;
+  }
+
+  @for $weight from 0 through 100 {
+    $candidate: round-rgb(color.mix($toward, $color, $weight * 1%, $method: rgb));
+
+    @if min-contrast-ratio($candidate, $backgrounds) >= $ratio {
+      @return $candidate;
+    }
+  }
+
+  @return $toward;
+}

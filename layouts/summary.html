@@ -1,13 +1,13 @@
 {{- $params := .Params | merge .Site.Params.page -}}
 
-<article class="single summary" itemscope itemtype="http://schema.org/Article">
+<article class="single summary" itemscope itemtype="https://schema.org/Article">
     {{- /* Featured image */ -}}
     {{- $image := $params.featuredimagepreview | default $params.featuredimage -}}
     {{- with .Resources.GetMatch "featured-image" -}}
-        {{- $image = .RelPermalink -}}
+        {{- $image = .Name -}}
     {{- end -}}
     {{- with .Resources.GetMatch "featured-image-preview" -}}
-        {{- $image = .RelPermalink -}}
+        {{- $image = .Name -}}
     {{- end -}}
     {{- with $image -}}
         <div class="featured-image-preview">
@@ -40,7 +40,7 @@
         {{- $categories := slice -}}
         {{- range .Params.categories -}}
             {{- $category := partialCached "function/path.html" . . | printf "/categories/%v" | $.Site.GetPage -}}
-            {{- $categories = $categories | append (printf `<a href="%v"><i class="far fa-folder" aria-hidden="true"></i>%v</a>` $category.RelPermalink $category.Title) -}}
+            {{- $categories = $categories | append (printf `<a href="%v">%v%v</a>` $category.RelPermalink (dict "Class" "far fa-folder" | partial "plugin/icon.html") $category.Title) -}}
         {{- end -}}
         {{- with delimit $categories "&nbsp;" -}}
             &nbsp;<span class="post-category">
@@ -60,10 +60,13 @@
 
     {{- /* Footer */ -}}
     <div class="post-footer">
-        <a href="{{ .RelPermalink }}">{{ T "readMore" }}</a>
+        {{- /* aria-label gives screen readers the localized name; the hidden title makes the link text itself descriptive for crawlers. */ -}}
+        {{- $title := .Title | emojify | string -}}
+        {{- $readMore := T "readMore" -}}
+        <a href="{{ .RelPermalink }}" aria-label="{{ dict `ReadMore` $readMore `Title` $title | T `readMoreTitle` }}">{{ $readMore }}<span class="visually-hidden"> {{ $title }}</span></a>
         {{- with .Params.tags -}}
             <div class="post-tags">
-                <i class="fas fa-tags" aria-hidden="true"></i>&nbsp;
+                {{ dict "Class" "fas fa-tags" | partial "plugin/icon.html" }}&nbsp;
                 {{- range $index, $value := . -}}
                     {{- if gt $index 0 }},&nbsp;{{ end -}}
                     {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}

@@ -155,6 +155,9 @@ other = "Strona główna"
 [readMore]
 other = "Czytaj więcej"
 
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
+
 [cookieconsentMessage]
 other = "Ta strona korzysta z plików Cookies, aby poprawić komfort użytkowania."
 
@@ -227,3 +230,10 @@ other = "Usunięte"
 [deprecated]
 other = "Przestarzałe"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Zaznaczone"
+
+[taskUnchecked]
+other = "Niezaznaczone"

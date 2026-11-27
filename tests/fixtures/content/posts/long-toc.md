@@ -5,7 +5,7 @@ date: 2024-01-01
 
 ## Section 1
 
-Paragraph for section 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Paragraph for section 1, citing <cite>a source[^1]</cite>. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 ## Section 2
 
@@ -162,3 +162,5 @@ Paragraph for section 39. Lorem ipsum dolor sit amet, consectetur adipiscing eli
 ## Section 40
 
 Paragraph for section 40. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+[^1]: The cited source.

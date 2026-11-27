@@ -13,7 +13,6 @@
 | [Fuse.js](https://github.com/krisk/Fuse)                                            | fuse              |   7.5.0 | Apache-2.0                              |
 | [Gitalk](https://github.com/gitalk/gitalk)                                          | gitalk            |   1.8.0 | MIT                                     |
 | [KaTeX](https://github.com/KaTeX/KaTeX)                                             | katex             |  0.19.1 | MIT                                     |
-| [lazysizes](https://github.com/aFarkas/lazysizes)                                   | lazysizes         |   5.3.2 | MIT                                     |
 | [lightGallery](https://github.com/sachinchoolur/lightgallery)                       | lightgallery      |   3.0.0 | **GPL-3.0-only OR Commercial**          |
 | [Lunr.js](https://github.com/olivernn/lunr.js)                                      | lunr              |   2.3.9 | MIT (see [Lunr](#lunr))                 |
 | [Mapbox GL JS](https://github.com/mapbox/mapbox-gl-js)                              | mapbox-gl         |  3.35.2 | **Proprietary (Mapbox ToS)**            |
@@ -78,6 +77,18 @@ MPL-1.1. Some of them have their own license:
 | `wordcut.js`            | [wordcut](https://github.com/veer66/wordcut)                                      | LGPL-3.0     |
 
 `wordcut.js` is shipped but no template loads it.
+
+### Font Awesome icons
+
+The theme's own icons (header, footer, social links, post meta, share buttons,
+admonitions, code blocks) are inlined into the HTML as SVG at build time. They
+come from Font Awesome Free 7.3.1, the same release as the bundled webfonts, and
+are copied unchanged to `fontawesome-free/svgs/` by `scripts/icons.mjs`, which
+also writes `svgs/aliases.json` for legacy icon names. The icons are CC-BY-4.0:
+every SVG file keeps Font Awesome's attribution comment, and this section is the
+attribution for the inlined copies. The stylesheet and webfonts (OFL-1.1 and
+MIT) still load on pages whose content uses Font Awesome classes or the
+`:(fa…):` syntax. Simple Icons are inlined the same way and are CC0-1.0.
 
 ### Emoji images
 

@@ -163,6 +163,9 @@ other = "Почетна"
 
 [readMore]
 other = "Прочитај више"
+
+[readMoreTitle]
+other = "{{ .ReadMore }}: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -227,3 +230,10 @@ other = "ОБРИСАНО"
 [deprecated]
 other = "ЗАСТАРЕЛО"
 # === shortcodes/version.html ===
+
+# === function/checkbox.html ===
+[taskChecked]
+other = "Означено"
+
+[taskUnchecked]
+other = "Није означено"

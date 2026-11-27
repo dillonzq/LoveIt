@@ -1,9 +1,10 @@
+{{- /* Task list checkboxes become icons named by their state */ -}}
 {{- /* Checkbox unchecked */ -}}
 {{- $old := `<input disabled="" type="checkbox">` -}}
-{{- $new := `<i class="far fa-square" aria-hidden="true"></i>` -}}
+{{- $new := dict "Class" "task-checkbox far fa-square" "Label" (T "taskUnchecked") | partial "plugin/icon.html" -}}
 {{- $content := replace . $old $new -}}
 
 {{- /* Checkbox checked */ -}}
 {{- $old = `<input checked="" disabled="" type="checkbox">` -}}
-{{- $new = `<i class="far fa-check-square" aria-hidden="true"></i>` -}}
+{{- $new = dict "Class" "task-checkbox far fa-square-check" "Label" (T "taskChecked") | partial "plugin/icon.html" -}}
 {{- return replace $content $old $new -}}

@@ -1,0 +1,52 @@
+{
+  "$comment": [
+    "Tolerances for the metrics gate (npm run metrics:compare). A pull request",
+    "fails ci-gate when a value is worse than the master baseline by more than",
+    "max(relative × baseline, absolute). Scores are worse when lower; every",
+    "other value is worse when higher. A metric left out is not checked.",
+    "The notes record the spread between seven Metrics runs of master commits",
+    "(November 2026), which the tolerances leave room for. The gate reads",
+    "`baseline` from the pull request's base commit, so changes to it apply",
+    "once merged (keep BOOTSTRAP_BASELINE in scripts/metrics-compare.mjs in",
+    "step); the tolerances come from the pull request itself."
+  ],
+  "baseline": {
+    "workflows": ["ci.yml", "metrics.yml"],
+    "artifact": "metrics",
+    "waitMinutes": 20,
+    "missing": "warn",
+    "acceptLabel": "accept-metrics-regression"
+  },
+  "lighthouse": {
+    "performance": { "absolute": 12, "note": "score; home ranged 72–81" },
+    "accessibility": { "absolute": 0, "note": "score; unchanged across runs" },
+    "best-practices": { "absolute": 0, "note": "score; unchanged across runs" },
+    "seo": { "absolute": 0, "note": "score; unchanged across runs" },
+    "fcp": { "relative": 0.15, "absolute": 150, "note": "754–910 ms, within 1% per page" },
+    "lcp": { "relative": 0.35, "absolute": 500, "note": "home 4384–5704 ms (30%), article 2705–3004 ms" },
+    "tbt": { "relative": 1, "absolute": 200, "note": "0–113 ms" },
+    "cls": { "absolute": 0.05, "note": "home 0.129–0.170, article 0.260–0.261" },
+    "script": { "relative": 0.1, "absolute": 4096, "note": "bytes; home 36.0–37.9 KiB (5%)" },
+    "stylesheet": { "relative": 0.1, "absolute": 4096, "note": "bytes; within 3.5%" },
+    "font": { "relative": 0.05, "absolute": 4096, "note": "bytes; within 0.5%" },
+    "image": { "relative": 0.05, "absolute": 4096, "note": "bytes; within 0.5%" },
+    "document": { "relative": 0.1, "absolute": 2048, "note": "bytes; within 0.5%" },
+    "other": { "relative": 0.15, "absolute": 4096, "note": "bytes; home 7.6–8.3 KiB (8%)" },
+    "total": { "relative": 0.03, "absolute": 10240, "note": "bytes; within 1%" },
+    "requests": { "absolute": 2, "note": "home 22, article 42 in every run" }
+  },
+  "axe": {
+    "critical": { "absolute": 0, "note": "affected nodes; unchanged across runs" },
+    "serious": { "absolute": 0, "note": "affected nodes; unchanged across runs" },
+    "moderate": { "absolute": 0, "note": "affected nodes; unchanged across runs" },
+    "minor": { "absolute": 0, "note": "affected nodes; unchanged across runs" },
+    "newRules": true
+  },
+  "build": {
+    "cold": { "relative": 1, "absolute": 1000, "note": "704–1070 ms" },
+    "warm": { "relative": 1, "absolute": 1000, "note": "569–1013 ms" }
+  },
+  "repository": {
+    "assetsLib": { "relative": 0.05, "absolute": 0, "note": "bytes of assets/lib; changes only with the code" }
+  }
+}

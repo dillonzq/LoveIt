@@ -130,9 +130,9 @@ This is a **right-aligned** paragraph.
 
 ## 3 image {#image}
 
-{{< version 0.2.0 changed >}}
+{{< version 0.5.0 changed >}}
 
-`image` shortcode 是 [`figure` shortcode](../theme-documentation-built-in-shortcodes#figure) 的替代. `image` shortcode 可以充分利用 [lazysizes](https://github.com/aFarkas/lazysizes) 和 [lightGallery](https://github.com/sachinchoolur/lightgallery) 两个依赖库.
+`image` shortcode 是 [`figure` shortcode](../theme-documentation-built-in-shortcodes#figure) 的替代. `image` shortcode 使用 Hugo 的[图片处理](../theme-documentation-content#contents-organization)和浏览器原生懒加载, 并且可以充分利用 [lightGallery](https://github.com/sachinchoolur/lightgallery).
 
 {{< admonition tip >}}
 {{< version 0.2.10 >}} 支持[本地资源引用](../theme-documentation-content#contents-organization)的完整用法.
@@ -166,7 +166,7 @@ This is a **right-aligned** paragraph.
 
 * **src_s** *[可选]*
 
-    图片缩略图的 URL, 用在画廊模式中, 默认值是 **src** 参数的值.
+    图片缩略图的 URL, 用在画廊模式中, 默认值是处理后图片最小的 WebP 副本, 否则是 **src** 参数的值.
 
 * **src_l** *[可选]*
 
@@ -174,11 +174,11 @@ This is a **right-aligned** paragraph.
 
 * **height** *[可选]*
 
-    图片的 `height` 属性.
+    图片的 `height` 属性. {{< version 0.5.0 changed >}} 只设置了 **width** 和 **height** 中的一个像素值时, 另一个会按照图片的宽高比计算 (Hugo 能读取图片尺寸时).
 
 * **width** *[可选]*
 
-    图片的 `width` 属性.
+    图片的 `width` 属性. 默认是页面包或 **assets** 目录中图片 (SVG 除外) 的尺寸.
 
 * **linked** *[可选]*
 

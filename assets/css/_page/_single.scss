@@ -2,6 +2,12 @@
 
 @import "../_partial/_single/toc";
 
+// Markdown headings carry their anchor link from the build. It shows only on
+// an article's own h2-h6, as before; anywhere else it is not rendered.
+.header-mark {
+  display: none;
+}
+
 .single {
   .single-title {
     margin: 2rem 0 .5rem;
@@ -31,6 +37,12 @@
 
     @include link(false, true);
 
+    // Underline links so they stand apart from the meta text by more than color.
+    a {
+      text-decoration: underline;
+      text-underline-offset: .2em;
+    }
+
     .author {
       font-size: 1.05rem;
     }
@@ -41,14 +53,10 @@
 
     img {
       display: block;
-      max-width: 100%;
+      width: 100%;
       height: auto;
       margin: 0 auto;
       overflow: hidden;
-    }
-
-    img.lazyloaded {
-      width: 100%;
     }
   }
 
@@ -103,8 +111,14 @@
     > h4,
     > h5,
     > h6 {
+      > .header-mark {
+        display: inline;
+      }
+
       > .header-mark::before {
         content: "|";
+        // The mark is decoration: keep it out of the heading's accessible name.
+        content: "|" / "";
         margin-right: .3125rem;
         color: $single-link-color;
 
@@ -116,6 +130,7 @@
 
     > h2 > .header-mark::before {
       content: "#";
+      content: "#" / "";
     }
 
     p {
@@ -134,6 +149,17 @@
 
     a {
       @include overflow-wrap(break-word);
+
+      // Underline links so they stand apart from body text by more than color.
+      &:not(.lightgallery, .header-mark) {
+        text-decoration: underline;
+        text-underline-offset: .2em;
+
+        // Inline code is an inline-block, which an ancestor's underline skips.
+        code {
+          text-decoration: inherit;
+        }
+      }
 
       [theme=dark] & b, [theme=dark] & strong {
         color: $single-link-color-dark;
@@ -233,7 +259,11 @@
         padding: .5rem;
         margin: 0 auto;
         font-size: .875rem;
-        color: #969696;
+        color: $global-font-secondary-color;
+
+        [theme=dark] & {
+          color: $global-font-secondary-color-dark;
+        }
       }
 
       img {
@@ -253,7 +283,8 @@
 
       [theme=dark] & {
         border-left-color: $blockquote-color-dark;
-        background-color: rgba($blockquote-color-dark, .2);
+        // A lighter tint keeps text in nested quotes readable.
+        background-color: rgba($blockquote-color-dark, .12);
       }
     }
 
@@ -266,6 +297,33 @@
 
       p {
         margin: .25rem 0;
+      }
+    }
+
+    // Mark the footnote, or the reference back in the text, that a link just jumped to.
+    // Links take the text color (underlined) so everything stays readable on the tint.
+    .footnotes li:target,
+    sup[id^="fnref"]:target {
+      color: $global-font-color;
+      background-color: $selection-color;
+      outline: 2px solid $single-link-color;
+      outline-offset: 2px;
+      @include border-radius(3px);
+
+      a,
+      a:hover {
+        color: inherit;
+        text-decoration: underline;
+      }
+
+      [theme=dark] & {
+        color: $global-font-color-dark;
+        background-color: rgba($selection-color-dark, .2);
+        outline-color: $single-link-color-dark;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        animation: footnote-target 1.2s ease-out;
       }
     }
 
@@ -311,6 +369,7 @@
     }
 
     .version {
+      width: auto;
       height: 1.25em;
       vertical-align: text-bottom;
     }
@@ -354,4 +413,17 @@
 
 .lg-toolbar .lg-icon::after {
   color: #999;
+}
+
+// Draw the eye once to the footnote target; skipped when reduced motion is preferred.
+@keyframes footnote-target {
+  from {
+    outline-offset: .5rem;
+    outline-width: 4px;
+  }
+
+  to {
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
 }

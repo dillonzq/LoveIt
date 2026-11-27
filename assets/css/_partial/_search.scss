@@ -82,7 +82,11 @@ html:has(.search-dialog[open]) {
   }
 
   .search-clear:hover {
-    color: #ff6b6b;
+    color: #d45959;
+
+    [theme=dark] & {
+      color: #ff6b6b;
+    }
   }
 }
 
@@ -209,9 +213,11 @@ html:has(.search-dialog[open]) {
 
     em {
       font-style: normal;
+      color: $global-font-color;
       background-color: $selection-color;
 
       [theme=dark] & {
+        color: $global-font-color-dark;
         background-color: $selection-color-dark;
       }
     }

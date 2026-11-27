@@ -114,10 +114,7 @@
         height: 100%;
         left: 0;
         top: 0;
-
-        &.lazyloaded {
-          @include object-fit(cover);
-        }
+        @include object-fit(cover);
       }
 
       &:hover {
@@ -166,6 +163,12 @@
       }
 
       @include link(false, true);
+
+      // Underline links so they stand apart from the summary text by more than color.
+      a:not(.lightgallery, .header-mark) {
+        text-decoration: underline;
+        text-underline-offset: .2em;
+      }
 
       b, strong {
         color: $global-font-secondary-color;

@@ -12,6 +12,8 @@
 {{- $resource := resources.Get "svg/version.template.svg" -}}
 {{- $resource = $resource | resources.ExecuteAsTemplate $path (dict "version" $version "label" $label "color" $color) | minify -}}
 {{- $alt := printf "LoveIt %v | %v" $label $version -}}
+{{- /* The badge is 200 units high; its width is computed as in svg/version.template.svg. */ -}}
+{{- $badgeWidth := add (strings.RuneCount $label | mul 64) (strings.RuneCount $version | mul 60) | add 300 -}}
 <a href="{{ $url }}" rel="noopener noreferrer" target="_blank">
-    {{- dict "Src" $resource.RelPermalink "Alt" $alt "Class" "version" | partial "plugin/img.html" -}}
+    {{- dict "Src" $resource.RelPermalink "Alt" $alt "Class" "version" "Width" (div $badgeWidth 10) "Height" 20 | partial "plugin/img.html" -}}
 </a>

@@ -73,10 +73,22 @@ button.link-like,
   color: inherit;
 }
 
+// Hidden on screen but kept in the accessibility tree and the element's text.
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 @include link(true, true);
 
 @import "../_partial/mask";
-@import "../_partial/img";
 @import "../_partial/icon";
 @import "../_partial/details";
 @import "../_partial/fixed-button";

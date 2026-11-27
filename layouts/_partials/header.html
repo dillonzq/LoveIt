@@ -5,10 +5,10 @@
             <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
                 {{- with .Site.Params.header.title -}}
                     {{- with .logo -}}
-                        {{- dict "Src" . "Class" "logo" | partial "plugin/img.html" -}}
+                        {{- dict "Src" . "Class" "logo" "Lazy" false "Widths" slice | partial "plugin/img.html" -}}
                     {{- end -}}
                     {{- with .pre -}}
-                        <span class="header-title-pre">{{ . | safeHTML }}</span>
+                        <span class="header-title-pre">{{ partialCached "function/icons.html" (string .) (string .) | safeHTML }}</span>
                     {{- end -}}
                     {{- if .typeit -}}
                         {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
@@ -18,7 +18,7 @@
                         {{- .name -}}
                     {{- end -}}
                     {{- with .post -}}
-                        <span class="header-title-post">{{ . | safeHTML }}</span>
+                        <span class="header-title-post">{{ partialCached "function/icons.html" (string .) (string .) | safeHTML }}</span>
                     {{- end -}}
                 {{- else -}}
                     {{- .Site.Title -}}
@@ -33,7 +33,7 @@
                         {{- $url = .RelPermalink -}}
                     {{- end -}}
                     <a class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end }}>
-                        {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
+                        {{- partialCached "function/icons.html" (string .Pre) (string .Pre) | safeHTML }} {{ .Name }} {{ partialCached "function/icons.html" (string .Post) (string .Post) | safeHTML -}}
                     </a>
                 {{- end -}}
                 {{- if .Site.Menus.main -}}
@@ -42,13 +42,13 @@
 
                 {{- if .Site.Params.search.enable -}}
                     <button type="button" class="menu-item search-toggle link-like" id="search-toggle-desktop" title="{{ T `search` }}" aria-label="{{ T `search` }}" aria-haspopup="dialog" aria-controls="search-dialog" aria-keyshortcuts="/ Control+K Meta+K">
-                        <i class="fas fa-search" aria-hidden="true"></i>
+                        {{ dict "Class" "fas fa-search" | partial "plugin/icon.html" }}
                     </button>
                 {{- end -}}
                 {{- partial "plugin/theme-switch.html" . -}}
                 {{- if hugo.IsMultilingual -}}
                 <span class="menu-item language link-like" title="{{ T "selectLanguage" }}">
-                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    {{ dict "Class" "fa fa-globe" | partial "plugin/icon.html" }}
                     <select class="language-select" id="language-select-desktop" aria-label="{{ T "selectLanguage" }}" onchange="location = this.value;">
                         {{- if eq .Kind "404" -}}
                             {{- /* https://github.com/dillonzq/LoveIt/issues/378 */ -}}
@@ -81,10 +81,10 @@
                 <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
                     {{- with .Site.Params.header.title -}}
                         {{- with .logo -}}
-                            {{- dict "Src" . "Class" "logo" | partial "plugin/img.html" -}}
+                            {{- dict "Src" . "Class" "logo" "Lazy" false "Widths" slice | partial "plugin/img.html" -}}
                         {{- end -}}
                         {{- with .pre -}}
-                            <span class="header-title-pre">{{ . | safeHTML }}</span>
+                            <span class="header-title-pre">{{ partialCached "function/icons.html" (string .) (string .) | safeHTML }}</span>
                         {{- end -}}
                         {{- if .typeit -}}
                             {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
@@ -94,7 +94,7 @@
                             {{- .name -}}
                         {{- end -}}
                         {{- with .post -}}
-                            <span class="header-title-post">{{ . | safeHTML }}</span>
+                            <span class="header-title-post">{{ partialCached "function/icons.html" (string .) (string .) | safeHTML }}</span>
                         {{- end -}}
                     {{- else -}}
                         {{- .Site.Title -}}
@@ -103,7 +103,7 @@
             </div>
             {{- if .Site.Params.search.enable -}}
                 <button type="button" class="search-toggle link-like" id="search-toggle-mobile" title="{{ T `search` }}" aria-label="{{ T `search` }}" aria-haspopup="dialog" aria-controls="search-dialog" aria-keyshortcuts="/ Control+K Meta+K">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    {{ dict "Class" "fas fa-search" | partial "plugin/icon.html" }}
                 </button>
             {{- end -}}
             <button type="button" class="menu-toggle" id="menu-toggle-mobile" title="{{ T "menu" }}" aria-label="{{ T "menu" }}" aria-controls="menu-mobile" aria-expanded="false">
@@ -118,13 +118,13 @@
                     {{- $url = .RelPermalink -}}
                 {{- end -}}
                 <a class="menu-item" href="{{ $url }}" title="{{ .Title }}"{{ if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end }}>
-                    {{- .Pre | safeHTML }}{{ .Name }}{{ .Post | safeHTML -}}
+                    {{- partialCached "function/icons.html" (string .Pre) (string .Pre) | safeHTML }}{{ .Name }}{{ partialCached "function/icons.html" (string .Post) (string .Post) | safeHTML -}}
                 </a>
             {{- end -}}
             {{- partial "plugin/theme-switch.html" . -}}
             {{- if hugo.IsMultilingual -}}
                 <span class="menu-item language link-like" title="{{ T "selectLanguage" }}">
-                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    {{ dict "Class" "fa fa-globe" | partial "plugin/icon.html" }}
                     <select class="language-select" id="language-select-mobile" aria-label="{{ T "selectLanguage" }}" onchange="location = this.value;">
                         {{- if eq .Kind "404" -}}
                             {{- /* https://github.com/dillonzq/LoveIt/issues/378 */ -}}

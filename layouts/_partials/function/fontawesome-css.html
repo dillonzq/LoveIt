@@ -1,0 +1,32 @@
+{{- /* Whether the page loads the Font Awesome stylesheet and webfonts. The theme's own icons are inline */ -}}
+{{- /* SVG, so by default ("auto") only content and configured HTML that still use Font Awesome load it. */ -}}
+{{- /* The fontawesomeCSS page param set to true or false always or never loads it. */ -}}
+{{- $params := partial "function/params.html" . -}}
+{{- $mode := "auto" -}}
+{{- if isset $params "fontawesomecss" -}}
+    {{- $mode = index $params "fontawesomecss" | string | lower -}}
+{{- end -}}
+{{- $need := eq $mode "true" -}}
+{{- if not (in (slice "true" "false") $mode) -}}
+    {{- $need = partialCached "function/fontawesome-site.html" .Site .Site.Language.Lang -}}
+    {{- if not $need -}}
+        {{- $html := slice -}}
+        {{- /* Only the home page and regular pages show their content (list pages show titles). */ -}}
+        {{- if or .IsHome .IsPage -}}
+            {{- $html = $html | append (string .Content) -}}
+            {{- /* HTML that raw and typeit insert after load; rendering .Content above stores it. */ -}}
+            {{- range .Store.Get "contentData" -}}
+                {{- $html = $html | append (printf "%v" .) -}}
+            {{- end -}}
+        {{- end -}}
+        {{- /* posts/single.html shows the author (as HTML) and the license */ -}}
+        {{- if .IsPage | and (eq .Type "posts") -}}
+            {{- $html = $html | append (string ($params.author | default .Site.Params.Author.name)) (string $params.license) -}}
+        {{- end -}}
+        {{- $need = dict "Content" (delimit $html "\n") "Fontawesome" $params.fontawesome | partial "function/fontawesome-markup.html" -}}
+    {{- end -}}
+    {{- if not $need | and .IsHome -}}
+        {{- $need = partialCached "function/fontawesome-home.html" . .Site.Language.Lang -}}
+    {{- end -}}
+{{- end -}}
+{{- return $need -}}

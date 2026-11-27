@@ -37,7 +37,7 @@ math:
 * :(fab fa-yandex-international): 支持 **[Yandex Metrica](https://metrica.yandex.com/)**
 * :(fas fa-sitemap): 支持搜索引擎的**网站验证** (Google, Bing, Yandex 和 Baidu)
 * :(fas fa-tachometer-alt): 支持所有第三方库的 **CDN**
-* :(fas fa-cloud-download-alt): 基于 [lazysizes](https://github.com/aFarkas/lazysizes) 自动转换图片为**懒加载**
+* :(fas fa-cloud-download-alt): 基于 Hugo 图片处理的**响应式图片**, 带有 WebP 副本, `width`/`height` 和浏览器原生懒加载
 
 ### 外观和布局
 
@@ -109,7 +109,6 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
 * [Fuse.js](https://fusejs.io/)
 * [Pagefind](https://pagefind.app/)
-* [lazysizes](https://github.com/aFarkas/lazysizes)
 * [object-fit-images](https://github.com/fregante/object-fit-images)
 * [Twemoji](https://github.com/jdecked/twemoji)
 * [emoji-data](https://github.com/iamcal/emoji-data)

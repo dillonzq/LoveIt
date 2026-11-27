@@ -1,5 +1,15 @@
 import { test, expect } from '@playwright/test';
 import { AxeBuilder } from '@axe-core/playwright';
+import { getHugo } from '../../scripts/tools.mjs';
+
+async function hugoImageFeatures() {
+  const { version } = await getHugo();
+  const [major, minor] = version.match(/v(\d+)\.(\d+)\./).slice(1).map(Number);
+  return {
+    encodesWebP: version.includes('+extended') || major > 0 || minor >= 153,
+    readsPngOrientation: major > 0 || minor >= 155,
+  };
+}
 
 async function openSearch(page, engine, language = '') {
   await page.goto(`/${engine}/blog/${language}`);
@@ -297,6 +307,34 @@ test('Mermaid survives cached content; math, copy controls and persisted theme w
   expect(errors).toEqual([]);
 });
 
+// The referrer meta tag is covered by tests/security-defaults.test.mjs; the fixture overrides head/meta.html.
+test('Mermaid uses securityLevel "strict" unless the config says "loose"', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('/fuse/blog/guide/');
+  await expect(page.locator('.mermaid svg')).toBeVisible();
+  const securityLevel = () => page.evaluate(() => mermaid.mermaidAPI.getConfig().securityLevel);
+  expect(await page.evaluate(() => window.config.mermaid)).toEqual({ securityLevel: 'strict' });
+  expect(await securityLevel()).toBe('strict');
+  // The theme switch re-initializes Mermaid from window.config.
+  const rerender = async mermaidConfig => {
+    await page.evaluate(value => {
+      if (value === undefined) delete window.config.mermaid;
+      else window.config.mermaid = value;
+      document.querySelector('.mermaid').innerHTML = '';
+    }, mermaidConfig);
+    await page.locator('#header-desktop .theme-switch').click();
+    await expect(page.locator('.mermaid svg')).toBeVisible();
+  };
+  await rerender({ securityLevel: 'loose' });
+  expect(await securityLevel()).toBe('loose');
+  await rerender({ securityLevel: 'antiscript' });
+  expect(await securityLevel()).toBe('strict');
+  await rerender(undefined);
+  expect(await securityLevel()).toBe('strict');
+  expect(errors).toEqual([]);
+});
+
 test('mobile navigation and search survive resizing', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/fuse/blog/');
@@ -359,6 +397,66 @@ test('header, share and back controls are labelled, keyboard-operable buttons', 
 
   await page.locator('.post-info-more').getByRole('button', { name: 'Back' }).click();
   await expect(page).toHaveURL(/\/fuse\/blog\/$/);
+});
+
+test('theme icons are inline SVG and only content that uses Font Awesome loads it', async ({ page }) => {
+  const fontBytes = {};
+  const iconRequests = [];
+  page.on('requestfinished', async request => {
+    if (/\/lib\/(fontawesome-free|simple-icons)\//.test(request.url())) iconRequests.push(request.url());
+    if (request.resourceType() !== 'font') return;
+    const { responseBodySize } = await request.sizes();
+    fontBytes[page.url()] = (fontBytes[page.url()] || 0) + responseBodySize;
+  });
+  for (const path of ['/fuse/blog/', '/fuse/blog/gallery/', '/fuse/blog/tags/icons/', '/fuse/blog/404.html']) {
+    await page.goto(path, { waitUntil: 'networkidle' });
+    await expect(page.locator('link[href*="fontawesome"]')).toHaveCount(0);
+    await expect(page.locator('[data-svg-src], i[class*="fa-"]')).toHaveCount(0);
+    await expect(page.locator('#header-desktop .theme-switch svg.icon')).toHaveCount(3);
+    const { violations } = await new AxeBuilder({ page }).withRules(['svg-img-alt']).analyze();
+    expect(violations).toEqual([]);
+    expect(fontBytes[page.url()] || 0).toBeLessThanOrEqual(60 * 1024);
+  }
+  expect(iconRequests).toEqual([]);
+
+  // Icon-only social links are named by their icon.
+  await page.goto('/fuse/blog/');
+  await expect(page.locator('.home-profile .links svg[role="img"]').first()).toHaveAttribute('aria-label', /\S/);
+  // Each theme mode shows its own icon.
+  const visibleIcon = () => page.locator('#header-desktop .theme-switch svg:visible').getAttribute('class');
+  await expect.poll(visibleIcon).toContain('theme-icon-auto');
+  await page.locator('#header-desktop .theme-switch').click();
+  await expect.poll(visibleIcon).toContain('theme-icon-light');
+
+  await page.goto('/fuse/blog/font-awesome/');
+  await expect(page.locator('link[href*="fontawesome"]')).not.toHaveCount(0);
+  const rocket = page.locator('#content i.fas.fa-rocket');
+  await expect(rocket).toBeVisible();
+  await expect.poll(() => rocket.evaluate(icon => getComputedStyle(icon, '::before').fontFamily)).toContain('Font Awesome');
+  await expect(page.locator('#content .admonition svg.icon')).toHaveCount(3);
+  // Only the title icon is positioned; icons in the admonition body stay in the text flow.
+  await expect(page.locator('#content .admonition .admonition-content svg.icon')).toHaveCSS('position', 'static');
+  await expect(page.locator('#content').getByRole('img', { name: 'Checked', exact: true })).toHaveCount(2);
+  await expect(page.locator('#content').getByRole('img', { name: 'Unchecked', exact: true })).toHaveCount(1);
+  const { violations } = await new AxeBuilder({ page }).include('#content').withRules(['svg-img-alt', 'label']).analyze();
+  expect(violations).toEqual([]);
+
+  // HTML that the raw shortcode inserts after load still gets the webfont.
+  await page.goto('/fuse/blog/raw-icon/');
+  await expect(page.locator('link[href*="fontawesome"]')).not.toHaveCount(0);
+  await expect(page.locator('#content i.fas.fa-anchor')).toBeVisible();
+
+  // So does a byline whose author name uses a Font Awesome class.
+  await page.goto('/fuse/blog/author-icon/');
+  await expect(page.locator('link[href*="fontawesome"]')).not.toHaveCount(0);
+});
+
+test('icon prose does not load webfonts and local SVGs retain their fills', async ({ page }) => {
+  await page.goto('/fuse/blog/icon-prose/');
+  await expect(page.locator('link[href*="fontawesome"]')).toHaveCount(0);
+  const icon = page.getByRole('img', { name: 'Custom SVG' });
+  await expect(icon.locator('path').first()).toHaveCSS('fill', 'rgb(255, 0, 0)');
+  await expect(icon.locator('path').last()).toHaveCSS('fill', 'none');
 });
 
 for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/', dir: 'rtl' }]) {
@@ -425,11 +523,18 @@ test('a long auto TOC stays within the viewport and scrolls to the active sectio
 });
 
 test('first-screen avatar loads directly and scroll bursts share a frame', async ({ page }) => {
+  const { readsPngOrientation } = await hugoImageFeatures();
   await page.goto('/fuse/blog/');
   const avatar = page.locator('.home-avatar img');
   await expect(avatar).toHaveAttribute('loading', 'eager');
   await expect(avatar).toHaveAttribute('fetchpriority', 'high');
   await expect(avatar).not.toHaveAttribute('src', /loading\.svg/);
+  if (readsPngOrientation) {
+    await expect(avatar).toHaveAttribute('sizes', '6rem');
+    await expect(avatar).toHaveAttribute('srcset', /\.webp 480w, \S+avatar\.png 528w$/);
+  } else {
+    await expect(avatar).not.toHaveAttribute('srcset');
+  }
   const frames = await page.evaluate(() => {
     let count = 0;
     const original = window.requestAnimationFrame;
@@ -584,6 +689,7 @@ test('fixed buttons fade in after scrolling down', async ({ page }) => {
 });
 
 test('lightGallery opens linked images with thumbnails, zoom and SVG icons', async ({ page }) => {
+  const { encodesWebP } = await hugoImageFeatures();
   const errors = [];
   const missing = [];
   page.on('pageerror', error => errors.push(error.message));
@@ -604,7 +710,9 @@ test('lightGallery opens linked images with thumbnails, zoom and SVG icons', asy
   await expect(page.locator('.lg-current .lg-image')).toHaveAttribute('src', /Wavelength\.jpg$/);
   await expect(page.locator('.lg-sub-html h2')).toHaveText('Wavelength');
   await expect(page.locator('.lg-thumb-item')).toHaveCount(2);
-  // The second image sets its own thumbnail (src_s), which exThumbImage must pick up.
+  // The first thumbnail uses the smallest available copy. The second sets its own (src_s).
+  const firstThumbnail = encodesWebP ? /Wavelength_hu_\w+\.webp$/ : /Wavelength\.jpg$/;
+  await expect(page.locator('.lg-thumb-item img').first()).toHaveAttribute('src', firstThumbnail);
   await expect(page.locator('.lg-thumb-item img').nth(1)).toHaveAttribute('src', /Wavelength\.jpg$/);
   for (const button of ['.lg-close', '.lg-download', '.lg-toggle-thumb', '.lg-zoom-in', '.lg-zoom-out']) {
     await expect(page.locator(`.lg-toolbar ${button} svg`)).toBeVisible();
@@ -617,6 +725,103 @@ test('lightGallery opens linked images with thumbnails, zoom and SVG icons', asy
   await expect(outer).not.toHaveClass(/\blg-visible\b/);
   expect(errors).toEqual([]);
   expect(missing).toEqual([]);
+});
+
+test('local images get their size, WebP srcset and native lazy loading; others are left alone', async ({ page }) => {
+  const { encodesWebP, readsPngOrientation } = await hugoImageFeatures();
+  await page.goto('/fuse/blog/image-processing/');
+  await expect(page.locator('script[src*="lazysizes"], img.lazyload, img[data-src]')).toHaveCount(0);
+  const images = page.locator('#content img');
+  // Exif orientation 6: the 600x400 JPEG is shown 400x600, and its WebP copy is rotated to match.
+  const rotated = images.nth(0);
+  await expect(rotated).toHaveAttribute('src', /\/image-processing\/rotated\.jpg$/);
+  await expect(rotated).toHaveAttribute('width', '400');
+  await expect(rotated).toHaveAttribute('height', '600');
+  if (encodesWebP) {
+    await expect(rotated).toHaveAttribute('srcset', /^\S+\.webp 400w$/);
+    await expect(rotated).toHaveAttribute('sizes', /100vw/);
+  } else {
+    await expect(rotated).not.toHaveAttribute('srcset');
+    await expect(rotated).not.toHaveAttribute('sizes');
+  }
+  await expect(rotated).toHaveAttribute('loading', 'lazy');
+  await expect(rotated).toHaveAttribute('decoding', 'async');
+  await rotated.scrollIntoViewIfNeeded();
+  // naturalWidth follows the density that sizes gives the candidate, so compare the aspect ratio.
+  await expect.poll(() => rotated.evaluate(img => img.complete && [img.currentSrc.endsWith('.webp'), Math.round(img.naturalHeight / img.naturalWidth * 10) / 10]))
+    .toEqual([encodesWebP, 1.5]);
+  // A width alone gets the height that keeps the aspect ratio.
+  const narrow = images.nth(1);
+  await expect(narrow).toHaveAttribute('width', '200');
+  await expect(narrow).toHaveAttribute('height', '300');
+  // Files under static/ and remote images are used as they are.
+  for (const [index, src] of [[2, /\/android-chrome-192x192\.png$/], [3, /^https:\/\/cdn\.example\.com\/remote\.png$/]]) {
+    const image = images.nth(index);
+    await expect(image).toHaveAttribute('src', src);
+    await expect(image).not.toHaveAttribute('srcset');
+    await expect(image).not.toHaveAttribute('width');
+    await expect(image).toHaveAttribute('loading', 'lazy');
+  }
+  // Hugo reads a PNG's Exif orientation from 0.155.0 (.Meta); before that, only JPEG and TIFF orientation.
+  const png = images.nth(4);
+  const [pngWidth, pngHeight] = readsPngOrientation ? ['40', '60'] : ['60', '40'];
+  await expect(png).toHaveAttribute('width', pngWidth);
+  await expect(png).toHaveAttribute('height', pngHeight);
+  await png.scrollIntoViewIfNeeded();
+  if (encodesWebP && readsPngOrientation) {
+    await expect(png).toHaveAttribute('srcset', new RegExp(`^\\S+\\.webp ${pngWidth}w$`));
+    await expect.poll(() => png.evaluate(img => img.complete && [img.currentSrc.endsWith('.webp'), Math.round(img.naturalHeight / img.naturalWidth * 10) / 10]))
+      .toEqual([true, 1.5]);
+  } else {
+    await expect(png).not.toHaveAttribute('srcset');
+    await expect.poll(() => png.evaluate(img => img.currentSrc.endsWith('/oriented.png') && img.naturalWidth > 0)).toBe(true);
+    await expect.poll(() => png.evaluate(img => img.naturalHeight / img.naturalWidth)).toBeCloseTo(1.5);
+  }
+  // Animated PNG and WebP keep their animation: their size, but no WebP copies.
+  // The APNG has a text chunk that mentions IDAT and acTL before its real acTL chunk.
+  for (const [index, size] of [[5, ['60', '40']], [6, ['160', '33']]]) {
+    const image = images.nth(index);
+    await expect(image).toHaveAttribute('src', /\/image-processing\/animated\.(png|webp)$/);
+    await expect(image).not.toHaveAttribute('srcset');
+    await expect(image).toHaveAttribute('width', size[0]);
+    await expect(image).toHaveAttribute('height', size[1]);
+  }
+  // A width of 0 counts as missing.
+  await expect(images.nth(7)).toHaveAttribute('width', '400');
+  await expect(images.nth(7)).toHaveAttribute('height', '600');
+  // An oriented JPEG Hugo cannot decode keeps its size and is used as it is, without failing the build.
+  const broken = images.nth(8);
+  await expect(broken).toHaveAttribute('src', /\/image-processing\/broken\.jpg$/);
+  await expect(broken).toHaveAttribute('width', '400');
+  await expect(broken).toHaveAttribute('height', '600');
+  await expect(broken).not.toHaveAttribute('srcset');
+
+  const truncated = page.getByAltText('Truncated JPEG', { exact: true });
+  await expect(truncated).toHaveAttribute('src', /\/image-processing\/truncated\.jpg$/);
+  await expect(truncated).toHaveAttribute('width', '120');
+  await expect(truncated).not.toHaveAttribute('height');
+  await expect(truncated).not.toHaveAttribute('srcset');
+
+  const paddedApng = page.locator('#content img[title="APNG with metadata"]');
+  await expect(paddedApng).toHaveAttribute('src', /\/image-processing\/animated-metadata\.png$/);
+  await expect(paddedApng).toHaveAttribute('width', '60');
+  await expect(paddedApng).toHaveAttribute('height', '40');
+  await expect(paddedApng).not.toHaveAttribute('srcset');
+
+  // The bundle's featured image is the first-screen image: loaded at once with a high priority.
+  const featured = page.locator('.featured-image img');
+  await expect(featured).toHaveAttribute('src', /\/image-processing\/featured-image\.jpg$/);
+  await expect(featured).toHaveAttribute('fetchpriority', 'high');
+  await expect(featured).toHaveAttribute('loading', 'eager');
+  await expect(featured).not.toHaveAttribute('decoding');
+  await expect(featured).toHaveAttribute('width', '600');
+  await expect(featured).toHaveAttribute('height', '400');
+  await expect.poll(() => featured.evaluate(img => img.offsetWidth === img.parentElement.clientWidth)).toBe(true);
+  if (encodesWebP) {
+    await expect(featured).toHaveAttribute('srcset', /^\S+\.webp 600w$/);
+  } else {
+    await expect(featured).not.toHaveAttribute('srcset');
+  }
 });
 
 test('lightGallery keeps the zoom buttons and mobile defaults on phones', async ({ browser }) => {
@@ -791,4 +996,165 @@ test('home page and its feed list the posts section and pages typed "posts" or "
   expect(feed).toContain('<title>Posts type elsewhere</title>');
   expect(feed).toContain('<title>Post type elsewhere</title>');
   expect(feed).not.toContain('<title>Plain note</title>');
+});
+
+test.describe('heading anchors without JavaScript', () => {
+  test.use({ javaScriptEnabled: false });
+
+  test('are built into article headings, named by them and keep their formatting', async ({ page }) => {
+    await page.goto('/fuse/blog/headings/');
+    const content = page.locator('.content#content');
+    const anchors = content.locator('> :is(h2, h3, h4, h5, h6) > a.header-mark');
+    await expect(anchors).toHaveCount(5);
+    for (const [id, name] of [
+      ['plain-section', 'Plain section'],
+      ['section-with-code-and-emphasis', 'Section with code and emphasis'],
+      ['custom-id', 'Custom attributes'],
+      ['content', 'Content'],
+      ['last-section', 'Last section'],
+    ]) {
+      const anchor = content.locator(`#${id} > a.header-mark`);
+      await expect(anchor).toBeVisible();
+      await expect(anchor).toHaveAttribute('href', `#${id}`);
+      await expect(anchor).toHaveAccessibleName(name);
+      // The decorative "#" or "|" mark stays out of the heading's own name.
+      await expect(content.getByRole('heading', { name, exact: true })).toHaveAttribute('id', id);
+    }
+    const formatted = content.locator('#section-with-code-and-emphasis');
+    await expect(formatted.locator('code')).toHaveText('code');
+    await expect(formatted.locator('em')).toHaveText('emphasis');
+    const custom = content.locator('#custom-id');
+    await expect(custom).toHaveClass('custom-class');
+    await expect(custom).toHaveAttribute('data-count', '42');
+    await expect(custom).toHaveAttribute('title', 'Say "hi" & <go>');
+    // Headings the theme never marked keep no visible or focusable anchor.
+    await expect(content.locator('#top-level-heading > a.header-mark')).toBeHidden();
+    await expect(content.locator('.admonition #nested-heading > a.header-mark')).toBeHidden();
+    // An empty heading keeps its ID but gets no unnamed link. It sits in the admonition to stay out of the TOC.
+    await expect(content.locator('h5#divider')).toBeAttached();
+    await expect(content.locator('#divider > a')).toHaveCount(0);
+    await expect(content.locator('h5#space-divider')).toBeAttached();
+    await expect(content.locator('#space-divider > a')).toHaveCount(0);
+    await expect(content.locator('h5#formatted-space-divider')).toBeAttached();
+    await expect(content.locator('#formatted-space-divider > a')).toHaveCount(0);
+
+    await content.locator('#last-section > a.header-mark').click();
+    await expect(page).toHaveURL(/\/headings\/#last-section$/);
+  });
+
+  test('stay out of the feed and the Markdown output', async ({ request }) => {
+    const feed = await (await request.get('/fuse/blog/index.xml')).text();
+    expect(feed).toContain('<h2 id="plain-section">Plain section</h2>');
+    expect(feed).not.toContain('header-mark');
+    const markdown = await (await request.get('/fuse/blog/headings/index.md')).text();
+    expect(markdown).toContain('## Plain section');
+    expect(markdown).not.toContain('header-mark');
+  });
+});
+
+test('every link on an article with heading anchors has an accessible name', async ({ page }) => {
+  await page.goto('/fuse/blog/headings/');
+  const { violations } = await new AxeBuilder({ page }).withRules(['link-name']).analyze();
+  expect(violations).toEqual([]);
+});
+
+for (const missing of [false, true]) {
+  test(`the auto TOC follows the article headings it links to${missing ? ', skipping links without a heading' : ''}`, async ({ page }) => {
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    // With autoHeadingID off, Hugo links headings that have no ID to "#".
+    if (missing) {
+      await page.route('**/fuse/blog/headings/', async route => {
+        const response = await route.fetch();
+        const body = (await response.text()).replace(/<a href=["']?#(plain-section|section-with-code-and-emphasis)["']?>/g, '<a href="#">');
+        await route.fulfill({ response, body });
+      });
+    }
+    await page.setViewportSize({ width: 1280, height: 400 });
+    await page.goto('/fuse/blog/headings/');
+    const content = page.locator('#toc-content-auto');
+    await expect(page.locator('#toc-auto')).toBeVisible();
+    if (missing) await expect(content.locator('a[href="#"]')).toHaveCount(2);
+    const sections = [['custom-id', 'Custom attributes'], ['content', 'Content'], ['last-section', 'Last section']];
+    if (!missing) sections.unshift(['plain-section', 'Plain section']);
+    for (const [id, name] of sections) {
+      await page.locator(`.content :is(h2, h3)[id="${id}"]`).evaluate(heading => {
+        const top = heading.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: top - 10, behavior: 'instant' });
+      });
+      await expect(content.locator('a.active')).toHaveText(name);
+    }
+    expect(errors).toEqual([]);
+  });
+}
+
+test('Read More links name their post, microdata uses https and summaries keep it', async ({ page }) => {
+  await page.goto('/fuse/blog/');
+  const readMore = page.locator('.home .summary .post-footer > a').first();
+  // Only "Read More" shows; the post title stays in the link text for crawlers but off screen.
+  await expect(readMore).toHaveAccessibleName(/^Read More: \S/);
+  const typed = page.getByRole('link', { name: 'Read More: Typed post' });
+  await expect(typed).toHaveText('Read More Typed post', { useInnerText: true });
+  expect(await typed.evaluate(link => link.firstChild.textContent)).toBe('Read More');
+  const hidden = await typed.locator('.visually-hidden').boundingBox();
+  expect(hidden.width * hidden.height).toBeLessThanOrEqual(1);
+  await typed.focus();
+  await expect(typed).toBeFocused();
+  const literalTitle = 'std::vector<int> & 😄';
+  const literal = page.getByRole('link', { name: `Read More: ${literalTitle}`, exact: true });
+  await expect(literal.locator('.visually-hidden')).toHaveText(literalTitle);
+  await expect(page.locator('[itemtype^="http:"]')).toHaveCount(0);
+  await expect(page.locator('.summary[itemtype="https://schema.org/Article"]').first()).toBeAttached();
+  await expect(page.locator('.footer [itemtype="https://schema.org/CreativeWork"]')).toHaveCount(1);
+  await page.goto('/fuse/blog/zh-cn/');
+  await expect(page.getByRole('link', { name: '阅读全文：中文搜索指南' })).toHaveCount(1);
+});
+
+test('footnotes and their references are highlighted when a link jumps to them', async ({ browser, page }) => {
+  await page.goto('/fuse/blog/long-toc/');
+  const reference = page.locator('sup[id^="fnref"]').first();
+  const note = page.locator('.footnotes li').first();
+  await expect(note).not.toHaveCSS('outline-style', 'solid');
+  await reference.locator('a').focus();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#fn:1$/);
+  await expect(note).toHaveCSS('outline-style', 'solid');
+  await expect(note).toHaveCSS('animation-name', 'footnote-target');
+  await expect(note).toBeInViewport();
+  await note.locator('a.footnote-backref').focus();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#fnref:1$/);
+  await expect(reference).toHaveCSS('outline-style', 'solid');
+  await expect(note).not.toHaveCSS('outline-style', 'solid');
+
+  // Highlighted text and links keep at least 4.5:1 contrast in both themes.
+  const contrast = locator => locator.evaluate(element => {
+    const rgba = value => value.match(/[\d.]+/g).map(Number);
+    const over = ([r, g, b, a = 1], [br, bg, bb]) => [r * a + br * (1 - a), g * a + bg * (1 - a), b * a + bb * (1 - a)];
+    const target = element.closest(':target');
+    const background = over(rgba(getComputedStyle(target).backgroundColor), rgba(getComputedStyle(document.body).backgroundColor));
+    const luminance = rgb => rgb.map(v => v / 255).map(v => v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)
+      .reduce((sum, v, i) => sum + v * [0.2126, 0.7152, 0.0722][i], 0);
+    const [a, b] = [luminance(over(rgba(getComputedStyle(element).color), background)), luminance(background)];
+    return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+  });
+  for (const theme of ['light', 'dark']) {
+    await page.goto('/fuse/blog/long-toc/#fnref:1');
+    await page.evaluate(theme => document.body.setAttribute('theme', theme), theme);
+    expect(await contrast(reference.locator('a'))).toBeGreaterThanOrEqual(4.5);
+    await page.goto('/fuse/blog/long-toc/#fn:1');
+    await page.evaluate(theme => document.body.setAttribute('theme', theme), theme);
+    expect(await contrast(note.locator('p'))).toBeGreaterThanOrEqual(4.5);
+    expect(await contrast(note.locator('a.footnote-backref'))).toBeGreaterThanOrEqual(4.5);
+  }
+  await expect(note).toHaveCSS('outline-color', 'rgb(85, 189, 226)');
+
+  // Reduced motion keeps the highlight but drops the animation.
+  const context = await browser.newContext({ reducedMotion: 'reduce' });
+  const reduced = await context.newPage();
+  await reduced.goto('/fuse/blog/long-toc/#fn:1');
+  const reducedNote = reduced.locator('.footnotes li').first();
+  await expect(reducedNote).toHaveCSS('outline-style', 'solid');
+  await expect(reducedNote).toHaveCSS('animation-name', 'none');
+  await context.close();
 });
