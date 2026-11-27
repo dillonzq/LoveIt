@@ -1,7 +1,20 @@
 {{- /* Whether HTML (Content) still needs the Font Awesome stylesheet: an element with a Font Awesome */ -}}
 {{- /* class, or the :(fa…): syntax when Fontawesome enables it (function/fontawesome.html). */ -}}
 {{- $content := string .Content -}}
-{{- $need := findRE `(?i)\sclass\s*=\s*["']?[^"'>]*\bfa[srb]?\b` $content 1 | len | lt 0 -}}
+{{- $need := false -}}
+{{- /* Scan complete tags so attribute values, comments and prose cannot supply a class attribute. */ -}}
+{{- $tags := findRE `(?is)<!--.*?(?:-->|$)|<(?:script|style|textarea|title)\b[^>]*>.*?</(?:script|style|textarea|title)\s*>|<[a-z][\w:-]*(?:\s+(?:[^"'<>]|"[^"]*"|'[^']*')*)?/?>` $content -}}
+{{- range $tags -}}
+    {{- with findRESubmatch `(?i)^<[a-z][\w:-]*(?:\s+[^\s"'<>/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s"'=<>]+))?)*?\s+class\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>]+))` . 1 -}}
+        {{- $class := delimit (after 1 (index . 0)) "" | htmlUnescape -}}
+        {{- if findRE `(?:^|\s)fa(?:[srb]|-[\w-]+)?(?:\s|$)` $class 1 -}}
+            {{- $need = true -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if $need -}}
+        {{- break -}}
+    {{- end -}}
+{{- end -}}
 {{- if not $need | and .Fontawesome -}}
     {{- $need = findRE `:\([\w- ]+?\):` $content 1 | len | lt 0 -}}
 {{- end -}}

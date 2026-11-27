@@ -230,6 +230,14 @@ test('theme icons are inline SVG and only content that uses Font Awesome loads i
   await expect(page.locator('link[href*="fontawesome"]')).not.toHaveCount(0);
 });
 
+test('icon prose does not load webfonts and local SVGs retain their fills', async ({ page }) => {
+  await page.goto('/fuse/blog/icon-prose/');
+  await expect(page.locator('link[href*="fontawesome"]')).toHaveCount(0);
+  const icon = page.getByRole('img', { name: 'Custom SVG' });
+  await expect(icon.locator('path').first()).toHaveCSS('fill', 'rgb(255, 0, 0)');
+  await expect(icon.locator('path').last()).toHaveCSS('fill', 'none');
+});
+
 for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/', dir: 'rtl' }]) {
   test(`${dir}: header, search dropdown and auto TOC follow the language direction`, async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
