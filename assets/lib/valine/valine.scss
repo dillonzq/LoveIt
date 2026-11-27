@@ -116,6 +116,12 @@ $code-background-color-dark: #272C34 !default;
       }
     }
 
+    // Underline links in comments so they stand apart from the text by more than color.
+    .vcontent a[href] {
+      text-decoration: underline;
+      text-underline-offset: .2em;
+    }
+
     p,
     .vinput,
     .veditor,

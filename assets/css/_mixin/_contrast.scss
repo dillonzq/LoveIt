@@ -1,5 +1,21 @@
 @use "sass:color";
+@use "sass:list";
 @use "sass:math";
+@use "sass:meta";
+
+// Whether a value is a color Sass can compute with, not a runtime value like var().
+@function is-sass-color($value) {
+  @return meta.type-of($value) == "color";
+}
+
+// Rounds a color to whole sRGB channels, as the browser paints it.
+@function round-rgb($color) {
+  @return rgb(
+    math.round(color.channel($color, "red", $space: rgb)),
+    math.round(color.channel($color, "green", $space: rgb)),
+    math.round(color.channel($color, "blue", $space: rgb))
+  );
+}
 
 // WCAG relative luminance of an opaque color.
 @function relative-luminance($color) {
@@ -27,31 +43,48 @@
   @return math.div(math.max($la, $lb) + 0.05, math.min($la, $lb) + 0.05);
 }
 
-// Paints a translucent color over an opaque background.
+// Paints a translucent color over an opaque background, or returns null when
+// either is a runtime value.
 @function flatten($color, $background) {
-  @return color.mix(color.change($color, $alpha: 1), $background, color.channel($color, "alpha") * 100%);
+  @if not is-sass-color($color) or not is-sass-color($background) {
+    @return null;
+  }
+
+  @return round-rgb(color.mix(color.change($color, $alpha: 1), $background, color.channel($color, "alpha") * 100%, $method: rgb));
 }
 
-// Mixes $color with black on a light background, or with white on a dark one,
-// just enough to reach $ratio against $background. Keeps the hue of colors that
-// are already readable and fixes ones a site overrides without checking.
-@function readable-color($color, $background, $ratio: 4.5) {
+// Mixes $color with black on light backgrounds, or with white on dark ones,
+// just enough to reach $ratio against every color in $backgrounds. Keeps the
+// hue of colors that are already readable and fixes ones a site overrides
+// without checking. Returns $color unchanged when a value is not a Sass color.
+@function readable-color($color, $backgrounds, $ratio: 4.5) {
+  @if not is-sass-color($color) {
+    @return $color;
+  }
+
+  @each $background in $backgrounds {
+    @if not is-sass-color($background) {
+      @return $color;
+    }
+  }
+
   $toward: #fff;
 
-  @if relative-luminance($background) > 0.18 {
+  @if relative-luminance(list.nth($backgrounds, 1)) > 0.18 {
     $toward: #000;
   }
 
   @for $weight from 0 through 100 {
-    $mixed: color.mix($toward, $color, $weight * 1%);
-    // Round to whole channels so the checked color is the one the browser paints.
-    $candidate: rgb(
-      math.round(color.channel($mixed, "red", $space: rgb)),
-      math.round(color.channel($mixed, "green", $space: rgb)),
-      math.round(color.channel($mixed, "blue", $space: rgb))
-    );
+    $candidate: round-rgb(color.mix($toward, $color, $weight * 1%, $method: rgb));
+    $passes: true;
 
-    @if contrast-ratio($candidate, $background) >= $ratio {
+    @each $background in $backgrounds {
+      @if contrast-ratio($candidate, $background) < $ratio {
+        $passes: false;
+      }
+    }
+
+    @if $passes {
       @return $candidate;
     }
   }

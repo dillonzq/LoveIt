@@ -134,7 +134,11 @@ header {
     }
 
     .search-clear:hover {
-      color: #ff6b6b;
+      color: #d45959;
+
+      [theme=dark] & {
+        color: #ff6b6b;
+      }
     }
 
     .search-toggle:hover {
