@@ -364,8 +364,10 @@ class Theme {
             $toc.style.visibility = 'visible';
             const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
             const $tocLiElements = $tocCore.getElementsByTagName('li');
-            // Pair each TOC link with the heading it points to, skipping links whose heading has no ID.
-            const $tocTargets = Array.from($tocLinkElements, $tocLink => [$tocLink, document.getElementById($tocLink.getAttribute('href').slice(1))])
+            // Match headings inside the article so a wrapper with the same ID cannot become a TOC target.
+            const $headings = $page.querySelectorAll('.content :is(h1, h2, h3, h4, h5, h6)[id]');
+            const headingsById = new Map(Array.from($headings, $heading => [$heading.id, $heading]));
+            const $tocTargets = Array.from($tocLinkElements, $tocLink => [$tocLink, headingsById.get($tocLink.getAttribute('href').slice(1))])
                 .filter(([, $heading]) => $heading);
             const $headerLinkElements = $tocTargets.map(([, $heading]) => $heading);
             const $targetTocLinks = $tocTargets.map(([$tocLink]) => $tocLink);

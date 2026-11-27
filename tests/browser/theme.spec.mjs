@@ -587,7 +587,7 @@ test.describe('heading anchors without JavaScript', () => {
     await page.goto('/fuse/blog/headings/');
     const content = page.locator('#content');
     const anchors = content.locator('> :is(h2, h3, h4, h5, h6) > a.header-mark');
-    await expect(anchors).toHaveCount(4);
+    await expect(anchors).toHaveCount(5);
     for (const [id, name] of [
       ['plain-section', 'Plain section'],
       ['section-with-code-and-emphasis', 'Section with code and emphasis'],
@@ -614,6 +614,8 @@ test.describe('heading anchors without JavaScript', () => {
     // An empty heading keeps its ID but gets no unnamed link. It sits in the admonition to stay out of the TOC.
     await expect(content.locator('h5#divider')).toBeAttached();
     await expect(content.locator('#divider > a')).toHaveCount(0);
+    await expect(content.locator('h5#space-divider')).toBeAttached();
+    await expect(content.locator('#space-divider > a')).toHaveCount(0);
 
     await content.locator('#last-section > a.header-mark').click();
     await expect(page).toHaveURL(/\/headings\/#last-section$/);
@@ -652,13 +654,13 @@ for (const missing of [false, true]) {
     const content = page.locator('#toc-content-auto');
     await expect(page.locator('#toc-auto')).toBeVisible();
     if (missing) await expect(content.locator('a[href="#"]')).toHaveCount(2);
-    const sections = [['custom-id', 'Custom attributes'], ['last-section', 'Last section']];
+    const sections = [['custom-id', 'Custom attributes'], ['content', 'Content'], ['last-section', 'Last section']];
     if (!missing) sections.unshift(['plain-section', 'Plain section']);
     for (const [id, name] of sections) {
-      await page.evaluate(id => {
-        const top = document.getElementById(id).getBoundingClientRect().top + window.scrollY;
+      await page.locator(`.content :is(h2, h3)[id="${id}"]`).evaluate(heading => {
+        const top = heading.getBoundingClientRect().top + window.scrollY;
         window.scrollTo({ top: top - 10, behavior: 'instant' });
-      }, id);
+      });
       await expect(content.locator('a.active')).toHaveText(name);
     }
     expect(errors).toEqual([]);

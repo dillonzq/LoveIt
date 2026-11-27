@@ -26,7 +26,13 @@ Text for the custom heading.
 Text inside the admonition.
 
 ##### {#divider}
+
+##### &nbsp; {#space-divider}
 {{< /admonition >}}
+
+## Content
+
+Text for the heading that shares its ID with the article wrapper.
 
 ## Last section
 
