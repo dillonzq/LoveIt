@@ -21,7 +21,17 @@
         {{- /* Posts */ -}}
         {{- if ne $posts.enable false | and .Site.RegularPages -}}
             {{- /* Paginate */ -}}
-            {{- $pages := partial "function/home-pager.html" . -}}
+            {{- $pages := partial "function/home-pages.html" . -}}
+            {{- if .Site.Params.page.hiddenFromHomePage -}}
+                {{- $pages = where $pages "Params.hiddenfromhomepage" false -}}
+            {{- else -}}
+                {{- $pages = where $pages "Params.hiddenfromhomepage" "!=" true -}}
+            {{- end -}}
+            {{- with $posts.paginate | default .Site.Params.paginate -}}
+                {{- $pages = $.Paginate $pages . -}}
+            {{- else -}}
+                {{- $pages = .Paginate $pages -}}
+            {{- end -}}
             {{- range $pages.Pages -}}
                 {{- .Render "summary" -}}
             {{- end -}}

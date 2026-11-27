@@ -4,8 +4,6 @@ date: 2024-12-28
 hiddenFromHomePage: true
 ---
 
-The :(fas fa-rocket): syntax in this summary must not load Font Awesome on the home page, which hides the post.
-
-<!--more-->
+The only Font Awesome icon on this page is HTML that the raw shortcode inserts after load.
 
 {{< raw >}}<i class="fas fa-anchor" aria-hidden="true"></i> inserted by the raw shortcode{{< /raw >}}

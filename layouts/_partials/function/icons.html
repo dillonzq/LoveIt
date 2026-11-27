@@ -6,11 +6,11 @@
 {{- range findRE `<i\s[^>]*>\s*</i>` $html | uniq -}}
     {{- $tag := . -}}
     {{- $rest := replaceRE `^<i|>\s*</i>$` "" $tag | replaceRE `\s(class|aria-hidden|aria-label)\s*=\s*("[^"]*"|'[^']*')` "" | strings.TrimSpace -}}
-    {{- with findRESubmatch `\sclass\s*=\s*["']([^"']*)["']` $tag 1 -}}
-        {{- $class := index . 0 1 -}}
+    {{- with findRESubmatch `\sclass\s*=\s*(?:"([^"]*)"|'([^']*)')` $tag 1 -}}
+        {{- $class := add (index . 0 1) (index . 0 2) -}}
         {{- $label := "" -}}
-        {{- with findRESubmatch `\saria-label\s*=\s*["']([^"']*)["']` $tag 1 -}}
-            {{- $label = index . 0 1 | htmlUnescape -}}
+        {{- with findRESubmatch `\saria-label\s*=\s*(?:"([^"]*)"|'([^']*)')` $tag 1 -}}
+            {{- $label = add (index . 0 1) (index . 0 2) | htmlUnescape -}}
         {{- end -}}
         {{- if not $rest -}}
             {{- with partial "plugin/icon.html" (dict "Class" $class "Label" $label) -}}

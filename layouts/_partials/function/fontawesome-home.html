@@ -1,25 +1,29 @@
-{{- /* Whether the home profile or the post summaries on the current home page use Font Awesome. */ -}}
+{{- /* Whether the home profile or the home page's post summaries use Font Awesome. */ -}}
+{{- /* All visible summaries are checked, not the current pager page, so the home layout */ -}}
+{{- /* stays the first to call Paginate. */ -}}
 {{- $need := false -}}
 {{- $profile := .Site.Params.home.profile -}}
 {{- if ne $profile.enable false -}}
     {{- $html := slice (string $profile.title) (string $profile.subtitle) (string $profile.extra) (string $profile.disclaimer) -}}
-    {{- /* Social icons configured with a class that cannot be inlined (see plugin/icon.html). */ -}}
+    {{- /* Social icons that plugin/icon.html cannot inline fall back to the webfont. */ -}}
     {{- if $profile.social -}}
-        {{- range .Site.Params.social -}}
-            {{- if reflect.IsMap . -}}
-                {{- with .icon -}}
-                    {{- if reflect.IsMap . -}}
-                        {{- $html = $html | append (partial "plugin/icon.html" (dict "Class" .class "Simpleicons" .simpleicons "Prefix" .prefix "Src" .src)) -}}
-                    {{- end -}}
-                {{- end -}}
+        {{- range partial "function/social.html" . -}}
+            {{- with .Icon -}}
+                {{- $html = $html | append (partial "plugin/icon.html" .) -}}
             {{- end -}}
         {{- end -}}
     {{- end -}}
     {{- $need = partial "function/fontawesome-markup.html" (dict "Content" (delimit $html "\n")) -}}
 {{- end -}}
-{{- if not $need | and (ne .Site.Params.home.posts.enable false) | and .Site.RegularPages -}}
-    {{- /* The same summaries as summary.html renders for this pager page */ -}}
-    {{- range (partial "function/home-pager.html" .).Pages -}}
+{{- if not $need | and (ne .Site.Params.home.posts.enable false) -}}
+    {{- /* The posts home.html lists */ -}}
+    {{- $pages := partial "function/home-pages.html" . -}}
+    {{- if .Site.Params.page.hiddenFromHomePage -}}
+        {{- $pages = where $pages "Params.hiddenfromhomepage" false -}}
+    {{- else -}}
+        {{- $pages = where $pages "Params.hiddenfromhomepage" "!=" true -}}
+    {{- end -}}
+    {{- range $pages -}}
         {{- $params := partial "function/params.html" . -}}
         {{- if dict "Content" (.Summary | default .Description) "Fontawesome" $params.fontawesome | partial "function/fontawesome-markup.html" -}}
             {{- $need = true -}}

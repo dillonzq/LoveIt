@@ -58,10 +58,13 @@
     {{- $source := .Content -}}
     {{- $open := index (findRE `<svg\b[^>]*>` $source 1) 0 | default "" -}}
     {{- if findRE `\sviewBox\s*=` $open 1 -}}
-        {{- /* Keep the root's presentation attributes (viewBox, fill, stroke...); the theme sets class, */ -}}
+        {{- /* Keep the root's presentation (viewBox, fill, stroke, style...) and classes; the theme sets */ -}}
         {{- /* size and accessibility, and fills with the text color unless the root sets a fill. */ -}}
-        {{- $attrs := replaceRE `^<svg|/?>$` "" $open | replaceRE `\s(class|width|height|role|aria-[\w-]+|xmlns|style)\s*=\s*("[^"]*"|'[^']*')` "" | strings.TrimSpace -}}
-        {{- if not (findRE `(^|\s)fill\s*=` $attrs 1) -}}
+        {{- with findRESubmatch `\sclass\s*=\s*(?:"([^"]*)"|'([^']*)')` $open 1 -}}
+            {{- $class = add (index . 0 1) (index . 0 2) | htmlUnescape | htmlEscape | printf "%v %v" $class -}}
+        {{- end -}}
+        {{- $attrs := replaceRE `^<svg|/?>$` "" $open | replaceRE `\s(class|width|height|role|aria-[\w-]+|xmlns)\s*=\s*("[^"]*"|'[^']*')` "" | strings.TrimSpace -}}
+        {{- if not (findRE `(^|\s)fill\s*=|fill\s*:` $attrs 1) -}}
             {{- $attrs = printf `%v fill="currentColor"` $attrs -}}
         {{- end -}}
         {{- /* Keep the Font Awesome license comment (minified output drops it); drop titles, Label names the icon. */ -}}
