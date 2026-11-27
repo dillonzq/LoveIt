@@ -1,0 +1,119 @@
+// Compares build/metrics/summary.json with the master baseline using the
+// tolerances in metrics-budget.json, and exits with 1 when a check is worse
+// than allowed. In GitHub Actions the baseline is downloaded from the closest
+// successful master push run; elsewhere pass one with --baseline <summary.json>.
+//
+//   node scripts/metrics-gate.mjs [--baseline file] [--current file] [--budget file]
+import { appendFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
+import { parseArgs } from 'node:util';
+import { root } from './tools.mjs';
+import { compareSummaries, parseBudget, renderComparison, summaryProblems } from './metrics-compare.mjs';
+import { findBaseline, gitHelpers, githubApi } from './metrics-baseline.mjs';
+
+const { values: options } = parseArgs({
+  options: {
+    baseline: { type: 'string' },
+    current: { type: 'string', default: path.join(root, 'build/metrics/summary.json') },
+    budget: { type: 'string', default: path.join(root, 'metrics-budget.json') },
+  },
+});
+const out = path.join(root, 'build/metrics');
+const env = process.env;
+const readJson = (file, what) => {
+  try {
+    return JSON.parse(readFileSync(file, 'utf8'));
+  } catch (error) {
+    throw new Error(`Cannot read ${what} from ${file}: ${error.message}`);
+  }
+};
+
+function report(markdown, result) {
+  mkdirSync(out, { recursive: true });
+  writeFileSync(path.join(out, 'comparison.md'), markdown);
+  if (result) writeFileSync(path.join(out, 'comparison.json'), `${JSON.stringify(result, null, 2)}\n`);
+  console.log(`\n${markdown}`);
+  if (env.GITHUB_STEP_SUMMARY) appendFileSync(env.GITHUB_STEP_SUMMARY, markdown);
+}
+
+const budget = parseBudget(readJson(options.budget, 'the metrics budget'));
+const current = readJson(options.current, 'this run\'s metrics');
+const currentProblems = summaryProblems(current);
+if (currentProblems.length) throw new Error(`This run's metrics have an unexpected format: ${currentProblems.join('; ')}`);
+
+const git = gitHelpers(root);
+const notes = [];
+let baseline;
+let source;
+let baselineSha;
+const api = env.GITHUB_TOKEN && env.GITHUB_REPOSITORY
+  ? githubApi({ token: env.GITHUB_TOKEN, apiUrl: env.GITHUB_API_URL })
+  : null;
+
+if (options.baseline) {
+  baseline = readJson(options.baseline, 'the baseline');
+  const problems = summaryProblems(baseline);
+  if (problems.length) throw new Error(`The baseline has an unexpected format: ${problems.join('; ')}`);
+  source = `\`${options.baseline}\``;
+} else if (api) {
+  let result;
+  try {
+    const baseSha = env.LOVEIT_METRICS_BASE || git.mergeBase('HEAD', budget.baseline.branch);
+    result = await findBaseline({
+      api, git, repository: env.GITHUB_REPOSITORY, baseSha, config: budget.baseline,
+      sleep: ms => new Promise(resolve => setTimeout(resolve, ms)), log: console.log,
+    });
+    if (result.summary) {
+      baseline = result.summary;
+      baselineSha = result.run.head_sha;
+      const where = result.distance === 0
+        ? `the base commit \`${baseSha.slice(0, 7)}\``
+        : `\`${baselineSha.slice(0, 7)}\`, ${result.distance} ${result.distance === 1 ? 'commit' : 'commits'} before the base commit \`${baseSha.slice(0, 7)}\``;
+      source = `[run ${result.run.id}](${result.run.html_url}) of ${budget.baseline.branch} at ${where}.`;
+      if (result.distance > 0) notes.push(`Changes merged after \`${baselineSha.slice(0, 7)}\` are counted as part of this pull request.`);
+    }
+  } catch (error) {
+    result = { missing: error.message, skipped: [] };
+  }
+  // Explain why a closer master run was not used.
+  if (!result.summary || result.distance > 0) for (const reason of result.skipped) notes.push(`Skipped ${reason}.`);
+  if (!baseline) {
+    const fail = budget.baseline.missing === 'fail';
+    const message = `No ${budget.baseline.branch} baseline: ${result.missing}.`;
+    console.log(`::${fail ? 'error' : 'warning'} title=Metrics not compared::${message}`);
+    report([
+      '## Metrics compared with master', '',
+      `**Not compared.** ${message} ${fail ? 'The budget requires a baseline, so the check fails.' : 'Re-run this job once a master run has uploaded its `metrics` artifact.'}`, '',
+      ...notes.map(note => `- ${note}`), '',
+    ].join('\n'));
+    process.exit(fail ? 1 : 0);
+  }
+} else {
+  throw new Error('Pass --baseline <summary.json>, or set GITHUB_TOKEN and GITHUB_REPOSITORY to download the master baseline');
+}
+
+if (baselineSha && git.changed(baselineSha, path.relative(root, options.budget))) {
+  notes.push('`metrics-budget.json` differs from the baseline commit; this run uses the version in this pull request.');
+}
+
+const result = compareSummaries(baseline, current, budget);
+let accepted = false;
+if (result.failed && api && budget.baseline.acceptLabel && /^\d+$/.test(env.PR_NUMBER || '')) {
+  // Read the labels now rather than from the event payload, so that adding the
+  // label and re-running this job is enough.
+  try {
+    const labels = await api.request(`/repos/${env.GITHUB_REPOSITORY}/issues/${env.PR_NUMBER}/labels?per_page=100`);
+    accepted = labels.some(label => label.name === budget.baseline.acceptLabel);
+  } catch (error) {
+    notes.push(`Cannot read the pull request's labels: ${error.message}.`);
+  }
+  if (accepted) notes.push(`The \`${budget.baseline.acceptLabel}\` label accepts these regressions; the check passes.`);
+  else notes.push(`If the regressions are intended, a maintainer can add the \`${budget.baseline.acceptLabel}\` label and re-run this job.`);
+}
+report(renderComparison(result, { source, notes }), { baseline: source, accepted, ...result });
+if (result.failed) {
+  for (const item of result.checks.filter(check => check.status === 'fail')) {
+    console.log(`::${accepted ? 'warning' : 'error'} title=Metrics regression::${item.page} ${item.label}: ${item.metric === 'rules' ? item.added.join(', ') : `${item.baseline} → ${item.current}`}`);
+  }
+  if (!accepted) process.exit(1);
+}

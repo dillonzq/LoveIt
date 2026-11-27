@@ -174,11 +174,12 @@ with separate cold caches and repeated warm builds. Template cumulative times
 overlap; never sum them as a build duration. Preserve page-specific Scratch
 updates when adding partial caches.
 
-## Baseline metrics
+## Metrics
 
 ```sh
 npx --no-install playwright install chromium
 npm run metrics
+npm run metrics:compare -- --baseline path/to/master/summary.json
 ```
 
 `npm run metrics` builds the example site into `build/metrics/site` twice, from
@@ -192,11 +193,44 @@ full Lighthouse reports and axe results sit next to them. Lighthouse and axe use
 Playwright's Chromium unless `CHROME_PATH` is set; `LOVEIT_METRICS_PORT` changes
 the local port (default 48138).
 
-The Metrics workflow runs the same script on every pull request and push to
-master, writes the summary to the job summary and uploads the reports as the
-`metrics` artifact. It only records numbers: no score or violation fails it, and
-it is not part of `ci-gate`. Lighthouse scores vary between runs and runners;
-compare trends, not single values.
+CI runs the Metrics workflow on every pull request and push to master and
+uploads the reports as the `metrics` artifact. On a pull request,
+`npm run metrics:compare` then compares the results with the master baseline
+and the job, and with it `ci-gate`, fails when a value is worse than
+`metrics-budget.json` allows. The comparison is written to the job summary and
+to `build/metrics/comparison.md`.
+
+- **Tolerances.** For each metric the budget sets a `relative` (fraction of the
+  baseline) and an `absolute` tolerance; a value fails when it is worse by more
+  than the larger of the two. Scores fail when they drop; timings, bytes,
+  requests, axe nodes and build times fail when they grow, and so does any axe
+  rule the baseline did not violate. The `note` of each entry records the
+  spread between master runs that the tolerance leaves room for; Lighthouse
+  timings and build times vary much more between runners than bytes and axe
+  results, which barely change. A metric left out of the budget is not checked,
+  and an unknown key is an error.
+- **Baseline.** The baseline is the `summary.json` of the closest successful
+  run of a push to master (`baseline.workflows`) whose commit is an ancestor of
+  the pull request's base. Pull request runs, forks and other branches never
+  count, and nothing from the artifact is run: only `summary.json` is read and
+  its format checked. When the base commit's own run is still in progress, the
+  job waits up to `baseline.waitMinutes` for it, so a pull request updated right
+  after another one is merged compares with the merged state. Otherwise it uses
+  an older master commit and says so in the summary.
+- **No baseline.** When no baseline can be found or downloaded, or none has a
+  format the gate understands, the job passes with a warning
+  (`baseline.missing: "warn"`); set it to `"fail"` to require one. Re-run the job
+  once a master run has uploaded its artifact.
+- **Intended regressions.** A maintainer can add the `accept-metrics-regression`
+  label (`baseline.acceptLabel`) and re-run the job: the regressions are still
+  listed, but the check passes. Once merged, the new values become the baseline.
+  To change a tolerance instead, edit `metrics-budget.json` in the pull request;
+  the summary points out that it differs from the baseline's.
+
+Master commits are not cancelled by later pushes, so each one leaves a
+baseline. Lighthouse scores still vary between runs and runners; read a single
+failure next to the tolerances, and re-run the job when only a timing is just
+over its limit.
 
 References: [hvm](https://github.com/jmooring/hvm),
 [Hugo Sass](https://gohugo.io/functions/css/sass/),

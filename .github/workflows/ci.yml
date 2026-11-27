@@ -8,9 +8,11 @@ on:
 permissions:
   contents: read
 
+# Pull requests cancel their older runs. Every master commit runs to the end:
+# its metrics are the baseline for pull requests based on it.
 concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  group: ci-${{ github.ref }}-${{ github.event_name == 'push' && github.sha || 'latest' }}
+  cancel-in-progress: ${{ github.event_name != 'push' }}
 
 jobs:
   build-and-validate:
@@ -24,13 +26,26 @@ jobs:
       hugo_version: ${{ matrix.hugo_version }}
       hugo_env: ${{ matrix.hugo_env }}
 
+  metrics:
+    uses: ./.github/workflows/metrics.yml
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: read
+    with:
+      compare: ${{ github.event_name == 'pull_request' }}
+
   ci-gate:
     runs-on: ubuntu-latest
-    needs: [ build-and-validate ]
+    needs: [ build-and-validate, metrics ]
     if: always()
     steps:
-      - run: |
-          echo "build-and-validate result: ${{ needs.build-and-validate.result }}"
-          if [ "${{ needs.build-and-validate.result }}" != "success" ]; then
+      - env:
+          BUILD: ${{ needs.build-and-validate.result }}
+          METRICS: ${{ needs.metrics.result }}
+        run: |
+          echo "build-and-validate result: $BUILD"
+          echo "metrics result: $METRICS"
+          if [ "$BUILD" != "success" ] || [ "$METRICS" != "success" ]; then
             exit 1
           fi
