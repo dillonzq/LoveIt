@@ -157,6 +157,9 @@ other = "Anasayfa"
 
 [readMore]
 other = "Daha fazla oku"
+
+[readMoreTitle]
+other = "Daha fazla oku: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===

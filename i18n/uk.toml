@@ -157,6 +157,9 @@ other = "Головна"
 
 [readMore]
 other = "Детальніше"
+
+[readMoreTitle]
+other = "Детальніше: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===

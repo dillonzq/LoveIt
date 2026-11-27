@@ -160,6 +160,9 @@ other = "Accueil"
 
 [readMore]
 other = "En savoir plus"
+
+[readMoreTitle]
+other = "En savoir plus: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===

@@ -161,6 +161,9 @@ other = "主页"
 
 [readMore]
 other = "阅读全文"
+
+[readMoreTitle]
+other = "阅读全文：{{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===

@@ -157,6 +157,9 @@ other = "Почетна"
 
 [readMore]
 other = "Прочитај више"
+
+[readMoreTitle]
+other = "Прочитај више: {{ .Title }}"
 # === posts/single.html ===
 
 # === 404.html ===

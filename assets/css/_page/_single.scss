@@ -269,6 +269,26 @@
       }
     }
 
+    // Mark the footnote, or the reference back in the text, that a link just jumped to.
+    .footnotes li:target,
+    sup[id^="fnref"]:target {
+      color: $global-font-color;
+      background-color: $selection-color;
+      outline: 2px solid $single-link-color;
+      outline-offset: 2px;
+      @include border-radius(3px);
+
+      [theme=dark] & {
+        color: $global-font-color-dark;
+        background-color: $selection-color-dark;
+        outline-color: $single-link-color-dark;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        animation: footnote-target 1.2s ease-out;
+      }
+    }
+
     @import "../_partial/_single/code";
     @import "../_partial/_single/gist";
     @import "../_partial/_single/instagram";
@@ -354,4 +374,17 @@
 
 .lg-toolbar .lg-icon::after {
   color: #999;
+}
+
+// Draw the eye once to the footnote target; skipped when reduced motion is preferred.
+@keyframes footnote-target {
+  from {
+    outline-offset: .5rem;
+    outline-width: 4px;
+  }
+
+  to {
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
 }
