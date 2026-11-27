@@ -621,13 +621,24 @@ test('keyboard users can expand a collapsed code block and copy it', async ({ br
   const block = page.locator('.code-block');
   const toggle = block.getByRole('button', { name: 'Bash' });
   const copy = block.getByRole('button', { name: 'Copy to clipboard' });
+  const code = block.locator('.highlight pre');
+  const arrow = toggle.locator('.arrow');
   await expect(block).not.toHaveClass(/\bopen\b/);
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
   await expect(copy).toBeHidden();
+  await expect(code).toBeHidden();
+  await toggle.focus();
+  await page.keyboard.press('Tab');
+  await expect(code).not.toBeFocused();
+
+  await page.locator('html').evaluate(element => { element.dir = 'rtl'; });
+  await expect(arrow).toHaveCSS('transform', 'matrix(-1, 0, 0, -1, 0, 0)');
   await toggle.focus();
   await page.keyboard.press('Enter');
   await expect(block).toHaveClass(/\bopen\b/);
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(code).toBeVisible();
+  await expect(arrow).toHaveCSS('transform', 'matrix(0, 1, -1, 0, 0, 0)');
   await page.keyboard.press('Tab');
   await expect(copy).toBeFocused();
   await page.keyboard.press('Enter');

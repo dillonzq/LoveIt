@@ -72,7 +72,7 @@ code, pre {
     }
 
     .code-title::after {
-      padding-left: .2rem;
+      padding-inline-start: .2rem;
       content: "Code";
     }
 
@@ -85,6 +85,10 @@ code, pre {
     .arrow {
       padding: 0 .2rem;
       @include transition(transform 0.2s ease);
+
+      [dir=rtl] & {
+        @include transform(rotate(180deg));
+      }
     }
 
     .ellipses {
@@ -121,6 +125,7 @@ code, pre {
     position: relative;
     max-height: 0;
     overflow-y: hidden;
+    visibility: hidden;
     @include details-transition-open;
     background: $code-background-color;
 
@@ -192,6 +197,7 @@ code, pre {
 
     .highlight {
       max-height: 20000px;
+      visibility: visible;
       @include details-transition-close;
     }
   }
