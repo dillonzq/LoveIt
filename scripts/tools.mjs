@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, renameSync, rmdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -66,34 +66,64 @@ async function getHvm() {
   return executable;
 }
 
-// Serializes work on the shared tool cache across processes: `node --test` runs test files in
-// parallel, and on a cold cache each would otherwise download Hugo into the same path while another
-// runs it (ETXTBSY) or reads a .hvm file that is being rewritten.
+function removeEmptyDirectory(directory) {
+  try { rmdirSync(directory); } catch (error) {
+    if (!['ENOENT', 'ENOTEMPTY', 'EEXIST'].includes(error.code)) throw error;
+  }
+}
+
+function reclaimToolLock(lock) {
+  let owners;
+  try { owners = readdirSync(lock); } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+    return;
+  }
+  if (owners.length === 1) {
+    const [owner] = owners;
+    const pid = owner.match(/^([1-9]\d*)-[a-zA-Z0-9]+$/)?.[1];
+    if (!pid) return;
+    try {
+      process.kill(Number(pid), 0);
+      return;
+    } catch (error) {
+      if (error.code !== 'ESRCH') return;
+    }
+    // Remove only the observed owner's marker. A replacement has a different name.
+    removeEmptyDirectory(path.join(lock, owner));
+  }
+  removeEmptyDirectory(lock);
+}
+
+// Install the directory and its owner marker atomically. The marker keeps the lock
+// nonempty, so neither rename nor cleanup can replace a lock held by another process.
 async function withToolLock(fn) {
   mkdirSync(toolDir, { recursive: true });
   const lock = path.join(toolDir, 'hugo.lock');
+  const candidate = mkdtempSync(`${lock}-`);
+  const owner = `${process.pid}-${path.basename(candidate).slice(-6)}`;
   const start = Date.now();
-  for (;;) {
-    try {
-      mkdirSync(lock);
-      break;
-    } catch (error) {
-      if (error.code !== 'EEXIST') throw error;
-    }
-    let age = 0;
-    try { age = Date.now() - statSync(lock).mtimeMs; } catch { continue; /* Released meanwhile. */ }
-    // A lock left behind by a killed process expires; a Hugo download takes far less.
-    if (age > 10 * 60_000) {
-      rmSync(lock, { recursive: true, force: true });
-      continue;
-    }
-    if (Date.now() - start > 20 * 60_000) throw new Error(`Timed out waiting for ${lock}`);
-    await new Promise(resolve => setTimeout(resolve, 200));
-  }
+  let acquired = false;
   try {
+    mkdirSync(path.join(candidate, owner));
+    while (!acquired) {
+      try {
+        renameSync(candidate, lock);
+        acquired = true;
+      } catch (error) {
+        if (!['ENOTEMPTY', 'EEXIST'].includes(error.code)) throw error;
+        reclaimToolLock(lock);
+        if (Date.now() - start > 20 * 60_000) throw new Error(`Timed out waiting for ${lock}`);
+        await new Promise(resolve => setTimeout(resolve, 200));
+      }
+    }
     return await fn();
   } finally {
-    rmSync(lock, { recursive: true, force: true });
+    if (acquired) {
+      removeEmptyDirectory(path.join(lock, owner));
+      removeEmptyDirectory(lock);
+    } else {
+      rmSync(candidate, { recursive: true, force: true });
+    }
   }
 }
 
