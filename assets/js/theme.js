@@ -364,7 +364,7 @@ class Theme {
             $toc.style.visibility = 'visible';
             const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
             const $tocLiElements = $tocCore.getElementsByTagName('li');
-            const $headerLinkElements = document.querySelectorAll('.single .content > :is(h1, h2, h3, h4, h5, h6)');
+            const $headerLinkElements = Array.from($tocLinkElements, $tocLink => document.getElementById($tocLink.getAttribute('href').slice(1)));
             const headerIsFixed = document.body.getAttribute('data-header-desktop') !== 'normal';
             const headerHeight = document.getElementById('header-desktop').offsetHeight;
             const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);

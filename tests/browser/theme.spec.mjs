@@ -604,7 +604,10 @@ test.describe('heading anchors without JavaScript', () => {
     const formatted = content.locator('#section-with-code-and-emphasis');
     await expect(formatted.locator('code')).toHaveText('code');
     await expect(formatted.locator('em')).toHaveText('emphasis');
-    await expect(content.locator('#custom-id')).toHaveClass('custom-class');
+    const custom = content.locator('#custom-id');
+    await expect(custom).toHaveClass('custom-class');
+    await expect(custom).toHaveAttribute('data-count', '42');
+    await expect(custom).toHaveAttribute('title', 'Say "hi" & <go>');
     // Headings the theme never marked keep no visible or focusable anchor.
     await expect(content.locator('#top-level-heading > a.header-mark')).toBeHidden();
     await expect(content.locator('.admonition #nested-heading > a.header-mark')).toBeHidden();
@@ -627,4 +630,21 @@ test('every link on an article with heading anchors has an accessible name', asy
   await page.goto('/fuse/blog/headings/');
   const { violations } = await new AxeBuilder({ page }).withRules(['link-name']).analyze();
   expect(violations).toEqual([]);
+});
+
+test('the auto TOC follows the article headings it links to', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.setViewportSize({ width: 1280, height: 400 });
+  await page.goto('/fuse/blog/headings/');
+  const content = page.locator('#toc-content-auto');
+  await expect(page.locator('#toc-auto')).toBeVisible();
+  for (const [id, name] of [['plain-section', 'Plain section'], ['custom-id', 'Custom attributes'], ['last-section', 'Last section']]) {
+    await page.evaluate(id => {
+      const top = document.getElementById(id).getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: top - 10, behavior: 'instant' });
+    }, id);
+    await expect(content.locator('a.active')).toHaveText(name);
+  }
+  expect(errors).toEqual([]);
 });

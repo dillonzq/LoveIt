@@ -3,7 +3,7 @@
 <h{{ .Context.Level }}
     {{- with $anchor }} id="{{ . }}"{{ end }}
     {{- range $k, $v := .Context.Attributes }}
-        {{- if ne $k "id" }}{{ printf " %s=%q" $k $v | safeHTMLAttr }}{{ end -}}
+        {{- if ne $k "id" }}{{ printf ` %s="%s"` $k (string $v | htmlEscape) | safeHTMLAttr }}{{ end -}}
     {{- end }}>
     {{- if and .Anchor $anchor -}}
         <a href="#{{ $anchor }}" class="header-mark" aria-labelledby="{{ $anchor }}"></a>

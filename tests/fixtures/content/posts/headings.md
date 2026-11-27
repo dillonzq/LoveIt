@@ -16,7 +16,7 @@ Text for the plain section.
 
 Text for the formatted section.
 
-### Custom attributes {#custom-id .custom-class}
+### Custom attributes {#custom-id .custom-class data-count=42 title="Say \"hi\" & <go>"}
 
 Text for the custom heading.
 
