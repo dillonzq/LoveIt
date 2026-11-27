@@ -613,13 +613,14 @@ test.describe('heading anchors without JavaScript', () => {
 
   test('are built into article headings, named by them and keep their formatting', async ({ page }) => {
     await page.goto('/fuse/blog/headings/');
-    const content = page.locator('#content');
+    const content = page.locator('.content#content');
     const anchors = content.locator('> :is(h2, h3, h4, h5, h6) > a.header-mark');
     await expect(anchors).toHaveCount(5);
     for (const [id, name] of [
       ['plain-section', 'Plain section'],
       ['section-with-code-and-emphasis', 'Section with code and emphasis'],
       ['custom-id', 'Custom attributes'],
+      ['content', 'Content'],
       ['last-section', 'Last section'],
     ]) {
       const anchor = content.locator(`#${id} > a.header-mark`);
@@ -644,6 +645,8 @@ test.describe('heading anchors without JavaScript', () => {
     await expect(content.locator('#divider > a')).toHaveCount(0);
     await expect(content.locator('h5#space-divider')).toBeAttached();
     await expect(content.locator('#space-divider > a')).toHaveCount(0);
+    await expect(content.locator('h5#formatted-space-divider')).toBeAttached();
+    await expect(content.locator('#formatted-space-divider > a')).toHaveCount(0);
 
     await content.locator('#last-section > a.header-mark').click();
     await expect(page).toHaveURL(/\/headings\/#last-section$/);

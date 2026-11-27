@@ -28,6 +28,8 @@ Text inside the admonition.
 ##### {#divider}
 
 ##### &nbsp; {#space-divider}
+
+##### **&nbsp;** {#formatted-space-divider}
 {{< /admonition >}}
 
 ## Content

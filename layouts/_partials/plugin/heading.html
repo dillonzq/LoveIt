@@ -6,8 +6,10 @@
         {{- if ne $k "id" }}{{ printf ` %s="%s"` $k (string $v | htmlEscape) | safeHTMLAttr }}{{ end -}}
     {{- end }}>
     {{- /* An empty heading would give its link no name. */ -}}
-    {{- if and .Anchor $anchor (findRE `[^\s\p{Z}\x{0085}\x{000B}]` (htmlUnescape (string .Context.Text)) 1) -}}
-        <a href="#{{ $anchor }}" class="header-mark" aria-labelledby="{{ $anchor }}"></a>
+    {{- if and .Anchor $anchor (findRE `[^\s\p{Z}\x{0085}\x{000B}]` (htmlUnescape .Context.PlainText) 1) -}}
+        {{- $label := printf "%s:%s" .Context.Page.Path $anchor | sha256 | printf "loveit-heading-%s" -}}
+        <a href="#{{ $anchor }}" class="header-mark" aria-labelledby="{{ $label }}"></a><span id="{{ $label }}">{{ .Context.Text }}</span>
+    {{- else -}}
+        {{- .Context.Text -}}
     {{- end -}}
-    {{- .Context.Text -}}
 </h{{ .Context.Level }}>
