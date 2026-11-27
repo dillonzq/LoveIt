@@ -12,6 +12,21 @@ This file starts at 0.4.0. Older releases are described on the
 
 ## [Unreleased]
 
+### Added
+
+- A build warning, printed once per build, when the site configuration uses a
+  deprecated option. Each warning names the version that removes the option
+  and links to the
+  [Deprecated Options](https://hugoloveit.com/theme-documentation-basics/#deprecated-options)
+  section of the documentation. Builds with `--panicOnWarning` fail; add the
+  ID shown in the warning to `ignoreLogs` to silence it.
+
+### Deprecated
+
+- `params.compatibility.polyfill`, `params.compatibility.objectFit` and
+  `params.cdn.autocompleteJS`. They still work and will be removed in 0.7.0.
+  Setting them to `false` or `""` does not warn.
+
 ## [0.4.1] - 2026-11-27
 
 Hugo 0.146.0 or later and Dart Sass are still required.

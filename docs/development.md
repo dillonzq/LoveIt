@@ -112,6 +112,31 @@ configuration sets `ignore-scripts`, add `--ignore-scripts=false`.
 that the documented command changes the version in the footer of sites using
 the theme from a themes directory and as a Hugo Module.
 
+## Deprecating an option
+
+Deprecated site configuration keys are listed in `assets/data/deprecations.yml`
+with the version that deprecates them, the version that removes them and a
+hint in English and Chinese. `layouts/_partials/function/config.html` reads the
+table and returns the site params as Hugo merged them. Call it with
+`partialCached "function/config.html" .Site .Site.Language.Lang` (`init.html`
+already does for every page), so that a used key warns at most once per site
+and language; Hugo also drops repeated identical warnings. Each warning has the
+ID `loveit-deprecated-<key with dots as dashes, lowercase>` for `ignoreLogs`.
+
+- A key is used when its value is truthy, so keep the theme default in
+  `hugo.toml` at `false` or `""`, or remove it.
+- With `replacement`, the old value fills the new key in the returned params
+  while the new key is unset. Templates then read only the new key, which must
+  not have a default in `hugo.toml`; apply it with `default` in the template.
+- Until a key is removed, templates that still read it should read it from the
+  returned params rather than `.Site.Params`.
+- Add the key to "Deprecated Options" in both languages of
+  `exampleSite/content/posts/theme-documentation-basics` and to the
+  **Deprecated** section of `CHANGELOG.md`.
+
+`tests/config.test.mjs` builds sites with deprecated keys set and checks the
+warnings and the returned params.
+
 ## Checks
 
 ```sh
