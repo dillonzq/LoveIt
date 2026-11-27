@@ -16,3 +16,17 @@ The bundle's featured image is 600×400. The JPEG below is stored 600×400 with 
 ![Static](/android-chrome-192x192.png)
 
 ![Remote](https://cdn.example.com/remote.png)
+
+A PNG stored 60×40 with Exif orientation 6 is shown 40×60.
+
+![Oriented PNG](oriented.png)
+
+Animated PNG and WebP keep their animation, so they get no WebP copies.
+
+![Animated PNG](animated.png)
+
+![Animated WebP](animated.webp)
+
+A width of 0 counts as missing.
+
+{{< image src="rotated.jpg" alt="Zero" width="0" linked=false >}}

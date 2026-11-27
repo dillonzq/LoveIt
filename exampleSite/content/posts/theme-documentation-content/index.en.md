@@ -61,8 +61,10 @@ This applies to Markdown images, the `image` shortcode, featured images and the 
   and a `srcset` of WebP copies 480 and 960 pixels wide (no wider than the image),
   so browsers download a size that fits the screen.
   The original file is the last `srcset` candidate when it is wider, and the `src` of the image.
-  Images are rotated as their Exif orientation says.
-* GIF, BMP and TIFF images get their `width` and `height` only, so animated GIFs stay animated.
+  Images are rotated as their Exif orientation says
+  (Hugo before 0.155.3 reads the orientation of JPEG and TIFF images only).
+* GIF, BMP, TIFF and animated PNG or WebP images get their `width` and `height` only, so animations keep playing.
+  So does an image Hugo cannot decode.
 * SVG and other formats, files in the **static** directory and remote URLs are used as they are.
   Put an image in the page bundle or in **assets** to have it processed.
 

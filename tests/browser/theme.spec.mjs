@@ -524,6 +524,22 @@ test('local images get their size, WebP srcset and native lazy loading; others a
     await expect(image).not.toHaveAttribute('width');
     await expect(image).toHaveAttribute('loading', 'lazy');
   }
+  // A PNG's Exif orientation is read on Hugo 0.155.3 and later (.Meta); either way its size and copy agree.
+  const png = images.nth(4);
+  const pngSize = [await png.getAttribute('width'), await png.getAttribute('height')];
+  expect([['40', '60'], ['60', '40']]).toContainEqual(pngSize);
+  await expect(png).toHaveAttribute('srcset', new RegExp(`^\\S+\\.webp ${pngSize[0]}w$`));
+  // Animated PNG and WebP keep their animation: their size, but no WebP copies.
+  for (const [index, size] of [[5, ['60', '40']], [6, ['160', '33']]]) {
+    const image = images.nth(index);
+    await expect(image).toHaveAttribute('src', /\/image-processing\/animated\.(png|webp)$/);
+    await expect(image).not.toHaveAttribute('srcset');
+    await expect(image).toHaveAttribute('width', size[0]);
+    await expect(image).toHaveAttribute('height', size[1]);
+  }
+  // A width of 0 counts as missing.
+  await expect(images.nth(7)).toHaveAttribute('width', '400');
+  await expect(images.nth(7)).toHaveAttribute('height', '600');
 
   // The bundle's featured image is the first-screen image: loaded at once with a high priority.
   const featured = page.locator('.featured-image img');

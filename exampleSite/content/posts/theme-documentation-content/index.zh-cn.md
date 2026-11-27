@@ -60,8 +60,10 @@ Markdown 图片, `image` shortcode, 文章特色图片和主页头像都会这�
   并带上由 480 和 960 像素宽 (不超过原图宽度) 的 WebP 副本组成的 `srcset`,
   浏览器会下载适合屏幕的尺寸.
   原图比副本更宽时会作为 `srcset` 的最后一个候选, 同时也是图片的 `src`.
-  图片会按照 Exif 方向信息旋转.
-* GIF, BMP 和 TIFF 图片只会带上 `width` 和 `height`, 因此 GIF 动图仍然会动.
+  图片会按照 Exif 方向信息旋转
+  (Hugo 0.155.3 之前的版本只读取 JPEG 和 TIFF 图片的方向信息).
+* GIF, BMP, TIFF 图片和 PNG, WebP 动图只会带上 `width` 和 `height`, 因此动图仍然会动.
+  Hugo 无法解码的图片也是如此.
 * SVG 等其他格式, **static** 目录中的文件和远程 URL 会原样使用.
   需要处理的图片请放在页面包或者 **assets** 目录中.
 

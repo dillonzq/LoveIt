@@ -18,8 +18,9 @@
     Page resources and global resources (assets/) in JPEG, PNG or WebP get
     width, height and a srcset of WebP copies made with Hugo's image
     processing, followed by the original file when it is wider than the
-    largest copy. GIF, BMP and TIFF only get their size; SVG, other formats,
-    files under static/ and remote URLs are linked as they are.
+    largest copy. GIF, BMP, TIFF and animated PNG or WebP only get their size;
+    SVG, other formats, files under static/ and remote URLs are linked as
+    they are.
 */ -}}
 {{- $src := .Src -}}
 {{- $width := .Width -}}
@@ -33,55 +34,89 @@
     {{- $src = .RelPermalink -}}
     {{- $type := .MediaType.SubType -}}
     {{- if eq .ResourceType "image" | and (in (slice "jpeg" "png" "webp" "gif" "bmp" "tiff") $type) -}}
-        {{- $image := . -}}
-        {{- /* Hugo does not apply the Exif orientation when it resizes; the browser does for the original. */ -}}
-        {{- if in (slice "jpeg" "tiff" "webp") $type -}}
-            {{- $orientation := 1 -}}
-            {{- if ge hugo.Version "0.155.3" -}}
+        {{- /* The browser applies the Exif orientation to the original; Hugo does not when it resizes. */ -}}
+        {{- $orientation := 1 -}}
+        {{- if ge hugo.Version "0.155.3" -}}
+            {{- if in (slice "jpeg" "png" "webp" "tiff") $type -}}
                 {{- with .Meta -}}
-                    {{- $orientation = .Orientation -}}
-                {{- end -}}
-            {{- else if ne $type "webp" -}}
-                {{- with .Exif -}}
-                    {{- $orientation = index .Tags "Orientation" | default 1 -}}
+                    {{- $orientation = .Orientation | default 1 -}}
                 {{- end -}}
             {{- end -}}
-            {{- if gt (int $orientation) 1 -}}
-                {{- $image = $image.Filter images.AutoOrient -}}
+        {{- else if in (slice "jpeg" "tiff") $type -}}
+            {{- with .Exif -}}
+                {{- $orientation = index .Tags "Orientation" | default 1 -}}
             {{- end -}}
         {{- end -}}
+        {{- $orientation = int $orientation -}}
+        {{- $imageWidth := .Width -}}
+        {{- $imageHeight := .Height -}}
+        {{- if ge $orientation 5 -}}
+            {{- $imageWidth = .Height -}}
+            {{- $imageHeight = .Width -}}
+        {{- end -}}
 
-        {{- /* Fill in a missing dimension from the aspect ratio when the other one is a number of pixels. */ -}}
+        {{- /* Fill in a missing dimension from the aspect ratio when the other one is a number of pixels; 0 counts as missing. */ -}}
         {{- $w := string $width -}}
         {{- $h := string $height -}}
-        {{- if and $w (not $h) (findRE `^\d+$` $w) -}}
-            {{- $height = math.Round (div (mul (float $w) $image.Height) $image.Width) | int -}}
-        {{- else if and $h (not $w) (findRE `^\d+$` $h) -}}
-            {{- $width = math.Round (div (mul (float $h) $image.Width) $image.Height) | int -}}
+        {{- if eq $w "0" -}}
+            {{- $w = "" -}}
+            {{- $width = "" -}}
         {{- end -}}
-        {{- $width = $width | default $image.Width -}}
-        {{- $height = $height | default $image.Height -}}
+        {{- if eq $h "0" -}}
+            {{- $h = "" -}}
+            {{- $height = "" -}}
+        {{- end -}}
+        {{- if and $w (not $h) (findRE `^\d+$` $w) -}}
+            {{- $height = div (mul (float $w) $imageHeight) $imageWidth | math.Round | math.Max 1 | int -}}
+        {{- else if and $h (not $w) (findRE `^\d+$` $h) -}}
+            {{- $width = div (mul (float $h) $imageWidth) $imageHeight | math.Round | math.Max 1 | int -}}
+        {{- end -}}
+        {{- $width = $width | default $imageWidth -}}
+        {{- $height = $height | default $imageHeight -}}
+
+        {{- /* Animated PNG and WebP keep only their size, like GIF: WebP copies would be still or fail to decode. */ -}}
+        {{- $animated := false -}}
+        {{- if eq $type "png" -}}
+            {{- $animated = strings.Contains (index (split .Content "IDAT") 0) "acTL" -}}
+        {{- else if eq $type "webp" -}}
+            {{- $animated = strings.Contains (index (split (index (split .Content "VP8 ") 0) "VP8L") 0) "ANIM" -}}
+        {{- end -}}
 
         {{- /* WebP encoding needs the extended edition before Hugo 0.153.0. */ -}}
-        {{- if in (slice "jpeg" "png" "webp") $type | and (or hugo.IsExtended (ge hugo.Version "0.153.0")) -}}
+        {{- if in (slice "jpeg" "png" "webp") $type | and (not $animated) (or hugo.IsExtended (ge hugo.Version "0.153.0")) -}}
+            {{- $image := . -}}
+            {{- if gt $orientation 1 -}}
+                {{- $image = $image.Filter images.AutoOrient -}}
+            {{- end -}}
             {{- /* Copies narrower than the image, plus one at its own width when a width reaches it. */ -}}
             {{- $copies := slice -}}
             {{- range $widths -}}
-                {{- if lt . $image.Width -}}
+                {{- if lt . $imageWidth -}}
                     {{- $copies = $copies | append . -}}
                 {{- end -}}
             {{- end -}}
             {{- $covered := lt (len $copies) (len $widths) -}}
             {{- if $covered -}}
-                {{- $copies = $copies | append $image.Width -}}
+                {{- $copies = $copies | append $imageWidth -}}
             {{- end -}}
+            {{- /* An image Hugo cannot decode keeps only its size instead of failing the build. */ -}}
+            {{- $failed := false -}}
             {{- range sort ($copies | uniq) -}}
-                {{- $resized := $image.Resize (printf "%dx webp" .) -}}
-                {{- $candidates = $candidates | append (dict "URL" $resized.RelPermalink "Descriptor" (printf "%dw" $resized.Width)) -}}
-                {{- $thumbnail = $thumbnail | default $resized.RelPermalink -}}
+                {{- with try ($image.Resize (printf "%dx webp" .)) -}}
+                    {{- if .Err -}}
+                        {{- $failed = true -}}
+                    {{- else -}}
+                        {{- $candidates = $candidates | append (dict "URL" .Value.RelPermalink "Descriptor" (printf "%dw" .Value.Width)) -}}
+                    {{- end -}}
+                {{- end -}}
             {{- end -}}
-            {{- if and $candidates (not $covered) -}}
-                {{- $candidates = $candidates | append (dict "URL" $src "Descriptor" (printf "%dw" $image.Width)) -}}
+            {{- if $failed -}}
+                {{- $candidates = slice -}}
+            {{- else if $candidates -}}
+                {{- $thumbnail = (index $candidates 0).URL -}}
+                {{- if not $covered -}}
+                    {{- $candidates = $candidates | append (dict "URL" $src "Descriptor" (printf "%dw" $imageWidth)) -}}
+                {{- end -}}
             {{- end -}}
         {{- end -}}
     {{- end -}}
