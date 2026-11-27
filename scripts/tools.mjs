@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -66,6 +66,37 @@ async function getHvm() {
   return executable;
 }
 
+// Serializes work on the shared tool cache across processes: `node --test` runs test files in
+// parallel, and on a cold cache each would otherwise download Hugo into the same path while another
+// runs it (ETXTBSY) or reads a .hvm file that is being rewritten.
+async function withToolLock(fn) {
+  mkdirSync(toolDir, { recursive: true });
+  const lock = path.join(toolDir, 'hugo.lock');
+  const start = Date.now();
+  for (;;) {
+    try {
+      mkdirSync(lock);
+      break;
+    } catch (error) {
+      if (error.code !== 'EEXIST') throw error;
+    }
+    let age = 0;
+    try { age = Date.now() - statSync(lock).mtimeMs; } catch { continue; /* Released meanwhile. */ }
+    // A lock left behind by a killed process expires; a Hugo download takes far less.
+    if (age > 10 * 60_000) {
+      rmSync(lock, { recursive: true, force: true });
+      continue;
+    }
+    if (Date.now() - start > 20 * 60_000) throw new Error(`Timed out waiting for ${lock}`);
+    await new Promise(resolve => setTimeout(resolve, 200));
+  }
+  try {
+    return await fn();
+  } finally {
+    rmSync(lock, { recursive: true, force: true });
+  }
+}
+
 export async function getHugo() {
   const hvm = await getHvm();
   const requested = process.env.LOVEIT_HUGO_VERSION;
@@ -79,8 +110,15 @@ export async function getHugo() {
   }
   // An override gets its own directory: the checked-in .hvm is never rewritten by CI.
   const cwd = requested && requested !== 'locked' ? path.join(toolDir, 'versions', spec.replaceAll('/', '-')) : root;
+  return withToolLock(() => resolveHugo(hvm, spec, cwd));
+}
+
+function resolveHugo(hvm, spec, cwd) {
   mkdirSync(cwd, { recursive: true });
-  if (cwd !== root && !spec.startsWith('latest/')) writeFileSync(path.join(cwd, '.hvm'), spec);
+  const dotFile = path.join(cwd, '.hvm');
+  if (cwd !== root && !spec.startsWith('latest/') && !(existsSync(dotFile) && readFileSync(dotFile, 'utf8') === spec)) {
+    writeFileSync(dotFile, spec);
+  }
   const options = { cwd, env: toolEnv, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] };
   let binary;
   if (!spec.startsWith('latest/')) {
