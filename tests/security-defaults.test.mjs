@@ -31,6 +31,10 @@ const cases = [
     referrer: 'strict-origin-when-cross-origin', mermaid: 'strict', warnings: [/referrerPolicy "always"/, /mermaidSecurityLevel "antiscript"/],
   },
   {
+    name: 'unknown Mermaid value without a diagram', security: 'mermaidSecurityLevel = "antiscript"\n',
+    referrer: 'strict-origin-when-cross-origin', diagram: false, warnings: [/mermaidSecurityLevel "antiscript"/],
+  },
+  {
     name: 'arrays', security: 'referrerPolicy = ["no-referrer"]\nmermaidSecurityLevel = ["loose"]\n',
     referrer: 'strict-origin-when-cross-origin', mermaid: 'strict', warnings: [/referrerPolicy "\[no-referrer\]"/, /mermaidSecurityLevel "\[loose\]"/],
   },
@@ -44,7 +48,7 @@ test('referrer policy and Mermaid securityLevel defaults, overrides and fallback
   const { binary } = await getHugo();
   const temporary = mkdtempSync(path.join(os.tmpdir(), 'loveit-security-'));
   try {
-    for (const { name, security, referrer: expectedReferrer, mermaid, warnings = [], noWarnings = [] } of cases) {
+    for (const { name, security, referrer: expectedReferrer, mermaid, diagram = true, warnings = [], noWarnings = [] } of cases) {
       for (const environment of ['production', 'development']) {
         const site = path.join(temporary, `${name.replaceAll(' ', '-')}-${environment}`);
         mkdirSync(path.join(site, 'content/posts'), { recursive: true });
@@ -55,7 +59,8 @@ test('referrer policy and Mermaid securityLevel defaults, overrides and fallback
           '[params.security]',
           security,
         ].join('\n'));
-        writeFileSync(path.join(site, 'content/posts/diagram.md'), '---\ntitle: Diagram\n---\n\n```mermaid\ngraph LR;\n    A --> B\n```\n');
+        const content = diagram ? '```mermaid\ngraph LR;\n    A --> B\n```\n' : 'A post without a diagram.\n';
+        writeFileSync(path.join(site, 'content/posts/post.md'), `---\ntitle: Test post\n---\n\n${content}`);
         const result = spawnSync(binary, ['--source', site, '--environment', environment, '--noBuildLock'], { cwd: site, env: toolEnv, encoding: 'utf8' });
         assert.equal(result.status, 0, result.stderr);
         const label = `${name} (${environment})`;
@@ -63,7 +68,8 @@ test('referrer policy and Mermaid securityLevel defaults, overrides and fallback
         if (!warnings.length) assert.doesNotMatch(result.stderr, /params\.security/, label);
         for (const warning of noWarnings) assert.doesNotMatch(result.stderr, warning, label);
         assert.equal(referrer(readFileSync(path.join(site, 'public/index.html'), 'utf8')), expectedReferrer, label);
-        assert.deepEqual(mermaidConfig(readFileSync(path.join(site, 'public/posts/diagram/index.html'), 'utf8')), { securityLevel: mermaid }, label);
+        const post = readFileSync(path.join(site, 'public/posts/post/index.html'), 'utf8');
+        assert.deepEqual(mermaidConfig(post), diagram ? { securityLevel: mermaid } : undefined, label);
       }
     }
   } finally {
