@@ -34,6 +34,8 @@ const content = {
   'content/posts/untitled.en.md': '---\ntitle: " "\ndate: 2024-12-29\n---\nText.\n',
   // A custom "build" param is not a build option.
   'content/posts/custom-param.en.md': '---\ntitle: Custom param\ndate: 2024-12-28\nparams:\n  build: My Build\n---\nText.\n',
+  // Nor does a custom map whose "render" is not a string fail the build.
+  'content/posts/custom-map.en.md': '---\ntitle: Custom map\ndate: 2024-12-27\nparams:\n  build:\n    render: [a, b]\n---\nText.\n',
   // Hugo reads "0" as "never" and an unknown value such as "Never" as "always".
   'content/posts/zero.en.md': '---\ntitle: Zero\ndate: 2024-12-27\nbuild:\n  render: "0"\n---\nText.\n',
   'content/posts/capital.en.md': '---\ntitle: Capital\ndate: 2024-12-26\nbuild:\n  render: Never\n---\nText.\n',
@@ -123,6 +125,7 @@ test('pages link their Markdown version and the llms.txt of their language', () 
     // llms.txt parsers need a link text.
     '- [/posts/untitled](https://example.org/blog/posts/untitled/index.md)',
     '- [Custom param](https://example.org/blog/posts/custom-param/index.md)',
+    '- [Custom map](https://example.org/blog/posts/custom-map/index.md)',
     '- [Capital](https://example.org/blog/posts/capital/index.md)',
     '',
     '## Notes',

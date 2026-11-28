@@ -10,7 +10,7 @@
     {{- /* As Hugo decodes it: false is "0", and a value other than "never", "link" and "0" is "always". */ -}}
     {{- if eq (printf "%T" $render) "bool" -}}
         {{- $published = $render -}}
-    {{- else if in (slice "never" "link" "0") (string $render) -}}
+    {{- else if in (slice "never" "link" "0") (printf "%v" $render) -}}
         {{- $published = false -}}
     {{- end -}}
 {{- end -}}
