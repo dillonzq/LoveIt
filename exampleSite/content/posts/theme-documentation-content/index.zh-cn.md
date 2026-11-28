@@ -121,6 +121,8 @@ toc:
 code:
   copy: true
   maxShownLines: 50
+  lineNos: true
+  wrap: false
   render:
     goat: true
     mermaid: true
@@ -183,7 +185,7 @@ seo:
 * **rssFullText**: {{< version 0.2.4 >}} 如果设为 `true`, 在 RSS 中将会显示全文内容.
 
 * **toc**: {{< version 0.2.9 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.toc` 部分相同, 包括 `enable`, `keepStatic` (是否保持使用文章前面的静态目录) 和 `auto`.
-* **code**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.code` 部分相同, 包括 `copy`, `maxShownLines` 以及 `render.goat` / `render.mermaid` (见 [图表](#diagrams)).
+* **code**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.code` 部分相同, 包括 `copy`, `maxShownLines`, `lineNos` / `wrap` (见 [代码块](#code-blocks)) 以及 `render.goat` / `render.mermaid` (见 [图表](#diagrams)).
 * **mermaid**: {{< version 0.4.2 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.mermaid` 部分相同, 包括 `renderer` (见 [图表](#diagrams)).
 * **math**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.math` 部分相同.
 * **mapbox**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.mapbox` 部分相同.
@@ -299,6 +301,30 @@ SVG 图片不会用于 Open Graph 和 Twitter Cards, 因为社交网络无法显
 ## 5 Markdown 扩展语法 {#extended-markdown-syntax}
 
 **LoveIt** 主题提供了一些扩展的语法便于你撰写文章.
+
+### 代码块 {#code-blocks}
+
+{{< version 0.4.2 >}} 代码块的标题栏中有两个按钮, 读者可以用它们显示或隐藏行号, 以及切换长行是否自动换行.
+按钮高亮表示对应功能已开启.
+
+`lineNos` 和 `wrap` 选项决定了页面加载时代码块的状态.
+代码块的选项会覆盖页面前置参数中的 `code.lineNos` / `code.wrap`,
+后者又会覆盖 [网站配置](../theme-documentation-basics#site-configuration) 中 `[params.page.code]` 下的 `lineNos` / `wrap`.
+默认显示行号, 并且不自动换行.
+
+````markdown
+```bash {lineNos=false wrap=true}
+echo "这一行很长, 会自动换行而不是横向滚动"
+```
+````
+
+呈现的输出效果如下:
+
+```bash {lineNos=false wrap=true}
+echo "这一行很长, 会自动换行而不是横向滚动: 敏捷的棕色狐狸跳过了懒狗, 敏捷的棕色狐狸跳过了懒狗, 敏捷的棕色狐狸跳过了懒狗, 敏捷的棕色狐狸跳过了懒狗"
+```
+
+[`highlight` shortcode](../theme-documentation-built-in-shortcodes#3-highlight) 在其选项字符串中接受同样的选项, 例如 `"lineNos=false,wrap=true"`.
 
 ### 图表 {#diagrams}
 

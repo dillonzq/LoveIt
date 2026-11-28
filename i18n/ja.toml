@@ -136,6 +136,12 @@ other = "lib/lunr/lunr.segmentit.js"
 [copyToClipboard]
 other = "クリップボードにコピー"
 
+[codeLineNumbers]
+other = "行番号"
+
+[codeWrap]
+other = "折り返し"
+
 [cookieconsentMessage]
 other = "このサイトではユーザー体験を向上させるために Cookie を使用しています。"
 

@@ -132,6 +132,12 @@ other = "nl"
 [copyToClipboard]
 other = "Kopieer naar klembord"
 
+[codeLineNumbers]
+other = "Regelnummers"
+
+[codeWrap]
+other = "Regelterugloop"
+
 [cookieconsentMessage]
 other = "Deze website gebruikt cookies om de ervaring beter te maken."
 

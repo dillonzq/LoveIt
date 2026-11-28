@@ -132,6 +132,12 @@ other = "en"
 [copyToClipboard]
 other = "ক্লিপবোর্ডে কপি করুন"
 
+[codeLineNumbers]
+other = "লাইন নম্বর"
+
+[codeWrap]
+other = "লাইন মোড়ানো"
+
 [cookieconsentMessage]
 other = "এই ওয়েবসাইটটি আপনার ব্রাউজিং অভিজ্ঞতা সমৃদ্ধ করতে কুকিজ ব্যবহার করে।"
 

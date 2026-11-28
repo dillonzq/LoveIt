@@ -131,6 +131,12 @@ other = "pl"
 [copyToClipboard]
 other = "Skopiuj do schowka"
 
+[codeLineNumbers]
+other = "Numery wierszy"
+
+[codeWrap]
+other = "Zawijanie wierszy"
+
 [zoomIn]
 other = "Powiększ"
 

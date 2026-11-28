@@ -15,4 +15,10 @@
         {{- end -}}
     {{- end -}}
 {{- end -}}
+{{- /* wrap is not a highlighting option, so Hugo keeps it in .Attributes. */ -}}
+{{- with .Attributes -}}
+    {{- if isset . "wrap" -}}
+        {{- $options = merge $options (dict "wrap" .wrap) -}}
+    {{- end -}}
+{{- end -}}
 {{- dict "Content" .Inner "Lang" .Type "Options" $options "Page" .Page | partial "plugin/code-block.html" -}}

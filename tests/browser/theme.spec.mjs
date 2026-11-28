@@ -1804,10 +1804,73 @@ test('keyboard users can expand a collapsed code block and copy it', async ({ br
   await expect(code).toBeVisible();
   await expect(arrow).toHaveCSS('transform', 'matrix(0, 1, -1, 0, 0, 0)');
   await page.keyboard.press('Tab');
+  await expect(block.getByRole('button', { name: 'Line numbers' })).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(block.getByRole('button', { name: 'Wrap lines' })).toBeFocused();
+  await page.keyboard.press('Tab');
   await expect(copy).toBeFocused();
   await page.keyboard.press('Enter');
   await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe('echo one\necho two\necho three');
   await context.close();
+});
+
+test('line numbers and wrapping follow the site, page and block options and readers can toggle them', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.setViewportSize({ width: 600, height: 800 });
+  // The site defaults: line numbers on, wrapping off.
+  await page.goto('/fuse/blog/code-blocks/');
+  const plain = page.locator('.code-block').first();
+  await expect(plain).toHaveClass(/\bcode-line-numbers\b/);
+  await expect(plain).not.toHaveClass(/\bcode-wrap\b/);
+  await expect(plain.getByRole('button', { name: 'Line numbers' })).toHaveAttribute('aria-pressed', 'true');
+  await expect(plain.getByRole('button', { name: 'Wrap lines' })).toHaveAttribute('aria-pressed', 'false');
+
+  // The page turns line numbers off and wrapping on; the second block and the shortcode turn them back.
+  await page.goto('/fuse/blog/code-toggles/');
+  const blocks = page.locator('.code-block');
+  await expect(blocks).toHaveCount(4);
+  const states = () => blocks.evaluateAll(elements => elements.map(element => [
+    element.classList.contains('code-line-numbers'), element.classList.contains('code-wrap'),
+    ...[...element.querySelectorAll('[aria-pressed]')].map(button => button.getAttribute('aria-pressed') === 'true'),
+  ]));
+  expect(await states()).toEqual([[false, true, false, true], [true, false, true, false], [true, false, true, false], [false, false, false, false]]);
+  // The theme options are not passed on to Chroma, and the other options still apply.
+  await expect(blocks.nth(2)).toHaveAttribute('style', /counter-reset: ?code-block 2\b/);
+  await expect(blocks.nth(3)).toHaveAttribute('style', /counter-reset: ?code-block 6\b/);
+
+  const first = blocks.first();
+  const lineNumbers = first.getByRole('button', { name: 'Line numbers' });
+  const wrap = first.getByRole('button', { name: 'Wrap lines' });
+  const code = first.locator('pre');
+  const line = first.locator('span.line').first();
+  const before = element => getComputedStyle(element, '::before').content;
+  // Wrapped lines fit in the block and keep the copied text unchanged.
+  expect(await code.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
+  expect((await line.boundingBox()).height).toBeGreaterThan(40);
+  expect(await line.evaluate(before)).toBe('none');
+  await expect(first.locator('code')).toHaveText(/^echo "a long line .* going"\necho short\n?$/);
+  await expect(wrap).toHaveCSS('background-color', 'rgb(214, 214, 214)');
+  await expect(lineNumbers).not.toHaveCSS('background-color', 'rgb(214, 214, 214)');
+
+  await lineNumbers.click();
+  await expect(first).toHaveClass(/\bcode-line-numbers\b/);
+  await expect(lineNumbers).toHaveAttribute('aria-pressed', 'true');
+  expect(await line.evaluate(before)).toBe('counter(code-block)');
+  // A wrapped line continues to the right of its number.
+  const cl = await line.locator('.cl').boundingBox();
+  const lineBox = await line.boundingBox();
+  expect(cl.x).toBeGreaterThan(lineBox.x + 20);
+  expect(cl.height).toBeGreaterThan(40);
+
+  await wrap.press('Enter');
+  await expect(first).not.toHaveClass(/\bcode-wrap\b/);
+  await expect(wrap).toHaveAttribute('aria-pressed', 'false');
+  expect(await code.evaluate(element => element.scrollWidth > element.clientWidth)).toBe(true);
+  expect((await line.boundingBox()).height).toBeLessThan(30);
+  // Toggling one block leaves the others as they were.
+  expect((await states()).slice(1, 3)).toEqual([[true, false, true, false], [true, false, true, false]]);
+  expect(errors).toEqual([]);
 });
 
 test('copy buttons fall back to execCommand and leave the code selected when copying fails', async ({ page }) => {

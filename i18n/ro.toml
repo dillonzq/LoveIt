@@ -134,6 +134,12 @@ other = "lib/lunr/lunr.ro.js"
 [copyToClipboard]
 other = "Copiați în clipboard"
 
+[codeLineNumbers]
+other = "Numere de linie"
+
+[codeWrap]
+other = "Încadrarea liniilor"
+
 [cookieconsentMessage]
 other = "Acest site web utilizează Cookies pentru a vă îmbunătăți experiența."
 

@@ -130,6 +130,12 @@ other = "en"
 [copyToClipboard]
 other = "Copy to clipboard"
 
+[codeLineNumbers]
+other = "Line numbers"
+
+[codeWrap]
+other = "Wrap lines"
+
 [cookieconsentMessage]
 other = "This website uses Cookies to improve your experience."
 

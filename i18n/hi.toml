@@ -131,6 +131,12 @@ other = "hi"
 [copyToClipboard]
 other = "क्लिपबोर्ड पर कॉपी करें"
 
+[codeLineNumbers]
+other = "पंक्ति संख्या"
+
+[codeWrap]
+other = "पंक्ति रैप"
+
 [cookieconsentMessage]
 other = "यह वेबसाइट आपके अनुभव को बेहतर बनाने के लिए कुकीज़ का उपयोग करती है।"
 

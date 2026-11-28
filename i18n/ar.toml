@@ -131,6 +131,12 @@ other = "ar"
 [copyToClipboard]
 other = "نسخ"
 
+[codeLineNumbers]
+other = "أرقام الأسطر"
+
+[codeWrap]
+other = "التفاف الأسطر"
+
 [cookieconsentMessage]
 other = "هذا الموقع يستخدم الكوكيز لتجربة تصفح افضل."
 

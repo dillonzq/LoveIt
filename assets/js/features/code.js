@@ -1,9 +1,19 @@
 import { copyText, forEach } from '../util.js';
 
+// Toggle buttons of a code block header and the class of the block each one switches.
+const toggles = [['.line-numbers-toggle', 'code-line-numbers'], ['.wrap-toggle', 'code-wrap']];
+
 // Code blocks (layouts/_partials/plugin/code-block.html): the title and the ellipsis
-// fold the block, the copy button copies the code and reports the result.
+// fold the block, the toggle buttons switch line numbers and line wrapping, and the
+// copy button copies the code and reports the result.
 export default function initCode() {
     forEach(document.querySelectorAll('.code-block'), $codeBlock => {
+        toggles.forEach(([selector, className]) => {
+            const $toggle = $codeBlock.querySelector(`.code-header > ${selector}`);
+            if ($toggle) $toggle.addEventListener('click', () => {
+                $toggle.setAttribute('aria-pressed', $codeBlock.classList.toggle(className));
+            }, false);
+        });
         const $codeTitle = $codeBlock.querySelector('.code-header > .code-title');
         const toggle = () => {
             const open = $codeBlock.classList.toggle('open');

@@ -105,7 +105,7 @@ code, pre {
       white-space: nowrap;
     }
 
-    .copy {
+    .line-numbers-toggle, .wrap-toggle, .copy {
       display: none;
       padding: .4rem;
       color: inherit;
@@ -116,6 +116,22 @@ code, pre {
 
         [theme=dark] & {
           color: $global-link-hover-color-dark;
+        }
+      }
+    }
+
+    // A toggle that is on is highlighted.
+    .line-numbers-toggle, .wrap-toggle {
+      line-height: 1;
+
+      &[aria-pressed=true] {
+        color: $global-link-hover-color;
+        background: color.adjust($code-background-color, $lightness: -12%, $space: hsl);
+        border-radius: 4px;
+
+        [theme=dark] & {
+          color: $global-link-hover-color-dark;
+          background: color.adjust($code-background-color-dark, $lightness: 8%, $space: hsl);
         }
       }
     }
@@ -192,7 +208,7 @@ code, pre {
         display: none;
       }
 
-      .copy {
+      .line-numbers-toggle, .wrap-toggle, .copy {
         display: inline-block;
       }
     }
@@ -226,6 +242,20 @@ code, pre {
       [theme=dark] & {
         color: $code-info-color-dark;
       }
+    }
+  }
+
+  // Long lines wrap within the block, between words where they can. A line is
+  // a flex row, so its wrapped part stays to the right of the line number.
+  &.code-wrap .highlight span.line {
+    display: flex;
+
+    > .cl {
+      flex: 1;
+      min-width: 0;
+      white-space: pre-wrap;
+      @include line-break(auto);
+      overflow-wrap: anywhere;
     }
   }
 

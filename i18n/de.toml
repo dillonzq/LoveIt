@@ -134,6 +134,12 @@ other = "lib/lunr/lunr.de.js"
 [copyToClipboard]
 other = "In Zwischenablage kopieren"
 
+[codeLineNumbers]
+other = "Zeilennummern"
+
+[codeWrap]
+other = "Zeilenumbruch"
+
 [cookieconsentMessage]
 other = "Diese Website verwendet Cookies, um Ihre Erfahrung zu verbessern."
 

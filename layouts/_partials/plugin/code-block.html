@@ -4,12 +4,22 @@
 {{- $maxShownLines := $params.code.maxShownLines | default 10 | int -}}
 {{- $copy := $params.code.copy | default true -}}
 {{- $lines := split $content "\n" | len -}}
-{{- $options := dict "lineNoStart" 1 "lineNos" true -}}
+{{- /* lineNos and wrap: the site and page params set the default state of every block, */ -}}
+{{- /* the options of a block override it, and readers switch it with the header buttons. */ -}}
+{{- $options := dict "lineNoStart" 1 "lineNos" ($params.code.lineNos | default true) "wrap" ($params.code.wrap | default false) -}}
 {{- $options = .Options | partial "function/dict.html" | merge $options -}}
 {{- $lineNoStart := $options.lineNoStart | int -}}
 {{- $lineNos := $options.lineNos | partial "function/bool.html" -}}
+{{- $wrap := $options.wrap | partial "function/bool.html" -}}
 
-{{- $options = dict "noClasses" false "lineNos" false | merge $options -}}
+{{- /* CSS numbers the lines, and wrap is the theme's option, not one of Chroma's. */ -}}
+{{- $highlightOptions := dict "noClasses" false "lineNos" false -}}
+{{- range $key, $value := $options -}}
+    {{- if not (in (slice "linenos" "noclasses" "wrap") (lower $key)) -}}
+        {{- $highlightOptions = dict $key $value | merge $highlightOptions -}}
+    {{- end -}}
+{{- end -}}
+{{- $options = $highlightOptions -}}
 {{- $result := transform.Highlight $content $lang $options -}}
 {{- /* Without a Chroma lexer for the language (or no language), Hugo returns a bare pre:
     highlight it as plain text so the block keeps its styling and line numbers. */ -}}
@@ -17,12 +27,15 @@
     {{- $result = transform.Highlight $content "text" $options -}}
 {{- end -}}
 {{- $open := le $lines $maxShownLines -}}
-<div class="code-block{{ if $lineNos }} code-line-numbers{{ end }}{{ if $open }} open{{ end }}" style="counter-reset: code-block {{ sub $lineNoStart 1 }}">
+<div class="code-block{{ if $lineNos }} code-line-numbers{{ end }}{{ if $wrap }} code-wrap{{ end }}{{ if $open }} open{{ end }}" style="counter-reset: code-block {{ sub $lineNoStart 1 }}">
     <div class="code-header language-{{ $lang }}">
         {{- /* A disclosure button. CSS shows the language label (::after), which not every */}}
         {{- /* assistive technology reads, so the button is also named by the language. */}}
         <button type="button" class="code-title link-like" aria-expanded="{{ $open }}" aria-label="{{ $lang | default "Code" }}">{{ dict "Class" "arrow fas fa-angle-right" | partial "plugin/icon.html" }}</button>
         <span class="ellipses">{{ dict "Class" "fas fa-ellipsis-h" | partial "plugin/icon.html" }}</span>
+        {{- /* Toggle buttons: aria-pressed (highlighted in CSS) tells whether the feature is on. */}}
+        <button type="button" class="line-numbers-toggle link-like" title="{{ T "codeLineNumbers" }}" aria-label="{{ T "codeLineNumbers" }}" aria-pressed="{{ $lineNos }}">{{ dict "Class" "fas fa-list-ol" | partial "plugin/icon.html" }}</button>
+        <button type="button" class="wrap-toggle link-like" title="{{ T "codeWrap" }}" aria-label="{{ T "codeWrap" }}" aria-pressed="{{ $wrap }}">{{ dict "Src" "svg/icons/text-wrap.svg" | partial "plugin/icon.html" }}</button>
         {{ if $copy }}<button type="button" class="copy link-like" title="{{ T "copyToClipboard" }}" aria-label="{{ T "copyToClipboard" }}" data-copied="{{ T "success" }}" data-copy-failed="{{ T "failure" }}">{{ dict "Class" "far fa-copy" | partial "plugin/icon.html" }}</button><span class="copy-status" role="status"></span>{{ end }}
     </div>
     {{- $result -}}

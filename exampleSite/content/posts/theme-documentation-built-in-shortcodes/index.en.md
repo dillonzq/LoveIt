@@ -99,7 +99,7 @@ The HTML looks like this:
 [Documentation of `highlight`](https://gohugo.io/shortcodes/highlight/)
 
 {{< admonition note >}}
-The theme overrides this shortcode (`layouts/_shortcodes/highlight.html`). It only accepts positional parameters: the language, and optionally one options string as the second parameter, such as `"lineNos=false,lineNoStart=5"`. Named parameters are not supported, and the theme's code block rendering is used instead of Hugo's.
+The theme overrides this shortcode (`layouts/_shortcodes/highlight.html`). It only accepts positional parameters: the language, and optionally one options string as the second parameter, such as `"lineNos=false,lineNoStart=5"`. {{< version 0.4.2 >}} The theme's `wrap` option is accepted too, see [Code Blocks](../theme-documentation-content#code-blocks). Named parameters are not supported, and the theme's code block rendering is used instead of Hugo's.
 {{< /admonition >}}
 
 Example `highlight` input:

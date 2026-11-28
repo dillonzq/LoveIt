@@ -131,6 +131,12 @@ other = "en"
 [copyToClipboard]
 other = "Salin ke papan klip"
 
+[codeLineNumbers]
+other = "Nomor baris"
+
+[codeWrap]
+other = "Bungkus baris"
+
 [cookieconsentMessage]
 other = "Situs ini menggunakan Cookies untuk meningkatkan pengalaman Anda."
 
