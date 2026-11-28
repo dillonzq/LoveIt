@@ -131,6 +131,12 @@ other = "en"
 [copyToClipboard]
 other = "복사하기"
 
+[codeLineNumbers]
+other = "줄 번호"
+
+[codeWrap]
+other = "줄 바꿈"
+
 [cookieconsentMessage]
 other = "본 웹사이트는 웹 환경 개선을 위해 쿠키를 사용합니다."
 

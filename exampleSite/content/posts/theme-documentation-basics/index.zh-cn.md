@@ -581,6 +581,12 @@ enableEmoji = true
       copy = true
       # 默认展开显示的代码行数
       maxShownLines = 50
+      # {{< version 0.4.2 >}} 是否默认显示代码块的行号
+      # 读者可以通过代码块标题栏中的按钮切换
+      lineNos = true
+      # {{< version 0.4.2 >}} 是否默认对代码块的长行自动换行
+      # 读者可以通过代码块标题栏中的按钮切换
+      wrap = false
     [params.page.code.render]
       # 是否渲染代码块中的 goat 图表
       goat = true

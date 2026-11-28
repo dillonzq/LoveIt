@@ -131,6 +131,12 @@ other = "uk"
 [copyToClipboard]
 other = "Скопіювати до буфера обміну"
 
+[codeLineNumbers]
+other = "Номери рядків"
+
+[codeWrap]
+other = "Перенесення рядків"
+
 [cookieconsentMessage]
 other = "Цей веб-сайт використовує файли cookie, щоб покращити ваш досвід."
 

@@ -131,6 +131,12 @@ other = "tr"
 [copyToClipboard]
 other = "Panoya kopyala"
 
+[codeLineNumbers]
+other = "Satır numaraları"
+
+[codeWrap]
+other = "Satır kaydırma"
+
 [cookieconsentMessage]
 other = "Bu websitesi deneyiminizi iyileştirmek için çerezleri kullanmaktadır."
 

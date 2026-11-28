@@ -17,6 +17,12 @@ This file starts at 0.4.0. Older releases are described on the
 
 ### Added
 
+- Line wrapping for code blocks, and two buttons in the code block header that
+  let readers show or hide the line numbers and wrap or unwrap long lines; a
+  highlighted button means the feature is on. `lineNos` (on by default) and
+  `wrap` (off by default) under `params.page.code`, the `code` front matter
+  of a page, or the options of a code block (`{lineNos=false wrap=true}`)
+  set the initial state.
 - A footnote, or the reference in the text that links to it, is outlined and
   highlighted after a link jumps to it. The outline animates in briefly unless
   reduced motion is preferred ([#993]).

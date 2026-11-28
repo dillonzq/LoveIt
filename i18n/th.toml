@@ -134,6 +134,12 @@ other = "lib/lunr/lunr.th.js"
 [copyToClipboard]
 other = "คัดลอกไปยังคลิปบอร์ด"
 
+[codeLineNumbers]
+other = "หมายเลขบรรทัด"
+
+[codeWrap]
+other = "ตัดบรรทัด"
+
 [cookieconsentMessage]
 other = "เว็บไซต์นี้มีการใช้คุกกี้เพื่อปรับปรุงประสิทธิภาพการแสดงผล."
 

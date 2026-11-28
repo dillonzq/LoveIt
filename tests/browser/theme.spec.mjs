@@ -1804,10 +1804,131 @@ test('keyboard users can expand a collapsed code block and copy it', async ({ br
   await expect(code).toBeVisible();
   await expect(arrow).toHaveCSS('transform', 'matrix(0, 1, -1, 0, 0, 0)');
   await page.keyboard.press('Tab');
+  await expect(block.getByRole('button', { name: 'Line numbers' })).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(block.getByRole('button', { name: 'Wrap lines' })).toBeFocused();
+  await page.keyboard.press('Tab');
   await expect(copy).toBeFocused();
   await page.keyboard.press('Enter');
   await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe('echo one\necho two\necho three');
   await context.close();
+});
+
+test('line numbers and wrapping follow the site, page and block options and readers can toggle them', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.setViewportSize({ width: 600, height: 800 });
+  // The site defaults: line numbers on, wrapping off.
+  await page.goto('/fuse/blog/code-blocks/');
+  const plain = page.locator('.code-block').first();
+  await expect(plain).toHaveClass(/\bcode-line-numbers\b/);
+  await expect(plain).not.toHaveClass(/\bcode-wrap\b/);
+  await expect(plain.getByRole('button', { name: 'Line numbers' })).toHaveAttribute('aria-pressed', 'true');
+  await expect(plain.getByRole('button', { name: 'Wrap lines' })).toHaveAttribute('aria-pressed', 'false');
+
+  // The page turns line numbers off and wrapping on; the second block and the shortcode turn them back.
+  await page.goto('/fuse/blog/code-toggles/');
+  const blocks = page.locator('.code-block');
+  await expect(blocks).toHaveCount(4);
+  const states = () => blocks.evaluateAll(elements => elements.map(element => [
+    element.classList.contains('code-line-numbers'), element.classList.contains('code-wrap'),
+    ...[...element.querySelectorAll('[aria-pressed]')].map(button => button.getAttribute('aria-pressed') === 'true'),
+  ]));
+  expect(await states()).toEqual([[false, true, false, true], [true, false, true, false], [true, false, true, false], [false, false, false, false]]);
+  // The theme options are not passed on to Chroma, and the other options still apply.
+  await expect(blocks.nth(2)).toHaveAttribute('style', /counter-reset: ?code-block 2\b/);
+  await expect(blocks.nth(3)).toHaveAttribute('style', /counter-reset: ?code-block 6\b/);
+
+  const first = blocks.first();
+  const lineNumbers = first.getByRole('button', { name: 'Line numbers' });
+  const wrap = first.getByRole('button', { name: 'Wrap lines' });
+  const code = first.locator('pre');
+  const line = first.locator('span.line').first();
+  const before = element => getComputedStyle(element, '::before').content;
+  // Wrapped lines fit in the block and keep the copied text unchanged.
+  expect(await code.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
+  expect((await line.boundingBox()).height).toBeGreaterThan(40);
+  expect(await line.evaluate(before)).toBe('none');
+  await expect(first.locator('code')).toHaveText(/^echo "a long line .* going"\necho short\n?$/);
+  // Only the icon of a toggle that is on is highlighted, also while hovered.
+  await expect(wrap).toHaveCSS('color', 'rgb(29, 111, 148)');
+  await expect(lineNumbers).toHaveCSS('color', 'rgb(98, 98, 98)');
+  await expect(wrap).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+  await wrap.hover();
+  await expect(wrap).toHaveCSS('color', 'rgb(29, 111, 148)');
+  await lineNumbers.hover();
+  await expect(lineNumbers).toHaveCSS('color', 'rgb(22, 18, 9)');
+
+  await lineNumbers.click();
+  await expect(first).toHaveClass(/\bcode-line-numbers\b/);
+  await expect(lineNumbers).toHaveAttribute('aria-pressed', 'true');
+  await expect(lineNumbers).toHaveCSS('color', 'rgb(29, 111, 148)');
+  expect(await line.evaluate(before)).toBe('counter(code-block)');
+  // A wrapped line continues to the right of its number.
+  const cl = await line.locator('.cl').boundingBox();
+  const lineBox = await line.boundingBox();
+  expect(cl.x).toBeGreaterThan(lineBox.x + 20);
+  expect(cl.height).toBeGreaterThan(40);
+
+  await wrap.press('Enter');
+  await expect(first).not.toHaveClass(/\bcode-wrap\b/);
+  await expect(wrap).toHaveAttribute('aria-pressed', 'false');
+  expect(await code.evaluate(element => element.scrollWidth > element.clientWidth)).toBe(true);
+  expect((await line.boundingBox()).height).toBeLessThan(30);
+  // Toggling one block leaves the others as they were.
+  expect((await states()).slice(1, 3)).toEqual([[true, false, true, false], [true, false, true, false]]);
+
+  // A wrapped block is as tall as its code, even when that is taller than the max-height that animates opening.
+  await wrap.click();
+  await first.locator('.cl').first().evaluate(element => { element.textContent = 'going and '.repeat(20_000); });
+  const highlight = first.locator('.highlight');
+  expect(await highlight.evaluate(element => element.scrollHeight)).toBeGreaterThan(20_000);
+  expect(await highlight.evaluate(element => element.scrollHeight - element.clientHeight)).toBeLessThanOrEqual(1);
+  expect(errors).toEqual([]);
+});
+
+test('code block options are case-insensitive and toggle states are true or false', async ({ page }) => {
+  await page.goto('/fuse/blog/code-options/');
+  const blocks = page.locator('.code-block');
+  await expect(blocks).toHaveCount(7);
+  // The page turns line numbers off; linenos=true (in a fence or the shortcode) and lineNos=inline turn them on.
+  for (const index of [0, 1, 2]) {
+    await expect(blocks.nth(index)).toHaveClass(/\bcode-line-numbers\b/);
+    await expect(blocks.nth(index).getByRole('button', { name: 'Line numbers' })).toHaveAttribute('aria-pressed', 'true');
+    await expect(blocks.nth(index).getByRole('button', { name: 'Wrap lines' })).toHaveAttribute('aria-pressed', 'false');
+  }
+  // Inline code has no lines to number or wrap, so it gets no toggle buttons.
+  await expect(blocks.nth(3).locator('.line-numbers-toggle, .wrap-toggle')).toHaveCount(0);
+  await expect(blocks.nth(3).getByRole('button', { name: 'Copy to clipboard' })).toBeVisible();
+  // Whether the code is inline follows the markup Chroma renders, not the spelling of the option.
+  await expect(blocks.nth(4).locator('pre')).toHaveCount(1);
+  await expect(blocks.nth(4).locator('.line-numbers-toggle, .wrap-toggle')).toHaveCount(2);
+  // Boolean values are case-insensitive too, and lineNos=table turns the line numbers on.
+  const pressed = index => blocks.nth(index).locator('.line-numbers-toggle, .wrap-toggle')
+    .evaluateAll(buttons => buttons.map(button => button.getAttribute('aria-pressed')));
+  expect(await pressed(5)).toEqual(['false', 'false']);
+  await expect(blocks.nth(5)).not.toHaveClass(/\bcode-(line-numbers|wrap)\b/);
+  expect(await pressed(6)).toEqual(['true', 'true']);
+  await expect(blocks.nth(6)).toHaveClass(/\bcode-line-numbers\b.*\bcode-wrap\b/);
+});
+
+test('the site code options set the initial state of code blocks without options', async ({ page }) => {
+  // The Arabic site turns line numbers off and wrapping on.
+  await page.goto('/fuse/blog/ar/code-site/');
+  const blocks = page.locator('.code-block');
+  await expect(blocks).toHaveCount(2);
+  await expect(blocks.first()).not.toHaveClass(/\bcode-line-numbers\b/);
+  await expect(blocks.first()).toHaveClass(/\bcode-wrap\b/);
+  await expect(blocks.nth(1)).toHaveClass(/\bcode-line-numbers\b/);
+  await expect(blocks.nth(1)).not.toHaveClass(/\bcode-wrap\b/);
+  // Right to left, a wrapped line continues to the left of its number.
+  await blocks.first().locator('.line-numbers-toggle').click();
+  await page.setViewportSize({ width: 400, height: 800 });
+  const line = blocks.first().locator('span.line');
+  const cl = await line.locator('.cl').boundingBox();
+  const lineBox = await line.boundingBox();
+  expect(cl.height).toBeGreaterThan(30);
+  expect(cl.x + cl.width).toBeLessThan(lineBox.x + lineBox.width - 20);
 });
 
 test('copy buttons fall back to execCommand and leave the code selected when copying fails', async ({ page }) => {

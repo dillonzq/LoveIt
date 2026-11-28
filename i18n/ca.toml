@@ -131,6 +131,12 @@ other = "ca"
 [copyToClipboard]
 other = "Copiar al portapapers"
 
+[codeLineNumbers]
+other = "Números de línia"
+
+[codeWrap]
+other = "Ajust de línia"
+
 [cookieconsentMessage]
 other = "Aquest lloc web utilitza cookies per millorar la teva experiència."
 

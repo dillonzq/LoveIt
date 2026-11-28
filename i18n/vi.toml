@@ -134,6 +134,12 @@ other = "lib/lunr/lunr.vi.js"
 [copyToClipboard]
 other = "Sao chép vào bộ nhớ tạm"
 
+[codeLineNumbers]
+other = "Số dòng"
+
+[codeWrap]
+other = "Ngắt dòng"
+
 [cookieconsentMessage]
 other = "Trang web này sử dụng Cookies để cải thiện trải nghiệm của bạn."
 

@@ -593,6 +593,12 @@ enableEmoji = true
       copy = true
       # the maximum number of lines of displayed code by default
       maxShownLines = 50
+      # {{< version 0.4.2 >}} whether to show the line numbers of code blocks by default
+      # readers can toggle them with a button in the header of a code block
+      lineNos = true
+      # {{< version 0.4.2 >}} whether to wrap the long lines of code blocks by default
+      # readers can toggle it with a button in the header of a code block
+      wrap = false
     [params.page.code.render]
       # whether to render goat diagrams in code blocks
       goat = true

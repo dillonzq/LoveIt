@@ -134,6 +134,12 @@ other = "lib/lunr/lunr.pt.js"
 [copyToClipboard]
 other = "Copiar para a área de transferência"
 
+[codeLineNumbers]
+other = "Números de linha"
+
+[codeWrap]
+other = "Quebra de linha"
+
 [cookieconsentMessage]
 other = "Este site usa Cookies para melhorar sua experiência."
 

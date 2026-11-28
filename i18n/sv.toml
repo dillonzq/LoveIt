@@ -131,6 +131,12 @@ other = "sv"
 [copyToClipboard]
 other = "Kopiera till urklipp"
 
+[codeLineNumbers]
+other = "Radnummer"
+
+[codeWrap]
+other = "Radbrytning"
+
 [cookieconsentMessage]
 other = "Denna webbplats använder cookies för att förbättra din upplevelse."
 

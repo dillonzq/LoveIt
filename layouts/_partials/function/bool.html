@@ -1,17 +1,23 @@
 {{- /* To Bool */ -}}
+{{- /* true, false, "true", "false", "1" and "0" (in any case) become a boolean; */ -}}
+{{- /* other values, such as lineNos="inline", are returned as they are. */ -}}
 {{- $bool := . -}}
+{{- $value := . -}}
+{{- if eq (printf "%T" .) "string" -}}
+    {{- $value = lower . -}}
+{{- end -}}
 
-{{- if eq . true -}}
+{{- if eq $value true -}}
     {{- $bool = true -}}
-{{- else if eq . false -}}
+{{- else if eq $value false -}}
     {{- $bool = false -}}
-{{- else if eq . "true" -}}
+{{- else if eq $value "true" -}}
     {{- $bool = true -}}
-{{- else if eq . "false" -}}
+{{- else if eq $value "false" -}}
     {{- $bool = false -}}
-{{- else if eq . "1" -}}
+{{- else if eq $value "1" -}}
     {{- $bool = true -}}
-{{- else if eq . "0" -}}
+{{- else if eq $value "0" -}}
     {{- $bool = false -}}
 {{- end -}}
 

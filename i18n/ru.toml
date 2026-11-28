@@ -134,6 +134,12 @@ other = "lib/lunr/lunr.ru.js"
 [copyToClipboard]
 other = "Копировать в буфер обмена"
 
+[codeLineNumbers]
+other = "Номера строк"
+
+[codeWrap]
+other = "Перенос строк"
+
 [cookieconsentMessage]
 other = "Этот сайт использует Cookies для улучшения вашего опыта."
 

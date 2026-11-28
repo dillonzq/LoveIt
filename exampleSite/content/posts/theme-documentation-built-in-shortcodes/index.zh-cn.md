@@ -100,7 +100,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 [`highlight` 的文档](https://gohugo.io/shortcodes/highlight/)
 
 {{< admonition note >}}
-主题重写了这个 shortcode (`layouts/_shortcodes/highlight.html`). 它只接受位置参数: 语言, 以及可选的作为第二个参数的一个选项字符串, 例如 `"lineNos=false,lineNoStart=5"`. 不支持命名参数, 并且使用的是主题自己的代码块渲染而不是 Hugo 的.
+主题重写了这个 shortcode (`layouts/_shortcodes/highlight.html`). 它只接受位置参数: 语言, 以及可选的作为第二个参数的一个选项字符串, 例如 `"lineNos=false,lineNoStart=5"`. {{< version 0.4.2 >}} 也接受主题的 `wrap` 选项, 见 [代码块](../theme-documentation-content#code-blocks). 不支持命名参数, 并且使用的是主题自己的代码块渲染而不是 Hugo 的.
 {{< /admonition >}}
 
 一个 `highlight` 示例:

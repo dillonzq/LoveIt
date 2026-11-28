@@ -137,6 +137,12 @@ other = "lib/lunr/lunr.segmentit.js"
 [copyToClipboard]
 other = "复制到剪贴板"
 
+[codeLineNumbers]
+other = "行号"
+
+[codeWrap]
+other = "自动换行"
+
 [cookieconsentMessage]
 other = "本网站使用 Cookies 来改善您的浏览体验."
 

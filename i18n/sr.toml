@@ -131,6 +131,12 @@ other = "sr"
 [copyToClipboard]
 other = "Копирај на радну таблу"
 
+[codeLineNumbers]
+other = "Бројеви редова"
+
+[codeWrap]
+other = "Прелом редова"
+
 [cookieconsentMessage]
 other = "Ова веб локација користи Cookies да би побољшала ваше искуство."
 

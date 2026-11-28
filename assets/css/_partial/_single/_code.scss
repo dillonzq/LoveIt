@@ -105,7 +105,7 @@ code, pre {
       white-space: nowrap;
     }
 
-    .copy {
+    .line-numbers-toggle, .wrap-toggle, .copy {
       display: none;
       padding: .4rem;
       color: inherit;
@@ -116,6 +116,28 @@ code, pre {
 
         [theme=dark] & {
           color: $global-link-hover-color-dark;
+        }
+      }
+    }
+
+    // The icon of a toggle that is on is highlighted. Hovering a toggle that is
+    // off only darkens its icon, so it does not look on.
+    .line-numbers-toggle, .wrap-toggle {
+      &:hover {
+        color: $global-link-color;
+
+        [theme=dark] & {
+          color: $global-link-hover-color-dark;
+        }
+      }
+
+      &[aria-pressed=true] {
+        &, &:hover {
+          color: $single-link-color;
+        }
+
+        [theme=dark] &, [theme=dark] &:hover {
+          color: $single-link-color-dark;
         }
       }
     }
@@ -192,7 +214,7 @@ code, pre {
         display: none;
       }
 
-      .copy {
+      .line-numbers-toggle, .wrap-toggle, .copy {
         display: inline-block;
       }
     }
@@ -226,6 +248,25 @@ code, pre {
       [theme=dark] & {
         color: $code-info-color-dark;
       }
+    }
+  }
+
+  // Long lines wrap within the block, between words where they can. A line is
+  // a flex row, so its wrapped part stays to the right of the line number.
+  // Wrapped code can be taller than the max-height that animates opening.
+  &.open.code-wrap .highlight {
+    max-height: none;
+  }
+
+  &.code-wrap .highlight span.line {
+    display: flex;
+
+    > .cl {
+      flex: 1;
+      min-width: 0;
+      white-space: pre-wrap;
+      @include line-break(auto);
+      overflow-wrap: anywhere;
     }
   }
 

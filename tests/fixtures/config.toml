@@ -30,6 +30,11 @@ weight = 3
 title = "LoveIt RTL"
 direction = "rtl"
 
+# Site code options opposite to the defaults, for the code block toggle tests.
+[languages.ar.params.page.code]
+lineNos = false
+wrap = true
+
 # A remote thumbnail exercises the string branch of the home JSON-LD image helper.
 [languages.ar.params.seo]
 thumbnailUrl = "https://cdn.example.com/thumbnail.png"

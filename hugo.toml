@@ -389,6 +389,12 @@
       # the maximum number of lines of displayed code by default
       # 默认展开显示的代码行数
       maxShownLines = 50
+      # whether to show the line numbers of code blocks by default, readers can toggle them with a button
+      # 是否默认显示代码块的行号, 读者可以通过按钮切换
+      lineNos = true
+      # whether to wrap the long lines of code blocks by default, readers can toggle it with a button
+      # 是否默认对代码块的长行自动换行, 读者可以通过按钮切换
+      wrap = false
     [params.page.code.render]
       goat = true
       mermaid = true

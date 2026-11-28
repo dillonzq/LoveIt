@@ -124,6 +124,8 @@ toc:
 code:
   copy: true
   maxShownLines: 50
+  lineNos: true
+  wrap: false
   render:
     goat: true
     mermaid: true
@@ -186,7 +188,7 @@ seo:
 * **rssFullText**: {{< version 0.2.4 >}} if `true`, the full text content will be shown in RSS.
 
 * **toc**: {{< version 0.2.9 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics#site-configuration), including `enable`, `keepStatic` (whether to keep the static table of contents in front of the post) and `auto`.
-* **code**: {{< version 0.2.0 >}} the same as the `params.page.code` part in the [site configuration](../theme-documentation-basics#site-configuration), including `copy`, `maxShownLines` and `render.goat` / `render.mermaid` (see [Diagrams](#diagrams)).
+* **code**: {{< version 0.2.0 >}} the same as the `params.page.code` part in the [site configuration](../theme-documentation-basics#site-configuration), including `copy`, `maxShownLines`, `lineNos` / `wrap` (see [Code Blocks](#code-blocks)) and `render.goat` / `render.mermaid` (see [Diagrams](#diagrams)).
 * **mermaid**: {{< version 0.4.2 >}} the same as the `params.page.mermaid` part in the [site configuration](../theme-documentation-basics#site-configuration), including `renderer` (see [Diagrams](#diagrams)).
 * **math**: {{< version 0.2.0 changed >}} the same as the `params.page.math` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **mapbox**: {{< version 0.2.0 >}} the same as the `params.page.mapbox` part in the [site configuration](../theme-documentation-basics#site-configuration).
@@ -303,6 +305,30 @@ This part is shown in the [basic markdown syntax page](../basic-markdown-syntax/
 ## 5 Extended Markdown Syntax {#extended-markdown-syntax}
 
 **LoveIt** theme has some extended syntax elements for you to write articles.
+
+### Code Blocks {#code-blocks}
+
+{{< version 0.4.2 >}} The header of a code block has two buttons that let readers show or hide the line numbers and wrap or unwrap long lines.
+A highlighted button means the feature is on.
+
+The `lineNos` and `wrap` options set the state of a code block when the page loads.
+A code block option overrides the front matter of the page (`code.lineNos` / `code.wrap`),
+which overrides `lineNos` / `wrap` under `[params.page.code]` in your [site configuration](../theme-documentation-basics#site-configuration).
+By default, line numbers are shown and long lines are not wrapped.
+
+````markdown
+```bash {lineNos=false wrap=true}
+echo "a long line that wraps instead of scrolling"
+```
+````
+
+The rendered output looks like this:
+
+```bash {lineNos=false wrap=true}
+echo "a long line that wraps instead of scrolling: the quick brown fox jumps over the lazy dog, the quick brown fox jumps over the lazy dog"
+```
+
+The [`highlight` shortcode](../theme-documentation-built-in-shortcodes#3-highlight) takes the same options in its options string, such as `"lineNos=false,wrap=true"`.
 
 ### Diagrams
 

@@ -133,6 +133,12 @@ other = "te"
 [copyToClipboard]
 other = "క్లిప్‌బోర్డ్‌కు కాపీ చేయండి"
 
+[codeLineNumbers]
+other = "పంక్తి సంఖ్యలు"
+
+[codeWrap]
+other = "పంక్తులను చుట్టు"
+
 [cookieconsentMessage]
 other = "ఈ వెబ్‌సైట్ మీ అనుభవాన్ని మెరుగుపరచడానికి కుకీలను ఉపయోగిస్తుంది."
 
