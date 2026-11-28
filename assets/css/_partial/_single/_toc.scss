@@ -18,6 +18,12 @@
       min-block-size: 24px;
     }
 
+    // A numbered TOC indents each level less than the browser's 40 px, so deep
+    // levels keep room for their links in the narrow auto TOC.
+    ol {
+      padding-inline-start: 1.5rem;
+    }
+
     ul {
       text-indent: -0.85rem;
       padding-inline-start: .8rem;

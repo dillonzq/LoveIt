@@ -1367,6 +1367,28 @@ for (const { name, width, toc, ordered } of targetSizeCases) {
   });
 }
 
+test('every level of a deep numbered auto TOC keeps a 24×24 CSS px visible target', async ({ page }) => {
+  // Just above the 960 px breakpoint the auto TOC is at its narrowest.
+  await page.setViewportSize({ width: 961, height: 800 });
+  await page.goto('/fuse/blog/headings/');
+  await expect(page.locator('#toc-auto')).toBeVisible();
+  // A numbered TOC (markup.tableOfContents.ordered) of headings h2 to h6 nests five <ol>.
+  await page.evaluate(() => {
+    let html = '';
+    for (const level of [6, 5, 4, 3, 2]) html = `<ol><li><a href="#plain-section">Heading level ${level}</a>${html}</li></ol>`;
+    document.getElementById('TableOfContents').innerHTML = html;
+  });
+  const content = await page.locator('#toc-content-auto').boundingBox();
+  const links = await page.locator('#toc-content-auto ol a').all();
+  expect(links).toHaveLength(5);
+  for (const link of links) {
+    const box = await link.boundingBox();
+    const visibleWidth = Math.min(box.x + box.width, content.x + content.width) - Math.max(box.x, content.x);
+    expect(visibleWidth).toBeGreaterThanOrEqual(24);
+    expect(box.height).toBeGreaterThanOrEqual(24);
+  }
+});
+
 test('every link on an article with heading anchors has an accessible name', async ({ page }) => {
   await page.goto('/fuse/blog/headings/');
   const { violations } = await new AxeBuilder({ page }).withRules(['link-name']).analyze();
