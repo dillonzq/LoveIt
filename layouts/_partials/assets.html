@@ -218,8 +218,10 @@
         {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
         {{- /* A script served from the site (any local path, as plugin/script.html resolves it) is deployed */ -}}
         {{- /* with the license notices of the bundled copy (Pele's MIT and the Lucide icon's ISC). */ -}}
-        {{- if (urls.Parse $source).Host | not -}}
-            {{- (resources.Get "lib/pele/LICENSE").Publish -}}
+        {{- if not (strings.HasPrefix $source "<script") -}}
+            {{- if not (urls.Parse $source).Host -}}
+                {{- (resources.Get "lib/pele/LICENSE").Publish -}}
+            {{- end -}}
         {{- end -}}
         {{- $zoom := dict "zoomIn" (T "zoomIn") "zoomOut" (T "zoomOut") "reset" (T "resetZoom") -}}
         {{- $config = dict "renderer" "pele" "zoomLabels" $zoom | dict "mermaid" | merge $config -}}

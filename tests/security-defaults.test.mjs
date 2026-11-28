@@ -66,6 +66,12 @@ const cases = [
     files: { 'assets/data/cdn/local.yml': 'prefix:\n  libFiles: ""\nlibFiles:\n  peleJS: /lib/pele/pele.global.js\n' },
     referrer: 'strict-origin-when-cross-origin', mermaid: pele, localPele: true,
   },
+  // A CDN data file may also give a whole <script> tag, which is used as is.
+  {
+    name: 'Pele by script tag', security: '', extra: '[params.cdn]\ndata = "tag.yml"\n',
+    files: { 'assets/data/cdn/tag.yml': 'prefix:\n  libFiles: ""\nlibFiles:\n  peleJS: \'<script src="https://cdn.example.com/pele.global.js"></script>\'\n' },
+    referrer: 'strict-origin-when-cross-origin', mermaid: pele,
+  },
   { name: 'Mermaid bundled', security: '', page: useMermaid, extra: '[params.cdn]\ndata = ""\n', referrer: 'strict-origin-when-cross-origin', mermaid: mermaid('strict') },
   { name: 'Pele by name', security: '', page: 'renderer = "pele"\n', referrer: 'strict-origin-when-cross-origin', mermaid: pele, noWarnings: [/renderer/] },
   {
