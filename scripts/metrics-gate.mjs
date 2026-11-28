@@ -28,12 +28,38 @@ const readJson = (file, what) => {
   }
 };
 
-function report(markdown, result) {
+// The pull request this run belongs to, recorded so the Metrics comment
+// workflow can tell apart pull requests that share a head commit.
+const pullRequest = /^\d+$/.test(env.PR_NUMBER || '') ? Number(env.PR_NUMBER) : null;
+
+// Writes comparison.md and comparison.json (the data the Metrics comment
+// workflow renders from), and the job summary: the comparison first, then
+// this run's measurements folded. In CI, scripts/metrics.mjs leaves the job
+// summary to this script when it compares (LOVEIT_METRICS_COMPARE).
+function report(markdown, data) {
   mkdirSync(out, { recursive: true });
   writeFileSync(path.join(out, 'comparison.md'), markdown);
-  if (result) writeFileSync(path.join(out, 'comparison.json'), `${JSON.stringify(result, null, 2)}\n`);
+  writeFileSync(path.join(out, 'comparison.json'), `${JSON.stringify({ schema: 1, pullRequest, ...data }, null, 2)}\n`);
   console.log(`\n${markdown}`);
-  if (env.GITHUB_STEP_SUMMARY) appendFileSync(env.GITHUB_STEP_SUMMARY, markdown);
+  if (!env.GITHUB_STEP_SUMMARY) return;
+  let measured = '';
+  try {
+    measured = readFileSync(path.join(out, 'summary.md'), 'utf8').replace(/^## Metrics\s*/, '').trim();
+  } catch {
+    // Compared with --current outside build/metrics; there is nothing to fold.
+  }
+  // The pull request commit and the run, as in the Metrics comment.
+  const head = /^[0-9a-f]{40}$/.test(env.LOVEIT_METRICS_HEAD || '') ? env.LOVEIT_METRICS_HEAD : null;
+  const server = env.GITHUB_SERVER_URL || 'https://github.com';
+  const links = [
+    head && (pullRequest ? `Commit [\`${head.slice(0, 7)}\`](${server}/${env.GITHUB_REPOSITORY}/pull/${pullRequest}/commits/${head})` : `Commit \`${head.slice(0, 7)}\``),
+    env.GITHUB_RUN_ID && `[CI run](${server}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID})`,
+  ].filter(Boolean);
+  appendFileSync(env.GITHUB_STEP_SUMMARY, [
+    markdown.trimEnd(), '',
+    ...measured ? ['<details><summary>All measurements of this run</summary>', '', measured, '', '</details>', ''] : [],
+    ...links.length ? [`<sub>${links.join(' · ')}</sub>`, ''] : [],
+  ].join('\n'));
 }
 
 const budget = parseBudget(readJson(options.budget, 'the metrics budget'));
@@ -54,6 +80,7 @@ let policy = budget.baseline;
 let baseline;
 let source;
 let baselineSha;
+let baselineRun = null;
 const api = env.GITHUB_TOKEN && env.GITHUB_REPOSITORY
   ? githubApi({ token: env.GITHUB_TOKEN, apiUrl: env.GITHUB_API_URL })
   : null;
@@ -92,6 +119,7 @@ if (options.baseline) {
     if (result.summary) {
       baseline = result.summary;
       baselineSha = result.run.head_sha;
+      baselineRun = { id: result.run.id, sha: baselineSha, distance: result.distance };
       const where = result.distance === 0
         ? `the base commit \`${baseSha.slice(0, 7)}\``
         : `\`${baselineSha.slice(0, 7)}\`, ${result.distance} ${result.distance === 1 ? 'commit' : 'commits'} before the base commit \`${baseSha.slice(0, 7)}\``;
@@ -108,10 +136,10 @@ if (options.baseline) {
     const message = `No ${branch} baseline: ${result.missing}.`;
     console.log(`::${fail ? 'error' : 'warning'} title=Metrics not compared::${message}`);
     report([
-      '## Metrics compared with master', '',
+      fail ? '## ❌ Metrics: required baseline missing' : '## ⚠️ Metrics: not compared with master', '',
       `**Not compared.** ${message} ${fail ? 'The budget requires a baseline, so the check fails.' : 'Re-run this job once a master run has uploaded its `metrics` artifact.'}`, '',
       ...notes.map(note => `- ${note}`), '',
-    ].join('\n'));
+    ].join('\n'), { compared: false });
     process.exit(fail ? 1 : 0);
   }
 } else {
@@ -136,10 +164,11 @@ if (result.failed && api && policy.acceptLabel && /^\d+$/.test(env.PR_NUMBER || 
   if (accepted) notes.push(`The \`${policy.acceptLabel}\` label accepts these regressions; the check passes.`);
   else notes.push(`If the regressions are intended, a maintainer can add the \`${policy.acceptLabel}\` label and re-run this job.`);
 }
-report(renderComparison(result, { source, notes }), { baseline: source, accepted, ...result });
-if (result.failed) {
-  for (const item of result.checks.filter(check => check.status === 'fail')) {
-    console.log(`::${accepted ? 'warning' : 'error'} title=Metrics regression::${item.page} ${item.label}: ${item.metric === 'rules' ? item.added.join(', ') : `${item.baseline} → ${item.current}`}`);
-  }
-  if (!accepted) process.exit(1);
+report(renderComparison(result, { source, notes, accepted, baseline, current }), {
+  compared: true, accepted, ...result, notes: [...notes, ...result.warnings], baselineRun, baselineSummary: baseline,
+});
+for (const item of result.checks.filter(check => check.status === 'fail')) {
+  const level = item.blocking && !accepted ? 'error' : 'warning';
+  console.log(`::${level} title=Metrics regression${item.blocking ? '' : ' (not blocking)'}::${item.page} ${item.label}: ${item.metric === 'rules' ? item.added.join(', ') : `${item.baseline} → ${item.current}`}`);
 }
+if (result.failed && !accepted) process.exit(1);

@@ -1,0 +1,75 @@
+name: Metrics comment
+
+# Posts the Metrics results of a pull request's CI run as a comment on the pull
+# request and updates the same comment after later pushes. CI gets a read-only
+# token for pull requests from forks, so this separate workflow writes the
+# comment. It runs from the default branch, checks out only that branch and
+# reads the run's artifact as data (scripts/metrics-comment.mjs); nothing from
+# the pull request is run.
+
+on:
+  workflow_run:
+    workflows: [ CI ]
+    types: [ completed ]
+
+permissions:
+  contents: read
+
+jobs:
+  # Finds the pull request the run tested, with read-only access.
+  resolve:
+    # Cancelled runs were superseded by a newer push.
+    if: >-
+      github.event.workflow_run.event == 'pull_request'
+      && (github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      # Reads the CI run's jobs and artifact.
+      actions: read
+      pull-requests: read
+    outputs:
+      pull-request: ${{ steps.resolve.outputs.pull-request }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - id: resolve
+        name: Find the pull request
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/metrics-comment.mjs --resolve
+
+  # Writes the comment. Jobs for the same pull request run one at a time, up to
+  # 100 of them queued (GitHub's limit for `queue: max`), so reading the
+  # comment, comparing runs and writing never interleave.
+  comment:
+    needs: resolve
+    if: needs.resolve.outputs.pull-request != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    concurrency:
+      group: metrics-comment-${{ github.repository }}-${{ needs.resolve.outputs.pull-request }}
+      queue: max
+    permissions:
+      contents: read
+      # Reads the CI run's jobs and artifact.
+      actions: read
+      # Writes the comment.
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - name: Post or update the comment
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          LOVEIT_METRICS_PULL_REQUEST: ${{ needs.resolve.outputs.pull-request }}
+        run: node scripts/metrics-comment.mjs

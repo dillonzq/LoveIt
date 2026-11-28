@@ -8,8 +8,11 @@
     "(November 2026), which the tolerances leave room for. The gate reads",
     "`baseline` from the pull request's base commit, so changes to it apply",
     "once merged (keep BOOTSTRAP_BASELINE in scripts/metrics-compare.mjs in",
-    "step); the tolerances come from the pull request itself."
+    "step); the tolerances come from the pull request itself.",
+    "Checks in the `advisory` groups are compared and reported but do not fail",
+    "ci-gate. Lighthouse varies too much between runners to block a merge."
   ],
+  "advisory": ["lighthouse"],
   "baseline": {
     "workflows": ["ci.yml", "metrics.yml"],
     "artifact": "metrics",

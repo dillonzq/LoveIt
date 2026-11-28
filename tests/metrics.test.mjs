@@ -60,12 +60,15 @@ test('renders every section of the summary', () => {
   const markdown = renderMarkdown({
     lighthouseRuns: 3,
     lighthouse: [{ name: 'home', requests: 2, scores: { performance: 80, accessibility: 92, 'best-practices': 100, seo: null }, metrics: { fcp: 750, lcp: 4780, tbt: null, cls: 0.11 }, transfer: { script: 2048, stylesheet: 1024, font: 0, total: 3072 } }],
+    lighthouseDesktop: [{ name: 'home', requests: 2, scores: { performance: 45, accessibility: 92, 'best-practices': 100, seo: null }, metrics: { fcp: 200, lcp: 300, tbt: 0, cls: 0 }, transfer: { script: 2048, stylesheet: 1024, font: 0, total: 3072 } }],
     axe: [{ name: '404', counts: summarizeAxe({ violations: [] }).counts, rules: [] }],
     build: { hugo: 'v0.170.1', cold: 933, warm: 476 },
     repository: { assetsLib: { bytes: 3 * 1024 * 1024, files: 10 } },
   });
-  assert.match(markdown, /\| home \| 80 \| 92 \| 100 \| – \| 750 ms \| 4780 ms \| – \| 0\.110 \| 2\.0 KiB \| 1\.0 KiB \| 0\.0 KiB \| 3\.0 KiB \| 2 \|/);
-  assert.match(markdown, /\| 404 \| 0 \/ 0 \| 0 \/ 0 \| 0 \/ 0 \| 0 \/ 0 \| – \|/);
+  assert.match(markdown, /\| `home` \| 🟠 80 \| 🟢 92 \| 🟢 100 \| – \| 750 ms \| 4780 ms \| – \| 0\.110 \|\n/);
+  assert.match(markdown, /### Lighthouse \(desktop, representative of 3 runs\)\n\n.*\n.*\n\| `home` \| 🔴 45 \| 🟢 92 \| 🟢 100 \| – \| 200 ms \| 300 ms \| 0 ms \| 0\.000 \|\n/);
+  assert.match(markdown, /### Transfer sizes \(Lighthouse, mobile\)\n\n.*\n.*\n\| `home` \| 2\.0 KiB \| 1\.0 KiB \| 0\.0 KiB \| 3\.0 KiB \| 2 \|/);
+  assert.match(markdown, /\| `404` \| 0 \/ 0 \| 0 \/ 0 \| 0 \/ 0 \| 0 \/ 0 \| – \|/);
   assert.match(markdown, /Cold build: 933 ms/);
   assert.match(markdown, /`assets\/lib`: 3\.0 MiB in 10 files/);
 });

@@ -63,45 +63,54 @@ export function gitHelpers(cwd) {
   };
 }
 
-// Returns `summary.json` from an artifact zip, read with `unzip -p` so nothing
-// from the archive is written to disk.
-export function readSummaryFromZip(zip) {
-  const directory = mkdtempSync(path.join(tmpdir(), 'loveit-baseline-'));
+// Returns one file from an artifact zip, read with `unzip -p` so nothing from
+// the archive is extracted to disk. Throws when the file is missing or larger
+// than `maxBytes`.
+export function readFromZip(zip, name, { maxBytes = maxSummaryBytes } = {}) {
+  const directory = mkdtempSync(path.join(tmpdir(), 'loveit-metrics-'));
   try {
     const file = path.join(directory, 'artifact.zip');
     writeFileSync(file, zip);
-    return execFileSync('unzip', ['-p', file, 'summary.json'], { maxBuffer: maxSummaryBytes, stdio: ['ignore', 'pipe', 'ignore'] });
+    return execFileSync('unzip', ['-p', file, name], { maxBuffer: maxBytes, stdio: ['ignore', 'pipe', 'ignore'] });
   } finally {
     rmSync(directory, { recursive: true, force: true });
   }
 }
 
-// A minimal GitHub REST client: retries network errors, 5xx and 429 responses.
+export const readSummaryFromZip = zip => readFromZip(zip, 'summary.json');
+
+// A minimal GitHub REST client: retries network errors, 5xx and 429 responses,
+// except for a POST, which could otherwise create something twice.
 export function githubApi({ token, apiUrl = 'https://api.github.com', fetchImpl = fetch, sleep = ms => new Promise(resolve => setTimeout(resolve, ms)) }) {
-  async function request(pathname, { binary = false } = {}) {
+  async function request(pathname, { binary = false, method = 'GET', body } = {}) {
     const url = new URL(pathname.replace(/^\//, ''), `${apiUrl.replace(/\/$/, '')}/`);
+    const attempts = method === 'POST' ? 1 : 3;
     let lastError;
-    for (let attempt = 1; attempt <= 3; attempt += 1) {
+    for (let attempt = 1; attempt <= attempts; attempt += 1) {
       try {
         // fetch drops the Authorization header when an artifact download
         // redirects to another origin.
         const response = await fetchImpl(url, {
+          method,
           headers: {
             accept: 'application/vnd.github+json',
             authorization: `Bearer ${token}`,
             'user-agent': 'loveit-metrics-gate',
             'x-github-api-version': '2022-11-28',
+            ...body === undefined ? {} : { 'content-type': 'application/json' },
           },
+          ...body === undefined ? {} : { body: JSON.stringify(body) },
           signal: AbortSignal.timeout(120_000),
         });
-        if (response.ok) return binary ? Buffer.from(await response.arrayBuffer()) : response.json();
+        // DELETE answers 204 No Content.
+        if (response.ok) return binary ? Buffer.from(await response.arrayBuffer()) : response.status === 204 ? null : response.json();
         lastError = new Error(`GitHub API ${url.pathname} returned ${response.status}`);
         lastError.status = response.status;
         if (response.status < 500 && response.status !== 429) break;
       } catch (error) {
         lastError = error;
       }
-      if (attempt < 3) await sleep(attempt * 5000);
+      if (attempt < attempts) await sleep(attempt * 5000);
     }
     throw lastError;
   }
