@@ -18,7 +18,7 @@ categories: ["documentation"]
 hiddenFromHomePage: true
 ---
 
-{{< version 0.5.0 changed >}}
+{{< version 0.4.2 changed >}}
 
 `mermaid` shortcode 使用 [Mermaid](https://mermaid.js.org/) 语法提供绘制图表和流程图的功能.
 
@@ -39,7 +39,7 @@ graph LR;
 
 ## 渲染器 {#renderer}
 
-{{< version 0.5.0 >}} 图表默认使用 [Pele](https://pele.run) 渲染. 在[网站配置](../theme-documentation-basics#site-configuration)的 `[params.page.mermaid]` 中设置 `renderer`, 或者在文章[前置参数](../theme-documentation-content#front-matter)中设置 `mermaid.renderer`, 可以选择渲染器:
+{{< version 0.4.2 >}} 图表默认使用 [Pele](https://pele.run) 渲染. 在[网站配置](../theme-documentation-basics#site-configuration)的 `[params.page.mermaid]` 中设置 `renderer`, 或者在文章[前置参数](../theme-documentation-content#front-matter)中设置 `mermaid.renderer`, 可以选择渲染器:
 
 * `"pele"`: Pele 是一个轻量的 Mermaid 语法渲染器. 它加载的 JavaScript 比 Mermaid 少得多, 渲染更快, 会为窄屏重新布局图表, 并在图表缩小以适应宽度时提供缩放按钮. 它的颜色跟随浅色和深色主题, 切换主题时无需重新渲染图表.
 * `"mermaid"`: [Mermaid](https://mermaid.js.org/) 库.
@@ -69,7 +69,7 @@ graph LR;
 
 如果你的图表依赖以上任何一项, 请选择 `"mermaid"`.
 
-{{< version 0.5.0 changed >}} Mermaid 渲染器使用 Mermaid 的 `strict` 安全级别 (`securityLevel`), 这会禁用 `click` 交互并限制标签中的 HTML. 如果你信任图表的来源并需要这些功能, 可以在[网站配置](../theme-documentation-basics#site-configuration)的 `[params.security]` 中设置 `mermaidSecurityLevel = "loose"`. Pele 不支持 HTML 标签和 JavaScript 回调, 这个选项对它没有作用, 构建时会输出警告提醒你选择 Mermaid 渲染器.
+{{< version 0.4.2 changed >}} Mermaid 渲染器使用 Mermaid 的 `strict` 安全级别 (`securityLevel`), 这会禁用 `click` 交互并限制标签中的 HTML. 如果你信任图表的来源并需要这些功能, 可以在[网站配置](../theme-documentation-basics#site-configuration)的 `[params.security]` 中设置 `mermaidSecurityLevel = "loose"`. Pele 不支持 HTML 标签和 JavaScript 回调, 这个选项对它没有作用, 构建时会输出警告提醒你选择 Mermaid 渲染器.
 
 ## 流程图 {#flowchart}
 

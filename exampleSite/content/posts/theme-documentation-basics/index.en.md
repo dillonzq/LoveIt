@@ -315,7 +315,7 @@ enableEmoji = true
     name = "xxxx"
     email = ""
     link = ""
-    # {{< version 0.5.0 >}} author avatar shown in the post meta instead of the user icon (path under "static/" or "assets/", or URL)
+    # {{< version 0.4.2 >}} author avatar shown in the post meta instead of the user icon (path under "static/" or "assets/", or URL)
     avatar = ""
 
   # Header config
@@ -558,7 +558,7 @@ enableEmoji = true
     fraction = true
     # {{< version 0.2.0 >}} whether to enable the fontawesome extended syntax
     fontawesome = true
-    # {{< version 0.5.0 >}} when to load the Font Awesome stylesheet and webfonts ["auto", true, false]
+    # {{< version 0.4.2 >}} when to load the Font Awesome stylesheet and webfonts ["auto", true, false]
     # "auto": only on pages whose content or configured HTML (menu, footer...) uses Font Awesome classes,
     # the theme's own icons are inline SVG; true: always, e.g. for your own layouts that use them; false: never
     fontawesomeCSS = "auto"
@@ -598,7 +598,7 @@ enableEmoji = true
       goat = true
       # whether to render mermaid diagrams in code blocks
       mermaid = true
-    # {{< version 0.5.0 >}} Mermaid diagram config
+    # {{< version 0.4.2 >}} Mermaid diagram config
     [params.page.mermaid]
       # renderer of the mermaid code blocks and shortcodes ["pele", "mermaid"]
       # "pele": the lightweight {{< link "https://pele.run" Pele >}} renderer, colors follow the theme without re-rendering,
@@ -805,10 +805,10 @@ enableEmoji = true
     # Content-Security-Policy meta tag, for when HTTP headers cannot be set
     # https://content-security-policy.com/examples/meta/
     contentSecurityPolicy = ""
-    # {{< version 0.5.0 >}} referrer policy of the <meta name="referrer"> tag
+    # {{< version 0.4.2 >}} referrer policy of the <meta name="referrer"> tag
     # set "no-referrer" to send no Referer header at all
     referrerPolicy = "strict-origin-when-cross-origin"
-    # {{< version 0.5.0 >}} Mermaid securityLevel ["strict", "loose"], used when params.page.mermaid.renderer is "mermaid"
+    # {{< version 0.4.2 >}} Mermaid securityLevel ["strict", "loose"], used when params.page.mermaid.renderer is "mermaid"
     # "loose" allows click events and HTML labels in diagrams
     mermaidSecurityLevel = "strict"
 
@@ -1366,7 +1366,7 @@ Check the following when you upgrade from **LoveIt 0.3.X** to **0.4.X**.
 ### 6.2 What Has Changed
 
 * **Language configuration.** On Hugo 0.158.0 or later, use `locale` and `label` instead of the deprecated `languageCode` and `languageName`.
-* **Polyfill.** `params.compatibility.polyfill` loads from `cdnjs.cloudflare.com` instead of `polyfill.io` in 0.4.X. LoveIt 0.5.0 removes the Polyfill service, see [Deprecated Options](#deprecated-options).
+* **Polyfill.** `params.compatibility.polyfill` loads from `cdnjs.cloudflare.com` instead of `polyfill.io` in 0.4.X. LoveIt 0.4.2 removes the Polyfill service, see [Deprecated Options](#deprecated-options).
 * **Music.** The default Meting API has been replaced. Set `api` in `[params.page.music]` to use your own.
 * **Waline.** The bundled client is Waline v3, which requires a Waline server v1.27.0 or later.
 
@@ -1379,15 +1379,17 @@ Check the following when you upgrade from **LoveIt 0.3.X** to **0.4.X**.
 
 ## 7 Deprecated Options {#deprecated-options}
 
-{{< version 0.5.0 >}}
+{{< version 0.4.2 >}}
 
 When your site configuration uses a deprecated option, `hugo` prints a warning once per build like the one below.
-The warning is printed until the version in the "Removed in" column. Some options no longer have any effect; the table says what to do with each one.
+The warning is printed until the version in the "Removed in" column.
+Deprecated options are removed in the next minor version (0.x.0), which LoveIt releases only when it raises the minimum supported Hugo version.
+Some options no longer have any effect; the table says what to do with each one.
 The build does not fail unless you build with `--panicOnWarning`.
 To keep such a build passing while you migrate, add the ID from the warning to `ignoreLogs`.
 
 ```plain
-WARN  LoveIt: "params.compatibility.polyfill" is deprecated since v0.5.0 and will be removed in v0.7.0. ...
+WARN  LoveIt: "params.compatibility.polyfill" is deprecated since v0.4.2 and will be removed in v0.5.0. ...
 You can suppress this warning by adding the following to your site configuration:
 ignoreLogs = ['loveit-deprecated-params-compatibility-polyfill']
 ```
@@ -1397,6 +1399,6 @@ so the `false` defaults copied from the theme configuration do not warn.
 
 | Option | Deprecated in | Removed in | What to do |
 |:-------|:-------------:|:----------:|:-----------|
-| `params.compatibility.polyfill` | 0.5.0 | 0.7.0 | Remove it. It has no effect: the theme no longer loads the Polyfill service, which the browsers it supports do not need. |
-| `params.compatibility.objectFit` | 0.5.0 | 0.7.0 | Remove it. It has no effect: the theme no longer loads object-fit-images, because the browsers it supports handle `object-fit` natively. |
-| `params.cdn.autocompleteJS` | 0.5.0 | 0.7.0 | Remove it. Search no longer uses autocomplete.js. |
+| `params.compatibility.polyfill` | 0.4.2 | 0.5.0 | Remove it. It has no effect: the theme no longer loads the Polyfill service, which the browsers it supports do not need. |
+| `params.compatibility.objectFit` | 0.4.2 | 0.5.0 | Remove it. It has no effect: the theme no longer loads object-fit-images, because the browsers it supports handle `object-fit` natively. |
+| `params.cdn.autocompleteJS` | 0.4.2 | 0.5.0 | Remove it. Search no longer uses autocomplete.js. |
