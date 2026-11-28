@@ -141,9 +141,19 @@ test('pages link their Markdown version and the llms.txt of their language', () 
 
 test('a site that hides every page from search lists only the pages it shows', () => {
   const page = site('hidden', `${llms}\n[outputs]\nhome = ["html", "llms"]\n[params.page]\nhiddenFromSearch = true`, {
-    'content/notes/note.en.md': '---\ntitle: Note\nhiddenFromSearch: false\n---\nText.\n',
+    'content/notes/note.en.md': '---\ntitle: Note\ndate: 2025-01-03\nhiddenFromSearch: false\n---\nText.\n',
+    // A section without a title is named by its directory, so untitled sections keep their own heading.
+    'content/alpha/_index.en.md': '---\ndescription: No title.\n---\n',
+    'content/alpha/one.en.md': '---\ntitle: One\ndate: 2025-01-02\nhiddenFromSearch: false\n---\nText.\n',
+    'content/beta/_index.en.md': '---\ndescription: No title either.\n---\n',
+    'content/beta/two.en.md': '---\ntitle: Two\ndate: 2025-01-01\nhiddenFromSearch: false\n---\nText.\n',
   });
-  assert.equal(page('llms.txt'), '# Test Site\n\n> Notes and posts\n\n## Notes\n\n- [Note](https://example.org/blog/notes/note/)\n');
+  assert.equal(page('llms.txt'), [
+    '# Test Site', '', '> Notes and posts', '',
+    '## Notes', '', '- [Note](https://example.org/blog/notes/note/)', '',
+    '## alpha', '', '- [One](https://example.org/blog/alpha/one/)', '',
+    '## beta', '', '- [Two](https://example.org/blog/beta/two/)', '',
+  ].join('\n'));
 });
 
 test('the Markdown output of earlier example configurations keeps working', () => {
@@ -161,10 +171,19 @@ test('the Markdown output of earlier example configurations keeps working', () =
 test('Hugo versions that still read "_build" leave out the pages it only links', t => {
   const { status, output, read } = site('legacy-build', `${llms}\n[outputs]\nhome = ["html", "llms"]`, {
     'content/notes/linked.en.md': '---\ntitle: Linked\n_build:\n  render: link\n---\nText.\n',
+    // With both, Hugo follows "_build", here cascaded from the section.
+    'content/mixed/_index.en.md': '---\ntitle: Mixed\ncascade:\n  _build:\n    render: link\n---\n',
+    'content/mixed/kept-out.en.md': '---\ntitle: Kept out\nbuild:\n  render: always\n---\nText.\n',
+    'content/reversed/_index.en.md': '---\ntitle: Reversed\ncascade:\n  build:\n    render: link\n---\n',
+    'content/reversed/published.en.md': '---\ntitle: Published\n_build:\n  render: always\n---\nText.\n',
   }, { check: false });
   // Later versions refuse "_build" and fail the build.
   if (status !== 0 && /"_build" front matter key was deprecated/.test(output)) return t.skip('this Hugo version no longer reads "_build"');
   assert.equal(status, 0, output);
   assert.equal(read('notes/linked/index.html'), undefined);
-  assert.doesNotMatch(read('llms.txt'), /Linked/);
+  assert.equal(read('mixed/kept-out/index.html'), undefined);
+  assert.notEqual(read('reversed/published/index.html'), undefined);
+  const list = read('llms.txt');
+  assert.doesNotMatch(list, /Linked|Kept out/);
+  assert.match(list, /- \[Published\]\(https:\/\/example\.org\/blog\/reversed\/published\/\)/);
 });

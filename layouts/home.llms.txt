@@ -33,12 +33,12 @@
             {{- end -}}
         {{- end -}}
     {{- end -}}
-    {{- $heading = $heading | replaceRE `\s+` " " | strings.TrimSpace -}}
+    {{- $heading = $heading | replaceRE `\s+` " " | strings.TrimSpace | default $key -}}
     {{- range where $pages "Section" $key -}}
-        {{- /* Hugo publishes no file for a page that it only lists or links. Hugo before 0.145 also reads "_build". */ -}}
-        {{- $render := .Params.build.render -}}
+        {{- /* Hugo publishes no file for a page that it only lists or links. Hugo versions that still read "_build" prefer it to "build". */ -}}
+        {{- $render := .Params._build.render -}}
         {{- if eq $render nil -}}
-            {{- $render = .Params._build.render -}}
+            {{- $render = .Params.build.render -}}
         {{- end -}}
         {{- if in (slice "link" "never" "false") (lower (string $render)) -}}
             {{- continue -}}
