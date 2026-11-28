@@ -101,16 +101,20 @@
                     {{- end -}}
                 </a>
             </div>
-            {{- if .Site.Params.search.enable -}}
-                <button type="button" class="search-toggle link-like" id="search-toggle-mobile" title="{{ T `search` }}" aria-label="{{ T `search` }}" aria-haspopup="dialog" aria-controls="search-dialog" aria-keyshortcuts="/ Control+K Meta+K">
-                    {{ dict "Class" "fas fa-search" | partial "plugin/icon.html" }}
-                </button>
-            {{- end -}}
             <button type="button" class="menu-toggle" id="menu-toggle-mobile" title="{{ T "menu" }}" aria-label="{{ T "menu" }}" aria-controls="menu-mobile" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
         </div>
         <div class="menu" id="menu-mobile">
+            {{- if .Site.Params.search.enable -}}
+                {{- /* Looks like the search field; opens the search dialog over this row. */ -}}
+                <div class="search-wrapper">
+                    <button type="button" class="search-toggle" id="search-toggle-mobile" aria-haspopup="dialog" aria-controls="search-dialog" aria-keyshortcuts="/ Control+K Meta+K">
+                        <span class="search-icon">{{ dict "Class" "fas fa-search" | partial "plugin/icon.html" }}</span>
+                        <span class="search-placeholder">{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}</span>
+                    </button>
+                </div>
+            {{- end -}}
             {{- $currentPage := . -}}
             {{- range .Site.Menus.main -}}
                 {{- $url := .URL | relLangURL -}}

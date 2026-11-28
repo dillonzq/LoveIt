@@ -242,10 +242,14 @@ test('search: visitors can turn off the / shortcut and the choice persists', asy
   await expect(toggle).toHaveAttribute('aria-keyshortcuts', '/ Control+K Meta+K');
   await toggle.click();
   const checkbox = page.getByRole('checkbox', { name: 'Press / to open search' });
+  // The footer drops down with the results.
+  await expect(checkbox).toBeHidden();
+  await page.locator('#search-input').fill('x');
   await expect(checkbox).toBeChecked();
   await checkbox.uncheck();
   await expect(toggle).toHaveAttribute('aria-keyshortcuts', 'Control+K Meta+K');
   await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
   await page.keyboard.press('/');
   await expect(dialog).toBeHidden();
   await page.reload();
@@ -253,9 +257,11 @@ test('search: visitors can turn off the / shortcut and the choice persists', asy
   await expect(dialog).toBeHidden();
   await page.keyboard.press('Control+k');
   await expect(dialog).toBeVisible();
+  await page.locator('#search-input').fill('x');
   await expect(checkbox).not.toBeChecked();
   await checkbox.check();
   await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
   await page.keyboard.press('/');
   await expect(dialog).toBeVisible();
 });
@@ -315,13 +321,16 @@ test('search: the / shortcut can be turned off when browser storage is full', as
   const dialog = page.getByRole('dialog', { name: 'Search' });
   const checkbox = dialog.getByRole('checkbox', { name: 'Press / to open search' });
   await toggle.click();
+  await page.locator('#search-input').fill('x');
   await checkbox.uncheck();
   await expect(checkbox).not.toBeChecked();
   await expect(toggle).toHaveAttribute('aria-keyshortcuts', 'Control+K Meta+K');
   await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
   await page.keyboard.press('/');
   await expect(dialog).toBeHidden();
   await page.keyboard.press('Control+k');
+  await page.locator('#search-input').fill('x');
   await expect(checkbox).not.toBeChecked();
 });
 
@@ -369,6 +378,7 @@ test('search: closing and reopening invalidates a queued Enter', async ({ page }
 test('mobile: search footer and last result fit above the keyboard', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await mockAlgolia(page);
+  await page.getByRole('button', { name: 'Menu' }).click();
   await page.locator('#search-toggle-mobile').click();
   const dialog = page.getByRole('dialog', { name: 'Search' });
   const input = dialog.getByRole('combobox');
@@ -390,14 +400,300 @@ test('mobile: search footer and last result fit above the keyboard', async ({ pa
     const list = el.querySelector('#search-results').getBoundingClientRect();
     const option = el.querySelector('#search-results li:last-child').getBoundingClientRect();
     const footer = el.querySelector('.search-footer').getBoundingClientRect();
-    return option.top >= list.top && option.bottom <= list.bottom && footer.bottom <= 255;
+    // The list starts at the header's fractional bottom; scrolling snaps to whole pixels.
+    return option.top >= list.top - 1 && option.bottom <= list.bottom + 1 && footer.bottom <= 255;
   })).toBe(true);
+});
+
+// Clicks a search toggle or the backdrop, pauses the header transitions halfway and
+// returns the search bar's box at the start and at that midpoint.
+function searchBarMidway(page, action) {
+  return page.evaluate(action => new Promise(resolve => {
+    const dialog = document.getElementById('search-dialog');
+    const bar = dialog.querySelector('.search-bar');
+    const dropdown = document.getElementById('search-dropdown');
+    const state = () => {
+      const { x, y, width, height } = bar.getBoundingClientRect();
+      return { x, y, width, height, open: dialog.open, dropdown: dropdown.getClientRects().length > 0 };
+    };
+    if (action === 'backdrop') {
+      dialog.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
+      dialog.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    } else {
+      document.getElementById(action).click();
+    }
+    const start = state();
+    const transitions = ['header-desktop', 'header-mobile']
+      .flatMap(id => document.getElementById(id).getAnimations({ subtree: true }))
+      .filter(animation => 'transitionProperty' in animation);
+    for (const animation of transitions) {
+      animation.pause();
+      animation.currentTime = 150;
+    }
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const middle = state();
+      for (const animation of transitions) animation.play();
+      resolve({ start, middle });
+    }));
+  }), action);
+}
+
+test('desktop: the search bar grows out of the header button and shrinks back into it', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await mockAlgolia(page);
+  const header = page.locator('#header-desktop');
+  const toggle = page.locator('#search-toggle-desktop');
+  const bar = page.locator('#search-dialog .search-bar');
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const dropdown = page.locator('#search-dropdown');
+  const closed = await toggle.boundingBox();
+  const themeSwitch = await header.locator('.theme-switch').boundingBox();
+
+  // It starts over the 2.5rem button and widens towards the title to 24rem, at the same height.
+  const opening = await searchBarMidway(page, 'search-toggle-desktop');
+  expect(Math.round(opening.start.width)).toBe(Math.round(closed.width));
+  expect(opening.middle.width).toBeGreaterThan(closed.width + 10);
+  expect(opening.middle.width).toBeLessThan(400);
+  await expect.poll(async () => Math.round((await bar.boundingBox()).width)).toBe(408);
+  const open = await bar.boundingBox();
+  expect(Math.round(open.y)).toBe(Math.round(closed.y));
+  expect(open.x + open.width).toBeLessThan(themeSwitch.x);
+  expect(await toggle.boundingBox()).toEqual(open);
+  expect(await header.locator('.theme-switch').boundingBox()).toEqual(themeSwitch);
+  await expect(header).toHaveClass(/\bopen\b/);
+  await expect(page.locator('body')).toHaveClass(/\bblur\b/);
+
+  // The results drop down below the header once there is a query.
+  await expect(dropdown).toBeHidden();
+  await page.locator('#search-input').fill('kw');
+  await expect(dropdown.getByRole('option')).toHaveCount(3);
+  const headerBox = await header.boundingBox();
+  const dropdownBox = await dropdown.boundingBox();
+  expect(dropdownBox.y).toBe(headerBox.y + headerBox.height);
+  expect(Math.round(dropdownBox.width)).toBe(510);
+  // The first result is the one Enter opens.
+  await expect(dropdown.locator('.suggestion').first()).not.toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+
+  // A click outside hides the results and shrinks the bar before the dialog closes.
+  const closing = await searchBarMidway(page, 'backdrop');
+  expect(closing.start.dropdown).toBe(false);
+  expect(closing.middle).toMatchObject({ open: true, dropdown: false });
+  expect(closing.middle.width).toBeGreaterThan(closed.width + 10);
+  expect(closing.middle.width).toBeLessThan(400);
+  await expect(dialog).toBeHidden();
+  await expect(header).not.toHaveClass(/\bopen\b/);
+  await expect(page.locator('body')).not.toHaveClass(/\bblur\b/);
+  expect(await toggle.boundingBox()).toEqual(closed);
+  await expect(toggle).toBeFocused();
+});
+
+test('mobile: the search row of the menu slides up into the header', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await mockAlgolia(page);
+  const header = page.locator('#header-mobile');
+  const menuToggle = page.getByRole('button', { name: 'Menu' });
+  const bar = page.locator('#search-dialog .search-bar');
+  await expect(page.locator('#search-toggle-mobile')).toBeHidden();
+  await menuToggle.click();
+  const row = await page.locator('#menu-mobile .search-wrapper').boundingBox();
+  expect(row.y).toBeGreaterThan(0);
+
+  // The menu loses its top padding and border at once, as before; then the row slides up.
+  const opening = await searchBarMidway(page, 'search-toggle-mobile');
+  expect(opening.start).toMatchObject({ ...row, y: row.height });
+  expect(opening.middle.y).toBeGreaterThan(1);
+  expect(opening.middle.y).toBeLessThan(row.height - 1);
+  await expect.poll(async () => (await bar.boundingBox()).y).toBe(0);
+  expect(await bar.boundingBox()).toEqual({ ...row, y: 0 });
+  await expect(header).toHaveClass(/\bopen\b/);
+  await expect(page.locator('#menu-mobile a.menu-item').first()).toBeHidden();
+  await expect(page.locator('#search-cancel')).toBeVisible();
+  await expect(page.locator('#search-input')).toBeFocused();
+
+  await page.locator('#search-input').fill('kw');
+  await expect(page.locator('#search-dropdown').getByRole('option')).toHaveCount(3);
+  expect(await page.locator('#search-dropdown').boundingBox()).toMatchObject({ x: 0, y: row.height, width: 390 });
+
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#search-dialog')).toBeHidden();
+  await expect(header).not.toHaveClass(/\bopen\b/);
+  await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(menuToggle).toBeFocused();
+});
+
+test('search: the bar stays still when motion is reduced and opens from shortcuts without a menu', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/fuse/blog/');
+  // Reduced motion makes the slot's transitions instant.
+  const toggle = page.locator('#search-toggle-desktop');
+  expect(await toggle.evaluate(el => Math.max(...getComputedStyle(el).transitionDuration.split(',').map(parseFloat)))).toBeLessThan(0.001);
+  await toggle.click();
+  await expect.poll(async () => Math.round((await page.locator('#search-dialog .search-bar').boundingBox()).width)).toBe(408);
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#search-dialog')).toBeHidden();
+
+  // With the menu closed, the mobile bar covers the header.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.keyboard.press('Control+k');
+  await expect(page.locator('#search-input')).toBeFocused();
+  await expect.poll(() => page.locator('#search-dialog .search-bar').boundingBox()).toMatchObject({ x: 0, y: 0, width: 390 });
+  await page.locator('#search-cancel').click();
+  await expect(page.locator('#search-dialog')).toBeHidden();
+});
+
+test('search: a static header scrolled partly away gets a whole bar above the results', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await mockAlgolia(page);
+  await page.evaluate(() => document.body.setAttribute('data-header-desktop', 'normal'));
+  const bar = page.locator('#search-dialog .search-bar');
+  const dropdown = page.locator('#search-dropdown');
+  const fitsAboveResults = async () => {
+    const barBox = await bar.boundingBox();
+    const dropdownBox = await dropdown.boundingBox();
+    return barBox.y >= 0 && barBox.y + barBox.height <= dropdownBox.y;
+  };
+  for (const scroll of [48, 56]) {
+    await page.evaluate(y => window.scrollTo(0, y), scroll);
+    await page.keyboard.press('/');
+    await page.locator('#search-input').fill('kw');
+    await expect(dropdown.getByRole('option')).toHaveCount(3);
+    expect(await fitsAboveResults()).toBe(true);
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#search-dialog')).toBeHidden();
+  }
+
+  // Scrolling the page under the open search moves the bar off the scrolled-away button.
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.locator('#search-toggle-desktop').click();
+  await expect.poll(async () => Math.round((await bar.boundingBox()).width)).toBe(408);
+  await page.locator('#search-input').fill('kw');
+  await expect(dropdown.getByRole('option')).toHaveCount(3);
+  await page.mouse.move(640, 600);
+  await page.mouse.wheel(0, 90);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+  await expect(page.locator('#search-dialog')).not.toHaveAttribute('data-anchored');
+  expect(await fitsAboveResults()).toBe(true);
+  // Closing returns focus to the scrolled-away button without scrolling back to it.
+  const scrolled = await page.evaluate(() => window.scrollY);
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#search-dialog')).toBeHidden();
+  await expect(page.locator('#search-toggle-desktop')).toBeFocused();
+  expect(await page.evaluate(() => window.scrollY)).toBe(scrolled);
+});
+
+test('search: the bar follows a resize to the mobile header without visualViewport', async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(window, 'visualViewport', { configurable: true, get: () => undefined }));
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/fuse/blog/');
+  await page.locator('#search-toggle-desktop').click();
+  const bar = page.locator('#search-dialog .search-bar');
+  await expect.poll(async () => Math.round((await bar.boundingBox()).width)).toBe(408);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator('#header-mobile')).toHaveClass(/\bopen\b/);
+  await expect.poll(() => bar.boundingBox()).toMatchObject({ x: 0, y: 0, width: 390 });
+  const cancel = await page.locator('#search-cancel').boundingBox();
+  expect(cancel.x + cancel.width).toBeLessThanOrEqual(390);
+});
+
+test('mobile: search fits a pinch-zoomed viewport and lines up with the menu row in RTL', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/fuse/blog/ar/');
+  await page.locator('#menu-toggle-mobile').click();
+  const row = await page.locator('#menu-mobile .search-wrapper').boundingBox();
+  const rowIcon = await page.locator('#search-toggle-mobile .search-icon svg').boundingBox();
+  await page.locator('#search-toggle-mobile').click();
+  // The search icon slides straight up from the menu row, without a sideways jump.
+  const icon = page.locator('#search-dialog .search-icon svg');
+  await expect.poll(async () => Math.abs((await icon.boundingBox()).y - (rowIcon.y - row.y))).toBeLessThan(1);
+  expect(Math.abs((await icon.boundingBox()).x - rowIcon.x)).toBeLessThan(1);
+
+  // A 2× pinch zoom shows 195 CSS px, 100 px from the left of the page.
+  await page.evaluate(() => {
+    for (const [key, value] of Object.entries({ width: 195, height: 422, offsetLeft: 100, offsetTop: 0 })) {
+      Object.defineProperty(window.visualViewport, key, { configurable: true, value });
+    }
+    window.visualViewport.dispatchEvent(new Event('resize'));
+  });
+  const dialog = page.locator('#search-dialog');
+  await expect.poll(() => dialog.boundingBox()).toMatchObject({ x: 100, y: 0, width: 195 });
+  await expect(dialog).not.toHaveAttribute('data-anchored');
+  await expect.poll(async () => {
+    const cancel = await page.locator('#search-cancel').boundingBox();
+    const bar = await page.locator('#search-dialog .search-bar').boundingBox();
+    return cancel.x >= 100 && cancel.x + cancel.width <= 295 && bar.x >= 100 && bar.x + bar.width <= 295;
+  }).toBe(true);
+});
+
+test('search: a quick reopen while closing drops the queued Enter', async ({ page }) => {
+  await page.goto('/algolia/blog/guide/');
+  await page.evaluate(() => {
+    window['algoliasearch/lite'] = { liteClient: () => ({ search: async ({ requests: [{ query }] }) => {
+      if (query === 'old') await new Promise(resolve => { window.finishOldSearch = resolve; });
+      return { results: [{ hits: [{ uri: '#final-section', title: query, content: query }] }] };
+    } }) };
+  });
+  await page.locator('#search-toggle-desktop').click();
+  const dialog = page.getByRole('dialog', { name: 'Search' });
+  const input = dialog.getByRole('combobox');
+  await input.fill('old');
+  await expect.poll(() => page.evaluate(() => Boolean(window.finishOldSearch))).toBe(true);
+  await input.press('Enter');
+  const reopened = await page.evaluate(() => {
+    const dialog = document.getElementById('search-dialog');
+    dialog.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
+    dialog.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    const closing = dialog.classList.contains('is-closing');
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true, bubbles: true, cancelable: true }));
+    window.finishOldSearch();
+    return closing && dialog.open && !dialog.classList.contains('is-closing');
+  });
+  expect(reopened).toBe(true);
+  await expect(input).toBeFocused();
+  await expect(input).toHaveValue('');
+  await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 500)));
+  await expect(page).toHaveURL(/\/guide\/$/);
+  await expect(dialog).toBeVisible();
+});
+
+test('search: focus after closing follows the visible controls and stays on an opened result', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/algolia/blog/guide/');
+  await page.evaluate(() => {
+    window['algoliasearch/lite'] = { liteClient: () => ({ search: async ({ requests: [{ query }] }) => ({
+      results: [{ hits: [{ uri: '#final-section', title: query, content: query }] }],
+    }) }) };
+  });
+  const menuToggle = page.getByRole('button', { name: 'Menu' });
+  const input = page.locator('#search-input');
+
+  // Opened from the mobile menu, then widened to the desktop header.
+  await menuToggle.click();
+  await page.locator('#search-toggle-mobile').click();
+  await expect(input).toBeFocused();
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await expect(page.locator('#header-desktop')).toHaveClass(/\bopen\b/);
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#search-dialog')).toBeHidden();
+  await expect(page.locator('#search-toggle-desktop')).toBeFocused();
+
+  // A same-page result keeps the focus its navigation gives, not the menu button.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await menuToggle.click();
+  await page.locator('#search-toggle-mobile').click();
+  await input.fill('section');
+  await expect(page.getByRole('option')).toHaveCount(1);
+  await input.press('Enter');
+  await expect(page).toHaveURL(/\/guide\/#final-section$/);
+  await expect(page.locator('#search-dialog')).toBeHidden();
+  await expect(menuToggle).not.toBeFocused();
 });
 
 for (const { name, viewport } of [{ name: 'desktop', viewport: { width: 1280, height: 800 } }, { name: 'mobile', viewport: { width: 390, height: 844 } }]) {
   test(`${name}: the open search dialog has no critical or region axe violations`, async ({ page }) => {
     await page.setViewportSize(viewport);
     await page.goto('/fuse/blog/');
+    if (name === 'mobile') await page.getByRole('button', { name: 'Menu' }).click();
     await page.locator(`#search-toggle-${name}`).click();
     await page.locator('#search-input').fill('Needle');
     await expect(page.locator('.suggestion-title').first()).toBeVisible();
@@ -538,15 +834,18 @@ test('mobile navigation and search survive resizing', async ({ page }) => {
   await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
   await menuToggle.click();
   await page.locator('#search-toggle-mobile').click();
-  await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
   await expect(page.locator('#search-input')).toBeFocused();
   const dialog = await page.locator('#search-dialog').boundingBox();
   expect(dialog).toMatchObject({ x: 0, y: 0, width: 390, height: 844 });
   await page.locator('#search-input').fill('Needle');
   await expect(page.locator('#search-results .suggestion-title')).toContainText('Search');
+  // Cancel closes the menu with the search, as the menu's search row is gone.
   await page.locator('#search-cancel').click();
   await expect(page.locator('#search-dialog')).toBeHidden();
-  await expect(page.locator('#search-toggle-mobile')).toBeFocused();
+  await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator('#header-mobile')).not.toHaveClass(/\bopen\b/);
+  await expect(page.locator('body')).not.toHaveClass(/\bblur\b/);
+  await expect(menuToggle).toBeFocused();
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.locator('#search-toggle-desktop').click();
   await expect(page.locator('#search-input')).toHaveValue('');
@@ -681,11 +980,17 @@ for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/'
     expect(violations).toEqual([]);
 
     await page.locator('#search-toggle-desktop').click();
+    await page.locator('#search-input').fill('Needle');
+    await expect(page.locator('#search-dropdown')).toBeVisible();
+    await expect(page.locator('#search-cancel')).toBeHidden();
     const input = await box('#search-input');
-    const cancel = await box('#search-cancel');
     const icon = await box('#search-dialog .search-icon');
-    expect(rtl ? cancel.x < input.x : cancel.x > input.x).toBe(true);
+    const clear = await box('#search-clear');
+    const dropdown = await box('#search-dropdown');
     expect(rtl ? icon.x > input.x + input.width / 2 : icon.x < input.x + input.width / 2).toBe(true);
+    expect(rtl ? clear.x < input.x + input.width / 2 : clear.x > input.x + input.width / 2).toBe(true);
+    // The results drop down at the header's end edge: 1rem from the viewport at 1280px.
+    expect(Math.round(rtl ? dropdown.x : 1280 - dropdown.x - dropdown.width)).toBe(17);
   });
 }
 
