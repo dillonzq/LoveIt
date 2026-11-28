@@ -120,18 +120,24 @@ code, pre {
       }
     }
 
-    // A toggle that is on is highlighted.
+    // The icon of a toggle that is on is highlighted. Hovering a toggle that is
+    // off only darkens its icon, so it does not look on.
     .line-numbers-toggle, .wrap-toggle {
-      line-height: 1;
-
-      &[aria-pressed=true] {
-        color: $global-link-hover-color;
-        background: color.adjust($code-background-color, $lightness: -12%, $space: hsl);
-        border-radius: 4px;
+      &:hover {
+        color: $global-link-color;
 
         [theme=dark] & {
           color: $global-link-hover-color-dark;
-          background: color.adjust($code-background-color-dark, $lightness: 8%, $space: hsl);
+        }
+      }
+
+      &[aria-pressed=true] {
+        &, &:hover {
+          color: $single-link-color;
+        }
+
+        [theme=dark] &, [theme=dark] &:hover {
+          color: $single-link-color-dark;
         }
       }
     }

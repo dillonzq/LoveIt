@@ -1850,12 +1850,19 @@ test('line numbers and wrapping follow the site, page and block options and read
   expect((await line.boundingBox()).height).toBeGreaterThan(40);
   expect(await line.evaluate(before)).toBe('none');
   await expect(first.locator('code')).toHaveText(/^echo "a long line .* going"\necho short\n?$/);
-  await expect(wrap).toHaveCSS('background-color', 'rgb(214, 214, 214)');
-  await expect(lineNumbers).not.toHaveCSS('background-color', 'rgb(214, 214, 214)');
+  // Only the icon of a toggle that is on is highlighted, also while hovered.
+  await expect(wrap).toHaveCSS('color', 'rgb(29, 111, 148)');
+  await expect(lineNumbers).toHaveCSS('color', 'rgb(98, 98, 98)');
+  await expect(wrap).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+  await wrap.hover();
+  await expect(wrap).toHaveCSS('color', 'rgb(29, 111, 148)');
+  await lineNumbers.hover();
+  await expect(lineNumbers).toHaveCSS('color', 'rgb(22, 18, 9)');
 
   await lineNumbers.click();
   await expect(first).toHaveClass(/\bcode-line-numbers\b/);
   await expect(lineNumbers).toHaveAttribute('aria-pressed', 'true');
+  await expect(lineNumbers).toHaveCSS('color', 'rgb(29, 111, 148)');
   expect(await line.evaluate(before)).toBe('counter(code-block)');
   // A wrapped line continues to the right of its number.
   const cl = await line.locator('.cl').boundingBox();
