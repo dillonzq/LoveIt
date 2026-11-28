@@ -125,6 +125,23 @@ header {
         &.language {
           margin-inline-end: 0;
         }
+
+        // The search dialog's bar covers this slot and grows with it (see _search.scss).
+        &.search-toggle {
+          box-sizing: border-box;
+          width: 2.5rem;
+          height: 2.5rem;
+          margin-inline: 0 -.25rem;
+          padding-inline-start: .5rem;
+          line-height: 2.5rem;
+          text-align: start;
+          vertical-align: baseline;
+          @include border-radius(.5rem);
+
+          @media (prefers-reduced-motion: no-preference) {
+            @include transition(width 0.3s ease, margin 0.3s ease);
+          }
+        }
       }
 
       // Isolate each link from the bidirectional text around it. Otherwise, in a
@@ -145,6 +162,11 @@ header {
       }
     }
   }
+}
+
+#header-desktop.open .header-wrapper .menu .menu-item.search-toggle {
+  width: 24rem;
+  margin-inline: .5rem;
 }
 
 #header-mobile {
@@ -169,11 +191,6 @@ header {
       .header-title {
         font-size: var(--header-title-font-size);
         max-width: 80%;
-      }
-
-      .search-toggle {
-        margin-inline-end: 1.25rem;
-        line-height: 4rem;
       }
 
       .menu-toggle {
@@ -226,6 +243,52 @@ header {
       padding-top: .5rem;
       @include box-shadow(0 .125rem .25rem rgba(0, 0, 0, .1));
 
+      // The search dialog's bar covers this row (see _search.scss).
+      .search-wrapper {
+        box-sizing: border-box;
+        padding: calc((var(--header-height) - 2.5rem) / 2) 1rem;
+        line-height: 2.5rem;
+      }
+
+      .search-toggle {
+        -webkit-appearance: none;
+        appearance: none;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        width: 100%;
+        height: 2.5rem;
+        margin: 0;
+        padding: 0;
+        padding-inline-end: 1rem;
+        border: 0;
+        font: inherit;
+        line-height: inherit;
+        color: $global-font-secondary-color;
+        background-color: $search-background-color;
+        cursor: text;
+        @include border-radius(.5rem);
+
+        [theme=dark] & {
+          color: $global-font-secondary-color-dark;
+          background-color: $search-background-color-dark;
+        }
+
+        .search-icon {
+          flex: none;
+          width: 2rem;
+          padding-inline-start: .5rem;
+          box-sizing: border-box;
+          text-align: start;
+        }
+
+        .search-placeholder {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
       .menu-item {
         display: block;
         width: 100%;
@@ -239,6 +302,22 @@ header {
       [theme=dark] & {
         background: $header-background-color-dark;
         border-top-color: $global-border-color-dark;
+      }
+    }
+  }
+
+  // While searching, the title row slides up and the search row takes its place.
+  &.open {
+    .header-wrapper {
+      margin-top: calc(0px - var(--header-height));
+    }
+
+    .menu {
+      padding-top: 0;
+      border-top: none;
+
+      .menu-item {
+        display: none;
       }
     }
   }

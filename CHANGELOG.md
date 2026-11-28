@@ -32,8 +32,8 @@ This file starts at 0.4.0. Older releases are described on the
   `⌘K` open it. Arrow keys move through the results, `Enter` opens one
   (`Ctrl`/`⌘`/`Shift+Enter` or a middle click opens it in a new tab), and
   `Esc` closes search and returns focus to where it was. Visitors can turn
-  off the `/` shortcut with a checkbox in the search dialog; the choice is
-  remembered in the browser.
+  off the `/` shortcut with a checkbox below the search results; the choice
+  is remembered in the browser.
 
 ### Changed
 
@@ -112,14 +112,16 @@ This file starts at 0.4.0. Older releases are described on the
   processed image is its smallest WebP copy.
 - The `image` shortcode fills in a missing `width` or `height` from the
   image's aspect ratio when the other one is a number.
-- Search opens in a native `<dialog>` with an ARIA combobox and listbox
-  instead of the inline header field and dropdown. The desktop and mobile
-  headers each show a search button; the mobile menu no longer contains a
-  search field. Screen readers hear the number of results. All four engines
-  (Lunr.js, Fuse.js, Algolia, Pagefind) and every `params.search` option
-  work as before. Sites that override `_partials/header.html` or style the
-  old `#search-*-desktop`, `#search-*-mobile` or `.search-dropdown` elements
-  need to follow the new markup in `_partials/search.html`.
+- Search is a native modal `<dialog>` with an ARIA combobox and listbox
+  instead of autocomplete.js, and keeps the look of the inline header search.
+  On desktop, the search button grows into the search field in the header
+  and the results drop down below it; on mobile, the search field at the top
+  of the menu slides up into the header. Screen readers hear the number of
+  results. All four engines (Lunr.js, Fuse.js, Algolia, Pagefind) and every
+  `params.search` option work as before. Sites that override
+  `_partials/header.html` or style the old `#search-*-desktop`,
+  `#search-*-mobile` or `.search-dropdown` elements need to follow the new
+  markup in `_partials/header.html` and `_partials/search.html`.
 - The page title entrance, the auto-hiding header, the fixed buttons and the
   copy feedback of code blocks use the theme's own CSS instead of animate.css.
   With reduced motion, page titles and copied code no longer animate.

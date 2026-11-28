@@ -133,6 +133,7 @@ class Theme {
         const highlightTag = searchConfig.highlightTag || 'em';
         const $input = document.getElementById('search-input');
         const $results = document.getElementById('search-results');
+        const $dropdown = document.getElementById('search-dropdown');
         const $empty = document.getElementById('search-empty');
         const $status = document.getElementById('search-status');
         const $loading = document.getElementById('search-loading');
@@ -149,6 +150,12 @@ class Theme {
         let queuedEnter = false;
         let opener;
         let ready;
+        // Set while the desktop bar shrinks back before the dialog closes.
+        let closing;
+        let closeTimer;
+        let navigating = false;
+        let followStart = 0;
+        let followFrame;
 
         // Lunr's Chinese segmenter is a classic script, loaded before the first search.
         // A failed load is retried by the next search instead of building an index without it.
@@ -212,6 +219,7 @@ class Theme {
                 return $option;
             }));
             const expanded = results.length > 0;
+            $dropdown.hidden = !query;
             $results.hidden = !expanded;
             $input.setAttribute('aria-expanded', String(expanded));
             $empty.hidden = !query || expanded;
@@ -221,7 +229,7 @@ class Theme {
         };
         const go = ($option, newTab) => {
             const uri = $option?.dataset.uri;
-            if (stale || !$dialog.open || !uri) return;
+            if (stale || !$dialog.open || closing || !uri) return;
             let url;
             try {
                 url = new URL(uri, document.baseURI);
@@ -234,7 +242,7 @@ class Theme {
                 window.open(url.href, '_blank', 'noopener');
             } else {
                 // Closing first allows same-page fragment navigation to move focus to the result.
-                opener = undefined;
+                navigating = true;
                 $dialog.close();
                 window.location.assign(url.href);
             }
@@ -280,12 +288,69 @@ class Theme {
             $input.value = '';
             search();
         };
-        // The mobile keyboard can resize the visual viewport alone.
+        // The mobile keyboard and pinch zoom can resize and move the visual viewport alone.
         const fitViewport = () => {
+            $dialog.style.setProperty('--search-viewport-width', `${viewport.width}px`);
             $dialog.style.setProperty('--search-viewport-height', `${viewport.height}px`);
+            $dialog.style.setProperty('--search-viewport-left', `${viewport.offsetLeft}px`);
             $dialog.style.setProperty('--search-viewport-top', `${viewport.offsetTop}px`);
+            // Resizing can switch between the desktop and the mobile header.
+            if ($dialog.open && !closing) setHeaderOpen(true);
+            follow();
+        };
+        // The search bar covers the control it grows from: the desktop header slot
+        // or the search row of the mobile menu. Both move while the header animates.
+        const $headerDesktop = document.getElementById('header-desktop');
+        const $headerMobile = document.getElementById('header-mobile');
+        const $anchorDesktop = document.getElementById('search-toggle-desktop');
+        const $anchorMobile = document.getElementById('search-toggle-mobile')?.parentElement;
+        const place = () => {
+            const isMobile = Util.isMobile();
+            const box = $dialog.getBoundingClientRect();
+            const anchor = (isMobile ? $anchorMobile : $anchorDesktop)?.getBoundingClientRect();
+            // A control partly out of view (a static header scrolled away, a zoomed-in page)
+            // gets the fixed fallback place, with the results right below the header height.
+            const anchored = anchor && anchor.width > 0 && anchor.top >= box.top && anchor.bottom <= box.bottom
+                && anchor.left >= box.left && anchor.right <= box.right;
+            $dialog.toggleAttribute('data-anchored', Boolean(anchored));
+            if (anchored) {
+                const header = (isMobile ? $headerMobile : $headerDesktop).getBoundingClientRect();
+                $dialog.style.setProperty('--search-bar-left', `${anchor.left - box.left}px`);
+                $dialog.style.setProperty('--search-bar-top', `${anchor.top - box.top}px`);
+                $dialog.style.setProperty('--search-bar-width', `${anchor.width}px`);
+                $dialog.style.setProperty('--search-bar-height', `${anchor.height}px`);
+                $dialog.style.setProperty('--search-dropdown-top', `${Math.max(header.bottom, anchor.bottom) - box.top}px`);
+            } else {
+                $dialog.style.removeProperty('--search-dropdown-top');
+            }
+        };
+        // CSS transitions of the headers, which move the controls the bar covers.
+        const transitions = $element => $element?.getAnimations?.({ subtree: true }).filter(animation => 'transitionProperty' in animation) ?? [];
+        const transitioning = () => [$headerDesktop, $headerMobile].some($header => transitions($header).some(animation => animation.playState !== 'finished'));
+        // Follow the header's transitions frame by frame: for at least a few frames
+        // after a change and while a transition is running, up to a few seconds.
+        const follow = () => {
+            followStart = performance.now();
+            const frame = () => {
+                place();
+                const elapsed = performance.now() - followStart;
+                followFrame = $dialog.open && (elapsed < 100 || elapsed < 5000 && transitioning()) ? requestAnimationFrame(frame) : undefined;
+            };
+            if (!followFrame) frame();
+        };
+        // The header grows the desktop slot or slides the mobile search row up (see _header.scss).
+        const setHeaderOpen = isOpen => {
+            const $header = Util.isMobile() ? $headerMobile : $headerDesktop;
+            $headerDesktop.classList.toggle('open', isOpen && $header === $headerDesktop);
+            $headerMobile.classList.toggle('open', isOpen && $header === $headerMobile);
+            if (isOpen) $header.classList.remove('is-hidden');
+            document.body.classList.toggle('blur', isOpen);
+            if (!isOpen) this.setMenuMobileOpen(false);
         };
         const open = $opener => {
+            closing = undefined;
+            clearTimeout(closeTimer);
+            $dialog.classList.remove('is-closing');
             if (!$dialog.open) {
                 resetSearch();
                 // Safari does not focus a clicked button, so the toggle is passed in.
@@ -298,16 +363,36 @@ class Theme {
                 }
                 loadSegmentit().catch(() => {});
             }
+            setHeaderOpen(true);
+            follow();
             $input.focus();
             $input.select();
         };
+        // The desktop bar shrinks back into the header before the dialog closes.
+        const dismiss = () => {
+            if (!$dialog.open || closing) return;
+            const animate = !Util.isMobile() && $headerDesktop.classList.contains('open')
+                && window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+            // Like the old field, the query goes at once: a pending search or Enter is dropped.
+            resetSearch();
+            setHeaderOpen(false);
+            if (!animate) {
+                $dialog.close();
+                return;
+            }
+            $dialog.classList.add('is-closing');
+            const token = closing = {};
+            const done = () => {
+                if (closing === token) $dialog.close();
+            };
+            const shrinking = transitions($anchorDesktop);
+            Promise.all(shrinking.map(animation => animation.finished)).then(done, done);
+            closeTimer = setTimeout(done, shrinking.length ? 1000 : 300);
+            follow();
+        };
 
-        Util.forEach($toggles, $toggle => $toggle.addEventListener('click', () => {
-            this.setMenuMobileOpen(false);
-            document.body.classList.remove('blur');
-            open($toggle);
-        }, false));
-        document.getElementById('search-cancel').addEventListener('click', () => $dialog.close(), false);
+        Util.forEach($toggles, $toggle => $toggle.addEventListener('click', () => open($toggle), false));
+        document.getElementById('search-cancel').addEventListener('click', dismiss, false);
         $clear.addEventListener('click', () => {
             $input.value = '';
             search();
@@ -346,16 +431,48 @@ class Theme {
         let pressedBackdrop = false;
         $dialog.addEventListener('pointerdown', event => { pressedBackdrop = event.target === $dialog; }, false);
         $dialog.addEventListener('click', event => {
-            if (pressedBackdrop && event.target === $dialog) $dialog.close();
+            if (pressedBackdrop && event.target === $dialog) dismiss();
+        }, false);
+        // Esc animates like the other ways out; a repeated Esc may close at once.
+        $dialog.addEventListener('cancel', event => {
+            if (!event.cancelable) return;
+            event.preventDefault();
+            dismiss();
         }, false);
         $dialog.addEventListener('close', () => {
             // An earlier close event can arrive after the dialog has reopened.
             if ($dialog.open) return;
+            closing = undefined;
+            clearTimeout(closeTimer);
+            cancelAnimationFrame(followFrame);
+            followFrame = undefined;
+            $dialog.classList.remove('is-closing');
+            setHeaderOpen(false);
             viewport?.removeEventListener('resize', fitViewport);
             viewport?.removeEventListener('scroll', fitViewport);
             resetSearch();
-            if (opener?.isConnected && opener !== document.body) opener.focus();
+            // Focus returns to the opener, unless a result was opened. The mobile search row
+            // closes with the menu and resizing can hide the opener: the first visible
+            // search or menu button takes the focus instead.
+            if (!navigating) {
+                const $focus = [opener, ...$toggles, document.getElementById('menu-toggle-mobile')]
+                    .find($element => $element?.isConnected && $element !== document.body && $element.getClientRects().length);
+                // The opener can be scrolled away with a static header; keep the reader's place.
+                $focus?.focus({ preventScroll: true });
+            }
+            navigating = false;
             opener = undefined;
+        }, false);
+        // A static header scrolls with the page under the open search.
+        window.addEventListener('scroll', () => {
+            if ($dialog.open) follow();
+        }, { passive: true });
+        // Resizing can switch between the desktop and the mobile header, also where
+        // visualViewport, which fitViewport listens to, is missing.
+        window.addEventListener('resize', () => {
+            if (!$dialog.open) return;
+            if (!closing) setHeaderOpen(true);
+            follow();
         }, false);
         document.addEventListener('keydown', event => {
             // Autofill dispatches keydown events without a key.
@@ -879,7 +996,8 @@ class Theme {
                 this.newScrollTop = Util.getScrollTop();
                 const scroll = this.newScrollTop - this.oldScrollTop;
                 const isMobile = Util.isMobile();
-                Util.forEach($headers, $header => {
+                // The open search bar sits over the header.
+                if (!document.getElementById('search-dialog')?.open) Util.forEach($headers, $header => {
                     if (scroll > ACCURACY) $header.classList.add('is-hidden');
                     else if (scroll < - ACCURACY) $header.classList.remove('is-hidden');
                 });

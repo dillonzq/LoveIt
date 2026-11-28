@@ -1,50 +1,53 @@
 @use "sass:color";
 
 // Search dialog opened from the header buttons, `/` or Ctrl/⌘+K.
-html:has(.search-dialog[open]) {
-  overflow: hidden;
-}
-
+// It is a transparent layer over the page: the search bar sits over the header
+// control that opened it (placed by initSearch in theme.js through the
+// --search-bar-* properties) and the results drop down below the header.
 .search-dialog {
+  position: fixed;
+  // The visual viewport, which the mobile keyboard and pinch zoom can shrink and move.
+  inset: var(--search-viewport-top, 0px) auto auto var(--search-viewport-left, 0px);
   box-sizing: border-box;
-  width: min(40rem, calc(100% - 2rem));
+  width: var(--search-viewport-width, 100%);
   max-width: none;
+  height: var(--search-viewport-height, 100%);
   max-height: none;
-  margin: var(--header-height) auto auto;
+  margin: 0;
   padding: 0;
   border: none;
   overflow: hidden;
   color: $global-font-color;
-  background-color: $global-background-color;
-  @include border-radius(.5rem);
-  @include box-shadow(0 .5rem 2rem rgba(0, 0, 0, .2));
+  background: transparent;
 
   [theme=dark] & {
     color: $global-font-color-dark;
-    background-color: $global-background-color-dark;
   }
 
+  // body.blur dims and blurs the page under the header, as the mobile menu does.
   &::backdrop {
-    background-color: rgba(0, 0, 0, .25);
+    background: transparent;
   }
-}
-
-.search-panel {
-  display: flex;
-  flex-direction: column;
-  max-height: calc(100vh - 2 * var(--header-height));
-  max-height: calc(100dvh - 2 * var(--header-height));
 }
 
 .search-bar {
+  position: absolute;
+  top: calc((var(--header-height) - 2.5rem) / 2);
+  inset-inline-end: 2rem;
   display: flex;
   align-items: center;
-  flex: none;
-  padding: .75rem 1rem;
-  border-bottom: 1px solid $global-border-color;
+  box-sizing: border-box;
+  width: 24rem;
+  max-width: calc(100% - 2rem);
+  height: 2.5rem;
 
-  [theme=dark] & {
-    border-bottom-color: $global-border-color-dark;
+  [data-anchored] & {
+    top: var(--search-bar-top);
+    right: auto;
+    left: var(--search-bar-left);
+    width: var(--search-bar-width);
+    max-width: none;
+    height: var(--search-bar-height);
   }
 }
 
@@ -52,6 +55,8 @@ html:has(.search-dialog[open]) {
   position: relative;
   flex: auto;
   min-width: 0;
+  height: 100%;
+  max-height: 2.5rem;
   color: $global-font-secondary-color;
 
   [theme=dark] & {
@@ -73,7 +78,7 @@ html:has(.search-dialog[open]) {
   }
 
   .search-icon {
-    inset-inline-start: .75rem;
+    inset-inline-start: .5rem;
   }
 
   .search-loading,
@@ -93,8 +98,8 @@ html:has(.search-dialog[open]) {
 .search-input {
   box-sizing: border-box;
   width: 100%;
-  height: 2.5rem;
-  padding: 0 2.25rem;
+  height: 100%;
+  padding: 0 2rem;
   border: none;
   font: inherit;
   color: $global-font-color;
@@ -106,9 +111,9 @@ html:has(.search-dialog[open]) {
     opacity: 1;
   }
 
+  // The only control in its bar, with the caret in it.
   &:focus {
-    outline: 2px solid $global-link-hover-color;
-    outline-offset: -2px;
+    outline: none;
   }
 
   [theme=dark] & {
@@ -118,25 +123,46 @@ html:has(.search-dialog[open]) {
     &::placeholder {
       color: $global-font-secondary-color-dark;
     }
-
-    &:focus {
-      outline-color: $global-link-hover-color-dark;
-    }
   }
 }
 
+// Only the mobile search bar has a cancel button; Esc or a click outside closes the desktop one.
 // Outranks `button.link-like`, which resets the margin.
 .search-bar .search-cancel {
+  display: none;
   flex: none;
   margin-inline-start: .75rem;
   white-space: nowrap;
+}
+
+.search-dropdown {
+  position: absolute;
+  top: var(--search-dropdown-top, var(--header-height));
+  inset-inline-end: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 30rem;
+  max-width: calc(100% - 2rem);
+  max-height: calc(100% - var(--search-dropdown-top, var(--header-height)));
+  overflow: hidden;
+  background-color: $global-background-color;
+  @include box-shadow(0 .125rem .25rem rgba(0, 0, 0, .1));
+
+  [theme=dark] & {
+    background-color: $global-background-color-dark;
+  }
+
+  &[hidden],
+  .is-closing & {
+    display: none;
+  }
 }
 
 .search-results {
   flex: 0 1 auto;
   min-height: 0;
   margin: 0;
-  padding: .25rem 0;
+  padding: 0;
   list-style: none;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -152,11 +178,14 @@ html:has(.search-dialog[open]) {
 
   .suggestion {
     padding: .75rem 1rem;
+    padding-inline-start: calc(1rem - 3px);
     border-inline-start: 3px solid transparent;
     cursor: pointer;
 
+    // Enter opens the first result while none is active.
     &:hover,
-    &[aria-selected=true] {
+    &[aria-selected=true],
+    &:first-child:not(:has(~ [aria-selected=true])) {
       background: color.adjust($code-background-color, $lightness: -5%, $space: hsl);
 
       [theme=dark] & {
@@ -172,25 +201,25 @@ html:has(.search-dialog[open]) {
       }
     }
 
-    > div:first-child {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-    }
-
     .suggestion-title {
-      flex: auto;
+      display: inline-block;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       font-size: 1rem;
       font-weight: bold;
+      max-width: 75%;
     }
 
     .suggestion-date {
-      flex: none;
+      float: right;
       font-size: .875rem;
+      text-align: end;
       color: $global-font-secondary-color;
+
+      [dir=rtl] & {
+        float: left;
+      }
 
       [theme=dark] & {
         color: $global-font-secondary-color-dark;
@@ -257,11 +286,9 @@ html:has(.search-dialog[open]) {
   padding: .5rem 1rem;
   font-size: .8rem;
   color: $global-font-secondary-color;
-  border-top: 1px solid $global-border-color;
 
   [theme=dark] & {
     color: $global-font-secondary-color-dark;
-    border-top-color: $global-border-color-dark;
   }
 
   @include link(false, false);
@@ -286,31 +313,52 @@ html:has(.search-dialog[open]) {
   }
 }
 
-@media only screen and (max-width: 680px) {
-  .search-dialog {
-    position: fixed;
-    inset: var(--search-viewport-top, 0px) 0 auto;
-    width: 100%;
-    height: var(--search-viewport-height, 100%);
-    margin: 0;
-    @include border-radius(0);
-  }
-
-  .search-panel {
-    height: 100%;
-    max-height: none;
-  }
-
+@media only screen and (max-width: 1280px) {
   .search-bar {
-    min-height: var(--header-height);
-    box-sizing: border-box;
+    inset-inline-end: 1rem;
   }
 
-  .search-results {
-    flex: 1 1 auto;
+  .search-dropdown {
+    inset-inline-end: 1rem;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  // The desktop page keeps its scrollbar, so the header does not shift under the bar.
+  html:has(.search-dialog[open]) {
+    overflow: hidden;
   }
 
-  .search-footer {
-    margin-top: auto;
+  // Covers the header, where the search row of the mobile menu slides up to.
+  .search-bar {
+    top: 0;
+    inset-inline: 0;
+    width: 100%;
+    max-width: none;
+    height: var(--header-height);
+    padding: calc((var(--header-height) - 2.5rem) / 2) 1rem;
+    line-height: 2.5rem;
+    background-color: $header-background-color;
+
+    [theme=dark] & {
+      background-color: $header-background-color-dark;
+    }
+
+    .search-cancel {
+      display: inline;
+    }
+  }
+
+  .search-field {
+    .search-loading,
+    .search-clear {
+      inset-inline-end: 1rem;
+    }
+  }
+
+  .search-dropdown {
+    inset-inline: 0;
+    width: 100%;
+    max-width: none;
   }
 }
