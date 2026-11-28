@@ -43,6 +43,14 @@
       }
 
       .post-info-share {
+        // Each share icon is a target of at least 24×24 CSS px (WCAG 2.2 SC 2.5.8).
+        a, .link-like {
+          display: inline-block;
+          min-inline-size: 24px;
+          min-block-size: 24px;
+          text-align: center;
+        }
+
         a *, .link-like * {
           vertical-align: text-bottom;
         }

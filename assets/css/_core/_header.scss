@@ -127,6 +127,14 @@ header {
         }
       }
 
+      // Isolate each link from the bidirectional text around it. Otherwise, in a
+      // right-to-left page, Latin labels and the spaces between them merge into one
+      // left-to-right run: the links appear in reverse order and a link can split
+      // into fragments too small to be a 24 CSS px target (WCAG 2.2 SC 2.5.8).
+      a.menu-item {
+        unicode-bidi: isolate;
+      }
+
       a.active {
         font-weight: 900;
         color: $header-hover-color;
