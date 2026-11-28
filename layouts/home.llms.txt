@@ -1,0 +1,75 @@
+{{- /* llms.txt (https://llmstxt.org/): the site title and description, then an H2 list of the pages outside any section and one per top-level section. Each page links to its Markdown version when it has one, otherwise to its HTML page; pages with neither are left out. Pages hidden from search are left out, as in index.json. */ -}}
+{{- $pages := .Site.RegularPages -}}
+{{- if .Site.Params.page.hiddenFromSearch -}}
+    {{- $pages = where $pages "Params.hiddenfromsearch" false -}}
+{{- else -}}
+    {{- $pages = where $pages "Params.hiddenfromsearch" "!=" true -}}
+{{- end -}}
+{{- /* The pages outside any section, the top-level sections in the order of Hugo, then the sections that Hugo does not list, such as one with "build.list = never" */ -}}
+{{- $keys := slice "" -}}
+{{- range .Sections -}}
+    {{- $keys = $keys | append .Section -}}
+{{- end -}}
+{{- range $pages -}}
+    {{- if not (in $keys .Section) -}}
+        {{- $keys = $keys | append .Section -}}
+    {{- end -}}
+{{- end -}}
+# {{ .Site.Title | replaceRE `\s+` " " }}
+{{ with .Site.Params.description }}
+> {{ . | replaceRE `\s+` " " | strings.TrimSpace }}
+{{ end -}}
+{{- /* Entries keyed by their heading: a section titled like another heading, such as the "Pages" heading, joins it, so each heading appears once */ -}}
+{{- $entries := slice -}}
+{{- $headings := slice -}}
+{{- range $keys -}}
+    {{- $key := . -}}
+    {{- $heading := T "pages" -}}
+    {{- with $key -}}
+        {{- $heading = . -}}
+        {{- with $.Site.GetPage (printf "/%s" .) -}}
+            {{- if eq .Kind "section" -}}
+                {{- $heading = .Title -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $heading = $heading | replaceRE `\s+` " " | strings.TrimSpace | default $key -}}
+    {{- range where $pages "Section" $key -}}
+        {{- /* Hugo publishes no file for a page that it only lists or links */ -}}
+        {{- if not (partial "function/published.html" .) -}}
+            {{- continue -}}
+        {{- end -}}
+        {{- $url := "" -}}
+        {{- with .OutputFormats.Get "markdown" -}}
+            {{- $url = .Permalink -}}
+        {{- end -}}
+        {{- if not $url -}}
+            {{- with .OutputFormats.Get "html" -}}
+                {{- $url = .Permalink -}}
+            {{- end -}}
+        {{- end -}}
+        {{- if $url -}}
+            {{- /* Brackets as character references: llms.txt parsers end the link text at the first "]", even an escaped one */ -}}
+            {{- /* llms.txt parsers need a link text; an untitled page is named by its path */ -}}
+            {{- $title := .LinkTitle | replaceRE `\s+` " " | strings.TrimSpace | default .Path | replaceRE `\\` `\\` -}}
+            {{- $title = replace (replace $title "[" "&#91;") "]" "&#93;" -}}
+            {{- $line := printf "- [%s](%s)" $title ($url | replaceRE `\(` "%28" | replaceRE `\)` "%29") -}}
+            {{- with .Description -}}
+                {{- $line = printf "%s: %s" $line (. | replaceRE `\s+` " " | strings.TrimSpace) -}}
+            {{- end -}}
+            {{- $entries = $entries | append (dict "heading" $heading "line" $line) -}}
+            {{- if not (in $headings $heading) -}}
+                {{- $headings = $headings | append $heading -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- range $headings -}}
+    {{- $lines := slice -}}
+    {{- range where $entries "heading" . -}}
+        {{- $lines = $lines | append .line -}}
+    {{- end }}
+## {{ . }}
+
+{{ delimit $lines "\n" }}
+{{ end -}}

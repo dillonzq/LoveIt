@@ -191,6 +191,9 @@ other = "뒤로"
 [home]
 other = "홈"
 
+[pages]
+other = "페이지"
+
 [readMore]
 other = "더 읽기"
 

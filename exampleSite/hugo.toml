@@ -855,24 +855,21 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   [privacy.youtube]
     # ...
 
-# Options to make output .md files
-# 用于输出 Markdown 格式文档的设置
-[mediaTypes]
-  [mediaTypes."text/plain"]
-    suffixes = ["md"]
-
-# Options to make output .md files
-# 用于输出 Markdown 格式文档的设置
-[outputFormats.MarkDown]
+# Output format of llms.txt (https://llmstxt.org/), add "llms" to the outputs of home to publish it
+# llms.txt 的输出格式 (https://llmstxt.org/), 在 home 的 outputs 中加入 "llms" 以生成它
+[outputFormats.llms]
+  baseName = "llms"
   mediaType = "text/plain"
   isPlainText = true
-  isHTML = false
+  notAlternative = true
 
 # Options to make hugo output files
 # 用于 Hugo 输出文档的设置
+# "markdown" is the output format built into Hugo for the .md version of a page
+# "markdown" 是 Hugo 内置的输出格式, 用于生成页面的 .md 版本
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
-  page = ["HTML", "MarkDown"]
+  home = ["HTML", "RSS", "JSON", "llms"]
+  page = ["HTML", "markdown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
 

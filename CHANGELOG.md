@@ -42,6 +42,16 @@ This file starts at 0.4.0. Older releases are described on the
   `params.author.avatar` for the site author, or `authorAvatar` in front
   matter for a post ([#977]). Posts that name another `author` only show the
   avatar from their own `authorAvatar`.
+- Pages with the `markdown` output format link their Markdown version in the
+  head with `<link rel="alternate" type="text/markdown">` ([#1115]). A default
+  [llms.txt](https://llmstxt.org/) template lists the pages of the site by
+  section, linked to their Markdown versions. Define the `llms` output format
+  and add it to the outputs of `home` to publish it; every page then links it
+  with `<link rel="describedby">`. A site whose configuration still sets
+  `suffixes = ["md"]` for `text/plain` (from the example of earlier versions)
+  should remove that and the `MarkDown` output format, and use Hugo's built-in
+  `markdown` format, before adding `llms`. See
+  [Markdown Output and llms.txt](https://hugoloveit.com/theme-documentation-basics/#llms-txt).
 - Mastodon comments: with `params.page.comment.mastodon` and the URL of a
   post in the page's front matter (`comment.mastodon.url`), the public
   replies to that post on Mastodon or another Fediverse server with the
@@ -433,4 +443,5 @@ for the full upgrade guide.
 [#1096]: https://github.com/dillonzq/LoveIt/pull/1096
 [#1098]: https://github.com/dillonzq/LoveIt/pull/1098
 [#1101]: https://github.com/dillonzq/LoveIt/pull/1101
+[#1115]: https://github.com/dillonzq/LoveIt/issues/1115
 [#1120]: https://github.com/dillonzq/LoveIt/issues/1120

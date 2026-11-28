@@ -918,22 +918,19 @@ enableEmoji = true
   [privacy.youtube]
     # ...
 
-# 用于输出 Markdown 格式文档的设置
-[mediaTypes]
-  [mediaTypes."text/plain"]
-    suffixes = ["md"]
-
-# 用于输出 Markdown 格式文档的设置
-[outputFormats.MarkDown]
+# {{< version 0.4.2 >}} llms.txt 的输出格式, 参见 [Markdown 输出和 llms.txt](#llms-txt)
+[outputFormats.llms]
+  baseName = "llms"
   mediaType = "text/plain"
   isPlainText = true
-  isHTML = false
+  notAlternative = true
 
 # 用于 Hugo 输出文档的设置
 [outputs]
-  # {{< version 0.2.0 changed >}}
-  home = ["HTML", "RSS", "JSON"]
-  page = ["HTML", "MarkDown"]
+  # {{< version 0.4.2 changed >}}
+  home = ["HTML", "RSS", "JSON", "llms"]
+  # "markdown" 是 Hugo 内置的输出格式, 用于生成页面的 .md 版本
+  page = ["HTML", "markdown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
 ```
@@ -1102,6 +1099,62 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 ```
 
 在 `assets/css/_custom.scss` 中, 你可以添加一些 CSS 样式代码以自定义样式.
+
+### 3.4 Markdown 输出和 llms.txt {#llms-txt}
+
+{{< version 0.4.2 >}}
+
+使用 Hugo 内置的 `markdown` 输出格式, 每个页面在 `index.html` 旁边还会生成一个 `index.md`:
+
+```toml
+[outputs]
+  page = ["HTML", "markdown"]
+```
+
+有这个输出的每个页面都会在 `<head>` 中用 `<link rel="alternate" type="text/markdown">` 链接它的 Markdown 版本, 工具和 LLM 爬虫无需解析页面就能找到它.
+`[params.page]` 中的 `linkToMarkdown` 还会在文章底部显示指向它的链接.
+
+主题还提供了一个默认的 [llms.txt](https://llmstxt.org/) 模板 `layouts/home.llms.txt`.
+要生成 `/llms.txt`, 在你的 [网站配置](#site-configuration) 中定义 `llms` 输出格式, 并把它加入 `home` 的 outputs:
+
+```toml
+[outputFormats.llms]
+  baseName = "llms"
+  mediaType = "text/plain"
+  isPlainText = true
+  notAlternative = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON", "llms"]
+  page = ["HTML", "markdown"]
+```
+
+`llms.txt` 以网站标题和 `[params]` 中的 `description` 开头.
+它先在以网站语言显示的 "页面" 标题下列出不属于任何章节的页面, 再在以章节标题为标题的小节下列出每个顶级章节的页面, 包括嵌套章节中的页面.
+每个页面有 Markdown 版本时链接到 Markdown 版本, 否则链接到 HTML 页面, 并附上其前置参数中的 `description`.
+对搜索隐藏的页面 (`hiddenFromSearch`) 以及两者都不生成的页面不会列出.
+多语言网站的每种语言各有一个 `llms.txt`, 位于该语言的根目录, 例如 `/zh-cn/llms.txt`.
+每个页面都会用 `<link rel="describedby">` 链接其语言的 `llms.txt`.
+
+要修改内容, 把主题的 `layouts/home.llms.txt` 复制到你项目的 `layouts/home.llms.txt` 再编辑.
+
+{{< admonition warning "删除旧的 Markdown 输出设置" >}}
+基于早期版本示例的网站配置用下面的设置生成 `.md` 文件:
+
+```toml
+[mediaTypes]
+  [mediaTypes."text/plain"]
+    suffixes = ["md"]
+
+[outputFormats.MarkDown]
+  mediaType = "text/plain"
+  isPlainText = true
+  isHTML = false
+```
+
+在加入 `llms` 输出格式之前删除这两项, 并在 `page` 的 outputs 中使用 `markdown`.
+否则 `text/plain` 文件会以 `.md` 结尾: Hugo 会查找 `home.llms.md` 而不生成 `llms.txt`, 并且再也找不到页面的 Markdown 模板.
+{{< /admonition >}}
 
 ## 4 多语言和 i18n
 

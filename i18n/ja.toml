@@ -196,6 +196,9 @@ other = "戻る"
 [home]
 other = "ホーム"
 
+[pages]
+other = "ページ"
+
 [readMore]
 other = "続きを読む"
 

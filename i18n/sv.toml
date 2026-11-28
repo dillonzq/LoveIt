@@ -191,6 +191,9 @@ other = "Tillbaka"
 [home]
 other = "Hem"
 
+[pages]
+other = "Sidor"
+
 [readMore]
 other = "Läs mer"
 
