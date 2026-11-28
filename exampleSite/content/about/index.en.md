@@ -78,7 +78,7 @@ math:
 * :(fas fa-superscript): Extended Markdown syntax for **ruby annotation**
 * :(fas fa-percentage): Extended Markdown syntax for **fraction**
 * :(fas fa-square-root-alt): **Mathematical formula** supported by [$\KaTeX$](https://katex.org/)
-* :(fas fa-project-diagram): **Diagrams** shortcode supported by [mermaid](https://github.com/mermaid-js/mermaid)
+* :(fas fa-project-diagram): **Diagrams** shortcode supported by [Pele](https://github.com/obsidianmd/pele) or [mermaid](https://github.com/mermaid-js/mermaid)
 * :(fas fa-chart-pie): **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
 * :(fas fa-map-marked-alt): **Mapbox** shortcode supported by [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * :(fas fa-music): **Music player** shortcode supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
@@ -115,6 +115,7 @@ Thanks to the authors of following resources included in the theme:
 * [TypeIt](https://typeitjs.com/)
 * [$\KaTeX$](https://katex.org/)
 * [mermaid](https://github.com/mermaid-js/mermaid)
+* [Pele](https://github.com/obsidianmd/pele)
 * [ECharts](https://echarts.apache.org/)
 * [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * [APlayer](https://github.com/MoePlayer/APlayer)

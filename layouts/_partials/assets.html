@@ -185,10 +185,40 @@
     {{- warnf "Unknown params.security.mermaidSecurityLevel \"%v\". \"strict\" will be used instead.\n" $value -}}
     {{- warnf "未知的 params.security.mermaidSecurityLevel \"%v\". 将使用 \"strict\".\n" $value -}}
 {{- end -}}
+{{- /* Renderer of the diagrams: "pele" (default) or "mermaid", from the site or front matter. */ -}}
+{{- $renderer := "pele" -}}
+{{- $value = "" -}}
+{{- if reflect.IsMap $params.mermaid -}}
+    {{- $value = $params.mermaid.renderer -}}
+{{- end -}}
+{{- $type = printf "%T" $value -}}
+{{- $known = eq $type "<nil>" -}}
+{{- if eq $type "string" -}}
+    {{- $known = in (slice "" "pele" "mermaid") $value -}}
+    {{- if eq $value "mermaid" -}}
+        {{- $renderer = "mermaid" -}}
+    {{- end -}}
+{{- end -}}
+{{- if not $known -}}
+    {{- warnf "Unknown params.page.mermaid.renderer \"%v\". \"pele\" will be used instead.\n" $value -}}
+    {{- warnf "未知的 params.page.mermaid.renderer \"%v\". 将使用 \"pele\".\n" $value -}}
+{{- end -}}
 {{- if or $contentAssets.mermaid $this.mermaid -}}
-    {{- $source := $cdn.mermaidJS | default "lib/mermaid/mermaid.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-    {{- $config = dict "securityLevel" $securityLevel | dict "mermaid" | merge $config -}}
+    {{- if eq $renderer "mermaid" -}}
+        {{- $source := $cdn.mermaidJS | default "lib/mermaid/mermaid.min.js" -}}
+        {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+        {{- $config = dict "renderer" "mermaid" "securityLevel" $securityLevel | dict "mermaid" | merge $config -}}
+    {{- else -}}
+        {{- if eq $securityLevel "loose" -}}
+            {{- warnidf "loveit-mermaid-loose-pele"
+                "LoveIt: params.security.mermaidSecurityLevel \"loose\" has no effect with the Pele renderer, which has no HTML labels or click callbacks. Set params.page.mermaid.renderer = \"mermaid\" to keep them.\nLoveIt: Pele 渲染器不支持 HTML 标签和点击回调, params.security.mermaidSecurityLevel \"loose\" 不会生效. 设置 params.page.mermaid.renderer = \"mermaid\" 以继续使用它们.\n"
+            -}}
+        {{- end -}}
+        {{- $source := $cdn.peleJS | default "lib/pele/pele.global.js" -}}
+        {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+        {{- $zoom := dict "zoomIn" (T "zoomIn") "zoomOut" (T "zoomOut") "reset" (T "resetZoom") -}}
+        {{- $config = dict "renderer" "pele" "zoomLabels" $zoom | dict "mermaid" | merge $config -}}
+    {{- end -}}
 {{- end -}}
 
 {{- /* ECharts */ -}}

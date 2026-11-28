@@ -118,6 +118,15 @@ other = "समझ गया!"
 
 [cookieconsentLink]
 other = "और अधिक जानें"
+
+[zoomIn]
+other = "ज़ूम इन करें"
+
+[zoomOut]
+other = "ज़ूम आउट करें"
+
+[resetZoom]
+other = "ज़ूम रीसेट करें"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

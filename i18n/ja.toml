@@ -123,6 +123,15 @@ other = "OK"
 
 [cookieconsentLink]
 other = "もっと詳しく"
+
+[zoomIn]
+other = "拡大"
+
+[zoomOut]
+other = "縮小"
+
+[resetZoom]
+other = "ズームをリセット"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

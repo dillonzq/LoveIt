@@ -118,6 +118,15 @@ other = "Зрозуміло!"
 
 [cookieconsentLink]
 other = "Дізнатися більше"
+
+[zoomIn]
+other = "Збільшити"
+
+[zoomOut]
+other = "Зменшити"
+
+[resetZoom]
+other = "Скинути масштаб"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

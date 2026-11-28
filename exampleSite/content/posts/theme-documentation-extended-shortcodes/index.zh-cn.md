@@ -311,7 +311,7 @@ This is a **right-aligned** paragraph.
 
 ## 5 mermaid
 
-`mermaid` shortcode 使用 [Mermaid](https://mermaidjs.github.io/) 库提供绘制图表和流程图的功能.
+`mermaid` shortcode 使用 [Mermaid](https://mermaid.js.org/) 语法提供绘制图表和流程图的功能, 由 [Pele](https://pele.run) 或 Mermaid 库渲染.
 
 完整文档请查看页面 [主题文档 - mermaid Shortcode](../theme-documentation-mermaid-shortcode).
 

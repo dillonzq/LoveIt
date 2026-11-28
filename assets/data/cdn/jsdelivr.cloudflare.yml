@@ -30,6 +30,8 @@ libFiles:
   katexMhchemJS: katex@0.19.1/dist/contrib/mhchem.min.js
   # mermaid@12.3.0 https://github.com/mermaid-js/mermaid
   mermaidJS: mermaid@12.3.0/dist/mermaid.min.js
+  # pele@1.13.0 https://github.com/obsidianmd/pele
+  peleJS: pele@1.13.0/dist/pele.global.js
   # echarts@6.1.0 https://echarts.apache.org/
   echartsJS: echarts@6.1.0/dist/echarts.min.js
   # mapbox-gl@3.35.2 https://docs.mapbox.com/mapbox-gl-js

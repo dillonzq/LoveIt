@@ -121,6 +121,15 @@ other = "J'accepte"
 
 [cookieconsentLink]
 other = "En savoir plus"
+
+[zoomIn]
+other = "Zoom avant"
+
+[zoomOut]
+other = "Zoom arrière"
+
+[resetZoom]
+other = "Réinitialiser le zoom"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

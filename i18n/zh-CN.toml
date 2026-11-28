@@ -124,6 +124,15 @@ other = "同意"
 
 [cookieconsentLink]
 other = "了解更多"
+
+[zoomIn]
+other = "放大"
+
+[zoomOut]
+other = "缩小"
+
+[resetZoom]
+other = "重置缩放"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

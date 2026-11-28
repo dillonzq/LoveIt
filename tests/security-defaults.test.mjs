@@ -12,43 +12,75 @@ const mermaidConfig = html => {
   return config && JSON.parse(config).mermaid;
 };
 
+const pele = { renderer: 'pele', zoomLabels: { zoomIn: 'Zoom in', zoomOut: 'Zoom out', reset: 'Reset zoom' } };
+const mermaid = securityLevel => ({ renderer: 'mermaid', securityLevel });
+// Selects the Mermaid renderer, whose securityLevel the security cases check.
+const useMermaid = 'renderer = "mermaid"\n';
+
 const cases = [
-  { name: 'defaults', security: '', referrer: 'strict-origin-when-cross-origin', mermaid: 'strict' },
-  { name: 'empty values', security: 'referrerPolicy = ""\nmermaidSecurityLevel = ""\n', referrer: 'strict-origin-when-cross-origin', mermaid: 'strict' },
-  { name: 'explicit overrides', security: 'referrerPolicy = "no-referrer"\nmermaidSecurityLevel = "loose"\n', referrer: 'no-referrer', mermaid: 'loose' },
-  { name: 'explicit strict', security: 'referrerPolicy = "strict-origin-when-cross-origin"\nmermaidSecurityLevel = "strict"\n', referrer: 'strict-origin-when-cross-origin', mermaid: 'strict' },
+  { name: 'defaults', security: '', page: useMermaid, referrer: 'strict-origin-when-cross-origin', mermaid: mermaid('strict') },
+  { name: 'empty values', security: 'referrerPolicy = ""\nmermaidSecurityLevel = ""\n', page: useMermaid, referrer: 'strict-origin-when-cross-origin', mermaid: mermaid('strict') },
+  { name: 'explicit overrides', security: 'referrerPolicy = "no-referrer"\nmermaidSecurityLevel = "loose"\n', page: useMermaid, referrer: 'no-referrer', mermaid: mermaid('loose') },
+  { name: 'explicit strict', security: 'referrerPolicy = "strict-origin-when-cross-origin"\nmermaidSecurityLevel = "strict"\n', page: useMermaid, referrer: 'strict-origin-when-cross-origin', mermaid: mermaid('strict') },
   // Referrer-Policy tokens are case-insensitive; only the exact "loose" relaxes Mermaid.
   {
-    name: 'other spellings', security: 'referrerPolicy = " Same-Origin "\nmermaidSecurityLevel = "LOOSE"\n',
-    referrer: 'same-origin', mermaid: 'strict', warnings: [/mermaidSecurityLevel "LOOSE"/], noWarnings: [/referrerPolicy/],
+    name: 'other spellings', security: 'referrerPolicy = " Same-Origin "\nmermaidSecurityLevel = "LOOSE"\n', page: useMermaid,
+    referrer: 'same-origin', mermaid: mermaid('strict'), warnings: [/mermaidSecurityLevel "LOOSE"/], noWarnings: [/referrerPolicy/],
   },
   {
-    name: 'padded loose', security: 'mermaidSecurityLevel = " loose "\n',
-    referrer: 'strict-origin-when-cross-origin', mermaid: 'strict', warnings: [/mermaidSecurityLevel " loose "/],
+    name: 'padded loose', security: 'mermaidSecurityLevel = " loose "\n', page: useMermaid,
+    referrer: 'strict-origin-when-cross-origin', mermaid: mermaid('strict'), warnings: [/mermaidSecurityLevel " loose "/],
   },
   {
-    name: 'unknown values', security: 'referrerPolicy = "always"\nmermaidSecurityLevel = "antiscript"\n',
-    referrer: 'strict-origin-when-cross-origin', mermaid: 'strict', warnings: [/referrerPolicy "always"/, /mermaidSecurityLevel "antiscript"/],
+    name: 'unknown values', security: 'referrerPolicy = "always"\nmermaidSecurityLevel = "antiscript"\n', page: useMermaid,
+    referrer: 'strict-origin-when-cross-origin', mermaid: mermaid('strict'), warnings: [/referrerPolicy "always"/, /mermaidSecurityLevel "antiscript"/],
   },
   {
     name: 'unknown Mermaid value without a diagram', security: 'mermaidSecurityLevel = "antiscript"\n',
     referrer: 'strict-origin-when-cross-origin', diagram: false, warnings: [/mermaidSecurityLevel "antiscript"/],
   },
   {
-    name: 'arrays', security: 'referrerPolicy = ["no-referrer"]\nmermaidSecurityLevel = ["loose"]\n',
-    referrer: 'strict-origin-when-cross-origin', mermaid: 'strict', warnings: [/referrerPolicy "\[no-referrer\]"/, /mermaidSecurityLevel "\[loose\]"/],
+    name: 'arrays', security: 'referrerPolicy = ["no-referrer"]\nmermaidSecurityLevel = ["loose"]\n', page: useMermaid,
+    referrer: 'strict-origin-when-cross-origin', mermaid: mermaid('strict'), warnings: [/referrerPolicy "\[no-referrer\]"/, /mermaidSecurityLevel "\[loose\]"/],
   },
   {
-    name: 'booleans', security: 'referrerPolicy = false\nmermaidSecurityLevel = true\n',
-    referrer: 'strict-origin-when-cross-origin', mermaid: 'strict', warnings: [/referrerPolicy "false"/, /mermaidSecurityLevel "true"/],
+    name: 'booleans', security: 'referrerPolicy = false\nmermaidSecurityLevel = true\n', page: useMermaid,
+    referrer: 'strict-origin-when-cross-origin', mermaid: mermaid('strict'), warnings: [/referrerPolicy "false"/, /mermaidSecurityLevel "true"/],
+  },
+  // Pele is the default renderer; it has no securityLevel, so "loose" only warns.
+  { name: 'Pele by default', security: '', referrer: 'strict-origin-when-cross-origin', mermaid: pele, noWarnings: [/renderer/] },
+  { name: 'Pele by name', security: '', page: 'renderer = "pele"\n', referrer: 'strict-origin-when-cross-origin', mermaid: pele, noWarnings: [/renderer/] },
+  {
+    name: 'Pele with loose', security: 'mermaidSecurityLevel = "loose"\n',
+    referrer: 'strict-origin-when-cross-origin', mermaid: pele, warnings: [/mermaidSecurityLevel "loose" has no effect with the Pele renderer/],
+  },
+  {
+    name: 'loose without a diagram', security: 'mermaidSecurityLevel = "loose"\n',
+    referrer: 'strict-origin-when-cross-origin', diagram: false, noWarnings: [/Pele/],
+  },
+  {
+    name: 'unknown renderer', security: '', page: 'renderer = "Mermaid"\n',
+    referrer: 'strict-origin-when-cross-origin', mermaid: pele, warnings: [/params\.page\.mermaid\.renderer "Mermaid"/],
+  },
+  {
+    name: 'boolean renderer', security: '', page: 'renderer = true\n',
+    referrer: 'strict-origin-when-cross-origin', mermaid: pele, warnings: [/params\.page\.mermaid\.renderer "true"/],
+  },
+  {
+    name: 'renderer from front matter', security: '', frontMatter: 'mermaid:\n  renderer: mermaid\n',
+    referrer: 'strict-origin-when-cross-origin', mermaid: mermaid('strict'),
+  },
+  {
+    name: 'front matter over the site', security: '', page: useMermaid, frontMatter: 'mermaid:\n  renderer: pele\n',
+    referrer: 'strict-origin-when-cross-origin', mermaid: pele,
   },
 ];
 
-test('referrer policy and Mermaid securityLevel defaults, overrides and fallbacks', async () => {
+test('referrer policy, Mermaid renderer and securityLevel defaults, overrides and fallbacks', async () => {
   const { binary } = await getHugo();
   const temporary = mkdtempSync(path.join(os.tmpdir(), 'loveit-security-'));
   try {
-    for (const { name, security, referrer: expectedReferrer, mermaid, diagram = true, warnings = [], noWarnings = [] } of cases) {
+    for (const { name, security, page = '', frontMatter = '', referrer: expectedReferrer, mermaid: expectedMermaid, diagram = true, warnings = [], noWarnings = [] } of cases) {
       for (const environment of ['production', 'development']) {
         const site = path.join(temporary, `${name.replaceAll(' ', '-')}-${environment}`);
         mkdirSync(path.join(site, 'content/posts'), { recursive: true });
@@ -58,18 +90,25 @@ test('referrer policy and Mermaid securityLevel defaults, overrides and fallback
           `themesDir = ${JSON.stringify(path.dirname(root))}`,
           '[params.security]',
           security,
+          '[params.page.mermaid]',
+          page,
         ].join('\n'));
         const content = diagram ? '```mermaid\ngraph LR;\n    A --> B\n```\n' : 'A post without a diagram.\n';
-        writeFileSync(path.join(site, 'content/posts/post.md'), `---\ntitle: Test post\n---\n\n${content}`);
+        writeFileSync(path.join(site, 'content/posts/post.md'), `---\ntitle: Test post\n${frontMatter}---\n\n${content}`);
         const result = spawnSync(binary, ['--source', site, '--environment', environment, '--noBuildLock'], { cwd: site, env: toolEnv, encoding: 'utf8' });
         assert.equal(result.status, 0, result.stderr);
         const label = `${name} (${environment})`;
         for (const warning of warnings) assert.match(result.stderr, warning, label);
-        if (!warnings.length) assert.doesNotMatch(result.stderr, /params\.security/, label);
+        if (!warnings.length) assert.doesNotMatch(result.stderr, /params\.(security|page\.mermaid)/, label);
         for (const warning of noWarnings) assert.doesNotMatch(result.stderr, warning, label);
         assert.equal(referrer(readFileSync(path.join(site, 'public/index.html'), 'utf8')), expectedReferrer, label);
         const post = readFileSync(path.join(site, 'public/posts/post/index.html'), 'utf8');
-        assert.deepEqual(mermaidConfig(post), diagram ? { securityLevel: mermaid } : undefined, label);
+        assert.deepEqual(mermaidConfig(post), diagram ? expectedMermaid : undefined, label);
+        // Each page loads only the library of its renderer.
+        const scripts = [...post.matchAll(/<script[^>]+src="?([^" >]+)/g)].map(match => match[1]);
+        const renderer = diagram ? expectedMermaid.renderer : undefined;
+        assert.equal(scripts.some(src => /pele[@./]/.test(src)), renderer === 'pele', label);
+        assert.equal(scripts.some(src => /mermaid[@./]/.test(src)), renderer === 'mermaid', label);
       }
     }
   } finally {

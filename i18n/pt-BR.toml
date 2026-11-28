@@ -121,6 +121,15 @@ other = "Aceita"
 
 [cookieconsentLink]
 other = "Saber mais"
+
+[zoomIn]
+other = "Aumentar zoom"
+
+[zoomOut]
+other = "Diminuir zoom"
+
+[resetZoom]
+other = "Redefinir zoom"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

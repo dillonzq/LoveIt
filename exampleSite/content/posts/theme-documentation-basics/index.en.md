@@ -596,6 +596,13 @@ enableEmoji = true
       goat = true
       # whether to render mermaid diagrams in code blocks
       mermaid = true
+    # {{< version 0.5.0 >}} Mermaid diagram config
+    [params.page.mermaid]
+      # renderer of the mermaid code blocks and shortcodes ["pele", "mermaid"]
+      # "pele": the lightweight {{< link "https://pele.run" Pele >}} renderer, colors follow the theme without re-rendering,
+      # but its layout differs from Mermaid and it has no HTML labels or click callbacks
+      # "mermaid": the {{< link "https://mermaid.js.org" Mermaid >}} library
+      renderer = "pele"
     # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config
     [params.page.mapbox]
       # access token of Mapbox GL JS
@@ -799,7 +806,7 @@ enableEmoji = true
     # {{< version 0.5.0 >}} referrer policy of the <meta name="referrer"> tag
     # set "no-referrer" to send no Referer header at all
     referrerPolicy = "strict-origin-when-cross-origin"
-    # {{< version 0.5.0 >}} Mermaid securityLevel ["strict", "loose"]
+    # {{< version 0.5.0 >}} Mermaid securityLevel ["strict", "loose"], used when params.page.mermaid.renderer is "mermaid"
     # "loose" allows click events and HTML labels in diagrams
     mermaidSecurityLevel = "strict"
 

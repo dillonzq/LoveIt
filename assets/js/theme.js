@@ -562,7 +562,53 @@ class Theme {
         return null;
     }
 
+    // Typesets $$...$$ in Pele labels with KaTeX when the page loads it; Pele shows the TeX source otherwise.
+    getPeleMath() {
+        if (typeof katex === 'undefined') return undefined;
+        let probe;
+        return (tex, size) => {
+            if (!probe) {
+                probe = document.createElement('div');
+                probe.setAttribute('aria-hidden', 'true');
+                probe.style.cssText = 'position:absolute;left:-9999px;top:0;visibility:hidden;display:inline-block;white-space:nowrap';
+                document.body.appendChild(probe);
+            }
+            try {
+                // MathML only: Safari misplaces KaTeX's HTML output inside SVG.
+                probe.innerHTML = katex.renderToString(tex, { displayMode: true, output: 'mathml' });
+            } catch (err) {
+                return null;
+            }
+            probe.style.fontSize = `${size}px`;
+            const expression = probe.querySelector('math');
+            if (!expression) return null;
+            const { width, height } = expression.getBoundingClientRect();
+            return { html: expression.outerHTML, width, height };
+        };
+    }
+
+    // Pele lays diagrams out for their container and redraws them on resize; colors come from CSS variables,
+    // so switching the theme needs no re-render.
+    initPele() {
+        const options = {
+            math: this.getPeleMath(),
+            zoom: { labels: this.config.mermaid.zoomLabels },
+            onError: err => console.error(err),
+        };
+        Util.forEach(document.getElementsByClassName('mermaid'), $mermaid => {
+            if ($mermaid.dataset.peleMounted) return;
+            const definition = this.getMermaidDefinition($mermaid);
+            if (!definition) return;
+            $mermaid.dataset.peleMounted = 'true';
+            pele.mount($mermaid, definition, options);
+        });
+    }
+
     initMermaid() {
+        if (this.config.mermaid && this.config.mermaid.renderer === 'pele') {
+            this.initPele();
+            return;
+        }
         this._mermaidOnSwitchTheme = this._mermaidOnSwitchTheme || (() => {
             const $mermaidElements = document.getElementsByClassName('mermaid');
             if (!$mermaidElements.length) return;

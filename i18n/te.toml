@@ -120,6 +120,15 @@ other = "అర్థమైంది"
 
 [cookieconsentLink]
 other = "మరింత తెలుసుకోండి"
+
+[zoomIn]
+other = "జూమ్ ఇన్ చేయండి"
+
+[zoomOut]
+other = "జూమ్ అవుట్ చేయండి"
+
+[resetZoom]
+other = "జూమ్‌ను రీసెట్ చేయండి"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

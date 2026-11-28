@@ -121,6 +121,15 @@ other = "Согласен"
 
 [cookieconsentLink]
 other = "Учить больше"
+
+[zoomIn]
+other = "Увеличить"
+
+[zoomOut]
+other = "Уменьшить"
+
+[resetZoom]
+other = "Сбросить масштаб"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

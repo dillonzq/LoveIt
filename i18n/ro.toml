@@ -121,6 +121,15 @@ other = "De acord"
 
 [cookieconsentLink]
 other = "Aflați mai multe"
+
+[zoomIn]
+other = "Mărește"
+
+[zoomOut]
+other = "Micșorează"
+
+[resetZoom]
+other = "Resetează zoomul"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

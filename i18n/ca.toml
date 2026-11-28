@@ -118,6 +118,15 @@ other = "Entenc!"
 
 [cookieconsentLink]
 other = "Més informació"
+
+[zoomIn]
+other = "Amplia"
+
+[zoomOut]
+other = "Redueix"
+
+[resetZoom]
+other = "Restableix el zoom"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

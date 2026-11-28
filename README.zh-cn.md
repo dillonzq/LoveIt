@@ -46,7 +46,7 @@
 * 支持**上标注释**的扩展 Markdown 语法
 * 支持**分数**的扩展 Markdown 语法
 * 支持基于 [KaTeX](https://katex.org/) 的**数学公式**
-* 支持基于 [mermaid](https://github.com/mermaid-js/mermaid) 的**图表**生成功能
+* 支持基于 [Pele](https://github.com/obsidianmd/pele) 或 [mermaid](https://github.com/mermaid-js/mermaid) 的**图表**生成功能
 * 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化**生成功能
 * 支持基于 [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) 的 **Mapbox** 地图显示功能
 * 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的内嵌**音乐播放器**
@@ -113,7 +113,7 @@
 * 支持**上标注释**的扩展 Markdown 语法
 * 支持**分数**的扩展 Markdown 语法
 * 支持基于 [KaTeX](https://katex.org/) 的**数学公式**
-* 支持基于 [mermaid](https://github.com/mermaid-js/mermaid) 的**图表** shortcode
+* 支持基于 [Pele](https://github.com/obsidianmd/pele) 或 [mermaid](https://github.com/mermaid-js/mermaid) 的**图表** shortcode
 * 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化** shortcode
 * 支持基于 [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) 的 **Mapbox** shortcode
 * 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的**音乐播放器** shortcode
@@ -214,6 +214,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [TypeIt](https://typeitjs.com/)
 * [KaTeX](https://katex.org/)
 * [mermaid](https://github.com/mermaid-js/mermaid)
+* [Pele](https://github.com/obsidianmd/pele)
 * [ECharts](https://echarts.apache.org/)
 * [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * [APlayer](https://github.com/MoePlayer/APlayer)

@@ -119,6 +119,15 @@ other = "বুঝেছি!"
 
 [cookieconsentLink]
 other = "আরো জানুন"
+
+[zoomIn]
+other = "বড় করুন"
+
+[zoomOut]
+other = "ছোট করুন"
+
+[resetZoom]
+other = "জুম রিসেট করুন"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

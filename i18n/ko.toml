@@ -118,6 +118,15 @@ other = "알겠습니다"
 
 [cookieconsentLink]
 other = "더 보기"
+
+[zoomIn]
+other = "확대"
+
+[zoomOut]
+other = "축소"
+
+[resetZoom]
+other = "확대/축소 초기화"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

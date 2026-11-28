@@ -584,6 +584,13 @@ enableEmoji = true
       goat = true
       # 是否渲染代码块中的 mermaid 图表
       mermaid = true
+    # {{< version 0.5.0 >}} Mermaid 图表配置
+    [params.page.mermaid]
+      # mermaid 代码块和 shortcode 的渲染器 ["pele", "mermaid"]
+      # "pele": 轻量的 {{< link "https://pele.run" Pele >}} 渲染器, 切换主题时只更新颜色而不重新渲染,
+      # 但它的布局与 Mermaid 不同, 并且不支持 HTML 标签和点击回调
+      # "mermaid": {{< link "https://mermaid.js.org" Mermaid >}} 库
+      renderer = "pele"
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} 数学公式
     [params.page.math]
       enable = false
@@ -800,7 +807,7 @@ enableEmoji = true
     # {{< version 0.5.0 >}} <meta name="referrer"> 标签的引荐来源策略
     # 设置为 "no-referrer" 则完全不发送 Referer 请求头
     referrerPolicy = "strict-origin-when-cross-origin"
-    # {{< version 0.5.0 >}} Mermaid 安全级别 ["strict", "loose"]
+    # {{< version 0.5.0 >}} Mermaid 安全级别 ["strict", "loose"], 在 params.page.mermaid.renderer 为 "mermaid" 时使用
     # "loose" 允许图表中的点击事件和 HTML 标签
     mermaidSecurityLevel = "strict"
 

@@ -6,7 +6,7 @@ lastmod: 2020-03-03T15:29:41+08:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
-description: "The mermaid shortcode supports diagrams in Hugo with Mermaid library."
+description: "The mermaid shortcode supports diagrams in Hugo with the Mermaid syntax."
 images: []
 resources:
 - name: "featured-image"
@@ -18,9 +18,9 @@ categories: ["documentation"]
 hiddenFromHomePage: false
 ---
 
-{{< version 0.2.11 changed >}}
+{{< version 0.5.0 changed >}}
 
-The `mermaid` shortcode supports diagrams in Hugo with [Mermaid](https://mermaid.js.org/) library.
+The `mermaid` shortcode supports diagrams in Hugo with the [Mermaid](https://mermaid.js.org/) syntax.
 
 <!--more-->
 
@@ -37,7 +37,28 @@ graph LR;
 ```
 ````
 
-{{< version 0.5.0 changed >}} Diagrams are rendered with the Mermaid `securityLevel` set to `strict`, which disables `click` interactions and restricts HTML in labels. If you trust the diagram sources and need these features, set `mermaidSecurityLevel = "loose"` in `[params.security]` of the [site configuration](../theme-documentation-basics#site-configuration).
+## Renderer {#renderer}
+
+{{< version 0.5.0 >}} Diagrams are rendered with [Pele](https://pele.run) by default. Set `renderer` in `[params.page.mermaid]` of the [site configuration](../theme-documentation-basics#site-configuration), or `mermaid.renderer` in the [front matter](../theme-documentation-content#front-matter) of a page, to choose the renderer:
+
+* `"pele"`: Pele is a small renderer for the Mermaid syntax. It loads much less JavaScript than Mermaid, draws faster, lays diagrams out again for narrow screens and offers zoom buttons when a diagram is shrunk to fit. Its colors follow the light and dark themes without drawing the diagrams again.
+* `"mermaid"`: the [Mermaid](https://mermaid.js.org/) library.
+
+```toml
+[params.page.mermaid]
+  renderer = "mermaid"
+```
+
+Each page loads only the library of its renderer. Pele supports the diagram types of Mermaid 12.1, with some [differences](https://pele.run/compatibility):
+
+* Pele has its own layout engine and style, so diagrams do not look exactly like Mermaid's. Mermaid themes do not apply; the theme sets the colors through [CSS variables](https://pele.run/theming), which you can override for `.mermaid` in `assets/css/_custom.scss`.
+* Labels can't contain HTML. `click` statements open links, but JavaScript callbacks are ignored. Icons such as `fa:fa-car` are not drawn.
+* Math (`$$...$$`) in labels is typeset with KaTeX only on pages where KaTeX is loaded (see `params.page.math`). Elsewhere the TeX source is shown.
+* A diagram that can't be drawn shows the error in its place.
+
+Choose `"mermaid"` if your diagrams rely on any of these.
+
+{{< version 0.5.0 changed >}} The Mermaid renderer uses the Mermaid `securityLevel` set to `strict`, which disables `click` interactions and restricts HTML in labels. If you trust the diagram sources and need these features, set `mermaidSecurityLevel = "loose"` in `[params.security]` of the [site configuration](../theme-documentation-basics#site-configuration). Pele has no HTML labels or JavaScript callbacks, so this option has no effect on it, and a build warning reminds you to choose the Mermaid renderer.
 
 ## Flowchart {#flowchart}
 

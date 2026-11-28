@@ -148,9 +148,9 @@
     # <meta name="referrer"> 标签的引荐来源策略
     # 设置为 "no-referrer" 则完全不发送 Referer 请求头
     referrerPolicy = "strict-origin-when-cross-origin"
-    # Mermaid securityLevel ["strict", "loose"]
+    # Mermaid securityLevel ["strict", "loose"], used when params.page.mermaid.renderer is "mermaid"
     # "loose" allows click events and HTML labels in diagrams
-    # Mermaid 安全级别 ["strict", "loose"]
+    # Mermaid 安全级别 ["strict", "loose"], 在 params.page.mermaid.renderer 为 "mermaid" 时使用
     # "loose" 允许图表中的点击事件和 HTML 标签
     mermaidSecurityLevel = "strict"
 
@@ -389,6 +389,18 @@
     [params.page.code.render]
       goat = true
       mermaid = true
+    # Mermaid diagram config
+    # Mermaid 图表配置
+    [params.page.mermaid]
+      # renderer of the mermaid code blocks and shortcodes ["pele", "mermaid"]
+      # "pele": the lightweight Pele renderer (https://pele.run), colors follow the theme without re-rendering,
+      # but its layout differs from Mermaid and it has no HTML labels or click callbacks
+      # "mermaid": the Mermaid library (https://mermaid.js.org)
+      # mermaid 代码块和 shortcode 的渲染器 ["pele", "mermaid"]
+      # "pele": 轻量的 Pele 渲染器 (https://pele.run), 切换主题时只更新颜色而不重新渲染,
+      # 但它的布局与 Mermaid 不同, 并且不支持 HTML 标签和点击回调
+      # "mermaid": Mermaid 库 (https://mermaid.js.org)
+      renderer = "pele"
     # KaTeX mathematical formulas config (KaTeX https://katex.org/)
     # KaTeX 数学公式配置 (KaTeX https://katex.org/)
     [params.page.math]

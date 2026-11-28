@@ -58,6 +58,20 @@ This file starts at 0.4.0. Older releases are described on the
   `mermaidSecurityLevel = "loose"` (exactly) in `[params.security]` if you
   trust your diagram sources and need these features. Invalid values produce
   a build warning and fall back to `strict`.
+- Mermaid diagrams, from `mermaid` code blocks and the `mermaid` shortcode,
+  are rendered with [Pele](https://pele.run) 1.13.0 instead of Mermaid
+  ([#1120]). The script is about 83% smaller than Mermaid's, diagrams draw
+  several times faster and are laid out again for narrow screens, and
+  switching between light and dark only changes their colors. Diagrams
+  shrunk to fit get zoom buttons named in the page language. Pele has its own
+  layout and style, has no HTML labels, ignores JavaScript `click` callbacks
+  and Mermaid themes, and typesets `$$...$$` in labels only on pages that load
+  KaTeX. To keep Mermaid 12.3.0, set `renderer = "mermaid"` in
+  `[params.page.mermaid]`, or `mermaid.renderer` in the front matter of a
+  page. Sites with `mermaidSecurityLevel = "loose"` get a build warning until
+  they choose the Mermaid renderer. Unknown renderers warn and use Pele.
+  Custom code that called the `mermaid` global on diagram pages must also
+  choose the Mermaid renderer.
 - The theme's own icons (header, footer, social links, post meta, share
   buttons, admonitions, code blocks, task lists) are inline SVG rendered at
   build time, so pages no longer fetch icon files at runtime. Decorative icons
@@ -370,3 +384,4 @@ for the full upgrade guide.
 [#1096]: https://github.com/dillonzq/LoveIt/pull/1096
 [#1098]: https://github.com/dillonzq/LoveIt/pull/1098
 [#1101]: https://github.com/dillonzq/LoveIt/pull/1101
+[#1120]: https://github.com/dillonzq/LoveIt/issues/1120

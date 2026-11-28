@@ -47,7 +47,7 @@ Compared to the original LeaveIt theme and the KeepIt theme, the LoveIt theme ha
 * Extended Markdown syntax for **ruby annotation**
 * Extended Markdown syntax for **fraction**
 * **Mathematical formula** supported by [KaTeX](https://katex.org/)
-* **Diagram syntax** shortcode supported by [mermaid](https://github.com/mermaid-js/mermaid)
+* **Diagram syntax** shortcode supported by [Pele](https://github.com/obsidianmd/pele) or [mermaid](https://github.com/mermaid-js/mermaid)
 * **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
 * **Mapbox** shortcode supported by [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * Embedded **music player** supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
@@ -118,7 +118,7 @@ I hope you will LoveIt ❤️!
 * Extended Markdown syntax for **ruby annotation**
 * Extended Markdown syntax for **fraction**
 * **Mathematical formula** supported by [KaTeX](https://katex.org/)
-* **Diagrams** shortcode supported by [mermaid](https://github.com/mermaid-js/mermaid)
+* **Diagrams** shortcode supported by [Pele](https://github.com/obsidianmd/pele) or [mermaid](https://github.com/mermaid-js/mermaid)
 * **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
 * **Mapbox** shortcode supported by [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * **Music player** shortcode supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
@@ -219,6 +219,7 @@ Thanks to the authors of following resources included in the theme:
 * [TypeIt](https://typeitjs.com/)
 * [KaTeX](https://katex.org/)
 * [mermaid](https://github.com/mermaid-js/mermaid)
+* [Pele](https://github.com/obsidianmd/pele)
 * [ECharts](https://echarts.apache.org/)
 * [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * [APlayer](https://github.com/MoePlayer/APlayer)
