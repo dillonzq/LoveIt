@@ -22,6 +22,8 @@ const posts = {
   // A bundle file named like the site avatar does not replace it.
   'shadow/index.md': '',
   'remote.md': 'authorAvatar: https://cdn.example.com/face.png\n',
+  // A scheme-relative URL is absolute in the JSON-LD.
+  'protocol-relative.md': 'authorAvatar: //cdn.example.com/face.png\n',
   // A file under static/ keeps the path of baseURL.
   'static.md': 'authorAvatar: images/static-face.svg\n',
   // A name that YAML reads as a number is still shown as written.
@@ -139,6 +141,9 @@ test('author avatar in the byline and the structured data', async () => {
       const remote = page('remote');
       assert.equal(attribute(avatar(remote), 'src'), 'https://cdn.example.com/face.png');
       assert.equal(author(remote).image, 'https://cdn.example.com/face.png');
+      const protocolRelative = page('protocol-relative');
+      assert.equal(attribute(avatar(protocolRelative), 'src'), '//cdn.example.com/face.png');
+      assert.equal(author(protocolRelative).image, 'https://cdn.example.com/face.png');
       const fromStatic = page('static');
       assert.equal(attribute(avatar(fromStatic), 'src'), '/blog/images/static-face.svg');
       assert.equal(author(fromStatic).image, 'https://example.org/blog/images/static-face.svg');
