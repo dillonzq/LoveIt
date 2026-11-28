@@ -106,7 +106,13 @@
     {{- with $params.author | default .Site.Params.Author.name | default (T "author") -}}
         {{- $person := dict "@type" "Person" "name" (printf "%v" .) -}}
         {{- with dict "Page" $ "Params" $params | partial "function/author-avatar.html" -}}
-            {{- with partial "function/schema-image.html" . -}}
+            {{- $image := "" -}}
+            {{- with .URL -}}
+                {{- $image = absURL . -}}
+            {{- else -}}
+                {{- $image = partial "function/schema-image.html" . -}}
+            {{- end -}}
+            {{- with $image -}}
                 {{- $person = merge $person (dict "image" .) -}}
             {{- end -}}
         {{- end -}}

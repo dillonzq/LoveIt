@@ -2,21 +2,22 @@
     The avatar of a page author.
     Input: dict "Page" (the page) "Params" (its parameters merged with params.page).
 
-    authorAvatar in front matter, or else params.author.avatar when the page
-    author (Params.author) is unset or is params.author.name, so that a page
-    by another author does not show the site author's photo.
-    Returns dict "Path" "Resources" for function/resource.html and
-    plugin/img.html, or "" without an avatar. Only authorAvatar is looked up
-    in the page resources; params.author.avatar is the same file on every
-    page. A local path that is not a resource, such as a file under static/,
-    goes through relURL, so a path without a leading slash keeps the path of
-    baseURL.
+    authorAvatar in the front matter of the page, or else params.author.avatar
+    when the author shown (Params.author) is unset or is params.author.name,
+    so that a page by another author does not show the site author's photo.
+    Only authorAvatar is looked up in the page resources.
+
+    Returns "" without an avatar, dict "Path" "Resources" for a page resource
+    or a file under assets/ (for plugin/img.html and function/schema-image.html),
+    or dict "URL" for anything else, to be used as it is: a remote URL, or a
+    local path such as a file under static/, which goes through relURL so a
+    path without a leading slash keeps the path of baseURL.
 */ -}}
 {{- $page := .Page -}}
 {{- $author := .Params.author -}}
 {{- $avatar := "" -}}
 {{- $resources := "" -}}
-{{- with .Params.authoravatar -}}
+{{- with $page.Params.authoravatar -}}
     {{- $avatar = . -}}
     {{- $resources = $page.Resources -}}
 {{- else -}}
@@ -29,12 +30,14 @@
 {{- $result := "" -}}
 {{- with $avatar -}}
     {{- $path := printf "%v" . -}}
-    {{- $url := urls.Parse $path -}}
-    {{- if not $url.Scheme | and (not $url.Host) -}}
-        {{- if not (dict "Path" $path "Resources" $resources | partial "function/resource.html") -}}
+    {{- if dict "Path" $path "Resources" $resources | partial "function/resource.html" -}}
+        {{- $result = dict "Path" $path "Resources" $resources -}}
+    {{- else -}}
+        {{- $url := urls.Parse $path -}}
+        {{- if not $url.Scheme | and (not $url.Host) -}}
             {{- $path = relURL $path -}}
         {{- end -}}
+        {{- $result = dict "URL" $path -}}
     {{- end -}}
-    {{- $result = dict "Path" $path "Resources" $resources -}}
 {{- end -}}
 {{- return $result -}}

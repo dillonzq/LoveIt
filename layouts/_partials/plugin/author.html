@@ -17,8 +17,15 @@
 {{- $options := dict "Class" "author" "Destination" $authorLink "Title" "Author" "Rel" "author" "Content" $author -}}
 {{- with dict "Page" $page "Params" $params | partial "function/author-avatar.html" -}}
     {{- /* The avatar is decorative: the author name next to it names the link. */ -}}
-    {{- $avatar := dict "Src" .Path "Resources" .Resources "Alt" "" "Class" "author-avatar" "Width" 20 "Height" 20 "Widths" (slice 20 40 60) "Sizes" "20px" "Lazy" $.Lazy -}}
-    {{- $options = merge $options (dict "Content" (printf "%s%v" (partial "plugin/img.html" $avatar) $author)) -}}
+    {{- $img := "" -}}
+    {{- with .URL -}}
+        {{- /* Not a resource: linked as it is, without looking it up again. */ -}}
+        {{- $loading := cond (eq $.Lazy false) "" ` loading="lazy" decoding="async"` -}}
+        {{- $img = printf `<img class="author-avatar" src="%s" alt="" width="20" height="20"%s />` (htmlEscape .) $loading -}}
+    {{- else -}}
+        {{- $img = dict "Src" .Path "Resources" .Resources "Alt" "" "Class" "author-avatar" "Width" 20 "Height" 20 "Widths" (slice 20 40 60) "Sizes" "20px" "Lazy" $.Lazy | partial "plugin/img.html" -}}
+    {{- end -}}
+    {{- $options = merge $options (dict "Content" (printf "%s%v" $img $author)) -}}
 {{- else -}}
     {{- $options = merge $options (dict "Icon" (dict "Class" "fas fa-user-circle")) -}}
 {{- end -}}

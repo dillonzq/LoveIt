@@ -34,8 +34,9 @@ const assetsAvatar = { '@type': 'ImageObject', url: 'https://example.org/blog/im
 const variants = {
   avatar: 'avatar = "/images/avatar.png"\n',
   plain: '',
-  // An author inherited from params.page is another author than params.author.name.
-  inherited: 'avatar = "/images/avatar.png"\n[params.page]\nauthor = "Staff"\n',
+  // An author inherited from params.page is another author than params.author.name,
+  // and authorAvatar is only read from front matter.
+  inherited: 'avatar = "/images/avatar.png"\n[params.page]\nauthor = "Staff"\nauthorAvatar = "images/static-face.svg"\n',
 };
 
 function build(site, config) {
@@ -50,6 +51,9 @@ function build(site, config) {
   writeFileSync(path.join(site, 'content/posts/shadow/images/avatar.png'), svg);
   mkdirSync(path.join(site, 'static/images'), { recursive: true });
   writeFileSync(path.join(site, 'static/images/static-face.svg'), svg);
+  // An asset at the resolved URL of the static file must not be looked up in its place.
+  mkdirSync(path.join(site, 'assets/blog/images'), { recursive: true });
+  writeFileSync(path.join(site, 'assets/blog/images/static-face.svg'), svg);
   mkdirSync(path.join(site, 'assets/images'), { recursive: true });
   copyFileSync(path.join(root, 'exampleSite/assets/images/avatar.png'), path.join(site, 'assets/images/avatar.png'));
   writeFileSync(path.join(site, 'hugo.toml'), [
@@ -137,6 +141,8 @@ test('author avatar in the byline and the structured data', async () => {
       const fromStatic = page('static');
       assert.equal(attribute(avatar(fromStatic), 'src'), '/blog/images/static-face.svg');
       assert.equal(author(fromStatic).image, 'https://example.org/blog/images/static-face.svg');
+      assert.equal(attribute(avatar(fromStatic), 'loading'), undefined);
+      assert.equal(attribute(avatar(remote), 'alt'), '');
       const numeric = page('numeric');
       assert.match(byline(numeric), /<img[^>]*>123<\/a>$/);
       assert.equal(author(numeric).name, '123');
