@@ -5,28 +5,36 @@
     authorAvatar in front matter, or else params.author.avatar when the page
     author (Params.author) is unset or is params.author.name, so that a page
     by another author does not show the site author's photo.
-    A page resource or a file under assets/ is returned as given, for
-    function/resource.html. Another local path, such as a file under static/,
+    Returns dict "Path" "Resources" for function/resource.html and
+    plugin/img.html, or "" without an avatar. Only authorAvatar is looked up
+    in the page resources; params.author.avatar is the same file on every
+    page. A local path that is not a resource, such as a file under static/,
     goes through relURL, so a path without a leading slash keeps the path of
-    baseURL. Returns "" without an avatar.
+    baseURL.
 */ -}}
 {{- $page := .Page -}}
 {{- $author := .Params.author -}}
-{{- $avatar := .Params.authoravatar -}}
-{{- if not $avatar -}}
+{{- $avatar := "" -}}
+{{- $resources := "" -}}
+{{- with .Params.authoravatar -}}
+    {{- $avatar = . -}}
+    {{- $resources = $page.Resources -}}
+{{- else -}}
     {{- with $page.Site.Params.Author -}}
         {{- if not $author | or (eq (printf "%v" $author) (printf "%v" (.name | default ""))) -}}
             {{- $avatar = .avatar -}}
         {{- end -}}
     {{- end -}}
 {{- end -}}
+{{- $result := "" -}}
 {{- with $avatar -}}
-    {{- $avatar = printf "%v" . -}}
-    {{- $url := urls.Parse $avatar -}}
+    {{- $path := printf "%v" . -}}
+    {{- $url := urls.Parse $path -}}
     {{- if not $url.Scheme | and (not $url.Host) -}}
-        {{- if not (dict "Path" $avatar "Resources" $page.Resources | partial "function/resource.html") -}}
-            {{- $avatar = relURL $avatar -}}
+        {{- if not (dict "Path" $path "Resources" $resources | partial "function/resource.html") -}}
+            {{- $path = relURL $path -}}
         {{- end -}}
     {{- end -}}
+    {{- $result = dict "Path" $path "Resources" $resources -}}
 {{- end -}}
-{{- return ($avatar | default "") -}}
+{{- return $result -}}

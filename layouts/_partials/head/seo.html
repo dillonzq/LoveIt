@@ -32,7 +32,7 @@
         {{- $schema = merge $schema (dict "inLanguage" .) -}}
     {{- end -}}
     {{- with .Site.Params.Author.name -}}
-        {{- $person := dict "@type" "Person" "name" . -}}
+        {{- $person := dict "@type" "Person" "name" (printf "%v" .) -}}
         {{- with dict "Path" $.Site.Params.Author.avatar | partial "function/schema-image.html" -}}
             {{- $person = merge $person (dict "image" .) -}}
         {{- end -}}
@@ -104,9 +104,11 @@
     {{- $schema = merge $schema (dict "publisher" $organization) -}}
     {{- /* The author of the byline, which may come from params.page. */ -}}
     {{- with $params.author | default .Site.Params.Author.name | default (T "author") -}}
-        {{- $person := dict "@type" "Person" "name" . -}}
-        {{- with dict "Path" (dict "Page" $ "Params" $params | partial "function/author-avatar.html") "Resources" $.Resources | partial "function/schema-image.html" -}}
-            {{- $person = merge $person (dict "image" .) -}}
+        {{- $person := dict "@type" "Person" "name" (printf "%v" .) -}}
+        {{- with dict "Page" $ "Params" $params | partial "function/author-avatar.html" -}}
+            {{- with partial "function/schema-image.html" . -}}
+                {{- $person = merge $person (dict "image" .) -}}
+            {{- end -}}
         {{- end -}}
         {{- $schema = merge $schema (dict "author" $person) -}}
     {{- end -}}

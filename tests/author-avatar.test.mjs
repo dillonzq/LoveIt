@@ -19,6 +19,8 @@ const posts = {
   // The site author named again keeps the site avatar.
   'named.md': 'author: Site Author\n',
   'bundle/index.md': 'author: Bundled\nauthorAvatar: face.svg\n',
+  // A bundle file named like the site avatar does not replace it.
+  'shadow/index.md': '',
   'remote.md': 'authorAvatar: https://cdn.example.com/face.png\n',
   // A file under static/ keeps the path of baseURL.
   'static.md': 'authorAvatar: images/static-face.svg\n',
@@ -44,6 +46,8 @@ function build(site, config) {
     writeFileSync(target, `---\ntitle: ${file}\n${date}${frontMatter}---\n\nText.\n`);
   }
   writeFileSync(path.join(site, 'content/posts/bundle/face.svg'), svg);
+  mkdirSync(path.join(site, 'content/posts/shadow/images'), { recursive: true });
+  writeFileSync(path.join(site, 'content/posts/shadow/images/avatar.png'), svg);
   mkdirSync(path.join(site, 'static/images'), { recursive: true });
   writeFileSync(path.join(site, 'static/images/static-face.svg'), svg);
   mkdirSync(path.join(site, 'assets/images'), { recursive: true });
@@ -86,9 +90,10 @@ test('author avatar in the byline and the structured data', async () => {
       assert.deepEqual(author(guest), { '@type': 'Person', name: 'Guest' }, label('guest'));
 
       const siteAuthor = variant === 'inherited' ? 'Staff' : 'Site Author';
-      for (const name of ['site', 'named']) {
+      for (const name of ['site', 'named', 'shadow']) {
         const html = page(name);
         const shown = name === 'named' ? 'Site Author' : siteAuthor;
+        if (name === 'shadow' && variant !== 'avatar') continue;
         if (variant === 'plain' || shown !== 'Site Author') {
           assert.equal(avatar(html), undefined, label(name));
           assert.match(byline(html), new RegExp(`<svg class="?icon"?.*${shown}</a>$`, 's'), label(name));
@@ -132,7 +137,9 @@ test('author avatar in the byline and the structured data', async () => {
       const fromStatic = page('static');
       assert.equal(attribute(avatar(fromStatic), 'src'), '/blog/images/static-face.svg');
       assert.equal(author(fromStatic).image, 'https://example.org/blog/images/static-face.svg');
-      assert.match(byline(page('numeric')), /<img[^>]*>123<\/a>$/);
+      const numeric = page('numeric');
+      assert.match(byline(numeric), /<img[^>]*>123<\/a>$/);
+      assert.equal(author(numeric).name, '123');
     }
   } finally {
     rmSync(temporary, { recursive: true, force: true });
