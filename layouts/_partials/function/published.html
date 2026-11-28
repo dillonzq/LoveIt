@@ -1,0 +1,17 @@
+{{- /* Whether Hugo publishes files for the page: false when its "render" build option is "never" or "link". */ -}}
+{{- /* Hugo versions that still read "_build" use it in place of "build", even when it is empty. A "build" param that is not a map is not a build option. */ -}}
+{{- $build := .Params.build -}}
+{{- if isset .Params "_build" -}}
+    {{- $build = index .Params "_build" -}}
+{{- end -}}
+{{- $published := true -}}
+{{- if reflect.IsMap $build -}}
+    {{- $render := index $build "render" -}}
+    {{- /* As Hugo decodes it: false is "0", and a value other than "never", "link" and "0" is "always". */ -}}
+    {{- if eq (printf "%T" $render) "bool" -}}
+        {{- $published = $render -}}
+    {{- else if in (slice "never" "link" "0") (string $render) -}}
+        {{- $published = false -}}
+    {{- end -}}
+{{- end -}}
+{{- return $published -}}

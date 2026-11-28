@@ -32,6 +32,11 @@ const content = {
   'content/posts/unrendered.en.md': '---\ntitle: Unrendered\ndate: 2025-01-03\nbuild:\n  render: never\n---\nText.\n',
   'content/posts/linked.en.md': '---\ntitle: Linked\ndate: 2025-01-03\nbuild:\n  render: link\n---\nText.\n',
   'content/posts/untitled.en.md': '---\ntitle: " "\ndate: 2024-12-29\n---\nText.\n',
+  // A custom "build" param is not a build option.
+  'content/posts/custom-param.en.md': '---\ntitle: Custom param\ndate: 2024-12-28\nparams:\n  build: My Build\n---\nText.\n',
+  // Hugo reads "0" as "never" and an unknown value such as "Never" as "always".
+  'content/posts/zero.en.md': '---\ntitle: Zero\ndate: 2024-12-27\nbuild:\n  render: "0"\n---\nText.\n',
+  'content/posts/capital.en.md': '---\ntitle: Capital\ndate: 2024-12-26\nbuild:\n  render: Never\n---\nText.\n',
   // A section titled like the heading of the pages outside any section joins it.
   'content/pages/guide.en.md': '---\ntitle: Guide\n---\nText.\n',
   'content/unrendered/only.en.md': '---\ntitle: Only unrendered\nbuild:\n  render: never\n---\nText.\n',
@@ -117,6 +122,8 @@ test('pages link their Markdown version and the llms.txt of their language', () 
     '- [JSON first](https://example.org/blog/posts/json-first/)',
     // llms.txt parsers need a link text.
     '- [/posts/untitled](https://example.org/blog/posts/untitled/index.md)',
+    '- [Custom param](https://example.org/blog/posts/custom-param/index.md)',
+    '- [Capital](https://example.org/blog/posts/capital/index.md)',
     '',
     '## Notes',
     '',
@@ -127,6 +134,9 @@ test('pages link their Markdown version and the llms.txt of their language', () 
     '- [Old](https://example.org/blog/archive/old/index.md)',
     '',
   ].join('\n'));
+  // The llms.txt entries follow what Hugo publishes.
+  assert.notEqual(page('posts/capital/index.html'), undefined);
+  assert.equal(page('posts/zero/index.html'), undefined);
   assert.equal(page('zh-cn/llms.txt'), [
     '# Test Site',
     '',
@@ -137,6 +147,17 @@ test('pages link their Markdown version and the llms.txt of their language', () 
     '- [关于](https://example.org/blog/zh-cn/about/index.md)',
     '',
   ].join('\n'));
+});
+
+test('pages link no llms.txt that Hugo does not publish', () => {
+  const page = site('home-unrendered', `${llms}\n[outputs]\nhome = ["html", "llms"]`, {
+    'content/_index.en.md': '---\ntitle: Home\nbuild:\n  render: link\n---\n',
+  });
+  assert.equal(page('llms.txt'), undefined);
+  assert.doesNotMatch(page('posts/first/index.html'), /describedby/);
+  // The other language publishes its own.
+  assert.notEqual(page('zh-cn/llms.txt'), undefined);
+  assert.match(page('zh-cn/about/index.html'), /<link rel="?describedby"? href="?https:\/\/example\.org\/blog\/zh-cn\/llms\.txt"?>/);
 });
 
 test('a site that hides every page from search lists only the pages it shows', () => {
@@ -179,6 +200,8 @@ test('Hugo versions that still read "_build" leave out the pages it only links',
     // "_build" replaces all of "build", including the options that it does not set.
     'content/whole/_index.en.md': '---\ntitle: Whole\ncascade:\n  _build:\n    publishResources: false\n---\n',
     'content/whole/listed.en.md': '---\ntitle: Listed\nbuild:\n  render: link\n---\nText.\n',
+    // An empty "_build" too.
+    'content/notes/empty.en.md': '---\ntitle: Empty\n_build: {}\nbuild:\n  render: link\n---\nText.\n',
   }, { check: false });
   // Later versions refuse "_build" and fail the build.
   if (status !== 0 && /"_build" front matter key was deprecated/.test(output)) return t.skip('this Hugo version no longer reads "_build"');
@@ -187,8 +210,10 @@ test('Hugo versions that still read "_build" leave out the pages it only links',
   assert.equal(read('mixed/kept-out/index.html'), undefined);
   assert.notEqual(read('reversed/published/index.html'), undefined);
   assert.notEqual(read('whole/listed/index.html'), undefined);
+  assert.notEqual(read('notes/empty/index.html'), undefined);
   const list = read('llms.txt');
   assert.doesNotMatch(list, /Linked|Kept out/);
   assert.match(list, /- \[Published\]\(https:\/\/example\.org\/blog\/reversed\/published\/\)/);
+  assert.match(list, /- \[Empty\]\(https:\/\/example\.org\/blog\/notes\/empty\/\)/);
   assert.match(list, /- \[Listed\]\(https:\/\/example\.org\/blog\/whole\/listed\/\)/);
 });

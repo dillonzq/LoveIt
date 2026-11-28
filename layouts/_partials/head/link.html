@@ -29,9 +29,11 @@
     <link rel="alternate" href="{{ .Permalink }}" type="text/markdown" title="{{ $.Title | default $.Site.Title }}">
 {{- end -}}
 
-{{- /* llms.txt of the language, when "llms" is in the outputs of home */ -}}
+{{- /* llms.txt of the language, when "llms" is in the outputs of home and Hugo publishes it */ -}}
 {{- with .Site.Home.OutputFormats.Get "llms" -}}
-    <link rel="describedby" href="{{ .Permalink }}">
+    {{- if partialCached "function/published.html" $.Site.Home $.Site.Language.Lang -}}
+        <link rel="describedby" href="{{ .Permalink }}">
+    {{- end -}}
 {{- end -}}
 
 {{- with .OutputFormats.Get "RSS" -}}
