@@ -760,7 +760,7 @@ enableEmoji = true
         lang = ""
         # emoji presets, the Waline default is used when empty
         emoji = []
-      # {{< version 0.5.0 >}} Mastodon (Fediverse) comment config, see "Mastodon comments" below
+      # {{< version 0.4.2 >}} Mastodon (Fediverse) comment config, see "Mastodon comments" below
       [params.page.comment.mastodon]
         enable = false
         # URL of the post whose replies are the comments, set it in the front matter of each page
@@ -987,7 +987,7 @@ Export your comments before that date and move to another comment system.
 {{< /admonition >}}
 
 {{< admonition tip "Mastodon comments" >}}
-{{< version 0.5.0 >}}
+{{< version 0.4.2 >}}
 
 With `params.page.comment.mastodon`, the comments of a page are the public replies to a post
 on [Mastodon](https://joinmastodon.org/) or another Fediverse server with the Mastodon API.

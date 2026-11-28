@@ -761,7 +761,7 @@ enableEmoji = true
         lang = ""
         # 表情预设, 为空时使用 Waline 的默认值
         emoji = []
-      # {{< version 0.5.0 >}} Mastodon (联邦宇宙) 评论系统设置, 见下文 "Mastodon 评论"
+      # {{< version 0.4.2 >}} Mastodon (联邦宇宙) 评论系统设置, 见下文 "Mastodon 评论"
       [params.page.comment.mastodon]
         enable = false
         # 评论来源的帖子链接, 在每个页面的前置参数中设置
@@ -988,7 +988,7 @@ LeanCloud 已于 2026 年 1 月 12 日[停止新用户注册和新建应用](htt
 {{< /admonition >}}
 
 {{< admonition tip "Mastodon 评论" >}}
-{{< version 0.5.0 >}}
+{{< version 0.4.2 >}}
 
 启用 `params.page.comment.mastodon` 后, 页面的评论就是 [Mastodon](https://joinmastodon.org/)
 或其他支持 Mastodon API 的联邦宇宙服务器上一条帖子的公开回复.
