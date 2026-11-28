@@ -114,6 +114,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     name = "xxxx"
     email = ""
     link = ""
+    # author avatar shown in the post meta instead of the user icon (path under "static/" or "assets/", or URL)
+    # 文章元信息中代替用户图标显示的作者头像 (位于 "static/" 或 "assets/" 下的路径, 或者 URL)
+    avatar = ""
 
   # Header config
   # 页面头部导航栏配置

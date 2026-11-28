@@ -6,6 +6,7 @@ lastmod: {{ .Date }}
 draft: true
 author: ""
 authorLink: ""
+authorAvatar: ""
 description: ""
 license: ""
 images: []

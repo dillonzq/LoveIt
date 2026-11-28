@@ -1,0 +1,32 @@
+{{- /*
+    Render the author link of a post byline.
+
+    Options:
+    - Page: the post.
+    - Params: the post parameters merged with params.page.
+    - Lazy: false loads the avatar at once, as in plugin/img.html.
+
+    The avatar (see function/author-avatar.html) is a page resource name, a
+    path under assets/ or static/, or a URL, resolved like other images.
+    Without one, the user icon is shown.
+*/ -}}
+{{- $page := .Page -}}
+{{- $params := .Params -}}
+{{- $author := $params.author | default $page.Site.Params.Author.name | default (T "author") -}}
+{{- $authorLink := $params.authorlink | default $page.Site.Params.Author.link | default $page.Site.Home.RelPermalink -}}
+{{- $options := dict "Class" "author" "Destination" $authorLink "Title" "Author" "Rel" "author" "Content" $author -}}
+{{- with dict "Page" $page "Params" $params | partial "function/author-avatar.html" -}}
+    {{- /* The avatar is decorative: the author name next to it names the link. */ -}}
+    {{- $img := "" -}}
+    {{- with .URL -}}
+        {{- /* Not a resource: linked as it is, without looking it up again. */ -}}
+        {{- $loading := cond (eq $.Lazy false) "" ` loading="lazy" decoding="async"` -}}
+        {{- $img = printf `<img class="author-avatar" src="%s" alt="" width="20" height="20"%s />` (htmlEscape .) $loading -}}
+    {{- else -}}
+        {{- $img = dict "Src" .Path "Resources" .Resources "Alt" "" "Class" "author-avatar" "Width" 20 "Height" 20 "Widths" (slice 20 40 60) "Sizes" "20px" "Lazy" $.Lazy | partial "plugin/img.html" -}}
+    {{- end -}}
+    {{- $options = merge $options (dict "Content" (printf "%s%v" $img $author)) -}}
+{{- else -}}
+    {{- $options = merge $options (dict "Icon" (dict "Class" "fas fa-user-circle")) -}}
+{{- end -}}
+{{- partial "plugin/a.html" $options -}}

@@ -93,6 +93,7 @@ lastmod: 2020-03-04T15:58:26+08:00
 draft: true
 author: ""
 authorLink: ""
+authorAvatar: ""
 description: ""
 license: ""
 images: []
@@ -160,6 +161,7 @@ seo:
 * **draft**: 如果设为 `true`, 除非 `hugo` 命令使用了 `--buildDrafts`/`-D` 参数, 这篇文章不会被渲染.
 * **author**: 文章作者.
 * **authorLink**: 文章作者的链接.
+* **authorAvatar**: {{< version 0.5.0 >}} 文章作者的头像, 在文章元信息中代替用户图标显示: 页面资源的名称, 位于 `static/` 或 `assets/` 下的路径, 或者 URL. 如果没有设置, 文章会显示 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.author.avatar`, 除非它的 `author` 是另一位作者.
 * **description**: 文章内容的描述.
 * **license**: 这篇文章特殊的许可.
 * **images**: 页面图片, 用于 Open Graph 和 Twitter Cards.
