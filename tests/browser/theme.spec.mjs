@@ -1052,6 +1052,26 @@ test('first-screen avatar loads directly and scroll bursts share a frame', async
   expect(frames).toBe(1);
 });
 
+test('the theme script is a module and a feature that fails to start does not stop the ones after it', async ({ browser }) => {
+  const context = await browser.newContext({ reducedMotion: 'reduce' });
+  const page = await context.newPage();
+  const errors = [];
+  const logged = [];
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('console', message => { if (message.type() === 'error') logged.push(message.text()); });
+  // Without its library, the ECharts feature throws when it starts.
+  await page.route('**/echarts.min.js', route => route.abort());
+  await page.goto('/fuse/blog/feature-isolation/');
+  await expect(page.locator('script[src*="/js/theme"]')).toHaveAttribute('type', 'module');
+  // TypeIt and the TOC start after ECharts.
+  await expect(page.locator('.typeit > div')).toHaveText('Typed after the chart');
+  await expect(page.locator('#toc-auto')).toBeVisible();
+  await expect(page.locator('#toc-auto a.active')).toHaveCount(1);
+  expect(logged.some(text => text.includes('the echarts feature failed to start'))).toBe(true);
+  expect(errors).toEqual([]);
+  await context.close();
+});
+
 test('content shortcodes survive cached content and nesting; grouped TypeIt types in order', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));

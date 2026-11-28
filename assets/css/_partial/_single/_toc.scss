@@ -93,7 +93,7 @@
   }
 
   // A long TOC scrolls inside its own box instead of running past the viewport;
-  // theme.js caps the height of #toc-auto to the space below the header.
+  // assets/js/features/toc.js caps the height of #toc-auto to the space below the header.
   .toc-content {
     flex: 1 1 auto;
     min-height: 0;

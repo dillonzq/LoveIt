@@ -2,7 +2,7 @@
 
 // Search dialog opened from the header buttons, `/` or Ctrl/⌘+K.
 // It is a transparent layer over the page: the search bar sits over the header
-// control that opened it (placed by initSearch in theme.js through the
+// control that opened it (placed by assets/js/features/search.js through the
 // --search-bar-* properties) and the results drop down below the header.
 .search-dialog {
   position: fixed;

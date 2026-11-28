@@ -135,6 +135,19 @@ This file starts at 0.4.0. Older releases are described on the
   reports its state with `aria-expanded`. Sites that override
   `_partials/plugin/code-block.html` should compare it with the new one.
 
+- The theme script loads as a JavaScript module (`<script type="module">`)
+  built for ES2020 instead of ES2015. Its source is split into a core
+  (`assets/js/core.js`) and a module per feature under
+  `assets/js/features/` (search, table of contents, code blocks,
+  lightGallery, KaTeX, diagrams, ECharts, TypeIt, Mapbox, Cookie Consent and
+  each comment system); a feature starts only on pages that use it, and Hugo
+  still bundles them all into the one `js/theme.js` file. A feature that fails
+  to start, for example because its library did not load, is reported in the
+  browser console and no longer stops the features after it. The table of
+  contents and the comments start with the other features instead of 100 ms
+  later. Sites that override `assets/js/theme.js` should move their changes
+  to the file of the feature they change.
+
 ### Deprecated
 
 - `params.compatibility.polyfill`, `params.compatibility.objectFit` and
@@ -165,6 +178,9 @@ This file starts at 0.4.0. Older releases are described on the
 
 ### Fixed
 
+- After the window is resized, the table of contents beside a post measures
+  the page again for following the scroll, instead of keeping the
+  measurements taken when the page loaded.
 - With the Mermaid renderer and `mermaidSecurityLevel = "loose"`, `click`
   callbacks in diagrams run: they are bound after the diagram is
   inserted.

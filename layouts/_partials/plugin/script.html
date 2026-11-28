@@ -15,7 +15,10 @@
                 {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
             {{- end -}}
             {{- if .JSBuild -}}
-                {{- $opts := dict "target" "es2015" -}}
+                {{- $opts := dict "target" "es2020" -}}
+                {{- if .Module -}}
+                    {{- $opts = merge $opts (dict "format" "esm") -}}
+                {{- end -}}
                 {{- if .Minify -}}
                     {{- $opts = merge $opts (dict "minify" true) -}}
                 {{- end -}}
@@ -35,6 +38,9 @@
             {{- $src = $resource.RelPermalink -}}
         {{- end -}}
         {{- $attrs := printf `src="%v"` $src -}}
+        {{- if .Module -}}
+            {{- $attrs = ` type="module"` | add $attrs -}}
+        {{- end -}}
         {{- if .Crossorigin -}}
             {{- $attrs = ` crossorigin="anonymous"` | add $attrs -}}
         {{- end -}}
