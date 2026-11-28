@@ -917,7 +917,7 @@ enableEmoji = true
   [privacy.youtube]
     # ...
 
-# {{< version 0.5.0 >}} Output format of llms.txt, see [Markdown Output and llms.txt](#llms-txt)
+# {{< version 0.4.2 >}} Output format of llms.txt, see [Markdown Output and llms.txt](#llms-txt)
 [outputFormats.llms]
   baseName = "llms"
   mediaType = "text/plain"
@@ -926,7 +926,7 @@ enableEmoji = true
 
 # Options to make hugo output files
 [outputs]
-  # {{< version 0.5.0 changed >}}
+  # {{< version 0.4.2 changed >}}
   home = ["HTML", "RSS", "JSON", "llms"]
   # "markdown" is the output format built into Hugo for the .md version of a page
   page = ["HTML", "markdown"]
@@ -1101,7 +1101,7 @@ In `assets/css/_custom.scss`, you can add some css style code to customize the s
 
 ### 3.4 Markdown Output and llms.txt {#llms-txt}
 
-{{< version 0.5.0 >}}
+{{< version 0.4.2 >}}
 
 With the `markdown` output format, which is built into Hugo, each page is also published as `index.md` next to its `index.html`:
 

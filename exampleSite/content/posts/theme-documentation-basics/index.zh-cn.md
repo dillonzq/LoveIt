@@ -918,7 +918,7 @@ enableEmoji = true
   [privacy.youtube]
     # ...
 
-# {{< version 0.5.0 >}} llms.txt 的输出格式, 参见 [Markdown 输出和 llms.txt](#llms-txt)
+# {{< version 0.4.2 >}} llms.txt 的输出格式, 参见 [Markdown 输出和 llms.txt](#llms-txt)
 [outputFormats.llms]
   baseName = "llms"
   mediaType = "text/plain"
@@ -927,7 +927,7 @@ enableEmoji = true
 
 # 用于 Hugo 输出文档的设置
 [outputs]
-  # {{< version 0.5.0 changed >}}
+  # {{< version 0.4.2 changed >}}
   home = ["HTML", "RSS", "JSON", "llms"]
   # "markdown" 是 Hugo 内置的输出格式, 用于生成页面的 .md 版本
   page = ["HTML", "markdown"]
@@ -1102,7 +1102,7 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 ### 3.4 Markdown 输出和 llms.txt {#llms-txt}
 
-{{< version 0.5.0 >}}
+{{< version 0.4.2 >}}
 
 使用 Hugo 内置的 `markdown` 输出格式, 每个页面在 `index.html` 旁边还会生成一个 `index.md`:
 
