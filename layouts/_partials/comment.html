@@ -167,8 +167,14 @@
         {{- /* Mastodon (Fediverse) Comment System: the replies to a post, read from the Mastodon API */ -}}
         {{- $mastodon := $comment.mastodon | default dict -}}
         {{- if and $mastodon.enable $mastodon.url -}}
-            {{- $url := urls.Parse $mastodon.url -}}
-            {{- $id := path.Base (strings.TrimSuffix "/" $url.Path) -}}
+            {{- /* A URL that does not parse (such as one with a bad %-escape) warns like any other bad URL. */ -}}
+            {{- $url := dict -}}
+            {{- with try (urls.Parse $mastodon.url) -}}
+                {{- if not .Err -}}
+                    {{- $url = .Value -}}
+                {{- end -}}
+            {{- end -}}
+            {{- $id := path.Base (strings.TrimSuffix "/" ($url.Path | default "")) -}}
             {{- if and (eq $url.Scheme "https") $url.Host (findRE `^[0-9A-Za-z]+$` $id) -}}
                 <div id="mastodon" class="comment">
                     {{- $post := printf `<a href="%v" rel="noopener noreferrer" target="_blank">%v</a>` ($mastodon.url | htmlEscape) (T "mastodonPost") -}}
@@ -176,8 +182,14 @@
                     <p class="mastodon-status" role="status"></p>
                     <ol class="mastodon-replies" hidden></ol>
                 </div>
-                {{- $source := $cdn.dompurifyJS | default "lib/dompurify/purify.min.js" -}}
-                {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+                {{- $bundled := resources.Get "lib/dompurify/purify.min.js" -}}
+                {{- $script := dict "Source" ($cdn.dompurifyJS | default "lib/dompurify/purify.min.js") "Fingerprint" $fingerprint -}}
+                {{- /* The CDN data files point at the bundled version, so the bundled file's digest checks the CDN copy. */ -}}
+                {{- $version := index (findRESubmatch `DOMPurify (\d+\.\d+\.\d+)` $bundled.Content 1) 0 1 -}}
+                {{- if and $fingerprint $cdn.dompurifyJS (strings.HasSuffix $cdn.dompurifyJS (printf "/dompurify@%v/dist/purify.min.js" $version)) -}}
+                    {{- $script = dict "Integrity" ($bundled | fingerprint $fingerprint).Data.Integrity "Crossorigin" true | merge $script -}}
+                {{- end -}}
+                {{- dict "Scratch" .Scratch "Data" $script | partial "scratch/script.html" -}}
                 {{- $i18n := dict "loading" (T "mastodonLoading") "empty" (T "mastodonEmpty") "error" (T "mastodonError") "author" (T "author") "sensitive" (T "mastodonSensitive") "attachment" (T "mastodonAttachment") -}}
                 {{- $commentConfig = dict "host" $url.Host "id" $id "i18n" $i18n | dict "mastodon" | merge $commentConfig -}}
             {{- else -}}

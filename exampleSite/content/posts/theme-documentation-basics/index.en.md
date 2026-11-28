@@ -995,6 +995,7 @@ Publish a post about the page, then set its URL in the front matter of the page:
 
 ```yaml
 comment:
+  enable: true
   mastodon:
     enable: true
     url: https://mastodon.social/@user/113456789012345678
@@ -1008,6 +1009,7 @@ Only the public and unlisted replies that this server knows of are shown,
 and a server that requires a login for its API cannot be used.
 The replies are sanitized with [DOMPurify](https://github.com/cure53/DOMPurify),
 which the theme loads from the configured CDN or serves from `assets/lib/dompurify/`.
+With `params.fingerprint` set, the CDN copy is checked against the bundled file with SRI.
 {{< /admonition >}}
 
 {{< admonition tip "Tips about CDN Configuration" >}}

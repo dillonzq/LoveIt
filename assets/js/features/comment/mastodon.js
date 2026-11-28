@@ -71,6 +71,9 @@ function sanitize(html) {
         ALLOWED_TAGS,
         ALLOWED_ATTR,
         ALLOW_DATA_ATTR: false,
+        // DOMPurify keeps aria-* attributes unless told otherwise; a reply must not hide
+        // itself from screen readers or relabel its links.
+        ALLOW_ARIA_ATTR: false,
         RETURN_DOM_FRAGMENT: true,
     });
     fragment.querySelectorAll('[class]').forEach($element => {
@@ -118,7 +121,7 @@ function renderAttachments(status, i18n) {
     return $list;
 }
 
-function renderReply(status, host, authorId, i18n) {
+function renderReply(status, authorId, i18n) {
     const account = status.account || {};
     const $article = element('article', 'mastodon-reply');
 
@@ -138,8 +141,9 @@ function renderReply(status, host, authorId, i18n) {
     const $name = element('span', 'mastodon-name');
     const $displayName = element('bdi', 'mastodon-display-name', account.display_name || account.username || '');
     addEmojis($displayName, account.emojis);
-    const acct = account.acct || '';
-    $name.append($displayName, element('span', 'mastodon-acct', acct.includes('@') ? `@${acct}` : `@${acct}@${host}`));
+    // A local account's acct has no domain, and the domain of its handle can differ from the
+    // host the API is served from (WEB_DOMAIN), so it is shown as the API gives it.
+    $name.append($displayName, element('span', 'mastodon-acct', `@${account.acct || account.username || ''}`));
     $account.appendChild($name);
     $header.appendChild($account);
     if (authorId && account.id === authorId) $header.appendChild(element('span', 'mastodon-author', i18n.author));
@@ -179,7 +183,7 @@ function renderReply(status, host, authorId, i18n) {
 }
 
 // Builds the reply tree from the descendants, which the API lists in thread order.
-function renderReplies($list, rootId, descendants, host, authorId, i18n) {
+function renderReplies($list, rootId, descendants, authorId, i18n) {
     const ids = new Set(descendants.map(status => status.id));
     const children = new Map();
     for (const status of descendants) {
@@ -191,7 +195,7 @@ function renderReplies($list, rootId, descendants, host, authorId, i18n) {
     const render = ($parentList, parentId, depth) => {
         for (const status of children.get(parentId) || []) {
             const $item = element('li', 'mastodon-reply-item');
-            $item.appendChild(renderReply(status, host, authorId, i18n));
+            $item.appendChild(renderReply(status, authorId, i18n));
             $parentList.appendChild($item);
             if (!children.has(status.id)) continue;
             if (depth < MAX_DEPTH) {
@@ -244,10 +248,12 @@ export default function initMastodon(theme) {
                 showStatus(i18n.empty);
                 return;
             }
-            renderReplies($list, status.id || id, descendants, host, status.account?.id, i18n);
+            renderReplies($list, status.id || id, descendants, status.account?.id, i18n);
             $list.hidden = false;
             showStatus('');
         } catch (err) {
+            // One request failing ends the other one too.
+            controller?.abort();
             console.error('LoveIt: the Mastodon comments could not be loaded.', err);
             showStatus(i18n.error);
         } finally {

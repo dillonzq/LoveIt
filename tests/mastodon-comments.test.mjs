@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -15,6 +16,8 @@ const posts = {
   insecure: 'http://mastodon.example/@author/1',
   profile: 'https://mastodon.example/@author',
   script: 'javascript:alert(1)//1',
+  // urls.Parse fails on a bad %-escape; the page still builds.
+  escape: 'https://mastodon.example/@author/%ZZ',
 };
 
 function build(binary, site, cdn) {
@@ -29,6 +32,9 @@ function build(binary, site, cdn) {
     'baseURL = "https://example.org/"',
     `theme = ${JSON.stringify(path.basename(root))}`,
     `themesDir = ${JSON.stringify(path.dirname(root))}`,
+    '[params]',
+    // With the CDN, SRI checks the CDN copy against the bundled file.
+    `fingerprint = ${JSON.stringify(cdn ? 'sha384' : '')}`,
     '[params.cdn]',
     `data = ${JSON.stringify(cdn)}`,
     '[params.page.comment]',
@@ -39,6 +45,7 @@ function build(binary, site, cdn) {
   return spawnSync(binary, ['--source', site, '--environment', 'production', '--noBuildLock'], { cwd: site, env: toolEnv, encoding: 'utf8' });
 }
 
+const integrity = `sha384-${createHash('sha384').update(readFileSync(path.join(root, 'assets/lib/dompurify/purify.min.js'))).digest('base64')}`;
 const escape = text => text.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
 const config = html => JSON.parse(html.match(/window\.config=(\{.*?\});/s)[1]);
 
@@ -69,17 +76,23 @@ test('Mastodon comments read the post from its URL and load DOMPurify', async ()
         assert.match(prompt, new RegExp(`^Reply to <a href="?${escape(posts[name])}"? rel="?noopener noreferrer"? target="?_blank"?>this post</a> from a Mastodon`), name);
         const scripts = html.match(/<script[^>]*src=[^>]*purify[^>]*>/g);
         assert.equal(scripts?.length, 1, name);
-        if (cdn) assert.match(scripts[0], /src="?https:\/\/cdn\.jsdelivr\.net\/npm\/dompurify@3\.4\.18\/dist\/purify\.min\.js"?/);
-        else assert.match(scripts[0], /src="?\/lib\/dompurify\/purify\.min\.js"?/);
+        if (cdn) {
+          assert.match(scripts[0], /src="?https:\/\/cdn\.jsdelivr\.net\/npm\/dompurify@3\.4\.18\/dist\/purify\.min\.js"?/);
+          assert.match(scripts[0], new RegExp(`integrity="?${escape(integrity)}"?`));
+          assert.match(scripts[0], /crossorigin="?anonymous"?/);
+        } else {
+          assert.match(scripts[0], /src="?\/lib\/dompurify\/purify\.min\.js"?/);
+          assert.doesNotMatch(scripts[0], /integrity/);
+        }
       }
 
-      for (const name of ['insecure', 'profile', 'script', 'none']) {
+      for (const name of ['insecure', 'profile', 'script', 'escape', 'none']) {
         const html = page(name);
         assert.doesNotMatch(html, /id="?mastodon"?/, name);
         assert.doesNotMatch(html, /purify/, name);
         assert.equal(config(html).comment?.mastodon, undefined, name);
       }
-      for (const name of ['insecure', 'profile', 'script']) {
+      for (const name of ['insecure', 'profile', 'script', 'escape']) {
         assert.match(output, new RegExp(`WARN.*The Mastodon comment URL "${escape(posts[name])}" of "/posts/${name}"`), name);
       }
       assert.doesNotMatch(output, /posts\/(mastodon|pleroma|gotosocial|none)"/);

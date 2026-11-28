@@ -1283,7 +1283,7 @@ function mastodonThread() {
   return {
     status: { id: '100', account: author, content: '<p>New post</p>' },
     descendants: [
-      reply('101', '100', alice, '<p>Hello <span class="h-card"><a href="https://mastodon.test/@author" class="u-url mention theme-class">@<span>author</span></a></span> <a href="https://example.com/a/very/long/path" class="external"><span class="invisible">https://</span><span class="ellipsis">example.com/a/very</span><span class="invisible">/long/path</span></a> :blob:</p><img src="x" onerror="window.mastodonXSS = 1"><script>window.mastodonXSS = 2</script><p><a href="javascript:window.mastodonXSS = 3">click</a><iframe src="https://evil.test/"></iframe></p>', { emojis: alice.emojis }),
+      reply('101', '100', alice, '<p>Hello <span class="h-card"><a href="https://mastodon.test/@author" class="u-url mention theme-class">@<span>author</span></a></span> <a href="https://example.com/a/very/long/path" class="external"><span class="invisible">https://</span><span class="ellipsis">example.com/a/very</span><span class="invisible">/long/path</span></a> :blob:</p><img src="x" onerror="window.mastodonXSS = 1"><script>window.mastodonXSS = 2</script><p aria-hidden="true"><a href="javascript:window.mastodonXSS = 3" aria-label="Not a link">click</a><iframe src="https://evil.test/"></iframe></p>', { emojis: alice.emojis }),
       reply('102', '101', author, '<p>Thanks!</p>'),
       reply('103', '102', bob, '<p>Third level</p>'),
       reply('104', '103', alice, '<p>Fourth level</p>'),
@@ -1328,7 +1328,7 @@ test('Mastodon comments load when in view, sanitize replies, nest them and follo
 
   // Sanitized: no script, handler, iframe or javascript: link, and only Mastodon's own classes.
   expect(await page.evaluate(() => window.mastodonXSS)).toBeUndefined();
-  await expect(root.locator('script, iframe, [onerror]')).toHaveCount(0);
+  await expect(root.locator('script, iframe, [onerror], .mastodon-content [aria-hidden], .mastodon-content [aria-label]')).toHaveCount(0);
   const first = replies.first();
   await expect(first.locator('.mastodon-content a')).toHaveCount(3);
   await expect(first.locator('.mastodon-content a:not([href])')).toHaveText('click');
@@ -1342,7 +1342,7 @@ test('Mastodon comments load when in view, sanitize replies, nest them and follo
   // Custom emojis in names and text are static images named by their shortcode.
   await expect(first.locator('.mastodon-display-name img.mastodon-emoji')).toHaveAttribute('src', 'https://mastodon.test/emoji/blob.png');
   await expect(first.locator('.mastodon-content img.mastodon-emoji')).toHaveAttribute('alt', ':blob:');
-  await expect(first.locator('.mastodon-acct')).toHaveText('@alice@mastodon.test');
+  await expect(first.locator('.mastodon-acct')).toHaveText('@alice');
   await expect(first.locator('.mastodon-avatar')).toHaveAttribute('alt', '');
   await expect(first.locator('.mastodon-date')).toHaveAttribute('href', 'https://mastodon.test/@alice/101');
   await expect(first.locator('time')).toHaveAttribute('datetime', '2025-01-06T08:30:00.000Z');
@@ -1353,7 +1353,8 @@ test('Mastodon comments load when in view, sanitize replies, nest them and follo
   await expect(top.nth(0).locator(':scope > .mastodon-replies > li > .mastodon-replies > li')).toHaveCount(2);
   await expect(top.nth(0).locator('.mastodon-replies .mastodon-replies .mastodon-replies')).toHaveCount(0);
   await expect(top.nth(1).locator('.mastodon-content')).toHaveText('Orphan');
-  // The post author's replies are marked; a remote account keeps its own domain.
+  // The post author's replies are marked; a local account's handle is shown as the API gives it
+  // (its domain can differ from the API host), a remote one with its domain.
   await expect(root.locator('.mastodon-author')).toHaveCount(1);
   await expect(replies.nth(1).locator('.mastodon-author')).toHaveText('Author');
   await expect(replies.nth(2).locator('.mastodon-acct')).toHaveText('@bob@other.test');

@@ -996,6 +996,7 @@ LeanCloud 已于 2026 年 1 月 12 日[停止新用户注册和新建应用](htt
 
 ```yaml
 comment:
+  enable: true
   mastodon:
     enable: true
     url: https://mastodon.social/@user/113456789012345678
@@ -1009,6 +1010,7 @@ comment:
 需要登录才能访问 API 的服务器无法使用.
 回复内容经过 [DOMPurify](https://github.com/cure53/DOMPurify) 过滤,
 主题从配置的 CDN 加载它, 或使用 `assets/lib/dompurify/` 中的内置文件.
+设置了 `params.fingerprint` 时, CDN 上的文件会通过 SRI 与内置文件比对校验.
 {{< /admonition >}}
 
 {{< admonition tip "关于 CDN 配置的技巧" >}}
