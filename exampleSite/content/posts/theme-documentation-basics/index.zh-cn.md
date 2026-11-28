@@ -1010,7 +1010,7 @@ comment:
 需要登录才能访问 API 的服务器无法使用.
 回复内容经过 [DOMPurify](https://github.com/cure53/DOMPurify) 过滤,
 主题从配置的 CDN 加载它, 或使用 `assets/lib/dompurify/` 中的内置文件.
-设置了 `params.fingerprint` 时, CDN 上的文件会通过 SRI 与内置文件比对校验.
+设置了 `params.fingerprint` 时, 指向内置版本的 CDN 链接 (`dompurify@<版本>/dist/purify.min.js`, 与主题的 CDN 数据文件相同) 会通过 SRI 与内置文件比对校验.
 {{< /admonition >}}
 
 {{< admonition tip "关于 CDN 配置的技巧" >}}

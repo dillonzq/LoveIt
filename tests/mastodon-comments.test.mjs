@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { createHash } from 'node:crypto';
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -45,7 +44,8 @@ function build(binary, site, cdn) {
   return spawnSync(binary, ['--source', site, '--environment', 'production', '--noBuildLock'], { cwd: site, env: toolEnv, encoding: 'utf8' });
 }
 
-const integrity = `sha384-${createHash('sha384').update(readFileSync(path.join(root, 'assets/lib/dompurify/purify.min.js'))).digest('base64')}`;
+// SHA-384 of dist/purify.min.js as published in dompurify@3.4.18 on npm (and the CDNs).
+const integrity = 'sha384-lkArbWjiZKuE+bzKbj1vOEF7DKYBDNvgwZMCt5OH8bdRB92zpzyNska9Q/XKPHQD';
 const escape = text => text.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
 const config = html => JSON.parse(html.match(/window\.config=(\{.*?\});/s)[1]);
 
