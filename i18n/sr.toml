@@ -118,6 +118,15 @@ other = "Договорити се"
 
 [cookieconsentLink]
 other = "Сазнајте више"
+
+[zoomIn]
+other = "Увећај"
+
+[zoomOut]
+other = "Умањи"
+
+[resetZoom]
+other = "Поништи увећање"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

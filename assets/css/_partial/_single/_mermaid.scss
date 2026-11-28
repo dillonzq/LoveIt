@@ -1,0 +1,25 @@
+// Colors of diagrams drawn by Pele; Mermaid ignores them.
+// Pele SVGs use these CSS variables, so switching the theme recolors diagrams without redrawing them.
+// :where() keeps the specificity at zero, so `.mermaid` and `[theme=dark] .mermaid` in _custom.scss override them.
+:where(.mermaid) {
+  --pele-bg: #{$global-background-color};
+  --pele-fg: #{$global-font-color};
+  --pele-muted: #{$global-font-secondary-color};
+  --pele-line: #{$global-font-secondary-color};
+  --pele-surface: #{$table-thead-color};
+  --pele-surface-alt: #{$header-background-color};
+  --pele-border: #{$scrollbar-hover-color};
+  --pele-accent: #{$single-link-color};
+  --pele-font-mono: var(--code-font-family);
+}
+
+:where([theme=dark] .mermaid) {
+  --pele-bg: #{$global-background-color-dark};
+  --pele-fg: #{$global-font-color-dark};
+  --pele-muted: #{$global-font-secondary-color-dark};
+  --pele-line: #{$global-font-secondary-color-dark};
+  --pele-surface: #{$search-background-color-dark};
+  --pele-surface-alt: #{$header-background-color-dark};
+  --pele-border: #{$scrollbar-color};
+  --pele-accent: #{$single-link-color-dark};
+}

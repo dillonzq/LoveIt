@@ -121,6 +121,15 @@ other = "เข้าใจแล้ว!"
 
 [cookieconsentLink]
 other = "เรียนรู้เพิ่มเติม"
+
+[zoomIn]
+other = "ขยาย"
+
+[zoomOut]
+other = "ย่อ"
+
+[resetZoom]
+other = "รีเซ็ตการซูม"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

@@ -17,6 +17,7 @@
 | [Mermaid](https://github.com/mermaid-js/mermaid)                                    | mermaid           |  12.3.0 | MIT                                     |
 | [MetingJS](https://github.com/metowolf/MetingJS)                                    | meting            |   2.0.2 | MIT                                     |
 | [modern-normalize](https://github.com/sindresorhus/modern-normalize)                | modern-normalize  |   3.0.1 | MIT                                     |
+| [Pele](https://github.com/obsidianmd/pele)                                          | pele              |  1.13.0 | MIT                                     |
 | [sharer.js](https://github.com/ellisonleao/sharer.js)                               | sharer            |   0.5.4 | MIT                                     |
 | [Simple Icons](https://github.com/simple-icons/simple-icons)                        | simple-icons      | 16.38.0 | CC0-1.0                                 |
 | [Twemoji](https://github.com/jdecked/twemoji)                                       | twemoji           |  17.0.3 | MIT AND CC-BY-4.0                       |

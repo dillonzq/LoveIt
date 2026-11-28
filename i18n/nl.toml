@@ -119,6 +119,15 @@ other = "Begrepen!"
 
 [cookieconsentLink]
 other = "Meer informatie"
+
+[zoomIn]
+other = "Inzoomen"
+
+[zoomOut]
+other = "Uitzoomen"
+
+[resetZoom]
+other = "Zoom herstellen"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

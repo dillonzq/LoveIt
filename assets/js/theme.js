@@ -562,7 +562,60 @@ class Theme {
         return null;
     }
 
+    // Typesets $$...$$ in Pele labels with KaTeX when the page loads it; Pele shows the TeX source otherwise.
+    getPeleMath() {
+        if (typeof katex === 'undefined') return undefined;
+        let probe;
+        return (tex, size) => {
+            if (!probe) {
+                // A clipped, fixed box at the viewport origin never widens the page, also in RTL.
+                const box = document.createElement('div');
+                box.setAttribute('aria-hidden', 'true');
+                box.style.cssText = 'position:fixed;left:0;top:0;width:0;height:0;overflow:hidden;visibility:hidden;pointer-events:none';
+                probe = document.createElement('div');
+                probe.style.cssText = 'display:inline-block;white-space:nowrap';
+                box.appendChild(probe);
+                document.body.appendChild(box);
+            }
+            let expression;
+            try {
+                // MathML only: Safari misplaces KaTeX's HTML output inside SVG.
+                probe.innerHTML = katex.renderToString(tex, { displayMode: true, output: 'mathml' });
+                expression = probe.querySelector('math');
+            } catch (err) {
+                return null;
+            }
+            if (!expression) return null;
+            // Measure the bare <math> that Pele inserts, at the label's font size, without KaTeX's wrapper styles.
+            probe.replaceChildren(expression);
+            probe.style.fontSize = `${size}px`;
+            const { width, height } = expression.getBoundingClientRect();
+            return { html: expression.outerHTML, width, height };
+        };
+    }
+
+    // Pele lays diagrams out for their container and redraws them on resize; colors come from CSS variables,
+    // so switching the theme needs no re-render.
+    initPele() {
+        const options = {
+            math: this.getPeleMath(),
+            zoom: { labels: this.config.mermaid.zoomLabels },
+            onError: err => console.error(err),
+        };
+        Util.forEach(document.getElementsByClassName('mermaid'), $mermaid => {
+            if ($mermaid.dataset.peleMounted) return;
+            const definition = this.getMermaidDefinition($mermaid);
+            if (!definition) return;
+            $mermaid.dataset.peleMounted = 'true';
+            pele.mount($mermaid, definition, options);
+        });
+    }
+
     initMermaid() {
+        if (this.config.mermaid && this.config.mermaid.renderer === 'pele') {
+            this.initPele();
+            return;
+        }
         this._mermaidOnSwitchTheme = this._mermaidOnSwitchTheme || (() => {
             const $mermaidElements = document.getElementsByClassName('mermaid');
             if (!$mermaidElements.length) return;
@@ -577,8 +630,10 @@ class Theme {
 
                 mermaid
                     .render(`mermaid-svg-${$mermaid.id}-${index}`, definition)
-                    .then(({ svg }) => {
+                    .then(({ svg, bindFunctions }) => {
                         $mermaid.innerHTML = svg;
+                        // Attaches `click` callbacks, which Mermaid allows with securityLevel "loose".
+                        if (bindFunctions) bindFunctions($mermaid);
                     })
                     .catch(err => {
                         console.error(err);

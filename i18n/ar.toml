@@ -118,6 +118,15 @@ other = "حسنًا"
 
 [cookieconsentLink]
 other = "معرفة المزيد"
+
+[zoomIn]
+other = "تكبير"
+
+[zoomOut]
+other = "تصغير"
+
+[resetZoom]
+other = "إعادة ضبط التكبير"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

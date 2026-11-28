@@ -118,6 +118,15 @@ other = "Jag förstår!"
 
 [cookieconsentLink]
 other = "Läs mer"
+
+[zoomIn]
+other = "Zooma in"
+
+[zoomOut]
+other = "Zooma ut"
+
+[resetZoom]
+other = "Återställ zoom"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

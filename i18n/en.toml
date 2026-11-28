@@ -117,6 +117,15 @@ other = "Got it!"
 
 [cookieconsentLink]
 other = "Learn more"
+
+[zoomIn]
+other = "Zoom in"
+
+[zoomOut]
+other = "Zoom out"
+
+[resetZoom]
+other = "Reset zoom"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

@@ -118,6 +118,15 @@ other = "Mengerti!"
 
 [cookieconsentLink]
 other = "Pelajari lebih lanjut"
+
+[zoomIn]
+other = "Perbesar"
+
+[zoomOut]
+other = "Perkecil"
+
+[resetZoom]
+other = "Atur ulang zoom"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

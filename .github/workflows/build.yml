@@ -69,7 +69,7 @@ jobs:
         run: |
           npx --no-install playwright install --with-deps chromium
           if [[ "$LOVEIT_HUGO_VERSION" == minimum ]]; then
-            npm run test:browser -- --grep 'Mermaid|Chinese|content shortcodes|passthrough math'
+            npm run test:browser -- --grep 'Mermaid|Pele|Chinese|content shortcodes|passthrough math'
           else
             npm run test:browser
           fi

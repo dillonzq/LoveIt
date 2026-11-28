@@ -123,6 +123,8 @@ code:
   render:
     goat: true
     mermaid: true
+mermaid:
+  renderer: pele
 math:
   enable: false
   # ...
@@ -180,6 +182,7 @@ seo:
 
 * **toc**: {{< version 0.2.9 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.toc` 部分相同, 包括 `enable`, `keepStatic` (是否保持使用文章前面的静态目录) 和 `auto`.
 * **code**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.code` 部分相同, 包括 `copy`, `maxShownLines` 以及 `render.goat` / `render.mermaid` (见 [图表](#diagrams)).
+* **mermaid**: {{< version 0.5.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.mermaid` 部分相同, 包括 `renderer` (见 [图表](#diagrams)).
 * **math**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.math` 部分相同.
 * **mapbox**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.mapbox` 部分相同.
 * **share**: 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.share` 部分相同.
@@ -300,6 +303,10 @@ SVG 图片不会用于 Open Graph 和 Twitter Cards, 因为社交网络无法显
 默认情况下, `goat` 和 `mermaid` 代码块会被渲染为图表.
 在 [网站配置](../theme-documentation-basics#site-configuration) 的 `[params.page.code.render]` 下设置 `goat = false` 或 `mermaid = false` (或者在页面前置参数中设置 `code.render.goat` / `code.render.mermaid`) 可以关闭对应的代码块渲染钩子,
 此时该代码块会回退为普通代码块.
+
+{{< version 0.5.0 changed >}} Mermaid 图表默认使用 [Pele](https://pele.run) 渲染.
+在 `[params.page.mermaid]` 下设置 `renderer = "mermaid"` (或者在前置参数中设置 `mermaid.renderer`) 可以改用 Mermaid 库渲染,
+两者的区别见 [mermaid shortcode](../theme-documentation-mermaid-shortcode#renderer).
 
 #### GoAT 图表 (ASCII)
 

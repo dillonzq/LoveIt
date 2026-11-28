@@ -118,6 +118,15 @@ other = "Anladım!"
 
 [cookieconsentLink]
 other = "Daha fazla öğren"
+
+[zoomIn]
+other = "Yakınlaştır"
+
+[zoomOut]
+other = "Uzaklaştır"
+
+[resetZoom]
+other = "Yakınlaştırmayı sıfırla"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

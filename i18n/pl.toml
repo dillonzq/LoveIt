@@ -109,6 +109,15 @@ other = "pl"
 
 [copyToClipboard]
 other = "Skopiuj do schowka"
+
+[zoomIn]
+other = "Powiększ"
+
+[zoomOut]
+other = "Pomniejsz"
+
+[resetZoom]
+other = "Resetuj powiększenie"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

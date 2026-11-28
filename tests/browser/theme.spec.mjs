@@ -407,53 +407,120 @@ for (const { name, viewport } of [{ name: 'desktop', viewport: { width: 1280, he
   });
 }
 
-test('Mermaid survives cached content; math, copy controls and persisted theme work', async ({ page }) => {
+test('Pele diagrams survive cached content; math, copy controls and persisted theme work', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/fuse/blog/guide/');
   await expect(page.locator('html')).toHaveCSS('font-size', '17px');
   await expect(page.locator('.single-title')).toHaveCSS('letter-spacing', '0.125px');
-  await expect(page.locator('script[src*="mermaid.min.js"]')).toHaveCount(1);
-  await expect(page.locator('.mermaid svg')).toBeVisible();
+  await expect(page.locator('script[src*="pele.global"]')).toHaveCount(1);
+  await expect(page.locator('script[src*="mermaid"]')).toHaveCount(0);
+  await expect(page.locator('.mermaid svg.pele')).toBeVisible();
   await expect(page.locator('.katex').first()).toBeVisible();
   await expect(page.locator('.code-header .copy').first()).toBeVisible();
-  await page.locator('.mermaid svg').evaluate(svg => { svg.dataset.original = ''; });
-  await page.setViewportSize({ width: 1000, height: 700 });
-  await page.waitForTimeout(300);
-  await expect(page.locator('.mermaid svg[data-original]')).toHaveCount(1);
+  const background = () => page.locator('.mermaid svg.pele').evaluate(svg => getComputedStyle(svg).getPropertyValue('--pele-bg').trim());
+  expect(await background()).toBe('#fff');
+  // The theme's defaults have no specificity, so site CSS for .mermaid overrides them in both themes.
+  const override = await page.addStyleTag({ content: '.mermaid { --pele-bg: rgb(1, 2, 3); }' });
+  expect(await background()).toBe('rgb(1, 2, 3)');
+  await page.evaluate(() => document.body.setAttribute('theme', 'dark'));
+  expect(await background()).toBe('rgb(1, 2, 3)');
+  await page.evaluate(() => document.body.setAttribute('theme', 'light'));
+  await override.evaluate(element => element.remove());
+  expect(await background()).toBe('#fff');
+  // Pele colors come from CSS variables: switching the theme recolors the same SVG.
+  await page.locator('.mermaid svg.pele').evaluate(svg => { svg.dataset.original = ''; });
   const before = await page.locator('body').getAttribute('cfg-theme');
-  await page.locator('#header-desktop .theme-switch').click();
+  // The switch cycles auto, light and dark.
+  for (let i = 0; i < 3 && await page.locator('body').getAttribute('theme') !== 'dark'; i++) {
+    await page.locator('#header-desktop .theme-switch').click();
+  }
   const after = await page.locator('body').getAttribute('cfg-theme');
   expect(after).not.toBe(before);
+  await expect(page.locator('.mermaid svg.pele[data-original]')).toHaveCount(1);
+  expect(await background()).toBe('#292a2d');
   await page.reload();
   await expect(page.locator('body')).toHaveAttribute('cfg-theme', after);
+  await expect(page.locator('.mermaid svg.pele')).toBeVisible();
   expect(errors).toEqual([]);
 });
 
+test('Pele typesets math labels with KaTeX and shows syntax errors in place', async ({ page }) => {
+  const errors = [];
+  const consoleErrors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('console', message => { if (message.type() === 'error') consoleErrors.push(message.text()); });
+  await page.goto('/fuse/blog/pele/');
+  const diagrams = page.locator('.mermaid');
+  await expect(diagrams).toHaveCount(3);
+  await expect(diagrams.nth(0).locator('svg.pele')).toBeVisible();
+  await expect(diagrams.nth(0).locator('svg.pele math')).toHaveCount(1);
+  await expect(diagrams.nth(0)).not.toContainText('$$');
+  // The space reserved for the expression matches its rendered size.
+  const fit = await diagrams.nth(0).locator('svg.pele foreignObject').first().evaluate(object => ({
+    reserved: Number(object.getAttribute('width')),
+    rendered: object.querySelector('math').getBoundingClientRect().width / (object.getScreenCTM()?.a || 1),
+  }));
+  expect(Math.abs(fit.reserved - fit.rendered)).toBeLessThan(1);
+  // A diagram that cannot be drawn shows the error instead and does not stop the others.
+  await expect(diagrams.nth(2).locator('svg.pele')).toHaveCount(0);
+  await expect(diagrams.nth(2)).not.toBeEmpty();
+  expect(consoleErrors.length).toBeGreaterThan(0);
+  expect(errors).toEqual([]);
+});
+
+test('Pele offers localized zoom controls for diagrams shrunk to fit', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  await page.goto('/fuse/blog/pele/');
+  const sequence = page.locator('.mermaid').nth(1);
+  await expect(sequence.locator('svg.pele-sequence')).toBeVisible();
+  await expect(sequence.getByRole('button', { name: 'Zoom in' })).toHaveCount(1);
+  await expect(sequence.getByRole('button', { name: 'Zoom out' })).toHaveCount(1);
+  await page.goto('/fuse/blog/ar/pele/');
+  await expect(page.locator('.mermaid svg.pele-sequence')).toBeVisible();
+  await expect(page.locator('.mermaid').getByRole('button', { name: 'تكبير', exact: true })).toHaveCount(1);
+  await expect(page.locator('.mermaid').getByRole('button', { name: 'تصغير', exact: true })).toHaveCount(1);
+  // Measuring math labels must not widen a right-to-left page.
+  await expect(page.locator('.mermaid svg.pele math')).toHaveCount(1);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
+});
+
 // The referrer meta tag is covered by tests/security-defaults.test.mjs; the fixture overrides head/meta.html.
-test('Mermaid uses securityLevel "strict" unless the config says "loose"', async ({ page }) => {
+test('Mermaid renderer from front matter uses securityLevel "strict" unless the config says "loose"', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto('/fuse/blog/guide/');
+  await page.goto('/fuse/blog/mermaid-renderer/');
+  await expect(page.locator('script[src*="mermaid.min.js"]')).toHaveCount(1);
+  await expect(page.locator('script[src*="pele"]')).toHaveCount(0);
   await expect(page.locator('.mermaid svg')).toBeVisible();
+  await expect(page.locator('.mermaid svg.pele')).toHaveCount(0);
   const securityLevel = () => page.evaluate(() => mermaid.mermaidAPI.getConfig().securityLevel);
-  expect(await page.evaluate(() => window.config.mermaid)).toEqual({ securityLevel: 'strict' });
+  expect(await page.evaluate(() => window.config.mermaid)).toEqual({ renderer: 'mermaid', securityLevel: 'strict' });
   expect(await securityLevel()).toBe('strict');
   // The theme switch re-initializes Mermaid from window.config.
   const rerender = async mermaidConfig => {
     await page.evaluate(value => {
-      if (value === undefined) delete window.config.mermaid;
-      else window.config.mermaid = value;
+      window.config.mermaid = value;
       document.querySelector('.mermaid').innerHTML = '';
     }, mermaidConfig);
     await page.locator('#header-desktop .theme-switch').click();
     await expect(page.locator('.mermaid svg')).toBeVisible();
   };
-  await rerender({ securityLevel: 'loose' });
+  await rerender({ renderer: 'mermaid', securityLevel: 'loose' });
   expect(await securityLevel()).toBe('loose');
-  await rerender({ securityLevel: 'antiscript' });
+  // "loose" runs `click` callbacks, which are bound after the SVG is inserted.
+  await page.evaluate(() => {
+    window.mermaidClicked = [];
+    window.onMermaidClick = id => window.mermaidClicked.push(id);
+    const element = document.querySelector('.mermaid');
+    window.config.data[element.id] = 'graph LR\n    A[Mermaid] --> B[Renderer]\n    click A onMermaidClick';
+  });
+  await rerender({ renderer: 'mermaid', securityLevel: 'loose' });
+  await page.locator('.mermaid .node').filter({ hasText: 'Mermaid' }).click();
+  expect(await page.evaluate(() => window.mermaidClicked)).toEqual(['A']);
+  await rerender({ renderer: 'mermaid', securityLevel: 'antiscript' });
   expect(await securityLevel()).toBe('strict');
-  await rerender(undefined);
+  await rerender({ renderer: 'mermaid' });
   expect(await securityLevel()).toBe('strict');
   expect(errors).toEqual([]);
 });
@@ -692,7 +759,7 @@ test('content shortcodes survive cached content and nesting; grouped TypeIt type
   await expect(page.getByText('Nested alpha')).toHaveCSS('color', 'rgb(4, 5, 6)');
   await expect(page.getByText('Nested beta')).toHaveCSS('color', 'rgb(7, 8, 9)');
   expect(await page.evaluate(() => window.scriptOrder)).toEqual(['first', 'second', 'nested a', 'nested b']);
-  await expect(page.locator('.mermaid svg')).toBeVisible();
+  await expect(page.locator('.mermaid svg.pele')).toBeVisible();
   const ids = await page.$$eval('[id^="id-"]', elements => elements.map(element => element.id));
   expect(new Set(ids).size).toBe(ids.length);
   expect(errors).toEqual([]);

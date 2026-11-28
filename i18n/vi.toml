@@ -121,6 +121,15 @@ other = "Đã hiểu!"
 
 [cookieconsentLink]
 other = "Tìm hiểu thêm"
+
+[zoomIn]
+other = "Phóng to"
+
+[zoomOut]
+other = "Thu nhỏ"
+
+[resetZoom]
+other = "Đặt lại thu phóng"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===

@@ -126,6 +126,8 @@ code:
   render:
     goat: true
     mermaid: true
+mermaid:
+  renderer: pele
 math:
   enable: false
   # ...
@@ -183,6 +185,7 @@ seo:
 
 * **toc**: {{< version 0.2.9 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics#site-configuration), including `enable`, `keepStatic` (whether to keep the static table of contents in front of the post) and `auto`.
 * **code**: {{< version 0.2.0 >}} the same as the `params.page.code` part in the [site configuration](../theme-documentation-basics#site-configuration), including `copy`, `maxShownLines` and `render.goat` / `render.mermaid` (see [Diagrams](#diagrams)).
+* **mermaid**: {{< version 0.5.0 >}} the same as the `params.page.mermaid` part in the [site configuration](../theme-documentation-basics#site-configuration), including `renderer` (see [Diagrams](#diagrams)).
 * **math**: {{< version 0.2.0 changed >}} the same as the `params.page.math` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **mapbox**: {{< version 0.2.0 >}} the same as the `params.page.mapbox` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **share**: the same as the `params.page.share` part in the [site configuration](../theme-documentation-basics#site-configuration).
@@ -305,6 +308,10 @@ The `goat` and `mermaid` code blocks are rendered as diagrams by default.
 Set `goat = false` or `mermaid = false` under `[params.page.code.render]` in your [site configuration](../theme-documentation-basics#site-configuration)
 (or `code.render.goat` / `code.render.mermaid` in the front matter of a page) to turn the corresponding code block render hook off.
 The code block then falls back to a plain code block.
+
+{{< version 0.5.0 changed >}} Mermaid diagrams are rendered with [Pele](https://pele.run) by default.
+Set `renderer = "mermaid"` under `[params.page.mermaid]` (or `mermaid.renderer` in the front matter) to render them with the Mermaid library,
+see the [mermaid shortcode](../theme-documentation-mermaid-shortcode#renderer) for the differences.
 
 #### GoAT Diagrams (ASCII)
 
