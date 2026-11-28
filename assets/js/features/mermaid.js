@@ -99,6 +99,6 @@ function initMermaid(theme) {
 
 // Diagrams of the mermaid shortcode and code blocks, drawn by Pele (default) or Mermaid.
 export default function initDiagrams(theme) {
-    if (theme.config.mermaid.renderer === 'pele') initPele(theme);
+    if (theme.config.mermaid?.renderer === 'pele') initPele(theme);
     else initMermaid(theme);
 }

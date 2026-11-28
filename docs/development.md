@@ -100,7 +100,10 @@ page has (header, mobile menu, theme switch, scroll and resize events) and
 `theme.config` and subscribes to its event sets. The entry imports a feature
 with `import()` only when the page uses it; `js.Build` bundles every feature
 into the one file, and a feature runs only once imported. A feature that throws
-while starting is logged and the others still start.
+while starting is logged and the others still start. The theme starts on
+`DOMContentLoaded` from a handler that the inline config script registers
+(`window.loveitStart`), so it runs before the handlers of classic scripts that
+come after the theme script, as it did when the theme script was classic.
 
 ## Theme version
 

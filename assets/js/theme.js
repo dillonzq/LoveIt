@@ -12,7 +12,8 @@ const features = [
     { name: 'gallery', when: theme => theme.config.lightgallery, load: () => import('./features/gallery.js') },
     { name: 'code', when: () => document.querySelector('.code-block'), load: () => import('./features/code.js') },
     { name: 'math', when: theme => theme.config.math, load: () => import('./features/math.js') },
-    { name: 'mermaid', when: theme => theme.config.mermaid, load: () => import('./features/mermaid.js') },
+    // A site's own layout can draw diagrams with the Mermaid library it loads itself.
+    { name: 'mermaid', when: theme => theme.config.mermaid || (typeof mermaid !== 'undefined' && document.querySelector('.mermaid')), load: () => import('./features/mermaid.js') },
     { name: 'echarts', when: theme => theme.config.echarts, load: () => import('./features/echarts.js') },
     { name: 'typeit', when: theme => theme.config.typeit, load: () => import('./features/typeit.js') },
     { name: 'mapbox', when: theme => theme.config.mapbox, load: () => import('./features/mapbox.js') },
@@ -32,12 +33,18 @@ const themeInit = () => {
     new Theme().init(features);
 };
 
-// The theme starts on DOMContentLoaded, after the deferred scripts and the handlers of this
-// event that the site's scripts added before it. A module script runs before the event,
-// unless it is loaded late: then the document has been parsed and the load event starts it.
-if (document.readyState === 'complete') {
+// The theme starts on DOMContentLoaded, like the classic script it used to be: after the
+// deferred scripts and after the handlers of this event that scripts before the theme
+// script added, but before those that later scripts (the script shortcode) added. A module
+// script runs after all of them are added, so the config script registers the theme's
+// handler in its place (layouts/_partials/assets.html): it sets `loveitStart` to null, calls
+// the function this script stores there on DOMContentLoaded, and sets it to true then.
+if (window.loveitStart === null) {
+    window.loveitStart = themeInit;
+} else if (window.loveitStart === true || document.readyState === 'complete') {
     themeInit();
 } else {
+    // Without the config script's handler, e.g. a site's own copy of an older assets.html.
     document.addEventListener('DOMContentLoaded', themeInit, false);
     window.addEventListener('load', themeInit, false);
 }

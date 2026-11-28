@@ -15,9 +15,9 @@
                 {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
             {{- end -}}
             {{- if .JSBuild -}}
-                {{- $opts := dict "target" "es2020" -}}
+                {{- $opts := dict "target" "es2015" -}}
                 {{- if .Module -}}
-                    {{- $opts = merge $opts (dict "format" "esm") -}}
+                    {{- $opts = dict "target" "es2020" "format" "esm" -}}
                 {{- end -}}
                 {{- if .Minify -}}
                     {{- $opts = merge $opts (dict "minify" true) -}}

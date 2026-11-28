@@ -1026,6 +1026,16 @@ test('a long auto TOC stays within the viewport and scrolls to the active sectio
     const [c, a] = await Promise.all([content.boundingBox(), active.boundingBox()]);
     return a.y >= c.y && a.y + a.height <= c.y + c.height && c.y + c.height <= 400;
   }).toBe(true);
+
+  // A resize measures the page again: the fixed TOC follows a taller header.
+  expect(await toc.evaluate(el => getComputedStyle(el).position)).toBe('fixed');
+  const headerHeight = await page.evaluate(() => {
+    const header = document.getElementById('header-desktop');
+    header.style.height = `${header.offsetHeight + 40}px`;
+    window.dispatchEvent(new Event('resize'));
+    return header.offsetHeight;
+  });
+  await expect.poll(() => toc.evaluate(el => el.style.top)).toBe(`${headerHeight + 20}px`);
 });
 
 test('first-screen avatar loads directly and scroll bursts share a frame', async ({ page }) => {
@@ -1052,7 +1062,7 @@ test('first-screen avatar loads directly and scroll bursts share a frame', async
   expect(frames).toBe(1);
 });
 
-test('the theme script is a module and a feature that fails to start does not stop the ones after it', async ({ browser }) => {
+test('the theme script is a module, starts before later DOMContentLoaded handlers, and a feature that fails to start does not stop the ones after it', async ({ browser }) => {
   const context = await browser.newContext({ reducedMotion: 'reduce' });
   const page = await context.newPage();
   const errors = [];
@@ -1068,6 +1078,8 @@ test('the theme script is a module and a feature that fails to start does not st
   await expect(page.locator('#toc-auto')).toBeVisible();
   await expect(page.locator('#toc-auto a.active')).toHaveCount(1);
   expect(logged.some(text => text.includes('the echarts feature failed to start'))).toBe(true);
+  // The script shortcode's DOMContentLoaded handler finds the code block already working.
+  expect(await page.evaluate(() => window.shortcodeSawTheme)).toBe(true);
   expect(errors).toEqual([]);
   await context.close();
 });
