@@ -568,20 +568,27 @@ class Theme {
         let probe;
         return (tex, size) => {
             if (!probe) {
+                // A clipped, fixed box at the viewport origin never widens the page, also in RTL.
+                const box = document.createElement('div');
+                box.setAttribute('aria-hidden', 'true');
+                box.style.cssText = 'position:fixed;left:0;top:0;width:0;height:0;overflow:hidden;visibility:hidden;pointer-events:none';
                 probe = document.createElement('div');
-                probe.setAttribute('aria-hidden', 'true');
-                probe.style.cssText = 'position:absolute;left:-9999px;top:0;visibility:hidden;display:inline-block;white-space:nowrap';
-                document.body.appendChild(probe);
+                probe.style.cssText = 'display:inline-block;white-space:nowrap';
+                box.appendChild(probe);
+                document.body.appendChild(box);
             }
+            let expression;
             try {
                 // MathML only: Safari misplaces KaTeX's HTML output inside SVG.
                 probe.innerHTML = katex.renderToString(tex, { displayMode: true, output: 'mathml' });
+                expression = probe.querySelector('math');
             } catch (err) {
                 return null;
             }
-            probe.style.fontSize = `${size}px`;
-            const expression = probe.querySelector('math');
             if (!expression) return null;
+            // Measure the bare <math> that Pele inserts, at the label's font size, without KaTeX's wrapper styles.
+            probe.replaceChildren(expression);
+            probe.style.fontSize = `${size}px`;
             const { width, height } = expression.getBoundingClientRect();
             return { html: expression.outerHTML, width, height };
         };

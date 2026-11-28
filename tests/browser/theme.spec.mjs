@@ -420,6 +420,14 @@ test('Pele diagrams survive cached content; math, copy controls and persisted th
   await expect(page.locator('.code-header .copy').first()).toBeVisible();
   const background = () => page.locator('.mermaid svg.pele').evaluate(svg => getComputedStyle(svg).getPropertyValue('--pele-bg').trim());
   expect(await background()).toBe('#fff');
+  // The theme's defaults have no specificity, so site CSS for .mermaid overrides them in both themes.
+  const override = await page.addStyleTag({ content: '.mermaid { --pele-bg: rgb(1, 2, 3); }' });
+  expect(await background()).toBe('rgb(1, 2, 3)');
+  await page.evaluate(() => document.body.setAttribute('theme', 'dark'));
+  expect(await background()).toBe('rgb(1, 2, 3)');
+  await page.evaluate(() => document.body.setAttribute('theme', 'light'));
+  await override.evaluate(element => element.remove());
+  expect(await background()).toBe('#fff');
   // Pele colors come from CSS variables: switching the theme recolors the same SVG.
   await page.locator('.mermaid svg.pele').evaluate(svg => { svg.dataset.original = ''; });
   const before = await page.locator('body').getAttribute('cfg-theme');
@@ -448,6 +456,12 @@ test('Pele typesets math labels with KaTeX and shows syntax errors in place', as
   await expect(diagrams.nth(0).locator('svg.pele')).toBeVisible();
   await expect(diagrams.nth(0).locator('svg.pele math')).toHaveCount(1);
   await expect(diagrams.nth(0)).not.toContainText('$$');
+  // The space reserved for the expression matches its rendered size.
+  const fit = await diagrams.nth(0).locator('svg.pele foreignObject').first().evaluate(object => ({
+    reserved: Number(object.getAttribute('width')),
+    rendered: object.querySelector('math').getBoundingClientRect().width / (object.getScreenCTM()?.a || 1),
+  }));
+  expect(Math.abs(fit.reserved - fit.rendered)).toBeLessThan(1);
   // A diagram that cannot be drawn shows the error instead and does not stop the others.
   await expect(diagrams.nth(2).locator('svg.pele')).toHaveCount(0);
   await expect(diagrams.nth(2)).not.toBeEmpty();
@@ -466,6 +480,9 @@ test('Pele offers localized zoom controls for diagrams shrunk to fit', async ({ 
   await expect(page.locator('.mermaid svg.pele-sequence')).toBeVisible();
   await expect(page.locator('.mermaid').getByRole('button', { name: 'تكبير', exact: true })).toHaveCount(1);
   await expect(page.locator('.mermaid').getByRole('button', { name: 'تصغير', exact: true })).toHaveCount(1);
+  // Measuring math labels must not widen a right-to-left page.
+  await expect(page.locator('.mermaid svg.pele math')).toHaveCount(1);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
 });
 
 // The referrer meta tag is covered by tests/security-defaults.test.mjs; the fixture overrides head/meta.html.

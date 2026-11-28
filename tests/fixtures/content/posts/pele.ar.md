@@ -4,6 +4,11 @@ date: 2024-06-01
 ---
 
 ```mermaid
+graph LR
+    A["$$x^2 + y^2$$"] --> B[مربع]
+```
+
+```mermaid
 sequenceDiagram
     participant Alpha as Alpha service
     participant Bravo as Bravo service

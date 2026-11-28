@@ -51,7 +51,18 @@ graph LR;
 
 每个页面只加载所选渲染器的库. Pele 支持 Mermaid 12.1 的图表类型, 但存在一些[差异](https://pele.run/compatibility):
 
-* Pele 使用自己的布局引擎和样式, 所以图表和 Mermaid 的外观并不完全相同. Mermaid 主题不会生效, 主题通过 [CSS 变量](https://pele.run/theming) 设置颜色, 你可以在 `assets/css/_custom.scss` 中为 `.mermaid` 覆盖这些变量.
+* Pele 使用自己的布局引擎和样式, 所以图表和 Mermaid 的外观并不完全相同. Mermaid 主题不会生效, 主题通过 [CSS 变量](https://pele.run/theming) 设置颜色, 你可以在 `assets/css/_custom.scss` 中覆盖这些变量:
+
+  ```scss
+  .mermaid {
+    --pele-accent: #c62f6c;
+  }
+
+  [theme=dark] .mermaid {
+    --pele-accent: #ff7aa8;
+  }
+  ```
+
 * 标签中不能包含 HTML. `click` 语句可以打开链接, 但会忽略 JavaScript 回调. 不会绘制 `fa:fa-car` 这类图标.
 * 只有在加载了 KaTeX 的页面 (见 `params.page.math`) 上, 标签中的数学公式 (`$$...$$`) 才会使用 KaTeX 排版, 其它页面会显示 TeX 源码.
 * 无法绘制的图表会在原位置显示错误信息.

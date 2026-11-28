@@ -51,7 +51,18 @@ graph LR;
 
 Each page loads only the library of its renderer. Pele supports the diagram types of Mermaid 12.1, with some [differences](https://pele.run/compatibility):
 
-* Pele has its own layout engine and style, so diagrams do not look exactly like Mermaid's. Mermaid themes do not apply; the theme sets the colors through [CSS variables](https://pele.run/theming), which you can override for `.mermaid` in `assets/css/_custom.scss`.
+* Pele has its own layout engine and style, so diagrams do not look exactly like Mermaid's. Mermaid themes do not apply; the theme sets the colors through [CSS variables](https://pele.run/theming), which you can override in `assets/css/_custom.scss`:
+
+  ```scss
+  .mermaid {
+    --pele-accent: #c62f6c;
+  }
+
+  [theme=dark] .mermaid {
+    --pele-accent: #ff7aa8;
+  }
+  ```
+
 * Labels can't contain HTML. `click` statements open links, but JavaScript callbacks are ignored. Icons such as `fa:fa-car` are not drawn.
 * Math (`$$...$$`) in labels is typeset with KaTeX only on pages where KaTeX is loaded (see `params.page.math`). Elsewhere the TeX source is shown.
 * A diagram that can't be drawn shows the error in its place.

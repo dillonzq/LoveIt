@@ -1,6 +1,7 @@
 @use "sass:color";
 
 @import "../_partial/_single/toc";
+@import "../_partial/_single/mermaid";
 
 // Markdown headings carry their anchor link from the build. It shows only on
 // an article's own h2-h6, as before; anywhere else it is not rendered.
@@ -332,7 +333,6 @@
     @import "../_partial/_single/instagram";
     @import "../_partial/_single/admonition";
     @import "../_partial/_single/echarts";
-    @import "../_partial/_single/mermaid";
     @import "../_partial/_single/mapbox";
     @import "../_partial/_single/music";
     @import "../_partial/_single/bilibili";
