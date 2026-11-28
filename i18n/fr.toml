@@ -173,6 +173,9 @@ other = "Retour"
 [home]
 other = "Accueil"
 
+[pages]
+other = "Pages"
+
 [readMore]
 other = "En savoir plus"
 

@@ -169,6 +169,10 @@ other = "Back"
 [home]
 other = "Home"
 
+# Heading of the pages outside any section in llms.txt
+[pages]
+other = "Pages"
+
 [readMore]
 other = "Read More"
 

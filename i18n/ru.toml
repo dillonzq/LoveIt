@@ -173,6 +173,9 @@ other = "Назад"
 [home]
 other = "Домой"
 
+[pages]
+other = "Страницы"
+
 [readMore]
 other = "Читать больше"
 

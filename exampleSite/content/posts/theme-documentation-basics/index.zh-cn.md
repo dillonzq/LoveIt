@@ -1099,9 +1099,9 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 ```
 
 `llms.txt` 以网站标题和 `[params]` 中的 `description` 开头.
-它先列出不属于任何章节的页面, 再在以章节标题为标题的小节下列出每个顶级章节的页面, 包括嵌套章节中的页面.
+它先在以网站语言显示的 "页面" 标题下列出不属于任何章节的页面, 再在以章节标题为标题的小节下列出每个顶级章节的页面, 包括嵌套章节中的页面.
 每个页面有 Markdown 版本时链接到 Markdown 版本, 否则链接到 HTML 页面, 并附上其前置参数中的 `description`.
-对搜索隐藏的页面 (`hiddenFromSearch`) 不会列出.
+对搜索隐藏的页面 (`hiddenFromSearch`) 以及两者都不生成的页面不会列出.
 多语言网站的每种语言各有一个 `llms.txt`, 位于该语言的根目录, 例如 `/zh-cn/llms.txt`.
 每个页面都会用 `<link rel="describedby">` 链接其语言的 `llms.txt`.
 

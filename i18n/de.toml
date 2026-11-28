@@ -173,6 +173,9 @@ other = "Zurück"
 [home]
 other = "Startseite"
 
+[pages]
+other = "Seiten"
+
 [readMore]
 other = "Weiterlesen"
 

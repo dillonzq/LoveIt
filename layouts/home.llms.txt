@@ -1,30 +1,59 @@
-{{- /* llms.txt (https://llmstxt.org/): the site title and description, then the pages outside any section and an H2 list per top-level section. Each page links to its Markdown version when it has one, otherwise to its HTML page. Pages hidden from search are left out, as in index.json. */ -}}
+{{- /* llms.txt (https://llmstxt.org/): the site title and description, then an H2 list of the pages outside any section and one per top-level section. Each page links to its Markdown version when it has one, otherwise to its HTML page; pages with neither are left out. Pages hidden from search are left out, as in index.json. */ -}}
 {{- $pages := .Site.RegularPages -}}
 {{- if .Site.Params.page.hiddenFromSearch -}}
     {{- $pages = where $pages "Params.hiddenfromsearch" false -}}
 {{- else -}}
     {{- $pages = where $pages "Params.hiddenfromsearch" "!=" true -}}
 {{- end -}}
-{{- $groups := slice (dict "pages" (where $pages "Section" "")) -}}
+{{- /* The pages outside any section, the top-level sections in the order of Hugo, then the sections that Hugo does not list, such as one with "build.list = never" */ -}}
+{{- $keys := slice "" -}}
 {{- range .Sections -}}
-    {{- $groups = $groups | append (dict "title" .Title "pages" (where $pages "Section" .Section)) -}}
+    {{- $keys = $keys | append .Section -}}
+{{- end -}}
+{{- range $pages -}}
+    {{- if not (in $keys .Section) -}}
+        {{- $keys = $keys | append .Section -}}
+    {{- end -}}
 {{- end -}}
 {{- $escape := `([\\\[\]])` -}}
 # {{ .Site.Title | replaceRE `\s+` " " }}
 {{ with .Site.Params.description }}
 > {{ . | replaceRE `\s+` " " | strings.TrimSpace }}
 {{ end -}}
-{{- range $groups -}}
-    {{- if .pages }}
-{{ with .title }}## {{ . | replaceRE `\s+` " " }}
-
-{{ end -}}
-        {{- range .pages -}}
-            {{- $url := .Permalink -}}
-            {{- with .OutputFormats.Get "markdown" -}}
+{{- range $keys -}}
+    {{- $key := . -}}
+    {{- $lines := slice -}}
+    {{- range where $pages "Section" $key -}}
+        {{- $url := "" -}}
+        {{- with .OutputFormats.Get "markdown" -}}
+            {{- $url = .Permalink -}}
+        {{- end -}}
+        {{- if not $url -}}
+            {{- with .OutputFormats.Get "html" -}}
                 {{- $url = .Permalink -}}
             {{- end -}}
-- [{{ .LinkTitle | replaceRE `\s+` " " | replaceRE $escape `\$1` }}]({{ $url | replaceRE `\(` "%28" | replaceRE `\)` "%29" }}){{ with .Description }}: {{ . | replaceRE `\s+` " " | strings.TrimSpace }}{{ end }}
-{{ end -}}
+        {{- end -}}
+        {{- if $url -}}
+            {{- $title := .LinkTitle | replaceRE `\s+` " " | replaceRE $escape `\$1` -}}
+            {{- $line := printf "- [%s](%s)" $title ($url | replaceRE `\(` "%28" | replaceRE `\)` "%29") -}}
+            {{- with .Description -}}
+                {{- $line = printf "%s: %s" $line (. | replaceRE `\s+` " " | strings.TrimSpace) -}}
+            {{- end -}}
+            {{- $lines = $lines | append $line -}}
+        {{- end -}}
     {{- end -}}
+    {{- with $lines -}}
+        {{- $heading := T "pages" -}}
+        {{- with $key -}}
+            {{- $heading = . -}}
+            {{- with $.Site.GetPage (printf "/%s" .) -}}
+                {{- if eq .Kind "section" -}}
+                    {{- $heading = .Title -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end }}
+## {{ $heading | replaceRE `\s+` " " }}
+
+{{ delimit . "\n" }}
+{{ end -}}
 {{- end -}}

@@ -1098,9 +1098,9 @@ To publish `/llms.txt`, define the `llms` output format and add it to the output
 ```
 
 `llms.txt` starts with the site title and `description` in `[params]`.
-It lists the pages outside any section first, then the pages of each top-level section under a heading with the section title, nested sections included.
+It lists the pages outside any section under a "Pages" heading in the language of the site, then the pages of each top-level section under a heading with the section title, nested sections included.
 Each page links to its Markdown version when it has one, otherwise to its HTML page, with the `description` from its front matter.
-Pages hidden from search (`hiddenFromSearch`) are left out.
+Pages hidden from search (`hiddenFromSearch`) and pages that publish neither are left out.
 A multilingual site has one `llms.txt` per language, in the root of each language, such as `/zh-cn/llms.txt`.
 Each page links the `llms.txt` of its language with `<link rel="describedby">`.
 

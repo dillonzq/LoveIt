@@ -170,6 +170,9 @@ other = "Повернутися"
 [home]
 other = "Головна"
 
+[pages]
+other = "Сторінки"
+
 [readMore]
 other = "Детальніше"
 

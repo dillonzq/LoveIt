@@ -171,6 +171,9 @@ other = "Terug"
 [home]
 other = "Homepagina"
 
+[pages]
+other = "Pagina's"
+
 [readMore]
 other = "Lees Meer"
 

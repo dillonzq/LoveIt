@@ -28,6 +28,15 @@ const content = {
   'content/posts/nested/deep.en.md': '---\ntitle: Deep\ndate: 2024-12-31\n---\nText.\n',
   'content/notes/note.en.md': '---\ntitle: Note\n---\nText.\n',
   'content/empty/hidden.en.md': '---\ntitle: Only hidden\nhiddenFromSearch: true\n---\nText.\n',
+  // Hugo lists a page that it does not render, but publishes no file to link.
+  'content/posts/unrendered.en.md': '---\ntitle: Unrendered\ndate: 2025-01-03\nbuild:\n  render: never\n---\nText.\n',
+  'content/unrendered/only.en.md': '---\ntitle: Only unrendered\nbuild:\n  render: never\n---\nText.\n',
+  // The HTML page, not the first output format, is the fallback.
+  'content/posts/json-first.en.md': '---\ntitle: JSON first\ndate: 2024-12-30\noutputs: [json, html]\n---\nText.\n',
+  'layouts/single.json': '{}\n',
+  // A section that Hugo does not list keeps its published pages in llms.txt.
+  'content/archive/_index.en.md': '---\ntitle: Archive\nbuild:\n  list: never\n---\n',
+  'content/archive/old.en.md': '---\ntitle: Old\ndate: 2020-01-01\n---\nText.\n',
 };
 
 function site(name, config, files = {}) {
@@ -88,6 +97,8 @@ test('pages link their Markdown version and the llms.txt of their language', () 
     '',
     '> Notes and posts',
     '',
+    '## Pages',
+    '',
     '- [About](https://example.org/blog/about/index.md): Who writes here.',
     '',
     // Sections in the order of Hugo, here by the date of their newest page; nested sections join their top-level section.
@@ -96,16 +107,23 @@ test('pages link their Markdown version and the llms.txt of their language', () 
     '- [First \\[draft\\] post](https://example.org/blog/posts/first/index.md): Two lines.',
     '- [HTML only](https://example.org/blog/posts/html-only/)',
     '- [Deep](https://example.org/blog/posts/nested/deep/index.md)',
+    '- [JSON first](https://example.org/blog/posts/json-first/)',
     '',
     '## Notes',
     '',
     '- [Note](https://example.org/blog/notes/note/index.md)',
+    '',
+    '## Archive',
+    '',
+    '- [Old](https://example.org/blog/archive/old/index.md)',
     '',
   ].join('\n'));
   assert.equal(page('zh-cn/llms.txt'), [
     '# Test Site',
     '',
     '> Notes and posts',
+    '',
+    '## 页面',
     '',
     '- [关于](https://example.org/blog/zh-cn/about/index.md)',
     '',
@@ -117,4 +135,16 @@ test('a site that hides every page from search lists only the pages it shows', (
     'content/notes/note.en.md': '---\ntitle: Note\nhiddenFromSearch: false\n---\nText.\n',
   });
   assert.equal(page('llms.txt'), '# Test Site\n\n> Notes and posts\n\n## Notes\n\n- [Note](https://example.org/blog/notes/note/)\n');
+});
+
+test('the Markdown output of earlier example configurations keeps working', () => {
+  // The example site of earlier versions published .md files as text/plain. The theme defines no
+  // other text/plain output format, so Hugo still finds the Markdown template of the pages.
+  const legacy = '[mediaTypes."text/plain"]\nsuffixes = ["md"]\n[outputFormats.MarkDown]\nmediaType = "text/plain"\nisPlainText = true\nisHTML = false\n[outputs]\npage = ["HTML", "MarkDown"]';
+  const page = site('legacy', legacy);
+  assert.match(page('posts/first/index.md'), /^# First \[draft\] post\n\nText\.\n/);
+  const html = links(page('posts/first/index.html'));
+  assert.ok(html.includes('<link rel="alternate" href="https://example.org/blog/posts/first/index.md" type="text/markdown" title="First [draft] post">'), html.join('\n'));
+  assert.ok(!html.some(link => link.includes('describedby')), html.join('\n'));
+  assert.equal(page('llms.txt'), undefined);
 });
