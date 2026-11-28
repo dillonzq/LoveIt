@@ -216,8 +216,9 @@
         {{- end -}}
         {{- $source := $cdn.peleJS | default "lib/pele/pele.global.js" -}}
         {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-        {{- /* The bundled copy is deployed with its license notices (Pele's MIT and the Lucide icon's ISC). */ -}}
-        {{- if eq $source "lib/pele/pele.global.js" -}}
+        {{- /* A script served from the site (any local path, as plugin/script.html resolves it) is deployed */ -}}
+        {{- /* with the license notices of the bundled copy (Pele's MIT and the Lucide icon's ISC). */ -}}
+        {{- if (urls.Parse $source).Host | not -}}
             {{- (resources.Get "lib/pele/LICENSE").Publish -}}
         {{- end -}}
         {{- $zoom := dict "zoomIn" (T "zoomIn") "zoomOut" (T "zoomOut") "reset" (T "resetZoom") -}}

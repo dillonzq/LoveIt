@@ -56,6 +56,16 @@ const cases = [
     files: { 'assets/data/cdn/local.yml': 'prefix:\n  libFiles: ""\nlibFiles:\n  peleJS: lib/pele/pele.global.js\n' },
     referrer: 'strict-origin-when-cross-origin', mermaid: pele, localPele: true,
   },
+  {
+    name: 'Pele by relative path', security: '', extra: '[params.cdn]\ndata = "local.yml"\n',
+    files: { 'assets/data/cdn/local.yml': 'prefix:\n  libFiles: ""\nlibFiles:\n  peleJS: ./lib/pele/pele.global.js\n' },
+    referrer: 'strict-origin-when-cross-origin', mermaid: pele, localPele: true,
+  },
+  {
+    name: 'Pele by absolute path', security: '', extra: '[params.cdn]\ndata = "local.yml"\n',
+    files: { 'assets/data/cdn/local.yml': 'prefix:\n  libFiles: ""\nlibFiles:\n  peleJS: /lib/pele/pele.global.js\n' },
+    referrer: 'strict-origin-when-cross-origin', mermaid: pele, localPele: true,
+  },
   { name: 'Mermaid bundled', security: '', page: useMermaid, extra: '[params.cdn]\ndata = ""\n', referrer: 'strict-origin-when-cross-origin', mermaid: mermaid('strict') },
   { name: 'Pele by name', security: '', page: 'renderer = "pele"\n', referrer: 'strict-origin-when-cross-origin', mermaid: pele, noWarnings: [/renderer/] },
   {
