@@ -658,6 +658,17 @@ for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/'
     if (rtl) expect(tocBox.x + tocBox.width).toBeLessThanOrEqual(article.x);
     else expect(tocBox.x).toBeGreaterThanOrEqual(article.x + article.width);
     await expect(toc).toHaveCSS(rtl ? 'border-right-width' : 'border-left-width', '4px');
+    // Each header link is one box in menu order, even with Latin names on a right-to-left page.
+    const items = page.locator('#header-desktop a.menu-item');
+    const xs = [];
+    for (const item of await items.all()) {
+      expect(await item.evaluate(el => el.getClientRects().length)).toBe(1);
+      xs.push((await item.boundingBox()).x);
+    }
+    expect(xs.length).toBeGreaterThan(1);
+    expect(xs).toEqual([...xs].sort((a, b) => rtl ? b - a : a - b));
+    const { violations } = await new AxeBuilder({ page }).withRules(['target-size']).analyze();
+    expect(violations).toEqual([]);
 
     await page.locator('#search-toggle-desktop').click();
     const input = await box('#search-input');
@@ -1369,6 +1380,70 @@ test.describe('heading anchors without JavaScript', () => {
     expect(markdown).toContain('## Plain section');
     expect(markdown).not.toContain('header-mark');
   });
+});
+
+const targetSizeCases = [
+  { name: 'desktop', width: 1280, toc: '#toc-auto' },
+  { name: 'mobile', width: 412, toc: '#toc-static' },
+  // Hugo renders a numbered TOC (markup.tableOfContents.ordered) with <ol>.
+  { name: 'mobile numbered TOC', width: 412, toc: '#toc-static', ordered: true },
+];
+for (const { name, width, toc, ordered } of targetSizeCases) {
+  test(`${name}: TOC links and share buttons are targets of at least 24×24 CSS px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 800 });
+    await page.goto('/fuse/blog/headings/');
+    if (ordered) {
+      await page.evaluate(() => {
+        for (const list of [...document.querySelectorAll('#TableOfContents ul')].reverse()) {
+          const numbered = document.createElement('ol');
+          numbered.replaceChildren(...list.childNodes);
+          list.replaceWith(numbered);
+        }
+      });
+    }
+    if (toc === '#toc-static' && !(await page.locator('#toc-static.open').count())) await page.locator('#toc-static .toc-title').click();
+    // Scroll to the nested heading so the auto TOC expands the sub-level that holds it.
+    await page.evaluate(() => {
+      const top = document.getElementById('custom-id').getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: top - 10, behavior: 'instant' });
+    });
+    await expect(page.locator(`${toc} ${ordered ? 'ol' : 'ul'} a[href$="#custom-id"]`)).toBeVisible();
+    // Both kinds of share control: a button (X) and a plain link (Telegram).
+    await expect(page.locator('.post-info-share button[data-sharer="x"]')).toBeVisible();
+    await expect(page.locator('.post-info-share a[href^="https://t.me/"]')).toBeVisible();
+
+    const targets = page.locator(`${toc} .toc-content a, .post-info-share a, .post-info-share button`);
+    const boxes = (await Promise.all((await targets.all()).map(target => target.boundingBox()))).filter(Boolean);
+    expect(boxes.length).toBeGreaterThan(4);
+    for (const box of boxes) {
+      expect(box.width).toBeGreaterThanOrEqual(24);
+      expect(box.height).toBeGreaterThanOrEqual(24);
+    }
+    const { violations } = await new AxeBuilder({ page }).include(toc).include('.post-info-share').withRules(['target-size']).analyze();
+    expect(violations).toEqual([]);
+  });
+}
+
+test('every level of a deep numbered auto TOC keeps a 24×24 CSS px visible target', async ({ page }) => {
+  // Just above the 960 px breakpoint the auto TOC is at its narrowest.
+  await page.setViewportSize({ width: 961, height: 800 });
+  await page.goto('/fuse/blog/headings/');
+  await expect(page.locator('#toc-auto')).toBeVisible();
+  // A numbered TOC (markup.tableOfContents.ordered) of headings h2 to h6 nests five <ol>.
+  await page.evaluate(() => {
+    let html = '';
+    for (const level of [6, 5, 4, 3, 2]) html = `<ol><li><a href="#plain-section">Heading level ${level}</a>${html}</li></ol>`;
+    document.getElementById('TableOfContents').innerHTML = html;
+  });
+  const content = await page.locator('#toc-content-auto').boundingBox();
+  const links = await page.locator('#toc-content-auto ol a').all();
+  expect(links).toHaveLength(5);
+  for (const link of links) {
+    const box = await link.boundingBox();
+    const visibleWidth = Math.min(box.x + box.width, content.x + content.width) - Math.max(box.x, content.x);
+    expect(visibleWidth).toBeGreaterThanOrEqual(24);
+    expect(box.height).toBeGreaterThanOrEqual(24);
+  }
 });
 
 test('every link on an article with heading anchors has an accessible name', async ({ page }) => {
