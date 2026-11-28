@@ -24,3 +24,11 @@ echo inline code
 {{< highlight bash "hl_inline=FALSE" >}}
 echo a block, whatever the case of the option value
 {{< /highlight >}}
+
+{{< highlight bash "lineNos=FALSE,wrap=FALSE" >}}
+echo boolean option values are case-insensitive
+{{< /highlight >}}
+
+```bash {lineNos=table wrap=True}
+echo table line numbers and wrapping
+```
