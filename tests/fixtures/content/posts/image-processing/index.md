@@ -42,3 +42,19 @@ A JPEG truncated before its size can be read keeps the original URL and any expl
 An APNG with a large metadata chunk before its animation control stays animated.
 
 ![APNG with metadata](animated-metadata.png)
+
+The description of a Markdown image is its alt text, without markup or escapes; an empty one marks a decorative image.
+
+![A *styled* alt & text](rotated.jpg)
+
+![Captioned *alt*](rotated.jpg "The caption")
+
+![](rotated.jpg)
+
+![Cost \*extra\* &#x26; fees](rotated.jpg "Escaped")
+
+![](rotated.jpg "Decorative caption")
+
+![Outer ![inner](rotated.jpg "Inner caption") label](rotated.jpg)
+
+![See ![logo](rotated.jpg "Logo caption").](rotated.jpg)

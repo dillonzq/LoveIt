@@ -859,6 +859,10 @@ test('lightGallery opens linked images with thumbnails, zoom and SVG icons', asy
   page.on('pageerror', error => errors.push(error.message));
   page.on('response', response => { if (response.status() >= 400) missing.push(response.url()); });
   await page.goto('/fuse/blog/gallery/');
+  // The image shortcode without alt uses its src.
+  const avatar = page.locator('#content img').nth(1);
+  await expect(avatar).toHaveAttribute('alt', await avatar.getAttribute('src'));
+  await expect(avatar).toHaveAttribute('alt', /\/images\/avatar\.png$/);
   // lightGallery ignores navigation while a slide transition, including the
   // opening one, is running, so each step waits for its lgAfterSlide.
   const slideAfter = async action => {
@@ -971,6 +975,30 @@ test('local images get their size, WebP srcset and native lazy loading; others a
   await expect(paddedApng).toHaveAttribute('width', '60');
   await expect(paddedApng).toHaveAttribute('height', '40');
   await expect(paddedApng).not.toHaveAttribute('srcset');
+
+  // The description of a Markdown image is its alt text, without markup or escapes, and an empty one stays empty.
+  await expect(images.nth(2)).toHaveAttribute('alt', 'Static');
+  await expect(images.nth(3)).toHaveAttribute('alt', 'Remote');
+  const styled = page.getByAltText('A styled alt & text', { exact: true });
+  await expect(styled).toHaveAttribute('src', /\/image-processing\/rotated\.jpg$/);
+  await expect(styled).toHaveAttribute('title', 'A styled alt & text');
+  const captioned = page.locator('#content figure').filter({ hasText: 'The caption' });
+  await expect(captioned.locator('img')).toHaveAttribute('alt', 'Captioned alt');
+  await expect(captioned.locator('a.lightgallery')).toHaveAttribute('title', 'Captioned alt');
+  const escaped = page.locator('#content figure').filter({ hasText: 'Escaped' });
+  await expect(escaped.locator('img')).toHaveAttribute('alt', 'Cost *extra* & fees');
+  await expect(escaped.locator('a.lightgallery')).toHaveAttribute('title', 'Cost *extra* & fees');
+  const decorative = page.locator('#content p > img[alt=""]');
+  await expect(decorative).toHaveCount(1);
+  await expect(decorative).toHaveAttribute('src', /\/image-processing\/rotated\.jpg$/);
+  await expect(decorative).not.toHaveAttribute('title');
+  // A decorative image with a caption keeps its empty alt; the caption names the link to the gallery.
+  const decorativeLink = page.getByRole('link', { name: 'Decorative caption', exact: true });
+  await expect(decorativeLink.locator('img')).toHaveAttribute('alt', '');
+  // A nested image gives its own alt text, as CommonMark does.
+  await expect(page.getByAltText('Outer inner label', { exact: true })).toHaveAttribute('title', 'Outer inner label');
+  await expect(page.getByAltText('See logo.', { exact: true })).toHaveAttribute('title', 'See logo.');
+  await expect(page.locator('#content img[alt$=".jpg"], #content img[alt$=".png"], #content img[alt$=".webp"]')).toHaveCount(0);
 
   // The bundle's featured image is the first-screen image: loaded at once with a high priority.
   const featured = page.locator('.featured-image img');

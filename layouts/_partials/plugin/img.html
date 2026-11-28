@@ -4,7 +4,9 @@
     Options:
     - Src: page resource name, path under assets/ or static/, or URL.
     - Resources: the page resources to look Src up in first.
-    - Alt, Title, Caption, Class, Rel, Linked: as before.
+    - Alt: the alternative text. An empty Alt marks a decorative image;
+      without Alt, Src is used.
+    - Title, Caption, Class, Rel, Linked: as before.
     - Width, Height: override the intrinsic size. When only one is a number,
       the other follows the image's aspect ratio.
     - SrcSmall, SrcLarge: lightGallery thumbnail and full-size image.
@@ -189,16 +191,21 @@
 {{- end -}}
 {{- $thumbnail = $small | default $thumbnail | default $src -}}
 
-{{- $alt := .Alt | default $src -}}
+{{- $alt := cond (isset . "Alt") .Alt $src -}}
 
 {{- if .Linked -}}
-    <a class="lightgallery" href="{{ $large | safeURL }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $thumbnail | safeURL }}"{{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
+    {{- /* The link to the gallery needs a name, even when the image is decorative. */ -}}
+    {{- $label := .Title | default $alt -}}
+    {{- if not $label | and .Caption -}}
+        {{- $label = .Caption | plainify | htmlUnescape -}}
+    {{- end -}}
+    <a class="lightgallery" href="{{ $large | safeURL }}"{{ with $label }} title="{{ . }}"{{ end }} data-thumbnail="{{ $thumbnail | safeURL }}"{{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
 {{- end -}}
 <img
     {{- with .Class }} class="{{ . }}"{{ end }} src="{{ $src | safeURL }}"
     {{- with $srcset }} srcset="{{ range $i, $c := . }}{{ if $i }}, {{ end }}{{ $c.URL | safeURL }}{{ with $c.Descriptor }} {{ . }}{{ end }}{{ end }}"{{ end }}
     {{- if $candidates }} sizes="{{ $sizes }}"{{ end }} alt="{{ $alt }}"
-    {{- if not $.Linked }} title="{{ $.Title | default $alt }}"{{ end }}
+    {{- if not $.Linked }}{{ with $.Title | default $alt }} title="{{ . }}"{{ end }}{{ end }}
     {{- with $width }} width="{{ . }}"{{ end }}
     {{- with $height }} height="{{ . }}"{{ end }}
     {{- if .Eager }} loading="eager" fetchpriority="high"{{ else if ne .Lazy false }} loading="lazy" decoding="async"{{ end }} />
