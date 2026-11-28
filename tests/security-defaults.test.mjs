@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -49,6 +49,8 @@ const cases = [
   },
   // Pele is the default renderer; it has no securityLevel, so "loose" only warns.
   { name: 'Pele by default', security: '', referrer: 'strict-origin-when-cross-origin', mermaid: pele, noWarnings: [/renderer/] },
+  { name: 'Pele bundled', security: '', extra: '[params.cdn]\ndata = ""\n', referrer: 'strict-origin-when-cross-origin', mermaid: pele, localPele: true },
+  { name: 'Mermaid bundled', security: '', page: useMermaid, extra: '[params.cdn]\ndata = ""\n', referrer: 'strict-origin-when-cross-origin', mermaid: mermaid('strict') },
   { name: 'Pele by name', security: '', page: 'renderer = "pele"\n', referrer: 'strict-origin-when-cross-origin', mermaid: pele, noWarnings: [/renderer/] },
   {
     name: 'Pele with loose', security: 'mermaidSecurityLevel = "loose"\n',
@@ -80,7 +82,7 @@ test('referrer policy, Mermaid renderer and securityLevel defaults, overrides an
   const { binary } = await getHugo();
   const temporary = mkdtempSync(path.join(os.tmpdir(), 'loveit-security-'));
   try {
-    for (const { name, security, page = '', frontMatter = '', referrer: expectedReferrer, mermaid: expectedMermaid, diagram = true, warnings = [], noWarnings = [] } of cases) {
+    for (const { name, security, page = '', extra = '', localPele: expectedLocalPele = false, frontMatter = '', referrer: expectedReferrer, mermaid: expectedMermaid, diagram = true, warnings = [], noWarnings = [] } of cases) {
       for (const environment of ['production', 'development']) {
         const site = path.join(temporary, `${name.replaceAll(' ', '-')}-${environment}`);
         mkdirSync(path.join(site, 'content/posts'), { recursive: true });
@@ -92,6 +94,7 @@ test('referrer policy, Mermaid renderer and securityLevel defaults, overrides an
           security,
           '[params.page.mermaid]',
           page,
+          extra,
         ].join('\n'));
         const content = diagram ? '```mermaid\ngraph LR;\n    A --> B\n```\n' : 'A post without a diagram.\n';
         writeFileSync(path.join(site, 'content/posts/post.md'), `---\ntitle: Test post\n${frontMatter}---\n\n${content}`);
@@ -109,6 +112,10 @@ test('referrer policy, Mermaid renderer and securityLevel defaults, overrides an
         const renderer = diagram ? expectedMermaid.renderer : undefined;
         assert.equal(scripts.some(src => /pele[@./]/.test(src)), renderer === 'pele', label);
         assert.equal(scripts.some(src => /mermaid[@./]/.test(src)), renderer === 'mermaid', label);
+        // A self-hosted Pele script (always in development) is deployed with its license.
+        const localPele = renderer === 'pele' && (expectedLocalPele || environment === 'development');
+        assert.equal(scripts.some(src => src.includes('lib/pele/')), localPele, label);
+        assert.equal(existsSync(path.join(site, 'public/lib/pele/LICENSE')), localPele, label);
       }
     }
   } finally {

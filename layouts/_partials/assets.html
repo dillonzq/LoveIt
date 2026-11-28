@@ -216,6 +216,10 @@
         {{- end -}}
         {{- $source := $cdn.peleJS | default "lib/pele/pele.global.js" -}}
         {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+        {{- /* The bundled copy is deployed with its license notices (Pele's MIT and the Lucide icon's ISC). */ -}}
+        {{- if not $cdn.peleJS -}}
+            {{- (resources.Get "lib/pele/LICENSE").Publish -}}
+        {{- end -}}
         {{- $zoom := dict "zoomIn" (T "zoomIn") "zoomOut" (T "zoomOut") "reset" (T "resetZoom") -}}
         {{- $config = dict "renderer" "pele" "zoomLabels" $zoom | dict "mermaid" | merge $config -}}
     {{- end -}}
