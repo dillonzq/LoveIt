@@ -9,9 +9,10 @@
 
     Returns "" without an avatar, dict "Path" "Resources" for a page resource
     or a file under assets/ (for plugin/img.html and function/schema-image.html),
-    or dict "URL" for anything else, to be used as it is: a remote URL, or a
-    local path such as a file under static/, which goes through relURL so a
-    path without a leading slash keeps the path of baseURL.
+    or dict "URL" "Permalink" for anything else, to be used as it is: a remote
+    URL, or a local path such as a file under static/, where URL comes from
+    relURL (so a path without a leading slash keeps the path of baseURL) and
+    Permalink from absURL of the same path.
 */ -}}
 {{- $page := .Page -}}
 {{- $author := .Params.author -}}
@@ -33,11 +34,11 @@
     {{- if dict "Path" $path "Resources" $resources | partial "function/resource.html" -}}
         {{- $result = dict "Path" $path "Resources" $resources -}}
     {{- else -}}
+        {{- $result = dict "URL" $path "Permalink" $path -}}
         {{- $url := urls.Parse $path -}}
         {{- if not $url.Scheme | and (not $url.Host) -}}
-            {{- $path = relURL $path -}}
+            {{- $result = dict "URL" (relURL $path) "Permalink" (absURL $path) -}}
         {{- end -}}
-        {{- $result = dict "URL" $path -}}
     {{- end -}}
 {{- end -}}
 {{- return $result -}}

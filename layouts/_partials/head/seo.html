@@ -107,8 +107,8 @@
         {{- $person := dict "@type" "Person" "name" (printf "%v" .) -}}
         {{- with dict "Page" $ "Params" $params | partial "function/author-avatar.html" -}}
             {{- $image := "" -}}
-            {{- with .URL -}}
-                {{- $image = absURL . -}}
+            {{- with .Permalink -}}
+                {{- $image = . -}}
             {{- else -}}
                 {{- $image = partial "function/schema-image.html" . -}}
             {{- end -}}

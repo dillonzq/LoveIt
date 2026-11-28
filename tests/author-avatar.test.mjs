@@ -39,7 +39,7 @@ const variants = {
   inherited: 'avatar = "/images/avatar.png"\n[params.page]\nauthor = "Staff"\nauthorAvatar = "images/static-face.svg"\n',
 };
 
-function build(site, config) {
+function build(site, config, top = '') {
   for (const [file, frontMatter] of Object.entries(posts)) {
     const target = path.join(site, 'content/posts', file);
     mkdirSync(path.dirname(target), { recursive: true });
@@ -58,6 +58,7 @@ function build(site, config) {
   copyFileSync(path.join(root, 'exampleSite/assets/images/avatar.png'), path.join(site, 'assets/images/avatar.png'));
   writeFileSync(path.join(site, 'hugo.toml'), [
     'baseURL = "https://example.org/blog/"',
+    top,
     `theme = ${JSON.stringify(path.basename(root))}`,
     `themesDir = ${JSON.stringify(path.dirname(root))}`,
     '[params.author]',
@@ -149,5 +150,23 @@ test('author avatar in the byline and the structured data', async () => {
     }
   } finally {
     rmSync(temporary, { recursive: true, force: true });
+  }
+});
+
+test('a static author avatar keeps the path of baseURL with canonifyURLs', async () => {
+  const { binary } = await getHugo();
+  const site = mkdtempSync(path.join(os.tmpdir(), 'loveit-avatar-canonify-'));
+  try {
+    build(site, 'avatar = "images/static-face.svg"\n', 'canonifyURLs = true');
+    const result = spawnSync(binary, ['--source', site, '--noBuildLock', '--panicOnWarning'], { cwd: site, env: toolEnv, encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+    const read = file => readFileSync(path.join(site, 'public', file), 'utf8');
+    const expected = 'https://example.org/blog/images/static-face.svg';
+    const post = read('posts/site/index.html');
+    assert.equal(attribute(avatar(post), 'src'), expected);
+    assert.equal(author(post).image, expected);
+    assert.equal(author(read('index.html')).image, expected);
+  } finally {
+    rmSync(site, { recursive: true, force: true });
   }
 });
