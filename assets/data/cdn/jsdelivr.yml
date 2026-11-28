@@ -53,3 +53,5 @@ libFiles:
   # waline@3.16.2 https://waline.js.org/
   walineCSS: "@waline/client@3.16.2/dist/waline.css"
   walineJS: "@waline/client@3.16.2/dist/waline.umd.js"
+  # dompurify@3.4.18 https://github.com/cure53/DOMPurify
+  dompurifyJS: dompurify@3.4.18/dist/purify.min.js

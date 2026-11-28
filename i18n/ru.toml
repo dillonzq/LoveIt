@@ -80,6 +80,27 @@ other = "ru"
 
 [walineLang]
 other = "ru-RU"
+
+[mastodonPrompt]
+other = "Ответьте на {{ .Post }} из аккаунта Mastodon или другого сервера Федиверса, чтобы оставить комментарий."
+
+[mastodonPost]
+other = "этот пост"
+
+[mastodonLoading]
+other = "Загрузка комментариев…"
+
+[mastodonEmpty]
+other = "Комментариев пока нет."
+
+[mastodonError]
+other = "Не удалось загрузить комментарии."
+
+[mastodonSensitive]
+other = "Деликатный контент"
+
+[mastodonAttachment]
+other = "Вложение"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

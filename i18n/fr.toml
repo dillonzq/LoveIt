@@ -80,6 +80,27 @@ other = "fr"
 
 [walineLang]
 other = "fr"
+
+[mastodonPrompt]
+other = "Répondez à {{ .Post }} depuis un compte Mastodon ou d’un autre serveur du Fédivers pour commenter."
+
+[mastodonPost]
+other = "cette publication"
+
+[mastodonLoading]
+other = "Chargement des commentaires…"
+
+[mastodonEmpty]
+other = "Aucun commentaire pour le moment."
+
+[mastodonError]
+other = "Les commentaires n’ont pas pu être chargés."
+
+[mastodonSensitive]
+other = "Contenu sensible"
+
+[mastodonAttachment]
+other = "Pièce jointe"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

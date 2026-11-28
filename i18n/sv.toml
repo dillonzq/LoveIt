@@ -80,6 +80,27 @@ other = "sv"
 
 [walineLang]
 other = "en"
+
+[mastodonPrompt]
+other = "Svara på {{ .Post }} från ett Mastodon-konto eller ett annat Fediverse-konto för att kommentera."
+
+[mastodonPost]
+other = "det här inlägget"
+
+[mastodonLoading]
+other = "Läser in kommentarer…"
+
+[mastodonEmpty]
+other = "Inga kommentarer än."
+
+[mastodonError]
+other = "Kommentarerna kunde inte läsas in."
+
+[mastodonSensitive]
+other = "Känsligt innehåll"
+
+[mastodonAttachment]
+other = "Bilaga"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

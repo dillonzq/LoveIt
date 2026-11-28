@@ -81,6 +81,27 @@ other = "en"
 # Waline has no locale for this language, so it uses English
 [walineLang]
 other = "en"
+
+[mastodonPrompt]
+other = "মন্তব্য করতে Mastodon বা অন্য কোনো ফেডিভার্স অ্যাকাউন্ট থেকে {{ .Post }} উত্তর দিন।"
+
+[mastodonPost]
+other = "এই পোস্টে"
+
+[mastodonLoading]
+other = "মন্তব্য লোড হচ্ছে…"
+
+[mastodonEmpty]
+other = "এখনো কোনো মন্তব্য নেই।"
+
+[mastodonError]
+other = "মন্তব্য লোড করা যায়নি।"
+
+[mastodonSensitive]
+other = "সংবেদনশীল বিষয়বস্তু"
+
+[mastodonAttachment]
+other = "সংযুক্তি"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

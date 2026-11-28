@@ -80,6 +80,27 @@ other = "ko"
 
 [walineLang]
 other = "ko"
+
+[mastodonPrompt]
+other = "Mastodon 또는 다른 연합우주 계정으로 {{ .Post }}에 답글을 달면 댓글이 됩니다."
+
+[mastodonPost]
+other = "이 게시물"
+
+[mastodonLoading]
+other = "댓글을 불러오는 중…"
+
+[mastodonEmpty]
+other = "아직 댓글이 없습니다."
+
+[mastodonError]
+other = "댓글을 불러오지 못했습니다."
+
+[mastodonSensitive]
+other = "민감한 내용"
+
+[mastodonAttachment]
+other = "첨부 파일"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
