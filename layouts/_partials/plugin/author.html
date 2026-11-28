@@ -15,10 +15,10 @@
 {{- $author := $params.author | default $page.Site.Params.Author.name | default (T "author") -}}
 {{- $authorLink := $params.authorlink | default $page.Site.Params.Author.link | default $page.Site.Home.RelPermalink -}}
 {{- $options := dict "Class" "author" "Destination" $authorLink "Title" "Author" "Rel" "author" "Content" $author -}}
-{{- with partial "function/author-avatar.html" $page -}}
+{{- with dict "Page" $page "Params" $params | partial "function/author-avatar.html" -}}
     {{- /* The avatar is decorative: the author name next to it names the link. */ -}}
     {{- $avatar := dict "Src" . "Resources" $page.Resources "Alt" "" "Class" "author-avatar" "Width" 20 "Height" 20 "Widths" (slice 20 40 60) "Sizes" "20px" "Lazy" $.Lazy -}}
-    {{- $options = merge $options (dict "Content" (printf "%s%s" (partial "plugin/img.html" $avatar) $author)) -}}
+    {{- $options = merge $options (dict "Content" (printf "%s%v" (partial "plugin/img.html" $avatar) $author)) -}}
 {{- else -}}
     {{- $options = merge $options (dict "Icon" (dict "Class" "fas fa-user-circle")) -}}
 {{- end -}}

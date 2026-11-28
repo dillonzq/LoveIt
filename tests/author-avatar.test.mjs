@@ -12,23 +12,40 @@ const attribute = (tag, name) => tag?.match(new RegExp(`\\s${name}=(?:"([^"]*)"|
 const author = html => JSON.parse(html.match(/<script type="?application\/ld\+json"?>(.*?)<\/script>/s)[1]).author;
 
 const posts = {
-  // No author of its own: the site author and avatar.
-  'site.md': '',
+  // No author of its own: the site author and avatar. The newest post, so it is on the home page.
+  'site.md': 'date: 2025-01-02\n',
   // Another author does not get the site author's avatar.
   'guest.md': 'author: Guest\nauthorLink: https://guest.example.com/\n',
   // The site author named again keeps the site avatar.
   'named.md': 'author: Site Author\n',
   'bundle/index.md': 'author: Bundled\nauthorAvatar: face.svg\n',
   'remote.md': 'authorAvatar: https://cdn.example.com/face.png\n',
+  // A file under static/ keeps the path of baseURL.
+  'static.md': 'authorAvatar: images/static-face.svg\n',
+  // A name that YAML reads as a number is still shown as written.
+  'numeric.md': 'author: 123\nauthorAvatar: https://cdn.example.com/face.png\n',
 };
 
-function build(site, avatarConfig) {
+const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><rect width="1" height="1"/></svg>';
+const assetsAvatar = { '@type': 'ImageObject', url: 'https://example.org/blog/images/avatar.png', width: 528, height: 560 };
+
+const variants = {
+  avatar: 'avatar = "/images/avatar.png"\n',
+  plain: '',
+  // An author inherited from params.page is another author than params.author.name.
+  inherited: 'avatar = "/images/avatar.png"\n[params.page]\nauthor = "Staff"\n',
+};
+
+function build(site, config) {
   for (const [file, frontMatter] of Object.entries(posts)) {
     const target = path.join(site, 'content/posts', file);
     mkdirSync(path.dirname(target), { recursive: true });
-    writeFileSync(target, `---\ntitle: ${file}\ndate: 2025-01-01\n${frontMatter}---\n\nText.\n`);
+    const date = frontMatter.startsWith('date:') ? '' : 'date: 2025-01-01\n';
+    writeFileSync(target, `---\ntitle: ${file}\n${date}${frontMatter}---\n\nText.\n`);
   }
-  writeFileSync(path.join(site, 'content/posts/bundle/face.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><rect width="1" height="1"/></svg>');
+  writeFileSync(path.join(site, 'content/posts/bundle/face.svg'), svg);
+  mkdirSync(path.join(site, 'static/images'), { recursive: true });
+  writeFileSync(path.join(site, 'static/images/static-face.svg'), svg);
   mkdirSync(path.join(site, 'assets/images'), { recursive: true });
   copyFileSync(path.join(root, 'exampleSite/assets/images/avatar.png'), path.join(site, 'assets/images/avatar.png'));
   writeFileSync(path.join(site, 'hugo.toml'), [
@@ -37,7 +54,7 @@ function build(site, avatarConfig) {
     `themesDir = ${JSON.stringify(path.dirname(root))}`,
     '[params.author]',
     'name = "Site Author"',
-    avatarConfig,
+    config,
   ].join('\n'));
 }
 
@@ -48,64 +65,74 @@ test('author avatar in the byline and the structured data', async () => {
   const resizesPng = Number(minor) >= 155;
   const temporary = mkdtempSync(path.join(os.tmpdir(), 'loveit-avatar-'));
   try {
-    for (const withAvatar of [true, false]) {
-      const site = path.join(temporary, withAvatar ? 'avatar' : 'plain');
-      build(site, withAvatar ? 'avatar = "/images/avatar.png"' : '');
+    for (const [variant, config] of Object.entries(variants)) {
+      const site = path.join(temporary, variant);
+      build(site, config);
       const result = spawnSync(binary, ['--source', site, '--noBuildLock', '--panicOnWarning'], { cwd: site, env: toolEnv, encoding: 'utf8' });
       assert.equal(result.status, 0, result.stderr);
       const read = file => readFileSync(path.join(site, 'public', file), 'utf8');
       const page = name => read(`posts/${name}/index.html`);
+      const label = name => `${name} (${variant})`;
 
       // Posts without an avatar keep the user icon and the link as before.
       const guest = page('guest');
-      assert.equal(avatar(guest), undefined);
-      assert.match(byline(guest), /<svg class="?icon"?/);
+      assert.equal(avatar(guest), undefined, label('guest'));
+      assert.match(byline(guest), /<svg class="?icon"?/, label('guest'));
       const link = byline(guest).match(/<a[^>]*>/)[0];
       assert.equal(attribute(link, 'href'), 'https://guest.example.com/');
       assert.equal(attribute(link, 'target'), '_blank');
       assert.equal(attribute(link, 'rel'), 'noopener noreferrer author');
       assert.equal(attribute(link, 'title'), 'Author');
-      assert.deepEqual(author(guest), { '@type': 'Person', name: 'Guest' });
+      assert.deepEqual(author(guest), { '@type': 'Person', name: 'Guest' }, label('guest'));
 
+      const siteAuthor = variant === 'inherited' ? 'Staff' : 'Site Author';
       for (const name of ['site', 'named']) {
         const html = page(name);
-        if (!withAvatar) {
-          assert.equal(avatar(html), undefined, name);
-          assert.match(byline(html), /<svg class="?icon"?/, name);
-          assert.deepEqual(author(html), { '@type': 'Person', name: 'Site Author' }, name);
+        const shown = name === 'named' ? 'Site Author' : siteAuthor;
+        if (variant === 'plain' || shown !== 'Site Author') {
+          assert.equal(avatar(html), undefined, label(name));
+          assert.match(byline(html), new RegExp(`<svg class="?icon"?.*${shown}</a>$`, 's'), label(name));
+          assert.deepEqual(author(html), { '@type': 'Person', name: shown }, label(name));
           continue;
         }
         // An image under assets/ is published below the base path, with resized copies.
         const img = avatar(html);
-        assert.match(attribute(img, 'src'), /^\/blog\/images\/avatar\.png$/, name);
-        if (resizesPng) assert.match(attribute(img, 'srcset'), /\/blog\/images\/avatar_[^ ]+\.webp 20w, .+ 40w, .+ 60w/, name);
-        assert.equal(attribute(img, 'alt'), '', name);
-        assert.equal(attribute(img, 'width'), '20', name);
-        assert.equal(attribute(img, 'height'), '20', name);
-        assert.doesNotMatch(byline(html), /<svg class="?icon"?/, name);
-        assert.match(byline(html), /Site Author<\/a>$/, name);
-        assert.deepEqual(author(html), {
-          '@type': 'Person', name: 'Site Author',
-          image: { '@type': 'ImageObject', url: 'https://example.org/blog/images/avatar.png', width: 528, height: 560 },
-        }, name);
-      }
-      // The single page loads the avatar at once; summaries lazy-load it.
-      if (withAvatar) {
-        assert.equal(attribute(avatar(page('site')), 'loading'), undefined);
-        const home = read('index.html');
-        assert.equal(attribute(home.match(/<span class="?post-author"?>.*?<img[^>]*>/s)[0].match(/<img[^>]*>/)[0], 'loading'), 'lazy');
-        assert.deepEqual(author(home).image, { '@type': 'ImageObject', url: 'https://example.org/blog/images/avatar.png', width: 528, height: 560 });
-      } else {
-        assert.deepEqual(author(read('index.html')), { '@type': 'Person', name: 'Site Author' });
+        assert.equal(attribute(img, 'src'), '/blog/images/avatar.png', label(name));
+        if (resizesPng) assert.match(attribute(img, 'srcset'), /\/blog\/images\/avatar_[^ ]+\.webp 20w, .+ 40w, .+ 60w/, label(name));
+        assert.equal(attribute(img, 'alt'), '', label(name));
+        assert.equal(attribute(img, 'width'), '20', label(name));
+        assert.equal(attribute(img, 'height'), '20', label(name));
+        assert.doesNotMatch(byline(html), /<svg class="?icon"?/, label(name));
+        assert.match(byline(html), /Site Author<\/a>$/, label(name));
+        assert.deepEqual(author(html), { '@type': 'Person', name: 'Site Author', image: assetsAvatar }, label(name));
       }
 
-      // Front matter avatars: a page resource and a remote URL.
+      // The home page JSON-LD uses the site author; its summaries lazy-load the avatar.
+      const home = read('index.html');
+      const summary = home.split('<article').find(article => /href="?\/blog\/posts\/site\/"?/.test(article));
+      if (variant === 'avatar') {
+        assert.equal(attribute(avatar(page('site')), 'loading'), undefined);
+        const img = avatar(summary);
+        assert.equal(attribute(img, 'src'), '/blog/images/avatar.png');
+        assert.equal(attribute(img, 'loading'), 'lazy');
+        assert.deepEqual(author(home), { '@type': 'Person', name: 'Site Author', image: assetsAvatar });
+      } else {
+        assert.equal(avatar(summary), undefined, label('home'));
+        assert.match(byline(summary), /<svg class="?icon"?/, label('home'));
+        assert.equal(author(home).name, 'Site Author', label('home'));
+      }
+
+      // Front matter avatars: a page resource, a remote URL and a file under static/.
       const bundle = page('bundle');
       assert.equal(attribute(avatar(bundle), 'src'), '/blog/posts/bundle/face.svg');
       assert.deepEqual(author(bundle).image, { '@type': 'ImageObject', url: 'https://example.org/blog/posts/bundle/face.svg' });
       const remote = page('remote');
       assert.equal(attribute(avatar(remote), 'src'), 'https://cdn.example.com/face.png');
       assert.equal(author(remote).image, 'https://cdn.example.com/face.png');
+      const fromStatic = page('static');
+      assert.equal(attribute(avatar(fromStatic), 'src'), '/blog/images/static-face.svg');
+      assert.equal(author(fromStatic).image, 'https://example.org/blog/images/static-face.svg');
+      assert.match(byline(page('numeric')), /<img[^>]*>123<\/a>$/);
     }
   } finally {
     rmSync(temporary, { recursive: true, force: true });

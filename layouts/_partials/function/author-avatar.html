@@ -1,13 +1,31 @@
 {{- /*
-    The avatar of a page author: authorAvatar in front matter, or else
-    params.author.avatar when the page names no other author than
-    params.author.name. Returns "" without an avatar.
+    The avatar of a page author.
+    Input: dict "Page" (the page) "Params" (its parameters merged with params.page).
+
+    authorAvatar in front matter, or else params.author.avatar when the page
+    author (Params.author) is unset or is params.author.name, so that a page
+    by another author does not show the site author's photo.
+    A page resource or a file under assets/ is returned as given, for
+    function/resource.html. Another local path, such as a file under static/,
+    goes through relURL, so a path without a leading slash keeps the path of
+    baseURL. Returns "" without an avatar.
 */ -}}
+{{- $page := .Page -}}
+{{- $author := .Params.author -}}
 {{- $avatar := .Params.authoravatar -}}
 {{- if not $avatar -}}
-    {{- with .Site.Params.Author -}}
-        {{- if not $.Params.author | or (eq (printf "%v" $.Params.author) (printf "%v" (.name | default ""))) -}}
+    {{- with $page.Site.Params.Author -}}
+        {{- if not $author | or (eq (printf "%v" $author) (printf "%v" (.name | default ""))) -}}
             {{- $avatar = .avatar -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- with $avatar -}}
+    {{- $avatar = printf "%v" . -}}
+    {{- $url := urls.Parse $avatar -}}
+    {{- if not $url.Scheme | and (not $url.Host) -}}
+        {{- if not (dict "Path" $avatar "Resources" $page.Resources | partial "function/resource.html") -}}
+            {{- $avatar = relURL $avatar -}}
         {{- end -}}
     {{- end -}}
 {{- end -}}

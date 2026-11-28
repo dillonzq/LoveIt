@@ -102,9 +102,10 @@
         {{- $organization = merge $organization (dict "logo" .) -}}
     {{- end -}}
     {{- $schema = merge $schema (dict "publisher" $organization) -}}
-    {{- with .Params.author | default .Site.Params.Author.name | default (T "author") -}}
+    {{- /* The author of the byline, which may come from params.page. */ -}}
+    {{- with $params.author | default .Site.Params.Author.name | default (T "author") -}}
         {{- $person := dict "@type" "Person" "name" . -}}
-        {{- with dict "Path" (partial "function/author-avatar.html" $) "Resources" $.Resources | partial "function/schema-image.html" -}}
+        {{- with dict "Path" (dict "Page" $ "Params" $params | partial "function/author-avatar.html") "Resources" $.Resources | partial "function/schema-image.html" -}}
             {{- $person = merge $person (dict "image" .) -}}
         {{- end -}}
         {{- $schema = merge $schema (dict "author" $person) -}}
