@@ -1,5 +1,6 @@
 // Records metrics for the example site: Hugo build time (cold and warm),
-// Lighthouse CI on mobile, axe-core violations and the size of assets/lib.
+// Lighthouse CI on mobile and desktop, axe-core violations and the size of
+// assets/lib.
 // Results are written to build/metrics and, in GitHub Actions, to the job
 // summary; scripts/metrics-gate.mjs compares them with the master baseline.
 import { spawn } from 'node:child_process';
@@ -58,18 +59,34 @@ async function build() {
     times.push(total);
   }
   const { version } = await getHugo();
-  const hugo = `${version.match(/v\d+\.\d+\.\d+/)?.[0] || version}${version.includes('+extended') ? ' extended' : ''}`;
+  // Only this shape is recorded: the Metrics comment workflow renders it from
+  // pull requests' artifacts and rejects anything else.
+  const number = version.match(/v\d+\.\d+\.\d+/)?.[0];
+  const hugo = number ? `${number}${version.includes('+extended') ? ' extended' : ''}` : 'unknown';
   return { hugo, cold: times[0], warm: times[1] };
 }
 
-async function lighthouse() {
-  const outputDir = path.join(root, lighthouseConfig.ci.upload.outputDir);
+// Runs Lighthouse CI with lighthouserc.json (mobile, Lighthouse's default) or,
+// for desktop, with a copy that adds the desktop preset and its own output
+// directory. Each collect replaces the previous run's results in .lighthouseci.
+async function lighthouse(formFactor) {
+  let config = 'lighthouserc.json';
+  let outputDir = path.join(root, lighthouseConfig.ci.upload.outputDir);
+  if (formFactor === 'desktop') {
+    outputDir = `${outputDir}-desktop`;
+    const desktop = structuredClone(lighthouseConfig);
+    desktop.ci.collect.settings = { ...desktop.ci.collect.settings, preset: 'desktop' };
+    desktop.ci.upload.outputDir = path.relative(root, outputDir).split(path.sep).join('/');
+    config = path.join(out, 'lighthouserc.desktop.json');
+    writeFileSync(config, `${JSON.stringify(desktop, null, 2)}\n`);
+  }
+  console.log(`\n# Lighthouse (${formFactor})`);
   const urls = pages.filter(page => page.lighthouse).map(page => `--collect.url=${origin}${page.path}`);
   const env = { ...process.env, CHROME_PATH: process.env.CHROME_PATH || chromium.executablePath() };
   // Run the CLI's entry point through Node: Windows cannot spawn the .bin shim without a shell.
   const lhci = path.join(root, 'node_modules/@lhci/cli/src/cli.js');
-  await run(process.execPath, [lhci, 'collect', '--config=lighthouserc.json', ...urls], { env });
-  await run(process.execPath, [lhci, 'upload', '--config=lighthouserc.json'], { env });
+  await run(process.execPath, [lhci, 'collect', `--config=${config}`, ...urls], { env });
+  await run(process.execPath, [lhci, 'upload', `--config=${config}`], { env });
   const manifest = JSON.parse(readFileSync(path.join(outputDir, 'manifest.json'), 'utf8'));
   return pages.filter(page => page.lighthouse).map(page => {
     const entry = manifest.find(item => item.isRepresentativeRun && new URL(item.url).pathname === page.path);
@@ -113,10 +130,19 @@ function directorySize(directory) {
 
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
+// The pull request this run belongs to, written first so the Metrics comment
+// workflow can tell apart pull requests sharing a head commit even when a
+// later step fails.
+if (/^\d+$/.test(process.env.LOVEIT_METRICS_PULL_REQUEST || '')) {
+  writeFileSync(path.join(out, 'pull-request.json'), `${JSON.stringify({ pullRequest: Number(process.env.LOVEIT_METRICS_PULL_REQUEST) })}\n`);
+}
 const summary = { schema: SUMMARY_SCHEMA, build: await build(), lighthouseRuns: lighthouseConfig.ci.collect.numberOfRuns };
 const server = await serve(site, port);
 try {
-  summary.lighthouse = await lighthouse();
+  summary.lighthouse = await lighthouse('mobile');
+  // Shown next to mobile but not compared with master: metrics-budget.json has
+  // no desktop tolerances yet.
+  summary.lighthouseDesktop = await lighthouse('desktop');
   summary.axe = await axe();
 } finally {
   server.close();
@@ -126,4 +152,6 @@ writeFileSync(path.join(out, 'summary.json'), `${JSON.stringify(summary, null, 2
 const markdown = renderMarkdown(summary);
 writeFileSync(path.join(out, 'summary.md'), markdown);
 console.log(`\n${markdown}`);
-if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, markdown);
+// When the job compares with master, the comparison step writes the job
+// summary, verdict first, with these measurements folded below it.
+if (process.env.GITHUB_STEP_SUMMARY && process.env.LOVEIT_METRICS_COMPARE !== '1') appendFileSync(process.env.GITHUB_STEP_SUMMARY, markdown);

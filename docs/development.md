@@ -202,8 +202,10 @@ npm run metrics:compare -- --baseline path/to/master/summary.json
 `npm run metrics` builds the example site into `build/metrics/site` twice, from
 empty caches and again with them warm, and records the build time Hugo reports.
 It then serves the output locally with gzip and runs Lighthouse CI
-(`lighthouserc.json`, mobile defaults, three runs) on the home page and an
-article, and `@axe-core/playwright` on the home page, an article, the post list,
+(`lighthouserc.json`, three runs) on the home page and an article twice: with
+Lighthouse's mobile defaults and with its desktop preset
+(`build/metrics/lighthouse-desktop`). It runs `@axe-core/playwright` on the
+home page, an article, the post list,
 the 404 page and the open search dropdown. It also records the size of
 `assets/lib`. `build/metrics/summary.md` and `summary.json` hold the results;
 full Lighthouse reports and axe results sit next to them. Lighthouse and axe use
@@ -211,11 +213,15 @@ Playwright's Chromium unless `CHROME_PATH` is set; `LOVEIT_METRICS_PORT` changes
 the local port (default 48138).
 
 CI runs the Metrics workflow on every pull request and push to master and
-uploads the reports as the `metrics` artifact. On a pull request,
+uploads the reports as an artifact: `metrics` for master, the baseline later
+pull requests use, and `metrics-attempt-N` for attempt N of a pull request run. On a pull request,
 `npm run metrics:compare` then compares the results with the master baseline
 and the job, and with it `ci-gate`, fails when a value is worse than
-`metrics-budget.json` allows. The comparison is written to the job summary and
-to `build/metrics/comparison.md`.
+`metrics-budget.json` allows, except in the groups listed under `advisory`.
+It writes `build/metrics/comparison.md` and `comparison.json`, and the job
+summary: the verdict and the comparison first, this run's measurements folded
+below, then links to the commit and the run. If the comparison stops early,
+the measurements alone are written.
 
 - **Tolerances.** For each metric the budget sets a `relative` (fraction of the
   baseline) and an `absolute` tolerance; a value fails when it is worse by more
@@ -227,6 +233,16 @@ to `build/metrics/comparison.md`.
   timings and build times vary much more between runners than bytes and axe
   results, which barely change. A metric left out of the budget is not checked,
   and an unknown key is an error.
+- **Advisory groups.** `advisory` lists the groups (`lighthouse`, `axe`,
+  `build`, `repository`) whose regressions are reported, marked "not
+  blocking" and raised as warnings, but do not fail the job. It holds
+  `lighthouse`: scores and timings vary between runners too much to block a
+  merge, while axe results, build times and `assets/lib` still do. Remove a
+  group from the list to enforce it again.
+- **Desktop.** Desktop Lighthouse results (`lighthouseDesktop` in
+  `summary.json`) are shown next to mobile, with their change from master once
+  the baseline has them. The budget has no desktop tolerances, so they are
+  never checked, even when `lighthouse` is not advisory.
 - **Baseline.** The baseline is the `summary.json` of a successful run of a
   push to the default branch (`baseline.workflows`) for the pull request's base
   commit or, failing that, for the closest ancestor of it. Pull request runs,
@@ -250,6 +266,50 @@ to `build/metrics/comparison.md`.
   listed, but the check passes. Once merged, the new values become the baseline.
   To change a tolerance instead, edit `metrics-budget.json` in the pull request;
   the summary points out that it differs from the baseline's.
+
+Once CI finishes on a pull request, the Metrics comment workflow
+(`metrics-comment.yml`, `scripts/metrics-comment.mjs`) posts the results as a
+comment on the pull request and updates the same comment after later pushes.
+Its heading gives the verdict; the checks over budget come next, then the
+Lighthouse scores, LCP, CLS and TBT on mobile and desktop with their change
+from master, and this run's full measurements folded below. Without a
+comparison it shows this run's Lighthouse tables instead.
+
+The workflow runs on `workflow_run` from the default branch, because CI's token
+cannot write to pull requests from forks. A pull request controls what its run
+uploads, so the artifact is data, never Markdown:
+
+- Only `summary.json`, `comparison.json` and `pull-request.json` are read,
+  without extracting the archive. Page names, axe rules and the Hugo version
+  must match narrow patterns and are shown as code, so GitHub links none of
+  them; labels and units come from the default branch's metric definitions,
+  and the comment is rendered by the default branch's code. Anything else shows
+  a fixed message with a link to the run.
+- The artifact is the one of the latest attempt, up to the one whose
+  completion started the workflow, in which the Metrics job ran, so a re-run
+  never shows an earlier attempt's results and a later re-run already under
+  way is not mistaken for this one. A failed or unfinished
+  Metrics job is the heading, unless blocking checks over budget explain it.
+- The pull request is an open one into this repository, opened before the run,
+  whose head is the tested commit: one listed in the run, or for forks, one
+  found by head repository and branch. The run records its pull request number
+  in `pull-request.json` before installing anything; that number can only choose
+  among those candidates, and a fork's pull request needs it. When it names
+  none of them, or several remain without it, nothing is written. The head is
+  checked again right before writing, and cancelled runs are skipped.
+- A read-only `resolve` job finds the pull request; the `comment` job, the
+  only one that can write, runs one at a time per pull request, with up to 100
+  waiting jobs queued (`queue: max`), checks that the run still resolves to the
+  same pull request, and updates only the workflow's own comment, found by its
+  marker after reading every page of comments. It never replaces a later CI
+  run's results with an earlier one's. Should several such comments exist, the
+  oldest stays with the latest run's results and the others are deleted.
+- The workflow is triggered by any workflow named CI, so it only handles runs
+  of `.github/workflows/ci.yml`.
+
+The numbers themselves come from the pull request's run and are only as
+trustworthy as its CI. Changes to the workflow take effect once they are on the
+default branch.
 
 Master commits are not cancelled by later pushes, so each one leaves a
 baseline. Lighthouse scores still vary between runs and runners; read a single

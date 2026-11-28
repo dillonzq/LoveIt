@@ -24,7 +24,8 @@ test('the budget accepts every pair of recorded master runs', () => {
   }
 });
 
-test('the budget rejects deliberate regressions', () => {
+test('the budget flags deliberate regressions; only Lighthouse ones do not block', () => {
+  assert.deepEqual(budget.advisory, ['lighthouse']);
   const baseline = masterRuns[0];
   const regressions = {
     // A 40% slower LCP on the home page (beyond the 30% spread between runs).
@@ -43,8 +44,11 @@ test('the budget rejects deliberate regressions', () => {
     const current = clone(baseline);
     change(current);
     const result = compareSummaries(baseline, current, budget);
-    assert.equal(result.failed, true, name);
     assert.deepEqual(failures(result), [name]);
+    const lighthouse = result.checks.find(check => check.status === 'fail').group === 'lighthouse';
+    assert.equal(result.failed, !lighthouse, name);
+    // Without the advisory group every one of them fails the gate.
+    assert.equal(compareSummaries(baseline, current, { ...budget, advisory: [] }).failed, true, name);
   }
 });
 
@@ -54,7 +58,7 @@ test('a new axe rule fails even when the node count does not grow', () => {
   current.axe[4].rules = current.axe[4].rules.slice(1).concat('label (serious)');
   const result = compareSummaries(baseline, current, budget);
   assert.deepEqual(failures(result), ['search rules']);
-  assert.match(renderComparison(result), /\| search \| New violated rules \| .* \| label \(serious\) \| no new rule \| ❌ worse \|/);
+  assert.match(renderComparison(result), /\| `search` \| New violated rules \| .* \| `label \(serious\)` \| no new rule \| ❌ worse \|/);
 });
 
 test('improvements pass and missing values are reported', () => {
@@ -70,10 +74,10 @@ test('improvements pass and missing values are reported', () => {
   assert.equal(find('home', 'lcp').status, 'improved');
   assert.equal(find('home', 'tbt').status, 'fail');
   assert.equal(find('post', 'tbt').status, 'skipped');
-  assert.deepEqual(result.warnings, ['Lighthouse page "tags" has no baseline and was not compared.']);
+  assert.deepEqual(result.warnings, ['Lighthouse page `tags` has no baseline and was not compared.']);
   // A page the baseline measured but this run did not is a failure, not a warning.
   assert.equal(find('404', 'coverage').status, 'fail');
-  assert.match(renderComparison(result), /\| 404 \| axe measured \| yes \| no \| – \| – \| ❌ worse \(page from the baseline was not measured\) \|/);
+  assert.match(renderComparison(result), /\| `404` \| axe measured \| yes \| no \| – \| – \| ❌ worse \(page from the baseline was not measured\) \|/);
 });
 
 test('the allowed change is the larger of the relative and absolute tolerance', () => {
@@ -94,6 +98,10 @@ test('budget mistakes are errors, not silently skipped checks', () => {
   assert.throws(() => parseBudget({ baseline: { missing: 'ignore' } }), /baseline\.missing/);
   assert.throws(() => parseBudget({ baseline: { workflows: ['../ci.yml'] } }), /baseline\.workflows/);
   assert.throws(() => parseBudget({ axe: { newRules: 'yes' } }), /axe\.newRules/);
+  assert.throws(() => parseBudget({ advisory: ['lighthouse', 'lighthouse'] }), /advisory: expected a list of distinct groups/);
+  assert.throws(() => parseBudget({ advisory: ['lighthous'] }), /advisory/);
+  assert.throws(() => parseBudget({ advisory: 'lighthouse' }), /advisory/);
+  assert.deepEqual(parseBudget({}).advisory, []);
 });
 
 test('summaries in an unknown format are rejected', () => {
@@ -336,4 +344,59 @@ test('the API client retries server errors but not client errors', async () => {
   assert.deepEqual(calls, [['https://api.example/repos/o/r/actions/runs', 'Bearer t0ken'], ['https://api.example/repos/o/r/actions/runs', 'Bearer t0ken']]);
   const notFound = githubApi({ token: 't', fetchImpl: async () => new Response('', { status: 404 }), sleep: async () => {} });
   await assert.rejects(notFound.request('/x'), error => error.status === 404);
+});
+
+test('the heading gives the verdict and the Lighthouse overview shows changes', () => {
+  const baseline = clone(masterRuns[0]);
+  assert.match(renderComparison(compareSummaries(baseline, clone(baseline), budget)), /^## ✅ Metrics: within budget\n/);
+  const current = clone(baseline);
+  current.lighthouse[1].scores.accessibility -= 3;
+  current.lighthouse[0].metrics.lcp = baseline.lighthouse[0].metrics.lcp * 1.13;
+  current.lighthouse[0].metrics.tbt = baseline.lighthouse[0].metrics.tbt;
+  current.lighthouse[0].metrics.cls = baseline.lighthouse[0].metrics.cls + 0.01;
+  const result = compareSummaries(baseline, current, budget);
+  // The accessibility drop is a Lighthouse check: reported, but not blocking.
+  assert.equal(result.failed, false);
+  assert.match(renderComparison(result), /^## ⚠️ Metrics: 1 non-blocking check over budget\n\n1 check is worse than allowed in `lighthouse`, which `advisory` in `metrics-budget.json` lists as not blocking\.\n/);
+  assert.match(renderComparison(result), /\| `post` \| Accessibility \| .* \| ⚠️ worse, not blocking \|/);
+  assert.doesNotMatch(renderComparison(result), /### Lighthouse/);
+  // A blocking check (axe) on top: the heading counts only the blocking one.
+  const axe = clone(current);
+  axe.axe[0].counts.serious.nodes += 1;
+  const both = compareSummaries(baseline, axe, budget);
+  assert.match(renderComparison(both), /^## ❌ Metrics: 1 check over budget\n\n\*\*1 check is worse than `metrics-budget.json` allows\.\*\*\n\n1 check is worse than allowed in `lighthouse`/);
+  assert.match(renderComparison(both), /\| `home` \| Serious nodes \| .* \| ❌ worse \|\n\| `post` \| Accessibility \| .* \| ⚠️ worse, not blocking \|/);
+  assert.match(renderComparison(both, { accepted: true }), /^## ⚠️ Metrics: 1 check over budget, accepted\n/);
+  const markdown = renderComparison(result, { baseline, current });
+  const home = current.lighthouse[0];
+  const cls = `${home.metrics.cls.toFixed(3)} \\(\\+0\\.010\\)`;
+  assert.match(markdown, new RegExp(`\\| \`home\` \\| 🟠 ${home.scores.performance} \\| 🟢 ${home.scores.accessibility} \\| 🟢 \\d+ \\| 🟢 \\d+ \\| ${Math.round(home.metrics.lcp)} ms \\(\\+${Math.round(home.metrics.lcp - baseline.lighthouse[0].metrics.lcp)} ms\\) \\| ${cls} \\| ${Math.round(home.metrics.tbt)} ms \\|`));
+  assert.match(markdown, new RegExp(`\\| \`post\` \\| \\S+ \\d+ \\| 🟠 ${current.lighthouse[1].scores.accessibility} \\(−3\\) \\|`));
+  // The overview follows the failures and comes before the folded list of checks.
+  assert.ok(markdown.indexOf('❌ worse') < markdown.indexOf('### Lighthouse') && markdown.indexOf('### Lighthouse') < markdown.indexOf('<details>'));
+});
+
+test('desktop results are validated and shown, but never compared', () => {
+  const baseline = clone(masterRuns[0]);
+  const current = clone(baseline);
+  current.lighthouseDesktop = clone(current.lighthouse);
+  assert.deepEqual(summaryProblems(current), []);
+  // Much worse desktop values do not fail the comparison.
+  current.lighthouseDesktop[0].scores.performance = 20;
+  current.lighthouseDesktop[0].metrics.lcp *= 5;
+  const result = compareSummaries(baseline, current, budget);
+  assert.equal(result.failed, false);
+  let markdown = renderComparison(result, { baseline, current });
+  assert.match(markdown, /### Lighthouse \(desktop\), change from master\n\n.*\n.*\n\| `home` \| 🔴 20 \| /);
+  assert.match(markdown, /the baseline has none to compare with/);
+  // With desktop results in the baseline, changes are shown.
+  baseline.lighthouseDesktop = clone(baseline.lighthouse);
+  markdown = renderComparison(result, { baseline, current });
+  assert.match(markdown, new RegExp(`\\| \`home\` \\| 🔴 20 \\(−${baseline.lighthouse[0].scores.performance - 20}\\) \\|`));
+  assert.doesNotMatch(markdown, /baseline has none/);
+  // A broken desktop list makes the summary unusable like any other field.
+  current.lighthouseDesktop = [{ name: 'home' }];
+  assert.match(summaryProblems(current).join('; '), /lighthouseDesktop home: scores missing/);
+  current.lighthouseDesktop = [];
+  assert.deepEqual(summaryProblems(current), ['lighthouseDesktop: expected a list of pages']);
 });

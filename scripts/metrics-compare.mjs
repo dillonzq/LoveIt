@@ -2,6 +2,8 @@
 // summaries scripts/metrics.mjs writes, compare a pull request with the master
 // baseline and render the result. No I/O, so they can be unit tested.
 
+import { code, scoreMark } from './metrics-report.mjs';
+
 // Version of build/metrics/summary.json. Summaries written before the field
 // existed have the same shape and count as version 1.
 export const SUMMARY_SCHEMA = 1;
@@ -99,13 +101,19 @@ export function parseBaselinePolicy(section) {
 // a typo cannot silently turn a check off.
 export function parseBudget(budget) {
   if (!isObject(budget)) throw new Error('metrics budget: expected a JSON object');
-  checkKeys(budget, ['$comment', 'baseline', 'lighthouse', 'axe', 'build', 'repository'], 'metrics budget');
+  checkKeys(budget, ['$comment', 'baseline', 'advisory', 'lighthouse', 'axe', 'build', 'repository'], 'metrics budget');
   const baseline = parseBaselinePolicy(budget.baseline ?? {});
+  const groups = ['lighthouse', 'axe', 'build', 'repository'];
+  const advisory = budget.advisory ?? [];
+  if (!Array.isArray(advisory) || !advisory.every(group => groups.includes(group)) || new Set(advisory).size !== advisory.length) {
+    throw new Error(`advisory: expected a list of distinct groups from ${groups.join(', ')}`);
+  }
   if (budget.axe !== undefined && 'newRules' in (budget.axe ?? {}) && typeof budget.axe.newRules !== 'boolean') {
     throw new Error('axe.newRules: expected true or false');
   }
   return {
     baseline,
+    advisory,
     lighthouse: checkRules(budget.lighthouse, lighthouseMetrics, 'lighthouse'),
     axe: checkRules(budget.axe, axeMetrics, 'axe', ['newRules']),
     newRules: budget.axe?.newRules === true,
@@ -148,12 +156,16 @@ export function summaryProblems(summary) {
     }
   };
   if (!isCount(summary.lighthouseRuns) || !summary.lighthouseRuns) problems.push('lighthouseRuns is not a count');
-  pages(summary.lighthouse, 'lighthouse', (page, where) => {
+  const lighthousePage = (page, where) => {
     fields(page.scores, ['performance', 'accessibility', 'best-practices', 'seo'], isMeasurement, `${where}: scores`);
     fields(page.metrics, ['fcp', 'lcp', 'tbt', 'cls'], isMeasurement, `${where}: metrics`);
     fields(page.transfer, transferTypes, isCount, `${where}: transfer`);
     fields(page, ['requests'], isCount, where);
-  });
+  };
+  pages(summary.lighthouse, 'lighthouse', lighthousePage);
+  // Desktop results are optional: summaries written before they were measured
+  // have none. They are shown, not compared.
+  if (summary.lighthouseDesktop !== undefined) pages(summary.lighthouseDesktop, 'lighthouseDesktop', lighthousePage);
   pages(summary.axe, 'axe', (page, where) => {
     if (!Array.isArray(page.rules) || !page.rules.every(rule => typeof rule === 'string')) problems.push(`${where}: rules missing`);
     if (!isObject(page.counts)) return problems.push(`${where}: counts missing`);
@@ -162,6 +174,97 @@ export function summaryProblems(summary) {
   fields(summary.build, ['cold', 'warm'], value => typeof value === 'number' && Number.isFinite(value) && value >= 0, 'build');
   fields(summary.repository?.assetsLib, ['bytes', 'files'], isCount, 'repository.assetsLib');
   return problems;
+}
+
+// Text a summary contributes to rendered Markdown, checked against narrow
+// patterns: the Metrics comment workflow renders summaries from pull requests,
+// including forks, and must not pass on links, mentions or markup.
+const safeName = value => typeof value === 'string' && /^[a-z0-9][a-z0-9-]{0,31}$/i.test(value);
+const safeRule = value => typeof value === 'string' && /^[a-z0-9-]{1,64} \((?:critical|serious|moderate|minor|unknown)\)$/.test(value);
+const maxPages = 20;
+const maxRules = 100;
+
+// Returns problems with the names, rules and Hugo version in a summary that
+// summaryProblems accepts; an empty list means its text is safe to render.
+export function summaryTextProblems(summary) {
+  const problems = [];
+  for (const key of ['lighthouse', 'lighthouseDesktop', 'axe']) {
+    const list = summary[key] ?? [];
+    if (list.length > maxPages) problems.push(`${key}: more than ${maxPages} pages`);
+    for (const page of list) if (!safeName(page.name)) problems.push(`${key}: unexpected page name`);
+  }
+  for (const page of summary.axe ?? []) {
+    if (page.rules.length > maxRules || !page.rules.every(safeRule)) problems.push(`axe ${page.name}: unexpected rules`);
+  }
+  // As scripts/metrics.mjs records it; a looser pattern would let a value such
+  // as "www.example.com" become a link.
+  if (summary.build?.hugo !== undefined && !(typeof summary.build.hugo === 'string' && /^(?:v\d{1,4}\.\d{1,4}\.\d{1,4}(?: extended)?|unknown)$/.test(summary.build.hugo))) {
+    problems.push('build.hugo: unexpected version');
+  }
+  return problems;
+}
+
+const groupMetrics = { lighthouse: lighthouseMetrics, axe: axeMetrics, build: buildMetrics, repository: repositoryMetrics };
+const coverageLabels = { lighthouse: 'Lighthouse measured', axe: 'axe measured' };
+const checkStatuses = ['pass', 'improved', 'fail', 'skipped'];
+const checkReasons = ['no baseline value', 'no value in this run', 'page from the baseline was not measured'];
+const isValue = value => value === null || (typeof value === 'number' && Number.isFinite(value));
+
+// Reads comparison.json as written by scripts/metrics-gate.mjs, from an
+// untrusted artifact, and rebuilds every check from the metric definitions
+// here: labels and units never come from the file, names and rules must match
+// the patterns above, and `failed` is recomputed. Throws on anything else.
+export function trustedComparison(data) {
+  const fail = what => { throw new Error(`comparison.json: ${what}`); };
+  if (!isObject(data) || data.schema !== 1 || typeof data.compared !== 'boolean') fail('unexpected format');
+  let pullRequest = null;
+  if (data.pullRequest !== null && data.pullRequest !== undefined) {
+    if (!Number.isSafeInteger(data.pullRequest) || data.pullRequest < 1) fail('pullRequest is not a number');
+    pullRequest = data.pullRequest;
+  }
+  if (!data.compared) return { compared: false, pullRequest };
+  if (!Array.isArray(data.checks) || data.checks.length > 1000) fail('checks is not a list');
+  const checks = data.checks.map((item, index) => {
+    const where = `checks[${index}]`;
+    if (!isObject(item) || !Object.hasOwn(groupMetrics, item.group)) fail(`${where}: unknown group`);
+    if (!checkStatuses.includes(item.status) || typeof item.blocking !== 'boolean') fail(`${where}: unknown status`);
+    const paged = item.group === 'lighthouse' || item.group === 'axe';
+    if (paged ? !safeName(item.page) : item.page !== '–') fail(`${where}: unexpected page`);
+    const row = { group: item.group, page: item.page, metric: item.metric, status: item.status, blocking: item.blocking };
+    if (item.metric === 'coverage') {
+      if (!paged || item.status !== 'fail') fail(`${where}: unexpected coverage check`);
+      return { ...row, label: coverageLabels[item.group], unit: 'text', baseline: 'yes', current: 'no', reason: checkReasons[2] };
+    }
+    if (item.metric === 'rules') {
+      if (item.group !== 'axe' || !['pass', 'fail'].includes(item.status) || !isCount(item.baseline) || !isCount(item.current)
+        || !Array.isArray(item.added) || item.added.length > maxRules || !item.added.every(safeRule)) fail(`${where}: unexpected rules check`);
+      return { ...row, label: 'New violated rules', unit: 'rules', baseline: item.baseline, current: item.current, added: [...item.added] };
+    }
+    if (typeof item.metric !== 'string' || !Object.hasOwn(groupMetrics[item.group], item.metric)) fail(`${where}: unknown metric`);
+    if (!isValue(item.baseline ?? null) || !isValue(item.current ?? null)) fail(`${where}: values are not numbers`);
+    if (item.allowed !== undefined && !(typeof item.allowed === 'number' && Number.isFinite(item.allowed) && item.allowed >= 0)) fail(`${where}: allowed is not a number`);
+    if (item.reason !== undefined && !checkReasons.includes(item.reason)) fail(`${where}: unknown reason`);
+    const { label, unit } = groupMetrics[item.group][item.metric];
+    return { ...row, label, unit, baseline: item.baseline ?? null, current: item.current ?? null, allowed: item.allowed, reason: item.reason };
+  });
+  if (typeof data.accepted !== 'boolean') fail('accepted is not true or false');
+  let baselineRun = null;
+  if (data.baselineRun !== null && data.baselineRun !== undefined) {
+    const { id, sha, distance } = data.baselineRun;
+    if (!Number.isSafeInteger(id) || id < 1 || !/^[0-9a-f]{40}$/.test(sha) || !isCount(distance)) fail('unexpected baselineRun');
+    baselineRun = { id, sha, distance };
+  }
+  let baselineSummary = null;
+  if (data.baselineSummary !== null && data.baselineSummary !== undefined) {
+    const problems = [...summaryProblems(data.baselineSummary), ...(isObject(data.baselineSummary) ? summaryTextProblems(data.baselineSummary) : [])];
+    if (problems.length) fail(`baselineSummary: ${problems[0]}`);
+    baselineSummary = data.baselineSummary;
+  }
+  return {
+    compared: true, pullRequest, checks, warnings: [], accepted: data.accepted, baselineRun, baselineSummary,
+    failed: checks.some(item => item.status === 'fail' && item.blocking),
+    noteCount: Array.isArray(data.notes) ? data.notes.length : 0,
+  };
 }
 
 function check({ group, page, key, metric, rule, baseline, current }) {
@@ -179,7 +282,8 @@ const ruleId = rule => rule.replace(/\s*\([^)]*\)$/, '');
 
 // Compares two valid summaries with a parsed budget. Returns every check,
 // warnings about pages or settings that were not compared, and whether any
-// check failed.
+// blocking check failed. Checks in the budget's `advisory` groups are still
+// marked as failing but have `blocking: false`, so they do not fail the gate.
 export function compareSummaries(baseline, current, budget) {
   const checks = [];
   const warnings = [];
@@ -187,7 +291,7 @@ export function compareSummaries(baseline, current, budget) {
     const afterByName = new Map(after.map(page => [page.name, page]));
     const beforeNames = new Set(before.map(page => page.name));
     for (const page of after) {
-      if (!beforeNames.has(page.name)) warnings.push(`${label} page "${page.name}" has no baseline and was not compared.`);
+      if (!beforeNames.has(page.name)) warnings.push(`${label} page ${code(page.name)} has no baseline and was not compared.`);
     }
     return before.flatMap(page => {
       if (afterByName.has(page.name)) return [[page, afterByName.get(page.name)]];
@@ -228,12 +332,14 @@ export function compareSummaries(baseline, current, budget) {
     checks.push(check({ group: 'repository', page: '–', key, metric, rule, baseline: metric.get(baseline.repository), current: metric.get(current.repository) }));
   }
   if (baseline.build.hugo && current.build.hugo && baseline.build.hugo !== current.build.hugo) {
-    warnings.push(`The baseline was built with Hugo ${baseline.build.hugo}, this run with ${current.build.hugo}.`);
+    warnings.push(`The baseline was built with Hugo ${code(baseline.build.hugo)}, this run with ${code(current.build.hugo)}.`);
   }
   if (baseline.lighthouseRuns !== current.lighthouseRuns) {
     warnings.push(`The baseline used ${baseline.lighthouseRuns} Lighthouse runs, this run ${current.lighthouseRuns}.`);
   }
-  return { checks, warnings, failed: checks.some(item => item.status === 'fail') };
+  const advisory = new Set(budget.advisory ?? []);
+  for (const item of checks) item.blocking = !advisory.has(item.group);
+  return { checks, warnings, failed: checks.some(item => item.status === 'fail' && item.blocking) };
 }
 
 function format(value, unit) {
@@ -248,7 +354,7 @@ function format(value, unit) {
 }
 
 function change(item) {
-  if (item.metric === 'rules') return item.added.length ? item.added.join(', ') : '–';
+  if (item.metric === 'rules') return item.added.length ? item.added.map(code).join(', ') : '–';
   if (item.metric === 'coverage') return '–';
   if (typeof item.baseline !== 'number' || typeof item.current !== 'number') return '–';
   const delta = item.current - item.baseline;
@@ -258,29 +364,92 @@ function change(item) {
 }
 
 const statusText = { pass: '✅', improved: '✅ better', fail: '❌ worse', skipped: '➖ skipped' };
+const statusOf = item => item.status === 'fail' && item.blocking === false ? '⚠️ worse, not blocking' : statusText[item.status];
 
 function table(items) {
   const lines = ['| Page | Metric | Baseline | This run | Change | Allowed worse by | |', '|:--|:--|--:|--:|--:|--:|:--|'];
   for (const item of items) {
     const allowed = item.metric === 'rules' ? 'no new rule' : item.allowed === undefined ? '–' : format(item.allowed, item.unit);
-    const status = item.reason ? `${statusText[item.status]} (${item.reason})` : statusText[item.status];
-    lines.push(`| ${item.page} | ${item.label} | ${format(item.baseline, item.unit === 'rules' ? 'count' : item.unit)} | ${format(item.current, item.unit === 'rules' ? 'count' : item.unit)} | ${change(item)} | ${allowed} | ${status} |`);
+    const status = item.reason ? `${statusOf(item)} (${item.reason})` : statusOf(item);
+    lines.push(`| ${item.page === '–' ? '–' : code(item.page)} | ${item.label} | ${format(item.baseline, item.unit === 'rules' ? 'count' : item.unit)} | ${format(item.current, item.unit === 'rules' ? 'count' : item.unit)} | ${change(item)} | ${allowed} | ${status} |`);
+  }
+  return lines;
+}
+
+// A Lighthouse cell: this run's value and, when it changed, the change from
+// the baseline. Timings change in ms, not percent, which would exaggerate
+// noise on small values such as a TBT of 40 ms.
+function lighthouseCell(before, after, unit) {
+  if (typeof after !== 'number') return '–';
+  const value = unit === 'score' ? `${scoreMark(after)} ${after}` : format(after, unit);
+  if (typeof before !== 'number') return value;
+  const delta = after - before;
+  const sign = delta > 0 ? '+' : '−';
+  let shown;
+  if (unit === 'score') shown = Math.round(delta) ? `${sign}${Math.abs(Math.round(delta))}` : '';
+  else if (unit === 'cls') shown = Math.abs(delta) >= 0.0005 ? `${sign}${Math.abs(delta).toFixed(3)}` : '';
+  else shown = Math.round(delta) ? `${sign}${format(Math.abs(delta), unit)}` : '';
+  return shown ? `${value} (${shown})` : value;
+}
+
+const overviewMetrics = ['performance', 'accessibility', 'best-practices', 'seo', 'lcp', 'cls', 'tbt'];
+
+// This run's Lighthouse scores and main timings next to their change from the
+// baseline, for readers who want the numbers rather than the verdict: mobile,
+// then desktop when it was measured. Desktop is not in the budget yet.
+export function renderLighthouseOverview(baseline, current) {
+  const table = (list, before) => {
+    const byName = new Map((before || []).map(page => [page.name, page]));
+    const lines = [
+      '| Page | Perf | A11y | Best practices | SEO | LCP | CLS | TBT |', `|:--|${overviewMetrics.map(() => '--:').join('|')}|`,
+    ];
+    for (const page of list) {
+      const cells = overviewMetrics.map(key => {
+        const metric = lighthouseMetrics[key];
+        return lighthouseCell(byName.has(page.name) ? metric.get(byName.get(page.name)) : undefined, metric.get(page), metric.unit);
+      });
+      lines.push(`| ${code(page.name)} | ${cells.join(' | ')} |`);
+    }
+    return lines;
+  };
+  const lines = [];
+  if (current?.lighthouse?.length) {
+    lines.push('### Lighthouse (mobile), change from master', '', ...table(current.lighthouse, baseline?.lighthouse), '');
+  }
+  if (current?.lighthouseDesktop?.length) {
+    lines.push('### Lighthouse (desktop), change from master', '', ...table(current.lighthouseDesktop, baseline?.lighthouseDesktop), '');
+    lines.push(baseline?.lighthouseDesktop?.length
+      ? 'Desktop results are shown only; `metrics-budget.json` does not check them.'
+      : 'Desktop results are shown only; `metrics-budget.json` does not check them, and the baseline has none to compare with.', '');
   }
   return lines;
 }
 
 // Renders the comparison as Markdown for the job summary. `source` describes
-// the baseline in one line; `notes` are extra lines shown before the tables.
-export function renderComparison({ checks, warnings, failed }, { source, notes = [] } = {}) {
-  const failures = checks.filter(item => item.status === 'fail');
-  const lines = ['## Metrics compared with master', ''];
+// the baseline in one line; `notes` are extra lines shown before the tables;
+// `accepted` says the accept label lets the regressions pass. With `baseline`
+// and `current` summaries, a Lighthouse overview follows the failures.
+export function renderComparison({ checks, warnings, failed }, { source, notes = [], accepted = false, baseline, current } = {}) {
+  const plural = (count, one, many) => `${count} ${count === 1 ? one : many}`;
+  const blocking = checks.filter(item => item.status === 'fail' && item.blocking !== false);
+  const advisory = checks.filter(item => item.status === 'fail' && item.blocking === false);
+  const over = `${plural(blocking.length, 'check', 'checks')} over budget`;
+  const heading = failed
+    ? accepted ? `⚠️ Metrics: ${over}, accepted` : `❌ Metrics: ${over}`
+    : advisory.length ? `⚠️ Metrics: ${plural(advisory.length, 'non-blocking check', 'non-blocking checks')} over budget` : '✅ Metrics: within budget';
+  const lines = [`## ${heading}`, ''];
   if (source) lines.push(`Baseline: ${source}`, '');
-  lines.push(failed
-    ? `**${failures.length} ${failures.length === 1 ? 'check is' : 'checks are'} worse than \`metrics-budget.json\` allows.**`
-    : `No check is worse than \`metrics-budget.json\` allows (${checks.length} checks).`, '');
+  if (blocking.length) lines.push(`**${plural(blocking.length, 'check is', 'checks are')} worse than \`metrics-budget.json\` allows.**`, '');
+  if (advisory.length) {
+    const groups = [...new Set(advisory.map(item => item.group))].map(group => `\`${group}\``).join(', ');
+    lines.push(`${plural(advisory.length, 'check is', 'checks are')} worse than allowed in ${groups}, which \`advisory\` in \`metrics-budget.json\` lists as not blocking.`, '');
+  }
+  if (!blocking.length && !advisory.length) lines.push(`No check is worse than \`metrics-budget.json\` allows (${checks.length} checks).`, '');
+  const failures = [...blocking, ...advisory];
   for (const note of [...notes, ...warnings]) lines.push(`- ${note}`);
   if (notes.length || warnings.length) lines.push('');
   if (failures.length) lines.push(...table(failures), '');
+  lines.push(...renderLighthouseOverview(baseline, current));
   if (checks.length) lines.push('<details><summary>All checks</summary>', '', ...table(checks), '', '</details>', '');
   return lines.join('\n');
 }

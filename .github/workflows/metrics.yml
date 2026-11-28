@@ -38,6 +38,13 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+      - name: Record the pull request
+        # First, so the artifact names the pull request even when installing
+        # fails; scripts/metrics.mjs writes it again after clearing the folder.
+        if: inputs.compare && github.event.pull_request.number
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: mkdir -p build/metrics && printf '{"pullRequest":%d}\n' "$PR_NUMBER" > build/metrics/pull-request.json
       - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
@@ -51,6 +58,9 @@ jobs:
       - name: Lighthouse, axe-core and build time
         env:
           HVM_GITHUB_TOKEN: ${{ github.token }}
+          # The comparison step writes the job summary when there is one.
+          LOVEIT_METRICS_COMPARE: ${{ inputs.compare && '1' || '' }}
+          LOVEIT_METRICS_PULL_REQUEST: ${{ github.event.pull_request.number }}
         run: npm run metrics
       - name: Compare with master
         if: inputs.compare
@@ -59,11 +69,19 @@ jobs:
           LOVEIT_METRICS_BRANCH: ${{ github.event.repository.default_branch }}
           LOVEIT_METRICS_BASE: ${{ github.event.pull_request.base.sha }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
+          LOVEIT_METRICS_HEAD: ${{ github.event.pull_request.head.sha }}
         run: npm run metrics:compare
+      - name: Job summary without a comparison
+        # The comparison stopped before writing the job summary: show the measurements.
+        if: failure() && inputs.compare && hashFiles('build/metrics/summary.md') != '' && hashFiles('build/metrics/comparison.md') == ''
+        run: cat build/metrics/summary.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: metrics
+          # Master runs upload `metrics`, the baseline later pull requests
+          # download. Pull request runs name the attempt, so the Metrics comment
+          # workflow never shows an earlier attempt's results after a re-run.
+          name: ${{ inputs.compare && format('metrics-attempt-{0}', github.run_attempt) || 'metrics' }}
           path: |
             build/metrics/
             !build/metrics/site/
