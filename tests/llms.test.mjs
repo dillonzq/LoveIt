@@ -176,6 +176,9 @@ test('Hugo versions that still read "_build" leave out the pages it only links',
     'content/mixed/kept-out.en.md': '---\ntitle: Kept out\nbuild:\n  render: always\n---\nText.\n',
     'content/reversed/_index.en.md': '---\ntitle: Reversed\ncascade:\n  build:\n    render: link\n---\n',
     'content/reversed/published.en.md': '---\ntitle: Published\n_build:\n  render: always\n---\nText.\n',
+    // "_build" replaces all of "build", including the options that it does not set.
+    'content/whole/_index.en.md': '---\ntitle: Whole\ncascade:\n  _build:\n    publishResources: false\n---\n',
+    'content/whole/listed.en.md': '---\ntitle: Listed\nbuild:\n  render: link\n---\nText.\n',
   }, { check: false });
   // Later versions refuse "_build" and fail the build.
   if (status !== 0 && /"_build" front matter key was deprecated/.test(output)) return t.skip('this Hugo version no longer reads "_build"');
@@ -183,7 +186,9 @@ test('Hugo versions that still read "_build" leave out the pages it only links',
   assert.equal(read('notes/linked/index.html'), undefined);
   assert.equal(read('mixed/kept-out/index.html'), undefined);
   assert.notEqual(read('reversed/published/index.html'), undefined);
+  assert.notEqual(read('whole/listed/index.html'), undefined);
   const list = read('llms.txt');
   assert.doesNotMatch(list, /Linked|Kept out/);
   assert.match(list, /- \[Published\]\(https:\/\/example\.org\/blog\/reversed\/published\/\)/);
+  assert.match(list, /- \[Listed\]\(https:\/\/example\.org\/blog\/whole\/listed\/\)/);
 });
