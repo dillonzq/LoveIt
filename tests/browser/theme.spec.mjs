@@ -1084,6 +1084,36 @@ test('the theme script is a module, starts before later DOMContentLoaded handler
   await context.close();
 });
 
+test('the theme starts when the config and theme scripts are added after the page has loaded', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  // A site that delays both scripts, e.g. until the reader interacts with the page.
+  await page.route('**/fuse/blog/guide/', async route => {
+    const response = await route.fetch();
+    let html = await response.text();
+    const config = html.match(/<script>(window\.config=[\s\S]*?)<\/script>/)[1];
+    const src = html.match(/<script src=([^ >]+\/js\/theme[^ >]*\.js)[^>]*><\/script>/)[1];
+    html = html.replace(`<script>${config}</script>`, '').replace(/<script src=[^ >]+\/js\/theme[^>]*><\/script>/, '');
+    const late = `<script>addEventListener('load', () => setTimeout(() => {
+      const config = document.createElement('script');
+      config.textContent = ${JSON.stringify(config)};
+      document.body.append(config);
+      const theme = document.createElement('script');
+      theme.type = 'module';
+      theme.src = ${JSON.stringify(src)};
+      document.body.append(theme);
+    }));</script>`;
+    await route.fulfill({ response, body: html.replace('</body>', `${late}</body>`) });
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/fuse/blog/guide/');
+  await page.waitForFunction(() => window.loveitStart === true);
+  const menuToggle = page.getByRole('button', { name: 'Menu' });
+  await menuToggle.click();
+  await expect(menuToggle).toHaveAttribute('aria-expanded', 'true');
+  expect(errors).toEqual([]);
+});
+
 test('content shortcodes survive cached content and nesting; grouped TypeIt types in order', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));

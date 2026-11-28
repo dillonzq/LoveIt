@@ -293,7 +293,7 @@
 
 {{- /* Config script. It also registers the DOMContentLoaded handler of the theme script here, */ -}}
 {{- /* before the handlers of later classic scripts; see the end of assets/js/theme.js. */ -}}
-{{- $start := `window.loveitStart=null;document.addEventListener("DOMContentLoaded",function(){var s=window.loveitStart;window.loveitStart=true;if(typeof s==="function")s()});` -}}
+{{- $start := `if(document.readyState==="loading"){window.loveitStart=null;document.addEventListener("DOMContentLoaded",function(){var s=window.loveitStart;window.loveitStart=true;if(typeof s==="function")s()})}else window.loveitStart=true;` -}}
 {{- printf "window.config=%s;%s" ($config | jsonify) $start | dict "Content" | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 
 {{- /* Theme script: the core and the feature modules (assets/js/features) in one module script. */ -}}

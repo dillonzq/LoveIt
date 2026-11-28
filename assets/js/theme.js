@@ -37,14 +37,14 @@ const themeInit = () => {
 // deferred scripts and after the handlers of this event that scripts before the theme
 // script added, but before those that later scripts (the script shortcode) added. A module
 // script runs after all of them are added, so the config script registers the theme's
-// handler in its place (layouts/_partials/assets.html): it sets `loveitStart` to null, calls
-// the function this script stores there on DOMContentLoaded, and sets it to true then.
+// handler in its place (layouts/_partials/assets.html). While the document is loading, it
+// sets `loveitStart` to null, calls the function this script stores there on
+// DOMContentLoaded and sets it to true then; it sets it to true at once when it runs later.
 if (window.loveitStart === null) {
     window.loveitStart = themeInit;
-} else if (window.loveitStart === true || document.readyState === 'complete') {
+} else if (window.loveitStart === true || document.readyState !== 'loading') {
     themeInit();
 } else {
     // Without the config script's handler, e.g. a site's own copy of an older assets.html.
     document.addEventListener('DOMContentLoaded', themeInit, false);
-    window.addEventListener('load', themeInit, false);
 }

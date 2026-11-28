@@ -8,7 +8,7 @@ import { getHugo, root, toolEnv } from '../scripts/tools.mjs';
 
 const referrer = html => html.match(/<meta name="?referrer"? content="?([^">]*)"?/)?.[1];
 const mermaidConfig = html => {
-  const config = html.match(/window\.config=(\{.*?\});window\.loveitStart=/)?.[1];
+  const config = html.match(/window\.config=(\{.*?\});if\(document\.readyState/)?.[1];
   return config && JSON.parse(config).mermaid;
 };
 
