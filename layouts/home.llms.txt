@@ -1,0 +1,30 @@
+{{- /* llms.txt (https://llmstxt.org/): the site title and description, then the pages outside any section and an H2 list per top-level section. Each page links to its Markdown version when it has one, otherwise to its HTML page. Pages hidden from search are left out, as in index.json. */ -}}
+{{- $pages := .Site.RegularPages -}}
+{{- if .Site.Params.page.hiddenFromSearch -}}
+    {{- $pages = where $pages "Params.hiddenfromsearch" false -}}
+{{- else -}}
+    {{- $pages = where $pages "Params.hiddenfromsearch" "!=" true -}}
+{{- end -}}
+{{- $groups := slice (dict "pages" (where $pages "Section" "")) -}}
+{{- range .Sections -}}
+    {{- $groups = $groups | append (dict "title" .Title "pages" (where $pages "Section" .Section)) -}}
+{{- end -}}
+{{- $escape := `([\\\[\]])` -}}
+# {{ .Site.Title | replaceRE `\s+` " " }}
+{{ with .Site.Params.description }}
+> {{ . | replaceRE `\s+` " " | strings.TrimSpace }}
+{{ end -}}
+{{- range $groups -}}
+    {{- if .pages }}
+{{ with .title }}## {{ . | replaceRE `\s+` " " }}
+
+{{ end -}}
+        {{- range .pages -}}
+            {{- $url := .Permalink -}}
+            {{- with .OutputFormats.Get "markdown" -}}
+                {{- $url = .Permalink -}}
+            {{- end -}}
+- [{{ .LinkTitle | replaceRE `\s+` " " | replaceRE $escape `\$1` }}]({{ $url | replaceRE `\(` "%28" | replaceRE `\)` "%29" }}){{ with .Description }}: {{ . | replaceRE `\s+` " " | strings.TrimSpace }}{{ end }}
+{{ end -}}
+    {{- end -}}
+{{- end -}}

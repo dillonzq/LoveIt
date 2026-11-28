@@ -24,6 +24,16 @@
     <link rel="next" href="{{ .NextInSection.Permalink }}" />
 {{- end -}}
 
+{{- /* The Markdown version of the page, for clients that read Markdown instead of HTML */ -}}
+{{- with .OutputFormats.Get "markdown" -}}
+    <link rel="alternate" href="{{ .Permalink }}" type="text/markdown" title="{{ $.Title | default $.Site.Title }}">
+{{- end -}}
+
+{{- /* llms.txt of the language, when "llms" is in the outputs of home */ -}}
+{{- with .Site.Home.OutputFormats.Get "llms" -}}
+    <link rel="describedby" href="{{ .Permalink }}">
+{{- end -}}
+
 {{- with .OutputFormats.Get "RSS" -}}
     <link rel="alternate" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ $.Site.Title }}">
     <link rel="feed" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ $.Site.Title }}">

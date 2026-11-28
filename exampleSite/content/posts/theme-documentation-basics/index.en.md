@@ -912,22 +912,19 @@ enableEmoji = true
   [privacy.youtube]
     # ...
 
-# Options to make output .md files
-[mediaTypes]
-  [mediaTypes."text/plain"]
-    suffixes = ["md"]
-
-# Options to make output .md files
-[outputFormats.MarkDown]
+# {{< version 0.5.0 >}} Output format of llms.txt, see [Markdown Output and llms.txt](#llms-txt)
+[outputFormats.llms]
+  baseName = "llms"
   mediaType = "text/plain"
   isPlainText = true
-  isHTML = false
+  notAlternative = true
 
 # Options to make hugo output files
 [outputs]
-  # {{< version 0.2.0 changed >}}
-  home = ["HTML", "RSS", "JSON"]
-  page = ["HTML", "MarkDown"]
+  # {{< version 0.5.0 changed >}}
+  home = ["HTML", "RSS", "JSON", "llms"]
+  # "markdown" is the output format built into Hugo for the .md version of a page
+  page = ["HTML", "markdown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
 ```
@@ -1070,6 +1067,62 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 ```
 
 In `assets/css/_custom.scss`, you can add some css style code to customize the style.
+
+### 3.4 Markdown Output and llms.txt {#llms-txt}
+
+{{< version 0.5.0 >}}
+
+With the `markdown` output format, which is built into Hugo, each page is also published as `index.md` next to its `index.html`:
+
+```toml
+[outputs]
+  page = ["HTML", "markdown"]
+```
+
+Every page that has this output links its Markdown version in the `<head>` with `<link rel="alternate" type="text/markdown">`, so tools and LLM crawlers find it without parsing the page.
+`linkToMarkdown` in `[params.page]` also shows a link to it in the post footer.
+
+The theme also has a default [llms.txt](https://llmstxt.org/) template, `layouts/home.llms.txt`.
+To publish `/llms.txt`, define the `llms` output format and add it to the outputs of `home` in your [site configuration](#site-configuration):
+
+```toml
+[outputFormats.llms]
+  baseName = "llms"
+  mediaType = "text/plain"
+  isPlainText = true
+  notAlternative = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON", "llms"]
+  page = ["HTML", "markdown"]
+```
+
+`llms.txt` starts with the site title and `description` in `[params]`.
+It lists the pages outside any section first, then the pages of each top-level section under a heading with the section title, nested sections included.
+Each page links to its Markdown version when it has one, otherwise to its HTML page, with the `description` from its front matter.
+Pages hidden from search (`hiddenFromSearch`) are left out.
+A multilingual site has one `llms.txt` per language, in the root of each language, such as `/zh-cn/llms.txt`.
+Each page links the `llms.txt` of its language with `<link rel="describedby">`.
+
+To change the content, copy `layouts/home.llms.txt` of the theme to `layouts/home.llms.txt` in your project and edit it.
+
+{{< admonition warning "Remove the old Markdown output settings" >}}
+Site configurations based on the example of earlier versions make the `.md` files with these settings:
+
+```toml
+[mediaTypes]
+  [mediaTypes."text/plain"]
+    suffixes = ["md"]
+
+[outputFormats.MarkDown]
+  mediaType = "text/plain"
+  isPlainText = true
+  isHTML = false
+```
+
+Remove both before you add the `llms` output format, and use `markdown` in the outputs of `page`.
+Otherwise `text/plain` files end in `.md`: Hugo looks for `home.llms.md` and publishes no `llms.txt`, and it no longer finds the Markdown template of the pages.
+{{< /admonition >}}
 
 ## 4 Multilingual and i18n
 
