@@ -1,7 +1,7 @@
 // The theme's own motion: header auto-hide, page title entrance and copy feedback.
 
 // Auto-hiding headers slide out while scrolling down and come back when
-// scrolling up (see onScroll in theme.js). Keyboard focus brings them back.
+// scrolling up (see onScroll in assets/js/core.js). Keyboard focus brings them back.
 header.is-hidden {
   opacity: 0;
   @include transform(translateY(-100%));

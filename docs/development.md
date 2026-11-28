@@ -89,6 +89,23 @@ Search implementation lives in `assets/js/search.mjs`; Hugo bundles it with
 `assets/js/theme.js` using `js.Build`. The independent, checked-in Lunr Chinese
 segmenter is regenerated with `npm run compile-lunr-segmentit` (esbuild).
 
+## Theme script
+
+`assets/js/theme.js` is the entry of the theme script, built by `js.Build` as an
+ES2020 module and loaded with `<script type="module">`. It lists the features
+and the order they start in; `assets/js/core.js` holds what every page has
+(header, mobile menu, theme switch, scroll and resize events) and
+`assets/js/util.js` the shared helpers. Each feature is a module under
+`assets/js/features/` whose default export receives the core object, reads
+`theme.config` and subscribes to its event sets. The entry imports a feature
+with `import()` only when the page uses it; `js.Build` bundles every feature
+into the one file, and a feature runs only once imported. A feature that throws
+while starting is logged and the others still start. The theme starts on
+`DOMContentLoaded` from a handler that the inline config script registers
+(`window.loveitStart`) while the document is loading, so it runs before the
+handlers of classic scripts that come after the theme script, as it did when the
+theme script was classic.
+
 ## Theme version
 
 `package.json` is the source of the theme version. Templates read it from

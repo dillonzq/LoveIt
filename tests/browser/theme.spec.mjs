@@ -1026,6 +1026,37 @@ test('a long auto TOC stays within the viewport and scrolls to the active sectio
     const [c, a] = await Promise.all([content.boundingBox(), active.boundingBox()]);
     return a.y >= c.y && a.y + a.height <= c.y + c.height && c.y + c.height <= 400;
   }).toBe(true);
+
+  // A resize measures the page again: the fixed TOC follows a taller header.
+  expect(await toc.evaluate(el => getComputedStyle(el).position)).toBe('fixed');
+  const headerHeight = await page.evaluate(() => {
+    const header = document.getElementById('header-desktop');
+    header.style.height = `${header.offsetHeight + 40}px`;
+    window.dispatchEvent(new Event('resize'));
+    return header.offsetHeight;
+  });
+  await expect.poll(() => toc.evaluate(el => el.style.top)).toBe(`${headerHeight + 20}px`);
+});
+
+test('the auto TOC is placed again after later DOMContentLoaded handlers change the header', async ({ page }) => {
+  // A script after the theme script, like the script shortcode, makes the header taller.
+  await page.route('**/fuse/blog/long-toc/', async route => {
+    const response = await route.fetch();
+    const late = `<script>document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('header-desktop').style.height = '120px';
+    });</script>`;
+    await route.fulfill({ response, body: (await response.text()).replace('</body>', `${late}</body>`) });
+  });
+  await page.setViewportSize({ width: 1280, height: 600 });
+  await page.goto('/fuse/blog/long-toc/');
+  await page.waitForFunction(() => document.readyState === 'complete');
+  await page.evaluate(() => {
+    const top = document.getElementById('section-35').getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top - 10, behavior: 'instant' });
+  });
+  const toc = page.locator('#toc-auto');
+  await expect.poll(() => toc.evaluate(el => getComputedStyle(el).position)).toBe('fixed');
+  await expect.poll(() => toc.evaluate(el => el.style.top)).toBe('140px');
 });
 
 test('first-screen avatar loads directly and scroll bursts share a frame', async ({ page }) => {
@@ -1050,6 +1081,60 @@ test('first-screen avatar loads directly and scroll bursts share a frame', async
     return count;
   });
   expect(frames).toBe(1);
+});
+
+test('the theme script is a module, starts before later DOMContentLoaded handlers, and a feature that fails to start does not stop the ones after it', async ({ browser }) => {
+  const context = await browser.newContext({ reducedMotion: 'reduce' });
+  const page = await context.newPage();
+  const errors = [];
+  const logged = [];
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('console', message => { if (message.type() === 'error') logged.push(message.text()); });
+  // Without its library, the ECharts feature throws when it starts.
+  await page.route('**/echarts.min.js', route => route.abort());
+  await page.goto('/fuse/blog/feature-isolation/');
+  await expect(page.locator('script[src*="/js/theme"]')).toHaveAttribute('type', 'module');
+  // TypeIt and the TOC start after ECharts.
+  await expect(page.locator('.typeit > div')).toHaveText('Typed after the chart');
+  await expect(page.locator('#toc-auto')).toBeVisible();
+  await expect(page.locator('#toc-auto a.active')).toHaveCount(1);
+  expect(logged.some(text => text.includes('the echarts feature failed to start'))).toBe(true);
+  // The script shortcode's DOMContentLoaded handler finds the code block already working.
+  expect(await page.evaluate(() => window.shortcodeSawTheme)).toBe(true);
+  expect(errors).toEqual([]);
+  await context.close();
+});
+
+test('the theme starts when the config and theme scripts are added after the page has loaded', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  // A site that delays both scripts, e.g. until the reader interacts with the page.
+  await page.route('**/fuse/blog/guide/', async route => {
+    const response = await route.fetch();
+    let html = await response.text();
+    const config = html.match(/<script>(window\.config=[\s\S]*?)<\/script>/)[1];
+    const src = html.match(/<script src=([^ >]+\/js\/theme[^ >]*\.js)[^>]*><\/script>/)[1];
+    html = html.replace(`<script>${config}</script>`, '').replace(/<script src=[^ >]+\/js\/theme[^>]*><\/script>/, '');
+    const late = `<script>addEventListener('load', () => setTimeout(() => {
+      const config = document.createElement('script');
+      config.textContent = ${JSON.stringify(config)};
+      document.body.append(config);
+      const theme = document.createElement('script');
+      theme.type = 'module';
+      theme.src = ${JSON.stringify(src)};
+      // A module script fires load once it has run.
+      theme.onload = () => { window.lateThemeRan = true; };
+      document.body.append(theme);
+    }));</script>`;
+    await route.fulfill({ response, body: html.replace('</body>', `${late}</body>`) });
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/fuse/blog/guide/');
+  await page.waitForFunction(() => window.lateThemeRan);
+  const menuToggle = page.getByRole('button', { name: 'Menu' });
+  await menuToggle.click();
+  await expect(menuToggle).toHaveAttribute('aria-expanded', 'true');
+  expect(errors).toEqual([]);
 });
 
 test('content shortcodes survive cached content and nesting; grouped TypeIt types in order', async ({ page }) => {
