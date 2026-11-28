@@ -32,16 +32,6 @@
       display: inline-block;
     }
 
-    .post-author {
-      .h-card img {
-        max-height: 1.5em;
-        width: auto;
-        margin-right: .25rem;
-        border-radius: 50%;
-        vertical-align: middle;
-      }
-    }
-
     [theme=dark] & {
       color: $global-font-secondary-color-dark;
     }
@@ -56,6 +46,16 @@
 
     .author {
       font-size: 1.05rem;
+    }
+
+    // A round crop of the author photo, about the size of the user icon it replaces.
+    .author-avatar {
+      width: 1.25em;
+      height: 1.25em;
+      margin-inline-end: .25em;
+      border-radius: 50%;
+      object-fit: cover;
+      vertical-align: -.25em;
     }
   }
 

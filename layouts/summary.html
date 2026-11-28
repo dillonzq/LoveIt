@@ -24,12 +24,8 @@
 
     {{- /* Meta */ -}}
     <div class="post-meta">
-        {{- $author := $params.author | default .Site.Params.Author.name | default (T "author") -}}
-        {{- $authorLink := $params.authorlink | default .Site.Params.Author.link | default .Site.Home.RelPermalink -}}
-        {{- $authorAvatar := .Params.authorAvatar | default .Site.Params.Author.avatar -}}
         <span class="post-author">
-            {{- $options := dict "Class" "person-mention author" "Name" $author "URL" $authorLink "Rel" "author" "Image" $authorAvatar -}}
-            {{- partial "plugin/h-card" $options -}}
+            {{- dict "Page" . "Params" $params | partial "plugin/author.html" -}}
         </span>
 
         {{- with .Site.Params.dateFormat | default "2006-01-02" | .PublishDate.Format -}}

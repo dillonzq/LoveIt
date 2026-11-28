@@ -315,6 +315,8 @@ enableEmoji = true
     name = "xxxx"
     email = ""
     link = ""
+    # {{< version 0.5.0 >}} author avatar shown in the post meta instead of the user icon (path under "static/" or "assets/", or URL)
+    avatar = ""
 
   # Header config
   [params.header]

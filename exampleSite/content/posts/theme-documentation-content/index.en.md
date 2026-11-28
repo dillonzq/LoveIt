@@ -96,6 +96,7 @@ lastmod: 2020-03-04T15:58:26+08:00
 draft: true
 author: ""
 authorLink: ""
+authorAvatar: ""
 description: ""
 license: ""
 images: []
@@ -163,6 +164,7 @@ seo:
 * **draft**: if `true`, the content will not be rendered unless the `--buildDrafts`/`-D` flag is passed to the `hugo` command.
 * **author**: the author for the content.
 * **authorLink**: the link of the author.
+* **authorAvatar**: {{< version 0.5.0 >}} the avatar of the author, shown in the post meta instead of the user icon: the name of a page resource, a path under `static/` or `assets/`, or a URL. Without it, the post shows `params.author.avatar` from the [site configuration](../theme-documentation-basics#site-configuration), unless its `author` is another author.
 * **description**: the description for the content.
 * **license**: the special license for this content.
 * **images**: page images for Open Graph and Twitter Cards.

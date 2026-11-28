@@ -34,6 +34,11 @@ This file starts at 0.4.0. Older releases are described on the
   `Esc` closes search and returns focus to where it was. Visitors can turn
   off the `/` shortcut with a checkbox below the search results; the choice
   is remembered in the browser.
+- An author avatar in the post meta of posts and post summaries, in place of
+  the user icon, and in the author of the structured data. Set
+  `params.author.avatar` for the site author, or `authorAvatar` in front
+  matter for a post ([#977]). Posts that name another `author` only show the
+  avatar from their own `authorAvatar`.
 
 ### Changed
 
@@ -364,6 +369,7 @@ for the full upgrade guide.
 [#863]: https://github.com/dillonzq/LoveIt/issues/863
 [#963]: https://github.com/dillonzq/LoveIt/issues/963
 [#974]: https://github.com/dillonzq/LoveIt/issues/974
+[#977]: https://github.com/dillonzq/LoveIt/issues/977
 [#993]: https://github.com/dillonzq/LoveIt/issues/993
 [#997]: https://github.com/dillonzq/LoveIt/pull/997
 [#1012]: https://github.com/dillonzq/LoveIt/pull/1012

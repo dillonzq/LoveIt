@@ -32,7 +32,11 @@
         {{- $schema = merge $schema (dict "inLanguage" .) -}}
     {{- end -}}
     {{- with .Site.Params.Author.name -}}
-        {{- $schema = merge $schema (dict "author" (dict "@type" "Person" "name" .)) -}}
+        {{- $person := dict "@type" "Person" "name" . -}}
+        {{- with dict "Path" $.Site.Params.Author.avatar | partial "function/schema-image.html" -}}
+            {{- $person = merge $person (dict "image" .) -}}
+        {{- end -}}
+        {{- $schema = merge $schema (dict "author" $person) -}}
     {{- end -}}
     {{- with .Site.Params.description -}}
         {{- $schema = merge $schema (dict "description" .) -}}
@@ -99,7 +103,11 @@
     {{- end -}}
     {{- $schema = merge $schema (dict "publisher" $organization) -}}
     {{- with .Params.author | default .Site.Params.Author.name | default (T "author") -}}
-        {{- $schema = merge $schema (dict "author" (dict "@type" "Person" "name" .)) -}}
+        {{- $person := dict "@type" "Person" "name" . -}}
+        {{- with dict "Path" (partial "function/author-avatar.html" $) "Resources" $.Resources | partial "function/schema-image.html" -}}
+            {{- $person = merge $person (dict "image" .) -}}
+        {{- end -}}
+        {{- $schema = merge $schema (dict "author" $person) -}}
     {{- end -}}
     {{- with .Description -}}
         {{- $schema = merge $schema (dict "description" .) -}}

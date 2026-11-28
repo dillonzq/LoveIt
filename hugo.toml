@@ -33,8 +33,8 @@
     name = "xxxx"
     email = ""
     link = ""
-    # URL of the author avatar (photo)
-    # 作者头像（照片）的 URL
+    # author avatar shown in the post meta instead of the user icon (path under "static/" or "assets/", or URL)
+    # 文章元信息中代替用户图标显示的作者头像 (位于 "static/" 或 "assets/" 下的路径, 或者 URL)
     avatar = ""
 
   # Header config

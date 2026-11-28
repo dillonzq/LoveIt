@@ -316,6 +316,8 @@ enableEmoji = true
     name = "xxxx"
     email = ""
     link = ""
+    # {{< version 0.5.0 >}} 文章元信息中代替用户图标显示的作者头像 (位于 "static/" 或 "assets/" 下的路径, 或者 URL)
+    avatar = ""
 
   # 页面头部导航栏配置
   [params.header]
