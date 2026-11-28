@@ -31,6 +31,7 @@ const content = {
   // Hugo lists a page that it does not render, but publishes no file to link.
   'content/posts/unrendered.en.md': '---\ntitle: Unrendered\ndate: 2025-01-03\nbuild:\n  render: never\n---\nText.\n',
   'content/posts/linked.en.md': '---\ntitle: Linked\ndate: 2025-01-03\nbuild:\n  render: link\n---\nText.\n',
+  'content/posts/untitled.en.md': '---\ntitle: " "\ndate: 2024-12-29\n---\nText.\n',
   // A section titled like the heading of the pages outside any section joins it.
   'content/pages/guide.en.md': '---\ntitle: Guide\n---\nText.\n',
   'content/unrendered/only.en.md': '---\ntitle: Only unrendered\nbuild:\n  render: never\n---\nText.\n',
@@ -42,7 +43,7 @@ const content = {
   'content/archive/old.en.md': '---\ntitle: Old\ndate: 2020-01-01\n---\nText.\n',
 };
 
-function site(name, config, files = {}) {
+function site(name, config, files = {}, { check = true } = {}) {
   const directory = path.join(temporary, name);
   for (const [file, text] of Object.entries({ ...content, ...files })) {
     mkdirSync(path.dirname(path.join(directory, file)), { recursive: true });
@@ -63,11 +64,12 @@ function site(name, config, files = {}) {
   const result = spawnSync(binary, ['--source', directory, '--environment', 'production', '--noBuildLock', '--panicOnWarning'], {
     cwd: directory, env: toolEnv, encoding: 'utf8',
   });
-  assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
-  return file => {
+  if (check) assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+  const read = file => {
     const target = path.join(directory, 'public', file);
     return existsSync(target) ? readFileSync(target, 'utf8') : undefined;
   };
+  return check ? read : { status: result.status, output: `${result.stdout}\n${result.stderr}`, read };
 }
 
 const links = html => html.match(/<link rel="?(?:alternate|describedby)"?[^>]*>/g) || [];
@@ -113,6 +115,8 @@ test('pages link their Markdown version and the llms.txt of their language', () 
     '- [HTML only](https://example.org/blog/posts/html-only/)',
     '- [Deep](https://example.org/blog/posts/nested/deep/index.md)',
     '- [JSON first](https://example.org/blog/posts/json-first/)',
+    // llms.txt parsers need a link text.
+    '- [/posts/untitled](https://example.org/blog/posts/untitled/index.md)',
     '',
     '## Notes',
     '',
@@ -152,4 +156,15 @@ test('the Markdown output of earlier example configurations keeps working', () =
   assert.ok(html.includes('<link rel="alternate" href="https://example.org/blog/posts/first/index.md" type="text/markdown" title="First [draft] post">'), html.join('\n'));
   assert.ok(!html.some(link => link.includes('describedby')), html.join('\n'));
   assert.equal(page('llms.txt'), undefined);
+});
+
+test('Hugo versions that still read "_build" leave out the pages it only links', t => {
+  const { status, output, read } = site('legacy-build', `${llms}\n[outputs]\nhome = ["html", "llms"]`, {
+    'content/notes/linked.en.md': '---\ntitle: Linked\n_build:\n  render: link\n---\nText.\n',
+  }, { check: false });
+  // Later versions refuse "_build" and fail the build.
+  if (status !== 0 && /"_build" front matter key was deprecated/.test(output)) return t.skip('this Hugo version no longer reads "_build"');
+  assert.equal(status, 0, output);
+  assert.equal(read('notes/linked/index.html'), undefined);
+  assert.doesNotMatch(read('llms.txt'), /Linked/);
 });

@@ -35,8 +35,12 @@
     {{- end -}}
     {{- $heading = $heading | replaceRE `\s+` " " | strings.TrimSpace -}}
     {{- range where $pages "Section" $key -}}
-        {{- /* Hugo publishes no file for a page that it only lists or links */ -}}
-        {{- if in (slice "link" "never" "false") (lower (string .Params.build.render)) -}}
+        {{- /* Hugo publishes no file for a page that it only lists or links. Hugo before 0.145 also reads "_build". */ -}}
+        {{- $render := .Params.build.render -}}
+        {{- if eq $render nil -}}
+            {{- $render = .Params._build.render -}}
+        {{- end -}}
+        {{- if in (slice "link" "never" "false") (lower (string $render)) -}}
             {{- continue -}}
         {{- end -}}
         {{- $url := "" -}}
@@ -50,7 +54,8 @@
         {{- end -}}
         {{- if $url -}}
             {{- /* Brackets as character references: llms.txt parsers end the link text at the first "]", even an escaped one */ -}}
-            {{- $title := .LinkTitle | replaceRE `\s+` " " | strings.TrimSpace | replaceRE `\\` `\\` -}}
+            {{- /* llms.txt parsers need a link text; an untitled page is named by its path */ -}}
+            {{- $title := .LinkTitle | replaceRE `\s+` " " | strings.TrimSpace | default .Path | replaceRE `\\` `\\` -}}
             {{- $title = replace (replace $title "[" "&#91;") "]" "&#93;" -}}
             {{- $line := printf "- [%s](%s)" $title ($url | replaceRE `\(` "%28" | replaceRE `\)` "%29") -}}
             {{- with .Description -}}
