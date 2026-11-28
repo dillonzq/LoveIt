@@ -50,6 +50,12 @@ const cases = [
   // Pele is the default renderer; it has no securityLevel, so "loose" only warns.
   { name: 'Pele by default', security: '', referrer: 'strict-origin-when-cross-origin', mermaid: pele, noWarnings: [/renderer/] },
   { name: 'Pele bundled', security: '', extra: '[params.cdn]\ndata = ""\n', referrer: 'strict-origin-when-cross-origin', mermaid: pele, localPele: true },
+  // A CDN data file may point a library at its bundled path.
+  {
+    name: 'Pele by local path', security: '', extra: '[params.cdn]\ndata = "local.yml"\n',
+    files: { 'assets/data/cdn/local.yml': 'prefix:\n  libFiles: ""\nlibFiles:\n  peleJS: lib/pele/pele.global.js\n' },
+    referrer: 'strict-origin-when-cross-origin', mermaid: pele, localPele: true,
+  },
   { name: 'Mermaid bundled', security: '', page: useMermaid, extra: '[params.cdn]\ndata = ""\n', referrer: 'strict-origin-when-cross-origin', mermaid: mermaid('strict') },
   { name: 'Pele by name', security: '', page: 'renderer = "pele"\n', referrer: 'strict-origin-when-cross-origin', mermaid: pele, noWarnings: [/renderer/] },
   {
@@ -82,10 +88,14 @@ test('referrer policy, Mermaid renderer and securityLevel defaults, overrides an
   const { binary } = await getHugo();
   const temporary = mkdtempSync(path.join(os.tmpdir(), 'loveit-security-'));
   try {
-    for (const { name, security, page = '', extra = '', localPele: expectedLocalPele = false, frontMatter = '', referrer: expectedReferrer, mermaid: expectedMermaid, diagram = true, warnings = [], noWarnings = [] } of cases) {
+    for (const { name, security, page = '', extra = '', files = {}, localPele: expectedLocalPele = false, frontMatter = '', referrer: expectedReferrer, mermaid: expectedMermaid, diagram = true, warnings = [], noWarnings = [] } of cases) {
       for (const environment of ['production', 'development']) {
         const site = path.join(temporary, `${name.replaceAll(' ', '-')}-${environment}`);
         mkdirSync(path.join(site, 'content/posts'), { recursive: true });
+        for (const [file, content] of Object.entries(files)) {
+          mkdirSync(path.dirname(path.join(site, file)), { recursive: true });
+          writeFileSync(path.join(site, file), content);
+        }
         writeFileSync(path.join(site, 'hugo.toml'), [
           'baseURL = "https://example.org/"',
           `theme = ${JSON.stringify(path.basename(root))}`,
