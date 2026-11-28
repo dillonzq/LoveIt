@@ -1101,13 +1101,15 @@ test('the theme starts when the config and theme scripts are added after the pag
       const theme = document.createElement('script');
       theme.type = 'module';
       theme.src = ${JSON.stringify(src)};
+      // A module script fires load once it has run.
+      theme.onload = () => { window.lateThemeRan = true; };
       document.body.append(theme);
     }));</script>`;
     await route.fulfill({ response, body: html.replace('</body>', `${late}</body>`) });
   });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/fuse/blog/guide/');
-  await page.waitForFunction(() => window.loveitStart === true);
+  await page.waitForFunction(() => window.lateThemeRan);
   const menuToggle = page.getByRole('button', { name: 'Menu' });
   await menuToggle.click();
   await expect(menuToggle).toHaveAttribute('aria-expanded', 'true');
