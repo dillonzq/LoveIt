@@ -15,6 +15,13 @@
       padding-inline-start: .8rem;
       list-style: none;
 
+      // A block link fills its whole line, so each entry is a target of at least
+      // 24 CSS px high (WCAG 2.2 SC 2.5.8). It inherits the list's hanging indent.
+      a {
+        display: block;
+        min-block-size: 24px;
+      }
+
       a:first-child::before {
         content: "|";
         font-weight: bolder;

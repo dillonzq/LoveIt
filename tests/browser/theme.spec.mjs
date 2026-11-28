@@ -1314,6 +1314,31 @@ test.describe('heading anchors without JavaScript', () => {
   });
 });
 
+for (const { name, width, toc } of [{ name: 'desktop', width: 1280, toc: '#toc-auto' }, { name: 'mobile', width: 412, toc: '#toc-static' }]) {
+  test(`${name}: TOC links and share buttons are targets of at least 24×24 CSS px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 800 });
+    await page.goto('/fuse/blog/headings/');
+    if (toc === '#toc-static' && !(await page.locator('#toc-static.open').count())) await page.locator('#toc-static .toc-title').click();
+    // Scroll to the nested heading so the auto TOC expands the sub-level that holds it.
+    await page.evaluate(() => {
+      const top = document.getElementById('custom-id').getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: top - 10, behavior: 'instant' });
+    });
+    const nested = page.locator(`${toc} a[href$="#custom-id"]`);
+    await expect(nested).toBeVisible();
+
+    const targets = page.locator(`${toc} .toc-content a, .post-info-share a, .post-info-share button`);
+    const boxes = (await Promise.all((await targets.all()).map(target => target.boundingBox()))).filter(Boolean);
+    expect(boxes.length).toBeGreaterThan(4);
+    for (const box of boxes) {
+      expect(box.width).toBeGreaterThanOrEqual(24);
+      expect(box.height).toBeGreaterThanOrEqual(24);
+    }
+    const { violations } = await new AxeBuilder({ page }).include(toc).include('.post-info-share').withRules(['target-size']).analyze();
+    expect(violations).toEqual([]);
+  });
+}
+
 test('every link on an article with heading anchors has an accessible name', async ({ page }) => {
   await page.goto('/fuse/blog/headings/');
   const { violations } = await new AxeBuilder({ page }).withRules(['link-name']).analyze();
