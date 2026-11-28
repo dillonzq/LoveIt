@@ -253,6 +253,11 @@ code, pre {
 
   // Long lines wrap within the block, between words where they can. A line is
   // a flex row, so its wrapped part stays to the right of the line number.
+  // Wrapped code can be taller than the max-height that animates opening.
+  &.open.code-wrap .highlight {
+    max-height: none;
+  }
+
   &.code-wrap .highlight span.line {
     display: flex;
 

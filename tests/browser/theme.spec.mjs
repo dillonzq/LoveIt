@@ -1877,7 +1877,48 @@ test('line numbers and wrapping follow the site, page and block options and read
   expect((await line.boundingBox()).height).toBeLessThan(30);
   // Toggling one block leaves the others as they were.
   expect((await states()).slice(1, 3)).toEqual([[true, false, true, false], [true, false, true, false]]);
+
+  // A wrapped block is as tall as its code, even when that is taller than the max-height that animates opening.
+  await wrap.click();
+  await first.locator('.cl').first().evaluate(element => { element.textContent = 'going and '.repeat(20_000); });
+  const highlight = first.locator('.highlight');
+  expect(await highlight.evaluate(element => element.scrollHeight)).toBeGreaterThan(20_000);
+  expect(await highlight.evaluate(element => element.scrollHeight - element.clientHeight)).toBeLessThanOrEqual(1);
   expect(errors).toEqual([]);
+});
+
+test('code block options are case-insensitive and toggle states are true or false', async ({ page }) => {
+  await page.goto('/fuse/blog/code-options/');
+  const blocks = page.locator('.code-block');
+  await expect(blocks).toHaveCount(4);
+  // The page turns line numbers off; linenos=true (in a fence or the shortcode) and lineNos=inline turn them on.
+  for (const index of [0, 1, 2]) {
+    await expect(blocks.nth(index)).toHaveClass(/\bcode-line-numbers\b/);
+    await expect(blocks.nth(index).getByRole('button', { name: 'Line numbers' })).toHaveAttribute('aria-pressed', 'true');
+    await expect(blocks.nth(index).getByRole('button', { name: 'Wrap lines' })).toHaveAttribute('aria-pressed', 'false');
+  }
+  // Inline code has no lines to number or wrap, so it gets no toggle buttons.
+  await expect(blocks.nth(3).locator('.line-numbers-toggle, .wrap-toggle')).toHaveCount(0);
+  await expect(blocks.nth(3).getByRole('button', { name: 'Copy to clipboard' })).toBeVisible();
+});
+
+test('the site code options set the initial state of code blocks without options', async ({ page }) => {
+  // The Arabic site turns line numbers off and wrapping on.
+  await page.goto('/fuse/blog/ar/code-site/');
+  const blocks = page.locator('.code-block');
+  await expect(blocks).toHaveCount(2);
+  await expect(blocks.first()).not.toHaveClass(/\bcode-line-numbers\b/);
+  await expect(blocks.first()).toHaveClass(/\bcode-wrap\b/);
+  await expect(blocks.nth(1)).toHaveClass(/\bcode-line-numbers\b/);
+  await expect(blocks.nth(1)).not.toHaveClass(/\bcode-wrap\b/);
+  // Right to left, a wrapped line continues to the left of its number.
+  await blocks.first().locator('.line-numbers-toggle').click();
+  await page.setViewportSize({ width: 400, height: 800 });
+  const line = blocks.first().locator('span.line');
+  const cl = await line.locator('.cl').boundingBox();
+  const lineBox = await line.boundingBox();
+  expect(cl.height).toBeGreaterThan(30);
+  expect(cl.x + cl.width).toBeLessThan(lineBox.x + lineBox.width - 20);
 });
 
 test('copy buttons fall back to execCommand and leave the code selected when copying fails', async ({ page }) => {
