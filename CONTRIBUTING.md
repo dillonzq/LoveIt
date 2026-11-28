@@ -65,7 +65,9 @@ site. Use it to try your change.
   `index.en.md` and `index.zh-cn.md` of the relevant
   `exampleSite/content/posts/theme-documentation-*` page. Mark new options with
   `{{< version X.Y.Z >}}` and removed ones with
-  `{{< version X.Y.Z deleted >}}`, using the next release version.
+  `{{< version X.Y.Z deleted >}}`, using the next release version. That is
+  a patch version (0.x.y), unless the release raises `module.hugoVersion.min`,
+  which makes it a minor version (0.x.0).
 - **A changelog entry** under `## [Unreleased]` in [CHANGELOG.md](CHANGELOG.md)
   for any change site owners may notice. Say what to do when upgrading if
   the change breaks existing sites.
@@ -77,8 +79,9 @@ site. Use it to try your change.
   with `LOVEIT_HUGO_VERSION=minimum npm run build` as well as the locked
   version.
 - Configuration options and template paths are part of the public API. Before
-  removing or renaming one, deprecate it: keep it working and log a warning
-  for at least one minor release.
+  removing or renaming one, deprecate it: keep it working, list it in
+  `assets/data/deprecations.yml` so that it logs a warning, and remove it in
+  the next minor version.
 - Keep `assets/css/_override.scss` and `assets/css/_custom.scss` working; sites
   use them to customize the theme.
 

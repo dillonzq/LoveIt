@@ -52,7 +52,7 @@ math:
 在这个主题中的很多地方可以使用上面的本地资源引用,
 例如 **链接**, **图片**, `image` shortcode, `music` shortcode 和**前置参数**中的部分参数.
 
-{{< version 0.5.0 >}} 页面资源或者 **assets** 目录中的图片会经过 Hugo 的[图片处理](https://gohugo.io/content-management/image-processing/).
+{{< version 0.4.2 >}} 页面资源或者 **assets** 目录中的图片会经过 Hugo 的[图片处理](https://gohugo.io/content-management/image-processing/).
 Markdown 图片, `image` shortcode, 文章特色图片和主页头像都会这样处理
 (网站 logo 只会带上 `width` 和 `height`):
 
@@ -161,7 +161,7 @@ seo:
 * **draft**: 如果设为 `true`, 除非 `hugo` 命令使用了 `--buildDrafts`/`-D` 参数, 这篇文章不会被渲染.
 * **author**: 文章作者.
 * **authorLink**: 文章作者的链接.
-* **authorAvatar**: {{< version 0.5.0 >}} 文章作者的头像, 在文章元信息中代替用户图标显示: 页面资源的名称, 位于 `static/` 或 `assets/` 下的路径, 或者 URL. 如果没有设置, 文章会显示 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.author.avatar`, 除非它的 `author` 是另一位作者.
+* **authorAvatar**: {{< version 0.4.2 >}} 文章作者的头像, 在文章元信息中代替用户图标显示: 页面资源的名称, 位于 `static/` 或 `assets/` 下的路径, 或者 URL. 如果没有设置, 文章会显示 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.author.avatar`, 除非它的 `author` 是另一位作者.
 * **description**: 文章内容的描述.
 * **license**: 这篇文章特殊的许可.
 * **images**: 页面图片, 用于 Open Graph 和 Twitter Cards.
@@ -184,7 +184,7 @@ seo:
 
 * **toc**: {{< version 0.2.9 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.toc` 部分相同, 包括 `enable`, `keepStatic` (是否保持使用文章前面的静态目录) 和 `auto`.
 * **code**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.code` 部分相同, 包括 `copy`, `maxShownLines` 以及 `render.goat` / `render.mermaid` (见 [图表](#diagrams)).
-* **mermaid**: {{< version 0.5.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.mermaid` 部分相同, 包括 `renderer` (见 [图表](#diagrams)).
+* **mermaid**: {{< version 0.4.2 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.mermaid` 部分相同, 包括 `renderer` (见 [图表](#diagrams)).
 * **math**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.math` 部分相同.
 * **mapbox**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.mapbox` 部分相同.
 * **share**: 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.share` 部分相同.
@@ -306,7 +306,7 @@ SVG 图片不会用于 Open Graph 和 Twitter Cards, 因为社交网络无法显
 在 [网站配置](../theme-documentation-basics#site-configuration) 的 `[params.page.code.render]` 下设置 `goat = false` 或 `mermaid = false` (或者在页面前置参数中设置 `code.render.goat` / `code.render.mermaid`) 可以关闭对应的代码块渲染钩子,
 此时该代码块会回退为普通代码块.
 
-{{< version 0.5.0 changed >}} Mermaid 图表默认使用 [Pele](https://pele.run) 渲染.
+{{< version 0.4.2 changed >}} Mermaid 图表默认使用 [Pele](https://pele.run) 渲染.
 在 `[params.page.mermaid]` 下设置 `renderer = "mermaid"` (或者在前置参数中设置 `mermaid.renderer`) 可以改用 Mermaid 库渲染,
 两者的区别见 [mermaid shortcode](../theme-documentation-mermaid-shortcode#renderer).
 

@@ -7,7 +7,8 @@
 #              default with "default" instead). Every section above the new key must already exist
 #              in the theme's hugo.toml, so that the new key reads in any case; the build fails otherwise.
 # since:       the theme version that deprecates the key.
-# removal:     the theme version that stops reading it.
+# removal:     the theme version that stops reading it: the next minor version (0.x.0), which is
+#              released only when the minimum Hugo version rises.
 # hint:        what to do instead, in English (en) and Simplified Chinese (zh).
 #
 # A key counts as used when its value is truthy (true, a non-empty string, map or list), so the
@@ -15,22 +16,22 @@
 # The upgrade notes for every key are in the "Deprecated Options" section of the documentation.
 
 - key: params.compatibility.polyfill
-  since: 0.5.0
-  removal: 0.7.0
+  since: 0.4.2
+  removal: 0.5.0
   hint:
     en: Remove it. It has no effect, because the theme no longer loads the Polyfill service.
     zh: 删除该配置. 主题不再加载 Polyfill 服务, 该配置已不起作用.
 
 - key: params.compatibility.objectFit
-  since: 0.5.0
-  removal: 0.7.0
+  since: 0.4.2
+  removal: 0.5.0
   hint:
     en: Remove it. It has no effect, because the theme no longer loads object-fit-images.
     zh: 删除该配置. 主题不再加载 object-fit-images, 该配置已不起作用.
 
 - key: params.cdn.autocompleteJS
-  since: 0.5.0
-  removal: 0.7.0
+  since: 0.4.2
+  removal: 0.5.0
   hint:
     en: Remove it. Search no longer uses autocomplete.js.
     zh: 删除该配置. 搜索不再使用 autocomplete.js.

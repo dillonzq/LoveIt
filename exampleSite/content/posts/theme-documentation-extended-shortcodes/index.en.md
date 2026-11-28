@@ -130,7 +130,7 @@ The rendered output looks like this (hover over the link, there should be a tool
 
 ## 3 image {#image}
 
-{{< version 0.5.0 changed >}}
+{{< version 0.4.2 changed >}}
 
 `image` shortcode is an alternative to [`figure` shortcode](../theme-documentation-built-in-shortcodes#figure). `image` shortcode uses Hugo's [image processing](../theme-documentation-content#contents-organization) and native lazy loading, and can take full advantage of [lightGallery](https://github.com/sachinchoolur/lightgallery).
 
@@ -174,7 +174,7 @@ The `image` shortcode has the following named parameters:
 
 * **height** *[optional]*
 
-    `height` attribute of the image. {{< version 0.5.0 changed >}} When only one of **width** and **height** is a number of pixels, the other one follows the aspect ratio of the image when Hugo can read its size.
+    `height` attribute of the image. {{< version 0.4.2 changed >}} When only one of **width** and **height** is a number of pixels, the other one follows the aspect ratio of the image when Hugo can read its size.
 
 * **width** *[optional]*
 

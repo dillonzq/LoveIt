@@ -316,7 +316,7 @@ enableEmoji = true
     name = "xxxx"
     email = ""
     link = ""
-    # {{< version 0.5.0 >}} 文章元信息中代替用户图标显示的作者头像 (位于 "static/" 或 "assets/" 下的路径, 或者 URL)
+    # {{< version 0.4.2 >}} 文章元信息中代替用户图标显示的作者头像 (位于 "static/" 或 "assets/" 下的路径, 或者 URL)
     avatar = ""
 
   # 页面头部导航栏配置
@@ -559,7 +559,7 @@ enableEmoji = true
     fraction = true
     # {{< version 0.2.0 >}} 是否使用 fontawesome 扩展语法
     fontawesome = true
-    # {{< version 0.5.0 >}} 何时加载 Font Awesome 样式和字体 ["auto", true, false]
+    # {{< version 0.4.2 >}} 何时加载 Font Awesome 样式和字体 ["auto", true, false]
     # "auto": 仅在内容或配置的 HTML (菜单, 页脚...) 使用 Font Awesome 类的页面加载, 主题自身图标为内联 SVG;
     # true: 总是加载, 例如你自己的布局使用了它; false: 从不加载
     fontawesomeCSS = "auto"
@@ -586,7 +586,7 @@ enableEmoji = true
       goat = true
       # 是否渲染代码块中的 mermaid 图表
       mermaid = true
-    # {{< version 0.5.0 >}} Mermaid 图表配置
+    # {{< version 0.4.2 >}} Mermaid 图表配置
     [params.page.mermaid]
       # mermaid 代码块和 shortcode 的渲染器 ["pele", "mermaid"]
       # "pele": 轻量的 {{< link "https://pele.run" Pele >}} 渲染器, 切换主题时只更新颜色而不重新渲染,
@@ -811,10 +811,10 @@ enableEmoji = true
     # 当无法设置 HTTP 响应头时使用的 Content-Security-Policy meta 标签
     # https://content-security-policy.com/examples/meta/
     contentSecurityPolicy = ""
-    # {{< version 0.5.0 >}} <meta name="referrer"> 标签的引荐来源策略
+    # {{< version 0.4.2 >}} <meta name="referrer"> 标签的引荐来源策略
     # 设置为 "no-referrer" 则完全不发送 Referer 请求头
     referrerPolicy = "strict-origin-when-cross-origin"
-    # {{< version 0.5.0 >}} Mermaid 安全级别 ["strict", "loose"], 在 params.page.mermaid.renderer 为 "mermaid" 时使用
+    # {{< version 0.4.2 >}} Mermaid 安全级别 ["strict", "loose"], 在 params.page.mermaid.renderer 为 "mermaid" 时使用
     # "loose" 允许图表中的点击事件和 HTML 标签
     mermaidSecurityLevel = "strict"
 
@@ -1394,7 +1394,7 @@ npx pagefind --site public --output-subdir _pagefind --serve
 ### 6.2 行为变化
 
 * **语言配置.** 在 Hugo 0.158.0 或更新版本中, 请使用 `locale` 和 `label` 代替已废弃的 `languageCode` 和 `languageName`.
-* **Polyfill.** 在 0.4.X 中 `params.compatibility.polyfill` 改为从 `cdnjs.cloudflare.com` 加载, 不再使用 `polyfill.io`. LoveIt 0.5.0 移除了 Polyfill 服务, 参见 [弃用的配置](#deprecated-options).
+* **Polyfill.** 在 0.4.X 中 `params.compatibility.polyfill` 改为从 `cdnjs.cloudflare.com` 加载, 不再使用 `polyfill.io`. LoveIt 0.4.2 移除了 Polyfill 服务, 参见 [弃用的配置](#deprecated-options).
 * **音乐.** 默认的 Meting API 已更换. 可以在 `[params.page.music]` 中设置 `api` 来使用你自己的服务.
 * **Waline.** 内置客户端为 Waline v3, 需要 v1.27.0 及以上的 Waline 服务端.
 
@@ -1407,15 +1407,17 @@ npx pagefind --site public --output-subdir _pagefind --serve
 
 ## 7 弃用的配置 {#deprecated-options}
 
-{{< version 0.5.0 >}}
+{{< version 0.4.2 >}}
 
 当网站配置使用了弃用的配置项时, `hugo` 每次构建会打印一次如下警告.
-警告会一直打印到「移除于」一列的版本. 部分配置项已经不再起作用, 处理方式见下表.
+警告会一直打印到「移除于」一列的版本.
+弃用的配置项会在下一个大版本 (0.x.0) 中移除, LoveIt 只在提高支持的 Hugo 最低版本时发布大版本.
+部分配置项已经不再起作用, 处理方式见下表.
 除非使用 `--panicOnWarning` 构建, 否则构建不会失败.
 迁移期间如需让这类构建通过, 可将警告中的 ID 加入 `ignoreLogs`.
 
 ```plain
-WARN  LoveIt: "params.compatibility.polyfill" 已于 v0.5.0 弃用, 将在 v0.7.0 移除. ...
+WARN  LoveIt: "params.compatibility.polyfill" 已于 v0.4.2 弃用, 将在 v0.5.0 移除. ...
 You can suppress this warning by adding the following to your site configuration:
 ignoreLogs = ['loveit-deprecated-params-compatibility-polyfill']
 ```
@@ -1424,6 +1426,6 @@ ignoreLogs = ['loveit-deprecated-params-compatibility-polyfill']
 
 | 配置项 | 弃用于 | 移除于 | 处理方式 |
 |:-------|:------:|:------:|:---------|
-| `params.compatibility.polyfill` | 0.5.0 | 0.7.0 | 删除该配置. 它已不起作用: 主题不再加载 Polyfill 服务, 主题支持的浏览器也不需要它. |
-| `params.compatibility.objectFit` | 0.5.0 | 0.7.0 | 删除该配置. 它已不起作用: 主题不再加载 object-fit-images, 主题支持的浏览器原生支持 `object-fit`. |
-| `params.cdn.autocompleteJS` | 0.5.0 | 0.7.0 | 删除该配置. 搜索不再使用 autocomplete.js. |
+| `params.compatibility.polyfill` | 0.4.2 | 0.5.0 | 删除该配置. 它已不起作用: 主题不再加载 Polyfill 服务, 主题支持的浏览器也不需要它. |
+| `params.compatibility.objectFit` | 0.4.2 | 0.5.0 | 删除该配置. 它已不起作用: 主题不再加载 object-fit-images, 主题支持的浏览器原生支持 `object-fit`. |
+| `params.cdn.autocompleteJS` | 0.4.2 | 0.5.0 | 删除该配置. 搜索不再使用 autocomplete.js. |

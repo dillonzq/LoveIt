@@ -65,8 +65,8 @@ test('each deprecated key warns once per build and no longer loads anything', ()
   const { status, output } = build(directory);
   assert.equal(status, 0, output);
   for (const id of ids) assert.equal(count(output, `'${id}'`), 1, `${id}\n${output}`);
-  assert.equal(count(output, 'is deprecated since v0.5.0 and will be removed in v0.7.0'), 3, output);
-  assert.equal(count(output, '已于 v0.5.0 弃用, 将在 v0.7.0 移除'), 3, output);
+  assert.equal(count(output, 'is deprecated since v0.4.2 and will be removed in v0.5.0'), 3, output);
+  assert.equal(count(output, '已于 v0.4.2 弃用, 将在 v0.5.0 移除'), 3, output);
   assert.equal(count(output, 'https://hugoloveit.com/theme-documentation-basics/#deprecated-options'), 3, output);
   for (const file of ['index.html', 'zh-cn/index.html', 'posts/post-1/index.html']) {
     // The Polyfill service, object-fit-images and autocomplete.js are gone, so the old keys only warn.
@@ -92,13 +92,13 @@ test('language params follow Hugo merging and warn once', () => {
 
 test('the normalized configuration maps old keys to unset new keys', () => {
   const table = [
-    '- key: params.oldSection.someFlag\n  replacement: params.newSection.someFlag\n  since: 0.5.0\n  removal: 0.7.0',
-    '- key: params.oldTop\n  replacement: params.newTop\n  since: 0.5.0\n  removal: 0.7.0',
-    '- key: params.oldMap\n  replacement: params.newMap\n  since: 0.5.0\n  removal: 0.7.0',
-    '- key: params.oldBoth\n  replacement: params.newBoth\n  since: 0.5.0\n  removal: 0.7.0\n  hint:\n    en: Custom hint.\n    zh: 自定义提示.',
+    '- key: params.oldSection.someFlag\n  replacement: params.newSection.someFlag\n  since: 0.4.2\n  removal: 0.5.0',
+    '- key: params.oldTop\n  replacement: params.newTop\n  since: 0.4.2\n  removal: 0.5.0',
+    '- key: params.oldMap\n  replacement: params.newMap\n  since: 0.4.2\n  removal: 0.5.0',
+    '- key: params.oldBoth\n  replacement: params.newBoth\n  since: 0.4.2\n  removal: 0.5.0\n  hint:\n    en: Custom hint.\n    zh: 自定义提示.',
     // Paths through missing sections and non-map values are unset.
-    '- key: params.title.sub\n  replacement: params.newTitle\n  since: 0.5.0\n  removal: 0.7.0',
-    '- key: params.missing.key\n  since: 0.5.0\n  removal: 0.7.0',
+    '- key: params.title.sub\n  replacement: params.newTitle\n  since: 0.4.2\n  removal: 0.5.0',
+    '- key: params.missing.key\n  since: 0.4.2\n  removal: 0.5.0',
   ].join('\n');
   const show = '{{ $c := partialCached "function/config.html" .Site .Site.Language.Lang }}'
     + '{{ $c.newSection.someFlag }}|{{ $c.newsection.someflag }}|{{ $c.newSection.other }}|{{ $c.newTop }}|{{ $c.newtop }}'
@@ -128,7 +128,7 @@ test('the normalized configuration maps old keys to unset new keys', () => {
 
 test('a replacement under a section that does not exist fails the build', () => {
   const directory = site('absent-section', '[params]\noldFlag = true', {
-    'assets/data/deprecations.yml': '- key: params.oldFlag\n  replacement: params.absentSection.flag\n  since: 0.5.0\n  removal: 0.7.0',
+    'assets/data/deprecations.yml': '- key: params.oldFlag\n  replacement: params.absentSection.flag\n  since: 0.4.2\n  removal: 0.5.0',
   });
   const { status, output } = build(directory);
   assert.notEqual(status, 0);
@@ -137,11 +137,11 @@ test('a replacement under a section that does not exist fails the build', () => 
 
 test('deprecation keys and replacements must be keys under params', () => {
   for (const [name, entry] of Object.entries({
-    'bad-key': '- key: config.oldFlag\n  since: 0.5.0\n  removal: 0.7.0',
-    'empty-key': '- key: ""\n  replacement: params.newFlag\n  since: 0.5.0\n  removal: 0.7.0',
-    'missing-key': '- replacement: params.newFlag\n  since: 0.5.0\n  removal: 0.7.0',
-    'bad-replacement': '- key: params.oldFlag\n  replacement: config.newFlag\n  since: 0.5.0\n  removal: 0.7.0',
-    'empty-segment': '- key: params.oldFlag\n  replacement: params..newFlag\n  since: 0.5.0\n  removal: 0.7.0',
+    'bad-key': '- key: config.oldFlag\n  since: 0.4.2\n  removal: 0.5.0',
+    'empty-key': '- key: ""\n  replacement: params.newFlag\n  since: 0.4.2\n  removal: 0.5.0',
+    'missing-key': '- replacement: params.newFlag\n  since: 0.4.2\n  removal: 0.5.0',
+    'bad-replacement': '- key: params.oldFlag\n  replacement: config.newFlag\n  since: 0.4.2\n  removal: 0.5.0',
+    'empty-segment': '- key: params.oldFlag\n  replacement: params..newFlag\n  since: 0.4.2\n  removal: 0.5.0',
   })) {
     const directory = site(name, '[params]\noldFlag = true', { 'assets/data/deprecations.yml': entry });
     const { status, output } = build(directory);
