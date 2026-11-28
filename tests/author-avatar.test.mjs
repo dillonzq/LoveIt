@@ -77,7 +77,7 @@ test('author avatar in the byline and the structured data', async () => {
     for (const [variant, config] of Object.entries(variants)) {
       const site = path.join(temporary, variant);
       build(site, config);
-      const result = spawnSync(binary, ['--source', site, '--noBuildLock', '--panicOnWarning'], { cwd: site, env: toolEnv, encoding: 'utf8' });
+      const result = spawnSync(binary, ['--source', site, '--environment', 'production', '--noBuildLock', '--panicOnWarning'], { cwd: site, env: toolEnv, encoding: 'utf8' });
       assert.equal(result.status, 0, result.stderr);
       const read = file => readFileSync(path.join(site, 'public', file), 'utf8');
       const page = name => read(`posts/${name}/index.html`);
@@ -158,7 +158,7 @@ test('a static author avatar keeps the path of baseURL with canonifyURLs', async
   const site = mkdtempSync(path.join(os.tmpdir(), 'loveit-avatar-canonify-'));
   try {
     build(site, 'avatar = "images/static-face.svg"\n', 'canonifyURLs = true');
-    const result = spawnSync(binary, ['--source', site, '--noBuildLock', '--panicOnWarning'], { cwd: site, env: toolEnv, encoding: 'utf8' });
+    const result = spawnSync(binary, ['--source', site, '--environment', 'production', '--noBuildLock', '--panicOnWarning'], { cwd: site, env: toolEnv, encoding: 'utf8' });
     assert.equal(result.status, 0, result.stderr);
     const read = file => readFileSync(path.join(site, 'public', file), 'utf8');
     const expected = 'https://example.org/blog/images/static-face.svg';
