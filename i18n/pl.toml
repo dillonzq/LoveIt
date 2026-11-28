@@ -80,6 +80,27 @@ other = "pl"
 
 [walineLang]
 other = "en"
+
+[mastodonPrompt]
+other = "Odpowiedz na {{ .Post }} z konta Mastodon lub innego konta w Fediwersum, aby dodać komentarz."
+
+[mastodonPost]
+other = "ten wpis"
+
+[mastodonLoading]
+other = "Wczytywanie komentarzy…"
+
+[mastodonEmpty]
+other = "Nie ma jeszcze komentarzy."
+
+[mastodonError]
+other = "Nie udało się wczytać komentarzy."
+
+[mastodonSensitive]
+other = "Treść wrażliwa"
+
+[mastodonAttachment]
+other = "Załącznik"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

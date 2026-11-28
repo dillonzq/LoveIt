@@ -80,6 +80,27 @@ other = "en"
 
 [walineLang]
 other = "en"
+
+[mastodonPrompt]
+other = "للتعليق، ردّ على {{ .Post }} من حساب Mastodon أو حساب آخر في الفديفرس."
+
+[mastodonPost]
+other = "هذا المنشور"
+
+[mastodonLoading]
+other = "جارٍ تحميل التعليقات…"
+
+[mastodonEmpty]
+other = "لا توجد تعليقات بعد."
+
+[mastodonError]
+other = "تعذّر تحميل التعليقات."
+
+[mastodonSensitive]
+other = "محتوى حساس"
+
+[mastodonAttachment]
+other = "مرفق"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

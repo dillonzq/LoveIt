@@ -80,6 +80,27 @@ other = "ro"
 
 [walineLang]
 other = "en"
+
+[mastodonPrompt]
+other = "Răspunde la {{ .Post }} de pe un cont Mastodon sau de pe alt cont din Fediverse pentru a comenta."
+
+[mastodonPost]
+other = "această postare"
+
+[mastodonLoading]
+other = "Se încarcă comentariile…"
+
+[mastodonEmpty]
+other = "Încă nu există comentarii."
+
+[mastodonError]
+other = "Comentariile nu au putut fi încărcate."
+
+[mastodonSensitive]
+other = "Conținut sensibil"
+
+[mastodonAttachment]
+other = "Atașament"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

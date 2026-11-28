@@ -24,6 +24,7 @@ const features = [
     { name: 'utterances', when: comment('utterances'), load: () => import('./features/comment/utterances.js') },
     { name: 'giscus', when: comment('giscus'), load: () => import('./features/comment/giscus.js') },
     { name: 'waline', when: comment('waline'), load: () => import('./features/comment/waline.js') },
+    { name: 'mastodon', when: comment('mastodon'), load: () => import('./features/comment/mastodon.js') },
 ];
 
 let started = false;

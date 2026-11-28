@@ -80,6 +80,27 @@ other = "en"
 
 [walineLang]
 other = "en"
+
+[mastodonPrompt]
+other = "Одговорите на {{ .Post }} са Mastodon налога или другог налога на Федиверсу да бисте коментарисали."
+
+[mastodonPost]
+other = "ову објаву"
+
+[mastodonLoading]
+other = "Учитавање коментара…"
+
+[mastodonEmpty]
+other = "Још нема коментара."
+
+[mastodonError]
+other = "Коментари не могу да се учитају."
+
+[mastodonSensitive]
+other = "Осетљив садржај"
+
+[mastodonAttachment]
+other = "Прилог"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

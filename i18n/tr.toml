@@ -80,6 +80,27 @@ other = "tr"
 
 [walineLang]
 other = "en"
+
+[mastodonPrompt]
+other = "Yorum yapmak için bir Mastodon ya da başka bir Fediverse hesabıyla {{ .Post }} yanıtlayın."
+
+[mastodonPost]
+other = "bu gönderiyi"
+
+[mastodonLoading]
+other = "Yorumlar yükleniyor…"
+
+[mastodonEmpty]
+other = "Henüz yorum yok."
+
+[mastodonError]
+other = "Yorumlar yüklenemedi."
+
+[mastodonSensitive]
+other = "Hassas içerik"
+
+[mastodonAttachment]
+other = "Ek"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
