@@ -20,8 +20,6 @@
 {{- /* lineNos=inline or lineNos=table shows the numbers too; the buttons need true or false. */ -}}
 {{- $lineNos := index $options "linenos" | partial "function/bool.html" | not | not -}}
 {{- $wrap := index $options "wrap" | partial "function/bool.html" | not | not -}}
-{{- /* hl_inline renders inline code without the lines that the toggle buttons act on. */ -}}
-{{- $inline := index $options "hl_inline" | partial "function/bool.html" | not | not -}}
 {{- $options = $highlightOptions -}}
 {{- $result := transform.Highlight $content $lang $options -}}
 {{- /* Without a Chroma lexer for the language (or no language), Hugo returns a bare pre:
@@ -29,6 +27,9 @@
 {{- if not (strings.Contains $result `class="chroma"`) -}}
     {{- $result = transform.Highlight $content "text" $options -}}
 {{- end -}}
+{{- /* hl_inline (set on the block or in the site's markup.highlight) renders inline code */ -}}
+{{- /* without the lines that the toggle buttons act on. */ -}}
+{{- $inline := not (strings.Contains $result "<pre") -}}
 {{- $open := le $lines $maxShownLines -}}
 <div class="code-block{{ if $lineNos }} code-line-numbers{{ end }}{{ if $wrap }} code-wrap{{ end }}{{ if $open }} open{{ end }}" style="counter-reset: code-block {{ sub $lineNoStart 1 }}">
     <div class="code-header language-{{ $lang }}">

@@ -20,3 +20,7 @@ echo inline line numbers
 ```bash {hl_inline=true wrap=true}
 echo inline code
 ```
+
+{{< highlight bash "hl_inline=FALSE" >}}
+echo a block, whatever the case of the option value
+{{< /highlight >}}

@@ -1890,7 +1890,7 @@ test('line numbers and wrapping follow the site, page and block options and read
 test('code block options are case-insensitive and toggle states are true or false', async ({ page }) => {
   await page.goto('/fuse/blog/code-options/');
   const blocks = page.locator('.code-block');
-  await expect(blocks).toHaveCount(4);
+  await expect(blocks).toHaveCount(5);
   // The page turns line numbers off; linenos=true (in a fence or the shortcode) and lineNos=inline turn them on.
   for (const index of [0, 1, 2]) {
     await expect(blocks.nth(index)).toHaveClass(/\bcode-line-numbers\b/);
@@ -1900,6 +1900,9 @@ test('code block options are case-insensitive and toggle states are true or fals
   // Inline code has no lines to number or wrap, so it gets no toggle buttons.
   await expect(blocks.nth(3).locator('.line-numbers-toggle, .wrap-toggle')).toHaveCount(0);
   await expect(blocks.nth(3).getByRole('button', { name: 'Copy to clipboard' })).toBeVisible();
+  // Whether the code is inline follows the markup Chroma renders, not the spelling of the option.
+  await expect(blocks.nth(4).locator('pre')).toHaveCount(1);
+  await expect(blocks.nth(4).locator('.line-numbers-toggle, .wrap-toggle')).toHaveCount(2);
 });
 
 test('the site code options set the initial state of code blocks without options', async ({ page }) => {
