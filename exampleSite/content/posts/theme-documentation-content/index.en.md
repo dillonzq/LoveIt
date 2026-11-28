@@ -52,7 +52,7 @@ The **priority** of references is also in the above order.
 There are many places in the theme where the above local resource references can be used,
 such as **links**, **images**, `image` shortcode, `music` shortcode and some params in the **front matter**.
 
-{{< version 0.5.0 >}} Images in page resources or in the assets directory are
+{{< version 0.4.2 >}} Images in page resources or in the assets directory are
 [processed](https://gohugo.io/content-management/image-processing/) by Hugo.
 This applies to Markdown images, the `image` shortcode, featured images and the home page avatar
 (the header logo only gets its `width` and `height`):
@@ -164,7 +164,7 @@ seo:
 * **draft**: if `true`, the content will not be rendered unless the `--buildDrafts`/`-D` flag is passed to the `hugo` command.
 * **author**: the author for the content.
 * **authorLink**: the link of the author.
-* **authorAvatar**: {{< version 0.5.0 >}} the avatar of the author, shown in the post meta instead of the user icon: the name of a page resource, a path under `static/` or `assets/`, or a URL. Without it, the post shows `params.author.avatar` from the [site configuration](../theme-documentation-basics#site-configuration), unless its `author` is another author.
+* **authorAvatar**: {{< version 0.4.2 >}} the avatar of the author, shown in the post meta instead of the user icon: the name of a page resource, a path under `static/` or `assets/`, or a URL. Without it, the post shows `params.author.avatar` from the [site configuration](../theme-documentation-basics#site-configuration), unless its `author` is another author.
 * **description**: the description for the content.
 * **license**: the special license for this content.
 * **images**: page images for Open Graph and Twitter Cards.
@@ -187,7 +187,7 @@ seo:
 
 * **toc**: {{< version 0.2.9 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics#site-configuration), including `enable`, `keepStatic` (whether to keep the static table of contents in front of the post) and `auto`.
 * **code**: {{< version 0.2.0 >}} the same as the `params.page.code` part in the [site configuration](../theme-documentation-basics#site-configuration), including `copy`, `maxShownLines` and `render.goat` / `render.mermaid` (see [Diagrams](#diagrams)).
-* **mermaid**: {{< version 0.5.0 >}} the same as the `params.page.mermaid` part in the [site configuration](../theme-documentation-basics#site-configuration), including `renderer` (see [Diagrams](#diagrams)).
+* **mermaid**: {{< version 0.4.2 >}} the same as the `params.page.mermaid` part in the [site configuration](../theme-documentation-basics#site-configuration), including `renderer` (see [Diagrams](#diagrams)).
 * **math**: {{< version 0.2.0 changed >}} the same as the `params.page.math` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **mapbox**: {{< version 0.2.0 >}} the same as the `params.page.mapbox` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **share**: the same as the `params.page.share` part in the [site configuration](../theme-documentation-basics#site-configuration).
@@ -311,7 +311,7 @@ Set `goat = false` or `mermaid = false` under `[params.page.code.render]` in you
 (or `code.render.goat` / `code.render.mermaid` in the front matter of a page) to turn the corresponding code block render hook off.
 The code block then falls back to a plain code block.
 
-{{< version 0.5.0 changed >}} Mermaid diagrams are rendered with [Pele](https://pele.run) by default.
+{{< version 0.4.2 changed >}} Mermaid diagrams are rendered with [Pele](https://pele.run) by default.
 Set `renderer = "mermaid"` under `[params.page.mermaid]` (or `mermaid.renderer` in the front matter) to render them with the Mermaid library,
 see the [mermaid shortcode](../theme-documentation-mermaid-shortcode#renderer) for the differences.
 

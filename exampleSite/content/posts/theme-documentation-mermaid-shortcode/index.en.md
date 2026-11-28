@@ -18,7 +18,7 @@ categories: ["documentation"]
 hiddenFromHomePage: false
 ---
 
-{{< version 0.5.0 changed >}}
+{{< version 0.4.2 changed >}}
 
 The `mermaid` shortcode supports diagrams in Hugo with the [Mermaid](https://mermaid.js.org/) syntax.
 
@@ -39,7 +39,7 @@ graph LR;
 
 ## Renderer {#renderer}
 
-{{< version 0.5.0 >}} Diagrams are rendered with [Pele](https://pele.run) by default. Set `renderer` in `[params.page.mermaid]` of the [site configuration](../theme-documentation-basics#site-configuration), or `mermaid.renderer` in the [front matter](../theme-documentation-content#front-matter) of a page, to choose the renderer:
+{{< version 0.4.2 >}} Diagrams are rendered with [Pele](https://pele.run) by default. Set `renderer` in `[params.page.mermaid]` of the [site configuration](../theme-documentation-basics#site-configuration), or `mermaid.renderer` in the [front matter](../theme-documentation-content#front-matter) of a page, to choose the renderer:
 
 * `"pele"`: Pele is a small renderer for the Mermaid syntax. It loads much less JavaScript than Mermaid, draws faster, lays diagrams out again for narrow screens and offers zoom buttons when a diagram is shrunk to fit. Its colors follow the light and dark themes without drawing the diagrams again.
 * `"mermaid"`: the [Mermaid](https://mermaid.js.org/) library.
@@ -69,7 +69,7 @@ Each page loads only the library of its renderer. Pele supports the diagram type
 
 Choose `"mermaid"` if your diagrams rely on any of these.
 
-{{< version 0.5.0 changed >}} The Mermaid renderer uses the Mermaid `securityLevel` set to `strict`, which disables `click` interactions and restricts HTML in labels. If you trust the diagram sources and need these features, set `mermaidSecurityLevel = "loose"` in `[params.security]` of the [site configuration](../theme-documentation-basics#site-configuration). Pele has no HTML labels or JavaScript callbacks, so this option has no effect on it, and a build warning reminds you to choose the Mermaid renderer.
+{{< version 0.4.2 changed >}} The Mermaid renderer uses the Mermaid `securityLevel` set to `strict`, which disables `click` interactions and restricts HTML in labels. If you trust the diagram sources and need these features, set `mermaidSecurityLevel = "loose"` in `[params.security]` of the [site configuration](../theme-documentation-basics#site-configuration). Pele has no HTML labels or JavaScript callbacks, so this option has no effect on it, and a build warning reminds you to choose the Mermaid renderer.
 
 ## Flowchart {#flowchart}
 

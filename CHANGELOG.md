@@ -4,8 +4,11 @@ All notable changes to LoveIt are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-Before 1.0.0, a minor version (0.x.0) may contain breaking changes; they are
-listed under **Changed** or **Removed** with what to do when upgrading.
+Before 1.0.0, a minor version (0.x.0) is released only when the minimum
+supported Hugo version rises; every other release is a patch version (0.x.y).
+Either kind may contain breaking changes; they are listed under **Changed** or
+**Removed** with what to do when upgrading. Deprecated options are removed in
+the next minor version.
 
 This file starts at 0.4.0. Older releases are described on the
 [GitHub Releases](https://github.com/dillonzq/LoveIt/releases) page.
@@ -176,7 +179,7 @@ This file starts at 0.4.0. Older releases are described on the
 - `params.compatibility.polyfill`, `params.compatibility.objectFit` and
   `params.cdn.autocompleteJS`. None of them has any effect any more, because
   the Polyfill service, object-fit-images and autocomplete.js were removed.
-  All three warn until 0.7.0; remove them from your configuration. Setting
+  All three warn until 0.5.0; remove them from your configuration. Setting
   them to `false` or `""` does not warn.
 
 ### Removed
