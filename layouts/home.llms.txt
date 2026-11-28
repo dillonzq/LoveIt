@@ -15,15 +15,30 @@
         {{- $keys = $keys | append .Section -}}
     {{- end -}}
 {{- end -}}
-{{- $escape := `([\\\[\]])` -}}
 # {{ .Site.Title | replaceRE `\s+` " " }}
 {{ with .Site.Params.description }}
 > {{ . | replaceRE `\s+` " " | strings.TrimSpace }}
 {{ end -}}
+{{- /* Entries keyed by their heading: a section titled like another heading, such as the "Pages" heading, joins it, so each heading appears once */ -}}
+{{- $entries := slice -}}
+{{- $headings := slice -}}
 {{- range $keys -}}
     {{- $key := . -}}
-    {{- $lines := slice -}}
+    {{- $heading := T "pages" -}}
+    {{- with $key -}}
+        {{- $heading = . -}}
+        {{- with $.Site.GetPage (printf "/%s" .) -}}
+            {{- if eq .Kind "section" -}}
+                {{- $heading = .Title -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $heading = $heading | replaceRE `\s+` " " | strings.TrimSpace -}}
     {{- range where $pages "Section" $key -}}
+        {{- /* Hugo publishes no file for a page that it only lists or links */ -}}
+        {{- if in (slice "link" "never" "false") (lower (string .Params.build.render)) -}}
+            {{- continue -}}
+        {{- end -}}
         {{- $url := "" -}}
         {{- with .OutputFormats.Get "markdown" -}}
             {{- $url = .Permalink -}}
@@ -34,26 +49,26 @@
             {{- end -}}
         {{- end -}}
         {{- if $url -}}
-            {{- $title := .LinkTitle | replaceRE `\s+` " " | replaceRE $escape `\$1` -}}
+            {{- /* Brackets as character references: llms.txt parsers end the link text at the first "]", even an escaped one */ -}}
+            {{- $title := .LinkTitle | replaceRE `\s+` " " | strings.TrimSpace | replaceRE `\\` `\\` -}}
+            {{- $title = replace (replace $title "[" "&#91;") "]" "&#93;" -}}
             {{- $line := printf "- [%s](%s)" $title ($url | replaceRE `\(` "%28" | replaceRE `\)` "%29") -}}
             {{- with .Description -}}
                 {{- $line = printf "%s: %s" $line (. | replaceRE `\s+` " " | strings.TrimSpace) -}}
             {{- end -}}
-            {{- $lines = $lines | append $line -}}
+            {{- $entries = $entries | append (dict "heading" $heading "line" $line) -}}
+            {{- if not (in $headings $heading) -}}
+                {{- $headings = $headings | append $heading -}}
+            {{- end -}}
         {{- end -}}
     {{- end -}}
-    {{- with $lines -}}
-        {{- $heading := T "pages" -}}
-        {{- with $key -}}
-            {{- $heading = . -}}
-            {{- with $.Site.GetPage (printf "/%s" .) -}}
-                {{- if eq .Kind "section" -}}
-                    {{- $heading = .Title -}}
-                {{- end -}}
-            {{- end -}}
-        {{- end }}
-## {{ $heading | replaceRE `\s+` " " }}
-
-{{ delimit . "\n" }}
-{{ end -}}
 {{- end -}}
+{{- range $headings -}}
+    {{- $lines := slice -}}
+    {{- range where $entries "heading" . -}}
+        {{- $lines = $lines | append .line -}}
+    {{- end }}
+## {{ . }}
+
+{{ delimit $lines "\n" }}
+{{ end -}}

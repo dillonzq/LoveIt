@@ -30,6 +30,9 @@ const content = {
   'content/empty/hidden.en.md': '---\ntitle: Only hidden\nhiddenFromSearch: true\n---\nText.\n',
   // Hugo lists a page that it does not render, but publishes no file to link.
   'content/posts/unrendered.en.md': '---\ntitle: Unrendered\ndate: 2025-01-03\nbuild:\n  render: never\n---\nText.\n',
+  'content/posts/linked.en.md': '---\ntitle: Linked\ndate: 2025-01-03\nbuild:\n  render: link\n---\nText.\n',
+  // A section titled like the heading of the pages outside any section joins it.
+  'content/pages/guide.en.md': '---\ntitle: Guide\n---\nText.\n',
   'content/unrendered/only.en.md': '---\ntitle: Only unrendered\nbuild:\n  render: never\n---\nText.\n',
   // The HTML page, not the first output format, is the fallback.
   'content/posts/json-first.en.md': '---\ntitle: JSON first\ndate: 2024-12-30\noutputs: [json, html]\n---\nText.\n',
@@ -100,11 +103,13 @@ test('pages link their Markdown version and the llms.txt of their language', () 
     '## Pages',
     '',
     '- [About](https://example.org/blog/about/index.md): Who writes here.',
+    '- [Guide](https://example.org/blog/pages/guide/index.md)',
     '',
     // Sections in the order of Hugo, here by the date of their newest page; nested sections join their top-level section.
     '## Articles',
     '',
-    '- [First \\[draft\\] post](https://example.org/blog/posts/first/index.md): Two lines.',
+    // llms.txt parsers end the link text at the first "]", even an escaped one.
+    '- [First &#91;draft&#93; post](https://example.org/blog/posts/first/index.md): Two lines.',
     '- [HTML only](https://example.org/blog/posts/html-only/)',
     '- [Deep](https://example.org/blog/posts/nested/deep/index.md)',
     '- [JSON first](https://example.org/blog/posts/json-first/)',
