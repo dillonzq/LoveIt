@@ -508,6 +508,16 @@ test('Mermaid renderer from front matter uses securityLevel "strict" unless the 
   };
   await rerender({ renderer: 'mermaid', securityLevel: 'loose' });
   expect(await securityLevel()).toBe('loose');
+  // "loose" runs `click` callbacks, which are bound after the SVG is inserted.
+  await page.evaluate(() => {
+    window.mermaidClicked = [];
+    window.onMermaidClick = id => window.mermaidClicked.push(id);
+    const element = document.querySelector('.mermaid');
+    window.config.data[element.id] = 'graph LR\n    A[Mermaid] --> B[Renderer]\n    click A onMermaidClick';
+  });
+  await rerender({ renderer: 'mermaid', securityLevel: 'loose' });
+  await page.locator('.mermaid .node').filter({ hasText: 'Mermaid' }).click();
+  expect(await page.evaluate(() => window.mermaidClicked)).toEqual(['A']);
   await rerender({ renderer: 'mermaid', securityLevel: 'antiscript' });
   expect(await securityLevel()).toBe('strict');
   await rerender({ renderer: 'mermaid' });

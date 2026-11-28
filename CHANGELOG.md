@@ -163,6 +163,9 @@ This file starts at 0.4.0. Older releases are described on the
 
 ### Fixed
 
+- With the Mermaid renderer and `mermaidSecurityLevel = "loose"`, `click`
+  callbacks in diagrams run: they are bound after the diagram is
+  inserted.
 - Table of contents links and the share buttons at the end of a post are at
   least 24×24 CSS px, to meet WCAG 2.2 success criterion 2.5.8 (Target Size,
   Minimum). Each TOC entry is clickable across its whole line, and the share

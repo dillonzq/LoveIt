@@ -630,8 +630,10 @@ class Theme {
 
                 mermaid
                     .render(`mermaid-svg-${$mermaid.id}-${index}`, definition)
-                    .then(({ svg }) => {
+                    .then(({ svg, bindFunctions }) => {
                         $mermaid.innerHTML = svg;
+                        // Attaches `click` callbacks, which Mermaid allows with securityLevel "loose".
+                        if (bindFunctions) bindFunctions($mermaid);
                     })
                     .catch(err => {
                         console.error(err);
