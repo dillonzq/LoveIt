@@ -80,6 +80,27 @@ other = "id"
 
 [walineLang]
 other = "id"
+
+[mastodonPrompt]
+other = "Balas {{ .Post }} dari akun Mastodon atau akun Fediverse lainnya untuk berkomentar."
+
+[mastodonPost]
+other = "postingan ini"
+
+[mastodonLoading]
+other = "Memuat komentar…"
+
+[mastodonEmpty]
+other = "Belum ada komentar."
+
+[mastodonError]
+other = "Komentar tidak dapat dimuat."
+
+[mastodonSensitive]
+other = "Konten sensitif"
+
+[mastodonAttachment]
+other = "Lampiran"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

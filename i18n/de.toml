@@ -80,6 +80,27 @@ other = "de"
 
 [walineLang]
 other = "de"
+
+[mastodonPrompt]
+other = "Antworte mit einem Mastodon- oder anderen Fediverse-Konto auf {{ .Post }}, um zu kommentieren."
+
+[mastodonPost]
+other = "diesen Beitrag"
+
+[mastodonLoading]
+other = "Kommentare werden geladen…"
+
+[mastodonEmpty]
+other = "Noch keine Kommentare."
+
+[mastodonError]
+other = "Die Kommentare konnten nicht geladen werden."
+
+[mastodonSensitive]
+other = "Sensibler Inhalt"
+
+[mastodonAttachment]
+other = "Anhang"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

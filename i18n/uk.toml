@@ -80,6 +80,27 @@ other = "uk"
 # Waline has no locale for this language, so it uses English
 [walineLang]
 other = "en"
+
+[mastodonPrompt]
+other = "Дайте відповідь на {{ .Post }} з облікового запису Mastodon або іншого сервера Федиверсу, щоб залишити коментар."
+
+[mastodonPost]
+other = "цей допис"
+
+[mastodonLoading]
+other = "Завантаження коментарів…"
+
+[mastodonEmpty]
+other = "Коментарів ще немає."
+
+[mastodonError]
+other = "Не вдалося завантажити коментарі."
+
+[mastodonSensitive]
+other = "Делікатний вміст"
+
+[mastodonAttachment]
+other = "Вкладення"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

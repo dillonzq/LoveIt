@@ -101,6 +101,7 @@
 * 支持 **[utterances](https://utteranc.es/)** 评论系统
 * 支持 **[giscus](https://giscus.app/)** 评论系统
 * 支持 **[Waline](https://waline.js.org/)** 评论系统
+* 支持 **Mastodon** 评论: 显示 [Mastodon](https://joinmastodon.org/) 或其他联邦宇宙服务器上一条帖子的回复
 
 ### 扩展功能
 
@@ -222,6 +223,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [Gitalk](https://github.com/gitalk/gitalk)
 * [Valine](https://valine.js.org/)
 * [Waline](https://waline.js.org/)
+* [DOMPurify](https://github.com/cure53/DOMPurify)
 * [cookieconsent](https://github.com/osano/cookieconsent)
 
 ## 作者

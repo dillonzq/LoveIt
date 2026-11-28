@@ -588,6 +588,13 @@
         lazyLoading = false
         lightTheme = "light"
         darkTheme = "dark"
+      # Mastodon (Fediverse) comment config: the replies to a post on a server with the Mastodon API
+      # Mastodon (联邦宇宙) 评论系统设置: 显示一条嘟文 (支持 Mastodon API 的服务器上的帖子) 的回复
+      [params.page.comment.mastodon]
+        enable = false
+        # URL of the post whose replies are the comments, set it in the front matter of each page
+        # 评论来源的帖子链接, 在每个页面的前置参数中设置
+        url = ""
     # Third-party library config
     # 第三方库配置
     [params.page.library]

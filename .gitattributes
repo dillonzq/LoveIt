@@ -1,0 +1,3 @@
+# The CDN copy of DOMPurify is checked with the digest of the bundled file (SRI),
+# so the bundled file must keep the published bytes on every checkout.
+assets/lib/dompurify/purify.min.js -text

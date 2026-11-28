@@ -760,6 +760,11 @@ enableEmoji = true
         lang = ""
         # emoji presets, the Waline default is used when empty
         emoji = []
+      # {{< version 0.4.2 >}} Mastodon (Fediverse) comment config, see "Mastodon comments" below
+      [params.page.comment.mastodon]
+        enable = false
+        # URL of the post whose replies are the comments, set it in the front matter of each page
+        url = ""
     # {{< version 0.2.7 >}} Third-party library config
     [params.page.library]
       [params.page.library.css]
@@ -976,6 +981,32 @@ LeanCloud [stopped new sign-ups and new apps](https://docs.leancloud.cn/en/sdk/a
 on January 12, 2026, and will shut down all public services on January 12, 2027.
 After that, Valine cannot load or save comments, and LeanCloud says it will permanently destroy or anonymize the user data it retains.
 Export your comments before that date and move to another comment system.
+{{< /admonition >}}
+
+{{< admonition tip "Mastodon comments" >}}
+{{< version 0.4.2 >}}
+
+With `params.page.comment.mastodon`, the comments of a page are the public replies to a post
+on [Mastodon](https://joinmastodon.org/) or another Fediverse server with the Mastodon API.
+Publish a post about the page, then set its URL in the front matter of the page:
+
+```yaml
+comment:
+  enable: true
+  mastodon:
+    enable: true
+    url: https://mastodon.social/@user/113456789012345678
+```
+
+Visitors comment by replying to that post from their own Fediverse account; the page has no comment form.
+When the comments come into view, the browser of the visitor reads the post and its replies
+from the server in the URL (`/api/v1/statuses/:id` and `/api/v1/statuses/:id/context`),
+so that server sees the visitor's IP address.
+Only the public and unlisted replies that this server knows of are shown,
+and a server that requires a login for its API cannot be used.
+The replies are sanitized with [DOMPurify](https://github.com/cure53/DOMPurify),
+which the theme loads from the configured CDN or serves from `assets/lib/dompurify/`.
+With `params.fingerprint` set, a CDN URL of the bundled version (`dompurify@<version>/dist/purify.min.js`, as in the theme's CDN data files) is checked against the bundled file with SRI.
 {{< /admonition >}}
 
 {{< admonition tip "Tips about CDN Configuration" >}}

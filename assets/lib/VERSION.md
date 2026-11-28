@@ -6,6 +6,7 @@
 | [APlayer](https://github.com/MoePlayer/APlayer)                                     | aplayer           |  1.10.1 | MIT                                     |
 | [Cookie Consent](https://github.com/osano/cookieconsent)                            | cookieconsent     |   3.1.1 | MIT                                     |
 | [Apache ECharts](https://github.com/apache/echarts)                                 | echarts           |   6.1.0 | Apache-2.0                              |
+| [DOMPurify](https://github.com/cure53/DOMPurify)                                    | dompurify         |  3.4.18 | MPL-2.0 OR Apache-2.0                   |
 | [emoji-data](https://github.com/iamcal/emoji-data)                                  | emoji-data        |  15.1.2 | MIT (see [Emoji images](#emoji-images)) |
 | [Font Awesome Free](https://github.com/FortAwesome/Font-Awesome)                    | fontawesome-free  |   7.3.1 | CC-BY-4.0 AND OFL-1.1 AND MIT           |
 | [Fuse.js](https://github.com/krisk/Fuse)                                            | fuse              |   7.5.0 | Apache-2.0                              |

@@ -761,6 +761,11 @@ enableEmoji = true
         lang = ""
         # 表情预设, 为空时使用 Waline 的默认值
         emoji = []
+      # {{< version 0.4.2 >}} Mastodon (联邦宇宙) 评论系统设置, 见下文 "Mastodon 评论"
+      [params.page.comment.mastodon]
+        enable = false
+        # 评论来源的帖子链接, 在每个页面的前置参数中设置
+        url = ""
     # {{< version 0.2.7 >}} 第三方库配置
     [params.page.library]
       [params.page.library.css]
@@ -977,6 +982,32 @@ LeanCloud 已于 2026 年 1 月 12 日[停止新用户注册和新建应用](htt
 并将于 2027 年 1 月 12 日关闭所有对外服务.
 此后 Valine 将无法加载或保存评论, LeanCloud 表示会永久销毁留存的用户数据或对其进行匿名化处理.
 请在此日期之前导出你的评论并迁移到其他评论系统.
+{{< /admonition >}}
+
+{{< admonition tip "Mastodon 评论" >}}
+{{< version 0.4.2 >}}
+
+启用 `params.page.comment.mastodon` 后, 页面的评论就是 [Mastodon](https://joinmastodon.org/)
+或其他支持 Mastodon API 的联邦宇宙服务器上一条帖子的公开回复.
+先发布一条介绍该页面的帖子, 再在页面的前置参数中设置它的链接:
+
+```yaml
+comment:
+  enable: true
+  mastodon:
+    enable: true
+    url: https://mastodon.social/@user/113456789012345678
+```
+
+访客用自己的联邦宇宙账号回复这条帖子来发表评论, 页面上没有评论框.
+评论区进入视野时, 访客的浏览器会从链接所在的服务器读取这条帖子和它的回复
+(`/api/v1/statuses/:id` 和 `/api/v1/statuses/:id/context`),
+因此该服务器能看到访客的 IP 地址.
+只显示该服务器已知的公开和不公开列出的回复,
+需要登录才能访问 API 的服务器无法使用.
+回复内容经过 [DOMPurify](https://github.com/cure53/DOMPurify) 过滤,
+主题从配置的 CDN 加载它, 或使用 `assets/lib/dompurify/` 中的内置文件.
+设置了 `params.fingerprint` 时, 指向内置版本的 CDN 链接 (`dompurify@<版本>/dist/purify.min.js`, 与主题的 CDN 数据文件相同) 会通过 SRI 与内置文件比对校验.
 {{< /admonition >}}
 
 {{< admonition tip "关于 CDN 配置的技巧" >}}

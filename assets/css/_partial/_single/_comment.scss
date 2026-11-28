@@ -6,3 +6,185 @@
     max-height: 1.5em;
   }
 }
+
+// Mastodon (Fediverse) comments, rendered by assets/js/features/comment/mastodon.js
+#mastodon {
+  @include link(false, false);
+
+  .mastodon-prompt {
+    margin: 0 0 1rem;
+  }
+
+  // Underline links in text so they stand apart from it by more than color.
+  .mastodon-prompt a,
+  .mastodon-content a {
+    text-decoration: underline;
+    text-underline-offset: .2em;
+  }
+
+  .mastodon-status {
+    margin: 0 0 1rem;
+    color: $global-font-secondary-color;
+
+    [theme=dark] & {
+      color: $global-font-secondary-color-dark;
+    }
+
+    &:empty {
+      margin: 0;
+    }
+  }
+
+  .mastodon-replies {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .mastodon-replies {
+      margin-block-start: .75rem;
+      padding-inline-start: 1rem;
+      border-inline-start: 2px solid $global-border-color;
+
+      [theme=dark] & {
+        border-inline-start-color: $global-border-color-dark;
+      }
+
+      @media only screen and (min-width: 681px) {
+        padding-inline-start: 1.5rem;
+      }
+    }
+  }
+
+  .mastodon-reply-item {
+    margin: 0 0 .75rem;
+  }
+
+  .mastodon-reply {
+    padding: .75rem 1rem;
+    border: 1px solid $global-border-color;
+    border-radius: 6px;
+
+    [theme=dark] & {
+      border-color: $global-border-color-dark;
+    }
+  }
+
+  .mastodon-reply-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .25rem .75rem;
+    margin-block-end: .5rem;
+  }
+
+  .mastodon-account {
+    display: inline-flex;
+    align-items: center;
+    gap: .75rem;
+    min-width: 0;
+  }
+
+  .mastodon-avatar {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+
+  .mastodon-name {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.25rem;
+  }
+
+  .mastodon-display-name {
+    font-weight: bold;
+    overflow-wrap: anywhere;
+  }
+
+  .mastodon-acct,
+  .mastodon-date {
+    font-size: .875rem;
+    overflow-wrap: anywhere;
+  }
+
+  .mastodon-acct,
+  .mastodon-date,
+  .mastodon-date:hover {
+    color: $global-font-secondary-color;
+
+    [theme=dark] & {
+      color: $global-font-secondary-color-dark;
+    }
+  }
+
+  .mastodon-author {
+    padding: 0 .4rem;
+    border-radius: 4px;
+    font-size: .75rem;
+    line-height: 1.25rem;
+    color: $global-background-color;
+    background-color: $single-link-color;
+
+    [theme=dark] & {
+      color: $global-background-color-dark;
+      background-color: $single-link-color-dark;
+    }
+  }
+
+  .mastodon-date {
+    margin-inline-start: auto;
+  }
+
+  .mastodon-content {
+    overflow-wrap: anywhere;
+
+    p {
+      margin: 0 0 .5rem;
+
+      &:last-child {
+        margin-block-end: 0;
+      }
+    }
+
+    // Mastodon shortens long links: the start and end of the URL are hidden, and an
+    // ellipsis follows what is left.
+    .invisible {
+      display: none;
+    }
+
+    .ellipsis::after {
+      content: "…";
+    }
+  }
+
+  .mastodon-emoji {
+    display: inline;
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 .05em;
+    vertical-align: -.25em;
+    object-fit: contain;
+  }
+
+  .mastodon-spoiler > summary {
+    cursor: pointer;
+    font-style: italic;
+  }
+
+  .mastodon-attachments {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-block-start: .5rem;
+
+    img {
+      display: block;
+      max-width: 100%;
+      max-height: 12rem;
+      border-radius: 4px;
+    }
+  }
+}

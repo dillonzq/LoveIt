@@ -49,6 +49,14 @@ This file starts at 0.4.0. Older releases are described on the
   should remove that and the `MarkDown` output format, and use Hugo's built-in
   `markdown` format, before adding `llms`. See
   [Markdown Output and llms.txt](https://hugoloveit.com/theme-documentation-basics/#llms-txt).
+- Mastodon comments: with `params.page.comment.mastodon` and the URL of a
+  post in the page's front matter (`comment.mastodon.url`), the public
+  replies to that post on Mastodon or another Fediverse server with the
+  Mastodon API are shown as the comments of the page ([#981]). Visitors
+  comment by replying to the post from their own account. The replies load
+  when the comments come into view and are sanitized with DOMPurify 3.4.18,
+  which is bundled in `assets/lib/dompurify` (MPL-2.0 OR Apache-2.0) and
+  listed in the CDN data files.
 
 ### Changed
 
@@ -380,6 +388,7 @@ for the full upgrade guide.
 [#963]: https://github.com/dillonzq/LoveIt/issues/963
 [#974]: https://github.com/dillonzq/LoveIt/issues/974
 [#977]: https://github.com/dillonzq/LoveIt/issues/977
+[#981]: https://github.com/dillonzq/LoveIt/issues/981
 [#993]: https://github.com/dillonzq/LoveIt/issues/993
 [#997]: https://github.com/dillonzq/LoveIt/pull/997
 [#1012]: https://github.com/dillonzq/LoveIt/pull/1012

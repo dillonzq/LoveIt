@@ -66,6 +66,7 @@ math:
 * :(fas fa-comment-alt): **utterances** comment system supported by [utterances](https://utteranc.es/)
 * :(fas fa-comments): **giscus** comment system supported by [giscus](https://giscus.app/)
 * :(far fa-comment-dots): **Waline** comment system supported by [Waline](https://waline.js.org/)
+* :(fab fa-mastodon): **Mastodon** comments: the replies to a post on [Mastodon](https://joinmastodon.org/) or another Fediverse server
 
 ### Extended Features
 
@@ -123,4 +124,5 @@ Thanks to the authors of following resources included in the theme:
 * [Gitalk](https://github.com/gitalk/gitalk)
 * [Valine](https://valine.js.org/)
 * [Waline](https://waline.js.org/)
+* [DOMPurify](https://github.com/cure53/DOMPurify)
 * [cookieconsent](https://github.com/osano/cookieconsent)

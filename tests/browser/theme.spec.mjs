@@ -1273,6 +1273,132 @@ test('Valine avatars are decorative on every page of comments and the example si
   expect(errors).toEqual([]);
 });
 
+// A post on a mocked Mastodon server and its replies, in the thread order of /context.
+function mastodonThread() {
+  const account = (id, acct, name, extra = {}) => ({ id, acct, username: acct.split('@')[0], display_name: name, url: `https://mastodon.test/@${acct}`, avatar_static: `https://mastodon.test/avatars/${id}.png`, emojis: [], ...extra });
+  const author = account('1', 'author', 'Post Author');
+  const alice = account('2', 'alice', 'Alice :blob:', { emojis: [{ shortcode: 'blob', url: 'https://mastodon.test/emoji/blob.gif', static_url: 'https://mastodon.test/emoji/blob.png' }] });
+  const bob = account('3', 'bob@other.test', '', { username: 'bob' });
+  const reply = (id, inReplyTo, by, content, extra = {}) => ({ id, in_reply_to_id: inReplyTo, account: by, content, created_at: '2025-01-06T08:30:00.000Z', url: `https://mastodon.test/@${by.acct}/${id}`, language: 'en', emojis: [], media_attachments: [], spoiler_text: '', sensitive: false, ...extra });
+  return {
+    status: { id: '100', account: author, content: '<p>New post</p>' },
+    descendants: [
+      reply('101', '100', alice, '<p>Hello <span class="h-card"><a href="https://mastodon.test/@author" class="u-url mention theme-class">@<span>author</span></a></span> <a href="https://example.com/a/very/long/path" class="external"><span class="invisible">https://</span><span class="ellipsis">example.com/a/very</span><span class="invisible">/long/path</span></a> :blob:</p><img src="x" onerror="window.mastodonXSS = 1"><script>window.mastodonXSS = 2</script><p aria-hidden="true"><a href="javascript:window.mastodonXSS = 3" aria-label="Not a link">click</a><iframe src="https://evil.test/"></iframe></p>', { emojis: alice.emojis }),
+      reply('102', '101', author, '<p>Thanks!</p>'),
+      reply('103', '102', bob, '<p>Third level</p>'),
+      reply('104', '103', alice, '<p>Fourth level</p>'),
+      // A reply to a post the API leaves out is listed under the root post.
+      reply('105', 'gone', bob, '<p>Orphan</p>'),
+      reply('106', '100', bob, '<p>Behind a warning</p>', { spoiler_text: 'Spoilers :blob:', emojis: alice.emojis }),
+      reply('107', '100', alice, '<p>Sensitive photo</p>', { sensitive: true, media_attachments: [{ type: 'image', url: 'https://mastodon.test/media/1.png', preview_url: 'https://mastodon.test/media/1-small.png', description: 'A cat' }] }),
+    ],
+  };
+}
+
+async function mockMastodon(page, { status = 200, thread = mastodonThread() } = {}) {
+  const requests = [];
+  await page.route(/^https:\/\/mastodon\.test\//, route => {
+    const url = new URL(route.request().url());
+    if (!url.pathname.startsWith('/api/')) return route.fulfill({ status: 204 });
+    requests.push(url.pathname);
+    if (status !== 200) return route.fulfill({ status, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: '{"error":"Record not found"}' });
+    const body = url.pathname.endsWith('/context') ? { ancestors: [], descendants: thread.descendants } : thread.status;
+    return route.fulfill({ contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify(body) });
+  });
+  return requests;
+}
+
+test('Mastodon comments load when in view, sanitize replies, nest them and follow the dark theme', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  const requests = await mockMastodon(page);
+  await page.goto('/fuse/blog/mastodon/');
+  const root = page.locator('#mastodon');
+  await expect(page.locator('script[src*="dompurify/purify.min"]')).toHaveCount(1);
+  await expect(root.locator('.mastodon-prompt a')).toHaveAttribute('href', 'https://mastodon.test/@author/100');
+  // Nothing is requested before the comments come near the viewport.
+  await page.waitForTimeout(300);
+  expect(requests).toEqual([]);
+  await root.scrollIntoViewIfNeeded();
+  const replies = root.locator('.mastodon-reply');
+  await expect(replies).toHaveCount(7);
+  expect(requests.sort()).toEqual(['/api/v1/statuses/100', '/api/v1/statuses/100/context']);
+  await expect(root.locator('.mastodon-status')).toHaveText('');
+  await expect(root).not.toHaveAttribute('aria-busy', /.*/);
+
+  // Sanitized: no script, handler, iframe or javascript: link, and only Mastodon's own classes.
+  expect(await page.evaluate(() => window.mastodonXSS)).toBeUndefined();
+  await expect(root.locator('script, iframe, [onerror], .mastodon-content [aria-hidden], .mastodon-content [aria-label]')).toHaveCount(0);
+  const first = replies.first();
+  await expect(first.locator('.mastodon-content a')).toHaveCount(3);
+  await expect(first.locator('.mastodon-content a:not([href])')).toHaveText('click');
+  await expect(first.locator('.mastodon-content a.mention')).toHaveAttribute('class', 'u-url mention');
+  await expect(first.locator('.mastodon-content a[href^="https://example.com"]')).not.toHaveAttribute('class', /.*/);
+  // Mastodon's shortened link text: the hidden parts are not shown.
+  await expect(first.locator('.mastodon-content a[href^="https://example.com"]')).toHaveText('example.com/a/very', { useInnerText: true });
+  expect(await first.locator('.mastodon-content .ellipsis').evaluate(element => getComputedStyle(element, '::after').content)).toBe('"…"');
+  await expect(first.locator('.mastodon-content a[href]').first()).toHaveAttribute('rel', 'nofollow ugc noopener noreferrer');
+  await expect(first.locator('.mastodon-content')).toHaveAttribute('lang', 'en');
+  // Custom emojis in names and text are static images named by their shortcode.
+  await expect(first.locator('.mastodon-display-name img.mastodon-emoji')).toHaveAttribute('src', 'https://mastodon.test/emoji/blob.png');
+  await expect(first.locator('.mastodon-content img.mastodon-emoji')).toHaveAttribute('alt', ':blob:');
+  await expect(first.locator('.mastodon-acct')).toHaveText('@alice');
+  await expect(first.locator('.mastodon-avatar')).toHaveAttribute('alt', '');
+  await expect(first.locator('.mastodon-date')).toHaveAttribute('href', 'https://mastodon.test/@alice/101');
+  await expect(first.locator('time')).toHaveAttribute('datetime', '2025-01-06T08:30:00.000Z');
+
+  // Replies nest up to three levels; deeper ones are listed at the third.
+  const top = root.locator(':scope > .mastodon-replies > .mastodon-reply-item');
+  await expect(top).toHaveCount(4);
+  await expect(top.nth(0).locator(':scope > .mastodon-replies > li > .mastodon-replies > li')).toHaveCount(2);
+  await expect(top.nth(0).locator('.mastodon-replies .mastodon-replies .mastodon-replies')).toHaveCount(0);
+  await expect(top.nth(1).locator('.mastodon-content')).toHaveText('Orphan');
+  // The post author's replies are marked; a local account's handle is shown as the API gives it
+  // (its domain can differ from the API host), a remote one with its domain.
+  await expect(root.locator('.mastodon-author')).toHaveCount(1);
+  await expect(replies.nth(1).locator('.mastodon-author')).toHaveText('Author');
+  await expect(replies.nth(2).locator('.mastodon-acct')).toHaveText('@bob@other.test');
+  await expect(replies.nth(2).locator('.mastodon-display-name')).toHaveText('bob');
+
+  // A content warning hides the reply; sensitive media without one is hidden on its own.
+  const warned = replies.nth(5).locator('details.mastodon-spoiler');
+  await expect(warned.locator('summary')).toContainText('Spoilers');
+  await expect(warned.locator('summary img.mastodon-emoji')).toHaveCount(1);
+  await expect(warned.locator('.mastodon-content')).toBeHidden();
+  await warned.locator('summary').click();
+  await expect(warned.locator('.mastodon-content')).toBeVisible();
+  const sensitive = replies.nth(6);
+  await expect(sensitive.locator(':scope > .mastodon-content')).toHaveText('Sensitive photo');
+  await expect(sensitive.locator('details summary')).toHaveText('Sensitive content');
+  await expect(sensitive.locator('details img')).toHaveAttribute('alt', 'A cat');
+  await expect(sensitive.locator('details img')).toBeHidden();
+
+  const border = () => replies.first().evaluate(element => getComputedStyle(element).borderTopColor);
+  await page.evaluate(() => document.body.setAttribute('theme', 'light'));
+  const light = await border();
+  await page.evaluate(() => document.body.setAttribute('theme', 'dark'));
+  expect(await border()).not.toBe(light);
+
+  const { violations } = await new AxeBuilder({ page }).include('#mastodon').analyze();
+  expect(violations).toEqual([]);
+  expect(errors).toEqual([]);
+});
+
+test('Mastodon comments say when there are no replies or they cannot be loaded', async ({ page }) => {
+  await mockMastodon(page, { thread: { status: { id: '100', account: { id: '1' } }, descendants: [] } });
+  await page.goto('/fuse/blog/mastodon/');
+  await page.locator('#mastodon').scrollIntoViewIfNeeded();
+  await expect(page.locator('#mastodon .mastodon-status')).toHaveText('No comments yet.');
+  await expect(page.locator('#mastodon .mastodon-replies')).toBeHidden();
+
+  await page.unrouteAll();
+  await mockMastodon(page, { status: 404 });
+  await page.goto('/fuse/blog/mastodon/');
+  await page.locator('#mastodon').scrollIntoViewIfNeeded();
+  await expect(page.locator('#mastodon .mastodon-status')).toHaveText('The comments could not be loaded.');
+  await expect(page.locator('#mastodon .mastodon-status')).toHaveAttribute('role', 'status');
+});
+
 test('fixed buttons fade in after scrolling down and the auto header hides until scrolling up', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));

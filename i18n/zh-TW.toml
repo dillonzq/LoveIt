@@ -80,6 +80,27 @@ other = "zh-TW"
 
 [walineLang]
 other = "zh-TW"
+
+[mastodonPrompt]
+other = "使用 Mastodon 或其他聯邦宇宙帳號回覆{{ .Post }}即可發表留言。"
+
+[mastodonPost]
+other = "這則嘟文"
+
+[mastodonLoading]
+other = "正在載入留言…"
+
+[mastodonEmpty]
+other = "還沒有留言。"
+
+[mastodonError]
+other = "留言載入失敗。"
+
+[mastodonSensitive]
+other = "敏感內容"
+
+[mastodonAttachment]
+other = "附件"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

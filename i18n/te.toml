@@ -81,6 +81,27 @@ other = "en"
 
 [walineLang]
 other = "en"
+
+[mastodonPrompt]
+other = "వ్యాఖ్యానించడానికి Mastodon లేదా మరొక ఫెడివర్స్ ఖాతా నుండి {{ .Post }} ప్రత్యుత్తరం ఇవ్వండి."
+
+[mastodonPost]
+other = "ఈ పోస్ట్‌కు"
+
+[mastodonLoading]
+other = "వ్యాఖ్యలు లోడ్ అవుతున్నాయి…"
+
+[mastodonEmpty]
+other = "ఇంకా వ్యాఖ్యలు లేవు."
+
+[mastodonError]
+other = "వ్యాఖ్యలను లోడ్ చేయలేకపోయాము."
+
+[mastodonSensitive]
+other = "సున్నితమైన కంటెంట్"
+
+[mastodonAttachment]
+other = "జోడింపు"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

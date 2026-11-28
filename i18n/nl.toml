@@ -81,6 +81,27 @@ other = "nl"
 # Waline has no locale for this language, so it uses English
 [walineLang]
 other = "en"
+
+[mastodonPrompt]
+other = "Reageer op {{ .Post }} vanaf een Mastodon- of ander Fediverse-account om een opmerking te plaatsen."
+
+[mastodonPost]
+other = "dit bericht"
+
+[mastodonLoading]
+other = "Reacties laden…"
+
+[mastodonEmpty]
+other = "Nog geen reacties."
+
+[mastodonError]
+other = "De reacties konden niet worden geladen."
+
+[mastodonSensitive]
+other = "Gevoelige inhoud"
+
+[mastodonAttachment]
+other = "Bijlage"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

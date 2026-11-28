@@ -80,6 +80,27 @@ other = "zh-CN"
 
 [walineLang]
 other = "zh-CN"
+
+[mastodonPrompt]
+other = "使用 Mastodon 或其他联邦宇宙账号回复{{ .Post }}即可发表评论。"
+
+[mastodonPost]
+other = "这条嘟文"
+
+[mastodonLoading]
+other = "正在加载评论…"
+
+[mastodonEmpty]
+other = "还没有评论。"
+
+[mastodonError]
+other = "评论加载失败。"
+
+[mastodonSensitive]
+other = "敏感内容"
+
+[mastodonAttachment]
+other = "附件"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

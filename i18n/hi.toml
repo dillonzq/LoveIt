@@ -80,6 +80,27 @@ other = "en"
 
 [walineLang]
 other = "en"
+
+[mastodonPrompt]
+other = "टिप्पणी करने के लिए Mastodon या किसी अन्य फ़ेडिवर्स खाते से {{ .Post }} का जवाब दें।"
+
+[mastodonPost]
+other = "इस पोस्ट"
+
+[mastodonLoading]
+other = "टिप्पणियाँ लोड हो रही हैं…"
+
+[mastodonEmpty]
+other = "अभी तक कोई टिप्पणी नहीं।"
+
+[mastodonError]
+other = "टिप्पणियाँ लोड नहीं हो सकीं।"
+
+[mastodonSensitive]
+other = "संवेदनशील सामग्री"
+
+[mastodonAttachment]
+other = "संलग्नक"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

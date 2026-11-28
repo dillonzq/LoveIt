@@ -80,6 +80,27 @@ other = "vi"
 
 [walineLang]
 other = "vi"
+
+[mastodonPrompt]
+other = "Trả lời {{ .Post }} từ tài khoản Mastodon hoặc tài khoản Fediverse khác để bình luận."
+
+[mastodonPost]
+other = "bài đăng này"
+
+[mastodonLoading]
+other = "Đang tải bình luận…"
+
+[mastodonEmpty]
+other = "Chưa có bình luận nào."
+
+[mastodonError]
+other = "Không thể tải bình luận."
+
+[mastodonSensitive]
+other = "Nội dung nhạy cảm"
+
+[mastodonAttachment]
+other = "Tệp đính kèm"
 # === partials/comment.html ===
 
 # === partials/assets.html ===

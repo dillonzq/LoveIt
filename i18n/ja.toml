@@ -79,6 +79,27 @@ other = "ja"
 
 [walineLang]
 other = "jp"
+
+[mastodonPrompt]
+other = "Mastodon などの Fediverse アカウントから{{ .Post }}に返信すると、コメントできます。"
+
+[mastodonPost]
+other = "この投稿"
+
+[mastodonLoading]
+other = "コメントを読み込んでいます…"
+
+[mastodonEmpty]
+other = "まだコメントはありません。"
+
+[mastodonError]
+other = "コメントを読み込めませんでした。"
+
+[mastodonSensitive]
+other = "センシティブな内容"
+
+[mastodonAttachment]
+other = "添付ファイル"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
