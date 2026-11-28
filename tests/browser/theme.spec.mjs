@@ -1038,6 +1038,27 @@ test('a long auto TOC stays within the viewport and scrolls to the active sectio
   await expect.poll(() => toc.evaluate(el => el.style.top)).toBe(`${headerHeight + 20}px`);
 });
 
+test('the auto TOC is placed again after later DOMContentLoaded handlers change the header', async ({ page }) => {
+  // A script after the theme script, like the script shortcode, makes the header taller.
+  await page.route('**/fuse/blog/long-toc/', async route => {
+    const response = await route.fetch();
+    const late = `<script>document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('header-desktop').style.height = '120px';
+    });</script>`;
+    await route.fulfill({ response, body: (await response.text()).replace('</body>', `${late}</body>`) });
+  });
+  await page.setViewportSize({ width: 1280, height: 600 });
+  await page.goto('/fuse/blog/long-toc/');
+  await page.waitForFunction(() => document.readyState === 'complete');
+  await page.evaluate(() => {
+    const top = document.getElementById('section-35').getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top - 10, behavior: 'instant' });
+  });
+  const toc = page.locator('#toc-auto');
+  await expect.poll(() => toc.evaluate(el => getComputedStyle(el).position)).toBe('fixed');
+  await expect.poll(() => toc.evaluate(el => el.style.top)).toBe('140px');
+});
+
 test('first-screen avatar loads directly and scroll bursts share a frame', async ({ page }) => {
   const { readsPngOrientation } = await hugoImageFeatures();
   await page.goto('/fuse/blog/');

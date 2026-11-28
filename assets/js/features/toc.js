@@ -109,6 +109,8 @@ export default function initToc(theme) {
     };
     place();
     theme.resizeEventSet.add(place);
-    // Web fonts that finish loading later can move the header and the article.
+    // The theme starts before the DOMContentLoaded handlers of later scripts, which can change
+    // the header, and before images and web fonts have loaded: place the TOC again then.
+    if (document.readyState !== 'complete') window.addEventListener('load', place, { once: true });
     if (document.fonts && document.fonts.status === 'loading') document.fonts.ready.then(place);
 }
