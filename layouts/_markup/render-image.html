@@ -1,10 +1,16 @@
+{{- /*
+    The image description is the alt text, as CommonMark defines it: nested images give their
+    own alt text, other tags are dropped and spaces collapsed. An empty one marks a decorative image.
+*/ -}}
+{{- $text := .Text | replaceRE `(?s)<figcaption\b.*?</figcaption>\s*` "" | replaceRE `<img\b(?:[^>"']|"[^"]*"|'[^']*')*?\salt="([^"]*)"(?:[^>"']|"[^"]*"|'[^']*')*>` "$1" | replaceRE `<(?:[^>"']|"[^"]*"|'[^']*')*>` "" | replaceRE `\s+` " " | strings.TrimSpace | safeHTML -}}
+{{- $options := dict "Src" .Destination "Alt" $text "Title" $text "Resources" .Page.Resources -}}
 {{- if .Title -}}
     <figure>
-        {{- dict "Src" .Destination "Title" .Text "Caption" .Title "Linked" true "Resources" .Page.Resources | partial "plugin/img.html" -}}
+        {{- dict "Caption" .Title "Linked" true | merge $options | partial "plugin/img.html" -}}
         <figcaption class="image-caption">
             {{- .Title | safeHTML -}}
         </figcaption>
     </figure>
 {{- else -}}
-    {{- dict "Src" .Destination "Title" .Text "Resources" .Page.Resources | partial "plugin/img.html" -}}
+    {{- partial "plugin/img.html" $options -}}
 {{- end -}}

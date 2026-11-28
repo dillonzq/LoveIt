@@ -1,5 +1,8 @@
 {{- $options := cond .IsNamedParams (.Get "src") (.Get 0) | dict "Src" -}}
-{{- $options = cond .IsNamedParams (.Get "alt") (.Get 1) | .Page.RenderString | dict "Alt" | merge $options -}}
+{{- /* Without alt, the image partial uses src. */ -}}
+{{- with cond .IsNamedParams (.Get "alt") (.Get 1) | .Page.RenderString -}}
+    {{- $options = dict "Alt" . | merge $options -}}
+{{- end -}}
 {{- $caption := cond .IsNamedParams (.Get "caption") (.Get 2) | .Page.RenderString -}}
 {{- $options = dict "Caption" $caption | merge $options -}}
 
