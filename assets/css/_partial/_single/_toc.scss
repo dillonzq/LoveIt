@@ -10,17 +10,18 @@
   .toc-content {
     font-size: var(--toc-content-font-size);
 
+    // A block link fills its whole line, so each entry, in a bulleted or a numbered
+    // TOC, is a target at least 24 CSS px high (WCAG 2.2 SC 2.5.8). In a bulleted
+    // TOC it inherits the list's hanging indent.
+    li > a {
+      display: block;
+      min-block-size: 24px;
+    }
+
     ul {
       text-indent: -0.85rem;
       padding-inline-start: .8rem;
       list-style: none;
-
-      // A block link fills its whole line, so each entry is a target of at least
-      // 24 CSS px high (WCAG 2.2 SC 2.5.8). It inherits the list's hanging indent.
-      a {
-        display: block;
-        min-block-size: 24px;
-      }
 
       a:first-child::before {
         content: "|";

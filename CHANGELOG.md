@@ -150,9 +150,12 @@ This file starts at 0.4.0. Older releases are described on the
 ### Fixed
 
 - Table of contents links and the share buttons at the end of a post are at
-  least 24×24 CSS px, as WCAG 2.2 success criterion 2.5.8 (Target Size,
-  Minimum) requires. Each TOC entry is clickable across its whole line, and
-  the share icons are spaced slightly further apart.
+  least 24×24 CSS px, to meet WCAG 2.2 success criterion 2.5.8 (Target Size,
+  Minimum). Each TOC entry is clickable across its whole line, and the share
+  icons are spaced slightly further apart.
+- On right-to-left pages, the desktop header menu keeps its order when the menu
+  names use a left-to-right script, and no menu link breaks into pieces too
+  small to tap.
 
 ## [0.4.1] - 2026-11-27
 

@@ -601,6 +601,17 @@ for (const { language, dir } of [{ language: '', dir: 'ltr' }, { language: 'ar/'
     if (rtl) expect(tocBox.x + tocBox.width).toBeLessThanOrEqual(article.x);
     else expect(tocBox.x).toBeGreaterThanOrEqual(article.x + article.width);
     await expect(toc).toHaveCSS(rtl ? 'border-right-width' : 'border-left-width', '4px');
+    // Each header link is one box in menu order, even with Latin names on a right-to-left page.
+    const items = page.locator('#header-desktop a.menu-item');
+    const xs = [];
+    for (const item of await items.all()) {
+      expect(await item.evaluate(el => el.getClientRects().length)).toBe(1);
+      xs.push((await item.boundingBox()).x);
+    }
+    expect(xs.length).toBeGreaterThan(1);
+    expect(xs).toEqual([...xs].sort((a, b) => rtl ? b - a : a - b));
+    const { violations } = await new AxeBuilder({ page }).withRules(['target-size']).analyze();
+    expect(violations).toEqual([]);
 
     await page.locator('#search-toggle-desktop').click();
     const input = await box('#search-input');
@@ -1314,18 +1325,35 @@ test.describe('heading anchors without JavaScript', () => {
   });
 });
 
-for (const { name, width, toc } of [{ name: 'desktop', width: 1280, toc: '#toc-auto' }, { name: 'mobile', width: 412, toc: '#toc-static' }]) {
+const targetSizeCases = [
+  { name: 'desktop', width: 1280, toc: '#toc-auto' },
+  { name: 'mobile', width: 412, toc: '#toc-static' },
+  // Hugo renders a numbered TOC (markup.tableOfContents.ordered) with <ol>.
+  { name: 'mobile numbered TOC', width: 412, toc: '#toc-static', ordered: true },
+];
+for (const { name, width, toc, ordered } of targetSizeCases) {
   test(`${name}: TOC links and share buttons are targets of at least 24×24 CSS px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 800 });
     await page.goto('/fuse/blog/headings/');
+    if (ordered) {
+      await page.evaluate(() => {
+        for (const list of [...document.querySelectorAll('#TableOfContents ul')].reverse()) {
+          const numbered = document.createElement('ol');
+          numbered.replaceChildren(...list.childNodes);
+          list.replaceWith(numbered);
+        }
+      });
+    }
     if (toc === '#toc-static' && !(await page.locator('#toc-static.open').count())) await page.locator('#toc-static .toc-title').click();
     // Scroll to the nested heading so the auto TOC expands the sub-level that holds it.
     await page.evaluate(() => {
       const top = document.getElementById('custom-id').getBoundingClientRect().top + window.scrollY;
       window.scrollTo({ top: top - 10, behavior: 'instant' });
     });
-    const nested = page.locator(`${toc} a[href$="#custom-id"]`);
-    await expect(nested).toBeVisible();
+    await expect(page.locator(`${toc} ${ordered ? 'ol' : 'ul'} a[href$="#custom-id"]`)).toBeVisible();
+    // Both kinds of share control: a button (X) and a plain link (Telegram).
+    await expect(page.locator('.post-info-share button[data-sharer="x"]')).toBeVisible();
+    await expect(page.locator('.post-info-share a[href^="https://t.me/"]')).toBeVisible();
 
     const targets = page.locator(`${toc} .toc-content a, .post-info-share a, .post-info-share button`);
     const boxes = (await Promise.all((await targets.all()).map(target => target.boundingBox()))).filter(Boolean);
